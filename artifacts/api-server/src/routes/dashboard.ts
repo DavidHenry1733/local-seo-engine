@@ -1,0 +1,9614 @@
+import { Router } from "express";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
+const WORKSPACE_ROOT = path.resolve(__dirname, "../../..");
+const CONFIG_DIR = path.join(WORKSPACE_ROOT, "config/projects");
+
+interface ProjectEntry { clientSlug: string; businessName: string; }
+
+// ── Server-rendered Industry Image Packs HTML ─────────────────────────────
+interface PackEntry { id: string; industryType: string; slot: string; sceneType: string;
+  path: string; altTemplate: string; serviceTypes?: string[]; approved: boolean; notes?: string; }
+
+function esc(s: unknown): string {
+  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function renderPacksHtml(): string {
+  const PACKS_JSON = path.join(WORKSPACE_ROOT, "config", "imagePacks.json");
+  let images: PackEntry[] = [];
+  try {
+    const raw = JSON.parse(fs.readFileSync(PACKS_JSON, "utf8")) as { images: PackEntry[] };
+    images = raw.images || [];
+  } catch { return "<p style='color:red'>Could not load image packs config.</p>"; }
+
+  const INDUSTRY_LABEL: Record<string, string> = {
+    "hairdresser":    "✂️ Hairdresser",
+    "accountant":     "📊 Accountant",
+    "restaurant":     "🍽️ Restaurant",
+    "electrician":    "⚡ Electrician",
+    "general-builder":"🧱 General Builder",
+    "plumber":        "🔧 Plumber",
+  };
+
+  // Group by industry (preserve order from JSON)
+  const byIndustry: Record<string, PackEntry[]> = {};
+  images.forEach(e => {
+    if (!byIndustry[e.industryType]) byIndustry[e.industryType] = [];
+    byIndustry[e.industryType].push(e);
+  });
+
+  return Object.keys(byIndustry).map(industry => {
+    const entries = byIndustry[industry];
+    const total   = entries.length;
+    const done    = entries.filter(e => fs.existsSync(path.join(WORKSPACE_ROOT, e.path))).length;
+    const pct     = Math.round((done / total) * 100);
+    const allDone = done === total;
+    const label   = INDUSTRY_LABEL[industry] || industry;
+
+    const cards = entries.map((img, idx) => {
+      const hasFile = fs.existsSync(path.join(WORKSPACE_ROOT, img.path));
+      const imgSrc  = hasFile ? `/api/image-library/pack-serve/${esc(img.id)}` : "";
+      const border  = hasFile ? "#86efac" : "#e2e8f0";
+      const btnBg   = hasFile ? "#f0fdf4" : "#eff6ff";
+      const btnCol  = hasFile ? "#15803d" : "#1d4ed8";
+      const btnBdr  = hasFile ? "#86efac" : "#93c5fd";
+      const btnTxt  = hasFile ? "↑ Replace" : "↑ Upload";
+      const num     = String(idx + 1);
+
+      return `<div id="pack-card-${esc(img.id)}" style="border:1.5px solid ${border};border-radius:8px;overflow:hidden;background:#fff;display:flex;flex-direction:column">
+  <div style="position:relative;width:100%;aspect-ratio:4/3;background:#f1f5f9;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    ${imgSrc ? `<img src="${imgSrc}?t=${Date.now()}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">` : `<span style="font-size:1.8rem;color:#cbd5e1">🖼</span>`}
+    <span style="position:absolute;top:6px;left:6px;font-size:.65rem;font-weight:700;color:#fff;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:10px">${num}</span>
+    ${hasFile ? `<span style="position:absolute;top:6px;right:6px;font-size:.7rem;background:#059669;color:#fff;padding:2px 6px;border-radius:10px">✓</span>` : ""}
+  </div>
+  <div style="padding:6px 8px 8px;display:flex;flex-direction:column;gap:4px">
+    <label style="display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;font-size:.73rem;font-weight:700;padding:6px 8px;background:${btnBg};color:${btnCol};border:1.5px solid ${btnBdr};border-radius:6px;text-align:center">
+      ${btnTxt}<input type="file" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="packUpload('${esc(img.id)}',this)">
+    </label>
+    ${hasFile ? `<button onclick="packDelete('${esc(img.id)}')" style="width:100%;font-size:.62rem;font-weight:600;padding:3px 6px;background:none;color:#dc2626;border:none;border-radius:5px;cursor:pointer">Remove</button>` : ""}
+  </div>
+</div>`;
+    }).join("\n");
+
+    // Role assignment preview (static — shows first assigned slot per role)
+    const uploadedEntries = entries.filter(e => fs.existsSync(path.join(WORKSPACE_ROOT, e.path)));
+    const rolePreviewHtml = done >= 1 ? (() => {
+      const ROLES = [
+        { key: "heroImage",         icon: "🖼",  label: "Hero",          desc: "Split hero — top of page" },
+        { key: "earlySupportImage", icon: "📸",  label: "Early Support", desc: "First body image" },
+        { key: "trustImage",        icon: "🤝",  label: "Trust",         desc: "Credibility section" },
+        { key: "conversionImage",   icon: "🎯",  label: "Conversion",    desc: "Final CTA section" },
+      ];
+      const roleCols = ROLES.map((role, idx) => {
+        const assigned = uploadedEntries[idx % uploadedEntries.length];
+        const src = assigned ? `/api/image-library/pack-serve/${esc(assigned.id)}` : "";
+        return `<div style="flex:1;min-width:100px;border:1px solid #e2e8f0;border-radius:7px;overflow:hidden;background:#f8fafc">
+  <div style="position:relative;width:100%;aspect-ratio:16/9;background:#e5e7eb;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    ${src ? `<img src="${src}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">` : `<span style="font-size:1.4rem">${role.icon}</span>`}
+  </div>
+  <div style="padding:6px 8px">
+    <div style="font-size:.65rem;font-weight:800;color:#1e293b;text-transform:uppercase;letter-spacing:.04em">${role.label}</div>
+    <div style="font-size:.58rem;color:#94a3b8;margin-top:1px">${role.desc}</div>
+  </div>
+</div>`;
+      }).join("");
+      return `<div style="border-top:1px solid #e2e8f0;padding:12px 16px 14px;background:#fafbff">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+    <span style="font-size:.72rem;font-weight:700;color:#6366f1;text-transform:uppercase;letter-spacing:.05em">Page Role Assignment Preview</span>
+    <button onclick="packRandomise('${esc(industry)}')" style="font-size:.68rem;font-weight:700;padding:4px 10px;background:#6366f1;color:#fff;border:none;border-radius:5px;cursor:pointer">🎲 Randomise</button>
+  </div>
+  <div id="role-preview-${esc(industry)}" style="display:flex;gap:8px;flex-wrap:wrap">${roleCols}</div>
+</div>`;
+    })() : `<div style="border-top:1px solid #e2e8f0;padding:10px 16px;background:#fffbeb;font-size:.72rem;color:#92400e">Upload at least 1 image to enable role assignment preview</div>`;
+
+    return `<div style="border:1.5px solid #e2e8f0;border-radius:10px;margin-bottom:16px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:12px;padding:12px 18px;background:#f8fafc;border-bottom:1px solid #e2e8f0">
+    <span style="font-size:1rem;font-weight:700;color:#1e293b;flex:1">${label}</span>
+    <span style="font-size:.78rem;color:${allDone ? "#059669" : "#64748b"}">${done} / ${total} uploaded</span>
+    <div style="width:80px;height:5px;background:#e5e7eb;border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${allDone ? "#059669" : "#7c3aed"};border-radius:3px"></div></div>
+  </div>
+  <div style="padding:14px 16px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px">
+      ${cards}
+    </div>
+  </div>
+  ${rolePreviewHtml}
+</div>`;
+  }).join("\n");
+}
+
+function getProjects(): ProjectEntry[] {
+  try {
+    return fs.readdirSync(CONFIG_DIR)
+      .filter(f => f.endsWith(".json"))
+      .map(f => {
+        try {
+          const cfg = JSON.parse(fs.readFileSync(path.join(CONFIG_DIR, f), "utf8"));
+          return { clientSlug: cfg.clientSlug as string, businessName: cfg.businessName as string };
+        } catch { return null; }
+      })
+      .filter(Boolean) as ProjectEntry[];
+  } catch { return []; }
+}
+
+interface HubPage { slug: string; title: string; }
+
+function getHubPages(projectSlug: string): HubPage[] {
+  try {
+    const outputDir = path.join(WORKSPACE_ROOT, "output", projectSlug);
+    if (!fs.existsSync(outputDir)) return [];
+    const pages: HubPage[] = [];
+    for (const entry of fs.readdirSync(outputDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const pdPath = path.join(outputDir, entry.name, "page-data.json");
+      if (!fs.existsSync(pdPath)) continue;
+      try {
+        const pd = JSON.parse(fs.readFileSync(pdPath, "utf8")) as {
+          isHubPage?: boolean; pageType?: string;
+          primaryLocation?: string; location?: string; service?: string;
+        };
+        if (!pd.isHubPage && pd.pageType !== "hub") continue;
+        const loc = pd.primaryLocation ?? pd.location ?? "";
+        const svc = pd.service ?? "";
+        const toTitle = (s: string) => s.split(/[\s-]+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        pages.push({ slug: entry.name, title: loc && svc ? `${toTitle(svc)} in ${toTitle(loc)}` : entry.name });
+      } catch { /* skip */ }
+    }
+    return pages.sort((a, b) => a.slug.localeCompare(b.slug));
+  } catch { return []; }
+}
+
+function getDefaultSlug(): string | null {
+  try {
+    const files = fs.readdirSync(CONFIG_DIR).filter(f => f.endsWith(".json") && !f.startsWith("demo-"));
+    if (files.length === 0) return null;
+    const sorted = files.sort((a, b) =>
+      fs.statSync(path.join(CONFIG_DIR, b)).mtimeMs - fs.statSync(path.join(CONFIG_DIR, a)).mtimeMs
+    );
+    return path.basename(sorted[0], ".json");
+  } catch { return null; }
+}
+
+const router = Router();
+
+router.get("/image-library/packs-html", (_req, res) => {
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store");
+  res.send(renderPacksHtml());
+});
+
+router.get("/dashboard", (req, res) => {
+  const slugFromUrl = (req.query.slug as string) || "";
+  const projects    = getProjects();
+  const defaultSlug = slugFromUrl || getDefaultSlug() || (projects[0]?.clientSlug ?? "");
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  const hubPages = getHubPages(defaultSlug);
+  const currentUser = {
+    name:     req.session?.userName  ?? "",
+    username: req.session?.username  ?? "",
+    role:     req.session?.userRole  ?? "staff",
+  };
+  res.send(dashboardHtml(defaultSlug, projects, process.env.SESSION_SECRET ?? "", hubPages, currentUser));
+});
+
+const STAGE_NAMES: Record<number, string> = {
+  1: "Business Setup",
+  2: "Area Selection",
+  3: "Keyword Review",
+  4: "Keyword Override",
+  5: "Generate Pages",
+  6: "Deploy",
+  7: "Review Output",
+  8: "Rankings & Index",
+};
+
+interface CurrentUser { name: string; username: string; role: string; }
+
+function dashboardHtml(defaultSlug = "", projects: ProjectEntry[] = [], internalToken = "", hubPages: HubPage[] = [], currentUser: CurrentUser = { name: "", username: "", role: "staff" }): string {
+  const projectOptions = projects.map(p =>
+    `<option value="${p.clientSlug}"${p.clientSlug === defaultSlug ? " selected" : ""}>${p.businessName} (${p.clientSlug})</option>`
+  ).join("\n");
+  const hubPageOptions = hubPages.map((p, i) =>
+    `<option value="${p.slug}"${i === 0 ? " selected" : ""}>${p.title}  (${p.slug})</option>`
+  ).join("\n");
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Local SEO Engine</title>
+<style>
+:root {
+  --brand:#005EB8; --brand-dark:#004a94;
+  --success:#16a34a; --warn:#d97706; --error:#dc2626;
+  --muted:#64748b; --border:#e2e8f0; --bg:#f1f5f9;
+  --card:#fff; --text:#1e293b; --radius:10px;
+  --topbar-h:56px; --tabbar-h:44px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* ── Top bar ── */
+.topbar{background:#0d1a2d;color:#fff;padding:0 20px;
+  display:flex;align-items:center;height:var(--topbar-h);gap:0;position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 2px 16px rgba(0,0,0,.28);}
+.topbar-brand{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none;}
+.brand-mark{width:28px;height:28px;border-radius:7px;
+  background:linear-gradient(135deg,#2563eb,#0ea5e9);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:.78rem;color:#fff;flex-shrink:0;letter-spacing:.01em;}
+.brand-text{font-size:.92rem;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:-.02em;}
+.topbar-hdivider{width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 18px;flex-shrink:0;}
+.topbar-project-wrap select{border:1px solid rgba(255,255,255,.13);border-radius:7px;
+  padding:6px 28px 6px 10px;font-size:.82rem;background:rgba(255,255,255,.07);color:#fff;
+  cursor:pointer;min-width:210px;outline:none;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='rgba(255,255,255,0.45)' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 9px center;
+  transition:border-color .15s,background-color .15s;}
+.topbar-project-wrap select:hover,.topbar-project-wrap select:focus{border-color:rgba(255,255,255,.28);background-color:rgba(255,255,255,.12);}
+.topbar-project-wrap select option{background:#0d1a2d;color:#fff;}
+.topbar-spacer{flex:1;}
+.topbar-actions{display:flex;align-items:center;gap:5px;}
+.tb-icon-btn{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.72);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:.95rem;
+  transition:all .15s;flex-shrink:0;text-decoration:none;}
+.tb-icon-btn:hover{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.22);}
+.tb-pill{height:32px;padding:0 13px;border-radius:7px;border:1px solid rgba(255,255,255,.15);
+  color:#fff;cursor:pointer;font-size:.8rem;font-weight:600;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:5px;transition:all .15s;background:rgba(255,255,255,.08);}
+.tb-pill:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.28);}
+.tb-pill.green{background:rgba(22,163,74,.88);border-color:rgba(255,255,255,.15);}
+.tb-pill.green:hover{background:#16a34a;}
+.tb-vdivider{width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 6px;flex-shrink:0;}
+.tb-user-btn{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:4px 10px 4px 5px;
+  cursor:pointer;color:#fff;transition:all .15s;flex-shrink:0;}
+.tb-user-btn:hover{background:rgba(255,255,255,.15);}
+.tb-avatar{width:24px;height:24px;border-radius:5px;
+  background:linear-gradient(135deg,#3b82f6,#06b6d4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.67rem;font-weight:800;color:#fff;flex-shrink:0;}
+.tb-user-name{font-size:.8rem;font-weight:600;white-space:nowrap;max-width:110px;overflow:hidden;text-overflow:ellipsis;}
+.tb-admin-badge{background:rgba(255,255,255,.16);border-radius:4px;padding:1px 5px;font-size:.63rem;font-weight:700;letter-spacing:.05em;}
+.tb-chevron{font-size:.6rem;opacity:.55;margin-left:1px;}
+
+/* ── Tab bar ── */
+.tabbar{background:#fff;border-bottom:1px solid #e2e8f0;
+  display:flex;flex-wrap:nowrap;position:sticky;top:var(--topbar-h);z-index:10001;
+  padding:0 12px;gap:0;overflow-x:auto;scrollbar-width:none;
+  box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.tabbar::-webkit-scrollbar{display:none;}
+.tab{padding:0 11px;height:var(--tabbar-h);display:flex;align-items:center;gap:5px;
+  font-size:.81rem;font-weight:600;color:#64748b;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;
+  transition:color .15s,border-color .15s;}
+.tab:hover{color:#1e293b;}
+.tab.active{color:#005EB8;border-bottom-color:#005EB8;}
+.tab-badge{background:#f1f5f9;color:#64748b;font-size:.67rem;font-weight:700;
+  border-radius:9px;padding:1px 6px;}
+.tab.active .tab-badge{background:#dbeafe;color:#1d4ed8;}
+.tab-sep{width:1px;height:18px;background:#e2e8f0;margin:0 4px;align-self:center;flex-shrink:0;}
+
+/* ── Tab panels ── */
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── Overview tab ── */
+.main{max-width:1140px;margin:0 auto;padding:20px 16px;}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
+  gap:12px;margin-bottom:20px;}
+.ov-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:15px 16px;display:flex;flex-direction:column;gap:3px;}
+.ov-label{font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+.ov-value{font-size:1.55rem;font-weight:800;line-height:1.1;}
+.ov-sub{font-size:.76rem;color:var(--muted);}
+.ov-value.green{color:var(--success);}
+.ov-value.amber{color:var(--warn);}
+.ov-value.red{color:var(--error);}
+.ov-value.blue{color:var(--brand);}
+
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.btn{display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;
+  border-radius:6px;padding:8px 14px;font-size:.875rem;font-weight:600;transition:all .15s;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn-primary{background:var(--brand);color:#fff;}
+.btn-primary:hover:not(:disabled){background:var(--brand-dark);}
+.btn-secondary{background:#f1f5f9;color:var(--text);border:1px solid var(--border);}
+.btn-secondary:hover:not(:disabled){background:#e2e8f0;}
+.btn-sm{padding:5px 10px;font-size:.8rem;}
+.btn-ghost{background:transparent;color:var(--brand);border:1px solid var(--brand);}
+.btn-ghost:hover:not(:disabled){background:#eff6ff;}
+
+.section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:16px;overflow:hidden;}
+.section-head{padding:14px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;}
+.section-head h2{font-size:.9rem;font-weight:700;flex:1;}
+.section-sub{font-size:.8rem;color:var(--muted);}
+.section-body{padding:14px 18px;}
+
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.875rem;}
+th{text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);
+  font-size:.72rem;color:var(--muted);font-weight:700;white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.05em;}
+td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#f8fafc;}
+
+.badge{display:inline-block;font-size:.72rem;font-weight:700;border-radius:4px;padding:2px 7px;white-space:nowrap;}
+.badge-ready{background:#dcfce7;color:#15803d;}
+.badge-needs-work{background:#fef9c3;color:#854d0e;}
+.badge-not-ready{background:#fee2e2;color:#991b1b;}
+.badge-indexed{background:#dcfce7;color:#15803d;}
+.badge-not_indexed{background:#fee2e2;color:#991b1b;}
+.badge-unknown{background:#f1f5f9;color:var(--muted);}
+
+.score-bar-wrap{display:flex;align-items:center;gap:8px;min-width:130px;}
+.score-bar-bg{flex:1;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:3px;}
+.score-val{font-size:.8rem;font-weight:700;white-space:nowrap;}
+
+.pos{display:inline-block;font-weight:700;border-radius:4px;padding:2px 6px;font-size:.82rem;background:#f1f5f9;}
+.pos.top3{background:#dcfce7;color:#16a34a;}
+.pos.top10{background:#dbeafe;color:#1d4ed8;}
+.pos.top20{background:#fef9c3;color:#854d0e;}
+.chg{font-size:.8rem;font-weight:700;}
+.chg.up{color:var(--success);}
+.chg.down{color:var(--error);}
+.chg.new{color:var(--brand);}
+
+.empty{text-align:center;padding:28px;color:var(--muted);font-size:.875rem;}
+.btn-strip{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;}
+.running-label{font-size:.82rem;color:var(--muted);}
+.alert{border-radius:8px;padding:10px 14px;font-size:.875rem;margin-top:10px;}
+.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;}
+.alert-info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
+.sh-filter-btn{padding:5px 12px;border:1px solid #cbd5e1;border-radius:20px;background:#f8fafc;font-size:.78rem;font-weight:600;cursor:pointer;color:#475569;transition:all .15s;}
+.sh-filter-btn:hover{background:#e2e8f0;}
+.sh-filter-btn.active{background:#1e3a5f;color:#fff;border-color:#1e3a5f;}
+.sh-sev-fail{display:inline-block;background:#fee2e2;color:#991b1b;border-radius:4px;padding:1px 7px;font-size:.74rem;font-weight:700;}
+.sh-sev-warn{display:inline-block;background:#fef9c3;color:#713f12;border-radius:4px;padding:1px 7px;font-size:.74rem;font-weight:700;}
+.sh-sev-pass{display:inline-block;background:#dcfce7;color:#15803d;border-radius:4px;padding:1px 7px;font-size:.74rem;font-weight:700;}
+.top-banner{position:fixed;top:calc(var(--topbar-h) + var(--tabbar-h));left:0;right:0;z-index:500;padding:11px 20px;font-size:.9rem;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px;}
+.top-banner-success{background:#16a34a;color:#fff;}
+.top-banner-error{background:#dc2626;color:#fff;}
+.top-banner-info{background:#1e40af;color:#fff;}
+.top-banner-warn{background:#b45309;color:#fff;}
+.top-banner button{background:rgba(255,255,255,.25);border:none;color:inherit;font-size:.85rem;padding:2px 8px;border-radius:4px;cursor:pointer;}
+.top-banner a{color:#fff;font-weight:700;text-decoration:underline;margin-left:8px;}
+
+/* ── Wizard tab ── */
+.wizard-shell{display:flex;flex-direction:column;height:calc(100vh - var(--topbar-h) - var(--tabbar-h));}
+.wizard-toolbar{background:var(--card);border-bottom:1px solid var(--border);
+  padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+.wizard-toolbar-label{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+.stage-pills{display:flex;gap:4px;flex-wrap:wrap;}
+.stage-pill{padding:4px 10px;border-radius:5px;font-size:.78rem;font-weight:600;cursor:pointer;
+  border:1px solid var(--border);background:#f8fafc;color:var(--muted);transition:all .12s;}
+.stage-pill:hover{border-color:var(--brand);color:var(--brand);background:#eff6ff;}
+.stage-pill.active{background:var(--brand);color:#fff;border-color:var(--brand);}
+.wizard-toolbar-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.wizard-frame-wrap{flex:1;position:relative;overflow:hidden;}
+.wizard-frame{width:100%;height:100%;border:none;display:block;}
+.wizard-loading{position:absolute;inset:0;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;}
+.spinner{width:36px;height:36px;border:3px solid var(--border);
+  border-top-color:var(--brand);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.wizard-loading-text{font-size:.875rem;color:var(--muted);}
+
+/* ── Loading overlay ── */
+#loading-overlay{position:fixed;top:calc(var(--topbar-h) + var(--tabbar-h));left:0;right:0;bottom:0;background:rgba(241,245,249,.88);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:300;gap:12px;pointer-events:none;}
+#loading-text{font-size:.9rem;color:var(--muted);}
+
+.hidden{display:none!important;}
+
+@media(max-width:640px){
+  .overview-grid{grid-template-columns:repeat(2,1fr);}
+  .tab{padding:0 10px;font-size:.78rem;}
+  .topbar-project-wrap select{min-width:140px;}
+  .tb-user-name,.brand-text{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="top-banner" class="top-banner hidden"></div>
+
+<div id="loading-overlay" class="hidden">
+  <div class="spinner"></div>
+  <div id="loading-text">Loading…</div>
+</div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-mark">LS</div>
+    <span class="brand-text">Local SEO Engine</span>
+  </div>
+  <div class="topbar-hdivider"></div>
+  <div class="topbar-project-wrap">
+    <select id="project-select" onchange="onProjectChange()">
+      <option value="">— select client —</option>
+      ${projectOptions}
+    </select>
+  </div>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-actions">
+    <button class="tb-icon-btn" onclick="loadAll()" title="Refresh data" style="font-size:1rem;">↻</button>
+    <button class="tb-pill green" onclick="openNewClientModal()">+ New Client</button>
+    ${currentUser.role === "admin" ? `<div class="tb-vdivider"></div><a href="/api/admin/users?_t=${encodeURIComponent(internalToken)}" class="tb-icon-btn" title="Manage Team">👥</a>` : ""}
+    <div class="tb-vdivider"></div>
+    <div class="user-menu-wrap" style="position:relative;">
+      <button id="user-menu-btn" class="tb-user-btn" onclick="toggleUserMenu()">
+        <div class="tb-avatar">${(currentUser.name || currentUser.username).charAt(0).toUpperCase()}</div>
+        <span class="tb-user-name">${esc(currentUser.name || currentUser.username)}</span>
+        ${currentUser.role === "admin" ? `<span class="tb-admin-badge">ADMIN</span>` : ""}
+        <span class="tb-chevron">▾</span>
+      </button>
+      <div id="user-menu-dropdown" style="display:none;position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.14);min-width:210px;z-index:999;overflow:hidden;">
+        <div style="padding:10px 14px 8px;border-bottom:1px solid #f1f5f9;">
+          <div style="font-size:.8rem;font-weight:700;color:#1e293b;">${esc(currentUser.name || currentUser.username)}</div>
+          <div style="font-size:.73rem;color:#94a3b8;margin-top:1px;">${esc(currentUser.username)} &middot; ${esc(currentUser.role)}</div>
+        </div>
+        <a href="/api/admin/change-password?_t=${encodeURIComponent(internalToken)}" style="display:block;padding:10px 14px;font-size:.84rem;color:#374151;text-decoration:none;font-weight:500;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''">🔑 Change Password</a>
+        ${currentUser.role === "admin" ? `<a href="/api/admin/users?_t=${encodeURIComponent(internalToken)}" style="display:block;padding:10px 14px;font-size:.84rem;color:#374151;text-decoration:none;font-weight:500;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''">👥 Manage Team</a>` : ""}
+        <div style="border-top:1px solid #f1f5f9;">
+          <a href="#" onclick="event.preventDefault();fetch('/api/logout',{method:'POST'}).then(()=>location.href='/api/login')" style="display:block;padding:10px 14px;font-size:.84rem;color:#dc2626;text-decoration:none;font-weight:600;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background=''">↪ Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleUserMenu(){var d=document.getElementById('user-menu-dropdown');d.style.display=d.style.display==='none'?'block':'none';}
+document.addEventListener('click',function(e){var w=document.querySelector('.user-menu-wrap');if(w&&!w.contains(e.target)){var d=document.getElementById('user-menu-dropdown');if(d)d.style.display='none';}});
+function openCampaignPanel(cid){
+  var overlay=document.getElementById('campaign-panel-overlay');
+  var panel=document.getElementById('campaign-panel');
+  var title=document.getElementById('cp-title');
+  if(overlay) overlay.style.display='block';
+  if(panel){ panel.style.display='flex'; panel.scrollTop=0; }
+  if(title) title.textContent='Loading\u2026';
+  if(typeof window.campaignViewOpen==='function'){ window.campaignViewOpen(cid); return; }
+  var t=0;
+  var poll=setInterval(function(){
+    t++;
+    if(typeof window.campaignViewOpen==='function'){ clearInterval(poll); window.campaignViewOpen(cid); }
+    else if(t>100) clearInterval(poll);
+  },50);
+}
+document.addEventListener('click',function(e){
+  var btn=e.target.closest('[data-view-cid]');
+  if(btn){ var cid=btn.getAttribute('data-view-cid'); if(cid) openCampaignPanel(cid); }
+});
+</script>
+
+<!-- Tab bar -->
+<div class="tabbar">
+  <div class="tab active" id="tab-overview" onclick="switchTab('overview')">Overview</div>
+  <div class="tab" id="tab-campaigns" onclick="switchTab('campaigns');campaignsLoad()">Campaigns <span class="tab-badge" id="tb-campaigns">—</span></div>
+  <div class="tab" id="tab-wizard" onclick="switchTab('wizard')">Setup Wizard</div>
+  <div class="tab" id="tab-distribution" onclick="switchToDistMode()">Distribution</div>
+  <div class="tab" id="tab-visibility-posts" onclick="switchToVPMode()">&#10024; Visibility Posts</div>
+  <div class="tab-sep"></div>
+  <div class="tab" id="tab-qa" onclick="switchTab('qa')">Page QA <span class="tab-badge" id="tb-qa">—</span></div>
+  <div class="tab" id="tab-live-crawl" onclick="switchTab('live-crawl');lcLoad()">Live Crawl <span class="tab-badge" id="tb-live-crawl">—</span></div>
+  <div class="tab" id="tab-system-health" onclick="switchTab('system-health');shLoad();ssLoad();liLoad()">System Health <span class="tab-badge" id="tb-system-health">—</span></div>
+  <div class="tab-sep"></div>
+  <div class="tab" id="tab-rankings" onclick="switchTab('rankings')">Rankings <span class="tab-badge" id="tb-rankings">—</span></div>
+  <div class="tab" id="tab-index" onclick="switchTab('index')">Index Tracking <span class="tab-badge" id="tb-index">—</span></div>
+  <div class="tab" id="tab-sitemaps" onclick="switchTab('sitemaps')">Sitemaps <span class="tab-badge" id="tb-sitemaps">—</span></div>
+  <div class="tab-sep"></div>
+  <div class="tab" id="tab-templates" onclick="switchTab('templates');templatesLoad();if(typeof packLoad==='function')packLoad()">Templates</div>
+  <div class="tab" id="tab-brand-import" onclick="switchTab('brand-import');biLoad()">Brand Import</div>
+  <div class="tab" id="tab-image-library" onclick="switchTab('image-library');imgLibLoad()">Image Library</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Overview                                          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel active" id="panel-overview">
+  <div class="main">
+
+    <!-- Profile Setup Banner — shown when profile is incomplete -->
+    <div id="profile-setup-banner" style="display:none;background:#fff;border:2px solid #fde047;border-radius:10px;padding:16px 20px;margin-bottom:20px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <div style="font-weight:700;font-size:.95rem;color:#713f12">⚠ Profile Setup Incomplete</div>
+            <div id="profile-pct-badge" style="font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:12px;background:#fef9c3;color:#713f12">0%</div>
+          </div>
+          <div style="background:#e2e8f0;border-radius:99px;height:6px;width:100%;max-width:320px;overflow:hidden;margin-bottom:10px">
+            <div id="profile-pct-bar" style="height:100%;border-radius:99px;background:#f59e0b;transition:width .4s;width:0%"></div>
+          </div>
+          <div style="font-size:.82rem;color:#92400e;margin-bottom:8px">Complete your profile setup before generating pages. Missing required items:</div>
+          <div id="profile-missing-list" style="font-size:.8rem;color:#713f12;display:flex;flex-wrap:wrap;gap:4px 12px"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <button class="btn btn-primary btn-sm" onclick="switchTab('wizard');wizardGoStage(1)">Complete Profile Setup →</button>
+          <button onclick="this.closest('#profile-setup-banner').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.1rem;padding:4px">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Setup Complete Banner — shown when ready -->
+    <div id="profile-setup-ok" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+      <span style="color:#16a34a;font-size:1rem">✓</span>
+      <span style="font-size:.85rem;color:#166534;font-weight:500">Profile setup complete — ready to generate pages.</span>
+    </div>
+
+    <!-- Distribution Quick-Action — plain HTML form, no JavaScript required -->
+    <form method="GET" action="/api/distribution/generate-page"
+      style="background:#1e40af;border-radius:10px;padding:16px 20px;margin-bottom:18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <input type="hidden" name="slug" value="${defaultSlug}">
+      <div style="flex:1;min-width:180px">
+        <div style="font-weight:700;font-size:.95rem;color:#fff;margin-bottom:2px">&#128227; Distribution Content Engine</div>
+        <div style="font-size:.8rem;color:#bfdbfe">Generate social posts &amp; YouTube drafts for a hub page using AI</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <select name="pageSlug" style="padding:7px 10px;border-radius:6px;border:none;font-size:.84rem;min-width:200px">
+          ${hubPageOptions}
+        </select>
+        <button type="submit" style="background:#fff;color:#1e40af;font-weight:700;font-size:.84rem;padding:7px 16px;border-radius:6px;border:none;cursor:pointer;white-space:nowrap">Generate &#8594;</button>
+      </div>
+    </form>
+
+    <div class="overview-grid">
+      <div class="ov-card">
+        <div class="ov-label">Pages</div>
+        <div class="ov-value blue" id="ov-pages">—</div>
+        <div class="ov-sub" id="ov-pages-sub">generated</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-label">QA Score</div>
+        <div class="ov-value green" id="ov-qa">—</div>
+        <div class="ov-sub">avg readiness</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-label">Indexed</div>
+        <div class="ov-value green" id="ov-indexed">—</div>
+        <div class="ov-sub" id="ov-indexed-sub">GSC Verified</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-label">Not Indexed</div>
+        <div class="ov-value red" id="ov-notindexed">—</div>
+        <div class="ov-sub">pages to fix</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-label">Ranked</div>
+        <div class="ov-value blue" id="ov-ranked">—</div>
+        <div class="ov-sub">in top 100</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-label">Top 10</div>
+        <div class="ov-value green" id="ov-top10">—</div>
+        <div class="ov-sub">keywords</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-run-all" onclick="runAll()" disabled>▶ Run All Checks</button>
+      <button class="btn btn-secondary" id="btn-run-kt" onclick="ktRunCheck()" disabled>Keyword Check</button>
+      <button class="btn btn-secondary" id="btn-run-it" onclick="itRunCheck()" disabled>Index Check</button>
+      <button class="btn btn-secondary" id="btn-run-qa" onclick="qaRefresh()" disabled>Refresh QA</button>
+      <button class="btn btn-secondary" id="btn-run-pp-qa-ov" onclick="switchTab('qa');setTimeout(runPrePublishQa,200)" disabled style="background:#1e3a5f;color:#fff;border-color:#1e3a5f">▶ Pre-Publish QA</button>
+      <button class="btn btn-ghost" onclick="switchTab('wizard')">Open Wizard →</button>
+    </div>
+
+    <!-- Summary tables side-by-side on wide screens -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Top Keywords</h2>
+          <div id="kt-overview-info" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div id="kt-overview-empty" class="empty">No data yet</div>
+          <div id="kt-overview-wrap" class="table-wrap hidden">
+            <table>
+              <thead><tr><th>Keyword</th><th>Position</th><th>Change</th></tr></thead>
+              <tbody id="kt-overview-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Index Status</h2>
+          <div id="it-overview-info" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div id="it-overview-empty" class="empty">No data yet</div>
+          <div id="it-overview-wrap" class="table-wrap hidden">
+            <table>
+              <thead><tr><th>Page</th><th>Status</th></tr></thead>
+              <tbody id="it-overview-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Wizard (iframe)                                   -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-wizard">
+  <div class="wizard-shell">
+
+    <!-- Toolbar: stage jumps + actions -->
+    <div class="wizard-toolbar">
+      <span class="wizard-toolbar-label">Jump to stage:</span>
+      <div class="stage-pills" id="stage-pills">
+        ${Object.entries(STAGE_NAMES).map(([n, name]) =>
+          `<div class="stage-pill" id="pill-${n}" onclick="wizardGoStage(${n})" title="${name}">
+            ${n}. ${name}
+          </div>`
+        ).join('')}
+      </div>
+      <div class="wizard-toolbar-sep"></div>
+      <button class="btn btn-sm btn-secondary" onclick="wizardReset()" title="Start wizard from Stage 1">↩ Reset</button>
+      <a id="wizard-open-tab" class="btn btn-sm btn-ghost" href="/api/setup${defaultSlug ? '?slug=' + encodeURIComponent(defaultSlug) : ''}" target="_blank"
+        style="text-decoration:none">Open in tab ↗</a>
+    </div>
+
+    <!-- iframe -->
+    <div class="wizard-frame-wrap">
+      <div class="wizard-loading" id="wizard-loading">
+        <div class="spinner"></div>
+        <div class="wizard-loading-text">Loading wizard…</div>
+      </div>
+      <iframe id="wizard-frame" class="wizard-frame" src="about:blank"
+        onload="onWizardLoad()"></iframe>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Campaigns                                         -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-campaigns">
+  <div class="main">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+      <div>
+        <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:4px">Campaigns</h2>
+        <div style="font-size:.84rem;color:var(--muted)">SEO page generation campaigns for <span id="camp-project-name" style="font-weight:600">this project</span></div>
+      </div>
+      <button class="btn btn-primary" onclick="campaignsNew()" id="btn-camp-new">+ Create New Campaign</button>
+    </div>
+
+    <!-- Create New Campaign form (hidden by default) -->
+    <div id="camp-new-form" style="display:none;background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:20px">
+      <div style="font-weight:700;font-size:.95rem;margin-bottom:14px">New Campaign</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Target city / location *</label>
+          <input id="camp-city" type="text" placeholder="e.g. Sheffield" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:.9rem"/>
+        </div>
+        <div>
+          <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Target service *</label>
+          <input id="camp-service" type="text" placeholder="e.g. Web Design" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:.9rem"/>
+        </div>
+        <div>
+          <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Status</label>
+          <select id="camp-status" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:.9rem">
+            <option value="new">Draft</option>
+            <option value="in_progress">Active</option>
+            <option value="paused">Paused</option>
+            <option value="generated">Completed</option>
+          </select>
+        </div>
+      </div>
+      <div id="camp-new-error" style="display:none;color:var(--error);font-size:.82rem;margin-bottom:10px"></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary" onclick="campaignsCreate()">Create &amp; Open Wizard →</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('camp-new-form').style.display='none'">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Campaign list -->
+    <div id="camp-list" style="display:grid;gap:10px">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:40px 20px;text-align:center;color:var(--muted)"><div style="font-size:2rem;margin-bottom:10px">📂</div><div style="font-weight:600;margin-bottom:6px">No project selected</div><div style="font-size:.85rem">Select a client project from the dropdown above, or create one with <strong>+ New Client</strong>.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Page QA                                           -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-qa">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-pp-qa" onclick="runPrePublishQa()" disabled>▶ Run Pre-Publish QA</button>
+      <button class="btn btn-secondary" id="btn-qa-refresh" onclick="qaRefresh()" disabled>Refresh QA Scores</button>
+      <button class="btn btn-secondary" id="btn-upgrade-list" onclick="upgradeLoadList()" disabled style="background:#1e3a5f;color:#fff;border-color:#1e3a5f">&#128269; AI Upgrade</button>
+    </div>
+
+    <!-- AI Upgrade Panel -->
+    <div class="section" id="upgrade-section">
+      <div class="section-head">
+        <h2>AI Upgrade</h2>
+        <div id="upgrade-info" class="section-sub">Identify and safely upgrade pages scoring below 90 — preserving all images, links, canonical URLs and header/footer data.</div>
+      </div>
+      <div class="section-body">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:10px 14px;background:#f0f4ff;border-radius:8px;border:1px solid #c7d7fd">
+          <div style="font-size:.84rem;color:#1e3a5f;flex:1">Scan all pages for AI readiness below <strong>90</strong>. Upgrade per page or per campaign — full AI readiness + link + image + placeholder validation runs after each regeneration.</div>
+          <button onclick="upgradeLoadList()" style="white-space:nowrap;background:#1e3a5f;color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:.84rem;font-weight:700;cursor:pointer">&#128269; Find pages below 90</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:10px 14px;background:#f0fdf4;border-radius:8px;border:1px solid #a7f3d0">
+          <div style="font-size:.84rem;color:#065f46;flex:1"><strong>AI Citation Blocks</strong> — Injects AI-extractable Q&amp;A blocks and definition blocks into all existing pages. No AI credits used — uses content already on each page. Run this once to make all pages citable in AI Overviews.</div>
+          <button onclick="rerenderAllPages()" id="rerender-btn" style="white-space:nowrap;background:#059669;color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:.84rem;font-weight:700;cursor:pointer">&#9889; Add AI Blocks to All Pages</button>
+        </div>
+        <div id="rerender-status" class="hidden" style="margin-bottom:12px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:7px;font-size:.84rem;color:#1e3a5f"></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:10px 14px;background:#fefce8;border-radius:8px;border:1px solid #fde68a">
+          <div style="font-size:.84rem;color:#713f12;flex:1"><strong>Push Images to Server</strong> — Uploads the hero, support and conversion images to the live FTP server. Run this if images are missing or broken on live pages. No pages are regenerated.</div>
+          <button onclick="pushImagesToServer()" id="push-images-btn" style="white-space:nowrap;background:#d97706;color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:.84rem;font-weight:700;cursor:pointer">&#128247; Push Images Live</button>
+        </div>
+        <div id="push-images-status" class="hidden" style="margin-bottom:12px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:7px;font-size:.84rem;color:#1e3a5f"></div>
+        <div id="upgrade-empty" class="empty">Click "Find pages below 90" to scan. Pages already at 90+ will not appear.</div>
+        <div id="upgrade-loading" class="hidden" style="padding:20px 0;text-align:center;font-size:.9rem;color:#1e3a5f;font-weight:600">Scanning pages…</div>
+        <div id="upgrade-list-wrap" class="hidden"></div>
+        <div id="upgrade-progress-wrap" class="hidden" style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+            <div style="font-size:.9rem;font-weight:700;color:#1e3a5f;flex:1" id="upgrade-progress-label">Starting upgrade…</div>
+            <button onclick="upgradeCancel()" style="background:#dc2626;color:#fff;border:none;border-radius:5px;padding:4px 12px;font-size:.78rem;cursor:pointer;font-weight:600">&#10005; Cancel</button>
+          </div>
+          <div style="height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;margin-bottom:14px">
+            <div id="upgrade-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#1e3a5f,#3b82f6);border-radius:4px;transition:width .5s ease"></div>
+          </div>
+          <div id="upgrade-progress-pages" style="display:grid;gap:6px"></div>
+        </div>
+        <div id="upgrade-results-wrap" class="hidden" style="margin-top:16px">
+          <div id="upgrade-results-banner" style="display:none;margin-bottom:12px;padding:10px 14px;background:#f0fdf4;border:1px solid #86efac;border-radius:7px;font-size:.84rem;color:#166534;line-height:1.5"></div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+            <div style="font-size:.95rem;font-weight:700;color:#1e3a5f" id="upgrade-results-title">Upgrade complete</div>
+            <button onclick="upgradeLoadList()" style="background:#1e3a5f;color:#fff;border:none;border-radius:5px;padding:5px 14px;font-size:.78rem;cursor:pointer;font-weight:600">&#128269; Scan for more pages</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Page</th><th>Tier</th>
+                <th style="min-width:72px" title="AI Readiness score before upgrade">Before</th>
+                <th style="min-width:72px" title="AI Readiness score after upgrade">After</th>
+                <th style="min-width:50px" title="Score improvement">&#916;</th>
+                <th>Result</th>
+              </tr></thead>
+              <tbody id="upgrade-results-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="upgrade-error" class="alert alert-error hidden"></div>
+      </div>
+    </div>
+
+    <!-- Pre-Publish QA Report -->
+    <div class="section" id="pp-qa-section">
+      <div class="section-head">
+        <h2>Pre-Publish QA Report</h2>
+        <div id="pp-qa-info" class="section-sub">—</div>
+      </div>
+      <div class="section-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:10px 14px;background:#f0f4ff;border-radius:8px;border:1px solid #c7d7fd">
+          <div style="font-size:.84rem;color:#1e3a5f">Scan all 86 pages for Google readiness, AI readiness, content quality and duplicate content.</div>
+          <button id="btn-pp-qa-head" onclick="if(activeSlug)runPrePublishQa();else alert('Select a project first')" style="margin-left:16px;white-space:nowrap;background:#1e3a5f;color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:.84rem;font-weight:700;cursor:pointer">▶ Run Pre-Publish QA</button>
+        </div>
+        <div id="pp-qa-summary" style="display:none;margin-bottom:14px;padding:12px 16px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+            <!-- Overall score badge -->
+            <div style="text-align:center;min-width:72px">
+              <div id="pp-overall-score" style="font-size:2rem;font-weight:900;line-height:1;color:#1e3a5f">—</div>
+              <div style="font-size:.68rem;color:#64748b;font-weight:600;letter-spacing:.04em;text-transform:uppercase">Overall</div>
+            </div>
+            <div style="width:1px;height:40px;background:#e2e8f0"></div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span id="pp-sum-pages" style="font-weight:700;font-size:.9rem;color:#1e3a5f">—</span>
+              <div style="display:flex;gap:6px">
+                <span class="badge badge-ready" id="pp-sum-pass">0 Pass</span>
+                <span class="badge badge-review" id="pp-sum-review">0 Review</span>
+                <span class="badge badge-blocked" id="pp-sum-fail">0 Fail</span>
+              </div>
+            </div>
+            <div style="margin-left:auto;display:flex;gap:18px;font-size:.82rem;color:#64748b;align-items:center;flex-wrap:wrap">
+              <div style="text-align:center">
+                <div style="font-size:1.1rem;font-weight:800;color:#1e3a5f" id="pp-avg-g">—</div>
+                <div style="font-size:.7rem;color:#94a3b8">Google SEO</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-size:1.1rem;font-weight:800;color:#1e3a5f" id="pp-avg-ai">—</div>
+                <div style="font-size:.7rem;color:#94a3b8">AI Structure</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-size:1.1rem;font-weight:800;color:#1e3a5f" id="pp-avg-s">—</div>
+                <div style="font-size:.7rem;color:#94a3b8">Internal Structure</div>
+              </div>
+              <div style="width:1px;height:36px;background:#e2e8f0"></div>
+              <div style="text-align:center">
+                <div style="font-size:1.1rem;font-weight:800;color:#1e3a5f" id="pp-avg-air">—</div>
+                <div style="font-size:.7rem;color:#94a3b8">AI Readiness</div>
+              </div>
+              <div id="pp-air-blocked-wrap" style="text-align:center;display:none">
+                <div style="font-size:1.1rem;font-weight:800;color:#dc2626" id="pp-air-blocked">0</div>
+                <div style="font-size:.7rem;color:#94a3b8">Blocked</div>
+              </div>
+            </div>
+            <div id="pp-deploy-gate" style="display:none;padding:6px 12px;border-radius:6px;font-size:.8rem;font-weight:700"></div>
+          <button id="pp-fix-all-btn" onclick="ppFixAll()" style="display:none;margin-left:8px;padding:7px 18px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:.84rem;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0">⚡ Fix All Issues</button>
+          </div>
+        </div>
+        <div id="pp-qa-empty" class="empty">Click "Run Pre-Publish QA" to scan all pages for Google SEO, AI Structure, and Internal Structure readiness.</div>
+        <div id="pp-qa-running" class="hidden" style="padding:28px 0 20px;text-align:center">
+          <div style="font-size:.9rem;font-weight:600;color:#1e3a5f;margin-bottom:14px" id="pp-progress-label">Initialising scan…</div>
+          <div style="max-width:520px;margin:0 auto 10px;height:10px;background:#e2e8f0;border-radius:5px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.1)">
+            <div id="pp-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#1e3a5f,#3b82f6);border-radius:5px;transition:width .4s ease;position:relative">
+              <div style="position:absolute;right:0;top:0;bottom:0;width:30px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35));animation:ppShimmer 1.2s infinite linear"></div>
+            </div>
+          </div>
+          <div style="font-size:.78rem;color:#64748b" id="pp-progress-sub">Reading page files…</div>
+        </div>
+        <style>
+          @keyframes ppShimmer{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+        </style>
+        <!-- Scoring Key -->
+        <div id="pp-qa-key" style="margin-bottom:16px">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+            <div style="flex:1;min-width:200px;padding:12px 14px;border-radius:8px;background:#d1fae5;border:1px solid #6ee7b7">
+              <div style="font-size:.95rem;font-weight:800;color:#065f46;margin-bottom:2px">✓ PASS — Ready to publish</div>
+              <div style="font-size:.78rem;color:#047857">Score ≥80% with no critical errors. Google will index and rank this page.</div>
+            </div>
+            <div style="flex:1;min-width:200px;padding:12px 14px;border-radius:8px;background:#fef3c7;border:1px solid #fcd34d">
+              <div style="font-size:.95rem;font-weight:800;color:#92400e;margin-bottom:2px">⚠ REVIEW — Minor issues</div>
+              <div style="font-size:.78rem;color:#b45309">Will likely rank but has warnings. Fix before deploying for best results.</div>
+            </div>
+            <div style="flex:1;min-width:200px;padding:12px 14px;border-radius:8px;background:#fee2e2;border:1px solid #fca5a5">
+              <div style="font-size:.95rem;font-weight:800;color:#991b1b;margin-bottom:2px">✗ FAIL — Do NOT publish</div>
+              <div style="font-size:.78rem;color:#b91c1c">Critical error found. Missing title, schema, CTA, or under 500 words. Page will not rank.</div>
+            </div>
+          </div>
+          <details style="font-size:.78rem;color:#64748b;cursor:pointer">
+            <summary style="font-weight:600;color:#475569;user-select:none">How is the score calculated? ▾</summary>
+            <div style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+              <div style="padding:10px 12px;background:#f8fafc;border-radius:6px;border:1px solid #e2e8f0">
+                <div style="font-weight:700;color:#1e3a5f;margin-bottom:6px">🔍 Google SEO Fundamentals</div>
+                <ul style="margin:0;padding-left:14px;line-height:1.7">
+                  <li>Title tag (20–60 chars)</li>
+                  <li>Meta description (120–160 chars)</li>
+                  <li>Canonical URL set correctly</li>
+                  <li>Exactly one H1</li>
+                  <li>JSON-LD schema (WebPage/Service)</li>
+                  <li>FAQPage schema</li>
+                  <li>No {{placeholder}} tokens</li>
+                  <li>No noindex tag</li>
+                  <li>No /preview/ links</li>
+                  <li>Images present (if required)</li>
+                  <li>Canonical matches sitemap</li>
+                </ul>
+              </div>
+              <div style="padding:10px 12px;background:#f8fafc;border-radius:6px;border:1px solid #e2e8f0">
+                <div style="font-weight:700;color:#1e3a5f;margin-bottom:6px">🤖 AI Structure & Extraction</div>
+                <ul style="margin:0;padding-left:14px;line-height:1.7">
+                  <li>Keyword + location in H1</li>
+                  <li>Quick answer section near top</li>
+                  <li>3+ H2 headings</li>
+                  <li>FAQ section present</li>
+                  <li>FAQPage schema</li>
+                  <li>Location mentioned 5+ times</li>
+                  <li>Short, scannable paragraphs</li>
+                  <li>Business name in hero</li>
+                </ul>
+              </div>
+              <div style="padding:10px 12px;background:#f8fafc;border-radius:6px;border:1px solid #e2e8f0">
+                <div style="font-weight:700;color:#1e3a5f;margin-bottom:6px">📐 Internal Structure</div>
+                <ul style="margin:0;padding-left:14px;line-height:1.7">
+                  <li>Word count ≥700 (fail &lt;500)</li>
+                  <li>Call-to-action button/section</li>
+                  <li>Map / local coverage embed</li>
+                  <li>Keyword density &lt;6%</li>
+                  <li>All images have alt text</li>
+                </ul>
+                <div style="margin-top:8px;padding:6px 8px;background:#fee2e2;border-radius:4px;font-size:.74rem;color:#991b1b;font-weight:600">
+                  ⚡ A page fails even with a high score if:<br>missing title · no schema · no CTA · &lt;500 words
+                </div>
+              </div>
+              <div style="padding:10px 12px;background:#f0f4ff;border-radius:6px;border:1px solid #c7d7fd">
+                <div style="font-weight:700;color:#1e3a5f;margin-bottom:6px">✦ AI Search Readiness (0–100)</div>
+                <ul style="margin:0;padding-left:14px;line-height:1.7">
+                  <li>AI Structure &amp; Extraction (20 pts)</li>
+                  <li>Local Relevance (15 pts)</li>
+                  <li>Service Relevance (15 pts)</li>
+                  <li>Human Readability (10 pts)</li>
+                  <li>Internal Structure (10 pts)</li>
+                  <li>Conversion Quality (10 pts)</li>
+                  <li>Google SEO Fundamentals (10 pts)</li>
+                  <li>Duplicate Risk &amp; Variation (10 pts)</li>
+                </ul>
+                <div style="margin-top:8px;padding:6px 8px;background:#fee2e2;border-radius:4px;font-size:.74rem;color:#991b1b;font-weight:600">
+                  ≥90 Elite · ≥75 Good · ≥60 Weak · &lt;60 Fail<br>Blocking issues = score capped at 59 + FTP blocked
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div id="pp-qa-filters" style="display:none;margin-bottom:10px;gap:8px;align-items:center;flex-wrap:wrap">
+          <span style="font-size:.8rem;color:#64748b;font-weight:600">Show:</span>
+          <button id="pp-filter-all" onclick="ppApplyFilter('all')" style="font-size:.78rem;padding:3px 11px;border-radius:14px;border:1px solid #cbd5e1;background:#1e3a5f;color:#fff;cursor:pointer;font-weight:700">All pages</button>
+          <button id="pp-filter-issues" onclick="ppApplyFilter('issues')" style="font-size:.78rem;padding:3px 11px;border-radius:14px;border:1px solid #cbd5e1;background:#fff;color:#92400e;cursor:pointer;font-weight:600">⚠ Issues only</button>
+          <button id="pp-filter-fail" onclick="ppApplyFilter('fail')" style="font-size:.78rem;padding:3px 11px;border-radius:14px;border:1px solid #fca5a5;background:#fff;color:#991b1b;cursor:pointer;font-weight:600">✗ Fail only</button>
+          <span id="pp-filter-count" style="font-size:.78rem;color:#64748b;margin-left:4px"></span>
+        </div>
+
+        <div id="pp-qa-table-wrap" class="table-wrap hidden">
+          <table>
+            <thead><tr>
+              <th>Area / Page</th>
+              <th style="min-width:60px" title="Overall score: average of Google SEO, AI Structure and Internal Structure">Score</th>
+              <th style="min-width:60px">Tier</th>
+              <th style="min-width:80px" title="Google SEO Fundamentals: title, canonical, H1, schema, no placeholders">Google SEO</th>
+              <th style="min-width:80px" title="AI Structure & Extraction: H1 clarity, FAQ, quick-answer, entity">AI Structure</th>
+              <th style="min-width:80px" title="Internal Structure: word count, CTA, local coverage">Internal Structure</th>
+              <th style="min-width:90px" title="AI Search Readiness score 0–100 across 8 categories. Fail or blocking issues = blocked from deployment.">AI Readiness</th>
+              <th style="min-width:80px" title="Cross-page duplicate content risk">Duplicate</th>
+              <th style="min-width:90px" title="PASS = ready to rank · REVIEW = minor issues · FAIL = do not publish">Rank Ready?</th>
+              <th>What to fix</th>
+            </tr></thead>
+            <tbody id="pp-qa-tbody"></tbody>
+          </table>
+        </div>
+        <div id="pp-qa-error" class="alert alert-error hidden"></div>
+      </div>
+    </div>
+
+    <!-- Existing content score QA -->
+    <div class="section">
+      <div class="section-head">
+        <h2>Content Scores (QA)</h2>
+        <div id="qa-run-info" class="section-sub">—</div>
+      </div>
+      <div class="section-body">
+        <div id="qa-empty" class="empty">Select a project above to load QA data.</div>
+        <div id="qa-table-wrap" class="table-wrap hidden">
+          <table>
+            <thead><tr>
+              <th>Area / Page</th><th style="min-width:68px">Tier</th><th>Score</th><th>Status</th>
+              <th>Duplicate Risk</th><th>Local Relevance</th><th>Service Relevance</th><th>Internal Structure</th><th>Issues</th>
+            </tr></thead>
+            <tbody id="qa-tbody"></tbody>
+          </table>
+        </div>
+        <div id="qa-error" class="alert alert-error hidden"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Live Crawl                                        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-live-crawl">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-lc-run" onclick="lcRun()" disabled>&#9654; Run Live Crawl</button>
+      <button class="btn btn-secondary" id="btn-lc-fix" onclick="lcFixDeploy()" disabled style="display:none">&#8593; Fix &amp; Redeploy Hubs</button>
+      <span id="lc-running" class="running-label hidden">Crawling live site&hellip; may take 1&ndash;2 minutes</span>
+    </div>
+
+    <!-- Summary cards -->
+    <div id="lc-summary-cards" style="display:none;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:20px">
+      <div class="ov-card"><div class="ov-label">Sitemap URLs</div><div class="ov-value blue" id="lc-stat-total">—</div><div class="ov-sub">found</div></div>
+      <div class="ov-card"><div class="ov-label">Live OK</div><div class="ov-value green" id="lc-stat-ok">—</div><div class="ov-sub">returning 200</div></div>
+      <div class="ov-card"><div class="ov-label">404s</div><div class="ov-value red" id="lc-stat-404">—</div><div class="ov-sub">not found</div></div>
+      <div class="ov-card"><div class="ov-label">Page Issues</div><div class="ov-value red" id="lc-stat-links">—</div><div class="ov-sub">page-specific broken</div></div>
+      <div class="ov-card"><div class="ov-label">Nav Issues</div><div class="ov-value orange" id="lc-stat-systemic">—</div><div class="ov-sub">template-wide</div></div>
+    </div>
+
+    <!-- Deploy gate banner -->
+    <div id="lc-gate-ok" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;margin-bottom:16px;align-items:center;gap:10px">
+      <span style="color:#16a34a;font-size:1.1rem">&#10003;</span>
+      <span style="font-size:.88rem;color:#166534;font-weight:600">All live URLs return 200 — no page-specific broken links detected. Safe to deploy.</span>
+    </div>
+    <div id="lc-gate-fail" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px 16px;margin-bottom:16px">
+      <span style="font-weight:700;color:#dc2626">&#9888; Deploy gate FAILED</span>
+      <span style="font-size:.85rem;color:#7f1d1d;margin-left:8px">Page-specific broken links detected. Fix them below then click "Fix &amp; Redeploy Hubs".</span>
+    </div>
+
+    <!-- Broken sitemap URLs -->
+    <div class="section" id="lc-sitemap-section" style="display:none">
+      <div class="section-head"><h2>Broken Sitemap URLs</h2><div class="section-sub" id="lc-sitemap-sub"></div></div>
+      <div class="section-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>URL</th><th>Status</th></tr></thead>
+            <tbody id="lc-sitemap-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Systemic nav/template broken links -->
+    <div class="section" id="lc-systemic-section" style="display:none;border-color:#fbbf24">
+      <div class="section-head" style="background:#fffbeb;border-color:#fbbf24">
+        <h2 style="color:#92400e">&#9888; Template-Wide Nav Issues</h2>
+        <div class="section-sub" id="lc-systemic-sub" style="color:#b45309"></div>
+      </div>
+      <div class="section-body" style="background:#fffbeb">
+        <p style="font-size:.83rem;color:#78350f;margin:0 0 10px">These links are broken on <strong>3+ pages</strong> — they are in the site template/nav, not individual pages. Use "Fix &amp; Redeploy Hubs" to patch them out of all pages at once.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Broken Nav URL</th><th>Affected Pages</th></tr></thead>
+            <tbody id="lc-systemic-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page-specific broken internal links -->
+    <div class="section" id="lc-links-section" style="display:none">
+      <div class="section-head"><h2>Page-Specific Broken Links</h2><div class="section-sub" id="lc-links-sub"></div></div>
+      <div class="section-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Source Page</th><th>Broken Link</th><th>Anchor Text</th><th>Status</th></tr></thead>
+            <tbody id="lc-links-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- All clear - no broken links -->
+    <div id="lc-all-clear" style="display:none;text-align:center;padding:40px 20px;color:var(--muted)">
+      <div style="font-size:2rem;margin-bottom:8px">&#10003;</div>
+      <div style="font-weight:600;color:#16a34a;margin-bottom:4px">All links healthy</div>
+      <div style="font-size:.85rem">No broken links found in hub pages.</div>
+    </div>
+
+    <!-- Empty state -->
+    <div id="lc-empty" class="empty">Click "Run Live Crawl" to check the live site for 404s and broken internal links.</div>
+    <div id="lc-error" class="alert alert-error hidden"></div>
+    <div id="lc-fix-result" style="display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-size:.88rem"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Rankings                                          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-rankings">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-kt-run" onclick="ktRunCheck()" disabled>Run Keyword Check</button>
+      <button class="btn btn-secondary" id="btn-kt-refresh" onclick="ktRefresh()" disabled>Refresh</button>
+      <span id="kt-running" class="running-label hidden">Running… ~1 min per 10 keywords</span>
+    </div>
+    <div class="section">
+      <div class="section-head">
+        <h2>Keyword Rankings</h2>
+        <div id="kt-run-info" class="section-sub">—</div>
+      </div>
+      <div class="section-body">
+        <div id="kt-empty" class="empty">No ranking data — click Run Keyword Check.</div>
+        <div id="kt-table-wrap" class="table-wrap hidden">
+          <table>
+            <thead><tr>
+              <th>Keyword</th><th>Position</th><th>Change</th><th>Target URL</th><th>Last Checked</th>
+            </tr></thead>
+            <tbody id="kt-tbody"></tbody>
+          </table>
+        </div>
+        <div id="kt-error" class="alert alert-error hidden"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Index Tracking                                    -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-index">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-it-run" onclick="itRunCheck()" disabled>Run Index Check</button>
+      <button class="btn btn-secondary" id="btn-it-refresh" onclick="itRefresh()" disabled>Refresh</button>
+      <button class="btn btn-secondary btn-sm" id="btn-it-copy" onclick="itCopyNotIndexed()" disabled>Copy Not-Indexed URLs</button>
+      <span id="it-running" class="running-label hidden">Running… ~30 sec per 10 pages</span>
+    </div>
+    <div class="section">
+      <div class="section-head">
+        <h2>Index Tracking</h2>
+        <div id="it-run-info" class="section-sub">—</div>
+      </div>
+      <div class="section-body">
+        <div id="it-empty" class="empty">No index data — click Run Index Check.</div>
+        <div id="it-table-wrap" class="table-wrap hidden">
+          <table>
+            <thead><tr>
+              <th>Page URL</th><th>Status</th><th>Last Checked</th><th>First Indexed</th>
+            </tr></thead>
+            <tbody id="it-tbody"></tbody>
+          </table>
+        </div>
+        <div id="it-error" class="alert alert-error hidden"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SERVER_DEFAULT_SLUG = ${JSON.stringify(defaultSlug)};
+const INTERNAL_TOKEN      = ${JSON.stringify(internalToken)};
+const enc = encodeURIComponent;
+
+
+let activeSlug  = null;
+let activeTab   = 'overview';
+let isRunning   = false;
+let wizardReady = false;
+let currentWizardStage = null;
+
+// ── Utils ─────────────────────────────────────────────────────────
+function $(id){ return document.getElementById(id); }
+async function apiFetch(path, opts){
+  const h = {
+    'Accept': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    ...(opts?.headers || {}),
+  };
+  // Send token as a URL query param — the Replit proxy strips custom headers
+  // (X-Internal-Token, Authorization) but cannot strip URL query params.
+  // This is the reliable auth channel for fetch() inside a cross-site iframe.
+  let url = window.location.origin + path;
+  if (INTERNAL_TOKEN) {
+    const sep = url.includes('?') ? '&' : '?';
+    url += sep + '_t=' + encodeURIComponent(INTERNAL_TOKEN);
+  }
+  // Default 30-second timeout so a hanging external API call never blocks the UI.
+  const timeoutMs = opts?.timeoutMs ?? 30000;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  let r;
+  try {
+    r = await fetch(url, { cache:'no-store', credentials:'include', ...opts, headers: h, signal: ctrl.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+  if(r.status===401){
+    showBanner('Session expired \u2014 <a href="/api/login" style="color:#fff;font-weight:700;text-decoration:underline;margin-left:4px">Log in again \u2192</a>','warn');
+    throw Object.assign(new Error('Session expired'),{sessionExpired:true});
+  }
+  const ct=r.headers.get('content-type')||'';
+  if(!ct.includes('application/json')){
+    throw new Error('Unexpected server response (HTTP '+r.status+'). Try refreshing the page.');
+  }
+  return r;
+}
+function set(id,v){ const el=$(id); if(el) el.textContent=v??'—'; }
+function hide(id){ $(id)?.classList.add('hidden'); }
+function show(id){ $(id)?.classList.remove('hidden'); }
+let _bannerTimer=null;
+function showBanner(msg,type){
+  const b=$('top-banner');
+  if(!b) return;
+  b.innerHTML=msg+'<button onclick="hide(&#39;top-banner&#39;)">✕ dismiss</button>';
+  b.className='top-banner top-banner-'+(type||'info');
+  show('top-banner');
+  if(_bannerTimer) clearTimeout(_bannerTimer);
+  _bannerTimer=setTimeout(()=>{ hide('top-banner'); _bannerTimer=null; },8000);
+}
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function safeApiFetch(url,opts){ return apiFetch(url,opts); }
+function imgFallback(el){ el.parentNode.innerHTML='<span style="font-size:1.4rem">\uD83D\uDDBC</span>'; }
+function fmtDate(iso){ return iso?new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—'; }
+function fmtDateTime(iso){
+  if(!iso) return '—';
+  const d=new Date(iso);
+  return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+    +' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+function scoreColor(n){ return n>=85?'#16a34a':n>=70?'#d97706':'#dc2626'; }
+function scoreBar(n){
+  const c=scoreColor(n);
+  return \`<div class="score-bar-wrap">
+    <div class="score-bar-bg"><div class="score-bar-fill" style="width:\${n}%;background:\${c}"></div></div>
+    <span class="score-val" style="color:\${c}">\${n}</span>
+  </div>\`;
+}
+function posCell(pos){
+  if(pos===null) return '<span style="color:var(--muted)">—</span>';
+  const cls=pos<=3?'top3':pos<=10?'top10':pos<=20?'top20':'';
+  return \`<span class="pos \${cls}">#\${pos}</span>\`;
+}
+function chgCell(r){
+  if(r.previousPosition===null&&r.position!==null) return '<span class="chg new">NEW</span>';
+  if(r.change===null) return '<span style="color:var(--muted)">—</span>';
+  if(r.change>0) return \`<span class="chg up">↑\${r.change}</span>\`;
+  if(r.change<0) return \`<span class="chg down">↓\${Math.abs(r.change)}</span>\`;
+  return '<span style="color:var(--muted)">→</span>';
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────
+function switchTab(tab){
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(el=>el.classList.remove('active'));
+  $('tab-'+tab).classList.add('active');
+  $('panel-'+tab).classList.add('active');
+  activeTab=tab;
+  if(tab==='wizard' && activeSlug && !wizardReady) loadWizardFrame(activeSlug, 8);
+  if(tab==='campaigns') campaignsLoad();
+}
+
+// ── Overview: Distribution Quick-Action ───────────────────────────
+function ovDistGenerate(){
+  var sel    = $('ov-dist-select');
+  var btn    = $('ov-dist-btn');
+  var status = $('ov-dist-status');
+  var barWrap= $('ov-dist-bar-wrap');
+  var bar    = $('ov-dist-bar');
+  var slug   = (($('project-select')||{}).value||'rotherham-proof');
+
+  if(btn)    { btn.disabled=true; btn.textContent='\u23f3 Generating\u2026'; }
+  if(status) { status.style.color='#bfdbfe'; status.textContent='Starting\u2026'; }
+
+  var pageSlug = sel ? (sel.value||'').trim() : '';
+  if(!pageSlug){
+    if(status){ status.style.color='#fca5a5'; status.textContent='No page selected — pick one from the dropdown'; }
+    if(btn){ btn.disabled=false; btn.textContent='Generate'; }
+    return;
+  }
+
+  if(barWrap){ barWrap.style.display='block'; }
+  if(bar)    { bar.style.width='5%'; }
+
+  var url = '/api/distribution/'+encodeURIComponent(slug)+'/generate-stream?pageSlug='+encodeURIComponent(pageSlug);
+  var es  = new EventSource(url);
+
+  es.addEventListener('progress', function(e){
+    try {
+      var d=JSON.parse(e.data);
+      if(status){ status.style.color='#bfdbfe'; status.textContent='\u23f3 '+d.message; }
+      if(bar && d.pct){ bar.style.width=d.pct+'%'; }
+    } catch(_){}
+  });
+
+  es.addEventListener('done', function(e){
+    es.close();
+    if(bar){ bar.style.width='100%'; }
+    if(btn){ btn.disabled=false; btn.textContent='Generate'; }
+    try {
+      var d=JSON.parse(e.data);
+      if(status){ status.style.color='#86efac'; status.textContent='\u2713 Done \u2014 '+d.pageTitle+' content saved. Click Distribution tab to view.'; }
+    } catch(_){ if(status){ status.style.color='#86efac'; status.textContent='\u2713 Done!'; } }
+    setTimeout(function(){ if(barWrap){ barWrap.style.display='none'; } }, 3000);
+  });
+
+  es.addEventListener('error', function(e){
+    es.close();
+    if(barWrap){ barWrap.style.display='none'; }
+    if(btn){ btn.disabled=false; btn.textContent='Generate'; }
+    try {
+      var d=JSON.parse(e.data);
+      if(status){ status.style.color='#fca5a5'; status.textContent='\u2717 '+d.message; }
+    } catch(_){ if(status){ status.style.color='#fca5a5'; status.textContent='\u2717 Error \u2014 please try again'; } }
+  });
+
+  es.onerror = function(){
+    if(es.readyState===EventSource.CLOSED) return;
+    es.close();
+    if(barWrap){ barWrap.style.display='none'; }
+    if(btn){ btn.disabled=false; btn.textContent='Generate'; }
+    if(status){ status.style.color='#fca5a5'; status.textContent='\u2717 Connection error \u2014 please try again'; }
+  };
+}
+
+// ── Campaigns tab ─────────────────────────────────────────────────
+
+function statusBadge(s){
+  const map={new:{label:'Draft',bg:'#e0e7ff',color:'#3730a3'},in_progress:{label:'Active',bg:'#fef3c7',color:'#92400e'},paused:{label:'Paused',bg:'#f1f5f9',color:'#475569'},generated:{label:'Completed',bg:'#d1fae5',color:'#065f46'},deployed:{label:'Deployed',bg:'#dcfce7',color:'#166534'}};
+  const m=map[s]||{label:s||'—',bg:'#f1f5f9',color:'#475569'};
+  return '<span style="font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:10px;background:'+m.bg+';color:'+m.color+'">'+esc(m.label)+'</span>';
+}
+
+async function campaignsLoad(){
+  const slug=activeSlug;
+  const list=$('camp-list'); if(!list) return;
+  if(!slug){
+    list.innerHTML='<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:40px 20px;text-align:center;color:var(--muted)"><div style="font-size:2rem;margin-bottom:10px">📂</div><div style="font-weight:600;margin-bottom:6px">No project selected</div><div style="font-size:.85rem">Select a client project from the dropdown above, or create one with <strong>+ New Client</strong>.</div></div>';
+    return;
+  }
+  $('camp-project-name').textContent=slug;
+  list.innerHTML='<div style="color:var(--muted);font-size:.85rem;padding:20px 0;text-align:center">Loading campaigns…</div>';
+  try{
+    const res=await apiFetch('/api/campaigns/'+enc(slug));
+    if(!res.ok){ list.innerHTML='<div style="color:var(--error);font-size:.85rem;text-align:center;padding:20px 0">Could not load campaigns</div>'; return; }
+    const data=await res.json();
+    const camps=data.campaigns||[];
+    const badge=$('tb-campaigns');
+    if(badge) badge.textContent=camps.length||'0';
+    if(!camps.length){
+      list.innerHTML='<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:40px 20px;text-align:center;color:var(--muted)"><div style="font-size:2rem;margin-bottom:10px">📂</div><div style="font-weight:600;margin-bottom:6px">No campaigns yet</div><div style="font-size:.85rem">Click <strong>+ Create New Campaign</strong> to get started.</div></div>';
+      return;
+    }
+    list.innerHTML=camps.map(c=>{
+      const created=new Date(c.createdAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+      const areas=c.areasSelected?c.areasSelected+' areas':'';
+      const pages=c.pagesGenerated?c.pagesGenerated+' pages generated':'';
+      const meta=[areas,pages].filter(Boolean).join(' · ')||'Stage '+c.currentStage+' of 8';
+      return '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px">'+
+        '<div style="flex:1;min-width:0">'+
+          '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">'+
+            '<span style="font-weight:700;font-size:.95rem">'+esc(c.city)+' — '+esc(c.serviceName)+'</span>'+
+            statusBadge(c.status)+
+          '</div>'+
+          '<div style="font-size:.8rem;color:var(--muted)">'+esc(meta)+' · Created '+esc(created)+'</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap">'+
+          (c.areasSelected>0||c.pagesGenerated>0||c.hubGenerated?'<button class="btn btn-secondary btn-sm" id="hub-btn-'+esc(c.id)+'" data-cid="'+esc(c.id)+'" data-money-url="'+esc(c.moneyPageUrl||'')+'" data-money-kw="'+esc(c.focusKeyword||'')+'" onclick="campaignsGenerateHub(this.dataset.cid,this.dataset.moneyUrl,this.dataset.moneyKw)" style="background:'+(c.hubGenerated?'#d1fae5':'#fef3c7')+';color:'+(c.hubGenerated?'#065f46':'#92400e')+';border:1px solid '+(c.hubGenerated?'#6ee7b7':'#fcd34d')+';font-weight:700" title="'+(c.hubGenerated?'Regenerate hub page with updated settings':'Generate hub page for this campaign after clusters are built')+'">'+esc(c.hubGenerated?'↺ Regen Hub':'★ Hub Page')+'</button>':'')+
+          '<button class="btn btn-secondary btn-sm" data-view-cid="'+esc(c.id)+'" onclick="campaignView(this.dataset.viewCid)" title="View campaign settings and pages" style="font-weight:600">View</button>'+
+          '<button class="btn btn-primary btn-sm" data-cid="'+esc(c.id)+'" data-stage="'+c.currentStage+'" onclick="campaignsResume(this.dataset.cid,this.dataset.stage)">Resume →</button>'+
+          '<button class="btn btn-secondary btn-sm" data-cid="'+esc(c.id)+'" onclick="campaignsDelete(this.dataset.cid)" style="color:var(--error);padding:4px 8px" title="Delete campaign">✕</button>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }catch(e){ list.innerHTML='<div style="color:var(--error);font-size:.85rem;text-align:center;padding:20px 0">Error loading campaigns</div>'; }
+}
+
+function campaignsNew(){
+  $('camp-new-form').style.display='block';
+  $('camp-city').focus();
+}
+
+async function campaignsCreate(){
+  const slug=activeSlug; if(!slug) return;
+  const city=($('camp-city').value||'').trim();
+  const service=($('camp-service').value||'').trim();
+  const status=$('camp-status').value||'new';
+  const errEl=$('camp-new-error');
+  if(!city||!service){ errEl.textContent='City and service are required.'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  const citySlug=city.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const serviceKey=service.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  try{
+    const res=await apiFetch('/api/campaigns/'+enc(slug),{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({city,citySlug,serviceName:service,serviceKey,status})
+    });
+    if(!res.ok){ const d=await res.json().catch(()=>({})); errEl.textContent=d.error||'Failed to create campaign'; errEl.style.display='block'; return; }
+    const data=await res.json();
+    // Update status if it's not 'new'
+    if(status!=='new' && data.campaign?.id){
+      await apiFetch('/api/campaigns/'+enc(slug)+'/'+enc(data.campaign.id),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});
+    }
+    // Switch to wizard tab and load the campaign stage
+    const newId=data.campaign?.id||'';
+    switchTab('wizard');
+    loadWizardFrame(slug, 2, newId);
+  }catch(e){ errEl.textContent='Network error creating campaign'; errEl.style.display='block'; }
+}
+
+function campaignsResume(campaignId, stage){
+  const slug=activeSlug; if(!slug) return;
+  switchTab('wizard');
+  loadWizardFrame(slug, stage||2, campaignId);
+}
+function campaignView(campaignId){
+  openCampaignPanel(campaignId);
+}
+
+async function campaignsDelete(campaignId){
+  const slug=activeSlug; if(!slug) return;
+  if(!confirm('Delete this campaign? This cannot be undone.')) return;
+  await apiFetch('/api/campaigns/'+enc(slug)+'/'+enc(campaignId),{method:'DELETE'});
+  campaignsLoad();
+}
+
+async function campaignsGenerateHub(campaignId,moneyUrl,moneyKw){
+  const slug=activeSlug; if(!slug) return;
+  // Show modal to collect / confirm money page values (prompt() is blocked in iframes)
+  const modal = await window._openHubModal(moneyUrl||'', moneyKw||'');
+  if(modal===null) return; // user cancelled
+  const finalUrl = modal.url||'';
+  const finalKw  = modal.kw||'';
+  const btn=document.getElementById('hub-btn-'+campaignId);
+  if(btn){ btn.textContent='Generating…'; btn.disabled=true; }
+  try{
+    const res=await apiFetch('/api/rollout/hub',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({clientSlug:slug,campaignId,moneyPageUrl:finalUrl,focusKeyword:finalKw})
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok){
+      alert('Hub page generation failed: '+(data.error||res.status));
+      if(btn){ btn.textContent='★ Hub Page'; btn.disabled=false; }
+      return;
+    }
+    if(btn){ btn.textContent='✓ Hub Done'; btn.style.background='#d1fae5'; btn.style.color='#065f46'; btn.style.borderColor='#6ee7b7'; btn.disabled=false; }
+    // Refresh list after short delay so page-data.json is written
+    setTimeout(()=>campaignsLoad(),1500);
+  }catch(e){
+    alert('Network error generating hub page');
+    if(btn){ btn.textContent='★ Hub Page'; btn.disabled=false; }
+  }
+}
+
+// ── Project list ──────────────────────────────────────────────────
+async function initProjects(){
+  const sel=$('project-select');
+  const params=new URLSearchParams(window.location.search);
+
+  // Collect valid slugs from the rendered select options
+  const validSlugs = new Set(Array.from(sel.options).map(o=>o.value).filter(Boolean));
+
+  // Pick slug: URL → localStorage → server-injected default → first option
+  // But only if that slug is actually in the project list — otherwise fall through
+  const candidateSlug = params.get('slug')
+    || localStorage.getItem('dashboard_slug')
+    || SERVER_DEFAULT_SLUG
+    || '';
+  const slug = (candidateSlug && validSlugs.has(candidateSlug))
+    ? candidateSlug
+    : (sel.options[1]?.value || '');
+
+  if(slug){
+    sel.value = slug;
+    localStorage.setItem('dashboard_slug', slug);
+    // Update URL without reload so bookmarks work
+    try{
+      const u=new URL(window.location.href);
+      if(!u.searchParams.get('slug')){ u.searchParams.set('slug',slug); window.history.replaceState({},'',u.toString()); }
+    }catch(_){}
+    await loadAll();
+  } else {
+  }
+
+  // GSC OAuth banners
+  if(params.has('gsc_connected')){
+    showBanner('Google Search Console connected successfully.','success');
+    const u=new URL(window.location.href); u.searchParams.delete('gsc_connected');
+    window.history.replaceState({},'',u.toString());
+    switchTab('wizard');
+  }
+  if(params.has('gsc_error')){
+    showBanner('Google auth error: '+decodeURIComponent(params.get('gsc_error')||''),'error');
+    const u=new URL(window.location.href); u.searchParams.delete('gsc_error');
+    window.history.replaceState({},'',u.toString());
+  }
+  if(params.get('tab')) switchTab(params.get('tab'));
+  const viewCid=params.get('view');
+  if(viewCid){
+    switchTab('campaigns');
+    const _tryOpen=function(n){
+      if(typeof window.campaignViewOpen==='function' && activeSlug){
+        window.campaignViewOpen(viewCid);
+      } else if(n<20){
+        setTimeout(function(){ _tryOpen(n+1); },200);
+      }
+    };
+    setTimeout(function(){ _tryOpen(0); },600);
+  }
+}
+
+function onProjectChange(){
+  const slug=$('project-select').value;
+  if(!slug) return;
+  wizardReady=false; // force iframe reload
+  const url=new URL(window.location.href);
+  url.searchParams.set('slug',slug);
+  window.history.replaceState({},'',url.toString());
+  loadAll();
+}
+
+async function loadProfileCompletion(slug){
+  try{
+    const res = await apiFetch('/api/projects/'+enc(slug)+'/completion');
+    if(!res.ok) return;
+    const data = await res.json();
+    const banner  = $('profile-setup-banner');
+    const okBadge = $('profile-setup-ok');
+    const bar     = $('profile-pct-bar');
+    const badge   = $('profile-pct-badge');
+    const missing = $('profile-missing-list');
+
+    const pct = data.requiredTotal > 0 ? Math.round((data.requiredScore / data.requiredTotal) * 100) : 100;
+    const missingRequired = Array.isArray(data.items)
+      ? data.items.filter(function(i){ return i.required && !i.done; }).map(function(i){ return i.label; })
+      : [];
+    if(data.canGenerate){
+      if(banner)  banner.style.display  = 'none';
+      if(okBadge) okBadge.style.display = 'flex';
+    } else {
+      if(okBadge) okBadge.style.display = 'none';
+      if(banner)  banner.style.display  = 'block';
+      if(bar)    bar.style.width = pct+'%';
+      if(badge)  badge.textContent = pct+'% complete';
+      if(missing && missingRequired.length){
+        missing.innerHTML = missingRequired.map(function(m){
+          return '<span style="display:inline-flex;align-items:center;gap:3px;white-space:nowrap">✗ '+esc(m)+'</span>';
+        }).join('');
+      }
+    }
+  } catch(e){ /* non-fatal */ }
+}
+
+// Auto-load any cached pre-publish QA results when a project is selected.
+// Non-blocking — errors are silently swallowed so they never break page load.
+async function ppQaAutoLoad(slug){
+  try{
+    const res=await apiFetch('/api/pre-publish-qa/'+enc(slug));
+    if(!res.ok) return;
+    const data=await res.json();
+    if(data.status==='running'||!data.results||!data.results.length) return;
+    _ppQaResults=data;
+    window._ppQaResults=data;
+    renderPrePublishQA(data);
+  }catch(_){ /* non-fatal */ }
+}
+
+async function loadAll(){
+  const slug=$('project-select').value;
+  if(!slug){ hide('loading-overlay'); return; }
+  activeSlug=slug;
+  localStorage.setItem('dashboard_slug',slug);
+  $('loading-text').textContent='Loading '+slug+'…';
+  show('loading-overlay');
+  ['btn-run-all','btn-run-kt','btn-run-it','btn-run-qa','btn-run-pp-qa-ov',
+   'btn-kt-run','btn-kt-refresh','btn-it-run','btn-it-refresh','btn-it-copy','btn-qa-refresh','btn-pp-qa','btn-pp-qa-head','btn-lc-run','btn-sh-run','btn-ss-run','btn-li-run','btn-upgrade-list']
+    .forEach(id=>{ const el=$(id); if(el) el.disabled=false; });
+  $('wizard-open-tab').href='/api/setup?slug='+enc(slug)+(INTERNAL_TOKEN?'&_t='+encodeURIComponent(INTERNAL_TOKEN):'');
+  // Safety net: hide overlay after 12 s max even if any background load hangs.
+  const _overlayGuard = setTimeout(() => hide('loading-overlay'), 1000);
+  try{
+    await Promise.all([qaRefresh(),ktRefresh(),itRefresh(),loadProfileCompletion(slug),ppQaAutoLoad(slug)]);
+  }catch(err){
+  }
+  clearTimeout(_overlayGuard);
+  hide('loading-overlay');
+  if(activeTab==='wizard' && !wizardReady) loadWizardFrame(slug,8);
+}
+
+// ── Wizard iframe ─────────────────────────────────────────────────
+function loadWizardFrame(slug, stage, campaignId){
+  wizardReady=false;
+  currentWizardStage=stage;
+  show('wizard-loading');
+  let url='/api/setup?slug='+enc(slug)+'&stage='+stage;
+  if(campaignId) url+='&campaign='+enc(campaignId);
+  if(INTERNAL_TOKEN) url+='&_t='+encodeURIComponent(INTERNAL_TOKEN);
+  $('wizard-frame').src=url;
+  highlightStagePill(stage);
+}
+
+function onWizardLoad(){
+  // Ignore the initial about:blank load — only count real wizard pages
+  const src=$('wizard-frame').src||'';
+  if(!src||src==='about:blank'||src.endsWith('/about:blank')) return;
+  hide('wizard-loading');
+  wizardReady=true;
+}
+
+function wizardGoStage(n){
+  if(!activeSlug){ alert('Select a project first.'); return; }
+  currentWizardStage=n;
+  const frame=$('wizard-frame');
+  const currentSrc=frame.src||'';
+  // If wizard is already loaded for this slug, jump in-page — no reload needed
+  if(wizardReady && currentSrc.includes('slug='+enc(activeSlug))){
+    try{
+      frame.contentWindow.App.jumpToStage(n);
+      frame.contentWindow.App.onStageEnter(n);
+      highlightStagePill(n);
+      return;
+    }catch(e){ /* fall through to full reload */ }
+  }
+  loadWizardFrame(activeSlug,n);
+}
+
+function highlightStagePill(n){
+  document.querySelectorAll('.stage-pill').forEach(el=>el.classList.remove('active'));
+  $('pill-'+n)?.classList.add('active');
+}
+
+function wizardReset(){
+  if(!activeSlug){ alert('Select a project first.'); return; }
+  if(!confirm('Reload wizard from Stage 1?')) return;
+  wizardReady=false;
+  loadWizardFrame(activeSlug,1);
+}
+
+// ── QA ────────────────────────────────────────────────────────────
+async function qaRefresh(){
+  if(!activeSlug) return;
+  hide('qa-error'); hide('qa-table-wrap'); hide('qa-empty');
+  try{
+    const res=await apiFetch(\`/api/validate/\${enc(activeSlug)}\`);
+    const data=await res.json();
+    renderQA(data.summary, data.results||[]);
+  }catch(e){
+    $('qa-error').textContent='QA load failed: '+e.message;
+    show('qa-error'); show('qa-empty');
+  }
+}
+
+const QA_TIER_BADGE={
+  hub:      '<span style="background:#fef3c7;color:#92400e;font-size:.68rem;font-weight:800;border-radius:4px;padding:2px 6px;letter-spacing:.04em;border:1px solid #fcd34d">★ HUB</span>',
+  priority: '<span style="background:#ede9fe;color:#5b21b6;font-size:.68rem;font-weight:700;border-radius:4px;padding:2px 6px">Priority</span>',
+  secondary:'<span style="background:#f1f5f9;color:#64748b;font-size:.68rem;font-weight:600;border-radius:4px;padding:2px 6px">Secondary</span>',
+  tertiary: '<span style="background:#f1f5f9;color:#94a3b8;font-size:.68rem;font-weight:600;border-radius:4px;padding:2px 6px">Tertiary</span>',
+};
+
+function renderQA(summary, results){
+  // results is a pre-sorted flat array (hub first) from the validate endpoint.
+  // Fall back to rebuilding from summary if results not provided.
+  const all = results && results.length
+    ? results
+    : [...(summary?.ready||[]),...(summary?.review||[]),...(summary?.blocked||[])];
+  if(!all.length){ show('qa-empty'); return; }
+
+  const avg=Math.round(all.reduce((a,r)=>a+(r.overallScore||0),0)/all.length);
+  const readyCnt=all.filter(r=>r.readiness==='ready').length;
+  const hubCount=all.filter(r=>r.tier==='hub').length;
+  set('ov-pages',all.length);
+  set('ov-pages-sub',readyCnt+' ready');
+  set('ov-qa',avg);
+  $('ov-qa').className='ov-value '+(avg>=85?'green':avg>=70?'amber':'red');
+  set('qa-run-info',all.length+' pages · '+readyCnt+' ready'+(hubCount?' · '+hubCount+' hub':''));
+  set('tb-qa',all.length);
+
+  $('qa-tbody').innerHTML=all.map(r=>{
+    const isHub=r.tier==='hub';
+    const tierBadge=QA_TIER_BADGE[r.tier]||QA_TIER_BADGE.secondary;
+    const bc=r.readiness==='ready'?'badge-ready':r.readiness==='review'?'badge-review':'badge-blocked';
+    const bt=r.readiness==='ready'?'Ready':r.readiness==='review'?'Review':'Blocked';
+    const cats=r.categories||{};
+    const issues=(r.qaIssues||[]).length;
+    const rowStyle=isHub?'border-left:4px solid #f59e0b;background:#fffbeb':'';
+    const nameStyle='font-weight:'+(isHub?'700;color:#92400e':'600');
+    return \`<tr style="\${rowStyle}">
+      <td style="\${nameStyle}">\${esc(r.area)}</td>
+      <td>\${tierBadge}</td>
+      <td>\${scoreBar(r.overallScore)}</td>
+      <td><span class="badge \${bc}">\${bt}</span></td>
+      <td style="font-size:.8rem;color:var(--muted)">\${cats.uniqueness??'—'}</td>
+      <td style="font-size:.8rem;color:var(--muted)">\${cats.intentCoverage??'—'}</td>
+      <td style="font-size:.8rem;color:var(--muted)">\${cats.commercialIntent??'—'}</td>
+      <td style="font-size:.8rem;color:var(--muted)">\${cats.qaStructure??'—'}</td>
+      <td>\${issues?'<span class="badge badge-blocked">'+issues+' issue'+(issues>1?'s':'')+'</span>':'<span style="color:var(--success);font-size:.8rem">✓</span>'}</td>
+    </tr>\`;
+  }).join('');
+  show('qa-table-wrap');
+}
+
+// ── Pre-Publish QA ────────────────────────────────────────────────
+let _ppQaResults=null; // cached last results — also mirrored on window for IIFE access
+
+// Animate the progress bar through stages while the API call is in flight
+function ppStartProgress(){
+  const bar=$('pp-progress-bar');
+  const label=$('pp-progress-label');
+  const sub=$('pp-progress-sub');
+  if(!bar) return ()=>{};
+
+  bar.style.width='0%';
+  let stopped=false;
+  const stages=[
+    {pct:8,  ms:300,  lbl:'Initialising scan…',      sub:'Reading project configuration…'},
+    {pct:22, ms:800,  lbl:'Reading page files…',       sub:'Loading HTML for each generated page…'},
+    {pct:45, ms:2500, lbl:'Running Google SEO Fundamentals checks…', sub:'Checking title, canonical, schema, placeholders…'},
+    {pct:62, ms:2500, lbl:'Running AI Structure & Extraction checks…', sub:'Checking H1 clarity, FAQ, quick-answer, local relevance…'},
+    {pct:76, ms:2000, lbl:'Running Internal Structure checks…',   sub:'Checking word count, CTA, map section, keyword density…'},
+    {pct:88, ms:3000, lbl:'Scanning duplicate content…',  sub:'Comparing intro and body sections across all pages…'},
+    {pct:94, ms:4000, lbl:'Finalising report…',           sub:'Aggregating scores and writing cache…'},
+  ];
+
+  let i=0;
+  function step(){
+    if(stopped||i>=stages.length) return;
+    const s=stages[i++];
+    bar.style.width=s.pct+'%';
+    if(label) label.textContent=s.lbl;
+    if(sub)   sub.textContent=s.sub;
+    setTimeout(step, s.ms);
+  }
+  step();
+
+  return function complete(ok){
+    stopped=true;
+    bar.style.width='100%';
+    bar.style.background=ok?'linear-gradient(90deg,#059669,#34d399)':'linear-gradient(90deg,#dc2626,#f87171)';
+    if(label) label.textContent=ok?'Scan complete ✓':'Scan failed';
+    if(sub)   sub.textContent=ok?'Results ready below.':'See error message below.';
+  };
+}
+
+async function runPrePublishQa(){
+  if(!activeSlug) return;
+  const btn=$('btn-pp-qa');
+  const btnOv=$('btn-run-pp-qa-ov');
+  const btnHead=$('btn-pp-qa-head');
+  [btn,btnOv,btnHead].forEach(b=>{ if(b){ b.disabled=true; b.textContent='Running…'; } });
+  hide('pp-qa-error'); hide('pp-qa-table-wrap'); hide('pp-qa-empty');
+  show('pp-qa-running');
+  $('pp-qa-summary').style.display='none';
+
+  const completeProg=ppStartProgress();
+
+  try{
+    // Kick off the background job — server responds immediately with { status: "running" }
+    const startRes=await apiFetch('/api/pre-publish-qa/'+enc(activeSlug),{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({})
+    });
+    if(!startRes.ok){
+      const err=await startRes.json().catch(()=>({}));
+      throw new Error(err.error||'Failed to start scan');
+    }
+
+    // Poll the GET endpoint every 2.5 s until the job finishes
+    let data=null;
+    let attempts=0;
+    const MAX_ATTEMPTS=120; // 5 minutes max
+    while(attempts<MAX_ATTEMPTS){
+      await new Promise(r=>setTimeout(r,2500));
+      attempts++;
+      const pollRes=await apiFetch('/api/pre-publish-qa/'+enc(activeSlug));
+      if(!pollRes.ok) continue;
+      const pollData=await pollRes.json();
+      if(pollData.status==='error') throw new Error('Scan failed on server — check logs');
+      if(pollData.status!=='running' && pollData.results && pollData.results.length){
+        data=pollData;
+        break;
+      }
+    }
+    if(!data) throw new Error('Scan timed out — try again');
+
+    completeProg(true);
+    await new Promise(r=>setTimeout(r,600));
+    _ppQaResults=data;
+    window._ppQaResults=data;
+    renderPrePublishQA(data);
+  }catch(e){
+    completeProg(false);
+    await new Promise(r=>setTimeout(r,400));
+    $('pp-qa-error').textContent='Pre-Publish QA failed: '+e.message;
+    show('pp-qa-error'); show('pp-qa-empty');
+  }finally{
+    hide('pp-qa-running');
+    const lbl='▶ Run Pre-Publish QA';
+    const lblOv='▶ Pre-Publish QA';
+    if(btn){ btn.disabled=false; btn.textContent=lbl; }
+    if(btnOv){ btnOv.disabled=false; btnOv.textContent=lblOv; }
+    if(btnHead){ btnHead.disabled=false; btnHead.textContent='▶ Run Scan'; }
+  }
+}
+
+const PP_DUP_COLOUR={low:'color:#059669',review:'color:#b45309',high:'color:#dc2626'};
+const PP_DUP_HEX={low:'#059669',review:'#b45309',high:'#dc2626'};
+
+// ── Pre-publish QA filter & navigation state ─────────────────────────────────
+let _ppDetailFilter='all'; // 'all' | 'issues' | 'fail'
+
+function ppFilteredIndices(){
+  if(!_ppQaResults) return [];
+  return _ppQaResults.results.map((_,i)=>i).filter(i=>{
+    const s=_ppQaResults.results[i].status;
+    if(_ppDetailFilter==='fail') return s==='fail';
+    if(_ppDetailFilter==='issues') return s!=='pass';
+    return true;
+  });
+}
+
+function ppApplyFilter(f){
+  _ppDetailFilter=f;
+  // Update pill styles
+  ['all','issues','fail'].forEach(k=>{
+    const el=document.getElementById('pp-filter-'+k);
+    if(!el) return;
+    const active=k===f;
+    const baseCol=k==='fail'?'#991b1b':k==='issues'?'#92400e':'#1e3a5f';
+    el.style.background=active?baseCol:'#fff';
+    el.style.color=active?'#fff':baseCol;
+    el.style.fontWeight=active?'700':'600';
+  });
+  if(!_ppQaResults) return;
+  const rows=document.querySelectorAll('#pp-qa-tbody tr');
+  let visible=0;
+  rows.forEach((row,i)=>{
+    const r=_ppQaResults.results[i];
+    if(!r){ row.style.display='none'; return; }
+    let show=true;
+    if(f==='fail') show=r.status==='fail';
+    if(f==='issues') show=r.status!=='pass';
+    row.style.display=show?'':'none';
+    if(show) visible++;
+  });
+  const cnt=document.getElementById('pp-filter-count');
+  if(cnt) cnt.textContent=visible+' of '+(_ppQaResults.results.length)+' pages shown';
+}
+
+function ppScoreBar(score){
+  const col=score>=80?'var(--success)':score>=60?'#f59e0b':'#ef4444';
+  return \`<div style="display:flex;align-items:center;gap:6px">
+    <div style="flex:1;height:6px;background:#e2e8f0;border-radius:3px;min-width:40px">
+      <div style="width:\${score}%;height:100%;background:\${col};border-radius:3px"></div>
+    </div>
+    <span style="font-size:.8rem;font-weight:700;color:\${col}">\${score}%</span>
+  </div>\`;
+}
+
+function renderPrePublishQA(data){
+  const{summary,results}=data;
+  if(!results||!results.length){ show('pp-qa-empty'); return; }
+
+  // Overall campaign score (average of all three category averages)
+  const overallAvg=Math.round((summary.googleReadyAvg+summary.aiReadyAvg+summary.structureAvg)/3);
+  const overallEl=$('pp-overall-score');
+  if(overallEl){
+    overallEl.textContent=overallAvg+'%';
+    overallEl.style.color=overallAvg>=80?'#059669':overallAvg>=60?'#b45309':'#dc2626';
+  }
+
+  // Summary bar
+  set('pp-sum-pages', results.length+' pages checked');
+  set('pp-sum-pass',  summary.passCount+' Pass');
+  set('pp-sum-review',summary.reviewCount+' Review');
+  set('pp-sum-fail',  summary.failCount+' Fail');
+  set('pp-avg-g',     summary.googleReadyAvg+'%');
+  set('pp-avg-ai',    summary.aiReadyAvg+'%');
+  set('pp-avg-s',     summary.structureAvg+'%');
+
+  // AI Readiness summary stats
+  if(summary.aiReadinessAvg!=null){
+    const airCol=summary.aiReadinessAvg>=75?'#059669':summary.aiReadinessAvg>=60?'#b45309':'#dc2626';
+    const airEl=$('pp-avg-air');
+    if(airEl){ airEl.textContent=summary.aiReadinessAvg+'/100'; airEl.style.color=airCol; }
+  }
+  if(summary.aiReadinessBlockedCount>0){
+    set('pp-air-blocked', summary.aiReadinessBlockedCount+' blocked');
+    const bw=$('pp-air-blocked-wrap'); if(bw) bw.style.display='block';
+  }
+
+  const gate=$('pp-deploy-gate');
+  const blocked=summary.aiReadinessBlockedCount||0;
+  if(summary.failCount===0&&blocked===0){
+    gate.style.cssText='display:block;padding:6px 12px;border-radius:6px;background:#d1fae5;color:#065f46;font-size:.8rem;font-weight:700;border:1px solid #6ee7b7';
+    gate.textContent='✓ Deploy Gate: All pages clear';
+  }else{
+    gate.style.cssText='display:block;padding:6px 12px;border-radius:6px;background:#fee2e2;color:#991b1b;font-size:.8rem;font-weight:700;border:1px solid #fca5a5';
+    const parts=[];
+    if(summary.failCount>0) parts.push(summary.failCount+' page'+(summary.failCount>1?'s':'')+' failing QA');
+    if(blocked>0) parts.push(blocked+' page'+(blocked>1?'s':'')+' blocked by AI Readiness');
+    gate.textContent='✗ Deploy Gate: '+parts.join(' · ')+' — fix before deploying';
+  }
+  $('pp-qa-summary').style.display='block';
+
+  // Show Fix All button when there are non-pass pages
+  const fixAllBtn=$('pp-fix-all-btn');
+  if(fixAllBtn){
+    const needsFix=(summary.failCount||0)+(summary.reviewCount||0);
+    fixAllBtn.style.display=needsFix>0?'inline-flex':'none';
+    fixAllBtn.textContent='⚡ Fix All Issues ('+(needsFix)+')';
+  }
+
+  const ran=summary.ranAt?new Date(summary.ranAt).toLocaleTimeString():'now';
+  set('pp-qa-info', results.length+' pages · '+summary.passCount+' pass · '+summary.reviewCount+' review · '+summary.failCount+' fail · ran '+ran);
+
+  const rows=results.map((r,i)=>{
+    const tierBadge=QA_TIER_BADGE[r.tier]||QA_TIER_BADGE.secondary;
+    const statusBc=r.status==='pass'?'badge-ready':r.status==='review'?'badge-review':'badge-blocked';
+    const statusTxt=r.status==='pass'?'Pass':r.status==='review'?'Review':'Fail';
+    const dup=r.duplicateRisk||{level:'low',maxSimilarity:0};
+    const dupStyle=PP_DUP_COLOUR[dup.level]||'color:#6b7280';
+    const isHub=r.tier==='hub';
+    const rowBase=isHub?'border-left:3px solid #f59e0b;background:#fffbeb':'';
+    const rowStyle=rowBase+';cursor:pointer;transition:background .12s';
+    const nameStyle='font-weight:'+(isHub?'700;color:#92400e':'600');
+    const ov=r.overallScore||Math.round(((r.googleScore||0)+(r.aiScore||0)+(r.structureScore||0))/3);
+    const ovCol=ov>=80?'#059669':ov>=60?'#b45309':'#dc2626';
+    // Build a quick fix list: critical first, then major, then review — max 2 inline
+    const levelOrder={fail:0,major:1,review:2,pass:3};
+    const issueChecks=(r.checks||[])
+      .filter(c=>c.level==='fail'||c.level==='major'||c.level==='review')
+      .sort((a,b)=>(levelOrder[a.level]||2)-(levelOrder[b.level]||2));
+    const fixes=issueChecks
+      .slice(0,2)
+      .map(c=>{
+        const isCrit=c.level==='fail', isMaj=c.level==='major';
+        const col=isCrit?'#991b1b':isMaj?'#7c2d12':'#92400e';
+        const icon=isCrit?'✗':isMaj?'▲':'⚠';
+        return \`<div style="font-size:.72rem;line-height:1.5;color:\${col}">\${icon} \${esc(c.message.length>65?c.message.slice(0,62)+'…':c.message)}</div>\`;
+      }).join('');
+    // CTA buttons — direct fix + details
+    const moreCount=issueChecks.length>2?issueChecks.length-2:0;
+    const moreNote=moreCount?\`<span style="font-size:.68rem;color:#64748b">+\${moreCount} more</span>\`:'';
+    const viewBtn=\`<button style="display:inline-flex;align-items:center;gap:3px;padding:4px 9px;border-radius:6px;border:1px solid #e2e8f0;background:#f8fafc;color:#475569;font-size:.73rem;font-weight:600;cursor:pointer;white-space:nowrap" onclick="event.stopPropagation();ppShowDetail(\${i})">Details →</button>\`;
+    let fixCell;
+    if(r.status==='pass'){
+      fixCell=\`<span style="font-size:.72rem;color:#059669">✓ All checks passed</span><br>\${viewBtn}\`;
+    }else{
+      const fixBtn=\`<button style="display:inline-flex;align-items:center;gap:3px;padding:5px 12px;border-radius:6px;border:none;background:#2563eb;color:#fff;font-size:.76rem;font-weight:800;cursor:pointer;white-space:nowrap" onclick="event.stopPropagation();ppUpgradeThisPage('\${esc(r.areaDir||'')}','\${esc(r.area||'')}','\${esc(r.tier||'cluster')}',\${i})">⚡ Fix</button>\`;
+      fixCell=\`\${fixes}\${moreNote}<br><div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap">\${fixBtn}\${viewBtn}</div>\`;
+    }
+    // Severity pill counts + cap info
+    const crit=r.criticalCount||0, maj=r.majorCount||0, warn=r.warningCount||0;
+    const rawSc=r.rawScore!=null?r.rawScore:ov;
+    const capInfo=r.capReason
+      ?\`<div style="font-size:.68rem;color:#b45309;line-height:1.4;margin-top:2px" title="\${esc(r.capReason)}">raw \${rawSc}% → capped</div>\`
+      :'';
+    const sevPills=\`<div style="display:flex;gap:3px;margin-top:3px;flex-wrap:wrap">\${
+      crit?\`<span style="font-size:.65rem;font-weight:700;background:#fee2e2;color:#991b1b;border-radius:3px;padding:1px 5px">\${crit}✗</span>\`:''
+    }\${
+      maj?\`<span style="font-size:.65rem;font-weight:700;background:#ffedd5;color:#7c2d12;border-radius:3px;padding:1px 5px">\${maj}▲</span>\`:''
+    }\${
+      warn?\`<span style="font-size:.65rem;font-weight:700;background:#fef9c3;color:#713f12;border-radius:3px;padding:1px 5px">\${warn}⚠</span>\`:''
+    }</div>\`;
+    // AI Readiness cell
+    const air=r.aiReadiness;
+    const airScore=air?air.score:null;
+    const airStatus=air?air.status:null;
+    const airBlocked=air?air.publishBlocked:false;
+    const airStatusLabels={elite:'Elite',good:'Good',weak:'Weak',fail:'Fail'};
+    const airStatusCol={elite:'#059669',good:'#0369a1',weak:'#b45309',fail:'#dc2626'};
+    const airCell=airScore!=null
+      ?\`<div style="display:flex;flex-direction:column;gap:2px;align-items:flex-start">
+          <div style="display:flex;align-items:center;gap:5px">
+            <span style="font-size:1rem;font-weight:900;color:\${airStatusCol[airStatus]||'#374151'}">\${airScore}</span>
+            <span style="font-size:.68rem;font-weight:700;color:#fff;background:\${airStatusCol[airStatus]||'#374151'};border-radius:3px;padding:1px 5px">\${airStatusLabels[airStatus]||'—'}</span>
+          </div>
+          \${airBlocked?\`<span style="font-size:.65rem;font-weight:700;color:#dc2626;background:#fee2e2;border-radius:3px;padding:1px 5px">🚫 BLOCKED</span>\`:\`<span style="font-size:.65rem;color:#059669">✓ clear</span>\`}
+          \${air.blockingIssues&&air.blockingIssues.length?\`<div style="font-size:.65rem;color:#dc2626;line-height:1.3" title="\${esc(air.blockingIssues.join('; '))}">\${air.blockingIssues.length} blocking issue\${air.blockingIssues.length>1?'s':''}</div>\`:''}
+        </div>\`
+      :'<span style="font-size:.72rem;color:#9ca3af">—</span>';
+    return \`<tr style="\${rowStyle}" id="pp-row-\${i}" onclick="ppShowDetail(\${i})" onmouseenter="this.style.background='\${isHub?'#fef9c3':'#f8fafc'}'" onmouseleave="this.style.background='\${isHub?'#fffbeb':''}'">
+      <td style="\${nameStyle}">\${esc(r.area)}<br><span style="font-size:.72rem;color:var(--muted);font-weight:400">\${esc(r.areaDir||'')}</span></td>
+      <td style="text-align:center"><span style="font-size:1.15rem;font-weight:900;color:\${ovCol}">\${ov}%</span>\${capInfo}\${sevPills}</td>
+      <td>\${tierBadge}</td>
+      <td>\${ppScoreBar(r.googleScore||0)}</td>
+      <td>\${ppScoreBar(r.aiScore||0)}</td>
+      <td>\${ppScoreBar(r.structureScore||0)}</td>
+      <td>\${airCell}</td>
+      <td style="font-size:.82rem;font-weight:700;\${dupStyle}">\${dup.maxSimilarity||0}% <span style="font-weight:400;font-size:.75rem">\${dup.level||'low'}</span></td>
+      <td><span class="badge \${statusBc}" style="font-size:.82rem;font-weight:800">\${statusTxt}</span></td>
+      <td onclick="event.stopPropagation()">\${fixCell}</td>
+    </tr>\`;
+  }).join('');
+  $('pp-qa-tbody').innerHTML=rows;
+  show('pp-qa-table-wrap');
+  // Show filter bar and reset to 'all'
+  _ppDetailFilter='all';
+  const fb=$('pp-qa-filters');
+  if(fb){ fb.style.display='flex'; }
+  ppApplyFilter('all');
+}
+
+function ppShowDetail(idx){
+  if(!_ppQaResults) return;
+  const r=_ppQaResults.results[idx];
+  if(!r) return;
+
+  // Navigation context — prev/next within current filter set
+  const filtered=ppFilteredIndices();
+  const pos=filtered.indexOf(idx);
+  const prevIdx=pos>0?filtered[pos-1]:null;
+  const nextIdx=pos<filtered.length-1?filtered[pos+1]:null;
+
+  const checks=r.checks||[];
+  const google=checks.filter(c=>c.category==='google');
+  const ai=checks.filter(c=>c.category==='ai');
+  const structure=checks.filter(c=>c.category==='structure');
+
+  const CHECK_FIX_HINTS={
+    'g.title':              'AI Upgrade rewrites the title tag with primary keyword + location.',
+    'g.metaDesc':           'AI Upgrade regenerates the meta description automatically.',
+    'g.canonical':          'Re-run the page generator or AI Upgrade to rebuild the canonical.',
+    'g.h1':                 'AI Upgrade adds or corrects the H1 with service + location.',
+    'g.previewLinks':       'Check templates — /preview/ links must not appear in generated output.',
+    'g.placeholders':       'AI Upgrade fills all {{placeholder}} tokens with real content.',
+    'g.noindex':            'Remove the noindex directive from your template or project config.',
+    'g.schema':             'AI Upgrade regenerates full JSON-LD schema (WebPage + Service).',
+    'g.schemaFaq':          'AI Upgrade adds FAQPage schema when a FAQ section is present.',
+    'g.images':             'Check Image Pack settings in Wizard — Stage 5 (Images).',
+    'g.schemaPhone':        'Fix the telephone value in the LocalBusiness schema or project config.',
+    'ai.h1Keyword':         'AI Upgrade rewrites H1 to include the full primary keyword.',
+    'ai.h1Location':        'AI Upgrade rewrites H1 to include the location.',
+    'ai.quickAnswer':       'AI Upgrade adds the Quick Answer / AI summary block near the top.',
+    'ai.headingStructure':  'AI Upgrade adds proper H2/H3 structure with 3+ sections.',
+    'ai.faqSection':        'AI Upgrade adds an FAQ section with common service questions.',
+    'ai.faqSchema':         'AI Upgrade adds FAQPage schema alongside the FAQ section.',
+    'ai.localRelevance':    'AI Upgrade increases location mentions throughout the page.',
+    'ai.paragraphLength':   'AI Upgrade breaks long paragraphs into shorter, scannable sections.',
+    'ai.entityClarity':     'AI Upgrade strengthens the hero section with brand/entity context.',
+    's.thinContent':        'AI Upgrade expands content to 700+ words with local detail.',
+    's.cta':                'AI Upgrade adds a clear call-to-action section.',
+    's.localCoverage':      'AI Upgrade adds local coverage content and a map reference.',
+    's.kwStuffing':         'AI Upgrade rebalances keyword usage to a natural density.',
+    's.altText':            'AI Upgrade adds descriptive alt text to all images.',
+    's.moneyPageBand':      'Set moneyPageUrl in Wizard — Stage 1 (Business Info).',
+    's.buyerTypeMismatch':  'AI Upgrade rewrites copy to match your buyer type (household/B2B).',
+    's.nonDigitalDigitalContent': 'AI Upgrade regenerates content for your industry type — removes digital/agency language.',
+  };
+
+  function renderChecks(list){
+    return list.map(c=>{
+      const isCrit=c.level==='fail', isMaj=c.level==='major', isWarn=c.level==='review';
+      const icon=isCrit?'✗':isMaj?'▲':isWarn?'⚠':'✓';
+      const bg=isCrit?'#fff5f5':isMaj?'#fff7ed':isWarn?'#fffbeb':'transparent';
+      const col=isCrit?'#dc2626':isMaj?'#7c2d12':isWarn?'#b45309':'#059669';
+      const hint=(isCrit||isMaj)?CHECK_FIX_HINTS[c.key]:'';
+      const hintHtml=hint?\`<div style="font-size:.72rem;color:#6b7280;margin-top:3px;padding-left:2px;border-left:2px solid #e2e8f0;padding-left:6px">→ \${esc(hint)}</div>\`:'';
+      return \`<div style="padding:6px 8px;border-radius:4px;background:\${bg};margin:2px 0">
+        <div style="display:flex;gap:8px">
+          <span style="font-weight:800;color:\${col};min-width:14px;font-size:.9rem;flex-shrink:0">\${icon}</span>
+          <span style="font-size:.82rem;color:#374151;line-height:1.5">\${esc(c.message)}</span>
+        </div>
+        \${hintHtml}
+      </div>\`;
+    }).join('');
+  }
+
+  const dup=r.duplicateRisk||{level:'low',maxSimilarity:0,matches:[]};
+  const dupMatches=dup.matches&&dup.matches.length
+    ? dup.matches.map(m=>\`<div style="font-size:.8rem;padding:4px 0;border-bottom:1px solid #f1f5f9"><strong>\${esc(m.section)}</strong>: \${m.similarity}% overlap with <em>\${esc(m.otherArea)}</em></div>\`).join('')
+    : '<div style="font-size:.82rem;color:#6b7280">No significant duplicate content detected.</div>';
+
+  const failChecks=checks.filter(c=>c.level==='fail');
+  const majorChecks=checks.filter(c=>c.level==='major');
+  const reviewChecks=checks.filter(c=>c.level==='review');
+  const passChecks=checks.filter(c=>c.level==='pass');
+
+  const statusBg=r.status==='pass'?'#d1fae5':r.status==='review'?'#fef3c7':'#fee2e2';
+  const statusCol=r.status==='pass'?'#065f46':r.status==='review'?'#92400e':'#991b1b';
+  const statusMsg=r.status==='pass'
+    ?'This page passed all checks and is ready to publish.'
+    :r.status==='review'
+    ?(majorChecks.length?'This page has major issues that must be addressed before deploying.':'This page has warnings. Fix before deploying for best ranking potential.')
+    :'This page has critical errors and will NOT rank. Fix all items marked ✗ before publishing.';
+
+  const ov=r.overallScore||Math.round(((r.googleScore||0)+(r.aiScore||0)+(r.structureScore||0))/3);
+  const ovCol=ov>=80?'#059669':ov>=60?'#b45309':'#dc2626';
+  const rawSc2=r.rawScore!=null?r.rawScore:ov;
+  const capExplain=r.capReason
+    ?\`<div style="margin-top:6px;font-size:.76rem;background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:8px 10px;color:#7c2d12"><strong>Score Cap:</strong> Raw score was \${rawSc2}% — \${esc(r.capReason.replace(/^Capped at \\d+ \\u2014 /,''))}</div>\`
+    :'';
+
+  // Fix CTA bar — pinned at top of modal, shown only for non-pass pages
+  const _cfgKeys=new Set(['g.noindex','g.previewLinks','g.images','s.moneyPageBand','g.schemaPhone']);
+  const _badAll=[...failChecks,...majorChecks,...reviewChecks];
+  const _hasContentFix=_badAll.some(c=>!_cfgKeys.has(c.key));
+  const _hasConfigFix=_badAll.some(c=>_cfgKeys.has(c.key));
+  const _issueCount=failChecks.length+majorChecks.length+reviewChecks.length;
+  const _critLabel=failChecks.length?failChecks.length+' critical':'';
+  const _majLabel=majorChecks.length?majorChecks.length+' major':'';
+  const _warnLabel=reviewChecks.length&&!failChecks.length&&!majorChecks.length?reviewChecks.length+' warning'+(reviewChecks.length!==1?'s':''):'';
+  const _issueLabel=[_critLabel,_majLabel,_warnLabel].filter(Boolean).join(' · ')||'issues';
+  const fixCtaBar=r.status==='pass'?'':
+    \`<div style="background:#1e3a5f;padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex-shrink:0">
+      <div style="flex:1;min-width:160px">
+        <div style="font-size:.85rem;font-weight:700;color:#93c5fd">\${_issueLabel} found — fix &amp; auto-recheck</div>
+        <div style="font-size:.7rem;color:#64748b;margin-top:2px">Results update automatically after fixing</div>
+      </div>
+      \${_hasContentFix?\`<button onclick="ppUpgradeThisPage('\${esc(r.areaDir||'')}','\${esc(r.area||'')}','\${esc(r.tier||'cluster')}',\${idx})" style="flex-shrink:0;padding:10px 28px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:.96rem;font-weight:900;cursor:pointer;white-space:nowrap;letter-spacing:.01em">⚡ Fix This Page</button>\`:''}
+      \${_hasConfigFix?\`<a href="/api/setup?slug=\${esc(activeSlug)}\${INTERNAL_TOKEN?'&_t='+encodeURIComponent(INTERNAL_TOKEN):''}" target="_blank" style="flex-shrink:0;padding:9px 18px;background:transparent;color:#cbd5e1;border:1px solid #475569;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;white-space:nowrap">⚙ Wizard</a>\`:''}
+    </div>\`;
+
+  const html=\`<div style="font-family:system-ui;max-width:660px">
+    <!-- Header -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:12px">
+      <div>
+        <div style="font-size:1.05rem;font-weight:800;color:#1e3a5f">\${esc(r.area)}</div>
+        <div style="font-size:.78rem;color:#64748b">\${esc(r.areaDir||'')} · \${r.wordCount} words · \${r.tier||'cluster'} page</div>
+        <div style="font-size:.72rem;color:#64748b;margin-top:2px">
+          \${(failChecks.length?'<span style="color:#991b1b;font-weight:700">'+failChecks.length+' critical</span> &middot; ':'')+
+            (majorChecks.length?'<span style="color:#7c2d12;font-weight:700">'+majorChecks.length+' major</span> &middot; ':'')+
+            (reviewChecks.length?'<span style="color:#b45309;font-weight:700">'+reviewChecks.length+' warning'+(reviewChecks.length!==1?'s':'')+'</span> &middot; ':'')+
+            '<span style="color:#059669">'+passChecks.length+' passed</span>'}
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:2rem;font-weight:900;color:\${ovCol}">\${ov}%</div>
+        \${r.rawScore!=null&&r.rawScore!==ov?\`<div style="font-size:.7rem;color:#b45309">raw \${r.rawScore}%</div>\`:''}
+      </div>
+    </div>
+
+    <!-- Status banner -->
+    <div style="padding:10px 14px;border-radius:8px;background:\${statusBg};margin-bottom:10px">
+      <div style="font-size:.9rem;font-weight:800;color:\${statusCol};margin-bottom:2px">
+        \${r.status==='pass'?'✓ PASS — Ready to publish':r.status==='review'?'⚠ REVIEW — Issues found':'✗ FAIL — Do NOT publish yet'}
+      </div>
+      <div style="font-size:.78rem;color:\${statusCol}">\${statusMsg}</div>
+    </div>
+    \${capExplain?capExplain+'<div style="height:6px"></div>':''}
+
+    <!-- Score bars -->
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      \${['🔍 Google SEO','🤖 AI Structure','📐 Internal Structure'].map((label,i)=>{
+        const score=[r.googleScore,r.aiScore,r.structureScore][i]||0;
+        const col=score>=80?'#059669':score>=60?'#b45309':'#dc2626';
+        return \`<div style="flex:1;min-width:100px;padding:10px 12px;background:#f8fafc;border-radius:6px;border:1px solid #e2e8f0;text-align:center">
+          <div style="font-size:1.4rem;font-weight:900;color:\${col}">\${score}%</div>
+          <div style="font-size:.72rem;color:#64748b;margin-top:2px">\${label}</div>
+        </div>\`;
+      }).join('')}
+      <div style="flex:1;min-width:100px;padding:10px 12px;background:#f8fafc;border-radius:6px;border:1px solid #e2e8f0;text-align:center">
+        <div style="font-size:1.4rem;font-weight:900;color:\${PP_DUP_HEX[dup.level]||'#374151'}">\${dup.maxSimilarity||0}%</div>
+        <div style="font-size:.72rem;color:#64748b;margin-top:2px">Duplicate</div>
+      </div>
+    </div>
+
+    \${(()=>{
+      const air=r.aiReadiness;
+      if(!air) return '';
+      const airSc=air.score||0;
+      const airStL={elite:'Elite — Publish Ready',good:'Good — Publish Allowed',weak:'Weak — Review Required',fail:'FAIL — Blocked from Publishing'};
+      const airStC={elite:'#059669',good:'#0369a1',weak:'#b45309',fail:'#dc2626'};
+      const airStBg={elite:'#d1fae5',good:'#dbeafe',weak:'#fef3c7',fail:'#fee2e2'};
+      const sc=air.status||'fail';
+      const CAT_OPT_MAP={'Content Depth':'improve-local-relevance','Commercial Strength':'improve-service-relevance','Intent Coverage':'improve-service-relevance'};
+      const CAT_OPT_LABEL={'improve-local-relevance':'Improve Local Relevance','improve-service-relevance':'Improve Service Content'};
+      const _seenOptAction=new Set();
+      const catRows=(air.breakdown||[]).map(c=>{
+        const pct=Math.round(c.scored/c.maxPoints*100);
+        const bc=pct>=80?'#059669':pct>=60?'#b45309':'#dc2626';
+        const catKey=Object.keys(CAT_OPT_MAP).find(k=>c.name&&c.name.includes(k));
+        const optAction=catKey?CAT_OPT_MAP[catKey]:null;
+        const showBtn=optAction&&pct<70&&!_seenOptAction.has(optAction);
+        if(showBtn) _seenOptAction.add(optAction);
+        const optBtn=showBtn?\`<button onclick="runSectionOptimise('\${esc(r.areaDir||'')}','\${optAction}',this,\${idx})" style="margin-left:6px;padding:2px 8px;border-radius:4px;background:#1e3a5f;color:#fff;border:none;cursor:pointer;font-size:.68rem;font-weight:700;white-space:nowrap;flex-shrink:0">\${CAT_OPT_LABEL[optAction]||'Fix'}</button>\`:'';
+        return \`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #f1f5f9">
+          <div style="flex:1;font-size:.78rem;color:#374151">\${esc(c.name)}</div>
+          <div style="width:80px;height:5px;background:#e2e8f0;border-radius:3px;flex-shrink:0">
+            <div style="height:100%;width:\${pct}%;background:\${bc};border-radius:3px"></div>
+          </div>
+          <div style="font-size:.78rem;font-weight:700;color:\${bc};min-width:38px;text-align:right">\${c.scored}/\${c.maxPoints}</div>
+          \${optBtn}
+        </div>\`;
+      }).join('');
+      const blockList=(air.blockingIssues||[]).map(b=>\`<div style="font-size:.76rem;padding:4px 8px;background:#fff5f5;border-radius:4px;color:#991b1b;border-left:3px solid #dc2626;margin-bottom:4px">✗ \${esc(b)}</div>\`).join('');
+      const warnList=(air.warnings||[]).map(w=>\`<div style="font-size:.76rem;padding:3px 0;color:#b45309;border-bottom:1px solid #fef3c7">⚠ \${esc(w)}</div>\`).join('');
+      const fixList=(air.recommendedFixes||[]).map(f=>\`<div style="font-size:.76rem;padding:3px 0;color:#1e3a5f;border-bottom:1px solid #e2e8f0">→ \${esc(f)}</div>\`).join('');
+
+      // Quick-fix action cards for missing or fixable sections
+      const _airText=[...(air.blockingIssues||[]),...(air.warnings||[]),...(air.recommendedFixes||[])].join(' ').toLowerCase();
+      const _checks=r.checks||[];
+      const _allCheckText=_checks.map(c=>(c.key||'')+' '+(c.message||'')).join(' ').toLowerCase();
+      const _combinedText=_airText+' '+_allCheckText;
+      const _quickFixes=[];
+      if(_combinedText.includes('related-services')||_combinedText.includes('related services')){
+        _quickFixes.push({action:'generate-related-services',label:'Generate Related Services',why:'Builds the Related Services section from your other service campaigns in the same city — no AI required.'});
+      }
+      if(_combinedText.includes('areas-we-cover')||_combinedText.includes('areas we cover')){
+        _quickFixes.push({action:'generate-areas-we-cover',label:'Generate Areas We Cover',why:'Builds the Areas We Cover grid from your cluster area pages — links to all sibling pages in this campaign.'});
+      }
+      if(dup.level==='medium'||dup.level==='high'){
+        _quickFixes.push({action:'increase-variation',label:'Increase Content Variation',why:'Rewrites the AI summary intro with varied phrasing to reduce semantic overlap with other pages.'});
+      }
+      const _quickFixHtml=_quickFixes.length?\`<div style="margin-top:12px;padding-top:10px;border-top:1px solid #e2e8f0">
+        <div style="font-size:.74rem;font-weight:800;color:#1e3a5f;margin-bottom:6px;letter-spacing:.02em">⚡ QUICK FIXES</div>
+        \${_quickFixes.map(function(qf){return \`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f1f5f9">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:.77rem;font-weight:700;color:#1e3a5f">\${esc(qf.label)}</div>
+            <div style="font-size:.71rem;color:#64748b;line-height:1.3;margin-top:2px">\${esc(qf.why)}</div>
+          </div>
+          <button onclick="runSectionOptimise('\${esc(r.areaDir||'')}','\${esc(qf.action)}',this,\${idx})" style="flex-shrink:0;padding:4px 10px;border-radius:5px;background:#1e3a5f;color:#fff;border:none;cursor:pointer;font-size:.72rem;font-weight:700;white-space:nowrap">▲ Apply</button>
+        </div>\`;}).join('')}
+      </div>\`:'';
+
+      return \`<details open style="margin-bottom:14px;border:1px solid \${airStC[sc]||'#e2e8f0'};border-radius:8px;overflow:hidden">
+        <summary style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:\${airStBg[sc]||'#f8fafc'};cursor:pointer;font-size:.85rem;font-weight:800;color:\${airStC[sc]||'#374151'}">
+          <span>AI Readiness Score</span>
+          <span style="font-size:1.2rem;font-weight:900;color:\${airStC[sc]||'#374151'}">\${airSc}/100</span>
+          <span style="font-size:.7rem;font-weight:700;background:\${airStC[sc]||'#374151'};color:#fff;padding:2px 8px;border-radius:4px">\${airStL[sc]||sc}</span>
+          \${air.publishBlocked?\`<span style="margin-left:auto;font-size:.7rem;font-weight:700;background:#dc2626;color:#fff;padding:2px 8px;border-radius:4px">🚫 PUBLISH BLOCKED</span>\`:\`<span style="margin-left:auto;font-size:.7rem;color:\${airStC[sc]||'#374151'}">✓ Deploy gate: clear</span>\`}
+        </summary>
+        <div style="padding:12px 14px;background:#fff">
+          <div style="margin-bottom:10px">\${catRows}</div>
+          \${blockList?\`<div style="margin-bottom:8px"><div style="font-size:.75rem;font-weight:700;color:#991b1b;margin-bottom:4px">Blocking Issues (must fix):</div>\${blockList}</div>\`:''}
+          \${warnList?\`<details style="margin-bottom:6px"><summary style="font-size:.75rem;font-weight:600;color:#b45309;cursor:pointer">\${(air.warnings||[]).length} warning(s) ▾</summary><div style="padding-top:4px">\${warnList}</div></details>\`:''}
+          \${fixList?\`<details><summary style="font-size:.75rem;font-weight:600;color:#1e3a5f;cursor:pointer">\${(air.recommendedFixes||[]).length} recommended fix(es) ▾</summary><div style="padding-top:4px">\${fixList}</div></details>\`:''}
+          \${_quickFixHtml}
+        </div>
+      </details>\`;
+    })()}
+
+    \${failChecks.length?\`
+    <div style="margin-bottom:12px">
+      <div style="font-size:.82rem;font-weight:800;color:#991b1b;margin-bottom:6px;padding:4px 8px;background:#fee2e2;border-radius:4px">
+        ✗ CRITICAL — Must fix before publishing (\${failChecks.length})
+      </div>
+      \${renderChecks(failChecks)}
+    </div>\`:''}
+
+    \${majorChecks.length?\`
+    <div style="margin-bottom:12px">
+      <div style="font-size:.82rem;font-weight:800;color:#7c2d12;margin-bottom:6px;padding:4px 8px;background:#ffedd5;border-radius:4px">
+        ▲ MAJOR — Significant issue; status capped at REVIEW (\${majorChecks.length})
+      </div>
+      \${renderChecks(majorChecks)}
+    </div>\`:''}
+
+    \${reviewChecks.length?\`
+    <div style="margin-bottom:12px">
+      <div style="font-size:.82rem;font-weight:800;color:#92400e;margin-bottom:6px;padding:4px 8px;background:#fef3c7;border-radius:4px">
+        ⚠ WARNINGS — Fix for best results (\${reviewChecks.length})
+      </div>
+      \${renderChecks(reviewChecks)}
+    </div>\`:''}
+
+    <details style="margin-bottom:10px">
+      <summary style="font-size:.82rem;font-weight:600;cursor:pointer;color:#64748b;padding:4px 0">
+        ✓ Passed checks (\${passChecks.length}) ▾
+      </summary>
+      <div style="padding:4px 0;margin-top:4px">\${renderChecks(passChecks)||'<div style="font-size:.82rem;color:#6b7280">—</div>'}</div>
+    </details>
+    <details>
+      <summary style="font-size:.85rem;font-weight:700;cursor:pointer;color:#1e3a5f;padding:4px 0">Duplicate Content (\${dup.matches&&dup.matches.length||0} match\${dup.matches&&dup.matches.length===1?'':'es'})</summary>
+      <div style="padding:4px 0">\${dupMatches}</div>
+    </details>
+  </div>\`;
+
+  // Build navigation bar (prev/next + position counter + close)
+  const navPrev=prevIdx!=null
+    ?\`<button onclick="ppShowDetail(\${prevIdx})" style="padding:5px 12px;border-radius:6px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:.8rem;font-weight:600;color:#374151">← Prev</button>\`
+    :\`<button disabled style="padding:5px 12px;border-radius:6px;border:1px solid #e2e8f0;background:#f1f5f9;cursor:not-allowed;font-size:.8rem;color:#cbd5e1">← Prev</button>\`;
+  const navNext=nextIdx!=null
+    ?\`<button onclick="ppShowDetail(\${nextIdx})" style="padding:5px 12px;border-radius:6px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:.8rem;font-weight:600;color:#374151">Next →</button>\`
+    :\`<button disabled style="padding:5px 12px;border-radius:6px;border:1px solid #e2e8f0;background:#f1f5f9;cursor:not-allowed;font-size:.8rem;color:#cbd5e1">Next →</button>\`;
+  const navPos=filtered.length>0?\`<span style="font-size:.78rem;color:#64748b">\${pos+1} / \${filtered.length}</span>\`:'';
+  const liveUrl=r.liveUrl||(r.areaDir?('/'+r.areaDir+'/'):null);
+  const liveLink=liveUrl
+    ?\`<a href="\${esc(liveUrl)}" target="_blank" rel="noopener" style="font-size:.78rem;color:#0369a1;text-decoration:none;padding:5px 10px;border-radius:6px;border:1px solid #bae6fd;background:#f0f9ff;white-space:nowrap">↗ View Page</a>\`
+    :'';
+  const navBar=\`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid #e2e8f0;background:#f8fafc;border-radius:12px 12px 0 0;flex-shrink:0">
+    \${navPrev}\${navPos}\${navNext}
+    <span style="flex:1"></span>
+    \${liveLink}
+    <button onclick="document.getElementById('pp-detail-overlay').remove()" style="padding:5px 10px;border-radius:6px;border:1px solid #e2e8f0;background:#fff;cursor:pointer;font-size:.85rem;color:#6b7280;font-weight:600">✕ Close</button>
+  </div>\`;
+
+  // Open modal
+  let overlay=document.getElementById('pp-detail-overlay');
+  if(!overlay){
+    overlay=document.createElement('div');
+    overlay.id='pp-detail-overlay';
+    overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9998;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto';
+    overlay.onclick=function(e){ if(e.target===overlay) overlay.remove(); };
+    document.body.appendChild(overlay);
+  }
+  // Keyboard navigation
+  overlay._ppKeyHandler=function(e){
+    if(e.key==='Escape'){ overlay.remove(); document.removeEventListener('keydown',overlay._ppKeyHandler); }
+    if(e.key==='ArrowLeft'&&prevIdx!=null) ppShowDetail(prevIdx);
+    if(e.key==='ArrowRight'&&nextIdx!=null) ppShowDetail(nextIdx);
+  };
+  document.removeEventListener('keydown',overlay._ppKeyHandler);
+  document.addEventListener('keydown',overlay._ppKeyHandler);
+  overlay.style.display='flex';
+  overlay.innerHTML=\`<div style="background:#fff;border-radius:12px;overflow:hidden;max-width:700px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.2);display:flex;flex-direction:column;max-height:calc(100vh - 80px)">
+    \${navBar}
+    \${fixCtaBar}
+    <div style="overflow-y:auto;padding:20px 24px;flex:1;min-height:0">
+      \${html}
+    </div>
+  </div>\`;
+}
+
+// Closes the issue panel, switches to AI Upgrade tab, starts the upgrade, then auto-rechecks
+let _ppFixSourceIdx=null;  // result index that triggered the current fix
+let _ppFixAll=false;       // true when Fix All was triggered — auto-rescan on complete
+
+function ppFixAll(){
+  if(!activeSlug){ alert('Select a project first'); return; }
+  if(!_ppQaResults){ alert('Run the QA scan first.'); return; }
+  const toFix=_ppQaResults.results.filter(r=>r.status!=='pass');
+  if(!toFix.length){ ppShowToast('All pages already pass — nothing to fix!','pass'); return; }
+  const n=toFix.length;
+  if(!confirm('Fix all '+n+' page'+(n!==1?'s':'')+' with issues?\\n\\nTheir HTML will be regenerated using the AI upgrade engine. A full QA rescan will run automatically when done.')) return;
+  _ppFixAll=true;
+  _ppFixSourceIdx=null;
+  const pageList=toFix.map(r=>({areaDir:r.areaDir,area:r.area||r.areaDir,tier:r.tier||'cluster',score:r.overallScore||null}));
+  const areas=pageList.map(p=>p.areaDir);
+  switchTab('qa');
+  setTimeout(function(){
+    const upEl=document.getElementById('upgrade-progress-wrap');
+    if(upEl) upEl.scrollIntoView({behavior:'smooth',block:'start'});
+    upgradeStart({clientSlug:activeSlug,areas},pageList);
+  },200);
+}
+
+function ppUpgradeThisPage(areaDir,area,tier,idx){
+  if(!activeSlug){ alert('Select a project first'); return; }
+  if(!areaDir){ alert('Cannot determine page — please retry from the table.'); return; }
+  _ppFixSourceIdx=(idx!=null)?idx:null;
+  const overlay=document.getElementById('pp-detail-overlay');
+  if(overlay) overlay.remove();
+  switchTab('qa');
+  const pageList=[{areaDir,area:area||areaDir,tier:tier||'cluster',score:null}];
+  setTimeout(function(){
+    const upEl=document.getElementById('upgrade-progress-wrap');
+    if(upEl) upEl.scrollIntoView({behavior:'smooth',block:'start'});
+    upgradeStart({clientSlug:activeSlug,areas:[areaDir]},pageList);
+  },200);
+}
+
+// Auto-recheck a single page after upgrade and re-open the detail modal with fresh results
+async function ppAutoRecheck(idx,areaDir){
+  if(!activeSlug||!_ppQaResults||!_ppQaResults.results[idx]) return;
+  ppShowToast('Re-scanning '+areaDir+'…');
+  try{
+    const resp=await apiFetch('/api/pre-publish-qa/'+enc(activeSlug)+'/page/'+enc(areaDir));
+    const fresh=await resp.json();
+    if(fresh.error){ ppShowToast('Recheck failed: '+fresh.error,'error'); return; }
+    _ppQaResults.results[idx]=fresh;
+    renderPrePublishQA(_ppQaResults);
+    switchTab('qa');
+    ppShowDetail(idx);
+    const ok=fresh.status==='pass';
+    ppShowToast(ok?'✓ '+fresh.area+' now PASSES — ready to publish':'⚠ '+fresh.area+' still has issues — review below', ok?'pass':'warn');
+  }catch(e){
+    ppShowToast('Recheck error: '+e.message,'error');
+  }
+}
+
+function ppShowToast(msg,type){
+  let t=document.getElementById('pp-toast');
+  if(!t){
+    t=document.createElement('div');
+    t.id='pp-toast';
+    t.style.cssText='position:fixed;bottom:24px;right:24px;z-index:99999;max-width:380px;border-radius:10px;padding:13px 20px;font-family:system-ui;font-size:.88rem;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:opacity .3s;pointer-events:none';
+    document.body.appendChild(t);
+  }
+  const bg=type==='pass'?'#059669':type==='error'?'#dc2626':type==='warn'?'#b45309':'#1e3a5f';
+  t.style.background=bg; t.style.color='#fff'; t.style.opacity='1';
+  t.textContent=msg;
+  clearTimeout(t._timer);
+  t._timer=setTimeout(function(){ t.style.opacity='0'; setTimeout(function(){ if(t.parentNode) t.remove(); },300); },5000);
+}
+
+// ── AI Section Optimisation ────────────────────────────────────────────────────
+async function runSectionOptimise(areaDir,action,btn,idx){
+  if(!activeSlug){ alert('Select a project first'); return; }
+  const origText=btn.textContent;
+  const origBg=btn.style.background||'';
+  btn.disabled=true;
+  btn.textContent='⏳ Optimising…';
+  btn.style.background='#64748b';
+  btn.style.cursor='not-allowed';
+  const actionLabels={
+    'improve-local-relevance':'Local Relevance',
+    'improve-service-relevance':'Service Content',
+    'increase-variation':'Content Variation',
+    'generate-related-services':'Related Services',
+    'generate-areas-we-cover':'Areas We Cover',
+  };
+  const label=actionLabels[action]||action;
+  ppShowToast('Applying AI optimisation: '+label+' for '+areaDir+'…');
+  try{
+    const resp=await apiFetch('/api/section-optimise',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({clientSlug:activeSlug,areaDir,action}),
+    });
+    const data=await resp.json();
+    if(data.error){
+      btn.disabled=false;
+      btn.textContent=origText;
+      btn.style.background=origBg;
+      btn.style.cursor='pointer';
+      ppShowToast('Optimisation failed: '+data.error,'error');
+      return;
+    }
+    btn.textContent='✓ Applied';
+    btn.style.background='#059669';
+    const delta=data.scoreDelta;
+    const deltaStr=delta!==null&&delta!==undefined?(delta>=0?' (+'+delta+' pts)':' ('+delta+' pts)'):'';
+    ppShowToast('✓ '+data.label+deltaStr+' — rescanning page…','pass');
+    // Re-run QA check and reopen the modal with fresh results
+    setTimeout(function(){ ppAutoRecheck(idx,areaDir); },900);
+  }catch(e){
+    btn.disabled=false;
+    btn.textContent=origText;
+    btn.style.background=origBg;
+    btn.style.cursor='pointer';
+    ppShowToast('Optimisation error: '+e.message,'error');
+  }
+}
+
+// ── AI Upgrade ────────────────────────────────────────────────────
+let _upgradeJobId=null;
+let _upgradePollTimer=null;
+let _upgradeTotal=0;
+let _upgradePageList=[];       // [{areaDir,area,tier,score}] for current job
+let _upgradeCampaignAreas={};  // {campaignId:[{areaDir,area,tier,score}]}
+let _upgradePageState={};      // {areaName: 'waiting'|'running'|'done'|'failed'}
+
+function areaDirToName(d){
+  return d.replace(/^web-design-/,'').replace(/^local-seo-/,'').replace(/^affordable-web-design-/,'affordable ')
+    .replace(/-/g,' ').split(' ').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' ');
+}
+function normTier(t){return t==='priority'||t==='cluster'?'cluster':t==='hub'?'hub':t==='secondary'?'secondary':'cluster';}
+
+function upgradeScoreBadge(score,status){
+  if(score===null||score===undefined) return '<span style="color:#94a3b8">—</span>';
+  const col=score>=90?'#059669':score>=75?'#0369a1':score>=60?'#b45309':'#dc2626';
+  const bg=score>=90?'#d1fae5':score>=75?'#dbeafe':score>=60?'#fef3c7':'#fee2e2';
+  const lbl=status?(' '+status):'';
+  return \`<span style="display:inline-block;padding:2px 8px;border-radius:12px;background:\${bg};color:\${col};font-weight:700;font-size:.8rem">\${score}/100\${lbl}</span>\`;
+}
+
+function upgradePageCard(p,state,afterScore,afterStatus,ftpWarn){
+  const stateConfigs={
+    waiting:{icon:'○',bg:'#f1f5f9',border:'#e2e8f0',color:'#94a3b8',label:'Waiting'},
+    running:{icon:'⟳',bg:'#eff6ff',border:'#93c5fd',color:'#1e3a5f',label:'Upgrading…'},
+    done:   {icon:'✓',bg:'#f0fdf4',border:'#86efac',color:'#059669',label:'Done'},
+    failed: {icon:'✗',bg:'#fef2f2',border:'#fca5a5',color:'#dc2626',label:'Failed'},
+  };
+  const s=stateConfigs[state]||stateConfigs.waiting;
+  const tierBg=p.tier==='hub'?'#ede9fe':p.tier==='secondary'?'#dbeafe':'#f1f5f9';
+  const tierCol=p.tier==='hub'?'#7c3aed':p.tier==='secondary'?'#0369a1':'#374151';
+  const scoreFrom=p.score!==null&&p.score!==undefined?p.score+'':'?';
+  const scoreTo=afterScore!=null?afterScore+'':'?';
+  const ftpNote=ftpWarn?'<span style="margin-left:6px;font-size:.7rem;color:#b45309">⚠ FTP pending</span>':'';
+  const arrowHtml=state!=='waiting'&&scoreTo!=='?'?'<span style="color:#64748b"> → </span><span style="font-weight:700;color:'+(afterScore>=90?'#059669':'#b45309')+'">'+scoreTo+'</span>':'';
+  return \`<div id="upgcard-\${esc(p.areaDir)}" style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:\${s.bg};border:1px solid \${s.border};border-radius:6px;transition:all .3s">
+    <span style="font-size:1rem;color:\${s.color};font-weight:900;width:18px;text-align:center">\${s.icon}</span>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:.84rem;font-weight:600;color:#1e3a5f">\${esc(p.area||p.areaDir)}</div>
+      <div style="font-size:.7rem;color:#94a3b8">\${esc(p.areaDir)}</div>
+    </div>
+    <span style="font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:10px;background:\${tierBg};color:\${tierCol}">\${p.tier||'cluster'}</span>
+    <span style="font-size:.82rem;color:#64748b;min-width:110px;text-align:right">\${scoreFrom}\${arrowHtml}</span>
+    <span style="font-size:.78rem;font-weight:600;color:\${s.color};min-width:72px;text-align:right">\${s.label}</span>\${ftpNote}
+  </div>\`;
+}
+
+async function upgradeLoadList(){
+  if(!activeSlug){alert('Select a project first');return;}
+  hide('upgrade-empty');hide('upgrade-list-wrap');hide('upgrade-results-wrap');
+  hide('upgrade-error');show('upgrade-loading');
+  try{
+    const r=await apiFetch('/api/upgrade/list/'+enc(activeSlug));
+    const d=await r.json();
+    hide('upgrade-loading');
+    if(d.error){$('upgrade-error').textContent=d.error;show('upgrade-error');return;}
+    if(!d.total){
+      $('upgrade-empty').textContent='All pages already score 90 or above — nothing to upgrade.';
+      show('upgrade-empty');return;
+    }
+    $('upgrade-info').textContent=d.total+' page'+(d.total!==1?'s':'')+' below 90 found across '+d.campaigns.length+' campaign'+(d.campaigns.length!==1?'s':'')+'.';
+    $('upgrade-list-wrap').innerHTML=upgradeRenderList(d);
+    show('upgrade-list-wrap');
+  }catch(e){
+    hide('upgrade-loading');
+    $('upgrade-error').textContent='Scan failed: '+e.message;show('upgrade-error');
+  }
+}
+
+function upgradeRenderList(d){
+  if(!d.campaigns||!d.campaigns.length) return '<div class="empty">No pages below 90 found.</div>';
+  _upgradeCampaignAreas={};
+  const tierBadge=t=>{
+    const col=t==='hub'?'#7c3aed':t==='secondary'?'#0369a1':'#374151';
+    const bg=t==='hub'?'#ede9fe':t==='secondary'?'#dbeafe':'#f1f5f9';
+    return \`<span style="font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:10px;background:\${bg};color:\${col}">\${t}</span>\`;
+  };
+  return d.campaigns.map(camp=>{
+    // Store area list for this campaign so we can pre-populate the progress table
+    _upgradeCampaignAreas[camp.campaignId]=camp.pages.map(p=>({
+      areaDir:p.areaDir, area:areaDirToName(p.areaDir), tier:normTier(p.tier), score:p.score
+    }));
+    const rows=camp.pages.map(p=>{
+      const displayName=areaDirToName(p.areaDir);
+      const tier=normTier(p.tier);
+      const scoreCol=p.score>=75?'#0369a1':p.score>=60?'#b45309':'#dc2626';
+      const scoreBg=p.score>=75?'#dbeafe':p.score>=60?'#fef3c7':'#fee2e2';
+      const blocked=p.publishBlocked?'<span style="margin-left:6px;font-size:.72rem;color:#dc2626;font-weight:700">BLOCKED</span>':'';
+      const issues=p.blockingIssues&&p.blockingIssues.length
+        ?'<div style="font-size:.75rem;color:#dc2626;margin-top:2px">'+esc(p.blockingIssues.slice(0,2).join(' · '))+'</div>':'';
+      return \`<tr>
+        <td>
+          <span style="font-size:.85rem;font-weight:600;color:#1e3a5f">\${esc(displayName)}</span>
+          <div style="font-size:.71rem;color:#94a3b8;margin-top:1px">\${esc(p.areaDir)}</div>
+          \${issues}
+        </td>
+        <td>\${tierBadge(tier)}</td>
+        <td><span style="display:inline-block;padding:2px 8px;border-radius:12px;background:\${scoreBg};color:\${scoreCol};font-weight:700;font-size:.82rem">\${p.score}/100</span>\${blocked}</td>
+        <td style="white-space:nowrap">
+          <button onclick="upgradePages(['\${esc(p.areaDir)}'],'\${esc(camp.campaignId)}')" style="background:#1e3a5f;color:#fff;border:none;border-radius:4px;padding:3px 10px;font-size:.76rem;cursor:pointer;font-weight:600">Upgrade</button>
+        </td>
+      </tr>\`;
+    }).join('');
+
+    const avgCol=camp.avgScore>=75?'#0369a1':camp.avgScore>=60?'#b45309':'#dc2626';
+    const svcLabel=camp.campaignId.replace(/-[a-f0-9]{6,}$/,'').replace(/_/g,' ').replace(/-/g,' ');
+    return \`<div style="margin-bottom:20px;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden">
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#f8fafc;border-bottom:1px solid #e2e8f0">
+        <div style="flex:1">
+          <span style="font-weight:700;color:#1e3a5f;font-size:.9rem">\${esc(svcLabel)}</span>
+          <span style="margin-left:8px;font-size:.78rem;color:#64748b">\${camp.pages.length} page\${camp.pages.length!==1?'s':''} · avg <span style="font-weight:700;color:\${avgCol}">\${camp.avgScore}/100</span></span>
+        </div>
+        <button onclick="upgradeCampaign('\${esc(camp.campaignId)}')" style="background:#1e3a5f;color:#fff;border:none;border-radius:5px;padding:5px 14px;font-size:.78rem;cursor:pointer;font-weight:600">Upgrade all \${camp.pages.length}</button>
+      </div>
+      <div class="table-wrap" style="margin:0;border:none">
+        <table style="margin:0">
+          <thead><tr><th>Page</th><th>Tier</th><th style="min-width:90px">Current score</th><th style="min-width:90px">Action</th></tr></thead>
+          <tbody>\${rows}</tbody>
+        </table>
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function upgradeCampaign(campaignId){
+  if(!activeSlug){alert('Select a project first');return;}
+  const pages=_upgradeCampaignAreas[campaignId]||[];
+  if(!confirm('Upgrade all '+pages.length+' page'+(pages.length!==1?'s':'')+' in this campaign? Their HTML will be regenerated to the 100/100 template — images, links and header/footer data are preserved.')){return;}
+  upgradeStart({clientSlug:activeSlug,campaignId,areas:pages.map(p=>p.areaDir)},pages);
+}
+
+function upgradePages(areas,campaignId){
+  if(!activeSlug){alert('Select a project first');return;}
+  const campPages=_upgradeCampaignAreas[campaignId]||[];
+  const pageList=areas.map(ad=>{
+    const found=campPages.find(p=>p.areaDir===ad);
+    return found||{areaDir:ad,area:ad,tier:'cluster',score:null};
+  });
+  if(!confirm('Upgrade "'+pageList.map(p=>p.area||p.areaDir).join(', ')+'" now?')){return;}
+  upgradeStart({clientSlug:activeSlug,areas},pageList);
+}
+
+async function upgradeStart(body,pageList){
+  hide('upgrade-error');
+  $('upgrade-progress-bar').style.width='0%';
+  $('upgrade-progress-label').textContent='Starting upgrade…';
+  hide('upgrade-list-wrap');
+  hide('upgrade-results-wrap');
+
+  // Pre-populate the live page cards with "waiting" state
+  _upgradePageList=pageList||[];
+  _upgradePageState={};
+  _upgradeTotal=_upgradePageList.length;
+  const pagesEl=$('upgrade-progress-pages');
+  pagesEl.innerHTML=_upgradePageList.map(p=>{
+    _upgradePageState[p.area||p.areaDir]='waiting';
+    return upgradePageCard(p,'waiting',null,null,false);
+  }).join('');
+  if(!_upgradePageList.length) pagesEl.innerHTML='<div style="font-size:.84rem;color:#64748b;padding:4px 0">Identifying pages…</div>';
+
+  show('upgrade-progress-wrap');
+  $('upgrade-progress-wrap').scrollIntoView({behavior:'smooth',block:'start'});
+
+  try{
+    const r=await apiFetch('/api/upgrade',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const d=await r.json();
+    if(d.error){$('upgrade-error').textContent=d.error;show('upgrade-error');hide('upgrade-progress-wrap');return;}
+    if(!d.jobId){
+      $('upgrade-error').textContent=d.message||'Nothing to upgrade.';show('upgrade-error');
+      hide('upgrade-progress-wrap');return;
+    }
+    _upgradeJobId=d.jobId;
+    _upgradeTotal=d.totalAreas||_upgradePageList.length;
+    $('upgrade-progress-label').textContent='Upgrading 0 of '+_upgradeTotal+' pages…';
+    upgradePoll();
+  }catch(e){
+    $('upgrade-error').textContent='Start failed: '+e.message;show('upgrade-error');
+    hide('upgrade-progress-wrap');
+  }
+}
+
+function upgradePoll(){
+  if(_upgradePollTimer) clearTimeout(_upgradePollTimer);
+  if(!_upgradeJobId) return;
+  apiFetch('/api/rollout/status/'+_upgradeJobId).then(r=>r.json()).then(job=>{
+    upgradeHandleJob(job);
+    if(job.status==='running') _upgradePollTimer=setTimeout(upgradePoll,2500);
+  }).catch(()=>{ _upgradePollTimer=setTimeout(upgradePoll,3000); });
+}
+
+function upgradeHandleJob(job){
+  const events=(job.events||[]).filter(e=>e.type==='progress'&&e.area!=='sitemap');
+  const pagesEl=$('upgrade-progress-pages');
+
+  // Process events to update page card states
+  events.forEach(e=>{
+    const areaName=e.area||'';
+    // "39→100/100 (elite)" — result event has arrow and /100
+    const isResultEvent=e.step&&e.step.indexOf('→')>=0&&e.step.indexOf('/100')>=0;
+    const isStartEvent=e.step&&(e.step.indexOf('upgrading')>=0||e.step.indexOf('rebuilding from HTML')>=0);
+    const isFailed=e.status==='failed';
+    const isFtp=e.step&&e.step.indexOf('FTP')>=0;
+
+    if(isFailed){
+      _upgradePageState[areaName]='failed';
+    } else if(isResultEvent){
+      _upgradePageState[areaName]='done';
+    } else if(isStartEvent){
+      _upgradePageState[areaName]='running';
+    }
+
+    // Find the matching page in our list
+    const p=_upgradePageList.find(x=>(x.area||x.areaDir)===areaName)
+          ||{areaDir:areaName,area:areaName,tier:e.tier||'cluster',score:null};
+
+    // Extract after score from result step "??→100/100 (elite)"
+    // e.g. "39→100/100 (elite)" → afterScore=100, afterStatus="elite"
+    let afterScore=null,afterStatus='';
+    if(isResultEvent&&e.step){
+      const arrowIdx=e.step.indexOf('→');
+      const slashIdx=e.step.indexOf('/100',arrowIdx);
+      const parenOpen=e.step.indexOf('(',slashIdx);
+      const parenClose=e.step.indexOf(')',parenOpen);
+      if(arrowIdx>=0&&slashIdx>arrowIdx){
+        afterScore=parseInt(e.step.slice(arrowIdx+1,slashIdx))||null;
+        if(parenOpen>0&&parenClose>parenOpen) afterStatus=e.step.slice(parenOpen+1,parenClose);
+      }
+    }
+
+    // Update or insert the card
+    const state=_upgradePageState[areaName]||'waiting';
+    const cardHtml=upgradePageCard(p,state,afterScore,afterStatus,isFtp);
+    const existing=document.getElementById('upgcard-'+p.areaDir);
+    if(existing){
+      existing.outerHTML=cardHtml;
+    } else if(isStartEvent){
+      // Page not in original list (e.g. campaign upgraded more than shown)
+      pagesEl.insertAdjacentHTML('beforeend',cardHtml);
+    }
+  });
+
+  // Update progress bar and label
+  const done=Object.values(_upgradePageState).filter(s=>s==='done'||s==='failed').length;
+  const running=Object.values(_upgradePageState).filter(s=>s==='running').length;
+  const total=Math.max(_upgradeTotal,Object.keys(_upgradePageState).length);
+  const pct=total>0?Math.round(done/total*100):0;
+  $('upgrade-progress-bar').style.width=Math.min(pct,100)+'%';
+
+  if(job.status==='done'||job.status==='error'||job.status==='cancelled'){
+    $('upgrade-progress-bar').style.width='100%';
+    const failed=Object.values(_upgradePageState).filter(s=>s==='failed').length;
+    $('upgrade-progress-label').textContent=job.status==='cancelled'
+      ?'Upgrade cancelled.'
+      :'Done — '+done+' of '+total+' upgraded'+(failed?' ('+failed+' failed)':'')+'.';
+    if(job.log&&job.log.results) upgradeShowResults(job.log);
+    // Auto-rescan all pages if this was a Fix All job
+    if(_ppFixAll&&job.status==='done'){
+      _ppFixAll=false;
+      setTimeout(function(){
+        ppShowToast('⚡ Fix All complete — running fresh QA scan…');
+        switchTab('qa');
+        runPrePublishQa();
+      },1000);
+    }
+    // Auto-recheck a single page if triggered from "Fix This Page" in QA panel
+    else if(_ppFixSourceIdx!=null&&_upgradePageList.length===1&&job.status==='done'){
+      const _fixAreaDir=_upgradePageList[0].areaDir;
+      const _fixIdx=_ppFixSourceIdx;
+      _ppFixSourceIdx=null;
+      setTimeout(function(){ ppAutoRecheck(_fixIdx,_fixAreaDir); },600);
+    }
+  } else {
+    const currentPage=events.slice().reverse().find(e=>_upgradePageState[e.area||'']===('running'));
+    const currentName=currentPage?(currentPage.area||''):'';
+    $('upgrade-progress-label').textContent='Upgrading page '+(done+running)+' of '+total
+      +(currentName?' — '+currentName:'')+'…';
+  }
+}
+
+function upgradeShowResults(summary){
+  const upgraded=summary.upgraded,failed=summary.failed,total=summary.total;
+  $('upgrade-progress-label').textContent='Done — '+upgraded+' of '+total+' upgraded'+(failed?' ('+failed+' failed)':'')+'.'
+
+  // Build a prominent score-change summary banner
+  const successPages=(summary.results||[]).filter(r=>r.success&&r.afterScore!==null);
+  const bannerParts=successPages.map(r=>{
+    const delta=r.afterScore!==null&&r.beforeScore!==null?r.afterScore-r.beforeScore:null;
+    const deltaLabel=delta!==null&&delta>0?' (+'+delta+' pts)':'';
+    return esc(r.area||r.areaDir)+': '+(r.beforeScore!=null?r.beforeScore:'?')+' → '+r.afterScore+deltaLabel;
+  });
+  const banner=$('upgrade-results-banner');
+  if(banner){
+    banner.innerHTML=bannerParts.length
+      ?'<strong style="margin-right:6px">Score changes:</strong>'+bannerParts.join(' &nbsp;·&nbsp; ')
+      :'';
+    banner.style.display=bannerParts.length?'block':'none';
+  }
+
+  const rows=(summary.results||[]).map(r=>{
+    const before=r.beforeScore;
+    const after=r.afterScore;
+    const delta=after!==null&&before!==null?after-before:null;
+    const deltaStr=delta===null?'—':delta>0?'<span style="color:#059669;font-weight:700">+'+delta+'</span>':delta===0?'<span style="color:#94a3b8">0</span>':'<span style="color:#dc2626">'+delta+'</span>';
+    const blocked=r.publishBlocked?'<span style="margin-left:5px;font-size:.72rem;color:#dc2626;font-weight:700">BLOCKED</span>':'';
+    const issues=r.blockingIssues&&r.blockingIssues.length?'<div style="font-size:.72rem;color:#dc2626;margin-top:2px">'+esc(r.blockingIssues.slice(0,2).join(' · '))+'</div>':'';
+    const warningNote=r.warnings&&r.warnings.length&&!r.blockingIssues.length?'<div style="font-size:.72rem;color:#b45309;margin-top:2px">'+esc(r.warnings.slice(0,1).join(''))+'</div>':'';
+    const resultCell=r.success
+      ?(r.publishBlocked?'<span style="color:#dc2626;font-weight:700;font-size:.82rem">BLOCKED</span>':after>=90?'<span style="color:#059669;font-weight:700;font-size:.82rem">✓ Elite</span>':'<span style="color:#b45309;font-weight:600;font-size:.82rem">Review</span>')
+      :'<span style="color:#dc2626;font-size:.78rem" title="'+esc(r.error||'')+'">Failed</span>';
+    const tier=r.tier||'cluster';
+    const tc=tier==='hub'?'#7c3aed':tier==='secondary'?'#0369a1':'#374151';
+    const tbg=tier==='hub'?'#ede9fe':tier==='secondary'?'#dbeafe':'#f1f5f9';
+    return \`<tr>
+      <td>
+        <span style="font-size:.84rem;font-weight:600;color:#1e3a5f">\${esc(r.area||r.areaDir)}</span>
+        <div style="font-size:.7rem;color:#94a3b8">\${esc(r.areaDir)}</div>
+        \${issues}\${warningNote}
+      </td>
+      <td><span style="font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:10px;background:\${tbg};color:\${tc}">\${tier}</span></td>
+      <td>\${upgradeScoreBadge(before,'')}</td>
+      <td>\${upgradeScoreBadge(after,r.afterStatus)}\${blocked}</td>
+      <td style="text-align:center">\${deltaStr}</td>
+      <td>\${resultCell}</td>
+    </tr>\`;
+  }).join('');
+  $('upgrade-results-tbody').innerHTML=rows||'<tr><td colspan="6" style="text-align:center;color:#94a3b8">No results</td></tr>';
+  $('upgrade-results-title').textContent='Upgrade complete — '+upgraded+'/'+total+' upgraded'+(failed?', '+failed+' failed':'');
+  show('upgrade-results-wrap');
+  // Do NOT auto-refresh the list — user clicks "Scan for more" when ready
+}
+
+async function upgradeCancel(){
+  if(!_upgradeJobId) return;
+  try{ await apiFetch('/api/rollout/cancel/'+_upgradeJobId,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}); }catch(_){}
+}
+
+async function rerenderAllPages(){
+  if(!activeSlug){alert('Select a project first');return;}
+  const btn=$('rerender-btn');
+  const status=$('rerender-status');
+  if(btn){btn.disabled=true;btn.textContent='Adding AI Blocks…';}
+  show('rerender-status');
+  if(status) status.textContent='Injecting AI citation blocks into all pages…';
+  try{
+    const r=await apiFetch('/api/rerender/'+enc(activeSlug),{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Request failed');
+    const enhanced=(d.results||[]).filter(x=>x.result==='enhanced').length;
+    const already=(d.results||[]).filter(x=>x.result==='already-enhanced').length;
+    const defOnly=(d.results||[]).filter(x=>x.result&&x.result.indexOf('definition-only')===0).length;
+    const noContent=(d.results||[]).filter(x=>x.result==='no-content-extracted').length;
+    const errs=(d.results||[]).filter(x=>x.result&&x.result.indexOf('error')===0).length;
+    if(status){
+      status.style.background='#f0fdf4';
+      status.style.border='1px solid #86efac';
+      status.innerHTML='<strong style="color:#059669">Done!</strong> '
+        +enhanced+' pages enhanced with full AI blocks'
+        +(already?' · '+already+' already complete':'')
+        +(defOnly?' · <span style="color:#b45309">'+defOnly+' have definitions only — upgrade those pages to add Q&amp;A blocks</span>':'')
+        +(noContent?' · '+noContent+' skipped (no extractable content)':'')
+        +(errs?' · <span style="color:#dc2626">'+errs+' errors</span>':'')
+        +'.<br><span style="font-size:.76rem;color:#065f46">Definition blocks appear below the AI summary on all enhanced pages. Q&amp;A citable blocks appear before the CTA on fully upgraded pages.</span>';
+    }
+  }catch(e){
+    if(status){
+      status.style.background='#fef2f2';
+      status.style.border='1px solid #fca5a5';
+      status.innerHTML='<strong style="color:#dc2626">Failed:</strong> '+esc(e.message||String(e));
+    }
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='\u26A1 Add AI Blocks to All Pages';}
+  }
+}
+
+// ── Push Images to FTP ────────────────────────────────────────────
+async function pushImagesToServer(){
+  if(!activeSlug) return;
+  const btn=$('push-images-btn');
+  const status=$('push-images-status');
+  if(!status) return;
+  if(btn){ btn.disabled=true; btn.textContent='Uploading…'; }
+  status.className='';
+  status.style.background='#f8fafc';
+  status.style.border='1px solid #e2e8f0';
+  status.style.color='#1e3a5f';
+  status.textContent='Connecting to FTP and uploading images…';
+  try{
+    const res=await apiFetch('/api/images/push-assets/'+enc(activeSlug),{method:'POST',headers:{'Content-Type':'application/json','X-Internal-Token':INTERNAL_TOKEN}});
+    if(!res.ok){ const t=await res.text(); throw new Error(t); }
+    const d=await res.json();
+    const rows=d.results.map(r=>'<li style="margin:3px 0"><strong>'+esc(r.slot)+'</strong> ('+esc(r.file)+'): '+esc(r.status)+(r.error?' — '+esc(r.error):'')).join('');
+    if(d.failed>0){
+      status.style.background='#fef2f2';
+      status.style.border='1px solid #fca5a5';
+      status.innerHTML='<strong style="color:#dc2626">'+d.failed+' image(s) failed to upload</strong><ul style="margin:4px 0 0 16px">'+rows+'</ul>';
+    } else {
+      status.style.background='#f0fdf4';
+      status.style.border='1px solid #a7f3d0';
+      status.innerHTML='<strong style="color:#065f46">&#10003; '+d.uploaded+' image(s) uploaded successfully</strong><ul style="margin:4px 0 0 16px">'+rows+'</ul>';
+    }
+  }catch(e){
+    status.style.background='#fef2f2';
+    status.style.border='1px solid #fca5a5';
+    status.innerHTML='<strong style="color:#dc2626">Failed:</strong> '+esc(e.message||String(e));
+  }finally{
+    if(btn){ btn.disabled=false; btn.textContent='Push Images Live'; }
+  }
+}
+
+// ── Keyword Tracking ──────────────────────────────────────────────
+async function ktRefresh(){
+  if(!activeSlug) return;
+  hide('kt-error');
+  try{
+    const res=await apiFetch(\`/api/keyword-tracking?projectSlug=\${enc(activeSlug)}\`);
+    const data=await res.json();
+    renderKT(data.report||null,data.availableTargets||0);
+  }catch(e){ $('kt-error').textContent='Failed: '+e.message; show('kt-error'); }
+}
+
+function renderKT(report,availableTargets){
+  availableTargets=availableTargets||0;
+  const hasData=report&&report.records&&report.records.length;
+  if(!hasData){
+    const readyMsg=availableTargets>0
+      ? availableTargets+' keyword'+(availableTargets===1?'':'s')+' ready to track — click Run Keyword Check to get rankings.'
+      : 'No ranking data — click Run Keyword Check.';
+    set('kt-empty',readyMsg);
+    show('kt-empty'); hide('kt-table-wrap'); hide('kt-overview-wrap');
+    show('kt-overview-empty'); updateKTOv(null); return; }
+  hide('kt-empty'); show('kt-table-wrap');
+  updateKTOv(report);
+  set('kt-run-info','Last: '+fmtDateTime(report.runAt)+' · '+report.totalKeywords+' keywords');
+  set('kt-overview-info',report.totalKeywords+' keywords');
+  set('tb-rankings',report.totalKeywords);
+
+  const sorted=[...report.records].sort((a,b)=>{
+    if(a.position!==null&&b.position!==null) return a.position-b.position;
+    if(a.position!==null) return -1; if(b.position!==null) return 1;
+    return a.keyword.localeCompare(b.keyword);
+  });
+  $('kt-tbody').innerHTML=sorted.map(r=>{
+    const urlShort=r.targetUrl.replace(/^https?:\\/\\//,'');
+    return \`<tr>
+      <td style="font-weight:600">\${esc(r.keyword)}</td>
+      <td>\${posCell(r.position)}</td>
+      <td>\${chgCell(r)}</td>
+      <td><a href="\${esc(r.targetUrl)}" target="_blank"
+        style="color:var(--brand);font-family:monospace;font-size:.78rem">\${esc(urlShort)}</a></td>
+      <td style="white-space:nowrap;color:var(--muted);font-size:.8rem">\${fmtDate(r.lastCheckedAt)}</td>
+    </tr>\`;
+  }).join('');
+
+  // Overview mini-table (top 5 or first 5)
+  const top5=sorted.slice(0,6);
+  $('kt-overview-tbody').innerHTML=top5.map(r=>\`<tr>
+    <td style="font-weight:600;font-size:.82rem">\${esc(r.keyword)}</td>
+    <td>\${posCell(r.position)}</td>
+    <td>\${chgCell(r)}</td>
+  </tr>\`).join('');
+  hide('kt-overview-empty'); show('kt-overview-wrap');
+}
+
+function updateKTOv(report){
+  if(!report){ set('ov-ranked','—'); set('ov-top10','—'); return; }
+  set('ov-ranked',report.ranked);
+  set('ov-top10',report.records.filter(r=>r.position!==null&&r.position<=10).length);
+}
+
+async function ktRunCheck(){
+  if(!activeSlug||isRunning) return;
+  const btns=['btn-run-kt','btn-kt-run'];
+  const resetBtns=()=>btns.forEach(id=>{ const el=$(id); if(el){el.disabled=false;el.textContent=id==='btn-kt-run'?'Run Keyword Check':'Keyword Check';} });
+  btns.forEach(id=>{ const el=$(id); if(el){el.disabled=true;el.textContent='Starting…';} });
+  show('kt-running'); hide('kt-error');
+  set('kt-running','Starting keyword check…');
+  try{
+    // Start async job
+    const startRes=await apiFetch('/api/keyword-tracking/run',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({projectSlug:activeSlug,delayMs:2500}),
+    });
+    const startData=await startRes.json();
+    if(!startRes.ok||!startData.jobId){
+      $('kt-error').textContent=startData.error||'Failed to start keyword check';
+      show('kt-error'); return;
+    }
+    const jobId=startData.jobId;
+    const total=startData.total||0;
+    // Poll until done
+    while(true){
+      await new Promise(r=>setTimeout(r,3000));
+      const pollRes=await apiFetch(\`/api/keyword-tracking/job/\${jobId}\`);
+      const poll=await pollRes.json();
+      if(poll.status==='running'){
+        const done=poll.progress?.done||0;
+        const tot=poll.progress?.total||total;
+        const cur=poll.progress?.current||'';
+        const pct=tot>0?Math.round(done/tot*100):0;
+        set('kt-running',\`Checking… \${done}/\${tot} (\${pct}%)\${cur?' — '+cur:''}\`);
+        btns.forEach(id=>{ const el=$(id); if(el) el.textContent=\`\${done}/\${tot}\`; });
+        continue;
+      }
+      if(poll.status==='done'){
+        if(poll.report) renderKT(poll.report, poll.report.totalKeywords||0);
+        break;
+      }
+      if(poll.status==='error'){
+        $('kt-error').textContent=poll.error||'Keyword check failed'; show('kt-error'); break;
+      }
+      break;
+    }
+  }catch(e){ $('kt-error').textContent='Request failed: '+e.message; show('kt-error'); }
+  finally{ resetBtns(); hide('kt-running'); set('kt-running',''); }
+}
+
+// ── Index Tracking ────────────────────────────────────────────────
+async function itRefresh(){
+  if(!activeSlug) return;
+  hide('it-error');
+  try{
+    const res=await apiFetch(\`/api/index-tracking?projectSlug=\${enc(activeSlug)}\`);
+    const data=await res.json();
+    renderIT(data.report||null);
+  }catch(e){ $('it-error').textContent='Failed: '+e.message; show('it-error'); }
+}
+
+function renderIT(report){
+  const hasData=report&&report.records.length;
+  if(!hasData){ show('it-empty'); hide('it-table-wrap'); hide('it-overview-wrap');
+    show('it-overview-empty'); updateITOv(null); return; }
+  hide('it-empty'); show('it-table-wrap');
+  updateITOv(report);
+  const total=(report.indexedCount||0)+(report.notIndexedCount||0)+(report.unknownCount||0);
+  set('it-run-info','Last: '+fmtDateTime(report.runAt)+' · '+total+' pages');
+  set('it-overview-info',total+' pages');
+  set('tb-index',total);
+
+  const order={indexed:0,not_indexed:1,unknown:2};
+  const sorted=[...report.records].sort((a,b)=>(order[a.status]||2)-(order[b.status]||2));
+  $('it-tbody').innerHTML=sorted.map(r=>{
+    const lbl=r.status==='not_indexed'?'Not Indexed':r.status.charAt(0).toUpperCase()+r.status.slice(1);
+    const urlShort=r.url.replace(/^https?:\\/\\//,'');
+    return \`<tr>
+      <td><a href="\${esc(r.url)}" target="_blank"
+        style="color:var(--brand);font-family:monospace;font-size:.78rem">\${esc(urlShort)}</a></td>
+      <td><span class="badge badge-\${r.status}">\${lbl}</span></td>
+      <td style="white-space:nowrap;color:var(--muted);font-size:.8rem">\${fmtDate(r.lastCheckedAt)}</td>
+      <td style="white-space:nowrap;color:var(--muted);font-size:.8rem">\${fmtDate(r.firstDetectedIndexedAt)}</td>
+    </tr>\`;
+  }).join('');
+
+  // Overview mini-table
+  const top6=sorted.slice(0,6);
+  $('it-overview-tbody').innerHTML=top6.map(r=>{
+    const lbl=r.status==='not_indexed'?'Not Indexed':r.status.charAt(0).toUpperCase()+r.status.slice(1);
+    const urlShort=r.url.replace(/^https?:\\/\\/[^/]+/,'');
+    return \`<tr>
+      <td style="font-family:monospace;font-size:.78rem;color:var(--brand)">\${esc(urlShort)}</td>
+      <td><span class="badge badge-\${r.status}">\${lbl}</span></td>
+    </tr>\`;
+  }).join('');
+  hide('it-overview-empty'); show('it-overview-wrap');
+}
+
+function updateITOv(report){
+  if(!report){ set('ov-indexed','—'); set('ov-indexed-sub','GSC Verified'); set('ov-notindexed','—'); return; }
+  const total=(report.indexedCount||0)+(report.notIndexedCount||0)+(report.unknownCount||0);
+  set('ov-indexed',report.indexedCount);
+  const runDate=report.runAt?new Date(report.runAt).toLocaleDateString():'';
+  set('ov-indexed-sub','GSC Verified'+(runDate?' · '+runDate:''));
+  set('ov-notindexed',report.notIndexedCount);
+  // Add tooltip explaining this is GSC URL Inspection data
+  const el=$('ov-indexed');
+  if(el) el.title='Verified via Google Search Console URL Inspection API. Checked '+total+' pages. Re-run Index Check for fresh data.';
+}
+
+async function itRunCheck(){
+  if(!activeSlug||isRunning) return;
+  const btns=['btn-run-it','btn-it-run'];
+  btns.forEach(id=>{ const el=$(id); if(el){el.disabled=true;el.textContent='Running…';} });
+  const runLbl=$('it-running');
+  if(runLbl) runLbl.textContent='Running via Google Search Console API… usually 30-60 seconds';
+  show('it-running'); hide('it-error');
+  try{
+    // Start async job — returns immediately
+    const startRes=await apiFetch('/api/index-tracking/run',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({projectSlug:activeSlug,limit:200,delayMs:300}),
+    });
+    const {jobId,error:startErr}=await startRes.json();
+    if(!jobId){ $('it-error').textContent=startErr||'Failed to start job'; show('it-error'); return; }
+    // Poll until done
+    let done=false;
+    while(!done){
+      await new Promise(r=>setTimeout(r,4000));
+      const pollRes=await apiFetch('/api/index-tracking/job/'+jobId);
+      const poll=await pollRes.json();
+      if(poll.status==='done'){
+        done=true;
+        if(poll.report) renderIT(poll.report);
+        else{ $('it-error').textContent='Run completed but no report returned'; show('it-error'); }
+      } else if(poll.status==='error'){
+        done=true;
+        $('it-error').textContent=poll.error||'Run failed'; show('it-error');
+      } else {
+        if(runLbl) runLbl.textContent='Running\u2026 '+(poll.elapsed||0)+'s elapsed (checking all pages)';
+      }
+    }
+  }catch(e){ $('it-error').textContent='Request failed: '+e.message; show('it-error'); }
+  finally{
+    btns.forEach(id=>{ const el=$(id); if(el){el.disabled=false;el.textContent=id==='btn-it-run'?'Run Index Check':'Index Check';} });
+    if(runLbl) runLbl.textContent='Running via Google Search Console API… checking all pages';
+    hide('it-running');
+  }
+}
+
+async function itCopyNotIndexed(){
+  const rows=document.querySelectorAll('#it-tbody tr');
+  const urls=[];
+  rows.forEach(row=>{
+    const badge=row.querySelector('.badge');
+    if(badge&&badge.textContent.includes('Not Indexed')){
+      const a=row.querySelector('a'); if(a) urls.push(a.href);
+    }
+  });
+  if(!urls.length){ alert('No Not-Indexed URLs found.'); return; }
+  try{
+    await navigator.clipboard.writeText(urls.join('\\n'));
+    const btn=$('btn-it-copy'); const orig=btn.textContent;
+    btn.textContent='✓ Copied '+urls.length; setTimeout(()=>btn.textContent=orig,2000);
+  }catch(_){ alert(urls.join('\\n')); }
+}
+
+// ── Run All ───────────────────────────────────────────────────────
+async function runAll(){
+  if(!activeSlug||isRunning) return;
+  isRunning=true;
+  const btn=$('btn-run-all'); btn.disabled=true; btn.textContent='Running…';
+  show('loading-overlay'); $('loading-text').textContent='Running all checks…';
+  try{
+    await qaRefresh();
+    hide('loading-overlay');
+    await ktRunCheck();
+    await itRunCheck();
+  }finally{
+    isRunning=false; btn.disabled=false; btn.textContent='▶ Run All Checks';
+    hide('loading-overlay');
+  }
+}
+
+// ── Sitemaps tab ─────────────────────────────────────────────────────────
+async function smLoad(){
+  try{
+    const res=await apiFetch('/api/sitemap-registry');
+    const data=await res.json();
+    smRender(data.entries||[]);
+  }catch(e){ $('sm-error').textContent='Failed to load: '+e.message; show('sm-error'); }
+}
+
+function smRender(entries){
+  const smBadge=$('tb-sitemaps'); if(smBadge) smBadge.textContent=entries.length||'—';
+  if(!entries.length){
+    show('sm-empty'); hide('sm-table-wrap'); return;
+  }
+  hide('sm-empty'); show('sm-table-wrap');
+  // Sort: submitted entries first (most recent submission), then unsubmitted newest first
+  const sortedEntries=[...entries].sort((a,b)=>{
+    if(a.lastSubmittedAt&&!b.lastSubmittedAt) return -1;
+    if(!a.lastSubmittedAt&&b.lastSubmittedAt) return 1;
+    if(a.lastSubmittedAt&&b.lastSubmittedAt) return new Date(b.lastSubmittedAt).getTime()-new Date(a.lastSubmittedAt).getTime();
+    return new Date(b.addedAt).getTime()-new Date(a.addedAt).getTime();
+  });
+  $('sm-tbody').innerHTML=sortedEntries.map(e=>{
+    const submittedLabel = e.lastSubmittedAt
+      ? \`<span style="color:var(--success);font-weight:600">✓ \${fmtDate(e.lastSubmittedAt)}</span>\`
+      : \`<span style="color:var(--muted)">Never</span>\`;
+    const shortUrl = e.sitemapUrl.replace(/^https?:\\/\\//,'');
+    return \`<tr>
+      <td style="font-weight:600">\${esc(e.projectName)}</td>
+      <td><a href="\${esc(e.sitemapUrl)}" target="_blank" style="color:var(--brand);font-family:monospace;font-size:.8rem">\${esc(shortUrl)}</a></td>
+      <td style="white-space:nowrap;color:var(--muted);font-size:.8rem">\${fmtDate(e.addedAt)}</td>
+      <td>\${submittedLabel}</td>
+      <td>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" onclick="smSubmit('\${esc(e.id)}',this)">Submit to GSC</button>
+          <button class="btn btn-secondary btn-sm" onclick="smDelete('\${esc(e.id)}',this)">Remove</button>
+        </div>
+      </td>
+    </tr>\`;
+  }).join('');
+}
+
+async function smSubmit(id, btn){
+  const orig=btn.textContent; btn.disabled=true; btn.textContent='Logging…';
+  try{
+    const res=await apiFetch(\`/api/sitemap-registry/\${id}/submit\`,{method:'POST'});
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.error||'Failed');
+    // Open GSC sitemaps page in new tab
+    window.open(data.gscUrl,'_blank');
+    await smLoad();
+  }catch(e){ alert('Error: '+e.message); }
+  finally{ btn.disabled=false; btn.textContent=orig; }
+}
+
+async function smDelete(id, btn){
+  if(!confirm('Remove this sitemap from the registry?')) return;
+  btn.disabled=true;
+  try{
+    const res=await apiFetch(\`/api/sitemap-registry/\${id}\`,{method:'DELETE'});
+    if(!res.ok) throw new Error('Delete failed');
+    await smLoad();
+  }catch(e){ alert('Error: '+e.message); btn.disabled=false; }
+}
+
+async function smAdd(){
+  const nameEl=$('sm-add-name'), urlEl=$('sm-add-url');
+  const projectName=nameEl.value.trim(), sitemapUrl=urlEl.value.trim();
+  if(!projectName||!sitemapUrl){ alert('Enter both a project name and sitemap URL.'); return; }
+  if(!sitemapUrl.startsWith('http')){ alert('Sitemap URL must start with https://'); return; }
+  const btn=$('sm-add-btn'); btn.disabled=true; btn.textContent='Adding…';
+  try{
+    const res=await apiFetch('/api/sitemap-registry',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({projectName,sitemapUrl}),
+    });
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.error||'Failed');
+    nameEl.value=''; urlEl.value='';
+    await smLoad();
+  }catch(e){ alert('Error: '+e.message); }
+  finally{ btn.disabled=false; btn.textContent='Add Sitemap'; }
+}
+
+document.addEventListener('DOMContentLoaded', initProjects);
+
+// Sync stage pill highlight when the wizard navigates internally (Next/Back/circles)
+window.addEventListener('message', function(e){
+  if(!e.data) return;
+  if(e.data.type==='wizardStageChange'){
+    currentWizardStage=e.data.stage;
+    highlightStagePill(e.data.stage);
+  }
+  // Wizard "← Dashboard" button clicked from inside iframe — switch to overview tab
+  if(e.data.type==='wizard-nav' && e.data.action==='show-overview'){
+    switchTab('overview');
+    loadAll();
+  }
+});
+
+// patch switchTab to load data-driven tabs on first visit
+const _origSwitch=switchTab;
+switchTab=function(tab){
+  _origSwitch(tab);
+  if(tab==='sitemaps')  smLoad();
+  if(tab==='templates'){ templatesLoad(); }
+};
+</script>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Sitemaps                                          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-sitemaps">
+  <div class="main">
+
+    <!-- Add new sitemap -->
+    <div class="section">
+      <div class="section-head">
+        <h2>Add Sitemap</h2>
+        <span class="section-sub">Register a sitemap for any project so you can quickly resubmit it to Google Search Console later</span>
+      </div>
+      <div class="section-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end">
+          <div>
+            <label style="font-size:.78rem;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">PROJECT NAME</label>
+            <input id="sm-add-name" type="text" placeholder="e.g. InboxingProWeb — Rotherham"
+              style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:.875rem">
+          </div>
+          <div>
+            <label style="font-size:.78rem;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">SITEMAP URL</label>
+            <input id="sm-add-url" type="url" placeholder="https://local.example.com/sitemap.xml"
+              style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:.875rem">
+          </div>
+          <button id="sm-add-btn" class="btn btn-primary" onclick="smAdd()" style="height:38px">Add Sitemap</button>
+        </div>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:8px">
+          Existing projects with submitted sitemaps are imported automatically.
+          Clicking <strong>Submit to GSC</strong> opens the exact Google Search Console Sitemaps page for that property — paste the URL there and click Submit.
+        </p>
+      </div>
+    </div>
+
+    <!-- Registry table -->
+    <div class="section">
+      <div class="section-head">
+        <h2>Sitemap Registry</h2>
+        <button class="btn btn-secondary btn-sm" onclick="smLoad()" style="margin-left:auto">↻ Refresh</button>
+      </div>
+      <div class="section-body">
+        <div id="sm-error" class="alert alert-error hidden"></div>
+        <div id="sm-empty" class="empty">No sitemaps registered yet — add one above or complete the Search Console step in the setup wizard.</div>
+        <div id="sm-table-wrap" class="table-wrap hidden">
+          <table>
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Sitemap URL</th>
+                <th>Added</th>
+                <th>Last Submitted</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="sm-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info" style="margin-top:4px">
+      <strong>How resubmission works:</strong> Click <strong>Submit to GSC</strong> — this logs the submission here and opens the Google Search Console Sitemaps page for that property in a new tab.
+      Paste the sitemap URL into the "Add a new sitemap" box there and click Submit. Google will recrawl within a few days.
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: System Health                                     -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-system-health">
+  <div class="main">
+
+    <!-- Actions -->
+    <div class="actions" style="flex-wrap:wrap;gap:8px">
+      <button class="btn btn-primary" id="btn-sh-run" onclick="shRun()" disabled>&#9654; Run Full Audit</button>
+      <button class="btn btn-secondary" id="btn-sh-json" onclick="shExport('json')" style="display:none">&#8659; JSON Report</button>
+      <button class="btn btn-secondary" id="btn-sh-csv" onclick="shExport('csv')" style="display:none">&#8659; CSV Report</button>
+      <span id="sh-running" class="running-label hidden"></span>
+    </div>
+
+    <!-- Indexing note -->
+    <div id="sh-index-note" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:.83rem;color:#1e3a5f;line-height:1.5"></div>
+
+    <!-- Offline mode notice -->
+    <div id="sh-offline-banner" style="display:none;background:#f0f9ff;border:1px solid #7dd3fc;border-radius:8px;padding:10px 16px;margin-bottom:14px;font-size:.83rem;color:#0c4a6e">
+      <strong>&#9888; Site currently offline</strong> — Results are based on your <strong>local output files</strong>, not the live site. HTTP status, broken links and image checks are skipped. Run again once the site is back up for a full live audit.
+    </div>
+
+    <!-- Overall status banner -->
+    <div id="sh-gate-pass" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;margin-bottom:14px;align-items:center;gap:10px">
+      <span style="color:#16a34a;font-size:1.2rem">&#10003;</span>
+      <span style="font-size:.9rem;font-weight:700;color:#166534">All checks passed — site is healthy and ready to deploy.</span>
+    </div>
+    <div id="sh-gate-warn" style="display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin-bottom:14px">
+      <span style="font-weight:700;color:#b45309">&#9888; Warnings found</span>
+      <span id="sh-gate-warn-text" style="font-size:.85rem;color:#78350f;margin-left:8px"></span>
+    </div>
+    <div id="sh-gate-fail" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px 16px;margin-bottom:14px">
+      <span style="font-weight:700;color:#dc2626">&#9888; Audit FAILED</span>
+      <span id="sh-gate-fail-text" style="font-size:.85rem;color:#7f1d1d;margin-left:8px"></span>
+    </div>
+
+    <!-- Summary stats -->
+    <div id="sh-stats-grid" style="display:none;gap:10px;margin-bottom:18px">
+      <div class="ov-card"><div class="ov-label">Pages Crawled</div><div class="ov-value blue"  id="sh-s-total">—</div></div>
+      <div class="ov-card"><div class="ov-label">Live OK</div>      <div class="ov-value green" id="sh-s-ok">—</div></div>
+      <div class="ov-card"><div class="ov-label">404 Errors</div>   <div class="ov-value red"   id="sh-s-404">—</div></div>
+      <div class="ov-card"><div class="ov-label">Broken Links</div> <div class="ov-value red"   id="sh-s-links">—</div></div>
+      <div class="ov-card"><div class="ov-label">Broken Images</div><div class="ov-value red"   id="sh-s-imgs">—</div></div>
+      <div class="ov-card"><div class="ov-label">Preview URLs</div> <div class="ov-value red"   id="sh-s-prev">—</div></div>
+      <div class="ov-card"><div class="ov-label">GSC Indexed</div>  <div class="ov-value green" id="sh-s-gsc">—</div><div class="ov-sub" id="sh-s-gsc-sub">verified</div></div>
+      <div class="ov-card"><div class="ov-label">Thin Content</div> <div class="ov-value red"   id="sh-s-thin">—</div></div>
+      <div class="ov-card"><div class="ov-label">No Schema</div>    <div class="ov-value red"   id="sh-s-schema">—</div></div>
+      <div class="ov-card"><div class="ov-label">Placeholders</div> <div class="ov-value red"   id="sh-s-ph">—</div></div>
+    </div>
+
+    <!-- Issue filter tabs -->
+    <div id="sh-filter-bar" style="display:none;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+      <button class="sh-filter-btn active" onclick="shFilter('all',this)">All Issues</button>
+      <button class="sh-filter-btn" onclick="shFilter('Broken Internal Link',this)">Broken Links</button>
+      <button class="sh-filter-btn" onclick="shFilter('Broken Image',this)">Images</button>
+      <button class="sh-filter-btn" onclick="shFilter('Schema',this)">Schema</button>
+      <button class="sh-filter-btn" onclick="shFilter('Profile',this)">Profile</button>
+      <button class="sh-filter-btn" onclick="shFilter('Content',this)">Content</button>
+      <button class="sh-filter-btn" onclick="shFilter('fail',this)">Fails Only</button>
+    </div>
+
+    <!-- Issues table -->
+    <div class="section" id="sh-issues-section" style="display:none">
+      <div class="section-head">
+        <h2>Issues</h2>
+        <div class="section-sub" id="sh-issues-sub"></div>
+      </div>
+      <div class="section-body">
+        <div class="table-wrap" style="max-height:360px;overflow-y:auto">
+          <table id="sh-issues-table">
+            <thead><tr><th>Sev</th><th>Type</th><th>Page</th><th>Evidence</th><th>Fix</th><th>Action</th></tr></thead>
+            <tbody id="sh-issues-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pages detail table -->
+    <div class="section" id="sh-pages-section" style="display:none">
+      <div class="section-head">
+        <h2>Page-by-Page Results</h2>
+        <div class="section-sub" id="sh-pages-sub"></div>
+        <button id="btn-sh-fix-all" onclick="shFixAllPages(this)" style="display:none;margin-left:auto;font-size:.78rem;font-weight:700;padding:5px 14px;border-radius:6px;border:1.5px solid #dc2626;background:#dc2626;color:#fff;cursor:pointer;white-space:nowrap">&#9881; Fix All Pages</button>
+      </div>
+      <div class="section-body">
+        <div class="table-wrap" style="max-height:420px;overflow-y:auto">
+          <table>
+            <thead><tr><th>Status</th><th>URL</th><th>HTTP</th><th>Words</th><th>Title</th><th>H1</th><th>Schema</th><th>Br.Links</th><th>Br.Imgs</th><th>Actions</th></tr></thead>
+            <tbody id="sh-pages-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- All clear -->
+    <div id="sh-all-clear" style="display:none;text-align:center;padding:36px 20px;color:var(--muted)">
+      <div style="font-size:2rem;margin-bottom:8px">&#10003;</div>
+      <div style="font-weight:600;color:#16a34a;margin-bottom:4px">No issues found</div>
+      <div style="font-size:.85rem">All pages passed every check.</div>
+    </div>
+
+    <!-- Empty state -->
+    <div id="sh-empty" class="empty">Click "Run Full Audit" to check every page for 404s, broken links, missing SEO tags, schema errors, placeholder tokens, and more. Works from local files if the live site is offline.</div>
+    <div id="sh-error" class="alert alert-error hidden"></div>
+
+    <!-- ══ SECURITY & INTEGRITY SCAN ══════════════════════════════════════════ -->
+    <div style="border-top:2px solid #e5e7eb;margin-top:28px;padding-top:24px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+        <div>
+          <h2 style="margin:0;font-size:1.05rem;font-weight:700;color:#1e293b">&#128274; Security &amp; Integrity Scan</h2>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:2px">Detects malicious code, suspicious files, SEO spam injections, and unexpected file changes in your deployed output.</div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span id="ss-running" class="running-label hidden"></span>
+          <button class="btn btn-primary" id="btn-ss-run" onclick="ssRun()" disabled>&#9654; Run Security Scan</button>
+        </div>
+      </div>
+
+      <!-- Overall status banner -->
+      <div id="ss-gate-pass" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;margin-bottom:12px;display:none;align-items:center;gap:10px">
+        <span style="color:#16a34a;font-size:1.2rem">&#10003;</span>
+        <span style="font-size:.9rem;font-weight:700;color:#166534">All clear — no security issues detected.</span>
+      </div>
+      <div id="ss-gate-warn" style="display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin-bottom:12px">
+        <span style="font-weight:700;color:#b45309">&#9888; Warnings detected — review recommended</span>
+        <span id="ss-gate-warn-text" style="font-size:.83rem;color:#78350f;margin-left:8px"></span>
+      </div>
+      <div id="ss-gate-fail" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:12px">
+        <span style="font-weight:700;color:#dc2626">&#9888; SECURITY ISSUES FOUND — immediate action required</span>
+        <span id="ss-gate-fail-text" style="font-size:.83rem;color:#7f1d1d;margin-left:8px"></span>
+      </div>
+
+      <!-- Stats grid -->
+      <div id="ss-stats-grid" style="display:none;gap:10px;margin-bottom:18px">
+        <div class="ov-card"><div class="ov-label">Files Scanned</div> <div class="ov-value blue"  id="ss-s-files">—</div></div>
+        <div class="ov-card"><div class="ov-label">Pages</div>         <div class="ov-value blue"  id="ss-s-pages">—</div></div>
+        <div class="ov-card"><div class="ov-label">Assets</div>        <div class="ov-value blue"  id="ss-s-assets">—</div></div>
+        <div class="ov-card"><div class="ov-label">Suspicious Files</div><div class="ov-value red" id="ss-s-suspicious">—</div></div>
+        <div class="ov-card"><div class="ov-label">Malicious Code</div><div class="ov-value red"  id="ss-s-malicious">—</div></div>
+        <div class="ov-card"><div class="ov-label">Injected Scripts</div><div class="ov-value red" id="ss-s-scripts">—</div></div>
+        <div class="ov-card"><div class="ov-label">SEO Injections</div><div class="ov-value red"  id="ss-s-seo">—</div></div>
+        <div class="ov-card"><div class="ov-label">Unexpected Changes</div><div class="ov-value red" id="ss-s-changes">—</div></div>
+      </div>
+
+      <!-- Scan meta -->
+      <div id="ss-meta" style="display:none;font-size:.78rem;color:var(--muted);margin-bottom:12px"></div>
+
+      <!-- Issues table -->
+      <div class="section" id="ss-issues-section" style="display:none">
+        <div class="section-head">
+          <h2>Security Issues</h2>
+          <div class="section-sub" id="ss-issues-sub"></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px 16px">
+          <button class="sh-filter-btn active" onclick="ssFilter('all',this)">All</button>
+          <button class="sh-filter-btn" onclick="ssFilter('fail',this)">Critical</button>
+          <button class="sh-filter-btn" onclick="ssFilter('malicious-code',this)">Malicious Code</button>
+          <button class="sh-filter-btn" onclick="ssFilter('suspicious-file',this)">Suspicious Files</button>
+          <button class="sh-filter-btn" onclick="ssFilter('external-script',this)">Ext. Scripts</button>
+          <button class="sh-filter-btn" onclick="ssFilter('seo-injection',this)">SEO Spam</button>
+          <button class="sh-filter-btn" onclick="ssFilter('file-modified',this)">Changed Files</button>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap" style="max-height:420px;overflow-y:auto">
+            <table id="ss-issues-table">
+              <thead><tr><th>Sev</th><th>Type</th><th>File / Page</th><th>Evidence</th><th>Suggested Fix</th><th>Action</th></tr></thead>
+              <tbody id="ss-issues-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="ss-autofix-bar" style="display:none;margin:12px 16px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-secondary" id="btn-ss-autofix" onclick="ssApplyAllFixes()" style="background:#dc2626;color:#fff;border-color:#dc2626">&#9881; Apply All Safe Fixes</button>
+          <span style="font-size:.78rem;color:var(--muted)">Safe fixes move files to a quarantine folder — nothing is permanently deleted.</span>
+        </div>
+      </div>
+
+      <!-- All clear -->
+      <div id="ss-all-clear" style="display:none;text-align:center;padding:24px 20px;color:var(--muted)">
+        <div style="font-size:2rem;margin-bottom:6px">&#128274;</div>
+        <div style="font-weight:600;color:#16a34a;margin-bottom:4px">No security issues found</div>
+        <div style="font-size:.83rem">All files, assets, and pages passed every security check.</div>
+      </div>
+
+      <!-- Empty state -->
+      <div id="ss-empty" style="text-align:center;padding:20px;color:var(--muted);font-size:.85rem">
+        Click "Run Security Scan" to check your deployed pages for malicious code, suspicious files, and SEO spam injections.
+      </div>
+      <div id="ss-error" class="alert alert-error hidden"></div>
+    </div>
+
+    <!-- ══ CAMPAIGN LINK INTEGRITY AUDIT ══════════════════════════════════ -->
+    <div style="border-top:2px solid #e5e7eb;margin-top:28px;padding-top:24px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+        <div>
+          <h2 style="margin:0;font-size:1.05rem;font-weight:700;color:#1e293b">&#128279; Campaign Link Integrity</h2>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:2px">Verifies every cluster-to-hub, hub-to-cluster, and cross-campaign link. Detects wrong hubs, bare slugs, non-existent targets, and missing money-page bands.</div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span id="li-running" class="running-label hidden"></span>
+          <button class="btn btn-primary" id="btn-li-run" onclick="liRun()" disabled>&#9654; Run Link Audit</button>
+          <button class="btn btn-secondary" id="btn-li-live" onclick="liLiveCheck()" disabled style="background:#7c3aed;color:#fff">&#127760; Live Money Check</button>
+          <button class="btn btn-secondary" id="btn-li-repair" onclick="liRepair()" style="display:none;background:#dc2626;color:#fff">&#128295; Fix &amp; Re-upload</button>
+        </div>
+      </div>
+
+      <div id="li-gate-pass" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;margin-bottom:12px;align-items:center;gap:10px">
+        <span style="color:#16a34a;font-size:1.2rem">&#10003;</span>
+        <span style="font-size:.9rem;font-weight:700;color:#166534">All campaign links are correct — zero integrity violations.</span>
+      </div>
+      <div id="li-gate-fail" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:12px">
+        <span style="font-weight:700;color:#dc2626">&#9888; Link integrity violations found</span>
+        <span id="li-gate-fail-text" style="font-size:.83rem;color:#7f1d1d;margin-left:8px"></span>
+      </div>
+      <div id="li-repair-banner" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;margin-bottom:12px">
+        <span style="font-weight:700;color:#16a34a">&#10003; Repair complete</span>
+        <span id="li-repair-text" style="font-size:.83rem;color:#166534;margin-left:8px"></span>
+      </div>
+
+      <div id="li-stats-grid" style="display:none;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:14px">
+        <div class="ov-card"><div class="ov-label">Campaigns</div>       <div class="ov-value blue"  id="li-s-camps">—</div></div>
+        <div class="ov-card"><div class="ov-label">Pages Checked</div>   <div class="ov-value blue"  id="li-s-pages">—</div></div>
+        <div class="ov-card"><div class="ov-label">Root Links</div>      <div class="ov-value red"   id="li-s-root">—</div></div>
+        <div class="ov-card"><div class="ov-label">Wrong Hub</div>       <div class="ov-value red"   id="li-s-hub">—</div></div>
+        <div class="ov-card"><div class="ov-label">Cross-Campaign</div>  <div class="ov-value red"   id="li-s-cross">—</div></div>
+        <div class="ov-card"><div class="ov-label">Bare Slugs</div>      <div class="ov-value red"   id="li-s-bare">—</div></div>
+        <div class="ov-card"><div class="ov-label">Non-existent</div>    <div class="ov-value red"   id="li-s-dead">—</div></div>
+        <div class="ov-card"><div class="ov-label">Missing Band</div>    <div class="ov-value red"   id="li-s-money">—</div></div>
+        <div class="ov-card"><div class="ov-label">Wrong $ Href</div>    <div class="ov-value red"   id="li-s-wrong-href">—</div></div>
+        <div class="ov-card"><div class="ov-label">No $ Link</div>       <div class="ov-value red"   id="li-s-no-link">—</div></div>
+        <div class="ov-card"><div class="ov-label">Cluster Band</div>    <div class="ov-value red"   id="li-s-cluster-band">—</div></div>
+      </div>
+
+      <!-- Live money-page check results panel -->
+      <div id="li-live-panel" style="display:none;margin-bottom:14px;border:1px solid #e9d5ff;border-radius:8px;padding:12px 14px;background:#faf5ff">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <span style="font-weight:700;font-size:.9rem;color:#7c3aed">&#127760; Live Money Page Audit</span>
+          <span id="li-live-summary" style="font-size:.8rem;color:#6b7280"></span>
+        </div>
+        <div class="table-wrap" style="max-height:280px;overflow-y:auto">
+          <table id="li-live-table">
+            <thead><tr><th>Hub</th><th>Live Status</th><th>Found Href</th><th>$ Page HTTP</th></tr></thead>
+            <tbody id="li-live-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="li-issues-section" style="display:none">
+        <div class="section-head" style="margin-bottom:10px">
+          <h3 style="margin:0;font-size:.95rem;font-weight:600">Issues Found</h3>
+        </div>
+        <div class="table-wrap" style="max-height:360px;overflow-y:auto">
+          <table id="li-issues-table">
+            <thead><tr><th>Page</th><th>Type</th><th>Found Href</th><th>Expected</th></tr></thead>
+            <tbody id="li-issues-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="li-empty" style="text-align:center;padding:20px;color:var(--muted);font-size:.85rem">
+        Click "Run Link Audit" to verify every campaign link is correctly scoped to its hub and clusters.
+      </div>
+      <div id="li-error" class="alert alert-error hidden"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Templates                                         -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-templates">
+  <div class="main">
+    <div class="section">
+      <div class="section-head">
+        <h2>Template Library</h2>
+        <span class="section-sub">Reusable page-block layouts — choose one per project in the Setup Wizard</span>
+        <a href="/api/generate/test?_t=${encodeURIComponent(internalToken)}" target="_blank" class="btn btn-sm" style="margin-left:auto;background:#E5380D;color:#fff;font-weight:700;text-decoration:none;padding:7px 16px;border-radius:6px;font-size:.82rem">🔑 Generate from Keyword</a>
+        <button class="btn btn-secondary btn-sm" onclick="templatesLoad(true)">↻ Refresh</button>
+      </div>
+      <div class="section-body">
+        <div id="tpl-error" class="alert alert-error hidden"></div>
+        <div id="tpl-loading" style="color:var(--muted);font-size:.9rem;padding:20px 0">Loading templates…</div>
+        <div id="tpl-grid" style="display:none;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px"></div>
+      </div>
+    </div>
+
+    <!-- ── INDUSTRY IMAGE PACKS ─────────────────────────────────────────── -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-head">
+        <h2>Industry Image Packs</h2>
+        <span class="section-sub">Upload stock photos for each industry type — these are served to campaigns automatically when the service matches</span>
+        <button class="btn btn-secondary btn-sm" onclick="location.reload()" style="margin-left:auto">↻ Refresh</button>
+      </div>
+      <div class="section-body">
+        <div id="pack-upload-msg" style="display:none;margin-bottom:12px" class="alert alert-success"></div>
+        <div id="pack-error" class="alert alert-error hidden" style="margin-bottom:12px"></div>
+        <div id="pack-industries">${renderPacksHtml()}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  // ── Pack upload/delete — cards are server-rendered, JS only for interactions
+  function _packAuthUrl(path) {
+    var tok = (typeof INTERNAL_TOKEN !== 'undefined' && INTERNAL_TOKEN) ? ('?_t='+encodeURIComponent(INTERNAL_TOKEN)) : '';
+    return path + tok;
+  }
+  async function _refreshPacksHtml() {
+    const container = document.getElementById('pack-industries');
+    if (!container) return;
+    try {
+      const r = await fetch(_packAuthUrl('/api/image-library/packs-html'), { cache: 'no-store', credentials: 'include' });
+      if (r.ok) {
+        container.innerHTML = await r.text();
+        // Explicitly keep Templates tab active — innerHTML swap can disrupt tab state
+        document.querySelectorAll('.tab').forEach(function(el){ el.classList.remove('active'); });
+        document.querySelectorAll('.tab-panel').forEach(function(el){ el.classList.remove('active'); });
+        var tabEl   = document.getElementById('tab-templates');
+        var panelEl = document.getElementById('panel-templates');
+        if (tabEl)   tabEl.classList.add('active');
+        if (panelEl) panelEl.classList.add('active');
+      }
+    } catch(e) { /* silently ignore refresh errors */ }
+  }
+
+  window.packUpload = async function(packId, input) {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const card = document.getElementById('pack-card-'+packId);
+    if (card) { card.style.opacity='0.5'; card.style.pointerEvents='none'; }
+    try {
+      const fd = new FormData();
+      fd.append('packId', packId);
+      fd.append('file', file);
+      const r = await fetch(_packAuthUrl('/api/image-library/pack-upload'), { method:'POST', body:fd, credentials:'include' });
+      const d = await r.json();
+      if (!r.ok) { alert('Upload failed: '+(d.error||'Unknown error')); if(card){card.style.opacity='1';card.style.pointerEvents='';} return; }
+      await _refreshPacksHtml();
+    } catch(e) {
+      alert('Upload failed: '+e.message);
+      if (card) { card.style.opacity='1'; card.style.pointerEvents=''; }
+    }
+  };
+
+  window.packRandomise = async function(industry) {
+    const preview = document.getElementById('role-preview-'+industry);
+    if (!preview) return;
+    preview.style.opacity = '0.4';
+    try {
+      const r = await fetch(_packAuthUrl('/api/image-library/role-preview/'+encodeURIComponent(industry)), { cache:'no-store', credentials:'include' });
+      if (!r.ok) { preview.style.opacity='1'; return; }
+      const d = await r.json();
+      const roles = d.roles || {};
+      const ROLE_META = [
+        { key:'heroImage',         icon:'🖼',  label:'Hero',          desc:'Split hero — top of page' },
+        { key:'earlySupportImage', icon:'📸',  label:'Early Support', desc:'First body image' },
+        { key:'trustImage',        icon:'🤝',  label:'Trust',         desc:'Credibility section' },
+        { key:'conversionImage',   icon:'🎯',  label:'Conversion',    desc:'Final CTA section' },
+      ];
+      preview.innerHTML = ROLE_META.map(function(role) {
+        var src = roles[role.key] || '';
+        var imgHtml = src
+          ? '<img src="'+src+'?t='+Date.now()+'" style="width:100%;height:100%;object-fit:cover" onerror=\\'this.style.display="none"\\'>'
+          : '<span style="font-size:1.4rem">'+role.icon+'</span>';
+        return '<div style="flex:1;min-width:100px;border:1px solid #e2e8f0;border-radius:7px;overflow:hidden;background:#f8fafc">'
+          + '<div style="position:relative;width:100%;aspect-ratio:16/9;background:#e5e7eb;overflow:hidden;display:flex;align-items:center;justify-content:center">'+imgHtml+'</div>'
+          + '<div style="padding:6px 8px">'
+          + '<div style="font-size:.65rem;font-weight:800;color:#1e293b;text-transform:uppercase;letter-spacing:.04em">'+role.label+'</div>'
+          + '<div style="font-size:.58rem;color:#94a3b8;margin-top:1px">'+role.desc+'</div>'
+          + '</div></div>';
+      }).join('');
+      preview.style.opacity = '1';
+    } catch(e) { preview.style.opacity='1'; }
+  };
+
+  window.packDelete = async function(packId) {
+    if (!confirm('Remove this image from the pack? The file will be deleted.')) return;
+    const card = document.getElementById('pack-card-'+packId);
+    if (card) { card.style.opacity='0.5'; card.style.pointerEvents='none'; }
+    try {
+      const headers = {};
+      const r = await fetch(_packAuthUrl('/api/image-library/pack/'+packId), { method:'DELETE', headers, credentials:'include' });
+      const d = await r.json();
+      if (!r.ok) { alert('Delete failed: '+(d.error||'Unknown error')); if(card){card.style.opacity='1';card.style.pointerEvents='';} return; }
+      await _refreshPacksHtml();
+    } catch(e) {
+      alert('Delete failed: '+e.message);
+      if (card) { card.style.opacity='1'; card.style.pointerEvents=''; }
+    }
+  };
+
+})();
+</script>
+
+<script>
+(function(){
+  const blockColour = {
+    hero:'#005EB8', trust_signals:'#0e9f6e', services_grid:'#7c3aed',
+    ai_summary:'#0891b2', process_steps:'#d97706', testimonials:'#be185d',
+    map:'#16a34a', cta_band:'#dc2626', faq:'#6d28d9', gallery:'#c2410c',
+    areas_cover:'#0369a1', pricing:'#0d9488', authority_section:'#1d4ed8',
+    products_grid:'#7c3aed', conversion_image:'#d97706', why_it_matters:'#059669',
+    what_you_get:'#2563eb', competition_section:'#9333ea', social_proof:'#d97706',
+    near_me_copy:'#0891b2', split_feature:'#be185d'
+  };
+
+  const industryIcon = {
+    web_design:'💻', digital_agency:'💻', trades:'🔧', home_services:'🏠',
+    beauty:'💅', clinic:'🏥', professional:'📊', retail:'🛍️'
+  };
+
+  window.templatesLoad = async function(force) {
+    const grid   = document.getElementById('tpl-grid');
+    const loader = document.getElementById('tpl-loading');
+    const err    = document.getElementById('tpl-error');
+    grid.style.display = 'none';
+    loader.style.display = 'block';
+    err.classList.add('hidden');
+
+    try {
+      const res  = await fetch('/api/templates');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      loader.style.display = 'none';
+
+      grid.innerHTML = data.templates.map(function(t) {
+        const cats = (t.industryCategories || []).map(function(c) {
+          const icon = industryIcon[c] || '🏷';
+          return '<span style="font-size:.8rem;color:var(--muted)">' + icon + ' ' + c.replace(/_/g,' ') + '</span>';
+        }).join('&ensp;·&ensp;');
+
+        const style   = t.defaultStyle || {};
+        const swatches = [style.primaryColor, style.accentColor, style.bgColor].filter(Boolean).map(function(c) {
+          return '<span title="' + c + '" style="display:inline-block;width:18px;height:18px;border-radius:50%;background:' + c + ';border:2px solid #fff;box-shadow:0 0 0 1px #cbd5e1;flex-shrink:0"></span>';
+        }).join('');
+
+        return '<div style="border:1.5px solid #e2e8f0;border-radius:12px;padding:20px;background:#fff;display:flex;flex-direction:column;gap:12px">'
+          + '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">'
+          +   '<div>'
+          +     '<div style="font-weight:700;font-size:1rem;color:#1e293b">' + t.templateName + '</div>'
+          +     '<div style="font-size:.78rem;color:#64748b;margin-top:2px;font-family:monospace">' + t.templateId + '</div>'
+          +   '</div>'
+          +   '<div style="display:flex;gap:4px;flex-shrink:0">' + swatches + '</div>'
+          + '</div>'
+          + '<div style="font-size:.82rem;color:#64748b">' + cats + '</div>'
+          + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
+          +   '<a href="/api/templates/' + t.templateId + '/demo" target="_blank" style="font-size:.8rem;color:#fff;text-decoration:none;padding:7px 16px;border-radius:6px;font-weight:700;background:#005EB8;display:inline-block">View Demo ↗</a>'
+          +   '<a href="/api/templates/' + t.templateId + '" target="_blank" style="font-size:.8rem;color:#475569;text-decoration:none;padding:7px 12px;border:1.5px solid #cbd5e1;border-radius:6px;font-weight:600;display:inline-block">JSON</a>'
+          +   '<a href="/api/templates/' + t.templateId + '/blocks" target="_blank" style="font-size:.8rem;color:#475569;text-decoration:none;padding:7px 12px;border:1.5px solid #cbd5e1;border-radius:6px;font-weight:600;display:inline-block">Blocks</a>'
+          + '</div>'
+          + '</div>';
+      }).join('');
+
+      grid.style.display = 'grid';
+    } catch(e) {
+      loader.style.display = 'none';
+      err.textContent = 'Failed to load templates: ' + e.message;
+      err.classList.remove('hidden');
+    }
+  };
+})();
+</script>
+
+<!-- ── Hub money-page modal ─────────────────────────────────────────── -->
+<!-- ── Campaign Detail Panel ─────────────────────────────── -->
+<div id="campaign-panel-overlay" onclick="if(event.target===this)campaignPanelClose()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9000;"></div>
+<div id="campaign-panel" style="display:none;position:fixed;top:0;right:0;width:min(480px,100vw);height:100vh;background:#fff;border-left:1px solid #e5e7eb;box-shadow:-6px 0 32px rgba(0,0,0,.18);z-index:9001;overflow-y:auto;flex-direction:column">
+  <div style="padding:20px 22px 16px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1">
+    <div>
+      <div id="cp-title" style="font-weight:700;font-size:1.05rem;color:#111"></div>
+      <div id="cp-meta" style="font-size:.8rem;color:#6b7280;margin-top:2px"></div>
+    </div>
+    <button onclick="campaignPanelClose()" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:#6b7280;line-height:1;padding:4px" title="Close">✕</button>
+  </div>
+  <div style="padding:18px 22px;display:flex;flex-direction:column;gap:22px">
+
+    <!-- Stage trail -->
+    <div>
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:8px">Progress Trail</div>
+      <div id="cp-stage-trail" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
+    <!-- ══ FINAL PUBLISH GATE ════════════════════════════════════════════ -->
+    <div id="cp-gate-section" style="background:#f0f4ff;border:2px solid #1d4ed8;border-radius:10px;padding:16px 18px">
+
+      <!-- Header row -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:.85rem;font-weight:800;color:#1d4ed8;letter-spacing:.01em">🔒 Final Publish Gate</div>
+          <div style="font-size:.75rem;color:#6b7280;margin-top:2px">Deterministic check — PASS means safe to publish</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button id="cp-gate-run-btn" onclick="cpGateRun()" class="btn btn-sm" style="background:#1d4ed8;color:#fff;border:none;font-weight:700;font-size:.82rem;padding:8px 16px">▶ Run Gate</button>
+          <button id="cp-gate-repair-btn" onclick="cpGateRepair()" class="btn btn-sm" style="display:none;background:#dc2626;color:#fff;border:none;font-weight:700;font-size:.78rem;padding:6px 12px">🔧 Auto Repair</button>
+        </div>
+      </div>
+
+      <!-- Status banner -->
+      <div id="cp-gate-banner" style="display:none;border-radius:8px;padding:12px 14px;margin-bottom:10px;align-items:center;gap:10px">
+        <span id="cp-gate-status-icon" style="font-size:1.3rem"></span>
+        <div>
+          <div id="cp-gate-status-label" style="font-weight:800;font-size:.95rem"></div>
+          <div id="cp-gate-status-sub" style="font-size:.75rem;margin-top:2px"></div>
+        </div>
+      </div>
+
+      <!-- Summary cards row -->
+      <div id="cp-gate-stats" style="display:none;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
+        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:8px;text-align:center">
+          <div style="font-size:1.1rem;font-weight:800;color:#374151" id="cp-gs-total">—</div>
+          <div style="font-size:.65rem;color:#9ca3af;margin-top:2px">Pages</div>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px;text-align:center">
+          <div style="font-size:1.1rem;font-weight:800;color:#16a34a" id="cp-gs-pass">—</div>
+          <div style="font-size:.65rem;color:#9ca3af;margin-top:2px">Passed</div>
+        </div>
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px;text-align:center">
+          <div style="font-size:1.1rem;font-weight:800;color:#d97706" id="cp-gs-review">—</div>
+          <div style="font-size:.65rem;color:#9ca3af;margin-top:2px">Review</div>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:8px;text-align:center">
+          <div style="font-size:1.1rem;font-weight:800;color:#dc2626" id="cp-gs-fail">—</div>
+          <div style="font-size:.65rem;color:#9ca3af;margin-top:2px">Failed</div>
+        </div>
+      </div>
+
+      <!-- Issue counts row -->
+      <div id="cp-gate-counts" style="display:none;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+        <span id="cp-gc-crit" style="font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:12px;background:#fef2f2;color:#dc2626"></span>
+        <span id="cp-gc-major" style="font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:12px;background:#fffbeb;color:#d97706"></span>
+        <span id="cp-gc-warn" style="font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:12px;background:#f3f4f6;color:#6b7280"></span>
+        <span id="cp-gc-score" style="font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:12px;background:#eff6ff;color:#1d4ed8"></span>
+        <span id="cp-gc-ai" style="font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:12px;background:#f5f3ff;color:#6d28d9"></span>
+      </div>
+
+      <!-- Breakdown pills -->
+      <div id="cp-gate-breakdown" style="display:none;gap:4px;flex-wrap:wrap;margin-bottom:10px"></div>
+
+      <!-- Issue table -->
+      <div id="cp-gate-issues" style="display:none">
+        <div style="font-size:.7rem;font-weight:700;letter-spacing:.05em;color:#6b7280;text-transform:uppercase;margin-bottom:6px">Issues <span id="cp-gate-issue-count" style="font-weight:400;text-transform:none;font-size:.7rem;color:#9ca3af"></span></div>
+        <div style="border:1px solid #e5e7eb;border-radius:6px;overflow:hidden">
+          <div style="max-height:280px;overflow-y:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:.72rem">
+              <thead><tr style="background:#f9fafb;position:sticky;top:0">
+                <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;white-space:nowrap;border-bottom:1px solid #e5e7eb">Sev</th>
+                <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border-bottom:1px solid #e5e7eb">Type</th>
+                <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border-bottom:1px solid #e5e7eb">Page</th>
+                <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border-bottom:1px solid #e5e7eb">Evidence</th>
+                <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border-bottom:1px solid #e5e7eb">Fix</th>
+              </tr></thead>
+              <tbody id="cp-gate-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="cp-gate-repair-note" style="display:none;margin-top:6px;font-size:.72rem;color:#b45309;padding:6px 8px;background:#fffbeb;border:1px solid #fde68a;border-radius:5px"></div>
+      </div>
+
+      <!-- Running indicator -->
+      <div id="cp-gate-running" style="display:none;font-size:.78rem;color:#6b7280;padding:10px 0">Running gate checks… please wait</div>
+      <!-- Empty state -->
+      <div id="cp-gate-empty" style="font-size:.78rem;color:#9ca3af;padding:4px 0">Click <strong>Run Gate</strong> to check if this campaign is safe to publish.</div>
+      <!-- Error -->
+      <div id="cp-gate-error" style="display:none;font-size:.78rem;color:#dc2626"></div>
+    </div>
+
+    <!-- Settings -->
+    <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:12px">Campaign Settings</div>
+      <label style="font-size:.82rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">Money Page URL</label>
+      <input id="cp-money-url" type="url" placeholder="https://example.com/your-service-page/" style="width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;margin-bottom:10px"/>
+      <label style="font-size:.82rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">Focus Keyword / Anchor Text</label>
+      <input id="cp-focus-kw" type="text" placeholder="e.g. web design services" style="width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;margin-bottom:12px"/>
+      <button onclick="campaignSettingsSave()" class="btn btn-primary btn-sm" style="width:100%">Save Settings</button>
+      <div id="cp-settings-msg" style="font-size:.8rem;margin-top:6px;text-align:center;min-height:18px"></div>
+    </div>
+
+    <!-- Actions -->
+    <div>
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:10px">Page Actions</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button id="cp-hub-btn" onclick="campaignPanelRegenHub()" class="btn btn-sm" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;font-weight:700;text-align:left;padding:10px 14px">↺ Regenerate Hub Page <span style="font-size:.75rem;font-weight:400;opacity:.75">— rebuilds hub with current money page settings</span></button>
+        <button onclick="campaignRerunRollout()" class="btn btn-secondary btn-sm" style="text-align:left;padding:10px 14px">⚙ Generate Pages <span style="font-size:.75rem;font-weight:400;opacity:.75">— opens the wizard at the Generate Pages step</span></button>
+      </div>
+    </div>
+
+    <!-- Image Library -->
+    <div style="border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;background:#fff">
+
+      <!-- Header row -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div style="font-size:.78rem;font-weight:800;letter-spacing:.06em;color:#374151;text-transform:uppercase">Images</div>
+        <button onclick="cpLoadImageLibrary()" style="font-size:.68rem;color:#6b7280;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline">refresh</button>
+      </div>
+
+      <!-- Current slot thumbnails -->
+      <div id="cp-img-slots" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+        <div style="color:#6b7280;font-size:.75rem;grid-column:1/-1">Loading…</div>
+      </div>
+
+      <!-- ── THREE IMAGE OPTIONS ── -->
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+        <button onclick="cpImgShowSection('ai')" id="cp-opt-ai" style="width:100%;text-align:left;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;background:#fafaff;cursor:pointer;font-size:.85rem;font-weight:600;color:#374151">
+          🤖 Generate with AI
+        </button>
+        <button onclick="cpImgShowSection('upload')" id="cp-opt-upload" style="width:100%;text-align:left;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;background:#fafaff;cursor:pointer;font-size:.85rem;font-weight:600;color:#374151">
+          📁 Upload Image
+        </button>
+        <button onclick="cpImgShowSection('library')" id="cp-opt-library" style="width:100%;text-align:left;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;background:#fafaff;cursor:pointer;font-size:.85rem;font-weight:600;color:#374151">
+          🖼 Choose from Library <span id="cp-lib-svc-label" style="font-size:.75rem;font-weight:400;color:#6b7280"></span>
+        </button>
+      </div>
+
+      <!-- ── SAVE BUTTON — directly below the three options (div, not button, to avoid CSS resets) ── -->
+      <div id="cp-img-assignments-save-btn"
+        onclick="cpImgSaveAssignments()"
+        role="button"
+        tabindex="0"
+        style="display:block;box-sizing:border-box;width:100%;padding:13px 12px;font-size:.9rem;font-weight:800;background:#0369a1;color:#fff;border-radius:8px;cursor:pointer;letter-spacing:.01em;text-align:center;user-select:none">
+        💾 Save Image Assignments
+      </div>
+
+      <!-- Feedback message -->
+      <div id="cp-img-assign-msg" style="font-size:.78rem;min-height:18px;margin-top:8px;color:#059669;font-weight:600"></div>
+
+      <!-- ── EXPANDABLE: AI section ── -->
+      <div id="cp-section-ai" style="display:none;margin-top:14px;border-top:1px solid #e5e7eb;padding-top:12px">
+        <div style="font-size:.78rem;font-weight:700;color:#6366f1;margin-bottom:8px">Generate AI Images</div>
+
+        <!-- Image Source Mode selector -->
+        <div style="margin-bottom:12px">
+          <label style="font-size:.74rem;font-weight:700;color:#374151;display:block;margin-bottom:5px">Image Source Mode</label>
+          <select id="cp-img-source-mode" onchange="cpSaveImageMode(this.value)" style="width:100%;padding:7px 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.82rem;color:#374151;background:#fff;cursor:pointer">
+            <option value="library">📚 Library — use pre-loaded image packs (default)</option>
+            <option value="ai">🤖 AI — generate with Ideogram every time</option>
+            <option value="hybrid">🔀 Hybrid — try library first, AI if missing</option>
+            <option value="upload">📁 Upload — use your own uploaded images</option>
+            <option value="disabled">🚫 Disabled — no image generation</option>
+          </select>
+          <div id="cp-img-mode-msg" style="font-size:.72rem;margin-top:4px;min-height:14px;color:#6b7280"></div>
+        </div>
+
+        <div style="font-size:.78rem;color:#6b7280;margin-bottom:10px">Generates images for all three slots using scene diversity — no two slots will share the same scene type.</div>
+
+        <!-- Prompt Preview Panel -->
+        <div style="margin-bottom:10px">
+          <button onclick="cpPreviewPrompt('hero')" style="padding:6px 12px;font-size:.75rem;font-weight:600;background:#f3f4f6;color:#374151;border:1.5px solid #d1d5db;border-radius:6px;cursor:pointer;margin-right:5px">🔍 Preview Hero Prompt</button>
+          <button onclick="cpPreviewPrompt('support')" style="padding:6px 12px;font-size:.75rem;font-weight:600;background:#f3f4f6;color:#374151;border:1.5px solid #d1d5db;border-radius:6px;cursor:pointer;margin-right:5px">🔍 Support</button>
+          <button onclick="cpPreviewPrompt('conversion')" style="padding:6px 12px;font-size:.75rem;font-weight:600;background:#f3f4f6;color:#374151;border:1.5px solid #d1d5db;border-radius:6px;cursor:pointer">🔍 Conversion</button>
+        </div>
+        <div id="cp-prompt-preview" style="display:none;background:#1e1b4b;border-radius:8px;padding:12px;margin-bottom:10px;font-size:.7rem;color:#c7d2fe;line-height:1.5">
+          <div id="cp-prompt-debug" style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #3730a3;font-size:.68rem;color:#a5b4fc"></div>
+          <div style="font-weight:700;color:#818cf8;margin-bottom:4px;font-size:.72rem">PATH TAKEN</div>
+          <div id="cp-prompt-path" style="color:#fbbf24;font-weight:700;margin-bottom:8px;font-size:.8rem"></div>
+          <div style="font-weight:700;color:#818cf8;margin-bottom:4px;font-size:.72rem">FINAL PROMPT SENT TO IDEOGRAM</div>
+          <div id="cp-prompt-text" style="white-space:pre-wrap;word-break:break-word;color:#e0e7ff"></div>
+          <div style="font-weight:700;color:#818cf8;margin-top:8px;margin-bottom:4px;font-size:.72rem">NEGATIVE PROMPT</div>
+          <div id="cp-prompt-neg" style="white-space:pre-wrap;word-break:break-word;color:#fca5a5;font-size:.68rem"></div>
+        </div>
+
+        <button onclick="cpGenAIImages()" style="width:100%;padding:10px;font-size:.85rem;font-weight:700;background:#6366f1;color:#fff;border:none;border-radius:7px;cursor:pointer">
+          ✨ Generate Images Now
+        </button>
+        <!-- Scene badges — populated by JS after generation -->
+        <div id="cp-scene-badges" style="display:none;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px"></div>
+        <div id="cp-ai-gen-msg" style="font-size:.75rem;min-height:14px;margin-top:6px;color:#6b7280"></div>
+      </div>
+
+      <!-- ── EXPANDABLE: Upload section ── -->
+      <div id="cp-section-upload" style="display:none;margin-top:14px;border-top:1px solid #e5e7eb;padding-top:12px">
+        <div style="font-size:.78rem;font-weight:700;color:#0369a1;margin-bottom:8px">Upload an Image</div>
+        <input type="file" id="cp-img-file-input" accept="image/*" style="display:none"/>
+        <div id="cp-img-chosen" style="display:none;margin-bottom:8px">
+          <div style="display:flex;gap:10px;align-items:center">
+            <img id="cp-img-preview" style="width:52px;height:52px;object-fit:cover;border-radius:6px;border:1px solid #bae6fd;flex-shrink:0"/>
+            <div style="min-width:0">
+              <div id="cp-img-chosen-name" style="font-size:.76rem;font-weight:700;color:#0369a1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
+              <div id="cp-img-chosen-size" style="font-size:.7rem;color:#6b7280;margin-top:1px"></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button onclick="document.getElementById('cp-img-file-input').click()" id="cp-img-choose-btn" style="flex:1;padding:9px;border:1.5px solid #bae6fd;border-radius:7px;background:#f0f9ff;color:#0369a1;font-weight:700;font-size:.82rem;cursor:pointer">Choose File</button>
+          <button id="cp-img-save-btn" onclick="cpImgUpload()" style="display:none;flex:1;padding:9px;border:none;border-radius:7px;background:#059669;color:#fff;font-weight:700;font-size:.82rem;cursor:pointer">Save to Library</button>
+        </div>
+        <div id="cp-img-upload-msg" style="font-size:.75rem;min-height:14px;margin-top:6px;color:#6b7280"></div>
+      </div>
+
+      <!-- ── EXPANDABLE: Library section ── -->
+      <div id="cp-section-library" style="display:none;margin-top:14px;border-top:1px solid #e5e7eb;padding-top:12px">
+        <div style="font-size:.78rem;font-weight:700;color:#374151;margin-bottom:8px">
+          Image Library — <span id="cp-img-pack-count" style="color:#7c3aed"></span><span id="cp-img-count">0</span> images
+          <button onclick="cpLoadImageLibrary()" style="font-size:.62rem;color:#6b7280;background:none;border:none;cursor:pointer;padding:0 4px;text-decoration:underline">refresh</button>
+          <span style="font-weight:400;color:#9ca3af;font-size:.72rem;margin-left:4px">Pick slot then click ✓ Use</span>
+        </div>
+        <div id="cp-img-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-height:420px;overflow-y:auto"></div>
+        <div id="cp-img-debug" style="font-size:.68rem;color:#9ca3af;margin-top:6px">
+          Images found: — &nbsp;|&nbsp; Save button: ✓ above
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sitemap Panel -->
+    <div>
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:10px">Sitemap &amp; Search Console</div>
+
+      <!-- Status card -->
+      <div id="cp-sitemap-card" style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px 16px;margin-bottom:10px">
+
+        <!-- Header row: status + meta -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span id="cp-sm-badge" style="font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:20px;background:#d1fae5;color:#065f46">Checking…</span>
+          <span id="cp-sm-meta" style="font-size:.78rem;color:#6b7280"></span>
+        </div>
+
+        <!-- Stats row: hub + clusters + last rebuilt -->
+        <div id="cp-sm-stats" style="display:none;display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+          <span id="cp-sm-hub-badge" style="font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:12px;background:#fef3c7;color:#92400e">Hub: —</span>
+          <span id="cp-sm-cluster-badge" style="font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:12px;background:#eff6ff;color:#1d4ed8">Clusters: —</span>
+          <span id="cp-sm-total-badge" style="font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:12px;background:#f3f4f6;color:#374151">Total: —</span>
+          <span id="cp-sm-built-badge" style="font-size:.72rem;color:#6b7280;padding:2px 0">Built: —</span>
+        </div>
+
+        <!-- Campaign sitemap URL -->
+        <div style="margin-bottom:10px">
+          <div style="font-size:.72rem;font-weight:700;color:#374151;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em">
+            Campaign Sitemap (app-hosted) — paste into Google Search Console
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input id="cp-sm-url" type="text" readonly style="flex:1;font-family:monospace;font-size:.75rem;padding:7px 10px;border:1px solid #d1d5db;border-radius:6px;background:#fff;color:#111;min-width:0;cursor:text" value="—"/>
+            <button onclick="cpCopySitemapUrl('cp-sm-url')" title="Copy" style="flex-shrink:0;padding:7px 10px;background:#fff;border:1px solid #d1d5db;border-radius:6px;cursor:pointer;font-size:.85rem" id="cp-sm-copy-btn">⎘</button>
+            <a id="cp-sm-open-btn" href="#" target="_blank" title="Open in browser" style="flex-shrink:0;padding:7px 10px;background:#fff;border:1px solid #d1d5db;border-radius:6px;cursor:pointer;font-size:.85rem;text-decoration:none;color:#111">↗</a>
+          </div>
+          <div id="cp-sm-copy-msg" style="font-size:.72rem;color:#059669;margin-top:3px;min-height:14px"></div>
+        </div>
+
+        <!-- Master sitemap URL -->
+        <div style="margin-bottom:12px" id="cp-sm-master-row">
+          <div style="font-size:.72rem;font-weight:700;color:#374151;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em">
+            Master Sitemap — all campaigns combined
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input id="cp-sm-master-url" type="text" readonly style="flex:1;font-family:monospace;font-size:.75rem;padding:7px 10px;border:1px solid #d1d5db;border-radius:6px;background:#fff;color:#111;min-width:0;cursor:text" value="—"/>
+            <button onclick="cpCopySitemapUrl('cp-sm-master-url')" title="Copy" style="flex-shrink:0;padding:7px 10px;background:#fff;border:1px solid #d1d5db;border-radius:6px;cursor:pointer;font-size:.85rem">⎘</button>
+            <a id="cp-sm-master-open-btn" href="#" target="_blank" title="Open master sitemap" style="flex-shrink:0;padding:7px 10px;background:#fff;border:1px solid #d1d5db;border-radius:6px;cursor:pointer;font-size:.85rem;text-decoration:none;color:#111">↗</a>
+          </div>
+        </div>
+
+        <!-- FTP live-site note (if FTP configured) -->
+        <div id="cp-sm-ftp-note" style="display:none;font-size:.73rem;color:#6b7280;margin-bottom:10px;padding:6px 10px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px">
+          Live-site sitemap URL (after FTP upload): <span id="cp-sm-ftp-url" style="font-family:monospace;color:#2563eb"></span>
+        </div>
+
+        <!-- Sitemap index link if present -->
+        <div id="cp-sm-index-row" style="display:none;font-size:.75rem;color:#6b7280;margin-bottom:6px">
+          Sitemap index: <a id="cp-sm-index-link" href="#" target="_blank" style="color:#2563eb;font-family:monospace">sitemap-index.xml</a>
+        </div>
+
+        <!-- Action buttons -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button id="cp-rebuild-sitemap-btn" onclick="campaignRebuildSitemap()" class="btn btn-sm" style="background:#059669;color:#fff;border:none;font-weight:700;padding:8px 16px">🗺 Rebuild Sitemap</button>
+          <button id="cp-sitemap-btn" onclick="campaignResubmitSitemap()" class="btn btn-sm" style="background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;font-weight:700;padding:8px 14px">📤 Submit to Search Console</button>
+        </div>
+      </div>
+
+      <!-- FTP status (secondary) -->
+      <div id="cp-ftp-status" style="display:none;font-size:.78rem;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px;margin-bottom:8px"></div>
+
+      <!-- Download ZIP (backup) -->
+      <a id="cp-download-sitemap-btn" href="#" onclick="return false" style="display:none;font-size:.78rem;color:#6b7280;text-decoration:none">⬇ Download Sitemaps ZIP <span style="opacity:.7">(manual upload fallback)</span></a>
+
+      <!-- Action message -->
+      <div id="cp-action-msg" style="font-size:.8rem;margin-top:8px;min-height:18px;color:#059669"></div>
+    </div>
+
+    <!-- Live Page Deployment Status -->
+    <div style="border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;background:#fff">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:10px">Live Page Deployment</div>
+
+      <!-- Status badges row -->
+      <div id="cp-deploy-badges" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+        <span id="cp-deploy-local-badge" style="font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:12px;background:#eff6ff;color:#1d4ed8">Local: —</span>
+        <span id="cp-deploy-live-badge" style="font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:12px;background:#f3f4f6;color:#374151">Live 200: —</span>
+        <span id="cp-deploy-404-badge" style="font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:12px;background:#fee2e2;color:#991b1b">404: —</span>
+      </div>
+
+      <!-- 404 URL list (shown when issues exist) -->
+      <div id="cp-deploy-404-list" style="display:none;max-height:140px;overflow-y:auto;margin-bottom:10px;border:1px solid #fecaca;border-radius:6px;padding:6px 8px;background:#fff5f5;font-family:monospace;font-size:.7rem;color:#991b1b;line-height:1.8"></div>
+
+      <!-- Buttons -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="cpVerifyLiveUrls()" id="cp-verify-btn" class="btn btn-sm" style="background:#f0fdf4;color:#065f46;border:1px solid #86efac;font-weight:700;padding:8px 14px">✓ Verify Live URLs</button>
+        <button onclick="cpDeployPages()" id="cp-deploy-btn" class="btn btn-sm" style="background:#1d4ed8;color:#fff;border:none;font-weight:700;padding:8px 16px">⬆ Deploy Pages to Live Server</button>
+      </div>
+      <div id="cp-deploy-msg" style="font-size:.78rem;margin-top:8px;min-height:16px;color:#374151"></div>
+    </div>
+
+    <!-- Legacy Asset Check -->
+    <div id="cp-legacy-card" style="border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;background:#fff">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:10px">Legacy Asset Check</div>
+      <p style="font-size:.78rem;color:#6b7280;margin:0 0 10px">Detects old generic image files left on the live server from before per-project namespacing was applied (<code>/assets/hero.jpg</code> etc.). Nothing is deleted automatically.</p>
+      <button onclick="cpCheckLegacyAssets()" id="cp-legacy-btn" class="btn btn-sm" style="background:#fefce8;color:#713f12;border:1px solid #fde68a;font-weight:700;padding:8px 14px">⚠ Check for Legacy Assets</button>
+      <div id="cp-legacy-msg" style="font-size:.78rem;margin-top:8px;min-height:16px;color:#6b7280"></div>
+      <div id="cp-legacy-report" style="margin-top:10px;display:none">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.05em;color:#6b7280;text-transform:uppercase;margin-bottom:6px">Report</div>
+        <div id="cp-legacy-rows" style="display:flex;flex-direction:column;gap:4px;font-size:.76rem;font-family:monospace"></div>
+        <div style="margin-top:10px;padding:8px 10px;border-radius:6px;background:#fefce8;border:1px solid #fde68a;font-size:.75rem;color:#713f12">
+          ⚠ Files listed above are <strong>not deleted automatically</strong>. If safe to remove, delete them manually via FTP or your file manager.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pages -->
+    <div>
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:8px">Generated Pages</div>
+      <div id="cp-pages-list" style="display:flex;flex-direction:column;gap:4px"></div>
+    </div>
+
+  </div>
+</div>
+<script>
+let _cpCid='', _cpSlug='', _cpDetail=null;
+  const stageLabels=['Setup','Project','Keywords','Areas','Images','Content','Review','Rollout'];
+
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  function cpSetSitemapStatus(status){
+    const badge=document.getElementById('cp-sm-badge');
+    const meta=document.getElementById('cp-sm-meta');
+    const urlInput=document.getElementById('cp-sm-url');
+    const masterUrlInput=document.getElementById('cp-sm-master-url');
+    const openBtn=document.getElementById('cp-sm-open-btn');
+    const masterOpenBtn=document.getElementById('cp-sm-master-open-btn');
+    const indexRow=document.getElementById('cp-sm-index-row');
+    const indexLink=document.getElementById('cp-sm-index-link');
+    const card=document.getElementById('cp-sitemap-card');
+    const dlBtn=document.getElementById('cp-download-sitemap-btn');
+    const statsRow=document.getElementById('cp-sm-stats');
+    const hubBadge=document.getElementById('cp-sm-hub-badge');
+    const clusterBadge=document.getElementById('cp-sm-cluster-badge');
+    const totalBadge=document.getElementById('cp-sm-total-badge');
+    const builtBadge=document.getElementById('cp-sm-built-badge');
+
+    if(!status||!status.generated){
+      badge.textContent='Not generated yet';
+      badge.style.background='#fef3c7'; badge.style.color='#92400e';
+      card.style.background='#fffbeb'; card.style.borderColor='#fde68a';
+      meta.textContent='Rebuild to generate a sitemap';
+      urlInput.value='—';
+      if(masterUrlInput) masterUrlInput.value='—';
+      if(openBtn) openBtn.href='#';
+      if(masterOpenBtn) masterOpenBtn.href='#';
+      if(indexRow) indexRow.style.display='none';
+      if(statsRow) statsRow.style.display='none';
+    } else {
+      badge.textContent='\u2713 Generated';
+      badge.style.background='#d1fae5'; badge.style.color='#065f46';
+      card.style.background='#f0fdf4'; card.style.borderColor='#86efac';
+      meta.textContent=status.totalUrls+' URL'+(status.totalUrls!==1?'s':'')+' across all campaigns';
+      const base=window.location.origin;
+
+      // Master sitemap
+      const masterUrl=base+status.hostedPaths.sitemap;
+      if(masterUrlInput){ masterUrlInput.value=masterUrl; }
+      if(masterOpenBtn){ masterOpenBtn.href=masterUrl; }
+
+      // Campaign-specific sitemap — find current campaign in status.campaigns
+      const campaignData=(status.campaigns||[]).find(function(c){return c.campaignId===_cpCid;});
+      if(campaignData && campaignData.hostedSitemapPath){
+        const campaignUrl=base+campaignData.hostedSitemapPath;
+        urlInput.value=campaignUrl;
+        if(openBtn) openBtn.href=campaignUrl;
+        // Stats badges
+        if(statsRow) statsRow.style.display='flex';
+        if(hubBadge){
+          if(campaignData.hubIncluded){
+            hubBadge.textContent='Hub: \u2713 Included';
+            hubBadge.style.background='#d1fae5'; hubBadge.style.color='#065f46';
+          } else {
+            hubBadge.textContent='Hub: \u26a0 Missing';
+            hubBadge.style.background='#fee2e2'; hubBadge.style.color='#991b1b';
+          }
+        }
+        if(clusterBadge) clusterBadge.textContent='Clusters: '+campaignData.clusterCount;
+        if(totalBadge) totalBadge.textContent=campaignData.urlCount+' URL'+(campaignData.urlCount!==1?'s':'');
+      } else {
+        // No campaign-specific sitemap yet — fall back to master
+        urlInput.value=masterUrl;
+        if(openBtn) openBtn.href=masterUrl;
+        if(statsRow) statsRow.style.display='none';
+      }
+
+      // Last built
+      if(builtBadge && status.lastBuilt){
+        builtBadge.textContent='Built '+new Date(status.lastBuilt).toLocaleString();
+      }
+
+      // Sitemap index
+      if(status.hostedPaths.sitemapIndex && indexLink){
+        indexLink.href=base+status.hostedPaths.sitemapIndex;
+        if(indexRow) indexRow.style.display='block';
+      } else if(indexRow){
+        indexRow.style.display='none';
+      }
+      if(dlBtn){ dlBtn.href='/api/sitemap/download/'+_cpSlug; dlBtn.style.display='inline'; }
+    }
+  }
+
+  async function cpLoadSitemapStatus(){
+    if(!_cpSlug) return;
+    try{
+      const r=await apiFetch('/api/sitemap/status/'+_cpSlug);
+      const d=await r.json();
+      cpSetSitemapStatus(d);
+    }catch(e){
+      document.getElementById('cp-sm-badge').textContent='Error loading status';
+    }
+  }
+
+  window.cpCopySitemapUrl=function(inputId){
+    const id=inputId||'cp-sm-url';
+    const urlInput=document.getElementById(id);
+    const msg=document.getElementById('cp-sm-copy-msg');
+    if(!urlInput) return;
+    const val=urlInput.value;
+    if(!val||val==='—'){ msg.textContent='No URL yet — rebuild first'; msg.style.color='#b45309'; return; }
+    navigator.clipboard.writeText(val).then(function(){
+      msg.textContent='\u2713 Copied to clipboard!'; msg.style.color='#059669';
+      setTimeout(function(){ msg.textContent=''; },2500);
+    }).catch(function(){
+      urlInput.select(); document.execCommand('copy');
+      msg.textContent='\u2713 Copied!'; msg.style.color='#059669';
+      setTimeout(function(){ msg.textContent=''; },2500);
+    });
+  };
+
+  window.campaignViewOpen=async function(cid){
+    _cpCid=cid; _cpSlug=activeSlug;
+    document.getElementById('cp-settings-msg').textContent='';
+    document.getElementById('cp-action-msg').textContent='';
+    document.getElementById('cp-sm-copy-msg').textContent='';
+    document.getElementById('cp-img-upload-msg').textContent='';
+    document.getElementById('cp-img-assign-msg').textContent='';
+    document.getElementById('cp-sm-badge').textContent='Checking…';
+    document.getElementById('cp-sm-meta').textContent='';
+    document.getElementById('cp-sm-url').value='—';
+    document.getElementById('cp-ftp-status').style.display='none';
+    document.getElementById('cp-download-sitemap-btn').style.display='none';
+    document.getElementById('cp-title').textContent='Loading…';
+    document.getElementById('cp-meta').textContent='';
+    document.getElementById('campaign-panel-overlay').style.display='block';
+    document.getElementById('campaign-panel').style.display='flex';
+    document.getElementById('campaign-panel').scrollTop=0;
+    // Do NOT pre-load library here — _cpDetail must be set first so the service
+    // filter is available. The library is loaded again below after _cpDetail is set.
+    // Load campaign detail, sitemap status, and project config in parallel
+    try{
+      const [r, smR, projR] = await Promise.all([
+        apiFetch('/api/campaigns/'+_cpSlug+'/'+cid+'/detail'),
+        apiFetch('/api/sitemap/status/'+_cpSlug),
+        apiFetch('/api/projects/'+_cpSlug),
+      ]);
+      const d=await r.json();
+      if(!r.ok){ document.getElementById('cp-title').textContent='Error: '+(d.error||'Failed to load'); return; }
+      _cpDetail=d;
+      // Populate image source mode dropdown from project config
+      try{
+        const projD=await projR.json();
+        const modeEl=document.getElementById('cp-img-source-mode');
+        if(modeEl&&projD.project&&projD.project.imageSourceMode){
+          modeEl.value=projD.project.imageSourceMode;
+        }
+      }catch(e){/* non-fatal */}
+      // Reload library now that we have service context — filters to correct service images
+      window.cpLoadImageLibrary();
+      // Show the service name on the library picker button so it's clear what's filtered
+      const libSvcLbl=document.getElementById('cp-lib-svc-label');
+      if(libSvcLbl&&d.serviceName) libSvcLbl.textContent='('+d.serviceName+' only)';
+      document.getElementById('cp-title').textContent=esc(d.city)+' — '+esc(d.serviceName);
+      document.getElementById('cp-meta').textContent='Stage '+(d.stage||'?')+' of 8 · '+d.areasCount+' cluster areas'+(d.hubGenerated?' · Hub ✓':'');
+      document.getElementById('cp-money-url').value=d.moneyPageUrl||'';
+      document.getElementById('cp-focus-kw').value=d.focusKeyword||'';
+      // Stage trail
+      const trail=document.getElementById('cp-stage-trail');
+      trail.innerHTML=stageLabels.map((lbl,i)=>{
+        const n=i+1, done=n<=(d.stage||0), cur=n===(d.stage||0);
+        return '<span style="font-size:.75rem;padding:3px 10px;border-radius:20px;font-weight:600;background:'+(done?'#d1fae5':cur?'#dbeafe':'#f3f4f6')+';color:'+(done?'#065f46':cur?'#1d4ed8':'#9ca3af')+'">'+n+'. '+lbl+'</span>';
+      }).join('');
+      // Pages list
+      const pl=document.getElementById('cp-pages-list');
+      const allPages=[...(d.hubGenerated?[{area:'Hub — '+d.city,remotePath:d.hubPath,tier:'hub'}]:[]),...(d.areas||[])];
+      if(!allPages.length){ pl.innerHTML='<div style="font-size:.8rem;color:#9ca3af">No pages generated yet</div>'; }
+      else {
+        pl.innerHTML=allPages.map(p=>{
+          const url=d.domain+(p.remotePath||'');
+          const badge=p.tier==='hub'?'<span style="font-size:.68rem;background:#dbeafe;color:#1d4ed8;padding:1px 6px;border-radius:10px;font-weight:700">HUB</span>':'<span style="font-size:.68rem;background:#f3f4f6;color:#6b7280;padding:1px 6px;border-radius:10px">cluster</span>';
+          return '<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f9fafb;border-radius:6px;font-size:.8rem">'+
+            badge+
+            '<a href="'+esc(url)+'" target="_blank" style="color:#2563eb;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1" title="'+esc(url)+'">'+esc(p.area||p.remotePath)+'</a>'+
+            '<a href="'+esc(url)+'" target="_blank" style="color:#9ca3af;font-size:.7rem;flex-shrink:0">↗</a>'+
+          '</div>';
+        }).join('');
+      }
+      // Sitemap status
+      if(smR.ok){
+        const sm=await smR.json();
+        cpSetSitemapStatus(sm);
+      }
+      // Load cached gate result (if exists)
+      try{
+        const gr=await apiFetch('/api/publish-gate/'+_cpSlug);
+        const gd=await gr.json();
+        if(gd.cached&&gd.report) cpGateRender(gd.report);
+      }catch(e){ /* gate auto-load is non-fatal */ }
+    }catch(e){ document.getElementById('cp-title').textContent='Error loading campaign'; }
+  };
+
+  window.campaignPanelClose=function(){
+    document.getElementById('campaign-panel-overlay').style.display='none';
+    document.getElementById('campaign-panel').style.display='none';
+    _cpCid=''; _cpDetail=null;
+  };
+
+  window.campaignSettingsSave=async function(){
+    if(!_cpCid||!_cpSlug) return;
+    const moneyPageUrl=document.getElementById('cp-money-url').value.trim();
+    const focusKeyword=document.getElementById('cp-focus-kw').value.trim();
+    const msg=document.getElementById('cp-settings-msg');
+    msg.style.color='#6b7280'; msg.textContent='Saving…';
+    try{
+      const r=await apiFetch('/api/campaigns/'+_cpSlug+'/'+_cpCid+'/settings',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({moneyPageUrl,focusKeyword})});
+      const d=await r.json();
+      if(!r.ok){ msg.style.color='#dc2626'; msg.textContent='Error: '+(d.error||'Save failed'); return; }
+      msg.style.color='#059669'; msg.textContent='Settings saved ✓ — click Regenerate Hub or Re-run Rollout to apply.';
+      if(_cpDetail){ _cpDetail.moneyPageUrl=moneyPageUrl; _cpDetail.focusKeyword=focusKeyword; }
+    }catch(e){ msg.style.color='#dc2626'; msg.textContent='Network error'; }
+  };
+
+  window.campaignPanelRegenHub=async function(){
+    if(!_cpCid||!_cpSlug) return;
+    const moneyUrl=document.getElementById('cp-money-url').value.trim()||(_cpDetail&&_cpDetail.moneyPageUrl)||'';
+    const moneyKw=document.getElementById('cp-focus-kw').value.trim()||(_cpDetail&&_cpDetail.focusKeyword)||'';
+    const msg=document.getElementById('cp-action-msg');
+    const btn=document.getElementById('cp-hub-btn');
+    btn.disabled=true; btn.textContent='Generating hub…';
+    msg.style.color='#6b7280'; msg.textContent='Generating hub page — this takes ~30s…';
+    try{
+      const r=await apiFetch('/api/rollout/hub',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({clientSlug:_cpSlug,campaignId:_cpCid,moneyPageUrl:moneyUrl,focusKeyword:moneyKw})});
+      const d=await r.json();
+      if(!r.ok){ msg.style.color='#dc2626'; msg.textContent='Error: '+(d.error||'Hub generation failed'); }
+      else { msg.style.color='#059669'; msg.textContent='Hub page regenerated ✓'; }
+    }catch(e){ msg.style.color='#dc2626'; msg.textContent='Network error'; }
+    finally{ btn.disabled=false; btn.innerHTML='↺ Regenerate Hub Page <span style="font-size:.75rem;font-weight:400;opacity:.75">— rebuilds hub with current money page settings</span>'; }
+  };
+
+  window.campaignRerunRollout=function(){
+    if(!_cpCid) return;
+    campaignPanelClose();
+    campaignsResume(_cpCid, 5);
+  };
+
+  window.campaignRebuildSitemap=async function(){
+    if(!_cpSlug) return;
+    const msg=document.getElementById('cp-action-msg');
+    const btn=document.getElementById('cp-rebuild-sitemap-btn');
+    const ftpEl=document.getElementById('cp-ftp-status');
+    btn.disabled=true; btn.textContent='Rebuilding…';
+    msg.style.color='#6b7280'; msg.textContent='Rebuilding sitemap…';
+    try{
+      const r=await apiFetch('/api/sitemap/rebuild',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({clientSlug:_cpSlug})});
+      const d=await r.json();
+      if(d.success){
+        // Refresh the status card UI immediately
+        await cpLoadSitemapStatus();
+        // FTP secondary status
+        if(d.ftpConfigured){
+          ftpEl.style.display='block';
+          if(d.ftpUploaded&&d.ftpUploaded.length>0){
+            ftpEl.textContent='\u2713 FTP: '+d.ftpUploaded.length+' file'+(d.ftpUploaded.length!==1?'s':'')+' also uploaded to live server';
+            ftpEl.style.color='#065f46';
+          } else if(d.ftpError){
+            ftpEl.textContent='\u26a0 FTP upload failed: '+d.ftpError;
+            ftpEl.style.color='#b45309';
+          }
+        } else {
+          ftpEl.style.display='none';
+        }
+        msg.style.color='#059669';
+        msg.textContent='\u2713 Sitemap rebuilt — '+d.totalPages+' URL'+(d.totalPages!==1?'s':'')+'. Copy the URL above for Google Search Console.';
+      } else {
+        msg.style.color='#dc2626'; msg.textContent='Error: '+(d.error||'rebuild failed');
+      }
+    }catch(e){
+      msg.style.color='#dc2626'; msg.textContent='Network error rebuilding sitemap';
+    } finally {
+      btn.disabled=false;
+      btn.textContent='🗺 Rebuild Sitemap';
+    }
+  };
+  window.campaignResubmitSitemap=async function(){
+    if(!_cpSlug) return;
+    // Use the hosted URL shown in the status card
+    const urlInput=document.getElementById('cp-sm-url');
+    const sitemapUrl=urlInput&&urlInput.value&&urlInput.value!=='—'?urlInput.value:(_cpDetail&&_cpDetail.sitemapUrl)||'';
+    const msg=document.getElementById('cp-action-msg');
+    if(!sitemapUrl){
+      msg.style.color='#b45309';
+      msg.textContent='No sitemap URL yet — click Rebuild Sitemap first.';
+      return;
+    }
+    const btn=document.getElementById('cp-sitemap-btn');
+    btn.disabled=true;
+    msg.style.color='#6b7280'; msg.textContent='Logging sitemap submission…';
+    try{
+      const r=await apiFetch('/api/search-console/submit-sitemap',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({projectSlug:_cpSlug,sitemapUrl})});
+      const d=await r.json();
+      if(!r.ok){ msg.style.color='#dc2626'; msg.textContent='Error: '+(d.error||'Submission failed'); }
+      else {
+        msg.style.color='#059669';
+        msg.textContent='Logged \u2713 — opening Google Search Console…';
+        setTimeout(()=>window.open(d.gscUrl,'_blank'),600);
+      }
+    }catch(e){ msg.style.color='#dc2626'; msg.textContent='Network error'; }
+    finally{ btn.disabled=false; }
+  };
+
+  window.cpVerifyLiveUrls=async function(){
+    if(!_cpSlug) return;
+    const verifyBtn=document.getElementById('cp-verify-btn');
+    const deployMsg=document.getElementById('cp-deploy-msg');
+    const localBadge=document.getElementById('cp-deploy-local-badge');
+    const liveBadge=document.getElementById('cp-deploy-live-badge');
+    const badge404=document.getElementById('cp-deploy-404-badge');
+    const list404=document.getElementById('cp-deploy-404-list');
+    verifyBtn.disabled=true;
+    deployMsg.style.color='#6b7280'; deployMsg.textContent='Checking live URLs… (this may take 30–60s)';
+    try{
+      const r=await apiFetch('/api/pages/status/'+_cpSlug);
+      const d=await r.json();
+      if(!r.ok){ deployMsg.style.color='#dc2626'; deployMsg.textContent='Error: '+(d.error||'Check failed'); return; }
+      localBadge.textContent='Local: '+d.totalUrls;
+      liveBadge.textContent='Live 200: '+d.live200;
+      liveBadge.style.background=d.live200===d.totalUrls?'#d1fae5':'#fef3c7';
+      liveBadge.style.color=d.live200===d.totalUrls?'#065f46':'#92400e';
+      badge404.textContent='404: '+d.live404;
+      badge404.style.background=d.live404===0?'#d1fae5':'#fee2e2';
+      badge404.style.color=d.live404===0?'#065f46':'#991b1b';
+      const missing=(d.results||[]).filter(function(r){return r.status!==200;});
+      if(missing.length>0){
+        list404.style.display='block';
+        list404.innerHTML=missing.map(function(m){return esc(m.url)+(m.status?' ['+m.status+']':' [timeout]');}).join('<br>');
+        deployMsg.style.color='#b45309'; deployMsg.textContent=missing.length+' page(s) not live — click "Deploy Pages" to upload them.';
+      } else {
+        list404.style.display='none';
+        deployMsg.style.color='#059669'; deployMsg.textContent='All '+d.totalUrls+' pages are live and returning 200.';
+      }
+    }catch(e){ deployMsg.style.color='#dc2626'; deployMsg.textContent='Network error'; }
+    finally{ verifyBtn.disabled=false; }
+  };
+
+  // ── Image Library ───────────────────────────────────────────────────────
+  window.cpLoadImageLibrary=async function(){
+    if(!_cpSlug) return;
+    const slotsEl=document.getElementById('cp-img-slots');
+    const gridEl=document.getElementById('cp-img-grid');
+    const countEl=document.getElementById('cp-img-count');
+    slotsEl.innerHTML='<div style="color:#6b7280;font-size:.75rem;grid-column:1/-1">Loading…</div>';
+    gridEl.innerHTML='';
+    // Build service filter param — prefer explicit serviceKey from detail; fall back to cid so
+    // the server can self-resolve the service key even when _cpDetail isn't loaded yet.
+    var libUrl='/api/images/library/'+_cpSlug;
+    if(_cpDetail&&_cpDetail.serviceKey){
+      var svcNorm=String(_cpDetail.serviceKey).trim().replace(/[\s_]+/g,'-').replace(/^-+|-+$/g,'');
+      if(svcNorm) libUrl+='?service='+encodeURIComponent(svcNorm);
+    } else if(_cpCid){
+      libUrl+='?cid='+encodeURIComponent(_cpCid);
+    }
+    try{
+      // Build status URL with same service filter as the library URL so slot cards
+      // only show images that belong to this campaign's service.
+      var statusUrl='/api/images/status/'+_cpSlug;
+      if(_cpDetail&&_cpDetail.serviceKey){
+        var svcNormSt=String(_cpDetail.serviceKey).trim().replace(/[\s_]+/g,'-').replace(/^-+|-+$/g,'');
+        if(svcNormSt) statusUrl+='?service='+encodeURIComponent(svcNormSt);
+      } else if(_cpCid){
+        statusUrl+='?cid='+encodeURIComponent(_cpCid);
+      }
+      const [sR,lR]=await Promise.all([
+        fetch(statusUrl),
+        fetch(libUrl)
+      ]);
+      const sd=await sR.json(), ld=await lR.json();
+      const slots=sd.status||{}, images=ld.images||[];
+
+      // Slot cards (hero / support / conversion)
+      slotsEl.innerHTML='';
+      ['hero','support','trust','conversion'].forEach(function(slotName){
+        const info=slots[slotName]||{};
+        const imgUrl=info.exists?'/api/images/serve/'+_cpSlug+'/'+slotName:'';
+        const srcBadge=info.source==='ai'?'AI':info.source==='library'?'Library':info.source==='uploaded'?'Upload':'—';
+        const srcColor=info.source==='ai'?'#6366f1':info.source==='library'?'#7c3aed':info.source==='uploaded'?'#059669':'#9ca3af';
+        const approved=info.status==='approved';
+        const statusLabel=approved?'✓ Approved':info.status==='rejected'?'Rejected':info.exists?'Needs review':'Empty';
+        const statusColor=approved?'#059669':info.status==='rejected'?'#dc2626':'#b45309';
+        const borderColor=approved?'#86efac':info.status==='rejected'?'#fca5a5':'#fde68a';
+        const sceneTag=info.sceneLabel?'<div style="font-size:.58rem;color:#7c3aed;font-weight:600;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(String(info.sceneLabel||''))+'">'+esc(String(info.sceneLabel||''))+'</div>':'';
+        const card=document.createElement('div');
+        card.style.cssText='border:1.5px solid '+borderColor+';border-radius:8px;overflow:hidden;background:#f9fafb;text-align:center';
+        card.innerHTML=
+          '<div style="width:100%;aspect-ratio:1;overflow:hidden;background:#e5e7eb;display:flex;align-items:center;justify-content:center">'
+          +(imgUrl?'<img src="'+imgUrl+'?t='+Date.now()+'" style="width:100%;height:100%;object-fit:cover" onerror="imgFallback(this)">':'<span style="font-size:1.4rem">🖼</span>')
+          +'</div>'
+          +'<div style="padding:5px 4px 6px">'
+          +'<div style="font-size:.68rem;font-weight:700;color:#374151;text-transform:capitalize;margin-bottom:2px">'+slotName+'</div>'
+          +sceneTag
+          +'<div style="font-size:.6rem;font-weight:700;color:'+statusColor+';margin-bottom:4px">'+statusLabel+'</div>'
+          +(info.exists&&!approved
+            ?'<button onclick="cpImgApprove(this.dataset.slot)" data-slot="'+slotName+'" style="width:100%;font-size:.6rem;padding:3px 4px;border:1px solid #6ee7b7;border-radius:4px;background:#d1fae5;cursor:pointer;font-weight:700;color:#065f46">\u2713 Approve</button>'
+            :'<span style="font-size:.6rem;font-weight:700;padding:1px 5px;border-radius:8px;background:'+srcColor+'1a;color:'+srcColor+'">'+srcBadge+'</span>')
+          +'</div>';
+        slotsEl.appendChild(card);
+      });
+
+      // Library grid — uploaded images + Image Library images (filtered to this campaign's service)
+      const normCampaignSvc=_cpDetail?String(_cpDetail.serviceKey||'').trim().toLowerCase().replace(/[\s_]+/g,'-').replace(/^-+|-+$/g,''):'';
+      const uploads=images.filter(function(i){
+        if(i.source==='image_library'){
+          // Only show library images that match this campaign's service
+          return !normCampaignSvc||String(i.service||'').toLowerCase()===normCampaignSvc;
+        }
+        if(i.source==='image_pack'){
+          // Pack images are already pre-filtered by the API to the correct pack industry
+          return true;
+        }
+        return i.source==='uploaded';
+      });
+      const packCount=uploads.filter(function(i){return i.source==='image_pack';}).length;
+      const packCountEl=document.getElementById('cp-img-pack-count');
+      if(packCountEl){
+        if(packCount>0){
+          packCountEl.textContent='🖼 '+packCount+' pack + ';
+        } else {
+          packCountEl.textContent='';
+        }
+      }
+      countEl.textContent=String(uploads.length);
+      gridEl.innerHTML='';
+      // Build a reverse map: imageId → slot (from current slot assignments)
+      const assignedMap={};
+      ['hero','support','trust','conversion'].forEach(function(slotName){
+        const info=slots[slotName]||{};
+        if(info.imageId) assignedMap[info.imageId]=slotName;
+      });
+      const debugEl=document.getElementById('cp-img-debug');
+      // Single delegated click handler for all "Use this image" buttons in the grid
+      gridEl.onclick=function(e){
+        const btn=e.target.closest('[data-use]');
+        if(!btn) return;
+        const card=btn.closest('[data-image-id]');
+        if(!card) return;
+        const imageId=card.getAttribute('data-image-id');
+        const source=card.getAttribute('data-source');
+        const preSlot=btn.getAttribute('data-use');
+        if(preSlot){
+          cpImgAssign(btn,imageId,source,preSlot);
+        } else {
+          const sel=card.querySelector('select');
+          const chosenSlot=sel?sel.value:'';
+          if(!chosenSlot){alert('Pick a slot (Hero / Support / Trust / Conversion) first.');return;}
+          cpImgAssign(btn,imageId,source,chosenSlot);
+        }
+      };
+
+      const BTN='<button data-use="" style="display:block;width:100%;padding:7px 0;font-size:.73rem;font-weight:700;background:#059669;color:#fff;border:none;cursor:pointer">\u2713 Use this image</button>';
+      const BTN_USE=function(slot){return '<button data-use="'+slot+'" style="display:block;width:100%;padding:7px 0;font-size:.73rem;font-weight:700;background:#059669;color:#fff;border:none;cursor:pointer">\u2713 Use this image</button>';};
+
+      if(uploads.length===0){
+        var svcLabel=_cpDetail&&_cpDetail.serviceName?String(_cpDetail.serviceName):(_cpDetail&&_cpDetail.serviceKey?String(_cpDetail.serviceKey).replace(/-/g,' '):'');
+        gridEl.innerHTML='<div style="grid-column:1/-1;color:#6b7280;font-size:.78rem;text-align:center;padding:16px 0">No images found'+(svcLabel?' for <strong>'+svcLabel+'</strong>':'')+'. <a href="#" onclick="switchTab(\\'image-library\\');return false;" style="color:#7c3aed;text-decoration:underline;font-weight:600">Upload images in Image Library Packs</a> or generate with AI above.</div>';
+        if(debugEl) debugEl.textContent='Images found: 0';
+      } else {
+        // Separate pack images from other images for clear visual grouping
+        var packImgs=uploads.filter(function(i){return i.source==='image_pack';});
+        var otherImgs=uploads.filter(function(i){return i.source!=='image_pack';});
+        var packHeader=packImgs.length>0
+          ? '<div style="grid-column:1/-1;font-size:.68rem;font-weight:800;color:#7c3aed;text-transform:uppercase;letter-spacing:.06em;padding:4px 0 6px;border-bottom:1.5px solid #ddd6fe;margin-bottom:2px">\uD83D\uDDBC Pack Images \u2014 '+packImgs.length+' available</div>'
+          : '';
+        var uploadsHeader=otherImgs.length>0&&packImgs.length>0
+          ? '<div style="grid-column:1/-1;font-size:.65rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;padding:8px 0 4px;border-top:1px solid #e5e7eb;margin-top:4px">Your Uploads</div>'
+          : '';
+        // Render the two groups with their section headers
+        function renderImgCard(img){
+          var safeName=String(img.originalName||img.fileName||img.imageId||'').substring(0,24);
+          var thumb='<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#e5e7eb;display:flex;align-items:center;justify-content:center"><img src="'+img.imageUrl+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.remove()"></div>';
+          if(img.source==='image_library'){
+            const slotLabel=String(img.category||img.slot||'hero');
+            const slotCap=slotLabel.charAt(0).toUpperCase()+slotLabel.slice(1);
+            const svcLabel=String(img.service||'').replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+            return '<div data-image-id="'+img.imageId+'" data-source="image_library" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;background:#f9fafb">'
+              +thumb
+              +'<div style="padding:6px 7px 4px">'
+              +'<div style="font-size:.65rem;color:#6b7280;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px">'+safeName+'</div>'
+              +'<div style="font-size:.6rem;font-weight:700;color:#5b21b6;margin-bottom:6px">'+svcLabel+' \u203a '+slotCap+'</div>'
+              +'</div>'
+              +BTN_USE(slotLabel)
+              +'</div>';
+          } else if(img.source==='image_pack'){
+            // Image pack image — show numbered slot label, allow user to pick which page slot to use it in
+            const slotNum=String(img.slot||'').replace(/^0/,'');
+            const packLabel=String(img.packIndustry||img.category||'').replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+            const currentSlot=assignedMap[img.imageId]||'';
+            const opts=['hero','support','trust','conversion'].map(function(s){
+              return '<option value="'+s+'"'+(currentSlot===s?' selected':'')+'>'+s.charAt(0).toUpperCase()+s.slice(1)+'</option>';
+            }).join('');
+            return '<div data-image-id="'+img.imageId+'" data-source="image_pack" style="border:1.5px solid #ddd6fe;border-radius:8px;overflow:hidden;background:#faf5ff">'
+              +thumb
+              +'<div style="padding:6px 7px 4px">'
+              +'<div style="font-size:.6rem;font-weight:700;color:#7c3aed;margin-bottom:2px">\uD83D\uDDBC Pack \u2022 '+packLabel+' #'+slotNum+'</div>'
+              +'<select style="width:100%;font-size:.72rem;padding:4px 5px;border:1px solid #ddd6fe;border-radius:5px;background:#fff;color:#374151;cursor:pointer;margin-bottom:6px">'
+              +'<option value="">— pick slot —</option>'+opts
+              +'</select>'
+              +'</div>'
+              +BTN
+              +'</div>';
+          } else {
+            const currentSlot=assignedMap[img.imageId]||'';
+            const opts=['hero','support','trust','conversion'].map(function(s){
+              return '<option value="'+s+'"'+(currentSlot===s?' selected':'')+'>'+s.charAt(0).toUpperCase()+s.slice(1)+'</option>';
+            }).join('');
+            return '<div data-image-id="'+img.imageId+'" data-source="uploaded" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;background:#f9fafb">'
+              +thumb
+              +'<div style="padding:6px 7px 4px">'
+              +'<div style="font-size:.65rem;color:#6b7280;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:5px">'+safeName+'</div>'
+              +'<select style="width:100%;font-size:.72rem;padding:4px 5px;border:1px solid #d1d5db;border-radius:5px;background:#fff;color:#374151;cursor:pointer;margin-bottom:6px">'
+              +'<option value="">— pick slot —</option>'+opts
+              +'</select>'
+              +'</div>'
+              +BTN
+              +'</div>';
+          }
+        }
+        gridEl.innerHTML=packHeader+packImgs.map(renderImgCard).join('')+uploadsHeader+otherImgs.map(renderImgCard).join('');
+        var preSelected=uploads.filter(function(img){return !!assignedMap[img.imageId];}).length;
+        if(debugEl) debugEl.textContent='Pack images: '+packImgs.length+' | Other: '+otherImgs.length+' | Assigned: '+preSelected;
+      }
+    }catch(e){
+      slotsEl.innerHTML='<div style="color:#dc2626;font-size:.75rem;grid-column:1/-1">Failed to load image library</div>';
+    }
+  };
+
+  // Show/hide the expandable sub-sections and highlight active option button
+  window.cpImgShowSection=function(section){
+    ['ai','upload','library'].forEach(function(s){
+      const el=document.getElementById('cp-section-'+s);
+      const btn=document.getElementById('cp-opt-'+s);
+      if(el) el.style.display=s===section?'block':'none';
+      if(btn){
+        btn.style.background=s===section?'#eff6ff':'#fafaff';
+        btn.style.borderColor=s===section?'#0369a1':'#e5e7eb';
+        btn.style.color=s===section?'#0369a1':'#374151';
+      }
+    });
+    // Opening upload section: open file picker immediately
+    if(section==='upload'){
+      const fi=document.getElementById('cp-img-file-input');
+      if(fi) fi.click();
+    }
+    // Opening library section: load if not already loaded
+    if(section==='library') window.cpLoadImageLibrary();
+  };
+
+  // Wire file input: on selection, show preview + Save to Library button
+  (function wireFileInput(){
+    const fi=document.getElementById('cp-img-file-input');
+    if(!fi){ setTimeout(wireFileInput, 100); return; }
+    fi.addEventListener('change',function(){
+      const file=fi.files&&fi.files[0];
+      if(!file) return;
+      const chosenDiv=document.getElementById('cp-img-chosen');
+      const nameEl=document.getElementById('cp-img-chosen-name');
+      const sizeEl=document.getElementById('cp-img-chosen-size');
+      const previewEl=document.getElementById('cp-img-preview');
+      const saveBtn=document.getElementById('cp-img-save-btn');
+      const msg=document.getElementById('cp-img-upload-msg');
+      nameEl.textContent=file.name;
+      const kb=Math.round(file.size/1024);
+      sizeEl.textContent=kb>1024?(kb/1024).toFixed(1)+' MB':kb+' KB';
+      const reader=new FileReader();
+      reader.onload=function(e){ previewEl.src=e.target.result; };
+      reader.readAsDataURL(file);
+      chosenDiv.style.display='block';
+      saveBtn.style.display='block';
+      msg.textContent='';
+    });
+  })();
+
+  window.cpImgUpload=async function(){
+    const fi=document.getElementById('cp-img-file-input');
+    const file=fi&&fi.files&&fi.files[0];
+    if(!file||!_cpSlug) return;
+    const msg=document.getElementById('cp-img-upload-msg');
+    const saveBtn=document.getElementById('cp-img-save-btn');
+    const chooseBtn=document.getElementById('cp-img-choose-btn');
+    saveBtn.disabled=true; chooseBtn.disabled=true;
+    saveBtn.textContent='Saving…';
+    msg.style.color='#6b7280'; msg.textContent='';
+    const fd=new FormData();
+    fd.append('slug',_cpSlug);
+    fd.append('file',file);
+    fd.append('category','general');
+    fd.append('altText',file.name.replace(/\.[^.]+$/,''));
+    try{
+      const r=await apiFetch('/api/images/upload',{method:'POST',body:fd});
+      const d=await r.json();
+      if(!r.ok){ msg.style.color='#dc2626'; msg.textContent='Upload failed: '+(d.error||'unknown'); return; }
+      msg.style.color='#059669'; msg.textContent='\u2713 Saved! Now pick a slot and click \u201cUse this image\u201d below.';
+      // Reset upload area
+      fi.value='';
+      document.getElementById('cp-img-chosen').style.display='none';
+      saveBtn.style.display='none';
+      saveBtn.textContent='Save to Library';
+      // Switch to library grid so user can see their image with the Use button
+      await window.cpLoadImageLibrary();
+      window.cpImgShowSection('library');
+    }catch(e){ msg.style.color='#dc2626'; msg.textContent='Network error during upload'; }
+    finally{ saveBtn.disabled=false; chooseBtn.disabled=false; }
+  };
+
+  window.cpImgAssign=async function(btnEl,imageId,source,slot){
+    if(!_cpSlug) return;
+    const msg=document.getElementById('cp-img-assign-msg');
+    msg.style.color='#6b7280'; msg.textContent='Assigning to '+slot+' slot…';
+    const origText=btnEl?btnEl.textContent:'';
+    const origBg=btnEl?btnEl.style.background:'';
+    if(btnEl){ btnEl.disabled=true; btnEl.style.background='#92400e'; btnEl.textContent='⏳ Applying…'; }
+    try{
+      const r=await apiFetch('/api/images/assign-to-slot',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({slug:_cpSlug, slot, source, imageId, altText:''})
+      });
+      const d=await r.json();
+      if(!r.ok){ msg.style.color='#dc2626'; msg.textContent='Error: '+(d.error||'Assign failed');
+        if(btnEl){ btnEl.disabled=false; btnEl.style.background=origBg; btnEl.textContent=origText; } return; }
+      if(btnEl){ btnEl.style.background='#1d4ed8'; btnEl.textContent='\u2713 Applied!'; }
+      msg.style.color='#059669'; msg.textContent='\u2713 Set as '+slot+' — approved and ready. Deploy pages to push live.';
+      await new Promise(function(r){setTimeout(r,900);});
+      window.cpLoadImageLibrary();
+    }catch(e){ msg.style.color='#dc2626'; msg.textContent='Network error';
+      if(btnEl){ btnEl.disabled=false; btnEl.style.background=origBg; btnEl.textContent=origText; } }
+  };
+
+  window.cpImgSaveAssignments=async function(){
+    if(!_cpSlug) return;
+    const msg=document.getElementById('cp-img-assign-msg');
+    const saveBtn=document.getElementById('cp-img-assignments-save-btn');
+    const debugEl=document.getElementById('cp-img-debug');
+    const cards=document.querySelectorAll('#cp-img-grid [data-image-id]');
+    const tasks=[];
+    cards.forEach(function(card){
+      const imageId=card.getAttribute('data-image-id');
+      const source=card.getAttribute('data-source')||'uploaded';
+      const sel=card.querySelector('select');
+      const slot=sel?sel.value:'';
+      if(slot) tasks.push({imageId,source,slot});
+    });
+    if(debugEl) debugEl.textContent='Images found: '+cards.length+' | Selected for save: '+tasks.length+' | Save button: ✓ visible';
+    if(tasks.length===0){
+      const libOpen=document.getElementById('cp-section-library');
+      if(!libOpen||libOpen.style.display==='none'){
+        msg.style.color='#b45309'; msg.textContent='Choose from Library first, then assign slots using the dropdowns, then click Save.';
+      } else {
+        msg.style.color='#b45309'; msg.textContent='No images assigned — use the dropdowns on each image card to pick a slot first.';
+      }
+      return;
+    }
+    saveBtn.style.opacity='0.6'; saveBtn.style.pointerEvents='none'; saveBtn.textContent='Saving…';
+    msg.style.color='#6b7280'; msg.textContent='';
+    let saved=0, failed=0;
+    for(const t of tasks){
+      try{
+        const r=await apiFetch('/api/images/assign-to-slot',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({slug:_cpSlug, slot:t.slot, source:t.source, imageId:t.imageId, altText:''})
+        });
+        if(r.ok) saved++; else failed++;
+      }catch(e){ failed++; }
+    }
+    saveBtn.style.opacity='1'; saveBtn.style.pointerEvents=''; saveBtn.textContent='💾 Save Image Assignments';
+    if(failed===0){
+      msg.style.color='#059669';
+      msg.textContent='\u2713 Image selection saved. Deploy pages to push changes live.';
+    } else {
+      msg.style.color='#dc2626';
+      msg.textContent=saved+' saved, '+failed+' failed.';
+    }
+    window.cpLoadImageLibrary();
+  };
+
+  window.cpSaveImageMode=async function(mode){
+    if(!_cpSlug) return;
+    const modeMsg=document.getElementById('cp-img-mode-msg');
+    modeMsg.style.color='#6b7280'; modeMsg.textContent='Saving…';
+    try{
+      const r=await apiFetch('/api/images/source-mode',{
+        method:'PUT', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({slug:_cpSlug, mode})
+      });
+      const d=await r.json();
+      if(r.ok){ modeMsg.style.color='#059669'; modeMsg.textContent='\u2713 Mode saved: '+mode; }
+      else { modeMsg.style.color='#dc2626'; modeMsg.textContent='Error: '+(d.error||'Failed'); }
+    }catch(e){ modeMsg.style.color='#dc2626'; modeMsg.textContent='Network error'; }
+  };
+
+  // ── Preview Prompt — shows exact prompt before generation ──────────────────
+  window.cpPreviewPrompt=async function(slot){
+    if(!_cpSlug) return;
+    const panel=document.getElementById('cp-prompt-preview');
+    const debugEl=document.getElementById('cp-prompt-debug');
+    const pathEl=document.getElementById('cp-prompt-path');
+    const textEl=document.getElementById('cp-prompt-text');
+    const negEl=document.getElementById('cp-prompt-neg');
+    panel.style.display='block';
+    pathEl.textContent='Loading…';
+    textEl.textContent='';
+    negEl.textContent='';
+    debugEl.textContent='';
+    try{
+      const r=await apiFetch('/api/images/preview-prompt',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          slug:_cpSlug, slot,
+          campaignId:_cpCid||'',
+          serviceKey:(_cpDetail&&_cpDetail.serviceKey)||'',
+          serviceName:(_cpDetail&&_cpDetail.serviceName)||'',
+          primaryKeyword:(_cpDetail&&_cpDetail.focusKeyword)||'',
+        })
+      });
+      const d=await r.json();
+      if(!r.ok){ pathEl.textContent='Error: '+(d.error||'Failed'); return; }
+      const db=d.debug||{};
+      debugEl.innerHTML=
+        '<b>Slot:</b> '+slot+
+        ' &nbsp;|&nbsp; <b>imageRole:</b> '+(db.imageRole||'?')+
+        ' &nbsp;|&nbsp; <b>serviceKey:</b> '+(db.serviceKey||'—')+
+        ' &nbsp;|&nbsp; <b>serviceName:</b> '+(db.serviceName||'—')+
+        ' &nbsp;|&nbsp; <b>primaryKeyword:</b> '+(db.reqPrimaryKeyword||'—')+
+        '<br><b>project.businessType:</b> '+(db.projectBusinessType||'—')+
+        ' &nbsp;|&nbsp; <b>project.industryType:</b> '+(db.projectIndustryType||'—')+
+        ' &nbsp;|&nbsp; <b>emailMktgOverride:</b> '+(db.emailMktgOverride?'<b style="color:#4ade80">YES ✓</b>':'<b style="color:#f87171">NO ✗</b>');
+      const pathLabels={
+        email_marketing_override:'✅ EMAIL MARKETING OVERRIDE (correct for email marketing campaigns)',
+        scene_library:'⚠️ SCENE LIBRARY (generic — email marketing NOT detected)',
+        structured_prompt:'📝 STRUCTURED PROMPT (generic role-based)',
+      };
+      pathEl.textContent=pathLabels[d.path]||d.path||'unknown';
+      textEl.textContent=d.prompt||'(no prompt)';
+      negEl.textContent=d.negativePrompt||'(none)';
+    }catch(e){
+      pathEl.textContent='Network error: '+e.message;
+    }
+  };
+
+  window.cpGenAIImages=async function(){
+    if(!_cpSlug) return;
+    const msg=document.getElementById('cp-ai-gen-msg');
+    const badges=document.getElementById('cp-scene-badges');
+    const btn=document.querySelector('#cp-section-ai button[onclick="cpGenAIImages()"]');
+    if(btn){ btn.disabled=true; btn.textContent='Generating…'; }
+    if(badges) badges.style.display='none';
+    msg.style.color='#6b7280'; msg.textContent='Generating images for hero, support and conversion…';
+    let ok=0, fail=0, skipped=0;
+    const sceneResults=[];
+    for(const slot of ['hero','support','conversion']){
+      try{
+        const r=await apiFetch('/api/images/generate',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            slug:        _cpSlug,
+            slot,
+            campaignId:  _cpCid||'',
+            serviceKey:  (_cpDetail&&_cpDetail.serviceKey)||'',
+            serviceName: (_cpDetail&&_cpDetail.serviceName)||'',
+            primaryKeyword: (_cpDetail&&_cpDetail.focusKeyword)||'',
+            prompt:      '',
+          })
+        });
+        const d=await r.json();
+        if(d.skipped){ skipped++; }
+        else if(r.ok&&d.ok){ ok++; if(d.sceneLabel) sceneResults.push({slot,label:d.sceneLabel,source:d.source||'ai'}); }
+        else { fail++; }
+      }catch(e){ fail++; }
+    }
+    if(btn){ btn.disabled=false; btn.textContent='✨ Generate Images Now'; }
+    // Show scene diversity badges
+    if(badges&&sceneResults.length){
+      const slotColors={hero:'#6366f1',support:'#0369a1',conversion:'#059669'};
+      badges.innerHTML=sceneResults.map(s=>'<span style="font-size:.7rem;padding:3px 9px;border-radius:20px;background:'+( slotColors[s.slot]||'#6b7280')+'20;color:'+(slotColors[s.slot]||'#6b7280')+';border:1px solid '+(slotColors[s.slot]||'#6b7280')+'40;font-weight:600">'+s.slot+': '+s.label+'</span>').join('');
+      badges.style.display='flex';
+    }
+    if(skipped>0&&ok===0){
+      msg.style.color='#9ca3af'; msg.textContent='Image generation is disabled for this project.';
+    } else if(fail===0){
+      msg.style.color='#059669'; msg.textContent='\u2713 '+ok+' images generated with scene diversity. Click \u201cChoose from Library\u201d to assign them.';
+      window.cpLoadImageLibrary();
+    } else {
+      msg.style.color='#dc2626'; msg.textContent=ok+' generated, '+fail+' failed. Check your Ideogram API key or switch to Library mode.';
+    }
+  };
+
+  window.cpImgApprove=async function(slot){
+    if(!_cpSlug) return;
+    const msg=document.getElementById('cp-img-assign-msg');
+    msg.style.color='#6b7280'; msg.textContent='Approving '+slot+' image…';
+    try{
+      const r=await apiFetch('/api/images/approve',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({slug:_cpSlug, slot, status:'approved'})
+      });
+      const d=await r.json();
+      if(!r.ok){ msg.style.color='#dc2626'; msg.textContent='Error: '+(d.error||'Approve failed'); return; }
+      msg.style.color='#059669'; msg.textContent='\u2713 '+slot.charAt(0).toUpperCase()+slot.slice(1)+' image approved. Deploy pages to push live.';
+      window.cpLoadImageLibrary();
+    }catch(e){ msg.style.color='#dc2626'; msg.textContent='Network error'; }
+  };
+
+  window.cpCheckLegacyAssets=async function(){
+    if(!_cpSlug){ alert('Select a campaign first'); return; }
+    const btn=document.getElementById('cp-legacy-btn');
+    const msg=document.getElementById('cp-legacy-msg');
+    const report=document.getElementById('cp-legacy-report');
+    const rows=document.getElementById('cp-legacy-rows');
+    btn.disabled=true;
+    msg.style.color='#6b7280'; msg.textContent='Scanning live server for legacy assets… (may take ~30 s)';
+    report.style.display='none';
+    try{
+      const r=await apiFetch('/api/assets/legacy-check?clientSlug='+encodeURIComponent(_cpSlug));
+      const d=await r.json();
+      if(!r.ok){ msg.style.color='#dc2626'; msg.textContent='Error: '+(d.error||'Check failed'); return; }
+      const items=d.report||[];
+      const anyExist=items.some(function(i){return i.exists;});
+      if(!anyExist){
+        msg.style.color='#059669'; msg.textContent='No legacy files found on the live server. All clear.';
+        return;
+      }
+      rows.innerHTML='';
+      items.forEach(function(item){
+        const row=document.createElement('div');
+        row.style.cssText='padding:6px 8px;border-radius:6px;border:1px solid #e5e7eb;background:#f9fafb;display:flex;gap:8px;align-items:center;flex-wrap:wrap';
+        const exists=item.exists;
+        const ref=item.referenced;
+        const statusColor=!exists?'#6b7280':ref?'#b45309':'#15803d';
+        const statusBg=!exists?'#f3f4f6':ref?'#fef3c7':'#dcfce7';
+        const statusText=!exists?'Not found':ref?'Referenced by '+item.referencedByPages.length+' page(s)':'Unused — safe to remove';
+        row.innerHTML='<span style="flex:1;color:#374151">'+item.file+'</span>'
+          +'<span style="font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:700;background:'+statusBg+';color:'+statusColor+'">'+statusText+'</span>';
+        if(exists && ref && item.referencedByPages.length){
+          const detail=document.createElement('div');
+          detail.style.cssText='width:100%;padding-left:4px;font-size:.68rem;color:#92400e';
+          detail.textContent='Pages: '+item.referencedByPages.slice(0,5).join(', ')+(item.referencedByPages.length>5?' …':'');
+          row.appendChild(detail);
+        }
+        rows.appendChild(row);
+      });
+      report.style.display='block';
+      const safe=d.summary.safeToRemoveCount||0;
+      if(safe>0){
+        msg.style.color='#b45309'; msg.textContent=safe+' legacy file'+(safe!==1?'s':'')+' found with no live references — safe to remove manually.';
+      } else {
+        msg.style.color='#374151'; msg.textContent='Legacy files found but still referenced — do not remove yet.';
+      }
+    }catch(e){ msg.style.color='#dc2626'; msg.textContent='Network error'; }
+    finally{ btn.disabled=false; }
+  };
+
+    // ── Final Publish Gate JS ────────────────────────────────────────────────
+
+  let _cpGateReport=null;
+
+  window.cpGateRun=async function(){
+    if(!_cpSlug){ return; }
+    const runBtn   =document.getElementById('cp-gate-run-btn');
+    const runEl    =document.getElementById('cp-gate-running');
+    const emptyEl  =document.getElementById('cp-gate-empty');
+    const errEl    =document.getElementById('cp-gate-error');
+    const bannerEl =document.getElementById('cp-gate-banner');
+    const statsEl  =document.getElementById('cp-gate-stats');
+    const countsEl =document.getElementById('cp-gate-counts');
+    const breakEl  =document.getElementById('cp-gate-breakdown');
+    const issueEl  =document.getElementById('cp-gate-issues');
+    [bannerEl,statsEl,countsEl,breakEl,issueEl].forEach(function(el){el.style.display='none';});
+    emptyEl.style.display='none';
+    errEl.style.display='none';
+    runEl.style.display='block';
+    runBtn.disabled=true;
+    try{
+      const r=await apiFetch('/api/publish-gate/'+_cpSlug,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({campaignId:_cpCid||undefined})});
+      const d=await r.json();
+      if(!r.ok||d.error){ throw new Error(d.error||'Gate check failed'); }
+      _cpGateReport=d.report;
+      cpGateRender(d.report);
+    }catch(e){
+      errEl.textContent='Gate error: '+e.message;
+      errEl.style.display='block';
+    }finally{
+      runEl.style.display='none';
+      runBtn.disabled=false;
+    }
+  };
+
+  window.cpGateRepair=async function(){
+    if(!_cpSlug){ return; }
+    const repairBtn=document.getElementById('cp-gate-repair-btn');
+    const runEl    =document.getElementById('cp-gate-running');
+    const errEl    =document.getElementById('cp-gate-error');
+    runEl.textContent='Running auto-repair then re-running gate…';
+    runEl.style.display='block';
+    repairBtn.disabled=true;
+    errEl.style.display='none';
+    try{
+      const r=await apiFetch('/api/publish-gate/'+_cpSlug+'/repair',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+      const d=await r.json();
+      if(d.report) cpGateRender(d.report);
+      const note=document.getElementById('cp-gate-repair-note');
+      if(d.repairResult&&note){
+        const fixed=d.repairResult.pagesFixed||0;
+        note.textContent='Auto-repair complete — '+fixed+' page'+(fixed!==1?'s':'')+' repaired. Gate re-run above shows updated results.';
+        note.style.display='block';
+      }
+    }catch(e){
+      errEl.textContent='Repair error: '+e.message;
+      errEl.style.display='block';
+    }finally{
+      runEl.style.display='none';
+      runEl.textContent='Running gate checks… please wait';
+      repairBtn.disabled=false;
+    }
+  };
+
+  window.cpGateRender=function(report){
+    _cpGateReport=report;
+    const bannerEl   =document.getElementById('cp-gate-banner');
+    const iconEl     =document.getElementById('cp-gate-status-icon');
+    const labelEl    =document.getElementById('cp-gate-status-label');
+    const subEl      =document.getElementById('cp-gate-status-sub');
+    const statsEl    =document.getElementById('cp-gate-stats');
+    const countsEl   =document.getElementById('cp-gate-counts');
+    const breakEl    =document.getElementById('cp-gate-breakdown');
+    const issueEl    =document.getElementById('cp-gate-issues');
+    const issueCount =document.getElementById('cp-gate-issue-count');
+    const tbody      =document.getElementById('cp-gate-tbody');
+    const repairBtn  =document.getElementById('cp-gate-repair-btn');
+    const emptyEl    =document.getElementById('cp-gate-empty');
+    emptyEl.style.display='none';
+
+    const STATUS_CFG={
+      PASS_READY:       {bg:'#f0fdf4',border:'#86efac',color:'#065f46',icon:'✅',label:'PASS — Safe to Publish',sub:'All critical checks passed. This campaign is ready to go live.'},
+      REVIEW_REQUIRED:  {bg:'#fffbeb',border:'#fde68a',color:'#92400e',icon:'⚠️',label:'REVIEW REQUIRED',sub:'Issues found that need manual sign-off before publishing.'},
+      FAIL_BLOCKED:     {bg:'#fef2f2',border:'#fecaca',color:'#991b1b',icon:'❌',label:'FAIL — PUBLISH BLOCKED',sub:'Critical issues must be fixed or auto-repaired before you can deploy.'},
+    };
+    const cfg=STATUS_CFG[report.status]||STATUS_CFG.REVIEW_REQUIRED;
+
+    // Status banner
+    bannerEl.style.cssText='display:flex;align-items:flex-start;gap:10px;border-radius:8px;padding:12px 14px;margin-bottom:10px;background:'+cfg.bg+';border:1.5px solid '+cfg.border;
+    iconEl.textContent=cfg.icon;
+    labelEl.style.color=cfg.color; labelEl.textContent=cfg.label;
+    subEl.style.color=cfg.color+'cc'; subEl.textContent=cfg.sub;
+
+    // Summary stats grid
+    statsEl.style.display='grid';
+    document.getElementById('cp-gs-total').textContent=report.totalPages;
+    document.getElementById('cp-gs-pass').textContent=report.passedPages;
+    document.getElementById('cp-gs-review').textContent=report.reviewPages;
+    document.getElementById('cp-gs-fail').textContent=report.failedPages;
+
+    // Issue counts pills
+    countsEl.style.display='flex';
+    document.getElementById('cp-gc-crit').textContent =report.criticalCount+' Critical';
+    document.getElementById('cp-gc-major').textContent=report.majorCount+' Major';
+    document.getElementById('cp-gc-warn').textContent =report.warningCount+' Warning';
+    document.getElementById('cp-gc-score').textContent='Score: '+report.campaignScore+'/100';
+    if(report.aiReadinessAvg!=null){
+      document.getElementById('cp-gc-ai').textContent='AI: '+report.aiReadinessAvg+'/100';
+    }
+
+    // Breakdown pills
+    const BREAKDOWN_LABELS={
+      linkIntegrity:'🔗 Links',images:'🖼 Images',schema:'📋 Schema',
+      map:'🗺 Map',moneyPage:'💰 Money Page',content:'✏️ Content'
+    };
+    const bd=report.breakdown||{};
+    breakEl.style.display='flex';
+    breakEl.innerHTML=Object.entries(BREAKDOWN_LABELS).map(function(e){
+      const ok=bd[e[0]]==='ok';
+      return '<span style="font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:12px;background:'+(ok?'#d1fae5':'#fef2f2')+';color:'+(ok?'#065f46':'#dc2626')+'">'+e[1]+' '+(ok?'✓':'✗')+'</span>';
+    }).join('');
+
+    // Issue table
+    const issues=report.issues||[];
+    const autoRepairCount=issues.filter(function(i){return i.autoRepairAvailable;}).length;
+    if(issues.length>0){
+      issueEl.style.display='block';
+      issueCount.textContent='('+issues.length+' total)';
+      const SEV={critical:{bg:'#fef2f2',color:'#dc2626',label:'CRIT'},major:{bg:'#fffbeb',color:'#d97706',label:'MAJOR'},warning:{bg:'#f3f4f6',color:'#6b7280',label:'WARN'}};
+      tbody.innerHTML=issues.map(function(iss){
+        const s=SEV[iss.severity]||SEV.warning;
+        const page=iss.pageSlug||'—';
+        return '<tr style="border-bottom:1px solid #f3f4f6;vertical-align:top">'
+          +'<td style="padding:5px 8px"><span style="font-size:.65rem;font-weight:800;padding:2px 5px;border-radius:4px;background:'+s.bg+';color:'+s.color+'">'+s.label+'</span></td>'
+          +'<td style="padding:5px 8px;color:#374151;font-size:.72rem;white-space:nowrap">'+esc(iss.checkKey||iss.category||'—')+'</td>'
+          +'<td style="padding:5px 8px;color:#6b7280;font-size:.7rem;font-family:monospace;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(page)+'">'+esc(page.length>18?page.slice(-18):page)+'</td>'
+          +'<td style="padding:5px 8px;color:#374151;font-size:.7rem;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(iss.evidence||'')+'">'+esc(iss.evidence||'—')+'</td>'
+          +'<td style="padding:5px 8px;color:#059669;font-size:.7rem;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(iss.suggestedFix||'')+'">'+esc(iss.suggestedFix||'—')+'</td>'
+          +'</tr>';
+      }).join('');
+    }
+
+    // Show auto-repair button if any issues support it
+    if(repairBtn){
+      repairBtn.style.display=autoRepairCount>0?'':'none';
+    }
+
+    // Expose gate status for deploy guard
+    window._cpGateStatus=report.status;
+  };
+
+  window.cpDeployPages=async function(){
+    if(!_cpSlug) return;
+    const deployBtn=document.getElementById('cp-deploy-btn');
+    const deployMsg=document.getElementById('cp-deploy-msg');
+
+    // ── Final Publish Gate check ───────────────────────────────────────
+    const gateStatus=window._cpGateStatus||null;
+    if(gateStatus==='FAIL_BLOCKED'){
+      deployMsg.style.color='#dc2626';
+      deployMsg.textContent='PUBLISH BLOCKED — Final Publish Gate has critical failures. Fix all FAIL issues first, or click Auto Repair.';
+      return;
+    }
+    if(gateStatus==='REVIEW_REQUIRED'){
+      const ok=confirm('Final Publish Gate shows REVIEW_REQUIRED (non-critical issues). This campaign can be published but review is recommended.\\n\\nDeploy anyway?');
+      if(!ok){
+        deployMsg.style.color='#b45309';
+        deployMsg.textContent='Deploy cancelled. Address the review issues or run the gate again first.';
+        return;
+      }
+    }
+    if(!gateStatus){
+      const ok=confirm('Final Publish Gate has not been run for this campaign.\\n\\nRun it now before deploying to ensure no critical issues exist?\\n\\n(Cancel to run gate, OK to skip and deploy anyway)');
+      if(!ok){ cpGateRun(); return; }
+    }
+
+    // ── Legacy QA Gate (secondary warning only) ────────────────────────
+    const ppSlugCache=window._ppQaResults;
+    if(ppSlugCache && ppSlugCache.summary && !gateStatus){
+      const failCnt=ppSlugCache.summary.failCount||0;
+      if(failCnt>0){
+        const failList=(ppSlugCache.results||[])
+          .filter(function(r){return r.status==='fail';})
+          .map(function(r){return '• '+r.area+' ('+r.areaDir+')';})
+          .slice(0,5).join('\\n');
+        const msg='Pre-Publish QA found '+failCnt+' failing page'+(failCnt>1?'s':'')+':\\n\\n'
+          +failList+(failCnt>5?'\\n…and '+(failCnt-5)+' more':'')+'\\n\\n'
+          +'These pages have critical SEO issues. Deploy anyway?';
+        if(!confirm(msg)){
+          deployMsg.style.color='#b45309';
+          deployMsg.textContent='Deploy cancelled — fix '+failCnt+' failing page'+(failCnt>1?'s':'')+' first. Run Pre-Publish QA for details.';
+          return;
+        }
+      }
+    }
+    // ─────────────────────────────────────────────────────────────────
+
+    deployBtn.disabled=true;
+    deployMsg.style.color='#6b7280'; deployMsg.textContent='Starting deploy…';
+    try{
+      // Start the background job — returns immediately with a jobId
+      const r=await apiFetch('/api/pages/deploy',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({clientSlug:_cpSlug})});
+      const d=await r.json();
+      if(!r.ok){ deployMsg.style.color='#dc2626'; deployMsg.textContent='Error: '+(d.error||'Deploy failed'); deployBtn.disabled=false; return; }
+
+      const jobId=d.jobId;
+      const total=d.totalPages||0;
+
+      // Poll for progress every 2 seconds
+      const poll=setInterval(async()=>{
+        try{
+          const sr=await apiFetch('/api/pages/deploy/status/'+jobId);
+          const s=await sr.json();
+          if(!sr.ok){ clearInterval(poll); deployMsg.style.color='#dc2626'; deployMsg.textContent='Status check failed'; deployBtn.disabled=false; return; }
+
+          const pct=total>0?Math.round((s.done/total)*100):0;
+          if(s.status==='running'){
+            const phaseLabel=s.phase==='assets'?'Uploading images…':'Uploading pages…';
+            deployMsg.style.color='#6b7280';
+            deployMsg.textContent=phaseLabel+' '+s.done+'/'+total+' ('+pct+'%)';
+          } else if(s.status==='done'){
+            clearInterval(poll);
+            deployBtn.disabled=false;
+            const ok=s.uploadedCount||0, fail=s.failedCount||0;
+            if(fail===0){
+              deployMsg.style.color='#059669';
+              deployMsg.textContent='Done! Uploaded '+ok+' page'+(ok!==1?'s':'')+'. Verifying live URLs…';
+            } else {
+              deployMsg.style.color='#b45309';
+              deployMsg.textContent='Uploaded '+ok+', failed '+fail+'. Check FTP credentials or server logs.';
+            }
+            setTimeout(window.cpVerifyLiveUrls, 1500);
+          } else if(s.status==='error'){
+            clearInterval(poll);
+            deployBtn.disabled=false;
+            deployMsg.style.color='#dc2626';
+            deployMsg.textContent='FTP error: '+(s.error||'Unknown error');
+          }
+        }catch(pollErr){ /* network blip — keep polling */ }
+      }, 2000);
+
+    }catch(e){ deployMsg.style.color='#dc2626'; deployMsg.textContent='Network error — could not start deploy'; deployBtn.disabled=false; }
+  };
+
+// ── System Health ────────────────────────────────────────────────────────────
+let _shReport=null;
+let _shJobId=null;
+let _shAllIssues=[];
+
+function shLoad(){
+  if(!activeSlug) return;
+  $('btn-sh-run').disabled=false;
+  apiFetch('/api/system-health/'+activeSlug)
+    .then(r=>r.json())
+    .then(d=>{ if(d.cached&&d.report){ _shReport=d.report; shRender(d.report); } })
+    .catch(e=>{ if(!e.sessionExpired) console.warn('shLoad:',e.message); });
+}
+
+async function shRun(){
+  if(!activeSlug){ alert('Select a project first'); return; }
+  const btn=$('btn-sh-run');
+  const lbl=$('sh-running');
+  btn.disabled=true;
+  lbl.textContent='Starting audit…';
+  lbl.classList.remove('hidden');
+  shHideAll();
+  $('sh-error').classList.add('hidden');
+  $('sh-empty').style.display='none';
+  try{
+    const r=await apiFetch('/api/system-health/'+activeSlug+'/run',{method:'POST'});
+    const d=await r.json();
+    if(!r.ok){ $('sh-error').textContent='Error: '+(d.error||'Failed to start'); $('sh-error').classList.remove('hidden'); btn.disabled=false; lbl.classList.add('hidden'); return; }
+    _shJobId=d.jobId;
+    shPollJob(_shJobId);
+  }catch(e){
+    $('sh-error').textContent=e.message||'Network error — try refreshing the page.'; $('sh-error').classList.remove('hidden');
+    btn.disabled=false; lbl.classList.add('hidden');
+  }
+}
+
+function shPollJob(jobId){
+  const lbl=$('sh-running');
+  const interval=setInterval(async()=>{
+    try{
+      const r=await apiFetch('/api/system-health/'+activeSlug+'/job/'+jobId);
+      const d=await r.json();
+      if(d.status==='running'){
+        const p=d.progress||{};
+        lbl.textContent=p.stage||'Running\u2026'+(p.total>0?' ('+p.done+'/'+p.total+')':'');
+      } else if(d.status==='done'){
+        clearInterval(interval);
+        lbl.classList.add('hidden');
+        $('btn-sh-run').disabled=false;
+        _shReport=d.report;
+        shRender(d.report);
+      } else {
+        clearInterval(interval);
+        lbl.classList.add('hidden');
+        $('btn-sh-run').disabled=false;
+        $('sh-error').textContent='Audit error: '+(d.error||'Unknown'); $('sh-error').classList.remove('hidden');
+      }
+    }catch(e){
+      clearInterval(interval);
+      lbl.classList.add('hidden'); $('btn-sh-run').disabled=false;
+      if(!e.sessionExpired) $('sh-error').textContent=e.message||'Network error — try refreshing.'; $('sh-error').classList.remove('hidden');
+    }
+  },3000);
+}
+
+function shHideAll(){
+  ['sh-stats-grid','sh-gate-pass','sh-gate-warn','sh-gate-fail','sh-index-note',
+   'sh-offline-banner','sh-filter-bar','sh-issues-section','sh-pages-section','sh-all-clear'].forEach(id=>{
+    const el=$(id); if(el) el.style.display='none';
+  });
+  ['btn-sh-json','btn-sh-csv'].forEach(id=>{ const el=$(id); if(el) el.style.display='none'; });
+}
+
+function shRender(report){
+  shHideAll();
+  _shReport=report;
+  const s=report.summary;
+
+  // Offline warning
+  if(report.siteOffline){
+    const ob=$('sh-offline-banner'); if(ob) ob.style.display='block';
+  }
+
+  // Stats grid
+  const grid=$('sh-stats-grid');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:18px';
+  $('sh-s-total').textContent=s.totalPages;
+  $('sh-s-ok').textContent=s.live200Count;
+  $('sh-s-404').textContent=s.notFoundCount;
+  $('sh-s-links').textContent=s.brokenInternalLinks;
+  $('sh-s-imgs').textContent=s.brokenImages;
+  $('sh-s-prev').textContent=s.previewUrlCount;
+  $('sh-s-gsc').textContent=s.gscIndexedCount!=null?s.gscIndexedCount:'—';
+  $('sh-s-gsc-sub').textContent=s.gscIndexedCount!=null?'GSC Verified':'not run yet';
+  $('sh-s-thin').textContent=s.thinContentCount;
+  $('sh-s-schema').textContent=s.schemaIssueCount;
+  $('sh-s-ph').textContent=s.placeholderCount;
+
+  // Tab badge
+  const total=s.failCount+s.warningCount;
+  const tbadge=$('tb-system-health');
+  if(tbadge) tbadge.textContent=s.failCount>0?s.failCount+' FAIL':s.warningCount>0?s.warningCount+' WARN':'OK';
+
+  // Indexing note
+  if(s.indexingNote){
+    const note=$('sh-index-note');
+    note.style.display='block';
+    note.innerHTML='<strong>&#8505; Indexing Status:</strong> '+escH(s.indexingNote);
+  }
+
+  // Gate banners
+  if(s.canDeploy&&s.failCount===0&&s.warningCount===0){
+    $('sh-gate-pass').style.display='flex';
+  } else if(s.failCount>0){
+    $('sh-gate-fail').style.display='block';
+    $('sh-gate-fail-text').textContent=s.failCount+' critical failure'+(s.failCount!==1?'s':'')+' across '+report.pages.filter(p=>p.overallStatus==='fail').length+' page'+(report.pages.filter(p=>p.overallStatus==='fail').length!==1?'s':'')+'. Fix before deploying.';
+  } else if(s.warningCount>0){
+    $('sh-gate-warn').style.display='block';
+    $('sh-gate-warn-text').textContent=s.warningCount+' page'+(s.warningCount!==1?'s':'')+' have warnings. Review before deploying.';
+  }
+
+  // Issues
+  _shAllIssues=report.issues||[];
+  if(_shAllIssues.length>0){
+    $('sh-filter-bar').style.cssText='display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px';
+    shRenderIssues(_shAllIssues);
+  } else {
+    $('sh-all-clear').style.display='block';
+  }
+
+  // Pages table
+  shRenderPages(report.pages);
+
+  // Export buttons
+  ['btn-sh-json','btn-sh-csv'].forEach(id=>{ const el=$(id); if(el) el.style.display=''; });
+}
+
+function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+const SH_AUTO_FIX_TYPES=new Set(['Broken Image','Preview URL in Live HTML','Not Noindex','Canonical URL','Broken Internal Link']);
+
+function shRenderIssues(issues){
+  $('sh-issues-section').style.display='';
+  $('sh-issues-sub').textContent=issues.length+' issue'+(issues.length!==1?'s':'');
+  const tbody=$('sh-issues-tbody');
+  tbody.innerHTML=issues.map((i,idx)=>{
+    const canFix=SH_AUTO_FIX_TYPES.has(i.issueType);
+    const btnId='sh-fix-btn-'+idx;
+    const rowId='sh-fix-row-'+idx;
+    const issueData=encodeURIComponent(JSON.stringify(i));
+    const actionCell=canFix
+      ? \`<button id="\${escH(btnId)}" onclick="shFixNow(this,'\${escH(issueData)}')" style="font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:5px;border:1.5px solid #2563eb;background:#eff6ff;color:#1d4ed8;cursor:pointer;white-space:nowrap">Fix Now</button>\`
+      : \`<span style="font-size:.68rem;color:#9ca3af;white-space:nowrap">Manual</span>\`;
+    return \`<tr id="\${escH(rowId)}">
+    <td><span class="sh-sev-\${i.severity==='fail'?'fail':'warn'}">\${i.severity==='fail'?'FAIL':'WARN'}</span></td>
+    <td style="font-size:.8rem;font-weight:600;color:#374151">\${escH(i.issueType)}</td>
+    <td style="font-size:.78rem;color:#1e40af;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+      <a href="\${escH(i.sourcePage)}" target="_blank" title="\${escH(i.sourcePage)}">\${escH(i.sourcePage.replace(/^https?:\\/\\/[^/]+/,''))}</a>
+    </td>
+    <td style="font-size:.78rem;color:#374151;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${escH(i.evidence)}">\${escH(i.evidence)}</td>
+    <td style="font-size:.78rem;color:#6b7280;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${escH(i.suggestedFix)}">\${escH(i.suggestedFix)}</td>
+    <td style="white-space:nowrap">\${actionCell}</td>
+  </tr>\`;
+  }).join('');
+}
+
+async function shFixNow(btn,issueDataEncoded){
+  if(!activeSlug) return;
+  let issue;
+  try{ issue=JSON.parse(decodeURIComponent(issueDataEncoded)); }catch{ alert('Could not parse issue data.'); return; }
+  const row=btn.closest('tr');
+  btn.disabled=true;
+  btn.textContent='Fixing\u2026';
+  btn.style.background='#fefce8';
+  btn.style.borderColor='#fbbf24';
+  btn.style.color='#92400e';
+  try{
+    const r=await fetch('/api/system-health/'+activeSlug+'/fix',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({issue})
+    });
+    const data=await r.json();
+    if(data.success){
+      btn.textContent='Fixed \u2713';
+      btn.style.background='#f0fdf4';
+      btn.style.borderColor='#86efac';
+      btn.style.color='#15803d';
+      if(row) row.style.opacity='0.5';
+      const sub=$('sh-issues-sub');
+      if(sub){
+        const cur=parseInt(sub.textContent)||0;
+        const nxt=Math.max(0,cur-1);
+        sub.textContent=nxt+' issue'+(nxt!==1?'s':'');
+      }
+    } else if(data.autoFixUnavailable){
+      btn.disabled=false;
+      btn.textContent='Fix Now';
+      btn.style.background='#eff6ff';
+      btn.style.borderColor='#2563eb';
+      btn.style.color='#1d4ed8';
+      alert('Manual fix required:\\n\\n'+data.message);
+    } else {
+      btn.disabled=false;
+      btn.textContent='Retry';
+      btn.style.background='#fef2f2';
+      btn.style.borderColor='#fca5a5';
+      btn.style.color='#dc2626';
+      alert('Fix failed:\\n\\n'+(data.message||'Unknown error'));
+    }
+  }catch(e){
+    btn.disabled=false;
+    btn.textContent='Error';
+    btn.style.background='#fef2f2';
+    btn.style.borderColor='#fca5a5';
+    btn.style.color='#dc2626';
+    alert('Network error \u2014 please try again.');
+  }
+}
+
+let _shPages=[];
+
+function _buildIssuesFromPage(p){
+  const issues=[];
+  (p.brokenInternalLinks||[]).forEach(l=>{
+    issues.push({
+      url: (p.url.endsWith('/')?p.url.slice(0,-1):p.url)+l.href,
+      sourcePage: p.url,
+      issueType: 'Broken Internal Link',
+      severity: 'fail',
+      evidence: 'Href: '+l.href+' | Anchor: "'+l.anchorText+'" | Status: '+(l.status||404),
+      suggestedFix: 'Remove or correct the link to '+l.href,
+    });
+  });
+  (p.brokenImages||[]).forEach(img=>{
+    issues.push({
+      url: img.src,
+      sourcePage: p.url,
+      issueType: 'Broken Image',
+      severity: 'fail',
+      evidence: 'Image src: '+img.src+' | Status: '+(img.status||'error'),
+      suggestedFix: 'Upload the missing image or correct the src path.',
+    });
+  });
+  return issues;
+}
+
+function shRenderPages(pages){
+  _shPages=pages;
+  $('sh-pages-section').style.display='';
+  $('sh-pages-sub').textContent=pages.length+' pages checked';
+  const fixableCount=pages.filter(p=>(p.brokenInternalLinks&&p.brokenInternalLinks.length>0)||(p.brokenImages&&p.brokenImages.length>0)).length;
+  const fixAllBtn=$('btn-sh-fix-all');
+  if(fixAllBtn) fixAllBtn.style.display=fixableCount>0?'':'none';
+  const tbody=$('sh-pages-tbody');
+  tbody.innerHTML=pages.map((p,pi)=>{
+    const st=p.overallStatus==='pass'?'sh-sev-pass':p.overallStatus==='warning'?'sh-sev-warn':'sh-sev-fail';
+    const label=p.overallStatus==='pass'?'PASS':p.overallStatus==='warning'?'WARN':'FAIL';
+    const hasFixable=(p.brokenInternalLinks&&p.brokenInternalLinks.length>0)||(p.brokenImages&&p.brokenImages.length>0);
+    const hasIssues=p.overallStatus!=='pass';
+    const actionBtns=\`
+      \${hasFixable?\`<button id="sh-pg-fix-\${pi}" onclick="shFixPage(this,\${pi})" style="font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:5px;border:1.5px solid #2563eb;background:#eff6ff;color:#1d4ed8;cursor:pointer;white-space:nowrap;margin-right:4px">Fix Page</button>\`:''}
+      \${hasIssues?\`<button onclick="shFilterToPage('\${escH(p.url)}')" style="font-size:.7rem;padding:3px 8px;border-radius:5px;border:1px solid #e2e8f0;background:#f8fafc;color:#374151;cursor:pointer;white-space:nowrap">View Issues</button>\`:'<span style="font-size:.68rem;color:#9ca3af">All clear</span>'}
+    \`;
+    return \`<tr>
+      <td><span class="\${st}">\${label}</span></td>
+      <td style="font-size:.78rem;color:#1e40af;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <a href="\${escH(p.url)}" target="_blank" title="\${escH(p.url)}">/\${escH(p.slug)}/</a>
+      </td>
+      <td style="font-weight:700;color:\${p.httpStatus===200?'#15803d':'#dc2626'}">\${p.httpStatus}</td>
+      <td style="color:\${p.wordCount<300?'#dc2626':p.wordCount<500?'#b45309':'#15803d'}">\${p.wordCount}</td>
+      <td style="font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px" title="\${escH(p.title||'')}">\${escH(p.title||'—')}</td>
+      <td style="font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:110px" title="\${escH(p.h1||'')}">\${escH(p.h1||'—')}</td>
+      <td style="font-size:.78rem;color:\${p.schemaTypes.length>0?'#15803d':'#dc2626'}">\${p.schemaTypes.length>0?p.schemaTypes.join(', '):'None'}</td>
+      <td style="color:\${p.brokenInternalLinks.length>0?'#dc2626':'#15803d'}">\${p.brokenInternalLinks.length>0?p.brokenInternalLinks.length:'\u2714'}</td>
+      <td style="color:\${p.brokenImages.length>0?'#dc2626':'#15803d'}">\${p.brokenImages.length>0?p.brokenImages.length:'\u2714'}</td>
+      <td style="white-space:nowrap">\${actionBtns}</td>
+    </tr>\`;
+  }).join('');
+}
+
+async function _runPageFixes(pageData){
+  const fixable=_buildIssuesFromPage(pageData).filter(i=>SH_AUTO_FIX_TYPES.has(i.issueType));
+  let fixed=0, failed=0;
+  for(const issue of fixable){
+    try{
+      const r=await fetch('/api/system-health/'+encodeURIComponent(activeSlug)+'/fix',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({issue})
+      });
+      const d=await r.json();
+      if(d.success) fixed++; else failed++;
+    }catch{ failed++; }
+  }
+  return {fixed, failed, total:fixable.length};
+}
+
+async function shFixPage(btn, pageIdx){
+  if(!activeSlug) return;
+  const p=_shPages[parseInt(pageIdx)];
+  if(!p){ showBanner('Page data not found \u2014 re-run the audit.','error'); return; }
+  const fixable=_buildIssuesFromPage(p).filter(i=>SH_AUTO_FIX_TYPES.has(i.issueType));
+  if(!fixable.length){ showBanner('No auto-fixable issues found for this page.','info'); return; }
+  btn.disabled=true;
+  btn.textContent='Fixing\u2026';
+  btn.style.background='#fefce8';
+  btn.style.borderColor='#fbbf24';
+  btn.style.color='#92400e';
+  const {fixed,failed}=await _runPageFixes(p);
+  if(fixed>0 && failed===0){
+    btn.textContent='Fixed \u2713';
+    btn.style.background='#f0fdf4';
+    btn.style.borderColor='#86efac';
+    btn.style.color='#15803d';
+    showBanner(fixed+' issue'+(fixed!==1?'s':'')+' fixed and re-uploaded.','success');
+  } else if(fixed>0){
+    btn.textContent=fixed+' fixed';
+    btn.style.background='#fefce8';
+    btn.style.borderColor='#fbbf24';
+    btn.style.color='#92400e';
+    showBanner(fixed+' fixed, '+failed+' could not be auto-fixed.','info');
+  } else {
+    btn.disabled=false;
+    btn.textContent='Fix Page';
+    btn.style.background='#fef2f2';
+    btn.style.borderColor='#fca5a5';
+    btn.style.color='#dc2626';
+    showBanner('Could not auto-fix issues on this page.','error');
+  }
+}
+
+async function shFixAllPages(btn){
+  if(!activeSlug||!_shPages.length) return;
+  const fixablePages=_shPages.filter(p=>(p.brokenInternalLinks&&p.brokenInternalLinks.length>0)||(p.brokenImages&&p.brokenImages.length>0));
+  if(!fixablePages.length){ showBanner('No pages with auto-fixable issues.','info'); return; }
+  btn.disabled=true;
+  btn.textContent='\u2699 Fixing 0 / '+fixablePages.length+' pages\u2026';
+  btn.style.background='#b45309';
+  btn.style.borderColor='#b45309';
+  let totalFixed=0, totalFailed=0, pagesDone=0;
+  for(const p of fixablePages){
+    const {fixed,failed}=await _runPageFixes(p);
+    totalFixed+=fixed; totalFailed+=failed; pagesDone++;
+    btn.textContent='\u2699 Fixing '+pagesDone+' / '+fixablePages.length+' pages\u2026';
+  }
+  if(totalFixed>0){
+    btn.textContent='\u2713 '+totalFixed+' fix'+(totalFixed!==1?'es':'')+' applied';
+    btn.style.background='#15803d';
+    btn.style.borderColor='#15803d';
+    const msg=totalFixed+' issue'+(totalFixed!==1?'s':'')+' fixed across '+pagesDone+' page'+(pagesDone!==1?'s':'')+(totalFailed>0?', '+totalFailed+' could not be auto-fixed':'')+'. Re-run the audit to confirm.';
+    showBanner(msg,'success');
+    // Update Fix Page buttons to reflect done state
+    document.querySelectorAll('[id^="sh-pg-fix-"]').forEach(b=>{ b.textContent='Fixed \u2713'; b.style.background='#f0fdf4'; b.style.borderColor='#86efac'; b.style.color='#15803d'; b.disabled=true; });
+  } else {
+    btn.disabled=false;
+    btn.textContent='\u2699 Fix All Pages';
+    btn.style.background='#dc2626';
+    btn.style.borderColor='#dc2626';
+    showBanner('Could not auto-fix any issues \u2014 check FTP credentials in project settings.','error');
+  }
+}
+
+function shFilterToPage(pageUrl){
+  const filtered=(_shAllIssues||[]).filter(i=>i.sourcePage===pageUrl);
+  shRenderIssues(filtered);
+  const issuesSection=$('sh-issues-section');
+  if(issuesSection) issuesSection.scrollIntoView({behavior:'smooth',block:'start'});
+  showBanner('Showing '+filtered.length+' issue'+(filtered.length!==1?'s':'')+' for this page. Click "All" filter to see all issues.','info');
+}
+
+let _shCurrentFilter='all';
+function shFilter(filter,btn){
+  _shCurrentFilter=filter;
+  document.querySelectorAll('.sh-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(!_shAllIssues.length) return;
+  let filtered=_shAllIssues;
+  if(filter==='fail') filtered=_shAllIssues.filter(i=>i.severity==='fail');
+  else if(filter!=='all') filtered=_shAllIssues.filter(i=>
+    i.issueType.toLowerCase().includes(filter.toLowerCase()));
+  shRenderIssues(filtered);
+}
+
+function shExport(format){
+  if(!activeSlug) return;
+  window.location.href='/api/system-health/'+activeSlug+'/export?format='+format;
+}
+
+// ── Security Scan ─────────────────────────────────────────────────────────────
+let _ssReport=null;
+let _ssJobId=null;
+let _ssJobInterval=null;
+let _ssAllIssues=[];
+let _ssCurrentFilter='all';
+let _ssPendingFixes=[];
+
+function ssEl(id){ return document.getElementById(id); }
+
+function ssLoad(){
+  if(!activeSlug) return;
+  ssEl('btn-ss-run').disabled=false;
+  apiFetch('/api/security-scan/'+activeSlug)
+    .then(r=>r.json())
+    .then(d=>{ if(d.cached&&d.report){ _ssReport=d.report; ssRender(d.report); } })
+    .catch(()=>{});
+}
+
+async function ssRun(){
+  if(!activeSlug) return;
+  ssHideAll();
+  ssEl('ss-empty').style.display='none';
+  ssEl('ss-running').classList.remove('hidden');
+  ssEl('ss-running').textContent='Scanning…';
+  ssEl('btn-ss-run').disabled=true;
+  ssEl('ss-error').classList.add('hidden');
+  try {
+    const r=await apiFetch('/api/security-scan/'+activeSlug+'/run',{method:'POST'});
+    const d=await r.json();
+    if(!r.ok||!d.jobId){ throw new Error(d.error||'Failed to start scan'); }
+    _ssJobId=d.jobId;
+    ssPollJob(_ssJobId);
+  } catch(e){
+    ssEl('ss-running').classList.add('hidden');
+    ssEl('btn-ss-run').disabled=false;
+    ssEl('ss-error').classList.remove('hidden');
+    ssEl('ss-error').textContent='Error: '+e.message;
+  }
+}
+
+function ssPollJob(jobId){
+  if(_ssJobInterval) clearInterval(_ssJobInterval);
+  _ssJobInterval=setInterval(async()=>{
+    try {
+      const r=await apiFetch('/api/security-scan/'+activeSlug+'/job/'+jobId);
+      const d=await r.json();
+      if(d.progress) ssEl('ss-running').textContent=d.progress.stage||'Scanning…';
+      if(d.status==='done'){
+        clearInterval(_ssJobInterval); _ssJobInterval=null;
+        ssEl('ss-running').classList.add('hidden');
+        ssEl('btn-ss-run').disabled=false;
+        _ssReport=d.report; ssRender(d.report);
+      } else if(d.status==='error'){
+        clearInterval(_ssJobInterval); _ssJobInterval=null;
+        ssEl('ss-running').classList.add('hidden');
+        ssEl('btn-ss-run').disabled=false;
+        ssEl('ss-error').classList.remove('hidden');
+        ssEl('ss-error').textContent='Scan error: '+(d.error||'unknown');
+      }
+    } catch(e){
+      clearInterval(_ssJobInterval); _ssJobInterval=null;
+      ssEl('ss-running').classList.add('hidden');
+      ssEl('btn-ss-run').disabled=false;
+    }
+  }, 1500);
+}
+
+function ssHideAll(){
+  ['ss-gate-pass','ss-gate-warn','ss-gate-fail','ss-stats-grid',
+   'ss-meta','ss-issues-section','ss-all-clear','ss-autofix-bar'].forEach(id=>{
+    const el=ssEl(id); if(el) el.style.display='none';
+  });
+}
+
+function ssRender(report){
+  ssHideAll();
+  ssEl('ss-empty').style.display='none';
+
+  // Status banner
+  const status=report.overallStatus;
+  if(status==='pass'){
+    ssEl('ss-gate-pass').style.display='flex';
+  } else if(status==='warning'){
+    ssEl('ss-gate-warn').style.display='block';
+    ssEl('ss-gate-warn-text').textContent=report.issues.length+' issue(s) need review';
+  } else {
+    ssEl('ss-gate-fail').style.display='block';
+    const fails=report.issues.filter(i=>i.severity==='fail').length;
+    ssEl('ss-gate-fail-text').textContent=fails+' critical issue(s) detected';
+  }
+
+  // Stats
+  const sg=ssEl('ss-stats-grid');
+  sg.style.display='grid';
+  ssEl('ss-s-files').textContent=report.filesScanned;
+  ssEl('ss-s-pages').textContent=report.pagesScanned;
+  ssEl('ss-s-assets').textContent=report.assetsScanned;
+  const scolor=(n)=>n>0?'#dc2626':'#16a34a';
+  ssEl('ss-s-suspicious').textContent=report.suspiciousFiles;
+  ssEl('ss-s-suspicious').style.color=scolor(report.suspiciousFiles);
+  ssEl('ss-s-malicious').textContent=report.maliciousPatterns;
+  ssEl('ss-s-malicious').style.color=scolor(report.maliciousPatterns);
+  ssEl('ss-s-scripts').textContent=report.injectedScripts;
+  ssEl('ss-s-scripts').style.color=scolor(report.injectedScripts);
+  ssEl('ss-s-seo').textContent=report.seoInjections;
+  ssEl('ss-s-seo').style.color=scolor(report.seoInjections);
+  ssEl('ss-s-changes').textContent=report.unexpectedChanges;
+  ssEl('ss-s-changes').style.color=scolor(report.unexpectedChanges);
+
+  // Meta
+  const meta=ssEl('ss-meta');
+  meta.style.display='block';
+  const lastDeploy=report.lastDeployAt
+    ? 'Last deploy: '+new Date(report.lastDeployAt).toLocaleString()
+    : 'No deploy history found';
+  meta.textContent='Scanned: '+new Date(report.runAt).toLocaleString()+' · '+lastDeploy;
+
+  // Issues
+  _ssAllIssues=report.issues||[];
+  _ssPendingFixes=[];
+  if(_ssAllIssues.length===0){
+    ssEl('ss-all-clear').style.display='block';
+  } else {
+    ssEl('ss-issues-section').style.display='block';
+    ssEl('ss-issues-sub').textContent=_ssAllIssues.length+' issue(s) detected';
+    ssRenderIssues(_ssAllIssues);
+    const fixable=_ssAllIssues.filter(i=>i.canAutoFix);
+    if(fixable.length>0){
+      ssEl('ss-autofix-bar').style.display='flex';
+      ssEl('btn-ss-autofix').textContent='\u2699 Apply '+fixable.length+' Safe Fix(es)';
+    }
+  }
+}
+
+const SS_TYPE_LABELS={
+  'suspicious-file':'Suspicious File','malicious-code':'Malicious Code',
+  'seo-injection':'SEO Spam','external-script':'Ext. Script',
+  'asset-invalid':'Invalid Asset','htaccess':'.htaccess Rule',
+  'file-modified':'File Changed','unknown-file':'Unknown File',
+  'hidden-content':'Hidden Content'
+};
+const SS_SEV_COLORS={'fail':'#dc2626','warning':'#d97706'};
+
+function ssRenderIssues(issues){
+  const tbody=ssEl('ss-issues-tbody');
+  tbody.innerHTML='';
+  if(!issues.length){
+    tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:16px">No issues match this filter.</td></tr>';
+    return;
+  }
+  for(const iss of issues){
+    const tr=document.createElement('tr');
+    const sevColor=SS_SEV_COLORS[iss.severity]||'#6b7280';
+    const typeLabel=SS_TYPE_LABELS[iss.type]||iss.type;
+    const actionBtn=iss.canAutoFix
+      ? \`<button class="btn btn-secondary" style="font-size:.72rem;padding:2px 8px;background:#fef2f2;border-color:#fca5a5;color:#dc2626" onclick="ssQueueFix('\${esc(iss.id)}',this)">Remove</button>\`
+      : '<span style="color:var(--muted);font-size:.75rem">Manual</span>';
+    tr.innerHTML=\`
+      <td><span style="font-weight:700;color:\${sevColor};font-size:.8rem">\${iss.severity.toUpperCase()}</span></td>
+      <td style="font-size:.78rem;white-space:nowrap">\${esc(typeLabel)}</td>
+      <td style="font-size:.75rem;color:#4b5563;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${esc(iss.file)}">\${esc(iss.file)}</td>
+      <td style="font-size:.75rem;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${esc(iss.evidence)}">\${esc(iss.evidence)}</td>
+      <td style="font-size:.73rem;color:#4b5563;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${esc(iss.suggestedFix)}">\${esc(iss.suggestedFix)}</td>
+      <td>\${actionBtn}</td>
+    \`;
+    tbody.appendChild(tr);
+  }
+}
+
+function ssQueueFix(issueId,btn){
+  const issue=_ssAllIssues.find(i=>i.id===issueId);
+  if(!issue||!issue.canAutoFix) return;
+  const already=_ssPendingFixes.find(f=>f.issueId===issueId);
+  if(already){
+    _ssPendingFixes=_ssPendingFixes.filter(f=>f.issueId!==issueId);
+    btn.textContent='Remove'; btn.style.background='#fef2f2';
+  } else {
+    _ssPendingFixes.push({issueId,action:issue.fixData?.action||'',filePath:issue.fixData?.filePath||''});
+    btn.textContent='Queued \u2713'; btn.style.background='#fca5a5';
+  }
+}
+
+async function ssApplyAllFixes(){
+  const fixable=_ssAllIssues.filter(i=>i.canAutoFix);
+  const fixes=fixable.map(i=>({issueId:i.id,action:i.fixData?.action||'',filePath:i.fixData?.filePath||''}));
+  if(!fixes.length){ alert('No safe fixes available.'); return; }
+  if(!confirm('Move '+fixes.length+' suspicious file(s) to a quarantine folder? This does NOT permanently delete them.')) return;
+  try {
+    const r=await apiFetch('/api/security-scan/'+activeSlug+'/autofix',{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fixes})
+    });
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Autofix failed');
+    const ok=d.results.filter(x=>x.ok).length;
+    const fail=d.results.filter(x=>!x.ok).length;
+    alert('Done: '+ok+' file(s) moved to quarantine'+(fail?' ('+fail+' failed, check console)':'')+'.' + '\\n\\n' + 'Re-run the scan to confirm.');
+    ssRun();
+  } catch(e){ alert('Autofix error: '+e.message); }
+}
+
+function ssFilter(filter,btn){
+  _ssCurrentFilter=filter;
+  document.querySelectorAll('#ss-issues-section .sh-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(!_ssAllIssues.length) return;
+  let filtered=_ssAllIssues;
+  if(filter==='fail') filtered=_ssAllIssues.filter(i=>i.severity==='fail');
+  else if(filter!=='all') filtered=_ssAllIssues.filter(i=>i.type===filter||i.severity===filter);
+  ssRenderIssues(filtered);
+}
+
+// ── Live Crawl ────────────────────────────────────────────────────────────────
+let _lcReport=null;
+
+function lcLoad(){
+  if(!activeSlug) return;
+  document.getElementById('btn-lc-run').disabled=false;
+  fetch('/api/live-crawl/'+activeSlug)
+    .then(r=>r.json())
+    .then(d=>{ if(d.cached && d.report) lcRender(d.report); })
+    .catch(()=>{});
+}
+
+async function lcRun(){
+  if(!activeSlug){ alert('Select a project first'); return; }
+  const runBtn=document.getElementById('btn-lc-run');
+  const lbl=document.getElementById('lc-running');
+  runBtn.disabled=true;
+  lbl.classList.remove('hidden');
+  lcHideAll();
+  document.getElementById('lc-error').classList.add('hidden');
+  document.getElementById('lc-empty').style.display='none';
+  try{
+    const r=await fetch('/api/live-crawl/'+activeSlug,{method:'POST'});
+    const d=await r.json();
+    if(!r.ok){ document.getElementById('lc-error').textContent='Error: '+(d.error||'Crawl failed'); document.getElementById('lc-error').classList.remove('hidden'); return; }
+    _lcReport=d.report;
+    lcRender(d.report);
+  }catch(e){
+    document.getElementById('lc-error').textContent='Network error: '+e.message;
+    document.getElementById('lc-error').classList.remove('hidden');
+  }finally{
+    runBtn.disabled=false;
+    lbl.classList.add('hidden');
+  }
+}
+
+function lcHideAll(){
+  ['lc-summary-cards','lc-gate-ok','lc-gate-fail','lc-sitemap-section','lc-systemic-section','lc-links-section','lc-all-clear','lc-fix-result'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='none';
+  });
+}
+
+function lcRender(report){
+  lcHideAll();
+  _lcReport=report;
+  const s=report.summary;
+  const systemicHrefs=report.systemicBrokenHrefs||[];
+
+  // Summary cards
+  document.getElementById('lc-summary-cards').style.display='grid';
+  document.getElementById('lc-stat-total').textContent=s.totalSitemapUrls;
+  document.getElementById('lc-stat-ok').textContent=s.sitemapOk;
+  document.getElementById('lc-stat-404').textContent=s.sitemapBroken;
+  document.getElementById('lc-stat-links').textContent=(s.pageSpecificBrokenLinks??s.totalBrokenLinks);
+  document.getElementById('lc-stat-systemic').textContent=(s.systemicIssueCount??0);
+
+  // Tab badge — only count real blockers
+  const realIssues=s.sitemapBroken+(s.pageSpecificBrokenLinks??0);
+  const tbadge=document.getElementById('tb-live-crawl');
+  if(tbadge) tbadge.textContent=realIssues>0?realIssues+'':'OK';
+
+  // Deploy gate banner
+  if(s.canDeploy){
+    document.getElementById('lc-gate-ok').style.display='flex';
+    document.getElementById('btn-lc-fix').style.display=(systemicHrefs.length>0)?'':'none';
+    if(systemicHrefs.length>0){
+      const fb=document.getElementById('btn-lc-fix');
+      fb.disabled=false;
+      fb.textContent='Fix Template Nav Links & Deploy';
+    }
+  } else {
+    document.getElementById('lc-gate-fail').style.display='block';
+    const fixBtn=document.getElementById('btn-lc-fix');
+    fixBtn.style.display='';
+    fixBtn.disabled=false;
+    fixBtn.textContent='Fix & Redeploy Hubs';
+  }
+
+  // Broken sitemap URLs table
+  const brokenUrls=report.sitemap.urlResults.filter(r=>r.status!==200);
+  if(brokenUrls.length>0){
+    document.getElementById('lc-sitemap-section').style.display='';
+    document.getElementById('lc-sitemap-sub').textContent=brokenUrls.length+' broken URL'+(brokenUrls.length!==1?'s':'');
+    document.getElementById('lc-sitemap-tbody').innerHTML=brokenUrls.map(r=>\`
+      <tr>
+        <td><a href="\${r.url}" target="_blank" style="color:#1e40af;font-size:.82rem">\${r.url.replace(/^https?:\\/\\/[^/]+/,'')}</a></td>
+        <td><span style="font-weight:700;color:#dc2626">\${r.status}</span></td>
+      </tr>\`).join('');
+  }
+
+  // Systemic (template-wide) broken links
+  if(systemicHrefs.length>0){
+    // Build frequency map from linkChecks
+    const freq={};
+    for(const c of report.linkChecks){
+      for(const l of c.brokenLinks){
+        if(systemicHrefs.includes(l.href)) freq[l.href]=(freq[l.href]||0)+1;
+      }
+    }
+    document.getElementById('lc-systemic-section').style.display='';
+    document.getElementById('lc-systemic-sub').textContent=systemicHrefs.length+' broken nav URL'+(systemicHrefs.length!==1?'s':\'\');
+    document.getElementById('lc-systemic-tbody').innerHTML=systemicHrefs.map(href=>\`
+      <tr>
+        <td><code style="font-size:.8rem;color:#b45309">\${href}</code></td>
+        <td style="color:#78350f;font-size:.82rem">\${freq[href]||'?'} page\${(freq[href]||0)!==1?'s':''}</td>
+      </tr>\`).join('');
+  }
+
+  // Page-specific broken internal links (not systemic)
+  const systemicSet=new Set(systemicHrefs);
+  const pageSpecific=report.linkChecks
+    .map(c=>({...c,brokenLinks:c.brokenLinks.filter(l=>!systemicSet.has(l.href))}))
+    .filter(c=>c.brokenLinks.length>0);
+  if(pageSpecific.length>0){
+    document.getElementById('lc-links-section').style.display='';
+    const total=pageSpecific.reduce((a,c)=>a+c.brokenLinks.length,0);
+    document.getElementById('lc-links-sub').textContent=total+' broken link'+(total!==1?'s':'')+' across '+pageSpecific.length+' page'+(pageSpecific.length!==1?'s':'');
+    const rows=[];
+    for(const p of pageSpecific){
+      for(const link of p.brokenLinks){
+        rows.push(\`<tr>
+          <td><a href="\${p.sourcePage}" target="_blank" style="color:#1e40af;font-size:.82rem">/\${p.sourceSlug}/</a></td>
+          <td><code style="font-size:.8rem;color:#dc2626">\${link.href}</code></td>
+          <td style="color:#6b7280;font-size:.82rem">\${link.anchorText||'—'}</td>
+          <td><span style="font-weight:700;color:#dc2626">\${link.status}</span></td>
+        </tr>\`);
+      }
+    }
+    document.getElementById('lc-links-tbody').innerHTML=rows.join('');
+  } else if(s.sitemapBroken===0 && systemicHrefs.length===0){
+    document.getElementById('lc-all-clear').style.display='block';
+  }
+}
+
+async function lcFixDeploy(){
+  if(!activeSlug) return;
+  const btn=document.getElementById('btn-lc-fix');
+  btn.disabled=true;
+  btn.textContent='Deploying…';
+  const res=document.getElementById('lc-fix-result');
+  res.style.display='block';
+  res.style.background='#f0f9ff';
+  res.style.border='1px solid #bae6fd';
+  res.textContent='Connecting to FTP and uploading patched hub pages…';
+  try{
+    const r=await fetch('/api/live-crawl/'+activeSlug+'/fix-deploy',{method:'POST'});
+    const d=await r.json();
+    if(!r.ok){
+      res.style.background='#fef2f2'; res.style.border='1px solid #fca5a5';
+      res.textContent='Error: '+(d.error||'Deploy failed');
+    } else if(d.success){
+      res.style.background='#f0fdf4'; res.style.border='1px solid #86efac';
+      res.textContent='Success: '+d.message+' Uploaded: '+d.uploaded.join(', ')+'. Re-run crawl to verify.';
+      btn.textContent='Re-run Crawl to Verify';
+      btn.disabled=false;
+      btn.onclick=()=>lcRun();
+    } else {
+      res.style.background='#fffbeb'; res.style.border='1px solid #fde68a';
+      res.textContent=d.message+(d.errors.length?' Errors: '+d.errors.join('; '):'');
+    }
+  }catch(e){
+    res.style.background='#fef2f2'; res.style.border='1px solid #fca5a5';
+    res.textContent='Network error: '+e.message;
+  }finally{
+    if(btn.textContent==='Deploying…'){ btn.textContent='Fix & Redeploy Hubs'; btn.disabled=false; }
+  }
+}
+</script>
+<div id="hub-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:10px;padding:28px 28px 20px;max-width:440px;width:92%;box-shadow:0 8px 32px rgba(0,0,0,.2)">
+    <h3 style="margin:0 0 6px;font-size:1.1rem;color:#1e3a5f">Money Page Link</h3>
+    <p style="margin:0 0 18px;font-size:.85rem;color:#64748b">Add a link from the hub page to your main service/money page. Leave blank to skip.</p>
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:.82rem;font-weight:600;color:#374151;margin-bottom:4px">Money page URL</label>
+      <input id="hub-modal-url" type="url" placeholder="https://inboxingproweb.com/web-design/" style="width:100%;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:.9rem"/>
+    </div>
+    <div style="margin-bottom:20px">
+      <label style="display:block;font-size:.82rem;font-weight:600;color:#374151;margin-bottom:4px">Anchor text</label>
+      <input id="hub-modal-kw" type="text" placeholder="web design services" style="width:100%;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:.9rem"/>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button onclick="hubModalCancel()" style="padding:8px 16px;border:1px solid #cbd5e1;border-radius:6px;background:#f8fafc;cursor:pointer;font-size:.9rem">Cancel</button>
+      <button onclick="hubModalSkip()" style="padding:8px 16px;border:1px solid #cbd5e1;border-radius:6px;background:#f8fafc;cursor:pointer;font-size:.9rem;color:#64748b">Skip link</button>
+      <button onclick="hubModalConfirm()" style="padding:8px 16px;border:none;border-radius:6px;background:#1e40af;color:#fff;cursor:pointer;font-size:.9rem;font-weight:600">Generate Hub →</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  let _hubModalResolve = null;
+  window._openHubModal = function(currentUrl, currentKw){
+    document.getElementById('hub-modal-url').value = currentUrl || '';
+    document.getElementById('hub-modal-kw').value  = currentKw  || '';
+    document.getElementById('hub-modal-overlay').style.display = 'flex';
+    return new Promise(function(resolve){ _hubModalResolve = resolve; });
+  };
+  window.hubModalCancel = function(){
+    document.getElementById('hub-modal-overlay').style.display = 'none';
+    if(_hubModalResolve){ _hubModalResolve(null); _hubModalResolve=null; }
+  };
+  window.hubModalSkip = function(){
+    document.getElementById('hub-modal-overlay').style.display = 'none';
+    if(_hubModalResolve){ _hubModalResolve({url:'',kw:''}); _hubModalResolve=null; }
+  };
+  window.hubModalConfirm = function(){
+    const url = document.getElementById('hub-modal-url').value.trim();
+    const kw  = document.getElementById('hub-modal-kw').value.trim();
+    document.getElementById('hub-modal-overlay').style.display = 'none';
+    if(_hubModalResolve){ _hubModalResolve({url,kw}); _hubModalResolve=null; }
+  };
+  // Allow Enter key in inputs to confirm
+  ['hub-modal-url','hub-modal-kw'].forEach(function(id){
+    document.getElementById(id)?.addEventListener('keydown', function(e){
+      if(e.key==='Enter') window.hubModalConfirm();
+    });
+  });
+})();
+
+// ══ CAMPAIGN LINK INTEGRITY AUDIT ══════════════════════════════════════════
+(function(){
+  function liEl(id){ return document.getElementById(id); }
+  function liHideAll(){
+    ['li-gate-pass','li-gate-fail','li-repair-banner','li-stats-grid','li-issues-section','li-live-panel'].forEach(id=>{
+      const el=liEl(id); if(el) el.style.display='none';
+    });
+  }
+  function liSetStat(id, val){
+    const el=liEl(id); if(!el) return;
+    el.textContent = val==null ? '—' : String(val);
+    el.style.color = (typeof val==='number' && val>0) ? '#dc2626' : '';
+  }
+
+  window.liLoad = function(){
+    if(!activeSlug) return;
+    liEl('btn-li-run').disabled  = false;
+    liEl('btn-li-live').disabled = false;
+  };
+
+  window.liRun = async function(){
+    if(!activeSlug) return;
+    liHideAll();
+    liEl('li-empty').style.display='none';
+    liEl('li-running').classList.remove('hidden');
+    liEl('li-running').textContent='Auditing…';
+    liEl('btn-li-run').disabled=true;
+    liEl('btn-li-repair').style.display='none';
+    liEl('li-error').classList.add('hidden');
+    try {
+      const r = await apiFetch('/api/link-audit/'+activeSlug, {method:'GET'});
+      const d = await r.json();
+      if(!r.ok) throw new Error(d.error||'Audit failed');
+      liRenderReport(d);
+    } catch(e){
+      liEl('li-error').classList.remove('hidden');
+      liEl('li-error').textContent='Error: '+e.message;
+    } finally {
+      liEl('li-running').classList.add('hidden');
+      liEl('btn-li-run').disabled=false;
+    }
+  };
+
+  window.liRepair = async function(){
+    if(!activeSlug) return;
+    if(!confirm('This will fix all link integrity violations in local HTML files and re-upload affected pages to the live server. Continue?')) return;
+    liEl('li-running').classList.remove('hidden');
+    liEl('li-running').textContent='Repairing…';
+    liEl('btn-li-repair').disabled=true;
+    liEl('btn-li-run').disabled=true;
+    liEl('li-repair-banner').style.display='none';
+    liEl('li-error').classList.add('hidden');
+    try {
+      const r = await apiFetch('/api/link-audit/'+activeSlug+'/repair', {method:'POST', headers:{'Content-Type':'application/json'},body:'{}'});
+      const d = await r.json();
+      if(!r.ok) throw new Error(d.error||'Repair failed');
+      liEl('li-repair-banner').style.display='flex';
+      liEl('li-repair-text').textContent = d.pagesFixed+' pages fixed, '+d.pagesUploaded+' re-uploaded to live site.';
+      // Re-run audit to show clean state
+      await window.liRun();
+    } catch(e){
+      liEl('li-error').classList.remove('hidden');
+      liEl('li-error').textContent='Repair error: '+e.message;
+    } finally {
+      liEl('li-running').classList.add('hidden');
+      liEl('btn-li-repair').disabled=false;
+      liEl('btn-li-run').disabled=false;
+    }
+  };
+
+  window.liLiveCheck = async function(){
+    if(!activeSlug) return;
+    liEl('li-running').classList.remove('hidden');
+    liEl('li-running').textContent='Fetching live pages…';
+    liEl('btn-li-live').disabled=true;
+    liEl('li-live-panel').style.display='none';
+    liEl('li-error').classList.add('hidden');
+    try {
+      const r = await apiFetch('/api/link-audit/'+activeSlug+'/money-page-live', {method:'GET'});
+      const d = await r.json();
+      if(!r.ok) throw new Error(d.error||'Live check failed');
+      liRenderLiveReport(d);
+    } catch(e){
+      liEl('li-error').classList.remove('hidden');
+      liEl('li-error').textContent='Live check error: '+e.message;
+    } finally {
+      liEl('li-running').classList.add('hidden');
+      liEl('btn-li-live').disabled=false;
+    }
+  };
+
+  function liRenderLiveReport(d){
+    const results = d.results || [];
+    liEl('li-live-panel').style.display='block';
+    const downCount = d.moneyPageDownCount ?? results.filter(r=>!r.moneyPageStatusOk).length;
+    liEl('li-live-summary').textContent =
+      d.hubsChecked+' hub(s) checked — band: '+d.passCount+' OK, '+d.failCount+' issue(s)'
+      +(downCount?' | ⚠ '+downCount+' money page URL(s) not returning 200':'');
+    const tbody = liEl('li-live-tbody');
+    tbody.innerHTML='';
+    const statusLabel={ok:'✓ OK',missing_band:'✗ No band',missing_link:'✗ No link',wrong_href:'✗ Wrong href',fetch_error:'⚠ Fetch error'};
+    const statusColor={ok:'#16a34a',missing_band:'#dc2626',missing_link:'#dc2626',wrong_href:'#d97706',fetch_error:'#6b7280'};
+    for(const r of results){
+      const tr=document.createElement('tr');
+      const st=r.liveStatus||'fetch_error';
+      const http=r.moneyPageHttpStatus;
+      const statusOk=r.moneyPageStatusOk;
+      const httpColor=statusOk?'#16a34a':http?'#dc2626':'#6b7280';
+      const noteHtml=r.moneyPageStatusNote
+        ?'<br><span style="font-size:.68rem;color:#9ca3af;white-space:normal">'+esc(r.moneyPageStatusNote)+'</span>'
+        :'';
+      tr.innerHTML=\`<td style="font-size:.78rem"><a href="\${esc(r.hubLiveUrl)}" target="_blank" style="color:#3b82f6">\${esc(r.hubSlug)}</a></td>
+        <td><span style="font-weight:700;font-size:.76rem;color:\${statusColor[st]||'#6b7280'}">\${statusLabel[st]||st}</span>\${r.error?'<br><span style="font-size:.7rem;color:#9ca3af">'+esc(r.error.slice(0,60))+'</span>':''}</td>
+        <td style="font-size:.74rem;color:#4b5563;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${esc(r.foundHref)}">\${r.foundHref?esc(r.foundHref):'—'}</td>
+        <td style="font-weight:700;font-size:.8rem;color:\${httpColor}">\${http!=null?http:'—'}\${noteHtml}</td>\`;
+      tbody.appendChild(tr);
+    }
+    if(!results.length){
+      const tr=document.createElement('tr');
+      tr.innerHTML='<td colspan="4" style="text-align:center;color:#9ca3af;font-size:.82rem;padding:12px">No hub pages with a configured money page URL.</td>';
+      tbody.appendChild(tr);
+    }
+  }
+
+  function liRenderReport(d){
+    liHideAll();
+    const issues = d.issues || [];
+    const stats  = d.stats  || {};
+    // Stats grid
+    liEl('li-stats-grid').style.display='grid';
+    liSetStat('li-s-camps',        stats.campaigns);
+    liSetStat('li-s-pages',        stats.pagesChecked);
+    liSetStat('li-s-root',         stats.rootLinks);
+    liSetStat('li-s-hub',          stats.wrongHub);
+    liSetStat('li-s-cross',        stats.crossCampaign);
+    liSetStat('li-s-bare',         stats.bareSlug);
+    liSetStat('li-s-dead',         stats.nonExistent);
+    liSetStat('li-s-money',        stats.missingMoneyPage);
+    liSetStat('li-s-wrong-href',   stats.wrongMoneyPageHref);
+    liSetStat('li-s-no-link',      stats.missingMoneyPageLink);
+    liSetStat('li-s-cluster-band', stats.clusterHasMoneyBand);
+    // Status banner
+    if(issues.length===0){
+      liEl('li-gate-pass').style.display='flex';
+      liEl('btn-li-repair').style.display='none';
+    } else {
+      liEl('li-gate-fail').style.display='block';
+      liEl('li-gate-fail-text').textContent = issues.length+' violation(s) across '+(new Set(issues.map(i=>i.page))).size+' pages.';
+      liEl('btn-li-repair').style.display='inline-block';
+      // Issues table
+      liEl('li-issues-section').style.display='block';
+      const tbody = liEl('li-issues-tbody');
+      tbody.innerHTML='';
+      for(const iss of issues.slice(0,200)){
+        const tr=document.createElement('tr');
+        const typeColor={'WRONG_HUB':'#dc2626','CROSS_CAMPAIGN':'#dc2626','ROOT_LINK':'#d97706',
+          'BARE_SLUG':'#d97706','NONEXISTENT':'#dc2626','HUB_WRONG_CLUSTER':'#dc2626',
+          'MISSING_MONEY_PAGE':'#d97706','WRONG_MONEY_PAGE_HREF':'#d97706',
+          'MISSING_MONEY_PAGE_LINK':'#d97706','CLUSTER_HAS_MONEY_BAND':'#7c3aed'}[iss.type]||'#6b7280';
+        tr.innerHTML=\`<td style="font-size:.78rem;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${esc(iss.page)}">\${esc(iss.page)}</td>
+          <td><span style="font-weight:700;font-size:.76rem;color:\${typeColor}">\${esc(iss.type)}</span></td>
+          <td style="font-size:.74rem;color:#4b5563;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${esc(iss.found)}">\${esc(iss.found)}</td>
+          <td style="font-size:.74rem;color:#16a34a;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${esc(iss.expected)}">\${esc(iss.expected)}</td>\`;
+        tbody.appendChild(tr);
+      }
+    }
+  }
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Distribution Content Engine                       -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-distribution">
+  <div class="main">
+
+    <!-- Header + mode switcher -->
+    <div class="section" style="margin-bottom:0">
+      <div class="section-head" style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
+        <div>
+          <h2 id="dist-mode-title">Distribution Content Engine</h2>
+          <span class="section-sub" id="dist-mode-sub">Generate social media &amp; YouTube drafts for each SEO page — for review only, nothing is posted automatically</span>
+        </div>
+        <div style="display:flex;background:#f1f5f9;border-radius:10px;padding:3px;gap:2px;flex-shrink:0;margin-top:2px">
+          <button id="dist-mode-page-btn"
+            onclick="(function(){document.getElementById('panel-distribution').classList.remove('vp-active');var pb=document.getElementById('dist-mode-page-btn'),vb=document.getElementById('dist-mode-vp-btn');if(pb){pb.style.background='#fff';pb.style.color='#1e3a5f';pb.style.boxShadow='0 1px 4px rgba(0,0,0,.1)';}if(vb){vb.style.background='transparent';vb.style.color='#6b7280';vb.style.boxShadow='none';}var pm=document.getElementById('dist-page-mode');if(pm)pm.scrollIntoView({behavior:'smooth',block:'start'});if(typeof window.vpModeSwitch==='function')window.vpModeSwitch('page');})()"
+            style="padding:6px 18px;border-radius:8px;border:none;cursor:pointer;font-size:.82rem;font-weight:700;background:#fff;color:#1e3a5f;box-shadow:0 1px 4px rgba(0,0,0,.1);transition:all .15s">
+            📄 Page Posts
+          </button>
+          <button id="dist-mode-vp-btn"
+            onclick="(function(){document.getElementById('panel-distribution').classList.add('vp-active');var pb=document.getElementById('dist-mode-page-btn'),vb=document.getElementById('dist-mode-vp-btn');if(pb){pb.style.background='transparent';pb.style.color='#6b7280';pb.style.boxShadow='none';}if(vb){vb.style.background='#fff';vb.style.color='#1e3a5f';vb.style.boxShadow='0 1px 4px rgba(0,0,0,.1)';}var vm=document.getElementById('dist-visibility-mode');if(vm)vm.scrollIntoView({behavior:'smooth',block:'start'});if(typeof window.vpModeSwitch==='function')window.vpModeSwitch('visibility');})()"
+            style="padding:6px 18px;border-radius:8px;border:none;cursor:pointer;font-size:.82rem;font-weight:700;background:transparent;color:#6b7280;transition:all .15s">
+            ✨ Visibility Posts
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE POSTS MODE (existing content) ── -->
+    <div id="dist-page-mode">
+
+    <!-- Generate controls -->
+    <div class="section" style="margin-bottom:0">
+      <div class="section-body">
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+
+          <div style="flex:1;min-width:220px">
+            <label style="font-size:.78rem;font-weight:700;color:#374151;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em">Generate for one page</label>
+            <div style="display:flex;gap:8px">
+              <select id="dist-page-slug-input"
+                style="flex:1;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;background:#fff">
+                ${hubPageOptions}
+              </select>
+              <button onclick="distGenerateOne()" class="btn btn-primary btn-sm" id="dist-btn-one">Generate</button>
+            </div>
+          </div>
+
+          <div style="flex:1;min-width:220px">
+            <label style="font-size:.78rem;font-weight:700;color:#374151;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em">Generate for entire campaign</label>
+            <div style="display:flex;gap:8px">
+              <select id="dist-campaign-input"
+                style="flex:1;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;background:#fff">
+                <option value="">— all pages —</option>
+              </select>
+              <button onclick="distGenerateAll()" class="btn btn-secondary btn-sm" id="dist-btn-all">Generate All</button>
+            </div>
+          </div>
+
+        </div>
+        <div id="dist-gen-status" style="font-size:.82rem;margin-top:10px;min-height:18px;color:#374151"></div>
+        <div style="display:none;margin-top:6px;background:#e5e7eb;border-radius:4px;height:6px;overflow:hidden">
+          <div id="dist-progress-bar" style="height:100%;width:5%;background:#2563eb;border-radius:4px;transition:width .4s ease"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main layout: list + viewer -->
+    <div style="display:flex;gap:20px;margin-top:20px;align-items:flex-start;flex-wrap:wrap">
+
+      <!-- Left: page list -->
+      <div style="width:260px;flex-shrink:0">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="font-size:.75rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase">Generated Pages</div>
+          <button onclick="distLoad()" style="font-size:.68rem;color:#6b7280;background:none;border:none;cursor:pointer;text-decoration:underline">&#8635; refresh</button>
+        </div>
+        <div id="dist-list-empty" style="color:var(--muted);font-size:.85rem;padding:12px 0;display:none">No distribution content yet. Generate some above.</div>
+        <div id="dist-list" style="display:flex;flex-direction:column;gap:4px"></div>
+      </div>
+
+      <!-- Right: content viewer -->
+      <div style="flex:1;min-width:320px" id="dist-viewer">
+
+        <!-- Page title + status bar -->
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+          <div id="dist-view-title" style="font-size:1.05rem;font-weight:700;color:#111"></div>
+          <span id="dist-status-badge" style="font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:20px;background:#fef9c3;color:#854d0e">draft</span>
+          <span id="dist-angle-badge" style="display:none;font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:10px;background:#f3f4f6;color:#374151;border:1px solid #d1d5db;text-transform:capitalize;letter-spacing:.02em"></span>
+          <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+            <button onclick="distMarkApproved()" class="btn btn-sm" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;font-weight:700">&#10003; Approve</button>
+            <button onclick="distMarkPosted()" class="btn btn-sm" style="background:#dbeafe;color:#1e40af;border:1px solid #93c5fd;font-weight:700">&#9993; Mark Posted</button>
+            <button onclick="distDownload()" class="btn btn-sm" style="background:#f3f4f6;color:#374151;border:1px solid #d1d5db;font-weight:700">&#8659; Download JSON</button>
+          </div>
+        </div>
+
+        <!-- Platform tabs -->
+        <div style="display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:16px">
+          <button class="dist-ptab dist-ptab-active" onclick="distPlatformTab('facebook')" id="dist-ptab-facebook">Facebook</button>
+          <button class="dist-ptab" onclick="distPlatformTab('linkedin')" id="dist-ptab-linkedin">LinkedIn</button>
+          <button class="dist-ptab" onclick="distPlatformTab('reddit')" id="dist-ptab-reddit">Reddit</button>
+          <button class="dist-ptab" onclick="distPlatformTab('youtube')" id="dist-ptab-youtube">YouTube</button>
+        </div>
+
+        <!-- Facebook pane -->
+        <div id="dist-pane-facebook">
+
+          <!-- Suggested image (shown if page has library image) -->
+          <div id="dist-fb-img-section" style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px;margin-bottom:14px;gap:14px;align-items:flex-start;display:none">
+            <img id="dist-fb-img-preview" src="" alt="" style="width:96px;height:64px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid #e5e7eb;background:#e5e7eb"/>
+            <div style="flex:1;min-width:0">
+              <div class="dist-field-label" style="margin-bottom:4px">Suggested Image <span style="font-weight:400;color:#6b7280;font-size:.75rem">— download and upload directly to Facebook</span></div>
+              <div id="dist-fb-img-alt" style="font-size:.82rem;color:#374151;margin-bottom:6px;word-break:break-word"></div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+                <span id="dist-fb-img-src" style="display:none"></span>
+                <a id="dist-fb-img-dl" href="#" download style="display:none;font-size:.75rem;padding:4px 12px;background:#0ea5e9;color:#fff;border:none;border-radius:5px;cursor:pointer;font-weight:600;text-decoration:none">&#11015; Download image</a>
+                <button class="dist-copy-btn" onclick="distCopy('dist-fb-img-src', this)">Copy image URL</button>
+                <span id="dist-fb-img-slot" style="font-size:.7rem;color:#6b7280;padding:2px 7px;background:#e0f2fe;border-radius:10px;text-transform:uppercase;letter-spacing:.04em"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy-ready post blocks -->
+          <div style="margin-bottom:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:6px">
+              <div class="dist-field-label">Post Text</div>
+              <div style="display:flex;gap:6px">
+                <button class="dist-copy-btn" onclick="distCopy('dist-fb-postonly', this)">Copy post only</button>
+                <button class="dist-copy-btn" style="background:#dbeafe;color:#1e40af;border-color:#93c5fd" onclick="distCopy('dist-fb-postwithurl', this)">Copy post + URL</button>
+              </div>
+            </div>
+            <div class="dist-field-box dist-field-box-tall" id="dist-fb-postonly"></div>
+            <div style="margin-top:6px;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;font-size:.78rem;color:#1e40af;word-break:break-all" id="dist-fb-postwithurl"></div>
+          </div>
+
+          <!-- URL + anchor text -->
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+            <div style="flex:2;min-width:200px">
+              <div class="dist-field-label">Page URL</div>
+              <div class="dist-field-box" id="dist-fb-url" style="font-size:.8rem;word-break:break-all"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-fb-url', this)">Copy URL</button>
+            </div>
+            <div style="flex:1;min-width:160px">
+              <div class="dist-field-label">Suggested Anchor Text</div>
+              <div class="dist-field-box" id="dist-fb-anchor"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-fb-anchor', this)">Copy</button>
+            </div>
+          </div>
+
+          <!-- Hashtags -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Hashtags</div>
+            <div class="dist-field-box" id="dist-fb-hashtags"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-fb-hashtags', this)">Copy</button>
+          </div>
+
+          <!-- Platform note -->
+          <div style="font-size:.78rem;color:#6b7280;background:#fef9c3;border:1px solid #fde68a;border-radius:6px;padding:8px 10px;margin-bottom:10px">
+            &#9432; Facebook posts don't support custom anchor link text — paste the URL as a plain line and Facebook will generate a preview card automatically.
+          </div>
+
+          <!-- Manual posting instructions -->
+          <div>
+            <div class="dist-field-label">Manual Posting Steps</div>
+            <div class="dist-field-box" id="dist-fb-instructions" style="font-size:.79rem;line-height:1.7;white-space:pre-wrap;color:#374151"></div>
+          </div>
+
+        </div>
+
+        <!-- LinkedIn pane -->
+        <div id="dist-pane-linkedin" style="display:none">
+
+          <!-- Suggested image -->
+          <div id="dist-li-img-section" style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px;margin-bottom:14px;gap:14px;align-items:flex-start;display:none">
+            <img id="dist-li-img-preview" src="" alt="" style="width:96px;height:64px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid #e5e7eb;background:#e5e7eb"/>
+            <div style="flex:1;min-width:0">
+              <div class="dist-field-label" style="margin-bottom:4px">Suggested Image <span style="font-weight:400;color:#6b7280;font-size:.75rem">— download and upload directly to LinkedIn</span></div>
+              <div id="dist-li-img-alt" style="font-size:.82rem;color:#374151;margin-bottom:6px;word-break:break-word"></div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+                <span id="dist-li-img-src" style="display:none"></span>
+                <a id="dist-li-img-dl" href="#" download style="display:none;font-size:.75rem;padding:4px 12px;background:#0ea5e9;color:#fff;border:none;border-radius:5px;cursor:pointer;font-weight:600;text-decoration:none">&#11015; Download image</a>
+                <button class="dist-copy-btn" onclick="distCopy('dist-li-img-src', this)">Copy image URL</button>
+                <span id="dist-li-img-slot" style="font-size:.7rem;color:#6b7280;padding:2px 7px;background:#e0f2fe;border-radius:10px;text-transform:uppercase;letter-spacing:.04em"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Headline -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Headline</div>
+            <div class="dist-field-box" id="dist-li-headline" style="font-weight:700"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-li-headline', this)">Copy</button>
+          </div>
+
+          <!-- Copy-ready post blocks -->
+          <div style="margin-bottom:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:6px">
+              <div class="dist-field-label">Post Text</div>
+              <div style="display:flex;gap:6px">
+                <button class="dist-copy-btn" onclick="distCopy('dist-li-postonly', this)">Copy post only</button>
+                <button class="dist-copy-btn" style="background:#dbeafe;color:#1e40af;border-color:#93c5fd" onclick="distCopy('dist-li-postwithurl', this)">Copy post + URL</button>
+              </div>
+            </div>
+            <div class="dist-field-box dist-field-box-tall" id="dist-li-postonly"></div>
+            <div style="margin-top:6px;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;font-size:.78rem;color:#1e40af;word-break:break-all" id="dist-li-postwithurl"></div>
+          </div>
+
+          <!-- URL + anchor text -->
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+            <div style="flex:2;min-width:200px">
+              <div class="dist-field-label">Page URL</div>
+              <div class="dist-field-box" id="dist-li-url" style="font-size:.8rem;word-break:break-all"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-li-url', this)">Copy URL</button>
+            </div>
+            <div style="flex:1;min-width:160px">
+              <div class="dist-field-label">Suggested Anchor Text</div>
+              <div class="dist-field-box" id="dist-li-anchor"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-li-anchor', this)">Copy</button>
+            </div>
+          </div>
+
+          <!-- Hashtags -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Hashtags</div>
+            <div class="dist-field-box" id="dist-li-hashtags"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-li-hashtags', this)">Copy</button>
+          </div>
+
+          <!-- Platform note -->
+          <div style="font-size:.78rem;color:#6b7280;background:#fef9c3;border:1px solid #fde68a;border-radius:6px;padding:8px 10px;margin-bottom:10px">
+            &#9432; LinkedIn auto-generates a link preview card from the URL. If pasting the URL at the end of your post, you can delete it from the text once the preview card appears.
+          </div>
+
+          <!-- Manual posting instructions -->
+          <div>
+            <div class="dist-field-label">Manual Posting Steps</div>
+            <div class="dist-field-box" id="dist-li-instructions" style="font-size:.79rem;line-height:1.7;white-space:pre-wrap;color:#374151"></div>
+          </div>
+
+        </div>
+
+        <!-- Reddit pane -->
+        <div id="dist-pane-reddit" style="display:none">
+
+          <!-- Moderation risk + title row -->
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;flex-wrap:wrap">
+            <div style="flex:1;min-width:0">
+              <div class="dist-field-label">Post Title</div>
+              <div class="dist-field-box" id="dist-rd-title" style="font-weight:700"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-rd-title', this)">Copy title</button>
+            </div>
+            <div style="flex-shrink:0;padding-top:18px">
+              <span id="dist-rd-modrisk" style="display:none;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:10px"></span>
+            </div>
+          </div>
+
+          <!-- Body (NO URL — link goes in follow-up comment) -->
+          <div style="margin-bottom:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:6px">
+              <div>
+                <div class="dist-field-label" style="display:inline">Body Text</div>
+                <span style="font-size:.72rem;color:#6b7280;margin-left:6px">— post this as the main text. Do not include the link here.</span>
+              </div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-rd-body', this)">Copy body</button>
+            </div>
+            <div class="dist-field-box dist-field-box-tall" id="dist-rd-body"></div>
+          </div>
+
+          <!-- Suggested follow-up comment (with link) -->
+          <div style="margin-bottom:12px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px">
+              <div>
+                <div class="dist-field-label" style="display:inline;color:#15803d">Suggested Follow-up Comment</div>
+                <span style="font-size:.72rem;color:#6b7280;margin-left:6px">— add this as a comment AFTER the post gets some engagement</span>
+              </div>
+              <button class="dist-copy-btn" style="background:#dcfce7;color:#15803d;border-color:#86efac" onclick="distCopy('dist-rd-followup', this)">Copy follow-up</button>
+            </div>
+            <div class="dist-field-box" id="dist-rd-followup" style="font-size:.82rem;color:#166534;white-space:pre-wrap"></div>
+          </div>
+
+          <!-- URL + anchor text (for follow-up comment reference) -->
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+            <div style="flex:2;min-width:200px">
+              <div class="dist-field-label">Page URL</div>
+              <div class="dist-field-box" id="dist-rd-url" style="font-size:.8rem;word-break:break-all"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-rd-url', this)">Copy URL</button>
+            </div>
+            <div style="flex:1;min-width:160px">
+              <div class="dist-field-label">Anchor Text (for markdown link)</div>
+              <div class="dist-field-box" id="dist-rd-anchor"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-rd-anchor', this)">Copy</button>
+            </div>
+          </div>
+
+          <!-- Subreddits + disclosure -->
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+            <div style="flex:1;min-width:160px">
+              <div class="dist-field-label">Suggested Subreddits</div>
+              <div class="dist-field-box" id="dist-rd-subs"></div>
+            </div>
+            <div style="flex:2;min-width:200px">
+              <div class="dist-field-label">Disclosure Note</div>
+              <div class="dist-field-box" id="dist-rd-disclosure" style="font-style:italic;color:#6b7280"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-rd-disclosure', this)">Copy disclosure</button>
+            </div>
+          </div>
+
+          <!-- Platform note -->
+          <div style="font-size:.78rem;color:#6b7280;background:#fef9c3;border:1px solid #fde68a;border-radius:6px;padding:8px 10px;margin-bottom:10px">
+            &#9432; Post the body text first with no link. Only add the follow-up comment (with link) after the post gains engagement. Reddit supports markdown: <code style="background:#f3f4f6;padding:1px 5px;border-radius:3px">[anchor text](url)</code>.
+          </div>
+
+          <!-- Manual posting instructions -->
+          <div>
+            <div class="dist-field-label">Manual Posting Steps</div>
+            <div class="dist-field-box" id="dist-rd-instructions" style="font-size:.79rem;line-height:1.7;white-space:pre-wrap;color:#374151"></div>
+          </div>
+
+        </div>
+
+        <!-- YouTube pane -->
+        <div id="dist-pane-youtube" style="display:none">
+
+          <!-- Title -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Video Title</div>
+            <div class="dist-field-box" id="dist-yt-title" style="font-weight:700"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-yt-title', this)">Copy</button>
+          </div>
+
+          <!-- URL + anchor text -->
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+            <div style="flex:2;min-width:200px">
+              <div class="dist-field-label">Page URL (for description)</div>
+              <div class="dist-field-box" id="dist-yt-url" style="font-size:.8rem;word-break:break-all"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-yt-url', this)">Copy URL</button>
+            </div>
+            <div style="flex:1;min-width:160px">
+              <div class="dist-field-label">Suggested Anchor Text</div>
+              <div class="dist-field-box" id="dist-yt-anchor"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-yt-anchor', this)">Copy</button>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Description</div>
+            <div class="dist-field-box dist-field-box-tall" id="dist-yt-desc"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-yt-desc', this)">Copy</button>
+          </div>
+
+          <!-- Script -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Script (60&#8211;90 seconds)</div>
+            <div class="dist-field-box dist-field-box-tall" id="dist-yt-script" style="font-family:Georgia,serif;line-height:1.7"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-yt-script', this)">Copy</button>
+          </div>
+
+          <!-- Chapters + Tags -->
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px">
+            <div style="flex:1;min-width:160px">
+              <div class="dist-field-label">Chapters</div>
+              <div class="dist-field-box" id="dist-yt-chapters" style="font-family:monospace;font-size:.82rem"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-yt-chapters', this)">Copy</button>
+            </div>
+            <div style="flex:1;min-width:160px">
+              <div class="dist-field-label">Tags</div>
+              <div class="dist-field-box" id="dist-yt-tags"></div>
+              <button class="dist-copy-btn" onclick="distCopy('dist-yt-tags', this)">Copy</button>
+            </div>
+          </div>
+
+          <!-- Thumbnail prompt -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Thumbnail Prompt</div>
+            <div class="dist-field-box" id="dist-yt-thumb"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-yt-thumb', this)">Copy</button>
+          </div>
+
+          <!-- Video prompt -->
+          <div style="margin-bottom:10px">
+            <div class="dist-field-label">Text-to-Video Prompt</div>
+            <div class="dist-field-box dist-field-box-tall" id="dist-yt-vidprompt"></div>
+            <button class="dist-copy-btn" onclick="distCopy('dist-yt-vidprompt', this)">Copy</button>
+          </div>
+
+          <!-- Manual posting instructions -->
+          <div>
+            <div class="dist-field-label">Manual Posting Steps</div>
+            <div class="dist-field-box" id="dist-yt-instructions" style="font-size:.79rem;line-height:1.7;white-space:pre-wrap;color:#374151"></div>
+          </div>
+
+        </div>
+
+        <!-- Posted URL entry -->
+        <div style="margin-top:22px;padding:14px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px">
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:10px">Posted URLs (enter manually after posting)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div>
+              <label style="font-size:.75rem;color:#374151;font-weight:600;display:block;margin-bottom:3px">Facebook</label>
+              <input type="url" id="dist-url-facebook" placeholder="https://facebook.com/..."
+                style="width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid #d1d5db;border-radius:5px;font-size:.8rem"/>
+            </div>
+            <div>
+              <label style="font-size:.75rem;color:#374151;font-weight:600;display:block;margin-bottom:3px">LinkedIn</label>
+              <input type="url" id="dist-url-linkedin" placeholder="https://linkedin.com/..."
+                style="width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid #d1d5db;border-radius:5px;font-size:.8rem"/>
+            </div>
+            <div>
+              <label style="font-size:.75rem;color:#374151;font-weight:600;display:block;margin-bottom:3px">Reddit</label>
+              <input type="url" id="dist-url-reddit" placeholder="https://reddit.com/r/..."
+                style="width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid #d1d5db;border-radius:5px;font-size:.8rem"/>
+            </div>
+            <div>
+              <label style="font-size:.75rem;color:#374151;font-weight:600;display:block;margin-bottom:3px">YouTube</label>
+              <input type="url" id="dist-url-youtube" placeholder="https://youtube.com/watch?v=..."
+                style="width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid #d1d5db;border-radius:5px;font-size:.8rem"/>
+            </div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+            <button onclick="distSavePostedUrls()" class="btn btn-primary btn-sm">Save Posted URLs</button>
+            <span id="dist-url-msg" style="font-size:.8rem;color:#6b7280"></span>
+          </div>
+        </div>
+
+      </div><!-- /dist-viewer -->
+    </div><!-- /layout -->
+  </div><!-- /main -->
+
+  <!-- ─── Video Production Packs ───────────────────────────────────────── -->
+  <div class="main" style="padding-top:0;padding-bottom:0">
+  <div style="border-top:2px solid #e5e7eb;margin-top:36px;padding-top:28px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
+      <div>
+        <h3 style="margin:0 0 4px;font-size:1.05rem;font-weight:700;color:#111827">Video Production Packs</h3>
+        <p style="margin:0;font-size:.82rem;color:#6b7280">Generate 3 video variants per page (YouTube Short, Standard, Social Clip) — ready for Pictory, InVideo or any text-to-video tool.</p>
+      </div>
+    </div>
+
+    <!-- Generate form -->
+    <form method="GET" action="/api/distribution/generate-video" style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:16px;margin-bottom:20px">
+      <input type="hidden" name="slug" value="${defaultSlug}">
+      <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <label style="font-size:.78rem;font-weight:700;color:#374151;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em">Generate Video Pack for Page</label>
+          <select name="pageSlug" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;background:#fff">
+            ${hubPageOptions}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm" style="white-space:nowrap">&#9654; Generate Video Pack</button>
+        <button type="button" onclick="vidLoad()" class="btn btn-secondary btn-sm">&#8635; Refresh List</button>
+      </div>
+    </form>
+
+    <!-- Two-column: list + viewer -->
+    <div style="display:grid;grid-template-columns:260px 1fr;gap:16px;min-height:420px">
+
+      <!-- List -->
+      <div style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;align-self:start">
+        <div style="background:#f1f5f9;padding:10px 14px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#374151;border-bottom:1px solid #e5e7eb">Generated Packs</div>
+        <div id="vid-list" style="padding:8px">
+          <div id="vid-list-empty" style="padding:12px 8px;font-size:.82rem;color:#9ca3af;text-align:center">No video packs yet</div>
+        </div>
+      </div>
+
+      <!-- Viewer -->
+      <div id="vid-viewer" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;display:none">
+
+        <!-- Viewer header -->
+        <div style="background:#f1f5f9;padding:12px 16px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <span id="vid-view-title" style="font-weight:700;font-size:.95rem;color:#111827"></span>
+            <span id="vid-status-badge" class="vid-badge vid-badge-draft" style="margin-left:10px">Draft</span>
+          </div>
+          <button onclick="vidDownload()" class="btn btn-secondary btn-sm">&#11123; Download JSON</button>
+        </div>
+
+        <!-- Type tabs -->
+        <div style="display:flex;border-bottom:1px solid #e5e7eb;background:#f9fafb">
+          <button id="vid-tab-short" class="vid-type-tab vid-tab-active" onclick="vidTypeTab('short')">&#9654; Short (30&ndash;45s)</button>
+          <button id="vid-tab-std"   class="vid-type-tab"               onclick="vidTypeTab('std')">&#9654; Standard (60&ndash;90s)</button>
+          <button id="vid-tab-clip"  class="vid-type-tab"               onclick="vidTypeTab('clip')">&#9654; Social Clip (20&ndash;30s)</button>
+        </div>
+
+        <!-- Pane: Short -->
+        <div id="vid-pane-short" class="vid-pane" style="padding:18px;overflow-y:auto;max-height:700px">
+          <div id="vid-short-content"></div>
+        </div>
+
+        <!-- Pane: Standard -->
+        <div id="vid-pane-std" class="vid-pane" style="padding:18px;overflow-y:auto;max-height:700px;display:none">
+          <div id="vid-std-content"></div>
+        </div>
+
+        <!-- Pane: Social Clip -->
+        <div id="vid-pane-clip" class="vid-pane" style="padding:18px;overflow-y:auto;max-height:700px;display:none">
+          <div id="vid-clip-content"></div>
+        </div>
+
+        <!-- Status + URL footer -->
+        <div style="border-top:1px solid #e5e7eb;padding:12px 16px;background:#f9fafb;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <span style="font-size:.78rem;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.04em">Mark as:</span>
+          <button onclick="vidSetStatus('draft')"    class="btn btn-sm" style="background:#f3f4f6;color:#374151;border:1px solid #d1d5db">Draft</button>
+          <button onclick="vidSetStatus('approved')" class="btn btn-sm" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">Approved</button>
+          <button onclick="vidSetStatus('produced')" class="btn btn-sm" style="background:#dbeafe;color:#1e40af;border:1px solid #93c5fd">Produced</button>
+          <button onclick="vidSetStatus('uploaded')" class="btn btn-sm" style="background:#ede9fe;color:#5b21b6;border:1px solid #c4b5fd">Uploaded</button>
+          <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input id="vid-url-input" type="url" placeholder="YouTube URL (optional)" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.82rem;width:220px">
+            <button onclick="vidSaveUrl()" class="btn btn-primary btn-sm">Save URL</button>
+            <span id="vid-url-msg" style="font-size:.78rem;color:#6b7280"></span>
+          </div>
+        </div>
+
+      </div><!-- /vid-viewer -->
+
+    </div><!-- /video grid -->
+  </div><!-- /video section -->
+  </div><!-- /main wrapper for video -->
+
+  <!-- ─── Content Calendar ───────────────────────────────────────────────── -->
+  <div class="main" style="padding-top:0;padding-bottom:32px">
+  <div style="border-top:2px solid #e5e7eb;margin-top:36px;padding-top:28px">
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <div>
+        <h3 style="margin:0 0 4px;font-size:1.05rem;font-weight:700;color:#111827">Content Calendar</h3>
+        <p style="margin:0;font-size:.82rem;color:#6b7280">Generate a 7, 14 or 30-day posting plan — platform, content angle and page are assigned algorithmically from your hub pages.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <select id="cal-days-select" style="padding:7px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;background:#fff">
+          <option value="7">7 days</option>
+          <option value="14">14 days</option>
+          <option value="30" selected>30 days</option>
+        </select>
+        <button onclick="calGenerate()" class="btn btn-primary btn-sm" id="cal-gen-btn">&#9654; Generate Calendar</button>
+        <button onclick="calLoad()" class="btn btn-secondary btn-sm">&#8635; Refresh</button>
+        <button onclick="calDownload()" class="btn btn-sm" style="background:#f3f4f6;color:#374151;border:1px solid #d1d5db">&#8659; Export JSON</button>
+      </div>
+    </div>
+
+    <div id="cal-status" style="font-size:.82rem;color:#6b7280;margin-bottom:12px"></div>
+
+    <!-- Legend -->
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;align-items:center;font-size:.76rem;color:#374151">
+      <span style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280">Platform:</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#1877f2;vertical-align:middle;margin-right:4px"></span>Facebook</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#0a66c2;vertical-align:middle;margin-right:4px"></span>LinkedIn</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff4500;vertical-align:middle;margin-right:4px"></span>Reddit</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff0000;vertical-align:middle;margin-right:4px"></span>YouTube</span>
+      <span style="margin-left:16px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280">Status:</span>
+      <span><span style="display:inline-block;padding:1px 6px;border-radius:8px;background:#f3f4f6;border:1px solid #d1d5db;font-size:.7rem">draft</span></span>
+      <span><span style="display:inline-block;padding:1px 6px;border-radius:8px;background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;font-size:.7rem">approved</span></span>
+      <span><span style="display:inline-block;padding:1px 6px;border-radius:8px;background:#dbeafe;color:#1e40af;border:1px solid #93c5fd;font-size:.7rem">posted</span></span>
+    </div>
+
+    <!-- Calendar table -->
+    <div id="cal-table-wrap" style="overflow-x:auto">
+      <div id="cal-empty" style="padding:24px;text-align:center;font-size:.85rem;color:#9ca3af;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px">
+        No calendar yet — click Generate Calendar to create a posting plan.
+      </div>
+      <table id="cal-table" style="display:none;width:100%;border-collapse:collapse;font-size:.82rem">
+        <thead>
+          <tr style="background:#f1f5f9;border-bottom:2px solid #e5e7eb">
+            <th style="padding:8px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;white-space:nowrap">Day</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;white-space:nowrap">Date</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280">Platform</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280">Angle</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280">Page</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280">Status</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="cal-tbody"></tbody>
+      </table>
+    </div>
+
+  </div>
+  </div><!-- /calendar section -->
+
+    </div><!-- /dist-page-mode -->
+
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- VISIBILITY POSTS MODE                                                  -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <div id="dist-visibility-mode">
+
+      <!-- Form -->
+      <div class="section">
+        <div class="section-head">
+          <h3 style="font-size:1.05rem;font-weight:800;color:#111827">Create Visibility Post Set</h3>
+          <span class="section-sub">Generate platform-specific posts for any topic — linked to a page or as standalone awareness content</span>
+        </div>
+        <div class="section-body">
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px">
+
+            <!-- Topic -->
+            <div>
+              <label class="vp-label">Topic / Keyword</label>
+              <input id="vp-topic" type="text" placeholder="e.g. boiler service, kitchen refit, local SEO"
+                style="width:100%;box-sizing:border-box;padding:9px 11px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.88rem;background:#fff;outline:none"
+                oninput="vpUpdateSaveBtn()"/>
+            </div>
+
+            <!-- Business Type -->
+            <div>
+              <label class="vp-label">Business Type</label>
+              <input id="vp-biz-type" type="text" placeholder="e.g. Plumber, SEO Agency, Restaurant"
+                style="width:100%;box-sizing:border-box;padding:9px 11px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.88rem;background:#fff;outline:none"/>
+            </div>
+
+            <!-- Location -->
+            <div>
+              <label class="vp-label">Location</label>
+              <input id="vp-location" type="text" placeholder="e.g. Leeds, Manchester, West Yorkshire"
+                style="width:100%;box-sizing:border-box;padding:9px 11px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.88rem;background:#fff;outline:none"/>
+            </div>
+
+            <!-- Post Objective -->
+            <div>
+              <label class="vp-label">Post Objective</label>
+              <select id="vp-objective"
+                style="width:100%;box-sizing:border-box;padding:9px 11px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.88rem;background:#fff;outline:none">
+                <option value="Generate enquiries">Generate enquiries</option>
+                <option value="Build local awareness">Build local awareness</option>
+                <option value="Educate &amp; inform">Educate &amp; inform</option>
+                <option value="Showcase a recent job">Showcase a recent job</option>
+                <option value="Promote a seasonal offer">Promote a seasonal offer</option>
+                <option value="Drive website traffic">Drive website traffic</option>
+                <option value="Build trust &amp; credibility">Build trust &amp; credibility</option>
+                <option value="Announce a new service">Announce a new service</option>
+              </select>
+            </div>
+
+            <!-- Link Destination -->
+            <div>
+              <label class="vp-label">Link Destination</label>
+              <select id="vp-link-type" onchange="vpLinkTypeChange()"
+                style="width:100%;box-sizing:border-box;padding:9px 11px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.88rem;background:#fff;outline:none">
+                <option value="homepage">Homepage</option>
+                <option value="page">Specific page (select below)</option>
+                <option value="custom">Custom URL</option>
+                <option value="none">No link</option>
+              </select>
+            </div>
+
+            <!-- Conditional: page picker -->
+            <div id="vp-page-picker-wrap" style="display:none">
+              <label class="vp-label">Select Page</label>
+              <select id="vp-page-picker"
+                style="width:100%;box-sizing:border-box;padding:9px 11px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.88rem;background:#fff;outline:none">
+                <option value="">— loading pages… —</option>
+              </select>
+            </div>
+
+            <!-- Conditional: custom URL -->
+            <div id="vp-custom-url-wrap" style="display:none">
+              <label class="vp-label">Custom URL</label>
+              <input id="vp-custom-url" type="url" placeholder="https://example.com/page"
+                style="width:100%;box-sizing:border-box;padding:9px 11px;border:1.5px solid #d1d5db;border-radius:7px;font-size:.88rem;background:#fff;outline:none"/>
+            </div>
+
+          </div><!-- /grid -->
+
+          <!-- Platform checkboxes -->
+          <div style="margin-top:18px">
+            <label class="vp-label" style="margin-bottom:10px;display:block">Platforms</label>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <label class="vp-plat-chip" style="--chip-color:#4285F4">
+                <input type="checkbox" value="gbp" class="vp-plat-cb" checked/> Google Business Profile
+              </label>
+              <label class="vp-plat-chip" style="--chip-color:#1877F2">
+                <input type="checkbox" value="facebook" class="vp-plat-cb" checked/> Facebook
+              </label>
+              <label class="vp-plat-chip" style="--chip-color:#E1306C">
+                <input type="checkbox" value="instagram" class="vp-plat-cb" checked/> Instagram
+              </label>
+              <label class="vp-plat-chip" style="--chip-color:#0A66C2">
+                <input type="checkbox" value="linkedin" class="vp-plat-cb" checked/> LinkedIn
+              </label>
+              <label class="vp-plat-chip" style="--chip-color:#111827">
+                <input type="checkbox" value="twitter" class="vp-plat-cb"/> X / Twitter
+              </label>
+            </div>
+          </div>
+
+          <!-- Generate button + status -->
+          <div style="margin-top:20px">
+            <button id="vp-gen-btn" type="button" onclick="vpGenerate()" class="btn btn-primary" style="padding:12px 32px;font-size:1rem;font-weight:800">
+              ▶ Generate Posts
+            </button>
+            <div id="vp-gen-status" style="display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-size:.9rem;font-weight:600"></div>
+          </div>
+
+        </div><!-- /section-body -->
+      </div><!-- /form section -->
+
+      <!-- ── Output area ───────────────────────────────────────────────────── -->
+      <div id="vp-output" style="display:none">
+
+        <!-- Platform cards grid -->
+        <div class="section">
+          <div class="section-head" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+            <div>
+              <h3 style="font-size:1rem;font-weight:800;color:#111827;margin:0 0 2px">Generated Posts</h3>
+              <span class="section-sub" style="margin:0">Review and edit each post before copying</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button id="vp-save-btn" onclick="vpSave()" class="btn btn-sm" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;font-weight:700">&#10003; Save Set</button>
+              <button onclick="vpCopyAll()" class="btn btn-sm" style="background:#f3f4f6;color:#374151;border:1px solid #d1d5db;font-weight:700">&#8659; Copy All (JSON)</button>
+            </div>
+          </div>
+          <div class="section-body" style="padding-top:0">
+            <div id="vp-cards" style="display:flex;flex-direction:column;gap:16px"></div>
+          </div>
+        </div>
+
+        <!-- Image section -->
+        <div class="section">
+          <div class="section-head">
+            <h3 style="font-size:1rem;font-weight:800;color:#111827;margin:0 0 2px">AI Image</h3>
+            <span class="section-sub" style="margin:0">Generate a 16:9 social media image using Ideogram — download and use across platforms</span>
+          </div>
+          <div class="section-body" style="padding-top:8px">
+            <div id="vp-img-area">
+              <button id="vp-img-gen-btn" onclick="vpGenerateImage()"
+                style="padding:9px 22px;border:none;border-radius:7px;background:#1e3a5f;color:#fff;font-size:.86rem;font-weight:700;cursor:pointer">
+                🎨 Generate Image
+              </button>
+              <div id="vp-img-status" style="font-size:.82rem;color:#6b7280;margin-top:8px;min-height:16px"></div>
+            </div>
+            <div id="vp-img-result" style="display:none;margin-top:14px">
+              <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+                <img id="vp-img-preview" src="" alt="Generated social image"
+                  style="width:340px;max-width:100%;border-radius:10px;border:1px solid #e5e7eb;box-shadow:0 2px 8px rgba(0,0,0,.08);background:#f1f5f9"/>
+                <div style="flex:1;min-width:200px">
+                  <div style="font-size:.78rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Image Prompt</div>
+                  <div id="vp-img-prompt-text" style="font-size:.8rem;color:#374151;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:10px;margin-bottom:12px;line-height:1.5"></div>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <a id="vp-img-dl" href="#" target="_blank"
+                      style="padding:7px 16px;background:#0ea5e9;color:#fff;border-radius:6px;font-size:.8rem;font-weight:700;text-decoration:none">
+                      &#11015; Open / Download
+                    </a>
+                    <button onclick="vpGenerateImage()"
+                      style="padding:7px 16px;background:#f3f4f6;color:#374151;border:1px solid #d1d5db;border-radius:6px;font-size:.8rem;font-weight:700;cursor:pointer">
+                      &#8635; Regenerate
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /vp-output -->
+
+      <!-- ── Saved post sets ────────────────────────────────────────────────── -->
+      <div class="section">
+        <div class="section-head" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div>
+            <h3 style="font-size:1rem;font-weight:800;color:#111827;margin:0 0 2px">Saved Post Sets</h3>
+            <span class="section-sub" style="margin:0">Previously generated and saved post sets for this project</span>
+          </div>
+          <button onclick="vpLoadSaved()" style="font-size:.72rem;color:#6b7280;background:none;border:none;cursor:pointer;text-decoration:underline">&#8635; Refresh</button>
+        </div>
+        <div class="section-body" style="padding-top:0">
+          <div id="vp-saved-empty" style="color:#9ca3af;font-size:.85rem;padding:16px 0">No saved post sets yet — generate and save one above.</div>
+          <div id="vp-saved-list" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+      </div>
+
+    </div><!-- /dist-visibility-mode -->
+
+  </div><!-- /calendar section -->
+
+</div><!-- /panel-distribution -->
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Brand Import                                       -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-brand-import">
+  <div class="main">
+    <div class="section">
+      <div class="section-head">
+        <h2>Brand / Style Importer</h2>
+        <span class="section-sub">Enter a client&rsquo;s existing website URL to extract brand colours, fonts, logo and navigation &mdash; then apply them to generated pages.</span>
+      </div>
+      <div class="section-body">
+
+        <!-- URL Input -->
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px 24px;margin-bottom:20px">
+          <div style="font-weight:700;font-size:.95rem;color:#1e3a5f;margin-bottom:12px">&#127760; Website URL to Import</div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <input id="bi-url" type="url" placeholder="https://www.clientwebsite.co.uk"
+              style="flex:1;padding:10px 14px;border:1px solid #d1d5db;border-radius:7px;font-size:.9rem;outline:none"
+              onkeydown="if(event.key==='Enter')biRun()">
+            <button class="btn" onclick="biRun()" id="bi-run-btn"
+              style="background:#005eb8;color:#fff;font-weight:700;white-space:nowrap;padding:10px 22px">
+              &#128269; Import Brand
+            </button>
+          </div>
+          <div id="bi-status" style="margin-top:10px;font-size:.82rem;color:#6b7280;min-height:20px"></div>
+        </div>
+
+        <!-- Results (hidden until import runs or profile is loaded) -->
+        <div id="bi-results" style="display:none">
+
+          <!-- Warnings banner -->
+          <div id="bi-warnings" style="display:none;background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.83rem;color:#92400e"></div>
+
+          <!-- Confidence badges -->
+          <div id="bi-confidence" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px"></div>
+
+          <!-- Logo + Business name -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px">
+              <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Logo</div>
+              <div id="bi-logo-preview" style="min-height:48px;display:flex;align-items:center;gap:12px;margin-bottom:10px"></div>
+              <input id="bi-logo-url" type="url" placeholder="Logo URL (optional override)"
+                style="width:100%;padding:7px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:.8rem;box-sizing:border-box">
+            </div>
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px">
+              <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Business Name</div>
+              <input id="bi-business-name" type="text" placeholder="Business name"
+                style="width:100%;padding:7px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:.88rem;font-weight:600;box-sizing:border-box;margin-bottom:12px">
+              <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Source</div>
+              <div id="bi-source-url" style="font-size:.78rem;color:#4b5563;word-break:break-all"></div>
+              <div id="bi-fetched-at" style="font-size:.72rem;color:#9ca3af;margin-top:4px"></div>
+            </div>
+          </div>
+
+          <!-- Brand Colours -->
+          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:16px">
+            <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">&#127912; Brand Colours</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px" id="bi-colour-grid"></div>
+          </div>
+
+          <!-- Typography -->
+          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:16px">
+            <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">&#128195; Typography</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+              <div>
+                <label style="font-size:.78rem;color:#374151;font-weight:600;display:block;margin-bottom:4px">Heading Font</label>
+                <input id="bi-heading-font" type="text" placeholder="e.g. Montserrat"
+                  style="width:100%;padding:7px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:.85rem;box-sizing:border-box">
+              </div>
+              <div>
+                <label style="font-size:.78rem;color:#374151;font-weight:600;display:block;margin-bottom:4px">Body Font</label>
+                <input id="bi-body-font" type="text" placeholder="e.g. Open Sans"
+                  style="width:100%;padding:7px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:.85rem;box-sizing:border-box">
+              </div>
+            </div>
+            <div id="bi-font-preview" style="font-size:.82rem;color:#6b7280"></div>
+          </div>
+
+          <!-- Nav + Contact -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px">
+              <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">&#128196; Navigation Links</div>
+              <div id="bi-nav-links" style="font-size:.83rem;color:#374151"></div>
+            </div>
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px">
+              <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">&#128222; Contact Info</div>
+              <div id="bi-contact-info" style="font-size:.83rem;color:#374151"></div>
+            </div>
+          </div>
+
+          <!-- Tone of Voice -->
+          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:16px">
+            <div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">&#128172; Tone of Voice</div>
+            <div id="bi-tone" style="font-size:.83rem;color:#374151"></div>
+          </div>
+
+          <!-- Action Bar -->
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px">
+            <button class="btn" onclick="biSave(false)" style="background:#374151;color:#fff;font-weight:700">
+              &#128190; Save Changes
+            </button>
+            <button class="btn" onclick="biSave(true)" id="bi-approve-btn"
+              style="background:#059669;color:#fff;font-weight:700">
+              &#10003; Approve &amp; Apply to Project
+            </button>
+            <button class="btn btn-secondary" onclick="biRun()" style="font-size:.83rem">
+              &#8635; Re-Import
+            </button>
+            <div id="bi-action-status" style="font-size:.82rem;color:#6b7280;margin-left:auto"></div>
+          </div>
+
+          <!-- Post-approve panel (shown after approval) -->
+          <div id="bi-post-approve" style="display:none;margin-top:16px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:20px 24px">
+            <div style="font-weight:700;font-size:.95rem;color:#065f46;margin-bottom:12px">&#10003; Brand approved and applied &mdash; what next?</div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
+              <button class="btn" id="bi-preview-hub-btn" onclick="biPreviewHub()"
+                style="background:#1d4ed8;color:#fff;font-weight:700">
+                &#128065; Preview Hub Page with Brand
+              </button>
+              <button class="btn" onclick="biOpenWizard()"
+                style="background:#7c3aed;color:#fff;font-weight:700">
+                &#9881; Open Setup Wizard &rarr; Create Campaign
+              </button>
+              <a id="bi-preview-all-link" href="#" target="_blank"
+                style="font-size:.82rem;color:#1d4ed8;text-decoration:none;font-weight:600">
+                View all generated pages
+              </a>
+            </div>
+            <div id="bi-page-list" style="font-size:.82rem;color:#374151"></div>
+          </div>
+
+        </div><!-- /bi-results -->
+
+      </div>
+    </div>
+  </div>
+</div><!-- /panel-brand-import -->
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Image Library                                     -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-image-library">
+  <div class="main">
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Image Library</h2>
+        <span class="section-sub">Upload and manage approved images for each service and slot. Pages use only images from their matching service folder.</span>
+        <button class="btn btn-sm" onclick="imgLibShowUpload()" style="margin-left:auto;background:#005eb8;color:#fff;font-weight:700">&#43; Upload Image</button>
+        <button class="btn btn-secondary btn-sm" onclick="imgLibLoad(true)">&#8635; Refresh</button>
+      </div>
+      <div class="section-body">
+
+        <!-- Upload form (hidden by default) -->
+        <div id="imglib-upload-form" style="display:none;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px 24px;margin-bottom:20px">
+          <h3 style="font-size:.95rem;font-weight:700;color:#1e3a5f;margin:0 0 14px">Upload New Image</h3>
+          <div style="margin-bottom:12px">
+            <label class="dist-field-label">Service</label>
+            <select id="imglib-svc" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem">
+              <option value="web-hosting">Web Hosting</option>
+              <option value="web-design">Web Design</option>
+              <option value="local-seo">Local SEO</option>
+              <option value="google-business-profile">Google Business Profile</option>
+              <option value="email-marketing">Email Marketing</option>
+            </select>
+          </div>
+          <div style="margin-bottom:10px">
+            <label class="dist-field-label">Description</label>
+            <input id="imglib-desc" type="text" placeholder="e.g. Server room with blue lighting" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;box-sizing:border-box">
+          </div>
+          <div style="margin-bottom:10px">
+            <label class="dist-field-label">Alt Text Template <span style="font-weight:400;color:#6b7280">(use {{Service}} and {{Location}} placeholders)</span></label>
+            <input id="imglib-alt" type="text" placeholder="{{Service}} {{Location}} — professional hosting and website performance" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;box-sizing:border-box">
+          </div>
+          <div style="margin-bottom:14px">
+            <label class="dist-field-label">Tags <span style="font-weight:400;color:#6b7280">(comma-separated)</span></label>
+            <input id="imglib-tags" type="text" placeholder="hosting, servers, ssl, performance" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;box-sizing:border-box">
+          </div>
+          <div style="margin-bottom:14px">
+            <label class="dist-field-label">Image File <span style="font-weight:400;color:#6b7280">(JPG, PNG, WebP — max 20 MB)</span></label>
+            <input id="imglib-file" type="file" accept="image/jpeg,image/png,image/webp" multiple style="font-size:.85rem">
+          </div>
+          <div id="imglib-upload-status" style="margin-bottom:10px;font-size:.84rem;color:#059669;display:none"></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-sm" onclick="imgLibUpload()" style="background:#005eb8;color:#fff;font-weight:700">Upload</button>
+            <button class="btn btn-secondary btn-sm" onclick="imgLibHideUpload()">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px">
+          <select id="imglib-filter-svc" onchange="imgLibRender()" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.82rem">
+            <option value="">All Services</option>
+            <option value="web-hosting">Web Hosting</option>
+            <option value="web-design">Web Design</option>
+            <option value="local-seo">Local SEO</option>
+            <option value="google-business-profile">Google Business Profile</option>
+            <option value="email-marketing">Email Marketing</option>
+          </select>
+          <select id="imglib-filter-slot" onchange="imgLibRender()" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.82rem">
+            <option value="">All Slots</option>
+            <option value="hero">Hero</option>
+            <option value="support">Support</option>
+            <option value="conversion">Conversion</option>
+          </select>
+          <select id="imglib-filter-approved" onchange="imgLibRender()" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.82rem">
+            <option value="">All Status</option>
+            <option value="approved">Approved only</option>
+            <option value="unapproved">Unapproved only</option>
+          </select>
+          <span id="imglib-count" style="font-size:.8rem;color:#6b7280;margin-left:auto"></span>
+        </div>
+
+        <!-- Image grid -->
+        <div id="imglib-use-msg" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:7px;padding:10px 16px;font-size:.86rem;color:#065f46;font-weight:600;margin-bottom:12px"></div>
+        <div id="imglib-error" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:7px;padding:10px 14px;font-size:.85rem;color:#991b1b;margin-bottom:12px"></div>
+        <div id="imglib-loading" style="color:#6b7280;font-size:.9rem;padding:20px 0">Loading image library…</div>
+        <div id="imglib-empty" style="display:none;padding:32px 0;text-align:center;color:#6b7280;font-size:.9rem">No images found. Upload your first image using the button above.</div>
+        <div id="imglib-grid" style="display:none;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px"></div>
+
+        <!-- Usage info (per selected image) -->
+        <div id="imglib-usage-panel" style="display:none;margin-top:20px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:16px 20px">
+          <h4 style="font-size:.85rem;font-weight:700;color:#0369a1;margin:0 0 8px">Pages using this image</h4>
+          <div id="imglib-usage-list" style="font-size:.82rem;color:#0c4a6e;line-height:2"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Image Library Config -->
+    <div class="section" style="margin-top:20px">
+      <div class="section-head"><h2>Library Settings</h2></div>
+      <div class="section-body">
+        <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;padding:4px 0">
+          <label style="display:flex;align-items:center;gap:8px;font-size:.88rem;cursor:pointer">
+            <input type="checkbox" id="imglib-cfg-enabled" onchange="imgLibSaveConfig()" style="width:16px;height:16px">
+            <span><strong>Enable Image Library</strong> — use library images when generating pages</span>
+          </label>
+          <label style="font-size:.88rem">
+            Mode:&ensp;
+            <select id="imglib-cfg-mode" onchange="imgLibSaveConfig()" style="padding:5px 10px;border:1px solid #d1d5db;border-radius:5px;font-size:.85rem">
+              <option value="random">Random (varied per page)</option>
+              <option value="deterministic">Deterministic (stable per page slug)</option>
+            </select>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:.88rem;cursor:pointer">
+            <input type="checkbox" id="imglib-cfg-fallback" onchange="imgLibSaveConfig()">
+            <span>Allow cross-service fallback if slot is empty</span>
+          </label>
+        </div>
+        <div id="imglib-cfg-status" style="margin-top:8px;font-size:.82rem;color:#059669;display:none">Settings saved.</div>
+      </div>
+    </div>
+
+    <!-- FTP Push -->
+    <div class="section" style="margin-top:20px">
+      <div class="section-head"><h2>Deploy Library Images</h2></div>
+      <div class="section-body">
+        <p style="font-size:.85rem;color:#374151;margin:0 0 12px">Before publishing, upload all approved library images to the live FTP server so they appear on generated pages.</p>
+        <button class="btn btn-sm" onclick="imgLibPushFtp()" style="background:#d97706;color:#fff;font-weight:700">&#128247; Push Library Images to FTP</button>
+        <div id="imglib-ftp-status" style="margin-top:10px;font-size:.84rem;display:none"></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /panel-image-library -->
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- imglib styles below                                    -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div style="display:none" id="panel-users">
+  <div class="main">
+    <div class="card" style="max-width:820px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+        <div>
+          <h2 style="font-size:1.1rem;font-weight:800;margin:0">Team Members</h2>
+          <p style="font-size:.82rem;color:#64748b;margin:2px 0 0">Manage who can access the Local SEO Engine</p>
+        </div>
+        <button onclick="usersShowAdd()" style="background:#005EB8;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.87rem;font-weight:700;cursor:pointer;">+ Add Team Member</button>
+      </div>
+
+      <!-- Add user form (hidden by default) -->
+      <div id="users-add-form" style="display:none;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:20px;margin-bottom:20px;">
+        <h3 style="font-size:.95rem;font-weight:700;margin:0 0 14px">New Team Member</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div>
+            <label style="font-size:.78rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">Full Name</label>
+            <input id="u-name" type="text" placeholder="Jane Smith" style="width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:.9rem;"/>
+          </div>
+          <div>
+            <label style="font-size:.78rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">Username</label>
+            <input id="u-username" type="text" placeholder="janesmith" style="width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:.9rem;"/>
+          </div>
+          <div>
+            <label style="font-size:.78rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">Password</label>
+            <input id="u-password" type="password" placeholder="Min 8 characters" style="width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:.9rem;"/>
+          </div>
+          <div>
+            <label style="font-size:.78rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">Role</label>
+            <select id="u-role" style="width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:.9rem;background:#fff;">
+              <option value="staff">Staff</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+        <div id="users-add-err" style="display:none;color:#dc2626;font-size:.82rem;margin-bottom:10px;"></div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="usersAdd()" style="background:#005EB8;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-size:.87rem;font-weight:700;cursor:pointer;">Create</button>
+          <button onclick="usersHideAdd()" style="background:#f1f5f9;color:#374151;border:1px solid #e2e8f0;border-radius:7px;padding:8px 14px;font-size:.87rem;cursor:pointer;">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Users table -->
+      <div id="users-loading" style="color:#64748b;font-size:.87rem;padding:12px 0;">Loading team…</div>
+      <div id="users-table-wrap" style="display:none;">
+        <table style="width:100%;border-collapse:collapse;font-size:.87rem;">
+          <thead>
+            <tr style="border-bottom:2px solid #e2e8f0;text-align:left;">
+              <th style="padding:8px 10px;font-weight:700;color:#374151;">Name</th>
+              <th style="padding:8px 10px;font-weight:700;color:#374151;">Username</th>
+              <th style="padding:8px 10px;font-weight:700;color:#374151;">Role</th>
+              <th style="padding:8px 10px;font-weight:700;color:#374151;">Last Login</th>
+              <th style="padding:8px 10px;font-weight:700;color:#374151;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+      <div id="users-err" style="display:none;color:#dc2626;font-size:.85rem;padding:10px 0;"></div>
+    </div>
+
+    <!-- Change Password Card -->
+    <div class="card" style="max-width:820px;margin-top:16px;">
+      <h2 style="font-size:1rem;font-weight:800;margin:0 0 14px">Change My Password</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;">
+        <div>
+          <label style="font-size:.78rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">New Password</label>
+          <input id="pw-new" type="password" placeholder="Min 8 characters" style="width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:.9rem;"/>
+        </div>
+        <div>
+          <label style="font-size:.78rem;font-weight:600;color:#374151;display:block;margin-bottom:4px">Confirm Password</label>
+          <input id="pw-confirm" type="password" placeholder="Repeat password" style="width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:.9rem;"/>
+        </div>
+      </div>
+      <div id="pw-msg" style="display:none;margin-top:10px;font-size:.83rem;"></div>
+      <button onclick="usersChangePw()" style="margin-top:14px;background:#005EB8;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-size:.87rem;font-weight:700;cursor:pointer;">Update Password</button>
+    </div>
+  </div>
+</div><!-- /panel-users -->
+
+<script>
+(function(){
+  var CURRENT_USER_ID = null;
+  var CURRENT_USER_ROLE = '${esc(currentUser.role)}';
+
+  function usersShowRow(u) {
+    var isMe = u.id === CURRENT_USER_ID;
+    var lastLogin = u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleString('en-GB',{dateStyle:'short',timeStyle:'short'}) : 'Never';
+    var roleBadge = u.role === 'admin'
+      ? '<span style="background:#dbeafe;color:#1e40af;border-radius:6px;padding:2px 8px;font-size:.72rem;font-weight:700;">Admin</span>'
+      : '<span style="background:#f1f5f9;color:#475569;border-radius:6px;padding:2px 8px;font-size:.72rem;font-weight:700;">Staff</span>';
+    var meBadge = isMe ? ' <span style="background:#dcfce7;color:#15803d;border-radius:6px;padding:2px 7px;font-size:.68rem;font-weight:700;">You</span>' : '';
+    var actions = isMe ? '—' :
+      '<button onclick="usersDelete(\\''+u.id+'\\',\\''+u.name+'\\')" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:4px 10px;font-size:.78rem;cursor:pointer;font-weight:600;">Remove</button>';
+    return '<tr style="border-bottom:1px solid #f1f5f9;">'
+      + '<td style="padding:10px 10px;">'+u.name+meBadge+'</td>'
+      + '<td style="padding:10px 10px;color:#64748b;">'+u.username+'</td>'
+      + '<td style="padding:10px 10px;">'+roleBadge+'</td>'
+      + '<td style="padding:10px 10px;color:#94a3b8;font-size:.8rem;">'+lastLogin+'</td>'
+      + '<td style="padding:10px 10px;">'+actions+'</td>'
+      + '</tr>';
+  }
+
+  window.usersLoad = function() {
+    document.getElementById('users-loading').style.display = 'block';
+    document.getElementById('users-table-wrap').style.display = 'none';
+    document.getElementById('users-err').style.display = 'none';
+    apiFetch('/api/users')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        document.getElementById('users-loading').style.display = 'none';
+        if (!d.users) { document.getElementById('users-err').textContent = d.error || 'Failed to load'; document.getElementById('users-err').style.display='block'; return; }
+        // detect current user id
+        apiFetch('/api/auth/me').then(function(r2){return r2.json();}).then(function(me){
+          CURRENT_USER_ID = me.id;
+          document.getElementById('users-tbody').innerHTML = d.users.map(usersShowRow).join('');
+          document.getElementById('users-table-wrap').style.display = 'block';
+        });
+      })
+      .catch(function(){ document.getElementById('users-loading').style.display='none'; document.getElementById('users-err').textContent='Could not load team members'; document.getElementById('users-err').style.display='block'; });
+  };
+
+  window.usersShowAdd = function() {
+    document.getElementById('users-add-form').style.display = 'block';
+    document.getElementById('u-name').focus();
+  };
+  window.usersHideAdd = function() {
+    document.getElementById('users-add-form').style.display = 'none';
+    ['u-name','u-username','u-password'].forEach(function(id){ document.getElementById(id).value=''; });
+    document.getElementById('u-role').value = 'staff';
+    document.getElementById('users-add-err').style.display = 'none';
+  };
+
+  window.usersAdd = function() {
+    var name = document.getElementById('u-name').value.trim();
+    var username = document.getElementById('u-username').value.trim();
+    var password = document.getElementById('u-password').value;
+    var role = document.getElementById('u-role').value;
+    var errEl = document.getElementById('users-add-err');
+    if (!name || !username || !password) { errEl.textContent = 'All fields are required'; errEl.style.display='block'; return; }
+    if (password.length < 8) { errEl.textContent = 'Password must be at least 8 characters'; errEl.style.display='block'; return; }
+    errEl.style.display = 'none';
+    apiFetch('/api/users', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,username,password,role}) })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.error) { errEl.textContent = d.error; errEl.style.display='block'; return; }
+        usersHideAdd();
+        usersLoad();
+      })
+      .catch(function(){ errEl.textContent='Request failed'; errEl.style.display='block'; });
+  };
+
+  window.usersDelete = function(id, name) {
+    if (!confirm('Remove ' + name + ' from the team? They will no longer be able to log in.')) return;
+    apiFetch('/api/users/'+id, { method:'DELETE' })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.error) { alert(d.error); return; }
+        usersLoad();
+      });
+  };
+
+  window.usersChangePw = function() {
+    var np = document.getElementById('pw-new').value;
+    var cp = document.getElementById('pw-confirm').value;
+    var msgEl = document.getElementById('pw-msg');
+    if (np.length < 8) { msgEl.textContent = 'Password must be at least 8 characters'; msgEl.style.color='#dc2626'; msgEl.style.display='block'; return; }
+    if (np !== cp) { msgEl.textContent = 'Passwords do not match'; msgEl.style.color='#dc2626'; msgEl.style.display='block'; return; }
+    if (!CURRENT_USER_ID) {
+      apiFetch('/api/auth/me').then(function(r){return r.json();}).then(function(me){
+        CURRENT_USER_ID = me.id;
+        doPwChange(np, msgEl);
+      });
+    } else {
+      doPwChange(np, msgEl);
+    }
+  };
+
+  function doPwChange(pw, msgEl) {
+    apiFetch('/api/users/'+CURRENT_USER_ID, { method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify({password:pw}) })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.error) { msgEl.textContent = d.error; msgEl.style.color='#dc2626'; msgEl.style.display='block'; return; }
+        msgEl.textContent = 'Password updated successfully!'; msgEl.style.color='#16a34a'; msgEl.style.display='block';
+        document.getElementById('pw-new').value = '';
+        document.getElementById('pw-confirm').value = '';
+      })
+      .catch(function(){ msgEl.textContent='Request failed'; msgEl.style.color='#dc2626'; msgEl.style.display='block'; });
+  }
+})();
+</script>
+
+<style>
+.imglib-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;transition:box-shadow .15s}
+.imglib-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.imglib-card-img{width:100%;height:160px;object-fit:cover;display:block;background:#f1f5f9}
+.imglib-card-body{padding:12px 14px}
+.imglib-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:700;text-transform:uppercase}
+.imglib-badge-approved{background:#d1fae5;color:#065f46}
+.imglib-badge-unapproved{background:#fef9c3;color:#854d0e}
+.imglib-slot-pill{display:inline-block;padding:2px 7px;border-radius:8px;font-size:.7rem;font-weight:600;background:#dbeafe;color:#1e40af;margin-right:4px}
+.imglib-svc-pill{display:inline-block;padding:2px 7px;border-radius:8px;font-size:.7rem;font-weight:600;background:#ede9fe;color:#5b21b6;margin-right:4px}
+</style>
+
+<script>
+(function(){
+  let imgLibData = [];
+  let imgLibUsage = {};
+
+  function imgLibSlug(){
+    return (document.getElementById('project-select')||{value:${JSON.stringify(defaultSlug)}}).value || ${JSON.stringify(defaultSlug)};
+  }
+
+  window.imgLibImgErr = function(el) {
+    el.style.background = '#f1f5f9';
+    el.style.height     = '80px';
+    el.alt              = 'Image not found';
+  };
+
+  window.imgLibLoad = async function(force) {
+    const grid    = document.getElementById('imglib-grid');
+    const loader  = document.getElementById('imglib-loading');
+    const errEl   = document.getElementById('imglib-error');
+    if(loader) loader.style.display = 'block';
+    if(grid)   { grid.style.display = 'none'; }
+    if(errEl)  errEl.style.display = 'none';
+
+    try {
+      // Build an auth URL helper using the token embedded in the page
+      const _tok = (typeof INTERNAL_TOKEN !== 'undefined' && INTERNAL_TOKEN) ? ('?_t='+encodeURIComponent(INTERNAL_TOKEN)) : '';
+      const _tokAmp = (typeof INTERNAL_TOKEN !== 'undefined' && INTERNAL_TOKEN) ? ('&_t='+encodeURIComponent(INTERNAL_TOKEN)) : '';
+      // Load manifest
+      const r = await fetch('/api/image-library/manifest' + _tok, { credentials:'include' });
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      const data = await r.json();
+      imgLibData = data.images || [];
+
+      // Load usage map
+      try {
+        const ur = await fetch('/api/image-library/usage/' + imgLibSlug() + _tok, { credentials:'include' });
+        if(ur.ok) { const ud = await ur.json(); imgLibUsage = ud.usage || {}; }
+      } catch{ imgLibUsage = {}; }
+
+      // Load config
+      try {
+        const cr = await fetch('/api/projects/' + imgLibSlug() + _tok, { credentials:'include' });
+        if(cr.ok) {
+          const cd = await cr.json();
+          const cfg = (cd.project || cd).imageLibrary || {};
+          const en  = document.getElementById('imglib-cfg-enabled');
+          const mo  = document.getElementById('imglib-cfg-mode');
+          const fb  = document.getElementById('imglib-cfg-fallback');
+          if(en) en.checked  = !!cfg.enabled;
+          if(mo) mo.value    = cfg.mode || 'random';
+          if(fb) fb.checked  = !!cfg.allowFallback;
+        }
+      } catch{}
+
+      if(loader) loader.style.display = 'none';
+      imgLibRender();
+    } catch(e) {
+      if(loader) loader.style.display = 'none';
+      if(errEl) { errEl.textContent = 'Failed to load image library: ' + e.message; errEl.style.display = 'block'; }
+    }
+  };
+
+  window.imgLibRender = function() {
+    const grid    = document.getElementById('imglib-grid');
+    const empty   = document.getElementById('imglib-empty');
+    const countEl = document.getElementById('imglib-count');
+    if(!grid) return;
+
+    const svcFilter  = (document.getElementById('imglib-filter-svc')  || {}).value || '';
+    const slotFilter = (document.getElementById('imglib-filter-slot') || {}).value || '';
+    const apFilter   = (document.getElementById('imglib-filter-approved') || {}).value || '';
+
+    const filtered = imgLibData.filter(function(img) {
+      if(svcFilter  && img.service !== svcFilter)  return false;
+      if(slotFilter && img.slot    !== slotFilter)  return false;
+      if(apFilter === 'approved'   && !img.approved) return false;
+      if(apFilter === 'unapproved' &&  img.approved) return false;
+      return true;
+    });
+
+    if(countEl) countEl.textContent = filtered.length + ' of ' + imgLibData.length + ' images';
+
+    if(filtered.length === 0) {
+      grid.style.display = 'none';
+      if(empty) empty.style.display = 'block';
+      return;
+    }
+    if(empty) empty.style.display = 'none';
+
+    const SERVICE_LABELS = {
+      'web-hosting':'Web Hosting','web-design':'Web Design','local-seo':'Local SEO',
+      'google-business-profile':'Google Business Profile','email-marketing':'Email Marketing'
+    };
+
+    grid.innerHTML = filtered.map(function(img) {
+      const usagePages = imgLibUsage[img.id] || [];
+      const usageText  = usagePages.length > 0 ? 'Used by ' + usagePages.length + ' page' + (usagePages.length!==1?'s':'') : 'Not yet used';
+      const thumbSrc   = '/api/image-library/serve/' + img.service + '/' + img.slot + '/' + img.filename;
+      const svcLabel   = SERVICE_LABELS[img.service] || img.service;
+      const badgeClass = img.approved ? 'imglib-badge-approved' : 'imglib-badge-unapproved';
+      const badgeText  = img.approved ? 'Approved' : 'Unapproved';
+      const appNext    = img.approved ? 'false' : 'true';
+      const approveLabel = img.approved ? 'Unapprove' : 'Approve';
+      // Use data attributes for all IDs — avoids any quote-escaping inside onclick strings
+      return '<div class="imglib-card" data-imgid="' + img.id + '">' +
+        '<img class="imglib-card-img" src="' + thumbSrc + '" alt="' + (img.description||img.filename) + '" loading="lazy" onerror="imgLibImgErr(this)">' +
+        '<div class="imglib-card-body">' +
+          '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:6px">' +
+            '<span class="imglib-badge ' + badgeClass + '">' + badgeText + '</span>' +
+            '<span style="font-size:.72rem;color:#9ca3af">' + usageText + '</span>' +
+          '</div>' +
+          '<div style="margin-bottom:6px">' +
+            '<span class="imglib-svc-pill">' + svcLabel + '</span>' +
+          '</div>' +
+          '<div style="font-size:.82rem;font-weight:600;color:#111827;margin-bottom:3px;word-break:break-all">' + (img.description || img.filename) + '</div>' +
+          '<div style="font-size:.74rem;color:#6b7280;margin-bottom:8px;font-style:italic">' + (img.altTemplate||'') + '</div>' +
+          (img.tags && img.tags.length ? '<div style="font-size:.72rem;color:#9ca3af;margin-bottom:8px">' + img.tags.join(', ') + '</div>' : '') +
+          '<button data-action="use" style="width:100%;margin-bottom:8px;padding:7px 0;font-size:.82rem;font-weight:700;background:#059669;color:#fff;border:none;border-radius:6px;cursor:pointer;letter-spacing:.01em">&#10003; Use this image</button>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+            '<button data-action="approve" data-next="' + appNext + '" style="font-size:.73rem;padding:3px 10px;border-radius:5px;border:1px solid #d1d5db;background:#f9fafb;cursor:pointer;font-weight:600">' + approveLabel + '</button>' +
+            '<button data-action="pages" style="font-size:.73rem;padding:3px 10px;border-radius:5px;border:1px solid #d1d5db;background:#f9fafb;cursor:pointer">Pages</button>' +
+            '<button data-action="delete" style="font-size:.73rem;padding:3px 10px;border-radius:5px;border:1px solid #fee2e2;background:#fff;color:#dc2626;cursor:pointer;font-weight:600">Delete</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    grid.style.display = 'grid';
+  };
+
+  window.imgLibShowUpload = function() {
+    var f = document.getElementById('imglib-upload-form');
+    if(f) f.style.display = 'block';
+  };
+  window.imgLibHideUpload = function() {
+    var f = document.getElementById('imglib-upload-form');
+    if(f) f.style.display = 'none';
+  };
+
+  window.imgLibUpload = async function() {
+    const statusEl = document.getElementById('imglib-upload-status');
+    const fileEl   = document.getElementById('imglib-file');
+    const svc      = (document.getElementById('imglib-svc')  ||{}).value || '';
+    const desc     = (document.getElementById('imglib-desc') ||{}).value || '';
+    const alt      = (document.getElementById('imglib-alt')  ||{}).value || '';
+    const tags     = (document.getElementById('imglib-tags') ||{}).value || '';
+
+    if(!fileEl || !fileEl.files || !fileEl.files.length) {
+      if(statusEl){ statusEl.textContent='Please select one or more image files.'; statusEl.style.color='#dc2626'; statusEl.style.display='block'; }
+      return;
+    }
+
+    const files  = Array.from(fileEl.files);
+    const total  = files.length;
+    const failed = [];
+
+    for(var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if(statusEl){
+        statusEl.textContent = total > 1
+          ? 'Uploading ' + (i+1) + ' of ' + total + ': ' + file.name + '…'
+          : 'Uploading ' + file.name + '…';
+        statusEl.style.color   = '#374151';
+        statusEl.style.display = 'block';
+      }
+      var fd = new FormData();
+      fd.append('file', file);
+      fd.append('service', svc);
+      fd.append('description', desc || file.name.replace(/\.[^.]+$/, ''));
+      fd.append('altTemplate', alt);
+      fd.append('tags', tags);
+      try {
+        var r = await fetch('/api/image-library/upload', { method:'POST', body:fd });
+        var d = await r.json();
+        if(!r.ok || !d.ok) throw new Error(d.error || 'Upload failed');
+      } catch(e) {
+        failed.push(file.name + ': ' + e.message);
+      }
+    }
+
+    fileEl.value = '';
+    await imgLibLoad(true);
+
+    if(failed.length === 0) {
+      if(statusEl){ statusEl.textContent = total === 1 ? 'Image uploaded successfully.' : total + ' images uploaded successfully.'; statusEl.style.color='#059669'; }
+      setTimeout(function(){ imgLibHideUpload(); }, 1200);
+    } else {
+      if(statusEl){
+        statusEl.textContent = (total - failed.length) + ' of ' + total + ' uploaded. Failed: ' + failed.join('; ');
+        statusEl.style.color = '#dc2626';
+      }
+    }
+  };
+
+  window.imgLibToggleApprove = async function(id, approved) {
+    try {
+      const r = await fetch('/api/image-library/' + id + '/approve', {
+        method:'PATCH', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ approved })
+      });
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      await imgLibLoad(true);
+    } catch(e){ alert('Error: ' + e.message); }
+  };
+
+  window.imgLibDelete = async function(id, btn) {
+    // Two-click inline confirmation — avoids confirm() which is blocked in iframes
+    if (!btn._delPending) {
+      btn._delPending = true;
+      var orig = btn.textContent;
+      btn.textContent = 'Confirm delete?';
+      btn.style.background = '#dc2626';
+      btn.style.color = '#fff';
+      btn.style.borderColor = '#dc2626';
+      setTimeout(function() {
+        if (btn._delPending) {
+          btn._delPending = false;
+          btn.textContent = orig;
+          btn.style.background = '#fff';
+          btn.style.color = '#dc2626';
+          btn.style.borderColor = '#fee2e2';
+        }
+      }, 3500);
+      return;
+    }
+    btn._delPending = false;
+    btn.disabled = true;
+    btn.textContent = 'Deleting…';
+    var errEl = document.getElementById('imglib-error');
+    if (errEl) errEl.style.display = 'none';
+    try {
+      var tok = ${JSON.stringify(internalToken)};
+      var r = await fetch('/api/image-library/' + id, {
+        method: 'DELETE',
+        headers: tok ? { 'Authorization': 'Bearer ' + tok, 'X-Internal-Token': tok } : {}
+      });
+      var d = {}; try { d = await r.json(); } catch(_){}
+      if(!r.ok) throw new Error(d.error || 'HTTP ' + r.status);
+      await imgLibLoad(true);
+    } catch(e){
+      btn.disabled = false;
+      btn.textContent = 'Delete';
+      btn.style.background = '#fff';
+      btn.style.color = '#dc2626';
+      btn.style.borderColor = '#fee2e2';
+      if (errEl) { errEl.textContent = 'Delete failed: ' + e.message; errEl.style.display = 'block'; }
+    }
+  };
+
+  window.imgLibShowUsage = function(id) {
+    const panel   = document.getElementById('imglib-usage-panel');
+    const listEl  = document.getElementById('imglib-usage-list');
+    const pages   = imgLibUsage[id] || [];
+    if(!panel || !listEl) return;
+
+    if(pages.length === 0) {
+      listEl.innerHTML = '<em style="color:#6b7280">This image has not been assigned to any pages yet.</em>';
+    } else {
+      listEl.innerHTML = pages.map(function(slug) {
+        return '<a href="/' + slug + '/" target="_blank" style="display:inline-block;background:#e0f2fe;padding:2px 10px;border-radius:12px;color:#0369a1;text-decoration:none;font-size:.8rem;margin:2px">' + slug + '</a>';
+      }).join(' ');
+    }
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  };
+
+  window.imgLibSaveConfig = async function() {
+    const enabled  = (document.getElementById('imglib-cfg-enabled') ||{checked:false}).checked;
+    const mode     = (document.getElementById('imglib-cfg-mode')    ||{value:'random'}).value;
+    const fallback = (document.getElementById('imglib-cfg-fallback')||{checked:false}).checked;
+    const statusEl = document.getElementById('imglib-cfg-status');
+
+    try {
+      const slug = imgLibSlug();
+      const sr   = await fetch('/api/image-library/config/' + slug, {
+        method:'PATCH', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ enabled, mode, allowFallback: fallback })
+      });
+      if(!sr.ok) throw new Error('HTTP ' + sr.status);
+      if(statusEl){ statusEl.style.display='block'; setTimeout(function(){ if(statusEl) statusEl.style.display='none'; }, 2500); }
+    } catch(e){ alert('Failed to save settings: ' + e.message); }
+  };
+
+  window.imgLibPushFtp = async function() {
+    const statusEl = document.getElementById('imglib-ftp-status');
+    if(statusEl){ statusEl.textContent='Uploading library images to FTP…'; statusEl.style.color='#374151'; statusEl.style.display='block'; }
+    try {
+      const r = await fetch('/api/image-library/push-ftp/' + imgLibSlug(), { method:'POST' });
+      const d = await r.json();
+      if(!r.ok) throw new Error(d.error || 'FTP push failed');
+      if(statusEl){ statusEl.textContent = d.message || 'Library images uploaded successfully.'; statusEl.style.color='#059669'; }
+    } catch(e) {
+      if(statusEl){ statusEl.textContent='Error: ' + e.message; statusEl.style.color='#dc2626'; }
+    }
+  };
+
+  window.imgLibUseImage = async function(id) {
+    var img = imgLibData.find(function(i){ return i.id === id; });
+    if (!img) return;
+    // Auto-approve if not already
+    if (!img.approved) {
+      try {
+        await fetch('/api/image-library/' + id + '/approve', {
+          method:'PATCH', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ approved: true })
+        });
+      } catch(e) { /* continue */ }
+    }
+    var SERVICE_NAMES = {
+      'web-hosting':'Web Hosting','web-design':'Web Design','local-seo':'Local SEO',
+      'google-business-profile':'Google Business Profile','email-marketing':'Email Marketing'
+    };
+    var svcName  = SERVICE_NAMES[img.service] || img.service;
+    var slotName = img.slot.charAt(0).toUpperCase() + img.slot.slice(1);
+    var msgEl    = document.getElementById('imglib-use-msg');
+    if (msgEl) {
+      msgEl.textContent = '\u2713 "' + (img.description || img.filename) + '" is now active for ' + svcName + ' \u2192 ' + slotName + ' slot. Re-run rollout to apply it to all pages.';
+      msgEl.style.display = 'block';
+      setTimeout(function(){ msgEl.style.display = 'none'; }, 6000);
+    }
+    await imgLibLoad(true);
+  };
+
+  // Event delegation for image card buttons (avoids quote-escaping in onclick strings)
+  document.addEventListener('click', function(e) {
+    var btn  = e.target;
+    if (!btn || !btn.dataset || !btn.dataset.action) return;
+    var card = btn.closest('[data-imgid]');
+    if (!card) return;
+    var imgId  = card.dataset.imgid;
+    var action = btn.dataset.action;
+    if (action === 'use') {
+      imgLibUseImage(imgId);
+    } else if (action === 'approve') {
+      var nextVal = btn.dataset.next === 'true';
+      imgLibToggleApprove(imgId, nextVal);
+    } else if (action === 'pages') {
+      imgLibShowUsage(imgId);
+    } else if (action === 'delete') {
+      imgLibDelete(imgId, btn);
+    }
+  });
+
+})();
+</script>
+
+<style>
+.dist-ptab{padding:8px 18px;font-size:.82rem;font-weight:600;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;color:#6b7280;transition:color .15s,border-color .15s;}
+.dist-ptab:hover{color:#111;}
+.dist-ptab-active{color:#E5380D!important;border-bottom-color:#E5380D!important;}
+.dist-field-label{font-size:.72rem;font-weight:700;letter-spacing:.06em;color:#6b7280;text-transform:uppercase;margin-bottom:5px;}
+.dist-field-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:10px 12px;font-size:.85rem;line-height:1.6;color:#111827;white-space:pre-wrap;word-break:break-word;min-height:48px;}
+.dist-field-box-tall{min-height:110px;}
+.dist-copy-btn{margin-top:6px;font-size:.75rem;padding:4px 12px;background:#f3f4f6;border:1px solid #d1d5db;border-radius:5px;cursor:pointer;color:#374151;font-weight:600;transition:background .1s;}
+.dist-copy-btn:hover{background:#e5e7eb;}
+.dist-list-item{padding:9px 12px;border-radius:6px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;font-size:.82rem;transition:border-color .15s,background .15s;}
+.dist-list-item:hover{background:#f0f9ff;border-color:#93c5fd;}
+.dist-list-item.dist-list-active{background:#eff6ff;border-color:#3b82f6;}
+.dist-item-slug{font-weight:700;color:#111;}
+.dist-item-meta{color:#6b7280;font-size:.74rem;margin-top:2px;}
+.dist-status-draft{background:#fef9c3;color:#854d0e;}
+.dist-status-approved{background:#d1fae5;color:#065f46;}
+.dist-status-posted{background:#dbeafe;color:#1e40af;}
+/* Visibility Posts mode toggle — CSS-driven via .vp-active on #panel-distribution */
+#dist-visibility-mode { display: none; }
+#panel-distribution.vp-active #dist-page-mode { display: none !important; }
+#panel-distribution.vp-active #dist-visibility-mode { display: block !important; }
+/* Visibility Posts */
+.vp-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.05em;color:#374151;text-transform:uppercase;margin-bottom:6px}
+.vp-plat-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:20px;border:1.5px solid #e5e7eb;background:#fff;cursor:pointer;font-size:.82rem;font-weight:600;color:#374151;transition:all .15s;user-select:none}
+.vp-plat-chip:hover{border-color:var(--chip-color,#6b7280);color:var(--chip-color,#374151)}
+.vp-plat-chip input{display:none}
+.vp-plat-chip.vp-chip-on{border-color:var(--chip-color,#374151);background:color-mix(in srgb,var(--chip-color,#374151) 10%,white);color:var(--chip-color,#374151)}
+.vp-platform-card{border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.vp-card-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #f3f4f6}
+.vp-card-label{font-size:.82rem;font-weight:800;display:flex;align-items:center;gap:8px}
+.vp-card-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.vp-card-body{padding:14px}
+.vp-post-ta{width:100%;box-sizing:border-box;border:1.5px solid #e5e7eb;border-radius:7px;padding:10px 12px;font-size:.86rem;line-height:1.6;color:#111827;font-family:inherit;resize:vertical;min-height:100px;outline:none;transition:border-color .15s}
+.vp-post-ta:focus{border-color:#3b82f6}
+.vp-copy-btn{font-size:.75rem;padding:5px 13px;background:#f3f4f6;border:1px solid #d1d5db;border-radius:5px;cursor:pointer;color:#374151;font-weight:600;transition:background .1s}
+.vp-copy-btn:hover{background:#e5e7eb}
+.vp-saved-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;transition:border-color .15s}
+.vp-saved-item:hover{border-color:#93c5fd;background:#f0f9ff}
+.vid-list-item{padding:8px 10px;border-radius:6px;cursor:pointer;margin-bottom:4px;border:1px solid transparent;transition:background .15s,border-color .15s}
+.vid-list-item:hover{background:#f1f5f9;border-color:#e5e7eb}
+.vid-list-active{background:#eff6ff !important;border-color:#bfdbfe !important}
+.vid-status{padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:700;text-transform:uppercase;display:inline-block}
+.vid-status-draft{background:#f3f4f6;color:#374151}
+.vid-status-approved{background:#d1fae5;color:#065f46}
+.vid-status-produced{background:#dbeafe;color:#1e40af}
+.vid-status-uploaded{background:#ede9fe;color:#5b21b6}
+.vid-type-tab{padding:10px 18px;font-size:.8rem;font-weight:600;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;color:#6b7280;transition:color .15s,border-color .15s;white-space:nowrap}
+.vid-type-tab:hover{color:#111}
+.vid-tab-active{color:#005eb8 !important;border-bottom-color:#005eb8 !important}
+.vid-badge{padding:2px 10px;border-radius:12px;font-size:.72rem;font-weight:700;text-transform:uppercase;display:inline-block}
+.vid-badge-draft{background:#f3f4f6;color:#374151}
+.vid-badge-approved{background:#d1fae5;color:#065f46}
+.vid-badge-produced{background:#dbeafe;color:#1e40af}
+.vid-badge-uploaded{background:#ede9fe;color:#5b21b6}
+</style>
+
+<script>
+(function(){
+  let distIndex = [];
+  let distActive = null;
+  let distContent = null;
+  let distCurrentPlatform = 'facebook';
+
+  function distEl(id){ return document.getElementById(id); }
+  function distSlug(){ return (document.getElementById('project-select') || {value:${JSON.stringify(defaultSlug)}}).value || ${JSON.stringify(defaultSlug)}; }
+
+  window.distLoad = async function(){
+    try {
+      const r = await fetch('/api/distribution/' + distSlug());
+      if(!r.ok) throw new Error(await r.text());
+      const data = await r.json();
+      distIndex = data.entries || [];
+      distRenderList();
+    } catch(e){ console.error('distLoad', e); }
+    // Reload campaign dropdown if empty (page options are server-rendered)
+    var campSel = distEl('dist-campaign-input');
+    if(campSel && campSel.options.length <= 1){ distLoadCampaignOptions(); }
+  };
+
+  async function distLoadPageOptions(){
+    try {
+      const r = await fetch('/api/distribution/' + distSlug() + '/pages');
+      if(!r.ok) return;
+      const data = await r.json();
+      const pages = (data.pages || []);
+      const sel = distEl('dist-page-slug-input');
+      if(!sel) return;
+      const cur = sel.value;
+      sel.innerHTML = '';
+      pages.forEach(function(p){
+        const o = document.createElement('option');
+        o.value = p.slug;
+        o.textContent = p.title + '  (' + p.slug + ')';
+        sel.appendChild(o);
+      });
+      if(cur) sel.value = cur;
+      // auto-select first option if nothing selected yet
+      if(!sel.value && sel.options.length > 0) sel.selectedIndex = 0;
+    } catch(e){ console.error('distLoadPageOptions', e); }
+  }
+
+  async function distLoadCampaignOptions(){
+    try {
+      const r = await fetch('/api/campaigns/' + distSlug());
+      if(!r.ok) return;
+      const data = await r.json();
+      const campaigns = (data.campaigns || []).sort(function(a,b){
+        return (a.serviceName||'').localeCompare(b.serviceName||'') ||
+               (a.city||'').localeCompare(b.city||'');
+      });
+      const sel = distEl('dist-campaign-input');
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">— all pages —</option>';
+      campaigns.forEach(function(c){
+        const o = document.createElement('option');
+        o.value = c.id;
+        o.textContent = c.serviceName + ' — ' + c.city + ' (' + (c.pagesGenerated||0) + ' pages)';
+        sel.appendChild(o);
+      });
+      if(cur) sel.value = cur;
+    } catch(e){ console.error('distLoadCampaignOptions', e); }
+  }
+
+  function distRenderList(){
+    const listEl  = distEl('dist-list');
+    const emptyEl = distEl('dist-list-empty');
+    listEl.innerHTML = '';
+    if(!distIndex.length){
+      emptyEl.style.display = 'block';
+      listEl.style.display  = 'none';
+      return;
+    }
+    emptyEl.style.display = 'none';
+    listEl.style.display  = 'flex';
+    distIndex.forEach(function(entry){
+      const div = document.createElement('div');
+      div.className = 'dist-list-item' + (entry.pageSlug === distActive ? ' dist-list-active' : '');
+      const dateStr = entry.generatedAt ? new Date(entry.generatedAt).toLocaleDateString('en-GB') : '';
+      div.innerHTML = '<div class="dist-item-slug">' + esc(entry.pageSlug) + '</div>' +
+        '<div class="dist-item-meta"><span class="dist-status-' + esc(entry.approvalStatus) +
+        '" style="font-size:.7rem;font-weight:700;padding:1px 7px;border-radius:10px;display:inline-block">' +
+        esc(entry.approvalStatus) + '</span>' + (dateStr ? ' &nbsp;' + dateStr : '') + '</div>';
+      div.onclick = function(){ distViewPage(entry.pageSlug); };
+      listEl.appendChild(div);
+    });
+  }
+
+  async function distViewPage(pageSlug){
+    distActive = pageSlug;
+    distRenderList();
+    try {
+      const r = await fetch('/api/distribution/' + distSlug() + '/' + pageSlug);
+      if(!r.ok) throw new Error(await r.text());
+      distContent = await r.json();
+      distRenderViewer();
+    } catch(e){ alert('Could not load: ' + e.message); }
+  }
+
+  function distPopulateImage(sectionId, previewId, altId, srcId, slotId, imgObj) {
+    var section = distEl(sectionId);
+    if(!section) return;
+    if(imgObj && (imgObj.previewUrl || imgObj.src)) {
+      // For the in-dashboard thumbnail: use previewUrl (API serve path), falling back to src
+      var thumbUrl = imgObj.previewUrl || imgObj.src || '';
+      if(thumbUrl && thumbUrl.charAt(0) === '/'){
+        thumbUrl = window.location.origin + thumbUrl;
+      }
+      // For download + copy: always prefer src (deployed public HTTPS URL)
+      var publicUrl = imgObj.src || thumbUrl;
+      distEl(previewId).src             = thumbUrl;
+      distEl(previewId).alt             = imgObj.alt || '';
+      distEl(altId).textContent         = imgObj.alt || '';
+      distEl(srcId).textContent         = publicUrl;
+      if(slotId) distEl(slotId).textContent = imgObj.slot || '';
+      // Wire up download link — points to the deployed public URL
+      var dlId = sectionId.replace('-section', '-dl');
+      var dlEl = distEl(dlId);
+      if(dlEl){ dlEl.href = publicUrl; dlEl.style.display = 'inline-block'; }
+      section.style.display = 'flex';
+    } else {
+      section.style.display = 'none';
+    }
+  }
+
+  function distRenderViewer(){
+    var entry = distIndex.find(function(e){ return e.pageSlug === distActive; });
+    if(!entry || !distContent) return;
+
+    distEl('dist-view-title').textContent = entry.pageTitle || distActive;
+    distEl('dist-viewer').style.display = 'block';
+    var badge = distEl('dist-status-badge');
+    badge.textContent = entry.approvalStatus;
+    badge.className = 'dist-status-' + entry.approvalStatus;
+    badge.style.cssText = 'font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block';
+
+    // Content angle badge
+    var angleBadge = distEl('dist-angle-badge');
+    var angle = distContent && distContent.postAngle;
+    if(angleBadge && angle){
+      angleBadge.textContent = '\uD83C\uDFA2 ' + angle.replace(/-/g, ' ');
+      angleBadge.style.display = 'inline-block';
+    } else if(angleBadge){
+      angleBadge.style.display = 'none';
+    }
+
+    distEl('dist-url-facebook').value = (entry.postedUrls && entry.postedUrls.facebook) || '';
+    distEl('dist-url-linkedin').value = (entry.postedUrls && entry.postedUrls.linkedin) || '';
+    distEl('dist-url-reddit').value   = (entry.postedUrls && entry.postedUrls.reddit)   || '';
+    distEl('dist-url-youtube').value  = (entry.postedUrls && entry.postedUrls.youtube)  || '';
+
+    // ── Facebook ──────────────────────────────────────────────────────────────
+    var fb      = distContent.facebook || {};
+    var fbLink  = fb.link  || {};
+    var fbCopy  = fb.copyBlocks || {};
+    var fbImg   = fb.suggestedImage || null;
+    var fbUrl   = fbLink.url || fb.linkUrl || '';
+    var fbPost  = fbCopy.postOnly  || fb.postText || '';
+    var fbPwU   = fbCopy.postWithUrl || (fbPost && fbUrl ? fbPost + '\\n\\n' + fbUrl : fbPost);
+
+    distPopulateImage('dist-fb-img-section','dist-fb-img-preview','dist-fb-img-alt','dist-fb-img-src','dist-fb-img-slot', fbImg);
+    distEl('dist-fb-postonly').textContent    = fbPost;
+    distEl('dist-fb-postwithurl').textContent = fbPwU;
+    distEl('dist-fb-url').textContent         = fbUrl;
+    distEl('dist-fb-anchor').textContent      = fbLink.suggestedAnchorText || '';
+    distEl('dist-fb-hashtags').textContent    = (fb.hashtags || []).map(function(h){ return '#' + h; }).join(' ');
+    distEl('dist-fb-instructions').textContent = fbCopy.manualPostingInstructions || '';
+
+    // ── LinkedIn ──────────────────────────────────────────────────────────────
+    var li      = distContent.linkedin || {};
+    var liLink  = li.link  || {};
+    var liCopy  = li.copyBlocks || {};
+    var liImg   = li.suggestedImage || null;
+    var liUrl   = liLink.url || li.linkUrl || '';
+    var liPost  = liCopy.postOnly  || li.postText || '';
+    var liPwU   = liCopy.postWithUrl || (liPost && liUrl ? liPost + '\\n\\n' + liUrl : liPost);
+
+    distPopulateImage('dist-li-img-section','dist-li-img-preview','dist-li-img-alt','dist-li-img-src','dist-li-img-slot', liImg);
+    distEl('dist-li-headline').textContent     = li.headline || '';
+    distEl('dist-li-postonly').textContent     = liPost;
+    distEl('dist-li-postwithurl').textContent  = liPwU;
+    distEl('dist-li-url').textContent          = liUrl;
+    distEl('dist-li-anchor').textContent       = liLink.suggestedAnchorText || '';
+    distEl('dist-li-hashtags').textContent     = (li.hashtags || []).map(function(h){ return '#' + h; }).join(' ');
+    distEl('dist-li-instructions').textContent = liCopy.manualPostingInstructions || '';
+
+    // ── Reddit ────────────────────────────────────────────────────────────────
+    var rd      = distContent.reddit || {};
+    var rdLink  = rd.link  || {};
+    var rdCopy  = rd.copyBlocks || {};
+    var rdUrl   = rdLink.url || rd.linkUrl || '';
+    var rdBody  = rdCopy.postOnly || rd.body || '';
+
+    distEl('dist-rd-title').textContent        = rd.title || '';
+    distEl('dist-rd-body').textContent         = rdBody;
+    distEl('dist-rd-followup').textContent     = rd.suggestedFollowUpComment || '';
+    distEl('dist-rd-url').textContent          = rdUrl;
+    distEl('dist-rd-anchor').textContent       = rdLink.suggestedAnchorText || '';
+    distEl('dist-rd-subs').textContent         = (rd.suggestedSubreddits || []).map(function(s){ return 'r/' + s; }).join(', ');
+    distEl('dist-rd-disclosure').textContent   = rd.disclosureNote || '';
+    distEl('dist-rd-instructions').textContent = rdCopy.manualPostingInstructions || '';
+
+    // Moderation risk badge
+    var modRisk = distEl('dist-rd-modrisk');
+    if(modRisk){
+      var risk = rd.moderationRisk || '';
+      if(risk){
+        var riskColors = { low: '#dcfce7;color:#15803d', medium: '#fef9c3;color:#854d0e', high: '#fee2e2;color:#991b1b' };
+        var riskStyle = riskColors[risk] || '#f3f4f6;color:#374151';
+        modRisk.textContent = risk.toUpperCase() + ' risk';
+        modRisk.style.cssText = 'display:inline-block;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:10px;background:' + riskStyle;
+      } else {
+        modRisk.style.display = 'none';
+      }
+    }
+
+    // ── YouTube ───────────────────────────────────────────────────────────────
+    var yt      = distContent.youtube || {};
+    var ytLink  = yt.link  || {};
+    var ytCopy  = yt.copyBlocks || {};
+    var ytUrl   = ytLink.url || yt.linkUrl || '';
+
+    distEl('dist-yt-title').textContent        = yt.title       || '';
+    distEl('dist-yt-url').textContent          = ytUrl;
+    distEl('dist-yt-anchor').textContent       = ytLink.suggestedAnchorText || '';
+    distEl('dist-yt-desc').textContent         = yt.description || '';
+    distEl('dist-yt-script').textContent       = yt.script      || '';
+    distEl('dist-yt-chapters').textContent     = (yt.chapters || []).map(function(c){ return c.timestamp + '  ' + c.title; }).join('\\n');
+    distEl('dist-yt-tags').textContent         = (yt.tags || []).join(', ');
+    distEl('dist-yt-thumb').textContent        = yt.thumbnailPrompt || '';
+    distEl('dist-yt-vidprompt').textContent    = yt.videoPrompt    || '';
+    distEl('dist-yt-instructions').textContent = ytCopy.manualPostingInstructions || '';
+
+    distPlatformTab(distCurrentPlatform);
+  }
+
+  window.distPlatformTab = function(platform){
+    distCurrentPlatform = platform;
+    ['facebook','linkedin','reddit','youtube'].forEach(function(p){
+      var pane = distEl('dist-pane-' + p);
+      var tab  = distEl('dist-ptab-' + p);
+      if(pane) pane.style.display = p === platform ? 'block' : 'none';
+      if(tab)  tab.classList.toggle('dist-ptab-active', p === platform);
+    });
+  };
+
+  window.distCopy = function(elId, btn){
+    var el = distEl(elId);
+    if(!el) return;
+    var text = el.textContent || '';
+    function flash(){
+      if(!btn) return;
+      var orig = btn.textContent;
+      btn.textContent = '\u2713 Copied!';
+      setTimeout(function(){ btn.textContent = orig; }, 1400);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(flash).catch(function(){
+        distCopyFallback(text, btn);
+      });
+    } else {
+      distCopyFallback(text, btn);
+    }
+  };
+  window.distCopyFallback = function(text, btn){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try{ document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+    if(!btn) return;
+    var orig = btn.textContent;
+    btn.textContent = '\u2713 Copied!';
+    setTimeout(function(){ btn.textContent = orig; }, 1400);
+  };
+
+  window.distGenerateOne = function(){
+    var sel    = distEl('dist-page-slug-input');
+    var btn    = distEl('dist-btn-one');
+    var status = distEl('dist-gen-status');
+    var bar    = distEl('dist-progress-bar');
+
+    // Immediate feedback — user knows something is happening
+    if(btn)    { btn.disabled = true; btn.textContent = '\u23f3 Generating\u2026'; }
+    if(status) { status.style.color = '#374151'; status.textContent = 'Starting\u2026'; }
+
+    if(!sel || !btn || !status){
+      if(status){ status.style.color='#dc2626'; status.textContent='UI error \u2014 please hard-refresh (Ctrl+Shift+R)'; }
+      if(btn){ btn.disabled=false; btn.textContent='Generate'; }
+      return;
+    }
+
+    var pageSlug = (sel.value || '').trim();
+    if(!pageSlug){
+      status.style.color = '#dc2626';
+      status.textContent = 'No page selected \u2014 please pick one from the dropdown';
+      btn.disabled = false; btn.textContent = 'Generate';
+      return;
+    }
+
+    status.textContent = '\u23f3 Connecting\u2026';
+    if(bar){ bar.style.width = '5%'; bar.parentElement.style.display = 'block'; }
+
+    var url = '/api/distribution/' + distSlug() + '/generate-stream?pageSlug=' + encodeURIComponent(pageSlug);
+    var es  = new EventSource(url);
+
+    es.addEventListener('progress', function(e){
+      try {
+        var d = JSON.parse(e.data);
+        status.style.color = '#374151';
+        status.textContent = '\u23f3 ' + (d.message || 'Working\u2026');
+        if(bar && d.pct){ bar.style.width = d.pct + '%'; }
+      } catch(_){}
+    });
+
+    es.addEventListener('done', function(e){
+      es.close();
+      if(bar){ bar.style.width = '100%'; }
+      status.style.color = '#16a34a';
+      try {
+        var d = JSON.parse(e.data);
+        status.textContent = '\u2713 Done \u2014 ' + (d.pageTitle || pageSlug) + ' content generated. See the list below.';
+      } catch(_){ status.textContent = '\u2713 Done!'; }
+      btn.disabled = false; btn.textContent = 'Generate';
+      setTimeout(function(){ if(bar){ bar.parentElement.style.display='none'; } }, 2000);
+      distLoad().then(function(){ distViewPage(pageSlug); });
+    });
+
+    es.addEventListener('error', function(e){
+      es.close();
+      if(bar){ bar.parentElement.style.display='none'; }
+      btn.disabled = false; btn.textContent = 'Generate';
+      status.style.color = '#dc2626';
+      try {
+        var d = JSON.parse(e.data);
+        status.textContent = '\u2717 Error: ' + (d.message || 'Generation failed');
+      } catch(_){ status.textContent = '\u2717 Connection error \u2014 please try again'; }
+    });
+
+    es.onerror = function(){
+      if(es.readyState === EventSource.CLOSED) return;
+      es.close();
+      if(bar){ bar.parentElement.style.display='none'; }
+      btn.disabled = false; btn.textContent = 'Generate';
+      status.style.color = '#dc2626';
+      status.textContent = '\u2717 Connection lost \u2014 please try again';
+    };
+  };
+
+  window.distGenerateAll = async function(){
+    var campaignId = (distEl('dist-campaign-input').value || '').trim();
+    if(!confirm('Generate for ' + (campaignId ? 'campaign ' + campaignId : 'ALL pages') + '? This may take several minutes.')) return;
+    var btn = distEl('dist-btn-all');
+    var status = distEl('dist-gen-status');
+    btn.disabled = true;
+    status.textContent = 'Generating for ' + (campaignId || 'all pages') + '\u2026 please wait.';
+    try {
+      var r = await fetch('/api/distribution/' + distSlug() + '/generate-all', {
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({campaignId:campaignId||undefined})
+      });
+      var data = await r.json();
+      if(!r.ok) throw new Error(data.error || r.statusText);
+      var ok   = (data.results||[]).filter(function(x){ return x.ok; }).length;
+      var fail = (data.results||[]).filter(function(x){ return !x.ok; }).length;
+      status.textContent = '\u2713 Done \u2014 ' + ok + ' generated' + (fail ? ', ' + fail + ' failed' : '');
+      await distLoad();
+    } catch(e){ status.textContent = '\u2717 Error: ' + e.message; }
+    finally { btn.disabled = false; }
+  };
+
+  async function distUpdateStatus(approvalStatus){
+    if(!distActive) return;
+    var r = await fetch('/api/distribution/' + distSlug() + '/' + distActive + '/status', {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({approvalStatus:approvalStatus})
+    });
+    if(r.ok){
+      await distLoad();
+      distRenderViewer();
+    }
+  }
+  window.distMarkApproved = function(){ distUpdateStatus('approved'); };
+  window.distMarkPosted   = function(){ distUpdateStatus('posted'); };
+
+  window.distSavePostedUrls = async function(){
+    if(!distActive) return;
+    var postedUrls = {
+      facebook: distEl('dist-url-facebook').value.trim() || undefined,
+      linkedin: distEl('dist-url-linkedin').value.trim() || undefined,
+      reddit:   distEl('dist-url-reddit').value.trim()   || undefined,
+      youtube:  distEl('dist-url-youtube').value.trim()  || undefined,
+    };
+    var msg = distEl('dist-url-msg');
+    try {
+      var r = await fetch('/api/distribution/' + distSlug() + '/' + distActive + '/status', {
+        method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({postedUrls:postedUrls})
+      });
+      if(!r.ok) throw new Error(await r.text());
+      msg.textContent = '\u2713 Saved'; msg.style.color='#16a34a';
+      setTimeout(function(){ msg.textContent=''; }, 2000);
+      await distLoad();
+    } catch(e){ msg.textContent='\u2717 '+e.message; msg.style.color='#dc2626'; }
+  };
+
+  window.distDownload = function(){
+    if(!distContent || !distActive) return;
+    var blob = new Blob([JSON.stringify(distContent,null,2)],{type:'application/json'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = distActive + '-distribution.json';
+    a.click();
+  };
+
+  function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // Pre-load campaign dropdown on page load so it's ready before the tab is clicked
+  document.addEventListener('DOMContentLoaded', function(){
+    distLoadCampaignOptions();
+  });
+
+  // ── Content Calendar ───────────────────────────────────────────────────────
+
+  var calData = null;
+
+  var CAL_PLATFORM_COLORS = {
+    facebook: '#1877f2', linkedin: '#0a66c2', reddit: '#ff4500', youtube: '#ff0000'
+  };
+  var CAL_STATUS_STYLES = {
+    draft:    'background:#f3f4f6;color:#374151;border:1px solid #d1d5db',
+    approved: 'background:#d1fae5;color:#065f46;border:1px solid #6ee7b7',
+    posted:   'background:#dbeafe;color:#1e40af;border:1px solid #93c5fd',
+  };
+
+  function calSlug(){ return distSlug(); }
+
+  function calRender(){
+    var empty = document.getElementById('cal-empty');
+    var table = document.getElementById('cal-table');
+    var tbody = document.getElementById('cal-tbody');
+    if(!calData || !calData.entries || !calData.entries.length){
+      if(empty) empty.style.display = 'block';
+      if(table) table.style.display = 'none';
+      return;
+    }
+    if(empty) empty.style.display = 'none';
+    if(table) table.style.display = 'table';
+    var rows = calData.entries.map(function(e, i){
+      var dot   = CAL_PLATFORM_COLORS[e.platform] || '#888';
+      var sts   = CAL_STATUS_STYLES[e.status]   || CAL_STATUS_STYLES.draft;
+      var angle = (e.angle || '').replace(/-/g, ' ');
+      var plat  = e.platform.charAt(0).toUpperCase() + e.platform.slice(1);
+      return '<tr style="border-bottom:1px solid #f3f4f6;' + (i % 2 === 0 ? '' : 'background:#f9fafb') + '">' +
+        '<td style="padding:7px 12px;color:#9ca3af;font-variant-numeric:tabular-nums">' + esc(String(e.day)) + '</td>' +
+        '<td style="padding:7px 12px;white-space:nowrap;font-variant-numeric:tabular-nums">' + esc(e.date || '') + '</td>' +
+        '<td style="padding:7px 12px;white-space:nowrap">' +
+          '<span style="display:inline-flex;align-items:center;gap:5px">' +
+            '<span style="width:9px;height:9px;border-radius:50%;background:' + dot + ';flex-shrink:0"></span>' +
+            esc(plat) +
+          '</span>' +
+        '</td>' +
+        '<td style="padding:7px 12px;text-transform:capitalize;color:#374151">' + esc(angle) + '</td>' +
+        '<td style="padding:7px 12px;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="' + esc(e.pageTitle) + '">' + esc(e.pageTitle) + '</td>' +
+        '<td style="padding:7px 12px"><span style="display:inline-block;padding:2px 7px;border-radius:8px;font-size:.7rem;font-weight:700;' + sts + '">' + esc(e.status) + '</span></td>' +
+        '<td style="padding:7px 12px">' +
+          '<div style="display:flex;gap:4px;flex-wrap:nowrap">' +
+            (e.status !== 'approved' ? '<button data-day="' + e.day + '" data-st="approved" onclick="calSetStatus(+this.dataset.day,this.dataset.st)" style="font-size:.7rem;padding:2px 7px;background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;border-radius:4px;cursor:pointer">Approve</button>' : '') +
+            (e.status !== 'posted'   ? '<button data-day="' + e.day + '" data-st="posted"   onclick="calSetStatus(+this.dataset.day,this.dataset.st)" style="font-size:.7rem;padding:2px 7px;background:#dbeafe;color:#1e40af;border:1px solid #93c5fd;border-radius:4px;cursor:pointer">Posted</button>'   : '') +
+            (e.status !== 'draft'    ? '<button data-day="' + e.day + '" data-st="draft"    onclick="calSetStatus(+this.dataset.day,this.dataset.st)" style="font-size:.7rem;padding:2px 7px;background:#f3f4f6;color:#374151;border:1px solid #d1d5db;border-radius:4px;cursor:pointer">Reset</button>'   : '') +
+          '</div>' +
+        '</td>' +
+      '</tr>';
+    });
+    if(tbody) tbody.innerHTML = rows.join('');
+  }
+
+  window.calLoad = async function(){
+    var status = document.getElementById('cal-status');
+    try {
+      var r = await fetch('/api/distribution/' + calSlug() + '/calendar');
+      calData = await r.json();
+      if(status) status.textContent = calData && calData.generatedAt
+        ? 'Generated ' + new Date(calData.generatedAt).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) + ' \u00b7 ' + (calData.days || 0) + ' days'
+        : '';
+      calRender();
+    } catch(e){ if(status) status.textContent = 'Could not load calendar: ' + e.message; }
+  };
+
+  window.calGenerate = async function(){
+    var btn    = document.getElementById('cal-gen-btn');
+    var status = document.getElementById('cal-status');
+    var days   = parseInt((document.getElementById('cal-days-select') || {}).value || '30', 10);
+    if(btn){ btn.disabled = true; btn.textContent = '\u23f3 Generating\u2026'; }
+    if(status){ status.style.color = '#374151'; status.textContent = 'Building ' + days + '-day plan\u2026'; }
+    try {
+      var r = await fetch('/api/distribution/' + calSlug() + '/calendar/generate', {
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({days:days})
+      });
+      if(!r.ok){ var e = await r.json(); throw new Error(e.error || 'Server error'); }
+      calData = await r.json();
+      if(status){ status.style.color='#16a34a'; status.textContent = '\u2713 ' + days + '-day calendar generated'; }
+      calRender();
+    } catch(e){
+      if(status){ status.style.color='#dc2626'; status.textContent = '\u2717 ' + e.message; }
+    } finally {
+      if(btn){ btn.disabled=false; btn.textContent='\u25b6 Generate Calendar'; }
+    }
+  };
+
+  window.calSetStatus = async function(day, status){
+    try {
+      var r = await fetch('/api/distribution/' + calSlug() + '/calendar/' + day + '/status', {
+        method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:status})
+      });
+      if(!r.ok){ var e = await r.json(); throw new Error(e.error || 'Server error'); }
+      var entry = calData && calData.entries && calData.entries.find(function(e){ return e.day === day; });
+      if(entry) entry.status = status;
+      calRender();
+    } catch(e){ alert('Error: ' + e.message); }
+  };
+
+  window.calDownload = function(){
+    if(!calData || !calData.entries || !calData.entries.length){ alert('No calendar to download yet.'); return; }
+    var blob = new Blob([JSON.stringify(calData, null, 2)], {type:'application/json'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (calSlug() || 'calendar') + '-content-calendar.json';
+    a.click();
+  };
+
+  // ── Video Production Packs ─────────────────────────────────────────────────
+
+  var vidIndex = [];
+  var vidActive = null;
+  var vidPack = null;
+  var vidCurrentType = 'short';
+
+  function vidEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function vidFld(label, value, rows, id) {
+    return '<div style="margin-bottom:14px">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">' +
+        '<label style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#374151">' + vidEsc(label) + '</label>' +
+        '<button data-vid-copy="' + id + '" style="font-size:.72rem;padding:2px 8px;background:none;border:1px solid #d1d5db;border-radius:4px;cursor:pointer;color:#6b7280">Copy</button>' +
+      '</div>' +
+      '<textarea id="' + id + '" rows="' + rows + '" readonly style="width:100%;padding:8px 10px;border:1px solid #e5e7eb;border-radius:6px;font-size:.83rem;background:#f9fafb;color:#111;resize:vertical;box-sizing:border-box;font-family:inherit;line-height:1.5">' + vidEsc(value) + '</textarea>' +
+    '</div>';
+  }
+
+  function vidRenderPane(variant, paneId) {
+    var el = document.getElementById(paneId);
+    if (!el) return;
+    if (!variant) { el.innerHTML = '<p style="color:#9ca3af;font-size:.85rem">No data for this variant.</p>'; return; }
+
+    var scenes = (variant.sceneBreakdown || []).map(function(s) {
+      return 'Scene ' + s.sceneNumber + ' [' + s.timestamp + ']\\n' +
+        'Narration: ' + s.narration + '\\n' +
+        'On-screen: ' + s.onScreenText + '\\n' +
+        'Visual: ' + s.visualPrompt + '\\n' +
+        'B-roll: ' + s.brollSuggestion;
+    }).join('\\n\\n---\\n\\n');
+
+    var captions = (variant.captions || []).join('\\n');
+    var broll = (variant.brollSuggestions || []).map(function(b, i) { return (i + 1) + '. ' + b; }).join('\\n');
+    var tags = ((variant.youtube && variant.youtube.tags) || []).join(', ');
+    var chapters = ((variant.youtube && variant.youtube.chapters) || []).map(function(c) { return c.timestamp + '  ' + c.title; }).join('\\n');
+
+    var html =
+      vidFld('Hook', variant.hook || '', 2, paneId + '-hook') +
+      vidFld('Full Script', variant.script || '', 8, paneId + '-script') +
+      vidFld('Scene Breakdown', scenes, 12, paneId + '-scenes') +
+      vidFld('Caption Lines', captions, 5, paneId + '-captions') +
+      vidFld('CTA (spoken ending)', variant.cta || '', 2, paneId + '-cta') +
+      '<div style="display:flex;gap:12px">' +
+        '<div style="flex:1">' + vidFld('Voiceover Style', variant.voiceoverStyle || '', 2, paneId + '-voice') + '</div>' +
+        '<div style="flex:1">' + vidFld('Visual Style', variant.visualStyle || '', 2, paneId + '-visual') + '</div>' +
+      '</div>' +
+      vidFld('B-roll Suggestions', broll, 5, paneId + '-broll') +
+      vidFld('Thumbnail Prompt', variant.thumbnailPrompt || '', 3, paneId + '-thumb') +
+      '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:20px 0 12px;border-top:1px solid #f3f4f6;padding-top:16px">YouTube Metadata</div>' +
+      vidFld('YouTube Title', (variant.youtube && variant.youtube.title) || '', 2, paneId + '-yt-title') +
+      vidFld('YouTube Description', (variant.youtube && variant.youtube.description) || '', 7, paneId + '-yt-desc') +
+      vidFld('Tags', tags, 2, paneId + '-yt-tags') +
+      vidFld('Chapters', chapters, 4, paneId + '-yt-chap') +
+      vidFld('Pinned Comment', (variant.youtube && variant.youtube.pinnedComment) || '', 2, paneId + '-yt-pin') +
+      '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:20px 0 12px;border-top:1px solid #f3f4f6;padding-top:16px">Social Captions</div>' +
+      vidFld('Facebook Caption', (variant.social && variant.social.facebookCaption) || '', 3, paneId + '-fb') +
+      vidFld('LinkedIn Caption', (variant.social && variant.social.linkedinCaption) || '', 3, paneId + '-li') +
+      vidFld('Short Caption (Stories / Reels)', (variant.social && variant.social.shortCaption) || '', 2, paneId + '-short');
+
+    el.innerHTML = html;
+  }
+
+  window.vidLoad = async function() {
+    try {
+      var r = await fetch('/api/distribution/' + distSlug() + '/video-index');
+      if (!r.ok) throw new Error(await r.text());
+      var data = await r.json();
+      vidIndex = data.entries || [];
+      vidRenderList();
+    } catch(e) {
+      var listEl = document.getElementById('vid-list');
+      if (listEl) listEl.innerHTML = '<div style="padding:10px;color:#ef4444;font-size:.82rem">Error loading video index.</div>';
+    }
+  };
+
+  function vidRenderList() {
+    var listEl = document.getElementById('vid-list');
+    var emptyEl = document.getElementById('vid-list-empty');
+    if (!listEl) return;
+    if (!vidIndex.length) {
+      if (emptyEl) emptyEl.style.display = '';
+      listEl.innerHTML = '';
+      listEl.appendChild(emptyEl || document.createTextNode('No video packs yet'));
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < vidIndex.length; i++) {
+      var entry = vidIndex[i];
+      var st = entry.approvalStatus || 'draft';
+      var statusCls = st === 'approved' ? 'vid-status-approved' : st === 'produced' ? 'vid-status-produced' : st === 'uploaded' ? 'vid-status-uploaded' : 'vid-status-draft';
+      var statusLbl = st === 'approved' ? 'Approved' : st === 'produced' ? 'Produced' : st === 'uploaded' ? 'Uploaded' : 'Draft';
+      var isActive = vidActive === entry.pageSlug;
+      var dateStr = entry.generatedAt ? new Date(entry.generatedAt).toLocaleDateString('en-GB') : '';
+      html += '<div class="vid-list-item' + (isActive ? ' vid-list-active' : '') + '" data-vid-slug="' + vidEsc(entry.pageSlug) + '" onclick="vidSelect(this.dataset.vidSlug)">' +
+        '<div style="font-size:.82rem;font-weight:600;color:#111827;margin-bottom:3px">' + vidEsc(entry.pageTitle) + '</div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:center">' +
+          '<span class="vid-status ' + statusCls + '">' + statusLbl + '</span>' +
+          '<span style="font-size:.7rem;color:#9ca3af">' + vidEsc(dateStr) + '</span>' +
+        '</div>' +
+      '</div>';
+    }
+    listEl.innerHTML = html;
+  }
+
+  window.vidSelect = function(pageSlug) {
+    vidActive = pageSlug;
+    vidRenderList();
+    fetch('/api/distribution/' + distSlug() + '/video/' + encodeURIComponent(pageSlug))
+      .then(function(r) { return r.json(); })
+      .then(function(d) { vidPack = d; vidRenderViewer(); })
+      .catch(function() {
+        var viewerEl = document.getElementById('vid-viewer');
+        if (viewerEl) viewerEl.style.display = 'block';
+        var titleEl = document.getElementById('vid-view-title');
+        if (titleEl) titleEl.textContent = 'Error loading pack';
+      });
+  };
+
+  function vidRenderViewer() {
+    if (!vidPack) return;
+    var viewerEl = document.getElementById('vid-viewer');
+    if (viewerEl) viewerEl.style.display = 'block';
+
+    var entry = null;
+    for (var i = 0; i < vidIndex.length; i++) {
+      if (vidIndex[i].pageSlug === vidActive) { entry = vidIndex[i]; break; }
+    }
+
+    var titleEl = document.getElementById('vid-view-title');
+    if (titleEl) titleEl.textContent = entry ? entry.pageTitle : (vidActive || '');
+
+    var badgeEl = document.getElementById('vid-status-badge');
+    if (badgeEl && entry) {
+      var st = entry.approvalStatus || 'draft';
+      var stLabel = st === 'approved' ? 'Approved' : st === 'produced' ? 'Produced' : st === 'uploaded' ? 'Uploaded' : 'Draft';
+      var stClass = st === 'approved' ? 'vid-badge-approved' : st === 'produced' ? 'vid-badge-produced' : st === 'uploaded' ? 'vid-badge-uploaded' : 'vid-badge-draft';
+      badgeEl.textContent = stLabel;
+      badgeEl.className = 'vid-badge ' + stClass;
+    }
+
+    var urlInput = document.getElementById('vid-url-input');
+    if (urlInput && entry) { urlInput.value = entry.uploadedUrl || ''; }
+
+    vidRenderPane(vidPack.youtube_short,    'vid-short-content');
+    vidRenderPane(vidPack.youtube_standard, 'vid-std-content');
+    vidRenderPane(vidPack.social_clip,      'vid-clip-content');
+
+    vidTypeTab(vidCurrentType);
+  }
+
+  window.vidTypeTab = function(type) {
+    vidCurrentType = type;
+    var types = ['short', 'std', 'clip'];
+    for (var i = 0; i < types.length; i++) {
+      var t = types[i];
+      var tabEl = document.getElementById('vid-tab-' + t);
+      var paneEl = document.getElementById('vid-pane-' + t);
+      if (tabEl)  tabEl.className  = 'vid-type-tab' + (t === type ? ' vid-tab-active' : '');
+      if (paneEl) paneEl.style.display = t === type ? 'block' : 'none';
+    }
+  };
+
+  window.vidSetStatus = async function(status) {
+    if (!vidActive) return;
+    var urlInput = document.getElementById('vid-url-input');
+    var uploadedUrl = urlInput ? urlInput.value.trim() : '';
+    var msgEl = document.getElementById('vid-url-msg');
+    try {
+      var body = { approvalStatus: status };
+      if (uploadedUrl) body.uploadedUrl = uploadedUrl;
+      var r = await fetch('/api/distribution/' + distSlug() + '/video/' + encodeURIComponent(vidActive) + '/status', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (!r.ok) throw new Error(await r.text());
+      await vidLoad();
+      if (vidActive) vidSelect(vidActive);
+      if (msgEl) { msgEl.textContent = 'Status saved'; msgEl.style.color = '#059669'; setTimeout(function(){ msgEl.textContent = ''; }, 2000); }
+    } catch(e) {
+      if (msgEl) { msgEl.textContent = 'Error saving status'; msgEl.style.color = '#ef4444'; }
+    }
+  };
+
+  window.vidSaveUrl = async function() {
+    if (!vidActive) return;
+    var urlInput = document.getElementById('vid-url-input');
+    var uploadedUrl = urlInput ? urlInput.value.trim() : '';
+    var msgEl = document.getElementById('vid-url-msg');
+    try {
+      var entry = null;
+      for (var i = 0; i < vidIndex.length; i++) {
+        if (vidIndex[i].pageSlug === vidActive) { entry = vidIndex[i]; break; }
+      }
+      var currentStatus = entry ? (entry.approvalStatus || 'draft') : 'draft';
+      var r = await fetch('/api/distribution/' + distSlug() + '/video/' + encodeURIComponent(vidActive) + '/status', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ approvalStatus: currentStatus, uploadedUrl: uploadedUrl })
+      });
+      if (!r.ok) throw new Error(await r.text());
+      await vidLoad();
+      if (msgEl) { msgEl.textContent = 'URL saved'; msgEl.style.color = '#059669'; setTimeout(function(){ msgEl.textContent = ''; }, 2000); }
+    } catch(e) {
+      if (msgEl) { msgEl.textContent = 'Error saving URL'; msgEl.style.color = '#ef4444'; }
+    }
+  };
+
+  window.vidDownload = function() {
+    if (!vidPack || !vidActive) return;
+    var blob = new Blob([JSON.stringify(vidPack, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = vidActive + '-video-pack.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  // Copy handler (event delegation — avoids onclick escaping issues in dynamic HTML)
+  document.addEventListener('click', function(e) {
+    var btn = e.target ? e.target.closest('[data-vid-copy]') : null;
+    if (!btn) return;
+    var targetId = btn.getAttribute('data-vid-copy');
+    var ta = document.getElementById(targetId);
+    if (!ta) return;
+    var text = (ta.tagName === 'TEXTAREA' || ta.tagName === 'INPUT') ? ta.value : (ta.textContent || '');
+    navigator.clipboard.writeText(text).catch(function(){});
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(function(){ btn.textContent = orig; }, 1400);
+  });
+
+  // ── End video section ──────────────────────────────────────────────────────
+
+})();
+</script>
+
+<script>
+// ── Brand Import ─────────────────────────────────────────────────────────────
+(function() {
+  var biProfile = null;
+
+  var COLOUR_FIELDS = [
+    { key: 'primaryColour',    label: 'Primary' },
+    { key: 'secondaryColour',  label: 'Secondary' },
+    { key: 'accentColour',     label: 'Accent' },
+    { key: 'buttonColour',     label: 'Button BG' },
+    { key: 'buttonTextColour', label: 'Button Text' },
+    { key: 'headingColour',    label: 'Heading' },
+    { key: 'bodyTextColour',   label: 'Body Text' },
+    { key: 'backgroundColour', label: 'Background' },
+  ];
+
+  function biSlug() {
+    var sel = document.getElementById('project-select');
+    return sel ? sel.value : '';
+  }
+
+  function biStatus(msg, isError) {
+    var el = document.getElementById('bi-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.color = isError ? '#dc2626' : '#6b7280';
+  }
+
+  function biActionStatus(msg, isSuccess) {
+    var el = document.getElementById('bi-action-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.color = isSuccess ? '#059669' : '#6b7280';
+    if (isSuccess) setTimeout(function() { el.textContent = ''; }, 3000);
+  }
+
+  function confBadge(label, score) {
+    var color = score >= 70 ? '#d1fae5' : score >= 40 ? '#fef9c3' : '#fee2e2';
+    var text  = score >= 70 ? '#065f46' : score >= 40 ? '#854d0e' : '#991b1b';
+    return '<span style="display:inline-flex;align-items:center;gap:5px;background:' + color
+      + ';color:' + text
+      + ';border-radius:12px;padding:4px 12px;font-size:.75rem;font-weight:700">'
+      + label + ': ' + score + '%</span>';
+  }
+
+  function colourField(key, label, value) {
+    var safeVal = (value && value.match(/^#[0-9a-fA-F]{3,6}$/)) ? value : '#888888';
+    return '<div style="display:flex;flex-direction:column;gap:6px">'
+      + '<div style="font-size:.72rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">' + label + '</div>'
+      + '<div style="display:flex;align-items:center;gap:8px">'
+      + '<input type="color" id="bi-col-' + key + '" value="' + safeVal + '" '
+      + 'style="width:38px;height:32px;border:1px solid #d1d5db;border-radius:5px;cursor:pointer;padding:1px">'
+      + '<input type="text" id="bi-coltxt-' + key + '" value="' + (value || '') + '" '
+      + 'style="flex:1;padding:5px 8px;border:1px solid #e2e8f0;border-radius:5px;font-size:.82rem;font-family:monospace" '
+      + 'maxlength="7" placeholder="#rrggbb">'
+      + '</div></div>';
+  }
+
+  function biRender(profile) {
+    biProfile = profile;
+    document.getElementById('bi-results').style.display = 'block';
+
+    // Warnings
+    var warnEl = document.getElementById('bi-warnings');
+    if (profile.warnings && profile.warnings.length > 0) {
+      warnEl.innerHTML = '<strong>&#9888; Notes:</strong> ' + profile.warnings.join(' &bull; ');
+      warnEl.style.display = 'block';
+    } else {
+      warnEl.style.display = 'none';
+    }
+
+    // Confidence badges
+    var conf = profile.confidence || {};
+    document.getElementById('bi-confidence').innerHTML =
+      confBadge('Logo', conf.logo || 0) + ' ' +
+      confBadge('Colours', conf.colours || 0) + ' ' +
+      confBadge('Fonts', conf.fonts || 0) + ' ' +
+      confBadge('Contact', conf.contact || 0);
+
+    // Logo preview
+    var logoEl = document.getElementById('bi-logo-preview');
+    if (profile.logoUrl) {
+      logoEl.innerHTML = '<img src="' + profile.logoUrl + '" alt="Logo" '
+        + 'style="max-height:60px;max-width:180px;object-fit:contain;border:1px solid #f1f5f9;border-radius:4px;background:#f8fafc;padding:4px"> '
+        + '<a href="' + profile.logoUrl + '" target="_blank" '
+        + 'style="font-size:.75rem;color:#3b82f6;text-decoration:none">&#128279; View</a>';
+    } else {
+      logoEl.innerHTML = '<span style="color:#9ca3af;font-size:.82rem">No logo detected</span>';
+    }
+    document.getElementById('bi-logo-url').value      = profile.logoUrl      || '';
+    document.getElementById('bi-business-name').value = profile.businessName || '';
+    document.getElementById('bi-source-url').textContent  = profile.sourceUrl  || '';
+    document.getElementById('bi-fetched-at').textContent  = profile.fetchedAt
+      ? 'Fetched: ' + new Date(profile.fetchedAt).toLocaleString('en-GB') : '';
+
+    // Colour grid
+    var colGrid = document.getElementById('bi-colour-grid');
+    colGrid.innerHTML = COLOUR_FIELDS.map(function(f) {
+      return colourField(f.key, f.label, profile[f.key]);
+    }).join('');
+
+    // Wire colour picker <-> text input sync
+    COLOUR_FIELDS.forEach(function(f) {
+      var picker = document.getElementById('bi-col-' + f.key);
+      var txt    = document.getElementById('bi-coltxt-' + f.key);
+      if (picker && txt) {
+        picker.addEventListener('input', function() { txt.value = picker.value; });
+        txt.addEventListener('input', function() {
+          if (txt.value.match(/^#[0-9a-fA-F]{6}$/)) picker.value = txt.value;
+        });
+      }
+    });
+
+    // Fonts
+    document.getElementById('bi-heading-font').value = profile.headingFont || '';
+    document.getElementById('bi-body-font').value    = profile.bodyFont    || '';
+    var fp = document.getElementById('bi-font-preview');
+    fp.innerHTML = profile.headingFont || profile.bodyFont
+      ? '<span style="font-size:.9rem;font-weight:700">Heading: '
+          + (profile.headingFont || '(system default)') + '</span>'
+        + ' &bull; <span style="font-size:.9rem">Body: '
+          + (profile.bodyFont || '(system default)') + '</span>'
+      : '<span style="color:#9ca3af">No custom fonts detected &mdash; system fonts will be used.</span>';
+
+    // Nav links
+    var navEl = document.getElementById('bi-nav-links');
+    if (profile.navigationLinks && profile.navigationLinks.length > 0) {
+      navEl.innerHTML = profile.navigationLinks.map(function(l) {
+        return '<div style="padding:4px 0;border-bottom:1px solid #f1f5f9">'
+          + '<a href="' + l.href + '" target="_blank" rel="noopener"'
+          + ' style="color:#1d4ed8;text-decoration:none;font-size:.82rem">'
+          + l.label + '</a></div>';
+      }).join('');
+    } else {
+      navEl.innerHTML = '<span style="color:#9ca3af;font-size:.82rem">None detected</span>';
+    }
+
+    // Contact
+    var c = profile.contact || {};
+    document.getElementById('bi-contact-info').innerHTML = [
+      c.phone   ? '<div style="padding:3px 0">&#128222; ' + c.phone   + '</div>' : '',
+      c.email   ? '<div style="padding:3px 0">&#128231; ' + c.email   + '</div>' : '',
+      c.address ? '<div style="padding:3px 0">&#128205; ' + c.address + '</div>' : '',
+    ].join('') || '<span style="color:#9ca3af;font-size:.82rem">None detected</span>';
+
+    // Tone of voice
+    var tone = profile.toneOfVoice || {};
+    document.getElementById('bi-tone').innerHTML =
+      '<strong style="text-transform:capitalize">' + (tone.formality || 'professional') + '</strong>'
+      + ' &mdash; ' + (tone.style || '')
+      + (tone.notes ? '<br><span style="color:#6b7280;font-size:.78rem">' + tone.notes + '</span>' : '')
+      + (tone.samplePhrases && tone.samplePhrases.length
+        ? '<div style="margin-top:8px;padding:10px;background:#f8fafc;border-radius:6px;'
+            + 'font-style:italic;font-size:.8rem;color:#374151">'
+            + '&ldquo;' + tone.samplePhrases[0] + '&rdquo;</div>' : '');
+
+    // Approve button state
+    var approveBtn = document.getElementById('bi-approve-btn');
+    if (approveBtn && profile.approved) {
+      approveBtn.textContent = '\u2713 Approved & Applied';
+    }
+  }
+
+  function biCollect() {
+    var p = JSON.parse(JSON.stringify(biProfile || {}));
+    p.logoUrl      = (document.getElementById('bi-logo-url')      || {}).value || p.logoUrl || '';
+    p.businessName = (document.getElementById('bi-business-name') || {}).value || p.businessName || '';
+    p.headingFont  = (document.getElementById('bi-heading-font')  || {}).value || '';
+    p.bodyFont     = (document.getElementById('bi-body-font')     || {}).value || '';
+    COLOUR_FIELDS.forEach(function(f) {
+      var txt = document.getElementById('bi-coltxt-' + f.key);
+      if (txt && txt.value.match(/^#[0-9a-fA-F]{3,6}$/)) p[f.key] = txt.value;
+    });
+    return p;
+  }
+
+  window.biLoad = async function() {
+    var slug = biSlug();
+    if (!slug) { biStatus('No project selected.', true); return; }
+    biStatus('Loading saved profile\u2026');
+    try {
+      var r = await fetch('/api/brand-import/' + slug);
+      if (r.status === 404) {
+        biStatus('No brand profile saved yet. Enter a URL above to import.');
+        return;
+      }
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var profile = await r.json();
+      biRender(profile);
+      var d = profile.fetchedAt ? new Date(profile.fetchedAt).toLocaleDateString('en-GB') : 'unknown';
+      biStatus('\u2713 Profile loaded (fetched ' + d + ').');
+    } catch (e) {
+      biStatus('Could not load profile: ' + e.message, true);
+    }
+  };
+
+  window.biRun = async function() {
+    var slug = biSlug();
+    if (!slug) { biStatus('Select a project first.', true); return; }
+    var urlEl = document.getElementById('bi-url');
+    var url   = urlEl ? urlEl.value.trim() : '';
+    if (!url) { biStatus('Enter a website URL first.', true); return; }
+    if (!url.startsWith('http')) url = 'https://' + url;
+
+    var btn = document.getElementById('bi-run-btn');
+    if (btn) { btn.disabled = true; btn.textContent = '\u23F3 Importing\u2026'; }
+    biStatus('Fetching and analysing website\u2026 (may take up to 15 seconds)');
+    document.getElementById('bi-results').style.display = 'none';
+
+    try {
+      var r = await fetch('/api/brand-import/' + slug, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url }),
+      });
+      var data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Import failed');
+      biRender(data);
+      biStatus('\u2713 Import complete. Review below, then click Approve & Apply when ready.');
+    } catch (e) {
+      biStatus('\u2717 Import failed: ' + e.message, true);
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '\uD83D\uDD0D Import Brand'; }
+    }
+  };
+
+  window.biSave = async function(andApprove) {
+    var slug = biSlug();
+    if (!slug || !biProfile) { biActionStatus('No profile loaded.', false); return; }
+    var payload = biCollect();
+    if (andApprove) payload.approved = true;
+    biActionStatus('Saving\u2026');
+    try {
+      var r = await fetch('/api/brand-import/' + slug, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      var data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Save failed');
+      biProfile = data;
+
+      if (andApprove) {
+        var r2 = await fetch('/api/brand-import/' + slug + '/apply', { method: 'POST' });
+        var d2 = await r2.json();
+        if (!r2.ok) throw new Error(d2.error || 'Apply failed');
+        biActionStatus('\u2713 Brand approved and applied to project config!', true);
+        var btn = document.getElementById('bi-approve-btn');
+        if (btn) btn.textContent = '\u2713 Approved & Applied';
+        // Show post-approve next-steps panel and load page list
+        biShowPostApprove(slug);
+      } else {
+        biActionStatus('\u2713 Changes saved.', true);
+      }
+    } catch (e) {
+      biActionStatus('\u2717 ' + e.message, false);
+    }
+  };
+
+  async function biShowPostApprove(slug) {
+    var panel = document.getElementById('bi-post-approve');
+    var allLink = document.getElementById('bi-preview-all-link');
+    if (panel) panel.style.display = 'block';
+    if (allLink) allLink.href = '/preview/' + slug;
+
+    // Fetch page list and render hub first
+    try {
+      var r = await fetch('/api/brand-import/' + slug + '/pages');
+      var data = await r.json();
+      var pages = data.pages || [];
+
+      // Wire the preview hub button to the first hub page (or first page)
+      var hub = pages.find(function(p) { return p.tier === 'hub'; }) || pages[0];
+      var hubBtn = document.getElementById('bi-preview-hub-btn');
+      if (hub && hubBtn) {
+        hubBtn.onclick = function() { window.open(hub.previewUrl, '_blank'); };
+        hubBtn.textContent = '\uD83D\uDC41 Preview: ' + (hub.service || '') + ' ' + (hub.location || '') + ' (hub)';
+      } else if (hubBtn) {
+        hubBtn.textContent = '\uD83D\uDC41 No hub page generated yet';
+        hubBtn.disabled = true;
+      }
+
+      // Render page list grouped by tier
+      var listEl = document.getElementById('bi-page-list');
+      if (!listEl || !pages.length) return;
+
+      var hubs     = pages.filter(function(p) { return p.tier === 'hub'; });
+      var clusters = pages.filter(function(p) { return p.tier !== 'hub'; });
+
+      var html = '';
+      if (hubs.length) {
+        html += '<div style="font-weight:700;color:#1e3a5f;margin-bottom:6px">Hub Pages</div>';
+        html += hubs.map(function(p) {
+          return '<div style="padding:4px 0;border-bottom:1px solid #e2e8f0">'
+            + '<a href="' + p.previewUrl + '" target="_blank" rel="noopener" '
+            + 'style="color:#1d4ed8;text-decoration:none;font-weight:600">'
+            + (p.service || p.slug) + ' \u2014 ' + (p.location || '') + '</a>'
+            + ' <span style="background:#dbeafe;color:#1e40af;border-radius:10px;'
+            + 'padding:1px 8px;font-size:.68rem;font-weight:700;margin-left:6px">hub</span></div>';
+        }).join('');
+      }
+      if (clusters.length) {
+        html += '<div style="font-weight:700;color:#1e3a5f;margin:12px 0 6px">Cluster Pages (' + clusters.length + ')</div>';
+        html += clusters.slice(0, 12).map(function(p) {
+          return '<div style="padding:3px 0;border-bottom:1px solid #f1f5f9">'
+            + '<a href="' + p.previewUrl + '" target="_blank" rel="noopener" '
+            + 'style="color:#1d4ed8;text-decoration:none">'
+            + (p.service || p.slug) + ' \u2014 ' + (p.location || '') + '</a></div>';
+        }).join('');
+        if (clusters.length > 12) {
+          html += '<div style="color:#6b7280;padding:4px 0">…and ' + (clusters.length - 12) + ' more. '
+            + '<a href="/preview/' + slug + '" target="_blank" style="color:#1d4ed8">View all</a></div>';
+        }
+      }
+      listEl.innerHTML = html || '<span style="color:#6b7280">No pages generated yet. Create a campaign in the Setup Wizard first.</span>';
+    } catch (e) {
+      var listEl2 = document.getElementById('bi-page-list');
+      if (listEl2) listEl2.textContent = 'Could not load page list.';
+    }
+  }
+
+  window.biPreviewHub = function() {
+    // Fallback if page list hasn't loaded yet
+    window.open('/preview/' + biSlug(), '_blank');
+  };
+
+  window.biOpenWizard = function() {
+    var slug = biSlug();
+    window.open('/api/setup?slug=' + slug + (INTERNAL_TOKEN?'&_t='+encodeURIComponent(INTERNAL_TOKEN):''), '_blank');
+  };
+
+})();
+</script>
+
+<!-- ── New Client Modal ─────────────────────────────────────────────────── -->
+<div id="new-client-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:14px;box-shadow:0 12px 48px rgba(0,0,0,.22);width:100%;max-width:480px;margin:20px;overflow:hidden;">
+    <div style="background:#005EB8;color:#fff;padding:18px 22px 16px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:1.05rem;font-weight:800;">➕ Add New Client</div>
+        <div style="font-size:.78rem;opacity:.8;margin-top:2px;">Creates a new project — you'll complete the full profile in the Setup Wizard</div>
+      </div>
+      <button onclick="closeNewClientModal()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:6px;width:30px;height:30px;font-size:1.1rem;cursor:pointer;line-height:1;">✕</button>
+    </div>
+    <div style="padding:22px;">
+      <div id="nc-err" style="display:none;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:8px;padding:10px 14px;font-size:.85rem;margin-bottom:14px;"></div>
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:.8rem;font-weight:700;color:#374151;margin-bottom:5px;">Company / Business Name <span style="color:#dc2626">*</span></label>
+        <input id="nc-name" type="text" placeholder="e.g. Smith Plumbing Ltd" oninput="ncAutoSlug()"
+          style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.95rem;"/>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:.8rem;font-weight:700;color:#374151;margin-bottom:5px;">Website / Domain <span style="color:#94a3b8;font-weight:400;">(optional — can add later)</span></label>
+        <input id="nc-domain" type="text" placeholder="https://smithplumbing.co.uk"
+          style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.95rem;"/>
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="display:block;font-size:.8rem;font-weight:700;color:#374151;margin-bottom:5px;">Primary Location <span style="color:#94a3b8;font-weight:400;">(optional)</span></label>
+        <input id="nc-location" type="text" placeholder="e.g. Sheffield"
+          style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.95rem;"/>
+        <div style="font-size:.75rem;color:#94a3b8;margin-top:5px;">Project ID: <code id="nc-slug-preview" style="background:#f1f5f9;padding:2px 6px;border-radius:4px;color:#475569;">—</code></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button id="nc-submit-btn" onclick="submitNewClient()"
+          style="flex:1;background:#005EB8;color:#fff;border:none;border-radius:8px;padding:11px;font-size:.95rem;font-weight:700;cursor:pointer;">
+          Create &amp; Open Setup Wizard →
+        </button>
+        <button onclick="closeNewClientModal()" style="background:#f1f5f9;color:#374151;border:1px solid #e2e8f0;border-radius:8px;padding:11px 16px;font-size:.9rem;cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function slugify(s){
+    return s.toLowerCase().trim()
+      .replace(/[^a-z0-9\\s-]/g,'').replace(/[\\s_]+/g,'-')
+      .replace(/-+/g,'-').replace(/^-|-$/g,'').slice(0,48);
+  }
+  window.openNewClientModal=function(){
+    var m=document.getElementById('new-client-modal');
+    m.style.display='flex';
+    document.getElementById('nc-name').focus();
+    document.getElementById('nc-err').style.display='none';
+  };
+  window.closeNewClientModal=function(){
+    document.getElementById('new-client-modal').style.display='none';
+    document.getElementById('nc-name').value='';
+    document.getElementById('nc-domain').value='';
+    document.getElementById('nc-location').value='';
+    document.getElementById('nc-slug-preview').textContent='—';
+    document.getElementById('nc-err').style.display='none';
+  };
+  window.ncAutoSlug=function(){
+    var name=document.getElementById('nc-name').value;
+    document.getElementById('nc-slug-preview').textContent=slugify(name)||'—';
+  };
+  document.getElementById('new-client-modal').addEventListener('click',function(e){
+    if(e.target===this)window.closeNewClientModal();
+  });
+  document.getElementById('nc-name').addEventListener('keydown',function(e){if(e.key==='Enter')window.submitNewClient();});
+  window.submitNewClient=function(){
+    var name=document.getElementById('nc-name').value.trim();
+    var domain=document.getElementById('nc-domain').value.trim();
+    var location=document.getElementById('nc-location').value.trim();
+    var errEl=document.getElementById('nc-err');
+    var btn=document.getElementById('nc-submit-btn');
+    errEl.style.display='none';
+    if(!name){errEl.textContent='Please enter the company name.';errEl.style.display='block';return;}
+    var slug=slugify(name);
+    if(!slug){errEl.textContent='Could not generate a valid project ID from that name.';errEl.style.display='block';return;}
+    btn.disabled=true;btn.textContent='Creating…';
+    apiFetch('/api/projects/stub',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({businessName:name,domain:domain||'',primaryLocation:location||''})
+    }).then(function(r){return r.json();})
+      .then(function(d){
+        if(d.error){errEl.textContent=d.error;errEl.style.display='block';btn.disabled=false;btn.textContent='Create & Open Setup Wizard →';return;}
+        window.location.href='/api/setup?slug='+encodeURIComponent(d.clientSlug)+'&stage=1'+(INTERNAL_TOKEN?'&_t='+encodeURIComponent(INTERNAL_TOKEN):'');
+      })
+      .catch(function(){errEl.textContent='Request failed — please try again.';errEl.style.display='block';btn.disabled=false;btn.textContent='Create & Open Setup Wizard →';});
+  };
+})();
+</script>
+
+<script>
+// ── Visibility Posts (Distribution & Visibility Engine) ─────────────────────
+
+// ── state ────────────────────────────────────────────────────────────────────
+var vpCurrentPosts    = {};
+var vpCurrentImageUrl = '';
+var vpCurrentImagePrompt = '';
+var vpPagesLoaded     = false;
+var vpSavedSetsMap    = {};
+
+// ── platform meta ─────────────────────────────────────────────────────────────
+var VP_PLATFORMS = {
+  gbp:       { label: 'Google Business Profile', dot: '#4285F4', short: 'GBP' },
+  facebook:  { label: 'Facebook',                dot: '#1877F2', short: 'FB'  },
+  instagram: { label: 'Instagram',               dot: '#E1306C', short: 'IG'  },
+  linkedin:  { label: 'LinkedIn',                dot: '#0A66C2', short: 'LI'  },
+  twitter:   { label: 'X / Twitter',             dot: '#111827', short: 'X'   },
+};
+
+// ── tab navigation helpers ────────────────────────────────────────────────────
+function switchToVPMode() {
+  try {
+    document.querySelectorAll('.tab').forEach(function(el){ el.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(el){ el.classList.remove('active'); });
+    var vpTab = document.getElementById('tab-visibility-posts');
+    if (vpTab) vpTab.classList.add('active');
+    var dp = document.getElementById('panel-distribution');
+    if (dp) { dp.classList.add('active'); dp.classList.add('vp-active'); }
+    var pm = document.getElementById('dist-page-mode');
+    var vm = document.getElementById('dist-visibility-mode');
+    if (pm) pm.style.display = 'none';
+    if (vm) { vm.style.display = 'block'; vm.style.visibility = 'visible'; }
+    vpModeSwitch('visibility');
+    if (typeof distLoad === 'function') distLoad();
+    if (typeof vidLoad === 'function') vidLoad();
+    setTimeout(function(){ if (vm) vm.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
+  } catch(e) { alert('Error opening Visibility Posts: ' + e.message); }
+}
+
+function switchToDistMode() {
+  try {
+    switchTab('distribution');
+    var dp = document.getElementById('panel-distribution');
+    if (dp) dp.classList.remove('vp-active');
+    var pm = document.getElementById('dist-page-mode');
+    var vm = document.getElementById('dist-visibility-mode');
+    if (pm) pm.style.display = '';
+    if (vm) vm.style.display = 'none';
+    if (typeof distLoad === 'function') distLoad();
+    if (typeof vidLoad === 'function') vidLoad();
+  } catch(e) {}
+}
+
+// ── mode switch ───────────────────────────────────────────────────────────────
+function vpModeSwitch(mode) {
+    var isVp    = mode === 'visibility';
+    var pageModeEl = document.getElementById('dist-page-mode');
+    var visModeEl  = document.getElementById('dist-visibility-mode');
+
+    if (pageModeEl) pageModeEl.style.display = isVp ? 'none' : '';
+    if (visModeEl)  visModeEl.style.display  = isVp ? ''     : 'none';
+
+    var pageBtn = document.getElementById('dist-mode-page-btn');
+    var vpBtn   = document.getElementById('dist-mode-vp-btn');
+    if (pageBtn) {
+      pageBtn.style.background   = isVp ? 'transparent' : '#fff';
+      pageBtn.style.color        = isVp ? '#6b7280' : '#1e3a5f';
+      pageBtn.style.boxShadow    = isVp ? 'none' : '0 1px 4px rgba(0,0,0,.1)';
+    }
+    if (vpBtn) {
+      vpBtn.style.background  = isVp ? '#fff' : 'transparent';
+      vpBtn.style.color       = isVp ? '#1e3a5f' : '#6b7280';
+      vpBtn.style.boxShadow   = isVp ? '0 1px 4px rgba(0,0,0,.1)' : 'none';
+    }
+
+    // Always scroll the panel header into view so the active section is visible
+    var panelEl = document.getElementById('panel-distribution');
+    if (panelEl) panelEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (isVp) {
+      vpUpdateChips();
+      vpLoadSaved();
+      if (!vpPagesLoaded) vpLoadPages();
+    }
+  };
+
+  // ── update platform chip visual state ──────────────────────────────────────
+  function vpUpdateChips() {
+    document.querySelectorAll('.vp-plat-chip').forEach(function(chip) {
+      var cb = chip.querySelector('input[type=checkbox]');
+      if (cb) chip.classList.toggle('vp-chip-on', cb.checked);
+    });
+    document.querySelectorAll('.vp-plat-cb').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var chip = cb.closest('.vp-plat-chip');
+        if (chip) chip.classList.toggle('vp-chip-on', cb.checked);
+      });
+    });
+  }
+
+  // ── link type change ────────────────────────────────────────────────────────
+function vpLinkTypeChange() {
+    var val = document.getElementById('vp-link-type').value;
+    document.getElementById('vp-page-picker-wrap').style.display  = val === 'page'   ? '' : 'none';
+    document.getElementById('vp-custom-url-wrap').style.display   = val === 'custom' ? '' : 'none';
+  };
+
+  // ── load project pages for page picker ─────────────────────────────────────
+  function vpLoadPages() {
+    if (!activeSlug) return;
+    vpPagesLoaded = true;
+    apiFetch('/api/social-posts/pages/' + enc(activeSlug))
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var sel = document.getElementById('vp-page-picker');
+        if (!sel || !d.pages) return;
+        sel.innerHTML = '<option value="">— choose a page —</option>' +
+          d.pages.map(function(p){
+            return '<option value="'+escHtml(p.url)+'">'+escHtml(p.label)+'</option>';
+          }).join('');
+      })
+      .catch(function(){});
+  }
+
+  // ── resolve link URL from form ──────────────────────────────────────────────
+  function vpResolveLink() {
+    var type = document.getElementById('vp-link-type').value;
+    if (type === 'none') return '';
+    if (type === 'custom') return (document.getElementById('vp-custom-url').value || '').trim();
+    if (type === 'page') return (document.getElementById('vp-page-picker').value || '').trim();
+    // homepage — derive from project if possible
+    return '';
+  }
+
+  // ── get selected platforms ──────────────────────────────────────────────────
+  function vpSelectedPlatforms() {
+    return Array.from(document.querySelectorAll('.vp-plat-cb'))
+      .filter(function(cb){ return cb.checked; })
+      .map(function(cb){ return cb.value; });
+  }
+
+  // ── Generate posts ──────────────────────────────────────────────────────────
+function vpGenerate() {
+  var topic    = '';
+  var bizType  = '';
+  var location = '';
+  var objective= 'Generate enquiries';
+  var linkUrl  = '';
+  var platforms= [];
+  var btn = document.getElementById('vp-gen-btn');
+
+  try {
+    var topicEl    = document.getElementById('vp-topic');
+    var bizTypeEl  = document.getElementById('vp-biz-type');
+    var locationEl = document.getElementById('vp-location');
+    var objEl      = document.getElementById('vp-objective');
+
+    topic    = topicEl    ? topicEl.value.trim()    : '';
+    bizType  = bizTypeEl  ? bizTypeEl.value.trim()  : '';
+    location = locationEl ? locationEl.value.trim() : '';
+    objective= objEl      ? objEl.value              : 'Generate enquiries';
+    linkUrl  = vpResolveLink();
+    platforms= vpSelectedPlatforms();
+  } catch(e) {
+    vpStatusBox('Setup error: ' + e.message, 'error');
+    return;
+  }
+
+  if (!topic)    { vpStatusBox('Please fill in the Topic / Keyword field', 'error'); return; }
+  if (!bizType)  { vpStatusBox('Please fill in the Business Type field', 'error'); return; }
+  if (!location) { vpStatusBox('Please fill in the Location field', 'error'); return; }
+  if (!platforms.length) { vpStatusBox('Please select at least one platform', 'error'); return; }
+
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Generating…'; }
+  vpStatusBox('Generating posts — please wait…', 'loading');
+
+  apiFetch('/api/social-posts/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ topic, businessType: bizType, location, postObjective: objective, linkUrl, platforms }),
+    timeoutMs: 60000,
+  })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (btn) { btn.disabled = false; btn.textContent = '▶ Generate Posts'; }
+      if (d.error) { vpStatusBox('Error: ' + d.error, 'error'); return; }
+      vpCurrentPosts = d.posts || {};
+      vpCurrentImageUrl = '';
+      vpCurrentImagePrompt = '';
+      vpStatusBox('Posts generated — scroll down to review', 'success');
+      vpRenderCards(vpCurrentPosts, platforms);
+      var out = document.getElementById('vp-output');
+      if (out) out.style.display = '';
+      var imgResult = document.getElementById('vp-img-result');
+      if (imgResult) imgResult.style.display = 'none';
+      var imgStatus = document.getElementById('vp-img-status');
+      if (imgStatus) imgStatus.textContent = '';
+      var imgGenBtn = document.getElementById('vp-img-gen-btn');
+      if (imgGenBtn) imgGenBtn.style.display = '';
+      vpUpdateSaveBtn();
+      setTimeout(function(){
+        var outEl = document.getElementById('vp-output');
+        if (outEl) outEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    })
+    .catch(function(e){
+      if (btn) { btn.disabled = false; btn.textContent = '▶ Generate Posts'; }
+      vpStatusBox('Request failed: ' + (e.message || String(e)), 'error');
+    });
+}
+
+  // ── render platform cards ───────────────────────────────────────────────────
+  function vpRenderCards(posts, platforms) {
+    var container = document.getElementById('vp-cards');
+    container.innerHTML = '';
+    (platforms || Object.keys(posts)).forEach(function(key) {
+      var text = posts[key] || '';
+      var meta = VP_PLATFORMS[key] || { label: key, dot: '#6b7280', short: key };
+      var card = document.createElement('div');
+      card.className = 'vp-platform-card';
+      card.id = 'vp-card-' + key;
+      card.innerHTML =
+        '<div class="vp-card-head">' +
+          '<div class="vp-card-label">' +
+            '<span class="vp-card-dot" style="background:' + meta.dot + '"></span>' +
+            escHtml(meta.label) +
+          '</div>' +
+          '<div style="display:flex;gap:7px">' +
+            '<button class="vp-copy-btn" data-plat="'+key+'" onclick="vpCopyPost(this.dataset.plat,this)">Copy</button>' +
+            '<button class="vp-copy-btn" data-plat="'+key+'" onclick="vpRegeneratePlatform(this.dataset.plat,this)" style="background:#eff6ff;color:#1e40af;border-color:#93c5fd">&#8635; Redo</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="vp-card-body">' +
+          '<textarea id="vp-ta-'+key+'" class="vp-post-ta">'+escHtml(text)+'</textarea>' +
+          (key === 'twitter' ? '<div style="margin-top:5px;font-size:.74rem;color:#9ca3af;text-align:right"><span id="vp-char-'+key+'">'+text.length+'</span> / 280 chars</div>' : '') +
+        '</div>';
+      container.appendChild(card);
+
+      // Character counter for twitter
+      if (key === 'twitter') {
+        var ta = document.getElementById('vp-ta-' + key);
+        if (ta) ta.addEventListener('input', function(){
+          var ctr = document.getElementById('vp-char-' + key);
+          if (ctr) {
+            ctr.textContent = ta.value.length;
+            ctr.style.color = ta.value.length > 280 ? '#dc2626' : '#9ca3af';
+          }
+        });
+      }
+    });
+  }
+
+  // ── copy a single platform post ─────────────────────────────────────────────
+function vpCopyPost(platform, btn) {
+    var ta = document.getElementById('vp-ta-' + platform);
+    if (!ta) return;
+    navigator.clipboard.writeText(ta.value).catch(function(){});
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.style.background = '#d1fae5';
+    btn.style.color = '#065f46';
+    setTimeout(function(){ btn.textContent = orig; btn.style.background=''; btn.style.color=''; }, 1500);
+  };
+
+  // ── copy all as JSON ────────────────────────────────────────────────────────
+function vpCopyAll() {
+    var all = {};
+    document.querySelectorAll('.vp-post-ta').forEach(function(ta){
+      var id = ta.id.replace('vp-ta-', '');
+      all[id] = ta.value;
+    });
+    navigator.clipboard.writeText(JSON.stringify(all, null, 2)).catch(function(){});
+  };
+
+  // ── regenerate single platform ──────────────────────────────────────────────
+function vpRegeneratePlatform(platform, btn) {
+    var topic    = (document.getElementById('vp-topic').value || '').trim();
+    var bizType  = (document.getElementById('vp-biz-type').value || '').trim();
+    var location = (document.getElementById('vp-location').value || '').trim();
+    var objective= document.getElementById('vp-objective').value;
+    var linkUrl  = vpResolveLink();
+    if (!topic || !bizType || !location) { alert('Complete the form first'); return; }
+    btn.disabled = true;
+    btn.textContent = '⏳';
+    apiFetch('/api/social-posts/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ topic, businessType: bizType, location, postObjective: objective, linkUrl, platforms: [platform] }),
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        btn.disabled = false; btn.textContent = '↻ Redo';
+        if (d.error) { alert('Error: ' + d.error); return; }
+        var ta = document.getElementById('vp-ta-' + platform);
+        if (ta && d.posts && d.posts[platform]) {
+          ta.value = d.posts[platform];
+          vpCurrentPosts[platform] = d.posts[platform];
+          if (platform === 'twitter') {
+            var ctr = document.getElementById('vp-char-twitter');
+            if (ctr) ctr.textContent = ta.value.length;
+          }
+        }
+      })
+      .catch(function(e){
+        btn.disabled = false; btn.textContent = '↻ Redo';
+        alert('Failed: ' + (e.message || e));
+      });
+  };
+
+  // ── generate image ──────────────────────────────────────────────────────────
+function vpGenerateImage() {
+    var topic    = (document.getElementById('vp-topic').value || '').trim();
+    var bizType  = (document.getElementById('vp-biz-type').value || '').trim();
+    var location = (document.getElementById('vp-location').value || '').trim();
+    var objective= document.getElementById('vp-objective').value;
+    if (!topic || !bizType || !location) { alert('Complete the form first'); return; }
+
+    var statusEl = document.getElementById('vp-img-status');
+    var genBtn   = document.getElementById('vp-img-gen-btn');
+    statusEl.textContent = '🎨 Generating image with Ideogram — takes ~15 seconds…';
+    statusEl.style.color = '#374151';
+    genBtn.disabled = true;
+
+    apiFetch('/api/social-posts/generate-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ topic, businessType: bizType, location, postObjective: objective }),
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        genBtn.disabled = false;
+        if (d.error) {
+          statusEl.textContent = 'Error: ' + d.error;
+          statusEl.style.color = '#dc2626';
+          return;
+        }
+        vpCurrentImageUrl    = d.imageUrl || '';
+        vpCurrentImagePrompt = d.prompt   || '';
+        statusEl.textContent = '';
+
+        var preview = document.getElementById('vp-img-preview');
+        var dl      = document.getElementById('vp-img-dl');
+        var pt      = document.getElementById('vp-img-prompt-text');
+        if (preview) preview.src = vpCurrentImageUrl;
+        if (dl)      { dl.href = vpCurrentImageUrl; }
+        if (pt)      pt.textContent = vpCurrentImagePrompt;
+
+        document.getElementById('vp-img-result').style.display = '';
+        genBtn.style.display = 'none';
+        vpUpdateSaveBtn();
+      })
+      .catch(function(e){
+        genBtn.disabled = false;
+        statusEl.textContent = 'Request failed: ' + (e.message || e);
+        statusEl.style.color = '#dc2626';
+      });
+  };
+
+  // ── save post set ───────────────────────────────────────────────────────────
+function vpSave() {
+    if (!activeSlug) { alert('Select a project first'); return; }
+    var topic    = (document.getElementById('vp-topic').value || '').trim();
+    var bizType  = (document.getElementById('vp-biz-type').value || '').trim();
+    var location = (document.getElementById('vp-location').value || '').trim();
+    var objective= document.getElementById('vp-objective').value;
+    var linkUrl  = vpResolveLink();
+    var platforms= vpSelectedPlatforms();
+
+    // Collect current textarea values (may have been edited)
+    var posts = {};
+    document.querySelectorAll('.vp-post-ta').forEach(function(ta){
+      var id = ta.id.replace('vp-ta-', '');
+      posts[id] = ta.value;
+    });
+
+    if (!topic || !Object.keys(posts).length) { alert('Nothing to save yet — generate some posts first'); return; }
+
+    var btn = document.getElementById('vp-save-btn');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    apiFetch('/api/social-posts/' + enc(activeSlug) + '/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        topic, businessType: bizType, location, postObjective: objective,
+        linkUrl, platforms, posts,
+        imageUrl: vpCurrentImageUrl || undefined,
+        imagePrompt: vpCurrentImagePrompt || undefined,
+      }),
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        btn.disabled = false;
+        btn.textContent = '✓ Save Set';
+        if (d.error) { alert('Save failed: ' + d.error); return; }
+        btn.textContent = '✓ Saved!';
+        btn.style.background = '#d1fae5';
+        setTimeout(function(){ btn.textContent = '✓ Save Set'; btn.style.background=''; }, 2000);
+        vpLoadSaved();
+      })
+      .catch(function(e){
+        btn.disabled = false;
+        btn.textContent = '✓ Save Set';
+        alert('Save failed: ' + (e.message || e));
+      });
+  };
+
+  // ── load saved sets ─────────────────────────────────────────────────────────
+function vpLoadSaved() {
+    if (!activeSlug) return;
+    apiFetch('/api/social-posts/' + enc(activeSlug))
+      .then(function(r){ return r.json(); })
+      .then(function(d){ vpRenderSaved(d.sets || []); })
+      .catch(function(){});
+  };
+
+  function vpRenderSaved(sets) {
+    var emptyEl = document.getElementById('vp-saved-empty');
+    var listEl  = document.getElementById('vp-saved-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    if (!sets.length) {
+      if (emptyEl) emptyEl.style.display = '';
+      return;
+    }
+    if (emptyEl) emptyEl.style.display = 'none';
+
+    // Store sets in global map so data-id lookups work from onclick
+    vpSavedSetsMap = {};
+    sets.forEach(function(set){
+      vpSavedSetsMap[set.id] = set;
+      var date = set.createdAt ? new Date(set.createdAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+      var hasImg = !!set.imageUrl;
+      var item = document.createElement('div');
+      item.className = 'vp-saved-item';
+      item.innerHTML =
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:700;font-size:.88rem;color:#111827;margin-bottom:2px">'+escHtml(set.topic)+'</div>' +
+          '<div style="font-size:.78rem;color:#6b7280;margin-bottom:4px">' +
+            escHtml(set.businessType||'') + ' · ' + escHtml(set.location||'') +
+            (date ? ' · ' + date : '') +
+          '</div>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">' +
+            (set.platforms||Object.keys(set.posts||{})).map(function(p){
+              var m = VP_PLATFORMS[p];
+              return '<span style="font-size:.7rem;padding:2px 8px;border-radius:10px;background:' +
+                (m?m.dot:'#6b7280') + '22;color:' + (m?m.dot:'#374151') +
+                ';font-weight:700;border:1px solid ' + (m?m.dot:'#6b7280') + '44">' +
+                escHtml(m?m.short:p) + '</span>';
+            }).join('') +
+            (hasImg ? '<span style="font-size:.7rem;padding:2px 8px;border-radius:10px;background:#fef9c3;color:#854d0e;font-weight:700;border:1px solid #fde68a">&#128444; Image</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">' +
+          '<button class="vp-copy-btn" data-id="'+escHtml(set.id)+'" onclick="vpLoadSavedSet(vpSavedSetsMap[this.dataset.id],this)" style="font-size:.74rem;padding:5px 12px;white-space:nowrap">Load</button>' +
+          '<button class="vp-copy-btn" data-id="'+escHtml(set.id)+'" onclick="vpDeleteSaved(this.dataset.id,this)" style="font-size:.74rem;padding:5px 12px;color:#dc2626;border-color:#fecaca;background:#fef2f2;white-space:nowrap">Delete</button>' +
+        '</div>';
+      listEl.appendChild(item);
+    });
+  }
+
+  // ── load a saved set into the form ──────────────────────────────────────────
+function vpLoadSavedSet(set, btn) {
+    if (document.getElementById('vp-topic'))    document.getElementById('vp-topic').value    = set.topic    || '';
+    if (document.getElementById('vp-biz-type')) document.getElementById('vp-biz-type').value = set.businessType || '';
+    if (document.getElementById('vp-location')) document.getElementById('vp-location').value = set.location  || '';
+
+    // Set objective if exists
+    var objSel = document.getElementById('vp-objective');
+    if (objSel && set.postObjective) {
+      Array.from(objSel.options).forEach(function(o){
+        if (o.value === set.postObjective) o.selected = true;
+      });
+    }
+
+    // Set link fields
+    var lt = document.getElementById('vp-link-type');
+    if (lt && set.linkUrl) {
+      lt.value = 'custom';
+      document.getElementById('vp-custom-url-wrap').style.display = '';
+      var cu = document.getElementById('vp-custom-url');
+      if (cu) cu.value = set.linkUrl;
+    }
+
+    // Platform checkboxes
+    var cbs = document.querySelectorAll('.vp-plat-cb');
+    var savedPlats = set.platforms || Object.keys(set.posts || {});
+    cbs.forEach(function(cb){
+      cb.checked = savedPlats.indexOf(cb.value) !== -1;
+      var chip = cb.closest('.vp-plat-chip');
+      if (chip) chip.classList.toggle('vp-chip-on', cb.checked);
+    });
+
+    // Render cards
+    vpCurrentPosts = set.posts || {};
+    vpRenderCards(vpCurrentPosts, savedPlats);
+    document.getElementById('vp-output').style.display = '';
+
+    // Image if saved
+    if (set.imageUrl) {
+      vpCurrentImageUrl    = set.imageUrl;
+      vpCurrentImagePrompt = set.imagePrompt || '';
+      var preview = document.getElementById('vp-img-preview');
+      var dl      = document.getElementById('vp-img-dl');
+      var pt      = document.getElementById('vp-img-prompt-text');
+      if (preview) preview.src = set.imageUrl;
+      if (dl)      dl.href = set.imageUrl;
+      if (pt)      pt.textContent = set.imagePrompt || '';
+      document.getElementById('vp-img-result').style.display = '';
+      document.getElementById('vp-img-gen-btn').style.display = 'none';
+    } else {
+      document.getElementById('vp-img-result').style.display = 'none';
+      document.getElementById('vp-img-gen-btn').style.display = '';
+      vpCurrentImageUrl = '';
+      vpCurrentImagePrompt = '';
+    }
+
+    vpUpdateSaveBtn();
+    document.getElementById('vp-output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // ── delete saved set ────────────────────────────────────────────────────────
+function vpDeleteSaved(id, btn) {
+    if (!activeSlug) return;
+    if (!confirm('Delete this saved post set?')) return;
+    btn.disabled = true;
+    apiFetch('/api/social-posts/' + enc(activeSlug) + '/' + enc(id), { method: 'DELETE' })
+      .then(function(){ vpLoadSaved(); })
+      .catch(function(e){ btn.disabled = false; alert('Delete failed: ' + (e.message||e)); });
+  };
+
+  // ── update save button state ────────────────────────────────────────────────
+function vpUpdateSaveBtn() {
+    var btn  = document.getElementById('vp-save-btn');
+    var topic= (document.getElementById('vp-topic')?.value || '').trim();
+    var hasPosts = Object.keys(vpCurrentPosts).length > 0;
+    if (btn) btn.disabled = !(topic && hasPosts);
+  };
+
+  // ── status helper ───────────────────────────────────────────────────────────
+  function vpStatus(msg, isErr) {
+    vpStatusBox(msg, isErr ? 'error' : 'info');
+  }
+
+  function vpStatusBox(msg, type) {
+    var el = document.getElementById('vp-gen-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = msg ? 'block' : 'none';
+    if (type === 'error') {
+      el.style.background = '#fef2f2';
+      el.style.color = '#b91c1c';
+      el.style.border = '1px solid #fca5a5';
+    } else if (type === 'success') {
+      el.style.background = '#f0fdf4';
+      el.style.color = '#15803d';
+      el.style.border = '1px solid #86efac';
+    } else if (type === 'loading') {
+      el.style.background = '#eff6ff';
+      el.style.color = '#1d4ed8';
+      el.style.border = '1px solid #93c5fd';
+    } else {
+      el.style.background = '#f9fafb';
+      el.style.color = '#374151';
+      el.style.border = '1px solid #e5e7eb';
+    }
+  }
+
+  // ── escHtml helper (if not already defined) ─────────────────────────────────
+  function escHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+// ── init chip state & checkbox listeners immediately (script runs after DOM) ──
+vpUpdateChips();
+document.querySelectorAll('.vp-plat-cb').forEach(function(cb){
+  cb.addEventListener('change', function(){
+    var chip = cb.closest('.vp-plat-chip');
+    if (chip) chip.classList.toggle('vp-chip-on', cb.checked);
+  });
+});
+</script>
+
+</body>
+</html>`;
+}
+
+export default router;
