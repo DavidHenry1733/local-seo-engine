@@ -1,0 +1,114 @@
+Layout/map fixes were only partially applied. Please fix the remaining issues globally.
+
+Do not change generation logic, scoring, schema, sitemap, deployment, images, or link audit except where required.
+
+1. Center-align card/body copy properly
+
+Some card wrappers now have text-align:center, but paragraph rules inside them still override back to left alignment.
+
+Current examples:
+.cluster-intent-item p { text-align: left; }
+.ai-citable-block p { text-align: left; }
+
+Fix:
+All card-style box sections must have centered heading AND centered paragraph copy.
+
+Apply to:
+- .included-card p
+- .audience-card p
+- .mistake-item p
+- .resource-card p
+- .cluster-intent-item p
+- .cluster-intent-answer p
+- .ai-citable-block p
+- .faq-card p
+- .ai-definition-block
+- .cluster-entity-block
+
+Remove or override any text-align:left rules inside these card components.
+
+Keep long-form body sections readable, but all boxes/cards should be visually consistent and centre aligned.
+
+2. Fix AI summary paragraph rendering
+
+The AI summary is still outputting multiple paragraphs inside one <p> tag with line breaks.
+
+Fix:
+Render each AI summary paragraph as a separate <p> tag.
+
+Bad:
+<p>Paragraph one.
+
+Paragraph two.
+
+Paragraph three.</p>
+
+Good:
+<p>Paragraph one.</p>
+<p>Paragraph two.</p>
+<p>Paragraph three.</p>
+
+3. Fix broken sentence fragments
+
+This broken sentence still appears:
+“For more insights, visit .”
+
+This must hard fail QA and be automatically rewritten.
+
+Add blocked patterns:
+- "visit ."
+- "Visit ."
+- "visit  ."
+- "For more insights, visit ."
+- empty link sentence fragments
+
+If link text or URL is missing, rewrite the sentence without a link.
+
+Example replacement:
+"Reliable hosting helps businesses stay visible, credible, and ready to capture more local enquiries."
+
+4. Map still not fixed
+
+The map is still using coordinates:
+https://maps.google.com/maps?q=53.4262892,-1.3551445&z=17&output=embed
+
+This does not show the business name/address pin clearly.
+
+Replace map embed generation globally with a full encoded business name + address query from business profile.
+
+Expected query format:
+https://maps.google.com/maps?q=InboxingProWeb%2C%20Moorgate%20Crofts%20Business%20Centre%2C%20South%20Grove%2C%20Rotherham%2C%20S60%202DH&z=17&output=embed
+
+Rules:
+- Use businessName + full businessAddress from profile.
+- Do not use target campaign location for the map.
+- iframe title should include:
+  "InboxingProWeb — Moorgate Crofts Business Centre, South Grove, Rotherham, S60 2DH"
+- Apply to all generated pages.
+
+5. Image alt issue
+
+Support image alt still says:
+"Professional web design generating enquiries for local businesses"
+
+On a web hosting page, this is wrong.
+
+Fix:
+All image alt text must use the current page service + location.
+
+Example:
+"Web Hosting Rotherham — professional service visual"
+"Web Hosting Rotherham — support and reliability for local businesses"
+"Web Hosting Rotherham — results and outcomes for local businesses"
+
+6. Acceptance criteria
+
+Regenerate/test Web Hosting Rotherham and confirm:
+- all card paragraph text is centered
+- no card paragraph has text-align:left
+- AI summary uses separate <p> tags
+- no “visit .” broken sentence exists
+- map src uses encoded business name + full address, not coordinates
+- iframe title includes full business name and address
+- image alt text matches Web Hosting Rotherham, not Web Design
+- AI score/link audit still pass

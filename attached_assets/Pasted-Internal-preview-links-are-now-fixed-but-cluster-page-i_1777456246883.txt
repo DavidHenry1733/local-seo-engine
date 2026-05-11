@@ -1,0 +1,55 @@
+Internal /preview/ links are now fixed, but cluster page images are now missing and only placeholders show.
+
+Do not change internal link logic again.
+Do not change sitemap logic.
+
+Current issue:
+- Hub page images appear correct.
+- Cluster pages now show image placeholders only.
+- This likely happened during the final HTML post-processing/re-upload step that fixed /preview/ links.
+- Image paths may have been stripped, overwritten, or replaced with template placeholders during cluster page upload.
+
+Required investigation:
+Compare working hub page HTML vs broken cluster page HTML.
+
+Check:
+1. Hub page image paths
+2. Cluster page image paths
+3. Whether cluster pages contain:
+   - placeholder paths
+   - missing {{HERO_IMAGE}} / {{SUPPORT_IMAGE}} / {{CONVERSION_IMAGE}}
+   - old /api/images/serve paths
+   - wrong /assets/ path
+   - missing <img> tags
+4. Whether the deploy/link-normalisation step overwrote cluster HTML from an older pre-image version.
+
+Required fix:
+Before FTP upload, the final HTML must run in this order:
+
+1. Generate/render page content
+2. Inject correct saved images
+3. Normalise internal links and remove /preview/
+4. Final validation
+5. Upload corrected HTML
+
+Do not run link normalisation using an old source HTML file that does not include images.
+
+Cluster pages must use the same image resolution logic as hub pages.
+
+Image URL rule:
+Use the current saved image paths:
+https://local.inboxingproweb.com/assets/{clientSlug}/hero.jpg
+https://local.inboxingproweb.com/assets/{clientSlug}/support.jpg
+https://local.inboxingproweb.com/assets/{clientSlug}/conversion.jpg
+
+or the correct current extension/path if WebP is used.
+
+Acceptance criteria:
+- Cluster pages have correct images again.
+- Hub page images remain correct.
+- Live cluster HTML has zero /preview/ links.
+- Live cluster HTML has no image placeholders unless no image is assigned.
+- Images return HTTP 200.
+- Sitemap remains unchanged.
+
+This is almost certainly a post-processing order problem: Replit fixed links by re-uploading older cluster HTML before image injection.

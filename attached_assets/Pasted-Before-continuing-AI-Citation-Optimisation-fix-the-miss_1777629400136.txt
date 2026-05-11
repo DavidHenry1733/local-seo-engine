@@ -1,0 +1,86 @@
+Before continuing AI Citation Optimisation, fix the missing money page links on hub pages.
+
+Critical issue:
+Live indexed hub pages are missing the money page link/copy line from campaign setup.
+
+This must be part of the permanent audit and repair system.
+
+Do not change content generation, AI scoring, images, schema, sitemap, or deployment logic except where required to fix hub money page links.
+
+Required work:
+
+1. Audit every campaign hub page
+
+For each campaign, identify:
+- campaign ID
+- service
+- city/location
+- hub slug
+- hub URL
+- configured moneyPageUrl from campaign setup
+- configured moneyPageAnchorText or service label if available
+
+2. Money page link requirement
+
+If moneyPageUrl exists in campaign setup, the hub page MUST include a visible money page link band.
+
+Expected format:
+
+<section class="money-page-band">
+  <div class="container">
+    <p>Looking for [Service] [Location] tailored to local businesses? Visit our dedicated service page.</p>
+  </div>
+</section>
+
+The words “dedicated service page” or the configured anchor text must link to moneyPageUrl.
+
+3. Validation rules
+
+Fail if:
+- moneyPageUrl exists but no money-page-band exists
+- money-page-band exists but has no link
+- link href does not exactly match configured moneyPageUrl
+- money-page-band appears on cluster pages unless specifically configured
+- moneyPageUrl is empty but audit incorrectly requires it
+
+4. Live validation
+
+Check the live hub page HTML, not just local generated files.
+
+For every hub page:
+- fetch live URL
+- confirm money-page-band exists when required
+- confirm link href matches moneyPageUrl
+- confirm linked money page returns HTTP 200 if external/live accessible
+
+5. Repair action
+
+Add repair:
+“Fix hub money page links”
+
+Repair must:
+- insert missing money-page-band after hero section on hub pages only
+- use campaign setup moneyPageUrl
+- use correct service + location in copy
+- preserve all existing page content
+- not regenerate the full page
+- upload affected hub pages only
+- re-run audit after upload
+
+6. System Health integration
+
+Add this to Campaign Link Integrity audit:
+- money page link present
+- money page href correct
+- money page HTTP status
+- affected hub page
+- repair status
+
+7. Acceptance criteria
+
+- Every hub page with moneyPageUrl has the visible money page link band.
+- The link points to the exact campaign moneyPageUrl.
+- Cluster pages are not wrongly given the money page band.
+- Live audit detects missing money page links.
+- Repair fixes missing bands and uploads affected hub pages.
+- Re-audit shows 0 missing money page link issues.

@@ -1,0 +1,56 @@
+The image library assignment flow still does not show a clear Save button in the UI.
+
+Current issue:
+You changed the library grid to use dropdowns and added cpImgSaveAssignments(), but I still cannot see or use a Save button after choosing image slots.
+
+Please inspect the rendered UI, not just the code.
+
+Required fix:
+
+1. Add a clearly visible Save button
+In the Image Library section, below the image assignment dropdowns, show a prominent button:
+
+Button text:
+Save Image Assignments
+
+2. Button visibility
+The button must be visible whenever:
+- the Image Library is open
+- at least one image is available
+- the user can assign images to slots
+
+Do not hide it behind hover states, scroll overflow, collapsed panels, or conditional logic that may not trigger.
+
+3. Upload flow
+After a user uploads a new image:
+- show the uploaded image in the Image Library
+- allow slot selection from dropdown
+- show Save Image Assignments button
+- save the selected slot only when this button is clicked
+
+Do not auto-assign immediately on upload unless the user explicitly chooses that.
+
+4. Save behaviour
+When clicked:
+- collect all selected dropdown values
+- submit assignments to the existing image assignment API
+- show success message:
+  “Image assignments saved. Deploy pages to push changes live.”
+- refresh the current slot cards so the user can see what is assigned
+
+5. Debug check
+Add a temporary console log or UI debug message confirming:
+- number of images found
+- number of selected assignments
+- save button rendered yes/no
+
+6. Acceptance criteria
+- I can upload an image.
+- I can see it in the Image Library.
+- I can select Hero, Support, or Conversion from a dropdown.
+- I can clearly see a “Save Image Assignments” button.
+- Clicking Save persists the assignment.
+- The assigned image appears in the relevant slot card after refresh.
+- No image assignment happens before clicking Save.
+
+The key wording is: inspect the rendered UI, not just the code. That usually stops Replit saying it added something that still isn’t visible.

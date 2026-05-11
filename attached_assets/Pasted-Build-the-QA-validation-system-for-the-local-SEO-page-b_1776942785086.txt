@@ -1,0 +1,238 @@
+Build the QA validation system for the local SEO page builder.
+
+Tech requirements:
+- Use Node.js with TypeScript
+- Use cheerio to parse generated HTML
+- Keep the code modular and easy to extend
+- The validator must return a structured report with scoring
+
+Create the following files:
+
+1. qaTypes.ts
+2. qaValidator.ts
+3. example usage file showing how to call the validator
+
+---
+
+1. qaTypes.ts
+
+Define strong TypeScript types for:
+
+- QaStatus = "pass" | "warning" | "fail"
+
+- QaCheck
+  fields:
+  - key: string
+  - status: QaStatus
+  - message: string
+  - sectionId?: string
+
+- QaReport
+  fields:
+  - passed: boolean
+  - score: number
+  - pageType: "hub" | "cluster"
+  - checks: QaCheck[]
+
+- QaValidatorInput
+  fields:
+  - html: string
+  - pageType: "hub" | "cluster"
+  - brandName: string
+  - legalName: string
+  - companyNumber: string
+  - addressLines: string[]
+  - email: string
+  - privacyUrl: string
+  - termsUrl: string
+  - primaryKeyword: string
+  - supportingKeywords: string[]
+  - hubPageUrl: string
+  - relatedClusterUrls: string[]
+  - supportingPageUrls: string[]
+
+---
+
+2. qaValidator.ts
+
+Build a validator function that accepts QaValidatorInput and returns QaReport.
+
+Required function:
+- validatePage(input: QaValidatorInput): QaReport
+
+Use cheerio to parse the HTML.
+
+Implement validation checks for the following categories:
+
+A. STRUCTURE CHECKS
+
+For hub pages, check presence of these section IDs:
+- site-header
+- hero-section
+- ai-summary-section
+- split-section-one
+- split-section-two
+- about-section
+- definition-section
+- process-section
+- local-relevance-section
+- internal-links-section
+- map-section
+- faq-section
+- cta-section
+- trust-strip
+- site-footer
+
+For cluster pages, check presence of these section IDs:
+- site-header
+- hero-section
+- ai-summary-section
+- split-section-one
+- split-section-two
+- about-section
+- resources-section
+- map-section
+- faq-section
+- cta-section
+- trust-strip
+- site-footer
+
+Each section check should return:
+- pass if present
+- fail if missing
+
+B. AI SUMMARY CHECKS
+
+Validate ai-summary-section contains, in this order:
+1. question heading
+2. “Quick Answer” label
+3. answer paragraph
+4. bullet list
+
+Rules:
+- question should be first
+- “Quick Answer” must appear after the question
+- answer paragraph must appear after the label
+- bullet list must appear after the answer
+
+Return:
+- pass if order is correct
+- fail if wrong order or missing items
+
+C. KEYWORD CHECKS
+
+Check:
+- primary keyword appears in H1
+- primary keyword appears in hero intro paragraph
+- primary keyword appears in AI answer paragraph
+- primary keyword appears in at least one later section heading
+- at least 2 supporting keywords appear somewhere in page body
+
+Return:
+- pass if condition met
+- warning if supporting keywords usage is weak
+- fail if primary keyword placement is missing
+
+D. INTERNAL LINK CHECKS
+
+Check:
+- at least 1 link exists to hubPageUrl
+- at least 1 link exists to any relatedClusterUrls
+- at least 1 link exists to any supportingPageUrls
+
+Return:
+- pass / warning / fail as appropriate
+
+E. TRUST / COMPLIANCE CHECKS
+
+Check presence of:
+- brandName
+- legalName
+- companyNumber
+- all addressLines
+- email
+- privacyUrl
+- termsUrl
+
+Return:
+- pass if found
+- fail if missing
+
+F. MAP CHECKS
+
+Check:
+- map-section exists
+- iframe exists inside map-section
+- iframe src includes either “maps” or the encoded address string
+
+Return:
+- pass / fail
+
+G. RESOURCES CHECKS
+
+For cluster pages:
+- resources-section must exist
+- resources-section must contain more than one clickable item
+- should detect card-like structure if possible by class or nested block elements
+- if only plain inline text links are found, return warning
+- if missing, return fail
+
+For hub pages:
+- internal-links-section is enough
+
+---
+
+3. SCORING
+
+Use this scoring model:
+- pass = 1 point
+- warning = 0.5 points
+- fail = 0 points
+
+Calculate:
+- total possible points
+- total earned points
+- final percentage score rounded to nearest whole number
+
+Set:
+- passed = true only if there are no fail checks
+- passed = false if any fail exists
+
+---
+
+4. CODE QUALITY REQUIREMENTS
+
+- Create helper functions for repeated checks
+- Keep validation categories clearly separated
+- Use descriptive check keys like:
+  - structure.site-header
+  - ai.order
+  - keywords.primaryInH1
+  - links.hub
+  - trust.legalName
+  - map.iframe
+  - resources.cards
+
+- Keep code readable and production-friendly
+
+---
+
+5. EXAMPLE USAGE FILE
+
+Create a small example usage file that:
+- imports validatePage
+- builds a sample QaValidatorInput object
+- runs validation
+- logs the result as JSON
+
+---
+
+6. OUTPUT FORMAT
+
+Return:
+- complete qaTypes.ts
+- complete qaValidator.ts
+- complete example usage file
+
+Do not return pseudocode.
+Return full working TypeScript code.

@@ -1,0 +1,75 @@
+Critical issue: QA says pages/sitemaps are fixed, but live internal links from hub to cluster pages still return 404.
+
+Example:
+Barnsley Web Design cluster link from the hub page returns 404.
+
+Do not focus on the QA UI now.
+Do not only check generated files locally.
+Do not only check sitemap XML exists.
+
+Required fix:
+The QA system and deployment validation must check actual LIVE URLs.
+
+1. Live Link Crawl
+For each campaign:
+- fetch the live hub page URL
+- extract all internal links
+- fetch each internal linked URL
+- record HTTP status
+- flag any 404/500/redirect issue
+
+2. Sitemap URL Crawl
+Fetch the live sitemap:
+https://local.inboxingproweb.com/sitemap.xml
+
+For every URL in the sitemap:
+- request the live URL
+- record status code
+- flag any non-200
+
+3. Compare sitemap vs deployed pages
+For every campaign page:
+- expected slug
+- expected live URL
+- expected FTP path
+- actual HTTP status
+
+If sitemap contains a URL but the page is not deployed, this is a FAIL.
+
+4. Fix Barnsley/Web Design URLs
+Investigate why Barnsley Web Design links return 404:
+- wrong slug?
+- page folder not uploaded?
+- link points to old slug?
+- sitemap lists pages that do not exist?
+- generated output folder mismatch?
+- FTP path mismatch?
+
+5. QA must fail on live 404s
+Pre-Publish QA must show:
+- FAIL if any live internal link returns 404
+- FAIL if any sitemap URL returns 404
+- source page
+- broken URL
+- anchor text
+- suggested fix
+
+6. Deployment gate
+Before deployment is marked successful:
+- crawl all deployed campaign URLs
+- confirm all return 200
+- crawl all internal links
+- confirm all local internal links return 200
+- if not, show deployment as failed/partial
+
+Acceptance criteria:
+- Barnsley Web Design hub-to-cluster links return 200.
+- Sitemap URLs all return 200.
+- Live internal links all return 200.
+- QA report shows real live HTTP status, not assumptions.
+- QA fails if any live 404 exists.
+- Dashboard shows exact broken links with source page and anchor text.
+
+Key instruction:
+
+Do not trust local files. Crawl the live deployed URLs.

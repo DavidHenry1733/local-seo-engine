@@ -1,0 +1,108 @@
+Fix the Rotherham cluster content issues.
+
+Do NOT change:
+- deployment logic
+- FTP logic
+- overall template layout
+- image system
+- map section position
+
+Only fix:
+1. incorrect Sheffield references in Rotherham pages
+2. map logic
+3. missing local relevance content injection
+
+---
+
+## Current issues
+
+1. Rotherham pages still contain "Sheffield" in wider area / coverage copy
+2. The map is not consistently using the businessAddress
+3. The improved local relevance content from the previous update is not appearing live
+
+---
+
+## 1. Fix city reference leakage
+
+Audit the Rotherham cluster generation path and remove any hardcoded or inherited references to "Sheffield".
+
+Ensure all cluster-specific copy uses:
+- areaConfig.primaryCity
+or
+- the current cluster context
+
+Focus especially on:
+- Areas We Cover section
+- wider area paragraph
+- local relevance section
+- CTA support paragraph
+- any static fallback copy
+
+For the Rotherham cluster, all wider-area references must say:
+- Rotherham
+not
+- Sheffield
+
+---
+
+## 2. Fix map logic
+
+Ensure the map builder ALWAYS uses:
+
+project.businessAddress
+
+The map must NOT use:
+- page location
+- area name
+- primaryCity
+
+For all pages, including:
+- web-design-rotherham
+- web-design-wickersley
+- all Rotherham area pages
+
+Print the final map query used for one Rotherham page.
+
+---
+
+## 3. Fix missing local relevance enhancement
+
+The previously added local relevance enhancement is not rendering.
+
+Please trace the full path for the local relevance section and identify where the new content is being lost.
+
+Check:
+
+1. Is area profile data loaded correctly from config?
+2. Is the local relevance section builder receiving:
+   - character
+   - knownFor
+   - businessType
+3. Is the correct local relevance section variant being selected?
+4. Is the generated text actually present in the page payload?
+5. Is the template rendering the updated section body, or an older section body?
+
+---
+
+## 4. Required outcome for local relevance section
+
+The local relevance section for area pages must explicitly include real area profile data.
+
+Example intent:
+"In Wickersley — a well-established suburban area known for independent retailers, professional services and established local businesses — customers searching online have specific expectations..."
+
+That means:
+- area name present
+- character present
+- knownFor present
+- businessType reflected naturally
+
+Do not fall back to the old generic local relevance paragraph.
+
+---
+
+## 5. Add validation checks
+
+Before deploy, add validation for the Rotherham cluster:
+
+### A. City mismatch check

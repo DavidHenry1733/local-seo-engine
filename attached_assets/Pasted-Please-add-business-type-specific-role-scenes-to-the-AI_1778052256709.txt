@@ -1,0 +1,291 @@
+Please add business-type-specific role scenes to the AI image prompt builder.
+
+Current status:
+- Image library is working.
+- Uploaded images are grouped by business type.
+- Image role placement is working.
+- AI image generation is working.
+- We now need AI prompts to become more specific to each business type and image role.
+
+Do not change:
+- Existing image library structure.
+- Existing page layout.
+- Existing role placement positions.
+- Existing upload/select image workflow.
+
+Only update:
+- The AI image prompt builder logic.
+
+Goal:
+When a user clicks “Generate AI Image”, the system should generate a highly relevant image based on:
+- businessType
+- imageRole
+- primaryKeyword
+- location
+- shortPageDescription, if available
+
+Image roles:
+- heroImage
+- earlySupportImage
+- problemImage
+- trustImage
+- conversionImage
+
+Please create a businessTypeSceneMap object like this:
+
+const businessTypeSceneMap = {
+  plumber: {
+    heroImage: "a professional plumber repairing or installing pipework or a boiler in a clean UK home kitchen or utility room",
+    earlySupportImage: "a plumber working on pipes, radiators or drainage systems using tools in a domestic setting",
+    problemImage: "a leaking pipe, blocked drain or water issue inside a clean UK home, realistic but controlled",
+    trustImage: "a plumber explaining completed work to a homeowner in a kitchen or home setting",
+    conversionImage: "a clean finished plumbing installation with polished pipework or a modern bathroom or kitchen sink area"
+  },
+
+  electrician: {
+    heroImage: "a professional electrician working on a consumer unit or wiring in a modern UK home",
+    earlySupportImage: "an electrician installing lighting, sockets or electrical components using tools",
+    problemImage: "a faulty socket or electrical issue being inspected safely in a domestic setting",
+    trustImage: "an electrician discussing work with a homeowner in a living space",
+    conversionImage: "a clean finished electrical installation with modern lighting and sockets"
+  },
+
+  builder: {
+    heroImage: "a builder working on a home renovation or extension project in a UK property",
+    earlySupportImage: "builders installing brickwork, plastering or interior renovation work",
+    problemImage: "a worn or damaged room needing renovation, clean but clearly outdated",
+    trustImage: "a builder reviewing plans with a homeowner inside a property",
+    conversionImage: "a fully renovated modern room or home interior with clean finishes"
+  },
+
+  roofer: {
+    heroImage: "a roofer working on a residential roof in the UK with tiles and tools visible",
+    earlySupportImage: "roof repair or tile replacement work in progress on a house",
+    problemImage: "damaged or missing roof tiles on a UK home",
+    trustImage: "a roofer discussing roofing work with a homeowner outside the property",
+    conversionImage: "a clean finished roof with new tiles on a residential property"
+  },
+
+  gardener: {
+    heroImage: "a gardener maintaining a clean UK garden with lawn and plants",
+    earlySupportImage: "garden maintenance such as trimming hedges or mowing a lawn",
+    problemImage: "an overgrown or untidy garden needing maintenance",
+    trustImage: "a gardener discussing garden work with a homeowner outdoors",
+    conversionImage: "a beautifully maintained garden with clean lawn and planted borders"
+  },
+
+  hairdresser: {
+    heroImage: "a hairdresser styling a client’s hair in a modern UK salon",
+    earlySupportImage: "hair cutting or colouring in progress with tools and styling station",
+    problemImage: "a person with unstyled or messy hair before treatment in a salon setting",
+    trustImage: "a consultation between hairdresser and client in front of a mirror",
+    conversionImage: "a finished hairstyle with clean styling and healthy glossy hair"
+  },
+
+  accountant: {
+    heroImage: "an accountant working with a client in a modern UK office setting",
+    earlySupportImage: "accounting work with laptop, calculator and organised documents",
+    problemImage: "messy financial paperwork or receipts on a desk",
+    trustImage: "a professional meeting between accountant and business owner",
+    conversionImage: "a clean organised desk with financial success visuals and tidy documents"
+  },
+
+  restaurant: {
+    heroImage: "a modern UK restaurant interior with warm lighting and dining tables",
+    earlySupportImage: "a chef preparing food in a clean kitchen environment",
+    problemImage: "an empty or poorly presented dining setup",
+    trustImage: "staff serving customers in a friendly restaurant environment",
+    conversionImage: "a beautifully plated meal served in a restaurant setting"
+  },
+
+  cleaner: {
+    heroImage: "a professional cleaner working in a modern UK home or office",
+    earlySupportImage: "cleaning surfaces, vacuuming or sanitising a room",
+    problemImage: "a messy or dirty room before cleaning",
+    trustImage: "a cleaner interacting with a client or preparing equipment",
+    conversionImage: "a spotless clean room with polished surfaces"
+  },
+
+  mechanic: {
+    heroImage: "a mechanic working on a car engine in a clean UK garage",
+    earlySupportImage: "vehicle repair or maintenance in progress with tools",
+    problemImage: "a car with visible issue being inspected in a garage",
+    trustImage: "a mechanic explaining vehicle work to a customer",
+    conversionImage: "a clean repaired car ready for collection"
+  },
+
+  florist: {
+    heroImage: "a florist arranging fresh flowers in a modern shop",
+    earlySupportImage: "flower arrangement being created with tools and stems",
+    problemImage: "wilted or unarranged flowers",
+    trustImage: "a florist helping a customer choose flowers",
+    conversionImage: "a beautiful finished bouquet arrangement"
+  },
+
+  coffeeShop: {
+    heroImage: "a modern UK coffee shop interior with seating and warm lighting",
+    earlySupportImage: "barista preparing coffee with espresso machine",
+    problemImage: "an empty or uninviting cafe space",
+    trustImage: "friendly barista serving a customer",
+    conversionImage: "a well-presented coffee and pastry on a table"
+  },
+
+  paving: {
+    heroImage: "a paving specialist installing a driveway or patio in a UK home",
+    earlySupportImage: "laying paving stones or blocks in progress",
+    problemImage: "damaged or uneven driveway or patio",
+    trustImage: "a contractor discussing paving work with a homeowner",
+    conversionImage: "a clean finished driveway or patio area"
+  },
+
+  interiorDesign: {
+    heroImage: "a modern interior designed living space in a UK home",
+    earlySupportImage: "interior designer working with samples or plans",
+    problemImage: "an outdated or poorly styled room",
+    trustImage: "designer consulting with a client in a home setting",
+    conversionImage: "a beautifully styled modern interior space"
+  },
+
+  painter: {
+    heroImage: "a painter decorating a room in a UK home",
+    earlySupportImage: "painting walls or surfaces with tools",
+    problemImage: "peeling paint or damaged walls",
+    trustImage: "a decorator discussing work with a homeowner",
+    conversionImage: "freshly painted clean interior walls"
+  },
+
+  beautySalon: {
+    heroImage: "a modern beauty salon treatment room",
+    earlySupportImage: "beauty treatment in progress such as facial or skincare",
+    problemImage: "skin concerns before treatment in a professional setting",
+    trustImage: "consultation between therapist and client",
+    conversionImage: "a clean glowing skin result after treatment"
+  },
+
+  windowCleaner: {
+    heroImage: "a window cleaner working on a residential property in the UK",
+    earlySupportImage: "cleaning windows using professional tools",
+    problemImage: "dirty or streaked windows on a house",
+    trustImage: "window cleaner interacting with homeowner",
+    conversionImage: "clean clear windows reflecting light"
+  },
+
+  nailClinic: {
+    heroImage: "a nail technician working in a modern salon",
+    earlySupportImage: "nail treatment in progress with tools",
+    problemImage: "untreated nails before service",
+    trustImage: "consultation between technician and client",
+    conversionImage: "clean finished nails with polished result"
+  },
+
+  childcare: {
+    heroImage: "a safe modern childcare environment with children playing",
+    earlySupportImage: "staff supervising children activities",
+    problemImage: "a parent looking concerned about childcare arrangements",
+    trustImage: "childcare staff interacting positively with children",
+    conversionImage: "happy children in a clean safe environment"
+  },
+
+  petGrooming: {
+    heroImage: "a pet groomer working on a dog in a clean salon",
+    earlySupportImage: "grooming process such as brushing or trimming",
+    problemImage: "a dog with messy or untrimmed fur",
+    trustImage: "groomer interacting calmly with pet and owner",
+    conversionImage: "a clean well-groomed pet"
+  },
+
+  landscaping: {
+    heroImage: "a landscaping project in progress in a UK garden",
+    earlySupportImage: "laying turf, planting or garden construction",
+    problemImage: "a bare or poorly maintained outdoor space",
+    trustImage: "landscaper discussing plans with homeowner",
+    conversionImage: "a fully landscaped modern garden"
+  },
+
+  locksmith: {
+    heroImage: "a locksmith working on a door lock at a UK property",
+    earlySupportImage: "lock repair or installation in progress",
+    problemImage: "a door lock issue being inspected",
+    trustImage: "locksmith assisting a customer at their property",
+    conversionImage: "a secure modern lock installed on a door"
+  },
+
+  travelAgent: {
+    heroImage: "a travel consultant working with a client in a modern office",
+    earlySupportImage: "planning travel on a laptop with maps and brochures",
+    problemImage: "a person confused by travel planning options",
+    trustImage: "a friendly consultation about holiday plans",
+    conversionImage: "a relaxing travel destination scene"
+  },
+
+  personalTrainer: {
+    heroImage: "a personal trainer coaching a client in a gym",
+    earlySupportImage: "training session in progress with equipment",
+    problemImage: "a person struggling with fitness goals",
+    trustImage: "trainer discussing goals with client",
+    conversionImage: "a fit healthy result after training"
+  },
+
+  communityPharmacy: {
+    heroImage: "a modern UK pharmacy interior with staff assisting customers",
+    earlySupportImage: "pharmacist preparing prescriptions or assisting a customer",
+    problemImage: "a person seeking help for a health concern",
+    trustImage: "a pharmacist consulting with a patient at the counter",
+    conversionImage: "a clean professional pharmacy service interaction"
+  }
+};
+
+Prompt builder logic:
+1. Normalise the businessType key before lookup.
+   Examples:
+   - "coffee shop" should resolve to "coffeeShop"
+   - "beauty salon" should resolve to "beautySalon"
+   - "nail clinic" should resolve to "nailClinic"
+   - "window cleaner" should resolve to "windowCleaner"
+   - "personal trainer" should resolve to "personalTrainer"
+   - "community pharmacy" should resolve to "communityPharmacy"
+   - "interior design" should resolve to "interiorDesign"
+   - "pet grooming" should resolve to "petGrooming"
+
+2. Look up the role scene:
+   const roleScene = businessTypeSceneMap[normalisedBusinessType]?.[imageRole]
+
+3. If no exact business type match exists, use the generic role scene fallback:
+   heroImage:
+   "a professional local business carrying out its main service in a clean, trustworthy UK setting"
+
+   earlySupportImage:
+   "a clear service-in-action scene showing tools, equipment or process related to the service"
+
+   problemImage:
+   "a realistic customer problem or service issue being solved professionally"
+
+   trustImage:
+   "a friendly professional consultation or workmanship scene that builds confidence"
+
+   conversionImage:
+   "a clean finished result showing the successful outcome of the service"
+
+4. Build the final Ideogram prompt using this format:
+
+wide angle composition, subject centred, designed for website layout with space around subject, create a photorealistic modern commercial website image for a [businessType] business. The image is for the [imageRole] section of a local SEO landing page targeting [primaryKeyword] in [location]. Show [roleScene]. The image should feel relevant to [shortPageDescription or primaryKeyword]. Realistic UK setting, clean professional composition, natural lighting, high detail, premium local business website style, no text, no logo, no watermark, no brand names, no writing, no signage, no captions, no overlays, no distorted hands, no unrealistic faces.
+
+5. Keep Ideogram output aspect ratio at 16:9.
+
+6. Keep existing AI image save behaviour:
+   - generated image should be saved back to the correct business type image library
+   - user should be able to select it like any other library image
+
+7. Add console logging for debugging:
+   - raw businessType
+   - normalisedBusinessType
+   - imageRole
+   - selected roleScene
+   - final prompt sent to Ideogram
+
+Acceptance criteria:
+- Generating an AI image for plumber + heroImage uses the plumber hero scene.
+- Generating an AI image for roofer + problemImage uses the roofer problem scene.
+- Generating an AI image for coffee shop + conversionImage uses the coffeeShop conversion scene.
+- Unknown business types still generate images using the generic fallback.
+- Existing layout and library image selection must continue working.

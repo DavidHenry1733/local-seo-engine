@@ -1,0 +1,169 @@
+Build the area expansion and internal linking system for the local SEO engine.
+
+Goal:
+Turn the current Sheffield setup into a scalable hub + area cluster system.
+
+Do NOT change:
+- deployment logic
+- FTP logic
+- subdomain structure
+- image path strategy
+- working page template design
+
+Only add:
+1. area expansion config
+2. hub/area page relationships
+3. internal linking logic
+4. areas we cover section
+5. stronger hub page output
+
+---
+
+## 1. Add area config support
+
+Create a config structure for area expansion.
+
+Example for Sheffield:
+
+{
+  "primaryCity": "Sheffield",
+  "coreAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Hillsborough",
+    "Crookes",
+    "Walkley",
+    "Broomhill",
+    "Nether Edge",
+    "Woodseats",
+    "Chapeltown",
+    "Dore"
+  ],
+  "priorityAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Hillsborough",
+    "Crookes",
+    "Broomhill"
+  ]
+}
+
+Add this under:
+- config/areas/sheffield.json
+
+---
+
+## 2. Build area expansion logic
+
+Create a module that:
+- loads the Sheffield area config
+- expands the main service/city into area pages
+- supports hub page + area pages
+
+For web design Sheffield:
+- hub page = web-design-sheffield
+- area pages = web-design-ecclesall, web-design-fulwood, etc.
+
+---
+
+## 3. Hub page behaviour
+
+The Sheffield hub page must:
+- be treated as the main authority page
+- include stronger, longer copy than area pages
+- include an “Areas We Cover” section listing all target areas
+- link to every area page in the Sheffield cluster
+
+---
+
+## 4. Area page behaviour
+
+Each area page must:
+- link back to the Sheffield hub page
+- link to 2–3 related nearby area pages
+- include a short “also covering nearby areas” style paragraph naturally
+- include an “Areas We Cover” or “Nearby Areas” section where appropriate
+
+---
+
+## 5. Internal linking rules
+
+Implement these rules:
+
+### Hub page
+Links to:
+- all area pages for that city/service
+
+### Area page
+Links to:
+- hub page
+- up to 3 sibling area pages
+
+Example:
+web-design-ecclesall links to:
+- web-design-sheffield
+- web-design-fulwood
+- web-design-crookes
+- web-design-hillsborough
+
+Keep links relevant and clean.
+
+---
+
+## 6. Areas we cover section
+
+Add a reusable section near the lower half of the page:
+- heading: “Areas We Cover”
+- body: one natural paragraph explaining coverage across the wider Sheffield area
+- list of linked area pages
+
+This should appear on:
+- the Sheffield hub page
+- area pages where useful
+
+---
+
+## 7. Keep map logic correct
+
+Do not change the corrected map logic.
+Map must continue to show:
+- the business location (Rotherham / businessAddress)
+NOT the target area page location.
+
+---
+
+## 8. Keep content quality strong
+
+Do not reduce content depth.
+Keep the expanded page content.
+Hub pages should be stronger/longer than area pages.
+
+---
+
+## 9. Files likely to update
+
+Expected areas:
+- config/areas/sheffield.json
+- src/generator/buildAreaPlan.ts
+- src/generator/buildProjectPlan.ts
+- src/seo/buildInternalLinks.ts
+- src/generator/buildPagePayload.ts
+- src/templates/service-location-v1.ts
+
+You may add a dedicated hub template only if truly needed, but keep it simple if possible.
+
+---
+
+## 10. Output required
+
+When complete, print:
+1. files created/updated
+2. example generated plan for Sheffield
+3. internal linking example for:
+   - web-design-sheffield
+   - web-design-ecclesall
+4. how the Areas We Cover section is rendered
+5. whether hub pages and area pages now behave differently
+
+Focus on building the Sheffield hub + area cluster properly.
+Do not introduce unrelated architecture changes.

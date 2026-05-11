@@ -1,0 +1,187 @@
+Generate a complete local service page using the provided inputs.
+
+You must follow the exact structure, rules, and section order defined below. Do not skip sections or change order.
+
+---
+
+INPUTS:
+
+Business Profile:
+- Brand Name: [brandName]
+- Legal Name: [legalName]
+- Company Number: [companyNumber]
+- Address: [addressLines]
+- Email: [email]
+- Logo URL: [logoUrl]
+- Privacy URL: [privacyUrl]
+- Terms URL: [termsUrl]
+- Navigation Items: [navItems]
+- Business Positioning: [businessPositioning]
+
+Page Details:
+- Service Name: [serviceName]
+- Location: [location]
+- Primary Keyword: [primaryKeyword]
+- Supporting Keywords: [supportingKeywords]
+- CTA Text: [ctaText]
+- CTA URL: [ctaUrl]
+
+Internal Links:
+- Hub Page: [hubPage]
+- Related Cluster Pages: [relatedClusterPages]
+- Supporting Pages: [supportingPages]
+
+---
+
+GLOBAL RULES:
+
+- Write for both humans and AI extraction
+- Keep language clear, direct, and professional
+- Avoid fluff and repetition
+- Do not keyword stuff
+- Use the primary keyword naturally throughout
+- Use supporting keywords where relevant, not forced
+- Maintain consistent service intent throughout the page
+
+---
+
+PAGE STRUCTURE (STRICT ORDER):
+
+1. HEADER
+- White background
+- Logo on left
+- Navigation on right
+- No CTA button
+
+2. HERO SECTION
+- H1 must include primary keyword
+- Short intro paragraph including primary keyword and outcome (enquiries, leads, visibility)
+
+3. AI SUMMARY SECTION (CRITICAL)
+Structure EXACTLY as follows:
+
+[H2] What Does [Primary Keyword] Do?
+[Text label] Quick Answer
+[Paragraph answer: 2–4 sentences explaining service and outcome]
+[Bullet points: 3–5 supporting benefits]
+
+DO NOT change this order.
+
+4. SPLIT SECTION ONE
+- Explain why the service matters for businesses in the location
+- Include local context and competition
+
+5. SPLIT SECTION TWO
+- Explain what the service includes
+- Use supporting keywords naturally
+
+6. ABOUT / ETHOS SECTION
+- Must appear here (after split sections)
+- Explain:
+  - who the company is
+  - what it does
+  - why it is trusted
+- Keep to 2 short paragraphs
+- Reference both brand name and legal name
+
+7. DEFINITION SECTION
+- Explain what the service is
+- Explain how it works
+- Keep simple and clear
+
+8. PROCESS SECTION
+- 3–5 steps showing how the service generates enquiries
+- Each step must be logical and outcome-focused
+
+9. LOCAL RELEVANCE SECTION
+- Connect service to local businesses and demand in the area
+
+10. INTERNAL LINKS SECTION
+- Include:
+  - 1 hub link
+  - 1–2 related cluster links
+  - 1–2 supporting content links
+- Use varied anchor text (not identical phrases)
+
+11. FAQ SECTION
+- 4–6 FAQs
+- Focus on cost, timeline, results, process
+- Use keywords naturally where relevant
+
+12. CTA SECTION
+- Clear action prompt
+- Reinforce benefit
+- Include CTA button
+
+13. TRUST STRIP
+- Short paragraph
+- Must reference:
+  - brand name
+  - legal entity
+  - service offering
+  - service area
+
+14. FOOTER
+Must include:
+- About column
+- Links column (privacy, terms, contact)
+- Services column (Web Design, Local SEO, Hosting, Email Marketing)
+- Contact column (address + email)
+- Bottom strip:
+  - legal name
+  - company number
+  - copyright
+
+---
+
+KEYWORD RULES:
+
+Primary keyword must appear in:
+- H1
+- Intro paragraph
+- AI summary answer
+- At least one later section heading
+
+Supporting keywords:
+- Use naturally across sections
+- Include in body, headings, or FAQ where relevant
+- Do not force all keywords if unnatural
+
+---
+
+INTERNAL LINK RULES:
+
+- Total links: 3–5
+- Must include:
+  - 1 hub link
+  - 1 cluster link
+  - 1 supporting content link
+- Use varied anchor text:
+  - exact match (limited)
+  - partial match
+  - natural phrases
+
+---
+
+OUTPUT REQUIREMENTS:
+
+- Return a complete HTML page
+- Include all sections in correct order
+- Use clean semantic structure
+- Include header and footer
+- Ensure no sections are missing
+- Ensure all tags are properly closed
+
+---
+
+DO NOT:
+
+- Change section order
+- Omit sections
+- Overuse keywords
+- Repeat identical anchor text
+- Mix unrelated services
+
+---
+
+Now generate the full page.

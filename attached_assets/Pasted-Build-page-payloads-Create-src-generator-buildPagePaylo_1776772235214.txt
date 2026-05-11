@@ -1,0 +1,77 @@
+Build page payloads
+
+Create:
+
+src/generator/buildPagePayload.ts
+
+import { PagePlanItem, PagePayload, ProjectConfig } from "./types";
+import { buildImageAssignments } from "../assets/buildImageAssignments";
+import { buildMeta } from "../seo/buildMeta";
+import { buildSchema } from "../seo/buildSchema";
+import { buildInternalLinks } from "../seo/buildInternalLinks";
+
+export function buildPagePayload(
+  project: ProjectConfig,
+  page: PagePlanItem,
+  allPages: PagePlanItem[]
+): PagePayload {
+  const h1 = `${page.serviceLabel} ${page.location}`;
+  const meta = buildMeta(project, page);
+  const images = buildImageAssignments(page.serviceKey);
+  const internalLinks = buildInternalLinks(page, allPages);
+  const schema = buildSchema(project, page, meta);
+
+  return {
+    title: h1,
+    metaTitle: meta.metaTitle,
+    metaDescription: meta.metaDescription,
+    canonicalUrl: meta.canonicalUrl,
+    h1,
+    intro: `${page.serviceLabel} in ${page.location} helps local businesses strengthen their online presence, improve trust, and generate more enquiries with a professionally structured digital presence.`,
+    sections: [
+      {
+        id: "overview",
+        heading: `Professional ${page.serviceLabel} in ${page.location}`,
+        body: `If your business needs stronger visibility, better credibility and more customer enquiries, a professionally delivered ${page.serviceLabel.toLowerCase()} solution can make a major difference.`
+      },
+      {
+        id: "benefits",
+        heading: `Why businesses in ${page.location} invest in ${page.serviceLabel}`,
+        body: `${page.serviceLabel} gives local businesses a stronger platform for attracting attention, building trust and encouraging action from potential customers.`
+      },
+      {
+        id: "local-relevance",
+        heading: `${page.serviceLabel} tailored for businesses in ${page.location}`,
+        body: `A strong local page should reflect the area it targets. That means clear local relevance, a focused service message and a layout designed to convert visitors into enquiries.`
+      },
+      {
+        id: "process",
+        heading: `Our process`,
+        body: `We start by understanding your business, your service goals and your target locations. From there, we create structured page content, strong on-page SEO signals and a conversion-focused page layout.`
+      }
+    ],
+    faq: [
+      {
+        question: `How much does ${page.serviceLabel.toLowerCase()} cost in ${page.location}?`,
+        answer: `The cost depends on the scope of the project, the features required and whether you need additional services such as hosting, content updates or ongoing optimisation.`
+      },
+      {
+        question: `How long does it take to complete ${page.serviceLabel.toLowerCase()}?`,
+        answer: `Timescales vary depending on the project size, but most standard projects can be planned and delivered much faster with a structured system and clear scope.`
+      },
+      {
+        question: `Can this help generate more enquiries?`,
+        answer: `Yes. A well-structured page with clear messaging, strong trust signals and good SEO fundamentals can help improve visibility and increase enquiries.`
+      }
+    ],
+    cta: {
+      heading: `Need ${page.serviceLabel} in ${page.location}?`,
+      body: `If you want a more professional online presence and a page designed to generate results, we can help.`,
+      buttonText: project.primaryCtaText,
+      buttonUrl: project.primaryCtaUrl
+    },
+    images,
+    internalLinks,
+    schema
+  };
+}

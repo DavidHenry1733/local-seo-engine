@@ -1,0 +1,105 @@
+Generate and review the first live proof set for Rotherham using the real setup flow and current generation pipeline.
+
+Goal:
+Produce, validate, and summarise the first two production pages for the business plus a proof log for case-study tracking.
+
+Pages to generate:
+1. Hub page:
+- Web Design Rotherham
+
+2. Cluster page:
+- Affordable Web Design Rotherham
+
+Requirements:
+
+1. Generation
+- Use the real generation pipeline already wired:
+  - generate content
+  - readability refinement
+  - anchor insertion
+  - render HTML
+  - write file
+  - post-render smoke check
+  - structural QA validation
+  - content scoring
+  - FTP deploy if enabled
+
+2. Output review
+For each page, return:
+- pageType
+- primaryKeyword
+- supportingKeywords
+- outputPath
+- liveUrl if deployed
+- smokeCheckPassed
+- QA score
+- content score
+- readiness band
+- warnings/issues summary
+- strengths summary
+- publish timestamp
+
+3. Manual review summary
+For each page, include a short review covering:
+- headline quality
+- clarity of commercial message
+- section separation (WHY vs WHAT)
+- readability
+- CTA strength
+- internal link naturalness
+- trust signals / footer / map presence
+
+4. Proof log
+Create a proof log file for both pages.
+
+File:
+- output/<slug>/proof-log.json
+
+Shape:
+{
+  "project": "<slug>",
+  "generatedAt": "<iso timestamp>",
+  "pages": [
+    {
+      "pageType": "hub" | "cluster",
+      "title": "",
+      "primaryKeyword": "",
+      "supportingKeywords": [],
+      "outputPath": "",
+      "liveUrl": "",
+      "smokeCheckPassed": true,
+      "qaScore": 0,
+      "contentScore": 0,
+      "readiness": "ready" | "review" | "blocked",
+      "warnings": [],
+      "strengths": [],
+      "publishedAt": ""
+    }
+  ]
+}
+
+5. Rotherham details
+Use:
+- Hub keyword: "Web Design Rotherham"
+- Cluster keyword: "Affordable Web Design Rotherham"
+
+For the cluster page:
+- keep the leaner cluster template
+- keep the agreed AI summary structure
+- keep the shorter, more conversion-focused layout
+
+6. Validation rules
+- If either page is below readiness threshold, do not mark it ready for live proof use
+- Include the exact reasons in the output
+- If deployed, include live URLs
+- If not deployed, still write proof-log.json with output paths and scores
+
+7. Return
+Return:
+- summary for both pages
+- proof-log.json contents
+- any issues that should be fixed before broader rollout
+
+Do not redesign the templates.
+Do not change the setup flow.
+Use the current live system exactly as implemented.

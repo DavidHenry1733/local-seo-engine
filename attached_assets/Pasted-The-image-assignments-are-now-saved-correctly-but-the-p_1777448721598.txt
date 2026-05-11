@@ -1,0 +1,57 @@
+The image assignments are now saved correctly, but the preview cards are still not rendering the saved images.
+
+Confirmed from diagnostics:
+- hero source = uploaded
+- support source = uploaded
+- conversion source = uploaded
+- file exists = yes for all three
+- status = approved for all three
+- preview URLs exist:
+  /api/images/serve/rotherham-proof/hero?v=...
+  /api/images/serve/rotherham-proof/support?v=...
+  /api/images/serve/rotherham-proof/conversion?v=...
+
+Therefore the bug is now in the Stage 5 preview card rendering.
+
+Required fix:
+Make the preview image cards use the exact resolved previewUrl from the image status/diagnostic data.
+
+For each slot:
+- hero card img src must equal hero.previewUrl
+- support card img src must equal support.previewUrl
+- conversion card img src must equal conversion.previewUrl
+
+Do not use:
+- stale asset paths
+- old generated image paths
+- hardcoded /assets/*.jpg
+- previous AI image URLs
+- fallback images if previewUrl exists
+- separate image state from diagnostics
+
+Add a visible “Open preview” link under each image card using the same previewUrl so I can click-test it.
+
+Important:
+If fileExists is true and previewUrl exists, render:
+<img src="{previewUrl}" ...>
+
+If the image fails to load:
+- show an error message under that card:
+  “Preview failed to load”
+- show the exact src being used
+
+Also inspect CSS:
+- make sure the preview image is not hidden
+- make sure img opacity is not 0
+- make sure the image container is not overlayed by grey placeholder
+- make sure z-index/background is not covering the image
+
+Acceptance criteria:
+- Hero preview displays the uploaded hero image.
+- Support preview displays the uploaded support image.
+- Conversion preview displays the uploaded conversion image.
+- The image shown in each card uses the same previewUrl as the diagnostics.
+- “Open preview” link opens the correct image in the browser.
+- No card shows Approved with a blank grey preview.
+
+The key point: diagnostics prove storage is correct. The card UI is rendering from the wrong source or being covered by the placeholder.

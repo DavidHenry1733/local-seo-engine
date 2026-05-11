@@ -1,0 +1,118 @@
+The correct answer is:
+
+Option 2 — Wire this as an AI prompt (PRIMARY)
+
++ Option 1 — Update the template to match the spec (REQUIRED FOUNDATION)
+
+✅ What you should actually do (clear direction)
+
+This is not an either/or — it’s a two-step system:
+
+🔷 STEP 1 — Lock the TEMPLATE (do this first)
+
+👉 Update your current HTML template so it 100% matches the spec
+
+This includes:
+
+correct section order
+all required sections present
+correct AI block structure
+About section in correct position
+header/footer standardised
+Why this matters
+
+This becomes your:
+👉 rendering layer (visual + structural)
+
+Without this:
+
+AI output will be inconsistent
+scaling will break
+pages won’t align
+🔷 STEP 2 — Wire the AI GENERATION PROMPT
+
+👉 Use the master prompt as your content engine
+
+For every page:
+
+Take your JSON inputs
+Inject into the prompt
+Send to AI
+Receive structured content
+Inject into template
+🔥 SIMPLE SYSTEM ARCHITECTURE
+[JSON Input]
+      ↓
+[Master Prompt]
+      ↓
+[AI Output (content only)]
+      ↓
+[HTML Template (fixed)]
+      ↓
+[Final Page]
+⚠️ IMPORTANT (THIS IS THE KEY DECISION)
+
+👉 The AI should NOT generate full HTML layout
+
+👉 The AI should generate:
+
+section content only
+
+👉 Your template should control:
+
+structure
+layout
+styling
+section order
+❌ What NOT to do
+Don’t:
+let AI build full page HTML every time
+rely on AI for structure
+mix structure + content generation
+
+That leads to:
+
+inconsistent pages
+broken layouts
+scaling issues
+✅ Correct separation of responsibilities
+Template (your system)
+
+Handles:
+
+header
+footer
+layout
+section order
+CSS
+IDs / structure
+AI (your engine)
+
+Handles:
+
+text content
+variation
+keyword usage
+local context
+🔷 FINAL ANSWER (VERY CLEAR)
+
+👉 You are building a hybrid system:
+
+✔ Step 1
+
+Update template to match spec exactly
+
+✔ Step 2
+
+Use the master prompt to generate content dynamically
+
+✔ Step 3
+
+Inject content into template
+
+🔥 If you do it this way, you get:
+consistent pages
+scalable generation
+controlled SEO structure
+strong AI extraction signals
+reusable client system

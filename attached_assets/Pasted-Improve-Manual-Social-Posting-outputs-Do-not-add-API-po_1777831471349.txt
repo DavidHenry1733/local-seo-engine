@@ -1,0 +1,128 @@
+Improve Manual Social Posting outputs.
+
+Do not add API posting yet.
+Do not connect OAuth yet.
+Do not change page generation, scoring, sitemap, deployment, image library, or Final Publish Gate.
+
+Goal:
+Make manual social posting easier by adding recommended image, link URL, suggested anchor text, and copy-ready platform content.
+
+1. Extend distribution content output
+
+For each platform add:
+
+{
+  postText,
+  suggestedImage: {
+    src,
+    alt,
+    libraryId,
+    slot
+  },
+  link: {
+    url,
+    suggestedAnchorText,
+    displayText
+  },
+  copyBlocks: {
+    postOnly,
+    postWithUrl,
+    imageCaption,
+    manualPostingInstructions
+  }
+}
+
+2. Platform-specific rules
+
+Facebook:
+- include post text
+- include suggested image
+- include URL on its own final line
+- suggested anchor text shown separately because Facebook posts do not support normal HTML anchor text
+- recommend uploading image manually
+
+LinkedIn:
+- include post text
+- include suggested image
+- include URL on final line
+- suggested anchor text shown separately
+- include optional first comment version if useful
+
+Reddit:
+- include title
+- include body
+- include disclosure note if linking to own content
+- include URL only if appropriate
+- suggested anchor text shown separately
+- warn user to follow subreddit rules
+
+YouTube:
+- keep manual video workflow
+- include thumbnail prompt
+- include script
+- include description
+- include URL
+- include suggested title
+
+3. Dashboard
+
+In Distribution panel show for each platform:
+- post preview
+- suggested image preview
+- image download/copy path button
+- copy post only
+- copy post + URL
+- copy URL
+- copy suggested anchor text
+- manual instructions
+- field to paste live posted URL
+- mark as posted manually
+
+4. Image selection
+
+Use selected page images from page-data.json:
+- Facebook/LinkedIn default image = hero or conversion image
+- Reddit default image = none unless user chooses image
+- YouTube thumbnail = thumbnail prompt/manual image placeholder
+
+If image library is enabled:
+- show image libraryId
+- show image slot
+- show alt text
+
+5. Manual posted URL tracking
+
+Allow user to paste:
+- Facebook post URL
+- LinkedIn post URL
+- Reddit post URL
+- YouTube video URL
+
+Save these in:
+
+output/{clientSlug}/distribution/{pageSlug}.json
+
+publishedUrls:
+{
+  facebook,
+  linkedin,
+  reddit,
+  youtube
+}
+
+Also update:
+
+output/{clientSlug}/distribution/index.json
+
+6. Acceptance criteria
+
+- User can open a page’s Distribution panel.
+- User sees Facebook, LinkedIn, Reddit and YouTube drafts.
+- Each social draft has suggested image where appropriate.
+- Each draft has page URL.
+- Each draft has suggested anchor text.
+- Copy buttons work.
+- User can paste manual posted URL.
+- Manual posted URL is saved.
+- No external social URLs are added to sitemap.
+- No API posting is added yet.

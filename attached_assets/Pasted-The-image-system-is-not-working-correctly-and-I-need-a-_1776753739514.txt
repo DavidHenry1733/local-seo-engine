@@ -1,0 +1,65 @@
+The image system is not working correctly and I need a full debug of the image pipeline, not a summary.
+
+Current issue:
+
+Only 1 image is being added per page
+The same image appears across multiple pages
+The image is not contextually relevant
+Injection reports success, but output is wrong
+
+Do NOT tell me the batch completed successfully. I need you to trace the full pipeline.
+
+Please analyse and report on the following stages step-by-step:
+
+IMAGE ASSET GENERATION
+How many image assets are being created per page?
+List all sceneTypes generated (hero, rankings, conversion, etc.)
+Print the asset count per page
+PROMPT GENERATION
+Show the FULL prompt used for EACH image per page
+Compare prompts between at least two areas (e.g. Ecclesall vs Fulwood)
+Confirm whether location, service, and sceneType are actually changing in the prompt
+FILE GENERATION / STORAGE
+Confirm where images are written before upload
+Check if the same file path is reused (e.g. /tmp/image.png)
+Confirm whether files are being overwritten between scenes or pages
+MEDIA UPLOAD
+Show how many uploads happen per page
+Print media IDs returned for each upload
+Confirm whether the same media ID is reused across pages
+DATA PASSED TO injectAllImages
+Show exactly what is passed into injectAllImages
+Confirm whether it receives:
+a) a single image
+b) or an array of multiple images
+INJECTION LOGIC
+Confirm which scenes are actually being inserted
+For each scene, show:
+sceneType
+placement used (below_h1, after_section, etc.)
+whether insertion succeeded or was skipped
+FALLBACK BEHAVIOUR
+Check if fallback insertion is triggering because markers or section anchors are missing
+Confirm whether only the first valid position is used
+FINAL DEBUG OUTPUT (REQUIRED FORMAT)
+
+For each area (Ecclesall, Fulwood, Hillsborough, Crookes), output:
+
+Area:
+Generated scenes:
+Asset count:
+Prompt per scene:
+Uploaded media IDs:
+Scenes passed to injection:
+Scenes successfully inserted:
+Placement used:
+Any skipped scenes and reason:
+
+IMPORTANT:
+
+Do not summarise
+Do not skip steps
+Do not assume success
+Show real values from the code execution
+
+If any part of the pipeline only handles a single image instead of multiple scenes, identify exactly where and why.

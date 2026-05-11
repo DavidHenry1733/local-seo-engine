@@ -1,0 +1,220 @@
+Build the Rotherham web design cluster using the existing local SEO engine.
+
+Do NOT change:
+- deployment logic
+- FTP logic
+- subdomain structure
+- image paths
+- working template design
+- content variation system
+- map logic (must continue to use businessAddress)
+
+Only add the next live cluster:
+- Web Design Rotherham hub
+- Rotherham area pages
+- internal linking for the Rotherham cluster
+
+---
+
+## 1. Create Rotherham area config
+
+Create:
+- config/areas/rotherham.json
+
+Use this structure:
+
+{
+  "primaryCity": "Rotherham",
+  "coreAreas": [
+    "Wickersley",
+    "Maltby",
+    "Bramley",
+    "Aston",
+    "Dinnington",
+    "Thurcroft",
+    "Swallownest",
+    "Rawmarsh",
+    "Parkgate",
+    "Kiveton Park"
+  ],
+  "priorityAreas": [
+    "Wickersley",
+    "Maltby",
+    "Bramley",
+    "Rawmarsh",
+    "Parkgate"
+  ],
+  "excludedAreas": [],
+  "areaProfiles": {
+    "Wickersley": {
+      "character": "well-established suburban area",
+      "knownFor": "independent retailers, professional services and established local businesses",
+      "businessType": "service-led and community-based businesses"
+    },
+    "Maltby": {
+      "character": "large residential town",
+      "knownFor": "trades, local retail and long-standing family-run businesses",
+      "businessType": "practical service-based and high-street businesses"
+    },
+    "Bramley": {
+      "character": "busy commuter area",
+      "knownFor": "local services, growing retail and well-connected residential communities",
+      "businessType": "service-focused and convenience-led businesses"
+    },
+    "Aston": {
+      "character": "well-connected village area",
+      "knownFor": "local services, trades and established community businesses",
+      "businessType": "local service providers and growing independent businesses"
+    },
+    "Dinnington": {
+      "character": "large local centre",
+      "knownFor": "trades, everyday retail and customer-facing service businesses",
+      "businessType": "practical local businesses serving nearby communities"
+    },
+    "Thurcroft": {
+      "character": "community-led village area",
+      "knownFor": "trades, local services and independent small businesses",
+      "businessType": "service-led and referral-driven businesses"
+    },
+    "Swallownest": {
+      "character": "established residential area",
+      "knownFor": "independent local businesses, trades and practical service providers",
+      "businessType": "community-focused and service-based businesses"
+    },
+    "Rawmarsh": {
+      "character": "busy local area",
+      "knownFor": "retail, trades and businesses serving a broad local customer base",
+      "businessType": "high-street, trade and service-led businesses"
+    },
+    "Parkgate": {
+      "character": "commercially active retail area",
+      "knownFor": "shopping, retail parks and customer-facing businesses",
+      "businessType": "retail-led and competitive local service businesses"
+    },
+    "Kiveton Park": {
+      "character": "residential community area",
+      "knownFor": "local services, trades and independent small businesses",
+      "businessType": "community-based and practical service businesses"
+    }
+  }
+}
+
+---
+
+## 2. Add Rotherham project support
+
+Update:
+- config/projects/inboxingproweb-local.json
+
+Add/support the Rotherham cluster for:
+- web_design
+
+Expected pages:
+- web-design-rotherham (hub)
+- web-design-wickersley
+- web-design-maltby
+- web-design-bramley
+- web-design-aston
+- web-design-dinnington
+- web-design-thurcroft
+- web-design-swallownest
+- web-design-rawmarsh
+- web-design-parkgate
+- web-design-kiveton-park
+
+---
+
+## 3. Keep content variation active
+
+Use the existing content variation system:
+- intro variants
+- section variants
+- CTA variants
+- FAQ rotation
+- area profile injection
+
+Do NOT fall back to token-swapped content.
+
+The Rotherham hub and area pages must be genuinely differentiated just like the improved Sheffield cluster.
+
+---
+
+## 4. Hub page behaviour
+
+The page:
+- web-design-rotherham
+
+must:
+- behave as the authority hub for the Rotherham cluster
+- be longer than area pages
+- include an “Areas We Cover” section listing all Rotherham target areas
+- link to all Rotherham area pages
+- keep map logic using businessAddress
+
+---
+
+## 5. Area page behaviour
+
+Each Rotherham area page must:
+- link back to web-design-rotherham
+- link to 2–3 sibling Rotherham area pages
+- include the local area profile data
+- include an “Areas We Cover” or “Nearby Areas” section where appropriate
+- use the existing image pack and CTA config
+
+---
+
+## 6. Internal linking rules
+
+Hub page:
+- links to all Rotherham area pages
+
+Area pages:
+- link to hub
+- link to 2–3 sibling pages
+- no duplicates
+- no orphan pages
+
+Do NOT cross-link to Sheffield pages yet unless already supported intentionally.
+Keep this cluster internally coherent first.
+
+---
+
+## 7. Keep map logic unchanged
+
+All Rotherham pages must continue to show:
+- businessAddress map
+not the page location map
+
+The current corrected behaviour must remain intact.
+
+---
+
+## 8. Deploy support
+
+Prepare this cluster for deployment using the existing command flow.
+Do not change the deploy system.
+
+Expected deploy target remains:
+- local.inboxingproweb.com
+
+---
+
+## 9. Output required
+
+When complete, print:
+
+1. files created/updated
+2. generated Rotherham page list
+3. example internal links for:
+   - web-design-rotherham
+   - web-design-wickersley
+4. one sample intro for:
+   - Wickersley
+   - Maltby
+   - Rawmarsh
+5. confirmation that map uses businessAddress
+6. confirmation that content variation system is active for the Rotherham cluster
+
+Do not introduce unrelated architecture changes.
+Build the Rotherham cluster cleanly on top of the working Sheffield system.

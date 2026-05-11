@@ -1,0 +1,653 @@
+MASTER FIX — REAL LOCAL SERVICE PROVIDER COPY ENGINE
+
+This is a critical production fix.
+
+The generator must stop writing as if pages sell marketing services to tradespeople or businesses.
+
+For all non-digital local service campaigns, generated pages must read as if they belong to the actual local business providing the service named in the keyword.
+
+==================================================
+1. CORE LAW
+==================================================
+
+The keyword defines the real service being sold.
+
+Example:
+“Boiler Repairs Leeds” =
+A boiler repair business in Leeds providing boiler repair services to householders.
+
+“Emergency Plumbing Rotherham” =
+A plumber in Rotherham providing emergency plumbing services to householders.
+
+“Landscape Gardener Sheffield” =
+A landscape gardener in Sheffield providing garden landscaping services to householders.
+
+“Roof Repairs Barnsley” =
+A roofer in Barnsley providing roof repair services to householders/property owners.
+
+The generator must never reinterpret a non-digital keyword as:
+- a web design service
+- a marketing service
+- an SEO service
+- a lead generation service
+- a service for tradespeople
+- a business growth service
+
+==================================================
+2. GENERATION ROLE LOCK
+==================================================
+
+Before writing any content, internally set:
+
+pageOwner = “the local service provider”
+reader = “the person who needs the service”
+serviceSold = “the physical/local service specified by the keyword”
+location = “the location specified by the keyword”
+
+The page must be written from this perspective:
+
+“We provide [service] in [location] for people who need [real problem solved].”
+
+Never from this perspective:
+
+“We help [trade/business] get enquiries.”
+“We help [business type] rank locally.”
+“We provide a digital solution for [trade].”
+
+==================================================
+3. DEFAULT AUDIENCE RULE
+==================================================
+
+For all non-digital local services, default buyerType must be:
+
+household
+
+This means write for:
+- homeowners
+- householders
+- tenants
+- landlords
+- property owners
+- families
+- residents
+
+Only use business/commercial audience if the campaign explicitly sets:
+
+buyerType = business
+
+Do not infer business audience from words like “service”, “provider”, “professional”, or “local”.
+
+==================================================
+4. DIGITAL LANGUAGE HARD BAN
+==================================================
+
+For non-digital services, ban these words/phrases from visible content, meta descriptions, schema descriptions, FAQs, cards, headings, AI summaries and trust strips:
+
+web design
+website design
+website
+SEO
+local SEO
+AI search
+Google rankings
+rankings
+online visibility
+digital marketing
+digital presence
+conversion-focused
+lead generation
+leads
+search traffic
+map pack
+schema
+page speed
+mobile responsive
+marketing agency
+business growth
+client acquisition
+ROI
+enquiry rates
+visibility strategy
+content optimisation
+technical optimisation
+Google Business Profile integration
+
+If any banned phrase appears in a non-digital service page:
+- fail generation
+- regenerate once
+- if still present, mark REVIEW_REQUIRED and block publish
+
+==================================================
+5. SERVICE-LED KEYWORD LOCK
+==================================================
+
+If the user provides a keyword, the page must be built around that exact service intent.
+
+Example keyword:
+Boiler Repairs Leeds
+
+The page must include:
+- boiler repair
+- boiler breakdowns
+- heating issues
+- no hot water
+- unusual boiler noises
+- leaks
+- fault finding
+- safe repair process
+- callout/inspection
+- local Leeds support
+
+It must not include:
+- web design
+- rankings
+- marketing
+- business enquiries
+- helping boiler engineers get leads
+
+Every keyword must be parsed into:
+
+primaryService
+serviceModifier
+location
+buyerProblem
+providerType
+
+Example:
+“Emergency Plumbing Rotherham”:
+primaryService = plumbing
+serviceModifier = emergency
+location = Rotherham
+buyerProblem = urgent leak/burst pipe/blocked toilet
+providerType = local plumber
+
+==================================================
+6. REQUIRED CAMPAIGN FIELDS
+==================================================
+
+For non-digital pages, require or derive:
+
+industryType
+serviceType
+primaryKeyword
+location
+buyerType
+providerType
+serviceDeliverables
+customerProblems
+conversionAction
+
+Example:
+{
+  "industryType": "plumbing",
+  "serviceType": "emergency-plumbing",
+  "primaryKeyword": "Emergency Plumbing Rotherham",
+  "location": "Rotherham",
+  "buyerType": "household",
+  "providerType": "local plumber",
+  "serviceDeliverables": [
+    "burst pipe repairs",
+    "leak repairs",
+    "blocked toilet help",
+    "urgent pipework repairs"
+  ],
+  "customerProblems": [
+    "water leak",
+    "burst pipe",
+    "blocked toilet",
+    "overflowing water",
+    "no hot water"
+  ],
+  "conversionAction": "Call an Emergency Plumber"
+}
+
+If these cannot be derived confidently, ask for user input or mark REVIEW_REQUIRED.
+
+Do not guess with digital fallback copy.
+
+==================================================
+7. SECTION-BY-SECTION COPY RULES
+==================================================
+
+Every non-digital local service page must follow these rules.
+
+--------------------------------------------------
+META DESCRIPTION
+--------------------------------------------------
+
+Must describe:
+- service
+- location
+- household/customer problem
+- practical outcome
+
+Example:
+“Boiler repairs Leeds for homeowners with heating faults, no hot water, leaks or boiler breakdowns. Book a local boiler repair visit.”
+
+Never mention:
+- rankings
+- websites
+- marketing
+- business enquiries
+
+--------------------------------------------------
+HERO
+--------------------------------------------------
+
+Must say what the provider does for the resident.
+
+Formula:
+“Need [service] in [location]? We help [buyerType] with [real problems] using [real service deliverables].”
+
+Example:
+“Need boiler repairs in Leeds? We help homeowners with boiler breakdowns, no hot water, leaks and heating faults with practical local repair support.”
+
+--------------------------------------------------
+AI SUMMARY / QUICK ANSWER
+--------------------------------------------------
+
+Must define the real-world service.
+
+Formula:
+“[Service] in [location] means [providerType] helps [buyerType] with [real problems] by providing [real deliverables].”
+
+Example:
+“Emergency plumbing in Rotherham means a local plumber helps homeowners, tenants and landlords with urgent problems such as burst pipes, leaks, blocked toilets and overflowing water.”
+
+--------------------------------------------------
+WHY THIS MATTERS
+--------------------------------------------------
+
+Must focus on real-world consequences.
+
+Examples:
+Plumbing:
+- water damage
+- blocked toilet
+- unsafe bathroom
+- leak getting worse
+
+Roofing:
+- water entering property
+- damaged ceilings
+- missing tiles
+- structural risk
+
+Landscaping:
+- unusable garden
+- poor drainage
+- lack of privacy
+- unsafe levels
+
+Boiler repairs:
+- no heating
+- no hot water
+- cold home
+- fault worsening
+
+Never discuss:
+- losing enquiries
+- search traffic
+- competitors ranking higher
+- online trust signals
+
+--------------------------------------------------
+WHAT YOU GET
+--------------------------------------------------
+
+Must list real service process and deliverables:
+- inspection
+- assessment
+- quote
+- repair/install/maintenance
+- materials/equipment
+- tidy finish
+- aftercare advice
+
+Never list:
+- SEO
+- web design
+- content
+- schema
+- Google integration
+- digital support
+
+--------------------------------------------------
+WHAT’S INCLUDED
+--------------------------------------------------
+
+Cards must be actual service deliverables.
+
+Examples:
+
+Plumbing:
+- Leak Repairs
+- Burst Pipe Repairs
+- Blocked Toilets
+- Tap and Pipe Repairs
+- No Hot Water Support
+- Landlord Callouts
+
+Roofing:
+- Roof Leak Repairs
+- Tile Replacement
+- Flat Roof Repairs
+- Gutter Repairs
+- Chimney Flashing
+- Roof Inspections
+
+Landscaping:
+- Patio Installation
+- Fencing
+- Turfing
+- Artificial Grass
+- Drainage
+- Planting
+
+Boiler Repairs:
+- Fault Finding
+- No Hot Water Repairs
+- Boiler Leak Checks
+- Heating Fault Diagnosis
+- Pressure Problems
+- Repair Advice
+
+--------------------------------------------------
+WHO IT’S FOR
+--------------------------------------------------
+
+Must describe real customers.
+
+Default household examples:
+- Homeowners
+- Tenants
+- Landlords
+- Property Owners
+- Families
+- Elderly Residents
+- New Homeowners
+- People Preparing to Sell
+
+Never use:
+- tradespeople
+- service businesses
+- consultants
+- SMEs
+- startups
+- professional firms
+unless buyerType = business.
+
+--------------------------------------------------
+PROCESS / ENQUIRY SECTION
+--------------------------------------------------
+
+Rename away from digital language.
+
+Use headings like:
+- How Our Callout Works
+- How to Book a Visit
+- How the Repair Process Works
+- How Your Garden Project Starts
+
+Must explain real customer journey:
+- call/message
+- describe issue
+- arrange visit
+- inspect
+- quote
+- complete work
+- explain next steps
+
+Never mention:
+- websites generating enquiries
+- contact forms converting visitors
+- local search traffic
+
+--------------------------------------------------
+LOCAL RELEVANCE
+--------------------------------------------------
+
+Must connect the physical service to local area conditions.
+
+Examples:
+Rotherham plumbing:
+- local homes
+- older pipework
+- rental properties
+- urgent water damage risks
+
+Sheffield landscaping:
+- sloped gardens
+- drainage
+- terraced homes
+- privacy
+- outdoor living
+
+Leeds boiler repairs:
+- older heating systems
+- winter demand
+- family homes
+- landlord properties
+
+Never discuss:
+- digital competition
+- ranking advantages
+- AI results
+
+--------------------------------------------------
+WHAT HAPPENS WITHOUT HELP
+--------------------------------------------------
+
+Must focus on practical consequences.
+
+Examples:
+- leak worsens
+- heating remains off
+- garden stays unusable
+- roof damage spreads
+- repair costs increase
+- property damage grows
+
+Never discuss:
+- competitors getting leads
+- lost website traffic
+- missed search visibility
+
+--------------------------------------------------
+COMMON MISTAKES
+--------------------------------------------------
+
+Must be service-specific mistakes.
+
+Examples:
+Emergency plumbing:
+- Not turning off the water
+- Ignoring a leak
+- Trying unsafe DIY repairs
+- Waiting too long
+- Using temporary fixes too long
+
+Boiler repairs:
+- Ignoring warning lights
+- Resetting repeatedly without checking fault
+- Delaying repair in winter
+- Ignoring pressure drops
+- Using unqualified help
+
+Landscaping:
+- Poor drainage planning
+- No clear garden layout
+- Cheap materials
+- Ignoring levels
+- No privacy planning
+
+Roofing:
+- Ignoring small leaks
+- Poor patch repairs
+- No inspection after storm damage
+- Choosing unsuitable materials
+
+Never include:
+- slow page load speed
+- mobile layout
+- missing SEO signals
+- Google Business Profile
+- headings/structure
+
+--------------------------------------------------
+FAQ
+--------------------------------------------------
+
+Must answer real buying questions.
+
+Examples:
+- How much does [service] cost in [location]?
+- How quickly can someone attend?
+- What should I do before help arrives?
+- Can you help with [specific problem]?
+- Do I need a repair or replacement?
+
+--------------------------------------------------
+CTA
+--------------------------------------------------
+
+CTA must match service.
+
+Examples:
+Emergency plumbing:
+“Call an Emergency Plumber”
+
+Boiler repairs:
+“Book a Boiler Repair Visit”
+
+Landscaping:
+“Request a Garden Quote”
+
+Roofing:
+“Request a Roof Repair Quote”
+
+Never use:
+“Improve Your Online Presence”
+“Grow Your Business”
+“Request a Digital Audit”
+
+==================================================
+8. PROVIDER PROFILE VALIDATION
+==================================================
+
+Customer profile must match the campaign industry.
+
+If:
+customerProfile.industry = digital/web/marketing
+and campaign industry = plumbing/roofing/landscaping/boiler repairs
+
+Then:
+- do not publish
+- mark REVIEW_REQUIRED
+- display:
+“The selected customer profile does not appear to provide this service. Choose a matching local service provider profile or enable test mode.”
+
+Do not generate public pages showing DHM Digital/InboxingProWeb as a plumber, roofer, boiler engineer or landscaper unless explicitly configured.
+
+==================================================
+9. MONEY PAGE RULE
+==================================================
+
+For non-digital campaigns:
+- moneyPageUrl must be supplied by campaign setup
+- if missing, do not render money-page-band
+- never fall back to InboxingProWeb homepage
+- never link trade pages to web design/digital pages
+
+Fail publish if money-page-band points to:
+- InboxingProWeb
+- DHM Digital
+- homepage fallback
+- unrelated service
+
+==================================================
+10. SCHEMA RULES
+==================================================
+
+Schema must describe the real service.
+
+Example:
+Service name:
+Emergency Plumbing Rotherham
+
+Description:
+Emergency plumbing services in Rotherham for burst pipes, leaks, blocked toilets and urgent plumbing repairs.
+
+Provider:
+Actual local plumbing business.
+
+Never:
+“digital solution”
+“visibility”
+“conversion”
+“local SEO”
+
+==================================================
+11. GENERATION SELF-CHECK
+==================================================
+
+Before returning content, answer internally:
+
+1. Is the page clearly from the service provider?
+2. Is the reader clearly the person needing the service?
+3. Is every section about the physical/local service?
+4. Are there zero digital marketing terms?
+5. Are all cards, FAQs and CTAs service-specific?
+6. Would a real homeowner believe this page belongs to a real local tradesperson?
+
+If any answer is no:
+Regenerate.
+
+==================================================
+12. FINAL PUBLISH GATE
+==================================================
+
+Add NonDigitalServiceProviderCheck.
+
+For non-digital campaigns, block publish if:
+
+- digital banned words appear
+- page reads as B2B when buyerType = household
+- service is described as a marketing/digital service
+- provider profile industry mismatch exists
+- common mistakes are not service-specific
+- CTA does not match service
+- FAQ does not match service
+- schema description is digital
+- meta description is digital
+- money page link is missing/wrong where required
+- page contains “businesses” more than once unless buyerType = business
+
+==================================================
+13. TEST CASE
+==================================================
+
+Generate this exact test page:
+
+primaryKeyword: Boiler Repairs Leeds
+industryType: heating
+serviceType: boiler-repairs
+location: Leeds
+buyerType: household
+providerType: local boiler repair engineer
+conversionAction: Book a Boiler Repair Visit
+
+Expected copy:
+- speaks to homeowners/landlords in Leeds
+- focuses on boiler breakdowns, no heating, no hot water, leaks, pressure faults
+- does not mention websites, SEO, rankings, marketing or enquiries
+- CTA = Book a Boiler Repair Visit
+- common mistakes are boiler repair mistakes
+- FAQ is boiler repair focused
+- schema describes boiler repair services
+
+This is the rule that matters most:
+
+The page is written by the business that DOES the job, for the person who NEEDS the job done.
+
+That has to be hardcoded across the system.

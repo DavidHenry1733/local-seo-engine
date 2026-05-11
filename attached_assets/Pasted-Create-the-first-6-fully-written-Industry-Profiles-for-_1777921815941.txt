@@ -1,0 +1,1071 @@
+Create the first 6 fully written Industry Profiles for the Local SEO Engine.
+
+Do not change page structure, schema, Final Publish Gate, link audit, sitemap, image library, or deployment logic yet.
+
+Goal:
+Create detailed industry profiles that the page generation engine can use to create accurate, industry-specific local SEO pages for different business types.
+
+Create file:
+
+config/industryProfiles.json
+
+Add these 6 profiles:
+
+1. web-design
+2. plumbing
+3. roofing
+4. electrical
+5. landscaping
+6. clinics-aesthetics
+
+Each profile must include this structure:
+
+{
+  "industryType": "",
+  "displayName": "",
+  "category": "",
+  "tone": "",
+  "buyerIntent": [],
+  "customerProblems": [],
+  "urgentTriggers": [],
+  "trustFactors": [],
+  "conversionActions": [],
+  "serviceTerminology": [],
+  "commonServices": [],
+  "commercialOutcomes": [],
+  "commonMistakes": [],
+  "faqFocus": [],
+  "whoItsFor": [],
+  "imageThemes": {
+    "hero": [],
+    "support": [],
+    "conversion": []
+  },
+  "ctaStyle": "",
+  "contentStyle": "",
+  "avoidLanguage": [],
+  "recommendedProofPoints": [],
+  "localSeoAngles": [],
+  "socialPostAngles": {
+    "facebook": [],
+    "linkedin": [],
+    "reddit": []
+  }
+}
+
+==================================================
+PROFILE 1 — WEB DESIGN
+==================================================
+
+{
+  "industryType": "web-design",
+  "displayName": "Web Design",
+  "category": "Digital Services",
+  "tone": "professional, helpful, commercial, clear, conversion-focused",
+  "buyerIntent": [
+    "business wants more enquiries",
+    "business needs a more professional online presence",
+    "business has an outdated website",
+    "business wants to rank locally",
+    "business wants a site that converts visitors into leads"
+  ],
+  "customerProblems": [
+    "outdated website",
+    "poor mobile experience",
+    "slow loading pages",
+    "low enquiry volume",
+    "weak trust signals",
+    "poor Google visibility",
+    "unclear calls to action"
+  ],
+  "urgentTriggers": [
+    "competitors ranking higher",
+    "website not generating enquiries",
+    "business launching a new service",
+    "existing website looks unprofessional",
+    "low conversion from website traffic"
+  ],
+  "trustFactors": [
+    "portfolio examples",
+    "clear pricing or package guidance",
+    "reviews and testimonials",
+    "business address and contact details",
+    "fast hosting",
+    "mobile-friendly design",
+    "SEO-ready structure"
+  ],
+  "conversionActions": [
+    "request a quote",
+    "book a consultation",
+    "call the business",
+    "submit enquiry form",
+    "view website packages"
+  ],
+  "serviceTerminology": [
+    "responsive design",
+    "lead generation website",
+    "conversion-focused layout",
+    "local SEO",
+    "hosting",
+    "website redesign",
+    "landing page",
+    "WordPress website"
+  ],
+  "commonServices": [
+    "new business website",
+    "website redesign",
+    "WordPress web design",
+    "local SEO website",
+    "website hosting",
+    "landing pages",
+    "small business websites"
+  ],
+  "commercialOutcomes": [
+    "more enquiries",
+    "stronger local visibility",
+    "higher trust",
+    "better conversion rates",
+    "more quote requests",
+    "improved brand credibility"
+  ],
+  "commonMistakes": [
+    "slow page speed",
+    "unclear call to action",
+    "poor mobile layout",
+    "generic copy",
+    "missing local SEO signals",
+    "weak trust signals",
+    "no contact route above the fold",
+    "outdated design"
+  ],
+  "faqFocus": [
+    "cost",
+    "timeline",
+    "what is included",
+    "how enquiries improve",
+    "SEO benefits",
+    "hosting and support"
+  ],
+  "whoItsFor": [
+    "local tradespeople",
+    "service businesses",
+    "consultants",
+    "clinics",
+    "small retailers",
+    "startups",
+    "professional firms",
+    "businesses with outdated websites"
+  ],
+  "imageThemes": {
+    "hero": [
+      "modern business website shown on laptop and mobile",
+      "clean website interface with enquiry form",
+      "local business digital presence"
+    ],
+    "support": [
+      "website planning dashboard",
+      "mobile responsive website preview",
+      "conversion-focused page layout"
+    ],
+    "conversion": [
+      "website enquiry form submission",
+      "analytics showing enquiry growth",
+      "business owner receiving online leads"
+    ]
+  },
+  "ctaStyle": "request a quote or consultation",
+  "contentStyle": "explain how better design, speed, trust and local SEO generate more enquiries",
+  "avoidLanguage": [
+    "guaranteed rank #1",
+    "cheap-looking",
+    "too technical",
+    "generic agency buzzwords"
+  ],
+  "recommendedProofPoints": [
+    "portfolio examples",
+    "local case studies",
+    "before and after screenshots",
+    "website speed improvements",
+    "enquiry increases"
+  ],
+  "localSeoAngles": [
+    "ranking for service + town searches",
+    "appearing in AI and Google local results",
+    "building location-specific service pages",
+    "turning local search traffic into enquiries"
+  ],
+  "socialPostAngles": {
+    "facebook": [
+      "why a website should generate enquiries",
+      "simple website improvements local businesses can make",
+      "how mobile users judge websites quickly"
+    ],
+    "linkedin": [
+      "website performance as a commercial asset",
+      "conversion design for local businesses",
+      "why trust signals affect enquiry rates"
+    ],
+    "reddit": [
+      "what actually makes a local business website work",
+      "whether local content helps websites convert",
+      "experiences from business owners after redesigning a site"
+    ]
+  }
+}
+
+==================================================
+PROFILE 2 — PLUMBING
+==================================================
+
+{
+  "industryType": "plumbing",
+  "displayName": "Plumbing",
+  "category": "Trades",
+  "tone": "direct, practical, trustworthy, urgent when needed, reassuring",
+  "buyerIntent": [
+    "customer has an urgent plumbing problem",
+    "customer needs a reliable local plumber",
+    "customer wants a repair, installation or inspection",
+    "landlord needs maintenance support",
+    "homeowner wants fast response and clear pricing"
+  ],
+  "customerProblems": [
+    "leaking pipes",
+    "blocked drains",
+    "no hot water",
+    "toilet problems",
+    "tap repairs",
+    "burst pipes",
+    "bathroom plumbing issues",
+    "low water pressure"
+  ],
+  "urgentTriggers": [
+    "water leak",
+    "burst pipe",
+    "blocked toilet",
+    "no hot water",
+    "emergency callout",
+    "property damage risk"
+  ],
+  "trustFactors": [
+    "local reviews",
+    "emergency availability",
+    "clear phone number",
+    "response times",
+    "insurance",
+    "qualifications",
+    "before and after work photos",
+    "transparent callout information"
+  ],
+  "conversionActions": [
+    "call now",
+    "request urgent callback",
+    "book a visit",
+    "request a quote",
+    "send photos of the issue"
+  ],
+  "serviceTerminology": [
+    "leak repair",
+    "pipe repair",
+    "emergency plumber",
+    "blocked drains",
+    "tap replacement",
+    "toilet repair",
+    "bathroom plumbing",
+    "water pressure issue"
+  ],
+  "commonServices": [
+    "emergency plumbing",
+    "leak repairs",
+    "blocked toilets",
+    "tap repairs",
+    "pipework",
+    "bathroom plumbing",
+    "kitchen plumbing",
+    "landlord plumbing maintenance"
+  ],
+  "commercialOutcomes": [
+    "more emergency calls",
+    "more booked jobs",
+    "higher local trust",
+    "more quote requests",
+    "more repeat customers",
+    "stronger Google Maps visibility"
+  ],
+  "commonMistakes": [
+    "no click-to-call button",
+    "unclear emergency availability",
+    "no local service areas listed",
+    "no reviews visible",
+    "slow website on mobile",
+    "no photos of previous work",
+    "unclear pricing or callout information",
+    "generic content that does not mention real plumbing problems"
+  ],
+  "faqFocus": [
+    "emergency availability",
+    "callout cost",
+    "response time",
+    "types of repairs",
+    "landlord work",
+    "how to prepare before visit"
+  ],
+  "whoItsFor": [
+    "homeowners",
+    "landlords",
+    "letting agents",
+    "property managers",
+    "small businesses",
+    "restaurants and shops",
+    "tenants needing landlord-approved repairs",
+    "home renovation customers"
+  ],
+  "imageThemes": {
+    "hero": [
+      "professional plumber fixing pipework",
+      "plumbing tools and clean repair setup",
+      "local plumber attending a home callout"
+    ],
+    "support": [
+      "plumber inspecting pipes under sink",
+      "emergency plumbing repair in progress",
+      "plumber using diagnostic tools"
+    ],
+    "conversion": [
+      "customer calling plumber from mobile",
+      "completed clean plumbing repair",
+      "booking request for plumbing visit"
+    ]
+  },
+  "ctaStyle": "call now, request callback, book a local plumber",
+  "contentStyle": "focus on urgent problems, fast response, local trust, practical repairs and clear contact routes",
+  "avoidLanguage": [
+    "luxury lifestyle wording",
+    "digital marketing jargon",
+    "overly technical explanations",
+    "guaranteed cheapest plumber",
+    "rank #1 claims"
+  ],
+  "recommendedProofPoints": [
+    "reviews",
+    "emergency response times",
+    "insurance",
+    "qualifications",
+    "photos of completed repairs",
+    "service area coverage"
+  ],
+  "localSeoAngles": [
+    "emergency plumber + town",
+    "plumber near me",
+    "local callout availability",
+    "service area pages for nearby villages",
+    "Google Maps visibility for urgent searches"
+  ],
+  "socialPostAngles": {
+    "facebook": [
+      "common plumbing issues homeowners should not ignore",
+      "what to check before calling a plumber",
+      "why fast response matters with leaks"
+    ],
+    "linkedin": [
+      "how trades businesses win urgent local enquiries",
+      "why response time and trust signals affect conversion",
+      "local search behaviour for emergency services"
+    ],
+    "reddit": [
+      "what makes people trust a plumber before calling",
+      "how homeowners choose tradespeople in an emergency",
+      "experiences with plumbing websites and booking forms"
+    ]
+  }
+}
+
+==================================================
+PROFILE 3 — ROOFING
+==================================================
+
+{
+  "industryType": "roofing",
+  "displayName": "Roofing",
+  "category": "Trades",
+  "tone": "reassuring, practical, safety-aware, trustworthy, locally credible",
+  "buyerIntent": [
+    "customer has a roof leak",
+    "customer needs roof repair",
+    "customer wants roof inspection",
+    "customer needs replacement or maintenance",
+    "customer is comparing trustworthy local roofers"
+  ],
+  "customerProblems": [
+    "leaking roof",
+    "missing tiles",
+    "storm damage",
+    "flat roof issues",
+    "gutter problems",
+    "chimney flashing issues",
+    "damp patches",
+    "old roof deterioration"
+  ],
+  "urgentTriggers": [
+    "active leak",
+    "storm damage",
+    "missing tiles",
+    "water entering property",
+    "visible roof damage",
+    "insurance-related repair"
+  ],
+  "trustFactors": [
+    "reviews",
+    "before and after photos",
+    "insurance",
+    "guarantees",
+    "local reputation",
+    "clear inspection process",
+    "safety standards",
+    "transparent quoting"
+  ],
+  "conversionActions": [
+    "request roof inspection",
+    "call for urgent repair",
+    "request a quote",
+    "send roof photos",
+    "book survey"
+  ],
+  "serviceTerminology": [
+    "roof repairs",
+    "flat roofing",
+    "pitched roofing",
+    "tile replacement",
+    "storm damage repair",
+    "guttering",
+    "fascias and soffits",
+    "chimney flashing"
+  ],
+  "commonServices": [
+    "roof repairs",
+    "new roofs",
+    "flat roofs",
+    "tile replacement",
+    "gutter repairs",
+    "roof inspections",
+    "storm damage repairs",
+    "fascias and soffits"
+  ],
+  "commercialOutcomes": [
+    "more quote requests",
+    "more inspection bookings",
+    "higher trust",
+    "more emergency repair calls",
+    "better local visibility",
+    "more high-value roofing jobs"
+  ],
+  "commonMistakes": [
+    "no project photos",
+    "unclear guarantees",
+    "no local service areas",
+    "weak reviews",
+    "no emergency repair information",
+    "poor mobile contact options",
+    "generic roofing copy",
+    "no trust signals above the fold"
+  ],
+  "faqFocus": [
+    "roof repair cost",
+    "inspection process",
+    "how long repairs take",
+    "emergency leaks",
+    "flat roof options",
+    "guarantees"
+  ],
+  "whoItsFor": [
+    "homeowners",
+    "landlords",
+    "property managers",
+    "commercial premises",
+    "letting agents",
+    "home renovation customers",
+    "insurance repair customers",
+    "estate agents"
+  ],
+  "imageThemes": {
+    "hero": [
+      "professional roofer inspecting roof safely",
+      "roof repair work with tiles and tools",
+      "clean roofing project on residential property"
+    ],
+    "support": [
+      "roofer replacing damaged tiles",
+      "flat roof repair detail",
+      "guttering and roofline work"
+    ],
+    "conversion": [
+      "customer requesting roof inspection",
+      "before and after roof repair result",
+      "roofing quote request on mobile"
+    ]
+  },
+  "ctaStyle": "request inspection, get a quote, call for urgent roof repair",
+  "contentStyle": "focus on damage prevention, safety, trust, local proof and high-value repair/replacement decisions",
+  "avoidLanguage": [
+    "cheap roof claims",
+    "guaranteed lowest price",
+    "digital agency language",
+    "overly casual tone",
+    "unsupported 24/7 claims"
+  ],
+  "recommendedProofPoints": [
+    "before and after images",
+    "guarantees",
+    "insurance",
+    "reviews",
+    "local completed projects",
+    "roofing accreditations"
+  ],
+  "localSeoAngles": [
+    "roofer + town",
+    "roof repair + town",
+    "emergency roof leak searches",
+    "nearby village service pages",
+    "Google Maps trust and review signals"
+  ],
+  "socialPostAngles": {
+    "facebook": [
+      "signs your roof needs attention",
+      "what storm damage can look like",
+      "why small leaks become expensive"
+    ],
+    "linkedin": [
+      "how local roofers build trust before a quote",
+      "why proof and project photos matter in trades",
+      "lead generation for high-value home services"
+    ],
+    "reddit": [
+      "what makes people trust a roofer online",
+      "experiences getting roof quotes locally",
+      "what information should a roofing website show"
+    ]
+  }
+}
+
+==================================================
+PROFILE 4 — ELECTRICAL
+==================================================
+
+{
+  "industryType": "electrical",
+  "displayName": "Electrical Services",
+  "category": "Trades",
+  "tone": "professional, safety-focused, precise, trustworthy, practical",
+  "buyerIntent": [
+    "customer needs a qualified electrician",
+    "customer has a fault or power issue",
+    "business needs compliance work",
+    "homeowner needs installation or upgrade",
+    "landlord needs inspection or certificate"
+  ],
+  "customerProblems": [
+    "electrical faults",
+    "tripping circuits",
+    "lighting problems",
+    "socket installation",
+    "consumer unit upgrades",
+    "EICR certificates",
+    "rewiring",
+    "EV charger installation"
+  ],
+  "urgentTriggers": [
+    "loss of power",
+    "burning smell",
+    "tripping fuse board",
+    "unsafe wiring",
+    "landlord certificate deadline",
+    "business compliance requirement"
+  ],
+  "trustFactors": [
+    "qualifications",
+    "NICEIC/NAPIT registration where applicable",
+    "insurance",
+    "reviews",
+    "clear safety process",
+    "compliance knowledge",
+    "local availability",
+    "transparent pricing"
+  ],
+  "conversionActions": [
+    "call an electrician",
+    "book an inspection",
+    "request a quote",
+    "schedule EICR",
+    "request urgent callback"
+  ],
+  "serviceTerminology": [
+    "qualified electrician",
+    "EICR",
+    "consumer unit",
+    "rewiring",
+    "fault finding",
+    "lighting installation",
+    "socket installation",
+    "electrical inspection"
+  ],
+  "commonServices": [
+    "fault finding",
+    "EICR certificates",
+    "consumer unit upgrades",
+    "rewiring",
+    "lighting installation",
+    "socket installation",
+    "commercial electrical work",
+    "EV charger installation"
+  ],
+  "commercialOutcomes": [
+    "more inspection bookings",
+    "more quote requests",
+    "more emergency calls",
+    "stronger safety trust",
+    "better visibility for compliance searches",
+    "more landlord and commercial enquiries"
+  ],
+  "commonMistakes": [
+    "no qualifications shown",
+    "no safety credentials",
+    "unclear services",
+    "no emergency contact option",
+    "weak local pages",
+    "no landlord/commercial content",
+    "poor mobile phone visibility",
+    "generic trade copy"
+  ],
+  "faqFocus": [
+    "cost",
+    "certification",
+    "safety",
+    "timescale",
+    "landlord requirements",
+    "emergency faults"
+  ],
+  "whoItsFor": [
+    "homeowners",
+    "landlords",
+    "letting agents",
+    "property managers",
+    "small businesses",
+    "commercial premises",
+    "renovation projects",
+    "EV charger customers"
+  ],
+  "imageThemes": {
+    "hero": [
+      "qualified electrician working safely",
+      "electrical inspection with tools",
+      "modern consumer unit installation"
+    ],
+    "support": [
+      "electrician testing circuits",
+      "EICR inspection process",
+      "lighting or socket installation"
+    ],
+    "conversion": [
+      "customer booking electrician",
+      "completed electrical installation",
+      "safety certificate and inspection result"
+    ]
+  },
+  "ctaStyle": "book inspection, request quote, call qualified electrician",
+  "contentStyle": "focus on safety, compliance, qualifications, speed of response and clear service explanations",
+  "avoidLanguage": [
+    "DIY electrical advice",
+    "unsafe suggestions",
+    "guaranteed cheapest",
+    "non-qualified language",
+    "vague claims"
+  ],
+  "recommendedProofPoints": [
+    "qualifications",
+    "accreditations",
+    "insurance",
+    "reviews",
+    "inspection certificates",
+    "commercial experience"
+  ],
+  "localSeoAngles": [
+    "electrician + town",
+    "EICR + town",
+    "emergency electrician searches",
+    "landlord certificate searches",
+    "local commercial electrician pages"
+  ],
+  "socialPostAngles": {
+    "facebook": [
+      "signs you should call an electrician",
+      "why electrical safety checks matter",
+      "common home electrical issues"
+    ],
+    "linkedin": [
+      "compliance and trust in local electrical services",
+      "why credentials matter for trade websites",
+      "local visibility for safety-critical services"
+    ],
+    "reddit": [
+      "what makes people trust an electrician online",
+      "what electrical info should be on a local business website",
+      "experiences booking electricians locally"
+    ]
+  }
+}
+
+==================================================
+PROFILE 5 — LANDSCAPING
+==================================================
+
+{
+  "industryType": "landscaping",
+  "displayName": "Landscaping",
+  "category": "Home and Garden",
+  "tone": "visual, aspirational, practical, trust-building, locally focused",
+  "buyerIntent": [
+    "customer wants garden transformation",
+    "customer needs landscaping quote",
+    "customer is comparing styles and examples",
+    "homeowner wants patio, fencing or turfing",
+    "customer wants reliable local landscaper"
+  ],
+  "customerProblems": [
+    "unused garden space",
+    "poor drainage",
+    "old patio",
+    "overgrown garden",
+    "lack of privacy",
+    "damaged fencing",
+    "muddy lawn",
+    "unclear garden design"
+  ],
+  "urgentTriggers": [
+    "garden needed before summer",
+    "property sale preparation",
+    "fence damage",
+    "unsafe garden levels",
+    "drainage problems",
+    "new build garden completion"
+  ],
+  "trustFactors": [
+    "project photos",
+    "before and after examples",
+    "reviews",
+    "clear design process",
+    "local completed projects",
+    "transparent quoting",
+    "materials guidance",
+    "portfolio gallery"
+  ],
+  "conversionActions": [
+    "request garden quote",
+    "book consultation",
+    "send garden photos",
+    "request design ideas",
+    "call landscaper"
+  ],
+  "serviceTerminology": [
+    "garden design",
+    "patios",
+    "fencing",
+    "turfing",
+    "artificial grass",
+    "decking",
+    "retaining walls",
+    "planting schemes"
+  ],
+  "commonServices": [
+    "garden landscaping",
+    "patio installation",
+    "fencing",
+    "turfing",
+    "artificial grass",
+    "decking",
+    "garden drainage",
+    "planting and borders"
+  ],
+  "commercialOutcomes": [
+    "more quote requests",
+    "more high-value projects",
+    "stronger visual trust",
+    "more consultation bookings",
+    "better local visibility",
+    "higher-value leads"
+  ],
+  "commonMistakes": [
+    "no project gallery",
+    "poor before and after images",
+    "unclear services",
+    "no local project examples",
+    "weak enquiry form",
+    "no pricing guidance",
+    "slow mobile site",
+    "generic garden copy"
+  ],
+  "faqFocus": [
+    "cost",
+    "timescale",
+    "design process",
+    "materials",
+    "maintenance",
+    "quote process"
+  ],
+  "whoItsFor": [
+    "homeowners",
+    "new build homeowners",
+    "landlords",
+    "property developers",
+    "families wanting usable gardens",
+    "retired homeowners",
+    "commercial outdoor spaces",
+    "homeowners preparing to sell"
+  ],
+  "imageThemes": {
+    "hero": [
+      "finished landscaped garden",
+      "professional landscaper creating patio",
+      "modern garden transformation"
+    ],
+    "support": [
+      "before and after garden work",
+      "patio or fencing installation",
+      "planting and garden design detail"
+    ],
+    "conversion": [
+      "customer viewing garden design plan",
+      "completed outdoor space",
+      "landscaping enquiry or consultation"
+    ]
+  },
+  "ctaStyle": "request garden quote, book consultation, send photos",
+  "contentStyle": "focus on transformation, visual proof, practical planning, trust and project value",
+  "avoidLanguage": [
+    "emergency-style pressure unless repair-related",
+    "technical jargon",
+    "guaranteed cheapest",
+    "generic property wording",
+    "unsupported ROI claims"
+  ],
+  "recommendedProofPoints": [
+    "before and after photos",
+    "portfolio gallery",
+    "reviews",
+    "local completed projects",
+    "materials used",
+    "project process"
+  ],
+  "localSeoAngles": [
+    "landscaper + town",
+    "garden design + town",
+    "patio installer + town",
+    "fencing + town",
+    "service area pages for surrounding villages"
+  ],
+  "socialPostAngles": {
+    "facebook": [
+      "simple ways to make a garden more usable",
+      "before and after garden transformation ideas",
+      "what to think about before landscaping"
+    ],
+    "linkedin": [
+      "how visual proof drives enquiries for home improvement businesses",
+      "why project galleries matter in landscaping",
+      "local search and high-value home service leads"
+    ],
+    "reddit": [
+      "what makes people choose one landscaper over another",
+      "what garden features are worth investing in",
+      "experiences getting landscaping quotes locally"
+    ]
+  }
+}
+
+==================================================
+PROFILE 6 — CLINICS / AESTHETICS
+==================================================
+
+{
+  "industryType": "clinics-aesthetics",
+  "displayName": "Clinics and Aesthetics",
+  "category": "Health, Beauty and Wellness",
+  "tone": "warm, professional, reassuring, trust-led, clear, compliant",
+  "buyerIntent": [
+    "client wants treatment information",
+    "client wants to trust the practitioner",
+    "client is comparing local clinics",
+    "client wants pricing or consultation details",
+    "client wants safe, professional care"
+  ],
+  "customerProblems": [
+    "uncertainty about treatment suitability",
+    "lack of trust",
+    "unclear pricing",
+    "fear of poor results",
+    "confusing treatment options",
+    "difficulty booking",
+    "weak local visibility",
+    "lack of reviews"
+  ],
+  "urgentTriggers": [
+    "event preparation",
+    "skin concern worsening",
+    "seasonal treatment demand",
+    "special offer period",
+    "availability for consultation",
+    "new clinic launch"
+  ],
+  "trustFactors": [
+    "qualified practitioner",
+    "treatment explanations",
+    "before and after images where appropriate",
+    "reviews",
+    "consultation process",
+    "clinic address",
+    "safety information",
+    "clear aftercare guidance"
+  ],
+  "conversionActions": [
+    "book consultation",
+    "request callback",
+    "view treatment options",
+    "ask a question",
+    "book appointment"
+  ],
+  "serviceTerminology": [
+    "consultation",
+    "treatment plan",
+    "aftercare",
+    "skin concerns",
+    "laser treatment",
+    "aesthetics clinic",
+    "microneedling",
+    "skin rejuvenation"
+  ],
+  "commonServices": [
+    "laser hair removal",
+    "skin treatments",
+    "microneedling",
+    "HydraFacial",
+    "cryotherapy",
+    "consultations",
+    "aesthetic treatments",
+    "skin tag removal"
+  ],
+  "commercialOutcomes": [
+    "more consultation bookings",
+    "more appointment requests",
+    "higher trust",
+    "better treatment visibility",
+    "more repeat clients",
+    "stronger local reputation"
+  ],
+  "commonMistakes": [
+    "unclear treatment information",
+    "no practitioner trust signals",
+    "no consultation CTA",
+    "weak reviews",
+    "poor mobile booking experience",
+    "no aftercare guidance",
+    "generic beauty copy",
+    "unclear location and parking details"
+  ],
+  "faqFocus": [
+    "suitability",
+    "cost",
+    "how treatment works",
+    "what to expect",
+    "aftercare",
+    "booking process",
+    "safety"
+  ],
+  "whoItsFor": [
+    "new clients",
+    "returning clients",
+    "people comparing treatments",
+    "clients preparing for events",
+    "skin health clients",
+    "laser hair removal clients",
+    "aesthetic treatment clients",
+    "local residents seeking trusted care"
+  ],
+  "imageThemes": {
+    "hero": [
+      "premium clinic treatment room",
+      "professional practitioner consultation",
+      "clean aesthetic clinic environment"
+    ],
+    "support": [
+      "treatment consultation",
+      "skin treatment equipment",
+      "professional clinic care setting"
+    ],
+    "conversion": [
+      "client booking consultation",
+      "clinic reception and appointment process",
+      "treatment plan discussion"
+    ]
+  },
+  "ctaStyle": "book consultation, request appointment, ask a question",
+  "contentStyle": "focus on trust, suitability, safety, professional care, clear treatment expectations and easy booking",
+  "avoidLanguage": [
+    "guaranteed medical results",
+    "overpromising outcomes",
+    "aggressive sales language",
+    "fear-based messaging",
+    "unsupported clinical claims",
+    "before/after promises without evidence"
+  ],
+  "recommendedProofPoints": [
+    "practitioner qualifications",
+    "client reviews",
+    "treatment explanations",
+    "consultation process",
+    "clinic standards",
+    "aftercare guidance"
+  ],
+  "localSeoAngles": [
+    "clinic + town",
+    "treatment + town",
+    "aesthetics clinic near me",
+    "local treatment pages",
+    "reviews and trust signals for map visibility"
+  ],
+  "socialPostAngles": {
+    "facebook": [
+      "what to ask before booking a treatment",
+      "how consultations help clients choose safely",
+      "common treatment questions explained simply"
+    ],
+    "linkedin": [
+      "trust and education in clinic marketing",
+      "why clarity improves consultation bookings",
+      "local visibility for health and aesthetics providers"
+    ],
+    "reddit": [
+      "what information people want before choosing a clinic",
+      "how people compare local treatment providers",
+      "what makes a clinic website feel trustworthy"
+    ]
+  }
+}
+
+==================================================
+Integration note
+==================================================
+
+Do not yet rewrite every prompt.
+
+After creating this file:
+- add industryType field to campaign setup if missing
+- allow user to select industry profile
+- store selected industryType in campaign config
+- expose selected profile in generation context
+- log which industry profile is used per page generation
+
+Acceptance criteria:
+- config/industryProfiles.json exists
+- all 6 profiles are valid JSON
+- campaign can store industryType
+- generation context can access selected profile
+- if no industryType is selected, use generic-trades fallback later or web-design only for existing InboxingProWeb tests

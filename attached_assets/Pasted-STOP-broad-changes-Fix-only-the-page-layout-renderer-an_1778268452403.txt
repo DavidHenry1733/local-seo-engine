@@ -1,0 +1,213 @@
+STOP broad changes. Fix only the page layout renderer and image placement.
+
+Test page:
+https://local.inboxingproweb.com/web-design-rotherham/
+
+Current problems:
+1. Images are being dumped together in one area around the “How web design generates real enquiries” section.
+2. The images are not integrated into the correct content sections.
+3. The approved hybrid image/content layout is not being used.
+4. There are duplicate FAQ/Common Questions sections.
+5. The page feels like content blocks are being appended rather than rendered in the approved order.
+
+Do not change:
+- brand rules
+- footer
+- internal link logic
+- related services logic
+- content generation prompts
+- image library logic
+- CTA wording
+
+Only fix:
+- final page section order
+- image placement
+- duplicate FAQ rendering
+
+========================
+APPROVED PAGE STRUCTURE
+========================
+
+Every generated page must render in this order:
+
+1. Header/navigation
+
+2. Hero section
+- Left: H1, short intro, CTA
+- Right: heroImage
+- Large contained 16:9 image
+- No other image immediately after hero
+
+3. Quick Answer block
+- “What is [Service] in [Area]?”
+- Quick Answer text
+- Short bullet list if available
+
+4. Local introduction / main service intro
+- Text only
+- No image
+
+5. Trust / value section with trustImage
+Use approved hybrid layout:
+TOP ROW:
+- image 45–50% width
+- short text block 50–55% width
+- short text beside image must be max 80–120 words
+
+BOTTOM ROW:
+- remaining supporting paragraphs full width underneath
+
+6. Service breakdown / what’s included
+- Text/cards only
+- No image unless explicitly assigned
+
+7. Problem / solution section with supportImage
+Use approved hybrid layout:
+TOP ROW:
+- image 45–50% width
+- short text block 50–55% width
+- short text beside image max 80–120 words
+
+BOTTOM ROW:
+- remaining supporting paragraphs full width underneath
+
+8. Best suited for / who this service helps
+- Text/cards only
+- No image
+
+9. Local context / why this area section
+- Text only
+- No image
+
+10. Related Services
+- Same area, other services only
+- Designed text/list style already approved
+- No image
+
+11. [Service] Areas We Cover
+- Same service, nearby area links only
+- No image
+
+12. FAQ section
+- Render FAQ section ONCE only
+- Do not render both “Common Questions” and duplicate “Frequently Asked Questions”
+- Use one heading only:
+  “Frequently Asked Questions About [Service] in [Area]”
+
+13. Conversion image section
+- Use conversionImage
+- Full-width feature image
+- Place directly before final CTA
+- Do not place conversionImage earlier in the page
+- Max visual height 500–600px
+- 16:9 crop/object-fit cover
+
+14. Final CTA
+- Heading, short paragraph, button
+
+15. Footer
+
+========================
+IMAGE ROLE RULES
+========================
+
+Each page should use exactly these 4 images:
+
+heroImage:
+- only in hero section
+
+trustImage:
+- only in trust/value hybrid section
+
+supportImage:
+- only in problem/solution hybrid section
+
+conversionImage:
+- only as full-width feature image directly before final CTA
+
+Do NOT:
+- output all images together
+- output raw image array
+- append images after body content
+- show three images back-to-back
+- repeat the same image section unless fallback requires it
+
+========================
+HYBRID SECTION RULES
+========================
+
+For trustImage and supportImage sections, use this exact layout:
+
+<div class="hybrid-section">
+  <div class="hybrid-top">
+    <div class="hybrid-image">
+      <img ... />
+    </div>
+    <div class="hybrid-summary">
+      <h2>Section heading</h2>
+      <p>Short summary only, max 80–120 words.</p>
+    </div>
+  </div>
+  <div class="hybrid-full-copy">
+    <p>Remaining supporting paragraph.</p>
+    <p>Remaining supporting paragraph.</p>
+  </div>
+</div>
+
+Rules:
+- Do not put long paragraphs beside image.
+- Do not put all copy below image.
+- Do not make the image small.
+- Image should be visually strong and balanced.
+
+Desktop:
+- image width 45–50%
+- text width 50–55%
+- image min width 500px where space allows
+- vertically centre image and summary text
+
+Mobile:
+- image above short text
+- full copy below
+
+========================
+DUPLICATE FAQ FIX
+========================
+
+Current issue:
+The page appears to render both:
+- Common Questions About Web Design in Rotherham
+- Frequently Asked Questions / Quick answers
+with overlapping questions.
+
+Fix:
+- Render only one FAQ section.
+- Use the best 4–6 FAQs.
+- Remove duplicate “Common questions”, “Quick answers”, and duplicate FAQ blocks.
+- Do not repeat the same question twice.
+
+========================
+DEBUG / ACCEPTANCE CHECK
+========================
+
+Before marking complete, regenerate:
+https://local.inboxingproweb.com/web-design-rotherham/
+
+Provide proof:
+
+1. Count of rendered image tags in main content.
+Expected: 4 role images plus logo only.
+
+2. Confirm image placement:
+- heroImage appears in hero only
+- trustImage appears in trust/value section only
+- supportImage appears in problem/solution section only
+- conversionImage appears before final CTA only
+
+3. Confirm no three images appear back-to-back.
+
+4. Confirm FAQ heading appears once only.
+
+5. Confirm there is no duplicate “Common Questions” / “Quick answers” section.
+
+Do not mark complete unless all acceptance criteria are met.

@@ -1,0 +1,118 @@
+Fix image rendering and force full regeneration of cluster pages using the latest prompt/template system.
+
+GOAL:
+1. Ensure all pages render images (not just hero)
+2. Ensure cluster pages regenerate using the latest prompt + template changes
+
+---
+
+PART 1 — IMAGE SYSTEM FIX
+
+1. Update image resolution logic:
+
+Ensure these functions always return a valid image:
+
+- resolveHeroImage()
+- resolveMidPageImage()
+- resolveSplitImage()
+
+Rules:
+- If specific image exists → use it
+- If missing → fallback to hero image
+- If hero missing → use default placeholder image URL (not empty div)
+
+Never allow:
+- empty image container
+- placeholder boxes on live pages
+
+2. Verify template bindings:
+
+Ensure these tokens are correctly replaced:
+- {{HERO_IMAGE}}
+- {{MID_IMAGE}}
+- {{SPLIT_IMAGE}}
+
+3. Ensure template sections render images:
+
+- enquiry-section → split image
+- image-band → mid image
+- hero → hero image
+
+4. Add debug log during render:
+
+Log which image was resolved for:
+- hero
+- mid
+- split
+
+---
+
+PART 2 — FORCE CLUSTER PAGE REGENERATION
+
+1. Ensure rollout does NOT reuse cached content:
+
+- Ignore existing output/<slug>/ files
+- Ignore previous selected-area-defs content fields
+- Always call generateClusterContent() fresh
+
+2. Add flag:
+
+forceRegenerate: true
+
+When true:
+- overwrite existing HTML
+- regenerate AI content
+- regenerate refined content
+
+3. Ensure latest prompt is used:
+
+- reload prompts/cluster-page-prompt.txt
+- do not cache prompt content
+
+---
+
+PART 3 — TEST BOTH PAGES
+
+Regenerate BOTH:
+
+1. Hub:
+- Web Design Rotherham
+
+2. Cluster:
+- Affordable Web Design Rotherham
+
+---
+
+PART 4 — VERIFY OUTPUT
+
+For BOTH pages confirm:
+
+Images:
+- hero image present
+- mid-page image present
+- split image present
+- no empty containers
+
+Content:
+- new sections present (enquiry, competition, no-website)
+- updated split headings applied
+- updated FAQ + about present
+
+System:
+- no unreplaced tokens
+- smoke check passed
+- QA + content scoring run
+
+---
+
+PART 5 — RETURN
+
+Return:
+- output paths
+- live URLs if deployed
+- image resolution results (hero/mid/split)
+- confirmation cluster page used latest prompt
+- updated scores
+- any remaining issues
+
+Do not modify page structure beyond fixing image rendering and regeneration.

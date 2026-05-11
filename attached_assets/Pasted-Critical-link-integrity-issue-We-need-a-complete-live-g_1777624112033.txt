@@ -1,0 +1,110 @@
+Critical link integrity issue.
+
+We need a complete live + generated-page audit to make sure every campaign links correctly.
+
+Current issues found:
+1. Some live page links were wrong and returned 404.
+2. Cluster links were fixed manually.
+3. Cluster-to-hub links need verifying.
+4. Hub page is missing the money-page link/copy line used on other hubs.
+5. Rotherham Local SEO cluster pages are incorrectly linking to Sheffield Web Design pages.
+
+Do not change content layout, AI scoring, images, sitemap, or schema unless required to fix link integrity.
+
+Required task:
+Run a complete link integrity audit across all campaigns and pages.
+
+1. Campaign manifest check
+For each campaign, identify:
+- campaign ID
+- service
+- city/location
+- hub slug
+- money page URL from campaign setup
+- cluster slugs
+- expected canonical URLs
+
+2. Cluster-to-hub links
+For every cluster page:
+- verify it links to its own campaign hub only
+- example:
+  - Rotherham Local SEO cluster → /local-seo-rotherham/
+  - Sheffield Web Design cluster → /web-design-sheffield/
+- fail if it links to another city or another service
+- fail if it links to bare slugs
+- fail if it links to /preview/
+
+3. Cluster-to-cluster links
+For every cluster page:
+- verify sibling links only point to pages inside the same campaign
+- same service
+- same city/location campaign
+- no cross-campaign contamination
+
+Example fail:
+Rotherham Local SEO cluster linking to Sheffield Web Design page.
+
+4. Hub-to-cluster links
+For every hub page:
+- verify hub links to its own cluster pages only
+- no missing cluster links
+- no wrong service links
+- no wrong city links
+- no 404 links
+
+5. Hub-to-money-page link
+Every hub page must include the campaign money page line/link from campaign setup.
+
+Example section/line:
+"Looking for [Service] [Location] tailored to local businesses? Visit our dedicated service page."
+
+This must link to the saved campaign moneyPageUrl.
+
+If moneyPageUrl exists in campaign setup:
+- render the money-page link band on the hub page
+- validate it exists
+- validate href matches exactly
+- fail QA if missing
+
+If moneyPageUrl is empty:
+- do not require it
+
+6. Live HTTP validation
+For every internal campaign link:
+- fetch the live URL
+- confirm HTTP 200
+- report 404/500/redirect issues
+
+7. Repair logic
+Add a repair action:
+"Fix campaign link integrity"
+
+Repair must:
+- rebuild internal links using campaign manifest
+- replace cross-campaign links
+- replace bare slugs with service-prefixed slugs
+- restore missing hub money-page link band
+- update affected HTML only
+- re-upload affected pages
+- re-run live link audit
+
+8. Report output
+Show:
+- source page
+- incorrect href
+- expected href
+- issue type
+- fix applied
+- live status after fix
+
+9. Acceptance criteria
+- Every cluster links to its correct hub.
+- Every cluster sibling link stays inside the same campaign.
+- Every hub links only to its correct clusters.
+- Every hub includes the money page link if configured.
+- No Rotherham Local SEO page links to Sheffield Web Design pages.
+- No bare area slugs remain.
+- No /preview/ links remain.
+- All internal campaign links return HTTP 200.
+
+This should become a permanent audit in System Health because broken cross-campaign links are one of the biggest risks before commercial rollout.

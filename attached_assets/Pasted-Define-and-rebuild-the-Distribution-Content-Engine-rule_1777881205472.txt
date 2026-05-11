@@ -1,0 +1,233 @@
+Define and rebuild the Distribution Content Engine rules.
+
+Do not change page generation, scoring, schema, sitemap, deployment, image library, or Final Publish Gate.
+
+Goal:
+The distribution engine must create platform-specific social content for local businesses and trades businesses. Content must be useful, non-spammy, and appropriate for each platform.
+
+The engine must not create one generic post reused across Facebook, LinkedIn, and Reddit.
+
+1. Distribution content types
+
+For every generated page, create:
+
+facebookPost
+linkedinPost
+redditPost
+youtubeScript
+
+Each must be generated separately using platform-specific rules.
+
+2. Universal rules
+
+All posts must:
+- match the current service
+- match the current location
+- be suitable for local businesses/trades
+- avoid spammy wording
+- avoid guaranteed ranking/income claims
+- avoid over-promotional language
+- avoid exaggerated claims
+- avoid “rank #1 guaranteed”
+- avoid “we are the best”
+- avoid hard selling
+- avoid repeated exact-match keyword stuffing
+
+Allowed:
+- helpful advice
+- observations
+- practical tips
+- local business examples
+- soft CTA where platform appropriate
+
+3. Facebook rules
+
+Facebook content should be:
+- friendly
+- useful
+- community-aware
+- easy to understand
+- suitable for small business owners
+
+Facebook can include:
+- page URL
+- suggested image
+- light CTA
+- 2–4 hashtags max
+
+Facebook must avoid:
+- aggressive sales language
+- too many hashtags
+- long corporate wording
+
+Output:
+{
+  "postText": "",
+  "suggestedImage": "",
+  "linkUrl": "",
+  "suggestedAnchorText": "",
+  "hashtags": [],
+  "manualPostingInstructions": ""
+}
+
+4. LinkedIn rules
+
+LinkedIn content should be:
+- professional
+- insight-led
+- business-focused
+- written for owners, managers, and decision-makers
+
+LinkedIn can include:
+- page URL
+- suggested image
+- business lesson
+- soft CTA
+- 3–5 hashtags max
+
+LinkedIn must avoid:
+- casual Reddit-style wording
+- clickbait
+- emojis overuse
+- heavy sales tone
+
+Output:
+{
+  "headline": "",
+  "postText": "",
+  "suggestedImage": "",
+  "linkUrl": "",
+  "suggestedAnchorText": "",
+  "hashtags": [],
+  "manualPostingInstructions": ""
+}
+
+5. Reddit rules
+
+Reddit content must be discussion-first.
+
+Reddit posts must:
+- sound like a genuine question or observation
+- avoid direct sales
+- avoid direct CTA
+- avoid “we help”
+- avoid “our service”
+- avoid “request a quote”
+- avoid posting a link by default
+- encourage real discussion
+- be suitable for subreddit moderation
+
+Default Reddit post should contain no link in the main body.
+
+Reddit format:
+1. Observation
+2. Personal curiosity
+3. 2–4 specific questions
+4. Invite experiences/opinions
+5. No sales CTA
+
+Optional fields:
+- suggestedCommentWithLink
+- disclosureNote
+- linkUrl
+
+The link should be suggested for later comment use only, not default post body.
+
+Output:
+{
+  "title": "",
+  "body": "",
+  "suggestedFollowUpComment": "",
+  "linkUrl": "",
+  "suggestedAnchorText": "",
+  "disclosureNote": "",
+  "moderationRisk": "low|medium|high",
+  "manualPostingInstructions": ""
+}
+
+6. YouTube rules
+
+YouTube remains manual.
+
+Create:
+- short video script
+- title
+- description
+- tags
+- thumbnail prompt
+- link URL
+
+No video generation API yet.
+
+7. Content calendar mode
+
+Add monthly distribution mode.
+
+For each campaign, allow generation of:
+- 7-day content plan
+- 14-day content plan
+- 30-day content plan
+
+Each day should include:
+- platform
+- topic angle
+- post type
+- linked page
+- suggested image
+- status: draft/approved/posted
+
+8. Post type rotation
+
+Rotate content angles so posts do not feel repetitive:
+
+Angles:
+- common mistake
+- quick tip
+- local observation
+- question/discussion
+- myth busting
+- checklist
+- before/after insight
+- cost/value explanation
+- trust/speed/conversion insight
+- service area relevance
+
+9. Manual publishing workflow
+
+Keep manual publishing for now.
+
+Dashboard must show:
+- copy post button
+- copy URL button
+- copy suggested anchor text button
+- suggested image preview
+- mark as approved
+- mark as posted manually
+- paste live post URL
+- posted URL tracking
+
+Do not add API posting yet.
+
+10. Validation rules
+
+Before showing a post as ready:
+- no placeholder text
+- no empty URL where URL is required
+- no unsupported claims
+- no guaranteed ranking claims
+- no sales CTA in Reddit post body
+- no link in Reddit post body by default
+- no duplicated post across platforms
+- current service and location included naturally where appropriate
+
+11. Acceptance criteria
+
+For a Web Design Rotherham page:
+- Facebook post sounds friendly and local
+- LinkedIn post sounds professional and insight-led
+- Reddit post sounds like a genuine discussion and contains no hard sell
+- YouTube script is short and usable manually
+- Each post is different
+- Dashboard lets user copy each post
+- User can paste live posted URL
+- No social URLs are added to sitemap

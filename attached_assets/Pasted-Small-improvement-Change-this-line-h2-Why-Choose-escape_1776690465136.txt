@@ -1,0 +1,138 @@
+Small improvement
+
+Change this line:
+
+<h2>Why Choose ${escapeHtml("InboxingProWeb")}</h2>
+
+to use the brand dynamically.
+
+So make buildHtml.ts read page-data.json too. Use this improved version instead:
+
+import fs from "fs";
+import path from "path";
+
+type FaqItem = {
+  question?: string;
+  answer?: string;
+};
+
+type ContentData = {
+  hero_title?: string;
+  hero_subtitle?: string;
+  intro?: string;
+  local_section?: string;
+  benefits?: string;
+  why_choose_us?: string;
+  faq?: FaqItem[];
+  cta?: string;
+};
+
+type PageData = {
+  brand?: {
+    name?: string;
+  };
+};
+
+function escapeHtml(value: string): string {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function formatParagraphs(text: string): string {
+  return String(text || "")
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .join("\n");
+}
+
+function buildFaqHtml(faq: FaqItem[] = []): string {
+  if (!Array.isArray(faq) || faq.length === 0) {
+    return "";
+  }
+
+  return faq
+    .filter((item) => item?.question && item?.answer)
+    .map(
+      (item) => `
+<h3>${escapeHtml(item.question || "")}</h3>
+${formatParagraphs(item.answer || "")}
+`.trim()
+    )
+    .join("\n\n");
+}
+
+export function buildHtml(projectRoot: string, slug: string) {
+  const contentPath = path.join(projectRoot, "output", slug, "content.json");
+  const pageDataPath = path.join(projectRoot, "output", slug, "page-data.json");
+
+  const content = JSON.parse(
+    fs.readFileSync(contentPath, "utf-8")
+  ) as ContentData;
+
+  const pageData = JSON.parse(
+    fs.readFileSync(pageDataPath, "utf-8")
+  ) as PageData;
+
+  const brandName = pageData.brand?.name || "Our Team";
+  const faqHtml = buildFaqHtml(content.faq || []);
+
+  const sections: string[] = [];
+
+  sections.push(`<h1>${escapeHtml(content.hero_title || "")}</h1>`);
+
+  if (content.hero_subtitle) {
+    sections.push(`<p>${escapeHtml(content.hero_subtitle)}</p>`);
+  }
+
+  if (content.intro) {
+    sections.push(`
+<h2>Professional Support for Local Businesses</h2>
+${formatParagraphs(content.intro)}
+`.trim());
+  }
+
+  if (content.local_section) {
+    sections.push(`
+<h2>Why This Matters in Your Area</h2>
+${formatParagraphs(content.local_section)}
+`.trim());
+  }
+
+  if (content.benefits) {
+    sections.push(`
+<h2>How This Helps Your Business</h2>
+${formatParagraphs(content.benefits)}
+`.trim());
+  }
+
+  if (content.why_choose_us) {
+    sections.push(`
+<h2>Why Choose ${escapeHtml(brandName)}</h2>
+${formatParagraphs(content.why_choose_us)}
+`.trim());
+  }
+
+  if (faqHtml) {
+    sections.push(`
+<h2>Frequently Asked Questions</h2>
+${faqHtml}
+`.trim());
+  }
+
+  if (content.cta) {
+    sections.push(`
+<h2>Get Started</h2>
+${formatParagraphs(content.cta)}
+`.trim());
+  }
+
+  const html = sections.join("\n\n");
+
+  const outputFile = path.join(projectRoot, "output", slug, "page.html");
+  fs.writeFileSync(outputFile, html, "utf-8");
+
+  console.log("WordPress-ready HTML created:", outputFile);

@@ -1,0 +1,127 @@
+Create a QA validator script for the local SEO page builder.
+
+Requirements:
+
+1. Input
+- Accept generated HTML as input
+- Accept page type as input: "hub" or "cluster"
+- Accept config input including:
+  - brandName
+  - legalName
+  - companyNumber
+  - addressLines
+  - email
+  - privacyUrl
+  - termsUrl
+  - primaryKeyword
+  - supportingKeywords
+  - hubPageUrl
+  - relatedClusterUrls
+  - supportingPageUrls
+
+2. Output
+Return a structured QA report object with:
+- passed: boolean
+- score: number
+- pageType: string
+- checks: array of check results
+
+Each check result must contain:
+- key
+- status ("pass" | "warning" | "fail")
+- message
+
+3. Validation categories
+- structure
+- aiSummary
+- keywords
+- internalLinks
+- trustSignals
+- map
+- resourcesCards
+
+4. Structure validation
+For hub pages check presence of:
+- site-header
+- hero-section
+- ai-summary-section
+- split-section-one
+- split-section-two
+- about-section
+- definition-section
+- process-section
+- local-relevance-section
+- internal-links-section
+- map-section
+- faq-section
+- cta-section
+- trust-strip
+- site-footer
+
+For cluster pages check presence of:
+- site-header
+- hero-section
+- ai-summary-section
+- split-section-one
+- split-section-two
+- about-section
+- resources-section
+- map-section
+- faq-section
+- cta-section
+- trust-strip
+- site-footer
+
+5. AI summary validation
+Check that ai-summary-section contains, in order:
+- question heading
+- "Quick Answer" label
+- answer paragraph
+- bullet list
+
+6. Keyword validation
+Check:
+- primary keyword exists in H1
+- primary keyword exists in hero intro
+- primary keyword exists in AI answer
+- primary keyword exists in at least one later section heading
+- at least 2 supporting keywords appear in the page body
+
+7. Internal link validation
+Check:
+- at least 1 link to hubPageUrl
+- at least 1 link to a related cluster URL
+- at least 1 link to a supporting page URL
+
+8. Trust signal validation
+Check presence of:
+- brandName
+- legalName
+- companyNumber
+- address lines
+- email
+- privacyUrl
+- termsUrl
+
+9. Map validation
+Check that a map iframe exists and includes the address string or embed source
+
+10. Resources validation
+Check that the resources section exists and contains card-style items instead of plain text links
+
+11. Scoring
+- pass = 1 point
+- warning = 0.5 points
+- fail = 0 points
+Return overall percentage score
+
+12. Tech
+- Use Node.js with TypeScript
+- Use cheerio to parse HTML
+- Write clean modular code
+- Include helper functions for repeated checks
+
+Return:
+- validator file code
+- type definitions
+- sample usage example

@@ -1,0 +1,171 @@
+Build the image layer for the local SEO page engine using the Ideogram API and WordPress media upload.
+
+Goal:
+
+Generate one image per page
+Upload it to WordPress media
+Insert it into the generated HTML
+Keep it simple and production-safe for v1
+
+We are using Ideogram API V3 generate and WordPress REST media upload.
+
+Please build this in small, clean pieces.
+
+Files to create or update:
+
+input/image-config.json
+src/local-seo/generateImagePrompt.ts
+src/local-seo/generateIdeogramImage.ts
+src/local-seo/uploadImageToWordPress.ts
+src/local-seo/injectImageIntoHtml.ts
+src/local-seo/testImagePipeline.ts
+update src/local-seo/runBatch.ts so images can be generated optionally
+update src/local-seo/generateQaReport.ts to include image status fields
+
+Requirements:
+
+Create input/image-config.json
+Use this example structure:
+
+{
+"enabled": true,
+"provider": "ideogram",
+"stylePreset": "DESIGN",
+"renderingSpeed": "TURBO",
+"areaPageCount": 1,
+"hubPageCount": 1,
+"placement": "after-intro",
+"featuredImage": false,
+"brandStyles": {
+"InboxingProWeb": {
+"visualStyle": "clean professional digital business illustration",
+"colourTone": "modern professional website and digital marketing style",
+"backgroundStyle": "clean light background"
+}
+}
+}
+
+generateImagePrompt.ts
+Create a helper that builds an image prompt from:
+page type (hub or area)
+brand
+service
+city
+area if present
+image config brand style
+
+Prompt rules:
+
+professional digital service illustration
+no text in the image
+no logos
+no watermarks
+no UI screenshots
+suitable for a local web design / digital service page
+area pages can reference local business growth or website enquiries
+hub pages can reference broader city-wide business visibility
+
+Return:
+
+prompt
+altText
+suggestedFilename
+generateIdeogramImage.ts
+Use the Ideogram API.
+Implementation requirements:
+Read IDEOGRAM_API_KEY from environment
+Call POST https://api.ideogram.ai/v1/ideogram-v3/generate
+Send:
+prompt
+rendering_speed from image-config.json
+style_preset from image-config.json
+Use header:
+Api-Key:
+Parse the response safely
+Download the first returned image URL to the local page output folder
+Save it as a .png or .jpg using the suggested filename
+Save an image-generation.json log beside it
+uploadImageToWordPress.ts
+Implementation requirements:
+Use the same WordPress auth helper pattern already in the project
+Upload the generated file to:
+POST /wp-json/wp/v2/media
+Send filename/content type properly
+Then update the media item if needed so alt_text is stored
+Save image-upload.json beside the page output
+Return:
+mediaId
+sourceUrl
+altText
+injectImageIntoHtml.ts
+Implementation requirements:
+Read output/{slug}/page.html
+Insert one image block into the HTML based on image-config.json placement
+For v1 support only:
+after-intro
+after-local-section
+Use a simple HTML figure block:
+Save the updated page.html back to disk
+Do not add duplicate image blocks if rerun
+If image already injected, replace the old generated image block rather than adding another one
+testImagePipeline.ts
+Create a test runner for slug:
+web-design-ecclesall
+
+It should run in this order:
+
+generate image prompt
+call Ideogram
+upload image to WordPress
+inject image into page HTML
+export updated page to WordPress using existing export logic
+print success details
+runBatch.ts
+Update batch support so image generation is optional.
+Add support for an images block inside input/job.batch.json like this:
+
+"images": {
+"enabled": true
+}
+
+If enabled:
+
+generate/upload/inject image before exportToWordPress
+keep failures isolated per page
+if image generation fails, log it but do not crash the whole batch
+page generation should still continue without an image if needed
+QA report update
+Extend generateQaReport.ts to include:
+hasGeneratedImage
+hasImageUploadLog
+hasInjectedImage
+imageMediaId
+imageSourceUrl
+
+Detection rules:
+
+hasGeneratedImage if image-generation.json exists
+hasImageUploadLog if image-upload.json exists
+hasInjectedImage if page.html contains class="generated-page-image"
+imageMediaId / imageSourceUrl from image-upload.json if present
+Keep this production-safe
+no new dependencies unless truly required
+use built-in fetch if available
+preserve all current working features
+do not break batch generation
+do not assume more than one image per page for v1
+Important output files per page should now be:
+page-data.json
+content.json
+page.html
+schema.json
+schema-inline.html
+image-generation.json
+image-upload.json
+wordpress-export.json
+
+After making the changes, tell me:
+
+the exact command to run the single-page image test
+the exact command to run the full batch with images enabled
+the exact environment variable name needed for Ideogram

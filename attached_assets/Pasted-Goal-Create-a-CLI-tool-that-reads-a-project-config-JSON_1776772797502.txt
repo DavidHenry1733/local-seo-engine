@@ -1,0 +1,190 @@
+Goal
+
+Create a CLI tool that:
+
+reads a project config JSON
+generates pages for each service + location
+builds structured content
+assigns image packs
+renders static HTML
+exports to an /output folder
+1. Project structure
+
+Create this exact structure:
+
+root/
+assets/
+web-design/
+hero-v1.png
+trust-v1.png
+conversion-v1.png
+seo/
+hero-v1.png
+support-v1.png
+conversion-v1.png
+
+config/
+projects/
+example-business.json
+
+output/
+
+src/
+generator/
+runProject.ts
+buildProjectPlan.ts
+buildPagePayload.ts
+renderPage.ts
+exportProject.ts
+types.ts
+
+seo/
+  buildMeta.ts
+  buildSchema.ts
+  buildInternalLinks.ts
+  slugify.ts
+
+assets/
+  imagePacks.ts
+  buildImageAssignments.ts
+
+templates/
+  service-location-v1.ts
+2. Project config file
+
+Create:
+
+config/projects/example-business.json
+
+with this content:
+
+{
+"clientSlug": "example-business",
+"businessName": "Example Business",
+"domain": "https://example.com",
+"phone": "0114 000 0000",
+"email": "info@example.com",
+"primaryCtaText": "Request a Quote",
+"primaryCtaUrl": "/contact/",
+"branding": {
+"primaryColor": "#005EB8",
+"accentColor": "#1CA9C9"
+},
+"services": [
+{ "key": "web_design", "label": "Web Design" },
+{ "key": "local_seo", "label": "Local SEO" }
+],
+"locations": ["Sheffield", "Rotherham"]
+}
+
+3. Types
+
+Create types for:
+
+ProjectConfig
+PagePlanItem
+PagePayload
+ImageAssignment
+InternalLink
+4. Slug generator
+
+Create a slugify function that:
+
+lowercases
+removes special characters
+replaces spaces with hyphens
+5. Build project plan
+
+Generate pages for each:
+service × location
+
+Example:
+web-design-sheffield
+local-seo-rotherham
+
+6. Image packs
+
+Map service → images:
+
+web_design → assets/web-design/
+local_seo → assets/seo/
+
+Each must include:
+
+hero
+support
+conversion
+7. Page payload builder
+
+For each page:
+
+H1 = service + location
+intro paragraph
+4 sections:
+overview, benefits, local relevance, process
+3 FAQ items
+CTA block
+internal links (3 max)
+meta title + description
+schema (WebPage + Service)
+8. Template
+
+Create a function that returns full HTML:
+
+Requirements:
+
+proper with meta + canonical
+schema injected as JSON-LD
+layout:
+
+H1
+intro
+hero image
+section 1 + 2
+support image
+section 3 + 4
+conversion image
+CTA
+FAQ
+internal links
+
+Use simple inline CSS.
+
+Images must render using:
+
+
+
+9. Renderer
+
+Map template → HTML output
+
+10. Export
+
+Write files to:
+
+output/{clientSlug}/{pageSlug}/
+
+Include:
+
+index.html
+page.json
+11. CLI runner
+
+Create:
+
+runProject.ts
+
+It should:
+
+accept config path as argument
+load config
+build plan
+generate payloads
+render HTML
+export pages
+log progress
+12. Run command
+
+Ensure this works:
+
+pnpm exec tsx src/generator/runProject.ts config/projects/example-business.json

@@ -1,0 +1,96 @@
+The first template
+
+Create:
+
+src/templates/service-location-v1.ts
+
+import { PagePayload, ProjectConfig } from "../generator/types";
+
+export function renderServiceLocationTemplate(
+  project: ProjectConfig,
+  payload: PagePayload
+): string {
+  const schemaJson = payload.schema
+    .map((item) => `<script type="application/ld+json">${JSON.stringify(item)}</script>`)
+    .join("\n");
+
+  const faqHtml = payload.faq
+    .map(
+      (item) => `
+      <div class="faq-item">
+        <h3>${item.question}</h3>
+        <p>${item.answer}</p>
+      </div>
+    `
+    )
+    .join("");
+
+  const linksHtml = payload.internalLinks
+    .map((link) => `<li><a href="${link.href}">${link.label}</a></li>`)
+    .join("");
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>${payload.metaTitle}</title>
+  <meta name="description" content="${payload.metaDescription}" />
+  <link rel="canonical" href="${payload.canonicalUrl}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  ${schemaJson}
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; color: #222; background: #fff; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+    h1, h2, h3 { color: #003A6D; }
+    .hero-img, .support-img, .conversion-img { margin: 24px 0; }
+    img { max-width: 100%; height: auto; display: block; }
+    .cta { background: #F4F6F8; padding: 24px; border-radius: 12px; margin-top: 32px; }
+    .internal-links ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>${payload.h1}</h1>
+    <p>${payload.intro}</p>
+
+    <div class="hero-img">
+      <img src="/${payload.images.hero}" alt="${payload.h1} professional website visual" />
+    </div>
+
+    ${payload.sections
+      .slice(0, 2)
+      .map((section) => `<section><h2>${section.heading}</h2><p>${section.body}</p></section>`)
+      .join("")}
+
+    <div class="support-img">
+      <img src="/${payload.images.support}" alt="${payload.h1} trust and credibility visual" />
+    </div>
+
+    ${payload.sections
+      .slice(2, 4)
+      .map((section) => `<section><h2>${section.heading}</h2><p>${section.body}</p></section>`)
+      .join("")}
+
+    <div class="conversion-img">
+      <img src="/${payload.images.conversion}" alt="${payload.h1} lead generation visual" />
+    </div>
+
+    <section class="cta">
+      <h2>${payload.cta.heading}</h2>
+      <p>${payload.cta.body}</p>
+      <p><a href="${payload.cta.buttonUrl}">${payload.cta.buttonText}</a></p>
+    </section>
+
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      ${faqHtml}
+    </section>
+
+    <section class="internal-links">
+      <h2>Related Pages</h2>
+      <ul>${linksHtml}</ul>
+    </section>
+  </main>
+</body>
+</html>`;
+}

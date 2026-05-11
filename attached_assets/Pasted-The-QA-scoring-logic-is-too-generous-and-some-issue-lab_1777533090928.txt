@@ -1,0 +1,79 @@
+The QA scoring logic is too generous and some issue labels are misleading.
+
+Example:
+Barnsley Web Design hub page scores 92 but shows:
+- Primary keyword "web design Barnsley" not fully present in H1
+- No FAQPage schema found
+- No FAQPage schema — required for Google FAQ rich results and AI extraction
+
+This is inconsistent.
+
+Required changes:
+
+1. Fix scoring severity
+A page should not score 90+ if it has unresolved keyword/H1 or schema/content-structure warnings.
+
+Scoring should cap based on issue severity:
+- Any critical issue: max score 64 = FAIL
+- Any major issue: max score 84 = REVIEW
+- More than 2 warnings: max score 89 = REVIEW
+- Clean pages only: eligible for 90+
+
+2. Keyword/H1 issue
+If primary keyword is not fully present in H1:
+- classify as MAJOR for local SEO landing pages
+- status should be REVIEW at best
+- recommended fix should show exact current H1 and suggested H1
+
+Example:
+Current H1: Web Design in Barnsley
+Expected keyword coverage: Web Design Barnsley
+Suggested H1: Web Design Barnsley
+
+3. FAQ schema wording
+Change misleading wording.
+
+Do NOT say:
+“FAQPage schema is required for Google FAQ rich results”
+
+Use:
+“FAQPage schema can help structure FAQ content, but Google FAQ rich results are limited mainly to authoritative government and health websites. For this system, FAQ schema is recommended for AI/content clarity, not guaranteed rich results.”
+
+4. FAQ schema severity
+If visible FAQ section exists but no FAQPage schema:
+- classify as WARNING
+- affect AI Ready score more than Google Ready score
+
+If no FAQ section and no FAQ schema:
+- classify as REVIEW for AI Ready
+- not automatic Google Ready FAIL
+
+5. Score transparency
+Each page row should show:
+- raw score
+- capped score
+- cap reason
+- issue severity counts:
+  - critical
+  - major
+  - warning
+
+6. Status consistency
+If a page has a major issue:
+- status cannot be PASS
+- max status = REVIEW
+
+If a page has critical issue:
+- status = FAIL
+
+7. Acceptance criteria
+- Barnsley hub page cannot score 92 while keyword/H1 issue is present.
+- Missing FAQ schema is worded accurately.
+- Google Ready and AI Ready scores separate their logic.
+- Page status matches severity.
+- QA report clearly explains why a score is capped.
+
+The bigger principle:
+
+QA must be trustable.
+If it says 92, the page should be genuinely close to clean.

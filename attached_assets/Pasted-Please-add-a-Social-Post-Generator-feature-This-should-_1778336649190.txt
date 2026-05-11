@@ -1,0 +1,167 @@
+Please add a Social Post Generator feature.
+
+This should allow users to create social posts without needing to generate a new landing page.
+
+Purpose:
+Users should be able to enter a keyword or topic and generate social media post copy for multiple platforms. This helps keep the service useful every month and allows users to create regular content linked back to their website, homepage, or selected service page.
+
+========================
+USER INPUTS
+========================
+
+Add a form with these fields:
+
+1. Topic / Keyword
+Example:
+“emergency plumbing tips”
+“how to improve local SEO”
+“winter boiler checks”
+“email marketing for local businesses”
+
+2. Business Type
+Example:
+plumber, electrician, web design, accountant, restaurant, etc.
+
+3. Location / Area
+Example:
+Rotherham, Sheffield, Barnsley
+
+4. Link Destination
+Options:
+- Homepage
+- Existing generated page
+- Custom URL
+
+5. Post Objective
+Options:
+- Educate
+- Promote service
+- Generate enquiries
+- Announce offer
+- Build trust
+- Seasonal post
+- Local awareness
+
+6. Platforms
+Checkboxes:
+- Google Business Profile
+- Facebook
+- Instagram
+- LinkedIn
+
+========================
+OUTPUT
+========================
+
+For each selected platform, generate one post.
+
+Each platform should have its own style:
+
+Google Business Profile:
+- 100–150 words
+- local service-focused
+- clear CTA
+- link included
+- direct and practical
+
+Facebook:
+- friendly and conversational
+- 80–140 words
+- local community tone
+- CTA included
+
+Instagram:
+- shorter, visual-first caption
+- hook line
+- 5–10 relevant hashtags
+- CTA included
+
+LinkedIn:
+- professional tone
+- more insight-led
+- suitable for B2B or professional positioning
+- 100–180 words
+
+========================
+AI PROMPT RULES
+========================
+
+The AI should use:
+- businessType
+- topic/keyword
+- location
+- postObjective
+- linkDestination
+- platform
+
+The posts must:
+- be unique per platform
+- not simply copy the same text
+- sound natural and human
+- include local relevance where appropriate
+- avoid exaggerated claims
+- avoid fake guarantees
+- include a clear next step
+
+========================
+LINK RULES
+========================
+
+If Link Destination = Homepage:
+Use homepage URL.
+
+If Link Destination = Existing generated page:
+Let user select from generated pages.
+
+If Link Destination = Custom URL:
+Use entered URL.
+
+Each generated post should include the selected URL naturally at the end or CTA area.
+
+========================
+EXAMPLE OUTPUT FORMAT
+========================
+
+Display results in separate editable cards:
+
+Card 1:
+Google Business Profile Post
+[generated copy]
+Button: Copy
+
+Card 2:
+Facebook Post
+[generated copy]
+Button: Copy
+
+Card 3:
+Instagram Caption
+[generated copy]
+Button: Copy
+
+Card 4:
+LinkedIn Post
+[generated copy]
+Button: Copy
+
+========================
+EXTRA FEATURES
+========================
+
+Add:
+- Regenerate all posts button
+- Regenerate individual platform button
+- Copy button for each platform
+- Save post set to campaign history
+- Optional image suggestion based on topic
+
+========================
+ACCEPTANCE CRITERIA
+========================
+
+- User can enter a topic/keyword without creating a new page.
+- AI generates different copy for GBP, Facebook, Instagram, and LinkedIn.
+- User can choose homepage, existing page, or custom URL.
+- Each post includes a relevant CTA.
+- Posts are editable/copyable.
+- Saved posts are attached to the campaign or user account.

@@ -1,0 +1,106 @@
+Build a QA/reporting layer for the local SEO page engine.
+
+Goal:
+
+After generation/export, create a per-page quality summary
+Output both JSON and CSV reports
+Make it easy to spot broken or incomplete pages quickly
+
+Please create a new file:
+
+src/local-seo/generateQaReport.ts
+
+And a test runner:
+
+src/local-seo/testGenerateQaReport.ts
+
+Requirements for generateQaReport.ts:
+
+Scan the /output directory
+Only process page folders (ignore unrelated files like batch-results.json)
+For each page folder, read these files if present:
+page-data.json
+content.json
+page.html
+schema.json
+wordpress-export.json
+
+For each page, include these fields in the QA report:
+
+slug
+title
+pageType
+"hub" if slug ends with the city only (example: web-design-sheffield)
+"area" otherwise
+city
+area
+faqCount
+benefitsCount
+hasCta
+hasFaqSection
+hasHubLink
+hasNearbyLinksSection
+hasSchemaJson
+hasSchemaInline
+wordpressAction
+wordpressStatus
+wordpressLink
+readyForReview
+issues (array of strings)
+
+Detection rules:
+
+title = content.hero_title if available, otherwise pageData.page.title_seed
+faqCount = count of faq items in content.json
+benefitsCount = number of benefits items in content.json if benefits is an array
+hasCta = true if content.cta exists and is non-empty
+hasFaqSection = true if page.html contains "Frequently Asked Questions" or other FAQ heading text already rendered
+hasHubLink = true if page.html contains a link to the city hub URL pattern for area pages
+hasNearbyLinksSection = true if page.html contains the nearby areas section heading
+hasSchemaJson = true if schema.json exists
+hasSchemaInline = true if schema-inline.html exists
+wordpressAction / wordpressStatus / wordpressLink from wordpress-export.json if present
+
+readyForReview should be true only if:
+
+title exists
+faqCount >= 3
+benefitsCount >= 6
+hasCta = true
+hasSchemaJson = true
+for area pages: hasHubLink = true
+page.html exists
+
+issues array should include human-readable messages like:
+
+"Missing CTA"
+"FAQ count below 3"
+"Benefits count below 6"
+"Missing hub link"
+"Missing schema.json"
+"Missing page.html"
+
+Output files:
+
+output/qa-report.json
+output/qa-report.csv
+
+CSV columns should match the main flat fields:
+slug,title,pageType,city,area,faqCount,benefitsCount,hasCta,hasFaqSection,hasHubLink,hasNearbyLinksSection,hasSchemaJson,hasSchemaInline,wordpressAction,wordpressStatus,wordpressLink,readyForReview,issues
+
+Implementation details:
+
+Keep it TypeScript
+Use fs/path only, no new dependencies
+Add helper functions if needed
+Make the CSV safe by escaping commas and quotes properly
+
+Please also create:
+
+src/local-seo/testGenerateQaReport.ts
+
+The test runner should:
+
+call generateQaReport(process.cwd())
+print the number of pages processed
+print the output file paths

@@ -1,0 +1,476 @@
+MASTER STABILISATION PROMPT — RELEASE-BLOCKING
+
+We are no longer adding new features. We are stabilising the system so it can become a commercial product.
+
+Current problem:
+Campaigns/pages are passing QA while still containing visible bugs such as broken links, wrong links, missing content, wrong image relevance, wrong alt text, map issues, broken sentence fragments, and incomplete layout rules.
+
+Goal:
+Create a deterministic publishing system where PASS means genuinely safe to publish.
+
+Do not add new product features.
+Do not change UI design except to show clearer pass/fail status.
+Do not change page styling except where validation requires it.
+Do not change content strategy.
+Focus entirely on validation, enforcement, repair, and release reliability.
+
+==================================================
+1. CREATE STRICT PUBLISH GATE
+==================================================
+
+Create a single campaign-level gate called:
+
+Final Publish Gate
+
+This gate must run all critical checks before a campaign can be marked PASS or READY TO PUBLISH.
+
+The gate must combine:
+- Page QA
+- AI Readiness
+- Link Integrity
+- Image Validation
+- Schema Validation
+- Map Validation
+- Money Page Validation
+- Placeholder/Text Fragment Validation
+- Layout Validation
+- Required Sections Validation
+
+PASS must only be possible when every critical check passes on every page.
+
+A campaign with 10 perfect pages and 1 broken page must FAIL.
+
+==================================================
+2. STATUS RULES
+==================================================
+
+Use only these campaign statuses:
+
+PASS_READY
+REVIEW_REQUIRED
+FAIL_BLOCKED
+
+Rules:
+- Any critical issue anywhere = FAIL_BLOCKED
+- Any major issue anywhere = REVIEW_REQUIRED
+- More than 5 warnings = REVIEW_REQUIRED
+- No critical, no major, <=5 warnings = PASS_READY
+
+Do not allow average score to determine pass/fail.
+
+Score is informational only.
+Severity determines status.
+
+==================================================
+3. SCORE CAPS
+==================================================
+
+Apply these hard caps:
+
+- Any critical issue anywhere:
+  campaign score max = 59
+  status = FAIL_BLOCKED
+
+- Any major issue anywhere:
+  campaign score max = 84
+  status = REVIEW_REQUIRED
+
+- More than 5 warnings:
+  campaign score max = 89
+  status = REVIEW_REQUIRED
+
+Never show a green/pass state if a critical issue exists.
+
+==================================================
+4. PAGE-LEVEL RULE
+==================================================
+
+Every page must individually pass.
+
+For every page:
+- page status can be PASS, REVIEW, or FAIL
+- if any page is FAIL, campaign is FAIL_BLOCKED
+- if any page is REVIEW and no page fails, campaign is REVIEW_REQUIRED
+- only if every page is PASS can campaign be PASS_READY
+
+==================================================
+5. CRITICAL INVARIANT RULES
+==================================================
+
+Create invariant checks that run against every generated page.
+
+Each failed invariant is a CRITICAL issue unless explicitly listed as review.
+
+A. Page existence and identity
+Critical fail if:
+- expected HTML file missing
+- slug missing
+- canonical missing
+- canonical does not match expected URL
+- title missing
+- H1 missing
+- H1 does not contain service + location
+- page has wrong service
+- page has wrong location
+
+B. Link integrity
+Critical fail if:
+- any internal campaign link returns 404 or file missing
+- href="" exists
+- href="#" exists
+- empty anchor text exists
+- anchor with no visible text exists
+- /preview/ link exists
+- bare area slug exists where service-prefixed slug is expected
+- resource card href="/" exists
+- cluster links to wrong hub
+- cluster links to wrong service
+- cluster links to wrong city/campaign
+- hub links to wrong cluster
+- hub missing expected cluster links
+- sibling cluster links leave the same campaign
+- cross-campaign contamination exists
+- Rotherham Local SEO links to Sheffield Web Design or equivalent wrong campaign link
+
+C. Money page link
+Critical fail if:
+- hub has configured moneyPageUrl but no money-page-band
+- money-page-band exists but has no link
+- money-page-band href does not exactly match configured moneyPageUrl
+- cluster page contains money-page-band unless explicitly configured
+
+D. Images
+Critical fail if:
+- required hero image missing
+- required support image missing
+- required conversion image missing
+- image file missing
+- image src broken
+- blank placeholder image area exists
+- image alt text uses wrong service
+- image alt text uses wrong location
+- Web Hosting page image prompt/alt mentions Web Design
+- Local SEO page image prompt/alt mentions Web Design unless service is Web Design
+- image filename does not include current service slug and slot when newly generated
+
+E. Content completeness
+Critical fail if:
+- unresolved placeholders exist
+- {{ }} tokens exist
+- [placeholder] text exists
+- “visit .” exists
+- “Visit .” exists
+- “For more insights, visit .” exists
+- empty generated link sentence exists
+- duplicated full paragraph exists
+- AI summary malformed
+- AI summary contains multiple paragraphs inside one <p>
+- required sections missing
+- FAQ section missing
+- FAQ schema exists but visible FAQs missing
+- visible FAQs exist but FAQ schema missing
+- intent answer below configured minimum word count
+- page word count below minimum threshold
+
+F. Schema
+Critical fail if:
+- any JSON-LD is invalid JSON
+- WebPage schema missing
+- Service schema missing
+- LocalBusiness schema missing
+- BreadcrumbList schema missing
+- FAQPage schema missing when visible FAQ exists
+- LocalBusiness address uses target campaign city instead of actual business address city
+- Service serviceArea does not use target location
+- WebPage URL does not match canonical
+- FAQ schema does not match visible FAQ questions
+
+G. Map
+Critical fail if:
+- map section missing
+- iframe missing
+- map src uses raw coordinates instead of encoded business name + full business address
+- map uses target location as business address
+- iframe title missing business name
+- iframe title missing business address
+
+H. AI readiness
+Critical fail if:
+- AI readiness score below 90
+- AI readiness publishBlocked is true
+- AI citable blocks missing where expected
+- data-ai-citable missing when citation optimiser is enabled
+
+I. Layout
+Major issue if:
+- What’s Included section with 6 cards does not render as 3 + 3 desktop
+- Common Mistakes does not generate 8 cards
+- card section has 4+1, 4+2, 5+1, or 5+2 layout where avoidable
+- card paragraph text is not centered where required
+
+Layout can be major unless it causes broken/missing content, then critical.
+
+==================================================
+6. DETERMINISTIC CAMPAIGN MANIFEST
+==================================================
+
+Create a campaign manifest builder that becomes the source of truth.
+
+For every campaign, derive and store:
+- clientSlug
+- campaignId
+- serviceKey
+- serviceName
+- cityName/location
+- hubSlug
+- hubUrl
+- moneyPageUrl
+- expected cluster slugs
+- expected cluster URLs
+- expected canonical URLs
+- expected image slot filenames
+- expected related resource links
+
+All validation must compare output against this manifest.
+
+Do not infer correctness from current HTML alone.
+
+HTML must match the manifest.
+
+==================================================
+7. DETERMINISTIC LINK MAP
+==================================================
+
+Build a deterministic link map per campaign.
+
+For each campaign:
+- hub URL
+- all cluster URLs
+- allowed sibling URLs
+- allowed moneyPageUrl
+- allowed external URLs
+- allowed main-site CTA URLs
+
+Validation rules:
+- cluster-to-hub must match manifest hub URL
+- hub-to-cluster links must match manifest cluster URLs
+- resource cards must match manifest cluster URLs
+- no cross-campaign URLs allowed inside generated local page content
+- header/footer external links are allowed and should not be incorrectly modified
+
+Repair rules:
+- replace wrong cluster-to-hub links using manifest
+- replace wrong resource card links using manifest
+- replace bare area slugs with service-prefixed slugs
+- remove /preview/ prefixes
+- remove root resource card href="/"
+- preserve intentional main-site header/footer/CTA links
+
+==================================================
+8. CONTENT SANITISER BEFORE SAVE
+==================================================
+
+Before writing HTML to disk, run a sanitiser.
+
+Sanitiser must:
+- remove or rewrite “visit .” fragments
+- remove empty anchors
+- remove href="" and href="#" from generated content
+- split AI summary paragraphs into separate <p> tags
+- remove duplicate full paragraphs
+- ensure required sections are present
+- ensure image alt text uses current service + location
+- ensure map embed uses business name + full business address
+- ensure card paragraph alignment rules are applied
+- ensure money page band is inserted on hub if configured
+- ensure money page band is absent from clusters
+
+If sanitiser cannot safely fix an issue:
+- mark critical issue
+- block publish
+
+==================================================
+9. AUTO-REPAIR FLOW
+==================================================
+
+Add a repair pipeline tied to Final Publish Gate.
+
+If Final Publish Gate fails:
+- show all issues
+- group by type
+- show “Auto Repair Available” where possible
+
+Auto repairs must include:
+- fix internal links
+- fix hub/cluster links
+- fix resource-card root links
+- fix money page band
+- remove money page band from clusters
+- fix image alt text
+- fix map embed
+- fix AI summary paragraph structure
+- fix broken sentence fragments
+- fix empty anchors
+- regenerate affected page only where repair cannot safely patch HTML
+
+After repair:
+- rerun Final Publish Gate automatically
+- show before issue count
+- show after issue count
+- status must update based on new gate result
+
+==================================================
+10. BLOCK DEPLOY/PUBLISH
+==================================================
+
+If Final Publish Gate status is FAIL_BLOCKED:
+- deployment must be blocked by default
+- publishing must be blocked by default
+- show exact blocking reasons
+
+Allow admin override only if explicitly enabled:
+adminOverridePublish: true
+
+If override is used:
+- log override
+- store timestamp
+- store user
+- store unresolved issue count
+
+Default must be no override.
+
+==================================================
+11. DASHBOARD REQUIREMENTS
+==================================================
+
+Add/adjust dashboard to show:
+
+Campaign Publish Status:
+- PASS_READY
+- REVIEW_REQUIRED
+- FAIL_BLOCKED
+
+Summary cards:
+- total pages
+- passed pages
+- review pages
+- failed pages
+- critical issue count
+- major issue count
+- warning count
+- campaign score
+- AI readiness average
+- link integrity status
+- image status
+- schema status
+- map status
+- money page status
+
+Issue table:
+- severity
+- issue type
+- page slug
+- evidence
+- expected value
+- actual value
+- suggested fix
+- auto-repair available yes/no
+
+Buttons:
+- Run Final Publish Gate
+- Auto Repair Issues
+- Rerun Gate
+
+Do not show campaign as green/pass unless Final Publish Gate is PASS_READY.
+
+==================================================
+12. TESTING REQUIREMENTS
+==================================================
+
+Create tests or scripted checks for the following intentionally broken cases:
+
+1. Cluster links to wrong hub
+Expected: FAIL_BLOCKED
+
+2. Resource card href="/"
+Expected: FAIL_BLOCKED
+
+3. Hub missing money page band while moneyPageUrl configured
+Expected: FAIL_BLOCKED
+
+4. Cluster contains money page band
+Expected: FAIL_BLOCKED
+
+5. Web Hosting page image alt says Web Design
+Expected: FAIL_BLOCKED
+
+6. Map src uses raw coordinates
+Expected: FAIL_BLOCKED
+
+7. LocalBusiness addressLocality equals target city when business address is Rotherham
+Expected: FAIL_BLOCKED
+
+8. AI summary has multiple paragraphs inside one <p>
+Expected: FAIL_BLOCKED or auto-fix before scoring
+
+9. “For more insights, visit .”
+Expected: FAIL_BLOCKED or auto-fix before scoring
+
+10. AI score average is high but one page has broken link
+Expected: campaign FAIL_BLOCKED
+
+11. One page missing from campaign
+Expected: FAIL_BLOCKED
+
+12. FAQ schema does not match visible FAQs
+Expected: FAIL_BLOCKED
+
+13. Common Mistakes has 7 cards
+Expected: REVIEW_REQUIRED or auto-fix to 8
+
+14. What’s Included has 6 cards but desktop grid is 4+2
+Expected: REVIEW_REQUIRED or auto-fix CSS/grid
+
+==================================================
+13. RELEASE ACCEPTANCE CRITERIA
+==================================================
+
+Run Final Publish Gate on at least 3 different campaigns:
+- Web Design Rotherham
+- Web Hosting Rotherham
+- Local SEO Rotherham or equivalent
+
+A campaign can only be marked PASS_READY if:
+- every expected page exists
+- every page has canonical/title/H1 correct
+- every internal link is valid
+- every cluster links to correct hub
+- every hub links to correct clusters
+- no cross-campaign links exist
+- no bare slugs exist
+- no root resource card links exist
+- money page band is correct
+- images exist and match service/location
+- schema is valid and consistent
+- map uses full business address query
+- no placeholders or broken sentence fragments exist
+- AI readiness score >=90 on every page
+- all required sections exist
+- layout rules pass or only minor warnings remain
+
+If any critical issue exists, status must be FAIL_BLOCKED.
+
+==================================================
+14. PRODUCT RULE
+==================================================
+
+This is a commercial product.
+
+A user must be able to trust that PASS_READY means:
+“This campaign is safe to publish.”
+
+Do not use averages to hide failures.
+Do not allow individual page failures to be masked by good pages.
+Do not mark as pass unless the campaign is genuinely clean.
+
+Implement this as the core release gate before any further feature development.

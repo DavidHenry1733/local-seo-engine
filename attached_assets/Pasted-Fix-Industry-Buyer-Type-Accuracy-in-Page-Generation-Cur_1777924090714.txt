@@ -1,0 +1,334 @@
+Fix Industry + Buyer Type Accuracy in Page Generation
+
+Current issue:
+The landscaping page copy is unacceptable because it assumes “businesses” and “commercial ROI” for a service that is often household/homeowner focused. The engine must distinguish whether the service is aimed at households, businesses, landlords/property managers, or mixed audiences before generating copy.
+
+Do not change layout, sitemap, deployment, social distribution, image library, or link audit unless validation requires it.
+
+Goal:
+Add buyerType and audienceIntent logic so every page writes content for the correct customer type.
+
+==================================================
+1. Add buyerType to campaign/service setup
+==================================================
+
+Add required field:
+
+buyerType:
+- household
+- business
+- landlord-property
+- mixed
+
+Examples:
+Landscape gardener = household by default
+Plumber = household + landlord-property by default
+Roofer = household + landlord-property by default
+Electrician = mixed by default
+Clinic/aesthetics = household/individual by default
+Web design = business by default
+
+Allow user override.
+
+==================================================
+2. Add audienceMode to generation context
+==================================================
+
+Every page generation prompt must include:
+
+serviceName
+industryType
+buyerType
+customerProfile
+location
+targetAudience
+primaryBuyerPainPoints
+primaryConversionAction
+
+The AI must never guess whether it is B2B or B2C.
+
+==================================================
+3. Rewrite landscaping industry profile
+==================================================
+
+Update landscaping profile to separate household and commercial contexts.
+
+For household landscaping:
+Audience:
+- homeowners
+- families
+- new-build homeowners
+- landlords improving rental gardens
+- homeowners preparing to sell
+- people wanting patios, fencing, turfing, planting, privacy, drainage, garden design
+
+Buyer intent:
+- make garden usable
+- improve privacy
+- create outdoor living space
+- replace tired patio/lawn/fencing
+- improve kerb appeal
+- solve drainage or level problems
+- make garden safer for children/pets
+- increase home enjoyment/value
+
+Tone:
+- warm
+- practical
+- visual
+- reassuring
+- home-improvement focused
+
+CTAs:
+- request a garden quote
+- book a garden consultation
+- send garden photos
+- arrange a site visit
+
+Avoid:
+- “commercial ROI”
+- “business enquiries”
+- “footfall”
+- “client engagement”
+- “commercial premises”
+- “hospitality venues”
+unless buyerType = business.
+
+For commercial landscaping:
+Audience:
+- offices
+- hospitality venues
+- schools
+- care homes
+- commercial landlords
+- property managers
+- retail sites
+
+Only use this if buyerType = business or mixed.
+
+==================================================
+4. Section rules by buyerType
+==================================================
+
+If buyerType = household:
+
+Hero:
+Must speak to homeowners/local residents.
+Example:
+“Create a garden you can actually enjoy with a landscape gardener in Sheffield who understands patios, fencing, turfing, planting, drainage and practical outdoor living.”
+
+AI Summary:
+Must explain the service for homeowners.
+Do not mention business ROI unless mixed/business.
+
+Why This Matters:
+Focus on:
+- unused garden space
+- poor privacy
+- tired patios
+- muddy lawns
+- unsafe levels
+- drainage problems
+- kerb appeal
+- family use
+- home value
+
+What You Get:
+Focus on:
+- garden design
+- patios
+- fencing
+- turfing
+- planting
+- drainage
+- practical layout
+- low-maintenance options
+
+Who It’s For:
+Generate 8 household-relevant cards:
+- Homeowners
+- Families
+- New-build homeowners
+- Landlords
+- Homeowners preparing to sell
+- People wanting low-maintenance gardens
+- Pet owners
+- Homeowners with sloped or awkward gardens
+
+Enquiry Section:
+Explain how a clear landscaping website/service page helps homeowners enquire:
+- see examples
+- understand services
+- request quote
+- send photos
+- book site visit
+But do not say landscaping itself increases website enquiries unless the page is for a landscaping provider’s website.
+
+Local Relevance:
+Focus on Sheffield homes, gardens, slopes, weather, clay soil/drainage where appropriate, privacy, patios, outdoor living, local areas.
+
+Common Mistakes:
+For landscaping service pages, mistakes must be about landscaping decisions, not website mistakes:
+- choosing poor drainage
+- using unsuitable materials
+- ignoring privacy
+- no clear garden plan
+- poor patio levels
+- low-quality turf/artificial grass installation
+- planting without maintenance plan
+- not checking access/removal requirements
+
+FAQ:
+Household-focused:
+- How much does a landscape gardener cost in Sheffield?
+- How long does a garden landscaping project take?
+- Do I need a design before landscaping work starts?
+- Can you help with patios, fencing, turfing and planting?
+
+CTA:
+“Request a Garden Quote” or “Book a Garden Consultation”
+
+==================================================
+5. Fix generic website mistakes leaking into non-digital services
+==================================================
+
+For non-digital industries, Common Mistakes must relate to the actual service, not website/SEO mistakes.
+
+Examples:
+Landscape gardener mistakes = drainage, materials, privacy, access, levels, maintenance.
+Plumbing mistakes = delaying leaks, DIY fixes, ignoring pressure issues.
+Roofing mistakes = ignoring small leaks, poor materials, no guarantee.
+Electrical mistakes = DIY wiring, ignoring tripping circuits, no certification.
+Clinics = unclear treatment suitability, no aftercare, unrealistic expectations.
+
+Final Publish Gate must fail if:
+- landscaping page contains “slow page load speed” as a landscaping mistake
+- roofing/plumbing/electrical pages contain web design mistake cards
+- non-digital service pages talk about Google/AI optimisation as if it is part of the trade service
+
+==================================================
+6. Fix incorrect provider/service mismatch
+==================================================
+
+This test page uses DHM Digital as provider for landscape gardener. That is only acceptable if DHM Digital is intentionally the customer/service provider.
+
+If customer profile is a digital agency but service is landscape gardener, require user confirmation:
+“Is this business actually providing landscape gardening services?”
+
+Add validation:
+- If customerProfile.primaryIndustry conflicts with campaign industryType, mark REVIEW_REQUIRED.
+- Do not silently generate trade pages for a digital agency unless allowed by admin/test mode.
+
+==================================================
+7. Money page link correction
+==================================================
+
+Money page band currently points to https://inboxingproweb.com/ for landscape gardener Sheffield.
+
+This is wrong unless configured.
+
+Rules:
+- moneyPageUrl must come from campaign setup.
+- If no moneyPageUrl exists, do not render money-page-band.
+- Do not fallback to homepage.
+- Do not fallback to InboxingProWeb.
+- Final Publish Gate fails if money-page-band href is homepage or wrong brand.
+
+==================================================
+8. Schema/contact validation
+==================================================
+
+The LocalBusiness schema contains bad phone/address data.
+
+Add validation:
+- phone must be valid format or omitted
+- addressLocality must be actual town/city, not street name
+- provider name must match customer profile
+- Service provider must not be digital agency unless that agency provides the service
+- fail REVIEW_REQUIRED on suspicious phone/address values
+
+Example invalid:
+"telephone":"059) 0 0 60"
+"addressLocality":"South Grove"
+
+==================================================
+9. Improved landscaping household content prompt
+==================================================
+
+When industryType = landscaping and buyerType = household, use this guidance:
+
+Write as if speaking to homeowners who want a better garden, not businesses trying to increase revenue.
+
+Focus on:
+- making the garden more usable
+- improving privacy
+- creating space for family/friends
+- patios, paths, fencing, turfing, planting, drainage, retaining walls
+- practical site visit and quote process
+- local Sheffield garden conditions
+- trustworthy workmanship
+- examples/photos
+- clear pricing guidance
+
+Avoid:
+- commercial ROI
+- enquiries for businesses
+- client engagement
+- footfall
+- business premises
+- digital marketing wording
+- Google/AI search optimisation as a service benefit
+
+==================================================
+10. Example replacement copy direction
+==================================================
+
+For Landscape Gardener Sheffield, household mode should sound like this:
+
+Hero:
+“Create a garden that works for everyday life with a landscape gardener in Sheffield. From patios and fencing to turfing, planting, drainage and full garden redesigns, the right landscaping can turn a tired outdoor space into somewhere practical, attractive and easy to enjoy.”
+
+AI Summary:
+“A landscape gardener in Sheffield helps homeowners improve outdoor spaces with practical garden design, patios, fencing, turfing, planting, drainage and ongoing garden improvements. The aim is to make the garden easier to use, more attractive and better suited to the property. This is especially useful for homeowners with tired patios, uneven lawns, poor privacy, drainage problems or gardens that no longer fit how the family uses the space.”
+
+Common Mistake:
+“Poor drainage planning — A new patio, lawn or artificial grass area can quickly become a problem if water has nowhere to go. Good landscaping should consider levels, runoff and drainage before materials are installed.”
+
+==================================================
+11. Validation / scoring updates
+==================================================
+
+Add semantic checks:
+- buyerType terms must match page copy
+- household pages must include homeowner/home/garden language
+- business-only wording must not dominate household pages
+- common mistakes must be industry-specific
+- CTA must match buyerType and industry
+- FAQs must match buyerType
+
+Fail REVIEW_REQUIRED if mismatch found.
+
+==================================================
+12. Acceptance criteria
+==================================================
+
+Regenerate Landscape Gardener Sheffield with:
+industryType = landscaping
+buyerType = household
+
+Expected:
+- copy speaks to homeowners, not businesses
+- meta description mentions homeowners/gardens, not businesses
+- FAQ costs are realistic for garden projects
+- common mistakes are landscaping mistakes, not website mistakes
+- who-it’s-for cards are household/property focused
+- CTA says Request a Garden Quote
+- no “commercial ROI”, “client engagement”, “business footfall” unless buyerType = business
+- no money page band if no valid moneyPageUrl exists
+- no bad fallback to InboxingProWeb
+- schema/contact passes validation or marks REVIEW_REQUIRED
+
+The core fix is this:
+
+industryType tells the engine what the service is.
+buyerType tells the engine who the service is for.

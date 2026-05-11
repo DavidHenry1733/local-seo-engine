@@ -1,0 +1,85 @@
+The images are now saving, but Stage 5 preview/rendering is still wrong.
+
+Current confirmed issue:
+- Hero image assignment is saved, but the hero preview is blank/grey.
+- Conversion image assignment is saved, but Stage 5 still displays the previous conversion image.
+- Support appears closer to correct.
+- Therefore the save function is probably writing data, but Stage 5 preview/status is resolving stale or incorrect image paths for hero and conversion.
+
+Do not change button placement.
+Do not redesign the image UI.
+Only fix image slot preview/state resolution.
+
+Required debugging:
+Trace the full flow for each slot separately:
+- hero
+- support
+- conversion
+
+For each slot, check:
+1. What value is saved after clicking Save Image Selection.
+2. Where that value is stored.
+3. What /api/images/status returns.
+4. What URL Stage 5 uses for preview.
+5. Whether the preview URL returns HTTP 200.
+6. Whether browser caching is showing an old image.
+7. Whether hero/conversion are using stale fallback paths or old AI image paths.
+
+Likely causes to check:
+- Hero preview uses a different field name than saved assignment.
+- Conversion preview falls back to old conversion.jpg before checking saved assignment.
+- Slot order/index mismatch, e.g. hero/support/conversion mapped incorrectly.
+- Browser cache serving old /assets/{clientSlug}/conversion.jpg.
+- Save handler updates image-meta.json but status endpoint reads a different file/state.
+- Preview URL lacks a cache-busting query string after save.
+- Hero image file exists but src is empty/undefined.
+- Conversion saved path exists but UI continues to render old approved AI path.
+
+Required fix:
+Create one central function/helper to resolve the current image for a slot.
+
+Example:
+resolveCurrentSlotImage(clientSlug, slot)
+
+It should return:
+- slot
+- source
+- savedPath
+- previewUrl
+- liveUrl
+- fileExists
+- approvalStatus
+- updatedAt
+
+Stage 5 preview, image status endpoint, and deployment should all use this same resolved slot image data.
+
+Rules:
+1. Saved assignment must take priority over old AI/default images.
+2. Uploaded/library image must override previous AI image.
+3. If saved image path exists, preview must use it.
+4. If saved image path is missing, do not show Approved.
+5. If preview URL changes after save, append cache busting:
+   ?v={updatedAt}
+6. Conversion must not show old image after new image is saved.
+7. Hero must not show blank if saved image exists and file returns 200.
+
+Add temporary visible diagnostics under each Stage 5 image card:
+- slot
+- source
+- saved path
+- preview URL
+- file exists yes/no
+- updatedAt
+- resolved from: saved assignment / ai image / fallback / missing
+
+Acceptance criteria:
+- Hero preview displays the saved hero image.
+- Conversion preview displays the saved conversion image, not the previous image.
+- Support preview still works.
+- Refresh Status shows the correct saved image for all three slots.
+- After hard refresh, all three slots still show the saved images.
+- Deployment uses the same three images shown in Stage 5.
+
+The key fix is this:
+
+Saved assignment must be the first source of truth. Old AI images/default slot files must only be fallback.

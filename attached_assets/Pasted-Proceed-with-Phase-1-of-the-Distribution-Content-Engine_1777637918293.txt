@@ -1,0 +1,172 @@
+Proceed with Phase 1 of the Distribution Content Engine.
+
+Do not connect any APIs.
+Do not auto-post anywhere.
+Do not change page generation, deployment, sitemap, scoring, images, or link audit logic.
+
+Goal:
+For each generated SEO page, create supporting content drafts for Facebook, LinkedIn, Reddit and YouTube, then display them in the dashboard for review/copy/export.
+
+1. Create module
+
+Create:
+
+src/generator/distributionContent.ts
+
+Function:
+
+generateDistributionContent(context)
+
+Context includes:
+- clientSlug
+- campaignId
+- pageSlug
+- pageTitle
+- primaryKeyword
+- service
+- location
+- businessName
+- pageUrl
+- moneyPageUrl
+- aiSummary
+- keyBenefits
+- targetAudience
+- nearbyAreas
+- approvedClaims
+- imageUrl
+
+2. Generate JSON output
+
+Return:
+
+{
+  facebook: {
+    postText,
+    hashtags,
+    imageSuggestion,
+    linkUrl
+  },
+  linkedin: {
+    headline,
+    postText,
+    hashtags,
+    linkUrl
+  },
+  reddit: {
+    title,
+    body,
+    suggestedSubreddits,
+    disclosureNote,
+    linkUrl
+  },
+  youtube: {
+    title,
+    description,
+    script,
+    chapters,
+    tags,
+    thumbnailPrompt,
+    videoPrompt,
+    linkUrl
+  }
+}
+
+3. Platform rules
+
+Facebook:
+- 80–150 words
+- friendly/local tone
+- benefit-led
+- include page URL
+- 3–5 hashtags
+
+LinkedIn:
+- 120–220 words
+- professional/insight-led
+- mention local business problem
+- mention solution
+- include page URL
+- 3–5 hashtags
+
+Reddit:
+- discussion-first, not promotional
+- title should ask a genuine question
+- body should invite discussion
+- include disclosure if linking to own page
+- suggested subreddit list only
+- do not make spammy claims
+
+YouTube:
+- title under 70 characters
+- description 150–300 words
+- 60–90 second script
+- include keyword naturally
+- include call to action
+- include page URL
+- chapters/timestamps
+- tags
+- thumbnail prompt
+- text-to-video prompt
+
+4. Storage
+
+Save to:
+
+output/{clientSlug}/distribution/{pageSlug}.json
+
+Also save a campaign index:
+
+output/{clientSlug}/distribution/index.json
+
+Index should include:
+- pageSlug
+- pageTitle
+- generatedAt
+- approvalStatus: draft | approved | posted
+- postedUrls: facebook/linkedin/reddit/youtube
+
+5. Dashboard UI
+
+Add a Distribution Content panel.
+
+Features:
+- list generated pages
+- view Facebook draft
+- view LinkedIn draft
+- view Reddit draft
+- view YouTube script
+- copy button for each platform
+- download JSON
+- mark approved
+- mark posted
+- manually enter posted URL per platform
+
+6. Generation trigger
+
+Add button:
+“Generate Distribution Content”
+
+Options:
+- generate for current page
+- generate for all pages in campaign
+
+Do not automatically generate on every page build yet unless explicitly triggered.
+
+7. Quality rules
+
+Do not claim guaranteed rankings.
+Do not invent statistics unless approvedClaims includes them.
+Do not reuse identical copy across platforms.
+Do not say “we are the best”.
+Do not spam Reddit.
+Do not auto-post.
+
+8. Acceptance criteria
+
+- Distribution content can be generated for one page.
+- Content is saved as JSON.
+- Dashboard displays drafts clearly.
+- Copy buttons work.
+- Approval status can be updated.
+- Posted URLs can be stored manually.
+- No API posting occurs.

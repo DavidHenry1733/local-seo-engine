@@ -1,0 +1,125 @@
+Add a Pre-Publish SEO QA and AI Readiness Checker.
+
+Do not change existing page generation, sitemap, image deployment, or internal link logic unless required for validation.
+
+Goal:
+Before pages are deployed, check whether each generated page is Google-ready, AI-ready, unique enough, and structurally clean.
+
+1. Google Ready Checks
+For every hub and cluster page, check:
+- title tag exists
+- meta description exists
+- canonical exists and matches final URL
+- H1 exists and is unique
+- no /preview/ links
+- no placeholder tokens like {{...}}
+- no broken internal links
+- no missing images if image mode requires images
+- no noindex tag
+- schema exists
+- footer/profile data exists when provided
+- sitemap URL matches canonical URL
+
+2. AI Ready Checks
+Check:
+- clear service + location in H1
+- quick answer / summary section near top
+- logical H2/H3 structure
+- FAQ section
+- FAQ schema
+- trust signals
+- local relevance section
+- concise answer-style paragraphs
+- business/entity clarity
+
+3. Duplicate Content Scanner
+Compare pages within the same campaign:
+- hub vs clusters
+- cluster vs cluster
+- section vs section
+
+Flag:
+- repeated paragraphs
+- repeated headings
+- overly similar intros
+- overly similar FAQs
+
+Add overlap score:
+- Low: 0–20%
+- Review: 21–35%
+- High: 36%+
+
+Only flag meaningful repeated content, not header/footer/navigation.
+
+4. Structure Checks
+Flag:
+- homepage-style sections on landing pages
+- generic services grid if not relevant
+- missing CTA
+- missing local coverage
+- thin content under 700 words
+- repeated exact-match keyword stuffing
+
+5. Report Output
+Create a QA report per campaign:
+- Google Ready score
+- AI Ready score
+- Duplicate Risk score
+- Broken links count
+- Image issues count
+- Schema issues count
+- Recommended fixes
+
+6. Dashboard
+Add a “Run Pre-Publish QA” button.
+
+Show:
+- Pass
+- Review
+- Fail
+
+Allow user to open details per page.
+
+Acceptance criteria:
+- QA runs across all hub and cluster pages.
+- Duplicate content is detected.
+- AI readiness is scored.
+- Google readiness is scored.
+- Report clearly shows what needs fixing.
+- No deployment happens if status is Fail unless user overrides.
+
+For image rotation, use this as a separate prompt after QA is stable:
+
+Add campaign image rotation pools.
+
+Goal:
+Allow each campaign to use multiple approved images per slot and rotate them across cluster pages to reduce visual duplication.
+
+Image pools:
+- heroImages[]
+- supportImages[]
+- conversionImages[]
+
+User can upload/generate/select multiple images for each pool.
+
+Rotation rules:
+- Hub page uses primary selected images.
+- Cluster pages rotate through approved pool images.
+- Rotation should be deterministic, not random every deploy.
+- Use page slug or index to assign images consistently.
+- Do not change image on every rebuild unless user clicks “reshuffle”.
+
+Example:
+Cluster 1: hero-1, support-2, conversion-3
+Cluster 2: hero-2, support-3, conversion-1
+Cluster 3: hero-3, support-1, conversion-2
+
+Acceptance criteria:
+- User can add multiple images per slot.
+- Cluster pages use varied images.
+- Same page keeps same image after rebuild.
+- Images remain namespaced under /assets/{clientSlug}/.
+- Hub page keeps primary images.
+- No broken images.
+
+I’d do QA first, then image rotation. QA protects the product. Image rotation improves quality.

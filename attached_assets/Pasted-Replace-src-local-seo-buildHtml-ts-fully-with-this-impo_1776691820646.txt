@@ -1,0 +1,246 @@
+Replace src/local-seo/buildHtml.ts fully with this
+import fs from "fs";
+import path from "path";
+
+type FaqItem =
+  | {
+      question?: string;
+      answer?: string;
+    }
+  | string;
+
+type ContentData = {
+  hero_title?: string;
+  hero_subtitle?: string;
+  intro?: string;
+  local_section?: string;
+  benefits?: string;
+  why_choose_us?: string;
+  faq?: FaqItem[] | string;
+  cta?: string;
+};
+
+type PageData = {
+  brand?: {
+    name?: string;
+  };
+};
+
+function escapeHtml(value: string): string {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function formatParagraphs(text: string): string {
+  const cleaned = String(text || "").trim();
+  if (!cleaned) return "";
+
+  return cleaned
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .join("\n");
+}
+
+function formatList(text: string): string {
+  const cleaned = String(text || "").trim();
+  if (!cleaned) return "";
+
+  const lines = cleaned
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const bulletLines = lines.filter(
+    (line) => line.startsWith("•") || line.startsWith("-")
+  );
+
+  if (bulletLines.length >= 2) {
+    const items = bulletLines
+      .map((line) => line.replace(/^[-•]\s*/, "").trim())
+      .filter(Boolean)
+      .map((item) => `<li>${escapeHtml(item)}</li>`)
+      .join("\n");
+
+    return `<ul>\n${items}\n</ul>`;
+  }
+
+  return formatParagraphs(cleaned);
+}
+
+function normaliseFaq(faq: ContentData["faq"]): Array<{ question: string; answer: string }> {
+  if (!faq) return [];
+
+  if (Array.isArray(faq)) {
+    return faq
+      .map((item) => {
+        if (typeof item === "string") {
+          return null;
+        }
+
+        const question = String(item.question || "").trim();
+        const answer = String(item.answer || "").trim();
+
+        if (!question || !answer) return null;
+
+        return { question, answer };
+      })
+      .filter(Boolean) as Array<{ question: string; answer: string }>;
+  }
+
+  return [];
+}
+
+function buildFaqHtml(faq: ContentData["faq"]): string {
+  const items = normaliseFaq(faq);
+
+  if (items.length === 0) {
+    return "";
+  }
+
+  return items
+    .map(
+      (item) => `
+<h3>${escapeHtml(item.question)}</h3>
+${formatParagraphs(item.answer)}
+`.trim()
+    )
+    .join("\n\n");
+}
+
+export function buildHtml(projectRoot: string, slug: string) {
+  const contentPath = path.join(projectRoot, "output", slug, "content.json");
+  const pageDataPath = path.join(projectRoot, "output", slug, "page-data.json");
+
+  const content = JSON.parse(
+    fs.readFileSync(contentPath, "utf-8")
+  ) as ContentData;
+
+  const pageData = JSON.parse(
+    fs.readFileSync(pageDataPath, "utf-8")
+  ) as PageData;
+
+  const brandName = pageData.brand?.name || "Our Team";
+  const faqHtml = buildFaqHtml(content.faq);
+
+  const sections: string[] = [];
+
+  if (content.hero_title) {
+    sections.push(`<h1>${escapeHtml(content.hero_title)}</h1>`);
+  }
+
+  // Subtitle deliberately omitted for now to prevent duplicate heading output.
+  // We can reintroduce it later once the content prompt is stable.
+
+  if (content.intro) {
+    sections.push(`
+<h2>Professional Web Design for Local Businesses</h2>
+${formatParagraphs(content.intro)}
+`.trim());
+  }
+
+  if (content.local_section) {
+    sections.push(`
+<h2>Why This Matters in ${escapeHtml(slug.split("-").slice(-1)[0] || "Your Area")}</h2>
+${formatParagraphs(content.local_section)}
+`.trim());
+  }
+
+  if (content.benefits) {
+    sections.push(`
+<h2>How This Helps Your Business</h2>
+${formatList(content.benefits)}
+`.trim());
+  }
+
+  if (content.why_choose_us) {
+    sections.push(`
+<h2>Why Choose ${escapeHtml(brandName)}</h2>
+${formatParagraphs(content.why_choose_us)}
+`.trim());
+  }
+
+  if (faqHtml) {
+    sections.push(`
+<h2>Frequently Asked Questions</h2>
+${faqHtml}
+`.trim());
+  }
+
+  if (content.cta) {
+    sections.push(`
+<h2>Get Started</h2>
+${formatParagraphs(content.cta)}
+`.trim());
+  }
+
+  const html = sections.join("\n\n");
+
+  const outputFile = path.join(projectRoot, "output", slug, "page.html");
+  fs.writeFileSync(outputFile, html, "utf-8");
+
+  console.log("WordPress-ready HTML created:", outputFile);
+  console.log("FAQ items detected:", normaliseFaq(content.faq).length);
+}
+Then replace your prompt with this stricter version
+
+Update prompts/local-seo-page.txt to:
+
+You are an expert UK local SEO copywriter specialising in high-converting service pages for local businesses.
+
+Write a locally optimised, conversion-focused service page in UK English.
+
+CONTEXT:
+Service: {{service_name}}
+Area: {{area}}
+City: {{city}}
+Brand: {{brand_name}}
+
+Tone:
+{{brand_tone}}
+
+OBJECTIVES:
+- Sound natural and human
+- Include local relevance naturally
+- Encourage enquiries and trust
+- Avoid generic filler
+- Do not keyword stuff
+
+RULES:
+- Write in UK English
+- Do not use markdown
+- Do not include any text outside JSON
+- Output valid JSON only
+- The faq field MUST contain exactly 3 items
+- Each FAQ item MUST have both a question and an answer
+- The hero_subtitle must be different from the hero_title
+- Keep the hero_subtitle to one sentence only
+
+Return JSON in exactly this shape:
+
+{
+  "hero_title": "",
+  "hero_subtitle": "",
+  "intro": "",
+  "local_section": "",
+  "benefits": "",
+  "why_choose_us": "",
+  "faq": [
+    {
+      "question": "",
+      "answer": ""
+    },
+    {
+      "question": "",
+      "answer": ""
+    },
+    {
+      "question": "",
+      "answer": ""
+    }
+  ],
+  "cta": ""
+}

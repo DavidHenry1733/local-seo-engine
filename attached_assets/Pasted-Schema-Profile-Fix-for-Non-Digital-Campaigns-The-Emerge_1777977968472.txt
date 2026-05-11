@@ -1,0 +1,58 @@
+Schema/Profile Fix for Non-Digital Campaigns
+
+The Emergency Plumber Rotherham copy is now correct, but schema still uses DHM Digital and web/digital profile data.
+
+This must not pass publish.
+
+For non-digital campaigns, provider schema must come from the active customer profile that actually provides the service.
+
+If campaign industryType = plumbing and customerProfile.industry is digital/web/design/marketing:
+- mark REVIEW_REQUIRED
+- do not publish
+- show: “Provider profile does not match service industry. Select or create a plumbing business profile.”
+
+Fix schema rules:
+
+1. WebPage schema:
+- name = primaryKeyword
+- description = service-specific meta description
+- url = generated page URL
+
+2. Service schema:
+- name = primaryKeyword
+- serviceType = serviceType
+- areaServed/serviceArea = location
+- provider = actual service provider customer profile
+- provider must not fallback to DHM Digital/InboxingProWeb unless that profile industry matches the campaign
+
+3. LocalBusiness schema:
+For plumbing/heating use more specific schema if possible:
+- @type: ["LocalBusiness", "Plumber"] for plumbing
+- name = actual plumber business name
+- url = actual customer site URL or generated customer page URL
+- telephone = valid customer phone number only
+- email = valid customer email only
+- addressLocality = town/city, e.g. Rotherham
+- streetAddress = street/address only
+- addressRegion = South Yorkshire
+- addressCountry = GB
+
+4. Breadcrumb schema:
+- Home must point to active customer/customer campaign root, not InboxingProWeb unless this is an InboxingProWeb campaign
+- Middle item must point to the correct service hub, e.g. /emergency-plumber-rotherham/ or /plumber-rotherham/ if configured
+- Never use https://inboxingproweb.com/ as fallback for non-digital customer pages
+
+5. Validation:
+Fail/REVIEW_REQUIRED if:
+- provider name does not match customer profile
+- phone is malformed, e.g. “059) 0 0 60”
+- addressLocality is a street name
+- provider is DHM Digital for a plumbing page
+- breadcrumb links to InboxingProWeb for non-InboxingProWeb campaign
+- Service provider and LocalBusiness provider do not match
+
+Acceptance:
+Emergency Plumber Rotherham must either:
+A) use a real plumbing customer profile in schema/footer/about/trust strip
+OR
+B) be blocked as REVIEW_REQUIRED in test mode because DHM Digital is not a plumber.

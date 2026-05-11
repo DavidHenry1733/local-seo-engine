@@ -1,0 +1,86 @@
+The same blank/stale preview issue still exists after rewriting updateImagePreview.
+
+Stop making assumptions. We need to trace the actual rendered DOM and all functions that update image cards.
+
+Confirmed:
+- image assignments are saved
+- file exists = yes
+- serve URLs return 200
+- MIME is correct
+- diagnostics show correct preview URLs
+
+Still broken:
+- hero visual preview is blank
+- conversion visual preview still shows previous image
+
+Required task:
+Find the exact DOM element that is visible on screen for each Stage 5 image preview and prove which function last writes to it.
+
+1. Add visible preview URL text directly above each image preview card
+For each card show:
+VISIBLE CARD SRC: {actual img src currently rendered}
+
+This must read from the actual DOM image element currently inside the visible preview container, not from stored state.
+
+2. Add a visible render timestamp directly inside each card:
+LAST CARD RENDERED: {timestamp}
+
+3. Add console logs for every function that updates image cards:
+- loadImageStatuses
+- updateImagePreview
+- checkImageStatus
+- generateImage handler
+- upload handler
+- library assignment handler
+- save image selection handler
+- any template render function that rebuilds the Stage 5 content
+
+Each log must include:
+- function name
+- slot
+- src being written
+- timestamp
+
+4. Find and remove/disable any second renderer
+Search for all code that writes to:
+- hero preview container
+- support preview container
+- conversion preview container
+- img-preview
+- previewWrap
+- placeholder
+- image card innerHTML
+- image status card
+
+There must be only one source of truth for card preview rendering.
+
+5. Force visible preview card to use diagnostics source
+For each slot, after diagnostics are loaded:
+- read status.previewUrl
+- set visible card image to that exact URL
+- immediately read back actual DOM img.src
+- display it as VISIBLE CARD SRC
+
+6. If the preview container is being overwritten
+Fix the overwrite so saved assignment previewUrl always wins.
+
+Priority order:
+- saved uploaded/library assignment
+- approved AI image
+- placeholder/missing
+
+7. If conversion still shows old image
+Add cache-busting with assigned filename and updatedAt:
+previewUrl = /api/images/serve/{clientSlug}/{slot}?assignedFrom={filename}&v={updatedAt}
+
+8. Acceptance criteria
+- Visible card displays the same URL as diagnostics.
+- Hero preview displays the uploaded hero image.
+- Conversion preview displays the uploaded conversion image, not old image.
+- The card shows VISIBLE CARD SRC matching diagnostics previewUrl.
+- Console/logs prove only one function writes the final preview.
+- No stale fallback image overwrites saved assignment.
+
+The important instruction is:
+
+Find the actual visible DOM element and show its real src.

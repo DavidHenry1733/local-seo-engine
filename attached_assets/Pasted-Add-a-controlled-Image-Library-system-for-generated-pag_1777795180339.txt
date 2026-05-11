@@ -1,0 +1,172 @@
+Add a controlled Image Library system for generated pages.
+
+Do not change page content, scoring, schema, sitemap, link audit, or deployment except where image validation requires it.
+
+Goal:
+Stop irrelevant images being used. Pages should use approved images from a service-specific library, with optional random rotation.
+
+1. Image library structure
+
+Create this structure:
+
+assets/image-library/
+  web-design/
+    hero/
+    support/
+    conversion/
+  web-hosting/
+    hero/
+    support/
+    conversion/
+  local-seo/
+    hero/
+    support/
+    conversion/
+  google-business-profile/
+    hero/
+    support/
+    conversion/
+  email-marketing/
+    hero/
+    support/
+    conversion/
+
+Each service folder should contain approved images only.
+
+2. Image manifest
+
+Create:
+
+assets/image-library/image-library.json
+
+Each image entry should include:
+
+{
+  "id": "web-hosting-hero-001",
+  "service": "web-hosting",
+  "slot": "hero",
+  "filename": "web-hosting-hero-001.webp",
+  "description": "Secure cloud hosting and performance dashboard visual",
+  "altTemplate": "{{Service}} {{Location}} — secure hosting and website performance",
+  "tags": ["hosting", "security", "speed", "servers", "ssl"],
+  "approved": true
+}
+
+3. Service-to-image rules
+
+For each generated page, choose images from matching service + slot only.
+
+Examples:
+
+Web Hosting pages:
+- hero must come from web-hosting/hero
+- support must come from web-hosting/support
+- conversion must come from web-hosting/conversion
+
+Web Design pages:
+- hero must come from web-design/hero
+- support must come from web-design/support
+- conversion must come from web-design/conversion
+
+Do not allow fallback from web-hosting to web-design unless explicitly enabled by admin.
+
+4. Random rotation
+
+Add option in campaign/project config:
+
+imageLibrary: {
+  enabled: true,
+  mode: "random" | "deterministic",
+  allowFallback: false
+}
+
+Rules:
+- random mode picks a random approved image from service + slot
+- deterministic mode picks the same image for the same pageSlug every time using a stable hash
+- never pick the same image for all cluster pages if more than one image is available
+- avoid using the same image twice in the same page
+
+5. Per-page image assignment
+
+When a page is generated, save selected image data to page-data.json:
+
+images: {
+  hero: {
+    libraryId,
+    src,
+    alt
+  },
+  support: {
+    libraryId,
+    src,
+    alt
+  },
+  conversion: {
+    libraryId,
+    src,
+    alt
+  }
+}
+
+6. Alt text
+
+Alt text must be generated from:
+- service
+- location
+- image slot
+- image altTemplate
+
+Examples:
+Web Hosting Rotherham — secure hosting and website performance
+Web Hosting Rotherham — support, uptime monitoring and backups
+Web Hosting Rotherham — faster websites and more local enquiries
+
+Fail validation if:
+- Web Hosting image alt says Web Design
+- image alt does not include current service
+- image alt does not include current location
+
+7. Dashboard
+
+Add Image Library panel:
+
+- upload image
+- select service
+- select slot: hero/support/conversion
+- add description
+- add tags
+- approve/unapprove image
+- preview images by service/slot
+- show which pages use each image
+
+8. Manual override
+
+Allow user to manually select images per campaign:
+
+- choose hero image
+- choose support image
+- choose conversion image
+
+If manual override exists, use it instead of random rotation.
+
+9. Validation
+
+Final Publish Gate must check:
+
+- each page has hero/support/conversion image
+- each image comes from correct service folder
+- each image exists
+- each image alt matches service/location
+- no placeholder images
+- no cross-service image use unless allowFallback=true
+- no page uses the same image for hero/support/conversion
+
+10. Acceptance criteria
+
+Test Web Hosting Rotherham campaign:
+- all web hosting pages use only web-hosting images
+- no web hosting page uses web design images
+- cluster pages rotate through available approved web-hosting images
+- image alt text includes Web Hosting + location
+- selected image IDs saved in page-data.json
+- Final Publish Gate fails if wrong-service image is used

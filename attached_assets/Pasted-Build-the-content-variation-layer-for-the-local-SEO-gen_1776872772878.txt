@@ -1,0 +1,225 @@
+Build the content variation layer for the local SEO generator.
+
+Goal:
+Reduce content similarity across area pages from ~99% to ~55–70% while keeping:
+- structure
+- SEO strength
+- readability
+- conversion quality
+
+Do NOT change:
+- deployment logic
+- FTP logic
+- page template layout
+- image system
+- hub/area architecture
+
+Only enhance the CONTENT layer.
+
+---
+
+## 1. AREA PROFILE SUPPORT (HIGH PRIORITY)
+
+Extend the area config to include profile data.
+
+Example:
+config/areas/sheffield.json
+
+{
+  "areaProfiles": {
+    "Ecclesall": {
+      "character": "affluent residential suburb",
+      "knownFor": "independent restaurants, boutique retailers and professional services",
+      "businessType": "service-led and lifestyle-focused businesses"
+    },
+    "Hillsborough": {
+      "character": "established community area",
+      "knownFor": "local retail, trades and family-run businesses",
+      "businessType": "high street and service-based businesses"
+    }
+  }
+}
+
+---
+
+### Usage
+Inject into:
+- intro
+- section 0 (overview)
+- section 2 (local relevance)
+
+Example:
+“In areas like {{area}}, known for {{knownFor}}, having a strong online presence is essential…”
+
+---
+
+## 2. INTRO VARIATION SYSTEM
+
+Create 3–5 intro templates for area pages.
+
+Example:
+const introTemplates = [
+  "If your business in {{area}} is not generating consistent enquiries online...",
+  "For businesses based in {{area}}, having a professional website is no longer optional...",
+  "In areas like {{area}}, where competition is strong, your website plays a critical role...",
+  "If you're running a business in {{area}}, your website should be working as a key growth tool..."
+];
+
+---
+
+### Selection logic
+Use:
+areaIndex % introTemplates.length
+
+Ensure:
+- no two consecutive priority areas use the same intro
+
+---
+
+## 3. SECTION VARIATION (CORE FIX)
+
+For EACH major section, create 2–3 variants.
+
+Target sections:
+- section 0 (overview)
+- section 1 (benefits)
+- section 2 (local relevance)
+- section 3 (process)
+
+---
+
+### Example pattern
+
+const benefitsVariants = [
+  "A well-built website improves visibility, builds trust and increases enquiries...",
+  "For local businesses, a strong online presence directly impacts customer enquiries...",
+  "Your website is often the first interaction potential customers have with your business..."
+];
+
+---
+
+### Selection logic
+
+const variantIndex = areaIndex % variants.length
+
+---
+
+### Important rules
+
+- DO NOT reduce content depth
+- Each variant must still be ~120–200 words
+- Maintain professional tone
+- Avoid spinning — write distinct paragraphs
+
+---
+
+## 4. FAQ ROTATION SYSTEM
+
+Create a pool of 6–8 FAQ entries.
+
+Example:
+const faqPool = [
+  Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8
+];
+
+---
+
+### Selection logic
+
+- Select 4 FAQs per page
+- Rotate based on areaIndex
+- Ensure:
+  - no identical FAQ sets across consecutive pages
+  - mix of:
+    - location-specific
+    - general questions
+
+---
+
+## 5. CTA VARIATION
+
+Create 3 CTA paragraph variants:
+
+const ctaVariants = [
+  "If you're based in {{area}} and looking to improve your website performance...",
+  "Whether you're launching a new website or improving an existing one...",
+  "If your current website isn't generating the results you need..."
+];
+
+---
+
+Use:
+areaIndex % ctaVariants.length
+
+---
+
+## 6. CONTENT INJECTION RULES
+
+When building page payload:
+
+- replace tokens:
+  {{area}}, {{character}}, {{knownFor}}, {{businessType}}
+
+- ensure:
+  - each page uses a different combination of:
+    - intro
+    - section variants
+    - CTA
+    - FAQs
+
+---
+
+## 7. SAFETY RULES
+
+Do NOT:
+- randomise aggressively
+- break tone consistency
+- reduce clarity
+- introduce awkward phrasing
+
+This must feel like:
+- professionally written content
+- not AI-spun text
+
+---
+
+## 8. FILES TO UPDATE
+
+Expected areas:
+
+- config/areas/sheffield.json
+- src/generator/buildPagePayload.ts
+- src/generator/buildSections.ts (if exists)
+- src/content/variants.ts (create if needed)
+- src/seo/buildFaq.ts (or equivalent)
+
+---
+
+## 9. OUTPUT REQUIRED
+
+After implementation, print:
+
+1. example intro for:
+   - Ecclesall
+   - Fulwood
+   - Crookes
+
+2. example section variation (same section, 3 pages)
+
+3. FAQ sets for 3 different pages
+
+4. CTA variants across 3 pages
+
+5. estimated similarity reduction
+
+---
+
+## GOAL
+
+Achieve:
+- natural variation
+- reduced duplication footprint
+- consistent quality
+- scalable content system
+
+Without changing the core architecture.

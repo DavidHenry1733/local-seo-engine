@@ -1,0 +1,276 @@
+CRITICAL FIX: Stop Digital/Web Design Logic Leaking Into Non-Digital Service Pages
+
+Current problem:
+Generated pages for services like landscape gardener still read like digital marketing/web design pages. This is wrong.
+
+For any non-digital business/service, the page must be written as if the customer business directly provides that real service to household customers.
+
+Example:
+If keyword = Landscape Gardener Sheffield
+The page is for a landscape gardening business selling garden landscaping services to homeowners in Sheffield.
+
+It is NOT about:
+- web design
+- SEO
+- enquiries from websites
+- AI search optimisation
+- digital marketing
+- business growth pages
+- Google visibility
+- customer engagement
+- ROI from a website
+
+==================================================
+GLOBAL RULE
+==================================================
+
+If industryType is NOT:
+- web-design
+- local-seo
+- web-hosting
+- email-marketing
+- digital-marketing
+
+Then default buyerType = household.
+
+The page must assume the business is selling directly to:
+- homeowners
+- householders
+- landlords where relevant
+- property owners
+- families
+- people improving their home
+
+Do NOT default to businesses.
+
+==================================================
+SERVICE PAGE MEANING
+==================================================
+
+The keyword is the service being sold.
+
+Example:
+Landscape Gardener Sheffield means:
+A landscape gardener providing garden landscaping services in Sheffield.
+
+Plumber Rotherham means:
+A plumber providing plumbing services to homeowners in Rotherham.
+
+Roofer Barnsley means:
+A roofer providing roofing services to homeowners in Barnsley.
+
+Do not reinterpret the keyword as a digital marketing service.
+
+==================================================
+FORBIDDEN PHRASES FOR NON-DIGITAL SERVICES
+==================================================
+
+For all non-digital services, block these phrases unless explicitly allowed:
+
+- web design
+- website
+- SEO
+- AI search
+- Google rankings
+- local SEO
+- map pack
+- online visibility
+- digital marketing
+- enquiries from your website
+- conversion-focused website
+- page speed
+- mobile layout
+- schema
+- search engines
+- customer engagement
+- commercial ROI
+- business growth through digital
+- lead generation website
+
+If these appear in a non-digital service page, Final Publish Gate must mark REVIEW_REQUIRED or FAIL.
+
+==================================================
+LANDSCAPE GARDENER PAGE LOGIC
+==================================================
+
+For landscape gardener pages, copy must focus on:
+
+- garden design
+- patios
+- paving
+- fencing
+- turfing
+- artificial grass
+- planting
+- drainage
+- retaining walls
+- raised beds
+- garden clearance
+- levelling
+- privacy
+- outdoor living space
+- family-friendly gardens
+- low-maintenance gardens
+- improving kerb appeal
+- making the garden usable
+
+Audience:
+- homeowners
+- families
+- landlords
+- new-build homeowners
+- property owners
+- people preparing a home for sale
+- people with tired or unusable gardens
+
+CTA:
+- Request a Garden Quote
+- Book a Garden Visit
+- Arrange a Landscaping Consultation
+- Send Garden Photos
+
+==================================================
+REWRITE SECTION PROMPT RULES
+==================================================
+
+Hero:
+Explain the real household service.
+
+Good:
+“Create a garden that works for everyday life with a landscape gardener in Sheffield. From patios and fencing to turfing, planting and drainage, professional landscaping can turn a tired outdoor space into somewhere practical, attractive and easy to enjoy.”
+
+Bad:
+“Generate more enquiries with a landscape gardener Sheffield partner focused on business results.”
+
+AI Summary:
+Define the actual service.
+
+Good:
+“A landscape gardener in Sheffield helps homeowners improve outdoor spaces with patios, fencing, turfing, planting, drainage and full garden redesigns.”
+
+Bad:
+“Landscape gardener Sheffield helps businesses generate enquiries and improve local visibility.”
+
+Why This Matters:
+Talk about real homeowner problems:
+- garden is unusable
+- patio is old
+- lawn is muddy
+- poor privacy
+- drainage issues
+- unsafe levels
+- wasted outdoor space
+
+What You Get:
+Talk about actual deliverables:
+- site visit
+- garden plan
+- quote
+- materials advice
+- patio/fencing/turfing/drainage
+- installation
+- tidy handover
+
+What’s Included:
+Cards must be real landscaping services only:
+- Garden design and planning
+- Patio and paving installation
+- Fencing and privacy solutions
+- Turfing and artificial grass
+- Drainage and levelling
+- Planting and borders
+
+Who It’s For:
+Must be household-focused:
+- Homeowners
+- Families
+- New-build homeowners
+- Landlords
+- Homeowners preparing to sell
+- Pet owners
+- Low-maintenance garden seekers
+- Owners of sloped or awkward gardens
+
+Enquiry Section:
+Explain how homeowners can request the landscaping service:
+- call
+- send photos
+- book visit
+- get quote
+- agree design
+- start work
+
+Do NOT talk about websites generating enquiries.
+
+Common Mistakes:
+Must be landscaping mistakes:
+- Poor drainage planning
+- Choosing unsuitable materials
+- Ignoring garden levels
+- No privacy planning
+- Poor patio base preparation
+- Choosing high-maintenance planting
+- Not planning access for materials
+- No clear design before work starts
+
+FAQ:
+Must be homeowner landscaping questions:
+- How much does a landscape gardener cost in Sheffield?
+- Do I need a full garden design first?
+- How long does a landscaping project take?
+- Can you help with patios, fencing, turfing and drainage?
+
+CTA:
+Use:
+“Request a Garden Quote”
+
+==================================================
+BRAND / PROVIDER LOGIC
+==================================================
+
+If customer profile is DHM Digital but campaign service is landscape gardener, this is a mismatch unless test mode is enabled.
+
+Add validation:
+- customerProfile.primaryIndustry must match campaign industryType
+- if mismatch, show warning:
+  “This customer profile appears to be a digital business, but the campaign service is landscape gardener. Confirm this is intentional before generating.”
+
+==================================================
+FINAL PUBLISH GATE
+==================================================
+
+Add NonDigitalServiceSemanticCheck.
+
+For non-digital pages, fail/review if:
+- digital/web/SEO terms appear
+- common mistakes are website mistakes
+- CTA is digital-service style
+- content says business enquiries instead of homeowner service requests
+- provider industry conflicts with campaign industry
+- service deliverables are not real-world deliverables
+- page reads as marketing agency copy instead of service provider copy
+
+==================================================
+ACCEPTANCE TEST
+==================================================
+
+Regenerate Landscape Gardener Sheffield.
+
+Expected:
+- no web design language
+- no SEO/AI search language
+- no business ROI language
+- speaks to homeowners
+- explains patios, fencing, turfing, planting, drainage
+- CTA = Request a Garden Quote
+- common mistakes are landscaping mistakes
+- who-it’s-for is household/property focused
+- FAQ is landscaping-focused
+- page sounds like a real landscape gardener service page
+
+The simplest rule for Replit is:
+
+Digital services sell visibility and enquiries.
+Real-world services sell the actual job being done.
+
+So for a landscape gardener, the page sells garden transformation, not “business growth”.

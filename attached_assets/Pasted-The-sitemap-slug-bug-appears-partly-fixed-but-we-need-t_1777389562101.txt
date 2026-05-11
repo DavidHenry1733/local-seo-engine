@@ -1,0 +1,114 @@
+The sitemap slug bug appears partly fixed, but we need to finish the sitemap architecture properly.
+
+Current status:
+- Bare area slugs like /aston/ have been fixed to /local-seo-aston/.
+- Existing affected folders/session files were repaired.
+- Master sitemap now appears clean.
+- BUT the Local SEO hub page was missing from the sitemap.
+- The sitemap URL shown is still the Replit app URL:
+  https://...replit.dev/api/sitemaps/rotherham-proof/sitemap.xml
+
+We need to confirm and fix remaining issues.
+
+1. Hub Page Inclusion
+Every campaign sitemap must include:
+- campaign hub page
+- all cluster pages
+- any supporting/blog pages assigned to that campaign
+
+If the hub page is missing, fix the sitemap builder so it includes pages where:
+- pageType = hub
+- isHubPage = true
+- hubTag = hub
+- or any existing hub identifier used by the app
+
+Do not only include cluster/area pages.
+
+2. Campaign Sitemap vs Master Sitemap
+We need two clear sitemap types:
+
+A. Campaign sitemap
+Includes only pages for one campaign:
+- hub page
+- cluster pages
+- supporting pages
+
+B. Master project sitemap
+Includes all selected/published pages across all campaigns.
+
+Make sure both are generated correctly.
+
+3. URL Rules
+Sitemap XML entries should use the live client website domain from Business Profile / Publishing Setup.
+
+Example:
+https://clientdomain.com/local-seo-rotherham/
+https://clientdomain.com/local-seo-aston/
+
+The app-hosted sitemap route can exist, but the URLs inside the XML must be client live URLs, not app preview URLs.
+
+4. App-Hosted Sitemap Route
+The app-hosted sitemap route is acceptable for copying into Search Console only if it serves XML containing the correct client-domain URLs.
+
+However, the UI must clearly label it:
+
+- App-hosted sitemap URL
+- Live-site sitemap URL if uploaded to FTP
+- FTP upload status
+
+Do not confuse these two.
+
+5. Slug Generation Lock
+Create one central slug/path helper for all page types.
+
+Rules:
+Hub page:
+- /{service-slug}-{primary-location-slug}/
+
+Cluster page:
+- /{service-slug}-{area-slug}/
+
+Supporting/blog page:
+- /{article-slug}/ or existing supported format
+
+Do not generate bare area slugs.
+
+All campaign generation, sitemap generation, page preview, export, FTP upload, and internal linking should use this same helper.
+
+6. Regression Test
+Add a test/check using these campaigns:
+- Web Design Rotherham
+- Local SEO Rotherham
+- Web Design Sheffield
+- Web Design Doncaster
+
+Verify:
+- no bare area slugs
+- hub page included
+- all cluster pages included
+- no duplicate URLs
+- sitemap uses absolute client-domain URLs
+- campaign sitemap count matches campaign page count
+- master sitemap count matches all selected/published pages
+
+7. UI Requirements
+In the campaign sitemap panel, show:
+- Campaign sitemap URL
+- Master sitemap URL
+- Number of URLs included
+- Hub included: yes/no
+- Cluster pages included count
+- Last rebuilt time
+- Open sitemap
+- Copy sitemap URL
+- Rebuild sitemap
+
+8. Acceptance Criteria
+- Hub pages are included in campaign and master sitemaps.
+- Cluster pages use /{service}-{area}/ slugs.
+- No bare area slugs appear anywhere.
+- Sitemap XML contains client-domain URLs.
+- App-hosted sitemap endpoint works.
+- FTP upload remains optional.
+- Sitemap rebuild happens once per campaign batch, not once per page.
+- Existing generated campaigns remain repaired.

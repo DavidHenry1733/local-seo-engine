@@ -1,0 +1,416 @@
+CRITICAL CONTENT LOGIC FIX — Service Provider Page, Not Service-To-Provider Page
+
+The current output is still wrong.
+
+The engine is writing as if “landscape gardener Sheffield” is a service being sold TO landscape gardeners, or as if a digital agency is helping landscape gardeners get enquiries.
+
+That is completely incorrect.
+
+Correct interpretation:
+A “Landscape Gardener Sheffield” page is a public service page for a real landscape gardening business that sells landscaping work TO householders/homeowners in Sheffield.
+
+The page owner/provider is the landscape gardening business.
+The buyer is the householder/homeowner.
+The service sold is garden landscaping work.
+
+==================================================
+ABSOLUTE RULE
+==================================================
+
+For every non-digital trade/local service page:
+
+The page must be written in first-party service-provider logic:
+
+“We provide [service] for [customer type] in [location].”
+
+NOT:
+
+“We help [service providers] get enquiries.”
+“We create pages for [service providers].”
+“We improve visibility for [service providers].”
+“This service helps landscape gardeners.”
+
+Example:
+Keyword: Landscape Gardener Sheffield
+
+Correct:
+“Looking for a landscape gardener in Sheffield? We design and build practical, attractive gardens for homeowners, including patios, fencing, turfing, planting, drainage and full garden makeovers.”
+
+Wrong:
+“Landscape gardener Sheffield helps businesses generate more enquiries.”
+“Landscape gardener Sheffield improves visibility for landscaping businesses.”
+“DHM Digital helps landscape gardeners stand out online.”
+
+==================================================
+DEFAULT BUYER RULE
+==================================================
+
+For all non-digital industries, default buyerType = household.
+
+This means copy is written for:
+- homeowners
+- householders
+- families
+- landlords
+- property owners
+- people improving their own garden/home/property
+
+Do not mention businesses unless buyerType is explicitly set to business.
+
+==================================================
+DIGITAL LANGUAGE HARD BAN
+==================================================
+
+For non-digital service pages, the following words/ideas are forbidden unless the actual service is digital:
+
+Forbidden:
+- website
+- web design
+- SEO
+- local SEO
+- AI search
+- Google rankings
+- online visibility
+- digital marketing
+- enquiries from your website
+- conversion-focused website
+- page speed
+- schema
+- map pack
+- lead generation website
+- business growth through digital
+- marketing agency
+- search optimisation
+
+If any forbidden term appears in a non-digital service page body, fail Final Publish Gate.
+
+==================================================
+LANDSCAPE GARDENER SHEFFIELD — CORRECT CONTENT MODEL
+==================================================
+
+This page should read like a real landscape gardening business page.
+
+Audience:
+- homeowners in Sheffield
+- families wanting usable gardens
+- landlords improving rental properties
+- people with tired or awkward gardens
+- homeowners preparing to sell
+- people wanting patios, fencing, turfing, planting, drainage, or full garden redesign
+
+Service deliverables:
+- garden design
+- patios
+- paving
+- fencing
+- turfing
+- artificial grass
+- planting
+- borders
+- raised beds
+- drainage
+- levelling
+- retaining walls
+- garden clearance
+- low-maintenance gardens
+- outdoor living spaces
+
+Buyer problems:
+- tired garden
+- muddy lawn
+- poor drainage
+- lack of privacy
+- broken fencing
+- uneven ground
+- unused outdoor space
+- old patio
+- difficult sloped garden
+- garden not suitable for children/pets
+- no clear layout
+
+Tone:
+- practical
+- reassuring
+- skilled
+- local
+- homeowner-friendly
+- not corporate
+- not digital marketing
+
+CTA:
+- Request a Garden Quote
+- Book a Garden Visit
+- Arrange a Landscaping Consultation
+- Send Garden Photos
+
+==================================================
+SECTION-BY-SECTION REQUIREMENTS
+==================================================
+
+1. Meta description
+
+Must describe the actual household landscaping service.
+
+Example:
+“Landscape gardener Sheffield services for homeowners, including patios, fencing, turfing, planting, drainage and full garden makeovers.”
+
+Do not mention businesses, websites, SEO, visibility or enquiries.
+
+2. Hero
+
+Must speak directly to homeowners.
+
+Example:
+“Looking for a landscape gardener in Sheffield? We help homeowners turn tired or awkward gardens into practical, attractive outdoor spaces with patios, fencing, turfing, planting, drainage and full garden makeovers.”
+
+3. AI Summary
+
+Must define the real service.
+
+Example:
+“A landscape gardener in Sheffield helps homeowners improve outdoor spaces with garden design, patios, fencing, turfing, planting, drainage and general landscaping work. The aim is to make the garden more usable, attractive, private and easier to maintain.”
+
+4. Why This Matters
+
+Must focus on household garden problems.
+
+Include:
+- unused garden space
+- poor drainage
+- tired patios
+- broken fencing
+- muddy lawns
+- lack of privacy
+- unsafe levels
+- difficult maintenance
+- family use
+- property value
+
+Do not mention business enquiries, business growth, client engagement or ROI.
+
+5. What You Get
+
+Must describe actual landscaping process/deliverables.
+
+Include:
+- site visit
+- discussion of garden goals
+- design/layout ideas
+- quote
+- material guidance
+- preparation
+- patio/fencing/turfing/planting/drainage work
+- tidy finish
+- aftercare advice
+
+6. What’s Included Cards
+
+Create 6 or 8 cards only.
+
+Cards must be actual landscaping services:
+- Garden Design and Planning
+- Patio and Paving Installation
+- Fencing and Privacy Solutions
+- Turfing and Lawn Replacement
+- Artificial Grass Installation
+- Drainage and Levelling
+- Planting and Borders
+- Raised Beds and Retaining Features
+
+7. Common Questions / Intent Clusters
+
+Questions must be from homeowners.
+
+Examples:
+- How much does a landscape gardener cost in Sheffield?
+- Do I need a full garden design before work starts?
+- How long does a garden landscaping project take?
+- Can a landscape gardener help with patios, fencing, turfing and drainage?
+
+Answers must be written for householders and must not mention digital marketing, SEO, websites or business enquiries.
+
+8. Who It’s For
+
+Cards must be household/property focused:
+- Homeowners
+- Families
+- New-build homeowners
+- Landlords
+- Homeowners preparing to sell
+- Pet owners
+- Low-maintenance garden seekers
+- Owners of sloped or awkward gardens
+
+Do not include:
+- hospitality venues
+- office complexes
+- retail outlets
+- professional firms
+unless buyerType = business.
+
+9. Enquiry / Contact Section
+
+Rename the logic internally if needed. This section must explain how homeowners start a landscaping project.
+
+It should cover:
+- call or send photos
+- book garden visit
+- discuss requirements
+- receive quote
+- agree materials/design
+- schedule work
+
+Do not say “how websites generate enquiries.”
+
+10. Local Competition / Local Relevance
+
+Must discuss Sheffield garden/property conditions.
+
+Include:
+- Sheffield homes
+- sloped gardens where relevant
+- privacy in terraced/semi-detached areas
+- drainage/weather
+- patios for outdoor living
+- family-friendly gardens
+- local areas such as Ecclesall, Fulwood, Broomhill only as service areas
+
+Do not discuss businesses competing online.
+
+11. What Happens Without
+
+Must focus on household problems:
+- garden remains unusable
+- drainage gets worse
+- fencing deteriorates
+- patio becomes unsafe
+- outdoor space is wasted
+- property kerb appeal suffers
+
+Do not discuss competitors winning enquiries.
+
+12. Common Mistakes
+
+Must be landscaping mistakes:
+- Poor drainage planning
+- Choosing unsuitable materials
+- Ignoring levels and access
+- No privacy planning
+- Weak patio base preparation
+- Choosing high-maintenance planting
+- Not planning waste/material access
+- Starting without a clear design
+
+Do not include:
+- slow page load speed
+- poor mobile layout
+- missing SEO signals
+- no Google Business Profile
+- page headings and structure
+
+13. FAQ
+
+FAQ must be household landscaping-focused.
+
+14. CTA
+
+Use:
+“Request a Garden Quote”
+
+Not:
+“Request a Quote for Your Business”
+
+15. Trust Strip
+
+Must read like:
+“[Business Name] provides landscape gardening and garden landscaping services for homeowners across Sheffield and nearby areas.”
+
+Not:
+“provides marketing/web design/digital services.”
+
+==================================================
+PROMPT FAILURE CHECK
+==================================================
+
+Before returning generated content, run this self-check:
+
+Question 1:
+Does this page read like it belongs to a real landscape gardener selling garden work to homeowners?
+
+If no, regenerate.
+
+Question 2:
+Does it accidentally sound like a digital agency helping landscape gardeners?
+
+If yes, regenerate.
+
+Question 3:
+Does it mention websites, SEO, rankings, AI search, business enquiries or online visibility?
+
+If yes, remove and regenerate.
+
+Question 4:
+Are all deliverables actual landscaping services?
+
+If no, regenerate.
+
+Question 5:
+Is the buyer clearly a homeowner/householder/property owner?
+
+If no, regenerate.
+
+==================================================
+FINAL PUBLISH GATE
+==================================================
+
+Add a hard semantic validation for non-digital pages.
+
+For industryType = landscaping and buyerType = household, fail if page contains:
+
+- website
+- web design
+- SEO
+- local SEO
+- AI search
+- Google rankings
+- online visibility
+- business enquiries
+- client engagement
+- footfall
+- commercial ROI
+- hospitality venues
+- office complexes
+- retail outlets
+- professional firms
+- page speed
+- mobile layout
+- schema
+- Google Business Profile
+
+Also fail if Common Mistakes include digital mistakes.
+
+Also fail if CTA contains “business” unless buyerType = business.
+
+==================================================
+ACCEPTANCE TEST
+==================================================
+
+Regenerate Landscape Gardener Sheffield.
+
+It must pass these exact checks:
+
+- The page is for a landscape gardener business.
+- The reader is a Sheffield homeowner.
+- The service is garden landscaping work.
+- The copy mentions patios, fencing, turfing, planting, drainage and garden design.
+- The copy does not mention websites, SEO, rankings, AI, digital marketing or business enquiries.
+- Common Mistakes are landscaping mistakes.
+- Who It’s For is household-focused.
+- CTA says Request a Garden Quote.
+- Meta description is homeowner landscaping focused.
+- Trust strip says landscape gardening services for homeowners.
+
+The key instruction is:
+
+The page is not about marketing for landscape gardeners.
+The page is the landscape gardener’s own service page.

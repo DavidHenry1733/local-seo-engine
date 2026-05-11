@@ -1,0 +1,144 @@
+Proceed with STEP 2: implement the real AI Citation Optimisation logic.
+
+Do not enable it globally yet.
+Do not change existing generation prompt.
+Do not change layout manually.
+Do not change sitemap, deployment, schema, images, or link audit logic.
+
+Goal:
+When aiCitationOptimisation.enabled === true, run a post-render AI optimisation pass that improves AI citation/extraction signals while preserving the existing HTML structure.
+
+1. Update src/generator/aiCitationOptimiser.ts
+
+Replace the no-op placeholder with a real optimiser.
+
+Function:
+optimiseForAiCitation(html: string, context: AiCitationContext): Promise<string>
+
+It should:
+- call the same AI client/helper currently used by generation
+- pass the rendered HTML plus context
+- return full optimised HTML
+
+2. Prompt rules for optimiser
+
+The optimiser must preserve:
+- all existing section IDs
+- all classes
+- all image URLs
+- all schema blocks
+- all footer/header content
+- all existing working internal links
+
+It may only:
+- improve text clarity
+- add definition line inside ai-summary-section
+- add data-ai-citable="true" to AI citable answer paragraphs
+- shorten AI citable answers to 40–70 words
+- add 2–3 natural entity reinforcement sentences
+- improve image alt text
+- add loading="lazy" and decoding="async" to images if missing
+
+3. Optimiser prompt
+
+Use this prompt inside aiCitationOptimiser.ts:
+
+You are an advanced AI SEO optimisation engine.
+
+You will receive a complete rendered HTML page.
+
+Your task is to make the page more extractable and citable by AI search engines such as Google AI Overviews, ChatGPT and Perplexity.
+
+CRITICAL RULES:
+- Return the full HTML only.
+- Do not explain your changes.
+- Do not remove any sections.
+- Do not rename any IDs or classes.
+- Do not change image URLs.
+- Do not change schema JSON-LD.
+- Do not change header or footer.
+- Do not change canonical URL.
+- Do not change href values.
+- Do not add placeholder text.
+- Do not break valid HTML.
+
+You may only make these changes:
+
+A. AI Summary Enhancement
+Inside section id="ai-summary-section":
+- Keep the existing H2.
+- Keep the Quick Answer label.
+- Ensure the answer is clean, direct and readable.
+- Add one definition paragraph after the first answer paragraph:
+
+<p><strong>Definition:</strong> [Service] in [Location] is the process of creating high-performing, conversion-focused websites that generate enquiries from local customers.</p>
+
+Adapt [Service] and [Location] using the supplied context.
+
+B. AI Citable Blocks
+Inside section class="ai-citable-section":
+- For each answer paragraph inside .ai-citable-block:
+  - add data-ai-citable="true"
+  - rewrite the paragraph to 40–70 words
+  - make it direct, factual, and standalone
+  - include service and location naturally where relevant
+
+C. Entity Reinforcement
+Add 2–3 natural sentences across existing body sections using this pattern:
+"InboxingProWeb provides [service] in [location], helping local businesses improve visibility and generate enquiries."
+
+Do not overuse the exact same sentence.
+Insert only into existing paragraph sections, not schema, footer, header, or navigation.
+
+D. Image SEO
+For every img tag:
+- keep src unchanged
+- ensure alt includes service and location naturally
+- add loading="lazy" if missing
+- add decoding="async" if missing
+
+E. Clean-up
+- Remove duplicated full paragraphs if created by the optimiser
+- Ensure HTML remains valid
+- Return full HTML only
+
+4. Post-optimisation safety checks
+
+After AI returns HTML, validate:
+- HTML is not empty
+- contains <html or at least <body
+- contains id="hero-section"
+- contains id="ai-summary-section"
+- contains id="site-footer"
+- canonical is unchanged from input
+- number of <script type="application/ld+json"> blocks is unchanged
+- image src values are unchanged
+- href values are unchanged
+- no placeholder tokens {{ }} added
+
+If any check fails:
+- log the failure
+- return the original HTML unchanged
+- do not break generation
+
+5. Logging
+
+Log:
+- optimiser running
+- optimiser success
+- optimiser fallback reason if it returns original HTML
+
+6. Acceptance criteria
+
+- Build passes.
+- With enabled false, output is unchanged.
+- With enabled true on one test project/page:
+  - page still renders
+  - canonical unchanged
+  - hrefs unchanged
+  - image src unchanged
+  - schema unchanged
+  - definition line added
+  - AI citable paragraphs have data-ai-citable="true"
+  - images have loading and decoding attributes
+  - AI readiness score does not drop

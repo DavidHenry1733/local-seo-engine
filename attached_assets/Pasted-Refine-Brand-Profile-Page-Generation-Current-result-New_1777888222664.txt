@@ -1,0 +1,329 @@
+Refine Brand Profile Page Generation.
+
+Current result:
+New customer/brand profiles are working in principle. DHM Digital brand profile pulls logo, colours and navigation correctly, and generated pages use the DHM header/logo. However:
+
+1. Page layout is too wide again.
+2. Footer still contains InboxingProWeb details in some cases.
+3. Content/design feels exactly like InboxingProWeb rather than adapted to the new brand.
+4. Need new customer profiles to generate genuinely brand-specific pages while keeping the proven SEO structure.
+
+Do not change Final Publish Gate, social distribution, sitemap, image library, or link audit logic except where validation needs updating.
+
+==================================================
+1. Fix layout width regression for brand-imported pages
+==================================================
+
+Apply the same container fix globally to all templates, including brand-imported templates.
+
+Correct CSS must be:
+
+.wrap,
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+Do not use:
+
+.wrap.container
+
+Acceptance:
+- Brand-imported DHM Digital pages are contained to 1200px.
+- No page renders full width unless deliberately configured.
+- Final Publish Gate fails layout if .wrap and .container are not standalone selectors.
+
+==================================================
+2. Footer must come from active customer profile
+==================================================
+
+Footer must never default to InboxingProWeb if a different customer profile is active.
+
+Footer should use active brand/customer profile:
+
+- businessName
+- legalName if supplied
+- companyNumber if supplied
+- address
+- email
+- phone
+- nav/footer links
+- privacy URL
+- terms URL
+- services
+
+Fallback order:
+1. Active customer profile
+2. Brand profile extracted from URL
+3. Project config
+4. System default only if no customer data exists
+
+Add validation:
+If active customer brand is DHM Digital, footer must not contain InboxingProWeb unless explicitly set as service provider.
+
+Critical fail:
+- wrong brand name in footer
+- wrong contact details
+- wrong company number
+- wrong footer links
+- old/default brand leakage
+
+==================================================
+3. Separate platform brand from customer brand
+==================================================
+
+The app/platform may be built by InboxingProWeb, but generated pages belong to the active customer.
+
+Add explicit distinction:
+
+platformBrand:
+- InboxingProWeb / Local SEO Engine / system owner
+
+customerBrand:
+- the business being generated
+
+Generated public pages must use customerBrand.
+
+Admin/dashboard may show platformBrand.
+
+Do not leak platformBrand into generated customer pages unless:
+- whiteLabelPoweredBy is enabled
+- user explicitly chooses “Show powered by”
+
+Default:
+whiteLabelPoweredBy = false
+
+==================================================
+4. Create true customer profile model
+==================================================
+
+Add/confirm customer profile fields:
+
+customerProfile:
+{
+  customerId,
+  businessName,
+  legalName,
+  tradingName,
+  websiteUrl,
+  logoUrl,
+  faviconUrl,
+  brandColours,
+  fonts,
+  toneOfVoice,
+  services,
+  targetLocations,
+  primaryLocation,
+  contact: {
+    phone,
+    email,
+    address
+  },
+  legal: {
+    companyNumber,
+    privacyUrl,
+    termsUrl
+  },
+  navigationLinks,
+  footerLinks,
+  trustStatements,
+  uspStatements,
+  preferredCTA,
+  prohibitedWords,
+  contentNotes
+}
+
+Campaigns must be linked to a customerProfileId.
+
+Page generation must read from customerProfile first.
+
+==================================================
+5. Brand-specific content adaptation
+==================================================
+
+Keep the proven SEO page structure the same, but adapt the writing to each customer.
+
+Same structure:
+- Hero
+- AI Summary
+- Definitions
+- Why This Matters
+- What You Get
+- What’s Included
+- Intent Questions
+- Who It’s For
+- Enquiry Section
+- About
+- Competition
+- Local Relevance
+- Common Mistakes
+- Related Resources
+- Map
+- FAQ
+- CTA
+- Trust Strip
+- Footer
+
+But content must change by brand using:
+- customer business name
+- service offering
+- tone of voice
+- target audience
+- trust statements
+- USPs
+- pricing if provided
+- customer location
+- industry examples
+- avoided claims/phrases
+
+Do not simply reuse InboxingProWeb copy with the logo changed.
+
+==================================================
+6. Brand/content uniqueness rules
+==================================================
+
+For each customer, generated pages must include brand-specific elements:
+
+- Brand-specific hero intro
+- Brand-specific CTA wording
+- Brand-specific About section
+- Brand-specific trust strip
+- Brand-specific service explanation
+- Brand-specific examples
+- Brand-specific “why choose” language
+- Brand-specific footer
+
+Add customerBrandTerms to prompt:
+- businessName
+- shortDescription
+- key USPs
+- target audience
+- tone
+- proof points
+- service style
+
+Use these in page generation.
+
+==================================================
+7. Design uniqueness without breaking SEO structure
+==================================================
+
+Add brandStyleVariant based on brand profile:
+
+Allowed variants:
+- clean-professional
+- premium-consultancy
+- trades-local
+- healthcare-clinic
+- ecommerce-retail
+- corporate-b2b
+- friendly-small-business
+
+Variant affects:
+- hero feel
+- section spacing
+- card corner radius
+- button style
+- colour usage
+- icon/card style
+- heading tone
+- CTA style
+
+Variant must not remove required SEO sections.
+
+For DHM Digital:
+Use premium-consultancy style:
+- more consultancy-led wording
+- less “cheap website package” tone
+- more strategic digital growth language
+- professional but warm
+- focus on digital consultancy, web presence, automation, marketing systems
+
+==================================================
+8. Information-page mode
+==================================================
+
+Brand-imported pages should default to:
+
+pageStyleMode = "brandMatchedInformationPage"
+
+This means:
+- not a homepage clone
+- not generic sales landing page
+- more structured service guide
+- useful explanations
+- clear local SEO intent
+- strong but natural CTA
+- less repetitive sales language
+
+==================================================
+9. Prevent brand leakage
+==================================================
+
+Final Publish Gate must fail if:
+- generated page contains wrong brand name
+- footer contains wrong brand
+- logo alt contains wrong brand
+- trust strip contains wrong brand
+- schema provider/name wrong
+- LocalBusiness name wrong
+- contact details wrong
+- CTA references wrong brand
+- About section references wrong brand
+
+Example:
+If customerBrand.businessName = DHM Digital:
+- page must not say InboxingProWeb unless explicitly configured
+- footer must not say InboxingProWeb
+- schema provider must not say InboxingProWeb
+- logo alt must say DHM Digital
+
+==================================================
+10. Customer profile workflow
+==================================================
+
+Dashboard flow should support:
+
+1. Create Customer Profile
+2. Enter website URL
+3. Import brand signals
+4. Edit/approve:
+   - logo
+   - colours
+   - fonts
+   - nav
+   - footer
+   - contact
+   - legal info
+   - services
+   - target locations
+   - tone/USPs
+5. Create Campaign for that customer
+6. Add products/services/keywords
+7. Add hub + cluster locations
+8. Generate pages
+9. Run Final Publish Gate
+
+Do not create campaign pages from stale InboxingProWeb config when customer profile is active.
+
+==================================================
+11. Acceptance criteria
+==================================================
+
+Test with DHM Digital customer profile:
+
+- Header uses DHM logo/nav
+- Footer uses DHM details, not InboxingProWeb
+- Schema uses DHM Digital as provider/business
+- Trust strip uses DHM Digital
+- About section describes DHM Digital
+- CTA references DHM Digital
+- Content tone is consultancy-led, not InboxingProWeb web package tone
+- Page layout is contained to 1200px
+- Required SEO sections remain present
+- Final Publish Gate passes only when no InboxingProWeb leakage remains
+
+Also test InboxingProWeb profile:
+- InboxingProWeb pages remain correct
+- no regression

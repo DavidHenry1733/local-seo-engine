@@ -1,0 +1,90 @@
+New issue: Business Profile setup data is not saving or being applied to generated pages.
+
+Do not change sitemap, image, or internal link logic.
+
+Problems observed:
+1. InboxingProWeb business setup data appears to have been removed.
+2. Header/footer fields are incomplete.
+3. I added new logo, navigation links, footer links, address, phone, etc. and clicked save.
+4. The data did not persist.
+5. The new saved header/footer data was not applied to newly generated pages.
+6. Main app header navigation is now inaccessible; only wizard navigation is visible.
+
+Required investigation:
+Inspect the Business Profile / Profile Setup save flow.
+
+Check:
+- form field names
+- save handler
+- API endpoint
+- project/profile storage file
+- database/state update
+- reload/hydration of saved profile data
+- generated page renderer reading profile data
+- header/footer renderer using business profile values
+- navigation state after profile save
+
+Required fixes:
+
+1. Business Profile Save
+Saving profile setup must persist:
+- business name
+- website URL
+- logo URL
+- strapline
+- brand colour
+- header navigation links
+- footer business name
+- footer address
+- footer phone
+- footer email
+- footer strapline
+- footer links
+- service/useful links if supported
+
+2. Reload Test
+After saving and refreshing the browser:
+- all fields must repopulate with saved values.
+
+3. Page Generation Use
+Newly generated pages must use saved profile data for:
+- header logo
+- header navigation
+- footer business details
+- footer links
+- phone number
+- email
+- strapline
+- brand colour where applicable
+
+4. Do not overwrite profile data
+Campaign/page generation must not reset or remove business profile fields.
+
+5. Restore Main Navigation
+The main app header/sidebar navigation must remain accessible after setup changes.
+
+Users should be able to access:
+- Dashboard
+- Profile Setup
+- Campaigns
+- Help/Knowledge Base if present
+- Any other existing app sections
+
+Wizard navigation should not replace or hide the main app navigation permanently.
+
+6. Add Save Confirmation + Diagnostics
+After clicking Save:
+- show “Business profile saved successfully.”
+- show last saved timestamp
+- log saved profile object server-side
+- return saved object to frontend
+- frontend should update state from returned object
+
+7. Acceptance Criteria
+- Business profile fields save correctly.
+- Saved fields survive browser refresh.
+- Header/footer data appears on newly generated pages.
+- Existing campaigns do not wipe profile data.
+- Main app navigation is accessible again.
+- Wizard navigation only controls wizard steps, not the whole app.
+- No sitemap/image/internal link logic is changed.

@@ -1,0 +1,142 @@
+Refine page layout alignment globally.
+
+Do not change content strategy, scoring, schema, sitemap, deployment, image library, or link audit logic.
+
+Current layout issues:
+1. “Who [Service] in [Location] Is Best For” section has intro copy not properly centred above the cards.
+2. “Who It’s For” currently generates 5 boxes, creating an uneven layout. It should generate 8 boxes by default.
+3. “Why [Location] businesses need [Service] right now” single-column copy is left aligned. It must be centred.
+4. All single-column copy sections should be locked to centre alignment by default.
+
+Required fixes:
+
+1. Who It’s For section
+
+Generate exactly 8 audience cards by default.
+
+Desktop layout:
+- 4 columns x 2 rows
+
+Tablet:
+- 2 columns x 4 rows
+
+Mobile:
+- 1 column
+
+CSS:
+.who-its-for-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .who-its-for-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .who-its-for-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.who-its-for-intro {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+2. Add 3 more default audience types where needed
+
+If the AI returns fewer than 8 audiences, automatically pad to 8 using relevant service-safe audience types.
+
+Default examples:
+- Tradespeople
+- Local Clinics
+- Service Businesses
+- Consultants
+- Small Retailers
+- Hospitality Businesses
+- Professional Firms
+- Startups and New Businesses
+
+Each must be adapted to the current service and location.
+
+3. Local Relevance section alignment
+
+For:
+.local-relevance-section
+
+All single-column text inside this section must be centred.
+
+CSS:
+.local-relevance-section .wrap {
+  text-align: center;
+}
+
+.local-relevance-section .wrap > p {
+  max-width: 860px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.local-relevance-section h2,
+.local-relevance-section .cluster-section-label {
+  text-align: center;
+}
+
+4. Global single-column copy alignment rule
+
+Any section that is not explicitly a two-column layout must default to centred copy.
+
+Apply centre alignment to:
+- .ai-summary .container
+- .ai-definition-wrap
+- .whats-included-section
+- .who-its-for-section
+- .local-relevance-section
+- .common-mistakes-section
+- .resources-section
+- .faq-section
+- .ai-citable-section
+- .trust-strip
+- .cta-band
+- .map-section
+
+Do not centre-align paragraph copy inside:
+- .section-2col
+- .enquiry-text
+- .competition-section .section-2col
+- .no-website-section .section-2col
+
+Those are long-form reading sections and can remain left aligned unless already intentionally centred.
+
+5. Card copy alignment
+
+All card headings and paragraphs should be centred:
+- .included-card
+- .audience-card
+- .mistake-item
+- .resource-card
+- .cluster-intent-item
+- .faq-card
+- .ai-citable-block
+
+6. Final Publish Gate layout validation
+
+Add/update layout checks:
+- Who It’s For must have exactly 8 cards.
+- Who It’s For must not render 3+2 or 4+1 layout.
+- Local Relevance section paragraphs must be centred.
+- Any single-column content section must be centre aligned unless it is explicitly marked as long-form/two-column.
+- Fail as REVIEW_REQUIRED if alignment/layout rules fail.
+
+Acceptance criteria:
+- “Who Web Hosting in Sheffield Is Best For” intro copy is centred above the boxes.
+- The section has 8 boxes, not 5.
+- Cards render 4 + 4 on desktop.
+- “Why Sheffield businesses need Web Hosting right now” copy is centred.
+- All single-column copy sections are centred by default.
+- Two-column reading sections remain readable and are not forced into awkward centred long-form columns.

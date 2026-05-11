@@ -1,0 +1,206 @@
+Task: Implement a complete Image Upload Control & Optimisation System.
+
+Do NOT change:
+- page generation logic
+- sitemap logic
+- internal linking
+- deployment pipeline (except where image output is required)
+
+Goal:
+Ensure all user-uploaded images are validated, optimised, resized, and safely stored for use across hero, support, and conversion slots.
+
+--------------------------------------------------
+1. ACCEPTED FORMATS
+--------------------------------------------------
+
+Allow:
+- image/jpeg
+- image/png
+- image/webp
+
+Reject:
+- svg
+- gif (optional: allow later if needed)
+- any unsupported MIME type
+
+Return clear error:
+"Unsupported image format. Please upload JPG, PNG, or WebP."
+
+--------------------------------------------------
+2. FILE SIZE RULES
+--------------------------------------------------
+
+- Soft limit: 10MB → allow but optimise
+- Hard limit: 20MB → reject
+
+Error message:
+"Image exceeds 20MB limit. Please upload a smaller file."
+
+--------------------------------------------------
+3. IMAGE PROCESSING (REQUIRED)
+--------------------------------------------------
+
+On upload:
+
+- Read original image
+- Detect:
+  - width
+  - height
+  - mime type
+  - file size
+
+Generate optimised versions:
+
+HERO:
+- 1600 x 900 (16:9)
+- crop if needed (centre crop)
+- no stretching
+
+SUPPORT:
+- 1200 x 800
+- maintain aspect ratio
+- crop if needed
+
+CONVERSION:
+- 1200 x 800
+- same rules as support
+
+THUMBNAIL:
+- 400 x 300
+
+Rules:
+- never upscale images smaller than target
+- if too small → flag warning (see UI section)
+- preserve aspect ratio
+- use high-quality compression (80–85%)
+
+--------------------------------------------------
+4. FILE STORAGE
+--------------------------------------------------
+
+Store in:
+
+/assets/{clientSlug}/
+
+Use correct extension:
+- .jpg for JPEG
+- .png for PNG
+- .webp for WebP
+
+DO NOT:
+- save WebP as .jpg
+- mismatch MIME and extension
+
+File naming:
+- hero.{ext}
+- support.{ext}
+- conversion.{ext}
+- thumb.{ext}
+
+--------------------------------------------------
+5. METADATA STORAGE
+--------------------------------------------------
+
+Update image-meta.json with:
+
+{
+  "slot": "hero",
+  "source": "upload | ai | library",
+  "original": {
+    "filename": "",
+    "width": 0,
+    "height": 0,
+    "size": 0,
+    "mime": ""
+  },
+  "optimised": {
+    "hero": "path",
+    "support": "path",
+    "conversion": "path",
+    "thumbnail": "path"
+  },
+  "assignedFrom": "",
+  "assignedAt": "",
+  "status": "approved"
+}
+
+--------------------------------------------------
+6. IMAGE LIBRARY UI REQUIREMENTS
+--------------------------------------------------
+
+For each image show:
+
+- file name
+- dimensions (e.g. 1920 x 1080)
+- file size
+- format (JPG/PNG/WebP)
+
+Add slot suitability indicator:
+
+Hero:
+- ideal: ≥1600px width
+- warning if <1200px
+
+Support/Conversion:
+- ideal: ≥1200px width
+- warning if <800px
+
+Warnings:
+"Image may appear low quality in this slot"
+
+--------------------------------------------------
+7. VALIDATION RULES
+--------------------------------------------------
+
+On assignment:
+
+- if image exists → OK
+- if file missing → block assignment
+- if too small → allow but warn
+
+--------------------------------------------------
+8. DEPLOYMENT RULES
+--------------------------------------------------
+
+When injecting images into pages:
+
+Always use optimised versions:
+
+Hero:
+https://{domain}/assets/{clientSlug}/hero.{ext}
+
+Support:
+https://{domain}/assets/{clientSlug}/support.{ext}
+
+Conversion:
+https://{domain}/assets/{clientSlug}/conversion.{ext}
+
+Ensure:
+- correct extension
+- correct MIME type
+- file exists (HTTP 200)
+
+--------------------------------------------------
+9. ERROR HANDLING
+--------------------------------------------------
+
+If image fails:
+
+Show:
+"Image failed to load"
+
+Do NOT:
+- silently fallback to placeholder
+- show broken UI
+
+--------------------------------------------------
+10. ACCEPTANCE CRITERIA
+--------------------------------------------------
+
+- Large images upload and are optimised correctly
+- Files are stored with correct extension and MIME
+- No stretched images
+- No oversized images in deployment
+- Image previews match deployed images
+- Existing images still work
+- No impact on page generation, sitemap, or linking

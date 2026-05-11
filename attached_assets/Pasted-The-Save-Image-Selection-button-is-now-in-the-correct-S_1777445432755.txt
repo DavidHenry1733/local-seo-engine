@@ -1,0 +1,71 @@
+The Save Image Selection button is now in the correct Stage 5 location.
+
+New issue:
+Image saving/assignment is not working correctly.
+
+Observed problems:
+1. Hero image card shows “Approved” but the preview area is blank/grey.
+2. Uploaded images are not saving correctly after upload + save.
+3. Conversion image still shows the previous image instead of the newly uploaded/selected image.
+4. Stage 5 image cards do not reliably reflect the saved hero/support/conversion assignments.
+
+Please stop changing button placement. The UI location is now correct.
+
+Required debugging:
+Inspect the Stage 5 image state flow only:
+- Upload image handler
+- Library selection handler
+- Save Image Selection handler
+- image-meta.json or image assignment storage
+- image status endpoint used by Stage 5
+- preview image rendering in Stage 5
+- deployment image selection logic
+
+Fix the data flow so all three slots work consistently.
+
+Expected behaviour:
+For each slot:
+- hero
+- support
+- conversion
+
+The system should store:
+- slot name
+- image source: uploaded / library / ai
+- image URL/path
+- approval status
+- preview URL
+- file exists true/false
+- updated timestamp
+
+Rules:
+1. If a user uploads/selects an image for hero, hero preview must update immediately after save.
+2. If a user uploads/selects an image for support, support preview must update immediately after save.
+3. If a user uploads/selects an image for conversion, conversion preview must update immediately after save.
+4. A slot must not show “Approved” if the image file/path is missing or cannot be loaded.
+5. If the preview image cannot be loaded, show “Missing image file” or “Image path invalid” instead of a grey blank preview.
+6. Save Image Selection must persist the selected images into the same storage used by the rollout/deploy process.
+7. Stage 5 status refresh must read from the saved assignment state, not stale previous images.
+8. Uploaded images should not be overwritten by old AI images unless the user explicitly selects the old AI image again.
+
+Add diagnostic output temporarily in the Stage 5 image section:
+For each slot show:
+- slot name
+- source
+- saved path
+- preview URL
+- file exists yes/no
+- approval status
+
+Acceptance criteria:
+- Hero image preview is not blank when approved.
+- Uploaded hero image saves and remains after refresh.
+- Uploaded support image saves and remains after refresh.
+- Uploaded conversion image saves and remains after refresh.
+- Old AI image is not reused after a new uploaded image is saved.
+- Refresh Status shows the correct current images.
+- Deploy uses the same saved images shown in Stage 5.
+
+The key line is:
+
+A slot must not show “Approved” if the image file/path is missing or cannot be loaded.

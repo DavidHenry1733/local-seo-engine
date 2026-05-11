@@ -1,0 +1,128 @@
+Next move
+
+Now it makes sense to build the second layer:
+
+content scoring engine
+
+Because QA now proves:
+“the page is built correctly”
+
+The next layer proves:
+“the content is strong enough to rank”
+
+That distinction is important, and now you’re ready for it.
+
+Use this prompt next:
+
+Build the content scoring engine for the local SEO page builder.
+
+Goal:
+Create a second analysis layer that evaluates content quality and ranking potential, separate from the technical QA validator.
+
+Tech requirements:
+- Use Node.js with TypeScript
+- Keep the code modular and easy to extend
+- Accept generated HTML plus page inputs
+- Return a structured scoring report with percentages and section scores
+
+Create the following files:
+
+1. contentScoreTypes.ts
+2. contentScorer.ts
+3. contentScoreExample.ts
+
+Requirements:
+
+1. Input
+Accept:
+- html: string
+- pageType: "hub" | "cluster"
+- primaryKeyword: string
+- supportingKeywords: string[]
+- location: string
+- serviceName: string
+
+2. Output
+Return a structured report object with:
+- overallScore: number
+- rating: string
+- passed: boolean
+- categories: array
+- strengths: string[]
+- issues: string[]
+- recommendations: string[]
+
+Each category should contain:
+- key
+- score
+- maxScore
+- percentage
+- status
+- message
+
+3. Scoring categories
+Evaluate and score:
+
+A. Uniqueness
+- detect repeated phrases
+- detect repeated section messaging
+- flag overlap between sections
+
+B. Intent Coverage
+- check content covers:
+  - why the service matters
+  - what is included
+  - outcomes such as enquiries, leads, revenue
+  - local context
+  - trust / business credibility
+
+C. Commercial Intent
+- check whether content clearly positions the page around:
+  - generating enquiries
+  - increasing revenue
+  - attracting visitors
+  - selling products or services
+- reward strong commercial positioning
+- warn if content is too generic or purely descriptive
+
+D. AI Readiness
+- reward:
+  - direct answers
+  - clear headings
+  - structured bullets
+  - scannable sections
+- detect whether the AI summary block is useful and extractable
+
+E. Keyword Usage Quality
+- reward natural use of primary keyword
+- reward supporting keyword distribution
+- warn for weak usage
+- warn for obvious keyword stuffing
+
+F. Readability
+- score sentence length
+- paragraph length
+- scannability
+- heading structure
+
+4. Scoring model
+- each category gets a weighted score
+- return overall percentage rounded to nearest whole number
+
+Suggested rating bands:
+- 90–100 = High Ranking Potential
+- 75–89 = Good Ranking Potential
+- 60–74 = Moderate Ranking Potential
+- below 60 = Weak Ranking Potential
+
+5. Output style
+Make the report client-friendly:
+- clear percentages
+- plain-English strengths
+- plain-English issues
+- actionable recommendations
+
+6. Example usage file
+Create an example file that runs the scorer on a generated page and logs the full report as JSON.
+
+Return full working TypeScript code.

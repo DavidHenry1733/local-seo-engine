@@ -1,0 +1,85 @@
+Build a status control layer for the local SEO page engine.
+
+Goal:
+
+Control both WordPress page status and export behaviour from the batch job config
+Support safe production workflows for create/update/publish decisions
+
+Please update the system so it supports these new fields in input/job.batch.json:
+
+{
+"exportToWordPress": true,
+"wordpressStatus": "draft",
+"wordpressMode": "update-existing"
+}
+
+Supported wordpressStatus values:
+
+"draft"
+"publish"
+"private"
+"pending"
+
+Supported wordpressMode values:
+
+"update-existing"
+if slug exists, update it
+if slug does not exist, create it
+"create-only"
+if slug exists, skip it
+if slug does not exist, create it
+"update-only"
+if slug exists, update it
+if slug does not exist, skip it
+
+Files to update:
+
+src/local-seo/exportToWordPress.ts
+src/local-seo/runBatch.ts
+src/local-seo/testExportToWordPress.ts if needed
+input/job.batch.json example if needed
+
+Implementation requirements:
+
+exportToWordPress.ts
+Read wordpressStatus and wordpressMode from input/job.batch.json if present
+Keep support for input/wordpress.json as the base WordPress config
+Preserve existing authentication and slug lookup logic
+Before create/update, check for existing page by slug
+Apply wordpressMode rules:
+update-existing → update if found, else create
+create-only → create if not found, else skip
+update-only → update if found, else skip
+Use wordpressStatus for create/update payload status
+Save wordpress-export.json with these extra fields:
+action: "created" | "updated" | "skipped"
+reason: optional string for skipped cases
+wordpressMode
+wordpressStatus
+runBatch.ts
+Pass the mode/status settings through naturally
+Keep batch stable
+Do not break existing generation flow
+Results summary should include:
+exported
+schemaGenerated
+wordpressAction if available
+wordpressStatus if available
+skippedReason if available
+Skip handling
+If mode says skip, do not throw an error
+Log it clearly
+Treat skip as a successful controlled outcome, not a failure
+test runner
+Ensure there is a simple test runner for exporting one slug
+It should print whether the page was created, updated, or skipped
+Keep everything TypeScript and production-safe
+no new dependencies
+preserve current update-in-place behaviour
+do not remove any existing working features unnecessarily
+
+After making the changes, tell me:
+
+the exact command to run a single-page export test
+the exact command to run the full batch
+an example input/job.batch.json showing wordpressStatus and wordpressMode

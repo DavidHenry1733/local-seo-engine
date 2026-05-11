@@ -1,0 +1,73 @@
+New campaign generated correctly:
+- hub page created
+- cluster pages created
+- header/footer added
+- images added
+
+But validation is showing incorrect issues.
+
+Do not change image, sitemap, page generation, or deployment logic.
+
+Validation issues shown:
+1. Company number "16953956" not found in page
+- This value is saved in Business Profile.
+- It worked previously.
+- It should be rendered in footer/legal text if present.
+
+2. No link found for privacy URL: /privacy-policy/
+- This field was left empty and should not be required.
+- Validator should not check empty/default privacy links that are not saved in profile.
+
+3. No link found for terms URL: https://inboxingproweb.com/privacy-policy-2/
+- This link is saved and working.
+- Validator is incorrectly failing it, possibly because it expects relative URL matching or exact footer text.
+
+Required fixes:
+
+A. Company number rendering
+If companyNumber exists in Business Profile:
+- render it in footer/legal section on hub and cluster pages
+- validator should check for it only when companyNumber is populated
+
+If companyNumber is empty:
+- do not require it
+
+B. Privacy link validation
+Validator must only check privacy URL if a privacy URL is actually saved in Business Profile.
+
+If privacyUrl is empty/null:
+- do not show warning
+- do not fallback to /privacy-policy/
+- do not require a privacy link
+
+C. Terms/footer link validation
+Validator must support:
+- absolute URLs
+- relative URLs
+- trailing slashes
+- URL-encoded variations
+- text link matching from saved footerLinks array
+
+If saved footer link is:
+https://inboxingproweb.com/privacy-policy-2/
+
+Then validator should pass if page contains:
+href="https://inboxingproweb.com/privacy-policy-2/"
+or equivalent normalised URL.
+
+D. Source of truth
+Footer validation should use saved Business Profile/footerLinks as the source of truth.
+
+Do not validate against hardcoded default footer links.
+
+E. Acceptance criteria
+- Company number appears in generated footer if saved.
+- Company number warning disappears when rendered.
+- Privacy warning does not appear if privacy URL was left empty.
+- Terms/footer link passes when the saved absolute URL exists in the page.
+- Validator uses Business Profile saved data, not hardcoded defaults.
+- Hub and cluster pages follow same validation logic.
+
+The key fix is:
+
+Validator must only check fields actually saved in the Business Profile, not hardcoded defaults.

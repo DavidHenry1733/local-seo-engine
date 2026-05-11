@@ -1,0 +1,181 @@
+The latest deployment has broken the approved page structure.
+
+Current problems:
+1. Uploaded images are no longer rendering.
+2. Placeholder images are showing instead of uploaded business-type images.
+3. The page layout has reverted back to the OLD design.
+4. The approved improved hybrid image/content layout has been lost.
+5. Image positioning is incorrect and no longer matches the approved structure.
+
+We do NOT need a redesign.
+We need the previously approved layout and image system restored exactly.
+
+========================
+RESTORE THE APPROVED PAGE DESIGN
+========================
+
+The approved design uses:
+
+1. Hero section
+- Split layout
+- Text left
+- heroImage right
+- Large contained image (NOT full width)
+
+2. Hybrid image/content sections
+The approved layout is:
+- Large image beside SHORT intro text
+- Supporting paragraphs FULL WIDTH underneath
+
+This structure was previously implemented correctly and must be restored.
+
+Correct structure:
+
+[ LARGE IMAGE ] [ SHORT TEXT BLOCK ]
+
+[ FULL WIDTH SUPPORTING PARAGRAPHS BELOW ]
+
+Do NOT:
+- place long text beside images
+- use tiny images
+- stack images awkwardly above text
+- revert to old split paragraph layout
+
+========================
+IMAGE SYSTEM RULES
+========================
+
+Use ONLY uploaded business-type images.
+
+Do NOT show placeholders if uploaded images exist.
+
+Image priority:
+1. Uploaded library images
+2. AI generated images
+3. Fallback placeholder ONLY if no image exists
+
+Current issue:
+Uploaded images are not being pulled from the library.
+
+Debug and trace:
+- uploaded image path
+- businessType match
+- role assignment
+- final rendered image URL
+
+========================
+IMAGE ROLES
+========================
+
+Every page must use:
+
+- heroImage
+- trustImage
+- supportImage
+- conversionImage
+
+Rules:
+
+heroImage:
+- split hero layout
+- large contained image
+
+trustImage:
+- hybrid section
+- image beside short trust/support text
+- longer copy below full width
+
+supportImage:
+- hybrid section
+- image beside short service/problem text
+- longer copy below full width
+
+conversionImage:
+- full-width feature image before final CTA
+- visually strong
+- max height controlled
+- not repeated elsewhere
+
+========================
+HYBRID SECTION RULES (IMPORTANT)
+========================
+
+Correct approved structure:
+
+TOP ROW:
+- image 45–50% width
+- short text block only
+- max 80–120 words beside image
+
+BOTTOM ROW:
+- full-width supporting paragraphs underneath
+
+This layout was previously approved and must be restored site-wide.
+
+Do NOT revert to:
+- long paragraphs beside image
+- tiny image layouts
+- old stacked layouts
+
+========================
+IMAGE STYLING
+========================
+
+Non-full-width images:
+- 16:9 ratio
+- minimum desktop width 500–700px
+- rounded corners
+- soft shadow
+- vertically centered
+
+Conversion image:
+- full-width
+- feature section
+- visually impactful
+
+========================
+DO NOT CHANGE
+========================
+
+Do NOT:
+- redesign page structure
+- change copy prompts
+- change CTA structure
+- change internal linking logic
+- add new sections
+
+This task is ONLY:
+- restore approved layout
+- restore uploaded images
+- restore hybrid image/content structure
+
+========================
+DEBUG REQUIREMENTS
+========================
+
+Before marking complete:
+
+1. Confirm uploaded image URLs are being rendered.
+2. Confirm no placeholders are used where uploaded images exist.
+3. Confirm hybrid layout restored.
+4. Provide regenerated test URL.
+5. Provide screenshot or debug output showing:
+- heroImage URL
+- trustImage URL
+- supportImage URL
+- conversionImage URL
+
+========================
+ACCEPTANCE CRITERIA
+========================
+
+The regenerated page must:
+- use uploaded business-type images
+- contain NO placeholders
+- match the approved hybrid layout
+- have large visually balanced images
+- have short text beside images
+- have supporting full-width paragraphs below
+- include the full-width conversion image before CTA
+
+Do not mark complete until all acceptance criteria are met.

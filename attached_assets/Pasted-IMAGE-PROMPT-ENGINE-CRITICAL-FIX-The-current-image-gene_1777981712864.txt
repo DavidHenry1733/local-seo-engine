@@ -1,0 +1,133 @@
+IMAGE PROMPT ENGINE — CRITICAL FIX
+The current image generation is not acceptable.
+
+Images must be generated using a structured, industry-bound prompt system.
+
+Do NOT generate images using generic prompts.
+
+Implement the following system.
+
+---
+
+STEP 1 — Derive structured context from keyword
+
+Example:
+"emergency plumber rotherham"
+
+serviceType: "emergency plumbing"
+industry: "plumbing"
+buyerType: "household"
+scenario: "urgent repair"
+environment: "home interior"
+
+---
+
+STEP 2 — Build prompt using STRICT template
+
+Use this exact structure:
+
+[ROLE] + [ACTION] + [ENVIRONMENT] + [DETAILS] + [STYLE] + [NEGATIVE RULES]
+
+---
+
+STEP 3 — Prompt Template
+
+A professional [ROLE] in [LOCATION] performing [ACTION] inside a real residential home.
+
+Scene shows [ENVIRONMENT DETAILS].
+
+Include realistic tools, workwear, and natural lighting.
+
+The setting must clearly look like a homeowner’s property, not a commercial or office space.
+
+Style: high-quality, realistic, documentary-style photography.
+
+---
+
+NEGATIVE PROMPT (MANDATORY)
+
+Do NOT include:
+- offices
+- desks
+- laptops
+- suits
+- meetings
+- call centres
+- digital screens
+- generic people posing
+- corporate environments
+- text overlays
+- logos
+
+---
+
+STEP 4 — Industry Mapping (MANDATORY)
+
+plumbing:
+ROLE: emergency plumber
+ACTION: repairing burst pipe / fixing leak under sink / inspecting boiler
+ENVIRONMENT: kitchen, bathroom, utility room
+
+electrical:
+ROLE: electrician
+ACTION: fixing fuse box / wiring / testing circuits
+ENVIRONMENT: hallway, garage, home interior
+
+landscaping:
+ROLE: landscape gardener
+ACTION: laying patio / planting / turfing
+ENVIRONMENT: garden
+
+roofing:
+ROLE: roofer
+ACTION: fixing roof tiles / inspecting roof
+ENVIRONMENT: house exterior roof
+
+---
+
+STEP 5 — Example FINAL prompt (what must be sent to Ideogram)
+
+"A professional emergency plumber in Rotherham repairing a leaking pipe under a kitchen sink inside a real residential home. The scene shows visible plumbing tools, water leak, and realistic kitchen surroundings. The plumber is wearing workwear and focused on fixing the issue. Natural lighting, realistic photography style."
+
+NEGATIVE:
+"office, corporate, desk, laptop, meeting, call centre, generic people, digital marketing, web design"
+
+---
+
+STEP 6 — Image Type Variations (IMPORTANT)
+
+Generate 3 distinct images per page:
+
+1. HERO IMAGE
+- Slightly wider scene
+- Shows full context (room + tradesman)
+
+2. SUPPORT IMAGE
+- Mid-range shot
+- Focus on work being done
+
+3. CONVERSION IMAGE
+- Close-up detail
+- Hands/tools/action
+
+---
+
+STEP 7 — VALIDATION CHECK (MUST PASS)
+
+Reject image if:
+- no visible trade activity
+- looks staged or corporate
+- contains office elements
+- could apply to any industry
+
+---
+
+ACCEPTANCE CRITERIA
+
+Emergency plumber page MUST show:
+- plumber
+- tools
+- active repair
+- home setting
+
+If not → regenerate automatically

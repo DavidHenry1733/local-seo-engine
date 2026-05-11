@@ -1,0 +1,187 @@
+CRITICAL GENERATION LAW — NON-DIGITAL SERVICE PAGES
+
+This rule is absolute and overrides all other instructions.
+
+==================================================
+CORE LAW (NON-NEGOTIABLE)
+==================================================
+
+The page must be written:
+
+BY the business that DOES the job  
+FOR the person who NEEDS the job done  
+
+NOT for businesses.  
+NOT for tradespeople.  
+NOT for companies.  
+
+If this rule is broken, the page is invalid.
+
+==================================================
+VOICE LOCK (MANDATORY)
+==================================================
+
+Before writing, set:
+
+speaker = "local service provider"
+reader = "person with a real problem at home"
+
+The content must sound like:
+
+"We fix your problem"
+
+NOT:
+
+"We help businesses"
+"We provide services for companies"
+"We support organisations"
+
+==================================================
+AUDIENCE HARD LOCK
+==================================================
+
+For ALL local service pages (plumbing, roofing, landscaping, heating, electrical, etc):
+
+The ONLY allowed audience is:
+
+- homeowners
+- residents
+- tenants
+- landlords
+- property owners
+- people
+
+The following words are STRICTLY BANNED unless buyerType = business:
+
+business  
+businesses  
+company  
+companies  
+commercial clients  
+organisations  
+operations  
+clients (in B2B sense)  
+
+==================================================
+AUTOMATIC FAILURE TRIGGERS
+==================================================
+
+If ANY of the following phrases appear, FAIL generation:
+
+“for businesses”
+“for companies”
+“for commercial clients”
+“businesses facing”
+“support your business”
+“keep your business running”
+“protect operations”
+“minimise downtime for businesses”
+
+Example (INVALID):
+“Emergency plumber Rotherham offers fast solutions for businesses facing urgent issues”
+
+This must trigger:
+→ FAIL
+→ REGENERATE
+
+==================================================
+MANDATORY LANGUAGE PATTERNS
+==================================================
+
+All copy must follow these patterns:
+
+Instead of:
+“for businesses facing urgent issues”
+
+Use:
+“when you have a leak”
+“if your pipe bursts”
+“when your boiler stops working”
+“if your toilet is blocked”
+“when water is coming through your ceiling”
+
+==================================================
+HERO SECTION RULE (STRICT TEMPLATE)
+==================================================
+
+Hero MUST follow this structure:
+
+“Need [service] in [location]? We help [people] with [real problems].”
+
+Examples:
+
+✔ “Need an emergency plumber in Rotherham? We help homeowners deal with burst pipes, leaks and blocked toilets quickly.”
+
+✖ “Emergency plumbing solutions for businesses in Rotherham”
+
+==================================================
+PROBLEM LANGUAGE ENFORCEMENT
+==================================================
+
+Every section must refer to REAL SITUATIONS, not abstract audiences.
+
+Allowed:
+- “water leaking”
+- “no heating”
+- “blocked drain”
+- “damaged roof”
+- “garden unusable”
+
+Not allowed:
+- “operational disruption”
+- “business continuity”
+- “commercial risk”
+- “client impact”
+
+==================================================
+SELF-CHECK BEFORE OUTPUT (MANDATORY)
+==================================================
+
+The system must run this validation BEFORE returning content:
+
+1. Does the page ever mention “business” or “businesses”?
+2. Does any sentence sound like B2B marketing?
+3. Does the reader sound like a company instead of a person?
+4. Would a homeowner feel this is written for them?
+
+If ANY answer = YES → FAIL and REGENERATE
+
+==================================================
+REWRITE RULE (AUTO-CORRECTION)
+==================================================
+
+If the system detects B2B phrasing, it must rewrite:
+
+“businesses facing urgent plumbing issues”
+→ “people dealing with urgent plumbing problems at home”
+
+“commercial clients”
+→ “homeowners and landlords”
+
+“operations at risk”
+→ “risk of damage to your home”
+
+==================================================
+FINAL VALIDATION LINE (MUST PASS)
+==================================================
+
+Before output, confirm internally:
+
+“This page reads like a real local tradesperson speaking to someone with a problem at home.”
+
+If not true → regenerate.
+
+==================================================
+TEST CASE (MUST PASS)
+==================================================
+
+Keyword:
+Emergency Plumbing Rotherham
+
+VALID OUTPUT:
+“We help homeowners in Rotherham deal with leaks, burst pipes and blocked toilets.”
+
+INVALID OUTPUT:
+“We help businesses in Rotherham with urgent plumbing issues.”
+
+INVALID OUTPUT MUST NEVER BE RETURNED.

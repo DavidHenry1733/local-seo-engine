@@ -1,0 +1,114 @@
+The merged AI optimisation prompt is working structurally, but the generated output still has content and rendering issues.
+
+Do not change layout, images, sitemap, deployment, or internal link logic unless required for these content fixes.
+
+Required fixes:
+
+1. Keyword capitalisation
+Normalise service/location keywords for display.
+
+Examples:
+- "local seo Rotherham" must render as "Local SEO Rotherham"
+- "web design Barnsley" must render as "Web Design Barnsley"
+
+Apply to:
+- H1
+- title/meta
+- schema name fields
+- headings
+- AI answer block
+- FAQ
+- resource card titles
+- internal anchor text
+
+Do not change URL slugs.
+
+2. AI Answer Block must be unique
+The AI Answer Block currently repeats the hero intro.
+
+Fix:
+- hero intro should be persuasive and commercial
+- AI Quick Answer should be concise, factual and extractable
+- do not reuse the same paragraph
+
+Example:
+Quick Answer:
+"Local SEO Rotherham helps businesses improve visibility in Google local search, map results and AI-powered search answers. It combines website optimisation, local content, internal linking, schema and trust signals to help local customers find and contact the business."
+
+3. Render Intent Clusters visibly
+The prompt says intentClusters exist, but they are not visibly rendered.
+
+Add a visible section after "What you get" or before "How a website generates enquiries":
+
+Heading:
+"Common Questions About Local SEO in Rotherham"
+
+Subsections:
+- Pricing Questions
+- Process Questions
+- Local Questions
+- Comparison Questions
+
+Each should include a short question and direct answer.
+
+4. Render Entity Block visibly or semi-visibly
+Add section near bottom before FAQ or trust strip:
+
+Heading:
+"About this Local SEO service"
+
+Include:
+- Service: Local SEO
+- Location: Rotherham
+- Provider: InboxingProWeb
+- Target audience: Local businesses in Rotherham
+- Nearby areas: Aston, Bramley, Dinnington, etc.
+
+This should be visible enough for users and AI systems, not hidden in comments only.
+
+5. Improve schema depth
+Schema should include:
+- WebPage
+- LocalBusiness or Organization
+- Service
+- BreadcrumbList
+- FAQPage if visible FAQ exists
+
+FAQPage schema must be generated from the visible FAQ text only.
+
+6. Internal link formatting
+For links between generated campaign pages, use root-relative URLs:
+- /local-seo-aston/
+- /local-seo-bramley/
+
+External/profile links can remain absolute:
+- https://inboxingproweb.com/contact/
+
+7. Resource card descriptions
+Each related resource card should include:
+- title
+- short description
+- link
+
+Do not render title-only cards.
+
+8. Local SEO page content focus
+For Local SEO pages, reduce generic "website" language and increase relevance around:
+- Google local search visibility
+- map pack visibility
+- Google Business Profile
+- local service pages
+- citations
+- reviews/trust
+- schema
+- enquiries from local search
+
+9. Acceptance criteria
+- H1 displays "Local SEO Rotherham" not "local seo Rotherham"
+- AI Answer Block is not duplicated from hero intro
+- Intent Clusters are visible
+- Entity Block is visible
+- FAQPage schema exists when FAQ exists
+- Resource cards include descriptions
+- Generated internal links are root-relative
+- Local SEO page reads like a local SEO page, not a generic website page

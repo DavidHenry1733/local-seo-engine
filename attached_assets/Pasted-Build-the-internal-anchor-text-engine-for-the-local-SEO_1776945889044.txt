@@ -1,0 +1,213 @@
+Build the internal anchor text engine for the local SEO page builder.
+
+Goal:
+Automatically generate and insert internal anchor text links into page copy using a controlled mix of exact, partial, and natural anchors.
+
+Tech requirements:
+- Use Node.js with TypeScript
+- Keep the code modular and easy to extend
+- Return both updated section content and an anchor report
+- Keep insertion logic safe and readable
+- Do not break HTML structure
+
+Create the following files:
+
+1. anchorTypes.ts
+2. anchorEngine.ts
+3. anchorExample.ts
+
+---
+
+1. anchorTypes.ts
+
+Define strong TypeScript types for:
+
+- AnchorStyle = "exact" | "partial" | "natural"
+- LinkType = "hub" | "cluster" | "supporting"
+
+- AnchorTarget
+  fields:
+  - label: string
+  - url: string
+  - linkType: LinkType
+
+- AnchorInsertion
+  fields:
+  - anchorText: string
+  - url: string
+  - linkType: LinkType
+  - anchorStyle: AnchorStyle
+  - sectionUsed: string
+  - status: "inserted" | "warning" | "skipped"
+  - message: string
+
+- AnchorEngineInput
+  fields:
+  - pageType: "hub" | "cluster"
+  - primaryKeyword: string
+  - supportingKeywords: string[]
+  - serviceName: string
+  - location: string
+  - hubPage: AnchorTarget
+  - relatedClusterPages: AnchorTarget[]
+  - supportingPages: AnchorTarget[]
+  - splitSectionOneHtml: string
+  - splitSectionTwoHtml: string
+  - aboutSectionHtml?: string
+  - localRelevanceSectionHtml?: string
+  - resourcesIntroHtml?: string
+
+- AnchorEngineOutput
+  fields:
+  - splitSectionOneHtml: string
+  - splitSectionTwoHtml: string
+  - aboutSectionHtml?: string
+  - localRelevanceSectionHtml?: string
+  - resourcesIntroHtml?: string
+  - insertions: AnchorInsertion[]
+
+---
+
+2. anchorEngine.ts
+
+Build a single entry point:
+
+- applyInternalAnchors(input: AnchorEngineInput): AnchorEngineOutput
+
+Core responsibilities:
+- generate anchor text variations
+- choose a balanced mix of exact / partial / natural anchors
+- insert links into section HTML
+- avoid repeated anchor text
+- distribute links across different sections
+- preserve readable, natural copy
+
+---
+
+3. LINKING RULES
+
+Per page, include:
+- 1 mandatory hub link
+- 1–2 related cluster links
+- 1–2 supporting content links
+
+Target total:
+- 3–5 inserted links
+
+If not enough valid insertion points exist:
+- insert as many as possible
+- report warnings in the insertion log
+
+---
+
+4. ANCHOR STYLE RULES
+
+Use a controlled mix:
+
+A. Exact anchors
+Examples:
+- "web design Sheffield"
+- "Affordable Web Design Sheffield"
+
+Rules:
+- max 1 exact anchor per page for the same phrase
+- do not overuse exact match anchors
+
+B. Partial anchors
+Examples:
+- "professional web design in Sheffield"
+- "our affordable website design service"
+
+Rules:
+- preferred default style for commercial/service links
+
+C. Natural anchors
+Examples:
+- "learn more about how websites generate enquiries"
+- "see why website hosting matters"
+
+Rules:
+- preferred style for supporting content links
+
+---
+
+5. PLACEMENT RULES
+
+Preferred insertion order:
+1. splitSectionOneHtml
+2. splitSectionTwoHtml
+3. aboutSectionHtml
+4. localRelevanceSectionHtml
+5. resourcesIntroHtml
+
+Rules:
+- do not place all links in one section
+- try to spread them across the page
+- only insert links into suitable sentences
+- do not insert multiple links into the same sentence unless unavoidable
+- do not break grammar or sentence flow
+
+---
+
+6. INSERTION LOGIC
+
+Implement helper functions for:
+- generating exact anchor candidates
+- generating partial anchor candidates
+- generating natural anchor candidates
+- selecting anchor style by link type
+- finding safe insertion points in HTML paragraphs
+- preventing duplicate anchor text
+- checking section distribution
+
+Link style preference by link type:
+- hub: exact or partial
+- cluster: partial preferred
+- supporting: natural preferred
+
+---
+
+7. VALIDATION / WARNINGS
+
+Create warnings when:
+- exact anchors are overused
+- same anchor text repeats
+- required link type is missing
+- a link could not be inserted naturally
+- not enough insertion points are available
+
+Do not fail hard unless input is invalid.
+
+---
+
+8. CODE QUALITY
+
+- Use pure functions where practical
+- Keep the insertion logic readable
+- Avoid fragile regex-only logic where possible
+- Use basic HTML parsing if needed
+- Do not return pseudocode
+
+---
+
+9. EXAMPLE USAGE FILE
+
+Create anchorExample.ts that:
+- imports applyInternalAnchors
+- builds a sample AnchorEngineInput
+- runs the engine
+- logs:
+  - updated section HTML
+  - insertion report as JSON
+
+---
+
+10. OUTPUT
+
+Return:
+- complete anchorTypes.ts
+- complete anchorEngine.ts
+- complete anchorExample.ts
+
+Do not return explanation only.
+Return full working TypeScript code.

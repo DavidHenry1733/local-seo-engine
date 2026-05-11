@@ -1,0 +1,37 @@
+The email marketing AI images are still generic. Please stop using the generic business prompt for email marketing.
+
+Add a hard-coded emailMarketing override prompt and log the final prompt sent to Ideogram.
+
+Important:
+Do NOT rely on laptop/dashboard wording alone.
+Do NOT require readable screen text, because this conflicts with “no text”.
+
+For businessType = emailMarketing or service containing "email marketing", use this prompt:
+
+wide angle composition, subject centred, designed for website layout with space around subject, create a photorealistic modern commercial website image for an email marketing service. The image must clearly represent email marketing without relying on readable text. Show a small business owner or marketing professional reviewing an email campaign workflow, with visible abstract email envelope icons, campaign cards, message bubbles, contact list style panels, automation flow lines, analytics-style graphs, rising chart shapes, and digital marketing performance visuals around the laptop or workspace. The scene should communicate email campaigns, subscriber lists, automation, open rates, click activity, and customer engagement using icons and abstract UI elements, not readable words. Realistic UK small business office setting, clean professional composition, natural lighting, high detail, premium local business website style.
+
+Negative instructions:
+Do not generate a generic laptop scene.
+Do not generate a plain office meeting.
+Do not generate random business people at desks.
+Do not generate unrelated web design, coding, ecommerce, finance, or social media scenes.
+Do not include readable text, logos, brand names, watermarks, signage, captions, or overlays.
+No distorted hands, no unrealistic faces.
+
+Also add debug logging:
+- businessType
+- service/keyword
+- imageRole
+- final prompt sent to Ideogram
+- Ideogram request payload
+
+Acceptance test:
+When regenerating an email marketing image, the final prompt in console must contain:
+- email envelope icons
+- campaign cards
+- automation flow lines
+- subscriber/contact list panels
+- analytics-style graphs
+- not generic laptop scene
+
+The key fix is this: email marketing images should not depend on readable laptop screens. They need visible email/automation/analytics visual objects around the scene.

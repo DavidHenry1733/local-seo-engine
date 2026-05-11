@@ -1,0 +1,389 @@
+Add Existing Website URL Brand/Style Importer for Page Generation
+
+Do not change Final Publish Gate, scoring, sitemap, deployment, image library, link audit, or social distribution logic unless required for validation.
+
+Goal:
+Allow a user to enter their existing website URL during campaign setup. The system should analyse the live site and create generated local SEO pages that match the client’s brand style, tone, colours, logo, navigation, and general visual identity.
+
+Important:
+Generated pages should NOT become a copy of the homepage.
+They should remain local SEO/information landing pages with the approved ranking structure.
+The imported website should influence branding and styling only.
+
+==================================================
+1. Campaign setup field
+==================================================
+
+Add optional field:
+
+existingWebsiteUrl
+
+Example:
+https://examplebusiness.co.uk
+
+If provided, the system should run a website style import before page generation.
+
+If not provided, continue using default template settings.
+
+==================================================
+2. Website fetch and analysis
+==================================================
+
+Create a safe website fetcher.
+
+Fetch:
+- homepage HTML
+- CSS files linked from homepage where accessible
+- logo image if detectable
+- favicon if detectable
+- page title
+- meta description
+- header/navigation links
+- footer links
+- main brand colours
+- button colours
+- heading font family
+- body font family
+- tone of voice sample from homepage copy
+- business name
+- phone number
+- email address
+- address if visible
+- social profile links if visible
+
+Respect:
+- timeout
+- max file size
+- redirects
+- HTTPS
+- avoid crawling more than homepage + linked CSS
+- do not scrape large sites
+- do not store unnecessary personal data
+
+==================================================
+3. Brand profile output
+==================================================
+
+Save extracted data to:
+
+config/projects/{clientSlug}/brand-profile.json
+
+Structure:
+
+{
+  "sourceUrl": "",
+  "businessName": "",
+  "logoUrl": "",
+  "faviconUrl": "",
+  "primaryColour": "",
+  "secondaryColour": "",
+  "accentColour": "",
+  "backgroundColour": "",
+  "headingColour": "",
+  "bodyTextColour": "",
+  "buttonColour": "",
+  "buttonTextColour": "",
+  "headingFont": "",
+  "bodyFont": "",
+  "navigationLinks": [],
+  "footerLinks": [],
+  "toneOfVoice": {
+    "style": "",
+    "samplePhrases": [],
+    "formality": "casual|professional|premium|friendly",
+    "notes": ""
+  },
+  "contact": {
+    "phone": "",
+    "email": "",
+    "address": ""
+  },
+  "confidence": {
+    "logo": 0,
+    "colours": 0,
+    "fonts": 0,
+    "contact": 0
+  }
+}
+
+==================================================
+4. Colour extraction rules
+==================================================
+
+Extract likely brand colours from:
+- CSS variables
+- header
+- buttons
+- links
+- logo dominant colours where possible
+
+Avoid selecting:
+- white
+- black
+- greys only
+- body text colour as primary colour unless no other option
+
+If uncertain, use defaults and mark confidence low.
+
+==================================================
+5. Logo detection
+==================================================
+
+Try to detect logo from:
+- img alt containing logo/business name
+- header image
+- schema Organization logo
+- Open Graph image if no better logo found
+
+Save as external logoUrl initially.
+
+Do not hotlink permanently unless allowed.
+For generated output, either:
+- download logo into campaign assets folder if permitted, or
+- allow user to upload/replace logo manually.
+
+Add dashboard warning:
+“Logo detected from website. Please confirm usage before publishing.”
+
+==================================================
+6. Navigation import
+==================================================
+
+Extract main navigation links.
+
+Use only safe top-level links:
+- Home
+- About
+- Services
+- Contact
+- Blog
+- Reviews
+- Gallery
+- Areas Covered
+
+Do not import:
+- login links
+- cart links
+- checkout links
+- admin links
+- tracking links
+- duplicate links
+- broken links
+
+Generated pages should use imported navigation where available.
+
+Fallback to default navigation.
+
+==================================================
+7. Template styling integration
+==================================================
+
+Add a BrandTheme object used by renderClusterPage:
+
+brandTheme:
+{
+  logoUrl,
+  primaryColour,
+  secondaryColour,
+  accentColour,
+  headingColour,
+  bodyTextColour,
+  buttonColour,
+  buttonTextColour,
+  headingFont,
+  bodyFont,
+  navLinks,
+  footerLinks
+}
+
+Generated pages must:
+- keep the same approved SEO page structure
+- use the imported brand colours
+- use imported logo
+- use imported nav/footer links
+- use imported fonts if safe
+- preserve responsive layout
+- preserve all required SEO/AI sections
+
+Do not copy the homepage layout.
+Do not remove:
+- AI summary
+- What’s Included
+- Intent Clusters
+- Who It’s For
+- Enquiry section
+- Local Relevance
+- Common Mistakes
+- Related Resources
+- Map
+- FAQ
+- CTA
+- Trust strip
+- Footer
+
+==================================================
+8. Template type selection
+==================================================
+
+Add option:
+
+pageStyleMode:
+- default
+- brandMatched
+- informationPage
+- landingPage
+
+Default for imported websites should be:
+brandMatched + informationPage
+
+Meaning:
+- visually matches brand
+- still reads like a helpful local service/information page
+- does not look like a duplicated homepage
+
+==================================================
+9. Information page layout refinement
+==================================================
+
+When pageStyleMode includes informationPage:
+
+Use:
+- cleaner header
+- less homepage-style hero
+- more editorial/service guide feel
+- stronger content hierarchy
+- clear section labels
+- contained width
+- balanced cards
+- fewer “homepage sales” phrases
+- more useful explanations
+
+Still include:
+- CTA
+- trust indicators
+- contact route
+- money page band on hub pages where configured
+
+Avoid:
+- over-large hero
+- too many generic sales claims
+- homepage-like repeated navigation blocks
+- duplicate brand introduction too high on the page
+
+==================================================
+10. Tone of voice import
+==================================================
+
+Use imported tone only as guidance.
+
+Example:
+If original site is warm/friendly:
+- content can be slightly warmer
+
+If original site is professional/corporate:
+- content should be more formal
+
+But do not copy exact phrases from the website except:
+- business name
+- service names
+- location names
+- public contact details
+
+No plagiarism.
+
+==================================================
+11. Manual review dashboard
+==================================================
+
+Add Brand Import screen.
+
+Show:
+- source URL
+- detected business name
+- detected logo
+- detected colours
+- detected fonts
+- detected nav links
+- detected phone/email/address
+- confidence scores
+- warnings
+
+User can:
+- approve brand profile
+- edit colours
+- upload/replace logo
+- edit nav links
+- edit business name/contact details
+- rerun import
+
+Only use imported profile for generation after approval, unless admin setting allows auto-approve.
+
+==================================================
+12. Validation
+==================================================
+
+Final Publish Gate should validate:
+- if brandMatched mode enabled, brand profile exists
+- logo exists or fallback logo used
+- colours are valid hex values
+- nav links are valid URLs
+- no admin/cart/checkout links in nav
+- page still contains all required SEO sections
+- page is not missing schema/meta/canonical
+- layout still constrained to .wrap and .container
+- imported styles do not break readability/contrast
+
+If contrast is poor:
+- adjust text/button colours automatically
+- mark REVIEW_REQUIRED if not safely fixable
+
+==================================================
+13. Security and safety
+==================================================
+
+Do not execute remote scripts.
+Do not inline unknown JavaScript.
+Do not import third-party tracking scripts.
+Do not import forms from client site.
+Do not import hidden content.
+Do not import admin/login/private links.
+Do not store access credentials.
+Only fetch public HTML/CSS/assets.
+
+==================================================
+14. Fallback behaviour
+==================================================
+
+If import fails:
+- show clear error
+- continue with default template if user chooses
+- do not block campaign creation unless brandMatched mode is required
+
+Failure reasons:
+- site unreachable
+- timeout
+- blocked by robots/security
+- no usable brand signals found
+- invalid URL
+
+==================================================
+15. Acceptance criteria
+==================================================
+
+Test with:
+- InboxingProWeb URL
+- a generic local trades website
+- a clinic/service business website
+
+Expected:
+- system extracts logo/colours/nav/contact where available
+- creates brand-profile.json
+- user can review/edit/approve profile
+- generated pages visually match brand style
+- generated pages keep approved local SEO structure
+- pages do not become homepage clones
+- informationPage mode looks more like a useful local service page than a homepage
+- Final Publish Gate still works
+- no broken layout
+- no missing required sections
+- no copied homepage body text

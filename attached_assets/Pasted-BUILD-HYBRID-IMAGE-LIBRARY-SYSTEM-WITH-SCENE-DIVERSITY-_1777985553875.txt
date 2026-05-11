@@ -1,0 +1,326 @@
+BUILD HYBRID IMAGE LIBRARY SYSTEM WITH SCENE DIVERSITY
+
+Goal:
+Create a production-ready image system where each industry has a pre-loaded library, users can upload their own images, or the system can generate AI images.
+
+The system must prevent repetitive images. No page should use 3 images showing the same task, same angle, or same scene.
+
+==================================================
+1. Image Source Options
+==================================================
+
+Add imageSourceMode:
+
+- library
+- upload
+- ai
+- hybrid
+- disabled
+
+Default for beta:
+library
+
+Meaning:
+library = use approved pre-loaded image packs
+upload = user uploads images
+ai = generate with AI only
+hybrid = try AI first, fallback to library
+disabled = no generated images
+
+==================================================
+2. Preloaded Industry Image Library
+==================================================
+
+Create image packs for the 6 core templates:
+
+- web-design
+- plumbing
+- roofing
+- electrical
+- landscaping
+- clinics-aesthetics
+
+Each industry must support up to 9 images.
+
+Folder structure:
+
+assets/image-packs/{industryType}/
+  hero/
+  support/
+  conversion/
+  general/
+
+==================================================
+3. Image Manifest
+==================================================
+
+Create:
+
+config/imagePacks.json
+
+Each image must include:
+
+{
+  "id": "",
+  "industryType": "",
+  "serviceTypes": [],
+  "slot": "hero|support|conversion|general",
+  "sceneType": "",
+  "path": "",
+  "altTemplate": "",
+  "tags": [],
+  "buyerTypes": [],
+  "approved": true,
+  "avoidFor": [],
+  "notes": ""
+}
+
+sceneType is mandatory.
+
+Examples for plumbing:
+- emergency-callout-arrival
+- under-sink-leak-repair
+- blocked-toilet-repair
+- pipework-closeup
+- homeowner-doorstep
+- bathroom-repair
+- boiler-check
+- water-shutoff
+- completed-repair
+
+==================================================
+4. Scene Diversity Rule
+==================================================
+
+No page may use two images with the same sceneType.
+
+Also avoid near-duplicates:
+- same task
+- same room
+- same camera angle
+- same person pose
+- same under-sink repair repeated
+
+Example:
+For Emergency Plumbing Rotherham, this is valid:
+1. Hero: plumber arriving at home for urgent callout
+2. Support: close-up pipe leak repair under sink
+3. Conversion: homeowner speaking with plumber at door
+
+This is invalid:
+1. plumber under sink
+2. plumber under sink
+3. plumber under sink
+
+If duplicate sceneType is detected:
+- reject image
+- choose/generate another
+- if still duplicate, fallback to library
+
+==================================================
+5. AI Batch Generation
+==================================================
+
+When generating AI images for an industry/service, generate up to 9 distinct scene prompts.
+
+For Emergency Plumbing, generate these 9 scene prompts:
+
+1. emergency-callout-arrival
+A professional emergency plumber arriving at a UK residential home with toolbox for an urgent callout, homeowner opening the door, realistic documentary photo, no text.
+
+2. under-sink-leak-repair
+A professional plumber repairing a leaking pipe under a kitchen sink in a real UK home, visible pipework and tools, realistic photo, no text.
+
+3. blocked-toilet-repair
+A professional plumber working on a blocked toilet in a domestic bathroom, tools visible, clean realistic repair scene, no text.
+
+4. pipework-closeup
+Close-up of plumber’s hands using tools to repair domestic pipework, visible fittings, realistic trade work, no text.
+
+5. bathroom-water-leak
+A plumber investigating a bathroom water leak near basin pipework, realistic UK home bathroom, no text.
+
+6. water-shutoff-advice
+A plumber showing a homeowner the stop tap or shut-off valve in a domestic utility area, reassuring practical scene, no text.
+
+7. van-outside-home
+A local plumbing van parked outside a UK residential home with plumber carrying tools, no readable branding, no text.
+
+8. completed-repair
+A clean completed plumbing repair under sink or pipe area with tools being packed away, realistic home setting, no text.
+
+9. homeowner-consultation
+A homeowner speaking with a plumber in a kitchen about an urgent plumbing issue, reassuring professional interaction, no text.
+
+Negative prompt for all:
+No office, no laptop, no computer, no business meeting, no suits, no corporate scene, no text, no logo, no web design, no marketing, no dashboard.
+
+==================================================
+6. Slot Selection Rules
+==================================================
+
+For each page, select 3 images:
+
+Hero:
+Prefer sceneType:
+- callout-arrival
+- main-service-action
+- finished-result
+
+Support:
+Prefer sceneType:
+- closeup-work
+- tools/process
+- problem-specific repair
+
+Conversion:
+Prefer sceneType:
+- homeowner-consultation
+- completed-repair
+- callout-arrival
+
+Never use the same sceneType twice.
+
+==================================================
+7. Industry Scene Maps
+==================================================
+
+Create scene maps for all 6 industries.
+
+Plumbing:
+- emergency-callout-arrival
+- under-sink-leak-repair
+- blocked-toilet-repair
+- pipework-closeup
+- bathroom-water-leak
+- water-shutoff-advice
+- van-outside-home
+- completed-repair
+- homeowner-consultation
+
+Roofing:
+- roofer-arriving-at-home
+- roof-tile-repair
+- flat-roof-inspection
+- gutter-repair
+- chimney-flashing
+- roof-leak-inspection
+- ladder-safety
+- completed-roof-repair
+- homeowner-roof-consultation
+
+Electrical:
+- electrician-arriving-at-home
+- consumer-unit-check
+- socket-repair
+- lighting-installation
+- circuit-testing-closeup
+- safety-inspection
+- landlord-eicr-check
+- completed-electrical-work
+- homeowner-electrician-consultation
+
+Landscaping:
+- garden-consultation
+- patio-installation
+- fencing-installation
+- turfing-lawn
+- planting-borders
+- drainage-preparation
+- raised-bed-build
+- completed-garden
+- landscaper-tools-closeup
+
+Clinics-aesthetics:
+- clinic-consultation
+- treatment-room
+- practitioner-preparation
+- skincare-treatment-setup
+- client-discussion
+- clinic-reception
+- aftercare-advice
+- clean-equipment-closeup
+- calm-premium-room
+
+Web-design:
+- website-planning
+- laptop-site-preview
+- mobile-responsive-preview
+- enquiry-form-design
+- analytics-review
+- brand-layout-design
+- developer-workflow
+- client-consultation
+- finished-website-showcase
+
+==================================================
+8. User Choice
+==================================================
+
+Dashboard must allow user to choose:
+
+1. Use preloaded industry library
+2. Upload my own images
+3. Generate AI images
+4. Hybrid AI + library fallback
+5. Disable images
+
+For uploaded images, user must assign:
+- industryType
+- serviceTypes
+- slot
+- sceneType
+- altTemplate
+- approved true/false
+
+==================================================
+9. QA Rules
+==================================================
+
+Fail image set if:
+- any image is missing
+- any image repeats sceneType
+- any non-digital image contains office/computer/corporate scene
+- filename/alt contains stale keyword
+- wrong industry image selected
+- same image used more than once
+- all images show same task
+- no image clearly represents the service
+
+==================================================
+10. Acceptance Test
+==================================================
+
+Generate images for:
+
+Emergency Plumbing Rotherham
+
+Expected valid set:
+Hero = emergency-callout-arrival
+Support = under-sink-leak-repair OR pipework-closeup
+Conversion = homeowner-consultation OR completed-repair
+
+Invalid:
+3 under-sink images.
+
+Then test:
+Landscape Gardener Sheffield
+Expected:
+1 garden consultation or completed garden
+1 patio/fencing/turfing work
+1 planting/drainage/completed garden image
+
+Then test:
+Web Design Rotherham
+Expected:
+Digital/web images allowed, but no stale text from another town/service.
+
+==================================================
+11. Critical Commercial Rule
+==================================================
+
+For beta launch, default to preloaded image library.
+
+AI image generation should be optional, not the main route.
+
+A high-quality preloaded library gives more reliable output and makes the product feel done-for-you.
