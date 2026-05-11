@@ -1,0 +1,133 @@
+We are stress-testing page layouts. Fix the generated page layout rules globally.
+
+Do not change content generation logic, scoring, schema, sitemap, deployment, images, or link audit logic unless required for these layout fixes.
+
+Required layout changes:
+
+1. Uniform card grids
+
+Any section that renders content boxes/cards must avoid uneven final rows.
+
+Examples:
+- 6 cards should render as 3 + 3
+- 8 cards should render as 4 + 4 or 3 + 3 + 2 depending mobile/tablet rules, but desktop should look balanced
+- Do not render 4 + 2 if 6 cards exist
+- Do not render 5 + 2 if 7 cards exist
+
+2. “What’s Included” section
+
+Current issue:
+“What’s Included with Web Hosting in Rotherham” renders 4 cards on first row and 2 on second row.
+
+Fix:
+For 6 items, desktop must render 3 columns × 2 rows.
+
+Update CSS/grid rules for:
+.whats-included-grid
+
+Expected:
+grid-template-columns: repeat(3, 1fr) on desktop
+2 columns on tablet
+1 column on mobile
+
+3. “Common Mistakes” section
+
+Current issue:
+Some pages render 7 mistake boxes, causing an uneven layout.
+
+Fix:
+Default Common Mistakes to generate exactly 8 items for all pages.
+
+Desktop layout:
+4 columns × 2 rows where space allows
+or 2 columns × 4 rows on narrower screens
+1 column on mobile
+
+Update:
+.mistakes-grid
+
+Expected desktop:
+grid-template-columns: repeat(4, 1fr)
+
+Also update prompt/content generation so commonMistakes returns 8 items, not 5 or 7.
+
+4. Other card sections
+
+Apply balanced layout rules to:
+- intent cluster cards
+- who it’s for cards
+- resource cards
+- included cards
+- mistake cards
+- citable blocks
+- any future card grid
+
+Rules:
+- 4 items = 4 across or 2x2 depending section width
+- 5 items = avoid 4+1; prefer 3+2 or generate 6 if section type allows
+- 6 items = 3+3
+- 7 items = generate 8 or reduce to 6 depending section type
+- 8 items = 4+4
+- 9 items = 3+3+3
+
+5. Center align text sections by default
+
+Default generated text sections should be centre aligned unless the section is clearly a long-form reading section.
+
+Apply centre alignment to:
+- section headings
+- section labels
+- card text
+- short intro text
+- CTA text
+- AI summary card text if appropriate
+
+Long paragraph-heavy sections can remain readable, but should not look randomly left-aligned inside cards.
+
+Specific card text should be centered:
+- .included-card
+- .audience-card
+- .mistake-item
+- .resource-card
+- .cluster-intent-item
+- .ai-citable-block
+
+6. Map section address/pin issue
+
+Current issue:
+Maps show the map but no visible pin/address label.
+
+Fix:
+Use a Google Maps embed URL that includes the full business address query, not only latitude/longitude.
+
+Current style:
+https://maps.google.com/maps?q=53.4262892,-1.3551445&z=17&output=embed
+
+Preferred:
+https://maps.google.com/maps?q=InboxingProWeb%2C%20Moorgate%20Crofts%20Business%20Centre%2C%20South%20Grove%2C%20Rotherham%2C%20S60%202DH&z=17&output=embed
+
+Rules:
+- Map query should use business name + full address from business profile.
+- Do not use target city as the business address.
+- The map should show the business location/pin where possible.
+- iframe title should include business name and address.
+- Apply to all generated pages.
+
+7. Business address consistency
+
+For generated pages targeting other towns/cities:
+- LocalBusiness schema address must use actual business profile address.
+- Service area/page content can use the target location.
+- Map embed must use actual business profile address, not target location.
+
+8. Acceptance criteria
+
+After changes:
+- What’s Included with 6 cards renders 3 + 3 on desktop.
+- Common Mistakes always renders 8 cards.
+- No card section has ugly 4+1, 5+1, 5+2, or 4+2 layout where avoidable.
+- Card content is center aligned.
+- Map embed uses full business name + address.
+- Map shows a pin/address label where Google allows it.
+- LocalBusiness schema address remains actual business address.
+- No changes break AI readiness scoring, link audit, schema, sitemap, or deployment.

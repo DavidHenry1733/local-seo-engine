@@ -1,0 +1,98 @@
+import fs from "fs";
+import path from "path";
+
+type WordPressConfig = {
+  siteUrl: string;
+  username: string;
+  applicationPassword: string;
+  status?: "draft" | "publish" | "private" | "pending";
+};
+
+type PageData = {
+  page: {
+    slug: string;
+    title_seed?: string;
+  };
+};
+
+type ContentData = {
+  hero_title?: string;
+};
+
+function readJsonFile<T>(filePath: string): T {
+  return JSON.parse(fs.readFileSync(filePath, "utf-8")) as T;
+}
+
+function buildBasicAuth(username: string, applicationPassword: string): string {
+  const token = Buffer.from(`${username}:${applicationPassword}`).toString("base64");
+  return `Basic ${token}`;
+}
+
+export async function exportToWordPress(projectRoot: string, slug: string) {
+  const wpConfigPath = path.join(projectRoot, "input", "wordpress.json");
+  const pageDataPath = path.join(projectRoot, "output", slug, "page-data.json");
+  const htmlPath = path.join(projectRoot, "output", slug, "page.html");
+
+  const wpConfig = readJsonFile<WordPressConfig>(wpConfigPath);
+  const pageData = readJsonFile<PageData>(pageDataPath);
+  const pageHtml = fs.readFileSync(htmlPath, "utf-8");
+
+  const contentJsonPath = path.join(projectRoot, "output", slug, "content.json");
+  const contentData = fs.existsSync(contentJsonPath)
+    ? readJsonFile<ContentData>(contentJsonPath)
+    : null;
+
+  const pageTitle =
+    contentData?.hero_title ||
+    pageData.page.title_seed ||
+    slug.replace(/-/g, " ");
+
+  const endpoint = `${wpConfig.siteUrl.replace(/\/+$/, "")}/wp-json/wp/v2/pages`;
+
+  const payload = {
+    title: pageTitle,
+    slug: pageData.page.slug,
+    content: pageHtml,
+    status: wpConfig.status || "draft"
+  };
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Authorization": buildBasicAuth(
+        wpConfig.username,
+        wpConfig.applicationPassword
+      ),
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const responseText = await response.text();
+
+  if (!response.ok) {
+    throw new Error(
+      `WordPress export failed: ${response.status} ${response.statusText}\n${responseText}`
+    );
+  }
+
+  const result = JSON.parse(responseText);
+
+  const exportLog = {
+    exportedAt: new Date().toISOString(),
+    endpoint,
+    pageId: result.id,
+    status: result.status,
+    link: result.link,
+    slug: result.slug,
+    title: result.title?.rendered || pageTitle
+  };
+
+  fs.writeFileSync(
+    path.join(projectRoot, "output", slug, "wordpress-export.json"),
+    JSON.stringify(exportLog, null, 2),
+    "utf-8"
+  );
+
+  return exportLog;
+}

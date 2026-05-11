@@ -1,0 +1,213 @@
+We need to fix the local SEO landing page template output.
+
+Current output is still too much like a homepage:
+- too many generic service cards
+- broad services/footer links
+- fake testimonials
+- map section
+- not enough detailed landing page content
+- too many homepage-style grids
+- not enough buyer-intent copy around the keyword
+
+Test keyword:
+Emergency Plumber Sheffield
+
+Business:
+Peak Plumbing Services
+Phone:
+0144 245675
+Location:
+Sheffield
+
+IMPORTANT:
+This must be a dedicated local SEO landing page, not a homepage.
+
+The page should target ONE keyword:
+Emergency Plumber Sheffield
+
+The page should answer:
+- I have a plumbing emergency in Sheffield
+- can someone come quickly?
+- what problems do they fix?
+- how much might it cost?
+- are they local?
+- what should I do now?
+- can I trust them?
+
+Required changes:
+
+1. Remove homepage-style sections
+Do NOT include:
+- generic services grid
+- broad “Services” footer list
+- fake customer testimonials
+- generic company/about section
+- map section unless specifically enabled
+- homepage-style “products and services” blocks
+
+2. Add deeper landing page content
+The page should contain at least 900–1200 words of relevant copy.
+
+Use fewer sections but make each section stronger.
+
+Required structure:
+
+A. Hero
+- H1: Emergency Plumber in Sheffield
+- urgent, conversion-focused intro
+- call button
+- callback button
+- short trust bullets only
+
+B. Emergency reassurance section
+Heading example:
+Need an emergency plumber in Sheffield right now?
+
+Explain:
+- what the visitor should do
+- why speed matters
+- leaks, bursts, blocked toilets, water damage
+- call immediately if water is escaping
+
+C. What we can help with
+This should be prose-led, not a generic services grid.
+
+Cover:
+- burst pipes
+- leaking pipes
+- blocked toilets
+- overflowing sinks
+- failed stop taps
+- leaking showers/baths
+- emergency isolation
+- urgent plumbing repairs
+
+D. Sheffield local response section
+Explain:
+- local Sheffield coverage
+- nearby areas can be listed briefly
+- do not create lots of area links unless cluster pages exist
+- mention that local knowledge helps response time
+
+E. What to do before the plumber arrives
+This is important and adds real value.
+
+Include practical advice:
+- turn off stop tap if safe
+- avoid using affected fixtures
+- move valuables away from water
+- turn off electrics near water if safe
+- take photos if needed for landlord/insurance
+- call the plumber with clear details
+
+F. Pricing and callout expectations
+Do not make unsupported claims like “no call-out fee” unless provided in profile.
+
+Use safe wording:
+- clear pricing
+- quote before work starts where possible
+- emergency rates may vary
+- no hidden work without agreement
+
+G. Why choose us for emergency plumbing in Sheffield
+Use trust points only if profile data exists.
+Do not invent:
+- Gas Safe registered
+- 60 minute response
+- insured
+- guaranteed
+unless those fields are supplied in business profile.
+
+If missing, use placeholders:
+{{TRUST_POINT_1}}
+{{TRUST_POINT_2}}
+
+H. Process
+Simple 4-step process:
+1. Call or request callback
+2. Explain the emergency
+3. We confirm availability and pricing
+4. Plumber attends and completes urgent repair
+
+I. FAQ
+Use 6–8 strong FAQs:
+- Do you provide emergency plumbing in Sheffield?
+- What should I do if I have a burst pipe?
+- Can you help with leaks at night?
+- How quickly can a plumber attend?
+- Do you cover areas around Sheffield?
+- Will I know the price before work starts?
+- Can you repair blocked toilets and sinks?
+- Should I turn my water off before you arrive?
+
+J. Final CTA
+Strong call section.
+Use business phone from profile.
+
+3. Content quality rules
+- Write naturally in UK English.
+- Use Sheffield capitalised correctly.
+- Use “plumber” and “plumbing” correctly.
+- Do not overuse the exact keyword.
+- Use keyword variations:
+  - emergency plumber in Sheffield
+  - emergency plumbing Sheffield
+  - urgent plumber Sheffield
+  - Sheffield plumbing emergency
+- No fake claims.
+- No fake reviews.
+- No hardcoded certifications unless profile provides them.
+- No fake response times unless profile provides them.
+
+4. Footer rules
+Footer must only use Business Profile data:
+- business name
+- address
+- phone
+- email
+- navigation links
+- footer links
+
+Do not automatically add broad service links unless they exist in the profile/campaign.
+
+5. Schema rules
+Schema should not contain unsupported claims.
+
+Do not add:
+- Gas Safe
+- 24/7
+- 60-minute response
+- no callout fee
+unless these are supplied in profile.
+
+Schema should include:
+- WebPage
+- LocalBusiness
+- Service
+- FAQPage
+- BreadcrumbList
+
+6. Template behaviour
+The template should define layout only.
+The AI content generation should create section-specific copy from:
+- primaryKeyword
+- service
+- location
+- business profile
+- campaign data
+- trust fields
+- service areas
+
+7. Acceptance criteria
+- Output feels like a dedicated SEO landing page, not a homepage.
+- Page has 900–1200 words of meaningful content.
+- No fake testimonials.
+- No broad services grid.
+- No unsupported claims.
+- No map section unless enabled.
+- H1 targets Emergency Plumber in Sheffield.
+- Content is useful for someone with an urgent plumbing issue.
+- Footer uses saved profile links only.
+- Schema matches the actual page content and profile data.
+
+Key issue: Replit is still treating template blocks as content blocks. The template should only decide section order and visual layout. The AI must write deep copy from the keyword and profile data.

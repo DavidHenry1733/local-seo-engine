@@ -1,0 +1,141 @@
+Upgrade the current static HTML template from a basic functional layout to a production-quality landing page design.
+
+Do NOT change the generator architecture.
+Do NOT change the data model.
+Do NOT change the CLI flow.
+Only upgrade the HTML/CSS template and minimal rendering logic needed to support the design.
+
+Goal
+
+Make the generated pages look like premium commercial landing pages for local services while staying:
+
+static HTML
+fast
+reusable
+clean
+easy to scale
+Target file
+
+Update:
+
+src/templates/service-location-v1.ts
+
+You may also make minor updates to:
+
+src/generator/renderPage.ts
+if needed, but keep changes minimal.
+Design requirements
+1. General styling
+
+Use a premium, modern service-page style:
+
+white background
+light grey section backgrounds where useful
+strong spacing
+rounded corners
+soft shadows
+clean typography
+high readability
+branded blue accents
+
+Brand colours:
+
+primary: #005EB8
+accent: #1CA9C9
+dark heading: #003A6D
+light background: #F4F6F8
+border: #D9E2EC
+body text: #334155
+2. Hero section
+
+Create a proper hero section with:
+
+strong H1
+intro paragraph
+primary CTA button
+hero image displayed in a styled media panel
+responsive layout: text + image side by side on larger screens, stacked on mobile
+3. Content sections
+
+Render the 4 main sections as styled content blocks:
+
+Overview
+Benefits
+Local relevance
+Process
+
+Use a clean two-column or stacked card rhythm where appropriate.
+Each section should have:
+
+clear heading
+readable paragraph
+consistent spacing
+4. Support and conversion images
+
+Do not just dump images inline.
+Wrap support and conversion images in styled media sections with:
+
+light panel background
+rounded corners
+padding
+border
+subtle shadow
+5. CTA block
+
+Create a strong CTA section near the bottom with:
+
+branded panel background
+clear heading
+supporting text
+styled button
+6. FAQ section
+
+Style FAQs as clean stacked cards or bordered items.
+Questions should stand out visually.
+
+7. Related links section
+
+Style internal links as a clean list or grid of related page links.
+
+8. Responsive behaviour
+
+Template must be responsive:
+
+mobile-first or properly adaptive
+hero stacks vertically on small screens
+images scale correctly
+no overflow
+no broken spacing
+9. Image handling
+
+All images must:
+
+use max-width: 100%
+height: auto
+display cleanly without distortion
+sit inside styled wrappers
+
+Do not crop with CSS.
+Do not force fixed heights.
+
+10. Keep SEO intact
+
+Preserve:
+
+title
+meta description
+canonical
+schema JSON-LD
+semantic heading structure
+11. Keep template static
+
+Do not add JavaScript frameworks.
+Do not add dependencies.
+Inline CSS is acceptable for now.
+
+Output required
+Update the template code fully
+Keep it compile-safe
+Confirm which file(s) changed
+Explain briefly what visual upgrades were made
+Do not change the project structure

@@ -1,0 +1,77 @@
+We need to refine the image placement system to improve page quality and visual hierarchy.
+
+Do not change:
+- existing content structure
+- image library system
+- role-based image selection logic
+
+We are only improving:
+- how images are placed and styled on the page
+
+Image roles to use:
+- heroImage
+- trustImage
+- supportImage
+- conversionImage
+
+Rules:
+
+1. Total images per page:
+- Maximum of 4 images per page
+- Do not add additional images beyond these roles
+
+2. Hero section:
+- Use heroImage
+- Layout: split (text on left, image on right)
+- Image size: large but contained (not full width)
+- Aspect ratio: 16:9
+
+3. Trust section (early page):
+- Use trustImage
+- Layout: split section
+- Image should sit beside text explaining credibility, experience, or reliability
+
+4. Support section (mid page):
+- Use supportImage
+- Layout: split or contained block
+- Image should relate to service in action or real-world context
+
+5. Conversion section (very important):
+- Use conversionImage
+- This is the ONLY full-width image on the page
+- Place this image just before or within the final CTA section
+- Style:
+  - full-width container
+  - max height controlled (do not exceed 500–600px visually)
+  - clean crop
+  - high visual impact
+
+6. Do not:
+- Use full-width images anywhere else
+- Stack images vertically without structure
+- Place images randomly between paragraphs
+
+7. Image styling:
+- All non-full-width images:
+  - 16:9 ratio
+  - max width ~600–800px
+  - rounded corners
+  - soft shadow
+- Full-width image:
+  - no rounded corners required
+  - edge-to-edge container allowed
+  - must feel like a feature section
+
+8. Layout flow:
+- Alternate image positions left/right for split sections
+- Maintain consistent spacing between sections
+
+9. Fallback:
+- If any role image is missing, use another available image from the same business type library
+- Avoid duplicate images where possible
+
+Goal:
+- The page must feel like a professionally designed landing page
+- Not a template with randomly inserted images
+- Strong visual hierarchy:
+  Hero → Trust → Service → Conversion (feature image)

@@ -1,0 +1,351 @@
+We need to upgrade the current page scoring system into a unified AI Search Readiness framework.
+
+IMPORTANT:
+Do NOT remove the existing scoring/check systems.
+Instead:
+- rename/refine them
+- convert them into weighted subscores
+- feed them into one master score
+
+The goal is to create a scoring system users can trust as a real quality-control framework for modern SEO and AI-ready content.
+
+This is NOT a “Google ranking predictor”.
+This is an internal quality and readiness evaluation system.
+
+==================================================
+NEW MASTER SCORE
+==================================================
+
+Create a master score:
+
+AI Search Readiness Score
+
+Range:
+0–100
+
+This becomes the primary displayed score for every generated page.
+
+Display example:
+
+AI Search Readiness Score: 88/100
+
+Underneath, display weighted subscores.
+
+==================================================
+RENAME / RESTRUCTURE EXISTING SCORE FIELDS
+==================================================
+
+Current systems:
+- AI Ready
+- AI Readiness
+- Google
+- Structure
+- Duplicate
+
+Keep them, but rename/refine into the following framework.
+
+==================================================
+FINAL SCORE STRUCTURE
+==================================================
+
+1. AI Structure & Extraction (0–20)
+REPLACES:
+- AI Ready
+
+Purpose:
+Evaluate whether the page is structured clearly for AI extraction and answer generation.
+
+Checks:
+- Quick Answer block exists
+- extractable summaries
+- heading hierarchy
+- semantic structure
+- FAQ quality
+- concise answer sections
+- clear informational formatting
+- AI-readable content blocks
+
+Scoring:
+0–20
+
+==================================================
+
+2. Local Relevance (0–15)
+
+Purpose:
+Evaluate whether the content feels genuinely local and geographically relevant.
+
+Checks:
+- nearby areas referenced
+- local context injected
+- customer behaviour references
+- area-specific language
+- realistic local signals
+- non-generic locality references
+
+Scoring:
+0–15
+
+==================================================
+
+3. Service Relevance (0–15)
+
+Purpose:
+Evaluate whether the page demonstrates genuine understanding of the service/business type.
+
+Checks:
+- service-aware content
+- service-specific terminology
+- dynamic service-specific mistakes section
+- realistic business pain points
+- service-specific CTA relevance
+- contextual understanding
+
+Examples:
+Email marketing pages should discuss:
+- segmentation
+- subject lines
+- engagement
+NOT:
+- page speed
+- schema
+- hosting issues
+
+Scoring:
+0–15
+
+==================================================
+
+4. Human Readability (0–10)
+
+Purpose:
+Evaluate readability and natural flow.
+
+Checks:
+- paragraph length
+- sentence variation
+- readability balance
+- conversational tone
+- non-repetitive phrasing
+- scan-friendly formatting
+
+Scoring:
+0–10
+
+==================================================
+
+5. Internal Structure & Linking (0–10)
+REPLACES:
+- Structure
+
+Purpose:
+Evaluate structural completeness and internal relationship logic.
+
+Checks:
+- correct section order
+- Related Services present
+- Areas We Cover present
+- internal links working
+- CTA present
+- image sections present
+- FAQ section present
+- no duplicate sections
+
+Scoring:
+0–10
+
+==================================================
+
+6. Conversion Quality (0–10)
+
+Purpose:
+Evaluate conversion and trust quality.
+
+Checks:
+- trust-building language
+- CTA clarity
+- reassurance
+- enquiry-focused structure
+- benefit-driven content
+- clear next-step prompts
+
+Scoring:
+0–10
+
+==================================================
+
+7. Google SEO Fundamentals (0–10)
+REPLACES:
+- Google
+
+Purpose:
+Evaluate core technical SEO signals.
+
+Checks:
+- meta title
+- meta description
+- heading hierarchy
+- schema presence
+- alt tags
+- internal links
+- image optimisation
+- section hierarchy
+
+Scoring:
+0–10
+
+==================================================
+
+8. Duplicate Risk & Variation (0–10)
+REPLACES:
+- Duplicate
+
+Purpose:
+Evaluate uniqueness and variation quality.
+
+IMPORTANT:
+Do NOT only check exact text duplication.
+
+Also check:
+- semantic similarity
+- repeated sentence patterns
+- repeated openings
+- repeated CTA wording
+- repeated paragraph structure
+- repeated section flow
+
+Checks:
+- exact duplication
+- semantic duplication
+- excessive repeated phrasing
+- repeated templates
+- low variation risk
+
+Scoring:
+0–10
+
+HIGH SCORE:
+Low duplication risk
+
+LOW SCORE:
+High duplication risk
+
+==================================================
+MASTER SCORE CALCULATION
+==================================================
+
+Combine weighted subscores:
+
+AI Structure & Extraction = 20
+Local Relevance = 15
+Service Relevance = 15
+Human Readability = 10
+Internal Structure & Linking = 10
+Conversion Quality = 10
+Google SEO Fundamentals = 10
+Duplicate Risk & Variation = 10
+
+TOTAL = 100
+
+==================================================
+DISPLAY FORMAT
+==================================================
+
+Display:
+
+AI Search Readiness Score: 88/100
+
+Then show breakdown:
+
+✔ AI Structure & Extraction – 18/20
+✔ Local Relevance – 13/15
+✔ Service Relevance – 14/15
+✔ Human Readability – 8/10
+✔ Internal Structure & Linking – 9/10
+✔ Conversion Quality – 8/10
+✔ Google SEO Fundamentals – 9/10
+✔ Duplicate Risk & Variation – 9/10
+
+==================================================
+QUALITY THRESHOLDS
+==================================================
+
+90–100
+Excellent
+Highly structured and AI-ready
+
+75–89
+Strong
+Suitable for publication
+
+60–74
+Needs refinement
+
+Below 60
+High risk of low-quality or generic output
+
+==================================================
+IMPROVEMENT SUGGESTIONS
+==================================================
+
+Below the score, show:
+
+Strengths:
+- strong local context
+- clear structure
+- strong internal linking
+
+Suggested improvements:
+- improve CTA variation
+- add more local behavioural references
+- improve FAQ specificity
+
+Duplicate warnings:
+- repeated intro detected
+- repeated CTA wording detected
+
+==================================================
+IMPORTANT POSITIONING
+==================================================
+
+This scoring system:
+- is NOT a Google ranking guarantee
+- is NOT an AI citation guarantee
+- is an internal quality and AI-readiness framework
+
+The goal is:
+- improve quality consistency
+- improve usefulness
+- improve structure
+- improve local realism
+- improve AI readability
+- reduce generic content risk
+
+==================================================
+UI REQUIREMENTS
+==================================================
+
+Display:
+- clean dashboard card
+- progress bars or score indicators
+- colour-coded thresholds:
+  green = strong
+  amber = needs refinement
+  red = weak
+
+Allow:
+- score refresh after regeneration
+- score comparison between generated pages
+- duplicate warning indicator
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+- Existing scoring systems are preserved and upgraded.
+- Old labels are renamed correctly.
+- One unified AI Search Readiness Score is calculated.
+- Weighted scoring totals 100.
+- Duplicate Risk checks semantic repetition, not just exact duplication.
+- Improvement suggestions display dynamically.
+- Final scoring output is visually clean and understandable.

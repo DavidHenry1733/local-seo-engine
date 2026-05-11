@@ -1,0 +1,155 @@
+We now need to move from manual cPanel upload to automatic deployment to the live subdomain.
+
+Target:
+local.inboxingproweb.com
+
+Goal:
+After generating the static pages, automatically upload:
+
+all generated page folders
+required assets
+to the subdomain document root.
+Deployment requirements
+1. Add deploy configuration
+
+Create a config file or extend project config to support deployment settings:
+
+protocol: "sftp" or "ftp"
+host
+port
+username
+password
+remoteRoot
+
+Example fields:
+
+deploy.enabled
+deploy.protocol
+deploy.host
+deploy.port
+deploy.username
+deploy.password
+deploy.remoteRoot
+
+Use environment variables where appropriate for credentials.
+
+2. Use this deployment target
+
+Assume the live target is the document root for:
+local.inboxingproweb.com
+
+The final remote structure must be:
+
+/assets/web-design/hero-v1.png
+/assets/web-design/trust-v1.png
+/assets/web-design/conversion-v1.png
+/web-design-sheffield/index.html
+/web-design-rotherham/index.html
+etc
+3. Keep local output generation
+
+Do NOT remove local output generation.
+Continue generating to:
+
+output/{clientSlug}/...
+
+Then deploy from that output folder to the remote root.
+
+4. Add a deployment module
+
+Create something like:
+
+src/deploy/deployProject.ts
+
+This module should:
+
+connect to FTP or SFTP
+ensure remote directories exist
+upload all HTML files
+upload assets
+overwrite existing files cleanly
+5. Asset deployment
+
+Deploy image assets from:
+
+assets/web-design/
+to:
+{remoteRoot}/assets/web-design/
+
+Use the existing local files:
+
+hero-v1.png
+trust-v1.png
+conversion-v1.png
+6. Page deployment
+
+For each generated page:
+upload:
+
+output/{clientSlug}/{pageSlug}/index.html
+to:
+{remoteRoot}/{pageSlug}/index.html
+7. Keep image paths absolute
+
+The generated HTML must continue using:
+
+/assets/web-design/hero-v1.png
+/assets/web-design/trust-v1.png
+/assets/web-design/conversion-v1.png
+
+Do not use relative paths like ../assets
+
+8. Add a CLI option
+
+Allow deployment to be triggered after generation.
+
+Examples:
+
+generate only
+generate + deploy
+
+One acceptable approach:
+
+--deploy
+
+Example:
+pnpm exec tsx src/generator/runProject.ts config/projects/example-business.json --deploy
+
+9. Add clear logging
+
+During deploy, print:
+
+connected to server
+remote root
+asset uploaded
+page uploaded
+deploy complete
+10. Safety
+
+Do not delete unrelated remote files.
+Only ensure required directories exist and upload/overwrite matching project files.
+
+11. Files to create/update
+
+Expected areas:
+
+src/deploy/deployProject.ts
+src/generator/runProject.ts
+config/projects/example-business.json
+possibly package.json for dependency addition
+12. Dependency choice
+
+Prefer:
+
+ssh2-sftp-client for SFTP
+If not suitable, use:
+basic-ftp
+13. Output required
+
+When complete, report:
+
+files created/updated
+deploy command
+expected environment variables
+example remote path mapping
+whether protocol used is SFTP or FTP

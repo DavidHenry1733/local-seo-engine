@@ -1,0 +1,244 @@
+We need to add a new feature:
+
+Distribution & Visibility Engine
+
+Purpose:
+Allow users to create social/media distribution posts independently from page generation.
+
+This feature should help users:
+- keep publishing content monthly
+- support SEO and AI visibility
+- drive traffic back to their website/pages
+- create GBP/social content quickly
+- improve retention value of the platform
+
+IMPORTANT:
+This is NOT just a “social media generator”.
+
+This is a visibility/distribution system.
+
+==================================================
+NEW MAIN SECTION
+==================================================
+
+Add new dashboard section:
+
+Distribution Posts
+
+This should work:
+1. Linked to generated pages
+OR
+2. As standalone topic-based post generation
+
+==================================================
+USER INPUTS
+==================================================
+
+Add form fields:
+
+1. Topic / Keyword
+Examples:
+- emergency plumbing tips
+- local SEO advice
+- how to improve website enquiries
+- seasonal roofing checks
+
+2. Business Type
+Examples:
+- plumber
+- electrician
+- web design
+- accountant
+- restaurant
+
+3. Location / Area
+Examples:
+- Rotherham
+- Sheffield
+- Barnsley
+
+4. Link Destination
+IMPORTANT
+
+Options:
+- Homepage
+- Existing generated page
+- Custom URL
+- No link
+
+If:
+Homepage
+→ use homepage URL
+
+If:
+Existing generated page
+→ allow page selection from campaign pages
+
+If:
+Custom URL
+→ allow manual URL entry
+
+If:
+No link
+→ generate informational post only
+
+5. Post Objective
+Options:
+- Generate enquiries
+- Educate
+- Promote service
+- Seasonal awareness
+- Promote offer
+- Build trust
+- Drive traffic
+
+6. Platforms
+Checkboxes:
+- Google Business Profile
+- Facebook
+- Instagram
+- LinkedIn
+- X/Twitter
+
+==================================================
+POST GENERATION RULES
+==================================================
+
+Generate UNIQUE platform-specific copy.
+
+Do NOT duplicate the same text across platforms.
+
+==================================================
+PLATFORM STYLES
+==================================================
+
+GBP:
+- 100–150 words
+- local business tone
+- direct CTA
+- visibility-focused
+
+Facebook:
+- conversational
+- community-focused
+- engagement-oriented
+
+Instagram:
+- shorter caption
+- visual-first
+- hook opening
+- hashtags included
+
+LinkedIn:
+- professional
+- insight-driven
+- authority-focused
+
+X/Twitter:
+- concise
+- hook-led
+- engagement-focused
+
+==================================================
+LINK RULES
+==================================================
+
+If link selected:
+- include naturally in CTA/end of post
+
+Examples:
+- Learn more:
+- Find out more:
+- Request a review:
+- See how it works:
+
+Do NOT:
+- spam links repeatedly
+- insert raw ugly URLs mid-copy
+
+==================================================
+AI IMAGE GENERATION
+==================================================
+
+Each generated post set should also generate:
+1 related social image
+
+IMPORTANT:
+Reuse the existing businessType image intelligence system.
+
+The AI image must:
+- match business type
+- match topic
+- match platform style
+- feel realistic and relevant
+- avoid generic laptops/offices unless appropriate
+
+==================================================
+IMAGE PROMPT STRUCTURE
+==================================================
+
+Generate prompts using:
+- businessType
+- topic
+- location
+- postObjective
+- platform
+
+Example:
+“Professional local plumber in Rotherham helping customer with emergency pipe repair, realistic branded social media style, modern lighting, vertical social format”
+
+==================================================
+IMAGE OUTPUT
+==================================================
+
+Display:
+- generated image preview
+- regenerate image button
+- download image button
+
+==================================================
+OUTPUT UI
+==================================================
+
+Display each platform in separate cards:
+
+Card:
+- Platform name
+- Generated post
+- Generated image
+- Copy button
+- Regenerate post button
+
+==================================================
+SAVE SYSTEM
+==================================================
+
+Allow:
+- save post set
+- attach to campaign
+- reuse previous topics
+- regenerate later
+
+==================================================
+OPTIONAL FUTURE FEATURE
+==================================================
+
+Future:
+- direct posting integrations
+- scheduling
+- Canva export
+- short-form video generation
+
+Do NOT build integrations yet.
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+- Users can create posts without generating pages.
+- Users can enter custom keyword/topic.
+- Users can use homepage, generated page, or custom URL.
+- Platform-specific copy is unique.
+- AI-generated image matches topic/business type.
+- Posts and images are downloadable/copyable.
+- System supports ongoing monthly content generation.

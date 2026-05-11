@@ -1,0 +1,87 @@
+We need to update the Business Profile setup step.
+
+Current issue:
+The Business Profile does not collect enough default website details before the user moves to the next setup stage.
+
+Please inspect the existing onboarding/profile wizard first and extend the current Business Profile step. Do not create a duplicate profile system or duplicate wizard.
+
+Add the following fields to Business Profile:
+
+1. Website Branding
+- Logo URL
+- Strapline / tagline optional
+- Default brand colour
+  - Default value should be black: #000000
+  - User can change it if needed
+
+2. Header Navigation
+Allow user to add multiple navigation items.
+
+Each item should include:
+- Link name
+- Link URL
+
+Example:
+- Home / https://example.com/
+- Services / https://example.com/services/
+- Contact / https://example.com/contact/
+
+3. Footer Details
+Add footer information fields:
+
+- Business name
+- Business address
+- Telephone number
+- Email address
+- Footer strapline optional
+
+4. Footer Links
+Allow user to add multiple footer links.
+
+Each item should include:
+- Link name
+- Link URL
+
+Example:
+- Privacy Policy / https://example.com/privacy-policy/
+- Terms / https://example.com/terms/
+- Contact / https://example.com/contact/
+
+5. Footer Service / Useful Links
+If the current app supports grouped footer links, allow optional grouped footer links:
+
+Each item:
+- Link name
+- Link URL
+
+6. Validation
+Required fields:
+- Business name
+- Website URL
+- Logo URL or allow user to skip logo
+- At least one header navigation item
+- Footer business name
+- Footer address
+- Footer telephone number
+
+Optional fields:
+- Strapline
+- Footer strapline
+- Footer links
+- Brand colour override
+
+7. UX Requirements
+- Keep this inside the existing Business Profile wizard step.
+- User should complete these details before moving to the next stage.
+- Add “Save and continue”.
+- Save all fields to the existing business/profile/project data structure.
+- Ensure these saved details are available to the page generation system so generated pages can use the correct header, footer, logo, address, phone number, links, and brand colour.
+- Do not hardcode InboxingProWeb details except using black #000000 as the default colour.
+
+8. Acceptance Criteria
+- New users can add logo URL, strapline, header nav links, footer details, footer links, and default colour during Business Profile setup.
+- User cannot move forward if required fields are missing.
+- Header and footer links can be added, edited, and removed.
+- Saved profile data appears correctly when the user returns to the wizard.
+- Generated pages can access these values from the profile object.
+- Existing profiles/projects are not broken by this change.

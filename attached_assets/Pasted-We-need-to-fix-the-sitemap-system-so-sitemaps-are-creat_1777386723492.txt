@@ -1,0 +1,110 @@
+We need to fix the sitemap system so sitemaps are created automatically and are ready for Google Search Console without relying only on FTP or manual ZIP upload.
+
+Current Replit reply says:
+- Sitemaps rebuild correctly with campaign pages.
+- If FTP is configured, files upload to server.
+- If FTP is missing or fails, ZIP download appears.
+- But for Search Console, sitemap file must physically exist on the live server.
+
+Problem:
+This is not enough for our app. The system needs to automatically create, store, and expose sitemap files from inside the app, so users can copy/paste a sitemap URL into Google Search Console.
+
+Required change:
+Create an app-hosted sitemap URL system.
+
+1. Generate and store sitemaps automatically
+When campaign pages are created, updated, deleted, or rebuilt:
+- regenerate sitemap XML automatically
+- regenerate sitemap index if multiple sitemaps exist
+- regenerate robots.txt if supported
+- save generated files into app storage/public route
+
+2. Expose public sitemap URLs
+Each project/campaign should have public sitemap URLs like:
+
+/sitemaps/{projectSlug}/sitemap.xml
+/sitemaps/{projectSlug}/sitemap-pages.xml
+/sitemaps/{projectSlug}/robots.txt
+
+or equivalent existing routing structure.
+
+The user should be shown a ready-to-copy URL, for example:
+
+https://app-domain.com/sitemaps/rotherham-proof/sitemap.xml
+
+3. Search Console panel
+In the campaign sitemap panel, show:
+
+- Sitemap status: generated / not generated / error
+- Last generated date
+- Number of URLs included
+- Public sitemap URL
+- Copy button
+- Open sitemap button
+- Rebuild sitemap button
+- Optional: Download ZIP as backup
+- Optional: Upload to FTP if configured
+
+4. FTP should be optional
+FTP upload should NOT be the only automatic method.
+
+Priority order:
+A. Always generate and expose app-hosted sitemap URL.
+B. If FTP is configured, also upload to live server.
+C. If FTP fails, keep app-hosted sitemap available.
+D. ZIP download remains as backup only.
+
+5. Sitemap URL rules
+Sitemap XML should include the actual live page URLs, not app preview URLs.
+
+Use:
+- liveSiteUrl / websiteUrl from Business Profile or Publishing Setup
+- generated page slugs
+- canonical URLs
+
+Example sitemap entry:
+https://clientdomain.com/emergency-plumber-sheffield/
+
+NOT:
+https://app-domain.com/preview/emergency-plumber-sheffield/
+
+6. Robots.txt
+If robots.txt is generated, it should include:
+
+Sitemap: https://clientdomain.com/sitemap.xml
+
+If app-hosted sitemap is used instead, show that separately in app as the Search Console submission URL.
+
+7. Validation
+Add checks:
+- business website URL exists
+- page slugs exist
+- sitemap includes only published/selected pages
+- URLs are absolute
+- XML is valid
+- duplicate URLs are removed
+
+8. Dashboard behaviour
+The user should not be told only:
+“Configure FTP or download ZIP.”
+
+Instead, the campaign panel should always provide:
+- Ready-to-copy sitemap URL
+- Rebuild button
+- Optional FTP upload status
+- Optional ZIP download
+
+9. Acceptance criteria
+- User can generate sitemap without FTP.
+- User can copy a public sitemap URL from the campaign panel.
+- Sitemap URL opens in browser and displays valid XML.
+- Sitemap includes all relevant campaign page URLs.
+- Sitemap uses live client domain URLs.
+- FTP upload is optional.
+- ZIP download is only a fallback.
+- Sitemap automatically rebuilds when campaign pages change.
+- No duplicate sitemap systems are created.
+
+The key correction is this:
+
+FTP upload is useful, but the app still needs its own hosted sitemap URL for Search Console.

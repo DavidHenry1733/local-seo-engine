@@ -1,0 +1,149 @@
+Validate the Sheffield area expansion and internal linking system.
+
+Do NOT change any code yet.
+This is a read-only validation and reporting task.
+
+---
+
+## 1. Confirm pages generated
+
+List all generated pages for the Sheffield cluster:
+
+Expected:
+- web-design-sheffield (hub)
+- web-design-ecclesall
+- web-design-fulwood
+- web-design-hillsborough
+- web-design-crookes
+- any additional configured areas
+
+Print:
+- slug
+- local file path
+- deployed URL
+
+---
+
+## 2. Confirm hub page behaviour
+
+For:
+web-design-sheffield
+
+Check and print:
+
+- H1
+- intro paragraph (first 150–200 chars)
+- total word count
+- whether it includes an “Areas We Cover” section
+- list of area links included on the page
+
+Confirm:
+- it links to ALL area pages
+- it is longer than area pages
+
+---
+
+## 3. Confirm area page behaviour
+
+Pick one example:
+web-design-ecclesall
+
+Check and print:
+
+- H1
+- intro paragraph
+- total word count
+- whether it links back to the hub page
+- which sibling area pages it links to
+- whether it includes an “Areas We Cover” or “Nearby Areas” section
+
+Confirm:
+- hub link present
+- 2–3 sibling links present
+- links are not duplicated or excessive
+
+---
+
+## 4. Internal linking structure
+
+Print a simple map:
+
+web-design-sheffield →
+  [list of area pages]
+
+web-design-ecclesall →
+  [hub + sibling links]
+
+web-design-fulwood →
+  [hub + sibling links]
+
+---
+
+## 5. Map validation
+
+For BOTH:
+- web-design-sheffield
+- web-design-ecclesall
+
+Extract and print:
+
+- the Google Maps embed URL
+- confirm it uses businessAddress (Rotherham)
+- confirm it does NOT use the page location (Sheffield/Ecclesall)
+
+---
+
+## 6. CTA validation
+
+Check one page and print:
+
+- CTA button text
+- CTA URL
+- the paragraph directly before the CTA
+
+Confirm:
+- values come from config
+- not hardcoded
+
+---
+
+## 7. Content quality check
+
+For hub and one area page:
+
+- word count
+- average section length
+- confirm sections are expanded (not thin)
+- confirm no obvious duplication across sections
+
+---
+
+## 8. Deployment validation
+
+For one page:
+
+- confirm local file path
+- confirm remote upload path
+- confirm deployed URL loads correctly
+
+---
+
+## 9. Summary
+
+Return a clear status:
+
+- PASS / FAIL for:
+  - page generation
+  - hub structure
+  - area structure
+  - internal linking
+  - map logic
+  - CTA config
+  - deployment
+
+If anything fails, explain exactly why and which file/module is responsible.
+
+---
+
+Goal:
+Ensure the Sheffield cluster is fully correct, internally linked, and ready for scale before expanding to other locations.

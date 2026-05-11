@@ -1,0 +1,248 @@
+We need to update the Local SEO Engine onboarding/profile setup flow.
+
+Current issue:
+The dashboard allows image generation, but the user profile setup does not properly collect the required API connections, image preferences, or uploaded assets before the user starts building pages. Ideogram can currently generate images, but users also need the option to upload their own images and control where images are used.
+
+Please review the existing profile setup/wizard/dashboard code and update the system as follows.
+
+GOAL:
+Create a complete “Profile Completion” onboarding process that every new user completes before using the main dashboard.
+
+The profile setup should include these sections:
+
+1. Account / Business Profile
+- Business name
+- Website URL
+- Business type / industry
+- Main service
+- Additional services
+- Primary location
+- Service areas
+- Business address
+- Phone number
+- Email address
+- Short business description
+- Tone of voice preference
+
+2. Brand Profile
+- Logo upload
+- Brand colours
+- Preferred style:
+  - professional
+  - modern
+  - friendly
+  - premium
+  - local/trades focused
+- Font preference if currently supported
+- Optional brand notes
+
+3. API Connections
+The user must be able to add and save:
+- OpenAI API key
+- Ideogram API key
+
+Add validation/status indicators:
+- Not connected
+- Connected
+- Failed / needs attention
+
+Important:
+Do not expose full API keys after saving.
+Only show masked values, e.g. sk-****1234.
+Store securely according to the current app structure/environment rules.
+
+4. Image Preferences
+Add a required setup step asking:
+
+“How would you like to handle images?”
+
+Options:
+- Upload my own images
+- Use AI-generated images
+- Use a mix of uploaded and AI images
+- Skip images for now
+
+Save this as imageMode.
+
+5. Image Upload Library
+Allow users to upload and manage their own images.
+
+Image categories:
+- Logo
+- Hero images
+- Team photos
+- Premises / office
+- Work examples
+- Service images
+- Before and after images
+- CTA images
+- Blog featured images
+- General image library
+
+Each uploaded image should store:
+- file URL/path
+- category
+- alt text
+- optional caption
+- assigned page/section if selected
+- upload date
+
+6. Image Slot Logic
+Every generated page should support image slots, such as:
+- hero image
+- section image 1
+- section image 2
+- CTA image
+- blog/featured image
+
+Each image slot should support:
+- uploaded image
+- AI-generated image
+- no image
+
+Logic:
+- Uploaded images always take priority.
+- AI images are only generated if the slot is empty AND the user has allowed AI images.
+- If no uploaded image exists and AI is not allowed, mark the slot as “missing image”.
+- Never automatically generate images unless the user has selected AI or mixed image mode.
+
+Suggested logic:
+
+if uploadedImageExists:
+    use uploaded image
+else if imageMode is "ai" or "mixed":
+    allow AI generation
+else:
+    mark image slot as missing
+
+7. Dashboard Image Status
+Update the dashboard so users can clearly see image status per page.
+
+For each page, show:
+- Hero image: Uploaded / AI / Missing
+- Section images: Uploaded / AI / Missing
+- Featured image: Uploaded / AI / Missing
+- Overall image status: Ready / Needs Review / Missing Images
+
+Add actions:
+- Upload image
+- Generate AI image
+- Replace image
+- Approve image
+- Remove image
+- Regenerate image
+
+8. AI Image Generation Rules
+When generating Ideogram images, prompts must be based on:
+- business type
+- service
+- location
+- page type
+- image slot
+- section purpose
+- brand colours
+- preferred image style
+- avoid text unless explicitly required
+- transparent background if supported/required
+
+The Ideogram request should never use a generic prompt like “web design image”.
+
+Create a structured image prompt builder that receives page and section data and returns a detailed prompt.
+
+Example input:
+{
+  businessType: "web design agency",
+  service: "local SEO",
+  location: "Sheffield",
+  pageType: "area page",
+  imageSlot: "local relevance section",
+  style: "flat vector illustration",
+  brandColours: ["#005EB8", "#1CA9C9", "#003A6D"],
+  avoidText: true,
+  transparentBackground: true
+}
+
+9. Image Approval Flow
+AI-generated images should not be automatically published.
+
+Generated images should have status:
+- generated
+- approved
+- rejected
+- needs review
+
+Pages should only use approved images unless the user explicitly allows auto-use.
+
+10. Profile Completion Score
+Add a profile completion percentage.
+
+Required items:
+- Business name
+- Main service
+- Primary location
+- Website URL
+- OpenAI API key
+- Ideogram API key if AI images are enabled
+- Image mode selected
+- Logo uploaded or skipped
+- At least one service area
+
+Suggested status:
+- 0–40% incomplete
+- 41–80% needs attention
+- 81–100% ready
+
+The dashboard should show:
+“Profile completion: XX%”
+
+If required setup is incomplete, show a warning:
+“Complete your profile before generating pages.”
+
+11. Dashboard Gating
+Before allowing full page generation, check:
+
+- Business profile complete
+- OpenAI API connected
+- Image mode selected
+- If image mode is AI or mixed, Ideogram API must be connected
+- At least one location/service area added
+
+If incomplete, redirect user to the relevant profile setup step.
+
+12. User Experience
+The setup flow should feel like a simple wizard:
+
+Step 1: Business Details
+Step 2: Brand Details
+Step 3: API Connections
+Step 4: Image Preferences
+Step 5: Upload Images
+Step 6: Review & Complete
+
+Add “Save and continue” between steps.
+Allow users to return later and edit any section.
+
+13. Database / State Updates
+Add or update data structures to support:
+- user profile
+- API connection status
+- image mode
+- uploaded image library
+- image slot assignments
+- generated image approval status
+- profile completion score
+
+14. Acceptance Criteria
+After this update:
+- A new user cannot accidentally generate poor/random images before setup.
+- Users can upload their own images.
+- Users can choose AI images, uploaded images, mixed images, or skip images.
+- API connections are collected during profile setup.
+- OpenAI and Ideogram connection statuses are visible.
+- Dashboard clearly shows missing/ready image status.
+- AI images are generated only when allowed.
+- Uploaded images always take priority.
+- Profile completion percentage is shown.
+- Page generation is blocked or warned if required setup is incomplete.
+
+Please inspect the current implementation first, then modify the existing wizard/profile/dashboard flow rather than creating duplicate flows.

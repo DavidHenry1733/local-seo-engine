@@ -1,0 +1,123 @@
+Update the page template layout, image handling, and section structure using the following rules.
+
+Apply these changes exactly and consistently across cluster pages.
+
+---
+
+1. HERO SECTION (CONFIRMED – NO CHANGE)
+- Keep current 2-column hero layout
+- Text on one side, image on the other
+- Image aligned vertically with text
+- This layout is correct and should remain unchanged
+
+---
+
+2. IMAGE 2 (FULL WIDTH – FIX SIZE)
+- Keep Image 2 as a full-width visual section
+- Reduce its height significantly (currently too large)
+- Set a controlled height:
+  - Desktop: max-height ~400–500px
+  - Maintain aspect ratio (no stretching)
+- Ensure image does not dominate the page
+- Add spacing above and below for separation
+
+---
+
+3. SECTION WIDTH & LAYOUT (IMPORTANT CHANGE)
+
+Adjust content sections to alternate layouts:
+
+A. First section (e.g. “Why Web Design Matters”)
+- Full-width content
+- Single column
+- Wider container than current if needed
+
+B. Second section (e.g. “What Web Design Includes”)
+- Use a 2-column layout
+- Text split into two columns OR
+- Text + supporting layout blocks
+
+- This section should feel more structured and easier to scan
+
+---
+
+4. IMAGE 3 (CONFIRMED – KEEP)
+- Keep as half-page image with text beside it
+- Maintain 2-column layout
+- This layout is correct and should not change
+
+---
+
+5. “MORE RESOURCES” / INTERNAL LINKS SECTION (IMPORTANT CHANGE)
+
+Replace simple text links with structured boxes/cards.
+
+Instead of:
+- plain text links
+
+Use:
+- card-style layout (grid)
+
+Each item should include:
+- Title
+- Short description (1–2 lines)
+- Clickable area (entire card)
+
+Layout:
+- 2–3 columns (desktop)
+- stacked on mobile
+
+Cards should:
+- be visually distinct (background, border, or shadow)
+- feel like selectable resources, not inline links
+
+---
+
+6. CONTAINER WIDTH ADJUSTMENT
+
+- Slightly increase max content width
+- Current sections feel too narrow
+- Target:
+  - wider reading area without hurting readability
+- Maintain padding so content doesn’t touch edges
+
+---
+
+7. CONSISTENCY RULE
+
+Do NOT:
+- introduce per-page layout variations
+- create complex image positioning rules
+- allow different section structures per page
+
+This must remain:
+- a fixed, reusable layout system
+
+---
+
+8. RESPONSIVE RULES
+
+- Desktop:
+  - alternating layouts (full / split)
+  - hero split
+  - image 3 split
+  - cards in grid
+
+- Mobile:
+  - stack all columns
+  - images above text
+  - cards stacked vertically
+
+---
+
+9. DO NOT CHANGE
+
+- Section order
+- AI summary structure
+- About section position
+- Header/footer structure
+- Keyword logic
+
+---
+
+Return the updated template layout rules and structural changes needed to implement this cleanly.

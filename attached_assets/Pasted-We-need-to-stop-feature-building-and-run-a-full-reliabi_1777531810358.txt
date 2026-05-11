@@ -1,0 +1,161 @@
+We need to stop feature building and run a full reliability/stress-test audit of the Local SEO Engine.
+
+Current concern:
+The engine indexed crawl reports 12 indexed pages, but Google Search Console reports 22 indexed pages. This creates trust issues. We need to verify every core function with real data and make the dashboard explain differences clearly.
+
+Do not add new features.
+Do not redesign UI.
+Do not change page templates unless a test proves a bug.
+
+Goal:
+Create a full “System Health / Stress Test” module that checks every critical function end-to-end and reports PASS / WARNING / FAIL with real evidence.
+
+1. Indexing Status Accuracy
+Audit the current indexed crawl logic.
+
+For each URL:
+- URL
+- source: sitemap / campaign / live crawl / GSC if connected
+- HTTP status
+- canonical URL
+- robots meta
+- robots.txt allowed yes/no
+- in sitemap yes/no
+- app indexed check result
+- Google Search Console indexed status if available
+- last checked date
+- explanation if mismatch
+
+Important:
+Do not label a page “not indexed” unless the method is reliable.
+If using site: search or simple crawl, label it:
+“Index estimate”
+not:
+“Google indexed status”.
+
+If GSC is not connected, show:
+“Estimated only — connect Google Search Console for verified indexing data.”
+
+2. Sitemap Stress Test
+Fetch live sitemap from the client domain.
+
+Check:
+- sitemap returns 200
+- XML valid
+- all URLs absolute
+- no preview URLs
+- no duplicate URLs
+- each URL returns 200
+- each URL canonical matches itself or expected canonical
+- sitemap count matches deployed page manifest
+
+Fail if:
+- any sitemap URL returns 404
+- any preview URL appears
+- any generated published page is missing from sitemap
+
+3. Live Page Crawl
+Crawl all live pages listed in sitemap.
+
+For each page check:
+- HTTP status
+- title
+- meta description
+- H1
+- canonical
+- noindex
+- word count
+- images load
+- internal links
+- schema present
+- placeholder tokens
+- footer/profile details
+- map embed if required
+
+4. Internal Link Checker
+For every live page:
+- extract internal links
+- ignore mailto/tel/external links
+- fetch each internal link
+- record status
+- source page
+- anchor text
+- target URL
+
+Fail if:
+- any internal link returns 404/500
+- any /preview/ link appears in live HTML
+
+5. Image Checker
+For every live page:
+- extract image URLs
+- check HTTP status
+- check content-type
+- check file size
+- flag missing/broken/placeholder images
+- flag WebP served as JPEG or wrong MIME
+
+6. Header/Footer/Profile Checker
+For every live page:
+- verify business name if saved
+- logo if saved
+- phone if saved
+- address if saved
+- company number if saved
+- footer links if saved
+- nav links if saved
+
+Only validate fields that are actually saved in Business Profile.
+Do not validate hardcoded defaults.
+
+7. Schema Checker
+For every live page:
+- detect JSON-LD
+- parse JSON
+- list schema types
+- flag invalid JSON
+- check LocalBusiness/Service/WebPage/FAQ where expected
+
+8. Google Ready / AI Ready Report
+Produce:
+- Google Ready score
+- AI Ready score
+- Duplicate risk
+- Status: PASS / WARNING / FAIL
+
+But scores must be based on real checks above.
+
+9. Stress Test Dashboard
+Add or update a System Health page showing:
+- Overall status
+- Total pages checked
+- Sitemap URLs checked
+- Live pages 200 count
+- 404 count
+- Broken internal links
+- Broken images
+- Preview URL count
+- Indexed estimate count
+- GSC indexed count if connected
+- Mismatch explanation
+
+Each issue must show:
+- exact URL
+- source page
+- issue type
+- evidence
+- suggested fix
+
+10. Export
+Allow:
+- Download JSON report
+- Download CSV report
+
+11. Acceptance Criteria
+- The system clearly separates estimated indexing from verified GSC indexing.
+- It explains why app count may differ from Search Console.
+- Live sitemap URLs are checked with real HTTP requests.
+- Live internal links are checked with real HTTP requests.
+- Broken links/images cannot be hidden by local file checks.
+- Dashboard shows clear PASS / WARNING / FAIL.
+- Every issue includes exact evidence.

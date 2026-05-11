@@ -1,0 +1,226 @@
+We need to evolve the scoring dashboard from a diagnostic-only system into an actionable AI optimisation system.
+
+Current issue:
+The dashboard correctly identifies:
+- weak areas
+- missing sections
+- suggested improvements
+
+But users cannot apply fixes.
+
+The platform should not only identify issues — it should help improve them automatically.
+
+==================================================
+NEW SYSTEM REQUIRED
+==================================================
+
+Add AI Optimisation Actions.
+
+Users should be able to:
+- click improvement actions
+- regenerate weak sections only
+- apply targeted improvements
+- improve score incrementally
+
+IMPORTANT:
+Do NOT regenerate the entire page for every issue.
+
+Only regenerate the affected sections.
+
+==================================================
+CORE PRINCIPLE
+==================================================
+
+Every generated page section must become modular and individually regeneratable.
+
+Example page sections:
+- hero
+- quickAnswer
+- localIntro
+- trustSection
+- serviceBreakdown
+- localContext
+- problemSolution
+- faq
+- relatedServices
+- areasWeCover
+- conversionSection
+- finalCTA
+
+Each section should:
+- store generated content
+- store score contribution
+- be independently regeneratable
+
+==================================================
+NEW DASHBOARD ACTIONS
+==================================================
+
+For each score category and QA issue, display:
+- issue
+- explanation
+- fix action button
+
+==================================================
+EXAMPLE ACTIONS
+==================================================
+
+If:
+Local Relevance = low
+
+Show:
+[ Improve Local Relevance ]
+
+Action should:
+- regenerate local intro
+- regenerate local context section
+- inject nearby areas
+- inject behavioural signals
+- improve geographic realism
+
+Do NOT regenerate:
+- hero
+- CTA
+- FAQ
+- images
+- entire page
+
+==================================================
+
+If:
+Service Relevance = low
+
+Show:
+[ Improve Service Relevance ]
+
+Action:
+- regenerate service-specific sections
+- improve terminology
+- inject service-aware pain points
+- improve service-specific mistakes
+
+==================================================
+
+If:
+Duplicate Risk = high
+
+Show:
+[ Increase Variation ]
+
+Action:
+- vary intro structure
+- vary CTA wording
+- vary section openings
+- vary sentence structure
+- regenerate repeated sections only
+
+==================================================
+
+If QA issue:
+#related-services-section missing
+
+Show:
+[ Generate Related Services ]
+
+Action:
+- regenerate only relatedServices section
+
+==================================================
+
+If QA issue:
+#areas-we-cover-section missing
+
+Show:
+[ Generate Areas We Cover ]
+
+Action:
+- regenerate only areasWeCover section
+
+==================================================
+IMPROVEMENT EXPLANATIONS
+==================================================
+
+Current:
+“Add more local context”
+
+Improve this.
+
+Provide:
+- why the score is low
+- what is missing
+- what the optimisation will do
+
+Example:
+Local Relevance is low because:
+- only one nearby area is referenced
+- limited behavioural context
+- weak geographic specificity
+
+Optimisation will:
+- inject nearby locations
+- add local customer behaviour references
+- improve area-specific realism
+
+==================================================
+SECTION-ONLY REGENERATION
+==================================================
+
+IMPORTANT:
+Fix actions must:
+- regenerate only target sections
+- preserve working sections
+- preserve images
+- preserve layout
+- preserve approved content
+
+Avoid:
+- full page rewrite
+- resetting image placement
+- overwriting approved layout
+
+==================================================
+UI REQUIREMENTS
+==================================================
+
+Display:
+- issue card
+- score impact
+- explanation
+- fix button
+
+Example:
+
+⚠ Local Relevance – 9/15
+
+Why this matters:
+Local context helps search engines and AI systems understand geographic relevance.
+
+Issues detected:
+- weak nearby area references
+- limited behavioural signals
+
+[ Improve Local Relevance ]
+
+==================================================
+OPTIONAL FUTURE FEATURE
+==================================================
+
+Add:
+“Auto Optimise Page”
+
+This should:
+- apply safe low-risk improvements automatically
+- regenerate only low-scoring sections
+- preserve approved layout and images
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+- Users can apply fixes from the dashboard.
+- Regeneration happens section-by-section.
+- Existing layout/images are preserved.
+- Missing sections can be regenerated individually.
+- Suggested improvements become actionable.
+- Score updates after optimisation.
+- Full page regeneration is avoided unless manually requested.

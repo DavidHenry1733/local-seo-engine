@@ -1,0 +1,94 @@
+one small structural improvement now:
+
+Use scene names that match your page intent long term.
+
+Instead of:
+
+hero
+trust
+conversion
+
+I’d keep:
+
+hero
+support
+conversion
+
+Why:
+
+trust works well for web design pages
+but for Local SEO pages the middle scene may later be:
+rankings
+visibility
+GBP
+map pack
+support is more flexible as the generic slot name, while the prompt/composition can still be trust-based for web design pages
+
+So:
+
+asset slot = support
+scene composition = handshake / credibility / proof for web design pages
+
+That avoids repainting the architecture later.
+
+On the timeout workaround
+
+The addScene.ts one-scene-per-run approach is sensible.
+Given the time limit, I’d use it.
+
+That said, make sure image-assets.json is keyed by both:
+
+slug
+scene
+
+Not just scene globally.
+
+You want storage shaped like this conceptually:
+
+{
+  "web-design-fulwood": {
+    "hero": {...},
+    "support": {...},
+    "conversion": {...}
+  }
+}
+
+not:
+
+{
+  "hero": {...},
+  "support": {...},
+  "conversion": {...}
+}
+
+Otherwise one page can overwrite another.
+
+My recommendation
+
+Yes — run the remaining areas now, but with these checks in mind:
+
+Keep cumulative reinjection enabled
+Confirm assets are stored per slug + per scene
+Prefer support over trust if you can rename now without hassle
+After the first remaining area, visually inspect before finishing all of them
+The commands I’d run pattern-wise
+
+For each slug:
+
+pnpm exec tsx src/local-seo/addScene.ts --slug web-design-fulwood --scene hero
+pnpm exec tsx src/local-seo/addScene.ts --slug web-design-fulwood --scene trust
+pnpm exec tsx src/local-seo/addScene.ts --slug web-design-fulwood --scene conversion
+
+Then repeat for Hillsborough and Crookes.
+
+One final check after the first area
+
+Inspect the rendered page and confirm:
+
+3 distinct images appear
+each image is visually different
+each image sits in the correct position
+no earlier scene disappears after adding the next one
+alt text and filenames remain scene-specific
+
+So my answer is: yes, proceed, with the one naming refinement if it’s easy to do now. If not, keep trust for today and standardise later.

@@ -1,0 +1,204 @@
+You are an expert Local SEO + AI Search Optimisation content system.
+
+Your task is to generate a high-quality, SEO-optimised and AI-ready landing page for a local business service.
+
+--------------------------------------------------
+INPUT VARIABLES
+--------------------------------------------------
+
+Primary Keyword: {primaryKeyword}
+Service: {service}
+Location: {location}
+Business Name: {businessName}
+Supporting Keywords: {supportingKeywords[]}
+Nearby Areas: {nearbyAreas[]}
+Business Profile Data: {profileData}
+
+--------------------------------------------------
+CORE OBJECTIVE
+--------------------------------------------------
+
+Create a page that:
+- ranks for local SEO
+- is easily understood and extracted by AI systems
+- answers real user intent clearly
+- avoids duplication across cluster pages
+- is commercially focused (generates enquiries)
+
+--------------------------------------------------
+CONTENT STRUCTURE (MANDATORY)
+--------------------------------------------------
+
+1. H1 (STRICT)
+Must include exact primary keyword:
+Example:
+"Web Design Barnsley"
+
+--------------------------------------------------
+
+2. AI ANSWER BLOCK (VERY IMPORTANT — PLACE NEAR TOP)
+
+Format exactly:
+
+What does {service} in {location} include?
+
+Quick Answer:
+Write a 2–3 sentence direct answer clearly explaining the service.
+
+Key Points:
+- 4–6 bullet points
+- short, clear
+- no fluff
+
+--------------------------------------------------
+
+3. INTRO PARAGRAPH
+
+- mention service + location naturally
+- explain who it’s for
+- highlight benefit
+- avoid repetition from other pages
+
+--------------------------------------------------
+
+4. SERVICE BREAKDOWN
+
+Explain:
+- what is included
+- how it works
+- expected outcomes
+
+Use:
+- short paragraphs
+- bullet points
+- clear subheadings
+
+--------------------------------------------------
+
+5. INTENT CLUSTERS (CRITICAL FOR AI)
+
+Create grouped sections:
+
+Pricing Questions:
+- How much does {service} cost in {location}?
+
+Process Questions:
+- How does {service} work?
+
+Local Questions:
+- Why choose a local provider in {location}?
+
+Comparison Questions:
+- Is {service} worth it?
+
+Each answer:
+- 2–4 sentences
+- direct and clear
+
+--------------------------------------------------
+
+6. LOCAL RELEVANCE SECTION
+
+Explain:
+- why the service matters in this location
+- local business context
+- competition / demand
+
+Mention 2–3 nearby areas naturally.
+
+--------------------------------------------------
+
+7. TRUST / AUTHORITY SECTION
+
+Include:
+- experience
+- outcomes
+- reliability
+- what makes this provider different
+
+--------------------------------------------------
+
+8. INTERNAL LINKING (MANDATORY)
+
+Include:
+- link to hub page
+- link to 2–3 other cluster pages
+
+Use natural anchor text.
+
+--------------------------------------------------
+
+9. FAQ SECTION
+
+Include 4–6 FAQs:
+- real user questions
+- concise answers
+
+Do NOT repeat wording from intent clusters exactly.
+
+--------------------------------------------------
+
+10. CTA SECTION
+
+Clear call to action:
+- phone
+- enquiry
+- urgency
+
+--------------------------------------------------
+
+11. ENTITY BLOCK (IMPORTANT FOR AI)
+
+Include structured text:
+
+About this service:
+- Service: {service}
+- Location: {location}
+- Provider: {businessName}
+- Target: Local businesses
+
+--------------------------------------------------
+
+12. STYLE RULES
+
+- short paragraphs (2–4 lines)
+- no fluff
+- no keyword stuffing
+- vary wording across pages
+- avoid repeating exact phrases from other cluster pages
+- make each page feel locally unique
+
+--------------------------------------------------
+
+13. DUPLICATION CONTROL
+
+Ensure:
+- intro is unique per page
+- examples differ
+- nearby areas vary
+- phrasing is not repeated
+- FAQs are not identical across pages
+
+--------------------------------------------------
+
+14. OUTPUT FORMAT
+
+Return clean HTML-ready structured content with:
+- H1
+- H2 / H3 sections
+- lists
+- paragraphs
+
+No placeholder text.
+No lorem ipsum.
+No generic filler.
+
+--------------------------------------------------
+GOAL
+--------------------------------------------------
+
+This page must:
+- pass QA scoring
+- be AI extractable
+- be unique across cluster pages
+- be commercially effective

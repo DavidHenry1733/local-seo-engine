@@ -1,0 +1,147 @@
+We need to turn the Profile Setup page into the main onboarding setup page for all new users.
+
+Current situation:
+Business Profile has now been extended with website defaults, logo URL, navigation links, footer details, strapline, address, phone, links, and default brand colour. We now need Profile Setup to become the single default setup process before users access full page generation.
+
+Please inspect the current onboarding/profile/dashboard flow first. Do not create duplicate setup pages or duplicate profile systems.
+
+Goal:
+Create one clear setup process that collects all required user/project configuration before the user can generate pages.
+
+The setup flow should include these sections:
+
+1. Business Profile
+Use the existing Business Profile fields:
+- business name
+- website URL
+- logo URL or skipped logo
+- strapline optional
+- default brand colour
+- header navigation links
+- footer business name
+- footer address
+- footer telephone
+- footer email
+- footer strapline optional
+- footer links
+
+2. Services & Locations
+Add or confirm these fields exist:
+- main service
+- additional services
+- primary location
+- service areas
+- target keywords if currently supported
+- business type / industry
+
+3. API Connections
+Add setup section for:
+- OpenAI API key
+- Ideogram API key
+- API mode:
+  - user_provided_keys
+  - platform_keys if supported
+
+Show connection status:
+- not connected
+- connected
+- failed / needs attention
+
+Security:
+- never display full saved keys
+- only show masked value
+- allow user to update or remove keys
+
+4. Google Search Console
+Add setup section for Google Search Console connection if supported.
+
+Fields/status:
+- connect Google Search Console
+- selected website property
+- connection status
+- last sync date if available
+
+If GSC is not currently implemented, add a placeholder section:
+“Google Search Console integration coming soon”
+and ensure the setup system can support it later without breaking.
+
+5. Image Preferences
+Add or confirm:
+- image mode:
+  - upload_own_images
+  - ai_generated_images
+  - mixed
+  - skip_images
+- uploaded image library access
+- image approval preference if supported
+
+6. Publishing Connection
+Add setup section for publishing destination.
+
+If WordPress publishing is supported:
+- WordPress site URL
+- WordPress username
+- WordPress application password/API credential
+- publish mode:
+  - save as app draft
+  - send to WordPress draft
+  - publish directly
+
+Show connection status:
+- not connected
+- connected
+- failed / needs attention
+
+If WordPress publishing is not fully implemented, include this as a setup placeholder and mark as optional.
+
+7. Review & Complete
+Create a final review screen showing:
+- business profile status
+- services/location status
+- API connection status
+- image preference status
+- Google Search Console status
+- publishing connection status
+- profile completion percentage
+- missing required items
+
+Profile completion rules:
+Required before page generation:
+- business name
+- website URL
+- primary service
+- primary location
+- at least one service area
+- header navigation added
+- footer details completed
+- image mode selected
+- OpenAI connection if AI content generation is used
+- Ideogram connection if AI image generation is used
+- publishing connection only if user wants direct WordPress publishing
+
+Optional:
+- Google Search Console
+- footer strapline
+- extra links
+- uploaded images
+- direct publish mode
+
+Dashboard gating:
+If required setup is incomplete, show:
+“Complete your Profile Setup before generating pages.”
+
+The dashboard should show:
+- profile completion percentage
+- missing setup items
+- continue setup button
+- setup complete status when ready
+
+Acceptance criteria:
+- New users start with Profile Setup.
+- Profile Setup contains all core setup requirements in one flow.
+- Users cannot generate pages until required setup items are complete.
+- Existing profile data is preserved.
+- No duplicate profile or wizard system is created.
+- API keys are masked after saving.
+- GSC and WordPress can be optional or placeholder integrations if not fully implemented.
+- Dashboard clearly shows profile completion and setup status.

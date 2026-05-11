@@ -1,0 +1,192 @@
+We need to add a Server Security & Integrity Scan to the System Health module.
+
+Goal:
+Detect any signs of compromise, file tampering, malicious code, or unexpected changes in deployed pages and assets.
+
+Do not change page generation, QA scoring, or deployment logic unless required for security checks.
+
+--------------------------------------------------
+1. SECURITY SCAN MODULE
+--------------------------------------------------
+
+Add a new tab or section:
+“Security & Integrity Scan”
+
+Add button:
+▶ Run Security Scan
+
+This runs a full scan across:
+- deployed pages
+- assets folder
+- known directories
+
+--------------------------------------------------
+2. FILE INTEGRITY CHECK
+--------------------------------------------------
+
+For all deployed files:
+
+Check:
+- last modified timestamp
+- unexpected changes since last deploy
+- unknown files
+
+Flag:
+- files not created by system
+- files modified outside deploy process
+- files with suspicious names
+
+Examples:
+shell.php
+adminer.php
+config.old
+random-string.php
+
+--------------------------------------------------
+3. MALICIOUS CODE DETECTION
+--------------------------------------------------
+
+Scan HTML and files for:
+
+- eval(
+- base64_decode(
+- shell_exec(
+- iframe injections
+- external script injections
+- obfuscated JS
+- unknown <script src="...">
+
+Flag:
+- page URL
+- code snippet
+- severity
+
+--------------------------------------------------
+4. SEO PAGE INJECTION CHECK
+--------------------------------------------------
+
+For each page:
+
+Check:
+- hidden links
+- spam keywords
+- unrelated outbound links
+- injected anchors
+
+Examples:
+- casino links
+- pharma links
+- foreign domains
+
+Flag:
+- source page
+- injected content
+- anchor text
+
+--------------------------------------------------
+5. IMAGE / ASSET VALIDATION
+--------------------------------------------------
+
+Check all assets:
+
+- correct MIME type
+- valid image format
+- no scripts disguised as images
+- file size anomalies
+
+Reject:
+- .php in assets folder
+- non-image content in image paths
+
+--------------------------------------------------
+6. .HTACCESS CHECK
+--------------------------------------------------
+
+If accessible, scan for:
+
+- unknown redirects
+- external redirects
+- base64 code
+- injected rules
+
+Flag:
+- suspicious rules
+- redirect chains
+
+--------------------------------------------------
+7. LIVE PAGE SCRIPT CHECK
+--------------------------------------------------
+
+For each live page:
+
+Extract:
+- all script tags
+- all iframe tags
+
+Allow:
+- known domains
+- your own domain
+
+Flag:
+- unknown external scripts
+- injected iframes
+
+--------------------------------------------------
+8. CHANGE TRACKING
+--------------------------------------------------
+
+Track:
+- last deploy timestamp
+- files changed since deploy
+
+Flag:
+- files modified outside system
+- unexpected edits
+
+--------------------------------------------------
+9. SECURITY REPORT OUTPUT
+--------------------------------------------------
+
+Show:
+
+- Overall status:
+  PASS / WARNING / FAIL
+
+- Files scanned
+- Suspicious files found
+- Pages affected
+- Malicious patterns detected
+- External script injections
+- Unexpected file changes
+
+Issue table:
+- severity
+- type
+- file/page
+- evidence
+- suggested fix
+
+--------------------------------------------------
+10. AUTO-FIX (SAFE ACTIONS ONLY)
+--------------------------------------------------
+
+Allow safe fixes:
+
+- remove injected scripts (if clearly malicious)
+- remove unknown files (with confirmation)
+- restore last deployed version of page
+- clean asset folder (remove non-image files)
+
+DO NOT auto-delete critical files without confirmation.
+
+--------------------------------------------------
+11. ACCEPTANCE CRITERIA
+--------------------------------------------------
+
+- Security scan detects injected scripts and suspicious code
+- Flags unknown files in server directories
+- Identifies modified files since last deploy
+- Detects spam links or SEO injections
+- Validates assets are real images
+- Produces clear PASS / WARNING / FAIL
+- Integrates into System Health dashboard

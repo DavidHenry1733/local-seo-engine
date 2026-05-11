@@ -1,0 +1,192 @@
+test it with a local plumber template, but make clear this is not a homepage. It should be a local SEO landing page template for one service/location.
+
+Use this prompt:
+
+We need to test and refine the industry template system using a local plumber example.
+
+Current issue:
+The templates created so far feel more like generic homepages. We need templates designed specifically for local SEO landing pages, not homepage designs.
+
+Please create/test a template for:
+
+Industry: Plumbing
+Business type: Local plumber
+Page type: Local SEO service/location landing page
+Example service: Emergency Plumbing
+Example location: Sheffield
+Example target keyword: Emergency Plumber Sheffield
+
+Important:
+This should NOT be a generic homepage.
+It should be a conversion-focused local SEO landing page for one service in one location.
+
+Template name:
+plumber_local_service
+
+Template purpose:
+Generate local plumbing service pages that rank for service + location keywords and convert visitors into phone calls/enquiries.
+
+Recommended page structure:
+
+1. Hero Section
+Purpose:
+Immediately confirm service, location and urgent call-to-action.
+
+Include:
+- H1: Emergency Plumber in Sheffield
+- Short intro paragraph
+- Primary CTA: Call Now
+- Secondary CTA: Request a Callback
+- Trust points:
+  - Local plumber
+  - Fast response
+  - Fully insured
+  - No-obligation quote
+
+2. Emergency / Service Summary Section
+Purpose:
+Explain the exact service being offered.
+
+Include:
+- Common plumbing emergencies
+- Leaks
+- Burst pipes
+- Blocked toilets/sinks
+- Tap repairs
+- Shower/plumbing faults
+- Boiler-related plumbing issues if appropriate
+
+3. Why Choose This Local Plumber
+Purpose:
+Build trust and differentiate from national directories.
+
+Include:
+- Local service
+- Clear pricing where possible
+- Experienced plumber
+- Reliable appointments
+- Friendly service
+- Workmanship guarantee if supplied
+
+4. Local Area Coverage Section
+Purpose:
+Strengthen local SEO relevance.
+
+Include:
+- Main location: Sheffield
+- Nearby areas served
+- Local wording should come from user/campaign service area data
+- Do not hardcode Sheffield unless test data is being used
+
+5. Common Problems We Fix
+Purpose:
+Add keyword depth and user relevance.
+
+Use cards or bullet sections for:
+- Leaking pipes
+- Blocked drains
+- Overflow problems
+- Toilet issues
+- Kitchen plumbing
+- Bathroom plumbing
+- Radiator pipework
+- Outdoor taps
+
+6. Process Section
+Purpose:
+Show how easy it is to contact and book.
+
+Steps:
+- Call or request a callback
+- Explain the issue
+- Get a clear estimate
+- Plumber visits
+- Work completed
+
+7. Proof / Trust Section
+Purpose:
+Add credibility.
+
+Include placeholders for:
+- Reviews
+- Accreditations
+- Years of experience
+- Insurance
+- Before/after or job photos if available
+
+8. Image Section / Work Examples
+Purpose:
+Allow uploaded or AI images.
+
+Image slots:
+- Hero image
+- Service image
+- Work example image
+- CTA image
+
+Do not force images if missing.
+Use the existing image slot logic:
+- uploaded image
+- AI image
+- library image
+- missing image
+
+9. FAQ Section
+Purpose:
+Capture long-tail SEO and reduce objections.
+
+Example FAQs:
+- Do you offer emergency plumbing in Sheffield?
+- How quickly can you attend?
+- Do you repair leaks and burst pipes?
+- Can I get a quote before work starts?
+- Do you cover nearby areas?
+- Are you insured?
+
+10. Final CTA Section
+Purpose:
+Drive action.
+
+Include:
+- Call now
+- Request callback
+- Short reassurance sentence
+- Phone number from business profile
+
+11. Footer
+Use footer data from Business Profile:
+- business name
+- address
+- phone
+- email
+- footer links
+- navigation links
+
+Template requirements:
+- Must use business profile data dynamically.
+- Must use campaign service/location dynamically.
+- Must not hardcode InboxingProWeb.
+- Must not behave like a homepage.
+- Must support hub and cluster page variations later.
+- Must include local SEO content sections.
+- Must include CTA blocks.
+- Must support schema generation.
+
+Schema support:
+This template should support:
+- LocalBusiness
+- Service
+- WebPage
+- FAQPage
+- BreadcrumbList
+
+Acceptance criteria:
+- The plumber template renders as a local service/location landing page.
+- It is clearly different from a homepage.
+- H1 uses service + location.
+- CTAs use business profile phone/email.
+- Footer uses business profile data.
+- Image slots are present but not forced.
+- Local area coverage uses service area data.
+- FAQ section is included.
+- Template can be reused for other plumbing services and locations.

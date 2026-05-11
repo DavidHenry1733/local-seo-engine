@@ -1,0 +1,103 @@
+This is still showing the same critical issues, so Replit has not fixed the generator output yet.
+
+Use this prompt:
+
+The latest Web Design Rotherham output still contains the same critical generation issues.
+
+Do not change layout, deployment, sitemap, images, or internal link architecture.
+
+Fix the generator/post-processing output validation for these exact issues:
+
+1. Meta description still truncated
+Current:
+<meta name="description" content="Web design Rotherham from InboxingProWeb offers professional websites that attract local customers and generate real business enquiries. This service suits" />
+
+This is invalid quality output.
+
+Fix:
+- Meta description must be a complete sentence.
+- Target 140–160 characters where possible.
+- Never cut mid-sentence.
+- If generated text exceeds limit, trim to last full sentence or regenerate shorter.
+
+2. WebPage schema description also truncated
+Current:
+"description":"Web design Rotherham from InboxingProWeb offers professional websites that attract local customers and generate real business enquiries. This service suits Rotherham businesses who want to outperform "
+
+Fix:
+- Schema description must use the same cleaned complete meta description.
+- Never allow truncated schema descriptions.
+
+3. Canonical still relative
+Current:
+<link rel="canonical" href="/web-design-rotherham/" />
+
+Fix:
+Canonical must be absolute:
+https://local.inboxingproweb.com/web-design-rotherham/
+
+Apply to every generated page.
+
+4. Empty anchor still exists
+Current:
+Learn more at <a href="/"></a>.
+
+Fix:
+No empty anchor links should ever be generated.
+If anchor text is missing:
+- remove the anchor and surrounding phrase, or
+- replace with meaningful anchor text.
+
+Example:
+Learn more about our Rotherham web design services.
+
+QA must mark empty anchors as FAIL.
+
+5. Duplicate AI answer sections still exist
+Current output includes:
+- ai-summary-section
+- cluster-ai-answer-block
+
+Fix:
+Use only one main AI answer section near the top.
+
+Keep:
+- ai-summary-section
+
+Remove:
+- cluster-ai-answer-block
+
+Intent clusters must remain.
+
+6. Hero image still uses static template image
+Current:
+<img src="/assets/web-design/hero-v1.png"
+
+If campaign image is selected, campaign image must override static template image.
+
+Use:
+https://local.inboxingproweb.com/assets/{clientSlug}/hero.{ext}
+
+Only use static template fallback if no campaign image exists.
+
+7. Add final output guard
+Before page is saved, run output validation.
+
+Block or auto-fix if:
+- meta description ends with incomplete phrase
+- canonical is relative
+- empty anchor exists
+- duplicate AI answer blocks exist
+- schema description is truncated
+- selected campaign image is ignored
+
+Acceptance criteria:
+- Meta description is complete.
+- Schema description is complete.
+- Canonical is absolute.
+- No empty anchors.
+- Only one AI answer block.
+- Hero image uses campaign image when available.
+- QA flags these as fail if they appear again.
+
+This needs fixing at the generator/post-processing layer, not manually per page.

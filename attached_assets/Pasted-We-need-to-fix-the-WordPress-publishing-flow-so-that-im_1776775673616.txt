@@ -1,0 +1,122 @@
+We need to fix the WordPress publishing flow so that images display correctly.
+
+The issue:
+Images are uploading to WordPress successfully, but the final HTML is still using local asset paths like:
+
+/assets/web-design/hero-v1.png
+
+Instead of using the returned WordPress media URLs.
+
+OBJECTIVE
+
+Ensure:
+
+Images are uploaded BEFORE rendering the HTML
+The returned WordPress media URLs are stored
+The template uses those URLs in <img src="">
+Debug output is printed for the FIRST page only
+STEP 1 — Update runProject.ts
+
+Modify the loop so it passes a debug flag for the first page only.
+
+Example:
+
+const pages = buildProjectPlan(project);
+
+for (let i = 0; i < pages.length; i++) {
+  const page = pages[i];
+
+  await exportToWordPress({
+    project,
+    page,
+    printDebug: i === 0
+  });
+}
+
+If the function uses isFirstPage instead of printDebug, use that name.
+
+STEP 2 — Fix exportToWordPress.ts flow
+
+Ensure the order is:
+
+Build payload
+Upload images
+Replace image paths with WordPress URLs
+Render HTML
+Publish page
+STEP 3 — Upload images BEFORE rendering
+
+For each image:
+
+hero
+support
+conversion
+
+Upload using the existing upload function.
+
+Store result like:
+
+images: {
+  hero: {
+    sourceFile: "assets/web-design/hero-v1.png",
+    mediaId: number,
+    sourceUrl: string
+  }
+}
+STEP 4 — Replace payload image paths
+
+Before rendering HTML, update:
+
+payload.images.hero = uploadedHero.sourceUrl;
+payload.images.support = uploadedSupport.sourceUrl;
+payload.images.conversion = uploadedConversion.sourceUrl;
+
+So the payload contains FINAL URLs.
+
+STEP 5 — Ensure template uses payload URLs
+
+In service-location-v1.ts, confirm:
+
+<img src="${payload.images.hero}">
+<img src="${payload.images.support}">
+<img src="${payload.images.conversion}">
+
+NO references to /assets/... should remain.
+
+STEP 6 — Add debug output (first page only)
+
+If printDebug === true, log:
+
+console.log("IMAGE DEBUG SUMMARY");
+
+console.log({
+  hero: {
+    sourceFile: originalHeroPath,
+    mediaId: uploadedHero.id,
+    sourceUrl: uploadedHero.sourceUrl
+  },
+  support: {
+    sourceFile: originalSupportPath,
+    mediaId: uploadedSupport.id,
+    sourceUrl: uploadedSupport.sourceUrl
+  },
+  conversion: {
+    sourceFile: originalConversionPath,
+    mediaId: uploadedConversion.id,
+    sourceUrl: uploadedConversion.sourceUrl
+  }
+});
+STEP 7 — Validate
+
+After changes:
+
+Ensure TypeScript compiles cleanly
+Run:
+
+pnpm exec tsx src/generator/runProject.ts config/projects/example-business.json
+
+EXPECTED RESULT
+Images display correctly on WordPress pages
+<img src> uses /wp-content/uploads/...
+Debug output prints once (first page only)
+No /assets/... paths appear in final HTML

@@ -1,0 +1,349 @@
+We are freezing the current working prototype and preparing to migrate the app from Replit to our own production hosting.
+
+Please do not add new features, redesign pages, or make further logic changes.
+
+We need a complete migration/export package so the app can be deployed safely elsewhere while keeping this Replit project available as a backup/reference.
+
+==================================================
+1. FREEZE CURRENT VERSION
+==================================================
+
+Please confirm the current working version is frozen.
+
+Do not change:
+- page generation logic
+- image system
+- layout system
+- scoring system
+- content prompts
+- social post generation
+- internal linking
+- deployment/output logic
+
+==================================================
+2. FULL PROJECT EXPORT
+==================================================
+
+Please provide:
+
+- full project source code export
+- package.json
+- lock file
+- all src/app/server files
+- public/static files
+- config files
+- templates
+- prompt files
+- scoring logic files
+- image library logic
+- deployment scripts
+- generated page templates
+- database schema/migration files if present
+
+Confirm:
+- where the main app entry point is
+- where the frontend code is
+- where the backend/API code is
+- where generated pages are written
+- where uploaded images are stored
+
+==================================================
+3. ENVIRONMENT VARIABLES
+==================================================
+
+Please provide a complete list of all required environment variables.
+
+Include variables for:
+
+- OpenAI API
+- Ideogram API
+- database connection
+- file/image storage
+- app base URL
+- generated pages base URL
+- email/SMTP if used
+- session/auth secrets if used
+- deployment/FTP if used
+- any other API keys
+
+Do not expose live secret values in public chat if unsafe.
+
+Instead provide:
+- variable name
+- what it is used for
+- where to get/set it
+
+Example:
+OPENAI_API_KEY = used for content generation
+IDEOGRAM_API_KEY = used for AI image generation
+DATABASE_URL = database connection string
+
+==================================================
+4. DATABASE DETAILS
+==================================================
+
+Please provide:
+
+- database type currently used
+- schema/export method
+- table list
+- migration files if available
+- seed data if required
+- how to back up current data
+- how to restore data on new server
+
+Important data to preserve:
+- campaigns
+- generated pages
+- users if any
+- image libraries
+- uploaded image records
+- AI generated image records
+- scoring data
+- social post outputs
+- saved prompts/config
+
+==================================================
+5. FILE STORAGE / IMAGE LIBRARY
+==================================================
+
+Please provide:
+
+- where uploaded images are stored
+- where AI-generated images are stored
+- how image URLs are created
+- whether paths are relative or absolute
+- how images are linked to business type
+- how image roles are assigned
+- how to copy images to the new server
+
+Confirm how to migrate:
+- uploaded business-type libraries
+- AI images
+- generated page images
+- static assets
+
+==================================================
+6. BUILD AND RUN COMMANDS
+==================================================
+
+Please provide exact commands for:
+
+Install:
+npm install / pnpm install
+
+Development:
+npm run dev / pnpm dev
+
+Production build:
+npm run build / pnpm build
+
+Production start:
+npm run start / pnpm start
+
+Any additional commands:
+- database migration
+- database seed
+- generate pages
+- deploy pages
+- run tests
+- type checking
+- linting
+
+Also confirm:
+- Node.js version required
+- package manager used
+- whether TypeScript build is required
+
+==================================================
+7. DEPLOYMENT NOTES
+==================================================
+
+Please provide deployment instructions for a standard VPS/cPanel server running Node.js.
+
+Include:
+
+- recommended Node.js version
+- required ports
+- PM2 start command
+- reverse proxy notes
+- SSL notes
+- static file/public folder path
+- generated pages output folder
+- upload folder permissions
+- cron jobs if required
+
+Target domains:
+
+app domain:
+app.localseongine.com or app.inboxingproweb.com
+
+generated pages/preview domain:
+local.inboxingproweb.com or preview.localseongine.com
+
+==================================================
+8. CURRENT WORKING FEATURES
+==================================================
+
+Please list confirmed working features.
+
+Expected working features include:
+
+- campaign creation
+- page generation
+- business type selection
+- service/location selection
+- image library loading
+- uploaded image selection
+- AI image generation
+- role-based image placement
+- approved page layout
+- AI Search Readiness scoring
+- internal links
+- Related Services
+- Areas We Cover
+- generated-page social posts
+- page preview/output
+
+Please confirm which are working.
+
+==================================================
+9. KNOWN ISSUES
+==================================================
+
+Please list known unresolved issues.
+
+Current known issues may include:
+
+- standalone social post generation button not functioning
+- Suggested Improvements fix buttons not yet implemented
+- any route/view button issues
+- any deployment/export issues
+
+For each issue provide:
+- file(s) likely involved
+- current behaviour
+- expected behaviour
+- any console errors
+- suggested fix if known
+
+==================================================
+10. ROUTES / URL MAP
+==================================================
+
+Please provide a route map.
+
+Include:
+
+- dashboard routes
+- campaign list route
+- campaign detail/view route
+- page preview route
+- generated page URL route
+- image library route
+- AI image generation route
+- scoring route
+- social post route
+- API endpoints
+
+For each route:
+- path
+- purpose
+- main file/component
+- backend/API handler if applicable
+
+==================================================
+11. PROMPT / AI LOGIC LOCATIONS
+==================================================
+
+Please identify files/locations for:
+
+- main content generation prompt
+- service context system
+- local context injection
+- mistakes/pitfalls section generation
+- AI image prompt builder
+- social post generation prompts
+- scoring/QA logic
+- suggested improvements logic
+
+This is important so future edits can be made without breaking unrelated areas.
+
+==================================================
+12. CONFIGURATION FILES
+==================================================
+
+Please provide or identify:
+
+- business type config
+- service type config
+- area/location config
+- internal links config
+- image role config
+- scoring weights config
+- page template config
+- deployment config
+
+==================================================
+13. TESTING CHECKLIST
+==================================================
+
+Please provide a basic test checklist for the migrated app.
+
+Test checklist should include:
+
+1. Create campaign
+2. Select business type
+3. Generate pages
+4. Confirm images render
+5. Confirm 4 role images appear
+6. Confirm score displays
+7. Confirm Related Services correct
+8. Confirm Areas We Cover correct
+9. Confirm page preview works
+10. Confirm generated page URL works
+11. Confirm AI image generation works
+12. Confirm generated-page social posts work
+13. Confirm uploaded images persist
+14. Confirm no placeholders appear when images exist
+
+==================================================
+14. BACKUP PACKAGE
+==================================================
+
+Please create/provide:
+
+- source code export
+- database export if applicable
+- uploaded images export
+- generated page assets export
+- .env.example file
+- README migration instructions
+
+README should include:
+- setup steps
+- env variables
+- install commands
+- build commands
+- start commands
+- deployment notes
+- known issues
+
+==================================================
+15. FINAL CONFIRMATION
+==================================================
+
+Please confirm:
+
+- Replit project remains available after export
+- export does not delete the current project
+- no further changes will be made unless requested
+- the exported version matches the current working prototype
+
+Do not mark this complete until the migration package includes:
+- code
+- env variable list
+- database/storage notes
+- build/run commands
+- known issues
+- README/setup instructions

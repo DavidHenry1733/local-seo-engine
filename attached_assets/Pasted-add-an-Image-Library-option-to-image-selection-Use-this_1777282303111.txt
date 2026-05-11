@@ -1,0 +1,93 @@
+add an Image Library option to image selection.
+
+Use this Replit prompt:
+
+We need to improve the image selection flow.
+
+Current setup:
+- User can choose AI image generation using Ideogram.
+- User can upload a new image.
+- We now need a third option: use a previously saved image from the user's Image Library.
+
+Please inspect the existing image upload, image generation, image selection, and storage logic first. Do not create a duplicate image system if one already exists.
+
+Required changes:
+
+1. Add Image Source Options
+Wherever the user selects an image, show three options:
+
+- Generate with AI
+- Upload new image
+- Choose from Image Library
+
+2. Image Library
+Create or reuse an Image Library that stores previously uploaded and previously generated/approved images.
+
+Each image should store:
+- imageId
+- userId
+- projectId optional
+- campaignId optional
+- source: uploaded / ai_generated
+- imageUrl
+- thumbnailUrl if available
+- fileName
+- altText
+- caption optional
+- category optional
+- createdAt
+- approvalStatus if AI generated
+
+3. Choose From Library UI
+When user selects “Choose from Image Library”:
+
+Show:
+- image thumbnails
+- image name
+- source label: Uploaded / AI
+- category if available
+- view full image link/button
+- select image button
+
+Add filters if simple:
+- All
+- Uploaded
+- AI Generated
+- Approved
+- By category
+
+4. View Image
+Add a simple way to view the image before selecting it:
+- modal preview, or
+- open image in new tab, or
+- view link
+
+5. Reuse Existing Images
+When selected, the image should be assigned to the current image slot/page/section without duplicating the file unnecessarily.
+
+6. Save to Library
+Make sure:
+- uploaded images are saved to the Image Library
+- AI-generated images are saved to the Image Library
+- approved AI images remain available for future reuse
+
+7. Image Slot Assignment
+When a library image is selected, update the relevant image slot:
+
+- imageSource: library
+- imageId
+- imageUrl
+- altText
+- status: selected
+
+8. Acceptance Criteria
+- User can generate an AI image.
+- User can upload a new image.
+- User can choose a previously saved image.
+- Previous uploaded images appear in the library.
+- Previous AI-generated images appear in the library.
+- User can preview/view an image before selecting.
+- Selecting a library image assigns it to the correct page/image slot.
+- Existing image generation and upload functionality still works.
+
+This is a strong usability feature because users will often want to reuse the same hero/brand/service images across multiple cluster pages without uploading or generating every time

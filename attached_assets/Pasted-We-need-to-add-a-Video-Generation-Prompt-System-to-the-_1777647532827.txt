@@ -1,0 +1,339 @@
+We need to add a Video Generation Prompt System to the Distribution Content Engine.
+
+Do not connect any video API yet.
+Do not upload to YouTube yet.
+Do not change page generation, deployment, sitemap, scoring, images, or link audit logic.
+
+Goal:
+For each generated SEO page, create a complete video production pack that can be used with text-to-video tools such as Pictory, InVideo, HeyGen, Synthesia, Runway, or similar platforms.
+
+This should be generated from the same page/campaign data already used for distribution content.
+
+--------------------------------------------------
+1. CREATE VIDEO GENERATION MODULE
+--------------------------------------------------
+
+Create:
+
+src/generator/videoGeneration.ts
+
+Function:
+
+generateVideoPack(context)
+
+Context should include:
+- clientSlug
+- campaignId
+- pageSlug
+- pageTitle
+- primaryKeyword
+- service
+- location
+- businessName
+- pageUrl
+- moneyPageUrl
+- aiSummary
+- keyBenefits
+- targetAudience
+- nearbyAreas
+- approvedClaims
+- imageUrl
+- brandColours if available
+- logoUrl if available
+
+--------------------------------------------------
+2. OUTPUT STRUCTURE
+--------------------------------------------------
+
+Return JSON:
+
+{
+  videoType: "youtube_short" | "youtube_standard" | "social_clip",
+  title,
+  hook,
+  script,
+  sceneBreakdown,
+  captions,
+  voiceoverStyle,
+  visualStyle,
+  brollSuggestions,
+  thumbnailPrompt,
+  youtube: {
+    title,
+    description,
+    tags,
+    chapters,
+    pinnedComment
+  },
+  social: {
+    facebookCaption,
+    linkedinCaption,
+    shortCaption
+  },
+  cta,
+  status: "draft"
+}
+
+--------------------------------------------------
+3. VIDEO TYPES
+--------------------------------------------------
+
+Generate 3 variants per page:
+
+A. YouTube Short
+- 30–45 seconds
+- punchy hook
+- vertical format
+- useful for Shorts, TikTok, Reels
+
+B. YouTube Standard
+- 60–90 seconds
+- more explanation
+- suitable for main YouTube upload
+
+C. Social Clip
+- 20–30 seconds
+- fast, benefit-led
+- suitable for Facebook/LinkedIn
+
+--------------------------------------------------
+4. SCRIPT STRUCTURE
+--------------------------------------------------
+
+Every video script must follow:
+
+1. Hook
+2. Problem
+3. Insight
+4. Solution
+5. CTA
+
+Example:
+
+Hook:
+"Barnsley businesses are losing enquiries before customers even pick up the phone."
+
+Problem:
+"Most customers check your website before contacting you. If it looks outdated or loads slowly, they move on."
+
+Insight:
+"A professional website does more than look good. It helps customers trust you, find you, and contact you."
+
+Solution:
+"InboxingProWeb creates web design for Barnsley businesses built to generate enquiries."
+
+CTA:
+"Visit the page to learn more or request a quote."
+
+--------------------------------------------------
+5. SCENE BREAKDOWN
+--------------------------------------------------
+
+For every script, generate scene-by-scene output:
+
+sceneBreakdown: [
+  {
+    sceneNumber,
+    timestamp,
+    narration,
+    onScreenText,
+    visualPrompt,
+    brollSuggestion
+  }
+]
+
+Rules:
+- 5–7 scenes for 60–90 second video
+- 3–5 scenes for short videos
+- each scene has clear visual direction
+- avoid generic “business people shaking hands” unless unavoidable
+
+--------------------------------------------------
+6. CAPTIONS
+--------------------------------------------------
+
+Generate short caption lines suitable for burned-in captions.
+
+Rules:
+- max 8 words per caption line
+- direct and punchy
+- no long sentences
+
+Example:
+"Your website should generate enquiries"
+"Barnsley customers decide fast"
+"Better design builds trust"
+
+--------------------------------------------------
+7. VOICEOVER STYLE
+--------------------------------------------------
+
+Generate:
+
+voiceoverStyle:
+- British English
+- warm, professional, confident
+- local business adviser tone
+- no hype
+- no exaggerated promises
+
+--------------------------------------------------
+8. VISUAL STYLE
+--------------------------------------------------
+
+Generate:
+
+visualStyle:
+- professional local business style
+- clean modern visuals
+- website mockups
+- maps/local area references
+- laptop/mobile website previews
+- subtle brand colours
+- avoid cartoon/gimmick visuals unless brand requests them
+
+--------------------------------------------------
+9. B-ROLL SUGGESTIONS
+--------------------------------------------------
+
+Include:
+- local high street/business area visuals
+- people browsing websites on mobile
+- small business owner checking enquiries
+- laptop showing modern website layout
+- Google search/map style visual
+- contact form or phone enquiry visual
+
+--------------------------------------------------
+10. YOUTUBE SEO
+--------------------------------------------------
+
+For YouTube Standard video generate:
+
+youtube.title:
+- under 70 characters
+- include primary keyword naturally
+
+youtube.description:
+- 150–300 words
+- include page URL
+- include business name
+- include service + location
+- include CTA
+- no keyword stuffing
+
+youtube.tags:
+- 8–15 tags
+- include service, location, business type, nearby areas
+
+youtube.chapters:
+- timestamped chapters
+
+youtube.pinnedComment:
+- short CTA with page URL
+
+--------------------------------------------------
+11. THUMBNAIL PROMPT
+--------------------------------------------------
+
+Generate thumbnail prompt:
+
+Must include:
+- bold readable title text
+- service + location
+- professional website/local business visual
+- brand colours if available
+- no tiny unreadable text
+
+Example:
+"Create a clean YouTube thumbnail for Web Design Barnsley. Show a modern website mockup on a laptop with a local business owner looking at enquiries. Use navy, blue and teal accents. Add bold text: 'Web Design Barnsley'. Professional, trustworthy, modern."
+
+--------------------------------------------------
+12. TEXT-TO-VIDEO PROMPT
+--------------------------------------------------
+
+Generate a single videoPrompt suitable for tools like Pictory/InVideo:
+
+Must include:
+- full narration
+- scene descriptions
+- preferred visuals
+- captions
+- tone
+- brand style
+- CTA
+
+--------------------------------------------------
+13. QUALITY RULES
+--------------------------------------------------
+
+Do not:
+- guarantee rankings
+- guarantee income
+- invent statistics unless approvedClaims includes them
+- claim to be number one
+- overuse sales hype
+- sound spammy
+- reuse identical scripts across pages
+
+Must:
+- localise service + location
+- make the script useful
+- focus on business outcomes
+- include page URL
+- include CTA
+- produce unique angle per page
+
+--------------------------------------------------
+14. STORAGE
+--------------------------------------------------
+
+Save generated video packs to:
+
+output/{clientSlug}/video/{pageSlug}.json
+
+Also maintain:
+
+output/{clientSlug}/video/index.json
+
+Index fields:
+- pageSlug
+- pageTitle
+- generatedAt
+- videoTypesAvailable
+- approvalStatus: draft | approved | produced | uploaded
+- uploadedUrl if manually added
+
+--------------------------------------------------
+15. DASHBOARD
+--------------------------------------------------
+
+Add Video Content panel inside Distribution dashboard.
+
+Features:
+- select page
+- generate video pack
+- view YouTube Short
+- view YouTube Standard
+- view Social Clip
+- copy script
+- copy video prompt
+- copy YouTube description
+- download JSON
+- mark approved
+- mark produced
+- manually store uploaded YouTube URL
+
+--------------------------------------------------
+16. ACCEPTANCE CRITERIA
+--------------------------------------------------
+
+- Video pack generates for one page.
+- Three variants are created.
+- Scripts are localised to service/location.
+- YouTube metadata is generated.
+- Thumbnail prompt is generated.
+- Text-to-video prompt is generated.
+- Output saved to JSON.
+- Dashboard displays the video pack.
+- No API posting or video generation occurs yet.

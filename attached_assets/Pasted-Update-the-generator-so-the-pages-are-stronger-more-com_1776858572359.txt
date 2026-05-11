@@ -1,0 +1,137 @@
+Update the generator so the pages are stronger, more complete, and more configurable.
+
+Do NOT change:
+- deployment flow
+- FTP logic
+- static page structure
+- image paths (/assets/...)
+
+Only improve:
+1. content depth
+2. map logic
+3. CTA configuration
+
+---
+
+## 1. EXPAND CONTENT (HIGH PRIORITY)
+
+Problem:
+Pages are too thin and feel generated.
+
+Goal:
+Make each page feel like a real, high-quality local service landing page.
+
+### Requirements
+- Target 900–1200 words per page
+- Each main section: 120–200 words
+- Natural language, not repetitive
+- Include service + location naturally
+- Add trust + conversion language
+- Improve flow between sections
+
+### Section intent (keep structure, improve depth)
+
+1. Overview
+- explain service in location
+- why it matters
+- outcomes for businesses
+
+2. Benefits
+- visibility, trust, enquiries
+- practical business impact
+
+3. Local relevance
+- why location matters
+- natural mention of nearby areas
+
+4. Process / approach
+- how service is delivered
+- structured and credible
+
+5. Pre-CTA paragraph
+- strong closing before CTA
+- persuasive, action-focused
+
+---
+
+## 2. FIX MAP LOGIC (CRITICAL)
+
+Problem:
+Map shows page location (wrong)
+
+Goal:
+Map ALWAYS shows business location
+
+### Add to config:
+"businessAddress": "Rotherham, South Yorkshire"
+
+### Update logic:
+- Map embed must use businessAddress ONLY
+- NOT page location
+
+Example:
+Web Design Sheffield page → shows Rotherham map
+
+### Update:
+- config types
+- map builder
+- payload generation
+
+---
+
+## 3. CTA CONFIG (IMPORTANT)
+
+Ensure config supports:
+
+"primaryCtaText": "Request a Quote",
+"primaryCtaUrl": "https://inboxingproweb.com/contact/"
+
+### Template must use:
+payload.cta.buttonText
+payload.cta.buttonUrl
+
+### Improve:
+- add stronger paragraph before CTA button
+- make it feel natural and persuasive
+
+---
+
+## 4. DO NOT CHANGE
+
+- deployment logic
+- FTP integration
+- image system
+- template structure
+- subdomain setup
+
+---
+
+## 5. FILES TO UPDATE
+
+Likely:
+- config/projects/*.json
+- src/generator/types.ts
+- src/generator/buildPagePayload.ts
+- src/seo/buildMapEmbed.ts
+- src/templates/service-location-v1.ts
+
+---
+
+## 6. OUTPUT REQUIRED
+
+After completion, print:
+
+1. files updated
+2. how businessAddress is used
+3. how content was expanded
+4. how CTA is now handled
+5. sample improved section output
+
+---
+
+Focus only on:
+- better content
+- correct map
+- configurable CTA
+
+Do not introduce new architecture changes.

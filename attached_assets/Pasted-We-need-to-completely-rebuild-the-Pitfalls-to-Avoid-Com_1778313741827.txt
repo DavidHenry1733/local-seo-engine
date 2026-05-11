@@ -1,0 +1,188 @@
+We need to completely rebuild the “Pitfalls to Avoid / Common Mistakes” section so it becomes fully service-aware and dynamically generated per service type.
+
+Current issue:
+The same mistake list is being reused across all services.
+
+Example:
+Email Marketing pages are incorrectly showing:
+- slow page load speed
+- missing local SEO signals
+- no Google Business Profile
+- page headings and structure
+
+These are web design/local SEO issues, not email marketing mistakes.
+
+This makes the content feel generic and incorrect.
+
+========================
+NEW SYSTEM REQUIRED
+========================
+
+Create a service-aware mistake generation system.
+
+The section must dynamically generate:
+- 8 realistic mistakes
+- specific to the current service/business type
+- relevant to real customers
+- written naturally
+- locally contextual where appropriate
+
+Do NOT reuse one shared mistake list across all services.
+
+========================
+SECTION FORMAT
+========================
+
+Heading format:
+Common [Service] Mistakes That Cost [Area] Businesses
+
+Example:
+Common Email Marketing Mistakes That Cost Barnsley Businesses
+
+Each mistake should include:
+1. Mistake title
+2. Short explanation paragraph (2–3 sentences)
+
+The explanation must:
+- explain why it is a problem
+- explain impact on enquiries/conversions/visibility
+- feel relevant to the service
+
+========================
+CREATE A SERVICE MISTAKE MAP
+========================
+
+Create a dynamic object:
+
+serviceMistakeMap
+
+Each service/business type must contain:
+- realistic mistakes
+- relevant business issues
+- service-specific problems
+
+========================
+EXAMPLE: EMAIL MARKETING
+========================
+
+Correct examples:
+- Sending inconsistent campaigns
+- Generic email content
+- Poor subject lines
+- No customer segmentation
+- Over-emailing subscribers
+- No mobile optimisation
+- Weak call-to-action
+- Ignoring open/click data
+
+Wrong examples:
+- Slow page load speed
+- Missing schema
+- Google Business Profile
+- Local SEO signals
+- Page headings and structure
+
+========================
+EXAMPLE STRUCTURE
+========================
+
+emailMarketing: [
+  {
+    title: "Sending inconsistent campaigns",
+    description: "Many businesses send emails irregularly, making it difficult to build engagement or stay front of mind with customers. Consistency is important for generating repeat enquiries and improving long-term results."
+  },
+  {
+    title: "Generic email content",
+    description: "Emails that feel broad or impersonal are often ignored. Customers are more likely to engage with campaigns that feel relevant to their interests and local area."
+  }
+]
+
+========================
+SERVICE EXAMPLES
+========================
+
+webDesign:
+- outdated design
+- poor mobile experience
+- weak calls to action
+- confusing navigation
+- generic layouts
+
+localSEO:
+- inconsistent business information
+- poor map visibility
+- weak local content
+- no reviews strategy
+- targeting too many areas poorly
+
+websiteHosting:
+- slow hosting
+- poor uptime
+- lack of backups
+- weak security
+- outdated server setup
+
+emailMarketing:
+- poor subject lines
+- over-emailing
+- no segmentation
+- weak engagement tracking
+- inconsistent campaigns
+
+Trades:
+- no emergency contact visibility
+- poor quote process
+- unclear service coverage
+- weak trust signals
+
+========================
+GENERATION RULES
+========================
+
+Rules:
+- Always generate mistakes from the current service map only.
+- Do not mix services.
+- Do not reuse SEO/web design mistakes on unrelated services.
+- Explanations must feel natural and realistic.
+- Use varied sentence structure.
+- Keep explanations concise and readable.
+
+========================
+LOCAL CONTEXT
+========================
+
+Where natural, inject local context:
+- “Barnsley customers…”
+- “Businesses in Sheffield…”
+- “Local customers often…”
+
+But do not force location into every mistake.
+
+========================
+LAYOUT RULES
+========================
+
+Display:
+- clean 2-column grid desktop
+- stacked mobile
+- each mistake in compact designed block/card
+
+Do NOT:
+- use huge paragraphs
+- repeat wording
+- use generic filler text
+
+========================
+ACCEPTANCE CRITERIA
+========================
+
+On:
+ /email-marketing-barnsley/
+
+The section must contain:
+- only email marketing mistakes
+- no web design/local SEO mistakes
+- 8 unique realistic mistakes
+- natural explanations
+
+Provide regenerated test URL before marking complete.

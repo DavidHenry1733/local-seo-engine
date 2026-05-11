@@ -1,0 +1,173 @@
+We need to fix the template/page generation system.
+
+Current issue:
+Templates are generating generic homepage-style layouts with services/products lists. This is incorrect.
+
+We are NOT building homepages.
+We are building keyword-driven local SEO landing pages.
+
+The system must generate pages based on a primary keyword.
+
+Test case:
+
+Primary keyword:
+Emergency Plumber Sheffield
+
+Page type:
+Local SEO landing page (NOT homepage)
+
+Goal:
+Create a high-conversion, SEO-optimised page targeting this keyword.
+
+--------------------------------------------------
+1. KEYWORD-FIRST GENERATION (CRITICAL)
+--------------------------------------------------
+
+The page must be generated from the keyword:
+Emergency Plumber Sheffield
+
+Extract:
+- Service: Emergency Plumber
+- Location: Sheffield
+- Intent: urgent service / fast response / local availability
+
+All content must revolve around this.
+
+Do NOT generate:
+- generic homepage sections
+- full service lists unrelated to emergency plumbing
+- company-wide overview pages
+
+--------------------------------------------------
+2. REQUIRED PAGE STRUCTURE
+--------------------------------------------------
+
+Use this exact SEO landing page structure:
+
+1. Hero Section
+- H1 must include keyword:
+  "Emergency Plumber in Sheffield"
+- Short urgent intro
+- CTA: Call Now
+- Trust points (fast response, local, insured)
+
+2. Immediate Service Section
+Explain:
+- emergency plumbing services
+- leaks, burst pipes, blocked drains, urgent repairs
+
+3. Local Relevance Section
+- mention Sheffield naturally
+- mention nearby areas dynamically
+- reinforce local service
+
+4. Common Emergency Problems
+Content blocks:
+- burst pipes
+- leaks
+- blocked toilets
+- overflowing drains
+- no water issues
+
+5. Why Choose Us
+- local plumber
+- fast response
+- reliable
+- experienced
+- clear pricing
+
+6. Process Section
+Steps:
+- call
+- diagnose
+- quote
+- fix
+
+7. Trust Section
+- reviews placeholders
+- experience
+- certifications if provided
+
+8. FAQ Section
+Generate keyword-relevant FAQs:
+- response time
+- coverage
+- pricing
+- emergency availability
+
+9. Final CTA Section
+- strong call to action
+- phone number from business profile
+
+10. Footer
+- use business profile data
+
+--------------------------------------------------
+3. STRICT RULES
+--------------------------------------------------
+
+DO NOT:
+- create a homepage layout
+- list all services
+- add unrelated services
+- add navigation-style content sections
+- include generic "about us" sections
+
+DO:
+- focus ONLY on emergency plumbing
+- focus ONLY on Sheffield + nearby areas
+- keep content tightly relevant to keyword
+- optimise for conversion (calls)
+
+--------------------------------------------------
+4. CONTENT GENERATION RULES
+--------------------------------------------------
+
+- Every section must include keyword or variation
+- Use natural variations:
+  - emergency plumber Sheffield
+  - Sheffield emergency plumbing
+  - urgent plumber Sheffield
+- Avoid keyword stuffing
+- Keep content local and specific
+
+--------------------------------------------------
+5. IMAGE LOGIC
+--------------------------------------------------
+
+Image slots:
+- hero image (emergency plumbing scene)
+- service image
+- optional work image
+
+Do NOT:
+- add generic stock images unrelated to plumbing
+- force images if missing
+
+--------------------------------------------------
+6. TEMPLATE BEHAVIOUR CHANGE
+--------------------------------------------------
+
+Update the template system:
+
+Templates must NOT define full content.
+Templates should define:
+- section order
+- section purpose
+
+Content must be generated dynamically from keyword.
+
+--------------------------------------------------
+7. ACCEPTANCE CRITERIA
+--------------------------------------------------
+
+- Page is clearly a local SEO landing page
+- H1 includes "Emergency Plumber Sheffield"
+- No generic homepage structure
+- No broad service listing
+- Content is tightly focused on emergency plumbing
+- Strong CTAs present
+- Local relevance included
+- FAQ included
+- Footer uses profile data
+- Page reads like a service landing page, not a homepage

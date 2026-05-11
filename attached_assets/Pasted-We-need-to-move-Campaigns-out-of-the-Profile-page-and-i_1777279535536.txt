@@ -1,0 +1,63 @@
+We need to move Campaigns out of the Profile page and into a dedicated Campaigns page.
+
+Current issue:
+Existing campaigns are currently listed inside the Profile page. This is incorrect. Profile Setup should only contain setup/onboarding information. Campaigns should have their own page.
+
+Please inspect the current profile, dashboard, routing, navigation, and campaign listing code first. Do not create duplicate campaign data structures if one already exists.
+
+Required changes:
+
+1. Remove Campaigns from Profile Page
+- Remove the existing campaign list/display from the Profile page.
+- Profile page should only show onboarding/setup/profile completion sections.
+- Do not delete existing campaign data.
+
+2. Create New Campaigns Page
+Add a dedicated Campaigns page to the app.
+
+The Campaigns page should include:
+- Page title: Campaigns
+- Button: Create New Campaign
+- Current campaigns list displayed the same way they are currently displayed on the Profile page
+- Empty state if no campaigns exist
+
+3. Create New Campaign Flow
+Add a “Create New Campaign” action/button.
+
+Campaign creation should include, at minimum:
+- campaign name
+- campaign type if already supported
+- target service
+- target location/area
+- status:
+  - draft
+  - active
+  - paused
+  - completed
+
+If campaign type/status already exists in the current data model, reuse it.
+
+4. Navigation
+Add Campaigns to the main navigation/sidebar/header menu.
+
+Suggested nav item:
+- Campaigns
+
+5. Dashboard/Profile Separation
+Expected structure:
+- Profile Setup = user/business/API/image/publishing setup
+- Campaigns = SEO campaigns/projects/content runs
+- Dashboard = overview/status/usage/actions
+
+6. Preserve Existing Campaigns
+Existing campaigns must still appear on the new Campaigns page.
+Do not reset, delete, or duplicate them.
+
+7. Acceptance Criteria
+- Campaigns no longer appear inside Profile page.
+- Campaigns have their own page.
+- Existing campaigns display correctly on the new Campaigns page.
+- User can create a new campaign from the Campaigns page.
+- Navigation includes a Campaigns link.
+- Existing campaign data and functionality are preserved.
+- No duplicate campaign systems are created.

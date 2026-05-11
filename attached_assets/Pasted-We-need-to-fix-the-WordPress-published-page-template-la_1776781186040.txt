@@ -1,0 +1,84 @@
+We need to fix the WordPress-published page template layout.
+
+Current issues on live pages:
+
+H1 is duplicated
+There is a large gap between the WordPress page title/H1 and the template content
+The hero image is pushed too far to the right / misaligned
+The support and conversion images are rendering too large / full width
+The page ends too abruptly with a link/button and needs a stronger closing CTA paragraph
+
+Please fix the template and rendering logic for WordPress publish mode.
+
+Required fixes
+1. Remove duplicate H1 in WordPress mode
+
+WordPress already outputs the page title/H1.
+The generated template must NOT output a second H1 when publishing to WordPress.
+
+Implement this cleanly:
+
+add a render flag such as isWordPress or renderMode
+when publishing to WordPress, do not render the internal H1
+for static export mode, keep the internal H1
+2. Reduce top spacing in WordPress mode
+
+There is too much vertical gap before the template content starts.
+Reduce/remove top padding and margin on the top hero wrapper when in WordPress mode.
+
+3. Fix hero image alignment
+
+The hero image is pushed too far right.
+Adjust the hero layout so that:
+
+text and image align cleanly
+the hero image stays inside the content container
+no horizontal overflow
+on desktop: balanced two-column layout
+on mobile: stacked layout
+4. Constrain support and conversion images
+
+The support and conversion images are currently too large.
+Wrap all images in a shared constrained media container.
+
+Requirements:
+
+consistent max width for hero, support, and conversion image blocks
+centered within the page
+rounded corners
+padding
+border
+subtle shadow
+img { max-width: 100%; height: auto; }
+do not crop with CSS
+do not let support/conversion span the full page width unless inside a constrained wrapper
+5. Improve CTA ending
+
+The page currently ends too abruptly.
+Expand the CTA section with:
+
+a stronger closing paragraph
+a more natural transition into the button
+a proper final sentence before the CTA button
+
+Example intent:
+If a business in this location wants stronger visibility, better trust and more enquiries, this service provides a practical way to improve their online presence and convert more visitors into real enquiries.
+
+Keep it specific to service + location using the existing payload.
+
+Files likely to update
+src/templates/service-location-v1.ts
+src/generator/renderPage.ts
+any WordPress publish renderer flag if needed
+Output required
+Update the template code
+Explain exactly how WordPress mode differs from static mode
+Confirm H1 is suppressed in WordPress mode
+Confirm all three images now use the same constrained media wrapper system
+Confirm CTA section includes a proper closing paragraph before the button
+
+Important:
+Do not change generator architecture.
+Do not change image upload flow.
+Do not change schema logic.
+Only fix rendering/layout issues for WordPress-published pages.

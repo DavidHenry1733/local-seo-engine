@@ -1,0 +1,79 @@
+We need to fix AI image generation so it produces clearly relevant service-specific images.
+
+Current issue:
+Even with visual context, AI is still generating generic images (e.g. laptops, people working).
+
+Root cause:
+The prompt is too soft. It suggests visuals instead of enforcing them.
+
+Fix:
+Upgrade the prompt builder to use STRONG visual instructions and exclusions.
+
+---
+
+Update prompt builder rules:
+
+1. Replace “Include visual elements such as” with:
+
+“The image MUST clearly show the following key elements:”
+
+2. Add exclusion rule to every prompt:
+
+“Do NOT generate generic office scenes, laptops without context, or unrelated business imagery.”
+
+---
+
+Example for email marketing:
+
+Replace weak prompt with:
+
+"The image MUST clearly show:
+- an email campaign dashboard with open rates, click rates or analytics
+- a visible email interface or inbox showing marketing emails
+- marketing performance data such as graphs or campaign results
+
+Do NOT generate:
+- generic laptops without visible email interface
+- random office work scenes
+- people sitting at desks without clear marketing visuals"
+
+---
+
+3. Enforce screen clarity:
+
+Add:
+
+“Any screen or device shown must clearly display relevant service-specific content (e.g. email campaigns, analytics, dashboards) and not generic blank screens.”
+
+---
+
+4. Apply this structure across ALL services:
+
+- plumber → pipes, leaks, boilers MUST be visible
+- electrician → fuse boards, wiring MUST be visible
+- email marketing → dashboards, emails MUST be visible
+- accountant → financial data MUST be visible
+
+---
+
+5. Final prompt structure:
+
+wide angle composition, subject centred, designed for website layout with space around subject,
+
+create a photorealistic modern commercial website image for a [businessType] business.
+
+The image is for the [imageRole] section.
+
+Show [roleScene].
+
+The image MUST clearly show:
+[service-specific visual anchors]
+
+Do NOT generate:
+- generic scenes
+- unrelated business visuals
+- empty screens or vague imagery
+
+Any screens must clearly display relevant content.
+
+Realistic UK setting, clean professional composition, natural lighting, high detail, premium local business website style, no text, no logo, no watermark, no brand names, no writing, no signage, no captions, no overlays, no distorted hands, no unrealistic faces.

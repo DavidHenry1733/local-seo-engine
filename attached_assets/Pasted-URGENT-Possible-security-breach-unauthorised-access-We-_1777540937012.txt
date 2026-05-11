@@ -1,0 +1,149 @@
+URGENT: Possible security breach / unauthorised access.
+
+We need to immediately audit and secure the entire system. Treat this as a live incident.
+
+Do not add features.
+Do not modify UI.
+Do not continue normal development.
+
+Goal:
+Identify potential vulnerabilities, lock down access, and prevent any further unauthorised access to the server and deployment pipeline.
+
+--------------------------------------------------
+1. IMMEDIATE ACTIONS
+--------------------------------------------------
+
+- Disable or temporarily block ALL deploy-related endpoints:
+  /api/deploy
+  /api/upload
+  /api/images/*
+  any FTP-related routes
+
+- Add a temporary global guard:
+  All API routes must return 403 unless a valid internal auth token is present.
+
+--------------------------------------------------
+2. CHECK FOR EXPOSED SECRETS
+--------------------------------------------------
+
+Audit the entire codebase for:
+
+- FTP credentials
+- API keys
+- tokens
+- passwords
+
+Check:
+- .env files
+- logs
+- console output
+- hardcoded values
+- JSON configs
+
+Ensure:
+- All secrets are ONLY stored in Replit Secrets
+- No secrets are logged or returned in API responses
+
+--------------------------------------------------
+3. VERIFY PROJECT VISIBILITY
+--------------------------------------------------
+
+Confirm:
+- Project is PRIVATE
+- No public access to code
+- No public endpoints without authentication
+
+--------------------------------------------------
+4. SECURE ALL API ENDPOINTS
+--------------------------------------------------
+
+Every endpoint must require authentication.
+
+Implement:
+- API key or token validation middleware
+
+Block access if:
+- no token
+- invalid token
+
+Apply to:
+- deploy
+- image handling
+- campaign generation
+- QA endpoints
+- any file system access
+
+--------------------------------------------------
+5. DEPLOY PIPELINE SECURITY
+--------------------------------------------------
+
+Check deploy logic:
+
+- Ensure FTP upload cannot be triggered without authentication
+- Ensure no public route can trigger deployment
+- Ensure no user input can control FTP paths
+
+--------------------------------------------------
+6. LOGGING AND TRACE
+--------------------------------------------------
+
+Add logging for:
+
+- deploy attempts
+- image uploads
+- file writes
+- API calls
+
+Log:
+- timestamp
+- endpoint
+- IP (if available)
+- success/failure
+
+--------------------------------------------------
+7. FILE SYSTEM SAFETY
+--------------------------------------------------
+
+Ensure:
+
+- no arbitrary file write allowed
+- no path traversal possible (../)
+- uploads restricted to allowed directories only
+
+--------------------------------------------------
+8. IMAGE UPLOAD HARDENING
+--------------------------------------------------
+
+Validate:
+- file type (MIME)
+- file extension
+- file size
+
+Reject:
+- scripts
+- executable files
+- non-image formats
+
+--------------------------------------------------
+9. ACCEPTANCE CRITERIA
+--------------------------------------------------
+
+- All API endpoints are protected
+- No credentials exist in code or logs
+- Deploy cannot be triggered publicly
+- Project is private
+- Image uploads are secure
+- No unauthorised file writes possible
+
+--------------------------------------------------
+10. REPORT
+--------------------------------------------------
+
+Return a clear report:
+
+- vulnerabilities found
+- actions taken
+- remaining risks
+- recommendations
+
+Do not continue development until system is confirmed secure.

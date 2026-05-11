@@ -1,0 +1,114 @@
+We need to update the page creation flow so hub pages and cluster pages are created and identified separately.
+
+Current issue:
+During page creation, the system does not clearly separate Hub Page creation from Cluster Page creation. We already have a hub/tag concept somewhere in the app, but it is not exposed or applied properly at this stage.
+
+Please inspect the existing page creation flow, campaign structure, page data model, tags, hub page logic, and cluster page logic first. Do not create duplicate page systems.
+
+Required changes:
+
+1. Separate Page Creation Options
+Update page creation so the user can choose:
+
+- Create Hub Page
+- Create Cluster Pages
+- Create Full Campaign: Hub + Cluster Pages
+
+2. Hub Page Identification
+When creating a Hub Page, the page must be clearly marked as a hub page.
+
+Use the existing tag/field if already available.
+
+Expected hub page metadata:
+- pageType: hub
+- isHubPage: true
+- hubTag or tag: hub
+- campaignId
+- service
+- primaryLocation
+- targetKeyword
+- status
+
+Do not create a new hub tagging system if one already exists. Reuse the current one.
+
+3. Cluster Page Identification
+Cluster pages should be marked separately.
+
+Expected cluster page metadata:
+- pageType: cluster
+- isHubPage: false
+- parentHubPageId if available
+- campaignId
+- service
+- location / area
+- targetKeyword
+- status
+
+4. Hub-to-Cluster Relationship
+Cluster pages should be linked to the correct hub page.
+
+If the user creates a hub page first:
+- allow cluster pages to be assigned to that hub page
+
+If the user creates full campaign:
+- create hub page first
+- then create cluster pages linked to that hub
+
+If no hub exists:
+- show prompt/warning:
+  “Create or select a hub page before creating cluster pages.”
+
+5. UI Requirements
+In the page creation screen, clearly show:
+
+Hub Page section:
+- service
+- primary location
+- target keyword
+- create hub page button
+
+Cluster Pages section:
+- select hub page
+- select areas/locations
+- target keywords
+- create cluster pages button
+
+Full Campaign section:
+- create hub + cluster pages together
+
+6. Campaign/Page List Display
+In page lists, clearly display whether a page is:
+
+- Hub Page
+- Cluster Page
+
+Add visible label/badge:
+- Hub
+- Cluster
+
+The hub page should be easy to identify in the campaign view.
+
+7. Validation
+Before cluster pages are created:
+- campaign must exist
+- hub page must exist or be created in same flow
+- each cluster page must have location/area
+- each cluster page must have service
+- duplicate cluster pages should be prevented
+
+8. Acceptance Criteria
+- User can create a hub page separately.
+- User can create cluster pages separately.
+- User can create hub + cluster pages together.
+- Hub pages are tagged/identified correctly at creation.
+- Cluster pages are tagged/identified correctly at creation.
+- Cluster pages are linked to the correct hub page.
+- Page lists show Hub/Cluster labels.
+- Existing hub/tag logic is reused where possible.
+- Existing campaigns and pages are not broken.
+
+This is important because the engine needs a clear parent/child structure:
+
+Campaign → Hub Page → Cluster Pages
+
+Without that, later internal linking, validation, schema, and monthly optimisation actions will get messy.

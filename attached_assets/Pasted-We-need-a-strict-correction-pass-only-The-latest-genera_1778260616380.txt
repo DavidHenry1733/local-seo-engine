@@ -1,0 +1,152 @@
+We need a strict correction pass only. The latest generated pages are still wrong.
+
+Current issues found:
+1. DHM Digital is still appearing in footer menu links and page copy.
+2. Page copy still mentions DHM Digital instead of InboxingProWeb.
+3. The only place DHM Digital should appear is the legal footer line:
+   “DHM Digital Limited” plus company number as the legal owner of InboxingProWeb.
+4. There is a duplicate section:
+   “Related Resources” is duplicating the same links/content as “Web Design Areas We Cover”.
+5. The page structure is drifting from the agreed template.
+
+Do not make assumptions.
+Do not create new sections.
+Do not change page design.
+Do not change image logic.
+Do not change content prompts except where required to fix brand references and duplicate sections.
+
+========================
+BRAND RULES
+========================
+
+Public-facing brand name:
+InboxingProWeb
+
+Legal company name:
+DHM Digital Limited
+
+Rules:
+- All marketing copy must refer to InboxingProWeb, not DHM Digital.
+- Footer menu links should use InboxingProWeb wording, not DHM Digital wording.
+- Page headings, intro copy, CTA text, trust sections, related services, FAQs, schema where appropriate, and meta descriptions should use InboxingProWeb.
+- Do NOT use “DHM Digital” in visible marketing content.
+
+Only legal footer may mention:
+DHM Digital Limited
+Company number: [insert correct company number]
+
+Example footer legal line:
+“InboxingProWeb is owned and operated by DHM Digital Limited, Company No. [company number].”
+
+Acceptance criteria:
+- Searching generated HTML for “DHM Digital” should only find the legal footer line.
+- No marketing copy says DHM Digital.
+- No footer menu item says DHM Digital.
+- Footer menu should link to InboxingProWeb branded pages only.
+
+========================
+SECTION RULES
+========================
+
+The page should contain only these link/support sections:
+
+1. Related Services
+Purpose:
+Show the other services for the SAME main area/city.
+
+Example:
+On /web-design-sheffield/
+
+Related Services should show:
+- Local SEO Sheffield
+- Website Hosting Sheffield
+- Email Marketing Sheffield
+
+Do NOT include:
+- Web Design Sheffield
+- Web Design area pages
+- Broomhill, Crookes, Ecclesall, Fulwood, Hillsborough, etc.
+
+Rule:
+Related Services = same city + different services only.
+Exclude current service.
+
+2. Areas We Cover
+Purpose:
+Show same-service nearby area/cluster pages.
+
+Example:
+On /web-design-sheffield/
+
+Web Design Areas We Cover should show:
+- Web Design Broomhill
+- Web Design Crookes
+- Web Design Ecclesall
+- Web Design Fulwood
+- Web Design Hillsborough
+
+Rule:
+Areas We Cover = same service + nearby areas only.
+
+========================
+REMOVE DUPLICATES
+========================
+
+Remove the “Related Resources” section completely.
+
+Do not rename it.
+Do not keep it.
+Do not duplicate it.
+
+The only two lower-page link sections should be:
+- Related Services
+- [Service] Areas We Cover
+
+Acceptance criteria:
+- No section titled “Related Resources” exists.
+- Related Services does not duplicate Areas We Cover.
+- Related Services contains only other services in the same city.
+- Areas We Cover contains only same-service area pages.
+
+========================
+FINAL PAGE STRUCTURE
+========================
+
+Every generated page should follow this order:
+
+1. Header/navigation
+2. Hero section
+3. Quick Answer block
+4. Local introduction
+5. Main service explanation
+6. Trust/support section with image
+7. Local context section
+8. Problem/solution section with image
+9. Service breakdown/process section
+10. Related Services
+11. [Service] Areas We Cover
+12. Final CTA with conversion image
+13. Footer with InboxingProWeb branding and legal DHM Digital Limited line only
+
+Do not add:
+- Related Resources
+- duplicate link sections
+- extra DHM Digital branded sections
+
+========================
+DEBUG / PROOF REQUIRED
+========================
+
+After applying the fix, regenerate one test page and provide:
+
+1. The generated page URL.
+2. Search result count for “DHM Digital” in the generated HTML.
+   Expected: 1 occurrence only, in legal footer.
+3. Search result count for “Related Resources”.
+   Expected: 0 occurrences.
+4. Related Services links shown.
+5. Areas We Cover links shown.
+
+Do not mark complete until the acceptance criteria are met.
+
+This gets everything back to basics: brand rules, section rules, duplicate removal, and proof before “complete.”
