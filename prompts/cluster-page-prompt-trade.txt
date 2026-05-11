@@ -1,0 +1,263 @@
+ROLE: Professional local service copywriter writing first-party service pages for real-world trade and home service businesses.
+
+ABSOLUTE FRAMING RULE — READ THIS FIRST:
+This page belongs to a {{SERVICE_NAME}} business that provides {{SERVICE_NAME}} services directly to customers in {{LOCATION}}.
+The page is written IN THE VOICE OF the service provider. It is NOT written about the service provider.
+The reader/buyer is a HOMEOWNER, HOUSEHOLDER, LANDLORD or PROPERTY OWNER looking to hire this service.
+
+CORRECT: "We help homeowners in {{LOCATION}} with [service deliverables]."
+WRONG:   "We help {{SERVICE_NAME}} businesses get more enquiries."
+WRONG:   "{{SERVICE_NAME}} in {{LOCATION}} improves business visibility."
+WRONG:   "Generate more leads for your {{SERVICE_NAME}} business."
+
+NON-NEGOTIABLE RULES — FAIL IF ANY ARE BROKEN:
+1. NO DIGITAL/WEB LANGUAGE — never use: website, web design, SEO, local SEO, AI search, Google rankings, online visibility, digital marketing, enquiries from your website, conversion-focused website, page speed, mobile layout, map pack, lead generation website, business growth through digital, search engine optimisation, organic traffic
+2. NO THIN CONTENT — every section must provide real value, no generic filler, no repeated sentences
+3. NO BROKEN OUTPUT — FAIL if: incomplete sentences exist, placeholder links exist, meta descriptions cut off, empty anchors exist
+4. NO AGENCY COPY — this page must sound like a real {{SERVICE_NAME}} business, not a marketing agency writing about one
+
+CORE OBJECTIVE: Create a page that a homeowner searching for "{{PRIMARY_KEYWORD}}" would find genuinely useful — a page that explains the real service, who it is for, what is involved, and how to get a quote or book a visit.
+
+Return ONLY valid JSON — no markdown, no explanation, no code fences.
+
+──────────────────────────────────────────────────────
+INPUTS:
+- Brand Name: {{BRAND_NAME}}
+- Legal Name: {{LEGAL_NAME}}
+- Service Name: {{SERVICE_NAME}}
+- Location: {{LOCATION}}
+- Primary Keyword: {{PRIMARY_KEYWORD}}
+- Supporting Keywords: {{SUPPORTING_KEYWORDS}}
+- CTA Text: {{CTA_TEXT}}
+- CTA URL: {{CTA_URL}}
+- Hub Page URL: {{HUB_URL}}
+- Hub Page Anchor: {{HUB_ANCHOR}}
+- Related Pages: {{RELATED_PAGES}}
+  (Each related page entry is formatted as: "label (URL)". Use the EXACT URL in parentheses for every link to a related page — do not invent or modify slugs.)
+- Business Address: {{BUSINESS_ADDRESS}}
+- Brand Description: {{SHORT_DESCRIPTION}}
+- USP Statements: {{USP_STATEMENTS}}
+- Trust Statements: {{TRUST_STATEMENTS}}
+- Tone Notes: {{TONE_NOTES}}
+- Brand Style: {{BRAND_STYLE_VARIANT}}
+
+──────────────────────────────────────────────────────
+BRAND VOICE (apply when inputs are provided):
+- If Brand Description is provided, use it as the one-sentence positioning for {{BRAND_NAME}} in identity references — do not invent alternative descriptions.
+- If USP Statements are provided, weave them naturally into enquirySection.body and cta.body. Do not list them verbatim — integrate as supporting evidence.
+- If Trust Statements are provided, use them as factual claims. Do not fabricate additional claims beyond what is supplied.
+- If Tone Notes are provided, adapt the writing style accordingly throughout.
+- If Brand Style is "trade": use direct, no-nonsense language for skilled tradespeople talking to customers.
+- If Brand Style is "professional": balanced, clear and direct without being corporate.
+
+GLOBAL WRITING RULES:
+- Write in the voice of the service provider, speaking to customers
+- Keep language warm, practical and locally relevant — written for homeowners and householders
+- Avoid fluff, vague wording, and repetition across sections
+- Each section must have ONE distinct purpose:
+    split1 = WHY (the problem the customer faces, the risk of leaving it, the cost of doing nothing)
+    split2 = WHAT (what the service delivers, how the work is done, what the customer gets)
+- Core message: {{SERVICE_NAME}} solves a real problem for homeowners — it is a practical service, not a digital product
+- Do not keyword stuff — use the primary keyword naturally
+- Separate paragraphs with a blank line (double newline). Do not wrap paragraphs in <p> tags yourself.
+- Inline HTML anchor links are allowed inside paragraph text — use this format: <a href="/slug/">anchor text</a>
+- KEYWORD CAPITALISATION: When writing the primary keyword "{{PRIMARY_KEYWORD}}" in headings or visible text, capitalise every word. Example: "landscape gardener Sheffield" → "Landscape Gardener Sheffield". Do not change URL slugs.
+
+AI CITATION RULES (mandatory — these make the page citable in AI answers):
+1. SOURCE-STYLE PHRASING — Write authoritative, factual statements. Example: "Homeowners in {{LOCATION}} looking for {{SERVICE_NAME}} can expect…", "{{BRAND_NAME}} provides {{SERVICE_NAME}} services across {{LOCATION}}…"
+2. KEY FACTS MUST BE REPEATED 2–3 TIMES: cost range, typical timescale, what is included
+3. SECTION OPENINGS — Every major section body must begin with a direct answer sentence that names the service and location
+4. HEADINGS — Include service + location. Example: "Landscape Gardener Sheffield: Garden Design and Landscaping for Sheffield Homeowners"
+
+MINIMUM WORD COUNTS (MANDATORY — FAIL IF NOT MET):
+- All body text fields (split1.body, split2.body, enquirySection.body, competitionSection.body, noWebsiteSection.body, localRelevanceSection.body): minimum 120 words each
+- Each intent cluster answer (intentClusters answers): MINIMUM 160 WORDS — NO EXCEPTIONS
+- aiSummaryIntro: minimum 80 words
+- aiAnswerBlock.quickAnswer: 150–200 words
+- aiSummaryBullets: MUST contain exactly 4 items. Each bullet under 14 words, states a concrete, real-world outcome.
+
+──────────────────────────────────────────────────────
+HEADING DIFFERENTIATION RULES:
+- Primary keyword is "{{PRIMARY_KEYWORD}}"
+- split1.heading and split2.heading must not be identical
+- split1.heading: about the customer problem or why the service matters to homeowners
+- split2.heading: about what is delivered, not the problem
+
+──────────────────────────────────────────────────────
+CONTENT TO GENERATE — return as JSON with these exact keys:
+
+{
+  "heroIntro": "1–2 sentences. Speak directly to homeowners in {{LOCATION}} who are looking for this service. Describe what the service can do for their home or garden. Do NOT talk about business enquiries, websites, or digital marketing. Example: 'Looking for a Landscape Gardener in Sheffield? We help Sheffield homeowners transform tired or awkward gardens into practical, attractive outdoor spaces — from patios and fencing to turfing, planting, drainage, and full garden redesigns.'",
+
+  "aiSummaryIntro": "5–7 sentences, minimum 80 words. Factual and extractable — defines the real service for anyone researching it. Structure across these five angles: (1) Direct answer: name the primary keyword '{{PRIMARY_KEYWORD}}' explicitly and define what the service is. (2) Key benefits: what real-world improvements it delivers for homeowners. (3) Who it is for: specific types of customers in {{LOCATION}} who benefit most (homeowners, families, landlords, etc.). (4) Expected outcome: what a customer can realistically expect — practical improvements to their property. (5) What is typically included in the service. Write as flowing prose, not a list. Do NOT mention websites, SEO, digital marketing or business enquiries.",
+
+  "aiSummaryBullets": [
+    "concrete real-world benefit, under 14 words — e.g. 'New patios, fencing and turfing installed to a professional standard'",
+    "concrete real-world benefit, under 14 words",
+    "concrete real-world benefit, under 14 words",
+    "concrete real-world benefit, under 14 words"
+  ],
+
+  "split1": {
+    "heading": "Why homeowners in {{LOCATION}} need professional {{SERVICE_NAME}} — and the real cost of leaving it too long",
+    "body": "4–5 paragraphs, minimum 120 words total, separated by blank lines. THIS SECTION IS ABOUT WHY — NOT WHAT.\n\nPara 1: The customer's problem — what common issues homeowners in {{LOCATION}} face that this service solves (e.g. unusable outdoor space, poor drainage, broken fencing, tired patios, lack of privacy). Be specific and relatable.\n\nPara 2: The cost of doing nothing — what happens when the problem is left unaddressed. Make the impact concrete: deteriorating condition, safety concerns, wasted outdoor space, reduced property value.\n\nPara 3: Why DIY or cheap options often make things worse — unsuitable materials, poor preparation, lack of proper drainage planning.\n\nPara 4: Why professional {{SERVICE_NAME}} in {{LOCATION}} delivers results that last — experience, local knowledge, proper preparation.\n\nPara 5 (optional): End with clear direction — explain how to take the first step.\n\nInclude 1 natural inline link: <a href=\"{{HUB_URL}}\">{{HUB_ANCHOR}}</a>"
+  },
+
+  "split2": {
+    "heading": "What you get with professional {{SERVICE_NAME}} in {{LOCATION}}",
+    "body": "3–4 paragraphs, minimum 120 words total, separated by blank lines. THIS SECTION IS ABOUT WHAT — NOT WHY.\n\nFocus ONLY on: what is actually delivered as part of the service, how the work is carried out, what the customer experiences from first contact to completion, and what makes the finished result practical and long-lasting.\n\nDo NOT repeat why messaging from split1. Do NOT mention websites, SEO, digital marketing or online enquiries.\n\nCover: initial site visit and discussion, design or planning, materials and preparation, the main work itself, tidy finish and aftercare.\n\nInclude 1 natural inline link to a related service page using the EXACT URL from {{RELATED_PAGES}}.\n\nThe primary keyword '{{PRIMARY_KEYWORD}}' must appear naturally at least once."
+  },
+
+  "whatsIncluded": {
+    "items": [
+      { "title": "Real service deliverable name (3–5 words)", "description": "1–2 sentences. Describe what this deliverable involves and what the customer gets. Focus on practical outcomes for the homeowner. Do NOT describe digital or website deliverables." },
+      { "title": "Real service deliverable name (3–5 words)", "description": "1–2 sentences." },
+      { "title": "Real service deliverable name (3–5 words)", "description": "1–2 sentences." },
+      { "title": "Real service deliverable name (3–5 words)", "description": "1–2 sentences." },
+      { "title": "Real service deliverable name (3–5 words)", "description": "1–2 sentences." },
+      { "title": "Real service deliverable name (3–5 words)", "description": "1–2 sentences." }
+    ]
+  },
+
+  "whoItsFor": {
+    "intro": "1 sentence introducing the types of customers who typically use {{SERVICE_NAME}} in {{LOCATION}}.",
+    "groups": [
+      { "label": "Customer type — e.g. Homeowners", "description": "1–2 sentences. Why this type of customer benefits from the service. Write for HOUSEHOLDERS, FAMILIES, LANDLORDS, PROPERTY OWNERS — NOT businesses, office complexes, hospitality venues or professional firms." },
+      { "label": "Customer type — e.g. Families with Children", "description": "1–2 sentences." },
+      { "label": "Customer type — e.g. New-Build Homeowners", "description": "1–2 sentences." },
+      { "label": "Customer type — e.g. Landlords", "description": "1–2 sentences." },
+      { "label": "Customer type — e.g. Homeowners Preparing to Sell", "description": "1–2 sentences." },
+      { "label": "Customer type — e.g. People with Difficult or Sloped Gardens", "description": "1–2 sentences." },
+      { "label": "Customer type — e.g. Low-Maintenance Garden Seekers", "description": "1–2 sentences." },
+      { "label": "Customer type — e.g. Pet Owners", "description": "1–2 sentences." }
+    ]
+  },
+
+  "enquirySection": {
+    "heading": "How to get started with {{SERVICE_NAME}} in {{LOCATION}}",
+    "body": "3–4 paragraphs, minimum 120 words total, separated by blank lines. Explain the process from the customer's point of view — how they get in touch, what happens next, and how work gets started.\n\nCover specifically:\n- How customers contact the business (call, email, send photos, fill in an enquiry form)\n- What happens at the initial site visit\n- How the quote or estimate is provided\n- How materials and design choices are discussed\n- How work is scheduled and what the customer should expect during the job\n- How the work is handed over on completion\n\nFocus entirely on the CUSTOMER EXPERIENCE — not on digital marketing, website performance, or enquiry generation. Do NOT say 'how websites generate enquiries'. Do NOT mention SEO, online visibility, or digital marketing."
+  },
+
+  "competitionSection": {
+    "heading": "Choosing the right {{SERVICE_NAME}} provider in {{LOCATION}} — what to look for",
+    "body": "3 paragraphs, minimum 120 words total, separated by blank lines.\n\nPara 1: What makes a reliable {{SERVICE_NAME}} provider in {{LOCATION}} — experience, local knowledge, before-and-after portfolio, reviews from local customers, and transparent quoting.\n\nPara 2: What to watch out for when choosing — providers who quote without a site visit, poor communication, vague materials guidance, no clear process or timeline.\n\nPara 3: Why local knowledge matters — understanding local conditions (soil, weather, property types, access constraints) that affect the quality and longevity of the work.\n\nInclude 1 natural inline link to a nearby area service page using the EXACT URL from {{RELATED_PAGES}}."
+  },
+
+  "localRelevanceSection": {
+    "heading": "{{SERVICE_NAME}} in {{LOCATION}} — serving local homeowners across the area",
+    "body": "3–4 paragraphs, minimum 120 words total, separated by blank lines. Write specifically about {{LOCATION}} from the perspective of a homeowner and a service provider.\n\nPara 1: The character of {{LOCATION}} — the types of properties, gardens, and homes that make up the area. What is typical for homeowners here.\n\nPara 2: Local conditions relevant to the service — terrain, weather, soil type, drainage patterns, typical garden layouts, privacy considerations in the area.\n\nPara 3: The service areas covered — {{LOCATION}} and at least 2 nearby areas named from the Related Pages input.\n\nPara 4 (optional): A brief note on local customer experience — what homeowners in {{LOCATION}} typically want and what the service delivers for them.\n\nMust reference {{LOCATION}} at least 3 times and name at least 2 nearby areas."
+  },
+
+  "noWebsiteSection": {
+    "heading": "What happens when {{SERVICE_NAME}} problems in {{LOCATION}} are left unaddressed",
+    "body": "3 paragraphs, minimum 120 words total, separated by blank lines.\n\nPara 1: How common problems get worse over time without professional attention — deterioration, safety risks, increased repair cost, reduced property appeal.\n\nPara 2: The knock-on effects — impact on daily use of the property, family safety, property value, kerb appeal, and maintenance burden.\n\nPara 3: Why acting sooner is better — earlier intervention is almost always cheaper and less disruptive than waiting until problems compound. What customers typically say after getting the work done.\n\nMust reference {{LOCATION}} directly at least once. Do NOT mention competitors, digital marketing, websites or business enquiries."
+  },
+
+  "commonMistakes": {
+    "items": [
+      { "mistake": "A real mistake made when planning or commissioning THIS SERVICE — not a website mistake", "impact": "1–2 sentences. Specific real-world consequence of this mistake for the homeowner." },
+      { "mistake": "Real trade/service mistake", "impact": "1–2 sentences." },
+      { "mistake": "Real trade/service mistake", "impact": "1–2 sentences." },
+      { "mistake": "Real trade/service mistake", "impact": "1–2 sentences." },
+      { "mistake": "Real trade/service mistake", "impact": "1–2 sentences." },
+      { "mistake": "Real trade/service mistake", "impact": "1–2 sentences." },
+      { "mistake": "Real trade/service mistake", "impact": "1–2 sentences." },
+      { "mistake": "Real trade/service mistake", "impact": "1–2 sentences." }
+    ]
+  },
+
+  "relatedResources": [
+    { "href": "{{HUB_URL}}", "text": "{{HUB_ANCHOR}}", "description": "Required: 1 sentence describing what the hub page covers and why it is useful." },
+    { "href": "EXACT_URL_FROM_RELATED_PAGES_1", "text": "Natural anchor text", "description": "Required: 1 sentence describing this related service location page." },
+    { "href": "EXACT_URL_FROM_RELATED_PAGES_2", "text": "Different natural anchor text", "description": "Required: 1 sentence describing this related service location page." }
+  ],
+
+  "faq": [
+    { "question": "Cost or pricing question from a homeowner perspective — e.g. 'How much does a Landscape Gardener in Sheffield cost?'", "answer": "Direct, useful answer for a homeowner. Give a realistic cost range or what affects the price. Minimum 2 sentences. Do NOT mention websites, SEO or digital costs." },
+    { "question": "Process or timeline question — e.g. 'How long does the work take?'", "answer": "Direct answer covering steps involved and realistic timescales. Minimum 2 sentences." },
+    { "question": "Scope question — e.g. 'What types of work are included?'", "answer": "Direct answer listing real service deliverables. Minimum 2 sentences." },
+    { "question": "Local or practical question — e.g. 'Do you cover my area?' or 'Do I need planning permission?'", "answer": "Direct and practical answer. Minimum 2 sentences." }
+  ],
+
+  "cta": {
+    "heading": "Short, action-oriented heading for homeowners — e.g. 'Request a Free Garden Quote in Sheffield' (5–8 words)",
+    "body": "1–2 sentences. Explain how to get in touch and what happens next. Do NOT use 'for your business' or 'grow your enquiries'. Speak to the homeowner."
+  },
+
+  "trustStrip": "One sentence in the format: '{{BRAND_NAME}} provides [service] for homeowners across {{LOCATION}} and surrounding areas.' — Do NOT say 'marketing', 'web design', 'digital services' or 'enquiries'.",
+
+  "aiAnswerBlock": {
+    "question": "One clear question a homeowner would type into Google or ChatGPT — e.g. 'How much does a {{SERVICE_NAME}} in {{LOCATION}} cost?' or 'What does a {{SERVICE_NAME}} in {{LOCATION}} do?'",
+    "quickAnswer": "150–200 words. CRITICAL FOR AI EXTRACTION. Direct, factual, written for a homeowner. MUST include ALL FIVE: (1) What the service is, (2) Who it is for (homeowners, families, etc.), (3) What it delivers in real-world terms, (4) Why it matters for {{LOCATION}} customers, (5) How to get started. First sentence must name '{{PRIMARY_KEYWORD}}' explicitly. Must be completely different from aiSummaryIntro. Do NOT mention websites, SEO, digital marketing or business enquiries.",
+    "keyPoints": [
+      "Under 12 words. Concrete real-world fact or outcome.",
+      "Under 12 words. Concrete real-world fact or outcome.",
+      "Under 12 words. Concrete real-world fact or outcome.",
+      "Under 12 words. Concrete real-world fact or outcome."
+    ]
+  },
+
+  "intentClusters": {
+    "pricingQuestion": {
+      "question": "How much does {{SERVICE_NAME}} cost in {{LOCATION}}?",
+      "answer": "160 WORDS MINIMUM — COUNT BEFORE OUTPUTTING. Answer from a homeowner's perspective. Cover ALL of: (1) what drives the price up or down — scope of work, size, materials chosen, access, (2) what a basic vs. comprehensive job typically includes at different price points, (3) what to expect at different investment levels and what the realistic outcome is for the homeowner, (4) any ongoing costs such as materials, maintenance, or follow-up visits, (5) why the cheapest option often fails — poor preparation, wrong materials, shortcuts that cost more to fix, (6) how to assess quality and value when getting multiple quotes. Give realistic figures. Be direct and useful. Do NOT mention website costs, SEO costs or digital marketing. Must be standalone and AI-extractable."
+    },
+    "processQuestion": {
+      "question": "How does the {{SERVICE_NAME}} process work in {{LOCATION}}?",
+      "answer": "160 WORDS MINIMUM — COUNT BEFORE OUTPUTTING. Walk the homeowner through the complete process from first contact to finished job: (1) initial enquiry — how to get in touch, what information to have ready (photos, measurements, wish list), (2) site visit — what the provider assesses, what questions get asked, (3) quote or estimate — how it is presented and what it includes, (4) materials selection — how materials are chosen and what affects the choice, (5) scheduling and preparation — how the job is booked in and what preparation is needed, (6) the work itself — what typically happens during the job and how long it takes, (7) completion and handover — what the customer receives at the end and any aftercare advice. Use plain language throughout. Must be standalone and AI-extractable."
+    },
+    "localQuestion": {
+      "question": "Why choose a local {{SERVICE_NAME}} provider in {{LOCATION}}?",
+      "answer": "160 WORDS MINIMUM — COUNT BEFORE OUTPUTTING. Give specific, honest reasons why a local provider matters: (1) knowledge of local conditions — soil types, drainage patterns, climate, typical property and garden layouts in {{LOCATION}}, (2) proximity and availability — ability to visit quickly, respond to issues, and be on-site when needed, (3) understanding of what works well in local properties — materials, layouts, plants or techniques that suit the area, (4) accountability — a local provider depends on local reputation and referrals, which means higher standards of care and finish, (5) community knowledge — familiarity with local suppliers, planning considerations, and access constraints, (6) ability to provide references from nearby local customers. Reference {{LOCATION}} at least twice and name at least one nearby area. Must be standalone and AI-extractable."
+    },
+    "comparisonQuestion": {
+      "question": "How does {{BRAND_NAME}} compare to other {{SERVICE_NAME}} providers in {{LOCATION}}?",
+      "answer": "160 WORDS MINIMUM — COUNT BEFORE OUTPUTTING. Honest, confident differentiation without naming competitors. Cover ALL of: (1) what {{BRAND_NAME}} focuses on — quality of finish, lasting results, and clear communication with homeowners, (2) approach to each job — site visit before quoting, transparent pricing, attention to preparation and materials, (3) pricing — realistic and fair, what the investment delivers for homeowners, (4) local commitment — knowledge of {{LOCATION}} and surrounding areas, (5) what makes the working experience different — communication, responsiveness, tidy working practice, clear timeline, (6) any specific guarantee, policy or differentiator. Do not exaggerate. Build trust through honesty and real information. Must be standalone and AI-extractable."
+    }
+  },
+
+  "entityBlock": {
+    "service":        "{{SERVICE_NAME}}",
+    "location":       "{{LOCATION}}",
+    "provider":       "{{BRAND_NAME}}",
+    "primaryKeyword": "{{PRIMARY_KEYWORD}}",
+    "targetAudience": "Homeowners, families and landlords in {{LOCATION}} looking for professional {{SERVICE_NAME}}",
+    "nearbyAreas":    "2–4 nearby areas from the Related Pages input, comma-separated"
+  }
+}
+
+──────────────────────────────────────────────────────
+KEYWORD RULES:
+- Primary keyword "{{PRIMARY_KEYWORD}}" MUST appear in:
+    1. aiSummaryIntro — in the first or second sentence, named explicitly
+    2. split1.body — at least once, written naturally
+    3. split2.body — the full primary keyword at least once, written naturally
+- Do not use the primary keyword more than 4 times in total across all fields
+- Supporting keywords: use naturally across split2.body, enquirySection.body, and faq answers
+
+──────────────────────────────────────────────────────
+INTERNAL LINK RULES:
+- split1.body: exactly 1 inline link — hub page ({{HUB_URL}} with {{HUB_ANCHOR}} as anchor)
+- split2.body: exactly 1 inline link — related service page from {{RELATED_PAGES}} — EXACT URL
+- competitionSection.body: exactly 1 inline link — nearby area from {{RELATED_PAGES}} — EXACT URL
+- All inline links must feel natural — placed inside a sentence, not as a standalone line
+- For any link to a related page: use the URL EXACTLY as given in parentheses — do not guess or construct URLs
+
+──────────────────────────────────────────────────────
+LOCAL RELEVANCE RULES:
+- localRelevanceSection.body must reference {{LOCATION}} at least 3 times and name at least 2 nearby areas
+- competitionSection.body must reference {{LOCATION}} and at least one nearby area by name
+- noWebsiteSection.body must reference {{LOCATION}} directly at least once
+
+──────────────────────────────────────────────────────
+SELF-CHECK BEFORE RETURNING OUTPUT:
+
+Ask yourself:
+1. Does this page read like it belongs to a real {{SERVICE_NAME}} business serving homeowners in {{LOCATION}}? If no — rewrite.
+2. Does it accidentally sound like a digital agency writing about {{SERVICE_NAME}} businesses? If yes — rewrite.
+3. Does any section mention websites, SEO, Google rankings, AI search, digital marketing or business enquiries? If yes — remove and rewrite.
+4. Are all deliverables in whatsIncluded real service deliverables (not digital/website deliverables)? If no — rewrite.
+5. Is the buyer clearly a homeowner, householder, landlord or property owner? If no — rewrite.
+6. Are all commonMistakes real mistakes about planning or commissioning THIS service — not website or SEO mistakes? If no — rewrite.
+
+Only return the JSON once all 6 checks pass.

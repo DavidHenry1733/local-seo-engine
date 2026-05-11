@@ -1,0 +1,101 @@
+Generate structured content for a local service page. Return ONLY valid JSON — no markdown, no explanation, no code fences.
+
+INPUTS:
+- Brand Name: {{BRAND_NAME}}
+- Legal Name: {{LEGAL_NAME}}
+- Service Name: {{SERVICE_NAME}}
+- Location: {{LOCATION}}
+- Primary Keyword: {{PRIMARY_KEYWORD}}
+- Supporting Keywords: {{SUPPORTING_KEYWORDS}}
+- CTA Text: {{CTA_TEXT}}
+- CTA URL: {{CTA_URL}}
+- Hub Page URL: {{HUB_URL}}
+- Hub Page Anchor: {{HUB_ANCHOR}}
+- Related Cluster Pages: {{CLUSTER_PAGES}}
+- Business Address: {{BUSINESS_ADDRESS}}
+
+GLOBAL RULES:
+- Write for both humans and AI extraction
+- Keep language clear, direct, and commercial — written for business owners
+- Avoid fluff, vague wording, and repetition
+- Do not keyword stuff
+- Use the primary keyword naturally throughout
+- Use supporting keywords where relevant, not forced
+- Maintain consistent service intent throughout
+- CRITICAL: Each section must have ONE distinct purpose. split1 = WHY (the problem, the risk, the cost of inaction). split2 = WHAT (the solution, the structure, the delivery). Never mix these two purposes. A reader should be able to read split1 and understand the risk, then read split2 and understand exactly what they get.
+- The core message that must be present somewhere across split1 and split2: a website should generate enquiries and revenue — not just look good.
+
+CONTENT TO GENERATE (return as JSON with these exact keys):
+
+{
+  "aiSummaryIntro": "2–4 sentence answer explaining the service and outcome. Include primary keyword. Written for AI extraction.",
+  "aiSummaryBullets": ["bullet 1", "bullet 2", "bullet 3", "bullet 4"],
+
+  "split1": {
+    "heading": "Why [service] matters for [location] businesses",
+    "body": "2–3 paragraphs. THIS SECTION IS ABOUT WHY — NOT WHAT. Focus ONLY on: the cost of a weak or outdated website (missed enquiries, lost revenue, damaged credibility), how competitive the local market is, what happens when a potential customer visits a poor website (they leave and choose a competitor), and why a website must be treated as a revenue-generating tool, not a digital brochure. Do NOT describe what the service includes. Do NOT mention delivery steps or technical features. End with the clear idea that a poorly performing website costs money every single day. Include the primary keyword naturally."
+  },
+
+  "split2": {
+    "heading": "What [service] includes",
+    "body": "2–3 paragraphs. THIS SECTION IS ABOUT WHAT — NOT WHY. Focus ONLY on: what is actually delivered as part of the service, how the website is built to rank in both traditional search and AI-driven search results, how every element is structured to convert visitors into enquiries and sales, and what makes this approach different from a generic template build. Do NOT repeat 'why it matters' messaging from split1. Mention that modern websites must be optimised for search engines AND for AI search tools that extract and surface business information. Position the output as: built to rank, built to attract, built to convert. Use supporting keywords naturally."
+  },
+
+  "definition": {
+    "heading": "What is [primary keyword]?",
+    "body": "2 paragraphs. Clear explanation of what the service is and how it works. Simple language."
+  },
+
+  "process": {
+    "heading": "How we generate results for [location] businesses",
+    "steps": [
+      { "title": "Step title", "description": "One sentence outcome-focused description." },
+      { "title": "Step title", "description": "One sentence outcome-focused description." },
+      { "title": "Step title", "description": "One sentence outcome-focused description." },
+      { "title": "Step title", "description": "One sentence outcome-focused description." }
+    ]
+  },
+
+  "localRelevance": {
+    "heading": "[Service] for [location] — why local matters",
+    "body": "2 paragraphs connecting the service to local businesses and demand in the area."
+  },
+
+  "internalLinks": [
+    { "href": "{{HUB_URL}}", "text": "{{HUB_ANCHOR}}", "description": "1 line describing what this page covers." },
+    { "href": "/cluster-page-1/", "text": "Varied anchor text for cluster page", "description": "Brief description of this related service or location page." },
+    { "href": "/cluster-page-2/", "text": "Different natural anchor text", "description": "Brief description of this related service or location page." }
+  ],
+
+  "faq": [
+    { "question": "Cost or pricing question", "answer": "Direct answer mentioning service and location." },
+    { "question": "Timeline question", "answer": "Direct answer." },
+    { "question": "Results question", "answer": "Direct answer." },
+    { "question": "Process question", "answer": "Direct answer." },
+    { "question": "Local question", "answer": "Direct answer." }
+  ],
+
+  "cta": {
+    "heading": "Strong action-oriented heading",
+    "body": "1–2 sentences reinforcing the benefit of getting in touch."
+  },
+
+  "image3": {
+    "heading": "Short outcome-focused heading (5–8 words) for the image+text split section",
+    "body": "2 short paragraphs. Focused on results, credibility, or client outcomes. Keep it concise and specific to the service and location."
+  },
+
+  "trustStrip": "One sentence referencing {{BRAND_NAME}}, {{LEGAL_NAME}}, the service offering, and service area."
+}
+
+KEYWORD RULES:
+- Primary keyword must appear in: aiSummaryIntro, split1 body, split2 body, at least one later heading
+- Supporting keywords: use naturally across sections, do not force all of them
+- Do not repeat identical phrasing across sections
+
+INTERNAL LINK RULES:
+- Use the provided hub URL and anchor as the first link
+- Generate 2–3 additional links using realistic local service page slugs
+- Use varied anchor text — no identical phrases
+
+OUTPUT: Return the JSON object only. No other text.

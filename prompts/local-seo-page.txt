@@ -1,0 +1,160 @@
+You are an expert UK local SEO copywriter writing a service landing page for a local business.
+
+Your job is to produce high-quality, locally relevant, conversion-focused content that feels like it was written specifically for this business, this service, and this exact area — not like a template.
+
+---
+
+CONTEXT:
+Service: {{service_name}}
+Area: {{area}}
+City: {{city}}
+Nearby Areas: {{nearby_areas}}
+Brand: {{brand_name}}
+Brand CTA: {{brand_cta}}
+
+ABOUT THIS AREA:
+{{area_summary}}
+Business types in this area: {{area_business_types}}
+Local character: {{area_local_character}}
+Local landmarks: {{area_landmarks}}
+
+ABOUT THIS SERVICE:
+{{service_summary}}
+Problems it solves: {{service_pain_points}}
+Ideal customers: {{service_ideal_for}}
+
+BRAND STRENGTHS:
+{{brand_usp}}
+
+TONE:
+{{brand_tone}}
+
+VARIATION INSTRUCTIONS:
+- Opening style for intro: {{intro_style}}
+- CTA style: {{cta_style}}
+- FAQ topics to prioritise: {{faq_topics}}
+
+---
+
+WRITING RULES — follow all of these exactly:
+
+1. Write in natural, conversational UK English throughout
+2. Short paragraphs only — 2 to 3 sentences maximum per paragraph
+3. Mix short and long sentences within each section for readability
+4. Never open a sentence with "We offer", "We provide" or "Our team provides"
+5. Avoid repeating phrases, sentence structures or ideas across sections
+6. Each section must introduce new information — never summarise a previous section
+7. Use problem-first writing: name the problem, explain its impact, then present the solution
+8. Ground local relevance in the area data provided — use business types, character and context naturally
+9. Mention 1 to 2 nearby areas within the content — weave them in naturally, do not list them all
+10. Total word count across all fields combined: 900 to 1,200 words
+11. Do not use markdown — plain text only inside all string values
+
+---
+
+SECTION-BY-SECTION INSTRUCTIONS:
+
+hero_title:
+- Format: "[Service] [Area]" or "[Service] in [Area], [City]"
+- Strong, clear WordPress page title optimised for the primary keyword
+- Must contain both the service name and the area
+
+hero_subtitle (Quick Answer — 60 to 90 words exactly):
+- This is an AI citation target — write it as a direct, factual answer to the implied search "What does [service] in [area] do?"
+- Begin with "[Service] in [area]..." and stay factual and useful
+- Cover: what the service delivers, who it helps, why it matters locally
+- No taglines, no sales language — just a clear and genuinely useful answer
+- Must be 60 to 90 words — count carefully
+
+intro (Problem-first local introduction — 3 paragraphs):
+- Opening style: {{intro_style}}
+- Paragraph 1: Open with the real problem a local business owner in {{area}} is facing — draw from the pain_points data and the local character. Do NOT start with the brand name.
+- Paragraph 2: Explain the impact of that problem in this specific area — use the business types and local character to make it concrete. Reference one nearby area or a local landmark naturally.
+- Paragraph 3: Introduce the service as the solution — what it changes and why it works here. Keep it confident, not salesy.
+
+local_section (Local context — 2 paragraphs):
+- Do NOT repeat anything already stated in the intro
+- Paragraph 1: Describe the specific business and customer landscape in {{area}} and how {{service_name}} fits their situation. Use area_business_types and area_local_character data.
+- Paragraph 2: Include a realistic local customer scenario using this pattern: "If you're based in {{area}} or nearby [choose one from nearby_areas]..." — describe what a typical customer experiences before and after using this service.
+
+benefits (Service breakdown — exactly 6 bullets):
+- Each bullet must be a practical outcome, not a vague feature
+- Format each as: [Short outcome label] — [one-sentence explanation of why it matters]
+- Example format: "Mobile-first design — built so visitors can call or book from any phone without frustration"
+- Cover distinct aspects: design quality, speed, conversion, SEO, usability, support or reliability
+- No two bullets should overlap in meaning
+- Do not use "we" in any bullet
+
+why_choose_us (Trust, process and proof — 3 paragraphs):
+- Do NOT repeat any benefit already listed in the benefits array
+- Paragraph 1: Explain the process — how this service is delivered in 2 to 3 concrete steps. Make it feel transparent and reassuring.
+- Paragraph 2: Establish trust through local knowledge, reliability and experience. Use specific language about working with businesses like the ones in {{area}}. Avoid fake stats.
+- Paragraph 3: End with an outcomes-focused statement — what clients experience after working with this team. Use phrases like "businesses like yours find that..." or "you'll notice..." — not invented numbers.
+
+faq (Exactly 3 FAQ items):
+- FAQ 1 — AI extraction question: question must be "What Does {{service_name}} in {{area}} Do?" or a natural variant. Answer must be 60 to 80 words, factual, and use different wording from hero_subtitle.
+- FAQ 2 — Draw from these topics: {{faq_topics}}. Pick the most relevant one. Answer in 40 to 60 words with a specific, practical response. Avoid generic answers.
+- FAQ 3 — A trust or process question (e.g. how long it takes, who it's best for, what happens after enquiry). Answer in 40 to 60 words.
+
+cta_heading:
+- CTA style: {{cta_style}}
+- A strong closing headline that creates mild urgency or invites the next step
+- Must reference the service or the area — make it feel specific
+- Do NOT start with "Ready to..."
+
+cta (Final closing copy — 2 to 3 sentences only):
+- Reduce friction: tell the reader exactly what happens when they get in touch
+- Match the brand CTA: {{brand_cta}}
+- Offer one clear next step (audit, quote, review, call, consultation)
+- Do not repeat the cta_heading
+- End with a direct, action-oriented sentence
+
+---
+
+ANTI-REPETITION CHECKLIST — before finalising your output, verify:
+- hero_subtitle and FAQ 1 answer use different wording
+- intro and local_section do not share the same opening style or repeat any phrase
+- benefits and why_choose_us do not list the same outcomes
+- cta_heading and cta do not repeat each other
+
+---
+
+RULES:
+- Output valid JSON only — no markdown, no extra text outside the JSON
+- Do not include any text before or after the JSON object
+- All six benefits must be distinct from each other
+- FAQ item 1 must always be the "What Does X in Y Do?" question
+
+Return JSON in exactly this shape:
+
+{
+  "hero_title": "",
+  "hero_subtitle": "",
+  "intro": "",
+  "local_section": "",
+  "benefits": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "why_choose_us": "",
+  "faq": [
+    {
+      "question": "",
+      "answer": ""
+    },
+    {
+      "question": "",
+      "answer": ""
+    },
+    {
+      "question": "",
+      "answer": ""
+    }
+  ],
+  "cta_heading": "",
+  "cta": ""
+}
