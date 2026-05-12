@@ -46,7 +46,15 @@ router.post("/users", requireAdmin, async (req: Request, res: Response) => {
 });
 
 router.patch("/users/:id", requireAdmin, async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const id= Array.isArray(req.params.id)
+  ? req.params.id[0]
+  : req.params.id;
+
+
+if (!id) {
+  res.status(400).json({ error: "Invalid user id" });
+  return;
+}
   const { name, role, password } = req.body as {
     name?: string; role?: string; password?: string;
   };
