@@ -16,6 +16,7 @@ import { requireAuth } from "./middlewares/requireAuth";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const WORKSPACE_ROOT = path.resolve(__dirname, "../../..");
+const DASHBOARD_DIST = path.resolve(WORKSPACE_ROOT, "artifacts/dashboard/dist/public");
 
 const app: Express = express();
 
@@ -284,5 +285,21 @@ app.use(previewRouter);
 app.use("/api", requireAuth);
 
 app.use("/api", router);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(DASHBOARD_DIST, { dotfiles: "deny" }));
+  app.get("*", (req, res, next) => {
+    if (
+      req.path.startsWith("/api") ||
+      req.path.startsWith("/assets") ||
+      req.path.startsWith("/generated") ||
+      req.path.startsWith("/output")
+    ) {
+      next();
+      return;
+    }
+    res.sendFile(path.join(DASHBOARD_DIST, "index.html"));
+  });
+}
 
 export default app;
