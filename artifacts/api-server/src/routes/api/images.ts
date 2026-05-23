@@ -1502,9 +1502,7 @@ router.post("/images/generate", async (req, res) => {
     // Save to a service-specific subdir so different campaigns never share files.
     // e.g. assets/email-marketing/hero.jpg vs assets/web-design/hero.jpg
     const assetDir    = path.join(OUTPUT_DIR, slug, "assets");
-    const normSvcKey  = serviceKey
-      ? serviceKey.trim().toLowerCase().replace(/[\s_]+/g, "-").replace(/^-+|-+$/g, "")
-      : "";
+    const normSvcKey  = serviceKey ? normaliseServiceKey(serviceKey) : "";
     const svcSaveDir  = normSvcKey ? path.join(assetDir, normSvcKey) : assetDir;
     fs.mkdirSync(svcSaveDir, { recursive: true });
 
@@ -1559,7 +1557,7 @@ router.post("/images/upload", uploadMiddleware, async (req, res) => {
   const { slug, category = "general", altText = "", caption = "", serviceKey: rawUploadServiceKey = "" } = req.body as {
     slug: string; category?: string; altText?: string; caption?: string; serviceKey?: string;
   };
-  const uploadServiceKey = rawUploadServiceKey.trim().toLowerCase().replace(/[\s_]+/g, "-").replace(/^-+|-+$/g, "");
+  const uploadServiceKey = rawUploadServiceKey ? normaliseServiceKey(rawUploadServiceKey) : "";
 
   if (!slug || !req.file) {
     res.status(400).json({ error: "slug and file are required" });
@@ -1667,12 +1665,14 @@ const SERVICE_KEY_ALIASES: Record<string, string> = {
   web_hosting:     "web-hosting",
   webhoting:       "web-hosting",   // typo: webho_ting → webhoting
   webho_ting:      "web-hosting",
-  websitehosting:  "website-hosting",
-  website_hosting: "website-hosting",
+  websitehosting:  "web-hosting",
+  website_hosting: "web-hosting",
   localseo:        "local-seo",
   local_seo:       "local-seo",
   webdesign:       "web-design",
   web_design:      "web-design",
+  smallbusinesswebdesign:  "web-design",
+  small_business_web_design: "web-design",
 };
 
 function normaliseServiceKey(raw: string): string {
@@ -1837,8 +1837,7 @@ router.post("/images/assign-to-slot", (req, res) => {
   const { slug, slot, source, imageId, altText, serviceKey: rawServiceKey } = req.body as {
     slug: string; slot: string; source: string; imageId: string; altText?: string; serviceKey?: string;
   };
-  const svcKey = (rawServiceKey ?? "").toString().trim().toLowerCase()
-    .replace(/[\s_]+/g, "-").replace(/^-+|-+$/g, "");
+  const svcKey = rawServiceKey ? normaliseServiceKey(rawServiceKey) : "";
   if (!slug || !slot || !source || !imageId) {
     res.status(400).json({ error: "slug, slot, source, imageId are required" });
     return;

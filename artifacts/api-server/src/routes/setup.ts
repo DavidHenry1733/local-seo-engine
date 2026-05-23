@@ -3654,12 +3654,29 @@ App.saveStage4 = function() {
 // Stage 5 — Image Generation
 // ═══════════════════════════════════════════════════════════════════
 
+function canonicalImageServiceKey(raw) {
+  const key = String(raw || '').trim().toLowerCase()
+    .replace(/[\\s_]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  const merged = key.replace(/-/g, '');
+  const aliases = {
+    emailmarketing: 'email-marketing',
+    webhosting: 'web-hosting',
+    websitehosting: 'web-hosting',
+    webdesign: 'web-design',
+    smallbusinesswebdesign: 'web-design',
+    localseo: 'local-seo',
+  };
+  return aliases[merged] || aliases[key] || key;
+}
+
 function getServiceKey() {
-  // Derive service key from project services or campaign service name
-  const svc = state.project?.services?.[0]?.key
-    || (state.campaign?.serviceName || '').toLowerCase().replace(/\\s+/g, '_').replace(/-/g, '_')
-    || 'web_design';
-  return svc;
+  // Use the campaign's stored service key as the image-family source of truth.
+  const svc = state.campaign?.serviceKey
+    || state.project?.services?.[0]?.key
+    || state.campaign?.serviceName
+    || 'web-design';
+  return canonicalImageServiceKey(svc);
 }
 
 function getImageRole(slot) {

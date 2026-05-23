@@ -28,7 +28,7 @@ import type { AiReadinessResult } from "../../../../../src/generator/aiReadiness
 import { optimiseForAiCitation } from "../../../../../src/generator/aiCitationOptimiser";
 import type { AiCitationContext } from "../../../../../src/generator/aiCitationOptimiser";
 import { rebuildSitemapForClient } from "./searchConsole";
-import { selectPageImages, serviceDisplayName, approvedImages, imageFilePath } from "../../../../../src/generator/imageLibrary";
+import { selectPageImages, serviceDisplayName, approvedImages, imageFilePath, normaliseServiceKey } from "../../../../../src/generator/imageLibrary";
 import type { PageImageSelections, ImageLibraryConfig } from "../../../../../src/generator/imageLibrary";
 import { logger } from "../../lib/logger";
 import { loadProviderProfile } from "./providerProfiles";
@@ -1070,7 +1070,7 @@ async function runOneArea(
     : {};
 
   // Helper: normalise a key for fuzzy comparison
-  const _kNorm = (s: string) => (s ?? "").trim().toLowerCase().replace(/[\s_-]+/g, "");
+  const _kNorm = (s: string) => normaliseServiceKey(s ?? "").replace(/-/g, "");
 
   // Service identifiers for this campaign (used only in legacy fuzzy fallback)
   const _svcIds = [campaignServiceKey, def.service].map(_kNorm).filter(Boolean);

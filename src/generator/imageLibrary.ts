@@ -69,21 +69,39 @@ export interface ImageLibraryConfig {
 
 const SERVICE_DISPLAY_NAMES: Record<string, string> = {
   "web-hosting":             "Web Hosting",
+  "website-hosting":         "Web Hosting",
   "web-design":              "Web Design",
+  "small-business-web-design": "Small Business Web Design",
   "local-seo":               "Local SEO",
   "google-business-profile": "Google Business Profile",
   "email-marketing":         "Email Marketing",
 };
 
+const IMAGE_SERVICE_ALIASES: Record<string, string> = {
+  emailmarketing:           "email-marketing",
+  webhosting:               "web-hosting",
+  "website-hosting":        "web-hosting",
+  websitehosting:           "web-hosting",
+  webdesign:                "web-design",
+  "small-business-web-design": "web-design",
+  smallbusinesswebdesign:   "web-design",
+  localseo:                 "local-seo",
+};
+
 /** Convert underscore, space, or camel service key to hyphen-form used in library paths. */
 export function normaliseServiceKey(key: string): string {
-  return key.trim().replace(/[\s_]+/g, "-").toLowerCase().replace(/^-+|-+$/g, "");
+  const slug = key.trim().replace(/[\s_]+/g, "-").toLowerCase().replace(/^-+|-+$/g, "");
+  const merged = slug.replace(/-/g, "");
+  return IMAGE_SERVICE_ALIASES[slug] ?? IMAGE_SERVICE_ALIASES[merged] ?? slug;
 }
 
 /** Get human-readable display name for a service key (either form). */
 export function serviceDisplayName(key: string): string {
+  const slug = key.trim().replace(/[\s_]+/g, "-").toLowerCase().replace(/^-+|-+$/g, "");
   const norm = normaliseServiceKey(key);
-  return SERVICE_DISPLAY_NAMES[norm] ?? norm.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  return SERVICE_DISPLAY_NAMES[slug]
+    ?? SERVICE_DISPLAY_NAMES[norm]
+    ?? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export const KNOWN_SERVICES = Object.keys(SERVICE_DISPLAY_NAMES);
