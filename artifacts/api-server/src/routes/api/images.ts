@@ -1,3 +1,4 @@
+
 import { Router, Request, Response, NextFunction } from "express";
 import fs from "node:fs";
 import path from "node:path";
@@ -25,7 +26,7 @@ import {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
-const WORKSPACE_ROOT = path.resolve(__dirname, "../../..");
+const WORKSPACE_ROOT = "/home/inboxingproweb/local-seo-engine";
 const OUTPUT_DIR     = path.join(WORKSPACE_ROOT, "output");
 const PROJECTS_DIR   = path.join(WORKSPACE_ROOT, "config", "projects");
 
@@ -1675,11 +1676,48 @@ const SERVICE_KEY_ALIASES: Record<string, string> = {
   web_design:      "web-design",
 };
 
-function normaliseServiceKey(raw: string): string {
-  const step1 = raw.trim().toLowerCase().replace(/[\s_]+/g, "-").replace(/^-+|-+$/g, "");
-  // Strip hyphens and look up in alias map (covers merged forms like "emailmarketing")
-  const merged = step1.replace(/-/g, "");
-  return SERVICE_KEY_ALIASES[merged] ?? SERVICE_KEY_ALIASES[step1] ?? step1;
+export function normaliseServiceKey(value: string): string {
+  const raw = String(value || "")
+    .trim()
+    .toLowerCase();
+
+  const v = raw
+    .replace(/[\s_]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  const compact = v.replace(/[^a-z0-9]/g, "");
+
+  if (
+    v.includes("web-design") ||
+    v.includes("website-design") ||
+    compact.includes("webdesign") ||
+    compact.includes("websitedesign") ||
+    (compact.includes("web") && compact.includes("design"))
+  ) return "web-design";
+
+  if (
+    v.includes("web-hosting") ||
+    v.includes("website-hosting") ||
+    compact.includes("webhosting") ||
+    compact.includes("websitehosting") ||
+    (compact.includes("web") && compact.includes("hosting"))
+  ) return "web-hosting";
+
+  if (
+    v.includes("local-seo") ||
+    compact.includes("localseo") ||
+    compact.includes("seo")
+  ) return "local-seo";
+
+  if (
+    v.includes("email-marketing") ||
+    compact.includes("emailmarketing") ||
+    compact.includes("email")
+  ) return "email-marketing";
+
+  return v;
 }
 
 router.get("/images/library/:slug", (req, res) => {
@@ -1689,17 +1727,16 @@ router.get("/images/library/:slug", (req, res) => {
     ? normaliseServiceKey(req.query.service)
     : null;
 
-  // If no service filter but a ?cid= was passed, look up the serviceKey from the campaign file.
-  // This makes the pack-image lookup robust even when the client hasn't loaded campaign detail yet.
-  if (!filterService && typeof req.query.cid === "string" && req.query.cid) {
+  // Always resolve service filter from campaign ID when available.
+  // This is required for semantic-intent campaigns before a session file exists.
+  if (typeof req.query.cid === "string" && req.query.cid) {
     try {
       const campaignFile = path.join(WORKSPACE_ROOT, "config", "campaigns", `${slug}.json`);
       if (fs.existsSync(campaignFile)) {
-        const campaigns = JSON.parse(fs.readFileSync(campaignFile, "utf8")) as Array<{ id: string; serviceKey?: string }>;
+        const campaigns = JSON.parse(fs.readFileSync(campaignFile, "utf8")) as Array<{ id: string; serviceKey?: string; serviceName?: string }>;
         const match = campaigns.find(c => c.id === req.query.cid);
-        if (match?.serviceKey) {
-          filterService = normaliseServiceKey(match.serviceKey);
-        }
+        const resolved = match?.serviceKey || match?.serviceName || "";
+        if (resolved) filterService = normaliseServiceKey(resolved);
       }
     } catch { /* non-fatal */ }
   }
@@ -1829,6 +1866,19 @@ router.get("/images/library/:slug", (req, res) => {
 
   // Pack images first (most relevant for trade campaigns), then AI, uploads, library
   const all = [...packImages, ...aiImages, ...uploadImages, ...libImages];
+
+  console.log("[images/library debug]", {
+    slug,
+    cid: req.query.cid,
+    service: req.query.service,
+    filterService,
+    uploadImages: uploadImages.length,
+    aiImages: aiImages.length,
+    libImages: libImages.length,
+    packImages: packImages.length,
+    total: all.length
+  });
+
   res.json({ images: all });
 });
 
@@ -1869,21 +1919,57 @@ router.post("/images/assign-to-slot", (req, res) => {
     sourceFile = path.join(WORKSPACE_ROOT, packEntry.path);
     destExt    = ".jpg";
   } else if (source === "image_library") {
-    // New controlled Image Library — find by ID in manifest
+    // Controlled Image Library — find by ID in manifest and resolve file robustly.
     const manifestPath = path.join(WORKSPACE_ROOT, "assets", "image-library", "image-library.json");
+
     if (!fs.existsSync(manifestPath)) {
       res.status(404).json({ error: "Image Library manifest not found" });
       return;
     }
+
     const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8")) as { images?: Array<Record<string, unknown>> };
     const libImg = (manifest.images ?? []).find((i) => i.id === imageId);
+
     if (!libImg) {
       res.status(404).json({ error: `Image Library image not found: ${imageId}` });
       return;
     }
-    sourceFile = path.join(WORKSPACE_ROOT, "assets", "image-library",
-      String(libImg.service), String(libImg.slot), String(libImg.filename));
-    destExt    = path.extname(String(libImg.filename)) || ".jpg";
+
+    const service = String(libImg.service || "").trim();
+    const slotName = String(libImg.slot || "").trim();
+    const filename = String(libImg.filename || "").trim();
+    const manifestPathValue = String(libImg.path || libImg.file || "").trim();
+
+    const candidates = [
+      manifestPathValue && path.isAbsolute(manifestPathValue) ? manifestPathValue : "",
+      manifestPathValue ? path.join(WORKSPACE_ROOT, manifestPathValue) : "",
+      path.join(WORKSPACE_ROOT, "assets", "image-library", service, slotName, filename),
+      path.join(WORKSPACE_ROOT, "assets", "image-library", service, filename),
+      path.join(WORKSPACE_ROOT, "assets", "image-library", filename),
+    ].filter(Boolean);
+
+    const found = candidates.find((candidate) => fs.existsSync(candidate));
+
+    console.log("[assign image_library debug]", {
+      imageId,
+      service,
+      slotName,
+      filename,
+      manifestPathValue,
+      candidates,
+      found
+    });
+
+    if (!found) {
+      res.status(404).json({
+        error: `Image Library source file not found: ${imageId}`,
+        tried: candidates
+      });
+      return;
+    }
+
+    sourceFile = found;
+    destExt = path.extname(sourceFile) || ".jpg";
   } else {
     // Uploaded — use the pre-processed slot-specific version if available
     const uploadDir = path.join(OUTPUT_DIR, slug, "uploads");
@@ -2087,7 +2173,13 @@ router.get("/images/status/:slug", (req, res) => {
     status[slot] = { exists: !!filePath, ...metaForSlot };
   }
 
-  res.json({ slug, status });
+    console.log("[images/status debug JSON]");
+  console.log(JSON.stringify({
+    slug,
+    query: req.query,
+    filterSvc,
+    status
+  }, null, 2));res.json({ slug, status });
 });
 
 // ─── DELETE /api/images/:slug/:slot ───────────────────────────────────────

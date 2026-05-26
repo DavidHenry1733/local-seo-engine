@@ -1,3 +1,9 @@
+
+
+
+
+;
+
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
 import previewRouter from "./preview";
@@ -13,6 +19,7 @@ import validateRouter from "./api/validate";
 import sessionRouter from "./api/session";
 import searchConsoleRouter from "./api/searchConsole";
 import indexTrackingRouter from "./api/indexTracking";
+import gscIndexRouter from "./api/gscIndex";
 import keywordTrackingRouter from "./api/keywordTracking";
 import imagesRouter from "./api/images";
 import usageRouter from "./api/usage";
@@ -24,6 +31,7 @@ import suggestKeywordsRouter from "./api/suggestKeywords";
 import prePublishQaRouter    from "./api/prePublishQa";
 import liveCrawlRouter       from "./api/liveCrawl";
 import systemHealthRouter    from "./api/systemHealth";
+import systemDiagnosticsRouter from "./api/systemDiagnostics";
 import securityScanRouter   from "./api/securityScan";
 import linkAuditRouter      from "./api/linkAudit";
 import distributionRouter   from "./api/distribution";
@@ -58,6 +66,7 @@ router.use(validateRouter);
 router.use(sessionRouter);
 router.use(searchConsoleRouter);
 router.use(indexTrackingRouter);
+router.use(gscIndexRouter);
 router.use(keywordTrackingRouter);
 router.use(imagesRouter);
 router.use(usageRouter);
@@ -69,6 +78,7 @@ router.use(suggestKeywordsRouter);
 router.use(prePublishQaRouter);
 router.use(liveCrawlRouter);
 router.use(systemHealthRouter);
+router.use(systemDiagnosticsRouter);
 router.use(securityScanRouter);
 router.use(linkAuditRouter);
 router.use(distributionRouter);

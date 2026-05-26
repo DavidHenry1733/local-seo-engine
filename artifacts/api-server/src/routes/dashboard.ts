@@ -507,7 +507,7 @@ document.addEventListener('click',function(e){
   <div class="tab-sep"></div>
   <div class="tab" id="tab-qa" onclick="switchTab('qa')">Page QA <span class="tab-badge" id="tb-qa">—</span></div>
   <div class="tab" id="tab-live-crawl" onclick="switchTab('live-crawl');lcLoad()">Live Crawl <span class="tab-badge" id="tb-live-crawl">—</span></div>
-  <div class="tab" id="tab-system-health" onclick="switchTab('system-health');shLoad();ssLoad();liLoad()">System Health <span class="tab-badge" id="tb-system-health">—</span></div>
+  <div class="tab" id="tab-system-health" onclick="switchTab('system-health');shLoad();psLoad();ssLoad();liLoad()">System Health <span class="tab-badge" id="tb-system-health">—</span></div>
   <div class="tab-sep"></div>
   <div class="tab" id="tab-rankings" onclick="switchTab('rankings')">Rankings <span class="tab-badge" id="tb-rankings">—</span></div>
   <div class="tab" id="tab-index" onclick="switchTab('index')">Index Tracking <span class="tab-badge" id="tb-index">—</span></div>
@@ -569,9 +569,9 @@ document.addEventListener('click',function(e){
 
     <div class="overview-grid">
       <div class="ov-card">
-        <div class="ov-label">Pages</div>
+        <div class="ov-label">Tracked URLs</div>
         <div class="ov-value blue" id="ov-pages">—</div>
-        <div class="ov-sub" id="ov-pages-sub">generated</div>
+        <div class="ov-sub" id="ov-pages-sub">live registry</div>
       </div>
       <div class="ov-card">
         <div class="ov-label">QA Score</div>
@@ -581,7 +581,7 @@ document.addEventListener('click',function(e){
       <div class="ov-card">
         <div class="ov-label">Indexed</div>
         <div class="ov-value green" id="ov-indexed">—</div>
-        <div class="ov-sub" id="ov-indexed-sub">GSC Verified</div>
+        <div class="ov-sub" id="ov-indexed-sub">Tracked URLs</div>
       </div>
       <div class="ov-card">
         <div class="ov-label">Not Indexed</div>
@@ -702,11 +702,15 @@ document.addEventListener('click',function(e){
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
         <div>
           <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Target city / location *</label>
-          <input id="camp-city" type="text" placeholder="e.g. Sheffield" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:.9rem"/>
+          <input id="camp-city" type="text" placeholder="e.g. Rotherham" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:.9rem"/>
         </div>
         <div>
-          <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Target service *</label>
+          <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Core service category *</label>
           <input id="camp-service" type="text" placeholder="e.g. Web Design" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:.9rem"/>
+        </div>
+        <div style="grid-column:1 / -1">
+          <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Primary SEO keyword</label>
+          <input id="camp-focus-keyword" type="text" placeholder="e.g. Small Business Web Design Rotherham" style="width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem"/>
         </div>
         <div>
           <label style="font-size:.8rem;font-weight:600;display:block;margin-bottom:4px">Status</label>
@@ -1352,7 +1356,8 @@ async function campaignsLoad(){
       return '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px">'+
         '<div style="flex:1;min-width:0">'+
           '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">'+
-            '<span style="font-weight:700;font-size:.95rem">'+esc(c.city)+' — '+esc(c.serviceName)+'</span>'+
+            '<span style="font-weight:700;font-size:.95rem">'+esc(c.focusKeyword||c.city+' — '+c.serviceName)+'</span>'+
+            (c.focusKeyword?'<div style="font-size:.72rem;color:#64748b;margin-top:2px">'+esc(c.city)+' — '+esc(c.serviceName)+'</div>':'')+
             statusBadge(c.status)+
           '</div>'+
           '<div style="font-size:.8rem;color:var(--muted)">'+esc(meta)+' · Created '+esc(created)+'</div>'+
@@ -1377,9 +1382,14 @@ async function campaignsCreate(){
   const slug=activeSlug; if(!slug) return;
   const city=($('camp-city').value||'').trim();
   const service=($('camp-service').value||'').trim();
+  const focusKeyword=($('camp-focus-keyword')?.value||'').trim();
   const status=$('camp-status').value||'new';
   const errEl=$('camp-new-error');
-  if(!city||!service){ errEl.textContent='City and service are required.'; errEl.style.display='block'; return; }
+  if(!city||!service||!focusKeyword){
+    errEl.textContent='City, core service and primary SEO keyword are required.';
+    errEl.style.display='block';
+    return;
+  }
   errEl.style.display='none';
   const citySlug=city.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
   const serviceKey=service.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
@@ -1387,7 +1397,7 @@ async function campaignsCreate(){
     const res=await apiFetch('/api/campaigns/'+enc(slug),{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({city,citySlug,serviceName:service,serviceKey,status})
+      body:JSON.stringify({city,citySlug,serviceName:service,serviceKey,status,focusKeyword})
     });
     if(!res.ok){ const d=await res.json().catch(()=>({})); errEl.textContent=d.error||'Failed to create campaign'; errEl.style.display='block'; return; }
     const data=await res.json();
@@ -1664,8 +1674,13 @@ function renderQA(summary, results){
   const avg=Math.round(all.reduce((a,r)=>a+(r.overallScore||0),0)/all.length);
   const readyCnt=all.filter(r=>r.readiness==='ready').length;
   const hubCount=all.filter(r=>r.tier==='hub').length;
-  set('ov-pages',all.length);
-  set('ov-pages-sub',readyCnt+' ready');
+  if (window.__latestIndexTrackingReport && typeof window.__latestIndexTrackingReport.totalChecked === 'number') {
+    set('ov-pages', window.__latestIndexTrackingReport.totalChecked);
+    set('ov-pages-sub', 'tracked URLs');
+  } else {
+    set('ov-pages', all.length);
+    set('ov-pages-sub', readyCnt+' ready');
+  }
   set('ov-qa',avg);
   $('ov-qa').className='ov-value '+(avg>=85?'green':avg>=70?'amber':'red');
   set('qa-run-info',all.length+' pages · '+readyCnt+' ready'+(hubCount?' · '+hubCount+' hub':''));
@@ -2160,8 +2175,8 @@ function ppShowDetail(idx){
       const airStC={elite:'#059669',good:'#0369a1',weak:'#b45309',fail:'#dc2626'};
       const airStBg={elite:'#d1fae5',good:'#dbeafe',weak:'#fef3c7',fail:'#fee2e2'};
       const sc=air.status||'fail';
-      const CAT_OPT_MAP={'Content Depth':'improve-local-relevance','Commercial Strength':'improve-service-relevance','Intent Coverage':'improve-service-relevance'};
-      const CAT_OPT_LABEL={'improve-local-relevance':'Improve Local Relevance','improve-service-relevance':'Improve Service Content'};
+      const CAT_OPT_MAP={'Content Depth':'improve-local-relevance','Commercial Strength':'improve-service-relevance','Intent Coverage':'improve-intent-coverage'};
+      const CAT_OPT_LABEL={'improve-local-relevance':'Improve Local Relevance','improve-service-relevance':'Improve Service Content','improve-intent-coverage':'Improve Intent Coverage'};
       const _seenOptAction=new Set();
       const catRows=(air.breakdown||[]).map(c=>{
         const pct=Math.round(c.scored/c.maxPoints*100);
@@ -2335,6 +2350,29 @@ function ppFixAll(){
 function ppUpgradeThisPage(areaDir,area,tier,idx){
   if(!activeSlug){ alert('Select a project first'); return; }
   if(!areaDir){ alert('Cannot determine page — please retry from the table.'); return; }
+
+  const r=_ppQaResults&&_ppQaResults.results?_ppQaResults.results[idx]:null;
+  const air=r&&r.aiReadiness?r.aiReadiness:null;
+  const intent=(air&&air.breakdown||[]).find(c=>c.name&&c.name.indexOf('Intent Coverage')>=0);
+  const intentNeedsFix=intent && intent.maxPoints && (intent.scored/intent.maxPoints)<0.7;
+
+  if(intentNeedsFix){
+    ppShowToast('Fixing Intent Coverage for '+areaDir+'…');
+    apiFetch('/api/section-optimise',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({clientSlug:activeSlug,areaDir,action:'improve-intent-coverage'}),
+    })
+    .then(r=>r.json())
+    .then(data=>{
+      if(data.error){ ppShowToast('Intent fix failed: '+data.error,'error'); return; }
+      ppShowToast('✓ Intent Coverage fixed — rescanning page…','pass');
+      setTimeout(function(){ ppAutoRecheck(idx,areaDir); },900);
+    })
+    .catch(e=>ppShowToast('Intent fix error: '+(e.message||e),'error'));
+    return;
+  }
+
   _ppFixSourceIdx=(idx!=null)?idx:null;
   const overlay=document.getElementById('pp-detail-overlay');
   if(overlay) overlay.remove();
@@ -2393,6 +2431,7 @@ async function runSectionOptimise(areaDir,action,btn,idx){
   const actionLabels={
     'improve-local-relevance':'Local Relevance',
     'improve-service-relevance':'Service Content',
+    'improve-intent-coverage':'Intent Coverage',
     'increase-variation':'Content Variation',
     'generate-related-services':'Related Services',
     'generate-areas-we-cover':'Areas We Cover',
@@ -2464,7 +2503,7 @@ function upgradePageCard(p,state,afterScore,afterStatus,ftpWarn){
   const tierCol=p.tier==='hub'?'#7c3aed':p.tier==='secondary'?'#0369a1':'#374151';
   const scoreFrom=p.score!==null&&p.score!==undefined?p.score+'':'?';
   const scoreTo=afterScore!=null?afterScore+'':'?';
-  const ftpNote=ftpWarn?'<span style="margin-left:6px;font-size:.7rem;color:#b45309">⚠ FTP pending</span>':'';
+  const ftpNote='';
   const arrowHtml=state!=='waiting'&&scoreTo!=='?'?'<span style="color:#64748b"> → </span><span style="font-weight:700;color:'+(afterScore>=90?'#059669':'#b45309')+'">'+scoreTo+'</span>':'';
   return \`<div id="upgcard-\${esc(p.areaDir)}" style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:\${s.bg};border:1px solid \${s.border};border-radius:6px;transition:all .3s">
     <span style="font-size:1rem;color:\${s.color};font-weight:900;width:18px;text-align:center">\${s.icon}</span>
@@ -2997,11 +3036,14 @@ function renderIT(report){
 }
 
 function updateITOv(report){
-  if(!report){ set('ov-indexed','—'); set('ov-indexed-sub','GSC Verified'); set('ov-notindexed','—'); return; }
+  window.__latestIndexTrackingReport = report;
+  if(!report){ set('ov-indexed','—'); set('ov-indexed-sub','Tracked URLs'); set('ov-notindexed','—'); return; }
   const total=(report.indexedCount||0)+(report.notIndexedCount||0)+(report.unknownCount||0);
+  set('ov-pages', total);
+  set('ov-pages-sub', 'tracked URLs');
   set('ov-indexed',report.indexedCount);
   const runDate=report.runAt?new Date(report.runAt).toLocaleDateString():'';
-  set('ov-indexed-sub','GSC Verified'+(runDate?' · '+runDate:''));
+  set('ov-indexed-sub','Tracked URLs'+(runDate?' · '+runDate:''));
   set('ov-notindexed',report.notIndexedCount);
   // Add tooltip explaining this is GSC URL Inspection data
   const el=$('ov-indexed');
@@ -3267,6 +3309,9 @@ switchTab=function(tab){
     <!-- Actions -->
     <div class="actions" style="flex-wrap:wrap;gap:8px">
       <button class="btn btn-primary" id="btn-sh-run" onclick="shRun()" disabled>&#9654; Run Full Audit</button>
+      <button class="btn btn-secondary" id="btn-gsc-refresh" onclick="gscRefreshIndex()" disabled>&#8635; Refresh GSC Index Data</button>
+      <button class="btn btn-secondary" id="btn-gsc-import" onclick="gscImportUrls()" disabled>&#8679; Import GSC URLs</button>
+      <button class="btn btn-secondary" id="btn-diag-run" onclick="diagRun()">&#9881; Run Diagnostics</button>
       <button class="btn btn-secondary" id="btn-sh-json" onclick="shExport('json')" style="display:none">&#8659; JSON Report</button>
       <button class="btn btn-secondary" id="btn-sh-csv" onclick="shExport('csv')" style="display:none">&#8659; CSV Report</button>
       <span id="sh-running" class="running-label hidden"></span>
@@ -3302,10 +3347,18 @@ switchTab=function(tab){
       <div class="ov-card"><div class="ov-label">Broken Links</div> <div class="ov-value red"   id="sh-s-links">—</div></div>
       <div class="ov-card"><div class="ov-label">Broken Images</div><div class="ov-value red"   id="sh-s-imgs">—</div></div>
       <div class="ov-card"><div class="ov-label">Preview URLs</div> <div class="ov-value red"   id="sh-s-prev">—</div></div>
-      <div class="ov-card"><div class="ov-label">GSC Indexed</div>  <div class="ov-value green" id="sh-s-gsc">—</div><div class="ov-sub" id="sh-s-gsc-sub">verified</div></div>
+      <div class="ov-card" style="display:none"><div class="ov-label">Tracked Indexed</div>  <div class="ov-value green" id="sh-s-gsc">—</div><div class="ov-sub" id="sh-s-gsc-sub">legacy</div></div>
+      <div class="ov-card"><div class="ov-label">GSC Indexed</div><div class="ov-value green" id="gsc-indexed">—</div><div class="ov-sub">live inspection</div></div>
+      <div class="ov-card"><div class="ov-label">GSC URLs Checked</div><div class="ov-value blue" id="gsc-checked">—</div><div class="ov-sub">checked / total</div></div>
+      <div class="ov-card"><div class="ov-label">Crawled Not Indexed</div><div class="ov-value red" id="gsc-crawled">—</div><div class="ov-sub">google crawled</div></div>
+      <div class="ov-card"><div class="ov-label">Discovered Not Indexed</div><div class="ov-value blue" id="gsc-discovered">—</div><div class="ov-sub">not crawled yet</div></div>
+      <div class="ov-card"><div class="ov-label">GSC Last Check</div><div class="ov-value green" id="gsc-lastcheck">—</div><div class="ov-sub">live snapshot</div></div>
       <div class="ov-card"><div class="ov-label">Thin Content</div> <div class="ov-value red"   id="sh-s-thin">—</div></div>
       <div class="ov-card"><div class="ov-label">No Schema</div>    <div class="ov-value red"   id="sh-s-schema">—</div></div>
       <div class="ov-card"><div class="ov-label">Placeholders</div> <div class="ov-value red"   id="sh-s-ph">—</div></div>
+      <div class="ov-card"><div class="ov-label">Registry URLs</div> <div class="ov-value blue" id="ps-registry">—</div><div class="ov-sub">tracked</div></div>
+      <div class="ov-card"><div class="ov-label">Sitemap URLs</div> <div class="ov-value blue" id="ps-sitemap">—</div><div class="ov-sub">submitted</div></div>
+      <div class="ov-card"><div class="ov-label">Release Status</div> <div class="ov-value green" id="ps-status">—</div><div class="ov-sub" id="ps-status-sub">platform</div></div>
     </div>
 
     <!-- Issue filter tabs -->
@@ -3362,6 +3415,11 @@ switchTab=function(tab){
     <!-- Empty state -->
     <div id="sh-empty" class="empty">Click "Run Full Audit" to check every page for 404s, broken links, missing SEO tags, schema errors, placeholder tokens, and more. Works from local files if the live site is offline.</div>
     <div id="sh-error" class="alert alert-error hidden"></div>
+    <div id="diag-panel" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin-bottom:14px">
+      <div style="font-weight:800;margin-bottom:8px">System Diagnostics</div>
+      <div id="diag-summary" style="font-size:.85rem;margin-bottom:10px;color:#475569">Not checked yet.</div>
+      <div id="diag-list" style="display:grid;gap:6px;font-size:.82rem"></div>
+    </div>
 
     <!-- ══ SECURITY & INTEGRITY SCAN ══════════════════════════════════════════ -->
     <div style="border-top:2px solid #e5e7eb;margin-top:28px;padding-top:24px">
@@ -4433,34 +4491,46 @@ let _cpCid='', _cpSlug='', _cpDetail=null;
     // Build service filter param — prefer explicit serviceKey from detail; fall back to cid so
     // the server can self-resolve the service key even when _cpDetail isn't loaded yet.
     var libUrl='/api/images/library/'+_cpSlug;
-    if(_cpDetail&&_cpDetail.serviceKey){
-      var svcNorm=String(_cpDetail.serviceKey).trim().replace(/[\s_]+/g,'-').replace(/^-+|-+$/g,'');
-      if(svcNorm) libUrl+='?service='+encodeURIComponent(svcNorm);
-    } else if(_cpCid){
+
+    // Always send cid fallback so backend can resolve serviceKey
+    if(_cpCid){
       libUrl+='?cid='+encodeURIComponent(_cpCid);
+    }
+
+    // Prefer explicit service when available
+    if(_cpDetail&&_cpDetail.serviceKey){
+      var svcNorm=String(_cpDetail.serviceKey)
+        .trim()
+        .replace(/[\s_]+/g,'-')
+        .replace(/^-+|-+$/g,'');
+
+      if(svcNorm){
+        libUrl='/api/images/library/'+_cpSlug+'?service='+encodeURIComponent(svcNorm)+'&cid='+encodeURIComponent(_cpCid||'');
+      }
     }
     try{
       // Build status URL with same service filter as the library URL so slot cards
       // only show images that belong to this campaign's service.
+      // Preview status must not use campaign service filters.
+      // image-meta.json already stores the correct serviceKey per slot.
       var statusUrl='/api/images/status/'+_cpSlug;
-      if(_cpDetail&&_cpDetail.serviceKey){
-        var svcNormSt=String(_cpDetail.serviceKey).trim().replace(/[\s_]+/g,'-').replace(/^-+|-+$/g,'');
-        if(svcNormSt) statusUrl+='?service='+encodeURIComponent(svcNormSt);
-      } else if(_cpCid){
-        statusUrl+='?cid='+encodeURIComponent(_cpCid);
-      }
       const [sR,lR]=await Promise.all([
-        fetch(statusUrl),
-        fetch(libUrl)
+        apiFetch(statusUrl),
+        apiFetch(libUrl)
       ]);
       const sd=await sR.json(), ld=await lR.json();
       const slots=sd.status||{}, images=ld.images||[];
+
+      if(countEl){
+        countEl.textContent='Debug: '+images.length+' images loaded from '+libUrl;
+        countEl.style.display='block';
+      }
 
       // Slot cards (hero / support / conversion)
       slotsEl.innerHTML='';
       ['hero','support','trust','conversion'].forEach(function(slotName){
         const info=slots[slotName]||{};
-        const imgUrl=info.exists?'/api/images/serve/'+_cpSlug+'/'+slotName:'';
+        const imgUrl=info.exists?'/api/images/serve/'+_cpSlug+'/'+slotName+'?t='+Date.now():'';
         const srcBadge=info.source==='ai'?'AI':info.source==='library'?'Library':info.source==='uploaded'?'Upload':'—';
         const srcColor=info.source==='ai'?'#6366f1':info.source==='library'?'#7c3aed':info.source==='uploaded'?'#059669':'#9ca3af';
         const approved=info.status==='approved';
@@ -4486,11 +4556,11 @@ let _cpCid='', _cpSlug='', _cpDetail=null;
       });
 
       // Library grid — uploaded images + Image Library images (filtered to this campaign's service)
-      const normCampaignSvc=_cpDetail?String(_cpDetail.serviceKey||'').trim().toLowerCase().replace(/[\s_]+/g,'-').replace(/^-+|-+$/g,''):'';
       const uploads=images.filter(function(i){
         if(i.source==='image_library'){
-          // Only show library images that match this campaign's service
-          return !normCampaignSvc||String(i.service||'').toLowerCase()===normCampaignSvc;
+          // API already filters library images by service/campaign.
+          // Do not re-filter client-side because semantic campaigns may load before _cpDetail is complete.
+          return true;
         }
         if(i.source==='image_pack'){
           // Pack images are already pre-filtered by the API to the correct pack industry
@@ -5185,13 +5255,228 @@ let _shReport=null;
 let _shJobId=null;
 let _shAllIssues=[];
 
+
+async function psLoad(){
+  if(!activeSlug) return;
+  try{
+    const ps = await apiFetch('/api/platform-status/'+activeSlug);
+    if(!ps) return;
+
+    set('ps-registry', ps.registryUrls ?? '—');
+    set('ps-sitemap', ps.sitemapUrls ?? '—');
+
+    const statusEl = $('ps-status');
+    if(statusEl){
+      statusEl.textContent = ps.healthy ? 'PASS' : 'FAIL';
+      statusEl.className = 'ov-value ' + (ps.healthy ? 'green' : 'red');
+    }
+
+    set('ps-status-sub',
+      ps.healthy
+        ? 'healthy'
+        : ((ps.failedPages||0)+' failed · '+(ps.missingFromSitemap||0)+' missing')
+    );
+  }catch(e){
+    set('ps-status','—');
+    set('ps-status-sub','not generated');
+  }
+}
+
+
+async function diagRun(){
+  const panel = $('diag-panel');
+  const summary = $('diag-summary');
+  const list = $('diag-list');
+
+  if(panel) panel.style.display = 'block';
+  if(summary) summary.textContent = 'Running checks…';
+  if(list) list.innerHTML = '';
+
+  try{
+    const r = await apiFetch('/api/system-diagnostics');
+    const d = await r.json();
+
+    if(!r.ok){
+      if(summary) summary.textContent = 'Diagnostics failed: '+(d.error || r.status);
+      return;
+    }
+
+    if(summary){
+      summary.textContent = d.healthy
+        ? 'All diagnostics passed.'
+        : d.failCount+' diagnostic check'+(d.failCount!==1?'s':'')+' failed.';
+      summary.style.color = d.healthy ? '#166534' : '#991b1b';
+    }
+
+    if(list){
+      list.innerHTML = Object.values(d.checks || {}).map(c => {
+        const colour = c.ok ? '#166534' : '#991b1b';
+        const bg = c.ok ? '#f0fdf4' : '#fef2f2';
+        const border = c.ok ? '#86efac' : '#fecaca';
+        return '<div style="padding:8px 10px;border:1px solid '+border+';background:'+bg+';border-radius:7px;color:'+colour+'"><strong>'+escH(c.status)+'</strong> — '+escH(c.label)+'<div style="font-size:.76rem;color:#64748b;margin-top:2px">'+escH(c.detail||'')+'</div></div>';
+      }).join('');
+    }
+  }catch(e){
+    if(summary) summary.textContent = 'Diagnostics failed: '+(e.message || e);
+  }
+}
+
 function shLoad(){
   if(!activeSlug) return;
   $('btn-sh-run').disabled=false;
+  const gscBtn=$('btn-gsc-refresh'); if(gscBtn) gscBtn.disabled=false; const gscImportBtn=$('btn-gsc-import'); if(gscImportBtn) gscImportBtn.disabled=false;
   apiFetch('/api/system-health/'+activeSlug)
     .then(r=>r.json())
     .then(d=>{ if(d.cached&&d.report){ _shReport=d.report; shRender(d.report); } })
     .catch(e=>{ if(!e.sessionExpired) console.warn('shLoad:',e.message); });
+
+  apiFetch('/api/gsc-index/status/'+activeSlug)
+    .then(r=>r.json())
+    .then(g=>{
+      if(!g || !g.summary) return;
+
+      set('gsc-indexed', g.summary.indexed ?? '—');
+      set('gsc-checked', (g.summary.total ?? '—'));
+      set('gsc-crawled', g.summary.crawledNotIndexed ?? '—');
+      set('gsc-discovered', g.summary.discoveredNotIndexed ?? '—');
+
+      if(g.checkedAt){
+        const d = new Date(g.checkedAt);
+        set('gsc-lastcheck', d.toLocaleDateString()+' '+d.toLocaleTimeString());
+      }
+    })
+    .catch(()=>{});
+}
+
+
+
+async function gscImportUrls(){
+  if(!activeSlug){ alert('Select a project first'); return; }
+
+  const text = prompt('Paste GSC Page Indexing export URLs here. You can paste one URL per line or comma-separated URLs.');
+
+  if(!text) return;
+
+  try{
+    const r = await fetch('/api/gsc-index/import-urls/'+encodeURIComponent(activeSlug), {
+      method:'POST',
+      credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ text })
+    });
+
+    const data = await r.json();
+
+    if(!r.ok){
+      alert('GSC URL import failed: '+(data?.error || r.status));
+      return;
+    }
+
+    alert('Imported '+data.imported+' GSC URLs. Now run Refresh GSC Index Data again.');
+  }catch(e){
+    alert('GSC URL import failed: '+(e.message||e));
+  }
+}
+
+async function gscRefreshIndex(){
+  if(!activeSlug){ alert('Select a project first'); return; }
+
+  const siteUrl = prompt('Enter your GSC property URL exactly as shown in Search Console, e.g. sc-domain:inboxingproweb.com');
+
+  if(!siteUrl) return;
+
+  const btn = $('btn-gsc-refresh');
+  if(btn){
+    btn.disabled = true;
+    btn.textContent = 'Starting GSC refresh…';
+  }
+
+  try{
+    const r = await fetch('/api/gsc-index/refresh/'+encodeURIComponent(activeSlug), {
+      method:'POST',
+      credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ siteUrl })
+    });
+
+    const data = await r.json();
+
+    if(!r.ok){
+      alert('GSC refresh failed. HTTP '+r.status+': '+(data?.error || JSON.stringify(data).slice(0,300)));
+      if(btn){
+        btn.disabled = false;
+        btn.textContent = '↻ Refresh GSC Index Data';
+      }
+      return;
+    }
+
+    if(!data.jobId){
+      alert('GSC refresh did not return a job ID.');
+      if(btn){
+        btn.disabled = false;
+        btn.textContent = '↻ Refresh GSC Index Data';
+      }
+      return;
+    }
+
+    await gscPollIndexJob(data.jobId, btn);
+
+  }catch(e){
+    alert('GSC refresh failed in browser: '+(e.message||e));
+    if(btn){
+      btn.disabled = false;
+      btn.textContent = '↻ Refresh GSC Index Data';
+    }
+  }
+}
+
+async function gscPollIndexJob(jobId, btn){
+  let attempts = 0;
+
+  while(attempts < 600){
+    attempts++;
+
+    const r = await fetch('/api/gsc-index/job/'+encodeURIComponent(jobId), {
+      credentials:'same-origin'
+    });
+
+    const job = await r.json();
+
+    if(!r.ok){
+      alert('GSC job polling failed: '+(job?.error || r.status));
+      break;
+    }
+
+    if(btn){
+      btn.textContent = 'GSC '+job.checked+'/'+job.total+' checked';
+    }
+
+    set('gsc-indexed', job.indexed ?? '—');
+    set('gsc-checked', (job.checked ?? 0)+' / '+(job.total ?? '—'));
+    set('gsc-crawled', job.crawledNotIndexed ?? '—');
+    set('gsc-discovered', job.discoveredNotIndexed ?? '—');
+
+    if(job.status === 'complete'){
+      alert('GSC index data refreshed successfully.');
+      break;
+    }
+
+    if(job.status === 'error'){
+      alert(
+  (job.error || '').toLowerCase().includes('quota')
+    ? 'Google Search Console quota is currently exhausted. Your previous valid data has been preserved. Try again later.'
+    : 'GSC refresh failed: '+(job.error || 'Unknown error')
+);
+      break;
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 1500));
+  }
+
+  if(btn){
+    btn.disabled = false;
+    btn.textContent = '↻ Refresh GSC Index Data';
+  }
 }
 
 async function shRun(){
@@ -5229,17 +5514,20 @@ function shPollJob(jobId){
         clearInterval(interval);
         lbl.classList.add('hidden');
         $('btn-sh-run').disabled=false;
+  const gscBtn=$('btn-gsc-refresh'); if(gscBtn) gscBtn.disabled=false; const gscImportBtn=$('btn-gsc-import'); if(gscImportBtn) gscImportBtn.disabled=false;
         _shReport=d.report;
         shRender(d.report);
       } else {
         clearInterval(interval);
         lbl.classList.add('hidden');
         $('btn-sh-run').disabled=false;
+  const gscBtn=$('btn-gsc-refresh'); if(gscBtn) gscBtn.disabled=false; const gscImportBtn=$('btn-gsc-import'); if(gscImportBtn) gscImportBtn.disabled=false;
         $('sh-error').textContent='Audit error: '+(d.error||'Unknown'); $('sh-error').classList.remove('hidden');
       }
     }catch(e){
       clearInterval(interval);
       lbl.classList.add('hidden'); $('btn-sh-run').disabled=false;
+  const gscBtn=$('btn-gsc-refresh'); if(gscBtn) gscBtn.disabled=false; const gscImportBtn=$('btn-gsc-import'); if(gscImportBtn) gscImportBtn.disabled=false;
       if(!e.sessionExpired) $('sh-error').textContent=e.message||'Network error — try refreshing.'; $('sh-error').classList.remove('hidden');
     }
   },3000);
@@ -5273,7 +5561,7 @@ function shRender(report){
   $('sh-s-imgs').textContent=s.brokenImages;
   $('sh-s-prev').textContent=s.previewUrlCount;
   $('sh-s-gsc').textContent=s.gscIndexedCount!=null?s.gscIndexedCount:'—';
-  $('sh-s-gsc-sub').textContent=s.gscIndexedCount!=null?'GSC Verified':'not run yet';
+  $('sh-s-gsc-sub').textContent=s.gscIndexedCount!=null?'Tracked URLs':'not run yet';
   $('sh-s-thin').textContent=s.thinContentCount;
   $('sh-s-schema').textContent=s.schemaIssueCount;
   $('sh-s-ph').textContent=s.placeholderCount;
@@ -7113,6 +7401,16 @@ async function lcFixDeploy(){
           </div>
           <div style="margin-bottom:10px">
             <label class="dist-field-label">Description</label>
+        <label style="font-size:.82rem;font-weight:600;color:#374151">Slot
+          <select id="imglib-slot" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem">
+            <option value="hero">Hero</option>
+            <option value="support">Support</option>
+            <option value="trust">Trust</option>
+            <option value="conversion">Conversion</option>
+          </select>
+        </label>
+
+
             <input id="imglib-desc" type="text" placeholder="e.g. Server room with blue lighting" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.85rem;box-sizing:border-box">
           </div>
           <div style="margin-bottom:10px">
@@ -7447,7 +7745,7 @@ async function lcFixDeploy(){
       const _tok = (typeof INTERNAL_TOKEN !== 'undefined' && INTERNAL_TOKEN) ? ('?_t='+encodeURIComponent(INTERNAL_TOKEN)) : '';
       const _tokAmp = (typeof INTERNAL_TOKEN !== 'undefined' && INTERNAL_TOKEN) ? ('&_t='+encodeURIComponent(INTERNAL_TOKEN)) : '';
       // Load manifest
-      const r = await fetch('/api/image-library/manifest' + _tok, { credentials:'include' });
+      const r = await apiFetch('/api/image-library/manifest');
       if(!r.ok) throw new Error('HTTP ' + r.status);
       const data = await r.json();
       imgLibData = data.images || [];
@@ -7516,7 +7814,9 @@ async function lcFixDeploy(){
     grid.innerHTML = filtered.map(function(img) {
       const usagePages = imgLibUsage[img.id] || [];
       const usageText  = usagePages.length > 0 ? 'Used by ' + usagePages.length + ' page' + (usagePages.length!==1?'s':'') : 'Not yet used';
-      const thumbSrc   = '/api/image-library/serve/' + img.service + '/' + img.slot + '/' + img.filename;
+      const fileName   = img.fileName || img.filename || '';
+      const imageUrl   = img.thumbnailUrl || img.imageUrl || '';
+      const thumbSrc   = imageUrl || ('/api/image-library/serve/' + img.service + '/' + img.slot + '/' + fileName);
       const svcLabel   = SERVICE_LABELS[img.service] || img.service;
       const badgeClass = img.approved ? 'imglib-badge-approved' : 'imglib-badge-unapproved';
       const badgeText  = img.approved ? 'Approved' : 'Unapproved';
@@ -7524,7 +7824,7 @@ async function lcFixDeploy(){
       const approveLabel = img.approved ? 'Unapprove' : 'Approve';
       // Use data attributes for all IDs — avoids any quote-escaping inside onclick strings
       return '<div class="imglib-card" data-imgid="' + img.id + '">' +
-        '<img class="imglib-card-img" src="' + thumbSrc + '" alt="' + (img.description||img.filename) + '" loading="lazy" onerror="imgLibImgErr(this)">' +
+        '<img class="imglib-card-img" src="' + thumbSrc + '" alt="' + (img.description||fileName) + '" loading="lazy" onerror="imgLibImgErr(this)">' +
         '<div class="imglib-card-body">' +
           '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:6px">' +
             '<span class="imglib-badge ' + badgeClass + '">' + badgeText + '</span>' +
@@ -7533,7 +7833,7 @@ async function lcFixDeploy(){
           '<div style="margin-bottom:6px">' +
             '<span class="imglib-svc-pill">' + svcLabel + '</span>' +
           '</div>' +
-          '<div style="font-size:.82rem;font-weight:600;color:#111827;margin-bottom:3px;word-break:break-all">' + (img.description || img.filename) + '</div>' +
+          '<div style="font-size:.82rem;font-weight:600;color:#111827;margin-bottom:3px;word-break:break-all">' + (img.description || fileName) + '</div>' +
           '<div style="font-size:.74rem;color:#6b7280;margin-bottom:8px;font-style:italic">' + (img.altTemplate||'') + '</div>' +
           (img.tags && img.tags.length ? '<div style="font-size:.72rem;color:#9ca3af;margin-bottom:8px">' + img.tags.join(', ') + '</div>' : '') +
           '<button data-action="use" style="width:100%;margin-bottom:8px;padding:7px 0;font-size:.82rem;font-weight:700;background:#059669;color:#fff;border:none;border-radius:6px;cursor:pointer;letter-spacing:.01em">&#10003; Use this image</button>' +
@@ -7562,6 +7862,7 @@ async function lcFixDeploy(){
     const statusEl = document.getElementById('imglib-upload-status');
     const fileEl   = document.getElementById('imglib-file');
     const svc      = (document.getElementById('imglib-svc')  ||{}).value || '';
+    const slot     = (document.getElementById('imglib-slot') ||{}).value || 'hero';
     const desc     = (document.getElementById('imglib-desc') ||{}).value || '';
     const alt      = (document.getElementById('imglib-alt')  ||{}).value || '';
     const tags     = (document.getElementById('imglib-tags') ||{}).value || '';
@@ -7587,6 +7888,7 @@ async function lcFixDeploy(){
       var fd = new FormData();
       fd.append('file', file);
       fd.append('service', svc);
+      fd.append('slot', slot);
       fd.append('description', desc || file.name.replace(/\.[^.]+$/, ''));
       fd.append('altTemplate', alt);
       fd.append('tags', tags);
@@ -7735,7 +8037,7 @@ async function lcFixDeploy(){
     var slotName = img.slot.charAt(0).toUpperCase() + img.slot.slice(1);
     var msgEl    = document.getElementById('imglib-use-msg');
     if (msgEl) {
-      msgEl.textContent = '\u2713 "' + (img.description || img.filename) + '" is now active for ' + svcName + ' \u2192 ' + slotName + ' slot. Re-run rollout to apply it to all pages.';
+      msgEl.textContent = '\u2713 "' + (img.description || fileName) + '" is now active for ' + svcName + ' \u2192 ' + slotName + ' slot. Re-run rollout to apply it to all pages.';
       msgEl.style.display = 'block';
       setTimeout(function(){ msgEl.style.display = 'none'; }, 6000);
     }
@@ -8972,7 +9274,7 @@ async function lcFixDeploy(){
 (function(){
   function slugify(s){
     return s.toLowerCase().trim()
-      .replace(/[^a-z0-9\\s-]/g,'').replace(/[\\s_]+/g,'-')
+      .replace(/[^a-z0-9\\\\s-]/g,'').replace(/[\\\\s_]+/g,'-')
       .replace(/-+/g,'-').replace(/^-|-$/g,'').slice(0,48);
   }
   window.openNewClientModal=function(){
@@ -9612,3 +9914,4 @@ document.querySelectorAll('.vp-plat-cb').forEach(function(cb){
 }
 
 export default router;
+

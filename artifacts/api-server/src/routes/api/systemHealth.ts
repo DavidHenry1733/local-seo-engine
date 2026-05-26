@@ -818,6 +818,54 @@ function reportToCsv(report: SystemHealthReport): string {
 // ── Routes ────────────────────────────────────────────────────────────────────
 
 // GET cached report
+
+// ── Platform status summary ────────────────────────────────────────────────
+router.get("/platform-status/:slug", (req, res) => {
+  const slug = req.params.slug;
+  const dir = path.join(OUTPUT_DIR, slug);
+  const file = path.join(dir, "platform-status.json");
+
+  function readJson(name: string, fallback: any = {}) {
+    try {
+      const p = path.join(dir, name);
+      if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, "utf8"));
+    } catch {}
+    return fallback;
+  }
+
+  try {
+    if (fs.existsSync(file)) {
+      res.json(JSON.parse(fs.readFileSync(file, "utf8")));
+      return;
+    }
+
+    const registry = readJson("page-registry.json", { pages: [] });
+    const health = readJson("registry-health.json", {});
+    const orphan = readJson("orphan-check.json", {});
+
+    const livePages = (registry.pages || []).filter((p: any) => p.status === "live").length;
+
+    const status = {
+      checkedAt: new Date().toISOString(),
+      livePages,
+      liveOk: health.liveOk || 0,
+      failedPages: health.failedCount || 0,
+      sitemapUrls: orphan.sitemapCount || 0,
+      registryUrls: orphan.registryCount || livePages,
+      missingFromSitemap: (orphan.missingFromSitemap || []).length,
+      missingFromRegistry: (orphan.missingFromRegistry || []).length,
+      healthy:
+        (health.failedCount || 0) === 0 &&
+        ((orphan.missingFromSitemap || []).length) === 0 &&
+        ((orphan.missingFromRegistry || []).length) === 0,
+    };
+
+    res.json(status);
+  } catch {
+    res.status(500).json({ error: "Failed to read platform status" });
+  }
+});
+
 router.get("/system-health/:slug", (req, res) => {
   const { slug } = req.params;
   const cache    = cachePath(slug);

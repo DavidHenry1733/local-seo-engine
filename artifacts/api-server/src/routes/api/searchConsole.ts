@@ -584,16 +584,41 @@ export async function rebuildSitemapForClient(clientSlug: string): Promise<Sitem
     }
   }
 
-  const allDirs = fs.readdirSync(clientDir).filter((f) => {
-    const full = path.join(clientDir, f);
-    return fs.statSync(full).isDirectory() && fs.existsSync(path.join(full, "index.html"));
-  });
+  // ── Primary source: persistent page registry ───────────────────────
+  const registryFile = path.join(clientDir, "page-registry.json");
 
-  const finalMasterLocs = allDirs
-    .map((dir) => {
-      const loc = `${domain}/${dir}/`;
-      return { loc, priority: remotePriorityMap.get(loc) ?? 0.8 };
-    })
+  if (fs.existsSync(registryFile)) {
+    try {
+      const registry = JSON.parse(fs.readFileSync(registryFile, "utf8"));
+      const pages = Array.isArray(registry.pages) ? registry.pages : [];
+
+      for (const page of pages) {
+        if (!page || page.status === "archived") continue;
+        if (page.includedInSitemap === false) continue;
+        if (!page.url) continue;
+
+        const priority =
+          typeof page.priority === "number"
+            ? page.priority
+            : page.type === "hub"
+              ? 1.0
+              : 0.8;
+
+        if (
+          !remotePriorityMap.has(page.url) ||
+          priority > (remotePriorityMap.get(page.url) ?? 0)
+        ) {
+          remotePriorityMap.set(page.url, priority);
+        }
+      }
+    } catch (err) {
+      console.error("Failed to load page-registry.json:", err);
+    }
+  }
+
+  // Build master sitemap from merged registry + discovery sources.
+  const finalMasterLocs = Array.from(remotePriorityMap.entries())
+    .map(([loc, priority]) => ({ loc, priority }))
     .sort((a, b) => b.priority - a.priority || a.loc.localeCompare(b.loc));
 
   fs.writeFileSync(path.join(clientDir, "sitemap.xml"), buildUrlsetXml(finalMasterLocs), "utf8");
@@ -991,6 +1016,46 @@ async function runDeployJob(
         } catch (err) {
           job.failed.push({ slug: `assets/${imgFile}`, error: String(err instanceof Error ? err.message : err) });
         }
+      }
+    }
+
+    // ── 2. Upload shared /assets referenced by generated HTML ─────────────
+    job.phase = "assets";
+    const assetRefs = new Set<string>();
+
+    for (const { htmlPath } of pages) {
+      try {
+        const html = fs.readFileSync(htmlPath, "utf8");
+        const re = /["']\/assets\/([^"']+)["']/g;
+        let m: RegExpExecArray | null;
+
+        while ((m = re.exec(html)) !== null) {
+          if (m[1]) assetRefs.add(m[1]);
+        }
+      } catch {
+        /* skip unreadable html */
+      }
+    }
+
+    for (const rel of assetRefs) {
+      try {
+        const localAsset = path.join(WORKSPACE_ROOT, "assets", rel);
+
+        if (!fs.existsSync(localAsset)) continue;
+        if (!fs.statSync(localAsset).isFile()) continue;
+
+        const remoteAsset = `${remoteRoot}/assets/${rel}`.replace(/\/+/g, "/");
+        const remoteAssetDir = path.posix.dirname(remoteAsset);
+
+        await client.ensureDir(remoteAssetDir);
+        await client.uploadFrom(localAsset, remoteAsset);
+
+        job.assetsUploaded++;
+      } catch (err) {
+        job.failed.push({
+          slug: `asset:${rel}`,
+          error: String(err instanceof Error ? err.message : err)
+        });
       }
     }
 

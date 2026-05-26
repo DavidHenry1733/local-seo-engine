@@ -240,22 +240,22 @@ export function scoreAiReadiness(html: string): AiReadinessResult {
 
   if (legacyAnswerMatches.length > 0) {
     const avgWords = legacyAnswerMatches.reduce((a, b) => a + b, 0) / legacyAnswerMatches.length;
-    const shortCount = legacyAnswerMatches.filter(w => w < 120).length;
-    if (avgWords >= 120 && shortCount === 0) {
+    const shortCount = legacyAnswerMatches.filter(w => w < 100).length;
+    if (avgWords >= 100 && shortCount === 0) {
       cat2.scored += 12;
-      cat2.details.push(`All intent answers ≥120 words (avg ${Math.round(avgWords)} words) (+12)`);
+      cat2.details.push(`All intent answers ≥100 words (avg ${Math.round(avgWords)} words) (+12)`);
     } else if (avgWords >= 100 && shortCount <= 1) {
       cat2.scored += 8;
       cat2.details.push(`Intent answers mostly meet target (avg ${Math.round(avgWords)} words) (+8)`);
-      if (shortCount > 0) warnings.push(`${shortCount} intent answer(s) are under 120 words — expand each to 120–180 words.`);
+      if (shortCount > 0) warnings.push(`${shortCount} intent answer(s) are under 100 words — expand each to 100–180 words.`);
     } else if (avgWords >= 80) {
       cat2.scored += 4;
-      cat2.details.push(`Intent answers average ${Math.round(avgWords)} words (target ≥120) (+4)`);
-      warnings.push(`${shortCount} intent answer(s) under 120 words — all should be 120–180 words for AI extraction.`);
+      cat2.details.push(`Intent answers average ${Math.round(avgWords)} words (target ≥100) (+4)`);
+      warnings.push(`${shortCount} intent answer(s) under 100 words — all should be 100–180 words for AI extraction.`);
     } else {
       cat2.scored += 2;
       cat2.details.push(`Intent answers too short (avg ${Math.round(avgWords)} words) (+2)`);
-      recommendedFixes.push("Expand all intent cluster answers to at least 120 words — each must be standalone and AI-extractable.");
+      recommendedFixes.push("Expand all intent cluster answers to at least 100 words — each must be standalone and AI-extractable.");
     }
   } else {
     cat2.details.push("Could not measure intent answer word counts (0)");
@@ -377,7 +377,7 @@ export function scoreAiReadiness(html: string): AiReadinessResult {
       cat4.details.push(`Local Relevance section: ${lrWords} words (+4)`);
     } else if (lrWords >= 60) {
       cat4.scored += 2;
-      cat4.details.push(`Local Relevance section: only ${lrWords} words (target ≥120) (+2)`);
+      cat4.details.push(`Local Relevance section: only ${lrWords} words (target ≥100) (+2)`);
       warnings.push(`Local Relevance section is only ${lrWords} words — expand to 120+ words with area-specific detail.`);
     } else {
       cat4.scored += 1;

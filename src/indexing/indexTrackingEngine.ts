@@ -60,6 +60,31 @@ function writeTrackingReport(report: IndexTrackingReport, outputDir: string): vo
   fs.writeFileSync(p, JSON.stringify(report, null, 2), "utf8");
 }
 
+
+function loadRegistryUrls(projectSlug: string, outputDir = "output"): string[] {
+  const registryFile = path.join(outputDir, projectSlug, "page-registry.json");
+  if (!fs.existsSync(registryFile)) return [];
+
+  try {
+    const registry = JSON.parse(fs.readFileSync(registryFile, "utf8")) as {
+      pages?: Array<{
+        url?: string;
+        status?: string;
+        includedInSitemap?: boolean;
+      }>;
+    };
+
+    const urls = (registry.pages ?? [])
+      .filter(p => p.url && p.status === "live" && p.includedInSitemap !== false)
+      .map(p => p.url as string);
+
+    return [...new Set(urls)];
+  } catch {
+    return [];
+  }
+}
+
+
 // ─── Sitemap URL loader ───────────────────────────────────────────────────────
 
 /**
@@ -67,26 +92,54 @@ function writeTrackingReport(report: IndexTrackingReport, outputDir: string): vo
  * Falls back to proof-log.json if no sitemap exists.
  */
 export function loadSitemapUrls(projectSlug: string, outputDir = "output"): string[] {
-  const sitemapFile = path.join(outputDir, projectSlug, "sitemap.xml");
+  const projectDir = path.join(outputDir, projectSlug);
 
+  // Prefer sitemap index when present
+  const sitemapIndex = path.join(projectDir, "sitemap-index.xml");
+  if (fs.existsSync(sitemapIndex)) {
+    const indexXml = fs.readFileSync(sitemapIndex, "utf8");
+    const childSitemaps = [...indexXml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+      .map(m => m[1].trim());
+
+    const allUrls: string[] = [];
+
+    for (const smUrl of childSitemaps) {
+      const fileName = smUrl.split("/").pop();
+      if (!fileName) continue;
+
+      const localPath = path.join(projectDir, fileName);
+      if (!fs.existsSync(localPath)) continue;
+
+      const xml = fs.readFileSync(localPath, "utf8");
+      const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+        .map(m => m[1].trim());
+
+      allUrls.push(...urls);
+    }
+
+    if (allUrls.length > 0) return [...new Set(allUrls)];
+  }
+
+  // Legacy single sitemap fallback
+  const sitemapFile = path.join(projectDir, "sitemap.xml");
   if (fs.existsSync(sitemapFile)) {
-    const xml  = fs.readFileSync(sitemapFile, "utf8");
+    const xml = fs.readFileSync(sitemapFile, "utf8");
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].trim());
     if (locs.length > 0) return locs;
   }
 
-  const proofFile = path.join(outputDir, projectSlug, "proof-log.json");
+  const proofFile = path.join(projectDir, "proof-log.json");
   if (fs.existsSync(proofFile)) {
     try {
       const log = JSON.parse(fs.readFileSync(proofFile, "utf8")) as Array<{
         event: string;
-        data:  Record<string, unknown>;
+        data: Record<string, unknown>;
       }>;
       const urls = log
         .filter(e => typeof e.data?.pageUrl === "string")
         .map(e => e.data.pageUrl as string);
       return [...new Set(urls)];
-    } catch { /* fall through */ }
+    } catch {}
   }
 
   return [];
@@ -346,7 +399,8 @@ export async function runIndexTracking(
   const concurrency = Math.max(1, Math.min(options.concurrency ?? 5, 10));
   const outputDir   = options.outputDir   ?? "output";
 
-  const allUrls = loadSitemapUrls(projectSlug, outputDir);
+  const registryUrls = loadRegistryUrls(projectSlug, outputDir);
+  const allUrls = registryUrls.length > 0 ? registryUrls : loadSitemapUrls(projectSlug, outputDir);
   if (allUrls.length === 0) {
     throw new Error(
       `No URLs found for project "${projectSlug}". ` +

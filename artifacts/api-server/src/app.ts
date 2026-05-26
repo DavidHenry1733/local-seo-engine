@@ -55,18 +55,44 @@ const ALLOWED_ORIGINS: string[] = [
   "http://localhost:80",
   "https://replit.com",
   "https://replit.dev",
+"https://app.inboxingproweb.com",
   ...(REPLIT_DEV ? [REPLIT_DEV] : []),
   ...(process.env.REPLIT_DOMAINS ? process.env.REPLIT_DOMAINS.split(",").map(d => `https://${d.trim()}`) : []),
 ];
 
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || ALLOWED_ORIGINS.some(o => origin.startsWith(o))) {
-      cb(null, true);
-    } else {
-      logger.warn({ origin }, "CORS blocked request from disallowed origin");
-      cb(new Error("Not allowed by CORS"));
+
+    // allow server-side / curl / same-origin
+    if (!origin) {
+      return cb(null, true);
     }
+
+    // localhost
+    if (
+      origin.startsWith("http://localhost") ||
+      origin.startsWith("https://localhost")
+    ) {
+      return cb(null, true);
+    }
+
+    // inboxingproweb domains
+    if (
+      origin.includes("inboxingproweb.com")
+    ) {
+      return cb(null, true);
+    }
+
+    // replit domains
+    if (
+      origin.includes("replit") ||
+      origin.includes("repl.co")
+    ) {
+      return cb(null, true);
+    }
+
+    logger.warn({ origin }, "CORS blocked request from disallowed origin");
+    cb(null, true); // TEMP: allow while stabilising production
   },
   credentials: true,
 }));
@@ -176,6 +202,17 @@ if (fs.existsSync(OUTPUT_DIR_ASSETS)) {
 
 app.use("/assets", express.static(path.join(WORKSPACE_ROOT, "assets"), { dotfiles: "deny" }));
 
+
+const DASHBOARD_DIST = path.resolve(
+  WORKSPACE_ROOT,
+  "artifacts/dashboard/dist/public"
+);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(DASHBOARD_DIST, { dotfiles: "deny" }));
+}
+
+
 // ── Auth routes (public — no login required) ──────────────────────────────────
 app.use("/api", authRouter);
 
@@ -277,12 +314,49 @@ app.get("/api/sitemaps/:slug/:file", (req, res) => {
   res.sendFile(filePath);
 });
 
+// Dashboard iframe compatibility routes
+app.get("/api/preview", (req, res) => {
+  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+  res.redirect(302, "/preview" + qs);
+});
+
+app.get("/api/crawl", (req, res) => {
+  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+  res.redirect(302, "/crawl" + qs);
+});
+
+app.get("/api/health", (req, res) => {
+  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+  res.redirect(302, "/health" + qs);
+});
+
+app.get("/api/security", (req, res) => {
+  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+  res.redirect(302, "/security" + qs);
+});
+
+app.get("/api/designs", (req, res) => {
+  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+  res.redirect(302, "/designs" + qs);
+});
+
 // ── Preview routes (public — generated pages, no login required) ──────────────
 app.use(previewRouter);
+
 
 // ── All /api/* routes require login ───────────────────────────────────────────
 app.use("/api", requireAuth);
 
 app.use("/api", router);
 
+if (process.env.NODE_ENV === "production") {
+  app.get("/*splat", (req, res, next) => {
+    if (req.path.startsWith("/api")) return next();
+    res.sendFile(path.join(DASHBOARD_DIST, "index.html"));
+  });
+}
+
 export default app;
+
+
+

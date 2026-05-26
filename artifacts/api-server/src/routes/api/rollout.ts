@@ -29,6 +29,7 @@ import { optimiseForAiCitation } from "../../../../../src/generator/aiCitationOp
 import type { AiCitationContext } from "../../../../../src/generator/aiCitationOptimiser";
 import { rebuildSitemapForClient } from "./searchConsole";
 import { selectPageImages, serviceDisplayName, approvedImages, imageFilePath } from "../../../../../src/generator/imageLibrary";
+import { normaliseServiceKey } from "./images";
 import type { PageImageSelections, ImageLibraryConfig } from "../../../../../src/generator/imageLibrary";
 import { logger } from "../../lib/logger";
 import { loadProviderProfile } from "./providerProfiles";
@@ -499,13 +500,13 @@ async function runRolloutJob(
             manualOverride,
           });
 
-          // Library images take priority over campaign/project-level slot images.
-          // The image library contains approved uploaded business-type images that
-          // must always be preferred over AI-generated or project-level fallbacks.
-          const _libHero       = selections.hero;
-          const _libSupport    = selections.support;
-          const _libTrust      = selections.trust;
-          const _libConversion = selections.conversion;
+          // Gate on campaignSlotsFilled — assigned slot images must not be overwritten
+          // by the image library. Mirrors the identical guard in the hub library block.
+          const _filled        = new Set(result.campaignSlotsFilled);
+          const _libHero       = _filled.has("hero")       ? undefined : selections.hero;
+          const _libSupport    = _filled.has("support")    ? undefined : selections.support;
+          const _libTrust      = _filled.has("trust")      ? undefined : selections.trust;
+          const _libConversion = _filled.has("conversion") ? undefined : selections.conversion;
 
           if (_libHero || _libSupport || _libTrust || _libConversion) {
             let html = fs.readFileSync(result.outputPath, "utf8");
@@ -538,10 +539,10 @@ async function runRolloutJob(
               html = replaceByWrapper(html, "conversion-feature-image", _libConversion.src, _libConversion.alt);
             }
             // Sync selections to only reflect what was actually applied
-            selections.hero       = _libHero;
-            selections.support    = _libSupport;
-            selections.trust      = _libTrust;
-            selections.conversion = _libConversion;
+            selections.hero       = _libHero       ?? null;
+            selections.support    = _libSupport    ?? null;
+            selections.trust      = _libTrust      ?? null;
+            selections.conversion = _libConversion ?? null;
 
             fs.writeFileSync(result.outputPath, html, "utf8");
             libSelections = selections;
@@ -1073,9 +1074,12 @@ async function runOneArea(
   const _kNorm = (s: string) => (s ?? "").trim().toLowerCase().replace(/[\s_-]+/g, "");
 
   // Service identifiers for this campaign (used only in legacy fuzzy fallback)
-  const _svcIds = [campaignServiceKey, def.service].map(_kNorm).filter(Boolean);
+  // Normalize campaignServiceKey so alias variants like "small-business-web-design"
+  // resolve to the canonical form "web-design" written by the assign-to-slot endpoint.
+  const _normCampaignSvcKey = campaignServiceKey ? normaliseServiceKey(campaignServiceKey) : undefined;
+  const _svcIds = [_normCampaignSvcKey, def.service].map(_kNorm).filter(Boolean);
   const _svcKeyMatches = (key: string) => {
-    if (!key) return true;                    // empty key = root assets, always OK
+    if (!key) return _svcIds.length === 0;                    // empty key = root assets, always OK
     const kn = _kNorm(key);
     return _svcIds.length === 0 ||
       _svcIds.some((id) => kn === id || id.startsWith(kn) || kn.startsWith(id));
@@ -1124,7 +1128,11 @@ async function runOneArea(
     if (_legacyFuzzyDir && _legacyBestScore >= 50) {
       for (const ext of IMAGE_EXTS) {
         if (fs.existsSync(path.join(projectAssetsDir, _legacyFuzzyDir, `${slot}.${ext}`))) {
-          return { ext, svcDir: _legacyFuzzyDir, fromMeta: false };
+          const _metaEntry  = _imgMeta[slot] ?? _imgMeta[`${_legacyFuzzyDir}:${slot}`];
+          const _metaSvcKey = (_metaEntry as Record<string, unknown>)?.serviceKey as string | undefined;
+          const _fromMeta   = _metaEntry !== undefined &&
+            (!_metaSvcKey || _kNorm(_metaSvcKey) === _kNorm(_legacyFuzzyDir));
+          return { ext, svcDir: _legacyFuzzyDir, fromMeta: _fromMeta };
         }
       }
     }
@@ -1276,11 +1284,36 @@ async function runOneArea(
       const apiBase = `/api/images/serve/${project.clientSlug}`;
       const liveBase = `${domain}/assets/${project.clientSlug}`;
       const projectAssetsDir = path.join(OUTPUT_DIR, project.clientSlug, "assets");
-      for (const slot of ["hero", "support", "conversion"] as const) {
-        const apiPath  = `${apiBase}/${slot}`;
-        const livePath = `${liveBase}/${slot}.jpg`;
-        if (normalised.includes(apiPath) && fs.existsSync(path.join(projectAssetsDir, `${slot}.jpg`))) {
-          normalised = normalised.split(`"${apiPath}"`).join(`"${livePath}"`);
+      for (const slot of ["hero", "support", "trust", "conversion"] as const) {
+        const apiPath = `${apiBase}/${slot}`;
+        const svcKey = project.serviceKey ?? "";
+
+        const candidateFiles = [
+          path.join(projectAssetsDir, `${slot}.webp`),
+          path.join(projectAssetsDir, `${slot}.jpg`),
+          path.join(projectAssetsDir, `${slot}.jpeg`),
+          path.join(projectAssetsDir, `${slot}.png`),
+
+          ...(svcKey ? [
+            path.join(projectAssetsDir, svcKey, `${slot}.webp`),
+            path.join(projectAssetsDir, svcKey, `${slot}.jpg`),
+            path.join(projectAssetsDir, svcKey, `${slot}.jpeg`),
+            path.join(projectAssetsDir, svcKey, `${slot}.png`)
+          ] : [])
+        ];
+
+        const found = candidateFiles.find((f) => fs.existsSync(f));
+
+        if (normalised.includes(apiPath) && found) {
+          const ext = path.extname(found);
+          const isServiceSpecific = svcKey && found.includes(path.join(projectAssetsDir, svcKey));
+          const svcPrefix = isServiceSpecific ? `/${svcKey}` : "";
+          const livePath = `${liveBase}${svcPrefix}/${slot}${ext}`;
+
+          normalised = normalised
+            .split(`"${apiPath}"`).join(`"${livePath}"`)
+            .split(`'${apiPath}'`).join(`'${livePath}'`);
+
           changed = true;
         }
       }

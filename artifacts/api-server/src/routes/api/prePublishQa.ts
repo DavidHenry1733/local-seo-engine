@@ -1,3 +1,26 @@
+
+function normalisePrimaryKeyword(raw: string, h1: string, areaDir: string) {
+  const v = String(raw || "").trim();
+
+  // Detect polluted multi-service keywords
+  const bad =
+    v.includes(",") ||
+    v.toLowerCase().includes(" and ") ||
+    v.split(" ").length > 8;
+
+  if (!bad && v) return v;
+
+  // Prefer clean H1
+  if (h1 && h1.trim()) return h1.trim();
+
+  // Fallback to slug-derived title
+  return areaDir
+    .split("-")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+
 /**
  * prePublishQa.ts
  *
@@ -128,6 +151,32 @@ function loadSitemapUrls(clientDir: string): string[] {
 
 // ── GET /api/pre-publish-qa/:slug/page/:areaDir  (single-page fast recheck) ──
 
+
+function titleFromSlug(areaDir: string): string {
+  return String(areaDir || "")
+    .split("-")
+    .filter(Boolean)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+function isPollutedPrimaryKeyword(v: string): boolean {
+  const s = String(v || "").trim().toLowerCase();
+  if (!s) return true;
+  return (
+    s.includes(",") ||
+    s.includes(" and ") ||
+    s.split(/\s+/).length > 8 ||
+    (s.includes("web design") && s.includes("hosting") && s.includes("local seo"))
+  );
+}
+
+function cleanQaPrimaryKeyword(raw: string, h1: string, areaDir: string): string {
+  if (!isPollutedPrimaryKeyword(raw)) return String(raw || "").trim();
+  if (String(h1 || "").trim()) return String(h1).trim();
+  return titleFromSlug(areaDir);
+}
+
 router.get("/pre-publish-qa/:slug/page/:areaDir", (req, res) => {
   const { slug, areaDir } = req.params;
   const clientDir  = path.join(OUTPUT_DIR, slug);
@@ -146,7 +195,7 @@ router.get("/pre-publish-qa/:slug/page/:areaDir", (req, res) => {
   const area         = def?.area ?? areaDir;
   const serviceName  = ((project as unknown as Record<string, unknown>)?.mainService as string) ?? "Service";
   const domain       = project?.domain?.replace(/\/+$/, "") ?? "";
-  const primaryKw    = def?.primaryKeyword ?? `${serviceName} ${area}`;
+  const primaryKw = cleanQaPrimaryKeyword(def?.primaryKeyword ?? "", h1, areaDir) || `${serviceName} ${area}`;
   const isHub        = def?.tier === "hub";
   const pageType     = isHub ? "hub" : "cluster" as "hub" | "cluster";
   const imageMode    = (project as unknown as Record<string, unknown>)?.imageMode as string ?? "";
@@ -322,7 +371,8 @@ router.post("/pre-publish-qa/:slug", (req, res) => {
         const html      = fs.readFileSync(htmlPath, "utf8");
         const def       = findDef(areaDir, allDefs);
         const area      = def?.area ?? areaDir;
-        const primaryKw = def?.primaryKeyword ?? `${serviceName} ${area}`;
+        const pageH1 = (html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || "").replace(/<[^>]+>/g, "").trim();
+        const primaryKw = cleanQaPrimaryKeyword(def?.primaryKeyword ?? "", pageH1, areaDir) || `${serviceName} ${area}`;
         const isHub     = def?.tier === "hub" || sessionHubPath?.replace(/^\/|\/$/g, "") === areaDir;
         const pageType  = isHub ? "hub" : "cluster" as "hub" | "cluster";
         const expectedCanonical = `${domain}/${areaDir}/`;
@@ -443,7 +493,8 @@ router.post("/pre-publish-qa/:slug", (req, res) => {
       fs.writeFileSync(path.join(clientDir, "pre-publish-qa.json"), JSON.stringify(output, null, 2));
 
       jobStatus.set(slug, "done");
-    } catch {
+    } catch (err) {
+      console.error("[prePublishQa] scan failed", err);
       jobStatus.set(slug, "error");
     }
   });

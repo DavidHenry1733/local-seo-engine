@@ -310,8 +310,32 @@ function renderNavItems(
     .join("\n        ");
 }
 
+function resolveAssignedImage(cluster: ClusterRenderConfig, slot: "hero" | "support" | "trust" | "conversion"): string | null {
+  const serviceKey = cluster.serviceKey ?? cluster.imageGroup?.replace(/^assets\//, "") ?? "";
+  const candidates = [
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", serviceKey, `${slot}.webp`),
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", serviceKey, `${slot}.jpg`),
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", serviceKey, `${slot}.jpeg`),
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", serviceKey, `${slot}.png`),
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", `${slot}.webp`),
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", `${slot}.jpg`),
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", `${slot}.jpeg`),
+    path.join(process.cwd(), "output", "inboxingproweb", "assets", `${slot}.png`)
+  ];
+
+  const found = candidates.find((p) => fs.existsSync(p));
+  if (!found) return null;
+
+  const marker = `${path.sep}output${path.sep}inboxingproweb${path.sep}`;
+  const idx = found.indexOf(marker);
+  const rel = idx >= 0 ? found.slice(idx + marker.length) : found;
+  return `/${rel.replace(/\\/g, "/")}`;
+}
+
 function resolveHeroImage(cluster: ClusterRenderConfig): string {
-  // imageGroup already contains the "assets/<service>" prefix
+  const assigned = resolveAssignedImage(cluster, "hero");
+  if (assigned) return assigned;
+
   if (cluster.heroImage) {
     return `/${cluster.imageGroup}/${cluster.heroImage}`;
   }
@@ -332,6 +356,9 @@ function resolveHeroImage(cluster: ClusterRenderConfig): string {
  *  "conversion" — this is required for the slot-replacement regex in runOneArea
  *  to reliably identify and rewrite this img's src to the live domain URL. */
 function resolveMidPageImage(cluster: ClusterRenderConfig): string {
+  const assigned = resolveAssignedImage(cluster, "conversion");
+  if (assigned) return assigned;
+
   const candidates = [
     path.join(cluster.imageGroup, "conversion-v1.png"),
     path.join(cluster.imageGroup, "conversion-v1.jpg"),
@@ -344,6 +371,9 @@ function resolveMidPageImage(cluster: ClusterRenderConfig): string {
 
 /** Resolve half-width split section image — trust/professional context. */
 function resolveSplitImage(cluster: ClusterRenderConfig): string {
+  const assigned = resolveAssignedImage(cluster, "trust") || resolveAssignedImage(cluster, "support");
+  if (assigned) return assigned;
+
   const candidates = [
     path.join(cluster.imageGroup, "trust-v1.png"),
     path.join(cluster.imageGroup, "trust-v1.jpg"),
@@ -527,10 +557,10 @@ export function renderClusterHtml({ project, cluster, ai }: ClusterRenderInputs)
     ? project.industryType
     : (cluster.service ?? "");
   const _packRoles = assignImageRoles(_effectiveIndustry, process.cwd());
-  const heroImage       = _packRoles.heroImage         || resolveHeroImage(cluster);
-  const trustImage      = _packRoles.trustImage        || resolveSplitImage(cluster);
-  const supportImage    = _packRoles.earlySupportImage || resolveSplitImage(cluster);
-  const conversionImage = _packRoles.conversionImage   || resolveMidPageImage(cluster);
+  const heroImage       = resolveHeroImage(cluster)    || _packRoles.heroImage;
+  const trustImage      = resolveAssignedImage(cluster, "trust") || resolveSplitImage(cluster) || _packRoles.trustImage;
+  const supportImage    = resolveAssignedImage(cluster, "support") || resolveSplitImage(cluster) || _packRoles.earlySupportImage;
+  const conversionImage = resolveMidPageImage(cluster) || _packRoles.conversionImage;
   const pageUrl       = `${project.domain.replace(/\/+$/, "")}${cluster.remotePath}`;
   const _domainBase   = project.domain.replace(/\/+$/, "");
   const ogImage       = heroImage.startsWith("http")

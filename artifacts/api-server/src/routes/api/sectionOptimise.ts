@@ -410,6 +410,7 @@ function handleGenerateAreasWeCover(
 type OptimiseAction =
   | "improve-local-relevance"
   | "improve-service-relevance"
+  | "improve-intent-coverage"
   | "increase-variation"
   | "generate-related-services"
   | "generate-areas-we-cover";
@@ -417,6 +418,7 @@ type OptimiseAction =
 const VALID_ACTIONS: Set<string> = new Set([
   "improve-local-relevance",
   "improve-service-relevance",
+  "improve-intent-coverage",
   "increase-variation",
   "generate-related-services",
   "generate-areas-we-cover",
@@ -425,10 +427,104 @@ const VALID_ACTIONS: Set<string> = new Set([
 const ACTION_LABELS: Record<OptimiseAction, string> = {
   "improve-local-relevance":   "Local Relevance Improved",
   "improve-service-relevance": "Service Relevance Improved",
+  "improve-intent-coverage": "Intent Coverage Improved",
   "increase-variation":        "Content Variation Increased",
   "generate-related-services": "Related Services Section Generated",
   "generate-areas-we-cover":   "Areas We Cover Section Generated",
 };
+
+function soText(v: unknown, fallback = ""): string {
+  return String(v ?? fallback).trim();
+}
+
+function soEsc(v: unknown): string {
+  return soText(v)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function deriveServiceArea(pageData: Record<string, unknown>) {
+  const raw = soText(pageData.areaDir || pageData.slug || pageData.pageSlug || "");
+  const parts = raw.split("-").filter(Boolean);
+
+  const towns = ["doncaster", "barnsley", "sheffield", "rotherham"];
+  const town = parts.find(p => towns.includes(p.toLowerCase())) || soText(pageData.area || pageData.location || "your area");
+
+  const serviceParts = parts.filter(p => p.toLowerCase() !== town.toLowerCase());
+  const title = (words: string[]) => words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+
+  return {
+    area: soText(pageData.area || pageData.location || title([town]) || "your area"),
+    service: soText(pageData.serviceName || pageData.mainService || pageData.primaryKeyword || title(serviceParts) || "this service"),
+  };
+}
+
+function buildIntentCoverageSection(pageData: Record<string, unknown>): string {
+  const derived = deriveServiceArea(pageData);
+  const area = soEsc(derived.area);
+  const service = soEsc(derived.service);
+
+  return `
+<section class="cluster-intent-clusters" id="cluster-intent-clusters">
+  <div class="cluster-container">
+    <h2>Common Questions About ${service} in ${area}</h2>
+    <p class="cluster-intent-intro">These answers are designed to help local customers quickly understand pricing, process, suitability, and comparison points before choosing a provider. They also give search engines and AI answer systems a clearer picture of what the page covers, who it helps, and why the service is relevant locally.</p>
+
+    <div class="cluster-intent-item">
+      <h3>How much does ${service} cost in ${area}?</h3>
+      <div class="cluster-intent-answer">
+        <p>The cost of ${service} in ${area} depends on the type of work required, the size of the project, the level of preparation involved, and whether the customer needs a simple setup or a more complete service. A basic requirement will usually be quicker and more affordable, while a larger or more detailed project may need extra planning, content, design, technical checks, or follow-up support. The most useful approach is to start with a clear review of what is needed, then provide a practical recommendation based on the customer’s goals, budget, and timescale. This helps avoid unnecessary extras while making sure the final result is suitable, reliable, and ready to support local enquiries.</p>
+      </div>
+    </div>
+
+    <div class="cluster-intent-item">
+      <h3>What is the process for getting ${service} in ${area}?</h3>
+      <div class="cluster-intent-answer">
+        <p>The usual process starts with understanding the customer’s current situation, what they want to improve, and what outcome they need from the service. After that, the main requirements are reviewed so the right solution can be planned properly. This may include checking existing content, technical setup, local competition, branding, customer journey, or the way enquiries are currently handled. Once the plan is agreed, the work is completed in clear stages so the customer can see progress and understand what has been changed. The final stage is normally a review, testing, and any practical recommendations for next steps, so the service continues to support the business after the initial work is finished.</p>
+      </div>
+    </div>
+
+    <div class="cluster-intent-item">
+      <h3>Why choose a local provider for ${service} in ${area}?</h3>
+      <div class="cluster-intent-answer">
+        <p>Choosing a provider with local knowledge can make the service more relevant because the work can be shaped around the area, the audience, and the way customers actually search before making contact. Local understanding helps with clearer messaging, better service positioning, more realistic expectations, and stronger relevance for nearby customers. It also makes it easier to reflect the towns, neighbourhoods, and practical buying signals that matter in the local market. For businesses that rely on calls, enquiries, bookings, or visits from nearby customers, this local focus can make the final result more useful than a generic approach that could apply to any business in any location.</p>
+      </div>
+    </div>
+
+    <div class="cluster-intent-item">
+      <h3>How does ${service} compare with doing it yourself?</h3>
+      <div class="cluster-intent-answer">
+        <p>Doing the work yourself can seem attractive at first, especially when trying to keep costs low, but it can also take more time than expected and may lead to gaps that affect performance later. A professional service gives the customer a more structured approach, clearer technical checks, stronger local relevance, and a finished result that is easier to trust. It can also help avoid common issues such as thin content, weak calls to action, poor structure, missing search signals, broken links, unclear service messaging, or pages that do not properly answer customer questions. For many local businesses, the biggest benefit is speed and confidence: the work is completed properly while the business owner stays focused on running the business.</p>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
+function handleImproveIntentCoverage(html: string, pageData: Record<string, unknown>): string {
+  const newSection = buildIntentCoverageSection(pageData);
+
+  const existing = html.match(/<section[^>]*class="[^"]*cluster-intent-clusters[^"]*"[\s\S]*?<\/section>/i)?.[0];
+  if (existing) return html.replace(existing, newSection);
+
+  const aiSummary = html.match(/<section[^>]*id="ai-summary-section"[\s\S]*?<\/section>/i)?.[0];
+  if (aiSummary) return html.replace(aiSummary, aiSummary + "\n" + newSection);
+
+  const splitOne = html.match(/<section[^>]*id="split-section-one"[\s\S]*?<\/section>/i)?.[0];
+  if (splitOne) return html.replace(splitOne, splitOne + "\n" + newSection);
+
+  if (/<\/main>/i.test(html)) {
+    return html.replace(/<\/main>/i, newSection + "\n</main>");
+  }
+
+  if (/<\/body>/i.test(html)) {
+    return html.replace(/<\/body>/i, newSection + "\n</body>");
+  }
+
+  return html + "\n" + newSection;
+}
+
 
 router.post("/section-optimise", async (req, res) => {
   const { clientSlug, areaDir, action } = req.body as {
@@ -492,6 +588,10 @@ router.post("/section-optimise", async (req, res) => {
         newHtml = replaceSlice(html, slice, newSection);
         break;
       }
+      case "improve-intent-coverage": {
+        newHtml = handleImproveIntentCoverage(html, pageData);
+        break;
+      }
       case "increase-variation": {
         const slice = extractSection(html, 'id="ai-summary-section"');
         if (!slice) throw new Error("ai-summary-section not found in page HTML");
@@ -508,6 +608,10 @@ router.post("/section-optimise", async (req, res) => {
       default:
         res.status(400).json({ error: "Unknown action" });
         return;
+    }
+
+    if (act === "improve-intent-coverage" && !/<section[^>]*class="[^"]*cluster-intent-clusters/i.test(newHtml)) {
+      throw new Error("Intent Coverage fix failed: cluster-intent-clusters section was not inserted into HTML");
     }
 
     // Re-score the updated page

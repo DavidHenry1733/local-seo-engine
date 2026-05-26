@@ -2265,7 +2265,17 @@ App.loadCampaignHub = async function(slug) {
 };
 
 App.newCampaign = async function(evt) {
-  const slug = state.project?.clientSlug;
+  const urlCampaign = new URLSearchParams(window.location.search).get('campaign') || '';
+
+  const campaignSlug = (
+    state.campaign?.slug ||
+    state.campaign?.campaignSlug ||
+    state.campaignId ||
+    urlCampaign ||
+    ''
+  ).toString().trim();
+
+  const slug = campaignSlug || state.project?.clientSlug;
   if (!slug) {
     if (evt) evt.preventDefault();
     alert('Please load a project first.');
@@ -3655,11 +3665,36 @@ App.saveStage4 = function() {
 // ═══════════════════════════════════════════════════════════════════
 
 function getServiceKey() {
-  // Derive service key from project services or campaign service name
-  const svc = state.project?.services?.[0]?.key
-    || (state.campaign?.serviceName || '').toLowerCase().replace(/\\s+/g, '_').replace(/-/g, '_')
-    || 'web_design';
-  return svc;
+  // Active campaign must take priority over project default service.
+  // Return canonical hyphen service keys used by image library folders.
+  const raw = (
+    state.campaign?.serviceKey ||
+    state.campaign?.serviceName ||
+    state.project?.services?.[0]?.key ||
+    state.project?.serviceKey ||
+    state.project?.serviceName ||
+    'web-design'
+  ).toString().trim().toLowerCase();
+
+  const norm = raw
+    .replace(/[^a-z0-9\s_-]+/g, '')
+    .replace(/[\s_]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  const fixes = {
+    'web-de-ign': 'web-design',
+    'web-ho-ting': 'web-hosting',
+    'local--eo': 'local-seo',
+    'local-eo': 'local-seo',
+    'localseo': 'local-seo',
+    'local_seo': 'local-seo',
+    'emailmarketing': 'email-marketing',
+    'email_marketing': 'email-marketing',
+    'email marketing': 'email-marketing'
+  };
+
+  return fixes[norm] || norm;
 }
 
 function getImageRole(slot) {
@@ -3990,14 +4025,13 @@ App.loadImageLibrary = async function(slot) {
     // Pass service filter so pack images matching this campaign\'s trade are included.
     // Prefer serviceKey from campaign state; fall back to cid so server can self-resolve.
     let libUrl = '/api/images/library/' + slug;
-    const svcKey = state.campaign && state.campaign.serviceKey
-      ? String(state.campaign.serviceKey).trim().toLowerCase().replace(/[\\s_]+/g, '-').replace(/^-+|-+$/, '')
-      : '';
+    const svcKey = getServiceKey();
     if (svcKey) {
-      libUrl += '?service=' + encodeURIComponent(svcKey);
+      libUrl += '?service=' + encodeURIComponent(svcKey === 'web-de-ign' ? 'web-design' : svcKey);
     } else if (state.campaignId) {
       libUrl += '?cid=' + encodeURIComponent(state.campaignId);
     }
+    console.log('[loadImageLibrary] slot=' + slot + ' slug=' + slug + ' libUrl=' + libUrl);
     const res = await apiFetch(libUrl);
     if (!res.ok) throw new Error('Could not load library');
     const data = await res.json();
@@ -4092,7 +4126,17 @@ App.renderLibraryGrid = function(slot, filter) {
 App._selectedLibImg = App._selectedLibImg || {};
 
 App.assignFromLibrary = async function(btnEl, slot, imageUrl, altText, source, imageId) {
-  const slug = state.project?.clientSlug;
+  const urlCampaign = new URLSearchParams(window.location.search).get('campaign') || '';
+
+  const campaignSlug = (
+    state.campaign?.slug ||
+    state.campaign?.campaignSlug ||
+    state.campaignId ||
+    urlCampaign ||
+    ''
+  ).toString().trim();
+
+  const slug = campaignSlug || state.project?.clientSlug;
   console.log('[assignFromLibrary] START slot=' + slot + ' source=' + source + ' imageId=' + imageId + ' ts=' + new Date().toISOString());
   if (!slug) return;
   const statusEl = document.getElementById(\`img-status-\${slot}\`);
@@ -4159,18 +4203,26 @@ App.removeSlotImage = async function(btnEl, slot) {
 };
 
 App.loadImageStatuses = async function() {
-  const slug = state.project?.clientSlug;
+  const urlCampaign = new URLSearchParams(window.location.search).get('campaign') || '';
+
+  const campaignSlug = (
+    state.campaign?.slug ||
+    state.campaign?.campaignSlug ||
+    state.campaignId ||
+    urlCampaign ||
+    ''
+  ).toString().trim();
+
+  const slug = campaignSlug || state.project?.clientSlug;
   console.log('[loadImageStatuses] START slug=' + slug + ' ts=' + new Date().toISOString());
   if (!slug) return;
   try {
     // Build the status URL with service filter so slot previews only show images
     // that belong to the current campaign's service — mirrors loadImageLibrary.
     let statusUrl = '/api/images/status/' + slug;
-    const svcKey = state.campaign && state.campaign.serviceKey
-      ? String(state.campaign.serviceKey).trim().toLowerCase().replace(/[\s_]+/g, '-').replace(/^-+|-+$/, '')
-      : '';
+    const svcKey = getServiceKey();
     if (svcKey) {
-      statusUrl += '?service=' + encodeURIComponent(svcKey);
+      statusUrl += '?service=' + encodeURIComponent(svcKey === 'web-de-ign' ? 'web-design' : svcKey);
     } else if (state.campaignId) {
       statusUrl += '?cid=' + encodeURIComponent(state.campaignId);
     }
@@ -4357,6 +4409,17 @@ App.initStage5 = async function() {
 
   await App.loadImageStatuses();
   App.autoLoadLibraryImages();
+
+  // Load image library for Stage 5 after status/auto-load so the visible library is populated last.
+  // Run once immediately and once after the UI settles, because the Stage 5 pane can be re-rendered after init.
+  try {
+    if (typeof imgLibLoad === 'function') {
+      await imgLibLoad();
+      setTimeout(() => { try { imgLibLoad(); } catch(e) { console.error('[initStage5] delayed imgLibLoad failed', e); } }, 800);
+    }
+  } catch(e) {
+    console.error('[initStage5] imgLibLoad failed', e);
+  }
 
   // ── Zombie job recovery: if a job is already active when stage 5 loads ──────
   // This can happen when the dashboard opens the wizard while a previous job is

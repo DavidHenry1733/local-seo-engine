@@ -6,7 +6,7 @@ import { randomBytes } from "node:crypto";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
-const WORKSPACE_ROOT = path.resolve(__dirname, "../../..");
+const WORKSPACE_ROOT = "/home/inboxingproweb/local-seo-engine";
 const CAMPAIGNS_DIR  = path.join(WORKSPACE_ROOT, "config", "campaigns");
 const OUTPUT_DIR     = path.join(WORKSPACE_ROOT, "output");
 
@@ -76,18 +76,24 @@ const router = Router();
 // GET /api/campaigns/:slug — list all campaigns for a project
 router.get("/campaigns/:slug", (req, res) => {
   const { slug } = req.params;
-  const campaigns = readCampaigns(slug).map((c) => ({
-    ...c,
-    ...readSessionMoneyPage(slug, c.id),
-  }));
+  const campaigns = readCampaigns(slug).map((c) => {
+    const session = readSessionMoneyPage(slug, c.id);
+
+    return {
+      ...c,
+      moneyPageUrl: session.moneyPageUrl || c.moneyPageUrl || "",
+      focusKeyword: session.focusKeyword || c.focusKeyword || "",
+      hubGenerated: session.hubGenerated || false,
+    };
+  });
   res.json({ campaigns });
 });
 
 // POST /api/campaigns/:slug — create a new campaign
 router.post("/campaigns/:slug", (req, res) => {
   const { slug } = req.params;
-  const { city, citySlug, serviceName, serviceKey, industryType, buyerType } = req.body as {
-    city: string; citySlug: string; serviceName: string; serviceKey: string;
+  const { city, citySlug, serviceName, serviceKey, industryType, buyerType, focusKeyword } = req.body as {
+    city: string; citySlug: string; serviceName: string; serviceKey: string; focusKeyword?: string;
     industryType?: string; buyerType?: "household" | "business" | "landlord-property" | "mixed";
   };
 
@@ -97,20 +103,92 @@ router.post("/campaigns/:slug", (req, res) => {
   }
 
   const now = new Date().toISOString();
-  // Normalize both slugs to lowercase with underscores (no spaces/special chars) so the ID is safe as a filename and URL param.
-  // Strip leading/trailing hyphens/underscores so the ID always starts with [a-z0-9] (prevents validator rejection).
-  const safeCity = citySlug.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_-]/g, '').replace(/^[-_]+|[-_]+$/g, '');
-  const safeSvc  = serviceKey.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_-]/g, '').replace(/^[-_]+|[-_]+$/g, '');
+
+  const safeCity = citySlug.toLowerCase()
+    .replace(/\s+/g, "_")
+    .replace(/[^a-z0-9_-]/g, "")
+    .replace(/^[-_]+|[-_]+$/g, "");
+
+  const rawSvc = String(serviceKey || serviceName || "").toLowerCase();
+
+  let safeSvc = rawSvc
+    .replace(/[\s_]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  const svcCompact = safeSvc.replace(/[^a-z0-9]/g, "");
+
+  if (
+    safeSvc.includes("web-design") ||
+    svcCompact.includes("webdesign") ||
+    (svcCompact.includes("web") && svcCompact.includes("design"))
+  ) {
+    safeSvc = "web-design";
+  } else if (
+    safeSvc.includes("web-hosting") ||
+    svcCompact.includes("webhosting") ||
+    svcCompact.includes("webhoting") ||
+    (svcCompact.includes("web") && (svcCompact.includes("hosting") || svcCompact.includes("hoting")))
+  ) {
+    safeSvc = "web-hosting";
+  } else if (
+    safeSvc.includes("local-seo") ||
+    svcCompact.includes("localseo") ||
+    svcCompact.includes("seo")
+  ) {
+    safeSvc = "local-seo";
+  } else if (
+    safeSvc.includes("email-marketing") ||
+    svcCompact.includes("emailmarketing") ||
+    svcCompact.includes("email")
+  ) {
+    safeSvc = "email-marketing";
+  }
+
+  const canonicalize = (v: string) =>
+    String(v || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[\s-]+/g, "_")
+      .replace(/[^a-z0-9_]/g, "");
+
+  const campaigns = readCampaigns(slug);
+
+  // New architecture: duplicate campaigns are blocked by focus keyword/slug only.
+  // This allows intent variants for the same core service and town.
+  const effectiveFocusKeyword = String(focusKeyword || `${serviceName} ${city}`).trim();
+  const normalizedFocusKeyword = canonicalize(effectiveFocusKeyword);
+  const proposedSlug = canonicalize(effectiveFocusKeyword.replace(/_/g, "-"));
+
+  const duplicate = campaigns.find((c) => {
+    const existingKwRaw = String(c.focusKeyword || `${c.serviceName} ${c.city}`).trim();
+    const existingKw = canonicalize(existingKwRaw);
+    const existingSlug = canonicalize(existingKwRaw.replace(/_/g, "-"));
+
+    return existingKw === normalizedFocusKeyword || existingSlug === proposedSlug;
+  });
+
+  if (duplicate) {
+    res.status(409).json({
+      error: `A campaign for "${effectiveFocusKeyword}" already exists (id: ${duplicate.id}). Delete or resume the existing campaign instead.`,
+      existingId: duplicate.id,
+    });
+    return;
+  }
+
   const cityPart = safeCity || "city";
-  const svcPart  = safeSvc  || "svc";
+  const svcPart = safeSvc || "svc";
   const id = `${cityPart}-${svcPart}-${randomBytes(3).toString("hex")}`;
+
   const campaign: Campaign = {
     id,
     projectSlug: slug,
     city,
     citySlug,
     serviceName,
-    serviceKey,
+    serviceKey: safeSvc,
+    focusKeyword: effectiveFocusKeyword,
     status: "new",
     currentStage: 2,
     createdAt: now,
@@ -119,65 +197,13 @@ router.post("/campaigns/:slug", (req, res) => {
     pagesGenerated: 0,
     pagesDeployed: 0,
     ...(industryType ? { industryType } : {}),
-    ...(buyerType    ? { buyerType }    : {}),
+    ...(buyerType ? { buyerType } : {}),
   };
 
-  const campaigns = readCampaigns(slug);
-
-  // Prevent duplicate: block same city + service combination.
-  // Normalise both serviceKey AND serviceName to catch legacy campaigns where
-  // serviceKey was stored inconsistently (e.g. 'webho-ting', 'Local SEO', 'web design').
-  const canonicalize = (s: string) =>
-    s.trim().toLowerCase().replace(/[\s-]+/g, "_").replace(/[^a-z0-9_]/g, "");
-  const normalizedCity    = city.trim().toLowerCase();
-  const normalizedSvcKey  = canonicalize(serviceKey);
-  const normalizedSvcName = canonicalize(serviceName);
-  const duplicate = campaigns.find((c) => {
-    if (c.city.trim().toLowerCase() !== normalizedCity) return false;
-    return (
-      canonicalize(c.serviceKey  ?? "") === normalizedSvcKey ||
-      canonicalize(c.serviceName ?? "") === normalizedSvcName
-    );
-  });
-  if (duplicate) {
-    res.status(409).json({
-      error: `A campaign for "${city} — ${serviceName}" already exists (id: ${duplicate.id}). Delete or resume the existing campaign instead.`,
-      existingId: duplicate.id,
-    });
-    return;
-  }
-
-  // Store the canonical serviceKey going forward so future duplicate checks are reliable
-  campaign.serviceKey = canonicalize(serviceKey) || canonicalize(serviceName) || svcPart;
-
-  campaigns.unshift(campaign);
+  campaigns.push(campaign);
   writeCampaigns(slug, campaigns);
 
   res.status(201).json({ campaign });
-});
-
-// PATCH /api/campaigns/:slug/:campaignId — update campaign metadata
-router.patch("/campaigns/:slug/:campaignId", (req, res) => {
-  const { slug, campaignId } = req.params;
-  const updates = req.body as Partial<Campaign>;
-
-  const campaigns = readCampaigns(slug);
-  const idx = campaigns.findIndex((c) => c.id === campaignId);
-  if (idx === -1) {
-    res.status(404).json({ error: `Campaign not found: ${campaignId}` });
-    return;
-  }
-
-  campaigns[idx] = {
-    ...campaigns[idx],
-    ...updates,
-    id: campaigns[idx].id,
-    projectSlug: slug,
-    updatedAt: new Date().toISOString(),
-  };
-
-  writeCampaigns(slug, campaigns);
-  res.json({ campaign: campaigns[idx] });
 });
 
 // GET /api/campaigns/:slug/:campaignId/detail — full session detail for the campaign panel
@@ -185,7 +211,54 @@ router.get("/campaigns/:slug/:campaignId/detail", (req, res) => {
   const { slug, campaignId } = req.params;
   const sessionPath = path.join(OUTPUT_DIR, slug, "sessions", `${campaignId}.json`);
   if (!fs.existsSync(sessionPath)) {
-    res.status(404).json({ error: "Session not found" });
+    const campaigns = readCampaigns(slug);
+    const campaign = campaigns.find((c) => c.id === campaignId);
+
+    if (!campaign) {
+      res.status(404).json({ error: "Campaign not found" });
+      return;
+    }
+
+    const projectPath = path.join(WORKSPACE_ROOT, "config", "projects", `${slug}.json`);
+    let domain = "";
+    try {
+      domain = (JSON.parse(fs.readFileSync(projectPath, "utf8")) as { domain?: string }).domain?.replace(/\/+$/, "") ?? "";
+    } catch { /* ok */ }
+
+    const serviceSlug = (campaign.serviceKey || campaign.serviceName || "")
+      .toLowerCase()
+      .replace(/_/g, "-")
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+
+    const citySlug = (campaign.city || campaign.citySlug || "")
+      .toLowerCase()
+      .replace(/_/g, "-")
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+
+    const hubPath = `/${serviceSlug}-${citySlug}/`;
+
+    res.json({
+      campaignId,
+      city: campaign.city,
+      serviceName: campaign.serviceName,
+      serviceKey: campaign.serviceKey,
+      moneyPageUrl: "",
+      focusKeyword: `${campaign.serviceName} ${campaign.city}`,
+      stage: campaign.currentStage ?? 8,
+      areasCount: campaign.areasSelected ?? 0,
+      areas: [],
+      hubGenerated: (campaign.pagesGenerated ?? 0) > 0,
+      hubPath,
+      domain,
+      sitemapUrl: domain ? `${domain}/sitemap-${campaignId}.xml` : "",
+      legacyFallback: true
+    });
     return;
   }
   // Read project domain for sitemap URL
@@ -196,6 +269,15 @@ router.get("/campaigns/:slug/:campaignId/detail", (req, res) => {
   try {
     const session = JSON.parse(fs.readFileSync(sessionPath, "utf8")) as Record<string, unknown>;
     const camp = session.campaign as Record<string, unknown> | undefined;
+
+    // Canonical campaign config is the source of truth for service identity.
+    // Session files may contain semantic/keyword labels or legacy malformed service keys.
+    const campaigns = readCampaigns(slug);
+    const campaign = campaigns.find((c) => c.id === campaignId);
+
+    const canonicalServiceKey = campaign?.serviceKey || camp?.serviceKey || "";
+    const canonicalServiceName = campaign?.serviceName || camp?.serviceName || "";
+
     const defs = (session.selectedAreaDefs ?? []) as Array<{ tier?: string; area?: string; remotePath?: string }>;
     const clusterDefs = defs.filter((d) => d.tier !== "hub");
     const hubDef = defs.find((d) => d.tier === "hub");
@@ -203,8 +285,8 @@ router.get("/campaigns/:slug/:campaignId/detail", (req, res) => {
     res.json({
       campaignId,
       city:         camp?.cityName    ?? "",
-      serviceName:  camp?.serviceName ?? "",
-      serviceKey:   camp?.serviceKey  ?? "",
+      serviceName:  canonicalServiceName,
+      serviceKey:   canonicalServiceKey,
       moneyPageUrl: camp?.moneyPageUrl ?? "",
       focusKeyword: camp?.focusKeyword ?? "",
       stage:        session.stage ?? 1,
