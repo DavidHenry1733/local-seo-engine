@@ -24,8 +24,31 @@ import { loadCampaignBuilderSession } from "../growthEngineCampaignBuilderServic
 import { buildCampaignBuilderImagePlan, campaignImagePlanPath } from "../growthEngineCampaignBuilderImagePlanService.ts";
 import { resolveCampaignBuilderSelectedAreaNames } from "../growthEngineCampaignBuilderAreaDiscoveryService.ts";
 import type { ProfileAreaEntry } from "../pharmacyProfileSchema.ts";
+import {
+  readOrganicSearchRun,
+  type OrganicSearchDemandRow,
+} from "../competitorAnalysisOrganicSearchService.ts";
+import type { OrganicSearchCompetitorEvidence, OrganicSearchCompetitorRun } from "../nationalCompetitorDiscoveryModel.ts";
 
 export const CUSTOMER_CAMPAIGN_CONTEXT_VERSION = "1.0.0" as const;
+
+export interface CampaignOrganicSearchEvidence {
+  provider: OrganicSearchCompetitorRun["provider"] | null;
+  status: OrganicSearchCompetitorRun["status"] | null;
+  serviceId: string;
+  queries: string[];
+  capturedAt: string | null;
+  locationName: string | null;
+  languageCode: string | null;
+  /** Organic visibility rows from DataForSEO Google Organic Live. */
+  competitors: OrganicSearchCompetitorEvidence[];
+  /**
+   * Search-demand fields. Organic Live does not return volume/CPC/competition —
+   * those stay unavailable (null) unless a later supported endpoint supplies them.
+   */
+  keywordDemand: OrganicSearchDemandRow[];
+  sourceArtifact: string;
+}
 
 export interface CustomerCampaignGenerationContext {
   version: typeof CUSTOMER_CAMPAIGN_CONTEXT_VERSION;
@@ -40,12 +63,16 @@ export interface CustomerCampaignGenerationContext {
   campaignImagePlan: CampaignBuilderImagePlan | null;
   campaignImagePlanPath: string | null;
   generationContext: ContentGenerationContext;
+  /** Service-scoped DataForSEO organic/search evidence bound into this frozen brief. */
+  organicSearchEvidence: CampaignOrganicSearchEvidence | null;
   sourceRefs: {
     businessProfileUpdatedAt: string | null;
     localMarketGeneratedAt: string | null;
     websiteIntelligenceUrl: string;
     localMarketUrl: string;
     businessProfileUrl: string;
+    organicSearchCapturedAt: string | null;
+    organicSearchQueries: string[];
   };
 }
 
@@ -168,6 +195,28 @@ export function buildCustomerCampaignGenerationContext(
   const profileDoc = loadProfileRaw(slug);
   const encodedSlug = encodeURIComponent(slug);
   const imagePlan = buildCampaignBuilderImagePlan(slug, state);
+  const organicRun = readOrganicSearchRun(slug, serviceId);
+  const organicSearchEvidence = organicRun
+    ? {
+        provider: organicRun.provider,
+        status: organicRun.status,
+        serviceId,
+        queries: organicRun.queries || [],
+        capturedAt: organicRun.capturedAt,
+        locationName: organicRun.locationName || null,
+        languageCode: organicRun.languageCode || null,
+        competitors: organicRun.competitors || [],
+        keywordDemand: (organicRun.queries || []).map((query) => ({
+          query,
+          searchVolume: null,
+          cpc: null,
+          competition: null,
+          unavailableReason:
+            "DataForSEO Google Organic Live returns visibility rows only; search volume/CPC/competition were not returned for these queries.",
+        })),
+        sourceArtifact: `data/national-growth-engine/${slug}-competitor-discovery.json#organicSearchByService.${serviceId}`,
+      }
+    : null;
 
   return {
     version: CUSTOMER_CAMPAIGN_CONTEXT_VERSION,
@@ -190,12 +239,15 @@ export function buildCustomerCampaignGenerationContext(
         assignmentsLoaded: Boolean(imagePlan?.slots.some((s) => s.approvalState === "approved" || s.approvalState === "deferred")),
       },
     },
+    organicSearchEvidence,
     sourceRefs: {
       businessProfileUpdatedAt: profileDoc.updatedAt,
       localMarketGeneratedAt: localMarketGeneratedAt(slug),
       websiteIntelligenceUrl: `/api/growth-engine/website-intelligence?slug=${encodedSlug}`,
       localMarketUrl: `/api/growth-engine/local-market?slug=${encodedSlug}`,
       businessProfileUrl: `/api/pharmacy-profile-wizard?slug=${encodedSlug}`,
+      organicSearchCapturedAt: organicRun?.capturedAt || null,
+      organicSearchQueries: organicRun?.queries || [],
     },
   };
 }

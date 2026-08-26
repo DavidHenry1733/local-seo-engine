@@ -1,0 +1,305 @@
+/**
+ * Service variant content definitions V1 — Part 2 (repeat prescriptions, travel services).
+ * Clinically safe, service-specific, area-agnostic.
+ */
+import type { ServiceVariantPack } from "./pharmacyServiceVariantLibrary.ts";
+
+type SV = Omit<ServiceVariantPack, "version" | "generatedAt">;
+
+function faqs(items: Array<{ question: string; answer: string }>) {
+  return items;
+}
+
+function ctaSet(primary: string[], secondary: string[]) {
+  return primary.map((p, i) => ({
+    primary: p,
+    secondary: secondary[i % secondary.length],
+    phonePrompt: "Call the pharmacy team to ask about availability, suitability and booking options.",
+    bookingPrompt: "Book online or by phone once suitability is confirmed at assessment.",
+  }));
+}
+
+export const SERVICE_VARIANT_DEFINITIONS_PART2: Record<string, SV> = {
+  "repeat-prescriptions": {
+    serviceId: "repeat-prescriptions",
+    serviceName: "Repeat Prescriptions",
+    intro: [
+      { body: "Repeat prescription support helps you stay on regular medicines without gaps — with pharmacist advice on reorder timing and EPS nomination." },
+      { body: "Managing ongoing medicines is easier when repeat ordering is coordinated with your GP surgery and pharmacy team." },
+      { body: "Community pharmacy repeat services cover EPS setup, reorder reminders and supply planning — so treatment continues safely between GP reviews." },
+      { body: "A structured repeat process reduces missed doses from running out — with pharmacist checks when medicines change." },
+      { body: "From electronic prescription nomination to collection or delivery, repeat services keep long-term treatment on track with clear next steps." },
+    ],
+    problem: [
+      { heading: "Why Repeat Ordering Matters", body: "Running out of regular medicines can cause avoidable harm — especially for conditions such as asthma, diabetes, heart disease and mental health. Repeat processes need GP authorisation and timely reordering.", bullets: ["How do I reorder safely?", "What is EPS nomination?", "When does GP authorisation expire?", "What if my dose changes?"] },
+      { heading: "Medicines Continuity Risks", body: "Gaps in supply affect adherence and symptom control. Delays often happen when reordering is left too late or nomination is not updated after switching pharmacy.", bullets: ["Running out before reorder", "Expired GP authorisation", "Changed medicines not updated", "Carer coordination needs"] },
+      { heading: "Understanding Repeat Prescriptions", body: "Repeat items are authorised by your GP for a set period — not indefinitely. Pharmacy teams advise on timing but cannot authorise new repeats without surgery approval.", bullets: ["Repeat vs acute prescriptions", "Authorisation intervals", "Surgery liaison role", "When GP review is needed"] },
+      { heading: "Common Repeat Challenges", body: "Patients often struggle with EPS nomination, holiday supply, or medicines started by a hospital. Pharmacists signpost to GP when authorisation or clinical review is needed.", bullets: ["Holiday supply planning", "Hospital discharge medicines", "Multiple surgery registrations", "OTC and herbal interactions"] },
+      { heading: "Staying On Treatment Safely", body: "Consistent supply supports long-term health outcomes. Pharmacy repeat support complements GP care — it does not replace medical review when symptoms or treatment change.", bullets: ["Reorder lead times", "Delivery for housebound patients", "Dosette tray integration", "Safety-netting on changes"] },
+    ],
+    benefits: [
+      { heading: "Benefits Of Repeat Support", body: "Pharmacy-led repeat coordination offers convenient reorder advice, EPS nomination help and supply planning without always needing a GP appointment for routine items.", bullets: ["Reorder timing guidance", "EPS nomination support", "Surgery liaison when delayed", "Collection or delivery options"] },
+      { heading: "What The Service Delivers", body: "You receive practical help with repeat ordering, clarity on authorisation status, and pharmacist advice when medicines are new or changed.", bullets: ["Structured reorder process", "Supply timeline transparency", "Medicines questions answered", "GP signposting when needed"] },
+      { heading: "Practical Advantages", body: "Repeat services fit around everyday routines. Pharmacists explain when to reorder, how EPS works, and what to do if an item is not yet authorised.", bullets: ["Flexible collection", "Carer and proxy collection", "Holiday supply advice", "Reduced medicines gaps"] },
+      { heading: "Patient-Focused Continuity", body: "The service focuses on keeping treatment on track — with professional oversight when prescriptions are clinically screened before supply.", bullets: ["Adherence support", "Clinical checks on supply", "Plain-language guidance", "Continuity for chronic conditions"] },
+      { heading: "Accessible Medicines Management", body: "Community pharmacy access lowers barriers for people who find GP phone lines busy or who need local support coordinating repeats.", bullets: ["Local reorder help", "Electronic prescription flow", "Housebound delivery signposting", "Multi-medicine coordination"] },
+    ],
+    eligibility: [
+      { heading: "Who Can Use Repeat Services", body: "Patients with GP-authorised repeat prescriptions may use pharmacy repeat support. New medicines, dose changes and acute symptoms need GP review — not repeat reordering alone.", bullets: ["Valid repeat authorisation", "Registered GP surgery", "EPS or paper repeats", "Not for emergency supply without assessment"] },
+      { heading: "Repeat Suitability", body: "Suitability depends on your prescription status. Pharmacists confirm whether items are authorised, on hold, or need surgery contact before supply.", bullets: ["Authorisation still valid", "Items on repeat slip", "Nominated pharmacy for EPS", "Controlled drug rules apply"] },
+      { heading: "Before You Start", body: "Ensure your GP surgery has authorised repeats and your nomination is current if using EPS. Share medicine changes promptly so records stay accurate.", bullets: ["Updated medicines list", "Correct surgery details", "Nomination after pharmacy switch", "Allergy information current"] },
+      { heading: "Eligibility Overview", body: "Repeat support suits patients on stable long-term medicines. Unstable conditions, new symptoms or hospital-only medicines may need GP clarification first.", bullets: ["Stable repeat regimens", "Complex cases need GP", "Hospital-only items", "Private repeats where accepted"] },
+      { heading: "Is This Right For Me", body: "If you are unsure whether an item is on repeat or authorised, contact the pharmacy team. They advise on next steps and surgery liaison when needed.", bullets: ["Check repeat status", "Scope of pharmacy support", "When GP is required", "Emergency supply limits"] },
+    ],
+    howItWorks: [
+      { heading: "How Repeat Ordering Works", body: "The process covers checking authorisation, submitting or receiving the prescription, clinical screening and supply — with advice on when to reorder next.", bullets: ["Confirm repeat authorisation", "EPS or paper prescription flow", "Clinical check before supply", "Reorder interval guidance", "Surgery contact if delayed"] },
+      { heading: "Your Reorder Steps", body: "Request repeats before you run low — typically seven to ten days ahead for items needing ordering. Pharmacists track supply and advise if GP authorisation is pending.", bullets: ["Reorder in good time", "Nomination sends EPS electronically", "Notification when ready", "Counselling on changes"] },
+      { heading: "The Repeat Pathway", body: "Repeats follow a structured pathway: authorisation check, prescription receipt, dispensing and handover. Diagnosis and new prescriptions remain with your GP.", bullets: ["Authorisation verification", "Dispensing governance", "Collection or delivery", "Safety-netting on gaps"] },
+      { heading: "What Happens When You Reorder", body: "The pharmacy team checks whether your surgery has released the prescription. Delays may need surgery liaison — you are kept informed on timing.", bullets: ["Surgery release timing", "Partial supply rules", "Query resolution", "No supply without valid prescription"] },
+      { heading: "From Request To Collection", body: "Allow time for GP authorisation on each reorder cycle. Once received, clinical checks and preparation follow before handover or delivery.", bullets: ["GP authorisation step", "Assembly and accuracy check", "Ready notification", "Follow-up reorder advice"] },
+    ],
+    preparationGuide: [
+      { heading: "Preparing To Reorder", body: "Reorder before your medicines run out. Note any dose changes, new OTC products, or upcoming travel that may affect supply needs.", bullets: ["Reorder seven to ten days early", "List medicines running low", "Declare OTC and herbal products", "Note travel dates if relevant"] },
+      { heading: "Before Your First Repeat Setup", body: "Nominate your pharmacy for EPS with your GP surgery. Bring your repeat slip, medicines list and allergy information for accurate records.", bullets: ["EPS nomination form", "Repeat prescription slip", "Full medicines list", "GP surgery details"] },
+      { heading: "What To Bring Or Share", body: "Share hospital discharge letters if medicines changed recently. Carers should confirm proxy collection rules — especially for controlled drugs.", bullets: ["Discharge summaries", "Photo ID for controlled drugs", "Carer authorisation if needed", "Payment exemption proof"] },
+      { heading: "Holiday And Travel Supply", body: "Plan holiday supply early — GP authorisation may be needed for extra quantity. Pharmacists advise on timing and documentation.", bullets: ["Request holiday supply early", "GP authorisation for extras", "Travel documentation", "Allow dispensing lead time"] },
+      { heading: "Staying Organised", body: "Use a medicines diary or dosette tray if helpful. Set reminders to reorder and keep one week's buffer where possible.", bullets: ["Reorder reminders", "Dosette tray options", "One-week buffer stock", "Update pharmacy on changes"] },
+    ],
+    trustSafety: [
+      { heading: "Safety And Professional Standards", body: "Pharmacy teams cannot supply repeats without valid GP authorisation. Clinical checks apply before every supply — repeats are not automatic without prescriber approval.", bullets: ["GP authorisation required", "Clinical screening on supply", "No unauthorised repeats", "Emergency supply has limits"], type: "safetyConsiderations" },
+      { heading: "When To Contact Your GP", body: "New symptoms, dose changes, treatment not working, or medicines started in hospital need GP review — not repeat reordering alone.", bullets: ["Worsening symptoms", "Requested dose change", "New hospital medicines", "Side effects reported"], type: "safetyConsiderations" },
+      { heading: "Professional Insight", body: "Reliable repeat management works best when patients reorder early, keep nomination updated, and tell the pharmacy about all medicines including OTC products.", bullets: ["Early reorder prevents gaps", "Nomination reduces delays", "Declare all medicines", "Follow safety-netting advice"], type: "professionalInsight" },
+      { heading: "Trust And Clinical Governance", body: "Regulated pharmacy teams follow dispensing governance on every repeat supply, with documented advice and surgery liaison when authorisation is delayed.", bullets: ["GPhC-regulated premises", "Accuracy check protocols", "Documented supply advice", "Complements GP care"], type: "trust" },
+    ],
+    patientEducation: [
+      { heading: "Understanding EPS", body: "Electronic Prescription Service sends prescriptions from your GP to a nominated pharmacy digitally — reducing paper delays when nomination is set up correctly.", bullets: ["Nomination with GP surgery", "Paper repeats still accepted", "Switching pharmacy steps", "Prescription tracking limits"] },
+      { heading: "Patient Education", body: "Educational guidance covers reorder timing, authorisation cycles, and when GP involvement is needed instead of routine repeat supply.", bullets: ["Repeat authorisation periods", "Reorder lead times", "Holiday supply rules", "When repeats lapse"] },
+      { heading: "Medicines Continuity Basics", body: "Understanding why gaps matter helps you reorder on time and report changes promptly — supporting safer long-term treatment.", bullets: ["Adherence and outcomes", "Critical medicines priority", "Do not double doses", "Report supply problems early"] },
+      { heading: "Your Role In Safe Repeats", body: "Keep an updated medicines list, reorder before running out, and ask the pharmacy if authorisation seems delayed.", bullets: ["Accurate medicines record", "Timely reorder requests", "Update on OTC use", "Ask when unsure"] },
+    ],
+    mythVsFact: [
+      { heading: "Myths Vs Facts", body: "Evidence-based repeat advice separates common misconceptions from accurate information:", bullets: ["Myth: Repeats renew automatically forever. Fact: GP authorisation expires and must be renewed.", "Myth: Pharmacy can authorise new repeats. Fact: Only your GP surgery authorises repeat prescriptions.", "Myth: EPS means instant supply. Fact: Clinical checks and GP release still take time."] },
+      { heading: "Repeat Misconceptions", body: "Clear facts help you manage medicines safely:", bullets: ["Myth: Running out is fine for a few days. Fact: Gaps can harm control of chronic conditions.", "Myth: Switching pharmacy needs no GP update. Fact: Update EPS nomination with your surgery.", "Myth: Pharmacists change repeat doses. Fact: Dose changes need GP prescription."] },
+      { heading: "Medicines Supply Facts", body: "Separating myths from facts supports safer repeat use:", bullets: ["Myth: All repeats are NHS-funded. Fact: Some items may incur charges or be private.", "Myth: Carers need no ID for controlled drugs. Fact: ID and authorisation rules often apply.", "Myth: Holiday extras need no GP notice. Fact: Extra quantity usually needs authorisation."] },
+      { heading: "Common Repeat Myths", body: "Accurate information improves continuity:", bullets: ["Myth: Hospital medicines auto-join repeats. Fact: GP must add them to your repeat list.", "Myth: OTC products do not affect repeats. Fact: Interactions must be declared.", "Myth: Delivery replaces clinical checks. Fact: Same governance applies before supply."] },
+    ],
+    cta: ctaSet(
+      ["Set Up Repeats", "Reorder Medicines", "Ask About EPS", "Check Authorisation", "Speak To Pharmacy"],
+      ["Ask A Pharmacist", "Get Advice", "Phone The Team", "Request Help", "Book Consultation"],
+    ),
+    faqs: faqs([
+      { question: "How do I set up repeat prescriptions?", answer: "Ask your GP surgery to authorise repeats and nominate a pharmacy for EPS. The pharmacy team can guide you through nomination and first supply." },
+      { question: "What is EPS nomination?", answer: "Electronic Prescription Service sends prescriptions digitally from your GP to your nominated pharmacy, reducing paper handling delays." },
+      { question: "How early should I reorder repeats?", answer: "Reorder seven to ten days before you run out — sooner for items that need ordering in. This allows GP authorisation and dispensing time." },
+      { question: "Can the pharmacy authorise my repeats?", answer: "No — only your GP surgery authorises repeat prescriptions. The pharmacy supplies once authorisation is received." },
+      { question: "What if my repeat is not ready?", answer: "Delays may mean GP authorisation is pending. The pharmacy team can liaise with your surgery and advise on timing." },
+      { question: "Can someone collect repeats for me?", answer: "Yes in most cases — controlled drugs may need ID and written authorisation. Confirm requirements with the pharmacy." },
+      { question: "How do I switch pharmacy for repeats?", answer: "Update EPS nomination with your GP surgery and inform both pharmacies to avoid duplicate or missed supply." },
+      { question: "What if my medicines changed in hospital?", answer: "Contact your GP so repeats are updated. Do not assume hospital medicines are automatically on your repeat list." },
+      { question: "Can I get extra supply for holiday?", answer: "Often yes with GP authorisation for additional quantity. Request early to allow surgery approval and dispensing." },
+      { question: "Do repeats expire?", answer: "Yes — GP repeat authorisation runs for a set period. Your surgery reviews and renews when appropriate." },
+      { question: "Is repeat ordering free?", answer: "NHS prescription charges apply unless you are exempt. Some items may be private — the pharmacy confirms at supply." },
+      { question: "What if I run out completely?", answer: "Contact the pharmacy urgently. Emergency supply may be possible in limited circumstances — not a substitute for timely reordering." },
+      { question: "Can I use delivery for repeats?", answer: "Many pharmacies offer delivery for repeats where available. Ask about eligibility, timing and any charges." },
+      { question: "Should I tell the pharmacy about OTC medicines?", answer: "Yes — OTC and herbal products can interact with prescribed medicines. Share your full list for safe clinical checks." },
+      { question: "When should I see my GP instead of reordering?", answer: "New symptoms, side effects, dose changes, or treatment not working need GP review — not routine repeat supply alone." },
+    ]),
+  },
+
+  "travel-vaccinations": {
+    serviceId: "travel-vaccinations",
+    serviceName: "Travel Vaccinations",
+    intro: [
+      { body: "Travel vaccinations help protect against infections more common in certain destinations — with pharmacist-led assessment and personalised vaccine advice." },
+      { body: "Planning vaccines before departure reduces avoidable travel-related illness — with clear guidance on NHS and private options." },
+      { body: "A pharmacy travel vaccination appointment reviews your itinerary, medical history and planned activities to recommend appropriate protection." },
+      { body: "Destination-specific vaccine planning fits around your schedule — with transparent fees and realistic lead times for multi-dose courses." },
+      { body: "From hepatitis A and typhoid to rabies and yellow fever where commissioned, travel vaccination services support safer journeys with documented advice." },
+    ],
+    problem: [
+      { heading: "Travel Health Risks Worth Planning For", body: "Infectious diseases such as hepatitis A, typhoid, rabies and yellow fever vary by destination. Risk depends on where you go, how long you stay, and activities like rural travel or animal contact.", bullets: ["Which vaccines do I need?", "How far ahead should I book?", "Are vaccines NHS or private?", "What if I travel at short notice?"] },
+      { heading: "Why Pre-Travel Vaccines Matter", body: "Some vaccine courses need several weeks to complete. Last-minute travel may limit options — assessment identifies what is still achievable before departure.", bullets: ["Multi-dose schedules", "Immunity development time", "Outbreak destinations", "Visa or employer requirements"] },
+      { heading: "Destination-Specific Concerns", body: "Visiting friends and relatives, backpacking, safari travel and humanitarian work carry different risks than resort holidays. Individual assessment guides proportionate advice.", bullets: ["Rural and remote travel", "VFR travel assumptions", "Adventure and trekking", "Seasonal disease patterns"] },
+      { heading: "Understanding Travel Vaccination", body: "Not all travel vaccines are NHS-funded. Pharmacy teams explain which vaccines may be recommended, available, and any private fees before booking.", bullets: ["NHS vs private vaccines", "Certificate requirements", "Age and pregnancy considerations", "Medical history review"] },
+      { heading: "When Travel Health Needs More Than Vaccines", body: "Malaria prophylaxis, altitude illness and food-and-water precautions may also matter. Vaccination appointments focus on injectable protection — broader travel health may need a full consultation.", bullets: ["Malaria tablets separate", "Altitude planning", "Diarrhoea prevention", "Referral when needed"] },
+    ],
+    benefits: [
+      { heading: "Benefits Of Pharmacy Travel Vaccines", body: "Community pharmacy travel services offer accessible assessment, destination-specific advice and vaccination where clinically suitable — often without long GP waits for private travel vaccines.", bullets: ["Convenient appointments", "Destination review", "Fee transparency", "Documentation provided"] },
+      { heading: "What The Service Delivers", body: "You receive a structured risk assessment, personalised vaccine schedule, administration where appropriate, and record-keeping for your travel health documentation.", bullets: ["Individual risk assessment", "Vaccine schedule planning", "Professional administration", "Travel health records"] },
+      { heading: "Practical Advantages", body: "Pharmacy-led travel vaccination fits around work and family plans. Lead times and course completion are discussed honestly before you commit.", bullets: ["Flexible booking", "Multi-visit scheduling", "Plain-language advice", "Realistic timelines"] },
+      { heading: "Patient-Focused Protection", body: "The service focuses on proportionate protection for your trip — not one-size-fits-all lists — with signposting when GP or specialist input is needed.", bullets: ["Personalised recommendations", "Medical history considered", "Children and booster advice", "Safety-netting guidance"] },
+      { heading: "Accessible Travel Health Planning", body: "Local pharmacy access lowers barriers for travellers who need timely vaccine advice without navigating multiple providers.", bullets: ["Single assessment point", "Common travel vaccines", "Certificate where required", "Follow-up dose scheduling"] },
+    ],
+    eligibility: [
+      { heading: "Who Should Book Travel Vaccinations", body: "Anyone planning international travel may benefit from assessment. Suitability for specific vaccines is confirmed individually — based on destination, health history, age and pregnancy status.", bullets: ["International travel planned", "Individual health assessment", "Age-appropriate vaccines", "Pregnancy needs GP advice"] },
+      { heading: "Vaccination Suitability", body: "Some vaccines are contraindicated in certain conditions or with specific medicines. The pharmacist reviews history before recommending or administering vaccines.", bullets: ["Allergy and reaction history", "Immunosuppression", "Current medicines", "Live vaccine cautions"] },
+      { heading: "Before You Book", body: "Book as early as possible — ideally six to eight weeks before travel for multi-dose courses. Short-notice trips still benefit from assessment of what can be completed in time.", bullets: ["Six to eight weeks ideal", "Short-notice limitations", "Itinerary details needed", "Previous vaccine records"] },
+      { heading: "Eligibility Overview", body: "NHS travel vaccines are limited to specific indications. Many destination vaccines are private — availability and fees are confirmed at booking.", bullets: ["NHS eligibility criteria", "Private vaccine options", "Yellow fever centre status", "Stock and ordering lead times"] },
+      { heading: "Is This Right For Me", body: "If you need broad malaria, altitude or complex multi-country planning, a full travel health consultation may be more appropriate than vaccination alone.", bullets: ["Simple vs complex trips", "Vaccination-focused scope", "Full consultation option", "GP referral triggers"] },
+    ],
+    howItWorks: [
+      { heading: "How Travel Vaccination Works", body: "The pathway covers pre-travel assessment, personalised vaccine recommendations, scheduling, administration and documentation — with follow-up doses booked where needed.", bullets: ["Itinerary and risk review", "Vaccine recommendations", "Scheduling and fees", "Administration and records", "Follow-up appointments"] },
+      { heading: "Your Appointment Steps", body: "Bring your itinerary, vaccine history and medicines list. The pharmacist discusses risks, recommends vaccines, explains costs and plans the schedule before any injection.", bullets: ["History and itinerary review", "Risk assessment", "Consent and fee discussion", "Vaccine administration", "Aftercare advice"] },
+      { heading: "The Vaccination Pathway", body: "Travel vaccination follows structured clinical governance: assessment, informed consent, administration by trained staff, and documentation for your records.", bullets: ["Clinical assessment first", "Informed consent", "Safe administration", "Observation if required", "Certificate where applicable"] },
+      { heading: "What Happens At Consultation", body: "Consultations typically last twenty to forty minutes depending on complexity. Not every vaccine is given at the first visit — courses are planned across multiple appointments.", bullets: ["Allow adequate time", "Multi-dose planning", "Private fee transparency", "No vaccine without assessment"] },
+      { heading: "From Booking To Protection", body: "After assessment, you receive a schedule with dates for each dose. Attend follow-ups on time — incomplete courses may leave protection inadequate.", bullets: ["Written schedule", "Follow-up reminders", "Record card updated", "Seek care if reactions occur"] },
+    ],
+    preparationGuide: [
+      { heading: "Preparing For Your Appointment", body: "Bring full travel dates, regions visited, planned activities, previous vaccination records, and a medicines and allergy list.", bullets: ["Full itinerary with dates", "Previous vaccine records", "Medicines and allergy list", "Planned activities noted", "Visa health requirements"] },
+      { heading: "Before You Travel", body: "Start planning six to eight weeks ahead when possible. Some vaccines need multiple doses spaced weeks apart to build effective immunity.", bullets: ["Book early", "Complete full courses", "Allow immunity time", "Plan follow-up visits"] },
+      { heading: "What To Bring", body: "Previous travel health records, yellow fever certificates if applicable, and employer or visa health forms help the pharmacist give accurate advice.", bullets: ["International certificate of vaccination", "Employer health forms", "GP correspondence if relevant", "Photo ID if required"] },
+      { heading: "Day Of Vaccination", body: "Wear loose clothing for arm access. Eat normally unless advised otherwise. Report fever or acute illness — vaccination may be deferred.", bullets: ["Loose sleeves", "Eat and hydrate normally", "Postpone if acutely unwell", "Arrange post-vaccine rest if needed"] },
+      { heading: "After Vaccination", body: "Mild soreness or tiredness can occur. Know when to seek urgent care for severe reactions. Keep your record card safe for future travel.", bullets: ["Common mild reactions", "Paracetamol if appropriate", "Red-flag symptoms", "Keep records for boosters"] },
+    ],
+    trustSafety: [
+      { heading: "Safety And Professional Standards", body: "Vaccines are recommended and administered only after individual assessment. Live vaccines, pregnancy and immunosuppression need particular caution — GP advice may be needed.", bullets: ["Assessment before vaccination", "Contraindication screening", "Informed consent", "Emergency reaction protocols"], type: "safetyConsiderations" },
+      { heading: "When To Seek GP Or Urgent Care", body: "Severe allergic reactions, high fever after vaccination, or complex medical conditions need GP or urgent care — not delayed travel booking alone.", bullets: ["Anaphylaxis signs", "Severe post-vaccine illness", "Pregnancy and live vaccines", "Complex immunosuppression"], type: "safetyConsiderations" },
+      { heading: "Professional Insight", body: "Effective travel protection depends on completing courses on schedule and understanding that vaccines complement — not replace — food, water and insect precautions.", bullets: ["Courses must be completed", "Vaccines plus precautions", "No guarantee of zero risk", "Honest short-notice advice"], type: "professionalInsight" },
+      { heading: "Trust And Clinical Governance", body: "Travel vaccination is delivered by trained pharmacy teams following national immunisation standards, with documented consent and adverse event reporting processes.", bullets: ["Trained vaccinators", "Cold-chain storage", "Documented consent", "MHRA reporting standards"], type: "trust" },
+    ],
+    patientEducation: [
+      { heading: "Understanding Travel Vaccines", body: "Vaccines stimulate immunity against specific infections. Multi-dose courses and boosters are common — one injection rarely covers every travel health need.", bullets: ["Active vs passive immunity", "Primary courses and boosters", "NHS-funded travel vaccines", "Private vaccine fees"] },
+      { heading: "Patient Education", body: "Educational guidance covers common vaccines by region, realistic timelines, and precautions that remain important after vaccination.", bullets: ["Hepatitis A and typhoid basics", "Rabies and yellow fever context", "Insect bite prevention", "Food and water hygiene"] },
+      { heading: "Planning Your Protection", body: "Understanding lead times helps you book appropriately. Last-minute travel may still benefit from partial protection and clear advice on remaining risks.", bullets: ["Ideal six to eight weeks", "Short-notice options", "Incomplete course risks", "Booster intervals"] },
+      { heading: "What To Expect After Vaccines", body: "Most reactions are mild and short-lived. Know how to manage soreness and when to contact the pharmacy, GP or urgent care.", bullets: ["Mild local reactions", "When to postpone doses", "Record keeping", "Future booster planning"] },
+    ],
+    mythVsFact: [
+      { heading: "Myths Vs Facts", body: "Evidence-based travel health advice separates common misconceptions from accurate information:", bullets: ["Myth: One appointment covers every destination. Fact: Recommendations depend on individual itinerary and health.", "Myth: All travel vaccines are free on the NHS. Fact: Many destination vaccines are privately funded.", "Myth: Vaccines work immediately. Fact: Immunity often takes days to weeks after each dose."] },
+      { heading: "Travel Vaccine Misconceptions", body: "Clear facts help you plan safer travel:", bullets: ["Myth: Past travel means no vaccines needed. Fact: Boosters and new risks may apply.", "Myth: Resort holidays need no vaccines. Fact: Destination and activities determine risk.", "Myth: Pharmacy replaces GP for all travel health. Fact: Complex cases may need GP or specialist referral."] },
+      { heading: "Vaccination Facts", body: "Separating myths from facts supports informed travel planning:", bullets: ["Myth: Yellow fever is needed everywhere. Fact: Required only for specific countries and situations.", "Myth: More vaccines always means better. Fact: Recommendations should be proportionate to risk.", "Myth: Side effects mean stop all future vaccines. Fact: Reactions are assessed individually — seek clinical advice."] },
+      { heading: "Common Travel Health Myths", body: "Accurate information improves pre-travel decisions:", bullets: ["Myth: Vaccines remove need for malaria tablets. Fact: Different infections need different prevention.", "Myth: Short trips need no planning. Fact: Some exposures are brief but high risk.", "Myth: Children need adult doses. Fact: Paediatric schedules differ — age-based assessment applies."] },
+    ],
+    patientOutcomes: [
+      { heading: "Expected Travel Health Outcomes", body: "Well-planned vaccination reduces risk of specific vaccine-preventable diseases. Outcomes depend on completing courses, following precautions, and individual health factors.", bullets: ["Reduced vaccine-preventable illness risk", "Clear documentation for border requirements", "Structured schedule completed on time", "Informed precaution planning"] },
+      { heading: "What Successful Planning Looks Like", body: "Patients who book early typically complete full courses with documented records — supporting smoother entry where certificates are required.", bullets: ["Full course completion", "Records for future boosters", "Realistic risk understanding", "Fewer last-minute gaps"] },
+      { heading: "Outcomes Vary By Trip", body: "Protection levels differ by destination, adherence to schedules, and remaining non-vaccine risks such as malaria or food-borne illness.", bullets: ["Destination-specific protection", "Precautions still essential", "Short-notice partial protection", "Follow-up boosters planned"] },
+      { heading: "Longer-Term Benefits", body: "Travel vaccine records support future trips — boosters and revaccination intervals are easier when documentation is maintained.", bullets: ["Portable health records", "Booster timing clarity", "Confidence in travel planning", "Proportionate spend on private vaccines"] },
+    ],
+    treatmentProcess: [
+      { heading: "Travel Vaccination Pathway", body: "A structured pathway from assessment to follow-up doses ensures vaccines are given safely, on schedule, and with appropriate documentation.", bullets: ["Pre-travel risk assessment", "Personalised vaccine plan", "Informed consent and fees", "Administration and observation", "Follow-up dose booking"] },
+      { heading: "Assessment To Administration", body: "Each visit follows governance steps: history review, suitability check, consent, vaccine preparation, administration, and aftercare advice.", bullets: ["Medical history screen", "Contraindication check", "Vaccine preparation", "Safe injection technique", "Post-vaccination advice"] },
+      { heading: "Multi-Dose Course Planning", body: "Courses such as rabies pre-exposure or hepatitis B are scheduled across weeks. Attendance at each dose is essential for effective protection.", bullets: ["Dose spacing explained", "Appointment scheduling", "Course completion tracking", "Reschedule if unwell"] },
+      { heading: "Documentation And Certificates", body: "Where legally required, certificates are issued after eligible vaccines. Records are updated for your personal travel health file.", bullets: ["International certificate rules", "Personal record card", "Employer documentation", "Future booster reference"] },
+      { heading: "Follow-Up And Safety-Netting", body: "After each dose, you receive advice on common reactions, when to delay the next dose, and when to seek urgent care.", bullets: ["Mild reaction management", "Defer if acutely ill", "Red-flag symptom advice", "Pharmacy contact for concerns"] },
+    ],
+    cta: ctaSet(
+      ["Book Travel Vaccines", "Plan Vaccinations", "Check Availability", "Request Assessment", "Start Booking"],
+      ["Speak To A Pharmacist", "Ask A Pharmacist", "Get Advice", "Phone The Team", "Book Appointment"],
+    ),
+    faqs: faqs([
+      { question: "How far in advance should I book travel vaccinations?", answer: "Ideally six to eight weeks before departure so multi-dose courses can complete and immunity can develop. Short-notice trips still benefit from assessment." },
+      { question: "Which travel vaccines are available on the NHS?", answer: "Some vaccines such as hepatitis A, typhoid and combined courses may be NHS-funded when clinically indicated. Many destination vaccines are private — fees are discussed at assessment." },
+      { question: "What should I bring to my travel vaccination appointment?", answer: "Bring your full itinerary, previous vaccination records, medicines list, allergy history, and any visa or employer health requirements." },
+      { question: "Can I get all vaccines in one visit?", answer: "Often several vaccines can be given together when clinically appropriate, but some courses need multiple visits spaced weeks apart." },
+      { question: "Are travel vaccinations safe in pregnancy?", answer: "Pregnancy limits some vaccines, especially live ones. Individual assessment is essential — GP or specialist advice may be needed." },
+      { question: "Do children need different travel vaccines?", answer: "Yes — paediatric schedules and doses differ by age. Bring child vaccine records and discuss itinerary-specific risks at assessment." },
+      { question: "What is yellow fever vaccination?", answer: "Yellow fever vaccine is required for entry to some countries and after visiting endemic areas. It can only be given at designated centres — availability varies." },
+      { question: "Will I get a vaccination certificate?", answer: "Certificates are issued where legally required after eligible vaccines. Keep records safe for future travel and boosters." },
+      { question: "What if I am travelling at short notice?", answer: "Assessment identifies what protection is still achievable. Some courses cannot be completed in time — honest advice is given on remaining risks." },
+      { question: "Can the pharmacy prescribe malaria tablets?", answer: "Malaria prophylaxis may be available separately depending on service scope. A full travel health consultation may cover antimalarials in more depth." },
+      { question: "What side effects should I expect?", answer: "Mild arm soreness, redness or tiredness are common. Seek urgent care for signs of severe allergic reaction such as breathing difficulty or widespread rash." },
+      { question: "Do I need vaccines if I grew up abroad?", answer: "Previous exposure or childhood vaccines do not always remove the need for boosters or destination-specific protection — bring records for review." },
+      { question: "How much do private travel vaccines cost?", answer: "Fees vary by vaccine and course. Costs are explained before administration so you can make an informed decision." },
+      { question: "Can I vaccinate if I am unwell?", answer: "Acute fever or significant illness usually means postponing vaccination until recovered — unless urgent travel limits options and clinical judgement supports proceeding." },
+      { question: "Is rabies vaccination necessary?", answer: "Rabies risk depends on destination, animal contact likelihood and access to post-bite treatment abroad. Pre-exposure courses are discussed when risk warrants." },
+      { question: "What if I have a weakened immune system?", answer: "Live vaccines may be unsuitable and timing with specialist care matters. GP or specialist input is often needed before travel vaccines." },
+      { question: "Do boosters expire?", answer: "Immunity wanes for some vaccines. Previous doses and intervals are reviewed to determine if boosters are needed before travel." },
+      { question: "Does vaccination guarantee I will not get ill?", answer: "No vaccine is 100% effective. Vaccines reduce specific risks but food, water, insect and other precautions remain important." },
+    ]),
+  },
+
+  "travel-health-consultations": {
+    serviceId: "travel-health-consultations",
+    serviceName: "Travel Health Consultations",
+    intro: [
+      { body: "Travel health consultations review your full trip — vaccines, malaria prophylaxis, altitude risks and practical precautions — in one structured pharmacy appointment." },
+      { body: "Complex itineraries benefit from in-depth planning beyond single vaccines — with personalised advice matched to your destination and medical history." },
+      { body: "A comprehensive travel health consultation assesses itinerary, activities and health context to build a proportionate protection plan before departure." },
+      { body: "Multi-country, long-stay and adventure travel often needs broader planning than a standard vaccination visit — consultations cover the whole journey." },
+      { body: "Pharmacy-led travel health consultations combine risk assessment, vaccine scheduling, antimalarial advice and patient education — with clear referral when needed." },
+    ],
+    problem: [
+      { heading: "Why Whole-Trip Planning Matters", body: "Focusing only on vaccines can miss malaria risk, altitude illness, dengue precautions or medication timing across time zones. Complex trips need integrated travel health review.", bullets: ["Is vaccination alone enough?", "What about malaria tablets?", "Altitude and adventure risks?", "How early should I plan?"] },
+      { heading: "Complex Itinerary Challenges", body: "Multi-country routes, variable seasons, visiting friends and relatives, and remote trekking each change risk profiles. One destination label rarely captures the full picture.", bullets: ["Multi-country sequencing", "Seasonal disease variation", "Rural healthcare access", "VFR travel assumptions"] },
+      { heading: "Beyond Destination Lists", body: "Medical history, pregnancy, immunosuppression and regular medicines affect travel advice. Individual assessment determines safe and realistic recommendations.", bullets: ["Chronic condition management", "Medicines across time zones", "Pregnancy and breastfeeding", "Immunosuppressed travellers"] },
+      { heading: "When Standard Vaccine Visits Fall Short", body: "Long-stay volunteering, occupational deployment and expedition travel often need extended planning horizons, documentation and follow-up scheduling.", bullets: ["Long-stay travel", "Humanitarian deployment", "Corporate travel health", "Follow-up dose coordination"] },
+      { heading: "Reducing Avoidable Travel Harm", body: "Delayed planning leads to incomplete vaccine courses, missed malaria prophylaxis, and poor understanding of food, water and insect precautions.", bullets: ["Incomplete protection", "Last-minute antimalarials", "Altitude unpreparedness", "Poor precaution awareness"] },
+    ],
+    benefits: [
+      { heading: "Benefits Of Full Consultation", body: "In-depth consultations integrate vaccines, malaria advice, altitude guidance and practical precautions — reducing gaps that single-service bookings can leave.", bullets: ["Holistic risk review", "Coordinated vaccine schedule", "Malaria planning included", "Documented travel health plan"] },
+      { heading: "What The Service Delivers", body: "You receive structured itinerary review, personalised recommendations, scheduling across multiple visits, and education on non-vaccine risks.", bullets: ["Itinerary-based assessment", "Written planning summary", "Fee and timeline transparency", "Referral when scope exceeded"] },
+      { heading: "Practical Advantages", body: "One consultation can align vaccine courses, antimalarial timing and precaution advice — saving repeated appointments for complex trips.", bullets: ["Single planning session", "Multi-visit scheduling", "Plain-language education", "Realistic lead times"] },
+      { heading: "Patient-Focused Travel Medicine", body: "Advice is proportionate to your actual trip — not generic lists — with scope clearly explained when GP or specialist input is needed.", bullets: ["Personalised risk profile", "Activity-specific guidance", "Medical history integrated", "Safety-netting throughout"] },
+      { heading: "Accessible Specialist Planning", body: "Pharmacy-led travel health consultations bring structured travel medicine planning locally — especially valuable for complicated itineraries.", bullets: ["Complex trip expertise", "Vaccine and malaria alignment", "Altitude and adventure advice", "Continuity across follow-ups"] },
+    ],
+    eligibility: [
+      { heading: "Who Should Book A Consultation", body: "Travellers with multi-country itineraries, long stays, adventure activities, occupational travel, or significant medical history benefit most from full consultation.", bullets: ["Complex itineraries", "Long-stay or remote travel", "Significant medical history", "Pregnancy planning travel"] },
+      { heading: "Consultation Suitability", body: "Suitability is confirmed individually. Some conditions need GP or specialist travel clinic input before vaccines or antimalarials are recommended.", bullets: ["Stable vs unstable conditions", "Immunosuppression review", "Pregnancy assessment", "Psychiatric medicine considerations"] },
+      { heading: "Before You Book", body: "Book six to twelve weeks before departure for complex trips. Bring detailed itinerary, vaccine records, medicines list and allergy history.", bullets: ["Detailed itinerary essential", "Early booking for long trips", "Previous travel health records", "Employer or visa requirements"] },
+      { heading: "Eligibility Overview", body: "Consultations suit travellers needing integrated planning. Simple short resort trips may need only standard travel vaccination — the team advises which is appropriate.", bullets: ["Simple vs complex trip triage", "Service scope explained", "Private fees where applicable", "Referral criteria clear"] },
+      { heading: "Is This Right For Me", body: "If you need malaria tablets, altitude advice, or multi-course vaccines coordinated together, a full consultation is likely more appropriate than vaccination alone.", bullets: ["Integrated planning needs", "Vaccination-only alternative", "GP referral triggers", "Follow-up commitment required"] },
+    ],
+    howItWorks: [
+      { heading: "How The Consultation Works", body: "The appointment covers itinerary review, medical history, risk assessment, vaccine and malaria planning, precaution education, and follow-up scheduling.", bullets: ["Itinerary and activity review", "Medical history assessment", "Integrated recommendations", "Scheduling and fees", "Documentation and follow-up"] },
+      { heading: "Your Consultation Steps", body: "Expect a longer appointment than a single-vaccine visit. The pharmacist builds a plan covering vaccines, antimalarials where suitable, and non-pharmacy precautions.", bullets: ["Detailed history taking", "Risk stratification", "Informed consent discussions", "Written plan provided", "Subsequent visits booked"] },
+      { heading: "The Planning Pathway", body: "Travel health consultations follow structured clinical governance — with clear scope, referral criteria, and documented advice you can keep for your trip.", bullets: ["Structured assessment tool", "Scope of practice limits", "GP liaison when needed", "Patient-held records"] },
+      { heading: "What Happens During Review", body: "Each region and activity is considered in sequence. Recommendations may include vaccines, malaria chemoprophylaxis, altitude strategies, and kit advice.", bullets: ["Region-by-region review", "Season and duration factors", "Malaria where indicated", "Altitude and adventure modules"] },
+      { heading: "From Plan To Protection", body: "After consultation, you attend scheduled vaccine visits and start prophylaxis at advised times. Incomplete follow-up reduces the benefit of the plan.", bullets: ["Vaccine visit schedule", "Antimalarial start dates", "Precaution checklist", "Contact if plans change"] },
+    ],
+    preparationGuide: [
+      { heading: "Preparing For Consultation", body: "Prepare a detailed itinerary: countries in order, dates, rural or urban stays, accommodation type, and activities such as trekking, diving or animal contact.", bullets: ["Country sequence and dates", "Urban vs rural exposure", "Activity detail", "Previous travel vaccines"] },
+      { heading: "Medical Information To Bring", body: "Bring a full medicines list including OTC and herbal products, allergy history, vaccination records, and GP letters for complex conditions.", bullets: ["Complete medicines list", "Allergy and reaction history", "Vaccination certificates", "GP summaries if complex"] },
+      { heading: "Before Long Or Complex Trips", body: "Book six to twelve weeks ahead. Research visa health rules and employer requirements to discuss at consultation.", bullets: ["Early consultation booking", "Visa health rules", "Employer occupational health forms", "Insurance medical requirements"] },
+      { heading: "Itinerary Documentation Tips", body: "Layover countries, open-jaw routes and cross-border land travel all affect risk. Include every country touched, not just final destination.", bullets: ["Include transit countries", "Land border crossings", "Season at destination", "Duration in each region"] },
+      { heading: "After Your Consultation", body: "Keep your travel health plan accessible during the trip. Note malaria dose times, altitude ascent plans, and emergency contact guidance provided.", bullets: ["Store plan digitally", "Set malaria reminders", "Altitude ascent schedule", "Know local urgent care limits"] },
+    ],
+    trustSafety: [
+      { heading: "Safety And Scope Limits", body: "Pharmacy travel health consultations have defined scope. Complex immunosuppression, unstable cardiac disease, or high-risk pregnancy need GP or specialist referral.", bullets: ["Scope clearly explained", "Referral when needed", "No care beyond competence", "Emergency symptoms need urgent care"], type: "safetyConsiderations" },
+      { heading: "Malaria And Medicine Safety", body: "Antimalarials interact with some medicines and conditions. Full history is essential — never start malaria tablets without professional advice matched to your trip and health.", bullets: ["Drug interaction screening", "Pregnancy restrictions", "Epilepsy and psychiatric meds", "Adherence counselling"] },
+      { heading: "Professional Insight", body: "Effective travel health planning treats vaccines, malaria prophylaxis and precautions as one picture — incomplete follow-through on any element leaves gaps.", bullets: ["Integrated planning value", "Complete vaccine courses", "Malaria adherence matters", "Precautions non-negotiable"], type: "professionalInsight" },
+      { heading: "Trust And Clinical Governance", body: "Consultations are delivered by trained pharmacy travel health practitioners following national guidance, with documented assessment and safety-netting.", bullets: ["Trained practitioners", "Evidence-based recommendations", "Documented consultations", "Adverse event reporting"], type: "trust" },
+    ],
+    patientEducation: [
+      { heading: "Understanding Travel Health Planning", body: "Travel health spans infectious disease prevention, altitude illness, insect precautions, and safe food and water practices — vaccines are one part.", bullets: ["Vaccines plus precautions", "Malaria prevention modes", "Altitude illness basics", "Travellers' diarrhoea prevention"] },
+      { heading: "Patient Education", body: "Educational guidance helps you understand why recommendations vary by itinerary and how to adhere to malaria dosing and vaccine schedules.", bullets: ["Risk varies by trip", "Malaria tablet timing", "Incomplete course risks", "When to seek care abroad"] },
+      { heading: "Altitude And Adventure Travel", body: "Rapid ascent without acclimatisation risks altitude illness. Consultation may cover ascent profiles, symptom recognition and when to defer travel.", bullets: ["Gradual ascent principles", "Acetazolamide when discussed", "Symptom red flags", "Evacuation awareness"] },
+      { heading: "What To Expect After Planning", body: "You leave with a schedule and precaution checklist. Changing itinerary after consultation should prompt review — risks change with routes and seasons.", bullets: ["Written schedule", "Precaution checklist", "Review if itinerary changes", "Emergency planning basics"] },
+    ],
+    mythVsFact: [
+      { heading: "Myths Vs Facts", body: "Evidence-based travel medicine advice clarifies common misconceptions:", bullets: ["Myth: Vaccines alone make travel safe. Fact: Malaria, dengue and food-borne risks need separate precautions.", "Myth: One quick appointment suits every trip. Fact: Complex itineraries need longer planning horizons.", "Myth: Malaria tablets start on arrival. Fact: Many regimens begin before entering risk areas."] },
+      { heading: "Travel Consultation Misconceptions", body: "Clear facts support better planning:", bullets: ["Myth: Resort stays need no consultation. Fact: Destination and activities still determine risk.", "Myth: Past travel experience replaces advice. Fact: Outbreaks, seasons and health change over time.", "Myth: Online lists replace individual assessment. Fact: Medical history and itinerary detail matter."] },
+      { heading: "Integrated Planning Facts", body: "Separating myths from facts improves outcomes:", bullets: ["Myth: Antimalarials suit everyone visiting tropics. Fact: Resistance patterns and health determine choice.", "Myth: Altitude only affects mountaineers. Fact: Tourist routes can exceed risky elevations.", "Myth: Pharmacy covers every occupational need. Fact: Some employers need specialist occupational health."] },
+      { heading: "Common Travel Health Myths", body: "Accurate information supports safer journeys:", bullets: ["Myth: VFR travel is low risk. Fact: Assumed immunity may not cover all infections.", "Myth: Long layovers add no risk. Fact: Transit countries can matter for yellow fever rules.", "Myth: Consultation ends at first visit. Fact: Follow-up doses and prophylaxis adherence are essential."] },
+    ],
+    patientOutcomes: [
+      { heading: "Expected Consultation Outcomes", body: "Well-planned travellers typically complete vaccine courses, start malaria prophylaxis on time, and understand precautions — reducing avoidable travel-related illness.", bullets: ["Coordinated protection plan", "Fewer planning gaps", "Clear precaution understanding", "Documented records for trip"] },
+      { heading: "What Good Planning Achieves", body: "Patients report greater confidence managing medicines abroad, realistic risk awareness, and fewer last-minute emergencies from missed prophylaxis or incomplete vaccines.", bullets: ["Confidence abroad", "Realistic risk expectations", "Medicines timing clarity", "Reduced last-minute rushes"] },
+      { heading: "Outcomes For Complex Trips", body: "Multi-country itineraries benefit from sequenced advice — aligning vaccine immunity, malaria cover and altitude plans with actual travel dates.", bullets: ["Aligned schedules", "Region-specific precautions", "Appropriate referral completed", "Follow-up doses scheduled"] },
+      { heading: "Longer-Term Travel Health", body: "Maintained consultation records support future trips — booster timing, occupational redeployment, and repeat destination visits are easier to plan.", bullets: ["Portable health documentation", "Booster planning", "Repeat trip efficiency", "Employer compliance support"] },
+    ],
+    cta: ctaSet(
+      ["Book Consultation", "Plan Travel Health", "Request Assessment", "Check Availability", "Start Booking"],
+      ["Speak To A Pharmacist", "Ask A Pharmacist", "Get Advice", "Phone The Team", "Book Appointment"],
+    ),
+    faqs: faqs([
+      { question: "How is a travel health consultation different from travel vaccinations?", answer: "Consultations review the whole trip — vaccines, malaria prophylaxis, altitude risks and precautions. Vaccination appointments focus primarily on administering recommended vaccines." },
+      { question: "When should I book a travel health consultation?", answer: "Book six to twelve weeks before complex trips, or as early as possible for long-stay and multi-course vaccine schedules." },
+      { question: "What should I bring to the consultation?", answer: "Bring a detailed itinerary, vaccination records, full medicines and allergy list, and any employer, visa or insurance health requirements." },
+      { question: "Can the pharmacy prescribe malaria tablets?", answer: "Many pharmacy travel services can recommend and supply malaria chemoprophylaxis when clinically suitable — after full history and itinerary review." },
+      { question: "Do I need a consultation for a simple beach holiday?", answer: "Not always — short resort trips may need only standard travel vaccination. The pharmacy team advises which service fits your itinerary." },
+      { question: "How long does a consultation take?", answer: "Complex consultations often need thirty to sixty minutes. Follow-up vaccine visits are scheduled separately as needed." },
+      { question: "What if I have a chronic medical condition?", answer: "Stable conditions are reviewed individually. Unstable disease or complex cardiac, renal or immunosuppressed states may need GP or specialist referral." },
+      { question: "Is travel health advice safe in pregnancy?", answer: "Pregnancy changes vaccine and antimalarial options. Individual assessment is essential — specialist input is often recommended." },
+      { question: "Can children be included in consultation planning?", answer: "Yes — paediatric itineraries and vaccine schedules need age-specific planning. Bring children's vaccination records." },
+      { question: "What about altitude sickness prevention?", answer: "Consultation may cover ascent planning, symptom recognition and whether acetazolamide is appropriate — depending on itinerary and health." },
+      { question: "Will I receive written advice?", answer: "Patients typically receive a documented plan including vaccine schedule, malaria prophylaxis if prescribed, and key precautions." },
+      { question: "What if my itinerary changes after consultation?", answer: "Contact the pharmacy to review changes — risk profiles differ by country, season and activities added or removed." },
+      { question: "Are consultations NHS-funded?", answer: "Travel health consultations are usually private services. Fees are explained before booking." },
+      { question: "Do you advise on travellers' diarrhoea?", answer: "Yes — food, water and hygiene precautions are part of holistic planning, alongside when to seek medical care abroad." },
+      { question: "Can occupational or deployment travel be covered?", answer: "Many occupational trips are suitable for pharmacy consultation. Some employers require specialist occupational health — bring requirements to review." },
+      { question: "What if I need yellow fever vaccination?", answer: "Yellow fever can be incorporated when the pharmacy is a designated centre. Certificate rules depend on specific countries visited." },
+      { question: "How do time zones affect regular medicines?", answer: "Consultation can include practical guidance on adjusting medicines schedules across time zones — complex regimens may need GP input." },
+      { question: "When should I see my GP instead?", answer: "Unstable conditions, high-risk pregnancy, complex immunosuppression, or severe mental health instability need GP or specialist review before travel planning." },
+    ]),
+  },
+};
