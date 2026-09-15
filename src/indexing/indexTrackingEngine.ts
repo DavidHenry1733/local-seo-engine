@@ -270,7 +270,7 @@ export function detectAuthMethod(): AuthMethod {
   return "none";
 }
 
-async function fetchAccessToken(): Promise<string | null> {
+export async function fetchAccessToken(): Promise<string | null> {
   // OAuth personal account takes priority — service account can't be added to GSC
   const tokens = loadOAuthTokens();
   if (tokens) {

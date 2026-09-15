@@ -1,0 +1,263 @@
+{
+  "generatedAt": "2026-06-26T19:16:57.886Z",
+  "slug": "pharmaconnect",
+  "services": [
+    "blood-pressure-checks",
+    "pharmacy-first",
+    "travel-vaccinations",
+    "emergency-contraception"
+  ],
+  "summary": {
+    "passed": 40,
+    "total": 40,
+    "allPass": true
+  },
+  "checks": [
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "page-loads",
+      "pass": true,
+      "detail": "Dashboard HTML renders"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "hidden-page-service-id",
+      "pass": true,
+      "detail": "Hidden pageServiceId matches canonical service"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "canonical-service-helper",
+      "pass": true,
+      "detail": "Assign flow uses canonicalServiceId()"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "library-card-service-id",
+      "pass": true,
+      "detail": "Library cards embed canonical serviceId separate from libraryRef"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "image-pack-not-service-id",
+      "pass": true,
+      "detail": "Image pack stored separately from serviceId"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "reject-image-pack-as-service",
+      "pass": true,
+      "detail": "travel-health-services rejected as serviceId"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "reject-slot-as-service",
+      "pass": true,
+      "detail": "slot name hero rejected as serviceId"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "Assigned clinical-nhs-services/blood-pressure-check to blood-pressure-checks:hero"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Reload shows libraryRef on hero slot"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "page-loads",
+      "pass": true,
+      "detail": "Dashboard HTML renders"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "hidden-page-service-id",
+      "pass": true,
+      "detail": "Hidden pageServiceId matches canonical service"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "canonical-service-helper",
+      "pass": true,
+      "detail": "Assign flow uses canonicalServiceId()"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "library-card-service-id",
+      "pass": true,
+      "detail": "Library cards embed canonical serviceId separate from libraryRef"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "image-pack-not-service-id",
+      "pass": true,
+      "detail": "Image pack stored separately from serviceId"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "reject-image-pack-as-service",
+      "pass": true,
+      "detail": "travel-health-services rejected as serviceId"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "reject-slot-as-service",
+      "pass": true,
+      "detail": "slot name hero rejected as serviceId"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "Assigned clinical-nhs-services/pharmacy-first to pharmacy-first:hero"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Reload shows libraryRef on hero slot"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "page-loads",
+      "pass": true,
+      "detail": "Dashboard HTML renders"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "hidden-page-service-id",
+      "pass": true,
+      "detail": "Hidden pageServiceId matches canonical service"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "canonical-service-helper",
+      "pass": true,
+      "detail": "Assign flow uses canonicalServiceId()"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "library-card-service-id",
+      "pass": true,
+      "detail": "Library cards embed canonical serviceId separate from libraryRef"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "image-pack-not-service-id",
+      "pass": true,
+      "detail": "Image pack stored separately from serviceId"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "reject-image-pack-as-service",
+      "pass": true,
+      "detail": "travel-health-services rejected as serviceId"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "reject-slot-as-service",
+      "pass": true,
+      "detail": "slot name hero rejected as serviceId"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "Assigned travel-health-services/travel-vaccination to travel-vaccinations:hero"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Reload shows libraryRef on hero slot"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "page-loads",
+      "pass": true,
+      "detail": "Dashboard HTML renders"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "hidden-page-service-id",
+      "pass": true,
+      "detail": "Hidden pageServiceId matches canonical service"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "canonical-service-helper",
+      "pass": true,
+      "detail": "Assign flow uses canonicalServiceId()"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "library-card-service-id",
+      "pass": true,
+      "detail": "Library cards embed canonical serviceId separate from libraryRef"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "image-pack-not-service-id",
+      "pass": true,
+      "detail": "Image pack stored separately from serviceId"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "reject-image-pack-as-service",
+      "pass": true,
+      "detail": "travel-health-services rejected as serviceId"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "reject-slot-as-service",
+      "pass": true,
+      "detail": "slot name hero rejected as serviceId"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "Assigned clinical-nhs-services/contraception-service to emergency-contraception:hero"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Reload shows libraryRef on hero slot"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "visual-page-renders",
+      "pass": true,
+      "detail": "Visual page has hero img"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "visual-page-renders",
+      "pass": true,
+      "detail": "Visual page has hero img"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "visual-page-renders",
+      "pass": true,
+      "detail": "Visual page has hero img"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "visual-page-renders",
+      "pass": true,
+      "detail": "Visual page has hero img"
+    }
+  ],
+  "manualTestUrls": [
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=blood-pressure-checks&slot=hero",
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=pharmacy-first&slot=hero",
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=travel-vaccinations&slot=hero",
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=emergency-contraception&slot=hero"
+  ]
+}

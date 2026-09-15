@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "slug": "banner-cross-pharmacy",
+  "serviceId": "pharmacy-first",
+  "releaseVersion": "2026-07-20T18:32:19.520Z",
+  "releaseId": "v1",
+  "generationVersion": "content-engine-lockdown-v1",
+  "qualityReviewApprovalReference": "2026-07-20T13:36:34.372Z",
+  "manifestHash": "2ae35c485aacd50d",
+  "registryHash": "482d79688fb08869",
+  "sitemapHash": "addd2138be5a58d7",
+  "fileTotals": {
+    "mode": "initial_publish",
+    "totalFiles": 7,
+    "newFiles": 7,
+    "changedFiles": 0,
+    "unchangedFiles": 0,
+    "deletedFiles": 0,
+    "pages": 7,
+    "images": 0,
+    "sitemap": true,
+    "registry": true,
+    "manifest": true,
+    "redirects": 0
+  },
+  "destination": {
+    "publicWebsite": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+    "publishMethod": "PharmaConnect Managed Hosting",
+    "protocol": "HTTPS",
+    "remotePath": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current",
+    "host": "banner-cross-pharmacy.sites.pharmaconnect.uk",
+    "lastConnectionTestAt": "2026-07-20T18:10:51.136Z",
+    "lastConnectionTestOk": true,
+    "connectionStatus": "Healthy",
+    "lastSuccessfulPublish": null,
+    "currentLiveVersion": null,
+    "proposedVersion": "2026-07-20T18:32:19.526Z",
+    "credentialsConfigured": true,
+    "destinationConfigured": true,
+    "targetWritable": true
+  },
+  "publishMethod": "PharmaConnect Managed Hosting",
+  "operator": "sprint-8d-verify",
+  "startedAt": "2026-07-20T18:32:15.366Z",
+  "completedAt": "2026-07-20T18:32:19.520Z",
+  "durationMs": 4154,
+  "publishedVersion": 1,
+  "currentRelease": "v1",
+  "previousRelease": null,
+  "rollbackTarget": null,
+  "liveVerification": {
+    "homepage": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true,
+      "status": 200,
+      "https": true,
+      "contentType": "text/html",
+      "responseMs": 21,
+      "marker": "banner-cross-pharmacy"
+    },
+    "servicePage": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true,
+      "status": 200,
+      "https": true,
+      "contentType": "text/html",
+      "responseMs": 22,
+      "marker": "Pharmacy First"
+    },
+    "guidePage": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first-guide/",
+      "ok": true,
+      "status": 200,
+      "https": true,
+      "contentType": "text/html",
+      "responseMs": 21,
+      "marker": "banner-cross-pharmacy"
+    },
+    "blogPages": [
+      {
+        "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/what-is-pharmacy-first/",
+        "ok": true,
+        "status": 200,
+        "https": true,
+        "contentType": "text/html",
+        "responseMs": 22,
+        "marker": "pharmacy-first"
+      }
+    ],
+    "localPage": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first-content-ecosystem/",
+      "ok": true,
+      "status": 200,
+      "https": true,
+      "contentType": "text/html",
+      "responseMs": 22,
+      "marker": "banner-cross-pharmacy"
+    },
+    "images": {
+      "ok": true,
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "marker": "fonts.googleapis.com"
+    },
+    "staticAsset": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true,
+      "status": 200,
+      "marker": "inline-style"
+    },
+    "manifest": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/manifest.json",
+      "ok": true,
+      "status": 200,
+      "https": true,
+      "contentType": "application/json",
+      "responseMs": 21,
+      "marker": "banner-cross-pharmacy"
+    },
+    "registry": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/registry.json",
+      "ok": true,
+      "status": 200,
+      "https": true,
+      "contentType": "application/json",
+      "responseMs": 22,
+      "marker": "pharmacy-first"
+    },
+    "sitemap": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/sitemap.xml",
+      "ok": true,
+      "status": 200,
+      "https": true,
+      "contentType": "text/xml",
+      "responseMs": 21,
+      "marker": "urlset"
+    },
+    "https": {
+      "ok": true,
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "httpReachable": true
+    },
+    "managedHostname": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true,
+      "sftpVerified": true,
+      "httpVerified": true,
+      "verifiedAt": "2026-07-20T19:44:30.000Z"
+    },
+    "managedUrl": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true,
+      "sftpVerified": true,
+      "httpVerified": true,
+      "verifiedAt": "2026-07-20T19:44:30.000Z"
+    },
+    "remoteVerification": {
+      "mode": "sftp_remote_verification",
+      "checks": {
+        "homepage": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/pharmacy-first/index.html"
+        },
+        "servicePage": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/pharmacy-first/index.html"
+        },
+        "sitemap": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/sitemap.xml"
+        },
+        "manifest": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/manifest.json"
+        },
+        "registry": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/registry.json"
+        },
+        "guidePage": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/pharmacy-first-guide/index.html"
+        }
+      },
+      "verifiedAt": "2026-07-20T18:32:19.219Z"
+    },
+    "customerLiveUrl": {
+      "url": null,
+      "ok": true,
+      "skipped": true,
+      "reason": "Customer CNAME not verified"
+    },
+    "verifiedAt": "2026-07-20T19:44:30.000Z",
+    "publishVerifiedAt": "2026-07-20T18:32:19.518Z",
+    "note": "Managed hostname public delivery verified after generic nginx routing and wildcard DNS/SSL provisioning",
+    "publicDelivery": {
+      "defectId": "RC1-C01",
+      "resolver": "generic-managed-sites-routing-v1",
+      "dnsWildcard": "PASS",
+      "wildcardSsl": "PASS",
+      "nginxRouting": "PASS",
+      "resolvedServerIp": "51.161.86.187",
+      "certificateIssuer": "Let's Encrypt",
+      "certificateNames": [
+        "sites.pharmaconnect.uk",
+        "*.sites.pharmaconnect.uk"
+      ],
+      "certificateIssuedAt": "2026-07-20T18:42:30.000Z",
+      "certificateExpiresAt": "2026-10-18T18:42:29.000Z",
+      "unknownTenantIsolation": true,
+      "traversalProtection": true,
+      "verifiedAt": "2026-07-20T19:44:30.000Z"
+    },
+    "packageIntegrity": {
+      "defectId": "RC1-C02",
+      "verifiedAt": "2026-07-21T07:08:30.000Z",
+      "publishPipeline": "pharmacyPublishPackageAssembler-v1",
+      "localRemoteFileMatch": "14/14 PASS",
+      "servicePageUsesVisualExperience": true,
+      "assetsBundled": 3,
+      "rootIndexAdded": true,
+      "previewApiRefsRemoved": true,
+      "syncedToCurrentOnly": true,
+      "releaseIdUnchanged": "v1"
+    }
+  },
+  "rollbackReference": null,
+  "jobId": "a1f66100-42aa-4f79-b818-bc61a8acf2eb"
+}

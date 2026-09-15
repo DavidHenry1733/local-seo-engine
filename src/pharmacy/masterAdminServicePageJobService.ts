@@ -143,7 +143,7 @@ export function buildServicePageJobContract(job: MasterAdminJob): ServicePageJob
   return {
     jobId: job.id,
     customerSlug: job.slug,
-    serviceId: job.serviceId || resolvePrimaryServiceId(job.slug),
+    serviceId: job.serviceId || "",
     scope: SERVICE_PAGE_ONLY_SCOPE,
     initiationSource: CPR_DASHBOARD_INITIATION_SOURCE,
     evidenceRevision: job.evidenceRevision || "0",

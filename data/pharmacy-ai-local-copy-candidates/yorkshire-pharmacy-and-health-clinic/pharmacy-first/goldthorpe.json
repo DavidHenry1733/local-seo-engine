@@ -1,0 +1,209 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v1",
+  "promptContractVersion": "v1",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T16:21:23.076Z",
+  "tokenUsage": {
+    "promptTokens": 3283,
+    "completionTokens": 693,
+    "totalTokens": 3976
+  },
+  "estimatedCostUsd": 0.01211,
+  "inputEvidencePackHash": "7e930e9caa14c4ab5ae75ff0d703130160cfd00cbbd594156aabb218839324fe",
+  "areaSlug": "goldthorpe",
+  "areaName": "Goldthorpe",
+  "outputCopy": {
+    "area": "Goldthorpe",
+    "heroHeading": "Pharmacy First in Goldthorpe",
+    "heroIntroduction": "Pharmacy First offers quick help for common conditions in Goldthorpe. Speak to Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+    "localIntroduction": "Goldthorpe is 4.9 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "localContextHeading": "Accessing Pharmacy First from Goldthorpe",
+    "localContextParagraphs": [
+      "Residents of Goldthorpe can use Pharmacy First for assessment and advice on a range of everyday health concerns. The service is delivered by experienced pharmacists who will confirm your eligibility and guide you through the next steps.",
+      "Before travelling, it is recommended to check how consultations are being arranged and whether your symptoms are suitable for Pharmacy First. This helps ensure you receive the right care promptly."
+    ],
+    "relationshipToPharmacy": "People in Goldthorpe can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "localAccessIntroduction": "Contact the pharmacy by phone or visit their website to confirm arrangements before attending in person.",
+    "localFaqs": [
+      {
+        "question": "How far is it from Goldthorpe to Yorkshire Pharmacy & Health Clinic?",
+        "answer": "The pharmacy is 4.9 km from Goldthorpe."
+      },
+      {
+        "question": "Should I call before visiting from Goldthorpe?",
+        "answer": "Yes, it is best to call ahead to check how Pharmacy First consultations are being organised."
+      },
+      {
+        "question": "What if Pharmacy First is not suitable for my symptoms?",
+        "answer": "If your symptoms are not suitable, the pharmacist will advise you on the best next steps, which may include referral or self-care advice."
+      },
+      {
+        "question": "Can I get treatment for common conditions through Pharmacy First?",
+        "answer": "Pharmacy First can help with assessment and treatment for eligible common conditions, depending on your symptoms and NHS criteria."
+      },
+      {
+        "question": "How do I contact the pharmacy from Goldthorpe?",
+        "answer": "You can call 01226 210477 or visit the pharmacy website for further information."
+      }
+    ],
+    "localCtaBridge": "To discuss your symptoms or arrange a Pharmacy First consultation, please get in touch with the pharmacy team.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Goldthorpe is 4.9 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "People in Goldthorpe can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+      },
+      {
+        "field": "localFaqs",
+        "sentence": "The pharmacy is 4.9 km from Goldthorpe."
+      }
+    ],
+    "evidenceEntityIdsUsed": []
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Goldthorpe",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First offers quick help for common conditions in Goldthorpe.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Speak to Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Goldthorpe is 4.9 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Accessing Pharmacy First from Goldthorpe",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Residents of Goldthorpe can use Pharmacy First for assessment and advice on a range of everyday health concerns.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The service is delivered by experienced pharmacists who will confirm your eligibility and guide you through the next steps.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Before travelling, it is recommended to check how consultations are being arranged and whether your symptoms are suitable for Pharmacy First.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "People in Goldthorpe can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "Contact the pharmacy by phone or visit their website to confirm arrangements before attending in person.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].question",
+      "exactSentence": "How far is it from Goldthorpe to Yorkshire Pharmacy & Health Clinic?",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "The pharmacy is 4.9 km from Goldthorpe.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "Yes, it is best to call ahead to check how Pharmacy First consultations are being organised.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "What if Pharmacy First is not suitable for my symptoms?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "If your symptoms are not suitable, the pharmacist will advise you on the best next steps, which may include referral or self-care advice.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].question",
+      "exactSentence": "Can I get treatment for common conditions through Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "Pharmacy First can help with assessment and treatment for eligible common conditions, depending on your symptoms and NHS criteria.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].answer",
+      "exactSentence": "You can call 01226 210477 or visit the pharmacy website for further information.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "To discuss your symptoms or arrange a Pharmacy First consultation, please get in touch with the pharmacy team.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

@@ -1,0 +1,139 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "field-policy-deterministic-assembly",
+  "generatedAt": "2026-09-06T07:49:25.473Z",
+  "tokenUsage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "estimatedCostUsd": 0,
+  "inputEvidencePackHash": "a7047dd211b1ec3a9a01695de4e9a0b210f7e1282f2282782ec2028eb7fb725c",
+  "editorialEvidencePackHash": "5bfa1d1fbafd5d58c210425c670f1b30f5ec48960393c83608b0be11f8f13000",
+  "areaSlug": "borrowash",
+  "areaName": "Borrowash",
+  "editorialFactIdsUsed": [
+    "borrowash:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Borrowash",
+    "heroHeading": "Pharmacy First in Borrowash",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Borrowash.",
+    "localIntroduction": "Pharmacy First for people in Borrowash is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+        "editorialFactId": "borrowash:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "borrowash:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Borrowash",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Borrowash.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Borrowash is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+      "supportingCanonicalFieldOrEntity": "borrowash:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Borrowash",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Borrowash.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Borrowash is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "borrowash:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 3,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "",
+  "rawOpenAiResponses": []
+}

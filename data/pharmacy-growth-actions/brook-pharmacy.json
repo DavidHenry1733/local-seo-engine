@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "slug": "brook-pharmacy",
+  "generatedAt": "2026-07-31T12:15:47.716Z",
+  "lastUpdated": "2026-07-31T12:18:17.633Z",
+  "totalActions": 8,
+  "pendingActions": 8,
+  "inProgressActions": 0,
+  "completeActions": 0,
+  "deferredActions": 0,
+  "topPriorityActions": [
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "63% profile complete with 9 item(s) still missing.",
+      "evidence": [
+        "Required: At least one target area",
+        "Required: Reviewer or superintendent name",
+        "Required: Clinical review date",
+        "Improve profile: At least one service",
+        "Improve profile: Reviewer role"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "authority-pharmacy-first-add-reviewer",
+      "title": "Add named professional reviewer (Pharmacy First)",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Human expertise signal missing — named pharmacist or clinical reviewer required.",
+      "evidence": [
+        "Human Expertise: Named pharmacist / reviewer"
+      ],
+      "recommendedNextStep": "Add reviewer name, role and qualifications in Profile Dashboard.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#section-professional-review",
+      "dependencyOrder": 8,
+      "urgency": 4,
+      "rankScore": 64
+    },
+    {
+      "id": "authority-pharmacy-first-add-next-review-date",
+      "title": "Add next review date (Pharmacy First)",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Scheduled next review date missing — required for clinical trust signals.",
+      "evidence": [
+        "Human Expertise: Next review date"
+      ],
+      "recommendedNextStep": "Set nextReviewDate in Profile Dashboard professional review section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#section-professional-review",
+      "dependencyOrder": 8,
+      "urgency": 4,
+      "rankScore": 64
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "Competitor visibility gap not yet analysed.",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=brook-pharmacy",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    }
+  ],
+  "actionsByCategory": {
+    "Trust": [
+      {
+        "id": "trust-add-regulatory-links",
+        "title": "Add real GPhC and NHS profile links before live launch",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Trust credentials should link to your specific premises registration before go-live.",
+        "evidence": [
+          "NHS profile URL not set"
+        ],
+        "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#trust",
+        "dependencyOrder": 9,
+        "urgency": 4,
+        "rankScore": 67
+      },
+      {
+        "id": "authority-pharmacy-first-add-reviewer",
+        "title": "Add named professional reviewer (Pharmacy First)",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Human expertise signal missing — named pharmacist or clinical reviewer required.",
+        "evidence": [
+          "Human Expertise: Named pharmacist / reviewer"
+        ],
+        "recommendedNextStep": "Add reviewer name, role and qualifications in Profile Dashboard.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#section-professional-review",
+        "dependencyOrder": 8,
+        "urgency": 4,
+        "rankScore": 64
+      },
+      {
+        "id": "authority-pharmacy-first-add-next-review-date",
+        "title": "Add next review date (Pharmacy First)",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Scheduled next review date missing — required for clinical trust signals.",
+        "evidence": [
+          "Human Expertise: Next review date"
+        ],
+        "recommendedNextStep": "Set nextReviewDate in Profile Dashboard professional review section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#section-professional-review",
+        "dependencyOrder": 8,
+        "urgency": 4,
+        "rankScore": 64
+      }
+    ],
+    "Profile": [
+      {
+        "id": "profile-complete-missing-fields",
+        "title": "Complete remaining profile fields",
+        "category": "Profile",
+        "priority": "High",
+        "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "63% profile complete with 9 item(s) still missing.",
+        "evidence": [
+          "Required: At least one target area",
+          "Required: Reviewer or superintendent name",
+          "Required: Clinical review date",
+          "Improve profile: At least one service",
+          "Improve profile: Reviewer role"
+        ],
+        "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy",
+        "dependencyOrder": 10,
+        "urgency": 3,
+        "rankScore": 65
+      }
+    ],
+    "Competitor Gap": [
+      {
+        "id": "competitor-promote-pharmacy-first",
+        "title": "Promote Pharmacy First as a priority service",
+        "category": "Competitor Gap",
+        "priority": "High",
+        "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+        "evidence": [
+          "Competitor visibility gap not yet analysed.",
+          "Pharmacy First page published and in visibility registry"
+        ],
+        "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+        "linkedModule": "Competitor Intelligence",
+        "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=brook-pharmacy",
+        "dependencyOrder": 4,
+        "urgency": 4,
+        "rankScore": 56
+      }
+    ],
+    "Content": [
+      {
+        "id": "content-gbp-posts-pharmacy-first",
+        "title": "Build Google Business Profile posts from Pharmacy First ecosystem",
+        "category": "Content",
+        "priority": "Medium",
+        "impact": "GBP posts reinforce service relevance and drive local discovery between website updates.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Pharmacy First content ecosystem includes ready GBP post assets.",
+        "evidence": [
+          "GBP post pack available at pharmacy-first/packs/gbp-posts.json"
+        ],
+        "recommendedNextStep": "Copy ecosystem GBP posts into your Google Business Profile weekly schedule.",
+        "linkedModule": "Content Ecosystem",
+        "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+        "dependencyOrder": 3,
+        "urgency": 3,
+        "rankScore": 41
+      },
+      {
+        "id": "content-travel-vaccinations-seasonal",
+        "title": "Publish Travel Vaccinations content before peak travel season",
+        "category": "Content",
+        "priority": "Medium",
+        "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Travel Vaccinations page is published for Rotherham — refresh promotion ahead of peak demand.",
+        "evidence": [
+          "travel vaccinations Rotherham",
+          "70% of local competitors promote travel vaccinations"
+        ],
+        "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+        "linkedModule": "Visual Experience",
+        "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+        "dependencyOrder": 3,
+        "urgency": 3,
+        "rankScore": 41
+      },
+      {
+        "id": "content-review-ecosystem-assets",
+        "title": "Review content ecosystem assets for priority services",
+        "category": "Content",
+        "priority": "Low",
+        "impact": "Email, FAQ and social packs extend reach without new page generation.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Content ecosystem assets exist for Pharmacy First — extend use across channels.",
+        "evidence": [
+          "Pharmacy First ecosystem includes FAQ, email and social packs"
+        ],
+        "recommendedNextStep": "Open the Pharmacy First content ecosystem and schedule one asset per week.",
+        "linkedModule": "Content Ecosystem",
+        "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+        "dependencyOrder": 2,
+        "urgency": 2,
+        "rankScore": 25
+      }
+    ]
+  },
+  "actions": [
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "63% profile complete with 9 item(s) still missing.",
+      "evidence": [
+        "Required: At least one target area",
+        "Required: Reviewer or superintendent name",
+        "Required: Clinical review date",
+        "Improve profile: At least one service",
+        "Improve profile: Reviewer role"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "authority-pharmacy-first-add-reviewer",
+      "title": "Add named professional reviewer (Pharmacy First)",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Human expertise signal missing — named pharmacist or clinical reviewer required.",
+      "evidence": [
+        "Human Expertise: Named pharmacist / reviewer"
+      ],
+      "recommendedNextStep": "Add reviewer name, role and qualifications in Profile Dashboard.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#section-professional-review",
+      "dependencyOrder": 8,
+      "urgency": 4,
+      "rankScore": 64
+    },
+    {
+      "id": "authority-pharmacy-first-add-next-review-date",
+      "title": "Add next review date (Pharmacy First)",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Scheduled next review date missing — required for clinical trust signals.",
+      "evidence": [
+        "Human Expertise: Next review date"
+      ],
+      "recommendedNextStep": "Set nextReviewDate in Profile Dashboard professional review section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy#section-professional-review",
+      "dependencyOrder": 8,
+      "urgency": 4,
+      "rankScore": 64
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "Competitor visibility gap not yet analysed.",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=brook-pharmacy",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-gbp-posts-pharmacy-first",
+      "title": "Build Google Business Profile posts from Pharmacy First ecosystem",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "GBP posts reinforce service relevance and drive local discovery between website updates.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Pharmacy First content ecosystem includes ready GBP post assets.",
+      "evidence": [
+        "GBP post pack available at pharmacy-first/packs/gbp-posts.json"
+      ],
+      "recommendedNextStep": "Copy ecosystem GBP posts into your Google Business Profile weekly schedule.",
+      "linkedModule": "Content Ecosystem",
+      "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for Rotherham — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations Rotherham",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    },
+    {
+      "id": "content-review-ecosystem-assets",
+      "title": "Review content ecosystem assets for priority services",
+      "category": "Content",
+      "priority": "Low",
+      "impact": "Email, FAQ and social packs extend reach without new page generation.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Content ecosystem assets exist for Pharmacy First — extend use across channels.",
+      "evidence": [
+        "Pharmacy First ecosystem includes FAQ, email and social packs"
+      ],
+      "recommendedNextStep": "Open the Pharmacy First content ecosystem and schedule one asset per week.",
+      "linkedModule": "Content Ecosystem",
+      "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+      "dependencyOrder": 2,
+      "urgency": 2,
+      "rankScore": 25
+    }
+  ]
+}

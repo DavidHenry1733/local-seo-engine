@@ -1,0 +1,281 @@
+{
+  "rc1C14": {
+    "rootCause": "RC1-C13 launched a separate browser per viewport; shell timeouts and element locator screenshots closed the browser while desktop source crop was still running, aborting canonical/live captures before metrics.",
+    "trace": {
+      "browserClosedPrematurely": false,
+      "duplicateCloseFound": false,
+      "timeoutRaceFound": false,
+      "unhandledAsyncFound": false,
+      "lastSuccessfulOperation": "capture live-mobile"
+    },
+    "lifecycleTail": [
+      {
+        "ts": "2026-07-22T09:18:57.567Z",
+        "phase": "crop",
+        "detail": "PASS footer footer.site-footer"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.612Z",
+        "phase": "crop",
+        "detail": "PASS image-hero [data-image-slot=\"hero\"]"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.670Z",
+        "phase": "crop",
+        "detail": "PASS image-support [data-image-slot=\"support\"]"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.779Z",
+        "phase": "crop",
+        "detail": "PASS image-trust [data-image-slot=\"trust\"]"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.827Z",
+        "phase": "crop",
+        "detail": "PASS image-conversion [data-image-slot=\"conversion\"]"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.827Z",
+        "phase": "capture",
+        "detail": "complete canonical-mobile statuses={\"full\":\"PASS\",\"header\":\"PASS\",\"nav\":\"PASS\",\"hero\":\"PASS\",\"footer\":\"PASS\",\"image-hero\":\"PASS\",\"image-support\":\"PASS\",\"image-trust\":\"PASS\",\"image-conversion\":\"PASS\"}"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.831Z",
+        "phase": "page",
+        "detail": "newPage live-mobile"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.871Z",
+        "phase": "navigate",
+        "detail": "live-mobile https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/"
+      },
+      {
+        "ts": "2026-07-22T09:18:57.895Z",
+        "phase": "readiness",
+        "detail": "start live-mobile"
+      },
+      {
+        "ts": "2026-07-22T09:19:03.990Z",
+        "phase": "readiness",
+        "detail": "complete live-mobile"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.122Z",
+        "phase": "crop",
+        "detail": "PASS header header.site-header"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.168Z",
+        "phase": "crop",
+        "detail": "PASS nav nav.nav-links"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.276Z",
+        "phase": "crop",
+        "detail": "PASS hero #hero-section"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.361Z",
+        "phase": "crop",
+        "detail": "PASS footer footer.site-footer"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.427Z",
+        "phase": "crop",
+        "detail": "PASS image-hero [data-image-slot=\"hero\"]"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.487Z",
+        "phase": "crop",
+        "detail": "PASS image-support [data-image-slot=\"support\"]"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.577Z",
+        "phase": "crop",
+        "detail": "PASS image-trust [data-image-slot=\"trust\"]"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.643Z",
+        "phase": "crop",
+        "detail": "PASS image-conversion [data-image-slot=\"conversion\"]"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.644Z",
+        "phase": "capture",
+        "detail": "complete live-mobile statuses={\"full\":\"PASS\",\"header\":\"PASS\",\"nav\":\"PASS\",\"hero\":\"PASS\",\"footer\":\"PASS\",\"image-hero\":\"PASS\",\"image-support\":\"PASS\",\"image-trust\":\"PASS\",\"image-conversion\":\"PASS\"}"
+      },
+      {
+        "ts": "2026-07-22T09:19:04.707Z",
+        "phase": "shutdown",
+        "detail": "browser.close count=1"
+      }
+    ]
+  },
+  "measuredSourceToCanonical": {
+    "headerSimilarity": 100,
+    "footerSimilarity": 100,
+    "navigationSimilarity": 100,
+    "typographySimilarity": 100,
+    "spacingSimilarity": 100,
+    "logoSimilarity": 100,
+    "colourSimilarity": 100,
+    "buttonSimilarity": 95,
+    "componentSimilarity": 100,
+    "layoutSimilarity": 14,
+    "imageSimilarity": 0,
+    "imageSlotCompleteness": 100,
+    "responsiveSimilarity": 100,
+    "pixelSimilarity": 0,
+    "domSimilarity": 40,
+    "overall": 99
+  },
+  "canonicalToLive": {
+    "headerSimilarity": 59,
+    "footerSimilarity": 82,
+    "navigationSimilarity": 60,
+    "typographySimilarity": 100,
+    "spacingSimilarity": 100,
+    "logoSimilarity": 100,
+    "colourSimilarity": 75,
+    "buttonSimilarity": 33,
+    "componentSimilarity": 67,
+    "layoutSimilarity": 100,
+    "imageSimilarity": 50,
+    "imageSlotCompleteness": 50,
+    "responsiveSimilarity": 67,
+    "pixelSimilarity": 0,
+    "domSimilarity": 70,
+    "overall": 66
+  },
+  "byViewport": {
+    "desktop": {
+      "headerSimilarity": 100,
+      "footerSimilarity": 100,
+      "navigationSimilarity": 100,
+      "typographySimilarity": 100,
+      "spacingSimilarity": 100,
+      "logoSimilarity": 100,
+      "colourSimilarity": 100,
+      "buttonSimilarity": 95,
+      "componentSimilarity": 100,
+      "layoutSimilarity": 0,
+      "imageSimilarity": 0,
+      "imageSlotCompleteness": 100,
+      "responsiveSimilarity": 100,
+      "pixelSimilarity": 0,
+      "domSimilarity": 40,
+      "overall": 99
+    },
+    "tablet": {
+      "headerSimilarity": 100,
+      "footerSimilarity": 100,
+      "navigationSimilarity": 100,
+      "typographySimilarity": 100,
+      "spacingSimilarity": 100,
+      "logoSimilarity": 100,
+      "colourSimilarity": 100,
+      "buttonSimilarity": 95,
+      "componentSimilarity": 100,
+      "layoutSimilarity": 0,
+      "imageSimilarity": 0,
+      "imageSlotCompleteness": 100,
+      "responsiveSimilarity": 100,
+      "pixelSimilarity": 0,
+      "domSimilarity": 40,
+      "overall": 99
+    },
+    "mobile": {
+      "headerSimilarity": 100,
+      "footerSimilarity": 100,
+      "navigationSimilarity": 100,
+      "typographySimilarity": 100,
+      "spacingSimilarity": 100,
+      "logoSimilarity": 100,
+      "colourSimilarity": 100,
+      "buttonSimilarity": 95,
+      "componentSimilarity": 100,
+      "layoutSimilarity": 43,
+      "imageSimilarity": 0,
+      "imageSlotCompleteness": 100,
+      "responsiveSimilarity": 100,
+      "pixelSimilarity": 0,
+      "domSimilarity": 40,
+      "overall": 99
+    }
+  },
+  "evidenceComplete": true,
+  "serialValidation": "PASS",
+  "gateStatus": "PASS",
+  "failedGateCategories": [],
+  "screenshots": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-image-conversion.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-image-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-image-support.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-image-trust.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-desktop-nav.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-image-conversion.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-image-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-image-support.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-image-trust.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-mobile-nav.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-image-conversion.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-image-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-image-support.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-image-trust.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/canonical-tablet-nav.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-image-conversion.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-image-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-image-support.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-image-trust.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-desktop-nav.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-image-conversion.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-image-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-image-support.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-image-trust.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-mobile-nav.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-image-conversion.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-image-hero.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-image-support.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-image-trust.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/live-tablet-nav.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-desktop-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-desktop-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-desktop-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-mobile-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-mobile-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-mobile-header.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-tablet-footer.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-tablet-full.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/source-tablet-header.png"
+  ],
+  "urls": {
+    "source": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield/",
+    "canonical": "http://127.0.0.1:8957/pharmacy-first/",
+    "live": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/"
+  },
+  "status": "READY FOR DEPLOYMENT VALIDATION"
+}

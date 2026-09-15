@@ -1,0 +1,70 @@
+{
+  "filesChanged": [
+    "src/pharmacy/pharmacyTenantDnaRenderActivation.ts",
+    "src/pharmacy/pharmacyVisualExperienceLayoutV3.ts",
+    "src/pharmacy/pharmacyVisualServicePageRenderer.ts",
+    "src/pharmacy/pharmacyBrandDnaRenderTokens.ts",
+    "src/pharmacy/pharmacyBrandDnaComponentRenderers.ts",
+    "src/pharmacy/pharmacyBrandDnaFooterRenderer.ts",
+    "src/pharmacy/pharmacyServicePageDesignSystem.ts",
+    "src/pharmacy/pharmacyServicePageTrustInjection.ts",
+    "src/pharmacy/pharmacyCanonicalFinalRenderService.ts",
+    "src/pharmacy/pharmacyVisualExperience.ts"
+  ],
+  "rendererCorrected": "tenant-dna-activation-rc1-c10-v1",
+  "lockdownV1Removed": "YES",
+  "tenantComponentDnaConsumed": "YES",
+  "tenantLayoutDnaConsumed": "YES",
+  "genericBodyRemoved": "YES",
+  "genericFallbacksRemaining": [],
+  "desktopValidation": "PASS",
+  "mobileValidation": "PASS",
+  "previewParity": "PASS",
+  "liveParity": "PASS",
+  "build": "PASS",
+  "pm2": "ONLINE",
+  "exactUrlsTested": [
+    "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+    "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+    "file:///home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/pharmacy-first-guide/index.html",
+    "file:///home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/what-is-pharmacy-first/index.html",
+    "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+    "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/"
+  ],
+  "manifest": {
+    "brandDnaRevision": "e1a689cd1b36b79e",
+    "componentDnaRevision": "7193891cbbdc1793",
+    "layoutDnaRevision": "f8605d49c2d01cee",
+    "rendererRevision": "tenant-dna-activation-rc1-c10-v1",
+    "fallbackFlags": [],
+    "defaultTemplateUsed": false
+  },
+  "lineage": {
+    "websiteImportRevision": "c58ba4f2400bfc4e",
+    "websiteIntelligenceRevision": "b744d0e580749bee",
+    "brandDnaRevision": "e1a689cd1b36b79e",
+    "componentDnaRevision": "7193891cbbdc1793",
+    "brandDnaStale": false,
+    "componentDnaStale": false,
+    "brandDnaPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/banner-cross-pharmacy/brand-dna.json",
+    "componentDnaPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/banner-cross-pharmacy.json",
+    "websiteImport": {
+      "slug": "banner-cross-pharmacy",
+      "canonicalWebsiteUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "latestImportJobId": "281c42ff-1e3f-4462-8cc4-b3db8836c27e",
+      "importStartedAt": "2026-07-19T11:38:03.069Z",
+      "importCompletedAt": "2026-07-21T11:17:54.304Z",
+      "importedSourceUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield/",
+      "websiteIntelligencePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+      "websiteIntelligenceSchemaVersion": 2,
+      "websiteIntelligenceModifiedAt": "2026-07-21T11:16:44.646Z",
+      "importEvidenceRevision": "c58ba4f2400bfc4e",
+      "importedPageCount": 50,
+      "importedAssetCount": 27
+    },
+    "fallbackFlags": [],
+    "verifiedDesignEvidence": true,
+    "revisionChainComplete": true
+  },
+  "status": "READY FOR PRODUCT OWNER TEST"
+}

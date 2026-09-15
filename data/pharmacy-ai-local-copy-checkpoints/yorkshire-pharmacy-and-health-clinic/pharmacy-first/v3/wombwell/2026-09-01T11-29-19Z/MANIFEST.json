@@ -1,0 +1,156 @@
+{
+  "kind": "recoverable-candidate-checkpoint",
+  "status": "candidate",
+  "approved": false,
+  "locked": false,
+  "reviewStatus": "candidate",
+  "note": "Not approved. Not locked. Product Owner visual review required. No promotion, publication, deployment or commit.",
+  "createdAt": "2026-09-01T11:36:51.936454+00:00",
+  "areaSlug": "wombwell",
+  "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+  "serviceId": "pharmacy-first",
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "generatedAt": "2026-09-01T11:29:19.669Z",
+  "thisTaskUsd": 0.026188,
+  "researchUsd": 0.004,
+  "openaiUsd": 0.022188,
+  "thisRunPromptTokens": 8342,
+  "thisRunCompletionTokens": 688,
+  "attempted": 2,
+  "retried": 1,
+  "files": [
+    {
+      "checkpointPath": "source/pharmacyAiLocalNarrativePromptContractV1.ts",
+      "sourcePath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+      "sha256": "01b31257d5336f7d41a3a700015f1a2454d27171d48dddfb0a76bc58a20a5736",
+      "bytes": 38163
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalCopySchemaV1.ts",
+      "sourcePath": "src/pharmacy/contentEngine/pharmacyAiLocalCopySchemaV1.ts",
+      "sha256": "71ed65b3e23231c79cf2e9b01b8b23319bc582c60d3b63d5711f936504280d36",
+      "bytes": 17644
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalCopyQualityV1.ts",
+      "sourcePath": "src/pharmacy/contentEngine/pharmacyAiLocalCopyQualityV1.ts",
+      "sha256": "b4807a6881439b8bbf70dfabd935f8db0a8866f28859b92cd976ae958beb8454",
+      "bytes": 26287
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalNarrativeEngineV3.ts",
+      "sourcePath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativeEngineV3.ts",
+      "sha256": "24a14208f8fbe39a08061eb9e4e69f8dae26e7fac7ebfaca1551e708bd50fb8d",
+      "bytes": 24257
+    },
+    {
+      "checkpointPath": "source/runPharmacyAiLocalEditorialEvidencePilotV3.ts",
+      "sourcePath": "src/pharmacy/contentEngine/runPharmacyAiLocalEditorialEvidencePilotV3.ts",
+      "sha256": "6698b040f801f495e9ba07138f7a98b03b2513bc3a6d194d04265fe7625bfaf3",
+      "bytes": 12485
+    },
+    {
+      "checkpointPath": "source/validatePharmacyAiLocalEditorialEvidencePilotV3.ts",
+      "sourcePath": "src/pharmacy/contentEngine/validatePharmacyAiLocalEditorialEvidencePilotV3.ts",
+      "sha256": "057ba7395f4a50672698d4cd1dbc728ec4f70c1cbd1fd3e9b182accba8dda36f",
+      "bytes": 65292
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalPagePilotAssemblerV3.ts",
+      "sourcePath": "src/pharmacy/pharmacyAiLocalPagePilotAssemblerV3.ts",
+      "sha256": "b7421d2b6bc3e78a36d14c4dc32e249c7837fb3ab8447dd37139d2c29e9a20b0",
+      "bytes": 12389
+    },
+    {
+      "checkpointPath": "source/pharmacyServicePageTrustInjection.ts",
+      "sourcePath": "src/pharmacy/pharmacyServicePageTrustInjection.ts",
+      "sha256": "d6be47d5dd301b33d65e5110953b7c452a094cb782daa7726db4666ffe5564ea",
+      "bytes": 22975
+    },
+    {
+      "checkpointPath": "source/pharmacyFirstLocalNarrative.ts",
+      "sourcePath": "src/pharmacy/pharmacyFirstLocalNarrative.ts",
+      "sha256": "2c18e67a835fa8c674ab3be50e46ba8ee00b9b356820588a2114dd984e90ee7e",
+      "bytes": 56881
+    },
+    {
+      "checkpointPath": "source/pharmacyLocalClusterLocationPageRenderer.ts",
+      "sourcePath": "src/pharmacy/pharmacyLocalClusterLocationPageRenderer.ts",
+      "sha256": "ea8e383a9498b4c51d4e9eea3e532b5bc2884fab8253dca029303f8d29697d54",
+      "bytes": 23437
+    },
+    {
+      "checkpointPath": "copy/wombwell.json",
+      "sourcePath": "data/pharmacy-ai-local-copy-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell.json",
+      "sha256": "e1d09e786992245e2d991a7fa4b74c15d32f997124a9e567223d8f0b0116807f",
+      "bytes": 8674
+    },
+    {
+      "checkpointPath": "html/index.html",
+      "sourcePath": "output/pharmacy-ai-local-page-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/local/wombwell/index.html",
+      "sha256": "80c219a9be363d816f6d5d6951967f28fc68b0a1b6359a8c872c8dea5a6cf281",
+      "bytes": 65877
+    },
+    {
+      "checkpointPath": "attempts/2026-09-01T11-29-19-667Z-attempt-1.json",
+      "sourcePath": "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T11-29-19-667Z-attempt-1.json",
+      "sha256": "330a7b14da86fa0a41bee964e26d26e929e1ea4b755797b26307c920ddda931e",
+      "bytes": 22843
+    },
+    {
+      "checkpointPath": "attempts/2026-09-01T11-31-09-217Z-attempt-1.json",
+      "sourcePath": "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T11-31-09-217Z-attempt-1.json",
+      "sha256": "7edea0ff7f07a8b093b9b1744cedbb370fb730e26378c9427a4e6534833d4fd7",
+      "bytes": 23737
+    },
+    {
+      "checkpointPath": "research/2026-09-01-complete-pilot.json",
+      "sourcePath": "data/pharmacy-local-editorial-research-supplements/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01-complete-pilot.json",
+      "sha256": "8e792f950c8e6c4ce6a7f3042be2d1dceeb502a4fd86fb8ed1a3cb79d554582e",
+      "bytes": 25492
+    },
+    {
+      "checkpointPath": "research/2026-09-01-complete-pilot-cost-ledger.json",
+      "sourcePath": "data/pharmacy-local-editorial-research-supplements/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01-complete-pilot-cost-ledger.json",
+      "sha256": "6cc2008679295a4b3946ad7d97eb42f0fb040340771996f7522730aa5f4b9d22",
+      "bytes": 2414
+    },
+    {
+      "checkpointPath": "tests/live-preview-check.json",
+      "sourcePath": "tests/live-preview-check.json",
+      "sha256": "478f2398f8f47df4e512c5a7d51e876414aa4f6c12659feef222b93a634eb535",
+      "bytes": 6750
+    }
+  ],
+  "copySha256": "e1d09e786992245e2d991a7fa4b74c15d32f997124a9e567223d8f0b0116807f",
+  "htmlSha256": "80c219a9be363d816f6d5d6951967f28fc68b0a1b6359a8c872c8dea5a6cf281",
+  "protectedSetCount": 276,
+  "protectedCombinedSha256": "e904c9fe3053fd375c84af4b16ef94301caf79a57d6b5741f246fd77963a62f5",
+  "previousProtectedCombinedSha256": "81f71202d2f964183d94acd693535579c764e851c5ec1d3281366a16e92e6a2d",
+  "previousProtectedCombinedStillHoldsIfWombwellRolledBack": true,
+  "remainderCount": 274,
+  "remainderCombinedSha256": "2e4b4998308ff3824c6e5a1b700073f9c81e871db87b6da2bf2aaafb1947113e",
+  "onlyIntendedChanges": [
+    "data/pharmacy-ai-local-copy-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell.json",
+    "output/pharmacy-ai-local-page-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/local/wombwell/index.html"
+  ],
+  "preserved": {
+    "darfieldCopy": "7069e5d86f5519d5557c46acac7727d125a9e564aeeac5773114dd68aed55834",
+    "darfieldHtml": "fb6d1c6052eaf197e9c6d34892edf14a5a7d3e40101d18a045b2bbe58b8ca422",
+    "originalEditorialPack": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+    "rollbackCopy": "d846cabe00a921850a3080b9aa11ed296b6a725555dde02c73e529e89f4880a1",
+    "rollbackHtml": "2f85ccc13f180d96250009e5319fbecf48ab1c8bbd87cbbeb4fd61fe8a822115",
+    "rollbackDir": "data/pharmacy-ai-local-copy-checkpoints/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/rollback-accepted-2026-09-01T10-32-22Z",
+    "previousAcceptedCheckpoint": "data/pharmacy-ai-local-copy-checkpoints/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T10-32-22Z"
+  },
+  "copySourceMatch": true,
+  "copyMismatches": [],
+  "previewUrl": "https://app.pharmaconnect.uk/api/growth-engine/yorkshire-pharmacy-and-health-clinic/review-preview?campaign=pharmacy-first&asset=ai-local-area-page-pilot-v3&area=wombwell",
+  "livePreviewCheck": {
+    "path": "tests/live-preview-check.json",
+    "sha256": "478f2398f8f47df4e512c5a7d51e876414aa4f6c12659feef222b93a634eb535",
+    "servesNewCopy": true,
+    "publicAuthedStatus": 200
+  }
+}

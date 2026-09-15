@@ -1,0 +1,229 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-09T09:33:20.012Z",
+  "tokenUsage": {
+    "promptTokens": 762,
+    "completionTokens": 260,
+    "totalTokens": 1022
+  },
+  "estimatedCostUsd": 0.0036039999999999996,
+  "inputEvidencePackHash": "4d53bd6834f2990639e647868d7d37373f356a9f639cdff54b67beb31add52f2",
+  "editorialEvidencePackHash": "065e896a318589d4230f15670de7ff42f9594629b872507b4260ca15727239a9",
+  "areaSlug": "darfield",
+  "areaName": "Darfield",
+  "editorialFactIdsUsed": [
+    "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns"
+  ],
+  "outputCopy": {
+    "area": "Darfield",
+    "heroHeading": "Pharmacy First in Darfield",
+    "heroIntroduction": "For residents in Darfield, Brook Pharmacy offers access to the NHS Pharmacy First service. This initiative allows local patients to receive professional consultations with a pharmacist for various common health conditions, supporting the community with appropriate healthcare advice and clinical guidance.",
+    "localIntroduction": "Darfield is an established settlement situated within the Metropolitan Borough of Barnsley in South Yorkshire. Located in the eastern portion of the borough, the area forms an integral part of the local district, maintaining a clear identity defined by its history and residential surroundings.\n\nEssential public facilities and local infrastructure support the daily routines of those living in the community. Among these civic amenities is Darfield public library, which provides access to books, educational materials and shared space for residents of all ages. Facilities like this help to sustain community activity and offer shared services for the local population.\n\nTo support everyday health and care requirements, Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area. The NHS Pharmacy First service covers certain common health conditions, allowing members of the local community to speak directly with a qualified healthcare professional. During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. Depending on the findings of this individual clinical assessment, the outcome may include tailored clinical advice, suitable treatment or referral to another healthcare professional. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Darfield",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield. Yorkshire Pharmacy & Health Clinic is approximately 0.4 km in a straight line from Darfield.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Darfield is an established settlement situated within the Metropolitan Borough of Barnsley in South Yorkshire.",
+        "editorialFactId": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Darfield",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "This initiative allows local patients to receive professional consultations with a pharmacist for various common health conditions, supporting the community with appropriate healthcare advice and clinical guidance.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Darfield is an established settlement situated within the Metropolitan Borough of Barnsley in South Yorkshire.",
+      "supportingCanonicalFieldOrEntity": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "providerSource": "barnsley.gov.uk",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (established, settlement, situated) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Located in the eastern portion of the borough, the area forms an integral part of the local district, maintaining a clear identity defined by its history and residential surroundings.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Essential public facilities and local infrastructure support the daily routines of those living in the community.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Among these civic amenities is Darfield public library, which provides access to books, educational materials and shared space for residents of all ages.",
+      "supportingCanonicalFieldOrEntity": "darfield:community:darfield-has-a-public-library",
+      "providerSource": "barnsley.gov.uk",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (these, amenities, which, provides, access, books, educational, materials, shared, space, residents, all, ages) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Facilities like this help to sustain community activity and offer shared services for the local population.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (carefully, assesses, relevant, history) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Depending on the findings of this individual clinical assessment, the outcome may include tailored clinical advice, suitable treatment or referral to another healthcare professional.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Pharmacy First in Darfield",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "supportingCanonicalFieldOrEntity": "darfield:pharmacy-relationship:in-area",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is approximately 0.4 km in a straight line from Darfield.",
+      "supportingCanonicalFieldOrEntity": "darfield:pharmacy-relationship:in-area",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Darfield",
+      "purpose": "identify the local edition",
+      "supportingSource": "business.address",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "This initiative allows local patients to receive professional consultations with a pharmacist for various common health conditions, supporting the community with appropriate healthcare advice and clinical guidance.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Located in the eastern portion of the borough, the area forms an integral part of the local district, maintaining a clear identity defined by its history and residential surroundings.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Essential public facilities and local infrastructure support the daily routines of those living in the community.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Facilities like this help to sustain community activity and offer shared services for the local population.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Depending on the findings of this individual clinical assessment, the outcome may include tailored clinical advice, suitable treatment or referral to another healthcare professional.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Pharmacy First in Darfield",
+      "purpose": "section orientation",
+      "supportingSource": "business.address",
+      "readerValue": "signals the local-context passage"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "darfield:pharmacy-relationship:in-area",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Yorkshire Pharmacy & Health Clinic is approximately 0.4 km in a straight line from Darfield.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "darfield:pharmacy-relationship:in-area",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 5,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Darfield is an established settlement situated within the Metropolitan Borough of Barnsley in South Yorkshire. | rule=uncertain-paraphrase | defect=Darfield is an established settlement situated within the Metropolitan Borough of Barnsley in South Yorkshire. — uncertain paraphrase: unmatched wording (established, settlement, situated) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Among these civic amenities is Darfield public library, which provides access to books, educational materials and shared space for residents of all ages. | rule=uncertain-paraphrase | defect=Among these civic amenities is Darfield public library, which provides access to books, educational materials and shared space for residents of all ages. — uncertain paraphrase: unmatched wording (these, amenities, which, provides, access, books, educational, materials, shared, space, residents, all, ages) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. | rule=uncertain-paraphrase | defect=During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. — uncertain paraphrase: unmatched wording (carefully, assesses, relevant, history) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "HERO INTRODUCTION:\nFor residents in Darfield, Brook Pharmacy offers access to the NHS Pharmacy First service. This initiative allows local patients to receive professional consultations with a pharmacist for various common health conditions, supporting the community with appropriate healthcare advice and clinical guidance.\n\nLOCAL INTRODUCTION:\nDarfield is an established settlement situated within the Metropolitan Borough of Barnsley in South Yorkshire. Located in the eastern portion of the borough, the area forms an integral part of the local district, maintaining a clear identity defined by its history and residential surroundings.\n\nEssential public facilities and local infrastructure support the daily routines of those living in the community. Among these civic amenities is Darfield public library, which provides access to books, educational materials and shared space for residents of all ages. Facilities like this help to sustain community activity and offer shared services for the local population.\n\nTo support everyday health and care requirements, Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area. The NHS Pharmacy First service covers certain common health conditions, allowing members of the local community to speak directly with a qualified healthcare professional. During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. Depending on the findings of this individual clinical assessment, the outcome may include tailored clinical advice, suitable treatment or referral to another healthcare professional.",
+  "rawOpenAiResponses": [
+    "HERO INTRODUCTION:\nFor residents in Darfield, Brook Pharmacy offers access to the NHS Pharmacy First service. This initiative allows local patients to receive professional consultations with a pharmacist for various common health conditions, supporting the community with appropriate healthcare advice and clinical guidance.\n\nLOCAL INTRODUCTION:\nDarfield is an established settlement situated within the Metropolitan Borough of Barnsley in South Yorkshire. Located in the eastern portion of the borough, the area forms an integral part of the local district, maintaining a clear identity defined by its history and residential surroundings.\n\nEssential public facilities and local infrastructure support the daily routines of those living in the community. Among these civic amenities is Darfield public library, which provides access to books, educational materials and shared space for residents of all ages. Facilities like this help to sustain community activity and offer shared services for the local population.\n\nTo support everyday health and care requirements, Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area. The NHS Pharmacy First service covers certain common health conditions, allowing members of the local community to speak directly with a qualified healthcare professional. During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. Depending on the findings of this individual clinical assessment, the outcome may include tailored clinical advice, suitable treatment or referral to another healthcare professional."
+  ]
+}

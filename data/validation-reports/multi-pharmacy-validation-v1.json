@@ -1,0 +1,340 @@
+{
+  "verdict": "MULTI-PHARMACY NOT READY",
+  "validatedAt": "2026-06-24T15:19:21.428Z",
+  "pharmacies": {
+    "primary": {
+      "slug": "pharmaconnect",
+      "name": "Brook Pharmacy",
+      "town": "Rotherham",
+      "phone": "01709 210731",
+      "address": "Moorgate Crofts",
+      "primaryColor": "#005eb8",
+      "cta": "Speak To A Pharmacist",
+      "completeness": 99
+    },
+    "secondary": {
+      "slug": "greenlane-pharmacy",
+      "name": "Green Lane Pharmacy",
+      "town": "Sheffield",
+      "phone": "0114 555 0198",
+      "address": "42 Green Lane",
+      "primaryColor": "#1b7f4e",
+      "cta": "Book A Consultation",
+      "completeness": 99
+    }
+  },
+  "beforeState": {
+    "singlePharmacy": "pharmaconnect",
+    "pharmaconnectProfileHash": "eaf95f254239a0f69317008198c6ab8bdc9b94bb85c1b1f2c120e9eeb1d1922e",
+    "dataStoresWithPharmaconnectOnly": [
+      "pharmacy-growth-actions",
+      "pharmacy-indexing",
+      "pharmacy-registry",
+      "pharmacy-visibility",
+      "pharmacy-campaigns",
+      "pharmacy-executive-dashboard",
+      "pharmacy-campaign-launch-queue"
+    ]
+  },
+  "checks": [
+    {
+      "id": "brook-profile-unchanged",
+      "pass": true,
+      "detail": "pharmaconnect.json hash stable"
+    },
+    {
+      "id": "greenlane-loads",
+      "pass": true,
+      "detail": "Green Lane Pharmacy"
+    },
+    {
+      "id": "completeness-calculated-separately",
+      "pass": true,
+      "detail": "Brook 99% vs Green Lane 99%"
+    },
+    {
+      "id": "branding-calculated-separately",
+      "pass": true,
+      "detail": "Brook #005eb8 vs Green Lane #1b7f4e"
+    },
+    {
+      "id": "pharmaconnect:profilePreview:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:profilePreview:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham, #005eb8"
+    },
+    {
+      "id": "pharmaconnect:profileDashboardHeader:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:profileDashboardHeader:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham"
+    },
+    {
+      "id": "pharmaconnect:trustLayer:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:trustLayer:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham"
+    },
+    {
+      "id": "pharmaconnect:executiveDashboard:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:executiveDashboard:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham, #005eb8"
+    },
+    {
+      "id": "pharmaconnect:growthJourney:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:growthJourney:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham, #005eb8"
+    },
+    {
+      "id": "pharmaconnect:growthJourneyJson:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:growthJourneyJson:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham, #005eb8"
+    },
+    {
+      "id": "pharmaconnect:campaignOs:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:campaignOs:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham, #005eb8"
+    },
+    {
+      "id": "pharmaconnect:campaignJson:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "pharmaconnect:campaignJson:self-identity",
+      "pass": true,
+      "detail": "Found Brook Pharmacy, Rotherham, #005eb8"
+    },
+    {
+      "id": "greenlane-pharmacy:profilePreview:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "greenlane-pharmacy:profilePreview:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, Sheffield, #1b7f4e"
+    },
+    {
+      "id": "greenlane-pharmacy:profileDashboardHeader:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "greenlane-pharmacy:profileDashboardHeader:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, Sheffield"
+    },
+    {
+      "id": "greenlane-pharmacy:trustLayer:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "greenlane-pharmacy:trustLayer:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, Sheffield"
+    },
+    {
+      "id": "greenlane-pharmacy:executiveDashboard:isolated",
+      "pass": false,
+      "detail": "Cross-pharmacy leak: #005eb8"
+    },
+    {
+      "id": "greenlane-pharmacy:executiveDashboard:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, Sheffield"
+    },
+    {
+      "id": "greenlane-pharmacy:growthJourney:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "greenlane-pharmacy:growthJourney:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, Sheffield, #1b7f4e"
+    },
+    {
+      "id": "greenlane-pharmacy:growthJourneyJson:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "greenlane-pharmacy:growthJourneyJson:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, Sheffield, #1b7f4e"
+    },
+    {
+      "id": "greenlane-pharmacy:campaignOs:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "greenlane-pharmacy:campaignOs:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, #1b7f4e"
+    },
+    {
+      "id": "greenlane-pharmacy:campaignJson:isolated",
+      "pass": true,
+      "detail": "isolated"
+    },
+    {
+      "id": "greenlane-pharmacy:campaignJson:self-identity",
+      "pass": true,
+      "detail": "Found Green Lane Pharmacy, Sheffield, #1b7f4e"
+    },
+    {
+      "id": "data:pharmacy-profiles/greenlane-pharmacy.json:no-brook-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-profiles/pharmaconnect.before-profile-cleanup.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-profiles/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-growth-journey/greenlane-pharmacy.json:no-brook-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-growth-journey/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-growth-actions/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-indexing/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-registry/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-visibility/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-campaigns/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-executive-dashboard/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:pharmacy-campaign-launch-queue/pharmaconnect.json:no-greenlane-leak",
+      "pass": true,
+      "detail": "clean"
+    },
+    {
+      "id": "data:greenlane-profile-exists",
+      "pass": true,
+      "detail": "greenlane-pharmacy profile file present"
+    }
+  ],
+  "failedChecks": [
+    {
+      "id": "greenlane-pharmacy:executiveDashboard:isolated",
+      "pass": false,
+      "detail": "Cross-pharmacy leak: #005eb8"
+    }
+  ],
+  "runtimeBlockers": [
+    "greenlane-pharmacy:executiveDashboard:isolated: Cross-pharmacy leak: #005eb8"
+  ],
+  "hardcodedReferences": {
+    "blockers": [
+      "artifacts/api-server/src/routes/api/systemDiagnostics.ts: hardcoded pharmaconnect path segment",
+      "artifacts/api-server/src/routes/pharmacyIntelligencePage.ts: hardcoded SLUG constant (no query param support)",
+      "artifacts/api-server/src/routes/pharmacyLaunchDemoPage.ts: hardcoded SLUG constant (no query param support)",
+      "src/pharmacy/benchmarkServiceEcosystemBuilder.ts: hardcoded SLUG constant (no query param support)",
+      "src/pharmacy/pharmacyFirstEcosystemDemo.ts: hardcoded SLUG constant (no query param support)",
+      "src/pharmacy/pharmacyVisualExperience.ts: hardcoded pharmaconnect path segment"
+    ],
+    "warnings": [
+      "artifacts/api-server/src/routes/api/pharmacyPublishing.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "artifacts/api-server/src/routes/pharmacyCampaignLaunchQueuePage.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "artifacts/api-server/src/routes/pharmacyCampaignsPage.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "artifacts/api-server/src/routes/pharmacyCompetitorDashboardPage.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "artifacts/api-server/src/routes/pharmacyExecutiveDashboardPage.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "artifacts/api-server/src/routes/pharmacyGrowthActionsPage.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "artifacts/api-server/src/routes/pharmacyGrowthDashboardPage.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "artifacts/api-server/src/routes/pharmacyProfileDashboardPage.ts: defaults missing slug to pharmaconnect (fallback only)",
+      "src/pharmacy/pharmacyContentEcosystemPreviewRoute.ts: slug reassignment to pharmaconnect",
+      "src/pharmacy/pharmacyProfileCompleteness.ts: slug reassignment to pharmaconnect",
+      "src/pharmacy/pharmacyVisualExperience.ts: slug reassignment to pharmaconnect"
+    ]
+  },
+  "scalabilityBlockers": [
+    "artifacts/api-server/src/routes/api/systemDiagnostics.ts: hardcoded pharmaconnect path segment",
+    "artifacts/api-server/src/routes/pharmacyIntelligencePage.ts: hardcoded SLUG constant (no query param support)",
+    "artifacts/api-server/src/routes/pharmacyLaunchDemoPage.ts: hardcoded SLUG constant (no query param support)",
+    "src/pharmacy/benchmarkServiceEcosystemBuilder.ts: hardcoded SLUG constant (no query param support)",
+    "src/pharmacy/pharmacyFirstEcosystemDemo.ts: hardcoded SLUG constant (no query param support)",
+    "src/pharmacy/pharmacyVisualExperience.ts: hardcoded pharmaconnect path segment"
+  ],
+  "scalabilityRisks": [
+    "Visual Experience build paths hardcode pharmaconnect output directory",
+    "Intelligence and Launch Demo pages use const SLUG without query param",
+    "Setup page embeds pharmaconnect slug in client JS",
+    "Empty-slug fallback defaults to pharmaconnect across dashboard routes",
+    "Secondary pharmacy has no campaigns/indexing/visibility until lifecycle runs per slug"
+  ],
+  "recommendedFixes": [
+    "Add slug query param to pharmacy-intelligence and pharmacy-launch-demo routes",
+    "Parameterize Visual Experience output paths by slug",
+    "Add pharmacy registry listing endpoint for multi-tenant navigation",
+    "Run lifecycle completion script per slug when onboarding new pharmacies"
+  ]
+}

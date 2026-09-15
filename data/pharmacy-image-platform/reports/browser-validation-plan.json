@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-07-22T15:33:20.276Z",
+  "platformRevision": "e3b0c44298fc1c14",
+  "previewUrlTemplate": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/{pageSegment}/?slug={tenantSlug}",
+  "slots": [
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "homepage",
+      "pageSlug": "index",
+      "slot": "hero",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Primary service hero — photographic, patient-safe, UK community pharmacy context"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "homepage",
+      "pageSlug": "index",
+      "slot": "support",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Supporting editorial or care scene — photographic or approved illustration"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "homepage",
+      "pageSlug": "index",
+      "slot": "trust",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Trusted pharmacy team or professional care — photographic"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "homepage",
+      "pageSlug": "index",
+      "slot": "conversion",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Booking, next steps, or consultation room — photographic"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "service",
+      "pageSlug": "pharmacy-first",
+      "slot": "hero",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Primary service hero — photographic, patient-safe, UK community pharmacy context"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "service",
+      "pageSlug": "pharmacy-first",
+      "slot": "support",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Supporting editorial or care scene — photographic or approved illustration"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "service",
+      "pageSlug": "pharmacy-first",
+      "slot": "trust",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Trusted pharmacy team or professional care — photographic"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "service",
+      "pageSlug": "pharmacy-first",
+      "slot": "conversion",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Booking, next steps, or consultation room — photographic"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "guide",
+      "pageSlug": "pharmacy-first-guide",
+      "slot": "hero",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Primary service hero — photographic, patient-safe, UK community pharmacy context"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "guide",
+      "pageSlug": "pharmacy-first-guide",
+      "slot": "support",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Supporting editorial or care scene — photographic or approved illustration"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "guide",
+      "pageSlug": "pharmacy-first-guide",
+      "slot": "trust",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Trusted pharmacy team or professional care — photographic"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "guide",
+      "pageSlug": "pharmacy-first-guide",
+      "slot": "conversion",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Booking, next steps, or consultation room — photographic"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "blog",
+      "pageSlug": "what-is-pharmacy-first",
+      "slot": "hero",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Primary service hero — photographic, patient-safe, UK community pharmacy context"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "blog",
+      "pageSlug": "what-is-pharmacy-first",
+      "slot": "support",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Supporting editorial or care scene — photographic or approved illustration"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "blog",
+      "pageSlug": "what-is-pharmacy-first",
+      "slot": "trust",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Trusted pharmacy team or professional care — photographic"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "pageType": "blog",
+      "pageSlug": "what-is-pharmacy-first",
+      "slot": "conversion",
+      "expectedAssignment": null,
+      "catalogSubjectHint": "Booking, next steps, or consultation room — photographic"
+    }
+  ],
+  "instructions": [
+    "Use authenticated canonical preview URLs (existing RC1-R2 route); do not change HTML renderers.",
+    "For each slot: screenshot crop, record naturalWidth/Height, compare to expectedAssignment.assetRef when populated.",
+    "Until library population completes, expectedAssignment may be null — report MISSING_PLATFORM_ASSET."
+  ]
+}

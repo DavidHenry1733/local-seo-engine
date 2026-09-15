@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-template-family-differentiation-fix",
+  "generatedAt": "2026-06-10T18:50:00.000Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy Template Family Differentiation Fix Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "filesChanged": [
+    "src/pharmacy/templates/pharmacyTemplateCore.ts",
+    "scripts/lib/pharmacy-family-preview.mjs",
+    "scripts/pharmacy-template-family-comparative-qa.mjs"
+  ],
+  "clinicalNhsRendererUnchanged": true,
+  "clinicalNhsHash": "816e087d7b6b8c6b5aa94abb1eb001e6aa6958b7617c969793c7734eb7565a7a",
+  "blockersFixed": [
+    {
+      "blocker": "Unreplaced {usp} tokens in meta descriptions and Service schema",
+      "fix": "Added extractUsp() and resolveAllTokens() — USP derived from distinctive service benefits; placeholder removed cleanly when absent",
+      "status": "fixed"
+    },
+    {
+      "blocker": "Core families 2–5 shared identical section skeleton, process steps, benefit headings and CTAs",
+      "fix": "Added FAMILY_CONFIGS with dedicated sections per family, family-specific process steps, CTAs, benefit headings and FAQ answer variants",
+      "status": "fixed"
+    }
+  ],
+  "uspTokenStatus": {
+    "before": "4 hub pages contained literal {usp} in meta description and Service schema",
+    "after": "0 unreplaced template placeholders across all 25 preview pages",
+    "sampleMetaAfter": "Professional nhs flu vaccination at PharmaConnect Demo Pharmacy in Rotherham. Convenient walk-in or booked jab. Book online or walk in."
+  },
+  "previewPagesRerendered": {
+    "total": 25,
+    "clinicalNhs": 5,
+    "vaccination": 5,
+    "privateHealthcare": 5,
+    "travelHealth": 5,
+    "weightManagement": 5,
+    "renderCommand": "pnpm exec tsx scripts/render-all-pharmacy-template-previews.mjs"
+  },
+  "familyDedicatedSectionsAdded": {
+    "vaccination-services": [
+      "service-vaccine-eligibility",
+      "service-seasonal-timing",
+      "service-vaccine-expect",
+      "service-vaccine-safety",
+      "service-nhs-private"
+    ],
+    "private-healthcare-services": [
+      "service-appointment-detail",
+      "service-consultation-expect",
+      "service-comfort-privacy",
+      "service-pricing-transparency",
+      "service-aftercare"
+    ],
+    "travel-health-services": [
+      "service-destination-advice",
+      "service-travel-timing",
+      "service-travel-medicines",
+      "service-travel-consultation",
+      "service-popular-destinations"
+    ],
+    "weight-management-services": [
+      "service-suitability",
+      "service-assessment",
+      "service-programme-structure",
+      "service-monitoring",
+      "service-lifestyle-support",
+      "service-medicine-caution"
+    ]
+  },
+  "comparativeQaBeforeAfter": {
+    "before": {
+      "verdict": "FAIL",
+      "duplicationRisk": "medium-high",
+      "tokenIssues": 4,
+      "familyScoresOverall": {
+        "clinical-nhs-services": 8.6,
+        "vaccination-services": 7.6,
+        "private-healthcare-services": 7.3,
+        "travel-health-services": 7.3,
+        "weight-management-services": 7.3
+      },
+      "readinessStatusPerFamily": {
+        "clinical-nhs-services": "Ready for live wiring",
+        "vaccination-services": "Needs template revision",
+        "private-healthcare-services": "Needs template revision",
+        "travel-health-services": "Needs template revision",
+        "weight-management-services": "Needs template revision"
+      }
+    },
+    "after": {
+      "verdict": "PASS",
+      "duplicationRisk": "low-medium",
+      "tokenIssues": 0,
+      "familyScoresOverall": {
+        "clinical-nhs-services": 8.7,
+        "vaccination-services": 8.5,
+        "private-healthcare-services": 8.5,
+        "travel-health-services": 8.5,
+        "weight-management-services": 8.5
+      },
+      "readinessStatusPerFamily": {
+        "clinical-nhs-services": "Ready for live wiring",
+        "vaccination-services": "Ready for live wiring",
+        "private-healthcare-services": "Ready for live wiring",
+        "travel-health-services": "Ready for live wiring",
+        "weight-management-services": "Ready for live wiring"
+      }
+    }
+  },
+  "duplicationRiskAfterFix": "low-medium",
+  "familyReadinessScores": {
+    "clinical-nhs-services": {
+      "overall": 8.7,
+      "designDistinction": 9,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8.5,
+      "readinessStatus": "Ready for live wiring"
+    },
+    "vaccination-services": {
+      "overall": 8.5,
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "readinessStatus": "Ready for live wiring"
+    },
+    "private-healthcare-services": {
+      "overall": 8.5,
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "readinessStatus": "Ready for live wiring"
+    },
+    "travel-health-services": {
+      "overall": 8.5,
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "readinessStatus": "Ready for live wiring"
+    },
+    "weight-management-services": {
+      "overall": 8.5,
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "readinessStatus": "Ready for live wiring"
+    }
+  },
+  "validationResults": {
+    "noUnreplacedUsp": true,
+    "previewPages25": true,
+    "clinicalNhsUnchanged": true,
+    "allFiveFamiliesRender": true,
+    "familySectionsPresent": true,
+    "schemaValid": true,
+    "faqsPresent": true,
+    "internalLinksPresent": true,
+    "ctaSectionsPresent": true,
+    "noRegistryChanges": true,
+    "noSitemapChanges": true,
+    "noDeployment": true,
+    "allFamilyScoresGte8": true,
+    "allFamiliesReadyOrBetter": true
+  },
+  "recommendedLiveWiringOrder": [
+    "clinical-nhs-services",
+    "vaccination-services",
+    "private-healthcare-services",
+    "travel-health-services",
+    "weight-management-services"
+  ],
+  "comparativeQaReport": "output/pharmacy-blueprint/pharmacy-template-family-comparative-qa-report.json",
+  "templatePreviewReport": "output/pharmacy-blueprint/template-family-preview-report.json"
+}

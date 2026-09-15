@@ -1,0 +1,99 @@
+{
+  "kind": "pharmacy-uk-local-evidence-brief-v1",
+  "version": "v1",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaName": "Duffield",
+  "areaSlug": "duffield",
+  "savedAt": "2026-09-08T15:37:14.970Z",
+  "introductionStructureId": "community-life-first",
+  "identity": {
+    "verifiedName": "Duffield",
+    "statements": []
+  },
+  "geography": {
+    "parentTown": "Derby",
+    "county": "Derbyshire",
+    "country": "United Kingdom",
+    "queryPlaceLabel": "Duffield, Derbyshire, UK",
+    "statements": []
+  },
+  "healthcare": [
+    {
+      "name": "Appletree Medical Practice",
+      "category": "healthcare",
+      "address": "47A Town St, Duffield, Belper DE56 4GG"
+    },
+    {
+      "name": "NHS general practice services in Duffield are provided from Appletree Medical Practice.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Duffield are provided from Appletree Medical Practice.",
+      "factId": "duffield:healthcare:nhs-general-practice-services-in-duffield-are-pr"
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Eyes Meadow",
+      "category": "landmarks",
+      "address": "UK, Duffield, Belper DE56 0QG"
+    },
+    {
+      "name": "Duffield War Memorial",
+      "category": "landmarks",
+      "address": "Church Dr, Duffield, Belper DE56 4BA"
+    },
+    {
+      "name": "National Trust - Duffield Castle",
+      "category": "landmarks",
+      "address": "Milford Rd, Duffield, Belper DE56 4DW"
+    },
+    {
+      "name": "Eyes Meadow is listed as a landmark in Duffield.",
+      "category": "heritage",
+      "statement": "Eyes Meadow is listed as a landmark in Duffield.",
+      "factId": "duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield"
+    },
+    {
+      "name": "Duffield War Memorial is listed as a landmark in Duffield.",
+      "category": "heritage",
+      "statement": "Duffield War Memorial is listed as a landmark in Duffield.",
+      "factId": "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in"
+    },
+    {
+      "name": "National Trust - Duffield Castle is listed as a landmark in Duffield.",
+      "category": "heritage",
+      "statement": "National Trust - Duffield Castle is listed as a landmark in Duffield.",
+      "factId": "duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la"
+    }
+  ],
+  "parks": [],
+  "shopping": [],
+  "civic": [
+    {
+      "name": "Duffield Library",
+      "category": "community",
+      "address": "19 Wirksworth Rd, Duffield, Belper DE56 4GH"
+    }
+  ],
+  "community": [
+    {
+      "name": "Duffield Library is listed as a community facility in Duffield.",
+      "category": "community",
+      "statement": "Duffield Library is listed as a community facility in Duffield.",
+      "factId": "duffield:community:duffield-library-is-listed-as-a-community-facili"
+    }
+  ],
+  "distance": {
+    "km": 7.6,
+    "label": "approximately 7.6 km straight-line",
+    "method": "haversine-straight-line"
+  },
+  "factIds": [
+    "duffield:healthcare:nhs-general-practice-services-in-duffield-are-pr",
+    "duffield:community:duffield-library-is-listed-as-a-community-facili",
+    "duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield",
+    "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in",
+    "duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la",
+    "duffield:pharmacy-relationship:distance"
+  ]
+}

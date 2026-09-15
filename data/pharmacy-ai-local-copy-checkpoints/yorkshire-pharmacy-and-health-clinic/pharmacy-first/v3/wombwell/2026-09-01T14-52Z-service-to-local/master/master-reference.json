@@ -1,0 +1,84 @@
+{
+  "kind": "wombwell-v3-service-to-local-master-reference",
+  "establishedAt": "2026-09-01T15:00:00.000Z",
+  "structuralReference": {
+    "page": "Product Owner-confirmed Leeds Pharmacy First service page",
+    "path": "output/pharmacy-visual-experience/leeds-pharmacy/pharmacy-first/index.html",
+    "headings": [
+      "Pharmacy First at Leeds Pharmacy",
+      "Why patients choose Leeds Pharmacy",
+      "How our pharmacists can help with Pharmacy First",
+      "Who Pharmacy First is suitable for",
+      "What happens during your consultation",
+      "When to see a GP or urgent care instead",
+      "Frequently Asked Questions",
+      "Visit / Local access from Leeds",
+      "Book Pharmacy First"
+    ],
+    "notCopied": [
+      "Leeds Pharmacy trading name",
+      "01132 752103",
+      "Leeds address",
+      "Leeds-specific access, hours, walk-in or GP-wait claims"
+    ]
+  },
+  "localTemplate": {
+    "page": "Headingley local-page layout (structure and tone only)",
+    "path": "output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/headingley/index.html",
+    "overlaySlotsWrittenByAi": [
+      "heroHeading",
+      "heroIntroduction",
+      "localIntroduction",
+      "localContextHeading",
+      "localContextParagraphs",
+      "relationshipToPharmacy",
+      "localAccessIntroduction",
+      "localFaqs",
+      "localCtaBridge"
+    ],
+    "rendererOwnedNotRewritten": [
+      "How Pharmacy First can help",
+      "Conditions Pharmacy First may cover",
+      "What happens during the consultation",
+      "When to contact a GP, NHS 111 or emergency services",
+      "Shared FAQ clinical answers",
+      "Book / call / directions template",
+      "Images and Headingley layout"
+    ],
+    "notCopied": [
+      "Headingley / Otley Road / Cardigan Road",
+      "203 Kirkstall Lane",
+      "Leeds Pharmacy phone"
+    ]
+  },
+  "approvedReusableClinicalSourceSuppliedToWriter": {
+    "id": "PHARMACY_FIRST_LOCKED_CLINICAL_FACTS_V1",
+    "path": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+    "content": {
+      "serviceName": "Pharmacy First",
+      "serviceId": "pharmacy-first",
+      "conditionSet": "sore throat, earache, impetigo, infected insect bites, shingles, sinusitis, and uncomplicated UTI in eligible women",
+      "suitability": "The pharmacist confirms what can be assessed on the day. Eligibility depends on symptoms and NHS pathway criteria, not on the area the patient travels from.",
+      "process": "Call before visiting to check how a consultation is being arranged. The pharmacist reviews symptoms, medicines and red-flag concerns. Outcomes may include treatment where appropriate, self-care advice, safety-netting, or referral.",
+      "safety": "Seek urgent medical care for breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or any emergency symptoms that make you feel critically unwell.",
+      "allowedCta": ["Book An Appointment", "Call the pharmacy", "Get directions"]
+    },
+    "writerInstruction": "Locked clinical facts are for awareness only. Do not rewrite them and do not list the condition set. You may say Pharmacy First can help with eligible common conditions."
+  },
+  "yorkshireVerifiedIdentityRetained": {
+    "pharmacyName": "Yorkshire Pharmacy & Health Clinic",
+    "address": "91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK",
+    "premisesLocality": "Darfield",
+    "telephone": "01226 210477",
+    "currentMainPage": "output/pharmacy-visual-experience/yorkshire-pharmacy-and-health-clinic/pharmacy-first/index.html",
+    "currentMainPageUnchanged": true
+  },
+  "exactMasterContentSuppliedToLocalWriter": [
+    "PHARMACY_FIRST_LOCKED_CLINICAL_FACTS_V1 (approved reusable clinical source)",
+    "Yorkshire Pharmacy & Health Clinic canonical name, Darfield address, premisesLocality, marketTown Barnsley",
+    "Headingley local-page patient-journey tone note (not Headingley facts)",
+    "Section roles for the existing template JSON fields",
+    "Verified Wombwell editorial facts (in-memory merge of on-disk pack + saved library/TSY bodies)",
+    "One coherent writing brief via buildAiLocalNarrativeWritingBriefV3('Wombwell')"
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Spondon",
+  "areaSlug": "spondon",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-06T07:49:18.054Z",
+  "sourceStatus": "google-places-authorised-collection",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [
+    {
+      "name": "Chapel Street Medical Centre",
+      "address": "10 Chapel St, Spondon, Derby DE21 7RJ",
+      "category": "healthcare",
+      "types": [
+        "medical_clinic",
+        "government_office",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.921100599999995,
+        "longitude": -1.4042713
+      },
+      "placeId": "ChIJF43LtNnxeUgRiIoNTlQacEE",
+      "source": "google-places",
+      "provider": "googlePlaces",
+      "retrievedAt": "2026-09-06T07:49:18.054Z",
+      "sourceRef": "https://maps.google.com/?cid=4715297759245994632&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+      "confidence": 92,
+      "relationship": "name-in-address",
+      "areaName": "Spondon"
+    }
+  ],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [
+    {
+      "name": "Park Medical Practice Chaddesden",
+      "address": "Maine Dr, Chaddesden, Derby DE21 6LA",
+      "category": "healthcare",
+      "types": [
+        "medical_clinic",
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9289796,
+        "longitude": -1.4340448
+      },
+      "placeId": "ChIJT3cnyr_xeUgRBA955GRsILA",
+      "rejectionReason": "attributed-to-sibling-area"
+    },
+    {
+      "name": "Derwent Valley Medical Practice",
+      "address": "20 St Mark's Rd, Chaddesden, Derby DE21 6AT",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9267107,
+        "longitude": -1.457739
+      },
+      "placeId": "ChIJo6xkgQvxeUgRt1bOFnySBGI",
+      "rejectionReason": "outside-area-centroid"
+    },
+    {
+      "name": "Overdale Medical Practice",
+      "address": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.912257999999994,
+        "longitude": -1.37843
+      },
+      "placeId": "ChIJs3gorTXueUgRdfBX4LX-NwA",
+      "rejectionReason": "attributed-to-sibling-area"
+    }
+  ],
+  "researchCandidates": [
+    {
+      "name": "Spondon Derwent Valley Medical Practice",
+      "address": "81 Sitwell St, Spondon, Derby DE21 7FH",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9201852,
+        "longitude": -1.4039234
+      },
+      "placeId": "ChIJDc50MtjxeUgRsZkYin8K3DQ",
+      "rejectionReason": "no-retrieved-official-source"
+    }
+  ],
+  "pharmacyRelationship": {
+    "from": "Brook Pharmacy Demo Derby",
+    "to": "Spondon",
+    "distanceKm": 5.1,
+    "method": "haversine-straight-line",
+    "areaReferenceSource": "places-area-reference"
+  },
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 2,
+    "rejectedCount": 3,
+    "categoriesPresent": [
+      "healthcare"
+    ],
+    "minimumMet": true
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "sprint": "CPR-03",
+  "validatedAt": "2026-07-26T09:43:19.481Z",
+  "checks": [
+    {
+      "name": "Phase 3 evidence review service",
+      "pass": true
+    },
+    {
+      "name": "Phase 5 commercial checklist service",
+      "pass": true
+    },
+    {
+      "name": "Evidence review API routes",
+      "pass": true
+    },
+    {
+      "name": "Evidence review modal",
+      "pass": true
+    },
+    {
+      "name": "Evidence review approve button",
+      "pass": true
+    },
+    {
+      "name": "Generation blocked without evidence approval",
+      "pass": true
+    },
+    {
+      "name": "Commercial checklist in review UI",
+      "pass": true
+    },
+    {
+      "name": "Framework lock service",
+      "pass": true
+    },
+    {
+      "name": "Framework lock API",
+      "pass": true
+    },
+    {
+      "name": "Embedded JavaScript parse",
+      "pass": true
+    },
+    {
+      "name": "API-server build",
+      "pass": true
+    }
+  ],
+  "acceptance": {
+    "customerCreated": "NO",
+    "websiteImport": "NOT RUN — Product Owner action required via dashboard",
+    "evidenceReview": "NOT RUN — Product Owner action required via dashboard",
+    "servicePageGenerated": "NO",
+    "commercialChecklist": "PENDING — requires generated service page",
+    "itemsPassed": 0,
+    "itemsFailed": 35,
+    "frameworkChanges": [
+      "masterAdminCoreProductRecoveryEvidenceReviewService.ts",
+      "masterAdminCoreProductRecoveryCommercialChecklistService.ts",
+      "masterAdminCoreProductRecoveryService.ts",
+      "masterAdminCoreProductRecoveryModel.ts",
+      "masterAdminCustomerRecordLiteService.ts",
+      "masterAdminPlatform.ts",
+      "masterAdminPlatformPage.ts"
+    ],
+    "frameworkLocked": "NO",
+    "status": "READY FOR PRODUCT OWNER GOLD STANDARD SERVICE PAGE REVIEW"
+  }
+}

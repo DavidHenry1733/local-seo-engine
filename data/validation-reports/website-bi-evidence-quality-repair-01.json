@@ -1,0 +1,111 @@
+{
+  "generatedAt": "2026-08-10T10:45:21.988Z",
+  "passed": true,
+  "checks": [
+    {
+      "id": "sitemap-xml-not-content",
+      "pass": true,
+      "detail": "XML/sitemap URLs rejected; urlset not treated as HTML"
+    },
+    {
+      "id": "multi-page-html-analysable",
+      "pass": true,
+      "detail": "6 fixture pages"
+    },
+    {
+      "id": "commercial-paths-classified",
+      "pass": true,
+      "detail": "service-page"
+    },
+    {
+      "id": "off-domain-rejected",
+      "pass": true,
+      "detail": "rejected"
+    },
+    {
+      "id": "same-domain-restriction",
+      "pass": true,
+      "detail": "evil.example accepted=false"
+    },
+    {
+      "id": "identity-corroboration",
+      "pass": true,
+      "detail": "selected=\"PharmaConnect\" reasoning=Selected \"PharmaConnect\"; score=446.3; methods=schema.org-organization,logo-alt,page-title,footer-copyright,about-page; "
+    },
+    {
+      "id": "tagline-protected",
+      "pass": true,
+      "detail": "taglineProtected=false selected=\"PharmaConnect\""
+    },
+    {
+      "id": "invalid-phone-rejected",
+      "pass": true,
+      "detail": "unbalanced-parens"
+    },
+    {
+      "id": "valid-uk-phone-retained",
+      "pass": true,
+      "detail": "01709 210731"
+    },
+    {
+      "id": "website-profile-provenance-separation",
+      "pass": true,
+      "detail": "Website phone evidence provenance contradiction: profile fallback presented as website import. | Website phone evidence provenance contradiction: non-website source selected as website import evidence."
+    },
+    {
+      "id": "non-pharmacy-no-clinical",
+      "pass": true,
+      "detail": "class=digital_agency clinical=false hits="
+    },
+    {
+      "id": "pharmacy-clinical-scoped",
+      "pass": true,
+      "detail": "class=community_pharmacy ids=pharmacy-first,travel-vaccinations,flu-vaccinations,repeat-prescriptions,ear-wax-removal,vaccinations"
+    },
+    {
+      "id": "commercial-service-evidence",
+      "pass": true,
+      "detail": "Pharmacy Website Design · Local SEO"
+    },
+    {
+      "id": "bi-breadth-missing-ok",
+      "pass": true,
+      "detail": "missing optional fields remain absent by design (no invention)"
+    },
+    {
+      "id": "national-no-locality-required",
+      "pass": true,
+      "detail": "no locality blockers"
+    },
+    {
+      "id": "google-no-fake-evidence",
+      "pass": true,
+      "detail": "googleImported=false fakeConfirmed=0 comparisonState=suppressed"
+    },
+    {
+      "id": "website-vs-google-suppressed",
+      "pass": true,
+      "detail": "suppressed"
+    },
+    {
+      "id": "comparison-rows-empty-without-google",
+      "pass": true,
+      "detail": "comparisonRows=0"
+    },
+    {
+      "id": "evidence-quality-gate-blocks",
+      "pass": true,
+      "detail": "Invalid confirmed website phone evidence: \"059) 0 0 60\" (unbalanced-parens). | Unreliable high-confidence business identity: \"Pharmacy Growth Partner\"."
+    },
+    {
+      "id": "leeds-pharmacy-regression",
+      "pass": true,
+      "detail": "name=Leeds Pharmacy scope=local_regional websiteImport=true"
+    },
+    {
+      "id": "pharmaconnect-untouched-by-tests",
+      "pass": true,
+      "detail": "scope=national importAt=2026-08-10T09:46:16.566Z"
+    }
+  ]
+}

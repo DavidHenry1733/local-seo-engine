@@ -1,0 +1,56 @@
+
+=== Pharmacy profile service facts ===
+
+PASS  v2-fields-version — v2
+PASS  fee-default-unknown — unknown
+PASS  fee-available-never-becomes-free — unknown
+PASS  fee-true-never-becomes-free — unknown
+PASS  funding-both-maps-to-mixed — mixed
+PASS  legacy-keeps-funding — nhs
+PASS  legacy-keeps-pricing-notes — Free NHS service
+PASS  legacy-fee-not-inferred-free — unknown
+PASS  legacy-delivery-unknown — unknown
+PASS  legacy-nation-unknown — unknown
+PASS  legacy-branch-not-available — null
+PASS  legacy-prescribing-not-available — unknown
+PASS  legacy-reviewer-unconfirmed — unknown
+PASS  save-reopen-selected-services — blood-pressure-checks,travel-vaccinations
+PASS  save-reopen-funding — private
+PASS  save-reopen-nation — england
+PASS  save-reopen-branch — High Street branch
+PASS  save-reopen-delivery — both
+PASS  save-reopen-prescribing — pgd
+PASS  save-reopen-consultation-fee — fixed:£25
+PASS  save-reopen-deposit — £20
+PASS  save-reopen-reviewer — Jane Pharmacist:confirmed
+PASS  save-reopen-untouched-service — travel-vaccinations retained
+PASS  untouched-service-stays-unknown — unknown
+PASS  legacy-dhmdigital-loads — DHM Digital
+PASS  legacy-pharmaconnect-loads — PharmaConnect
+PASS  tenant-isolation-names — DHM Digital vs PharmaConnect
+PASS  tenant-isolation-selected-services — A=7 B=5
+PASS  tenant-isolation-facts-not-leaked — absent
+PASS  tenant-a-facts-kept — Jane Pharmacist
+PASS  tenant-a-selections-preserved — pharmacy-first,blood-pressure-checks,travel-vaccinations,prescription-dispensing,emergency-contraception,repeat-prescriptions,pharmacy-contraception-service
+PASS  form-has-funding — funding select
+PASS  form-has-nation — UK nation
+PASS  form-has-delivery — delivery
+PASS  form-has-prescribing — prescribing
+PASS  form-has-fees — three fee rows
+PASS  form-unknown-first-fee — unknown selected
+PASS  form-deposit — deposit
+PASS  form-reviewer — reviewer + no approval claim
+PASS  form-no-brook-invention — no Brook details
+PASS  form-imported-suggestion-copy — suggestion copy
+PASS  form-no-regulatory-approval — no approval claim
+PASS  merge-keeps-sibling-service — Ask in branch
+PASS  merge-keeps-legacy-pricing-notes — Free NHS service
+PASS  merge-overlays-new-facts — england
+PASS  merge-keeps-fee-notes — fixed:keep
+PASS  merge-then-normalize-unknown-not-free — unknown
+PASS  wizard-page-services-step — step 4
+PASS  wizard-page-no-brook — wizard page isolation
+PASS  wizard-page-unknown-not-free-copy — unknown copy
+PASS  wizard-page-legacy-link — legacy form link
+
+51/51 passed

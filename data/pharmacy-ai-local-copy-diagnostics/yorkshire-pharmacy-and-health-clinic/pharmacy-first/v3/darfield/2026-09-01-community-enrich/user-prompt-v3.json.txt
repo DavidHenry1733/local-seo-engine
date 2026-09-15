@@ -1,0 +1,145 @@
+{
+  "task": "Return structured JSON passages for the existing Pharmacy First local template. Do not write new HTML or shared clinical sections.",
+  "writingBrief": "Write a professional, locally informed Pharmacy First page for readers in Darfield. Follow the supplied section roles and tone. Preserve the supplied approved clinical content. Write connected local passages, not isolated sentences or a list of places. Use verified local history, community or industry context to create recognition and substantive local identity. Do not force every supplied fact into the page. Lead with the service and reader’s needs. Weave local context into the introduction and ‘Why Darfield patients start with the pharmacist’. Make the transition to the service natural without inventing patient habits, health demand, GP waiting times or referral relationships. Keep the pharmacy’s actual location clear. Do not invent travel, parking, opening-hours, availability or treatment promises. Do not claim the author lives locally.",
+  "promptContractVersion": "v3",
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "schemaFields": [
+    "area",
+    "heroHeading",
+    "heroIntroduction",
+    "localIntroduction",
+    "localContextHeading",
+    "localContextParagraphs",
+    "relationshipToPharmacy",
+    "localAccessIntroduction",
+    "localFaqs",
+    "localCtaBridge",
+    "evidenceClaims",
+    "evidenceEntityIdsUsed",
+    "editorialFactIdsUsed"
+  ],
+  "fieldNotes": {
+    "area": "Must equal the selected area name exactly.",
+    "heroHeading": "Short patient-facing heading naming Pharmacy First and this area.",
+    "heroIntroduction": "Lead with Pharmacy First and the reader’s needs. Name the area. Weave local context here when a supplied fact belongs in the introduction. Do not dump the address or phone.",
+    "localIntroduction": "Connected local passage for the introduction. Weave verified local history, community or industry context when it helps recognition. Do not write isolated sentences or a list of places. Empty only if no supplied fact helps. Optional fields may be omitted; there is no minimum FAQ count.",
+    "localContextHeading": "Optional heading for this area’s situation. Omit if the template heading is enough.",
+    "localContextParagraphs": "Required. Continue the locally informed account under ‘Why Darfield patients start with the pharmacist’. Write connected prose, not a catalogue of places. Transition to Pharmacy First naturally. Do not invent patient habits, health demand, GP waiting times or referral relationships. If the pharmacy is not in the area, do not use this field only to restate premises locality.",
+    "relationshipToPharmacy": "Keep the pharmacy’s actual location clear. If the pharmacy is not in the area, name the supplied premisesLocality so the reader knows where consultations take place. Do not invent travel, parking, opening-hours, availability or treatment promises.",
+    "localAccessIntroduction": "Optional. Include only if it adds a useful local access fact not already printed by the renderer. Omit or return an empty string when it adds nothing.",
+    "localFaqs": "Optional. Zero or more useful, supported local questions not already answered by the page. No minimum. Omit the field or return [] when nothing useful remains.",
+    "localCtaBridge": "Optional genuine non-claim sentence bridging to Book An Appointment or Call. Omit when the template already has those actions.",
+    "evidenceClaims": "Array of {field, sentence, entityId?}. Include editorialFactId in entityId when a fact was used.",
+    "evidenceEntityIdsUsed": "Optional Places entity IDs actually named. Usually empty.",
+    "editorialFactIdsUsed": "factId strings for editorial facts actually used. Omit facts you did not use."
+  },
+  "editorialStandard": {
+    "oneCoherentNarrative": true,
+    "factsOnlyIfTheyImproveMeaning": true,
+    "addressAtMostOnce": true,
+    "telephoneAtMostOnce": true,
+    "distanceAtMostOnce": true,
+    "callAheadAtMostOnce": true,
+    "kilometresInAtMostOneSentence": true
+  },
+  "business": {
+    "name": "Yorkshire Pharmacy & Health Clinic",
+    "address": "91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK",
+    "premisesLocality": "Darfield",
+    "marketTown": "Barnsley",
+    "note": "address is the full canonical pharmacy address. premisesLocality is derived from that address and is where the premises are. marketTown is the primary market. locality.areaName / selectedReaderArea is the selected reader area. These three place names are distinct. The page template already prints the street address and telephone; do not copy the street address, postcode or telephone into the copy. Repeated street-address text is an output-validation failure. Name premisesLocality when the pharmacy is not in the selected reader area. Do not invent a centre-of-area distance."
+  },
+  "offer": {
+    "serviceName": "Pharmacy First",
+    "serviceId": "pharmacy-first",
+    "allowedCta": [
+      "Book An Appointment",
+      "Call the pharmacy",
+      "Get directions"
+    ],
+    "lockedClinicalFacts": {
+      "serviceName": "Pharmacy First",
+      "serviceId": "pharmacy-first",
+      "conditionSet": "sore throat, earache, impetigo, infected insect bites, shingles, sinusitis, and uncomplicated UTI in eligible women",
+      "suitability": "The pharmacist confirms what can be assessed on the day. Eligibility depends on symptoms and NHS pathway criteria, not on the area the patient travels from.",
+      "process": "Call before visiting to check how a consultation is being arranged. The pharmacist reviews symptoms, medicines and red-flag concerns. Outcomes may include treatment where appropriate, self-care advice, safety-netting, or referral.",
+      "safety": "Seek urgent medical care for breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or any emergency symptoms that make you feel critically unwell.",
+      "allowedCta": [
+        "Book An Appointment",
+        "Call the pharmacy",
+        "Get directions"
+      ]
+    },
+    "clinicalBoundary": "Locked clinical facts are for awareness only. Do not rewrite them and do not list the condition set. You may say Pharmacy First can help with eligible common conditions."
+  },
+  "locality": {
+    "areaName": "Darfield",
+    "selectedReaderArea": "Darfield",
+    "areaSlug": "darfield",
+    "distanceLabel": "0.5 km",
+    "distanceKm": 0.5,
+    "pharmacyIsInArea": true,
+    "distanceMeasurement": "straight-line between the pharmacy’s saved Google coordinates and the area’s saved Google geocode point; not travel distance; not a town-centre measurement unless a supplied fact says so"
+  },
+  "verifiedEditorialFacts": [
+    {
+      "factId": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "category": "area-identity",
+      "statement": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+      "useAs": "area-introduction",
+      "doNotInfer": "Does not imply travel time, routes, or service eligibility."
+    },
+    {
+      "factId": "darfield:community:darfield-has-a-public-library",
+      "category": "community",
+      "statement": "Darfield has a public library.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not imply the pharmacy is next to the library or that readers use it."
+    },
+    {
+      "factId": "darfield:pharmacy-relationship:in-area",
+      "category": "pharmacy-relationship",
+      "statement": "Yorkshire Pharmacy & Health Clinic is in Darfield at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "useAs": "access-context",
+      "doNotInfer": "Does not describe parking, hours, or how readers usually travel. Do not force this figure into the copy. If used, identify it as an approximate straight-line distance, not travel, driving, walking or journey distance, and not a town-centre measurement."
+    },
+    {
+      "factId": "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Darfield are provided from Garland House Surgery.",
+      "useAs": "healthcare-context",
+      "doNotInfer": "A healthcare provider’s presence does not prove a relationship with the pharmacy, registration, waiting times, or eligibility."
+    },
+    {
+      "factId": "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "category": "heritage",
+      "statement": "Darfield History Society runs local history group sessions.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not invent the area’s industrial past, imply that residents attend these sessions, or prove healthcare demand."
+    },
+    {
+      "factId": "darfield:community:darfield-library-is-on-church-street",
+      "category": "community",
+      "statement": "Darfield Library is on Church Street.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "A library street does not prove walking time, adjacency to the pharmacy, or that readers visit the library."
+    },
+    {
+      "factId": "darfield:community:darfield-library-runs-regular-activities-and-spe",
+      "category": "community",
+      "statement": "Darfield Library runs regular activities and special events for children and adults.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not imply that Pharmacy First patients attend library events or that the pharmacy hosts them."
+    }
+  ],
+  "style": {
+    "roles": [
+      "hero introduction",
+      "local context",
+      "access relationship",
+      "local FAQs",
+      "CTA bridge"
+    ],
+    "tone": "Headingley local-page patient-journey tone: calm, specific, professional British English. Not Headingley facts."
+  }
+}

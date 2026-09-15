@@ -8,10 +8,19 @@ import session from "express-session";
 import type { SessionData } from "express-session";
 import router from "./routes";
 import previewRouter from "./routes/preview";
+import pharmacyPreviewRouter from "./routes/pharmacyPreview";
+import {
+  pharmacyVisualExperiencePublicRouter,
+  pharmacyVisualExperienceAdminRouter,
+  handleCanonicalPreviewAssetRequest,
+} from "./routes/pharmacyVisualExperiencePreview";
+import { pharmacyImagePlatformReviewRouter } from "./routes/pharmacyImagePlatformReviewGallery";
 import authRouter from "./routes/auth";
 import { logger } from "./lib/logger";
 import { ensureAdminExists } from "./lib/users";
-import { requireAuth } from "./middlewares/requireAuth";
+import { requireAuth, requireAdmin, hasValidInternalToken } from "./middlewares/requireAuth";
+import healthRouter from "./routes/health";
+import growthEnginePublicAcceptedPreviewRouter from "./routes/growthEnginePublicAcceptedPreview";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,6 +65,7 @@ const ALLOWED_ORIGINS: string[] = [
   "https://replit.com",
   "https://replit.dev",
 "https://app.inboxingproweb.com",
+"https://app.pharmaconnect.uk",
   ...(REPLIT_DEV ? [REPLIT_DEV] : []),
   ...(process.env.REPLIT_DOMAINS ? process.env.REPLIT_DOMAINS.split(",").map(d => `https://${d.trim()}`) : []),
 ];
@@ -78,7 +88,7 @@ app.use(cors({
 
     // inboxingproweb domains
     if (
-      origin.includes("inboxingproweb.com")
+      (origin.includes("inboxingproweb.com") || origin.includes("pharmaconnect.uk"))
     ) {
       return cb(null, true);
     }
@@ -174,6 +184,8 @@ app.use(session({
 }));
 
 // ── Security headers ──────────────────────────────────────────────────────────
+app.use(healthRouter);
+
 app.use((_req: Request, res: Response, next: NextFunction) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
   // NOTE: X-Frame-Options SAMEORIGIN is intentionally omitted here.
@@ -199,6 +211,20 @@ if (fs.existsSync(OUTPUT_DIR_ASSETS)) {
     } catch { /* slug dir has no assets subdir — skip */ }
   }
 }
+
+app.use(
+  "/assets/pharmacy-uploads",
+  express.static("/home/inboxingproweb/pharmaconnect-growth-engine/assets/pharmacy-uploads", {
+    dotfiles: "deny",
+  }),
+);
+
+// Canonical final render assets (authenticated Master Admin preview only)
+app.get(
+  /^\/assets\/(?:website-import|brands)\/[a-z0-9_-]+\/.+/i,
+  requireAdmin,
+  handleCanonicalPreviewAssetRequest,
+);
 
 app.use("/assets", express.static(path.join(WORKSPACE_ROOT, "assets"), { dotfiles: "deny" }));
 
@@ -245,18 +271,17 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     return;
   }
 
-  const authHeader = req.headers["authorization"] as string | undefined;
-  const bearerToken = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : undefined;
-  const token = (req.headers["x-internal-token"] as string | undefined) ?? bearerToken;
-  if (!token || token !== SESSION_SECRET) {
-    const ip = req.headers["x-forwarded-for"] ?? req.socket?.remoteAddress;
-    logger.warn({ url: req.url, method: req.method, ip }, "Blocked unauthorised access to destructive endpoint");
-    res.status(403).json({ error: "Forbidden — internal token required" });
+  // Match requireAuth: dashboard fetch() sends _t in the query string because
+  // some proxies strip custom headers; logged-in users may rely on session cookies.
+  if (req.session?.userId || hasValidInternalToken(req)) {
+    logger.info({ url: req.url, method: req.method }, "Authorised access to destructive endpoint");
+    next();
     return;
   }
 
-  logger.info({ url: req.url, method: req.method }, "Authorised access to destructive endpoint");
-  next();
+  const ip = req.headers["x-forwarded-for"] ?? req.socket?.remoteAddress;
+  logger.warn({ url: req.url, method: req.method, ip }, "Blocked unauthorised access to destructive endpoint");
+  res.status(403).json({ error: "Forbidden — internal token required" });
 });
 
 // ── Slug sanitisation helper ──────────────────────────────────────────────────
@@ -314,6 +339,11 @@ app.get("/api/sitemaps/:slug/:file", (req, res) => {
   res.sendFile(filePath);
 });
 
+app.get("/pharmacy-image-library", (req, res) => {
+  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+  res.redirect(302, "/api/pharmacy-image-library" + qs);
+});
+
 // Dashboard iframe compatibility routes
 app.get("/api/preview", (req, res) => {
   const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
@@ -325,10 +355,7 @@ app.get("/api/crawl", (req, res) => {
   res.redirect(302, "/crawl" + qs);
 });
 
-app.get("/api/health", (req, res) => {
-  const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
-  res.redirect(302, "/health" + qs);
-});
+app.use("/api", healthRouter);
 
 app.get("/api/security", (req, res) => {
   const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
@@ -342,10 +369,14 @@ app.get("/api/designs", (req, res) => {
 
 // ── Preview routes (public — generated pages, no login required) ──────────────
 app.use(previewRouter);
-
+app.use(pharmacyPreviewRouter);
+app.use("/api", pharmacyVisualExperiencePublicRouter);
+app.use("/api", growthEnginePublicAcceptedPreviewRouter);
 
 // ── All /api/* routes require login ───────────────────────────────────────────
 app.use("/api", requireAuth);
+app.use("/api", pharmacyVisualExperienceAdminRouter);
+app.use("/api", pharmacyImagePlatformReviewRouter);
 
 app.use("/api", router);
 

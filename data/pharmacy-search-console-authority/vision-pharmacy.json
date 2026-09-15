@@ -1,0 +1,39 @@
+{
+  "connected": true,
+  "requestedScope": "https://www.googleapis.com/auth/webmasters",
+  "grantedScope": "https://www.googleapis.com/auth/webmasters.readonly",
+  "grantedScopeProvenByGoogle": true,
+  "writeAuthorized": false,
+  "reconnectRequired": true,
+  "reconnectUrl": "/api/gsc/auth/start?returnSlug=vision-pharmacy",
+  "callbackUrl": "https://app.pharmaconnect.uk/api/gsc/auth/callback",
+  "canSubmitSitemaps": false,
+  "propertyVerified": false,
+  "permissionStatus": "readonly_insufficient_for_sitemap_submit",
+  "submissionPermissionLabel": "Reconnect required",
+  "connectedLabel": "Connected",
+  "managedPropertyLabel": "Not verified",
+  "externalSubmissionLabel": "Blocked",
+  "liveSubmitKillSwitchEnabled": false,
+  "liveGoogleCalls": {
+    "tokenRefresh": true,
+    "sitesList": true,
+    "sitemapSubmit": false,
+    "indexingApi": false
+  },
+  "property": {
+    "requestedProperty": "https://vision-pharmacy.sites.pharmaconnect.uk/",
+    "matchedProperty": null,
+    "permissionLevel": null,
+    "propertyVerified": false,
+    "permissionSufficient": false,
+    "missingExactUrlPrefix": true,
+    "rejectedCustomerWebsite": null,
+    "rejectedPlatformWideDomainProperty": null,
+    "rejectedCrossTenant": [],
+    "relevantProperties": [],
+    "setupRequired": true,
+    "setupHint": "Add a URL-prefix property in Search Console for https://vision-pharmacy.sites.pharmaconnect.uk/ and verify ownership on that managed host. Do not use the customer website or sc-domain:sites.pharmaconnect.uk as the tenant submission property."
+  },
+  "error": "Google Search Console API has not been used in project 863192885206 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/searchconsole.googleapis.com/overview?project=863192885206 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
+}

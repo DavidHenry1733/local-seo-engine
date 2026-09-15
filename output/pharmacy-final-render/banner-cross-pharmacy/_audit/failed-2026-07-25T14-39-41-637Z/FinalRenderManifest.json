@@ -1,0 +1,441 @@
+{
+  "version": "final-render-manifest-v1",
+  "tenant": "banner-cross-pharmacy",
+  "serviceId": "pharmacy-first",
+  "renderVersion": "canonical-final-render-v1",
+  "generatedAt": "2026-07-23T13:41:51.082Z",
+  "sourceProfileRevision": 49,
+  "brandDnaRevision": "15ab450c85031068",
+  "componentDnaRevision": "e248944a8f0de51f",
+  "websiteImportRevision": "c58ba4f2400bfc4e",
+  "websiteIntelligenceRevision": "b744d0e580749bee",
+  "layoutDnaRevision": "f0fd97d3577e4657",
+  "designIntelligenceRevision": "f0fd97d3577e4657",
+  "designIntelligencePath": "data/website-design-evidence/banner-cross-pharmacy/design-intelligence.json",
+  "navigationSource": "design-intelligence.navigation.tree",
+  "headerSource": "design-intelligence.header",
+  "footerSource": "design-intelligence.footer",
+  "colourSource": "design-intelligence.colours",
+  "imageRoleSource": "design-intelligence.images",
+  "fallbackAttempts": [],
+  "fallbackBlocks": [],
+  "rendererRevision": "tenant-dna-activation-rc1-r1-v1",
+  "canonicalRenderRevision": "4646598c2a923170cdfd9359295d94eacb3de7bc8f94fe5211e70b8957c1f4c0",
+  "revisionChainComplete": true,
+  "fallbackFlags": [],
+  "fallbackReasons": [],
+  "defaultTemplateUsed": false,
+  "contentManifestRevision": "2026-07-20T12:07:50.269Z",
+  "canonicalRenderRoot": "output/pharmacy-final-render/banner-cross-pharmacy",
+  "managedWebsiteBase": "https://banner-cross-pharmacy.sites.pharmaconnect.uk",
+  "customerEcosystemBase": "https://local.pharmacyhealthhub.co.uk",
+  "activePublishBaseUrl": "https://banner-cross-pharmacy.sites.pharmaconnect.uk",
+  "publishBaseMode": "internal_managed",
+  "pages": [
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "relativePath": "index.html",
+      "checksumSha256": "4e81889c9a02e25b044a67f6c69cba511e04b96d5f589443c9ab73c5c4f3aa3f",
+      "byteSize": 76076,
+      "sourcePipeline": "homepage-copy"
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "relativePath": "pharmacy-first/index.html",
+      "checksumSha256": "dc1a4c51153b87532335bdc486c20d2c1f383557069d47ad2cf1b89c236a419f",
+      "byteSize": 76046,
+      "sourcePipeline": "visual-experience"
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "relativePath": "pharmacy-first-guide/index.html",
+      "checksumSha256": "632f2ae08667de191f0b99a898499ab30ee720af76da1876df69de9a886a888e",
+      "byteSize": 64395,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "pharmacy-first-faqs",
+      "pageType": "faq",
+      "relativePath": "pharmacy-first-faqs/index.html",
+      "checksumSha256": "fc9391ff120439d9858ba0263cc5c6cc24828942e1ce3fc9ee0f8191addbe461",
+      "byteSize": 54185,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "relativePath": "what-is-pharmacy-first/index.html",
+      "checksumSha256": "f26cfed999e69497ef3f97a86cb7f0b45c4db1125d187019c7bf0a937d31b987",
+      "byteSize": 57813,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "who-should-consider-pharmacy-first",
+      "pageType": "blog",
+      "relativePath": "who-should-consider-pharmacy-first/index.html",
+      "checksumSha256": "7cddfcd74619b25fbfd83eeb385d6f37c4ed64bf84c3d9cdf8bd640e29b2de8a",
+      "byteSize": 54913,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "pharmacy-first-what-you-need-to-know",
+      "pageType": "support",
+      "relativePath": "pharmacy-first-what-you-need-to-know/index.html",
+      "checksumSha256": "4bec3a3835e31491de67f83e2dc3b169dd307c97fa82dce01424dbcd8ef3540b",
+      "byteSize": 56624,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "pharmacy-first-content-ecosystem",
+      "pageType": "hub",
+      "relativePath": "pharmacy-first-content-ecosystem/index.html",
+      "checksumSha256": "420f523cff27eb3d12f1271db32893a6e4dfd76e62e7663f0912c82b3e04beec",
+      "byteSize": 52314,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "local-sheffield-city-centre",
+      "pageType": "location-area",
+      "relativePath": "local-sheffield-city-centre/index.html",
+      "checksumSha256": "a74af19213beff7431520a6cbe42420d1d3b0b5ba29da635d0eef1546b3d60cc",
+      "byteSize": 74097,
+      "sourcePipeline": "local-location-engine"
+    },
+    {
+      "pageSlug": "local-broomhill",
+      "pageType": "location-area",
+      "relativePath": "local-broomhill/index.html",
+      "checksumSha256": "1c1f10a87ff4eb7273504bcd1ac7c9fa5c1f99f4c6bcd344f44f754348706697",
+      "byteSize": 73804,
+      "sourcePipeline": "local-location-engine"
+    },
+    {
+      "pageSlug": "local-kelham-island",
+      "pageType": "location-area",
+      "relativePath": "local-kelham-island/index.html",
+      "checksumSha256": "e5d764539ea02192ffa625d0427f28fbbc8f71ede32974b78a25490b193ae646",
+      "byteSize": 73921,
+      "sourcePipeline": "local-location-engine"
+    },
+    {
+      "pageSlug": "local-dore",
+      "pageType": "location-area",
+      "relativePath": "local-dore/index.html",
+      "checksumSha256": "c83044aa69803679fc6a85155e2e1e542c25329807763a35a7340cfb07bd64d0",
+      "byteSize": 73694,
+      "sourcePipeline": "local-location-engine"
+    },
+    {
+      "pageSlug": "local-hub",
+      "pageType": "location-hub",
+      "relativePath": "local-hub/index.html",
+      "checksumSha256": "3c9250d8189c9192807b4e46506494c8d05eb58e44c9fa44733b0204d1b5b6b4",
+      "byteSize": 74876,
+      "sourcePipeline": "local-location-engine"
+    },
+    {
+      "pageSlug": "local-cluster-ecclesall",
+      "pageType": "location-cluster",
+      "relativePath": "local-cluster-ecclesall/index.html",
+      "checksumSha256": "ff877fdcb4dd342dcb4f4e1b641f03cee153b02ad282afe598dce0c5d3ea6ee3",
+      "byteSize": 74574,
+      "sourcePipeline": "local-location-engine"
+    },
+    {
+      "pageSlug": "local-cluster-fulwood",
+      "pageType": "location-cluster",
+      "relativePath": "local-cluster-fulwood/index.html",
+      "checksumSha256": "1e8159e5a86f5eb54f09b6ca284f9bdc5432712363dafbdce22e12ddea77d6f1",
+      "byteSize": 74398,
+      "sourcePipeline": "local-location-engine"
+    }
+  ],
+  "assets": [
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-consultation-room.webp",
+      "checksumSha256": "300ca5ff30ecf0ebc26614baf648f3bb7365270a4cbe37777a7187c2f8c3d7ae",
+      "byteSize": 98016
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-patient-centred.webp",
+      "checksumSha256": "3253ac1e2d1733716f93c7b7e3bfa9cf9278d5de78433e556eba4f8753c2322a",
+      "byteSize": 91830
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-diverse-team.webp",
+      "checksumSha256": "4368e840cd397b07fd6b22ef02fbbbb45221d8eae83993528b700348075d6092",
+      "byteSize": 129006
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-reception.webp",
+      "checksumSha256": "15c54bfa13735f5e7ea917a0ab2d3e8f2c2200a586afeb8b5783c8068114ea44",
+      "byteSize": 89224
+    },
+    {
+      "relativePath": "assets/website-import/banner-cross-pharmacy/logo-0a892009df57.png",
+      "checksumSha256": "0a892009df57043bb529957e4eb90f8d3cc9ed48b82374c0839cb553e99dff04",
+      "byteSize": 22514
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-community-environment.webp",
+      "checksumSha256": "6a7c4cfe6f4ae3aa6bc334bf83f0c9e148648ace7d2cfb602609c83fc35e1d5e",
+      "byteSize": 135348
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-medication-talk.webp",
+      "checksumSha256": "f9014e08ab5fa49782f2160cfda9ccedf7f6c7e2e7a7bb05f59f322cc1999bc7",
+      "byteSize": 87952
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-professional-care.webp",
+      "checksumSha256": "65fe6e230b72c86173b2d9bf1a8f4aa8017e5cc365d778c72faffd7ed1a6e73f",
+      "byteSize": 103662
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-follow-up.webp",
+      "checksumSha256": "cf24f17361a27bff39490b044e582c0c6c95f65b54fd838a9f0e8fa1e42c472f",
+      "byteSize": 84842
+    },
+    {
+      "relativePath": "assets/brands/banner-cross-pharmacy/logo.png",
+      "checksumSha256": "0a892009df57043bb529957e4eb90f8d3cc9ed48b82374c0839cb553e99dff04",
+      "byteSize": 22514,
+      "sourceUrl": "/assets/website-import/banner-cross-pharmacy/logo-0a892009df57.png"
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-pharmacist-patient.webp",
+      "checksumSha256": "fe9f29b15e2cda577f4a8a7b5ea0c07b587240c1e6ed2e0546dbd1dcbe73e69a",
+      "byteSize": 82092
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-guide-editorial-care.webp",
+      "checksumSha256": "0bc760de57939f74c926e743e8d1ed1a13e7ad44c99bc71c00a6fe42893f7856",
+      "byteSize": 92782
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-service-enquiry.webp",
+      "checksumSha256": "8a3b650e7350eb56c22deddaeee1920d9fcff14b6de8774dd352940396e5cfde",
+      "byteSize": 75484
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-confidential-consultation.webp",
+      "checksumSha256": "ecd85a8185f03617d3d517f208c1c1a2d297daa6ead0329111a7fc9fe4c25543",
+      "byteSize": 73546
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-blog-editorial-pharmacy-first.webp",
+      "checksumSha256": "cb46ed6122cfba4e1cdb704aab13f41afdab0eb5a62d2e1b03a0222d1bcf6170",
+      "byteSize": 88534
+    },
+    {
+      "relativePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-booking.webp",
+      "checksumSha256": "5d02af466f2052c322e450003367931290d4c17e5212580a30795902c5ef6d4a",
+      "byteSize": 77944
+    }
+  ],
+  "pageInventory": [
+    "index",
+    "pharmacy-first",
+    "pharmacy-first-guide",
+    "pharmacy-first-faqs",
+    "what-is-pharmacy-first",
+    "who-should-consider-pharmacy-first",
+    "pharmacy-first-what-you-need-to-know",
+    "pharmacy-first-content-ecosystem"
+  ],
+  "assetInventory": [
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-consultation-room.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-patient-centred.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-diverse-team.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-reception.webp",
+    "assets/website-import/banner-cross-pharmacy/logo-0a892009df57.png",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-community-environment.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-medication-talk.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-professional-care.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-follow-up.webp",
+    "assets/brands/banner-cross-pharmacy/logo.png",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-pharmacist-patient.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-guide-editorial-care.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-service-enquiry.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-confidential-consultation.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-blog-editorial-pharmacy-first.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-booking.webp"
+  ],
+  "sharedCss": [
+    "inline-brand-dna"
+  ],
+  "sharedJs": [],
+  "fonts": [
+    "Roboto",
+    "Poppins"
+  ],
+  "logoFiles": [
+    "assets/brands/banner-cross-pharmacy/logo.png"
+  ],
+  "imageFiles": [
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-consultation-room.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-patient-centred.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-diverse-team.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-reception.webp",
+    "assets/website-import/banner-cross-pharmacy/logo-0a892009df57.png",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-community-environment.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-medication-talk.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-professional-care.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-follow-up.webp",
+    "assets/brands/banner-cross-pharmacy/logo.png",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-pharmacist-patient.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-guide-editorial-care.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-service-enquiry.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-confidential-consultation.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-blog-editorial-pharmacy-first.webp",
+    "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-booking.webp"
+  ],
+  "headerComponent": "standard-navigation",
+  "footerComponent": "three-column",
+  "navigationComponent": "horizontal-multi-link",
+  "mapConfiguration": {
+    "embedPresent": true,
+    "latitude": "",
+    "longitude": ""
+  },
+  "schemaInventory": 2,
+  "sitemap": "sitemap.xml",
+  "registry": "FinalRenderManifest.json",
+  "robots": "robots.txt",
+  "notFoundPage": "404.html",
+  "imageAssignmentRevision": "3920e180a1354984",
+  "imagePlatformSchemaVersion": "1.1",
+  "productionLibraryRevision": "69c19f8020ddc1d6",
+  "pharmacyFirstServiceManifestRevision": "bcb46b21ef6292fc",
+  "imagePlatformSlotMappings": [
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "hero",
+      "assetId": "pf-hero-consultation-room",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-consultation-room.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:homepage:homepage-hero:pf-hero-consultation-room",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "support",
+      "assetId": "pf-support-patient-centred",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-patient-centred.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:homepage:homepage-supporting:pf-support-patient-centred",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "trust",
+      "assetId": "pf-trust-diverse-team",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-diverse-team.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:homepage:homepage-trust:pf-trust-diverse-team",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "conversion",
+      "assetId": "pf-conversion-reception",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-reception.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:homepage:homepage-conversion:pf-conversion-reception",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "hero",
+      "assetId": "pf-hero-community-environment",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-community-environment.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:service:service-hero:pf-hero-community-environment",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "support",
+      "assetId": "pf-support-medication-talk",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-support-medication-talk.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:service:service-supporting:pf-support-medication-talk",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "trust",
+      "assetId": "pf-trust-professional-care",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/trust/approved/pf-trust-professional-care.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:service:service-trust:pf-trust-professional-care",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "conversion",
+      "assetId": "pf-conversion-follow-up",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-follow-up.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:service:service-conversion:pf-conversion-follow-up",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "slot": "hero",
+      "assetId": "pf-hero-pharmacist-patient",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-pharmacist-patient.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:guide:guide-hero:pf-hero-pharmacist-patient",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "slot": "support",
+      "assetId": "pf-guide-editorial-care",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-guide-editorial-care.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:guide:guide-editorial:pf-guide-editorial-care",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "slot": "conversion",
+      "assetId": "pf-conversion-service-enquiry",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-service-enquiry.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:guide:guide-cta:pf-conversion-service-enquiry",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "slot": "hero",
+      "assetId": "pf-hero-confidential-consultation",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/hero/approved/pf-hero-confidential-consultation.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:blog:blog-hero:pf-hero-confidential-consultation",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "slot": "support",
+      "assetId": "pf-blog-editorial-pharmacy-first",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/support/approved/pf-blog-editorial-pharmacy-first.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:blog:blog-editorial:pf-blog-editorial-pharmacy-first",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "slot": "conversion",
+      "assetId": "pf-conversion-booking",
+      "filePath": "assets/pharmacy-image-platform/services/pharmacy-first/roles/conversion/approved/pf-conversion-booking.webp",
+      "assignmentReason": "image-platform-v1.2:deterministic:blog:blog-cta:pf-conversion-booking",
+      "fallbackAttempts": 0
+    }
+  ]
+}

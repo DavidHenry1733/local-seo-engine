@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-09-01T13:40:00.000Z",
+  "note": "Saved 12:33/12:35 raw responses were replayed unchanged. No provider calls. Live Wombwell/Darfield pages, candidates, packs, campaign state, Review Centre and approvals were not written.",
+  "allFourStillRejected": true,
+  "reviewsReturnedByEngine": 0,
+  "falseFailuresRemoved": [
+    {
+      "attempt": "2026-09-01T12-33-31-060Z-attempt-1.json",
+      "original": "grammar: sentence missing a clear verb: Wombwell sits within the Metropolitan Borough of Barnsley, giving the area a dis",
+      "reason": "Finite verb-list grammar check removed. “sits” is grammatical British English."
+    },
+    {
+      "attempt": "2026-09-01T12-33-35-374Z-attempt-2.json",
+      "original": "grammar: sentence missing a clear verb: The area also benefits from community resources such as a public library.",
+      "reason": "Finite verb-list grammar check removed. “benefits” is grammatical."
+    },
+    {
+      "attempt": "2026-09-01T12-33-35-374Z-attempt-2.json",
+      "original": "generic filler",
+      "reason": "Vague retry label removed. The same sentence is now reported as field/sentence/rule/defect (empty-local-claim / ungrounded-clause)."
+    },
+    {
+      "attempt": "2026-09-01T12-35-39-845Z-attempt-1.json",
+      "original": "generic filler",
+      "reason": "Vague retry label removed. Empty character claims are now named per sentence."
+    }
+  ],
+  "genuineDefectsRetained": [
+    {
+      "attempt": "2026-09-01T12-35-43-358Z-attempt-2.json",
+      "original": "ungrounded factual sentence: With Pharmacy First, you have another option for support with common health concerns.",
+      "after": "FAIL | field=localContextParagraphs[0] | rule=ungrounded-clause | another option / clinical broadening"
+    },
+    {
+      "note": "All four drafts remain ok=false. Removing the Wombwell keyword test and the verb-list grammar test did not make any of these responses acceptable."
+    }
+  ],
+  "previouslyMissedUnsupportedClaimsNowDetected": [
+    {
+      "attempt": "2026-09-01T12-33-31-060Z-attempt-1.json",
+      "claims": [
+        "giving the area a distinct South Yorkshire character",
+        "which is a familiar spot for many residents"
+      ]
+    },
+    {
+      "attempt": "2026-09-01T12-33-35-374Z-attempt-2.json",
+      "claims": [
+        "giving the area a distinctive South Yorkshire character",
+        "Wombwell is recognised for its place within the Metropolitan Borough of Barnsley",
+        "community resources such as a public library",
+        "without needing a GP appointment"
+      ]
+    },
+    {
+      "attempt": "2026-09-01T12-35-39-845Z-attempt-1.json",
+      "claims": [
+        "without waiting for a GP appointment",
+        "giving residents access to a range of local services",
+        "known for its strong community links",
+        "benefits from facilities / valued resource for many",
+        "supporting local health needs",
+        "offering another option for advice and treatment"
+      ]
+    },
+    {
+      "attempt": "2026-09-01T12-35-43-358Z-attempt-2.json",
+      "claims": [
+        "without waiting for a GP appointment",
+        "giving it a strong sense of place within South Yorkshire"
+      ]
+    }
+  ],
+  "findingsRequiringEditorialReview": [
+    "Engine returned reviews=[] on all four replays. Nothing was classified REVIEW REQUIRED.",
+    "Leftover-token FAILs that a human editor should still inspect, because they may over-flag approved clinical paraphrase rather than prove a new invented fact: “unsupported assertion: support”; “without, needing”; “benefits, facilities”; “supporting, needs”.",
+    "Replay of the earlier 12:20 saved attempt (test 21) also FAILs leftover tokens such as assessment, next steps, refer. Prefer FAIL over a false PASS; this is not proof that those locked-clinical paraphrases are newly invented.",
+    "Subjective style (tone, padding, readability) is no longer treated as automatic grammar PASS or automatic factual FAIL via a verb list. Style is not currently emitted as a structured REVIEW REQUIRED finding on these four drafts."
+  ],
+  "afterCounts": [
+    {"file": "2026-09-01T12-33-31-060Z-attempt-1.json", "ok": false, "failures": 3, "reviews": 0},
+    {"file": "2026-09-01T12-33-35-374Z-attempt-2.json", "ok": false, "failures": 5, "reviews": 0},
+    {"file": "2026-09-01T12-35-39-845Z-attempt-1.json", "ok": false, "failures": 8, "reviews": 0},
+    {"file": "2026-09-01T12-35-43-358Z-attempt-2.json", "ok": false, "failures": 3, "reviews": 0}
+  ]
+}

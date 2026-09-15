@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "slug": "leeds-pharmacy",
+  "serviceId": "flu-vaccinations",
+  "releaseVersion": "2026-08-08T08:18:47.616Z",
+  "releaseId": "v1",
+  "generationVersion": null,
+  "qualityReviewApprovalReference": "",
+  "manifestHash": "6a9788ab95c0c02b",
+  "registryHash": "666c0b867c764fc2",
+  "sitemapHash": "a907ed69c066a5bc",
+  "fileTotals": {
+    "mode": "initial_publish",
+    "totalFiles": 2,
+    "newFiles": 2,
+    "changedFiles": 0,
+    "unchangedFiles": 0,
+    "deletedFiles": 0,
+    "pages": 2,
+    "images": 0,
+    "sitemap": true,
+    "registry": true,
+    "manifest": true,
+    "redirects": 0
+  },
+  "destination": {
+    "publicWebsite": "https://local.leedspharmacy.co.uk/",
+    "customerEcosystemUrl": "https://local.leedspharmacy.co.uk/",
+    "managedTargetUrl": "https://leeds-pharmacy.sites.pharmaconnect.uk/",
+    "internalManagedUrl": "https://leeds-pharmacy.sites.pharmaconnect.uk/",
+    "dnsStatus": "not configured",
+    "sslStatus": "managed preview active",
+    "publishMethod": "PharmaConnect Managed Infrastructure",
+    "protocol": "HTTPS",
+    "remotePath": "/var/www/pharmaconnect-sites/leeds-pharmacy/current",
+    "host": "leeds-pharmacy.sites.pharmaconnect.uk",
+    "lastConnectionTestAt": "2026-07-20T18:10:51.136Z",
+    "lastConnectionTestOk": true,
+    "connectionStatus": "Healthy",
+    "lastSuccessfulPublish": null,
+    "currentLiveVersion": null,
+    "proposedVersion": "2026-08-08T08:18:47.632Z",
+    "credentialsConfigured": true,
+    "destinationConfigured": true,
+    "targetWritable": true
+  },
+  "publishMethod": "PharmaConnect Managed Infrastructure",
+  "operator": "admin",
+  "startedAt": "2026-08-08T08:18:39.208Z",
+  "completedAt": "2026-08-08T08:18:47.616Z",
+  "durationMs": 8408,
+  "publishedVersion": 1,
+  "currentRelease": "v1",
+  "previousRelease": null,
+  "rollbackTarget": null,
+  "liveVerification": {
+    "homepage": {
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/flu-vaccinations/",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "servicePage": {
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "guidePage": {
+      "url": null,
+      "ok": true,
+      "status": null,
+      "https": true,
+      "skipped": true
+    },
+    "blogPages": [],
+    "images": {
+      "ok": true,
+      "skipped": true,
+      "reason": "No bundled image assets in generated package"
+    },
+    "manifest": {
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/manifest.json",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "registry": {
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/registry.json",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "sitemap": {
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/sitemap.xml",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "https": {
+      "ok": true,
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/flu-vaccinations/",
+      "httpReachable": true
+    },
+    "managedHostname": {
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/flu-vaccinations/",
+      "ok": true
+    },
+    "managedUrl": {
+      "url": "https://leeds-pharmacy.sites.pharmaconnect.uk/flu-vaccinations/",
+      "ok": true
+    },
+    "remoteVerification": {
+      "mode": "sftp_remote_verification",
+      "checks": {
+        "homepage": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/leeds-pharmacy/current/flu-vaccinations/index.html"
+        },
+        "servicePage": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/leeds-pharmacy/current/flu-vaccinations/index.html"
+        },
+        "sitemap": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/leeds-pharmacy/current/sitemap.xml"
+        },
+        "manifest": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/leeds-pharmacy/current/manifest.json"
+        },
+        "registry": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/leeds-pharmacy/current/registry.json"
+        },
+        "guidePage": {
+          "ok": false,
+          "path": "/var/www/pharmaconnect-sites/leeds-pharmacy/current/pharmacy-first-guide/index.html"
+        }
+      },
+      "verifiedAt": "2026-08-08T08:18:46.086Z"
+    },
+    "customerLiveUrl": {
+      "url": null,
+      "ok": true,
+      "skipped": true,
+      "reason": "Customer CNAME not verified"
+    },
+    "verifiedAt": "2026-08-08T08:18:47.143Z"
+  },
+  "rollbackReference": null,
+  "jobId": "edb4a804-1a69-43fe-8639-742d98aabcc2"
+}

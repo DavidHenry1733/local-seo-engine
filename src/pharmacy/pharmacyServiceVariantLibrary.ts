@@ -3,7 +3,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import crypto from "node:crypto";
 import { hashSeed } from "./pharmacyLayoutTemplateLibrary.ts";
 import {
   getEnrichedBlueprint,
@@ -12,24 +12,74 @@ import {
 import { SERVICE_VARIANT_DEFINITIONS } from "./serviceVariantContent.part1.ts";
 import { SERVICE_VARIANT_DEFINITIONS_PART2 } from "./serviceVariantContent.part2.ts";
 import { SERVICE_VARIANT_DEFINITIONS_PART3 } from "./serviceVariantContent.part3.ts";
+import { WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+export { WORKSPACE_ROOT };
+export const VARIANT_OUTPUT_DIR = path.join(WORKSPACE_ROOT, "data/pharmacy-service-variants");
+export const APPROVED_SERVICE_BANK_REGISTRY_PATH = path.join(
+  WORKSPACE_ROOT,
+  "data/pharmacy-approved-service-banks/registry.json",
+);
 
-function resolveWorkspaceRoot(): string {
-  const candidates = [
-    process.env.WORKSPACE_ROOT,
-    path.resolve(__dirname, "../.."),
-    path.resolve(__dirname, "../../.."),
-    process.cwd(),
-  ].filter(Boolean) as string[];
-  for (const root of candidates) {
-    if (fs.existsSync(path.join(root, "config/pharmacy/service-library.json"))) return root;
-  }
-  return path.resolve(__dirname, "../..");
+/** Registered approved-bank services must never fall back to in-code variant packs. */
+export const REGISTERED_APPROVED_BANK_SERVICE_IDS = [
+  "pharmacy-first",
+  "blood-pressure-checks",
+  "travel-vaccinations",
+  "flu-vaccinations",
+] as const;
+
+export interface ApprovedServiceBankRegistryEntry {
+  serviceId: string;
+  approvedBankVersion: string;
+  approvedBankHash: string;
+  approvedBankRelativePath: string;
+  allowedGeneratorContract?: {
+    servicePage?: string;
+    localityPage?: string;
+    selectionRule?: string;
+    servicePageContractRelativePath?: string;
+  };
 }
 
-export const WORKSPACE_ROOT = resolveWorkspaceRoot();
-export const VARIANT_OUTPUT_DIR = path.join(WORKSPACE_ROOT, "data/pharmacy-service-variants");
+export interface ApprovedServiceBankRegistry {
+  registryId: string;
+  immutable: boolean;
+  services: Record<string, ApprovedServiceBankRegistryEntry>;
+}
+
+/** Load immutable approved-bank registry (metadata only — no tenant HTML). */
+export function loadApprovedServiceBankRegistry(): ApprovedServiceBankRegistry | null {
+  if (!fs.existsSync(APPROVED_SERVICE_BANK_REGISTRY_PATH)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(APPROVED_SERVICE_BANK_REGISTRY_PATH, "utf8")) as ApprovedServiceBankRegistry;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Resolve the pinned approved content bank for a serviceId.
+ * Selection is solely by serviceId — no tenant or campaign overrides.
+ */
+export function resolveApprovedServiceBank(
+  serviceId: string,
+): { entry: ApprovedServiceBankRegistryEntry; absolutePath: string; hash: string } | null {
+  const registry = loadApprovedServiceBankRegistry();
+  const entry = registry?.services?.[serviceId];
+  if (!entry?.approvedBankRelativePath || !entry.approvedBankHash) return null;
+  const absolutePath = path.join(WORKSPACE_ROOT, entry.approvedBankRelativePath);
+  if (!fs.existsSync(absolutePath)) {
+    throw new Error(`Approved service bank missing for ${serviceId}: ${absolutePath}`);
+  }
+  const hash = crypto.createHash("sha256").update(fs.readFileSync(absolutePath)).digest("hex");
+  if (hash !== entry.approvedBankHash) {
+    throw new Error(
+      `Approved service bank hash mismatch for ${serviceId}: expected ${entry.approvedBankHash}, got ${hash}`,
+    );
+  }
+  return { entry, absolutePath, hash };
+}
 
 export interface SectionVariant {
   heading: string;
@@ -54,6 +104,29 @@ export interface FaqVariant {
   answer: string;
 }
 
+/** Optional locality-only reusable copy. Never used by the locked service-page contract. */
+export interface ApprovedBankLocalityPageSource {
+  overviewHeading?: string;
+  overviewParagraphs?: string[];
+  overviewBullets?: string[];
+  considerHeading?: string;
+  considerBody?: string;
+  considerBullets?: string[];
+  scopeHeading?: string;
+  scopeBody?: string;
+  scopeBullets?: string[];
+  processHeading?: string;
+  processBody?: string;
+  processSteps?: SectionVariant[];
+  preparationHeading?: string;
+  preparationBody?: string;
+  preparationBullets?: string[];
+  safetyHeading?: string;
+  safetyBody?: string;
+  safetyBullets?: string[];
+  faqs?: FaqVariant[];
+}
+
 export interface ServiceVariantPack {
   serviceId: string;
   serviceName: string;
@@ -72,6 +145,18 @@ export interface ServiceVariantPack {
   patientOutcomes?: SectionVariant[];
   cta: CtaVariant[];
   faqs: FaqVariant[];
+  /** Locality-page overlay. Must not alter locked service-page contract derivation. */
+  localityPage?: ApprovedBankLocalityPageSource;
+  /** CORE-PAGE-28: optional embedded service-page contract; otherwise derived at load. */
+  servicePage?: {
+    contractId: string;
+    serviceId: string;
+    serviceName: string;
+    bankVersion: number | string;
+    sections: Array<{ num: string; kicker: string; title: string; proseHtml: string }>;
+    faqs: FaqVariant[];
+    heroIntroBody: string;
+  };
 }
 
 export interface SelectedAreaVariants {
@@ -103,8 +188,10 @@ export function localizeFaqQuestion(
   area: string,
   areaSlug: string,
   index: number,
+  serviceId?: string,
 ): string {
   const q = question.trim();
+  if (serviceId && isApprovedBankRegisteredService(serviceId)) return q;
   if (q.toLowerCase().includes(area.toLowerCase())) return q;
   const templateIdx = hashSeed(areaSlug, String(index), "faq-q") % 5;
   const prefixes = [
@@ -216,6 +303,16 @@ export function writeServiceVariantPacks(): { written: string[]; outputDir: stri
 }
 
 export function loadServiceVariantPack(serviceId: string): ServiceVariantPack | null {
+  // Locked services: bank selection is solely by serviceId via the immutable registry.
+  const approved = resolveApprovedServiceBank(serviceId);
+  if (approved) {
+    return JSON.parse(fs.readFileSync(approved.absolutePath, "utf8")) as ServiceVariantPack;
+  }
+  if ((REGISTERED_APPROVED_BANK_SERVICE_IDS as readonly string[]).includes(serviceId)) {
+    throw new Error(
+      `Registered approved bank could not be loaded for ${serviceId} (registry=${APPROVED_SERVICE_BANK_REGISTRY_PATH})`,
+    );
+  }
   const file = path.join(VARIANT_OUTPUT_DIR, `${serviceId}.json`);
   if (!fs.existsSync(file)) {
     const built = ALL_DEFINITIONS[serviceId];
@@ -223,6 +320,11 @@ export function loadServiceVariantPack(serviceId: string): ServiceVariantPack | 
     return buildServiceVariantPack(serviceId);
   }
   return JSON.parse(fs.readFileSync(file, "utf8")) as ServiceVariantPack;
+}
+
+/** True when serviceId is covered by the approved-bank registry (core pages must use the bank). */
+export function isApprovedBankRegisteredService(serviceId: string): boolean {
+  return Boolean(resolveApprovedServiceBank(serviceId));
 }
 
 export function getSectionVariant(

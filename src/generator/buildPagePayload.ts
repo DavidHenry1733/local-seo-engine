@@ -4,6 +4,7 @@ import { buildMeta } from "../seo/buildMeta";
 import { buildSchema } from "../seo/buildSchema";
 import { buildInternalLinks } from "../seo/buildInternalLinks";
 import { buildMapEmbed } from "../seo/buildMapEmbed";
+import { pickTemplate, TemplateType } from "../content/templates";
 import {
   buildAreaIntroVariant,
   buildSectionBodyVariant,
@@ -38,6 +39,7 @@ function buildStandaloneIntro(serviceLabel: string, location: string): string {
 // ── Section builders ──────────────────────────────────────────────────────────
 
 function buildSections(
+  template: TemplateType,
   serviceLabel: string,
   location: string,
   serviceKey: ServiceKey,
@@ -77,6 +79,40 @@ function buildSections(
         heading: `${location} web design — the wider area`,
         body: `As a business serving the wider ${location} area, we understand that the communities across the region each have their own character and customer base. Businesses in ${topAreas} and the other areas surrounding ${location} all have distinct local audiences, and web design that speaks to those audiences performs significantly better than a one-size-fits-all approach.\n\nWe build and manage web design projects across the full ${location} catchment area — from the town centre to those operating in outlying communities. Every project follows the same structured approach: clear discovery, purposeful design, well-structured content and a build process focused on performance and longevity. Whether you are in the heart of ${location} or in one of the surrounding areas, the goal is the same — a website that generates consistent enquiries from the customers most likely to become clients.`,
       });
+    }
+
+    if (template === "problem_solution") {
+      return [
+        {
+          id: "common-problems",
+          heading: `Why ${location} businesses struggle to get enquiries online`,
+          body: `Many businesses in ${location} already have a website, but it does not always work as a proper enquiry-generation tool. Common problems include slow loading speeds, unclear messaging, weak calls to action, poor mobile layouts and pages that are not structured around the way local customers search. The result is a website that exists online but does not consistently bring in new enquiries.\n\nFor local businesses, this can be frustrating because the issue is not always obvious. The business may offer a strong service, have good reviews and rely on referrals, yet still lose online customers to competitors with clearer, faster and better-structured websites.`,
+        },
+        {
+          id: "solution",
+          heading: `How better ${serviceLabel.toLowerCase()} solves the problem`,
+          body: `A professionally planned website fixes these issues by giving every page a clear purpose. The structure, design, content and calls to action are all built around one goal: helping visitors understand your value quickly and giving them a simple reason to get in touch.\n\nFor businesses in ${location}, that means creating a website that loads quickly, works properly on mobile, explains the service clearly and supports local search visibility. Instead of acting like an online brochure, the website becomes a practical sales asset that helps turn local searches into real enquiries.`,
+        },
+        base[1],
+        base[3],
+      ];
+    }
+
+    if (template === "authority") {
+      return [
+        {
+          id: "industry-insight",
+          heading: `What strong online visibility means for ${location} businesses`,
+          body: `The way customers choose local businesses has changed. Before calling, visiting or requesting a quote, most people now check a business online. They compare websites, reviews, location signals and overall credibility before making contact. For businesses in ${location}, this means your website is often the first serious trust signal a potential customer sees.\n\nA strong website does more than present information. It helps search engines understand what you offer, helps customers understand why they should choose you, and gives your business a stronger position in the local market. This is why professional ${serviceLabel.toLowerCase()} should be treated as part of your growth infrastructure rather than a one-off design task.`,
+        },
+        {
+          id: "competitive-advantage",
+          heading: `Building a stronger position in the ${location} market`,
+          body: `In competitive local markets, small differences in presentation can have a large impact on enquiry levels. A faster website, clearer service pages, stronger local relevance and better calls to action can be enough to win enquiries that would otherwise go elsewhere.\n\nFor businesses in ${location}, the advantage comes from combining credibility, search visibility and conversion in one place. When your website communicates clearly and performs properly, every other marketing activity becomes more effective because visitors arrive on a stronger platform.`,
+        },
+        base[2],
+        base[3],
+      ];
     }
 
     return base;
@@ -181,8 +217,10 @@ export function buildPagePayload(
 
   const idx     = areaIndex(page.location, page.areaConfig);
   const profile = areaProfile(page.location, page.areaConfig);
+  const template = pickTemplate(idx);
 
   const sections = buildSections(
+    template,
     page.serviceLabel,
     page.location,
     page.serviceKey,

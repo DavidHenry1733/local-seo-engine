@@ -1,0 +1,55 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "gemini",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-14T08:24:56.317Z",
+  "tokenUsage": {
+    "promptTokens": 773,
+    "completionTokens": 264,
+    "totalTokens": 1037
+  },
+  "estimatedCostUsd": 0.0036580000000000002,
+  "inputEvidencePackHash": "",
+  "editorialEvidencePackHash": "",
+  "areaSlug": "oadby",
+  "areaName": "Oadby",
+  "editorialFactIdsUsed": [],
+  "outputCopy": {
+    "area": "Oadby",
+    "heroHeading": "Pharmacy First in Oadby",
+    "heroIntroduction": "Vision Pharmacy provides the Pharmacy First service for people in Oadby, offering professional clinical support for various common health conditions. Eligible local residents can receive a clinical consultation with a pharmacist, helping the community manage everyday health needs alongside existing services.",
+    "localIntroduction": "Oadby is a residential area defined by its local community and established civic infrastructure. The neighbourhood caters to individuals, couples and families who rely on local public amenities, shared facilities and regional support services for their day-to-day requirements.\n\nCommunity and healthcare facilities play a major role in supporting residents throughout the area. Oadby Library operates as a valuable civic facility, delivering core library services alongside Family Hub support for local parents and children. On the medical side, local health provisions are reinforced by Oadby Urgent Care Centre, a key hospital providing urgent medical care to the surrounding population.\n\nWorking alongside these local provisions, Vision Pharmacy provides Pharmacy First consultations for eligible people from the area. Designed to cover certain common health conditions, the service allows individuals to discuss their symptoms directly with a qualified pharmacist. The consultation involves a review where the pharmacist assesses symptoms, relevant medicines and medical history. Depending on the individual clinical assessment, the outcome may include advice, suitable treatment or referral to another healthcare professional to ensure each patient receives appropriate care.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Vision Pharmacy in Oadby. The pharmacy is approximately 0.3 km in a straight line from Oadby.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": []
+  },
+  "claimMap": [],
+  "sentencePurposes": [],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "HERO INTRODUCTION:\nVision Pharmacy provides the Pharmacy First service for people in Oadby, offering professional clinical support for various common health conditions. Eligible local residents can receive a clinical consultation with a pharmacist, helping the community manage everyday health needs alongside existing services.\n\nLOCAL INTRODUCTION:\nOadby is a residential area defined by its local community and established civic infrastructure. The neighbourhood caters to individuals, couples and families who rely on local public amenities, shared facilities and regional support services for their day-to-day requirements.\n\nCommunity and healthcare facilities play a major role in supporting residents throughout the area. Oadby Library operates as a valuable civic facility, delivering core library services alongside Family Hub support for local parents and children. On the medical side, local health provisions are reinforced by Oadby Urgent Care Centre, a key hospital providing urgent medical care to the surrounding population.\n\nWorking alongside these local provisions, Vision Pharmacy provides Pharmacy First consultations for eligible people from the area. Designed to cover certain common health conditions, the service allows individuals to discuss their symptoms directly with a qualified pharmacist. The consultation involves a review where the pharmacist assesses symptoms, relevant medicines and medical history. Depending on the individual clinical assessment, the outcome may include advice, suitable treatment or referral to another healthcare professional to ensure each patient receives appropriate care.",
+  "rawOpenAiResponses": [
+    "HERO INTRODUCTION:\nVision Pharmacy provides the Pharmacy First service for people in Oadby, offering professional clinical support for various common health conditions. Eligible local residents can receive a clinical consultation with a pharmacist, helping the community manage everyday health needs alongside existing services.\n\nLOCAL INTRODUCTION:\nOadby is a residential area defined by its local community and established civic infrastructure. The neighbourhood caters to individuals, couples and families who rely on local public amenities, shared facilities and regional support services for their day-to-day requirements.\n\nCommunity and healthcare facilities play a major role in supporting residents throughout the area. Oadby Library operates as a valuable civic facility, delivering core library services alongside Family Hub support for local parents and children. On the medical side, local health provisions are reinforced by Oadby Urgent Care Centre, a key hospital providing urgent medical care to the surrounding population.\n\nWorking alongside these local provisions, Vision Pharmacy provides Pharmacy First consultations for eligible people from the area. Designed to cover certain common health conditions, the service allows individuals to discuss their symptoms directly with a qualified pharmacist. The consultation involves a review where the pharmacist assesses symptoms, relevant medicines and medical history. Depending on the individual clinical assessment, the outcome may include advice, suitable treatment or referral to another healthcare professional to ensure each patient receives appropriate care."
+  ],
+  "geminiGrounding": null
+}

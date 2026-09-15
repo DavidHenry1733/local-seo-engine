@@ -1,0 +1,309 @@
+{
+  "issueId": "MAI-20260820-005",
+  "createdAt": "2026-08-20T13:54:27.345Z",
+  "createdBy": "admin",
+  "updatedAt": "2026-08-20T13:54:28.418Z",
+  "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "",
+  "category": "Customer onboarding",
+  "severity": "high",
+  "title": "Workflow failed: Generate Ecosystem",
+  "description": "Cluster generation is not eligible for this customer",
+  "expectedBehaviour": "Continue Workflow completes Generate Ecosystem without error",
+  "actualBehaviour": "Cluster generation is not eligible for this customer",
+  "reproductionSteps": "1. Open Master Admin customer record\n2. Customer slug: yorkshire-pharmacy-and-health-clinic\n3. Click Continue Workflow at stage: Generate Ecosystem\n4. Action: generate_local_cluster_pages",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-08-20T13:54:28.024Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "yorkshire-pharmacy-and-health-clinic",
+      "businessName": "Yorkshire Pharmacy & Health Clinic",
+      "website": "http://yorkshirepharmacyhealthclinic.co.uk/",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-08-20T13:48:22.847Z",
+      "platformClientStatus": "profile_approved"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "package_exists",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-generation-context-pharmacy-first.json",
+        "exists": true,
+        "modifiedAt": "2026-08-20T12:44:19.765Z",
+        "size": 343748
+      },
+      "generationTimestamp": "2026-08-20T12:44:20.597Z",
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/yorkshire-pharmacy-and-health-clinic/pharmacy-first.json",
+        "exists": true,
+        "modifiedAt": "2026-08-20T12:44:21.425Z",
+        "size": 6903
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/yorkshire-pharmacy-and-health-clinic/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/yorkshire-pharmacy-and-health-clinic.json",
+        "exists": true,
+        "modifiedAt": "2026-08-20T11:01:55.278Z",
+        "size": 6597
+      },
+      "pageType": "unknown",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-08-20T13:33:56.112Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-08-20T13:33:56.112Z",
+        "size": 13936238
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 3889045,
+        "pmId": 1,
+        "status": "online",
+        "startTime": "2026-08-20T13:33:56.639Z",
+        "restartCount": 191
+      },
+      "nodeEnv": "production"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "snapshot_present",
+      "businessProfileStatus": "profile_approved",
+      "generationStatus": "idle",
+      "publishingStatus": "not_started",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "d9ae56b2-ebf5-45f7-b946-e08f174ccaa1",
+        "action": "generate_local_cluster_pages",
+        "status": "failed",
+        "progressLabel": "Failed",
+        "updatedAt": "2026-08-20T13:54:27.298Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "d1c29bae-fac0-4491-816c-0cb5c18a86e0",
+          "timestamp": "2026-08-20T13:54:27.695Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260820-005 created: Workflow failed: Generate Ecosystem"
+        },
+        {
+          "id": "4060c0a3-2695-426f-83ae-637c2722080e",
+          "timestamp": "2026-08-20T13:48:42.699Z",
+          "action": "continue_workflow",
+          "status": "error",
+          "evidence": "Cluster generation is not eligible for this customer"
+        },
+        {
+          "id": "5eca8302-3a6f-496b-964f-14775984fad9",
+          "timestamp": "2026-08-20T13:48:42.558Z",
+          "action": "workflow_failure_ticket",
+          "status": "error",
+          "evidence": "Issue MAI-20260820-004 created for failed Generate Ecosystem"
+        },
+        {
+          "id": "9c390e3b-e7ab-47c0-b90f-fb486d36016f",
+          "timestamp": "2026-08-20T13:48:42.460Z",
+          "action": "issue_cursor_prompt_generated",
+          "status": "success",
+          "evidence": "Cursor prompt generated for MAI-20260820-004"
+        },
+        {
+          "id": "80e993e3-345b-47d5-94c7-40ad8ca6d699",
+          "timestamp": "2026-08-20T13:48:42.291Z",
+          "action": "issue_diagnostics_refresh",
+          "status": "success",
+          "evidence": "Diagnostics refreshed for MAI-20260820-004"
+        },
+        {
+          "id": "bd479a46-a9db-4648-97cf-6dec2b97d224",
+          "timestamp": "2026-08-20T13:48:41.621Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260820-004 created: Workflow failed: Generate Ecosystem"
+        },
+        {
+          "id": "57919c99-9ac0-438a-a1d3-cb20156970e5",
+          "timestamp": "2026-08-20T13:39:59.290Z",
+          "action": "continue_workflow",
+          "status": "error",
+          "evidence": "Cluster generation is not eligible for this customer"
+        },
+        {
+          "id": "b2d4e9cf-ab87-4c23-addf-c8691da49729",
+          "timestamp": "2026-08-20T13:39:59.207Z",
+          "action": "workflow_failure_ticket",
+          "status": "error",
+          "evidence": "Issue MAI-20260820-003 created for failed Generate Ecosystem"
+        },
+        {
+          "id": "8f1ee4ed-152c-47a3-ad13-e41a4885b2f3",
+          "timestamp": "2026-08-20T13:39:59.139Z",
+          "action": "issue_cursor_prompt_generated",
+          "status": "success",
+          "evidence": "Cursor prompt generated for MAI-20260820-003"
+        },
+        {
+          "id": "9a5416d1-c273-4e64-96b3-c0d25cf29ab6",
+          "timestamp": "2026-08-20T13:39:59.038Z",
+          "action": "issue_diagnostics_refresh",
+          "status": "success",
+          "evidence": "Diagnostics refreshed for MAI-20260820-003"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:54:27.298Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:48:41.049Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:39:57.921Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:55.999Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:27.654Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:48:42.699Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:48:42.558Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:39:59.290Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:39:59.207Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:57.027Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:56.957Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:28.750Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:28.641Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/yorkshire-pharmacy-and-health-clinic/pharmacy-first.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-generation-context-pharmacy-first.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/yorkshire-pharmacy-and-health-clinic.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/yorkshire-pharmacy-and-health-clinic.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-builder.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-08-20T13:54:28.324Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/yorkshire-pharmacy-and-health-clinic/pharmacy-first.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-generation-context-pharmacy-first.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/yorkshire-pharmacy-and-health-clinic.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/yorkshire-pharmacy-and-health-clinic.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-builder.json"
+  ],
+  "linkedAuditEventIds": [
+    "d1c29bae-fac0-4491-816c-0cb5c18a86e0"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-08-20T13:54:27.345Z",
+      "user": "admin",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": "COMMERCIAL RELEASE PROGRAMME V1\nRELEASE DEFECT\nONE ISSUE POLICY\n\nConfirmed browser-visible defect:\nCluster generation is not eligible for this customer\n\nTarget tenant:\nyorkshire-pharmacy-and-health-clinic (Yorkshire Pharmacy & Health Clinic)\n\nTarget campaign:\npharmacy-first\n\nTarget URL:\nNot specified in issue record\n\nLocked systems (do not modify):\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nObjective:\nResolve the reported Customer onboarding issue for tenant yorkshire-pharmacy-and-health-clinic: Workflow failed: Generate Ecosystem\n\nTrace requirements:\n- Reproduce using: 1. Open Master Admin customer record\n2. Customer slug: yorkshire-pharmacy-and-health-clinic\n3. Click Continue Workflow at stage: Generate Ecosystem\n4. Action: generate_local_cluster_pages\n- Expected behaviour: Continue Workflow completes Generate Ecosystem without error\n- Actual behaviour: Cluster generation is not eligible for this customer\n- Page type (from diagnostics): unknown\n- Lifecycle at report time: awaiting_review\n- Root cause to be traced.\n\nFix scope:\n- Operational/support fix only unless Product Owner approves engine changes\n- Do not modify locked rendering, generation, publishing, SEO, indexing, or ranking engines\n\nDo not modify:\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nValidation:\n- Confirm defect reproduced in browser\n- Apply fix within approved scope\n- Build and PM2 reload\n- WAIT FOR PRODUCT OWNER TEST\n- STOP.\n\nIssue ID: MAI-20260820-005\nSeverity: high\nCategory: Customer onboarding\nDiagnostic collected: 2026-08-20T13:54:28.324Z\n",
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

@@ -1,0 +1,202 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:32:29.938Z",
+  "tokenUsage": {
+    "promptTokens": 6644,
+    "completionTokens": 340,
+    "totalTokens": 6984
+  },
+  "estimatedCostUsd": 0.016008,
+  "inputEvidencePackHash": "686ca0102560558dc879ff3112923542625023943473b6e62aff391a69b99af7",
+  "editorialEvidencePackHash": "1998028850e884ab62170e6ae2ee09a33e9c01a185cfc51b9f129c7cbf18e047",
+  "areaSlug": "mickleover",
+  "areaName": "Mickleover",
+  "editorialFactIdsUsed": [
+    "mickleover:community:mickleover-community-centre-is-listed-as-a-commu",
+    "mickleover:community:mickleover-library-is-listed-as-a-community-faci",
+    "mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-"
+  ],
+  "outputCopy": {
+    "area": "Mickleover",
+    "heroHeading": "Pharmacy First in Mickleover",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Mickleover.",
+    "localIntroduction": "Pharmacy First for people in Mickleover is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Mickleover Community Centre is listed as a community facility in Mickleover. Mickleover Library is listed as a community facility in Mickleover. War Memorial - Mickleover is listed as a landmark in Mickleover."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Mickleover Community Centre is listed as a community facility in Mickleover.",
+        "editorialFactId": "mickleover:community:mickleover-community-centre-is-listed-as-a-commu"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Mickleover Library is listed as a community facility in Mickleover.",
+        "editorialFactId": "mickleover:community:mickleover-library-is-listed-as-a-community-faci"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "War Memorial - Mickleover is listed as a landmark in Mickleover.",
+        "editorialFactId": "mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "mickleover:community:mickleover-community-centre-is-listed-as-a-commu",
+      "mickleover:community:mickleover-library-is-listed-as-a-community-faci",
+      "mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Mickleover",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Mickleover.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Mickleover is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Mickleover Community Centre is listed as a community facility in Mickleover.",
+      "supportingCanonicalFieldOrEntity": "mickleover:community:mickleover-community-centre-is-listed-as-a-commu, mickleover:community:mickleover-library-is-listed-as-a-community-faci, mickleover:community:mickleover-community-pavilion-is-listed-as-a-com, mickleover:heritage:mickleover-meadows-is-listed-as-a-landmark-in-mi, mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Mickleover Library is listed as a community facility in Mickleover.",
+      "supportingCanonicalFieldOrEntity": "mickleover:community:mickleover-has-a-public-library, mickleover:community:mickleover-community-centre-is-listed-as-a-commu, mickleover:community:mickleover-library-is-listed-as-a-community-faci, mickleover:community:mickleover-community-pavilion-is-listed-as-a-com, mickleover:heritage:mickleover-meadows-is-listed-as-a-landmark-in-mi, mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-",
+      "providerSource": "derby.gov.uk, Google Places, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "War Memorial - Mickleover is listed as a landmark in Mickleover.",
+      "supportingCanonicalFieldOrEntity": "mickleover:community:mickleover-library-is-listed-as-a-community-faci, mickleover:heritage:mickleover-meadows-is-listed-as-a-landmark-in-mi, mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-, mickleover:heritage:homerton-vale-is-listed-as-a-landmark-in-mickleo",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Mickleover",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Mickleover.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Mickleover is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Mickleover Community Centre is listed as a community facility in Mickleover.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mickleover:community:mickleover-community-centre-is-listed-as-a-commu, mickleover:community:mickleover-library-is-listed-as-a-community-faci, mickleover:community:mickleover-community-pavilion-is-listed-as-a-com, mickleover:heritage:mickleover-meadows-is-listed-as-a-landmark-in-mi, mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Mickleover Library is listed as a community facility in Mickleover.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mickleover:community:mickleover-has-a-public-library, mickleover:community:mickleover-community-centre-is-listed-as-a-commu, mickleover:community:mickleover-library-is-listed-as-a-community-faci, mickleover:community:mickleover-community-pavilion-is-listed-as-a-com, mickleover:heritage:mickleover-meadows-is-listed-as-a-landmark-in-mi, mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "War Memorial - Mickleover is listed as a landmark in Mickleover.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mickleover:community:mickleover-library-is-listed-as-a-community-faci, mickleover:heritage:mickleover-meadows-is-listed-as-a-landmark-in-mi, mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-, mickleover:heritage:homerton-vale-is-listed-as-a-landmark-in-mickleo",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Mickleover Community Centre is listed as a community facility in Mickleover. Mickleover Library is listed as a community facility in Mickleover. War Memorial - Mickleover is listed as a landmark in Mickleover.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover Community Centre is listed as a community facility in Mickleover.\",\n      \"editorialFactId\": \"mickleover:community:mickleover-community-centre-is-listed-as-a-commu\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover Library is listed as a community facility in Mickleover.\",\n      \"editorialFactId\": \"mickleover:community:mickleover-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"War Memorial - Mickleover is listed as a landmark in Mickleover.\",\n      \"editorialFactId\": \"mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"mickleover:community:mickleover-community-centre-is-listed-as-a-commu\",\n    \"mickleover:community:mickleover-library-is-listed-as-a-community-faci\",\n    \"mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Mickleover Community Centre is listed as a community facility in Mickleover. Mickleover Library is listed as a community facility in Mickleover. War Memorial - Mickleover is listed as a landmark in Mickleover.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover Community Centre is listed as a community facility in Mickleover.\",\n      \"editorialFactId\": \"mickleover:community:mickleover-community-centre-is-listed-as-a-commu\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover Library is listed as a community facility in Mickleover.\",\n      \"editorialFactId\": \"mickleover:community:mickleover-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"War Memorial - Mickleover is listed as a landmark in Mickleover.\",\n      \"editorialFactId\": \"mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"mickleover:community:mickleover-community-centre-is-listed-as-a-commu\",\n    \"mickleover:community:mickleover-library-is-listed-as-a-community-faci\",\n    \"mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-\"\n  ]\n}"
+  ]
+}

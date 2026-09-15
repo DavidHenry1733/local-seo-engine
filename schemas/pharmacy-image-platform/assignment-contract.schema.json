@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pharmaconnect.uk/schemas/pharmacy-image-platform/assignment-contract.schema.json",
+  "title": "PharmaConnectImagePlatformAssignmentContract",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "platformRevision",
+    "serviceId",
+    "pageType",
+    "pageSlug",
+    "slot",
+    "selectionRule",
+    "assetRef"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "platformRevision": { "type": "string", "minLength": 8 },
+    "serviceId": { "type": "string" },
+    "pageType": { "enum": ["homepage", "service", "guide", "blog", "cluster", "other"] },
+    "pageSlug": { "type": "string" },
+    "slot": { "enum": ["hero", "support", "trust", "conversion"] },
+    "selectionRule": {
+      "type": "object",
+      "required": ["mode", "rankKey"],
+      "properties": {
+        "mode": { "const": "deterministic_approved_rank" },
+        "rankKey": { "type": "string" },
+        "minContentClass": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "approved_photograph",
+              "approved_editorial_illustration",
+              "approved_tenant_generated",
+              "approved_operator_selected"
+            ]
+          }
+        }
+      }
+    },
+    "assetRef": {
+      "type": "object",
+      "required": ["assetId", "revision", "relativePath"],
+      "properties": {
+        "assetId": { "type": "string" },
+        "revision": { "type": "string" },
+        "relativePath": { "type": "string" }
+      }
+    },
+    "assignedAt": { "type": "string", "format": "date-time" },
+    "assignmentReason": { "type": "string" }
+  },
+  "additionalProperties": false
+}

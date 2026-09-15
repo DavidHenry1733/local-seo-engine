@@ -1,0 +1,441 @@
+{
+  "ok": true,
+  "recovery": "CPR-PLATFORM-RECOVERY-03",
+  "generatedAt": "2026-08-04T08:13:02.467Z",
+  "stages": [
+    {
+      "stage": "Website Import",
+      "executed": "YES",
+      "file": "data/website-design-evidence|pharmacy-profiles",
+      "function": "preloaded-tenant-import",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Business Profile",
+      "executed": "YES",
+      "file": "data/pharmacy-master-admin/business-profile-review|pharmacy-profiles",
+      "function": "preloaded-business-profile",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Evidence",
+      "executed": "YES",
+      "file": "data/pharmacy-master-admin/service-page-evidence-review",
+      "function": "preloaded-evidence-review",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Service Builder",
+      "executed": "YES",
+      "file": "pharmacyContentPackageService.ts → pharmacyVisualExperience.ts → pharmacyVisualExperienceLayoutV3.ts",
+      "function": "generateContentPackage → buildVisualExperiencePage → buildPharmacyServicePageMainHtml",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Narrative Planner",
+      "executed": "YES",
+      "file": "pharmacyLocalClusterContentEngine.ts / pharmacyFirstLocalNarrative.ts",
+      "function": "composeCommercialClusterNarrativeV1 / buildPharmacyFirstLocalNarrative",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Section Planner",
+      "executed": "YES",
+      "file": "pharmacyCommercialSectionPlannerV1.ts",
+      "function": "resolveCommercialSectionPlanV1",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Locality Engine",
+      "executed": "YES",
+      "file": "pharmacyLocalAreaResolver.ts / pharmacyLocalClusterIntelligence.ts",
+      "function": "resolveLocalLocationHierarchy / applyClusterIntelligence",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Evidence Engine",
+      "executed": "YES",
+      "file": "pharmacyLocalClusterIntelligence.ts",
+      "function": "applyClusterIntelligence",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Duplicate Detection",
+      "executed": "YES",
+      "file": "pharmacyLocalClusterCompositionDedupe.ts",
+      "function": "finalizeLocalClusterPageContent",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Renderer",
+      "executed": "YES",
+      "file": "pharmacyVisualExperienceLayoutV3.ts / pharmacyLocalClusterLocationPageRenderer.ts",
+      "function": "buildPharmacyServicePageMainHtml / renderLocalClusterLocationPageHtml",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Generated HTML",
+      "executed": "YES",
+      "file": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/leeds-pharmacy/pharmacy-first/index.html",
+      "function": "service-page-html-written",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Cluster Pages",
+      "executed": "YES",
+      "file": "pharmacyLocalLocationGenerationService.ts",
+      "function": "generateLocalLocationHierarchyPages",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    },
+    {
+      "stage": "Preview",
+      "executed": "YES",
+      "file": "output/pharmacy-visual-experience + content-ecosystem clusters",
+      "function": "filesystem-preview-artifacts",
+      "canonical": "YES",
+      "legacy": "NO",
+      "replacement": "NO"
+    }
+  ],
+  "legacyExecuted": "NONE",
+  "legacyModuleLoadedButNotExecuted": [
+    "pharmacyServiceAreaPageGenerator.ts",
+    "pharmacyLocalNarrativeEngine.ts",
+    "pharmacyLocalWeavingV2.ts",
+    "pharmacyLocalEntitySectionEngine.ts",
+    "pharmacyAreaNarrativeIntelligence.ts"
+  ],
+  "firstLegacyExecution": null,
+  "clusterNarrativePass": true,
+  "sectionPlannerPass": true,
+  "duplicateDetectionPass": true,
+  "localityIntelligencePass": true,
+  "commercialNarrativePass": true,
+  "publicTerminologyPass": true,
+  "regressionPass": true,
+  "clusterRevalidation": [
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-headingley/index.html",
+      "headings": [
+        "Why patients in Headingley choose Leeds Pharmacy",
+        "Pharmacy First near Headingley",
+        "Pharmacy First for patients in Headingley",
+        "When patients in Headingley should see a GP instead — Leeds Pharmacy",
+        "Access from Headingley",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Headingley",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    },
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-chapel-allerton/index.html",
+      "headings": [
+        "Why patients in Chapel Allerton choose Leeds Pharmacy",
+        "Pharmacy First near Chapel Allerton",
+        "Pharmacy First for patients in Chapel Allerton",
+        "When patients in Chapel Allerton should see a GP instead — Leeds Pharmacy",
+        "Access from Chapel Allerton",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Chapel Allerton",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    },
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-meanwood/index.html",
+      "headings": [
+        "Why patients in Meanwood choose Leeds Pharmacy",
+        "Pharmacy First near Meanwood",
+        "Pharmacy First for patients in Meanwood",
+        "When patients in Meanwood should see a GP instead — Leeds Pharmacy",
+        "Access from Meanwood",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Meanwood",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    },
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-roundhay/index.html",
+      "headings": [
+        "Why patients in Roundhay choose Leeds Pharmacy",
+        "Pharmacy First near Roundhay",
+        "Pharmacy First for patients in Roundhay",
+        "When patients in Roundhay should see a GP instead — Leeds Pharmacy",
+        "Access from Roundhay",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Roundhay",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    },
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-horsforth/index.html",
+      "headings": [
+        "Why patients in Horsforth choose Leeds Pharmacy",
+        "Pharmacy First near Horsforth",
+        "Pharmacy First for patients in Horsforth",
+        "When patients in Horsforth should see a GP instead — Leeds Pharmacy",
+        "Access from Horsforth",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Horsforth",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    },
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-moortown/index.html",
+      "headings": [
+        "Why patients in Moortown choose Leeds Pharmacy",
+        "Pharmacy First near Moortown",
+        "Pharmacy First for patients in Moortown",
+        "When patients in Moortown should see a GP instead — Leeds Pharmacy",
+        "Access from Moortown",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Moortown",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    },
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-wetherby/index.html",
+      "headings": [
+        "Why patients in Wetherby choose Leeds Pharmacy",
+        "Pharmacy First near Wetherby",
+        "Pharmacy First for patients in Wetherby",
+        "When patients in Wetherby should see a GP instead — Leeds Pharmacy",
+        "Access from Wetherby",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Wetherby",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    },
+    {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-otley/index.html",
+      "headings": [
+        "Why patients in Otley choose Leeds Pharmacy",
+        "Pharmacy First near Otley",
+        "Pharmacy First for patients in Otley",
+        "When patients in Otley should see a GP instead — Leeds Pharmacy",
+        "Access from Otley",
+        "Related Pharmacy First Locations",
+        "Frequently Asked Questions About Pharmacy First in Otley",
+        "Book Pharmacy First at Leeds Pharmacy"
+      ],
+      "uniqueHeadings": true,
+      "publicTermsClean": true,
+      "whyPatients": true,
+      "gpSection": true,
+      "access": true,
+      "faq": true,
+      "book": true,
+      "localityRoad": true,
+      "localityGp": true,
+      "localityTravel": true,
+      "localityNearby": true,
+      "patientLanguage": true,
+      "commercial": true,
+      "nhsBody": 17
+    }
+  ],
+  "tenantArtifacts": {
+    "leeds-pharmacy": {
+      "serviceOk": true,
+      "clusterOk": true,
+      "clusterCount": 8,
+      "servicePath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/leeds-pharmacy/pharmacy-first/index.html",
+      "clusterPaths": [
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-headingley/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-chapel-allerton/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-meanwood/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-roundhay/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-horsforth/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-moortown/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-wetherby/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/cluster-otley/index.html"
+      ]
+    },
+    "reliable-direct-pharmacy": {
+      "serviceOk": true,
+      "clusterOk": true,
+      "clusterCount": 8,
+      "servicePath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/reliable-direct-pharmacy/pharmacy-first/index.html",
+      "clusterPaths": [
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-ecclesall/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-fulwood/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-sheffield-city-centre/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-broomhill/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-kelham-island/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-dore/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-hillsborough/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-crookes/index.html"
+      ]
+    },
+    "brook-pharmacy": {
+      "serviceOk": true,
+      "clusterOk": true,
+      "clusterCount": 8,
+      "servicePath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/brook-pharmacy/pharmacy-first/index.html",
+      "clusterPaths": [
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-wickersley/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-bramley/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-maltby/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-aston/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-rawmarsh/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-parkgate/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-dinnington/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local/cluster-thurcroft/index.html"
+      ]
+    },
+    "welfare-pharmacy": {
+      "serviceOk": true,
+      "clusterOk": true,
+      "clusterCount": 8,
+      "servicePath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/welfare-pharmacy/pharmacy-first/index.html",
+      "clusterPaths": [
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-allestree/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-mickleover/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-littleover/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-chellaston/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-duffield/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-alvaston/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-mackworth/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/welfare-pharmacy/pharmacy-first/local/cluster-chaddesden/index.html"
+      ]
+    },
+    "banner-cross-pharmacy": {
+      "serviceOk": true,
+      "clusterOk": true,
+      "clusterCount": 8,
+      "servicePath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/banner-cross-pharmacy/pharmacy-first/index.html",
+      "clusterPaths": [
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-ecclesall/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-fulwood/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-sheffield-city-centre/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-broomhill/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-kelham-island/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-dore/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-hillsborough/index.html",
+        "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/local/cluster-crookes/index.html"
+      ]
+    }
+  },
+  "coverageScripts": 1611
+}

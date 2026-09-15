@@ -1,0 +1,179 @@
+{
+  "task": "Write an isolated local edition of the approved Pharmacy First page for this one area. Write coherent copy, not an evidence dump. Do not write shared clinical sections. Do not restate renderer-owned consultation, eligibility, escalation or FAQ copy.",
+  "promptContractVersion": "v3",
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "schemaFields": [
+    "area",
+    "heroHeading",
+    "heroIntroduction",
+    "localIntroduction",
+    "localContextHeading",
+    "localContextParagraphs",
+    "relationshipToPharmacy",
+    "localAccessIntroduction",
+    "localFaqs",
+    "localCtaBridge",
+    "evidenceClaims",
+    "evidenceEntityIdsUsed",
+    "editorialFactIdsUsed"
+  ],
+  "fieldNotes": {
+    "area": "Must equal the selected area name exactly.",
+    "heroHeading": "Short patient-facing heading naming Pharmacy First and this area.",
+    "heroIntroduction": "Service-led introduction. Lead with Pharmacy First and what the reader in this area may need. Name the area. After that lead, one supplied local detail may be used. Do not dump the address or phone.",
+    "localIntroduction": "Locally informed account of the area using supplied facts. This field does not have to explain a route to the pharmacy. If no supplied fact helps, omit this field or return an empty string. Do not write a pathway sentence to fill it.",
+    "localContextHeading": "Optional heading for this area’s situation. Omit if the template heading is enough.",
+    "localContextParagraphs": "Required. Continue the locally informed account and transition to Pharmacy First only where that is supported. Do not claim local character proves symptoms or demand. If the pharmacy is not in the area, do not use this field only to restate the premises locality — that belongs once in relationshipToPharmacy. Do not copy the street address. If kilometres are used, identify them as an approximate straight-line distance.",
+    "relationshipToPharmacy": "Optional access. If the pharmacy is not in the area, name the supplied premisesLocality once so the reader knows where consultations take place. Do not restate consultation or eligibility copy. Omit or return an empty string when it adds nothing.",
+    "localAccessIntroduction": "Optional. Include only if it adds a useful local access fact not already printed by the renderer. Omit or return an empty string when it adds nothing.",
+    "localFaqs": "Optional. Zero or more useful, supported local questions not already answered by the page. No minimum. Omit the field or return [] when nothing useful remains.",
+    "localCtaBridge": "Optional genuine non-claim sentence bridging to Book An Appointment or Call. Omit when the template already has those actions.",
+    "evidenceClaims": "Array of {field, sentence, entityId?}. Include editorialFactId in entityId when a fact was used.",
+    "evidenceEntityIdsUsed": "Optional Places entity IDs actually named. Usually empty.",
+    "editorialFactIdsUsed": "factId strings for editorial facts actually used. Omit facts you did not use."
+  },
+  "editorialStandard": {
+    "oneCoherentNarrative": true,
+    "factsOnlyIfTheyImproveMeaning": true,
+    "addressAtMostOnce": true,
+    "telephoneAtMostOnce": true,
+    "distanceAtMostOnce": true,
+    "callAheadAtMostOnce": true,
+    "kilometresInAtMostOneSentence": true
+  },
+  "business": {
+    "name": "Yorkshire Pharmacy & Health Clinic",
+    "address": "91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK",
+    "premisesLocality": "Darfield",
+    "marketTown": "Barnsley",
+    "note": "address is the full canonical pharmacy address. premisesLocality is derived from that address and is where the premises are. marketTown is the primary market. locality.areaName / selectedReaderArea is the selected reader area. These three place names are distinct. The page template already prints the street address and telephone; do not copy the street address, postcode or telephone into the copy. Repeated street-address text is an output-validation failure. Name premisesLocality when the pharmacy is not in the selected reader area. Do not invent a centre-of-area distance."
+  },
+  "offer": {
+    "serviceName": "Pharmacy First",
+    "serviceId": "pharmacy-first",
+    "allowedCta": [
+      "Book An Appointment",
+      "Call the pharmacy",
+      "Get directions"
+    ],
+    "lockedClinicalFacts": {
+      "serviceName": "Pharmacy First",
+      "serviceId": "pharmacy-first",
+      "conditionSet": "sore throat, earache, impetigo, infected insect bites, shingles, sinusitis, and uncomplicated UTI in eligible women",
+      "suitability": "The pharmacist confirms what can be assessed on the day. Eligibility depends on symptoms and NHS pathway criteria, not on the area the patient travels from.",
+      "process": "Call before visiting to check how a consultation is being arranged. The pharmacist reviews symptoms, medicines and red-flag concerns. Outcomes may include treatment where appropriate, self-care advice, safety-netting, or referral.",
+      "safety": "Seek urgent medical care for breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or any emergency symptoms that make you feel critically unwell.",
+      "allowedCta": [
+        "Book An Appointment",
+        "Call the pharmacy",
+        "Get directions"
+      ]
+    },
+    "clinicalBoundary": "Locked clinical facts are for awareness only. Do not rewrite them and do not list the condition set. You may say Pharmacy First can help with eligible common conditions."
+  },
+  "locality": {
+    "areaName": "Wombwell",
+    "selectedReaderArea": "Wombwell",
+    "areaSlug": "wombwell",
+    "distanceLabel": "1.7 km",
+    "distanceKm": 1.7,
+    "pharmacyIsInArea": false,
+    "distanceMeasurement": "straight-line between the pharmacy’s saved Google coordinates and the area’s saved Google geocode point; not travel distance; not a town-centre measurement unless a supplied fact says so"
+  },
+  "verifiedEditorialFacts": [
+    {
+      "factId": "wombwell:access-transport:wombwell-has-a-national-rail-station",
+      "category": "access-transport",
+      "statement": "Wombwell has a National Rail station.",
+      "useAs": "access-context",
+      "doNotInfer": "A station in the area does not prove a route, walking connection, timetable, or journey time to the pharmacy."
+    },
+    {
+      "factId": "wombwell:pharmacy-relationship:distance",
+      "category": "pharmacy-relationship",
+      "statement": "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell, at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "useAs": "access-context",
+      "doNotInfer": "Distance is not a route, timetable, or travel-time claim. Do not force this figure into the copy. If used, identify it as an approximate straight-line distance, not travel, driving, walking or journey distance, and not a town-centre measurement."
+    },
+    {
+      "factId": "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Wombwell are provided from Wombwell Medical Centre.",
+      "useAs": "healthcare-context",
+      "doNotInfer": "A healthcare provider’s presence does not prove a relationship with the pharmacy, registration, waiting times, or eligibility."
+    },
+    {
+      "factId": "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+      "category": "area-identity",
+      "statement": "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+      "useAs": "area-introduction",
+      "doNotInfer": "Does not imply travel time, routes, or service eligibility."
+    },
+    {
+      "factId": "wombwell:community:wombwell-has-a-public-library",
+      "category": "community",
+      "statement": "Wombwell has a public library.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not imply the pharmacy is next to the library or that readers use it."
+    },
+    {
+      "factId": "wombwell:heritage:wombwell-library-hosts-local-history-sessions-ru",
+      "category": "heritage",
+      "statement": "Wombwell Library hosts local history sessions run by Wombwell Heritage Group.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not invent the area’s industrial past, imply that residents attend these sessions, or prove healthcare demand."
+    },
+    {
+      "factId": "wombwell:community:citizens-advice-runs-advice-and-welfare-rights-d",
+      "category": "community",
+      "statement": "Citizens Advice runs advice and welfare rights drop-in sessions at Wombwell Library.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not imply a referral relationship with the pharmacy or that readers use Citizens Advice."
+    },
+    {
+      "factId": "wombwell:community:artwork-at-wombwell-station-was-unveiled-followi",
+      "category": "community",
+      "statement": "Artwork at Wombwell station was unveiled following a collaboration between SYMCA, Barnsley Council and the town's community.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Station artwork does not prove a journey to the pharmacy, typical residents, or healthcare demand. Do not copy promotional wording such as inspiring, rich history or community spirit."
+    },
+    {
+      "factId": "wombwell:community:artwork-at-wombwell-station-refers-to-the-roly-p",
+      "category": "community",
+      "statement": "Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not invent a visit to the park, a route from the park, or healthcare demand."
+    },
+    {
+      "factId": "wombwell:community:the-artwork-at-wombwell-station-features-the-wom",
+      "category": "community",
+      "statement": "The artwork at Wombwell station features the Wombwell unicorn emblem.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "An emblem does not describe residents, industry, or healthcare need."
+    }
+  ],
+  "style": {
+    "roles": [
+      "hero introduction",
+      "local context",
+      "access relationship",
+      "local FAQs",
+      "CTA bridge"
+    ],
+    "tone": "Headingley local-page patient-journey tone: calm, specific, professional British English. Not Headingley facts."
+  },
+  "varietyHints": [
+    "This page is for Wombwell only. Name the area. Lead with Pharmacy First, then write a recognisable local account using supplied facts. Local context does not have to explain a route. Omit optional fields when they add nothing useful.",
+    "The pharmacy is not in Wombwell. Name the supplied premisesLocality once in relationshipToPharmacy. Do not copy the street address. If you state kilometres, identify them as an approximate straight-line distance. Do not invent a road, connection or journey.",
+    "Write a recognisable Wombwell community account, not a landmark list and not South Area Council padding. Prefer the library's local history sessions run by Wombwell Heritage Group, or the station artwork that refers to Wombwell Park. Do not catalogue the library, park, station, emblem and Medical Centre together.",
+    "Do not invent coal mining or present-day jobs. Do not say residents attend sessions, visit the park, or use Citizens Advice. Do not copy promotional wording such as inspiring, rich history or community spirit. Omit undated ward statistics. Name Darfield once in relationshipToPharmacy. Keep the hero service-led. Leave optional fields empty when they add nothing."
+  ]
+}
+
+The previous JSON failed validation. Fix these issues and return a complete new JSON object. Do not explain the issues in the copy:
+- FAIL | field=page | sentence=Pharmacy First in Wombwell Pharmacy First offers convenient NHS consultations for common conditions to people in Wombwell. | rule=unsupported-evaluative-claim | defect=convenience, accessibility, speed or marketing language is not a supplied fact
+- FAIL | field=heroIntroduction | sentence=Pharmacy First offers convenient NHS consultations for common conditions to people in Wombwell. | rule=unsupported-inference | defect=the sentence contains an unsupported inference or evaluative claim
+- unsupported convenience, reach or delay claim
+- REVIEW REQUIRED | field=heroIntroduction | sentence=Residents may be familiar with local landmarks such as Wombwell Library. | rule=uncertain-paraphrase | defect=Residents may be familiar with local landmarks such as Wombwell Library. — uncertain paraphrase: unmatched wording (residents, familiar, landmarks) is not proof of a new fact, and is not established as supported
+- REVIEW REQUIRED | field=localContextParagraphs[0] | sentence=Wombwell Library is a focal point for community activities, including local history sessions organised by Wombwell Heritage Group. | rule=uncertain-paraphrase | defect=Wombwell Library is a focal point for community activities, including local history sessions organised by Wombwell Heritage Group. — uncertain paraphrase: unmatched wording (focal, point, activities, including, organised) is not proof of a new fact, and is not established as supported
+- REVIEW REQUIRED | field=localContextParagraphs[0] | sentence=The town’s railway station features artwork that highlights local symbols, such as the Wombwell unicorn emblem and references to Roly Poly Hill and the Wishing Tree in Wombwell Park. | rule=uncertain-paraphrase | defect=The town’s railway station features artwork that highlights local symbols, such as the Wombwell unicorn emblem and references to Roly Poly Hill and the Wishing Tree in Wombwell Park. — uncertain paraphrase: unmatched wording (railway, highlights, symbols, references) is not proof of a new fact, and is not established as supported

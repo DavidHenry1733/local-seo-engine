@@ -1,0 +1,39 @@
+{
+  "taskId": "wombwell-v3-service-to-local-2026-09-01",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 1,
+  "reserved": 0,
+  "consumed": 2,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.03321,
+  "events": [
+    {
+      "at": "2026-09-01T14:52:31.255Z",
+      "kind": "created",
+      "detail": "calls=2 cost=1"
+    },
+    {
+      "at": "2026-09-01T14:52:31.381Z",
+      "kind": "reserve",
+      "reservationId": "r-1788274351381-1"
+    },
+    {
+      "at": "2026-09-01T14:52:41.641Z",
+      "kind": "consumed",
+      "reservationId": "r-1788274351381-1",
+      "detail": "cost=0.016038"
+    },
+    {
+      "at": "2026-09-01T14:52:41.720Z",
+      "kind": "reserve",
+      "reservationId": "r-1788274361720-2"
+    },
+    {
+      "at": "2026-09-01T14:52:50.930Z",
+      "kind": "consumed",
+      "reservationId": "r-1788274361720-2",
+      "detail": "cost=0.017172"
+    }
+  ]
+}

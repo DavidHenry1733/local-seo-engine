@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "image-upload-approval-workflow",
+  "generatedAt": "2026-06-11T08:21:37.183Z",
+  "verdict": "PASS: Image Upload Approval Workflow Complete",
+  "pass": true,
+  "dashboardPromptCopy": {
+    "status": "operational",
+    "checks": {
+      "promptGeneratorTab": true,
+      "industrySelector": true,
+      "templateFamilySelector": true,
+      "serviceSelector": true,
+      "packSelector": true,
+      "copyPrompt": true,
+      "copyNegativePrompt": true,
+      "copyBoth": true,
+      "downloadSinglePrompt": true,
+      "downloadPromptPack": true,
+      "uploadEndpointUi": true,
+      "approvalActions": true,
+      "allPass": true
+    }
+  },
+  "uploadEndpoint": {
+    "status": "exists",
+    "path": "POST /api/image-prompt-dashboard/upload",
+    "savePattern": {
+      "pharmacy": "assets/pharmacy-image-library/{pack}/{imageKey}.webp",
+      "future": "assets/{industry}-image-library/{pack}/{imageKey}.webp"
+    }
+  },
+  "approvalState": {
+    "status": "operational",
+    "path": "output/universal-image-intelligence/image-approval-state.json"
+  },
+  "approvalTransitionsTested": {
+    "status": "pass",
+    "testImage": {
+      "industry": "pharmacy",
+      "pack": "clinical-nhs-services",
+      "imageKey": "pharmacy-first-consultation",
+      "slot": "hero"
+    },
+    "steps": [
+      {
+        "toStatus": "uploaded",
+        "status": "uploaded"
+      },
+      {
+        "toStatus": "quality-review",
+        "status": "quality-review"
+      },
+      {
+        "toStatus": "compliance-review",
+        "status": "compliance-review"
+      },
+      {
+        "toStatus": "approved",
+        "status": "approved"
+      },
+      {
+        "toStatus": "live-ready",
+        "status": "live-ready"
+      }
+    ],
+    "restored": true
+  },
+  "coverageCalculation": {
+    "status": "operational",
+    "totalServices": 62,
+    "averageUploadedCoveragePercent": 0,
+    "averageApprovedCoveragePercent": 0,
+    "slotStatuses": [
+      "missing",
+      "uploaded",
+      "approved",
+      "fallback",
+      "rejected"
+    ]
+  },
+  "previewIntegration": {
+    "status": "operational",
+    "module": "src/pharmacy/templates/pharmacyImageLibrary.ts",
+    "behavior": "approved images render live; uploaded-not-approved show preview badge; rejected use placeholder"
+  },
+  "apiValidation": {
+    "meta": true,
+    "prompts": true,
+    "export": true,
+    "exportPrompt": true,
+    "upload": true,
+    "approvalAction": true,
+    "allPass": true
+  },
+  "promptExport": {
+    "packPromptCount": 4,
+    "singleExport": true
+  },
+  "futureIndustryReadiness": {
+    "status": "ready",
+    "pathStrategyValidated": true,
+    "industries": [
+      {
+        "industryKey": "dentist",
+        "displayName": "Dentist",
+        "readiness": "workflow-ready",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "planned",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "accountant",
+        "displayName": "Accountant",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "builder",
+        "displayName": "Builder",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "electrician",
+        "displayName": "Electrician",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "hairdresser",
+        "displayName": "Hairdresser",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      }
+    ]
+  },
+  "issues": [],
+  "nextRecommendedAction": "Generate first real Ideogram assets for pharmacy-first-consultation hero and upload via dashboard",
+  "constraintsRespected": {
+    "noDeployment": true,
+    "noRegistryChanges": true,
+    "noSitemapChanges": true,
+    "noLifecycleChanges": true,
+    "noSeoHealthChanges": true,
+    "noContentEngineChanges": true
+  }
+}

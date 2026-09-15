@@ -6,10 +6,17 @@ import {
   toSafeUser,
 } from "../lib/users.js";
 import { logger } from "../lib/logger.js";
+import { sanitizeCampaignBuilderLoginNext } from "../../../../src/pharmacy/growthEngineCampaignBuilderRoutingService.ts";
 
 const router = Router();
 
-function loginPageHtml(error = "", nextUrl = "/api/dashboard"): string {
+function defaultDashboardUrl(role?: string): string {
+  if (role === "admin") return "/api/admin/master";
+  const slug = process.env.DEFAULT_PROJECT_SLUG || "pharmaconnect";
+  return `/api/pharmacy-dashboard?slug=${encodeURIComponent(slug)}`;
+}
+
+function loginPageHtml(error = "", nextUrl = defaultDashboardUrl()): string {
   const err = error
     ? `<div class="error-msg">${error.replace(/</g, "&lt;")}</div>`
     : "";
@@ -18,7 +25,7 @@ function loginPageHtml(error = "", nextUrl = "/api/dashboard"): string {
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Sign In — Local SEO Engine</title>
+<title>Sign In — PharmaConnect Growth Engine</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -51,7 +58,7 @@ button[type=submit]:hover{background:#004a94;}
 <div class="card">
   <div class="logo">
     <div class="logo-mark">🔐</div>
-    <h1>Local SEO Engine</h1>
+    <h1>PharmaConnect Growth Engine</h1>
     <p>InboxingProWeb — Staff Access</p>
   </div>
   ${err}
@@ -77,31 +84,54 @@ button[type=submit]:hover{background:#004a94;}
 
 router.get("/login", (req: Request, res: Response) => {
   if (req.session?.userId) {
-    res.redirect("/api/dashboard");
+    res.redirect(defaultDashboardUrl(req.session.userRole));
     return;
   }
-  const next = (req.query.next as string) || "/api/dashboard";
+  const next = sanitizeCampaignBuilderLoginNext((req.query.next as string) || defaultDashboardUrl());
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
   res.send(loginPageHtml("", next));
 });
 
 router.post("/login", async (req: Request, res: Response) => {
-  const { username = "", password = "", next = "/api/dashboard" } = req.body as Record<string, string>;
-  const safeNext = next.startsWith("/") ? next : "/api/dashboard";
+  const { username = "", password = "", next = "" } = req.body as Record<string, string>;
+  const fallbackNext = sanitizeCampaignBuilderLoginNext(
+    next.startsWith("/") ? next : defaultDashboardUrl(),
+  );
 
   if (!username || !password) {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.send(loginPageHtml("Please enter your username and password.", safeNext));
+    res.send(loginPageHtml("Please enter your username and password.", fallbackNext));
     return;
   }
 
   const user = findUserByUsername(username);
+  const { isCustomerLoginBlocked, recordFailedCustomerLogin, clearPendingTemporaryPasswordOnLogin } = await import(
+    "../../../../src/pharmacy/masterAdminAccountService.ts"
+  );
+
   if (!user || !(await verifyPassword(user, password))) {
+    if (username) recordFailedCustomerLogin(username);
     logger.warn({ username }, "Failed login attempt");
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.send(loginPageHtml("Invalid username or password.", safeNext));
+    res.send(loginPageHtml("Invalid username or password.", fallbackNext));
     return;
+  }
+
+  const block = isCustomerLoginBlocked(username);
+  if (block.blocked) {
+    logger.warn({ username, reason: block.reason }, "Blocked customer login");
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.send(loginPageHtml(block.reason || "Login disabled.", fallbackNext));
+    return;
+  }
+
+  const safeNext = sanitizeCampaignBuilderLoginNext(
+    next.startsWith("/") ? next : defaultDashboardUrl(user.role),
+  );
+
+  if (user.requirePasswordChange) {
+    req.session.requirePasswordChange = true;
   }
 
   req.session.userId   = user.id;
@@ -110,6 +140,7 @@ router.post("/login", async (req: Request, res: Response) => {
   req.session.userName = user.name;
 
   updateLastLogin(user.id);
+  clearPendingTemporaryPasswordOnLogin(user.username);
   logger.info({ username: user.username, role: user.role }, "User logged in");
 
   // Always embed the internal token in the redirect URL.
@@ -124,7 +155,10 @@ router.post("/login", async (req: Request, res: Response) => {
     redirectUrl = safeNext + sep + "_t=" + encodeURIComponent(SESSION_SECRET);
   }
 
-  res.redirect(redirectUrl);
+  req.session.save((err) => {
+    if (err) logger.error({ err }, "Session save failed after login");
+    res.redirect(redirectUrl);
+  });
 });
 
 router.post("/logout", (req: Request, res: Response) => {

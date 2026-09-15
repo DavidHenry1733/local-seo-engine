@@ -29,6 +29,7 @@ export const INDUSTRY_SCHEMA_TYPES: Record<string, string[]> = {
   "local-seo":            ["LocalBusiness"],
   "seo":                  ["LocalBusiness"],
   "web-hosting":          ["LocalBusiness"],
+  "google-business-profile": ["LocalBusiness"],
   "email-marketing":      ["LocalBusiness"],
   "digital-marketing":    ["LocalBusiness"],
   "ppc":                  ["LocalBusiness"],
@@ -37,6 +38,7 @@ export const INDUSTRY_SCHEMA_TYPES: Record<string, string[]> = {
 
 const DIGITAL_INDUSTRY_TYPES = new Set([
   "web-design","local-seo","seo","web-hosting",
+  "google-business-profile",
   "email-marketing","digital-marketing","ppc","social-media-marketing",
 ]);
 

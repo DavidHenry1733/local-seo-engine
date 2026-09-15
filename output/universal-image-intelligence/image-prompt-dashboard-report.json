@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "image-prompt-dashboard",
+  "generatedAt": "2026-06-11T08:05:39.067Z",
+  "verdict": "PASS: Image Prompt Dashboard Complete",
+  "pass": true,
+  "tabsCreated": [
+    {
+      "id": "current-images",
+      "label": "Current Images tab",
+      "exists": true
+    },
+    {
+      "id": "prompt-generator",
+      "label": "Prompt Generator tab",
+      "exists": true
+    },
+    {
+      "id": "upload-queue",
+      "label": "Upload Queue tab",
+      "exists": true
+    },
+    {
+      "id": "coverage-report",
+      "label": "Coverage Report tab",
+      "exists": true
+    }
+  ],
+  "campaignContentImageLibrary": true,
+  "apiEndpoints": "/api/image-prompt-dashboard/*",
+  "coverageEngine": {
+    "status": "operational",
+    "totalServices": 62,
+    "averageCoveragePercent": 0,
+    "sampleServices": {
+      "pharmacyFirst": {
+        "serviceName": "Pharmacy First",
+        "coveragePercent": 0,
+        "slots": {
+          "hero": "✗",
+          "support": "✗",
+          "trust": "✗",
+          "conversion": "✗"
+        }
+      },
+      "fluVaccination": {
+        "serviceName": "NHS Flu Vaccination",
+        "coveragePercent": 0,
+        "slots": {
+          "hero": "✗",
+          "support": "✗",
+          "trust": "✗",
+          "conversion": "✗"
+        }
+      }
+    }
+  },
+  "promptExport": {
+    "status": "operational",
+    "sampleServiceKey": "pharmacy-first",
+    "promptCount": 4
+  },
+  "uploadQueue": {
+    "status": "operational",
+    "totals": {
+      "awaiting-upload": 48,
+      "uploaded": 0,
+      "approved": 0,
+      "rejected": 0,
+      "fallback-used": 248
+    }
+  },
+  "workflowPipeline": [
+    "Prompt Generated",
+    "Awaiting Upload",
+    "Uploaded",
+    "Quality Review",
+    "Compliance Review",
+    "Approved",
+    "Live Ready"
+  ],
+  "universalEngineIntegration": {
+    "status": "operational",
+    "resolverModule": "src/image-intelligence/universalImageIntelligenceEngine.ts",
+    "serviceModule": "src/image-intelligence/imagePromptDashboardService.ts"
+  },
+  "futureIndustryReadiness": {
+    "status": "ready",
+    "industries": [
+      {
+        "industryKey": "dentist",
+        "displayName": "Dentist",
+        "readiness": "workflow-ready",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "planned",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "accountant",
+        "displayName": "Accountant",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "builder",
+        "displayName": "Builder",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "electrician",
+        "displayName": "Electrician",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      },
+      {
+        "industryKey": "hairdresser",
+        "displayName": "Hairdresser",
+        "readiness": "asset-pack-exists",
+        "universalWorkflowLocked": true,
+        "adapterStatus": "partial",
+        "workflowReady": true
+      }
+    ]
+  },
+  "inputValidation": {
+    "output/pharmacy-blueprint/pharmacy-ai-image-prompt-library.json": true,
+    "output/pharmacy-blueprint/pharmacy-production-image-library.json": true,
+    "output/universal-image-intelligence/image-intelligence.json": true
+  },
+  "productionImageCount": 48,
+  "issues": [],
+  "recommendedNextPhase": "Phase 6L — Ideogram batch generation + asset upload workflow with approval state persistence",
+  "constraintsRespected": {
+    "noDeployment": true,
+    "noRegistryChanges": true,
+    "noSitemapChanges": true,
+    "noAuthChanges": true,
+    "noSeoHealthChanges": true,
+    "noContentEngineChanges": true
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Chellaston",
+  "areaSlug": "chellaston",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-05T19:41:29.286Z",
+  "sourceStatus": "google-places-authorised-collection",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [
+    {
+      "name": "Chellaston Medical Centre",
+      "address": "Rowallan Way, Chellaston, Derby DE73 5XD",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "hospital",
+        "medical_clinic",
+        "doctor",
+        "point_of_interest",
+        "health",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.8673971,
+        "longitude": -1.4494274
+      },
+      "placeId": "ChIJuR03ZYDweUgRENXzjJQqaO0",
+      "source": "google-places",
+      "provider": "googlePlaces",
+      "retrievedAt": "2026-09-05T19:41:29.286Z",
+      "sourceRef": "https://maps.google.com/?cid=17106970002075145488&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+      "confidence": 92,
+      "relationship": "name-in-address",
+      "areaName": "Chellaston"
+    }
+  ],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [],
+  "researchCandidates": [
+    {
+      "name": "Lister House at Chellaston",
+      "address": "Fellow Lands Way, Chellaston, Derby DE73 6SW",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "hospital",
+        "doctor",
+        "point_of_interest",
+        "health",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.8752503,
+        "longitude": -1.4301213
+      },
+      "placeId": "ChIJT0XffHHweUgRpG6VT3vwVBM",
+      "rejectionReason": "no-retrieved-official-source"
+    }
+  ],
+  "pharmacyRelationship": {
+    "from": "Brook Pharmacy Demo Derby",
+    "to": "Chellaston",
+    "distanceKm": 5.8,
+    "method": "haversine-straight-line",
+    "areaReferenceSource": "places-area-reference"
+  },
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 2,
+    "rejectedCount": 0,
+    "categoriesPresent": [
+      "healthcare"
+    ],
+    "minimumMet": true
+  }
+}

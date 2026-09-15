@@ -1,0 +1,35 @@
+{
+  "sprint": "NT-E2E-32B",
+  "slug": "reliable-direct-pharmacy",
+  "validatedAt": "2026-07-31T13:30:05.474Z",
+  "timings": {
+    "dashboardMs": 6592,
+    "customerMs": 900,
+    "workflowSummaryMs": 1199
+  },
+  "summary": {
+    "currentStage": "quality_review",
+    "nextAction": "Open Service Page Review",
+    "canonicalInventory": 16,
+    "imagePlatform": {
+      "status": "PASS",
+      "capturedAt": "2026-07-25T16:05:34.563Z",
+      "refreshAvailable": true,
+      "assignmentCount": 54,
+      "uniqueApprovedAssets": 19,
+      "missingAssignments": 0,
+      "parityStatus": "PASS"
+    },
+    "commercialIntelligence": "approved"
+  },
+  "checks": {
+    "dashboardUnder2s": false,
+    "customerUnder5s": true,
+    "summaryUnder2s": true,
+    "persistedSummaryBuilder": true,
+    "noAutoDetailSections": true,
+    "loadingWorkflowText": true,
+    "workflowSummaryRoute": true,
+    "customerLoaded": true
+  }
+}

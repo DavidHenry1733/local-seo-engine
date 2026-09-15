@@ -1,0 +1,88 @@
+{
+  "savedAt": "2026-09-08T11:22:17.887Z",
+  "areaSlug": "allestree",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write a useful 150–250-word introduction in fluent British English. Use three natural paragraphs: introduce the area, describe meaningful local features and healthcare references, then lead naturally into Pharmacy First. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Return only the finished introduction.\n\n- NHS general practice services in Allestree are provided from Park Lane Surgery.\n- Allestree is a neighbourhood ward in Derby.\n- Allestree has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Allestree Park has a Friends of Allestree Park group.\n- Allestree Carnival is a community organisation on the council neighbourhood page.\n- Allestree has a public library.\n- NHS general practice services in Allestree are provided from Park Farm Medical Centre.\n- Allestree Park is a landmark in Allestree.\n- War Memorial - Allestree is a landmark in Allestree.\n- Allestree Memorial Hall is a landmark in Allestree."
+  },
+  "rawResponse": "Allestree is a welcoming neighbourhood ward situated in Derby, defined by a strong sense of community and civic engagement. Local civic life and development are supported by the Allestree Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to work for the area.\n\nThe area is home to cherished local landmarks, including Allestree Park, Allestree Memorial Hall, and the Allestree War Memorial. Residents enjoy access to a public library and vibrant community initiatives, such as the Friends of Allestree Park group and the Allestree Carnival organisation. When medical support is required, NHS general practice services are provided from Park Lane Surgery and Park Farm Medical Centre, serving as essential pillars of local primary care.\n\nAlongside these GP practices, local pharmacies play a vital role in maintaining community health. Through the NHS Pharmacy First scheme, residents can easily access professional advice and treatments for various common minor ailments directly from qualified pharmacists. This convenient service allows individuals to receive prompt healthcare support close to home, helping to manage minor conditions efficiently without needing a GP appointment.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=page | sentence=This convenient service allows individuals to receive prompt healthcare support close to home, helping to manage minor conditions efficiently without needing a GP appointment. | rule=unsupported-evaluative-claim | defect=convenience, accessibility, speed or marketing language is not a supplied fact",
+      "FAIL | field=localIntroduction | sentence=Alongside these GP practices, local pharmacies play a vital role in maintaining community health. | rule=ungrounded-clause | defect=Alongside these GP practices, local pharmacies play a vital role in maintaining community health. — no supplied fact, canonical field or approved clinical text covers this clause",
+      "FAIL | field=localIntroduction | sentence=This convenient service allows individuals to receive prompt healthcare support close to home, helping to manage minor conditions efficiently without needing a GP appointment. | rule=unsupported-inference | defect=the sentence contains an unsupported inference or evaluative claim",
+      "unsupported convenience, reach or delay claim",
+      "FAIL | field=localIntroduction | sentence=Alongside these GP practices, local pharmacies play a vital role in maintaining community health. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts",
+      "FAIL | field=localIntroduction | sentence=Through the NHS Pharmacy First scheme, residents can easily access professional advice and treatments for various common minor ailments directly from qualified pharmacists. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts",
+      "FAIL | field=localIntroduction | sentence=This convenient service allows individuals to receive prompt healthcare support close to home, helping to manage minor conditions efficiently without needing a GP appointment. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts"
+    ],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Allestree is a welcoming neighbourhood ward situated in Derby, defined by a strong sense of community and civic engagement. | rule=uncertain-paraphrase | defect=Allestree is a welcoming neighbourhood ward situated in Derby, defined by a strong sense of community and civic engagement. — uncertain paraphrase: unmatched wording (welcoming, situated, defined, strong, sense, engagement) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local civic life and development are supported by the Allestree Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to work for the area. | rule=uncertain-paraphrase | defect=Local civic life and development are supported by the Allestree Neighbourhood Board — uncertain paraphrase: unmatched wording (life, development, supported) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local civic life and development are supported by the Allestree Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to work for the area. | rule=uncertain-paraphrase | defect=which brings together local councillors, residents, and representatives from community organisations and public services to work for the area. — uncertain paraphrase: unmatched wording (which, brings, work) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area is home to cherished local landmarks, including Allestree Park, Allestree Memorial Hall, and the Allestree War Memorial. | rule=uncertain-paraphrase | defect=The area is home to cherished local landmarks, including Allestree Park, Allestree Memorial Hall, and the Allestree War Memorial. — uncertain paraphrase: unmatched wording (cherished, landmarks) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Residents enjoy access to a public library and vibrant community initiatives, such as the Friends of Allestree Park group and the Allestree Carnival organisation. | rule=uncertain-paraphrase | defect=Residents enjoy access to a public library and vibrant community initiatives, such as the Friends of Allestree Park group and the Allestree Carnival organisation. — uncertain paraphrase: unmatched wording (enjoy, access, vibrant, initiatives) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=When medical support is required, NHS general practice services are provided from Park Lane Surgery and Park Farm Medical Centre, serving as essential pillars of local primary care. | rule=uncertain-paraphrase | defect=When medical support is required, NHS general practice services are provided from Park Lane Surgery and Park Farm Medical Centre, serving as essential pillars of local primary care. — uncertain paraphrase: unmatched wording (support, required, serving, essential, pillars, primary) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Through the NHS Pharmacy First scheme, residents can easily access professional advice and treatments for various common minor ailments directly from qualified pharmacists. | rule=uncertain-paraphrase | defect=Through the NHS Pharmacy First scheme, residents can easily access professional advice and treatments for various common minor ailments directly from qualified pharmacists. — uncertain paraphrase: unmatched wording (scheme, easily, access, professional, treatments, various, minor, ailments, directly, qualified, pharmacists) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Allestree",
+    "heroHeading": "Pharmacy First in Allestree",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Allestree.",
+    "localIntroduction": "Allestree is a welcoming neighbourhood ward situated in Derby, defined by a strong sense of community and civic engagement. Local civic life and development are supported by the Allestree Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to work for the area.\n\nThe area is home to cherished local landmarks, including Allestree Park, Allestree Memorial Hall, and the Allestree War Memorial. Residents enjoy access to a public library and vibrant community initiatives, such as the Friends of Allestree Park group and the Allestree Carnival organisation. When medical support is required, NHS general practice services are provided from Park Lane Surgery and Park Farm Medical Centre, serving as essential pillars of local primary care.\n\nAlongside these GP practices, local pharmacies play a vital role in maintaining community health. Through the NHS Pharmacy First scheme, residents can easily access professional advice and treatments for various common minor ailments directly from qualified pharmacists. This convenient service allows individuals to receive prompt healthcare support close to home, helping to manage minor conditions efficiently without needing a GP appointment.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Allestree is a welcoming neighbourhood ward situated in Derby, defined by a strong sense of community and civic engagement.",
+        "editorialFactId": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Local civic life and development are supported by the Allestree Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to work for the area.",
+        "editorialFactId": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area is home to cherished local landmarks, including Allestree Park, Allestree Memorial Hall, and the Allestree War Memorial.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Residents enjoy access to a public library and vibrant community initiatives, such as the Friends of Allestree Park group and the Allestree Carnival organisation.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "When medical support is required, NHS general practice services are provided from Park Lane Surgery and Park Farm Medical Centre, serving as essential pillars of local primary care.",
+        "editorialFactId": "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+        "editorialFactId": "allestree:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby",
+      "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+      "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+      "allestree:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

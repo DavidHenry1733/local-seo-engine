@@ -1,0 +1,71 @@
+{
+  "kind": "wombwell-v3-complete-pilot-cost-ledger",
+  "approved": false,
+  "taskBudgetUsd": 1.0,
+  "currency": "USD",
+  "imageGenerationUsd": 0,
+  "pageRetrievalUsd": 0,
+  "unusedPageRetrievals": 1,
+  "attempts": [
+    {
+      "kind": "dataforseo-search",
+      "query": "official council Wombwell Library community in Wombwell, Barnsley, South Yorkshire, UK",
+      "costUsd": 0.002,
+      "capturedAt": "2026-09-01T11:22:17.755Z"
+    },
+    {
+      "kind": "dataforseo-search",
+      "query": "official council Wombwell ward locality in Wombwell, Barnsley, South Yorkshire, UK",
+      "costUsd": 0.002,
+      "capturedAt": "2026-09-01T11:22:30.499Z"
+    },
+    {
+      "kind": "official-page-retrieval",
+      "url": "https://www.nationalrail.co.uk/stations/wombwell/",
+      "costUsd": 0,
+      "usedInCopy": false
+    },
+    {
+      "kind": "official-page-retrieval",
+      "url": "https://www.barnsley.gov.uk/services/libraries/find-a-library/wombwell-library/",
+      "costUsd": 0,
+      "usedInCopy": false,
+      "note": "Supported the unused Metropolitan Borough fact and the unused public-library fact."
+    },
+    {
+      "kind": "official-page-retrieval",
+      "url": "https://www.barnsley.gov.uk/services/community-and-volunteering/your-area-council-and-ward/",
+      "costUsd": 0,
+      "usedInCopy": true
+    },
+    {
+      "kind": "openai-gpt-4.1",
+      "role": "draft-1",
+      "acceptedForCandidate": true,
+      "promptTokens": 4076,
+      "completionTokens": 355,
+      "costUsd": 0.010992,
+      "attemptLog": "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T11-29-19-667Z-attempt-1.json",
+      "generatedAt": "2026-09-01T11:29:19.669Z"
+    },
+    {
+      "kind": "openai-gpt-4.1",
+      "role": "corrective-retry",
+      "acceptedForCandidate": false,
+      "promptTokens": 4266,
+      "completionTokens": 333,
+      "costUsd": 0.011196,
+      "attemptLog": "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T11-31-09-217Z-attempt-1.json",
+      "rejectedFor": "copy does not explain that the pharmacy is in the premises locality"
+    }
+  ],
+  "totals": {
+    "researchUsd": 0.004,
+    "openaiUsd": 0.022188,
+    "thisTaskUsd": 0.026188,
+    "remainingUsd": 0.973812
+  },
+  "notChargedToThisTask": {
+    "priorIsolatedWombwellOpenaiUsd": 0.087956
+  }
+}

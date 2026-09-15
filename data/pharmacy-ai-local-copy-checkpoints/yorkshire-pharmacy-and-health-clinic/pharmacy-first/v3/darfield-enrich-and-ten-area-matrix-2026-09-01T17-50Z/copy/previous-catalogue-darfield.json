@@ -1,0 +1,322 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-01T06:54:33.447Z",
+  "tokenUsage": {
+    "promptTokens": 2468,
+    "completionTokens": 639,
+    "totalTokens": 3107
+  },
+  "estimatedCostUsd": 0.010048000000000001,
+  "inputEvidencePackHash": "4d53bd6834f2990639e647868d7d37373f356a9f639cdff54b67beb31add52f2",
+  "editorialEvidencePackHash": "065e896a318589d4230f15670de7ff42f9594629b872507b4260ca15727239a9",
+  "areaSlug": "darfield",
+  "areaName": "Darfield",
+  "editorialFactIdsUsed": [
+    "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+    "darfield:community:darfield-has-a-public-library",
+    "darfield:pharmacy-relationship:in-area"
+  ],
+  "outputCopy": {
+    "area": "Darfield",
+    "heroHeading": "Pharmacy First in Darfield",
+    "heroIntroduction": "Yorkshire Pharmacy & Health Clinic offers Pharmacy First in Darfield, supporting patients in this part of the Metropolitan Borough of Barnsley.",
+    "localIntroduction": "Darfield has a public library.",
+    "localContextHeading": "Darfield setting",
+    "localContextParagraphs": [
+      "Yorkshire Pharmacy & Health Clinic is in Darfield."
+    ],
+    "relationshipToPharmacy": "If you think Pharmacy First may be suitable, the pharmacist confirms what can be assessed on the day.",
+    "localAccessIntroduction": "Call before visiting to check how a consultation is being arranged.",
+    "localFaqs": [
+      {
+        "question": "Is Yorkshire Pharmacy & Health Clinic located in Darfield?",
+        "answer": "Yes, the pharmacy is in Darfield."
+      },
+      {
+        "question": "What happens during a Pharmacy First consultation?",
+        "answer": "The pharmacist will review your symptoms, medicines and any red-flag concerns before deciding on the best outcome."
+      },
+      {
+        "question": "When should I use another healthcare service instead?",
+        "answer": "Seek urgent medical care for breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or any emergency symptoms that make you feel critically unwell."
+      },
+      {
+        "question": "Can Pharmacy First help with common conditions?",
+        "answer": "Pharmacy First can help with eligible common conditions if you meet NHS pathway criteria."
+      }
+    ],
+    "localCtaBridge": "Contact the pharmacy to discuss your symptoms or book an appointment.",
+    "evidenceClaims": [
+      {
+        "field": "heroIntroduction",
+        "sentence": "Yorkshire Pharmacy & Health Clinic offers Pharmacy First in Darfield, supporting patients in this part of the Metropolitan Borough of Barnsley.",
+        "entityId": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Darfield has a public library.",
+        "entityId": "darfield:community:darfield-has-a-public-library"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Yorkshire Pharmacy & Health Clinic is in Darfield.",
+        "entityId": "darfield:pharmacy-relationship:in-area"
+      }
+    ],
+    "evidenceEntityIdsUsed": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "darfield:community:darfield-has-a-public-library",
+      "darfield:pharmacy-relationship:in-area"
+    ],
+    "editorialFactIdsUsed": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "darfield:community:darfield-has-a-public-library",
+      "darfield:pharmacy-relationship:in-area"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Darfield",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic offers Pharmacy First in Darfield, supporting patients in this part of the Metropolitan Borough of Barnsley.",
+      "supportingCanonicalFieldOrEntity": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns, darfield:pharmacy-relationship:in-area",
+      "providerSource": "barnsley.gov.uk, canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Darfield has a public library.",
+      "supportingCanonicalFieldOrEntity": "darfield:community:darfield-has-a-public-library",
+      "providerSource": "barnsley.gov.uk",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Darfield setting",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is in Darfield.",
+      "supportingCanonicalFieldOrEntity": "darfield:pharmacy-relationship:in-area",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "If you think Pharmacy First may be suitable, the pharmacist confirms what can be assessed on the day.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "Call before visiting to check how a consultation is being arranged.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].question",
+      "exactSentence": "Is Yorkshire Pharmacy & Health Clinic located in Darfield?",
+      "supportingCanonicalFieldOrEntity": "darfield:pharmacy-relationship:in-area",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "Yes, the pharmacy is in Darfield.",
+      "supportingCanonicalFieldOrEntity": "locality.pharmacyIsInArea",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].question",
+      "exactSentence": "What happens during a Pharmacy First consultation?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "The pharmacist will review your symptoms, medicines and any red-flag concerns before deciding on the best outcome.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "When should I use another healthcare service instead?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "Seek urgent medical care for breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or any emergency symptoms that make you feel critically unwell.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].question",
+      "exactSentence": "Can Pharmacy First help with common conditions?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "Pharmacy First can help with eligible common conditions if you meet NHS pathway criteria.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "Contact the pharmacy to discuss your symptoms or book an appointment.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Darfield",
+      "purpose": "identify the local edition",
+      "supportingSource": "locality.areaName",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Yorkshire Pharmacy & Health Clinic offers Pharmacy First in Darfield, supporting patients in this part of the Metropolitan Borough of Barnsley.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns, darfield:pharmacy-relationship:in-area",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Darfield has a public library.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "darfield:community:darfield-has-a-public-library",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Darfield setting",
+      "purpose": "section orientation",
+      "supportingSource": "locality.areaName",
+      "readerValue": "signals the local-context passage"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Yorkshire Pharmacy & Health Clinic is in Darfield.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "darfield:pharmacy-relationship:in-area",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "If you think Pharmacy First may be suitable, the pharmacist confirms what can be assessed on the day.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "localAccessIntroduction",
+      "sentence": "Call before visiting to check how a consultation is being arranged.",
+      "purpose": "what the reader should do if Pharmacy First may be suitable",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "gives the next practical step"
+    },
+    {
+      "field": "localFaqs[0].question",
+      "sentence": "Is Yorkshire Pharmacy & Health Clinic located in Darfield?",
+      "purpose": "local FAQ question",
+      "supportingSource": "darfield:pharmacy-relationship:in-area",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[0].answer",
+      "sentence": "Yes, the pharmacy is in Darfield.",
+      "purpose": "pathway or preparation answer",
+      "supportingSource": "locality.pharmacyIsInArea",
+      "readerValue": "helps the reader prepare or understand the consultation"
+    },
+    {
+      "field": "localFaqs[1].question",
+      "sentence": "What happens during a Pharmacy First consultation?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[1].answer",
+      "sentence": "The pharmacist will review your symptoms, medicines and any red-flag concerns before deciding on the best outcome.",
+      "purpose": "pathway or preparation answer",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "helps the reader prepare or understand the consultation"
+    },
+    {
+      "field": "localFaqs[2].question",
+      "sentence": "When should I use another healthcare service instead?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[2].answer",
+      "sentence": "Seek urgent medical care for breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or any emergency symptoms that make you feel critically unwell.",
+      "purpose": "when to use another healthcare route",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader what happens if Pharmacy First is not the right route"
+    },
+    {
+      "field": "localFaqs[3].question",
+      "sentence": "Can Pharmacy First help with common conditions?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[3].answer",
+      "sentence": "Pharmacy First can help with eligible common conditions if you meet NHS pathway criteria.",
+      "purpose": "pathway or preparation answer",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "helps the reader prepare or understand the consultation"
+    },
+    {
+      "field": "localCtaBridge",
+      "sentence": "Contact the pharmacy to discuss your symptoms or book an appointment.",
+      "purpose": "non-claim CTA",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "bridges to the approved call-to-action without extra claims"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 0,
+    "telephoneMentions": 0,
+    "callAheadMentions": 1,
+    "areaNameMentions": 5,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

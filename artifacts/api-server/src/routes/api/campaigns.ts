@@ -6,7 +6,7 @@ import { randomBytes } from "node:crypto";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
-const WORKSPACE_ROOT = "/home/inboxingproweb/local-seo-engine";
+const WORKSPACE_ROOT = process.env.WORKSPACE_ROOT ?? "/home/inboxingproweb/pharmaconnect-growth-engine";
 const CAMPAIGNS_DIR  = path.join(WORKSPACE_ROOT, "config", "campaigns");
 const OUTPUT_DIR     = path.join(WORKSPACE_ROOT, "output");
 
@@ -120,8 +120,10 @@ router.post("/campaigns/:slug", (req, res) => {
   const svcCompact = safeSvc.replace(/[^a-z0-9]/g, "");
 
   if (
+    safeSvc.includes("webde-ign") ||
     safeSvc.includes("web-design") ||
     svcCompact.includes("webdesign") ||
+    svcCompact.includes("webdeign") ||
     (svcCompact.includes("web") && svcCompact.includes("design"))
   ) {
     safeSvc = "web-design";
@@ -335,6 +337,12 @@ router.delete("/campaigns/:slug/:campaignId", (req, res) => {
     return;
   }
   writeCampaigns(slug, filtered);
+
+  const sessionPath = path.join(OUTPUT_DIR, slug, "sessions", `${campaignId}.json`);
+  if (fs.existsSync(sessionPath)) {
+    try { fs.unlinkSync(sessionPath); } catch { /* non-fatal */ }
+  }
+
   res.json({ deleted: true });
 });
 

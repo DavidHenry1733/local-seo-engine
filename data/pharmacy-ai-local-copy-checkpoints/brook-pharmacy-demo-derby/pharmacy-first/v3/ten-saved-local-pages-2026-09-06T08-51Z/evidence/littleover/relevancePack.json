@@ -1,0 +1,138 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Littleover",
+  "areaSlug": "littleover",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-05T19:41:08.738Z",
+  "sourceStatus": "google-places-authorised-collection-pharmacy-relationship",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [
+    {
+      "name": "Horizon Healthcare | NHS GP Practice Derby",
+      "address": "3-5 Burton Rd, Derby DE1 1TH",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "medical_center",
+        "physiotherapist",
+        "hospital",
+        "medical_clinic",
+        "health",
+        "service",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.917034099999995,
+        "longitude": -1.4788980999999999
+      },
+      "placeId": "ChIJp1IadEPxeUgRw6xSpLUhGu4",
+      "rejectionReason": "outside-area-centroid"
+    }
+  ],
+  "researchCandidates": [
+    {
+      "name": "Aspiro Healthcare - Hollybrook Medical Centre",
+      "address": "Hollybrook Way, Littleover, Derby DE23 3TX",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "hospital",
+        "doctor",
+        "health",
+        "service",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.8918125,
+        "longitude": -1.5316355
+      },
+      "placeId": "ChIJc1xSwBb3eUgR7rEUz7QRXF0",
+      "rejectionReason": "no-retrieved-official-source"
+    },
+    {
+      "name": "Private Medical Clinic Derby | Private GP",
+      "address": "79 Rykneld Rd, Littleover, Derby DE23 4DJ",
+      "category": "healthcare",
+      "types": [
+        "skin_care_clinic",
+        "doctor",
+        "medical_clinic",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.8940956,
+        "longitude": -1.53195
+      },
+      "placeId": "ChIJubBYS1j3eUgRZxqihfnnJdA",
+      "rejectionReason": "no-retrieved-official-source"
+    },
+    {
+      "name": "The Lanes",
+      "address": "147 Normanton Ln, Littleover, Derby DE23 6LF",
+      "category": "healthcare",
+      "types": [
+        "consultant",
+        "health",
+        "service",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9017549,
+        "longitude": -1.5003081
+      },
+      "placeId": "ChIJZb32qdTweUgRfU7LvlPeSds",
+      "rejectionReason": "no-retrieved-official-source"
+    },
+    {
+      "name": "Village Surgery Medical Centre",
+      "address": "Browning St, Sunny Hill, Derby DE23 8AL",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "hospital",
+        "doctor",
+        "medical_clinic",
+        "health",
+        "service",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.8963672,
+        "longitude": -1.4846924
+      },
+      "placeId": "ChIJgbw_2MTweUgRzSTEGNx-nFc",
+      "rejectionReason": "no-retrieved-official-source"
+    }
+  ],
+  "pharmacyRelationship": {
+    "from": "Brook Pharmacy Demo Derby",
+    "to": "Littleover",
+    "distanceKm": 3,
+    "method": "haversine-straight-line",
+    "areaReferenceSource": "places-area-reference"
+  },
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 1,
+    "rejectedCount": 1,
+    "categoriesPresent": [],
+    "minimumMet": true
+  }
+}

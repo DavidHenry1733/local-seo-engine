@@ -1,0 +1,105 @@
+{
+  "kind": "implementation-checkpoint",
+  "status": "candidate",
+  "approved": false,
+  "locked": false,
+  "writingEngineReady": false,
+  "note": "Validator correction: leftover unmatched tokens are REVIEW REQUIRED, not factual FAIL. Not approved. No new generation.",
+  "updatedAt": "2026-09-01T13:55:00.000Z",
+  "areaSlug": "wombwell",
+  "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+  "serviceId": "pharmacy-first",
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "focusedTests": "PASS 104/104",
+  "apiBuild": "PASS",
+  "gitDiffCheck": "PASS",
+  "files": [
+    {
+      "checkpointPath": "INDEX.md",
+      "sha256": "3a99bf3a65b673a43d34d439d7310c91562dcc156f9896eb3d2df6187163b3e9",
+      "bytes": 1566
+    },
+    {
+      "checkpointPath": "README.md",
+      "sha256": "8262d6457364510e7ee1d48476c3bfea54e25f6a4cae98d1424234928f0981a1",
+      "bytes": 412
+    },
+    {
+      "checkpointPath": "prompt/revised-system-prompt-v3.txt",
+      "sha256": "fdf31d95f138a430558b182f8848101d173cd80f9a8dcccee0fe5ae9ff1311b3",
+      "bytes": 3200
+    },
+    {
+      "checkpointPath": "replay/classified-findings.json",
+      "sha256": "dad59d3fac232bb02098096641af9a7af0c224698003e0ccb46f4789f730074b",
+      "bytes": 4533
+    },
+    {
+      "checkpointPath": "replay/four-saved-1233-1235-replay-findings.json",
+      "sha256": "919d10cf50d924744f6617b6235dbd4efe251e5ed2324866cb4f206f5123fe27",
+      "bytes": 7709
+    },
+    {
+      "checkpointPath": "replay/validator-correction-cases.json",
+      "sha256": "8218a829dcc2064263609b770149df74c16e7f6e6c1d0f6fa97d58cca397916b",
+      "bytes": 10061
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalCopyClaimGroundingV1.ts",
+      "sha256": "9f23d8f538ffe97b2c03494d8a8d0b53b192f9473a5ad6db4e839966ccd70aa6",
+      "bytes": 50266
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalCopyQualityV1.ts",
+      "sha256": "f54fa6df6c127eb4e6a1aac5cbe73b05e7cd56f69779aa42814f94e13446aed3",
+      "bytes": 33960
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalNarrativeEngineV3.ts",
+      "sha256": "d447dbc10ef064b1e22eda3f936f21b1ff72675c4b9972845dbab5c286578147",
+      "bytes": 30598
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalNarrativePromptContractV1.ts",
+      "sha256": "375fdbe4c42b7ef2ef5b9d6dceaf6e596c811a4c595bfc11bf10d9cf0d2be0f2",
+      "bytes": 32946
+    },
+    {
+      "checkpointPath": "source/pharmacyAiLocalPagePilotAssemblerV3.ts",
+      "sha256": "fdf858a73464d2014909c0313c39411127f0af7fc50f018ed7c584d51a78e2d3",
+      "bytes": 12469
+    },
+    {
+      "checkpointPath": "source/pharmacyCommercialNarrativePolishV1.ts",
+      "sha256": "ca84d9b13c41787b91e0959e5b3f690ce8357522285317e116f434d3323c3d93",
+      "bytes": 20647
+    },
+    {
+      "checkpointPath": "source/pharmacyLocalCandidateReadabilityV1.ts",
+      "sha256": "67a9a5affd03c76896ee5954f7e09fb1d70317ce435b5636b66a037499989d29",
+      "bytes": 12876
+    },
+    {
+      "checkpointPath": "tests/validatePharmacyAiLocalEditorialEvidencePilotV3.ts",
+      "sha256": "dc018822b17a635f9601f9e214d98193f55626f3ab9c432c516703083e6dc055",
+      "bytes": 99988
+    }
+  ],
+  "protected": {
+    "wombwellCopy": "e1d09e786992245e2d991a7fa4b74c15d32f997124a9e567223d8f0b0116807f",
+    "darfieldCopy": "7069e5d86f5519d5557c46acac7727d125a9e564aeeac5773114dd68aed55834",
+    "wombwellHtml": "80c219a9be363d816f6d5d6951967f28fc68b0a1b6359a8c872c8dea5a6cf281",
+    "darfieldHtml": "fb6d1c6052eaf197e9c6d34892edf14a5a7d3e40101d18a045b2bbe58b8ca422",
+    "editorialPack": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+    "campaignBuilder": "4dc96b27e8fca9c969577a44c4aa903a2a26e37ecba5fd5742b360ed5d253e3f",
+    "reviewCentre": "16e6485531effed6e11d963d606d2bc1ab59fa38914ce34eec32ba5b0f3d8e09",
+    "approvals": "6b1250621c101f134f9185e8e8b30d947dd6500bae3a0138917b61201b92bbcd"
+  },
+  "excluded": [
+    ".env",
+    "ecosystem.config.cjs",
+    "secrets",
+    "API keys"
+  ]
+}

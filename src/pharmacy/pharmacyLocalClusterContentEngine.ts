@@ -5,18 +5,20 @@
  * - All other services → service variant pack via selectAreaVariants (no BP-family fallback)
  */
 import { loadPharmacyProfile } from "./pharmacyContentBlueprintService.ts";
-import { buildAreaNarrativeProfile, slugifyArea } from "./pharmacyAreaNarrativeProfiles.ts";
+import { buildAreaNarrativeProfile } from "./pharmacyAreaNarrativeProfiles.ts";
 import type { ProfileLocalEntity } from "./pharmacyProfileLocalIntelligenceSelection.ts";
 import { buildPharmacyServicePageProfile } from "./pharmacyServicePageProfileContext.ts";
 import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
 import {
+  isApprovedBankRegisteredService,
   loadServiceVariantPack,
   localizeFaqQuestion,
   pickServiceVariantFaqs,
-  selectAreaVariants,
   type FaqVariant,
   type SectionVariant,
 } from "./pharmacyServiceVariantLibrary.ts";
+import { selectRegisteredApprovedBank } from "./pharmacyApprovedBankRunProvenance.ts";
+import { buildApprovedBankLocalityPageContract } from "./pharmacyApprovedBankCorePageContract.ts";
 import { hashSeed } from "./pharmacyLayoutTemplateLibrary.ts";
 import { stripAreaPrefixCopy } from "./pharmacyLocalClusterVariantFamilies.ts";
 import type { ContentGenerationContext } from "./contentEngine/contentGenerationContextTypes.ts";
@@ -25,8 +27,13 @@ import {
   providersForArea,
 } from "./pharmacyLocalMarketSnapshot.ts";
 import { phraseAreaTravelContext } from "./contentEngine/pharmacyLocalMarketIntelligencePhrases.ts";
-import { applyClusterIntelligence } from "./pharmacyLocalClusterIntelligence.ts";
+import { composeApprovedBankLocalityDirectDraft } from "./pharmacyApprovedBankLocalityDirectRender.ts";
 import { buildPharmacyFirstLocalNarrative } from "./pharmacyFirstLocalNarrative.ts";
+import { usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
+import {
+  getLocalityVariationSessionV1,
+  sessionRestoresStrategyVariants,
+} from "./contentEngine/pharmacyLocalityVariationSessionV1.ts";
 import { finalizeLocalClusterPageContent } from "./pharmacyLocalClusterCompositionDedupe.ts";
 import { commercialNarrativeSequenceV1 } from "./contentEngine/pharmacyCommercialSectionPlannerV1.ts";
 import { allocateLocalityEvidenceV1 } from "./contentEngine/pharmacyLocalityEvidenceAllocatorV1.ts";
@@ -34,6 +41,7 @@ import { bindVerifiedLocalityEvidenceV1 } from "./contentEngine/pharmacyVerified
 import {
   buildLocalityEvidenceInventory,
   buildUniqueLocalityNarrative,
+  siblingFactsFromCampaignContext,
   type LocalitySiblingFact,
 } from "./contentEngine/pharmacyLocalityUniqueNarrativeV1.ts";
 
@@ -52,6 +60,7 @@ export interface LocalClusterContentInput {
 export interface LocalClusterProcessStep {
   title: string;
   body: string;
+  bullets?: string[];
 }
 
 export interface LocalClusterPageContent {
@@ -75,6 +84,10 @@ export interface LocalClusterPageContent {
   trustBullets?: string[];
   trustClosing?: string;
   trustBody: string;
+  eligibilityHeading?: string;
+  eligibilityBody?: string;
+  eligibilityBullets?: string[];
+  preparationBullets?: string[];
   faqs: FaqVariant[];
   ctaPrimary: string;
   ctaSecondary: string;
@@ -87,7 +100,7 @@ export interface LocalClusterPageContent {
   metaDescription?: string;
   supportingHeading?: string;
   supportingIntro?: string;
-  supportingItems?: Array<{ title: string; body: string; evidence: string }>;
+  supportingItems?: Array<{ title: string; body: string; evidence: string; bullets?: string[] }>;
   nearbyLocalityLinks?: Array<{ areaName: string; areaSlug: string; reason: string; geographic?: boolean }>;
   sectionEvidence?: Record<string, string[]>;
   evidenceLimited?: boolean;
@@ -297,6 +310,16 @@ function injectServiceContext(
     .trim();
 }
 
+/** One natural locality mention in bank copy — never stamp the name onto every sentence. */
+function weaveLocalityOnce(text: string, areaName: string): string {
+  const body = String(text || "").trim();
+  const area = String(areaName || "").trim();
+  if (!body || !area) return body;
+  const areaRe = new RegExp(`\\b${area.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+  if (areaRe.test(body)) return body;
+  return body.replace(/\byour area\b/i, area);
+}
+
 /** Consultation journey steps from the service bank only — omit when the bank has none. */
 function buildPackProcessStepsFromBank(
   howItWorks: SectionVariant | undefined,
@@ -372,7 +395,19 @@ function composeServiceVariantPackClusterDraft(
   const pharmacyName = profile.pharmacyName;
   const town = profile.town || "";
 
-  const pack = ctx?.variantPack ?? loadServiceVariantPack(input.serviceId);
+  const selected = isApprovedBankRegisteredService(input.serviceId)
+    ? selectRegisteredApprovedBank(input.serviceId)
+    : null;
+  const boundPackMatchesRegistry =
+    Boolean(selected?.registered) &&
+    Boolean(selected?.hash) &&
+    ctx?.approvedBankHash === selected?.hash &&
+    ctx?.variantPack?.serviceId === input.serviceId;
+  const pack = selected?.registered
+    ? boundPackMatchesRegistry
+      ? ctx!.variantPack
+      : selected.pack
+    : ctx?.variantPack ?? loadServiceVariantPack(input.serviceId);
   if (!pack || pack.serviceId !== input.serviceId) {
     throw new Error(
       `No service-specific locality content bank for service "${input.serviceId}". Refusing silent cross-service fallback.`,
@@ -384,7 +419,6 @@ function composeServiceVariantPackClusterDraft(
     );
   }
 
-  const variants = selectAreaVariants(pack, input.areaSlug, "local-cluster-v1", input.areaSlugsInCluster);
   const ctxInject = (text: string) =>
     stripAreaPrefixCopy(
       injectServiceContext(text, pharmacyName, input.areaName, town, input.serviceName),
@@ -424,18 +458,7 @@ function composeServiceVariantPackClusterDraft(
     verified,
   });
 
-  const selectedSiblings: LocalitySiblingFact[] = Array.isArray(ctx?.rawProfile?.selectedAreas)
-    ? ctx!.rawProfile!.selectedAreas!
-        .filter((row) => row && row.selected !== false && String(row.areaName || "").trim())
-        .map((row) => ({
-          areaName: String(row.areaName || "").trim(),
-          areaSlug: slugifyArea(String(row.areaName || "").trim()),
-          distanceKm: row.distanceKm == null ? null : Number(row.distanceKm),
-          distanceLabel: String(row.distanceLabel || "").trim(),
-          areaType: String(row.areaType || "").trim(),
-          order: typeof row.order === "number" ? row.order : undefined,
-        }))
-    : [];
+  const selectedSiblings: LocalitySiblingFact[] = siblingFactsFromCampaignContext(ctx);
   const selfArea = selectedSiblings.find((s) => s.areaSlug === input.areaSlug);
   const uniqueInventory = buildLocalityEvidenceInventory({
     areaName: input.areaName,
@@ -466,62 +489,84 @@ function composeServiceVariantPackClusterDraft(
   });
   const uniqueNarrative = buildUniqueLocalityNarrative(uniqueInventory);
 
-  const howItWorks = variants.sections.howItWorks;
-  const treatmentProcess = variants.sections.treatmentProcess;
-  const preparationGuide = (variants.sections as { preparationGuide?: SectionVariant }).preparationGuide;
-  const trustSafety = variants.sections.trustSafety;
-  const problem = (variants.sections as { problem?: SectionVariant }).problem;
-  const benefits = (variants.sections as { benefits?: SectionVariant }).benefits;
+  const localityContract = buildApprovedBankLocalityPageContract(
+    pack,
+    input.areaSlug,
+    input.areaSlugsInCluster,
+  );
+  void localityEvidence;
 
   // Unique evidence-backed locality intro (patient-facing; do not expand "the pharmacy" to the full trading name).
   const heroIntro = uniqueNarrative.heroIntro;
 
-  // Why / relevance: prefer service bank; locality unique narrative supplies locality framing only.
-  const bankWhyHeading = problem?.heading ? ctxInject(problem.heading) : benefits?.heading ? ctxInject(benefits.heading) : "";
-  const bankWhyBody = [sectionBody(problem), sectionBody(benefits)].filter(Boolean).map(ctxInject).join(" ");
-  const whyChecksHeading = bankWhyHeading || uniqueNarrative.relationshipHeading;
-  const whyChecksBody = bankWhyBody || [uniqueNarrative.relationshipIntro, uniqueNarrative.relationshipBody].filter(Boolean).join(" ");
+  const whyChecksHeading = ctxInject(localityContract.explanationHeading);
+  const whyChecksBody = weaveLocalityOnce(ctxInject(localityContract.explanationBody), input.areaName);
   const whyChecksBullets: string[] = [];
 
-  const localRelevanceHeading = uniqueNarrative.patientFocusHeading;
-  const localRelevanceIntro = uniqueNarrative.patientFocusBody;
-  const localRelevanceBody = "";
-  // No distance-comparison bullets — neighbouring areas are linked, not listed as a distance table.
-  const localRelevanceBullets: string[] = [];
+  const verifiedEntity =
+    verified?.healthcare.find((e) => e.name?.trim()) ||
+    verified?.landmarks.find((e) => e.name?.trim()) ||
+    verified?.community.find((e) => e.name?.trim()) ||
+    verified?.schools.find((e) => e.name?.trim()) ||
+    null;
+  const localWeave = verifiedEntity?.name
+    ? `${verifiedEntity.name} is a recognised place in ${input.areaName}; it does not change how ${input.serviceName} is arranged.`
+    : "";
 
-  const processSteps = buildPackProcessStepsFromBank(howItWorks, treatmentProcess);
-  const howHeading = howItWorks?.heading
-    ? ctxInject(howItWorks.heading)
-    : `How ${input.serviceName} works`;
-  const howBody = sectionBody(howItWorks)
-    ? ctxInject(sectionBody(howItWorks))
-    : `Contact the pharmacy to ask how ${input.serviceName.toLowerCase()} are arranged.`;
+  const considerFull = weaveLocalityOnce(ctxInject(localityContract.considerBody), input.areaName);
+  const considerSentences = considerFull.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
+  const localRelevanceHeading = ctxInject(localityContract.considerHeading);
+  const localRelevanceIntro = considerSentences[0] || "";
+  const localRelevanceBody = [
+    considerSentences.slice(1).join(" "),
+    ctxInject(localityContract.scopeBody),
+    localWeave,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+  const localRelevanceBullets = [...localityContract.considerBullets, ...localityContract.scopeBullets]
+    .map(ctxInject)
+    .filter(Boolean)
+    .filter((b, i, arr) => arr.indexOf(b) === i)
+    .slice(0, 8);
 
-  const preparingVariant = preparationGuide || treatmentProcess;
-  const clinicalEnvironmentHeading = preparingVariant?.heading
-    ? ctxInject(preparingVariant.heading)
-    : `Preparing for ${input.serviceName}`;
-  const clinicalEnvironmentBody = sectionBody(preparingVariant)
-    ? ctxInject(sectionBody(preparingVariant))
-    : `Contact the pharmacy if you have questions before you visit for ${input.serviceName.toLowerCase()}.`;
-
-  const trustHeading = trustSafety?.heading ? ctxInject(trustSafety.heading) : "When to seek further medical help";
-  const trustBody = trustSafety
-    ? ctxInject(
-        [sectionBody(trustSafety), ...sectionBullets(trustSafety).map((b) => (/[.!?]$/.test(b) ? b : `${b}.`))].join(
-          " ",
-        ),
+  const processSteps = (localityContract.processSteps.length
+    ? localityContract.processSteps.map((step) => ({
+        title: ctxInject(step.title),
+        body: ctxInject(step.body),
+      }))
+    : buildPackProcessStepsFromBank(
+        pack.howItWorks?.[0],
+        pack.treatmentProcess?.[0],
       )
-        .replace(/\bsignposts?\b/gi, "advise you to contact")
-        .replace(/\breferral if needed\b/gi, "further advice if needed")
-    : "Seek urgent medical help for chest pain, severe breathlessness, sudden weakness, or any emergency symptoms. Pharmacy advice does not replace emergency care.";
+  ).filter((step) => step.title && step.body);
+  const howHeading = ctxInject(localityContract.processHeading);
+  const howBody = ctxInject(localityContract.processBody);
 
-  const faqsRaw = pickServiceVariantFaqs(pack.faqs, input.serviceId, input.areaSlug, 6, input.areaSlugsInCluster);
+  const clinicalEnvironmentHeading = ctxInject(localityContract.preparationHeading);
+  const clinicalEnvironmentBody = ctxInject(localityContract.preparationBody);
+  const preparationBullets = localityContract.preparationBullets.map(ctxInject).filter(Boolean);
+
+  const trustHeading = ctxInject(localityContract.safetyHeading);
+  const trustBody = ctxInject(localityContract.safetyBody)
+    .replace(/\bsignposts?\b/gi, "advise you to contact")
+    .replace(/\breferral if needed\b/gi, "further advice if needed");
+  const trustBullets = localityContract.safetyBullets.map(ctxInject).filter(Boolean);
+
+  const faqsRaw = localityContract.faqs.length
+    ? localityContract.faqs
+    : pickServiceVariantFaqs(pack.faqs, input.serviceId, input.areaSlug, 8, input.areaSlugsInCluster);
   if (!faqsRaw.length) {
     throw new Error(`Service FAQ bank empty after selection for "${input.serviceId}" / ${input.areaSlug}.`);
   }
   const faqs = faqsRaw.map((f, i) => ({
-    question: localizeFaqQuestion(stripAreaPrefixCopy(f.question, input.areaName), input.areaName, input.areaSlug, i),
+    question: localizeFaqQuestion(
+      stripAreaPrefixCopy(f.question, input.areaName),
+      input.areaName,
+      input.areaSlug,
+      i,
+      input.serviceId,
+    ),
     answer: ctxInject(f.answer)
       .replace(/\bsignposts?\b/gi, "advise you to contact")
       .replace(/\breferral if needed\b/gi, "further advice if needed"),
@@ -533,57 +578,9 @@ function composeServiceVariantPackClusterDraft(
   const ctaPhonePrompt = uniqueNarrative.confirmBody;
   const accessHeading = uniqueNarrative.accessHeading;
   const accessBody = uniqueNarrative.accessBody;
-  const consultationLocalityNote = "";
 
-  // Shared clinically safe consultation note — avoid bank copy that expands the pharmacy name repeatedly.
-  const consultationParts = [clinicalEnvironmentBody].filter(Boolean);
-  const sectionOrder = [
-    whyChecksBody ? "why" : "",
-    howBody ? "how" : "",
-    localRelevanceIntro || localRelevanceBody ? "conditions" : "",
-    consultationParts.length ? "consultation" : "",
-    "travel",
-    trustBody ? "gp" : "",
-    "faq",
-    "cta",
-    "nearby",
-  ]
-    .filter(Boolean)
-    .join(",");
-
-  const processIntro = howBody || consultationParts.length || accessBody
-    ? [
-        howBody,
-        // Always emit the consultation marker so polish can extract %%TRAVEL%% / nearby meta.
-        "%%CONSULTATION%%",
-        clinicalEnvironmentHeading || howHeading || "What happens during the consultation",
-        consultationParts.join(" ") ||
-          `Contact the pharmacy to ask how ${input.serviceName.toLowerCase()} are arranged before you travel.`,
-        "%%STRATEGY%%",
-        localityEvidence.strategyId,
-        "%%SECTION_ORDER%%",
-        sectionOrder,
-        "%%NEARBY_INTRO%%",
-        uniqueNarrative.nearbyIntro || localityEvidence.nearbyIntro,
-        "%%TRAVEL%%",
-        accessBody,
-        "%%CTA_FRAME%%",
-        `${ctaPrimary}|||${ctaPhonePrompt}`,
-        "%%HEADINGS%%",
-        JSON.stringify({
-          ...(whyChecksHeading ? { why: whyChecksHeading } : {}),
-          ...(howHeading ? { how: howHeading } : {}),
-          ...(localRelevanceHeading ? { conditions: localRelevanceHeading } : {}),
-          ...(clinicalEnvironmentHeading ? { consultation: clinicalEnvironmentHeading } : {}),
-          travel: accessHeading,
-          ...(trustHeading ? { gp: trustHeading } : {}),
-          faq: localityEvidence.headings.faq || "Frequently asked questions",
-          // Keep contact CTA free of trading-name repetition (name budget ≤2 in narrative).
-          book: `Ask about ${input.serviceName}`,
-          nearby: localityEvidence.headings.nearby || "Nearby areas we also help",
-        }),
-      ].join("\n")
-    : "";
+  // Visible process copy only — commercial polish markers must not collapse bank sections.
+  const processIntro = howBody;
 
   return {
     heroIntro,
@@ -601,7 +598,12 @@ function composeServiceVariantPackClusterDraft(
     accessBody,
     clinicalEnvironmentHeading,
     clinicalEnvironmentBody,
+    preparationBullets,
+    eligibilityHeading: ctxInject(localityContract.scopeHeading),
+    eligibilityBody: ctxInject(localityContract.scopeBody),
+    eligibilityBullets: localityContract.scopeBullets.map(ctxInject).filter(Boolean),
     trustHeading,
+    trustBullets,
     trustBody,
     faqs,
     ctaPrimary,
@@ -613,14 +615,23 @@ function composeServiceVariantPackClusterDraft(
     wordCountEstimate: 0,
     seoTitle: uniqueNarrative.seoTitle,
     metaDescription: uniqueNarrative.metaDescription,
-    supportingHeading: uniqueNarrative.patientFocusHeading,
-    supportingIntro: `Blood pressure checks for patients travelling from ${input.areaName}. Contact the pharmacy before visiting to ask how the service is arranged.`,
+    supportingHeading: howHeading,
+    supportingIntro: (howBody.split(/(?<=[.!?])\s+/)[0] || howBody).trim(),
     supportingItems: [
-      ...(verified?.nearbyLocalities.slice(0, 2).map((n) => ({
-        title: n.areaName,
-        body: `Guidance for patients travelling from ${n.areaName}.`,
-        evidence: "approved-sibling-locality",
-      })) || []),
+      ...processSteps.map((step) => ({
+        title: step.title,
+        body: step.body,
+        evidence: "approved-bank-process",
+      })),
+      ...(clinicalEnvironmentBody
+        ? [
+            {
+              title: clinicalEnvironmentHeading || "How to prepare",
+              body: [clinicalEnvironmentBody, ...preparationBullets].filter(Boolean).join(" "),
+              evidence: "approved-bank-preparation",
+            },
+          ]
+        : []),
     ],
     nearbyLocalityLinks: verified?.nearbyLocalities || [],
     sectionEvidence: verified?.sectionEvidence,
@@ -667,15 +678,23 @@ export function composeCommercialClusterNarrativeV1(
   input: LocalClusterContentInput,
   ctx?: ContentGenerationContext,
 ): LocalClusterPageContent {
+  if (usesPharmacyFirstPatientJourneyLocalTemplate(input.serviceId) && ctx) {
+    const sessionStrategy = getLocalityVariationSessionV1()?.forceStrategyBySlug.get(input.areaSlug);
+    const restoreVariants = sessionRestoresStrategyVariants();
+    return buildPharmacyFirstLocalNarrative(input, ctx, {
+      forceStrategy: restoreVariants ? sessionStrategy : sessionStrategy || "patient-journey-led",
+    });
+  }
+  if (isApprovedBankRegisteredService(input.serviceId)) {
+    return composeApprovedBankLocalityDirectDraft(input, ctx);
+  }
+
   const pharmacyName =
     ctx?.profile.pharmacyName ||
     buildPharmacyServicePageProfile(resolveTenantProfileSlug(input.slug) || input.slug).pharmacyName;
 
-  // Service-to-locality router: PF intelligence bank, else service variant pack (never BP families).
-  const draft =
-    input.serviceId === "pharmacy-first" && ctx
-      ? buildPharmacyFirstLocalNarrative(input, ctx)
-      : composeServiceVariantPackClusterDraft(input, ctx);
+  // Service-to-locality router: unregistered services still use the shared composer.
+  const draft = composeServiceVariantPackClusterDraft(input, ctx);
 
   return finalizeCommercialClusterPipeline(draft, input, ctx, pharmacyName);
 }

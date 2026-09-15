@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "chosenIntro": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. Darfield Library is on Church Street and runs regular activities and special events for children and adults. Darfield History Society runs local history group sessions.",
+  "failures": [],
+  "reviews": [
+    "REVIEW REQUIRED | field=heroIntroduction | sentence=Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area. | rule=uncertain-paraphrase | defect=Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area. — uncertain paraphrase: unmatched wording (provides, service, living, surrounding) is not proof of a new fact, and is not established as supported",
+    "REVIEW REQUIRED | field=relationshipToPharmacy | sentence=Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield. | rule=uncertain-paraphrase | defect=Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield. — uncertain paraphrase: unmatched wording (residents) is not proof of a new fact, and is not established as supported"
+  ],
+  "publicationFailures": [],
+  "review": {
+    "wombwellLeak": false,
+    "fromDarfieldTravel": false,
+    "gpWait": false,
+    "pharmacyInDarfield": true,
+    "libraryListOnly": false,
+    "churchStreet": true,
+    "regularActivities": true,
+    "historySociety": true
+  },
+  "variantReview": {
+    "churchStreet": true,
+    "regularActivities": true,
+    "historySociety": true,
+    "garlandHouse": true,
+    "inDarfieldHow": true,
+    "fromDarfieldHow": false,
+    "gpWait": false,
+    "wombwellLeak": false,
+    "clinical": true,
+    "banner": true,
+    "journeyHeadingStripped": true,
+    "travelHeading": true
+  },
+  "hashes": {
+    "liveDarfieldCopy": "c664a82fd212c880ad824d01e8dd68d02f7bd34dff88ecb5d7f84598258baf9c",
+    "fileBasedDarfieldHtml": "96f124c92089a1773dd29a0873d63c73eb53dba5d2df298498f385d3c199c9fd",
+    "variantHtml": "a5febdc429e88a4fe3acbc658abd639dd3ccaebbcfea6c053c1c88dca572bf51",
+    "originalPack": "065e896a318589d4230f15670de7ff42f9594629b872507b4260ca15727239a9",
+    "wombwellCopy": "c23580da7b8e9458de02fc2318f924c4802eebc550f4c8adeeb8a458da82aee3",
+    "wombwellHtml": "79e6b8e5a06758d84c9e9d146fb505fc131bf595bd5c05bb2ddb9e798765c506",
+    "previousThinCopy": "cef33fae649386b87826cce3f7087259a47c47cefb1310e8e8ec23119a6f2b26"
+  },
+  "formatted": "heroHeading: Pharmacy First in Darfield\nheroIntroduction: Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area.\nlocalIntroduction: Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. Darfield Library is on Church Street and runs regular activities and special events for children and adults. Darfield History Society runs local history group sessions.\nlocalContextParagraphs[0]: NHS general practice services in Darfield are provided from Garland House Surgery.\nrelationshipToPharmacy: Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+  "mergedFactStatements": [
+    "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+    "Darfield has a public library.",
+    "Yorkshire Pharmacy & Health Clinic is in Darfield at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "NHS general practice services in Darfield are provided from Garland House Surgery.",
+    "Darfield History Society runs local history group sessions.",
+    "Darfield Library is on Church Street.",
+    "Darfield Library runs regular activities and special events for children and adults."
+  ],
+  "trials": [
+    {
+      "intro": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. Darfield Library is on Church Street and runs regular activities and special events for children and adults. Darfield History Society runs local history group sessions.",
+      "failures": [],
+      "reviews": [
+        "REVIEW REQUIRED | field=heroIntroduction | sentence=Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area. | rule=uncertain-paraphrase | defect=Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area. — uncertain paraphrase: unmatched wording (provides, service, living, surrounding) is not proof of a new fact, and is not established as supported",
+        "REVIEW REQUIRED | field=relationshipToPharmacy | sentence=Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield. | rule=uncertain-paraphrase | defect=Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield. — uncertain paraphrase: unmatched wording (residents) is not proof of a new fact, and is not established as supported"
+      ],
+      "publicationFailures": []
+    }
+  ]
+}

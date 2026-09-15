@@ -1,0 +1,83 @@
+
+=== Content-generation field-policy matrix (no provider) ===
+
+PASS  matrix-no-local-evidence — richness=none openai=
+PASS  matrix-sparse-evidence — richness=sparse
+PASS  matrix-distance-only — richness=distance-only
+PASS  matrix-normal-evidence — required=none
+PASS  matrix-rich-evidence — richness=rich
+PASS  matrix-unknown-delivery — unknown delivery facts stay deterministic and are omitted rather than inferred
+PASS  matrix-confirmed-delivery — confirmed delivery facts remain platform-owned
+PASS  matrix-multiple-services — one policy, two page kinds
+PASS  matrix-multiple-areas — area pages share ownership classes
+PASS  matrix-multiple-tenants — catalog has no tenant or area names
+PASS  matrix-unpublished-schema-disabled — unpublished or disabled schema is not live publication
+PASS  matrix-exact-version-clinical-approval — invalidated clinical versions are not live-approved
+PASS  policy-one-class-per-field — 27 fields classified
+PASS  schema-never-requires-omissible-fields — no omissible field is schema-required
+PASS  no-area-name-conditionals — production contract has no area-name branches
+PASS  generation-consumes-field-plan — generate path consumes the same field plan and skips OpenAI when the policy omits AI work
+PASS  prompts-request-only-permitted-ai-fields — schemaFields=localContextHeading,localContextParagraphs,localAccessIntroduction,localFaqs,localCtaBridge,evidenceClaims,evidenceEntityIdsUsed,editorialFactIdsUsed
+PASS  required-schemas-match-evidence — normal
+PASS  deterministic-facts-render — Pharmacy First can help with eligible common conditions for people in Chellaston. | Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.
+PASS  unsupported-optional-omitted — empty optional fields parse
+PASS  no-tenant-service-area-leakage — fact IDs stay on the supplied tenant/area
+REFERENCE  regression-allestree-stored-validationResult.ok=true — regression reference only; not contract proof
+PASS  regression-allestree-saved-copy-current-hard-failures — current hard validators found no failures on the unchanged saved copy
+REVIEW regression-allestree-saved-copy-current-reviews — 4 current review warning(s); not counted as a pass
+        REVIEW REQUIRED | field=localIntroduction | sentence=Allestree is a neighbourhood ward within the city of Derby. | rule=uncertain-paraphrase | defect=Allestree is a neighbourhood ward within the city of Derby. — uncertain paraphrase: unmatched wording (city) is not proof of a new fact, and is not established as supported
+        REVIEW REQUIRED | field=localIntroduction | sentence=The area is served by a Neighbourhood Board made up of local councillors, residents, and representatives from community organisations and public services. | rule=uncertain-paraphrase | defect=The area is served by a Neighbourhood Board made up of local councillors, residents, and representatives from community organisations and public services. — uncertain paraphrase: unmatched wording (served, made) is not proof of a new fact, and is not established as supported
+        REVIEW REQUIRED | field=localContextHeading | sentence=Why Allestree patients start with the pharmacist | rule=uncertain-paraphrase | defect=Why Allestree patients start with the pharmacist — uncertain paraphrase: unmatched wording (why, patients, start) is not proof of a new fact, and is not established as supported
+        REVIEW REQUIRED | field=localContextParagraphs[0] | sentence=Community organisations such as the Friends of Allestree Park and the Allestree Carnival group are also active in the area. | rule=uncertain-paraphrase | defect=Community organisations such as the Friends of Allestree Park and the Allestree Carnival group are also active in the area. — uncertain paraphrase: unmatched wording (active) is not proof of a new fact, and is not established as supported
+PASS  contract-fixture-allestree-hard-failures — zero hard failures; omittedOptional=none
+REVIEW contract-fixture-allestree-current-reviews — 2 current review warning(s); not counted as a pass
+        REVIEW REQUIRED | field=localContextHeading | sentence=Why Allestree patients start with the pharmacist | rule=uncertain-paraphrase | defect=Why Allestree patients start with the pharmacist — uncertain paraphrase: unmatched wording (why, patients, start) is not proof of a new fact, and is not established as supported
+        REVIEW REQUIRED | field=localContextParagraphs[0] | sentence=Community organisations such as the Friends of Allestree Park and the Allestree Carnival group are also active in the area. | rule=uncertain-paraphrase | defect=Community organisations such as the Friends of Allestree Park and the Allestree Carnival group are also active in the area. — uncertain paraphrase: unmatched wording (active) is not proof of a new fact, and is not established as supported
+PASS  preview-allestree-unchanged-identity — ai-local-area-page-pilot-v3
+PASS  hash-allestree — 2026-09-03T17:19:23.549Z
+REFERENCE  regression-mickleover-stored-validationResult.ok=true — regression reference only; not contract proof
+PASS  regression-mickleover-saved-copy-current-hard-failures — current hard validators found no failures on the unchanged saved copy
+REVIEW regression-mickleover-saved-copy-current-reviews — 1 current review warning(s); not counted as a pass
+        REVIEW REQUIRED | field=localIntroduction | sentence=The area is supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from community organisations and public services. | rule=uncertain-paraphrase | defect=The area is supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from community organisations and public services. — uncertain paraphrase: unmatched wording (supported, brings, together) is not proof of a new fact, and is not established as supported
+PASS  contract-fixture-mickleover-hard-failures — zero hard failures; omittedOptional=none
+NONE   contract-fixture-mickleover-current-reviews — no current review warnings
+PASS  preview-mickleover-unchanged-identity — ai-local-area-page-pilot-v3
+PASS  hash-mickleover — 2026-09-05T19:41:01.838Z
+REFERENCE  regression-littleover-stored-validationResult.ok=true — regression reference only; not contract proof
+PASS  regression-littleover-saved-copy-current-hard-failures — current hard validators found no failures on the unchanged saved copy
+NONE   regression-littleover-saved-copy-current-reviews — no current review warnings
+PASS  contract-fixture-littleover-hard-failures — zero hard failures; omittedOptional=none
+NONE   contract-fixture-littleover-current-reviews — no current review warnings
+PASS  preview-littleover-unchanged-identity — ai-local-area-page-pilot-v3
+PASS  hash-littleover — 2026-09-05T19:41:13.132Z
+REFERENCE  regression-chellaston-stored-validationResult.ok=true — regression reference only; not contract proof
+PASS  regression-chellaston-saved-copy-current-hard-failures — current hard validators found no failures on the unchanged saved copy
+NONE   regression-chellaston-saved-copy-current-reviews — no current review warnings
+PASS  contract-fixture-chellaston-hard-failures — zero hard failures; omittedOptional=none
+NONE   contract-fixture-chellaston-current-reviews — no current review warnings
+PASS  preview-chellaston-unchanged-identity — ai-local-area-page-pilot-v3
+PASS  successful-chellaston-candidate — 2026-09-06T06:16:09.662Z; current hard failures=0; stored.ok=true (reference only)
+PASS  rejected-attempt-preserved-2026-09-05T19-41-32 — 2026-09-05T19-41-32-991Z-attempt-1.json
+PASS  regression-2026-09-05T19-41-32-raw-still-hard-fails — FAIL | field=localContextParagraphs[0] | sentence=With established local healthcare and community networks, Chellaston residents have access to a range of support. | rule=ungrounded-clause | defect=With established local healthcare and community networks, Chellaston residents have access to a range of support. — no supplied fact, canonical field or approved clinical text covers this clause
+REVIEW regression-2026-09-05T19-41-32-raw-current-reviews — 2 current review warning(s); not counted as a pass
+        REVIEW REQUIRED | field=localIntroduction | sentence=Chellaston is served by NHS general practice services at Chellaston Medical Centre. | rule=uncertain-paraphrase | defect=Chellaston is served by NHS general practice services at Chellaston Medical Centre. — uncertain paraphrase: unmatched wording (served) is not proof of a new fact, and is not established as supported
+        REVIEW REQUIRED | field=localIntroduction | sentence=The area also has a Neighbourhood Board made up of local councillors, residents, and representatives from community organisations and public services. | rule=uncertain-paraphrase | defect=The area also has a Neighbourhood Board made up of local councillors, residents, and representatives from community organisations and public services. — uncertain paraphrase: unmatched wording (made) is not proof of a new fact, and is not established as supported
+PASS  contract-fixture-2026-09-05T19-41-32-hard-failures — zero hard failures; omittedOptional=localContextParagraphs
+NONE   contract-fixture-2026-09-05T19-41-32-current-reviews — no current review warnings
+PASS  rejected-attempt-preserved-2026-09-06T05-55-55 — 2026-09-06T05-55-55-049Z-attempt-1.json
+PASS  regression-2026-09-06T05-55-55-raw-still-hard-fails — FAIL | field=heroIntroduction | sentence=Pharmacy First can help with eligible common conditions. | rule=area-in-hero | defect=copy does not explain Pharmacy First for readers in the selected area | FAIL | field=relationshipToPharmacy | sentence=Brook Pharmacy Demo Derby is located in Derby. The pharmacy is approximately 5.8 km in a straight line from Chellaston. | rule=premises-locality | defect=copy does not explain that the pharmacy is in the premises locality
+NONE   regression-2026-09-06T05-55-55-raw-current-reviews — no current review warnings
+PASS  contract-fixture-2026-09-06T05-55-55-hard-failures — zero hard failures; omittedOptional=none
+NONE   contract-fixture-2026-09-06T05-55-55-current-reviews — no current review warnings
+PASS  rejected-chellaston-still-fails-without-overlay — area-in-hero still fails on the saved rejected response
+PASS  campaign-builder-unchanged-state — Campaign Builder still shows the four saved candidates
+PASS  duplicate-reload-safety — completed 4/4
+PASS  ai-sentences-evidence-bound — saved Chellaston narrative carries internal claims from Chellaston facts only
+PASS  complete-candidate-validation-on-assembled-copy — Pharmacy First in Chellaston
+NONE   contract-fixture-assembled-chellaston-current-reviews — no current review warnings
+PASS  validators-unchanged — grounding and quality files unchanged
+PASS  saved-state-unchanged — evidence, attempts, costs and candidates unchanged; run remains completed
+PASS  new-contract-fixtures-zero-hard-failures — 7 new-contract fixtures have zero current hard failures
+
+PASS  51/51 hard-failure checks
+REVIEW  9 current review warning(s) classified separately and not converted to passes

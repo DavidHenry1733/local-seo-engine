@@ -1,0 +1,135 @@
+{
+  "defect": "NT-E2E-22",
+  "rootCause": "pharmacyLocalAreaResolver.ts prefixed cluster- onto area slugs that already carried cluster- from frozen campaign context, producing cluster-cluster-* output paths alongside bare-area legacy paths.",
+  "responsibleFile": "src/pharmacy/pharmacyLocalAreaResolver.ts",
+  "responsibleFunction": "resolveLocalLocationHierarchy (cluster slug mapping)",
+  "sharedResolverAdded": true,
+  "canonicalClusterUrlFormula": "/local/cluster-{normalised-area-slug}/",
+  "duplicatePrefixRemoved": true,
+  "bareAreaPathsRemoved": true,
+  "clusterPagesPlanned": 8,
+  "clusterPagesCorrected": 8,
+  "clusterCanonicalPaths": [
+    "/local/cluster-ecclesall/",
+    "/local/cluster-fulwood/",
+    "/local/cluster-sheffield-city-centre/",
+    "/local/cluster-broomhill/",
+    "/local/cluster-kelham-island/",
+    "/local/cluster-dore/",
+    "/local/cluster-hillsborough/",
+    "/local/cluster-crookes/"
+  ],
+  "duplicateClusterPagesAfterCorrection": 0,
+  "legacyClusterPathsRemaining": [],
+  "internalLinksCorrected": "PASS",
+  "breadcrumbsCorrected": "PASS",
+  "registryRebuilt": true,
+  "registryPageCount": 15,
+  "sitemapRebuilt": true,
+  "sitemapPageCount": 15,
+  "manifestRebuilt": true,
+  "canonicalFinalRenderMaterialised": true,
+  "canonicalFinalRenderPageCount": 16,
+  "clusterMetadata": "PASS",
+  "clusterSchema": "PASS",
+  "canonicalInventoryCount": 16,
+  "generatedCanonicalPageCount": 16,
+  "planOutputParity": "PASS",
+  "authorisedJobPreserved": true,
+  "newGenerationJobCreated": false,
+  "qualityReviewOpened": true,
+  "qualityReviewApproved": false,
+  "publishingPerformed": false,
+  "indexingPerformed": false,
+  "rankTrackingInitialised": false,
+  "browserValidation": "PASS",
+  "browserResults": [
+    {
+      "area": "Ecclesall",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-ecclesall/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    },
+    {
+      "area": "Fulwood",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-fulwood/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    },
+    {
+      "area": "Sheffield City Centre",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-sheffield-city-centre/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    },
+    {
+      "area": "Broomhill",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-broomhill/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    },
+    {
+      "area": "Kelham Island",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-kelham-island/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    },
+    {
+      "area": "Dore",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-dore/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    },
+    {
+      "area": "Hillsborough",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-hillsborough/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    },
+    {
+      "area": "Crookes",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-crookes/",
+      "ok": true,
+      "tenant": true,
+      "clusterClusterLink": false,
+      "bareAreaLink": false
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "tenantSpecificCodeDetected": false,
+  "changedModuleValidation": "PASS",
+  "exactCorrectedPreviewUrls": [
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-ecclesall/",
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-fulwood/",
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-sheffield-city-centre/",
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-broomhill/",
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-kelham-island/",
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-dore/",
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-hillsborough/",
+    "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-crookes/"
+  ],
+  "authorisedRecord": {
+    "jobId": "eaa7bd57-fbe0-45a5-a252-e67b6ab69377",
+    "completenessStatus": "COMPLETE",
+    "qualityReviewReady": true,
+    "failures": []
+  },
+  "qualityReviewPreviewLinks": 7,
+  "manifestPageCount": 16,
+  "status": "READY FOR PRODUCT OWNER QUALITY REVIEW"
+}

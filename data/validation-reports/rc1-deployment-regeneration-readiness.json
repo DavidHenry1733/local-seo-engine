@@ -1,0 +1,84 @@
+{
+  "planId": "29b9e0670732ab99",
+  "planRevision": "2026-07-25T07:39:30.640Z",
+  "checksum": "90b8c999486cd249ed0fab4e9727f06a9e0543de875998dd53e767dd17f3e6a2",
+  "approvedServices": "pharmacy-first",
+  "townOrCity": "Sheffield",
+  "approvedAreas": 8,
+  "serviceHubsPlanned": 1,
+  "clusterPagesPlanned": 8,
+  "blogsPlanned": 3,
+  "guidesPlanned": 1,
+  "faqsPlanned": 1,
+  "supportingPlanned": 1,
+  "imagesPlanned": 4,
+  "expectedTotal": 16,
+  "schedulerTotal": 16,
+  "dashboard": {
+    "serviceHubs": 1,
+    "approvedAreas": 8,
+    "clusterPages": 8,
+    "total": 16,
+    "scheduler": 16
+  },
+  "steps": [
+    {
+      "name": "Commit verified",
+      "ok": true,
+      "detail": "ffe7c4b Align commercial generation with canonical plan and RC1 cluster pages."
+    },
+    {
+      "name": "Required committed files exist",
+      "ok": true
+    },
+    {
+      "name": "RC1 cluster page architecture flag",
+      "ok": true
+    },
+    {
+      "name": "Cluster page architecture",
+      "ok": true
+    },
+    {
+      "name": "Separate area page schedule removed",
+      "ok": true
+    },
+    {
+      "name": "Canonical plan rebuilt",
+      "ok": true
+    },
+    {
+      "name": "Plan/scheduler parity",
+      "ok": true
+    },
+    {
+      "name": "No duplicate locality URLs",
+      "ok": true
+    },
+    {
+      "name": "Legacy area-page URLs scheduled",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "Rotherham references",
+      "ok": true
+    },
+    {
+      "name": "Cross-tenant references",
+      "ok": true
+    },
+    {
+      "name": "Historical package preserved",
+      "ok": true
+    },
+    {
+      "name": "15-page package preserved",
+      "ok": true
+    },
+    {
+      "name": "15-page package marked superseded",
+      "ok": true
+    }
+  ]
+}

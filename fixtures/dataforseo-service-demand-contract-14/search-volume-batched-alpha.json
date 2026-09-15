@@ -1,0 +1,47 @@
+{
+  "version": "0.1.20231117",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0.1500 sec.",
+  "cost": 0.075,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "fixture-task-batched-alpha-001",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "cost": 0.075,
+      "result_count": 6,
+      "data": { "location_code": 2826, "language_code": "en" },
+      "result": [
+        {
+          "keyword": "blood pressure check",
+          "search_volume": 210,
+          "cpc": 1.35,
+          "competition": "MEDIUM",
+          "competition_index": 42,
+          "monthly_searches": [{ "year": 2026, "month": 7, "search_volume": 210 }]
+        },
+        {
+          "keyword": "pharmacy blood pressure check",
+          "search_volume": 0,
+          "monthly_searches": [{ "year": 2026, "month": 7, "search_volume": 0 }]
+        },
+        {
+          "keyword": "flu vaccination",
+          "search_volume": 1300,
+          "cpc": 0.55,
+          "competition": "HIGH",
+          "competition_index": 70,
+          "monthly_searches": [{ "year": 2026, "month": 7, "search_volume": 1900 }]
+        },
+        {
+          "keyword": "pharmacy flu vaccination",
+          "search_volume": null,
+          "monthly_searches": null
+        }
+      ]
+    }
+  ]
+}

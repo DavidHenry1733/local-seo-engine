@@ -1,0 +1,79 @@
+
+=== Business Profile Wizard V2 ===
+
+PASS  wizard-version — v2
+PASS  wizard-steps-count — 8 steps
+PASS  wizard-step-ids-unique — unique ids
+PASS  wizard-step-import-first — import
+PASS  wizard-no-team-step — team merged into trust
+PASS  wizard-local-step — local intelligence step
+PASS  dhmdigital:loads-into-wizard — DHM Digital
+PASS  dhmdigital:renders-html — page title
+PASS  dhmdigital:v2-auto-enriched-copy — V2 header
+PASS  dhmdigital:all-step-panels — step panels
+PASS  dhmdigital:import-badges — import status UI
+PASS  dhmdigital:accept-field-ui — smart confirmation Accept
+PASS  dhmdigital:help-icons — ? help tooltips
+PASS  dhmdigital:local-preview — local intel preview
+PASS  dhmdigital:finish-growth-engine — finish redirect
+PASS  dhmdigital:patient-checkboxes — patient group checkboxes
+PASS  dhmdigital:local-enrich-btn — local enrich button
+PASS  dhmdigital:competitor-host — competitor UI
+PASS  dhmdigital:progress-bar — progress UI
+PASS  dhmdigital:quality-score-ui — quality label
+PASS  dhmdigital:auto-save-hook — client autosave
+PASS  dhmdigital:wizard-validate-api — validation endpoint
+PASS  dhmdigital:wizard-enrich-api — local enrich endpoint
+PASS  dhmdigital:legacy-link — legacy form link
+PASS  dhmdigital:import-field-builder — 10 fields
+PASS  dhmdigital:resume-step-default — 7
+PASS  dhmdigital:resume-step-saved — profileWizardStep round-trip
+PASS  dhmdigital:quality-band — Poor
+PASS  dhmdigital:quality-categories — 7 categories
+PASS  dhmdigital:quality-local-category — local category
+PASS  dhmdigital:ready-flag — true
+PASS  dhmdigital:progress-step-5 — 57%
+PASS  dhmdigital:validate-step1 — import ok
+PASS  dhmdigital:validate-step2-required — Pharmacy name is required
+PASS  dhmdigital:patient-preset-map — older-patients,families
+PASS  dhmdigital:competitor-map — competitor mapper
+PASS  dhmdigital:ready-minimal-profile — required complete
+PASS  pharmaconnect:loads-into-wizard — PharmaConnect
+PASS  pharmaconnect:renders-html — page title
+PASS  pharmaconnect:v2-auto-enriched-copy — V2 header
+PASS  pharmaconnect:all-step-panels — step panels
+PASS  pharmaconnect:import-badges — import status UI
+PASS  pharmaconnect:accept-field-ui — smart confirmation Accept
+PASS  pharmaconnect:help-icons — ? help tooltips
+PASS  pharmaconnect:local-preview — local intel preview
+PASS  pharmaconnect:finish-growth-engine — finish redirect
+PASS  pharmaconnect:patient-checkboxes — patient group checkboxes
+PASS  pharmaconnect:local-enrich-btn — local enrich button
+PASS  pharmaconnect:competitor-host — competitor UI
+PASS  pharmaconnect:progress-bar — progress UI
+PASS  pharmaconnect:quality-score-ui — quality label
+PASS  pharmaconnect:auto-save-hook — client autosave
+PASS  pharmaconnect:wizard-validate-api — validation endpoint
+PASS  pharmaconnect:wizard-enrich-api — local enrich endpoint
+PASS  pharmaconnect:legacy-link — legacy form link
+PASS  pharmaconnect:import-field-builder — 10 fields
+PASS  pharmaconnect:resume-step-default — 1
+PASS  pharmaconnect:resume-step-saved — profileWizardStep round-trip
+PASS  pharmaconnect:quality-band — Poor
+PASS  pharmaconnect:quality-categories — 7 categories
+PASS  pharmaconnect:quality-local-category — local category
+PASS  pharmaconnect:ready-flag — false
+PASS  pharmaconnect:progress-step-5 — 57%
+PASS  pharmaconnect:validate-step1 — import ok
+PASS  pharmaconnect:validate-step2-required — Pharmacy name is required
+PASS  pharmaconnect:patient-preset-map — older-patients,families
+PASS  pharmaconnect:competitor-map — competitor mapper
+PASS  pharmaconnect:ready-minimal-profile — required complete
+PASS  patient-presets-count — 13
+PASS  empty-profile-backwards-compatible — default step 1
+PASS  empty-competitors-default — competitors []
+PASS  empty-not-ready — not ready
+PASS  legacy-step-clamped — step 10 → 8
+
+✅ 73/73 checks passed
+

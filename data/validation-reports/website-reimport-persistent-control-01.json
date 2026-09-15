@@ -1,0 +1,113 @@
+{
+  "ticket": "PC-WEBSITE-REIMPORT-PERSISTENT-CONTROL-01",
+  "generatedAt": "2026-08-11T07:30:53.785Z",
+  "pass": true,
+  "snapshotImportedAt": "2026-08-11T07:16:25.537Z",
+  "checks": [
+    {
+      "id": "browser-script-parses",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "confirmation-string-safe",
+      "pass": true,
+      "detail": "\"confirm('Re-import Website for '+((activeCustomer.pharmacyName||activeCustomer.slug)||'this customer')+' from '+target+'?\\\\n\\\\nThis archives the current website import snapshot and r\""
+    },
+    {
+      "id": "canonical-action-reused",
+      "pass": true,
+      "detail": "rerun_website_import handlers present"
+    },
+    {
+      "id": "optional-panel-in-shell",
+      "pass": true,
+      "detail": "SAFE optional + BLOCKED corrective branches in UI"
+    },
+    {
+      "id": "optional-does-not-gate-handler",
+      "pass": true,
+      "detail": "IER handler allows optional re-import"
+    },
+    {
+      "id": "website-imported",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "id": "safe-for-review",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "id": "pages-28",
+      "pass": true,
+      "detail": "28"
+    },
+    {
+      "id": "reimport-required-false",
+      "pass": true,
+      "detail": "false"
+    },
+    {
+      "id": "reimport-available-true",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "id": "action-id",
+      "pass": true,
+      "detail": "rerun_website_import"
+    },
+    {
+      "id": "target-website",
+      "pass": true,
+      "detail": "https://pharmaconnect.uk/"
+    },
+    {
+      "id": "target-tenant",
+      "pass": true,
+      "detail": "pharmaconnect"
+    },
+    {
+      "id": "bpr-still-valid",
+      "pass": true,
+      "detail": "Business Profile Review required=false"
+    },
+    {
+      "id": "workflow-button-present",
+      "pass": true,
+      "detail": "workflow control markup"
+    },
+    {
+      "id": "google-not-imported",
+      "pass": true,
+      "detail": "false"
+    },
+    {
+      "id": "snapshot-timestamp",
+      "pass": true,
+      "detail": "2026-08-11T07:16:25.537Z"
+    },
+    {
+      "id": "blocked-corrective-preserved",
+      "pass": true,
+      "detail": "corrective IER panel still coded"
+    },
+    {
+      "id": "shared-local-regional",
+      "pass": true,
+      "detail": "leeds available=true required=false"
+    },
+    {
+      "id": "snapshot-unchanged",
+      "pass": true,
+      "detail": "pharmaconnect.json unchanged"
+    },
+    {
+      "id": "no-reimport-post",
+      "pass": true,
+      "detail": "validation did not POST rerun_website_import"
+    }
+  ]
+}

@@ -144,6 +144,28 @@ export async function executeLocalClusterPagesJob(
       }
     }
 
+    opts.onProgress?.(20, "Collecting verified locality evidence");
+    updateMasterAdminJob(jobId, {
+      progress: 20,
+      progressLabel: "Collecting verified locality evidence",
+      stage: "collect-evidence",
+    });
+    const { preflightPharmacyLocalEvidenceForCampaign } = await import(
+      "./contentEngine/pharmacyLocalEvidencePackContractV1.ts"
+    );
+    let evidencePreflight = preflightPharmacyLocalEvidenceForCampaign(slug, serviceId);
+    if (!evidencePreflight.ok && (evidencePreflight.missingAreas.length || evidencePreflight.staleAreas.length)) {
+      const { runPharmacyLocalEvidenceDiscovery } = await import("./pharmacyLocalRelevancePackService.ts");
+      await runPharmacyLocalEvidenceDiscovery(slug);
+      evidencePreflight = preflightPharmacyLocalEvidenceForCampaign(slug, serviceId);
+    }
+    if (!evidencePreflight.ok) {
+      throw new Error(
+        evidencePreflight.customerError ||
+          "Local pages cannot be generated yet because verified area evidence is missing or insufficient.",
+      );
+    }
+
     opts.onProgress?.(30, "Building generation context");
     updateMasterAdminJob(jobId, { progress: 30, progressLabel: "Building generation context", stage: "compose-content" });
     const ctx = buildContentGenerationContext(slug, serviceId);

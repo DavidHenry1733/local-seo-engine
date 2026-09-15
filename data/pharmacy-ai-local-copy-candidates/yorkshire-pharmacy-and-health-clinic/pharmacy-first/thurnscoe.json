@@ -1,0 +1,230 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v1",
+  "promptContractVersion": "v1",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T16:20:59.749Z",
+  "tokenUsage": {
+    "promptTokens": 2407,
+    "completionTokens": 700,
+    "totalTokens": 3107
+  },
+  "estimatedCostUsd": 0.010414,
+  "inputEvidencePackHash": "170d315e32ea695b4937f5cf45d69dc26bdad9edc22c49ef20db4a7d21cea100",
+  "areaSlug": "thurnscoe",
+  "areaName": "Thurnscoe",
+  "outputCopy": {
+    "area": "Thurnscoe",
+    "heroHeading": "Pharmacy First for Thurnscoe",
+    "heroIntroduction": "Residents of Thurnscoe can access Pharmacy First for help with eligible common conditions. Speak to our team to discuss your needs or to arrange a consultation.",
+    "localIntroduction": "Thurnscoe is 4.6 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+    "localContextHeading": "Accessing Pharmacy First from Thurnscoe",
+    "localContextParagraphs": [
+      "People living in Thurnscoe can use Pharmacy First by travelling to our Darfield location. The service offers advice and treatment for a range of conditions, making it a convenient option for those seeking support without a referral.",
+      "Our pharmacy team will assess your symptoms and advise on the best next steps. If Pharmacy First is not suitable, you will be given guidance on where to seek further care."
+    ],
+    "relationshipToPharmacy": "People in Thurnscoe can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+    "localAccessIntroduction": "You are welcome to phone us on 01226 210477 if you would like to check service details or ask about what to bring to your consultation.",
+    "localFaqs": [
+      {
+        "question": "How far is Yorkshire Pharmacy & Health Clinic from Thurnscoe?",
+        "answer": "The pharmacy is 4.6 km from Thurnscoe."
+      },
+      {
+        "question": "Can I check if Pharmacy First is suitable before travelling from Thurnscoe?",
+        "answer": "Yes, you can call the pharmacy to discuss your symptoms and confirm if Pharmacy First is appropriate."
+      },
+      {
+        "question": "What happens if Pharmacy First is not suitable for my needs?",
+        "answer": "If the service is not suitable, the pharmacy team will advise you on alternative care or next steps."
+      },
+      {
+        "question": "Do I need to book an appointment for Pharmacy First?",
+        "answer": "It is recommended to contact the pharmacy before visiting to check current arrangements for consultations."
+      },
+      {
+        "question": "What should I bring with me to my Pharmacy First consultation?",
+        "answer": "Please bring a list of any medicines you are taking and details of your symptoms."
+      }
+    ],
+    "localCtaBridge": "Contact us to discuss your needs or to arrange a Pharmacy First consultation.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Thurnscoe is 4.6 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "People in Thurnscoe can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR."
+      },
+      {
+        "field": "localFaqs",
+        "sentence": "The pharmacy is 4.6 km from Thurnscoe."
+      }
+    ],
+    "evidenceEntityIdsUsed": []
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First for Thurnscoe",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Residents of Thurnscoe can access Pharmacy First for help with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Speak to our team to discuss your needs or to arrange a consultation.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Thurnscoe is 4.6 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Accessing Pharmacy First from Thurnscoe",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "People living in Thurnscoe can use Pharmacy First by travelling to our Darfield location.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The service offers advice and treatment for a range of conditions, making it a convenient option for those seeking support without a referral.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Our pharmacy team will assess your symptoms and advise on the best next steps.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "If Pharmacy First is not suitable, you will be given guidance on where to seek further care.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "People in Thurnscoe can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "You are welcome to phone us on 01226 210477 if you would like to check service details or ask about what to bring to your consultation.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].question",
+      "exactSentence": "How far is Yorkshire Pharmacy & Health Clinic from Thurnscoe?",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "The pharmacy is 4.6 km from Thurnscoe.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].question",
+      "exactSentence": "Can I check if Pharmacy First is suitable before travelling from Thurnscoe?",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "Yes, you can call the pharmacy to discuss your symptoms and confirm if Pharmacy First is appropriate.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "What happens if Pharmacy First is not suitable for my needs?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "If the service is not suitable, the pharmacy team will advise you on alternative care or next steps.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].question",
+      "exactSentence": "Do I need to book an appointment for Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "It is recommended to contact the pharmacy before visiting to check current arrangements for consultations.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].question",
+      "exactSentence": "What should I bring with me to my Pharmacy First consultation?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].answer",
+      "exactSentence": "Please bring a list of any medicines you are taking and details of your symptoms.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "Contact us to discuss your needs or to arrange a Pharmacy First consultation.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

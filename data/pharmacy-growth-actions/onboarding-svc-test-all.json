@@ -1,0 +1,412 @@
+{
+  "version": 1,
+  "slug": "onboarding-svc-test-all",
+  "generatedAt": "2026-06-28T14:51:56.133Z",
+  "lastUpdated": "2026-06-28T14:53:17.224Z",
+  "totalActions": 7,
+  "pendingActions": 7,
+  "inProgressActions": 0,
+  "completeActions": 0,
+  "deferredActions": 0,
+  "topPriorityActions": [
+    {
+      "id": "profile-add-logo",
+      "title": "Add pharmacy logo to complete profile",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Logo completes branding and improves trust on every published page header.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Profile completeness is at 33% — logo is the remaining branding gap.",
+      "evidence": [
+        "Branding: Logo"
+      ],
+      "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all#branding",
+      "dependencyOrder": 10,
+      "urgency": 4,
+      "rankScore": 69
+    },
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "33% profile complete with 16 item(s) still missing.",
+      "evidence": [
+        "Business Identity: Website URL",
+        "Business Identity: Company name",
+        "Branding: Logo",
+        "Navigation: Primary CTA text",
+        "Navigation: Primary CTA URL"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "Competitor visibility gap not yet analysed.",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=onboarding-svc-test-all",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for Leeds — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations Leeds",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    }
+  ],
+  "actionsByCategory": {
+    "Profile": [
+      {
+        "id": "profile-add-logo",
+        "title": "Add pharmacy logo to complete profile",
+        "category": "Profile",
+        "priority": "High",
+        "impact": "Logo completes branding and improves trust on every published page header.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Profile completeness is at 33% — logo is the remaining branding gap.",
+        "evidence": [
+          "Branding: Logo"
+        ],
+        "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all#branding",
+        "dependencyOrder": 10,
+        "urgency": 4,
+        "rankScore": 69
+      },
+      {
+        "id": "profile-complete-missing-fields",
+        "title": "Complete remaining profile fields",
+        "category": "Profile",
+        "priority": "High",
+        "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "33% profile complete with 16 item(s) still missing.",
+        "evidence": [
+          "Business Identity: Website URL",
+          "Business Identity: Company name",
+          "Branding: Logo",
+          "Navigation: Primary CTA text",
+          "Navigation: Primary CTA URL"
+        ],
+        "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all",
+        "dependencyOrder": 10,
+        "urgency": 3,
+        "rankScore": 65
+      }
+    ],
+    "Trust": [
+      {
+        "id": "trust-add-regulatory-links",
+        "title": "Add real GPhC and NHS profile links before live launch",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Trust credentials should link to your specific premises registration before go-live.",
+        "evidence": [
+          "NHS profile URL not set"
+        ],
+        "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all#trust",
+        "dependencyOrder": 9,
+        "urgency": 4,
+        "rankScore": 67
+      }
+    ],
+    "Competitor Gap": [
+      {
+        "id": "competitor-promote-pharmacy-first",
+        "title": "Promote Pharmacy First as a priority service",
+        "category": "Competitor Gap",
+        "priority": "High",
+        "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+        "evidence": [
+          "Competitor visibility gap not yet analysed.",
+          "Pharmacy First page published and in visibility registry"
+        ],
+        "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+        "linkedModule": "Competitor Intelligence",
+        "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=onboarding-svc-test-all",
+        "dependencyOrder": 4,
+        "urgency": 4,
+        "rankScore": 56
+      }
+    ],
+    "Content": [
+      {
+        "id": "content-travel-vaccinations-seasonal",
+        "title": "Publish Travel Vaccinations content before peak travel season",
+        "category": "Content",
+        "priority": "Medium",
+        "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Travel Vaccinations page is published for Leeds — refresh promotion ahead of peak demand.",
+        "evidence": [
+          "travel vaccinations Leeds",
+          "70% of local competitors promote travel vaccinations"
+        ],
+        "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+        "linkedModule": "Visual Experience",
+        "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+        "dependencyOrder": 3,
+        "urgency": 3,
+        "rankScore": 41
+      },
+      {
+        "id": "content-review-ecosystem-assets",
+        "title": "Review content ecosystem assets for priority services",
+        "category": "Content",
+        "priority": "Low",
+        "impact": "Email, FAQ and social packs extend reach without new page generation.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Content ecosystem assets exist for Pharmacy First — extend use across channels.",
+        "evidence": [
+          "Pharmacy First ecosystem includes FAQ, email and social packs"
+        ],
+        "recommendedNextStep": "Open the Pharmacy First content ecosystem and schedule one asset per week.",
+        "linkedModule": "Content Ecosystem",
+        "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+        "dependencyOrder": 2,
+        "urgency": 2,
+        "rankScore": 25
+      }
+    ],
+    "Local Coverage": [
+      {
+        "id": "local-coverage-expand-area-pages",
+        "title": "Expand local coverage pages for priority Leeds areas",
+        "category": "Local Coverage",
+        "priority": "Medium",
+        "impact": "Area-specific pages capture service + neighbourhood searches competitors may miss.",
+        "effort": "high",
+        "status": "pending",
+        "reason": "0 pages published including area variants — prioritise high-intent neighbourhoods.",
+        "evidence": [
+          "Priority area: Headingley",
+          "Priority area: Chapel Allerton",
+          "Priority area: Meanwood",
+          "Priority area: Roundhay"
+        ],
+        "recommendedNextStep": "Review area pages for Headingley, Chapel Allerton, Meanwood and ensure indexing is submitted.",
+        "linkedModule": "Publishing",
+        "linkedUrl": "/api/pharmacy-executive-dashboard?slug=onboarding-svc-test-all",
+        "dependencyOrder": 2,
+        "urgency": 2,
+        "rankScore": 33
+      }
+    ]
+  },
+  "actions": [
+    {
+      "id": "profile-add-logo",
+      "title": "Add pharmacy logo to complete profile",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Logo completes branding and improves trust on every published page header.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Profile completeness is at 33% — logo is the remaining branding gap.",
+      "evidence": [
+        "Branding: Logo"
+      ],
+      "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all#branding",
+      "dependencyOrder": 10,
+      "urgency": 4,
+      "rankScore": 69
+    },
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "33% profile complete with 16 item(s) still missing.",
+      "evidence": [
+        "Business Identity: Website URL",
+        "Business Identity: Company name",
+        "Branding: Logo",
+        "Navigation: Primary CTA text",
+        "Navigation: Primary CTA URL"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-all",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "Competitor visibility gap not yet analysed.",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=onboarding-svc-test-all",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for Leeds — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations Leeds",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    },
+    {
+      "id": "local-coverage-expand-area-pages",
+      "title": "Expand local coverage pages for priority Leeds areas",
+      "category": "Local Coverage",
+      "priority": "Medium",
+      "impact": "Area-specific pages capture service + neighbourhood searches competitors may miss.",
+      "effort": "high",
+      "status": "pending",
+      "reason": "0 pages published including area variants — prioritise high-intent neighbourhoods.",
+      "evidence": [
+        "Priority area: Headingley",
+        "Priority area: Chapel Allerton",
+        "Priority area: Meanwood",
+        "Priority area: Roundhay"
+      ],
+      "recommendedNextStep": "Review area pages for Headingley, Chapel Allerton, Meanwood and ensure indexing is submitted.",
+      "linkedModule": "Publishing",
+      "linkedUrl": "/api/pharmacy-executive-dashboard?slug=onboarding-svc-test-all",
+      "dependencyOrder": 2,
+      "urgency": 2,
+      "rankScore": 33
+    },
+    {
+      "id": "content-review-ecosystem-assets",
+      "title": "Review content ecosystem assets for priority services",
+      "category": "Content",
+      "priority": "Low",
+      "impact": "Email, FAQ and social packs extend reach without new page generation.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Content ecosystem assets exist for Pharmacy First — extend use across channels.",
+      "evidence": [
+        "Pharmacy First ecosystem includes FAQ, email and social packs"
+      ],
+      "recommendedNextStep": "Open the Pharmacy First content ecosystem and schedule one asset per week.",
+      "linkedModule": "Content Ecosystem",
+      "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+      "dependencyOrder": 2,
+      "urgency": 2,
+      "rankScore": 25
+    }
+  ]
+}

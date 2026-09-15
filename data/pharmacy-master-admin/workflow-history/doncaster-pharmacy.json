@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "slug": "doncaster-pharmacy",
+  "updatedAt": "2026-08-20T10:41:38.224Z",
+  "currentStage": "business_profile_intelligence",
+  "transitions": [
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-20T10:41:38.224Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Website import complete after branch selection",
+      "evidence": "Branch confirmed — website import stage complete"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-08-20T09:25:51.460Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-20T09:28:13.306Z",
+      "finishedAt": "2026-08-20T09:28:13.306Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Multiple pharmacy branches detected — select the branch being onboarded.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "9bd9117c-5230-44c7-8add-6e6b43704ad6"
+    },
+    {
+      "stageId": "google_import",
+      "actionId": "import_google",
+      "startedAt": "2026-08-20T09:26:00.712Z",
+      "finishedAt": "2026-08-20T09:26:00.712Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "No Google Business Profile found. You can continue with website import only.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "6a3d5b79-4245-468e-82a5-86f2690f575f"
+    }
+  ]
+}

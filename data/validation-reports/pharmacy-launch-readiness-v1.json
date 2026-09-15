@@ -1,0 +1,76 @@
+{
+  "slug": "pharmaconnect",
+  "validatedAt": "2026-06-19T11:28:18.849Z",
+  "readinessScore": 100,
+  "passCount": 13,
+  "totalChecks": 13,
+  "remainingIssues": [],
+  "demoReportPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/demo-reports/pharmaconnect-launch-demo.md",
+  "checks": [
+    {
+      "label": "Setup page route exists",
+      "pass": true,
+      "value": "/api/pharmacy-setup"
+    },
+    {
+      "label": "Setup page loads (no 503)",
+      "pass": true,
+      "value": "HTTP 302"
+    },
+    {
+      "label": "Profile save works",
+      "pass": true,
+      "value": "Brook Pharmacy"
+    },
+    {
+      "label": "Local intelligence works",
+      "pass": true,
+      "value": "local intel available"
+    },
+    {
+      "label": "Competitor dashboard works",
+      "pass": true,
+      "value": "HTTP 302"
+    },
+    {
+      "label": "Competitor build works",
+      "pass": true,
+      "value": "10 opportunities"
+    },
+    {
+      "label": "240 publish pages exist",
+      "pass": true,
+      "value": "240"
+    },
+    {
+      "label": "Sitemap exists",
+      "pass": true,
+      "value": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-sitemap.xml"
+    },
+    {
+      "label": "Quality >= 48/50",
+      "pass": true,
+      "value": "48.6/50"
+    },
+    {
+      "label": "HIGH_RISK = 0",
+      "pass": true,
+      "value": "0"
+    },
+    {
+      "label": "Competitor opportunities exist",
+      "pass": true,
+      "value": "10"
+    },
+    {
+      "label": "Health endpoint no 503",
+      "pass": true,
+      "value": "HTTP 302"
+    },
+    {
+      "label": "PM2 online",
+      "pass": true,
+      "value": "PM2 process online"
+    }
+  ]
+}

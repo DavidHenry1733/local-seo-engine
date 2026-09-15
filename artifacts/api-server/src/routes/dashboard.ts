@@ -212,6 +212,7 @@ const STAGE_NAMES: Record<number, string> = {
 interface CurrentUser { name: string; username: string; role: string; }
 
 function dashboardHtml(defaultSlug = "", projects: ProjectEntry[] = [], internalToken = "", hubPages: HubPage[] = [], currentUser: CurrentUser = { name: "", username: "", role: "staff" }): string {
+  const dashboardBuildAt = new Date().toISOString();
   const projectOptions = projects.map(p =>
     `<option value="${p.clientSlug}"${p.clientSlug === defaultSlug ? " selected" : ""}>${p.businessName} (${p.clientSlug})</option>`
   ).join("\n");
@@ -224,7 +225,7 @@ function dashboardHtml(defaultSlug = "", projects: ProjectEntry[] = [], internal
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Local SEO Engine</title>
+<title>PharmaConnect Growth Engine</title>
 <style>
 :root {
   --brand:#005EB8; --brand-dark:#004a94;
@@ -284,11 +285,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
 /* ── Tab bar ── */
 .tabbar{background:#fff;border-bottom:1px solid #e2e8f0;
-  display:flex;flex-wrap:nowrap;position:sticky;top:var(--topbar-h);z-index:10001;
-  padding:0 12px;gap:0;overflow-x:auto;scrollbar-width:none;
+  display:flex;flex-wrap:wrap;align-content:flex-start;position:sticky;top:var(--topbar-h);z-index:10001;
+  padding:0 12px;gap:0;overflow-x:visible;
   box-shadow:0 1px 4px rgba(0,0,0,.05);}
 .tabbar::-webkit-scrollbar{display:none;}
-.tab{padding:0 11px;height:var(--tabbar-h);display:flex;align-items:center;gap:5px;
+.tab{padding:0 11px;height:var(--tabbar-h);display:flex;align-items:center;gap:5px;flex-shrink:0;
   font-size:.81rem;font-weight:600;color:#64748b;cursor:pointer;
   border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;
   transition:color .15s,border-color .15s;}
@@ -297,6 +298,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .tab-badge{background:#f1f5f9;color:#64748b;font-size:.67rem;font-weight:700;
   border-radius:9px;padding:1px 6px;}
 .tab.active .tab-badge{background:#dbeafe;color:#1d4ed8;}
+.cc-subtabbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;padding:4px;background:#f1f5f9;border-radius:10px;width:fit-content;max-width:100%}
+.cc-subtab{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-size:.82rem;font-weight:700;background:transparent;color:#6b7280;transition:all .15s;font-family:inherit}
+.cc-subtab.active{background:#fff;color:#1e3a5f;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.ipd-subtabbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;padding:4px;background:#eef2ff;border-radius:10px;width:fit-content;max-width:100%}
+.ipd-subtab{padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-size:.8rem;font-weight:700;background:transparent;color:#64748b;transition:all .15s;font-family:inherit}
+.ipd-subtab.active{background:#fff;color:#3730a3;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.ipd-workflow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:20px;padding:14px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;font-size:.78rem}
+.ipd-workflow-step{background:#fff;border:1px solid #dbeafe;padding:6px 12px;border-radius:8px;font-weight:600;color:#1e3a5f}
+.ipd-workflow-arrow{color:#94a3b8;font-weight:700}
+.ipd-metric{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px 16px;min-width:120px}
+.ipd-metric-val{font-size:1.4rem;font-weight:800;color:#1e3a5f;line-height:1.2}
+.ipd-metric-lbl{font-size:.72rem;color:#64748b;margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
+.ipd-prompt-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;font-size:.78rem;font-family:monospace;white-space:pre-wrap;max-height:120px;overflow:auto;margin-top:6px}
+#ipd-panel-prompts.ipd-panel-active{display:block !important;visibility:visible !important;opacity:1 !important}
+#ipd-prompts-output{display:block !important;visibility:visible !important;min-height:120px;margin-top:12px}
+#ipd-prompts-selection{display:block;margin-bottom:12px;padding:12px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;font-size:.8rem;color:#1e3a5f}
+.ipd-prompt-card{display:block !important;visibility:visible !important;border:1px solid #cbd5e1;border-radius:10px;padding:16px;margin-bottom:16px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.ipd-prompt-card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-bottom:10px}
+.ipd-prompt-card-meta{font-size:.76rem;color:#64748b;margin-bottom:8px}
+.ipd-prompt-textarea{display:block !important;width:100%;min-height:140px;margin-top:6px;padding:10px;border:1px solid #d1d5db;border-radius:8px;font-family:monospace;font-size:.78rem;line-height:1.45;resize:vertical;box-sizing:border-box;background:#fff;color:#0f172a;user-select:text;-webkit-user-select:text;cursor:text}
+#ipd-live-debug{display:block;font-size:.72rem;margin-bottom:12px;padding:10px 12px;border-radius:8px;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;font-family:monospace;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.ipd-prompt-label{display:block;font-size:.76rem;font-weight:700;color:#475569;margin-top:10px}
+.ipd-slot-ok{color:#059669;font-weight:700}
+.ipd-slot-miss{color:#dc2626;font-weight:700}
+.ipd-thumb{width:48px;height:48px;object-fit:cover;border-radius:6px;background:#f1f5f9;border:1px solid #e2e8f0}
+.ipd-thumb-empty{width:48px;height:48px;border-radius:6px;background:#f1f5f9;border:1px dashed #cbd5e1;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#94a3b8}
+.ipd-actions{display:flex;flex-wrap:wrap;gap:4px}
+.ipd-actions .btn{font-size:.68rem;padding:3px 8px}
+.ipd-status-pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.68rem;font-weight:700;text-transform:capitalize}
+.ipd-status-missing{background:#fef2f2;color:#991b1b}
+.ipd-status-uploaded{background:#eff6ff;color:#1d4ed8}
+.ipd-status-approved{background:#ecfdf5;color:#065f46}
+.ipd-status-fallback{background:#fff7ed;color:#c2410c}
+.ipd-status-rejected{background:#fef2f2;color:#7f1d1d}
+.cc-sub-panel{display:none}
+.cc-sub-panel.cc-sub-visible{display:block}
 .tab-sep{width:1px;height:18px;background:#e2e8f0;margin:0 4px;align-self:center;flex-shrink:0;}
 
 /* ── Tab panels ── */
@@ -418,6 +455,7 @@ tr:hover td{background:#f8fafc;}
 
 @media(max-width:640px){
   .overview-grid{grid-template-columns:repeat(2,1fr);}
+  .tabbar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
   .tab{padding:0 10px;font-size:.78rem;}
   .topbar-project-wrap select{min-width:140px;}
   .tb-user-name,.brand-text{display:none;}
@@ -437,7 +475,7 @@ tr:hover td{background:#f8fafc;}
 <div class="topbar">
   <div class="topbar-brand">
     <div class="brand-mark">LS</div>
-    <span class="brand-text">Local SEO Engine</span>
+    <span class="brand-text">PharmaConnect Growth Engine</span>
   </div>
   <div class="topbar-hdivider"></div>
   <div class="topbar-project-wrap">
@@ -450,7 +488,7 @@ tr:hover td{background:#f8fafc;}
   <div class="topbar-actions">
     <button class="tb-icon-btn" onclick="loadAll()" title="Refresh data" style="font-size:1rem;">↻</button>
     <button class="tb-pill green" onclick="openNewClientModal()">+ New Client</button>
-    ${currentUser.role === "admin" ? `<div class="tb-vdivider"></div><a href="/api/admin/users?_t=${encodeURIComponent(internalToken)}" class="tb-icon-btn" title="Manage Team">👥</a>` : ""}
+    ${currentUser.role === "admin" ? `<a class="tb-pill green" href="/api/admin/pharmacies?create=1&_t=${encodeURIComponent(internalToken)}">+ Create New Pharmacy</a><a class="tb-pill" href="/api/admin/master?_t=${encodeURIComponent(internalToken)}">Client Portfolio</a><div class="tb-vdivider"></div><a href="/api/admin/users?_t=${encodeURIComponent(internalToken)}" class="tb-icon-btn" title="Manage Team">👥</a>` : ""}
     <div class="tb-vdivider"></div>
     <div class="user-menu-wrap" style="position:relative;">
       <button id="user-menu-btn" class="tb-user-btn" onclick="toggleUserMenu()">
@@ -465,7 +503,7 @@ tr:hover td{background:#f8fafc;}
           <div style="font-size:.73rem;color:#94a3b8;margin-top:1px;">${esc(currentUser.username)} &middot; ${esc(currentUser.role)}</div>
         </div>
         <a href="/api/admin/change-password?_t=${encodeURIComponent(internalToken)}" style="display:block;padding:10px 14px;font-size:.84rem;color:#374151;text-decoration:none;font-weight:500;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''">🔑 Change Password</a>
-        ${currentUser.role === "admin" ? `<a href="/api/admin/users?_t=${encodeURIComponent(internalToken)}" style="display:block;padding:10px 14px;font-size:.84rem;color:#374151;text-decoration:none;font-weight:500;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''">👥 Manage Team</a>` : ""}
+        ${currentUser.role === "admin" ? `<a href="/api/admin/master?_t=${encodeURIComponent(internalToken)}" style="display:block;padding:10px 14px;font-size:.84rem;color:#374151;text-decoration:none;font-weight:500;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''">🏥 Client Portfolio</a><a href="/api/admin/users?_t=${encodeURIComponent(internalToken)}" style="display:block;padding:10px 14px;font-size:.84rem;color:#374151;text-decoration:none;font-weight:500;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''">👥 Manage Team</a>` : ""}
         <div style="border-top:1px solid #f1f5f9;">
           <a href="#" onclick="event.preventDefault();fetch('/api/logout',{method:'POST'}).then(()=>location.href='/api/login')" style="display:block;padding:10px 14px;font-size:.84rem;color:#dc2626;text-decoration:none;font-weight:600;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background=''">↪ Sign Out</a>
         </div>
@@ -474,6 +512,7 @@ tr:hover td{background:#f8fafc;}
   </div>
 </div>
 <script>
+window.onWizardLoad=window.onWizardLoad||function(){};
 function toggleUserMenu(){var d=document.getElementById('user-menu-dropdown');d.style.display=d.style.display==='none'?'block':'none';}
 document.addEventListener('click',function(e){var w=document.querySelector('.user-menu-wrap');if(w&&!w.contains(e.target)){var d=document.getElementById('user-menu-dropdown');if(d)d.style.display='none';}});
 function openCampaignPanel(cid){
@@ -502,15 +541,21 @@ document.addEventListener('click',function(e){
   <div class="tab active" id="tab-overview" onclick="switchTab('overview')">Overview</div>
   <div class="tab" id="tab-campaigns" onclick="switchTab('campaigns');campaignsLoad()">Campaigns <span class="tab-badge" id="tb-campaigns">—</span></div>
   <div class="tab" id="tab-wizard" onclick="switchTab('wizard')">Setup Wizard</div>
-  <div class="tab" id="tab-distribution" onclick="switchToDistMode()">Distribution</div>
-  <div class="tab" id="tab-visibility-posts" onclick="switchToVPMode()">&#10024; Visibility Posts</div>
+  <div class="tab" id="tab-campaign-content" onclick="switchTab('campaign-content')">Campaign Content</div>
+  <!-- legacy tab ids kept hidden for backward-compatible JS references -->
+  <div class="tab" id="tab-distribution" style="display:none" aria-hidden="true"></div>
+  <div class="tab" id="tab-visibility-posts" style="display:none" aria-hidden="true"></div>
   <div class="tab-sep"></div>
   <div class="tab" id="tab-qa" onclick="switchTab('qa')">Page QA <span class="tab-badge" id="tb-qa">—</span></div>
   <div class="tab" id="tab-live-crawl" onclick="switchTab('live-crawl');lcLoad()">Live Crawl <span class="tab-badge" id="tb-live-crawl">—</span></div>
   <div class="tab" id="tab-system-health" onclick="switchTab('system-health');shLoad();psLoad();ssLoad();liLoad()">System Health <span class="tab-badge" id="tb-system-health">—</span></div>
   <div class="tab-sep"></div>
   <div class="tab" id="tab-rankings" onclick="switchTab('rankings')">Rankings <span class="tab-badge" id="tb-rankings">—</span></div>
+  <div class="tab" id="tab-rank-tracking" onclick="switchTab('rank-tracking');rtLoad()">Rank Tracking <span class="tab-badge" id="tb-rank-tracking">—</span></div>
+  <div class="tab" id="tab-opportunities" onclick="switchTab('opportunities');oppLoad()">Opportunities <span class="tab-badge" id="tb-opportunities">—</span></div>
+  <div class="tab" id="tab-seo-health-score" onclick="switchTab('seo-health-score');seoHealthLoad()">SEO Health <span class="tab-badge" id="tb-seo-health-score">—</span></div>
   <div class="tab" id="tab-index" onclick="switchTab('index')">Index Tracking <span class="tab-badge" id="tb-index">—</span></div>
+  <div class="tab" id="tab-index-dashboard" onclick="switchTab('index-dashboard');idxDashboardLoad()">Index Dashboard <span class="tab-badge" id="tb-index-dashboard">—</span></div>
   <div class="tab" id="tab-sitemaps" onclick="switchTab('sitemaps')">Sitemaps <span class="tab-badge" id="tb-sitemaps">—</span></div>
   <div class="tab-sep"></div>
   <div class="tab" id="tab-templates" onclick="switchTab('templates');templatesLoad();if(typeof packLoad==='function')packLoad()">Templates</div>
@@ -1123,6 +1168,291 @@ document.addEventListener('click',function(e){
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Rank Tracking                                    -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-rank-tracking">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-secondary" id="btn-rt-refresh" onclick="rtLoad()" disabled>Refresh</button>
+      <span id="rt-info" class="running-label">Reads output rank-tracking.json only</span>
+    </div>
+
+    <div id="rt-empty" class="empty">Select a project to load Rank Tracking.</div>
+    <div id="rt-error" class="alert alert-error hidden"></div>
+
+    <div id="rt-content" class="hidden">
+      <div class="overview-grid" style="margin-bottom:18px">
+        <div class="ov-card"><div class="ov-label">Keywords</div><div class="ov-value blue" id="rt-keywords">—</div><div class="ov-sub">queries</div></div>
+        <div class="ov-card"><div class="ov-label">URLs</div><div class="ov-value blue" id="rt-urls">—</div><div class="ov-sub">ranking pages</div></div>
+        <div class="ov-card"><div class="ov-label">Impressions</div><div class="ov-value amber" id="rt-impressions">—</div><div class="ov-sub">GSC</div></div>
+        <div class="ov-card"><div class="ov-label">Clicks</div><div class="ov-value green" id="rt-clicks">—</div><div class="ov-sub">GSC</div></div>
+        <div class="ov-card"><div class="ov-label">Average Position</div><div class="ov-value blue" id="rt-avg-position">—</div><div class="ov-sub">weighted</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px">
+        <div class="ov-card"><div class="ov-label">New Keywords</div><div class="ov-value blue" id="rt-new">—</div></div>
+        <div class="ov-card"><div class="ov-label">Improved</div><div class="ov-value green" id="rt-improved">—</div></div>
+        <div class="ov-card"><div class="ov-label">Dropped</div><div class="ov-value red" id="rt-dropped">—</div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Top Keywords</h2>
+          <div id="rt-generated" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Keyword</th><th>URL</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>Average Position</th>
+              </tr></thead>
+              <tbody id="rt-top-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Opportunities</h2>
+          <div id="rt-opps-sub" class="section-sub">High impressions, low clicks, position 8-30</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Keyword</th><th>URL</th><th>Impressions</th><th>Clicks</th><th>Position</th><th>Opportunity Score</th>
+              </tr></thead>
+              <tbody id="rt-opps-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Movement</h2>
+          <div id="rt-move-sub" class="section-sub">New, improved and dropped keywords</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Keyword</th><th>Previous Position</th><th>Current Position</th><th>Change</th><th>Direction</th>
+              </tr></thead>
+              <tbody id="rt-move-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Opportunity Dashboard                            -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-opportunities">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-secondary" id="btn-opp-refresh" onclick="oppLoad()" disabled>Refresh</button>
+      <span id="opp-info" class="running-label">Reads output seo-opportunities.json only</span>
+    </div>
+
+    <div id="opp-empty" class="empty">Select a project to load SEO opportunities.</div>
+    <div id="opp-error" class="alert alert-error hidden"></div>
+
+    <div id="opp-content" class="hidden">
+      <div class="overview-grid" style="margin-bottom:18px">
+        <div class="ov-card"><div class="ov-label">Total Opportunities</div><div class="ov-value blue" id="opp-total">—</div><div class="ov-sub">all priorities</div></div>
+        <div class="ov-card"><div class="ov-label">Critical</div><div class="ov-value red" id="opp-critical">—</div><div class="ov-sub">fix first</div></div>
+        <div class="ov-card"><div class="ov-label">High</div><div class="ov-value amber" id="opp-high">—</div><div class="ov-sub">next actions</div></div>
+        <div class="ov-card"><div class="ov-label">Medium</div><div class="ov-value blue" id="opp-medium">—</div><div class="ov-sub">optimise</div></div>
+        <div class="ov-card"><div class="ov-label">Low</div><div class="ov-value green" id="opp-low">—</div><div class="ov-sub">monitor</div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Category Breakdown</h2>
+          <div id="opp-generated" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+            <div class="ov-card"><div class="ov-label">Indexing</div><div class="ov-value blue" id="opp-cat-indexing">—</div></div>
+            <div class="ov-card"><div class="ov-label">Ranking</div><div class="ov-value blue" id="opp-cat-ranking">—</div></div>
+            <div class="ov-card"><div class="ov-label">Traffic</div><div class="ov-value amber" id="opp-cat-traffic">—</div></div>
+            <div class="ov-card"><div class="ov-label">Technical</div><div class="ov-value red" id="opp-cat-technical">—</div></div>
+            <div class="ov-card"><div class="ov-label">Content</div><div class="ov-value green" id="opp-cat-content">—</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Top Opportunities</h2>
+          <div id="opp-table-sub" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+            <button class="btn btn-secondary btn-sm opp-priority-filter" data-priority="All" onclick="oppSetPriorityFilter('All')">All</button>
+            <button class="btn btn-secondary btn-sm opp-priority-filter" data-priority="Critical" onclick="oppSetPriorityFilter('Critical')">Critical</button>
+            <button class="btn btn-secondary btn-sm opp-priority-filter" data-priority="High" onclick="oppSetPriorityFilter('High')">High</button>
+            <button class="btn btn-secondary btn-sm opp-priority-filter" data-priority="Medium" onclick="oppSetPriorityFilter('Medium')">Medium</button>
+            <button class="btn btn-secondary btn-sm opp-priority-filter" data-priority="Low" onclick="oppSetPriorityFilter('Low')">Low</button>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <button class="btn btn-secondary btn-sm opp-category-filter" data-category="All" onclick="oppSetCategoryFilter('All')">All Categories</button>
+            <button class="btn btn-secondary btn-sm opp-category-filter" data-category="Indexing" onclick="oppSetCategoryFilter('Indexing')">Indexing</button>
+            <button class="btn btn-secondary btn-sm opp-category-filter" data-category="Ranking" onclick="oppSetCategoryFilter('Ranking')">Ranking</button>
+            <button class="btn btn-secondary btn-sm opp-category-filter" data-category="Traffic" onclick="oppSetCategoryFilter('Traffic')">Traffic</button>
+            <button class="btn btn-secondary btn-sm opp-category-filter" data-category="Technical" onclick="oppSetCategoryFilter('Technical')">Technical</button>
+            <button class="btn btn-secondary btn-sm opp-category-filter" data-category="Content" onclick="oppSetCategoryFilter('Content')">Content</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>URL</th><th>Issue</th><th>Category</th><th>Priority</th><th>Recommended Action</th>
+              </tr></thead>
+              <tbody id="opp-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: SEO Health Score                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-seo-health-score">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-secondary" id="btn-seo-health-refresh" onclick="seoHealthLoad()" disabled>Refresh</button>
+      <button class="btn btn-primary" id="btn-seo-health-live-gsc" onclick="seoHealthLiveGscRefresh()" disabled>Refresh Live GSC Data</button>
+      <span id="seo-health-info" class="running-label">Reads dashboard-seo-intelligence-contract.json with seo-health-score.json fallback</span>
+    </div>
+    <div id="seo-health-live-gsc-status" class="running-label hidden" style="margin:-4px 0 10px"></div>
+    <div id="seo-health-live-gsc-summary" class="alert hidden" style="background:#ecfdf5;color:#166534;border:1px solid #86efac;margin-bottom:12px"></div>
+
+    <div id="seo-health-empty" class="empty">Select a project to load the SEO Health Score.</div>
+    <div id="seo-health-error" class="alert alert-error hidden"></div>
+    <div id="seo-health-fallback-note" class="alert hidden" style="background:#fef3c7;color:#92400e;border:1px solid #fcd34d;margin-bottom:12px"></div>
+
+    <div id="seo-health-content" class="hidden">
+      <div class="overview-grid" style="margin-bottom:18px">
+        <div class="ov-card"><div class="ov-label" id="seo-health-label-score">SEO Health Score</div><div class="ov-value blue" id="seo-health-overall">—</div><div class="ov-sub" id="seo-health-score-sub">0-100</div></div>
+        <div class="ov-card"><div class="ov-label" id="seo-health-label-grade">Grade</div><div class="ov-value red" id="seo-health-grade">—</div><div class="ov-sub" id="seo-health-grade-sub">A-F</div></div>
+        <div class="ov-card"><div class="ov-label" id="seo-health-label-projected">Projected Near-Term Score</div><div class="ov-value blue" id="seo-health-projected">—</div><div class="ov-sub" id="seo-health-projected-sub">forecast</div></div>
+        <div class="ov-card"><div class="ov-label" id="seo-health-label-strongest">Strongest Area</div><div class="ov-value green" style="font-size:1.05rem" id="seo-health-strongest">—</div><div class="ov-sub" id="seo-health-strongest-sub">category</div></div>
+        <div class="ov-card"><div class="ov-label" id="seo-health-label-weakest">Weakest Area</div><div class="ov-value red" style="font-size:1.05rem" id="seo-health-weakest">—</div><div class="ov-sub" id="seo-health-weakest-sub">category</div></div>
+        <div class="ov-card"><div class="ov-label">Active Pages</div><div class="ov-value blue" id="seo-health-page-count">—</div><div class="ov-sub">dataset pages</div></div>
+        <div class="ov-card"><div class="ov-label">Malformed URLs</div><div class="ov-value blue" id="seo-health-malformed">—</div><div class="ov-sub">technical count</div></div>
+        <div class="ov-card"><div class="ov-label">Generated At</div><div class="ov-value blue" style="font-size:1.05rem" id="seo-health-generated">—</div><div class="ov-sub">artifact timestamp</div></div>
+      </div>
+      <div id="seo-health-helper" class="running-label" style="margin:-8px 0 16px"></div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2 id="seo-health-label-categories">Score Breakdown</h2>
+          <div class="section-sub">Category scores read from the intelligence contract</div>
+        </div>
+        <div class="section-body">
+          <div id="seo-health-category-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2 id="seo-health-label-issues">Why the Score Is Low</h2>
+          <div class="section-sub">Top issues from the intelligence contract</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Reason</th><th>Severity</th><th>Recommended Action</th>
+              </tr></thead>
+              <tbody id="seo-health-issues-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2 id="seo-health-label-wins">Fastest Improvements</h2>
+          <div class="section-sub">Top quick wins from the intelligence contract</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>URL</th><th>Issue</th><th>Impact</th><th>Recommended Action</th>
+              </tr></thead>
+              <tbody id="seo-health-wins-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2 id="seo-health-label-forecast">Improvement Forecast</h2>
+          <div class="section-sub">Directional score projections from the intelligence contract</div>
+        </div>
+        <div class="section-body">
+          <div id="seo-health-forecast-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2 id="seo-health-label-diagnostics">Internal Diagnostics</h2>
+          <div class="section-sub">Source-backed dataset checks from the intelligence contract</div>
+        </div>
+        <div class="section-body">
+          <div class="overview-grid" id="seo-health-diagnostics-grid"></div>
+        </div>
+      </div>
+
+      <div id="seo-health-legacy-sections" class="hidden">
+      <div class="section">
+        <div class="section-head">
+          <h2>Component Scores</h2>
+          <div class="section-sub">Scores, weights and confidence read from seo-health-score.json</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Component</th><th>Score</th><th>Weight</th><th>Confidence</th>
+              </tr></thead>
+              <tbody id="seo-health-components-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Trends</h2>
+          <div class="section-sub">Trend placeholders from seo-health-score.json</div>
+        </div>
+        <div class="section-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
+            <div class="ov-card"><div class="ov-label">Previous Score</div><div class="ov-value blue" id="seo-health-prev">—</div></div>
+            <div class="ov-card"><div class="ov-label">Score Change</div><div class="ov-value blue" id="seo-health-change">—</div></div>
+            <div class="ov-card"><div class="ov-label">Direction</div><div class="ov-value blue" id="seo-health-direction">—</div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
 <!-- TAB: Index Tracking                                    -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div class="tab-panel" id="panel-index">
@@ -1154,9 +1484,101 @@ document.addEventListener('click',function(e){
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Index Dashboard                                  -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-index-dashboard">
+  <div class="main">
+    <div class="actions">
+      <button class="btn btn-secondary" id="btn-idx-refresh" onclick="idxDashboardLoad()" disabled>Refresh</button>
+      <span id="idx-dashboard-info" class="running-label">Reads output index-dashboard.json only</span>
+    </div>
+
+    <div id="idx-dashboard-empty" class="empty">Select a project to load the Index Dashboard.</div>
+    <div id="idx-dashboard-error" class="alert alert-error hidden"></div>
+
+    <div id="idx-dashboard-content" class="hidden">
+      <div class="overview-grid" style="margin-bottom:18px">
+        <div class="ov-card"><div class="ov-label">Total URLs</div><div class="ov-value blue" id="idx-total">—</div><div class="ov-sub">registry</div></div>
+        <div class="ov-card"><div class="ov-label">Indexed</div><div class="ov-value green" id="idx-indexed">—</div><div class="ov-sub">GSC</div></div>
+        <div class="ov-card"><div class="ov-label">Excluded</div><div class="ov-value red" id="idx-excluded">—</div><div class="ov-sub">GSC</div></div>
+        <div class="ov-card"><div class="ov-label">Not Indexed</div><div class="ov-value red" id="idx-not-indexed">—</div><div class="ov-sub">needs work</div></div>
+        <div class="ov-card"><div class="ov-label">Opportunities</div><div class="ov-value amber" id="idx-opportunities">—</div><div class="ov-sub">prioritised</div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Index Dashboard</h2>
+          <div id="idx-generated" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px">
+            <div class="ov-card"><div class="ov-label">Known To Google</div><div class="ov-value blue" id="idx-known">—</div></div>
+            <div class="ov-card"><div class="ov-label">Crawled</div><div class="ov-value blue" id="idx-crawled">—</div></div>
+            <div class="ov-card"><div class="ov-label">Discovered</div><div class="ov-value blue" id="idx-discovered">—</div></div>
+            <div class="ov-card"><div class="ov-label">Malformed</div><div class="ov-value red" id="idx-malformed">—</div></div>
+            <div class="ov-card"><div class="ov-label">Duplicates</div><div class="ov-value amber" id="idx-duplicates">—</div></div>
+            <div class="ov-card"><div class="ov-label">Missing Lifecycle</div><div class="ov-value amber" id="idx-missing">—</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Service Breakdown</h2>
+          <div class="section-sub">Metrics read from index-dashboard.json</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Service</th><th>URLs</th><th>Indexed</th><th>Impressions</th><th>Clicks</th><th>Average Position</th>
+              </tr></thead>
+              <tbody id="idx-service-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Top Opportunities</h2>
+          <div id="idx-opp-sub" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>URL</th><th>Issue</th><th>Status</th><th>Priority</th>
+              </tr></thead>
+              <tbody id="idx-opps-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Validation Status</h2>
+          <div id="idx-validation-sub" class="section-sub">—</div>
+        </div>
+        <div class="section-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
+            <div class="ov-card"><div class="ov-label">Registry</div><div class="ov-value green" id="idx-val-registry">—</div></div>
+            <div class="ov-card"><div class="ov-label">Lifecycle</div><div class="ov-value green" id="idx-val-lifecycle">—</div></div>
+            <div class="ov-card"><div class="ov-label">Health Audit</div><div class="ov-value green" id="idx-val-health">—</div></div>
+            <div class="ov-card"><div class="ov-label">Dashboard</div><div class="ov-value green" id="idx-val-dashboard">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 const SERVER_DEFAULT_SLUG = ${JSON.stringify(defaultSlug)};
 const INTERNAL_TOKEN      = ${JSON.stringify(internalToken)};
+const IPD_DASHBOARD_BUILD_TS = ${JSON.stringify(dashboardBuildAt)};
 const enc = encodeURIComponent;
 
 
@@ -1202,6 +1624,7 @@ async function apiFetch(path, opts){
   }
   return r;
 }
+window.apiFetch = apiFetch;
 function set(id,v){ const el=$(id); if(el) el.textContent=v??'—'; }
 function hide(id){ $(id)?.classList.add('hidden'); }
 function show(id){ $(id)?.classList.remove('hidden'); }
@@ -1247,7 +1670,84 @@ function chgCell(r){
 }
 
 // ── Tabs ──────────────────────────────────────────────────────────
+let activeCcSubTab = 'generated-assets';
+
+function ccSubTabSwitch(sub, opts) {
+  activeCcSubTab = sub || 'generated-assets';
+  try { localStorage.setItem('dashboard_cc_subtab', activeCcSubTab); } catch (_) {}
+
+  document.querySelectorAll('.cc-subtab').forEach(function(el) {
+    el.classList.toggle('active', el.getAttribute('data-cc-sub') === activeCcSubTab);
+  });
+
+  var gen = $('cc-sub-generated-assets');
+  var imgLib = $('cc-sub-image-library');
+  var dist = $('panel-distribution');
+  var showDist = activeCcSubTab === 'page-distribution' || activeCcSubTab === 'visibility-posts';
+
+  if (gen) gen.style.display = activeCcSubTab === 'generated-assets' ? '' : 'none';
+  if (imgLib) imgLib.style.display = activeCcSubTab === 'image-library' ? '' : 'none';
+  if (dist) {
+    dist.style.display = showDist ? '' : 'none';
+    dist.classList.toggle('cc-sub-visible', showDist);
+  }
+
+  if (activeCcSubTab === 'generated-assets') {
+    ccLoadWhenReady();
+  } else if (activeCcSubTab === 'image-library') {
+    if (typeof ipdLoad === 'function') ipdLoad();
+  } else if (activeCcSubTab === 'page-distribution') {
+    ccActivateDistPageMode();
+  } else if (activeCcSubTab === 'visibility-posts') {
+    ccActivateDistVisibilityMode();
+  }
+}
+window.ccSubTabSwitch = ccSubTabSwitch;
+
+function ccActivateDistPageMode() {
+  var dp = $('panel-distribution');
+  if (dp) dp.classList.remove('vp-active');
+  var pm = $('dist-page-mode');
+  var vm = $('dist-visibility-mode');
+  if (pm) pm.style.display = '';
+  if (vm) vm.style.display = 'none';
+  if (typeof vpModeSwitch === 'function') vpModeSwitch('page');
+  if (typeof distLoad === 'function') distLoad();
+  if (typeof vidLoad === 'function') vidLoad();
+}
+
+function ccActivateDistVisibilityMode() {
+  var dp = $('panel-distribution');
+  if (dp) dp.classList.add('vp-active');
+  var pm = $('dist-page-mode');
+  var vm = $('dist-visibility-mode');
+  if (pm) pm.style.display = 'none';
+  if (vm) { vm.style.display = 'block'; vm.style.visibility = 'visible'; }
+  if (typeof vpModeSwitch === 'function') vpModeSwitch('visibility');
+  if (typeof distLoad === 'function') distLoad();
+  if (typeof vidLoad === 'function') vidLoad();
+}
+
+function ccMountDistributionPanel() {
+  var ccMain = $('panel-campaign-content') && $('panel-campaign-content').querySelector('.main');
+  var dist = $('panel-distribution');
+  if (ccMain && dist && dist.parentElement !== ccMain) ccMain.appendChild(dist);
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', ccMountDistributionPanel);
+} else {
+  ccMountDistributionPanel();
+}
+
 function switchTab(tab){
+  var subOverride = null;
+  if (tab === 'distribution') {
+    subOverride = 'page-distribution';
+    tab = 'campaign-content';
+  } else if (tab === 'visibility-posts') {
+    subOverride = 'visibility-posts';
+    tab = 'campaign-content';
+  }
   document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(el=>el.classList.remove('active'));
   $('tab-'+tab).classList.add('active');
@@ -1255,7 +1755,20 @@ function switchTab(tab){
   activeTab=tab;
   if(tab==='wizard' && activeSlug && !wizardReady) loadWizardFrame(activeSlug, 8);
   if(tab==='campaigns') campaignsLoad();
+  if(tab==='campaign-content') {
+    ccMountDistributionPanel();
+    var sub = subOverride || 'generated-assets';
+    if (!subOverride) {
+      try { sub = localStorage.getItem('dashboard_cc_subtab') || 'generated-assets'; } catch (_) {}
+    }
+    ccSubTabSwitch(sub);
+  }
 }
+function ccLoadWhenReady(){
+  if(typeof ccLoad==='function'){ ccLoad(); return; }
+  setTimeout(function(){ if(typeof ccLoad==='function') ccLoad(); }, 0);
+}
+window.ccLoadWhenReady=ccLoadWhenReady;
 
 // ── Overview: Distribution Quick-Action ───────────────────────────
 function ovDistGenerate(){
@@ -1296,7 +1809,7 @@ function ovDistGenerate(){
     if(btn){ btn.disabled=false; btn.textContent='Generate'; }
     try {
       var d=JSON.parse(e.data);
-      if(status){ status.style.color='#86efac'; status.textContent='\u2713 Done \u2014 '+d.pageTitle+' content saved. Click Distribution tab to view.'; }
+      if(status){ status.style.color='#86efac'; status.textContent='\u2713 Done \u2014 '+d.pageTitle+' content saved. Open Campaign Content \u2192 Page Distribution to view.'; }
     } catch(_){ if(status){ status.style.color='#86efac'; status.textContent='\u2713 Done!'; } }
     setTimeout(function(){ if(barWrap){ barWrap.style.display='none'; } }, 3000);
   });
@@ -1424,8 +1937,18 @@ function campaignView(campaignId){
 async function campaignsDelete(campaignId){
   const slug=activeSlug; if(!slug) return;
   if(!confirm('Delete this campaign? This cannot be undone.')) return;
-  await apiFetch('/api/campaigns/'+enc(slug)+'/'+enc(campaignId),{method:'DELETE'});
-  campaignsLoad();
+  try{
+    const res=await apiFetch('/api/campaigns/'+enc(slug)+'/'+enc(campaignId),{method:'DELETE'});
+    if(!res.ok){
+      const d=await res.json().catch(()=>({}));
+      showBanner(d.error||'Failed to delete campaign (HTTP '+res.status+')','error');
+      return;
+    }
+    showBanner('Campaign deleted','success');
+    campaignsLoad();
+  }catch(e){
+    showBanner(e.message||'Failed to delete campaign','error');
+  }
 }
 
 async function campaignsGenerateHub(campaignId,moneyUrl,moneyKw){
@@ -1578,7 +2101,7 @@ async function loadAll(){
   localStorage.setItem('dashboard_slug',slug);
   $('loading-text').textContent='Loading '+slug+'…';
   show('loading-overlay');
-  ['btn-run-all','btn-run-kt','btn-run-it','btn-run-qa','btn-run-pp-qa-ov',
+  ['btn-run-all','btn-run-kt','btn-run-it','btn-run-qa','btn-run-pp-qa-ov','btn-idx-refresh','btn-rt-refresh','btn-opp-refresh','btn-seo-health-refresh','btn-seo-health-live-gsc',
    'btn-kt-run','btn-kt-refresh','btn-it-run','btn-it-refresh','btn-it-copy','btn-qa-refresh','btn-pp-qa','btn-pp-qa-head','btn-lc-run','btn-sh-run','btn-ss-run','btn-li-run','btn-upgrade-list']
     .forEach(id=>{ const el=$(id); if(el) el.disabled=false; });
   $('wizard-open-tab').href='/api/setup?slug='+enc(slug)+(INTERNAL_TOKEN?'&_t='+encodeURIComponent(INTERNAL_TOKEN):'');
@@ -1591,6 +2114,14 @@ async function loadAll(){
   clearTimeout(_overlayGuard);
   hide('loading-overlay');
   if(activeTab==='wizard' && !wizardReady) loadWizardFrame(slug,8);
+  if(activeTab==='index-dashboard') idxDashboardLoad();
+  if(activeTab==='rank-tracking') rtLoad();
+  if(activeTab==='opportunities') oppLoad();
+  if(activeTab==='seo-health-score') seoHealthLoad();
+  if(activeTab==='campaign-content') {
+    ccMountDistributionPanel();
+    ccSubTabSwitch(activeCcSubTab || 'generated-assets');
+  }
 }
 
 // ── Wizard iframe ─────────────────────────────────────────────────
@@ -1612,6 +2143,7 @@ function onWizardLoad(){
   hide('wizard-loading');
   wizardReady=true;
 }
+window.onWizardLoad=onWizardLoad;
 
 function wizardGoStage(n){
   if(!activeSlug){ alert('Select a project first.'); return; }
@@ -3107,6 +3639,646 @@ async function itCopyNotIndexed(){
   }catch(_){ alert(urls.join('\\n')); }
 }
 
+// ── Rank Tracking ─────────────────────────────────────────────────
+async function rtLoad(){
+  if(!activeSlug) return;
+  hide('rt-error');
+  hide('rt-content');
+  show('rt-empty');
+  set('rt-empty','Loading Rank Tracking…');
+  try{
+    const res=await apiFetch('/api/rank-tracking?projectSlug='+enc(activeSlug));
+    const data=await res.json();
+    if(!res.ok || !data.report){
+      throw new Error(data.error || 'Rank Tracking data unavailable');
+    }
+    rtRender(data.report);
+  }catch(e){
+    $('rt-error').textContent='Failed: '+(e.message||e);
+    show('rt-error');
+    set('rt-empty','No Rank Tracking data available.');
+  }
+}
+
+function rtNum(n){
+  if(n===null||n===undefined) return '—';
+  return Number(n).toLocaleString('en-GB');
+}
+
+function rtPos(n){
+  if(n===null||n===undefined) return '—';
+  return Number(n).toFixed(2);
+}
+
+function rtCtr(n){
+  if(n===null||n===undefined) return '—';
+  return (Number(n)*100).toFixed(2)+'%';
+}
+
+function rtUrlCell(url){
+  const shortUrl=String(url||'').replace(/^https?:\\/\\/[^/]+/,'');
+  return '<a href="'+esc(url||'#')+'" target="_blank" style="color:var(--brand);font-family:monospace;font-size:.78rem">'+esc(shortUrl||'—')+'</a>';
+}
+
+function rtDirectionBadge(direction){
+  const d=String(direction||'same').toLowerCase();
+  const label=d==='up'?'Improved':d==='down'?'Dropped':d==='new'?'New':'Same';
+  const bg=d==='up'?'#dcfce7':d==='down'?'#fee2e2':d==='new'?'#dbeafe':'#f1f5f9';
+  const color=d==='up'?'#166534':d==='down'?'#991b1b':d==='new'?'#1d4ed8':'#64748b';
+  return '<span style="font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:10px;background:'+bg+';color:'+color+'">'+label+'</span>';
+}
+
+function rtRowStyle(direction){
+  const d=String(direction||'').toLowerCase();
+  if(d==='up') return 'background:#f0fdf4';
+  if(d==='down') return 'background:#fef2f2';
+  if(d==='new') return 'background:#eff6ff';
+  return '';
+}
+
+function rtChange(record){
+  if(record.positionChange===null||record.positionChange===undefined) return '—';
+  const n=Number(record.positionChange);
+  return (n>0?'+':'')+n.toFixed(2);
+}
+
+function rtRender(report){
+  const s=report.summary||{};
+  hide('rt-empty');
+  hide('rt-error');
+  show('rt-content');
+  set('tb-rank-tracking', s.keywordsCount ?? '—');
+  set('rt-keywords', rtNum(s.keywordsCount));
+  set('rt-urls', rtNum(s.urlsCount));
+  set('rt-impressions', rtNum(s.totalImpressions));
+  set('rt-clicks', rtNum(s.totalClicks));
+  set('rt-avg-position', rtPos(s.averagePosition));
+  set('rt-new', rtNum(s.newKeywords));
+  set('rt-improved', rtNum(s.improvedKeywords));
+  set('rt-dropped', rtNum(s.droppedKeywords));
+  set('rt-generated', report.generatedAt ? 'Generated '+fmtDateTime(report.generatedAt) : '—');
+
+  const topKeywords=report.topKeywordsByImpressions||[];
+  $('rt-top-tbody').innerHTML=topKeywords.map(function(row){
+    return '<tr style="'+rtRowStyle(row.direction)+'">'+
+      '<td style="font-weight:700">'+esc(row.keyword||'—')+'</td>'+
+      '<td>'+rtUrlCell(row.url)+'</td>'+
+      '<td>'+rtNum(row.impressions)+'</td>'+
+      '<td>'+rtNum(row.clicks)+'</td>'+
+      '<td>'+rtCtr(row.ctr)+'</td>'+
+      '<td>'+rtPos(row.averagePosition)+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="6" style="text-align:center;color:#94a3b8">No top keyword data</td></tr>';
+
+  const opportunities=report.topRankingOpportunities||[];
+  set('rt-opps-sub', opportunities.length+' opportunit'+(opportunities.length===1?'y':'ies'));
+  $('rt-opps-tbody').innerHTML=opportunities.map(function(row){
+    return '<tr style="'+rtRowStyle(row.direction)+'">'+
+      '<td style="font-weight:700">'+esc(row.keyword||'—')+'</td>'+
+      '<td>'+rtUrlCell(row.url)+'</td>'+
+      '<td>'+rtNum(row.impressions)+'</td>'+
+      '<td>'+rtNum(row.clicks)+'</td>'+
+      '<td>'+rtPos(row.averagePosition)+'</td>'+
+      '<td style="font-weight:800;color:#1e3a5f">'+rtNum(row.opportunityScore)+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="6" style="text-align:center;color:#94a3b8">No ranking opportunities</td></tr>';
+
+  const movement=report.movementRecords||[];
+  set('rt-move-sub', movement.length+' movement record'+(movement.length===1?'':'s'));
+  $('rt-move-tbody').innerHTML=movement.map(function(row){
+    return '<tr style="'+rtRowStyle(row.direction)+'">'+
+      '<td style="font-weight:700">'+esc(row.keyword||'—')+'</td>'+
+      '<td>'+rtPos(row.previousAveragePosition)+'</td>'+
+      '<td>'+rtPos(row.averagePosition)+'</td>'+
+      '<td>'+rtChange(row)+'</td>'+
+      '<td>'+rtDirectionBadge(row.direction)+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="5" style="text-align:center;color:#94a3b8">No movement data</td></tr>';
+}
+
+// ── Opportunity Dashboard ─────────────────────────────────────────
+let _oppReport=null;
+let _oppPriorityFilter='All';
+let _oppCategoryFilter='All';
+
+async function oppLoad(){
+  if(!activeSlug) return;
+  hide('opp-error');
+  hide('opp-content');
+  show('opp-empty');
+  set('opp-empty','Loading SEO opportunities…');
+  try{
+    const res=await apiFetch('/api/seo-opportunities?projectSlug='+enc(activeSlug));
+    const data=await res.json();
+    if(!res.ok || !data.report){
+      throw new Error(data.error || 'SEO Opportunity data unavailable');
+    }
+    _oppReport=data.report;
+    _oppPriorityFilter='All';
+    _oppCategoryFilter='All';
+    oppRender(data.report);
+  }catch(e){
+    $('opp-error').textContent='Failed: '+(e.message||e);
+    show('opp-error');
+    set('opp-empty','No SEO Opportunity data available.');
+  }
+}
+
+function oppNum(n){
+  if(n===null||n===undefined) return '—';
+  return Number(n).toLocaleString('en-GB');
+}
+
+function oppUrlCell(url){
+  const shortUrl=String(url||'').replace(/^https?:\\/\\/[^/]+/,'');
+  return '<a href="'+esc(url||'#')+'" target="_blank" style="color:var(--brand);font-family:monospace;font-size:.78rem">'+esc(shortUrl||url||'—')+'</a>';
+}
+
+function oppPriorityBadge(priority){
+  const p=String(priority||'').toLowerCase();
+  const label=p? p.charAt(0).toUpperCase()+p.slice(1) : '—';
+  const bg=p==='critical'?'#fee2e2':p==='high'?'#fef3c7':p==='medium'?'#dbeafe':'#dcfce7';
+  const color=p==='critical'?'#991b1b':p==='high'?'#92400e':p==='medium'?'#1d4ed8':'#166534';
+  return '<span style="font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:10px;background:'+bg+';color:'+color+'">'+esc(label)+'</span>';
+}
+
+function oppCategoryBadge(category){
+  const c=String(category||'');
+  const bg=c==='Technical'?'#fee2e2':c==='Traffic'?'#fef3c7':c==='Content'?'#dcfce7':'#dbeafe';
+  const color=c==='Technical'?'#991b1b':c==='Traffic'?'#92400e':c==='Content'?'#166534':'#1d4ed8';
+  return '<span style="font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:10px;background:'+bg+';color:'+color+'">'+esc(c||'—')+'</span>';
+}
+
+function oppSetFilterButtons(){
+  document.querySelectorAll('.opp-priority-filter').forEach(function(btn){
+    const active=btn.dataset.priority===_oppPriorityFilter;
+    btn.style.background=active?'#1e3a5f':'#f1f5f9';
+    btn.style.color=active?'#fff':'var(--text)';
+  });
+  document.querySelectorAll('.opp-category-filter').forEach(function(btn){
+    const active=btn.dataset.category===_oppCategoryFilter;
+    btn.style.background=active?'#1e3a5f':'#f1f5f9';
+    btn.style.color=active?'#fff':'var(--text)';
+  });
+}
+
+function oppSetPriorityFilter(priority){
+  _oppPriorityFilter=priority;
+  oppRenderTable();
+}
+
+function oppSetCategoryFilter(category){
+  _oppCategoryFilter=category;
+  oppRenderTable();
+}
+
+function oppRender(report){
+  _oppReport=report;
+  const s=report.summary||{};
+  const byCategory=s.byCategory||{};
+  hide('opp-empty');
+  hide('opp-error');
+  show('opp-content');
+  set('tb-opportunities', s.total ?? '—');
+  set('opp-total', oppNum(s.total));
+  set('opp-critical', oppNum(s.critical));
+  set('opp-high', oppNum(s.high));
+  set('opp-medium', oppNum(s.medium));
+  set('opp-low', oppNum(s.low));
+  set('opp-cat-indexing', oppNum(byCategory.Indexing));
+  set('opp-cat-ranking', oppNum(byCategory.Ranking));
+  set('opp-cat-traffic', oppNum(byCategory.Traffic));
+  set('opp-cat-technical', oppNum(byCategory.Technical));
+  set('opp-cat-content', oppNum(byCategory.Content));
+  set('opp-generated', report.generatedAt ? 'Generated '+fmtDateTime(report.generatedAt) : '—');
+  oppRenderTable();
+}
+
+function oppRenderTable(){
+  if(!_oppReport) return;
+  oppSetFilterButtons();
+  const rows=(_oppReport.opportunities||[]).filter(function(row){
+    const priorityOk=_oppPriorityFilter==='All'||row.priority===_oppPriorityFilter;
+    const categoryOk=_oppCategoryFilter==='All'||row.category===_oppCategoryFilter;
+    return priorityOk&&categoryOk;
+  });
+  set('opp-table-sub', 'Filter: '+_oppPriorityFilter+' / '+_oppCategoryFilter);
+  $('opp-tbody').innerHTML=rows.map(function(row){
+    return '<tr>'+
+      '<td>'+oppUrlCell(row.url)+'</td>'+
+      '<td style="font-weight:700">'+esc(row.issue||'—')+'</td>'+
+      '<td>'+oppCategoryBadge(row.category)+'</td>'+
+      '<td>'+oppPriorityBadge(row.priority)+'</td>'+
+      '<td style="font-size:.8rem;color:#374151;line-height:1.4">'+esc(row.recommendedAction||'—')+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="5" style="text-align:center;color:#94a3b8">No opportunities match the selected filters</td></tr>';
+}
+
+// ── SEO Health Score ───────────────────────────────────────────────
+async function seoHealthLiveGscRefresh(){
+  if(!activeSlug || seoHealthLiveGscRunning) return;
+  hide('seo-health-error');
+  hide('seo-health-live-gsc-summary');
+  show('seo-health-live-gsc-status');
+  set('seo-health-live-gsc-status','Starting live GSC refresh…');
+  seoHealthLiveGscRunning=true;
+  const btn=$('btn-seo-health-live-gsc');
+  const refreshBtn=$('btn-seo-health-refresh');
+  if(btn) btn.disabled=true;
+  if(refreshBtn) refreshBtn.disabled=true;
+  try{
+    const startRes=await apiFetch('/api/dashboard-seo-intelligence/live-refresh',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ projectSlug: activeSlug })
+    });
+    const startData=await startRes.json();
+    if(!startRes.ok || !startData.jobId){
+      throw new Error(startData.error || 'Failed to start live GSC refresh');
+    }
+    const jobId=startData.jobId;
+    let elapsed=0;
+    while(elapsed < 960){
+      await new Promise(function(resolve){ setTimeout(resolve, 3000); });
+      elapsed+=3;
+      const pollRes=await apiFetch('/api/dashboard-seo-intelligence/live-refresh/'+encodeURIComponent(jobId));
+      const pollData=await pollRes.json();
+      if(pollData.status==='running'){
+        set('seo-health-live-gsc-status','Live GSC refresh running… ('+(pollData.elapsed||elapsed)+'s)');
+        continue;
+      }
+      if(!pollData.success){
+        throw new Error(pollData.error || 'Live GSC refresh failed');
+      }
+      const before=pollData.before||{};
+      const after=pollData.after||{};
+      hide('seo-health-live-gsc-status');
+      show('seo-health-live-gsc-summary');
+      set('seo-health-live-gsc-summary',
+        'Live GSC refresh complete in '+Math.round((pollData.runtimeMs||0)/1000)+'s using '+(pollData.gscPropertyUsed||'GSC property')+'. '+
+        'Score: '+(before.score??'—')+' → '+(after.score??'—')+'. '+
+        'Indexed: '+(before.indexed??'—')+' → '+(after.indexed??'—')+'. '+
+        'Not indexed: '+(before.notIndexed??'—')+' → '+(after.notIndexed??'—')+'. '+
+        'Lifecycle gaps: '+(before.lifecycleGaps??'—')+' → '+(after.lifecycleGaps??'—')+'.'
+      );
+      await seoHealthLoad();
+      return;
+    }
+    throw new Error('Live GSC refresh timed out while waiting for completion');
+  }catch(e){
+    hide('seo-health-live-gsc-status');
+    $('seo-health-error').textContent='Live GSC refresh failed: '+(e.message||e);
+    show('seo-health-error');
+  }finally{
+    seoHealthLiveGscRunning=false;
+    if(btn) btn.disabled=!activeSlug;
+    if(refreshBtn) refreshBtn.disabled=!activeSlug;
+  }
+}
+var seoHealthLiveGscRunning=false;
+
+async function seoHealthLoad(){
+  if(!activeSlug) return;
+  hide('seo-health-error');
+  hide('seo-health-fallback-note');
+  hide('seo-health-content');
+  show('seo-health-empty');
+  set('seo-health-empty','Loading SEO Health Intelligence…');
+  try{
+    const contractRes=await apiFetch('/api/dashboard-seo-intelligence?projectSlug='+enc(activeSlug));
+    const contractData=await contractRes.json();
+    if(contractRes.ok && contractData.contract){
+      seoHealthRenderContract(contractData.contract);
+      return;
+    }
+    const res=await apiFetch('/api/seo-health-score?projectSlug='+enc(activeSlug));
+    const data=await res.json();
+    if(!res.ok || !data.report){
+      throw new Error(contractData.error || data.error || 'SEO Health data unavailable');
+    }
+    seoHealthRender(data.report);
+    show('seo-health-fallback-note');
+    set('seo-health-fallback-note','Intelligence contract not found. Showing seo-health-score.json fallback only.');
+  }catch(e){
+    $('seo-health-error').textContent='Failed: '+(e.message||e);
+    show('seo-health-error');
+    set('seo-health-empty','No SEO Health data available.');
+  }
+}
+
+function seoHealthNum(n){
+  if(n===null||n===undefined) return '—';
+  return Number(n).toLocaleString('en-GB', { maximumFractionDigits: 2 });
+}
+
+function seoHealthUrlCell(url, displayUrl){
+  const shortUrl=displayUrl || String(url||'').replace(/^https?:\\/\\/[^/]+/,'');
+  return '<a href="'+esc(url||'#')+'" target="_blank" style="color:var(--brand);font-family:monospace;font-size:.78rem">'+esc(shortUrl||url||'—')+'</a>';
+}
+
+function seoHealthBadge(text, kind){
+  const value=String(text||'—');
+  const lower=value.toLowerCase();
+  let bg='#f1f5f9', color='#475569';
+  if(kind==='priority'){
+    bg=lower==='critical'?'#fee2e2':lower==='high'?'#fef3c7':lower==='medium'?'#dbeafe':'#dcfce7';
+    color=lower==='critical'?'#991b1b':lower==='high'?'#92400e':lower==='medium'?'#1d4ed8':'#166534';
+  } else if(kind==='severity'){
+    bg=lower==='critical'?'#fee2e2':lower==='high'?'#fef3c7':lower==='medium'?'#dbeafe':'#dcfce7';
+    color=lower==='critical'?'#991b1b':lower==='high'?'#92400e':lower==='medium'?'#1d4ed8':'#166534';
+  } else if(kind==='confidence'){
+    bg=lower==='high'?'#dcfce7':lower==='medium'?'#fef3c7':'#fee2e2';
+    color=lower==='high'?'#166534':lower==='medium'?'#92400e':'#991b1b';
+  } else if(kind==='status'){
+    bg=lower==='strong'||lower==='fair'?'#dcfce7':lower==='weak'||lower==='needs_attention'?'#fef3c7':'#fee2e2';
+    color=lower==='strong'||lower==='fair'?'#166534':lower==='weak'||lower==='needs_attention'?'#92400e':'#991b1b';
+  } else if(kind==='grade'){
+    bg=value==='A'||value==='B'?'#dcfce7':value==='C'?'#fef3c7':'#fee2e2';
+    color=value==='A'||value==='B'?'#166534':value==='C'?'#92400e':'#991b1b';
+  }
+  return '<span style="font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:10px;background:'+bg+';color:'+color+'">'+esc(value)+'</span>';
+}
+
+function seoHealthGradeClass(grade){
+  return (grade==='A'||grade==='B')?'green':grade==='C'?'amber':'red';
+}
+
+function seoHealthEvidence(evidence){
+  if(!evidence || typeof evidence!=='object') return '—';
+  const entries=Object.entries(evidence).slice(0,4);
+  if(!entries.length) return '—';
+  return entries.map(function(pair){
+    const value=Array.isArray(pair[1]) ? pair[1].join(', ') : String(pair[1]);
+    return '<div><strong>'+esc(pair[0])+':</strong> '+esc(value)+'</div>';
+  }).join('');
+}
+
+function seoHealthApplyLabels(labels){
+  if(!labels) return;
+  if(labels.score) set('seo-health-label-score', labels.score);
+  if(labels.grade) set('seo-health-label-grade', labels.grade);
+  if(labels.projectedNearTermScore) set('seo-health-label-projected', labels.projectedNearTermScore);
+  if(labels.strongestCategory) set('seo-health-label-strongest', labels.strongestCategory);
+  if(labels.weakestCategory) set('seo-health-label-weakest', labels.weakestCategory);
+  if(labels.categoryCards) set('seo-health-label-categories', labels.categoryCards);
+  if(labels.topIssues) set('seo-health-label-issues', labels.topIssues);
+  if(labels.quickWins) set('seo-health-label-wins', labels.quickWins);
+  if(labels.forecastCards) set('seo-health-label-forecast', labels.forecastCards);
+  if(labels.internalDiagnostics) set('seo-health-label-diagnostics', labels.internalDiagnostics);
+}
+
+function seoHealthRenderContract(contract){
+  hide('seo-health-empty');
+  hide('seo-health-error');
+  hide('seo-health-fallback-note');
+  show('seo-health-content');
+  hide('seo-health-legacy-sections');
+
+  const summary=contract.summaryCard||{};
+  const diagnostics=contract.internalDiagnostics||{};
+  const labels=contract.displayLabels||{};
+  seoHealthApplyLabels(labels);
+
+  set('tb-seo-health-score', summary.currentScoreLabel || seoHealthNum(summary.currentScore));
+  set('seo-health-overall', summary.currentScoreLabel || seoHealthNum(summary.currentScore));
+  set('seo-health-score-sub', summary.scoreStatusLabel || '0-100');
+  set('seo-health-grade', summary.grade || '—');
+  const gradeEl=$('seo-health-grade');
+  if(gradeEl) gradeEl.className='ov-value '+seoHealthGradeClass(summary.grade);
+  set('seo-health-grade-sub', summary.gradeLabel || 'A-F');
+  set('seo-health-projected', summary.projectedNearTermScoreLabel || seoHealthNum(summary.projectedNearTermScore));
+  set('seo-health-projected-sub', summary.projectedNearTermGradeLabel ? summary.projectedNearTermGradeLabel+' ('+(summary.projectedNearTermGrade||'—')+')' : 'forecast');
+  set('seo-health-strongest', summary.strongestCategoryLabel || summary.strongestCategory || '—');
+  set('seo-health-strongest-sub', 'strongest category');
+  set('seo-health-weakest', summary.weakestCategoryLabel || summary.weakestCategory || '—');
+  set('seo-health-weakest-sub', 'weakest category');
+  set('seo-health-page-count', seoHealthNum(diagnostics.datasetPageCount));
+  set('seo-health-malformed', seoHealthNum(diagnostics.malformedUrlCount));
+  set('seo-health-generated', contract.generatedAt ? fmtDateTime(contract.generatedAt) : '—');
+  set('seo-health-helper', summary.helperText || '');
+
+  const categories=contract.categoryCards||[];
+  $('seo-health-category-cards').innerHTML=categories.map(function(card){
+    return '<div class="ov-card" style="text-align:left">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px">'+
+        '<div style="font-weight:800;color:#1e3a5f">'+esc(card.label||card.name||'—')+'</div>'+
+        seoHealthBadge(card.statusLabel||card.status,'status')+
+      '</div>'+
+      '<div class="ov-value blue" style="font-size:1.35rem;margin-bottom:4px">'+esc(card.scoreLabel||seoHealthNum(card.score))+'</div>'+
+      '<div class="ov-sub" style="margin-bottom:8px">'+esc(card.percentageLabel||seoHealthNum(card.percentage)+'%')+' · '+esc(card.pointsLostLabel||'')+'</div>'+
+      '<div style="font-size:.82rem;color:#374151;line-height:1.45;margin-bottom:8px">'+esc(card.explanation||'—')+'</div>'+
+      '<div style="font-size:.78rem;color:#64748b;line-height:1.4"><strong>Improve:</strong> '+esc(card.improvementAction||'—')+'</div>'+
+    '</div>';
+  }).join('') || '<div class="empty">No category cards available.</div>';
+
+  const issues=contract.topIssues||[];
+  $('seo-health-issues-tbody').innerHTML=issues.map(function(row){
+    return '<tr>'+
+      '<td style="font-weight:700;line-height:1.45">'+esc(row.reason||'—')+'</td>'+
+      '<td>'+seoHealthBadge(row.severityLabel||row.severity,'severity')+'</td>'+
+      '<td style="font-size:.8rem;color:#374151;line-height:1.4">'+esc(row.recommendedAction||'—')+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="3" style="text-align:center;color:#94a3b8">No top issues</td></tr>';
+
+  const wins=contract.quickWins||[];
+  $('seo-health-wins-tbody').innerHTML=wins.map(function(row){
+    return '<tr>'+
+      '<td>'+seoHealthUrlCell(row.url, row.displayUrl)+'</td>'+
+      '<td style="font-weight:700">'+esc(row.issue||'—')+'</td>'+
+      '<td>'+seoHealthBadge(row.impact||row.priority,'priority')+'</td>'+
+      '<td style="font-size:.8rem;color:#374151;line-height:1.4">'+esc(row.recommendedAction||'—')+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="4" style="text-align:center;color:#94a3b8">No quick wins</td></tr>';
+
+  const forecasts=contract.forecastCards||[];
+  $('seo-health-forecast-cards').innerHTML=forecasts.map(function(card){
+    return '<div class="ov-card" style="text-align:left">'+
+      '<div style="font-weight:800;color:#1e3a5f;margin-bottom:6px">'+esc(card.title||'—')+'</div>'+
+      '<div class="ov-value blue" style="font-size:1.2rem;margin-bottom:4px">'+esc(card.projectedScoreLabel||seoHealthNum(card.projectedScore))+'</div>'+
+      '<div class="ov-sub" style="margin-bottom:8px">'+esc(card.projectedGradeLabel||card.projectedGrade||'—')+' · '+esc(card.expectedGainLabel||'')+'</div>'+
+      '<div style="font-size:.78rem;color:#64748b;line-height:1.45">'+esc((card.assumptions||[])[0]||'—')+'</div>'+
+    '</div>';
+  }).join('') || '<div class="empty">No forecast cards available.</div>';
+
+  const diagnosticCards=[
+    ['Active Pages', diagnostics.datasetPageCount],
+    ['Malformed URLs', diagnostics.malformedUrlCount],
+    ['Registry / Sitemap', diagnostics.registrySitemapParityLabel || diagnostics.registrySitemapParity],
+    ['Lifecycle Gaps', diagnostics.lifecycleGapCount],
+    ['Indexed Pages', diagnostics.indexedCount],
+    ['Not Indexed', diagnostics.notIndexedCount],
+    ['Excluded Pages', diagnostics.excludedCount],
+    ['Opportunity Records', diagnostics.opportunityCount],
+    ['Ranking Records', diagnostics.rankingRecordCount]
+  ];
+  $('seo-health-diagnostics-grid').innerHTML=diagnosticCards.map(function(pair){
+    return '<div class="ov-card"><div class="ov-label">'+esc(pair[0])+'</div><div class="ov-value blue" style="font-size:1.05rem">'+esc(String(pair[1]??'—'))+'</div></div>';
+  }).join('');
+}
+
+function seoHealthRender(report){
+  hide('seo-health-empty');
+  hide('seo-health-error');
+  show('seo-health-content');
+  show('seo-health-legacy-sections');
+  set('tb-seo-health-score', seoHealthNum(report.overallScore));
+  set('seo-health-overall', seoHealthNum(report.overallScore));
+  set('seo-health-grade', report.grade || '—');
+  const gradeEl=$('seo-health-grade');
+  if(gradeEl) gradeEl.className='ov-value '+seoHealthGradeClass(report.grade);
+  set('seo-health-grade-sub', 'A-F');
+  set('seo-health-projected', '—');
+  set('seo-health-projected-sub', 'contract unavailable');
+  set('seo-health-strongest', '—');
+  set('seo-health-strongest-sub', 'contract unavailable');
+  set('seo-health-weakest', '—');
+  set('seo-health-weakest-sub', 'contract unavailable');
+  set('seo-health-page-count', seoHealthNum(report.componentScores?.indexing?.metrics?.totalUrls));
+  set('seo-health-malformed', seoHealthNum(report.componentScores?.technical?.metrics?.malformed));
+  set('seo-health-generated', report.generatedAt ? fmtDateTime(report.generatedAt) : '—');
+  set('seo-health-helper', '');
+  $('seo-health-category-cards').innerHTML='<div class="empty">Category cards require the intelligence contract.</div>';
+  $('seo-health-forecast-cards').innerHTML='<div class="empty">Forecast cards require the intelligence contract.</div>';
+  $('seo-health-diagnostics-grid').innerHTML='';
+
+  const labels={indexing:'Indexing',ranking:'Ranking',traffic:'Traffic',technical:'Technical',content:'Content',opportunity:'Opportunity'};
+  const components=report.componentScores||{};
+  $('seo-health-components-tbody').innerHTML=Object.keys(labels).map(function(key){
+    const row=components[key]||{};
+    return '<tr>'+
+      '<td style="font-weight:700">'+labels[key]+'</td>'+
+      '<td style="font-weight:800;color:#1e3a5f">'+seoHealthNum(row.score)+'</td>'+
+      '<td>'+seoHealthNum(row.weight)+'</td>'+
+      '<td>'+seoHealthBadge(row.confidence,'confidence')+'</td>'+
+    '</tr>';
+  }).join('');
+
+  const issues=report.keyIssues||[];
+  $('seo-health-issues-tbody').innerHTML=issues.slice(0,5).map(function(row){
+    return '<tr>'+
+      '<td style="font-weight:700">'+esc(row.issue||'—')+'</td>'+
+      '<td>'+seoHealthBadge(row.priority,'priority')+'</td>'+
+      '<td style="font-size:.8rem;color:#374151;line-height:1.4">'+esc(row.recommendedAction||'—')+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="3" style="text-align:center;color:#94a3b8">No key issues</td></tr>';
+
+  const wins=report.quickWins||[];
+  $('seo-health-wins-tbody').innerHTML=wins.slice(0,5).map(function(row){
+    return '<tr>'+
+      '<td>'+seoHealthUrlCell(row.url)+'</td>'+
+      '<td style="font-weight:700">'+esc(row.issue||'—')+'</td>'+
+      '<td>'+seoHealthBadge(row.priority,'priority')+'</td>'+
+      '<td style="font-size:.8rem;color:#374151;line-height:1.4">'+esc(row.recommendedAction||'—')+'</td>'+
+    '</tr>';
+  }).join('') || '<tr><td colspan="4" style="text-align:center;color:#94a3b8">No quick wins</td></tr>';
+
+  const trends=report.trends||{};
+  set('seo-health-prev', seoHealthNum(trends.previousOverallScore));
+  set('seo-health-change', seoHealthNum(trends.scoreChange));
+  set('seo-health-direction', trends.direction || '—');
+}
+
+// ── Index Dashboard ────────────────────────────────────────────────
+async function idxDashboardLoad(){
+  if(!activeSlug) return;
+  hide('idx-dashboard-error');
+  hide('idx-dashboard-content');
+  show('idx-dashboard-empty');
+  set('idx-dashboard-empty','Loading Index Dashboard…');
+  try{
+    const res=await apiFetch('/api/index-dashboard?projectSlug='+enc(activeSlug));
+    const data=await res.json();
+    if(!res.ok || !data.dashboard){
+      throw new Error(data.error || 'Index Dashboard data unavailable');
+    }
+    idxDashboardRender(data.dashboard);
+  }catch(e){
+    $('idx-dashboard-error').textContent='Failed: '+(e.message||e);
+    show('idx-dashboard-error');
+    set('idx-dashboard-empty','No Index Dashboard data available.');
+  }
+}
+
+function idxFmtNum(n){
+  if(n===null||n===undefined) return '—';
+  return Number(n).toLocaleString('en-GB');
+}
+
+function idxFmtPos(n){
+  if(n===null||n===undefined) return '—';
+  return Number(n).toFixed(2);
+}
+
+function idxStatusBadge(text){
+  const t=String(text||'').toUpperCase();
+  const bg=t==='INDEXED'?'#dcfce7':t==='EXCLUDED'||t==='MALFORMED'?'#fee2e2':t==='OPPORTUNITY'?'#fef3c7':'#f1f5f9';
+  const color=t==='INDEXED'?'#166534':t==='EXCLUDED'||t==='MALFORMED'?'#991b1b':t==='OPPORTUNITY'?'#92400e':'#475569';
+  return '<span style="font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:10px;background:'+bg+';color:'+color+'">'+esc(t.replace(/_/g,' '))+'</span>';
+}
+
+function idxValidationLabel(ok){
+  return ok ? 'PASS' : 'FAIL';
+}
+
+function idxSetValidation(id, ok){
+  const el=$(id);
+  if(!el) return;
+  el.textContent=idxValidationLabel(ok);
+  el.className='ov-value '+(ok?'green':'red');
+}
+
+function idxDashboardRender(dashboard){
+  const s=dashboard.summary||{};
+  hide('idx-dashboard-empty');
+  hide('idx-dashboard-error');
+  show('idx-dashboard-content');
+  set('tb-index-dashboard', s.totalUrls ?? '—');
+  set('idx-total', idxFmtNum(s.totalUrls));
+  set('idx-indexed', idxFmtNum(s.indexed));
+  set('idx-excluded', idxFmtNum(s.excluded));
+  set('idx-not-indexed', idxFmtNum(s.notIndexed));
+  set('idx-opportunities', idxFmtNum(s.opportunities));
+  set('idx-known', idxFmtNum(s.knownToGoogle));
+  set('idx-crawled', idxFmtNum(s.crawled));
+  set('idx-discovered', idxFmtNum(s.discovered));
+  set('idx-malformed', idxFmtNum(s.malformed));
+  set('idx-duplicates', idxFmtNum(s.duplicates));
+  set('idx-missing', idxFmtNum(s.missingLifecycleData));
+  set('idx-generated', dashboard.generatedAt ? 'Generated '+fmtDateTime(dashboard.generatedAt) : '—');
+
+  const services=dashboard.serviceBreakdown||[];
+  $('idx-service-tbody').innerHTML=services.map(function(row){
+    return '<tr>'+
+      '<td style="font-weight:700">'+esc(row.label||row.service||'—')+'</td>'+
+      '<td>'+idxFmtNum(row.urlCount)+'</td>'+
+      '<td>'+idxFmtNum(row.indexedCount)+'</td>'+
+      '<td>'+idxFmtNum(row.impressions)+'</td>'+
+      '<td>'+idxFmtNum(row.clicks)+'</td>'+
+      '<td>'+idxFmtPos(row.averagePosition)+'</td>'+
+    '</tr>';
+  }).join('');
+
+  const opportunities=(dashboard.topOpportunities||[]).slice(0,20);
+  set('idx-opp-sub', opportunities.length+' prioritised URL'+(opportunities.length===1?'':'s'));
+  $('idx-opps-tbody').innerHTML=opportunities.map(function(row,idx){
+    const urlShort=String(row.url||'').replace(/^https?:\\/\\/[^/]+/,'');
+    const status=(row.statusGroups||[]).map(idxStatusBadge).join(' ');
+    return '<tr>'+
+      '<td><a href="'+esc(row.url)+'" target="_blank" style="color:var(--brand);font-family:monospace;font-size:.78rem">'+esc(urlShort)+'</a></td>'+
+      '<td style="font-size:.8rem;color:#374151">'+esc(row.actionReason||'Review URL')+'</td>'+
+      '<td style="white-space:nowrap">'+status+'</td>'+
+      '<td style="font-weight:800;color:#1e3a5f">#'+(idx+1)+'</td>'+
+    '</tr>';
+  }).join('');
+
+  const v=dashboard.validation||{};
+  idxSetValidation('idx-val-registry', Boolean(v.registryCountMatchesLifecycle&&v.registryCountMatchesHealth));
+  idxSetValidation('idx-val-lifecycle', Boolean(v.registryCountMatchesLifecycle&&v.indexedMatchesLifecycle&&v.excludedMatchesLifecycle));
+  idxSetValidation('idx-val-health', Boolean(v.registryCountMatchesHealth&&v.malformedMatchesHealth&&v.duplicatesMatchesHealth&&v.opportunitiesMatchesHealth&&v.missingLifecycleMatchesHealth));
+  idxSetValidation('idx-val-dashboard', Boolean(v.passed));
+  set('idx-validation-sub', v.passed ? 'All dashboard counts reconcile' : 'One or more reconciliation checks failed');
+}
+
 // ── Run All ───────────────────────────────────────────────────────
 async function runAll(){
   if(!activeSlug||isRunning) return;
@@ -3217,10 +4389,9 @@ window.addEventListener('message', function(e){
     currentWizardStage=e.data.stage;
     highlightStagePill(e.data.stage);
   }
-  // Wizard "← Dashboard" button clicked from inside iframe — switch to overview tab
+  // Wizard "← Dashboard" — open the existing pharmacy/client list (Master Admin).
   if(e.data.type==='wizard-nav' && e.data.action==='show-overview'){
-    switchTab('overview');
-    loadAll();
+    window.location.href='/api/admin/master';
   }
 });
 
@@ -6461,17 +7632,17 @@ async function lcFixDeploy(){
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- TAB: Distribution Content Engine                       -->
 <!-- ══════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="panel-distribution">
+<div class="cc-sub-panel" id="panel-distribution" style="display:none">
   <div class="main">
 
-    <!-- Header + mode switcher -->
+    <!-- Header + mode switcher (hidden — sub-tabs in Campaign Content control mode) -->
     <div class="section" style="margin-bottom:0">
       <div class="section-head" style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
         <div>
           <h2 id="dist-mode-title">Distribution Content Engine</h2>
           <span class="section-sub" id="dist-mode-sub">Generate social media &amp; YouTube drafts for each SEO page — for review only, nothing is posted automatically</span>
         </div>
-        <div style="display:flex;background:#f1f5f9;border-radius:10px;padding:3px;gap:2px;flex-shrink:0;margin-top:2px">
+        <div id="cc-dist-internal-mode-switch" style="display:none;background:#f1f5f9;border-radius:10px;padding:3px;gap:2px;flex-shrink:0;margin-top:2px">
           <button id="dist-mode-page-btn"
             onclick="(function(){document.getElementById('panel-distribution').classList.remove('vp-active');var pb=document.getElementById('dist-mode-page-btn'),vb=document.getElementById('dist-mode-vp-btn');if(pb){pb.style.background='#fff';pb.style.color='#1e3a5f';pb.style.boxShadow='0 1px 4px rgba(0,0,0,.1)';}if(vb){vb.style.background='transparent';vb.style.color='#6b7280';vb.style.boxShadow='none';}var pm=document.getElementById('dist-page-mode');if(pm)pm.scrollIntoView({behavior:'smooth',block:'start'});if(typeof window.vpModeSwitch==='function')window.vpModeSwitch('page');})()"
             style="padding:6px 18px;border-radius:8px;border:none;cursor:pointer;font-size:.82rem;font-weight:700;background:#fff;color:#1e3a5f;box-shadow:0 1px 4px rgba(0,0,0,.1);transition:all .15s">
@@ -7234,6 +8405,204 @@ async function lcFixDeploy(){
 </div><!-- /panel-distribution -->
 
 <!-- ══════════════════════════════════════════════════════ -->
+<!-- TAB: Campaign Content (Content Engine Phase 2)          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-campaign-content">
+  <div class="main">
+    <div class="cc-subtabbar" role="tablist" aria-label="Campaign Content sections">
+      <button type="button" class="cc-subtab active" data-cc-sub="generated-assets" onclick="ccSubTabSwitch('generated-assets')">Generated Assets</button>
+      <button type="button" class="cc-subtab" data-cc-sub="page-distribution" onclick="ccSubTabSwitch('page-distribution')">Page Distribution</button>
+      <button type="button" class="cc-subtab" data-cc-sub="visibility-posts" onclick="ccSubTabSwitch('visibility-posts')">Visibility Posts</button>
+      <button type="button" class="cc-subtab" data-cc-sub="image-library" onclick="ccSubTabSwitch('image-library')">Image Library</button>
+    </div>
+    <div id="cc-sub-generated-assets">
+    <div class="section">
+      <div class="section-head">
+        <h2>Campaign Content</h2>
+        <span class="section-sub">Preview, edit, approve and export generated marketing assets — no external publishing.</span>
+      </div>
+      <div class="section-body">
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px">
+          <label style="font-size:.82rem;color:var(--muted)">Campaign
+            <select id="cc-campaign-select" onchange="ccSelectCampaign()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:260px"></select>
+          </label>
+          <select id="cc-type-filter" onchange="ccRenderTable()" style="padding:6px 10px;border-radius:6px;border:1px solid #d1d5db">
+            <option value="all">All types</option>
+            <option value="blog_post">Blog</option>
+            <option value="facebook_post">Facebook</option>
+            <option value="linkedin_post">LinkedIn</option>
+            <option value="gbp_post">GBP</option>
+            <option value="reddit_post">Reddit</option>
+            <option value="youtube_script">YouTube Script</option>
+            <option value="youtube_metadata">YouTube Metadata</option>
+            <option value="email_sequence">Email</option>
+          </select>
+          <select id="cc-status-filter" onchange="ccRenderTable()" style="padding:6px 10px;border-radius:6px;border:1px solid #d1d5db">
+            <option value="all">All statuses</option>
+            <option value="generated">Generated</option>
+            <option value="reviewed">Reviewed</option>
+            <option value="approved">Approved</option>
+            <option value="published">Published</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <button class="btn btn-sm" onclick="ccLoad()">Refresh</button>
+        </div>
+        <div id="cc-load-status" style="display:none;font-size:.82rem;margin-bottom:12px;padding:8px 12px;border-radius:6px"></div>
+        <div id="cc-metrics" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px"></div>
+        <div style="overflow-x:auto;border:1px solid #e2e8f0;border-radius:8px">
+          <table class="data-table" style="width:100%;font-size:.84rem">
+            <thead><tr><th>Campaign</th><th>Type</th><th>Title</th><th>Status</th><th>Updated</th><th></th></tr></thead>
+            <tbody id="cc-asset-rows"><tr><td colspan="6" style="padding:16px;color:var(--muted)">Select a project and load campaigns…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="cc-preview-panel" style="display:none;margin-top:20px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:20px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px">
+        <div>
+          <div id="cc-preview-title" style="font-weight:700;font-size:1rem"></div>
+          <div id="cc-preview-meta" style="font-size:.8rem;color:var(--muted);margin-top:4px"></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn btn-sm" onclick="ccAction('review')">Mark Reviewed</button>
+          <button class="btn btn-sm btn-primary" onclick="ccAction('approve')">Approve</button>
+          <button class="btn btn-sm" onclick="ccAction('reject')">Reject</button>
+          <button class="btn btn-sm" onclick="ccAction('publish')">Publish Export</button>
+          <button class="btn btn-sm" onclick="ccSaveEdit()">Save Edit</button>
+          <button class="btn btn-sm" onclick="ccClosePreview()">Close</button>
+        </div>
+      </div>
+      <textarea id="cc-edit-area" style="width:100%;min-height:120px;font-family:monospace;font-size:.82rem;padding:10px;border:1px solid #d1d5db;border-radius:6px;margin-bottom:12px;display:none"></textarea>
+      <div id="cc-preview-body" style="max-height:480px;overflow:auto;border:1px solid #f1f5f9;border-radius:8px;padding:16px;background:#fafafa"></div>
+      <div id="cc-preview-status" style="font-size:.8rem;margin-top:10px;color:var(--muted)"></div>
+    </div>
+    </div><!-- /cc-sub-generated-assets -->
+
+    <div id="cc-sub-image-library" style="display:none">
+      <div class="section">
+        <div class="section-head" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+          <div style="flex:1;min-width:200px">
+          <h2>Image Library</h2>
+          <span class="section-sub">Manage image prompts, uploads, approvals and slot coverage — powered by Universal Image Intelligence.</span>
+          </div>
+          <a href="/api/image-prompts?slug=${encodeURIComponent(defaultSlug)}&amp;_t=${encodeURIComponent(internalToken)}" target="_blank" rel="noopener" class="btn btn-sm btn-primary" style="text-decoration:none;white-space:nowrap;font-weight:700">Open Standalone Prompt Page</a>
+          <a href="/api/image-upload?slug=${encodeURIComponent(defaultSlug)}&amp;_t=${encodeURIComponent(internalToken)}" target="_blank" rel="noopener" class="btn btn-sm btn-primary" style="text-decoration:none;white-space:nowrap;font-weight:700">Open Standalone Upload Page</a>
+        </div>
+        <div class="section-body">
+          <div id="ipd-workflow" class="ipd-workflow"></div>
+          <div class="ipd-subtabbar" role="tablist" aria-label="Image Library sections">
+            <button type="button" class="ipd-subtab active" data-ipd-sub="current" onclick="ipdSubTabSwitch('current')">Current Images</button>
+            <button type="button" class="ipd-subtab" data-ipd-sub="prompts" onclick="ipdSwitchSub('prompts')">Prompt Generator</button>
+            <button type="button" class="ipd-subtab" data-ipd-sub="queue" onclick="ipdSubTabSwitch('queue')">Upload Queue</button>
+            <button type="button" class="ipd-subtab" data-ipd-sub="coverage" onclick="ipdSubTabSwitch('coverage')">Coverage Report</button>
+          </div>
+          <div id="ipd-status" style="display:none;font-size:.82rem;margin-bottom:12px;padding:8px 12px;border-radius:6px"></div>
+
+          <div id="ipd-panel-current">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;align-items:center">
+              <label style="font-size:.82rem;color:var(--muted)">Industry
+                <select id="ipd-industry-current" onchange="ipdLoadCurrent()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:160px"></select>
+              </label>
+              <button class="btn btn-sm" onclick="ipdLoadCurrent()">Refresh</button>
+            </div>
+            <div id="ipd-upload-form" style="display:block;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:14px">
+              <div style="font-weight:700;font-size:.88rem;margin-bottom:10px">Upload Pharmacy Image</div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;align-items:flex-end">
+                <label style="font-size:.82rem;color:var(--muted)">Industry
+                  <select id="ipd-upload-industry" style="margin-left:0;margin-top:4px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:140px;display:block">
+                    <option value="pharmacy" selected>Pharmacy</option>
+                  </select>
+                </label>
+                <label style="font-size:.82rem;color:var(--muted)">Pack
+                  <select id="ipd-upload-pack-select" onchange="ipdOnUploadPackChange()" style="margin-left:0;margin-top:4px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:200px;display:block">
+                    <option value="core-pharmacy">Core Pharmacy</option>
+                    <option value="clinical-nhs-services" selected>Clinical NHS Services</option>
+                    <option value="vaccination-services">Vaccination Services</option>
+                    <option value="private-healthcare-services">Private Healthcare Services</option>
+                    <option value="travel-health-services">Travel Health Services</option>
+                    <option value="weight-management-services">Weight Management Services</option>
+                  </select>
+                </label>
+                <label style="font-size:.82rem;color:var(--muted)">Image
+                  <select id="ipd-upload-imageKey-select" onchange="ipdOnUploadImageChange()" style="margin-left:0;margin-top:4px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:220px;display:block">
+                    <option value="pharmacy-first-consultation" selected>Pharmacy First Consultation</option>
+                    <option value="minor-illness-advice">Minor Illness Advice</option>
+                    <option value="blood-pressure-check">Blood Pressure Check</option>
+                    <option value="nhs-service-support">NHS Service Support</option>
+                  </select>
+                </label>
+                <label style="font-size:.82rem;color:var(--muted)">Slot
+                  <select id="ipd-upload-slot-select" onchange="this.dataset.userChanged='1';ipdSyncUploadHiddenFields()" style="margin-left:0;margin-top:4px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:120px;display:block">
+                    <option value="hero" selected>Hero</option>
+                    <option value="support">Support</option>
+                    <option value="trust">Trust</option>
+                    <option value="conversion">Conversion</option>
+                  </select>
+                </label>
+              </div>
+              <div id="ipd-upload-target-path" style="font-size:.78rem;color:var(--muted);margin-bottom:10px;font-family:monospace">Upload target: assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp</div>
+              <input type="hidden" id="ipd-upload-pack" value="clinical-nhs-services">
+              <input type="hidden" id="ipd-upload-imageKey" value="pharmacy-first-consultation">
+              <input type="hidden" id="ipd-upload-slot" value="hero">
+              <div id="ipd-upload-label" style="font-size:.78rem;color:var(--muted);margin-bottom:8px"></div>
+              <input id="ipd-upload-file" type="file" accept="image/webp,.webp" style="margin-bottom:10px;font-size:.82rem">
+              <div id="ipd-upload-status" style="display:none;font-size:.82rem;margin-bottom:10px;padding:8px 12px;border-radius:6px;background:#eff6ff;color:#1e40af">Ready to upload.</div>
+              <div style="display:flex;gap:8px">
+                <button type="button" id="ipd-upload-btn" class="btn btn-sm btn-primary" onclick="ipdSubmitUpload()">Upload</button>
+                <button type="button" class="btn btn-sm" onclick="ipdClearUploadFile()">Clear file</button>
+              </div>
+            </div>
+            <div style="overflow-x:auto;border:1px solid #e2e8f0;border-radius:8px">
+              <table class="data-table" style="width:100%;font-size:.82rem">
+                <thead><tr><th>Image</th><th>Pack</th><th>Slot</th><th>Status</th><th>Upload date</th><th>Approved</th><th>Actions</th></tr></thead>
+                <tbody id="ipd-current-rows"><tr><td colspan="7" style="padding:16px;color:var(--muted)">Loading…</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="ipd-panel-prompts" class="ipd-sub-panel-prompts" style="display:none">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;align-items:center">
+              <label style="font-size:.82rem;color:var(--muted)">Industry<select id="ipd-industry-prompts" onchange="ipdOnIndustryChange('prompts')" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db"><option value="pharmacy" selected>UK Community Pharmacy</option></select></label>
+              <label style="font-size:.82rem;color:var(--muted)">Template Family<select id="ipd-family-prompts" onchange="ipdOnFamilyChange()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:200px"><option value="clinical-nhs-services" selected>Clinical NHS Services</option></select></label>
+              <label style="font-size:.82rem;color:var(--muted)">Service<select id="ipd-service-prompts" onchange="ipdOnServiceChange()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:220px">
+                <option value="pharmacy-first" selected>Pharmacy First</option>
+                <option value="nhs-flu-vaccination">NHS Flu Vaccination</option>
+                <option value="private-ear-wax-removal">Ear Wax Removal</option>
+                <option value="travel-vaccinations">Travel Vaccinations</option>
+                <option value="pharmacy-weight-loss-programme">Weight Loss Programme</option>
+              </select></label>
+              <label style="font-size:.82rem;color:var(--muted)">Pack<select id="ipd-pack-prompts" onchange="ipdLoadPrompts()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:180px"><option value="clinical-nhs-services" selected>Clinical NHS Services</option></select></label>
+              <button class="btn btn-sm btn-primary" onclick="ipdDownloadPromptPack()">Download Prompt Pack</button>
+              <button class="btn btn-sm" onclick="ipdLoadPromptPanel()">Refresh</button>
+            </div>
+            <div id="ipd-live-debug">IPD live debug — waiting for panel load…</div>
+            <div id="ipd-prompts-selection" style="display:block">Loading prompt selection…</div>
+            <div id="ipd-prompts-status" style="display:block;font-size:.82rem;margin-bottom:12px;padding:8px 12px;border-radius:6px;background:#f8fafc;color:#475569">Waiting for prompt load…</div>
+            <div id="ipd-prompts-output" style="display:block"><p style="color:var(--muted);padding:12px">Prompt cards will appear here.</p></div>
+          </div>
+
+          <div id="ipd-panel-queue" style="display:none">
+            <div id="ipd-queue-metrics" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px"></div>
+            <div id="ipd-queue-lists"></div>
+          </div>
+
+          <div id="ipd-panel-coverage" style="display:none">
+            <div id="ipd-coverage-summary" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px"></div>
+            <div style="overflow-x:auto;border:1px solid #e2e8f0;border-radius:8px">
+              <table class="data-table" style="width:100%;font-size:.82rem">
+                <thead><tr><th>Service</th><th>Hero</th><th>Support</th><th>Trust</th><th>Conversion</th><th>Uploaded</th><th>Approved</th><th>Missing</th></tr></thead>
+                <tbody id="ipd-coverage-rows"><tr><td colspan="8" style="padding:16px;color:var(--muted)">Loading…</td></tr></tbody>
+              </table>
+            </div>
+            <div id="ipd-future-industries" style="margin-top:20px"></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /cc-sub-image-library -->
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
 <!-- TAB: Brand Import                                       -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div class="tab-panel" id="panel-brand-import">
@@ -7396,6 +8765,7 @@ async function lcFixDeploy(){
               <option value="web-design">Web Design</option>
               <option value="local-seo">Local SEO</option>
               <option value="google-business-profile">Google Business Profile</option>
+              <option value="local-business-visibility">Local Business Visibility</option>
               <option value="email-marketing">Email Marketing</option>
             </select>
           </div>
@@ -7440,6 +8810,7 @@ async function lcFixDeploy(){
             <option value="web-design">Web Design</option>
             <option value="local-seo">Local SEO</option>
             <option value="google-business-profile">Google Business Profile</option>
+              <option value="local-business-visibility">Local Business Visibility</option>
             <option value="email-marketing">Email Marketing</option>
           </select>
           <select id="imglib-filter-slot" onchange="imgLibRender()" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:.82rem">
@@ -7519,7 +8890,7 @@ async function lcFixDeploy(){
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
         <div>
           <h2 style="font-size:1.1rem;font-weight:800;margin:0">Team Members</h2>
-          <p style="font-size:.82rem;color:#64748b;margin:2px 0 0">Manage who can access the Local SEO Engine</p>
+          <p style="font-size:.82rem;color:#64748b;margin:2px 0 0">Manage who can access the PharmaConnect Growth Engine</p>
         </div>
         <button onclick="usersShowAdd()" style="background:#005EB8;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.87rem;font-weight:700;cursor:pointer;">+ Add Team Member</button>
       </div>
@@ -7808,7 +9179,7 @@ async function lcFixDeploy(){
 
     const SERVICE_LABELS = {
       'web-hosting':'Web Hosting','web-design':'Web Design','local-seo':'Local SEO',
-      'google-business-profile':'Google Business Profile','email-marketing':'Email Marketing'
+      'google-business-profile':'Google Business Profile','local-business-visibility':'Local Business Visibility','email-marketing':'Email Marketing'
     };
 
     grid.innerHTML = filtered.map(function(img) {
@@ -7893,7 +9264,7 @@ async function lcFixDeploy(){
       fd.append('altTemplate', alt);
       fd.append('tags', tags);
       try {
-        var r = await fetch('/api/image-library/upload', { method:'POST', body:fd });
+        var r = await fetch('/api/image-library/upload', { method:'POST', credentials:'same-origin', body:fd });
         var d = await r.json();
         if(!r.ok || !d.ok) throw new Error(d.error || 'Upload failed');
       } catch(e) {
@@ -8031,7 +9402,7 @@ async function lcFixDeploy(){
     }
     var SERVICE_NAMES = {
       'web-hosting':'Web Hosting','web-design':'Web Design','local-seo':'Local SEO',
-      'google-business-profile':'Google Business Profile','email-marketing':'Email Marketing'
+      'google-business-profile':'Google Business Profile','local-business-visibility':'Local Business Visibility','email-marketing':'Email Marketing'
     };
     var svcName  = SERVICE_NAMES[img.service] || img.service;
     var slotName = img.slot.charAt(0).toUpperCase() + img.slot.slice(1);
@@ -9346,36 +10717,19 @@ var VP_PLATFORMS = {
 // ── tab navigation helpers ────────────────────────────────────────────────────
 function switchToVPMode() {
   try {
-    document.querySelectorAll('.tab').forEach(function(el){ el.classList.remove('active'); });
-    document.querySelectorAll('.tab-panel').forEach(function(el){ el.classList.remove('active'); });
-    var vpTab = document.getElementById('tab-visibility-posts');
-    if (vpTab) vpTab.classList.add('active');
-    var dp = document.getElementById('panel-distribution');
-    if (dp) { dp.classList.add('active'); dp.classList.add('vp-active'); }
-    var pm = document.getElementById('dist-page-mode');
-    var vm = document.getElementById('dist-visibility-mode');
-    if (pm) pm.style.display = 'none';
-    if (vm) { vm.style.display = 'block'; vm.style.visibility = 'visible'; }
-    vpModeSwitch('visibility');
-    if (typeof distLoad === 'function') distLoad();
-    if (typeof vidLoad === 'function') vidLoad();
-    setTimeout(function(){ if (vm) vm.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
+    switchTab('campaign-content');
+    ccSubTabSwitch('visibility-posts');
   } catch(e) { alert('Error opening Visibility Posts: ' + e.message); }
 }
 
 function switchToDistMode() {
   try {
-    switchTab('distribution');
-    var dp = document.getElementById('panel-distribution');
-    if (dp) dp.classList.remove('vp-active');
-    var pm = document.getElementById('dist-page-mode');
-    var vm = document.getElementById('dist-visibility-mode');
-    if (pm) pm.style.display = '';
-    if (vm) vm.style.display = 'none';
-    if (typeof distLoad === 'function') distLoad();
-    if (typeof vidLoad === 'function') vidLoad();
+    switchTab('campaign-content');
+    ccSubTabSwitch('page-distribution');
   } catch(e) {}
 }
+window.switchToVPMode = switchToVPMode;
+window.switchToDistMode = switchToDistMode;
 
 // ── mode switch ───────────────────────────────────────────────────────────────
 function vpModeSwitch(mode) {
@@ -9899,6 +11253,258 @@ function vpUpdateSaveBtn() {
     return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+// ── Campaign Content (Content Engine Phase 2) ───────────────────────────────
+var ccAssets = [];
+var ccCampaignId = '';
+var ccCurrentAsset = null;
+var ccTypeLabels = {
+  blog_post:'Blog', facebook_post:'Facebook', linkedin_post:'LinkedIn', gbp_post:'GBP',
+  reddit_post:'Reddit', youtube_script:'YouTube', youtube_metadata:'YouTube Meta', email_sequence:'Email'
+};
+var ccEnc = (typeof enc !== 'undefined' && enc) ? enc : encodeURIComponent;
+var ccGet = (typeof $ === 'function') ? $ : function(id){ return document.getElementById(id); };
+var ccEsc = (typeof escHtml === 'function') ? escHtml : ((typeof esc === 'function') ? esc : function(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+});
+
+function ccGetApiFetch() {
+  if (typeof window !== 'undefined' && typeof window.apiFetch === 'function') return window.apiFetch;
+  if (typeof apiFetch === 'function') return apiFetch;
+  if (typeof safeApiFetch === 'function') return safeApiFetch;
+  return null;
+}
+
+function ccSetStatus(msg, type) {
+  var el = ccGet('cc-load-status');
+  if (!el) return;
+  if (!msg) { el.style.display = 'none'; el.textContent = ''; return; }
+  el.textContent = msg;
+  el.style.display = 'block';
+  if (type === 'error') {
+    el.style.background = '#fef2f2';
+    el.style.color = '#b91c1c';
+    el.style.border = '1px solid #fca5a5';
+  } else if (type === 'success') {
+    el.style.background = '#f0fdf4';
+    el.style.color = '#15803d';
+    el.style.border = '1px solid #86efac';
+  } else {
+    el.style.background = '#eff6ff';
+    el.style.color = '#1d4ed8';
+    el.style.border = '1px solid #93c5fd';
+  }
+}
+
+function ccSlug() {
+  return activeSlug
+    || (ccGet('project-select')||{}).value
+    || (typeof SERVER_DEFAULT_SLUG !== 'undefined' ? SERVER_DEFAULT_SLUG : '')
+    || 'pharmaconnect';
+}
+
+function ccApiCall(path, opts) {
+  var fetchFn = ccGetApiFetch();
+  if (!fetchFn) {
+    ccSetStatus('Dashboard auth helper unavailable. Refresh the page and log in again.', 'error');
+    return Promise.reject(new Error('Dashboard auth helper unavailable'));
+  }
+  return fetchFn(path, opts).then(function(r) {
+    var ct = (r.headers && r.headers.get) ? (r.headers.get('content-type') || '') : '';
+    if (!ct.includes('application/json')) {
+      throw new Error('Server returned non-JSON (HTTP ' + r.status + '). Log in again and refresh.');
+    }
+    return r.json().then(function(d) {
+      return { ok: r.ok, status: r.status, data: d };
+    });
+  });
+}
+
+function ccLoad() {
+  var slug = ccSlug();
+  if (!slug) {
+    ccSetStatus('Select a project to load campaign content.', 'error');
+    return;
+  }
+  if (!ccGetApiFetch()) {
+    ccSetStatus('Dashboard auth helper unavailable. Refresh the page and log in again.', 'error');
+    return;
+  }
+  ccSetStatus('Loading campaigns for ' + slug + '…', 'loading');
+  ccApiCall('/api/content/campaigns?slug=' + ccEnc(slug))
+    .then(function(res){
+      var d = res.data || {};
+      if (!res.ok || !d.ok) throw new Error(d.error || ('Failed to load campaigns (HTTP ' + res.status + ')'));
+      var sel = ccGet('cc-campaign-select');
+      if (!sel) throw new Error('Campaign dropdown not found on page');
+      var campaigns = d.campaigns || [];
+      sel.innerHTML = campaigns.map(function(c){
+        return '<option value="'+ccEsc(c.campaignId)+'">'+ccEsc((c.location||'')+' — '+(c.service||'')+' ('+c.campaignId+')')+'</option>';
+      }).join('') || '<option value="">No campaign content yet</option>';
+      if (campaigns.length) {
+        ccCampaignId = campaigns[0].campaignId;
+        sel.value = ccCampaignId;
+        ccSetStatus('Loaded ' + campaigns.length + ' campaign(s).', 'success');
+        ccSelectCampaign();
+      } else {
+        ccCampaignId = '';
+        ccAssets = [];
+        ccRenderTable();
+        ccSetStatus('No campaign content found for ' + slug + '. Generate assets first.', 'error');
+      }
+    })
+    .catch(function(e){
+      ccSetStatus('Campaign content load failed: ' + (e.message||e), 'error');
+    });
+}
+
+function ccSelectCampaign() {
+  ccCampaignId = (ccGet('cc-campaign-select')||{}).value || '';
+  if (!ccCampaignId) return;
+  ccApiCall('/api/content/' + ccEnc(ccCampaignId) + '?slug=' + ccEnc(ccSlug()))
+    .then(function(res){
+      var d = res.data || {};
+      if (!res.ok || !d.ok) throw new Error(d.error || 'Failed');
+      ccAssets = d.assets || [];
+      ccRenderMetrics(d.manifest && d.manifest.summary ? d.manifest.summary.byStatus : null);
+      ccRenderTable();
+    })
+    .catch(function(e){ ccSetStatus('Load assets failed: ' + (e.message||e), 'error'); });
+}
+
+function ccRenderMetrics(byStatus) {
+  var el = ccGet('cc-metrics');
+  if (!el) return;
+  if (!byStatus) { el.innerHTML = ''; return; }
+  var chips = ['generated','reviewed','approved','published'].map(function(k){
+    return '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 14px"><div style="font-size:.72rem;color:var(--muted);text-transform:uppercase">'+k+'</div><div style="font-weight:700;font-size:1.1rem">'+ (byStatus[k]||0) +'</div></div>';
+  }).join('');
+  el.innerHTML = chips;
+}
+
+function ccRenderTable() {
+  var tbody = ccGet('cc-asset-rows');
+  if (!tbody) return;
+  ccInitTableEvents();
+  var tf = (ccGet('cc-type-filter')||{}).value || 'all';
+  var sf = (ccGet('cc-status-filter')||{}).value || 'all';
+  var rows = ccAssets.filter(function(a){
+    if (tf !== 'all' && a.assetType !== tf) return false;
+    if (sf !== 'all' && a.status !== sf) return false;
+    return true;
+  });
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:var(--muted)">No assets match filters.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map(function(a){
+    return '<tr><td>'+ccEsc(ccCampaignId)+'</td><td>'+ccEsc(ccTypeLabels[a.assetType]||a.assetType)+'</td><td>'+ccEsc(a.title)+'</td><td><span class="badge">'+ccEsc(a.status)+'</span></td><td>'+ccEsc((a.updatedAt||'').slice(0,19))+'</td><td><button type="button" class="btn btn-sm cc-preview-btn" data-asset-id="'+ccEsc(a.assetId)+'">Preview</button></td></tr>';
+  }).join('');
+}
+
+function ccInitTableEvents() {
+  var tbody = ccGet('cc-asset-rows');
+  if (!tbody || tbody.dataset.ccClickBound === '1') return;
+  tbody.dataset.ccClickBound = '1';
+  tbody.addEventListener('click', function(e) {
+    var btn = e.target.closest('.cc-preview-btn');
+    if (!btn) return;
+    var id = btn.getAttribute('data-asset-id');
+    if (id) ccOpenAsset(id);
+  });
+}
+
+function ccOpenAsset(assetId) {
+  if (!ccCampaignId) return;
+  ccApiCall('/api/content/' + ccEnc(ccCampaignId) + '/' + ccEnc(assetId) + '?slug=' + ccEnc(ccSlug()))
+    .then(function(res){
+      var d = res.data || {};
+      if (!res.ok || !d.ok) throw new Error(d.error || 'Failed');
+      ccCurrentAsset = d.asset;
+      var p = d.preview || {};
+      ccGet('cc-preview-title').textContent = p.title || assetId;
+      ccGet('cc-preview-meta').textContent = (d.asset.assetType || '') + ' · ' + (d.asset.status || '') + ' · rev ' + (d.asset.revision||0);
+      ccGet('cc-preview-body').innerHTML = p.html || '<pre>'+ccEsc(p.markdown||'')+'</pre>';
+      var edit = ccGet('cc-edit-area');
+      if (edit) {
+        if (d.asset.assetType === 'blog_post') {
+          edit.style.display = '';
+          edit.value = (d.asset.payload && d.asset.payload.bodyMarkdown) || '';
+        } else if (d.asset.assetType === 'facebook_post' || d.asset.assetType === 'linkedin_post' || d.asset.assetType === 'gbp_post') {
+          edit.style.display = '';
+          edit.value = (d.asset.payload && d.asset.payload.postText) || '';
+        } else if (d.asset.assetType === 'youtube_script') {
+          edit.style.display = '';
+          edit.value = (d.asset.payload && d.asset.payload.script) || '';
+        } else {
+          edit.style.display = 'none';
+        }
+      }
+      ccGet('cc-preview-panel').style.display = '';
+      ccGet('cc-preview-status').textContent = '';
+      ccGet('cc-preview-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    })
+    .catch(function(e){ ccSetStatus('Preview failed: ' + (e.message||e), 'error'); });
+}
+
+function ccClosePreview() {
+  ccCurrentAsset = null;
+  var panel = ccGet('cc-preview-panel');
+  if (panel) panel.style.display = 'none';
+}
+
+function ccAction(action) {
+  if (!ccCurrentAsset || !ccCampaignId) return;
+  var id = ccCurrentAsset.assetId;
+  ccApiCall('/api/content/' + ccEnc(ccCampaignId) + '/' + ccEnc(id) + '/' + action + '?slug=' + ccEnc(ccSlug()), { method: 'POST' })
+    .then(function(res){
+      var d = res.data || {};
+      if (!res.ok || !d.ok) throw new Error(d.error || 'Action failed');
+      ccCurrentAsset = d.asset;
+      ccGet('cc-preview-meta').textContent = (d.asset.assetType || '') + ' · ' + (d.asset.status || '') + ' · rev ' + (d.asset.revision||0);
+      if (d.preview && d.preview.html) ccGet('cc-preview-body').innerHTML = d.preview.html;
+      var msg = action + ' complete';
+      if (d.exportPaths) msg += ' — exported: ' + d.exportPaths.join(', ');
+      ccGet('cc-preview-status').textContent = msg;
+      ccSelectCampaign();
+    })
+    .catch(function(e){ ccGet('cc-preview-status').textContent = 'Error: ' + (e.message||e); });
+}
+
+function ccSaveEdit() {
+  if (!ccCurrentAsset || !ccCampaignId) return;
+  var edit = ccGet('cc-edit-area');
+  if (!edit || edit.style.display === 'none') return;
+  var payload = {};
+  if (ccCurrentAsset.assetType === 'blog_post') payload.bodyMarkdown = edit.value;
+  else if (ccCurrentAsset.assetType === 'youtube_script') payload.script = edit.value;
+  else payload.postText = edit.value;
+  ccApiCall('/api/content/' + ccEnc(ccCampaignId) + '/' + ccEnc(ccCurrentAsset.assetId) + '/save?slug=' + ccEnc(ccSlug()), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ payload: payload }),
+  })
+    .then(function(res){
+      var d = res.data || {};
+      if (!res.ok || !d.ok) throw new Error(d.error || 'Save failed');
+      ccCurrentAsset = d.asset;
+      ccGet('cc-preview-meta').textContent = (d.asset.assetType || '') + ' · ' + (d.asset.status || '') + ' · rev ' + (d.asset.revision||0);
+      if (d.preview && d.preview.html) ccGet('cc-preview-body').innerHTML = d.preview.html;
+      ccGet('cc-preview-status').textContent = 'Saved — revision ' + (d.asset.revision||0);
+      ccSelectCampaign();
+    })
+    .catch(function(e){ ccGet('cc-preview-status').textContent = 'Save error: ' + (e.message||e); });
+}
+
+window.ccLoad = ccLoad;
+window.ccSelectCampaign = ccSelectCampaign;
+window.ccRenderTable = ccRenderTable;
+window.ccOpenAsset = ccOpenAsset;
+window.ccClosePreview = ccClosePreview;
+window.ccAction = ccAction;
+window.ccSaveEdit = ccSaveEdit;
+
+ccInitTableEvents();
+
 // ── init chip state & checkbox listeners immediately (script runs after DOM) ──
 vpUpdateChips();
 document.querySelectorAll('.vp-plat-cb').forEach(function(cb){
@@ -9907,6 +11513,978 @@ document.querySelectorAll('.vp-plat-cb').forEach(function(cb){
     if (chip) chip.classList.toggle('vp-chip-on', cb.checked);
   });
 });
+
+// ── Image Prompt Dashboard (Phase 6K) ─────────────────────────────
+var ipdActiveSub = 'current';
+var ipdMeta = null;
+var ipdPromptSelectorsReady = false;
+var ipdLastApiUrl = '';
+var ipdLastApiStatus = '—';
+var ipdLastPromptCount = '—';
+var IPD_PROMPT_DEFAULTS = {
+  industry: 'pharmacy',
+  templateFamily: 'clinical-nhs-services',
+  serviceKey: 'pharmacy-first',
+  packKey: 'clinical-nhs-services'
+};
+var IPD_FALLBACK_SERVICES = [
+  { serviceKey: 'pharmacy-first', serviceName: 'Pharmacy First', templateFamily: 'clinical-nhs-services' },
+  { serviceKey: 'nhs-flu-vaccination', serviceName: 'NHS Flu Vaccination', templateFamily: 'vaccination-services' },
+  { serviceKey: 'private-ear-wax-removal', serviceName: 'Ear Wax Removal', templateFamily: 'private-healthcare-services' },
+  { serviceKey: 'travel-vaccinations', serviceName: 'Travel Vaccinations', templateFamily: 'travel-health-services' },
+  { serviceKey: 'pharmacy-weight-loss-programme', serviceName: 'Weight Loss Programme', templateFamily: 'weight-management-services' }
+];
+var IPD_FALLBACK_FAMILIES = [
+  { familyKey: 'clinical-nhs-services', familyName: 'Clinical NHS Services' },
+  { familyKey: 'vaccination-services', familyName: 'Vaccination Services' },
+  { familyKey: 'private-healthcare-services', familyName: 'Private Healthcare Services' },
+  { familyKey: 'travel-health-services', familyName: 'Travel Health Services' },
+  { familyKey: 'weight-management-services', familyName: 'Weight Management Services' }
+];
+var IPD_FALLBACK_PACKS = [
+  { packKey: 'clinical-nhs-services', packName: 'Clinical NHS Services', templateFamily: 'clinical-nhs-services' }
+];
+
+var ipdUploadOptions = null;
+
+var IPD_UPLOAD_IMAGE_FALLBACK = {
+  'core-pharmacy': [
+    { imageKey: 'hero', imageLabel: 'Hero', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/core-pharmacy/hero.webp' },
+    { imageKey: 'support', imageLabel: 'Support', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/core-pharmacy/support.webp' },
+    { imageKey: 'trust', imageLabel: 'Trust', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/core-pharmacy/trust.webp' },
+    { imageKey: 'conversion', imageLabel: 'Conversion', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/core-pharmacy/conversion.webp' }
+  ],
+  'clinical-nhs-services': [
+    { imageKey: 'pharmacy-first-consultation', imageLabel: 'Pharmacy First Consultation', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp' },
+    { imageKey: 'minor-illness-advice', imageLabel: 'Minor Illness Advice', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/clinical-nhs-services/minor-illness-advice.webp' },
+    { imageKey: 'blood-pressure-check', imageLabel: 'Blood Pressure Check', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/clinical-nhs-services/blood-pressure-check.webp' },
+    { imageKey: 'nhs-service-support', imageLabel: 'NHS Service Support', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/clinical-nhs-services/nhs-service-support.webp' }
+  ],
+  'vaccination-services': [
+    { imageKey: 'flu-vaccination', imageLabel: 'Flu Vaccination', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/vaccination-services/flu-vaccination.webp' },
+    { imageKey: 'vaccination-consultation', imageLabel: 'Vaccination Consultation', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/vaccination-services/vaccination-consultation.webp' },
+    { imageKey: 'vaccination-record-review', imageLabel: 'Vaccination Record Review', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/vaccination-services/vaccination-record-review.webp' },
+    { imageKey: 'vaccine-availability', imageLabel: 'Vaccine Availability', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/vaccination-services/vaccine-availability.webp' }
+  ],
+  'private-healthcare-services': [
+    { imageKey: 'ear-wax-removal', imageLabel: 'Ear Wax Removal', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/ear-wax-removal.webp' },
+    { imageKey: 'private-consultation', imageLabel: 'Private Consultation', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/private-consultation.webp' },
+    { imageKey: 'health-screening', imageLabel: 'Health Screening', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/health-screening.webp' },
+    { imageKey: 'aftercare-guidance', imageLabel: 'Aftercare Guidance', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/aftercare-guidance.webp' }
+  ],
+  'travel-health-services': [
+    { imageKey: 'travel-consultation', imageLabel: 'Travel Consultation', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/travel-consultation.webp' },
+    { imageKey: 'destination-advice', imageLabel: 'Destination Advice', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/destination-advice.webp' },
+    { imageKey: 'travel-vaccination', imageLabel: 'Travel Vaccination', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/travel-vaccination.webp' },
+    { imageKey: 'travel-medicine-planning', imageLabel: 'Travel Medicine Planning', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/travel-medicine-planning.webp' }
+  ],
+  'weight-management-services': [
+    { imageKey: 'weight-consultation', imageLabel: 'Weight Consultation', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/weight-consultation.webp' },
+    { imageKey: 'bmi-review', imageLabel: 'BMI Review', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/bmi-review.webp' },
+    { imageKey: 'progress-monitoring', imageLabel: 'Progress Monitoring', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/progress-monitoring.webp' },
+    { imageKey: 'private-weight-support', imageLabel: 'Private Weight Support', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/private-weight-support.webp' }
+  ]
+};
+
+var IPD_UPLOAD_PACK_FALLBACK = [
+  { packKey: 'core-pharmacy', packName: 'Core Pharmacy' },
+  { packKey: 'clinical-nhs-services', packName: 'Clinical NHS Services' },
+  { packKey: 'vaccination-services', packName: 'Vaccination Services' },
+  { packKey: 'private-healthcare-services', packName: 'Private Healthcare Services' },
+  { packKey: 'travel-health-services', packName: 'Travel Health Services' },
+  { packKey: 'weight-management-services', packName: 'Weight Management Services' }
+];
+
+function ipdUploadImagesForPack(packKey) {
+  if (ipdUploadOptions && ipdUploadOptions.imageKeysByPack && ipdUploadOptions.imageKeysByPack[packKey]) {
+    return ipdUploadOptions.imageKeysByPack[packKey];
+  }
+  return IPD_UPLOAD_IMAGE_FALLBACK[packKey] || [];
+}
+
+function ipdSyncUploadHiddenFields() {
+  var packSel = $('ipd-upload-pack-select');
+  var imageSel = $('ipd-upload-imageKey-select');
+  var slotSel = $('ipd-upload-slot-select');
+  if ($('ipd-upload-pack')) $('ipd-upload-pack').value = packSel ? packSel.value : '';
+  if ($('ipd-upload-imageKey')) $('ipd-upload-imageKey').value = imageSel ? imageSel.value : '';
+  if ($('ipd-upload-slot')) $('ipd-upload-slot').value = slotSel ? slotSel.value : '';
+}
+
+function ipdUpdateUploadTargetPath() {
+  var pack = ($('ipd-upload-pack-select') || {}).value || 'clinical-nhs-services';
+  var imageKey = ($('ipd-upload-imageKey-select') || {}).value || '';
+  var images = ipdUploadImagesForPack(pack);
+  var img = images.find(function(i) { return i.imageKey === imageKey; }) || images[0];
+  var pathEl = $('ipd-upload-target-path');
+  var labelEl = $('ipd-upload-label');
+  if (img) {
+    if (pathEl) pathEl.textContent = 'Upload target: ' + img.uploadTargetPath;
+    if (labelEl) labelEl.textContent = pack + ' / ' + img.imageKey + ' (' + (img.defaultSlot || 'hero') + ')';
+    var slotSel = $('ipd-upload-slot-select');
+    if (slotSel && img.defaultSlot && !slotSel.dataset.userChanged) slotSel.value = img.defaultSlot;
+  }
+  ipdSyncUploadHiddenFields();
+}
+
+function ipdOnUploadPackChange(preferredImageKey) {
+  var pack = ($('ipd-upload-pack-select') || {}).value || 'clinical-nhs-services';
+  var images = ipdUploadImagesForPack(pack);
+  var selected = preferredImageKey || (images[0] && images[0].imageKey);
+  ipdFillSelect('ipd-upload-imageKey-select', images, 'imageKey', 'imageLabel', selected);
+  ipdUpdateUploadTargetPath();
+}
+window.ipdOnUploadPackChange = ipdOnUploadPackChange;
+
+function ipdOnUploadImageChange() {
+  ipdUpdateUploadTargetPath();
+}
+window.ipdOnUploadImageChange = ipdOnUploadImageChange;
+
+function ipdLoadUploadOptions() {
+  var industry = ($('ipd-upload-industry') || {}).value || ($('ipd-industry-current') || {}).value || 'pharmacy';
+  return ipdFetch('/image-prompt-dashboard/upload-options?industry=' + encodeURIComponent(industry)).then(function(data) {
+    ipdUploadOptions = data;
+    var currentPack = ($('ipd-upload-pack-select') || {}).value || 'clinical-nhs-services';
+    var currentImage = ($('ipd-upload-imageKey-select') || {}).value || 'pharmacy-first-consultation';
+    if (data.packs && data.packs.length) {
+      ipdFillSelect('ipd-upload-pack-select', data.packs, 'packKey', 'packName', currentPack);
+    }
+    ipdOnUploadPackChange(currentImage);
+    return data;
+  }).catch(function(e) {
+    ipdFillSelect('ipd-upload-pack-select', IPD_UPLOAD_PACK_FALLBACK, 'packKey', 'packName', 'clinical-nhs-services');
+    ipdOnUploadPackChange('pharmacy-first-consultation');
+    ipdShowStatus('Upload options fallback: ' + e.message, false);
+  });
+}
+window.ipdLoadUploadOptions = ipdLoadUploadOptions;
+
+function ipdClearUploadFile() {
+  var f = $('ipd-upload-file');
+  if (f) f.value = '';
+}
+window.ipdClearUploadFile = ipdClearUploadFile;
+
+function ipdUpdateLiveDebug(patch) {
+  var el = $('ipd-live-debug');
+  if (!el) return;
+  if (patch && patch.lastApiUrl) ipdLastApiUrl = patch.lastApiUrl;
+  if (patch && patch.lastApiStatus) ipdLastApiStatus = patch.lastApiStatus;
+  if (patch && typeof patch.promptsCount === 'number') ipdLastPromptCount = String(patch.promptsCount);
+  var svcSel = $('ipd-service-prompts');
+  var svcCount = svcSel ? svcSel.options.length : 0;
+  var buildTs = (typeof IPD_DASHBOARD_BUILD_TS !== 'undefined' && IPD_DASHBOARD_BUILD_TS) ? IPD_DASHBOARD_BUILD_TS : 'unknown';
+  el.textContent = ''
+    + 'Served dashboard build: ' + buildTs + '\n'
+    + 'ipdMeta loaded: ' + (ipdMeta ? 'yes' : 'no') + '\n'
+    + 'services count: ' + svcCount + '\n'
+    + 'selected serviceKey: ' + ((svcSel && svcSel.value) || IPD_PROMPT_DEFAULTS.serviceKey) + '\n'
+    + 'prompts count: ' + ipdLastPromptCount + '\n'
+    + 'last API URL: ' + (ipdLastApiUrl || '—') + '\n'
+    + 'last API status: ' + ipdLastApiStatus;
+}
+
+function ipdApplyFallbackServices() {
+  var svcSel = $('ipd-service-prompts');
+  if (svcSel && (!svcSel.options || svcSel.options.length < 5)) {
+    ipdFillSelect('ipd-service-prompts', IPD_FALLBACK_SERVICES, 'serviceKey', 'serviceName', IPD_PROMPT_DEFAULTS.serviceKey);
+  }
+  var famSel = $('ipd-family-prompts');
+  if (famSel && (!famSel.options || famSel.options.length < 1)) {
+    ipdFillSelect('ipd-family-prompts', IPD_FALLBACK_FAMILIES, 'familyKey', 'familyName', IPD_PROMPT_DEFAULTS.templateFamily);
+  }
+  var packSel = $('ipd-pack-prompts');
+  if (packSel && (!packSel.options || packSel.options.length < 1)) {
+    ipdFillSelect('ipd-pack-prompts', IPD_FALLBACK_PACKS, 'packKey', 'packName', IPD_PROMPT_DEFAULTS.packKey);
+  }
+  ipdUpdateLiveDebug({});
+}
+
+function ipdApiPath(path) {
+  var url = '/api' + path;
+  if (typeof INTERNAL_TOKEN !== 'undefined' && INTERNAL_TOKEN) {
+    url += (url.indexOf('?') >= 0 ? '&' : '?') + '_t=' + encodeURIComponent(INTERNAL_TOKEN);
+  }
+  return url;
+}
+
+function ipdEscText(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function ipdEscAttr(s) {
+  return ipdEscText(s);
+}
+
+function ipdResolveServices(industry, templateFamily) {
+  if (ipdMeta && ipdMeta.servicesByTemplateFamily && ipdMeta.servicesByTemplateFamily[templateFamily]) {
+    return Promise.resolve({ industry: industry, templateFamily: templateFamily, services: ipdMeta.servicesByTemplateFamily[templateFamily] });
+  }
+  return ipdFetch('/image-prompt-dashboard/services?industry=' + encodeURIComponent(industry) + '&templateFamily=' + encodeURIComponent(templateFamily));
+}
+
+function ipdGetPromptFilters() {
+  return {
+    industry: ($('ipd-industry-prompts') && $('ipd-industry-prompts').value) || IPD_PROMPT_DEFAULTS.industry,
+    templateFamily: ($('ipd-family-prompts') && $('ipd-family-prompts').value) || IPD_PROMPT_DEFAULTS.templateFamily,
+    serviceKey: ($('ipd-service-prompts') && $('ipd-service-prompts').value) || IPD_PROMPT_DEFAULTS.serviceKey,
+    packKey: ($('ipd-pack-prompts') && $('ipd-pack-prompts').value) || IPD_PROMPT_DEFAULTS.packKey
+  };
+}
+
+function ipdUpdatePromptSelectionSummary(promptCount) {
+  var el = $('ipd-prompts-selection');
+  if (!el) return;
+  var f = ipdGetPromptFilters();
+  var countLabel = (typeof promptCount === 'number') ? String(promptCount) : '—';
+  el.style.display = 'block';
+  el.innerHTML = '<strong>Current selection</strong>'
+    + '<div style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;font-size:.78rem">'
+    + '<div><span style="color:#64748b">Industry</span><br><code>' + ipdEscText(f.industry) + '</code></div>'
+    + '<div><span style="color:#64748b">Template family</span><br><code>' + ipdEscText(f.templateFamily) + '</code></div>'
+    + '<div><span style="color:#64748b">Service</span><br><code>' + ipdEscText(f.serviceKey) + '</code></div>'
+    + '<div><span style="color:#64748b">Pack</span><br><code>' + ipdEscText(f.packKey) + '</code></div>'
+    + '<div><span style="color:#64748b">Prompt count</span><br><strong style="font-size:1.1rem">' + ipdEscText(countLabel) + '</strong></div>'
+    + '</div>';
+}
+
+function ipdSubTabSwitch(sub) {
+  ipdActiveSub = sub || 'current';
+  document.querySelectorAll('.ipd-subtab').forEach(function(el) {
+    el.classList.toggle('active', el.getAttribute('data-ipd-sub') === ipdActiveSub);
+  });
+  ['current', 'prompts', 'queue', 'coverage'].forEach(function(key) {
+    var panel = $('ipd-panel-' + key);
+    if (!panel) return;
+    var show = ipdActiveSub === key;
+    panel.style.display = show ? 'block' : 'none';
+    panel.classList.toggle('ipd-panel-active', show);
+  });
+  if (ipdActiveSub === 'current') {
+    ipdLoadUploadOptions();
+    ipdLoadCurrent();
+  }
+  else if (ipdActiveSub === 'prompts') ipdLoadPromptPanel();
+  else if (ipdActiveSub === 'queue') ipdLoadQueue();
+  else if (ipdActiveSub === 'coverage') ipdLoadCoverage();
+}
+function ipdSwitchSub(sub) { ipdSubTabSwitch(sub); }
+window.ipdSubTabSwitch = ipdSubTabSwitch;
+window.ipdSwitchSub = ipdSwitchSub;
+
+function ipdShowStatus(msg, ok) {
+  var el = $('ipd-status');
+  if (!el) return;
+  el.style.display = msg ? '' : 'none';
+  el.textContent = msg || '';
+  if (ok === true) {
+    el.style.background = '#ecfdf5';
+    el.style.color = '#065f46';
+  } else if (ok === false) {
+    el.style.background = '#fef2f2';
+    el.style.color = '#991b1b';
+  } else {
+    el.style.background = '#eff6ff';
+    el.style.color = '#1e40af';
+  }
+}
+
+function ipdShowUploadStatus(msg, ok) {
+  var el = $('ipd-upload-status');
+  if (!el) {
+    ipdShowStatus(msg, ok);
+    return;
+  }
+  el.style.display = msg ? 'block' : 'none';
+  el.textContent = msg || '';
+  if (ok === true) {
+    el.style.background = '#ecfdf5';
+    el.style.color = '#065f46';
+  } else if (ok === false) {
+    el.style.background = '#fef2f2';
+    el.style.color = '#991b1b';
+  } else {
+    el.style.background = '#eff6ff';
+    el.style.color = '#1e40af';
+  }
+  if (msg) ipdShowStatus(msg, ok);
+}
+
+function ipdRenderWorkflow(pipeline) {
+  var el = $('ipd-workflow');
+  if (!el || !pipeline || !pipeline.length) return;
+  el.innerHTML = pipeline.map(function(step, i) {
+    var arrow = i < pipeline.length - 1 ? '<span class="ipd-workflow-arrow">↓</span>' : '';
+    return '<span class="ipd-workflow-step" title="' + (step.description || '').replace(/"/g, '&quot;') + '">' + step.label + '</span>' + arrow;
+  }).join('');
+}
+
+function ipdShowPromptStatus(msg, ok) {
+  var el = $('ipd-prompts-status');
+  if (!el) return;
+  el.style.display = msg ? 'block' : 'none';
+  el.textContent = msg || '';
+  el.style.background = ok ? '#ecfdf5' : (ok === false ? '#fef2f2' : '#f8fafc');
+  el.style.color = ok ? '#065f46' : (ok === false ? '#991b1b' : '#475569');
+}
+
+function ipdFillSelect(selId, items, valueKey, labelKey, selected) {
+  var sel = $(selId);
+  if (!sel) return;
+  var opts = (items || []).map(function(it) {
+    var v = typeof it === 'string' ? it : it[valueKey];
+    var l = typeof it === 'string' ? it : (it[labelKey] || v);
+    return { v: v, l: l };
+  });
+  if (selected && !opts.some(function(o) { return o.v === selected; })) {
+    opts.unshift({ v: selected, l: selected.replace(/-/g, ' ') });
+  }
+  sel.innerHTML = opts.map(function(o) {
+    var selAttr = o.v === selected ? ' selected' : '';
+    return '<option value="' + ipdEscAttr(o.v) + '"' + selAttr + '>' + ipdEscText(o.l) + '</option>';
+  }).join('');
+  if (selected) sel.value = selected;
+  else if (opts.length) sel.value = opts[0].v;
+}
+
+function ipdFetch(path) {
+  ipdLastApiUrl = ipdApiPath(path);
+  ipdUpdateLiveDebug({ lastApiUrl: ipdLastApiUrl, lastApiStatus: 'pending' });
+  return fetch(ipdLastApiUrl, {
+    credentials: 'same-origin',
+    cache: 'no-store',
+    headers: {
+      'Accept': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  }).then(function(r) {
+    ipdLastApiStatus = String(r.status);
+    ipdUpdateLiveDebug({ lastApiStatus: ipdLastApiStatus });
+    return r.text().then(function(text) {
+      var data;
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (_) {
+        throw new Error('API returned non-JSON (HTTP ' + r.status + '). Session may have expired — refresh and log in again.');
+      }
+      if (!r.ok) {
+        throw new Error(data.error || ('Request failed: HTTP ' + r.status));
+      }
+      return data;
+    });
+  });
+}
+
+function ipdLoadMeta() {
+  return ipdFetch('/image-prompt-dashboard/meta').then(function(data) {
+    ipdMeta = data;
+    ipdUpdateLiveDebug({});
+    if (data.defaultPromptSelection) {
+      IPD_PROMPT_DEFAULTS = data.defaultPromptSelection;
+    }
+    ipdRenderWorkflow(data.workflowPipeline);
+    ipdFillSelect('ipd-industry-current', data.industries, 'industryKey', 'displayName', 'pharmacy');
+    ipdFillSelect('ipd-industry-prompts', data.industries, 'industryKey', 'displayName', IPD_PROMPT_DEFAULTS.industry);
+    return ipdLoadUploadOptions();
+  });
+}
+
+function ipdApplyPromptDefaults() {
+  var d = IPD_PROMPT_DEFAULTS;
+  var industrySel = $('ipd-industry-prompts');
+  if (industrySel) industrySel.value = d.industry;
+  return ipdFetch('/image-prompt-dashboard/template-families?industry=' + encodeURIComponent(d.industry)).then(function(data) {
+    ipdFillSelect('ipd-family-prompts', data.templateFamilies, 'familyKey', 'familyName', d.templateFamily);
+    return ipdResolveServices(d.industry, d.templateFamily);
+  }).then(function(data) {
+    ipdFillSelect('ipd-service-prompts', data.services, 'serviceKey', 'serviceName', d.serviceKey);
+    return ipdFetch('/image-prompt-dashboard/packs?industry=' + encodeURIComponent(d.industry) + '&templateFamily=' + encodeURIComponent(d.templateFamily));
+  }).then(function(data) {
+    ipdFillSelect('ipd-pack-prompts', data.packs, 'packKey', 'packName', d.packKey);
+    ipdPromptSelectorsReady = true;
+    ipdUpdatePromptSelectionSummary(null);
+    return data;
+  });
+}
+window.ipdApplyPromptDefaults = ipdApplyPromptDefaults;
+
+function ipdLoadPromptPanel() {
+  ipdApplyFallbackServices();
+  ipdUpdateLiveDebug({});
+  ipdShowPromptStatus('Loading default Pharmacy First prompts…', null);
+  ipdLoadPromptsForFilters(IPD_PROMPT_DEFAULTS, { silent: true });
+  ipdShowPromptStatus('Loading prompt panel (meta → defaults → prompts)…', null);
+  return ipdLoadMeta().then(function() {
+    return ipdApplyPromptDefaults();
+  }).then(function() {
+    return ipdLoadPrompts();
+  }).catch(function(e) {
+    ipdApplyFallbackServices();
+    ipdShowPromptStatus(e.message + ' — fallback selectors active.', false);
+    ipdShowStatus(e.message, false);
+    if (!$('ipd-prompts-output') || !$('ipd-prompts-output').querySelector('.ipd-prompt-card')) {
+      ipdLoadPromptsForFilters(IPD_PROMPT_DEFAULTS, { silent: false });
+    }
+  });
+}
+window.ipdLoadPromptPanel = ipdLoadPromptPanel;
+
+function ipdOnIndustryChange(mode) {
+  var industry = ($('ipd-industry-prompts') || {}).value || IPD_PROMPT_DEFAULTS.industry;
+  var family = ($('ipd-family-prompts') || {}).value || IPD_PROMPT_DEFAULTS.templateFamily;
+  return ipdFetch('/image-prompt-dashboard/template-families?industry=' + encodeURIComponent(industry)).then(function(data) {
+    ipdFillSelect('ipd-family-prompts', data.templateFamilies, 'familyKey', 'familyName', family);
+    family = ($('ipd-family-prompts') || {}).value || family;
+    return ipdResolveServices(industry, family);
+  }).then(function(data) {
+    var svc = industry === IPD_PROMPT_DEFAULTS.industry && family === IPD_PROMPT_DEFAULTS.templateFamily
+      ? IPD_PROMPT_DEFAULTS.serviceKey
+      : (data.services[0] && data.services[0].serviceKey);
+    ipdFillSelect('ipd-service-prompts', data.services, 'serviceKey', 'serviceName', svc);
+    return ipdFetch('/image-prompt-dashboard/packs?industry=' + encodeURIComponent(industry) + '&templateFamily=' + encodeURIComponent(family));
+  }).then(function(data) {
+    var pack = industry === IPD_PROMPT_DEFAULTS.industry && family === IPD_PROMPT_DEFAULTS.templateFamily
+      ? IPD_PROMPT_DEFAULTS.packKey
+      : (data.packs[0] && data.packs[0].packKey);
+    ipdFillSelect('ipd-pack-prompts', data.packs, 'packKey', 'packName', pack);
+    if (mode === 'prompts' || ipdActiveSub === 'prompts') ipdLoadPrompts();
+    return data;
+  }).catch(function(e) {
+    ipdShowStatus(e.message, false);
+    ipdShowPromptStatus(e.message, false);
+  });
+}
+
+function ipdOnFamilyChange() {
+  var industry = ($('ipd-industry-prompts') || {}).value || IPD_PROMPT_DEFAULTS.industry;
+  var family = ($('ipd-family-prompts') || {}).value || '';
+  return ipdResolveServices(industry, family).then(function(data) {
+    var svc = family === IPD_PROMPT_DEFAULTS.templateFamily ? IPD_PROMPT_DEFAULTS.serviceKey : (data.services[0] && data.services[0].serviceKey);
+    ipdFillSelect('ipd-service-prompts', data.services, 'serviceKey', 'serviceName', svc);
+    return ipdFetch('/image-prompt-dashboard/packs?industry=' + encodeURIComponent(industry) + '&templateFamily=' + encodeURIComponent(family));
+  }).then(function(data) {
+    var pack = family === IPD_PROMPT_DEFAULTS.templateFamily ? IPD_PROMPT_DEFAULTS.packKey : (data.packs[0] && data.packs[0].packKey);
+    ipdFillSelect('ipd-pack-prompts', data.packs, 'packKey', 'packName', pack);
+    return ipdLoadPrompts();
+  }).catch(function(e) {
+    ipdShowStatus(e.message, false);
+    ipdShowPromptStatus(e.message, false);
+  });
+}
+window.ipdOnFamilyChange = ipdOnFamilyChange;
+
+function ipdOnServiceChange() {
+  ipdLoadPrompts();
+}
+window.ipdOnServiceChange = ipdOnServiceChange;
+
+function ipdPost(path, body) {
+  return fetch(ipdApiPath(path), {
+    method: 'POST',
+    credentials: 'same-origin',
+    cache: 'no-store',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify(body || {})
+  }).then(function(r) {
+    return r.json().then(function(data) {
+      if (!r.ok) throw new Error(data.error || ('Request failed: ' + r.status));
+      return data;
+    });
+  });
+}
+
+function ipdLoadCurrent() {
+  var industry = ($('ipd-industry-current') || {}).value || 'pharmacy';
+  ipdFetch('/image-prompt-dashboard/current-images?industry=' + encodeURIComponent(industry)).then(function(data) {
+    var tbody = $('ipd-current-rows');
+    if (!tbody) return;
+    if (!data.images || !data.images.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="padding:16px;color:var(--muted)">No images for this industry.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.images.map(function(img) {
+      var thumb = img.thumbnailUrl
+        ? '<img class="ipd-thumb" src="' + img.thumbnailUrl + '" alt="">'
+        : '<div class="ipd-thumb-empty">—</div>';
+      var uploadDate = img.uploadDate ? new Date(img.uploadDate).toLocaleDateString() : '—';
+      var actions = '<div class="ipd-actions">'
+        + '<button class="btn btn-sm" onclick="ipdShowUpload(\'' + img.pack + '\',\'' + img.imageKey + '\',\'' + img.slot + '\')">Upload</button>'
+        + '<button class="btn btn-sm" onclick="ipdApprovalAction(\'' + img.pack + '\',\'' + img.imageKey + '\',\'' + img.slot + '\',\'mark-uploaded\')">Mark Uploaded</button>'
+        + '<button class="btn btn-sm btn-primary" onclick="ipdApprovalAction(\'' + img.pack + '\',\'' + img.imageKey + '\',\'' + img.slot + '\',\'approve\')">Approve</button>'
+        + '<button class="btn btn-sm" onclick="ipdApprovalAction(\'' + img.pack + '\',\'' + img.imageKey + '\',\'' + img.slot + '\',\'reject\')">Reject</button>'
+        + '<button class="btn btn-sm" onclick="ipdApprovalAction(\'' + img.pack + '\',\'' + img.imageKey + '\',\'' + img.slot + '\',\'reset\')">Reset</button>'
+        + '</div>';
+      return '<tr><td>' + thumb + ' <span style="font-size:.75rem;color:var(--muted)">' + img.imageKey + '</span></td>'
+        + '<td>' + img.packName + '</td><td>' + img.slot + '</td><td>' + img.status + '</td>'
+        + '<td>' + uploadDate + '</td><td>' + img.approvedStatus + '</td><td>' + actions + '</td></tr>';
+    }).join('');
+    ipdShowStatus('Loaded ' + data.images.length + ' production images.', true);
+  }).catch(function(e) {
+    ipdShowStatus(e.message, false);
+    var tbody = $('ipd-current-rows');
+    if (tbody) tbody.innerHTML = '<tr><td colspan="7" style="padding:16px;color:#dc2626">' + e.message + '</td></tr>';
+  });
+}
+
+function ipdShowUpload(pack, imageKey, slot) {
+  var form = $('ipd-upload-form');
+  if (!form) return;
+  var packSel = $('ipd-upload-pack-select');
+  if (packSel) packSel.value = pack;
+  ipdOnUploadPackChange(imageKey);
+  var slotSel = $('ipd-upload-slot-select');
+  if (slotSel) {
+    slotSel.value = slot;
+    slotSel.dataset.userChanged = '1';
+  }
+  ipdUpdateUploadTargetPath();
+  form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+window.ipdShowUpload = ipdShowUpload;
+
+function ipdHideUpload() {
+  ipdClearUploadFile();
+}
+window.ipdHideUpload = ipdHideUpload;
+
+function ipdGetUploadSelection() {
+  ipdSyncUploadHiddenFields();
+  var packSel = $('ipd-upload-pack-select');
+  var imageSel = $('ipd-upload-imageKey-select');
+  var slotSel = $('ipd-upload-slot-select');
+  var industrySel = $('ipd-upload-industry') || $('ipd-industry-current');
+  return {
+    industry: (industrySel && industrySel.value) || 'pharmacy',
+    pack: (packSel && packSel.value) || ($('ipd-upload-pack') && $('ipd-upload-pack').value) || '',
+    imageKey: (imageSel && imageSel.value) || ($('ipd-upload-imageKey') && $('ipd-upload-imageKey').value) || '',
+    slot: (slotSel && slotSel.value) || ($('ipd-upload-slot') && $('ipd-upload-slot').value) || ''
+  };
+}
+
+function ipdSubmitUpload() {
+  var sel = ipdGetUploadSelection();
+  var fileInput = $('ipd-upload-file');
+  var uploadBtn = $('ipd-upload-btn');
+  if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+    ipdShowUploadStatus('Select a .webp image file first.', false);
+    return;
+  }
+  var file = fileInput.files[0];
+  var fileName = (file.name || '').toLowerCase();
+  if (!fileName.endsWith('.webp') && file.type !== 'image/webp') {
+    ipdShowUploadStatus('Please upload a .webp file', false);
+    return;
+  }
+  if (!sel.pack || !sel.imageKey || !sel.slot) {
+    ipdShowUploadStatus('Select pack, image, and slot before uploading.', false);
+    return;
+  }
+  var fd = new FormData();
+  fd.append('industry', sel.industry);
+  fd.append('pack', sel.pack);
+  fd.append('imageKey', sel.imageKey);
+  fd.append('slot', sel.slot);
+  fd.append('approvalStatus', 'uploaded');
+  fd.append('file', file);
+  if (uploadBtn) uploadBtn.disabled = true;
+  ipdShowUploadStatus('Uploading...', null);
+  fetch(ipdApiPath('/image-prompt-dashboard/upload'), {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+    body: fd
+  }).then(function(r) {
+    return r.text().then(function(text) {
+      var data = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (_) {
+        throw new Error('Upload failed: non-JSON response (HTTP ' + r.status + ')');
+      }
+      if (!r.ok || data.ok === false) {
+        throw new Error(data.error || ('Upload failed: HTTP ' + r.status));
+      }
+      return data;
+    });
+  }).then(function(data) {
+    var uploadPath = data.uploadPath || (data.record && data.record.uploadPath) || '';
+    ipdClearUploadFile();
+    ipdShowUploadStatus('Upload complete: ' + uploadPath, true);
+    ipdLoadCurrent();
+    if (ipdActiveSub === 'queue') ipdLoadQueue();
+    if (ipdActiveSub === 'coverage') ipdLoadCoverage();
+  }).catch(function(e) {
+    ipdShowUploadStatus('Upload failed: ' + e.message, false);
+  }).finally(function() {
+    if (uploadBtn) uploadBtn.disabled = false;
+  });
+}
+window.ipdSubmitUpload = ipdSubmitUpload;
+
+function ipdApprovalAction(pack, imageKey, slot, action) {
+  var industry = ($('ipd-industry-current') || {}).value || 'pharmacy';
+  ipdPost('/image-prompt-dashboard/approval-action', {
+    industry: industry,
+    pack: pack,
+    imageKey: imageKey,
+    slot: slot,
+    action: action
+  }).then(function() {
+    ipdShowStatus('Updated: ' + imageKey + ' → ' + action, true);
+    ipdLoadCurrent();
+    if (ipdActiveSub === 'queue') ipdLoadQueue();
+    if (ipdActiveSub === 'coverage') ipdLoadCoverage();
+  }).catch(function(e) { ipdShowStatus(e.message, false); });
+}
+window.ipdApprovalAction = ipdApprovalAction;
+
+function ipdCopyText(text, btn, successMsg) {
+  navigator.clipboard.writeText(text).then(function() {
+    if (successMsg) {
+      ipdShowPromptStatus(successMsg, true);
+      ipdShowStatus(successMsg, true);
+    }
+    if (btn) { var o = btn.textContent; btn.textContent = 'Copied!'; setTimeout(function() { btn.textContent = o; }, 1500); }
+  }).catch(function(e) {
+    ipdShowPromptStatus('Copy failed: ' + (e.message || 'clipboard denied'), false);
+    ipdShowStatus('Copy failed', false);
+  });
+}
+function ipdCopyPrompt(text, btn) { ipdCopyText(text, btn, 'Prompt copied'); }
+window.ipdCopyPrompt = ipdCopyPrompt;
+window.ipdCopyText = ipdCopyText;
+
+function ipdCopyBothFromCard(card, btn) {
+  var promptTa = card.querySelector('.ipd-ta-prompt');
+  var negTa = card.querySelector('.ipd-ta-negative');
+  var pText = promptTa ? (promptTa.value || promptTa.textContent || '') : '';
+  var nText = negTa ? (negTa.value || negTa.textContent || '') : '';
+  var text = pText + '\n\n---\nNegative:\n' + nText;
+  ipdCopyText(text, btn, 'Prompt and negative copied');
+}
+window.ipdCopyBoth = ipdCopyBothFromCard;
+
+function ipdFetchDownload(path, filename) {
+  var url = ipdApiPath(path);
+  ipdLastApiUrl = url;
+  ipdUpdateLiveDebug({ lastApiUrl: url, lastApiStatus: 'pending' });
+  return fetch(url, {
+    credentials: 'same-origin',
+    cache: 'no-store',
+    headers: {
+      'Accept': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  }).then(function(r) {
+    ipdLastApiStatus = String(r.status);
+    ipdUpdateLiveDebug({ lastApiStatus: ipdLastApiStatus });
+    return r.text().then(function(text) {
+      if (!r.ok) {
+        var errMsg = text;
+        try { errMsg = JSON.parse(text).error || errMsg; } catch (_) {}
+        throw new Error(errMsg || ('HTTP ' + r.status));
+      }
+      var blob = new Blob([text], { type: 'application/json' });
+      var blobUrl = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(blobUrl);
+    });
+  });
+}
+
+function ipdDownloadSinglePromptLocal(card) {
+  var f = ipdGetPromptFilters();
+  var imageKey = card.getAttribute('data-image-key') || 'prompt';
+  var imagePack = card.getAttribute('data-image-pack') || f.packKey;
+  var promptTa = card.querySelector('.ipd-ta-prompt');
+  var negTa = card.querySelector('.ipd-ta-negative');
+  var payload = {
+    exportedAt: new Date().toISOString(),
+    industry: f.industry,
+    serviceKey: f.serviceKey,
+    templateFamily: f.templateFamily,
+    packKey: imagePack,
+    imageKey: imageKey,
+    prompt: {
+      imageKey: imageKey,
+      imagePack: imagePack,
+      prompt: promptTa ? promptTa.value : '',
+      negativePrompt: negTa ? negTa.value : ''
+    }
+  };
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'prompt-' + imageKey + '.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function ipdDownloadSinglePrompt(card) {
+  var f = ipdGetPromptFilters();
+  var imageKey = card.getAttribute('data-image-key');
+  var imagePack = card.getAttribute('data-image-pack') || f.packKey;
+  if (!imageKey) {
+    ipdShowPromptStatus('Download failed: missing image key', false);
+    return Promise.resolve();
+  }
+  var qs = '?industry=' + encodeURIComponent(f.industry)
+    + '&templateFamily=' + encodeURIComponent(f.templateFamily)
+    + '&serviceKey=' + encodeURIComponent(f.serviceKey)
+    + '&pack=' + encodeURIComponent(imagePack)
+    + '&imageKey=' + encodeURIComponent(imageKey);
+  return ipdFetchDownload('/image-prompt-dashboard/export-prompt' + qs, 'prompt-' + imageKey + '.json')
+    .then(function() {
+      ipdShowPromptStatus('Single prompt downloaded', true);
+      ipdShowStatus('Single prompt downloaded', true);
+    })
+    .catch(function(e) {
+      try {
+        ipdDownloadSinglePromptLocal(card);
+        ipdShowPromptStatus('Single prompt downloaded', true);
+        ipdShowStatus('Single prompt downloaded', true);
+      } catch (err) {
+        ipdShowPromptStatus('Download failed: ' + e.message, false);
+        ipdShowStatus('Download failed: ' + e.message, false);
+      }
+    });
+}
+
+function ipdInitPromptActions() {
+  if (window.__ipdPromptActionsBound) return;
+  window.__ipdPromptActionsBound = true;
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-ipd-action]');
+    if (!btn) return;
+    var card = btn.closest('.ipd-prompt-card');
+    if (!card) return;
+    e.preventDefault();
+    var action = btn.getAttribute('data-ipd-action');
+    var promptTa = card.querySelector('.ipd-ta-prompt');
+    var negTa = card.querySelector('.ipd-ta-negative');
+    if (action === 'copy-prompt') {
+      ipdCopyText(promptTa ? promptTa.value : '', btn, 'Prompt copied');
+    } else if (action === 'copy-negative') {
+      ipdCopyText(negTa ? negTa.value : '', btn, 'Negative prompt copied');
+    } else if (action === 'copy-both') {
+      ipdCopyBothFromCard(card, btn);
+    } else if (action === 'download-single') {
+      ipdDownloadSinglePrompt(card);
+    }
+  });
+}
+ipdInitPromptActions();
+
+function ipdRenderPromptCards(prompts, f) {
+  var out = $('ipd-prompts-output');
+  if (!out) return;
+  var count = (prompts && prompts.length) ? prompts.length : 0;
+  ipdLastPromptCount = String(count);
+  ipdUpdateLiveDebug({ promptsCount: count });
+  if (!count) {
+    out.innerHTML = '<p style="color:#92400e;padding:12px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px">No prompts found for this selection.</p>';
+    return;
+  }
+  out.style.display = 'block';
+  out.innerHTML = prompts.map(function(p, idx) {
+    var imageKey = p.imageKey || ('prompt-' + idx);
+    var imagePack = p.imagePack || f.packKey;
+    var slot = p.slot || p.recommendedSlot || 'hero';
+    var aspect = p.aspectRatio || '—';
+    var style = p.style || p.stylePreset || '—';
+    var promptText = p.prompt || p.ideogramPrompt || '';
+    var negText = p.negativePrompt || '';
+    return '<article class="ipd-prompt-card" data-image-key="' + ipdEscAttr(imageKey) + '" data-image-pack="' + ipdEscAttr(imagePack) + '">'
+      + '<div class="ipd-prompt-card-head"><strong style="font-size:.95rem">' + ipdEscText(imageKey) + '</strong>'
+      + '<span class="ipd-prompt-card-meta">Pack: ' + ipdEscText(imagePack) + '</span></div>'
+      + '<div class="ipd-prompt-card-meta">Slot: <strong>' + ipdEscText(slot) + '</strong> · Aspect: <strong>' + ipdEscText(aspect) + '</strong> · Style: <strong>' + ipdEscText(style) + '</strong></div>'
+      + '<div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0">'
+      + '<button type="button" class="btn btn-sm" data-ipd-action="copy-prompt">Copy Prompt</button>'
+      + '<button type="button" class="btn btn-sm" data-ipd-action="copy-negative">Copy Negative Prompt</button>'
+      + '<button type="button" class="btn btn-sm" data-ipd-action="copy-both">Copy Both</button>'
+      + '<button type="button" class="btn btn-sm" data-ipd-action="download-single">Download Single Prompt</button>'
+      + '</div>'
+      + '<p style="font-size:.72rem;color:#64748b;margin:0 0 6px">Select text below to copy manually if buttons fail.</p>'
+      + '<label class="ipd-prompt-label">Ideogram prompt</label>'
+      + '<textarea class="ipd-prompt-textarea ipd-ta-prompt" readonly spellcheck="false">' + ipdEscText(promptText) + '</textarea>'
+      + '<label class="ipd-prompt-label">Negative prompt</label>'
+      + '<textarea class="ipd-prompt-textarea ipd-ta-negative" readonly spellcheck="false">' + ipdEscText(negText) + '</textarea>'
+      + '</article>';
+  }).join('');
+}
+
+function ipdLoadPromptsForFilters(f, opts) {
+  opts = opts || {};
+  var out = $('ipd-prompts-output');
+  if (out && !opts.silent) {
+    out.style.display = 'block';
+    out.innerHTML = '<p style="color:var(--muted);padding:12px">Loading prompts…</p>';
+  }
+  if (!opts.silent) {
+    ipdUpdatePromptSelectionSummary(null);
+    ipdShowPromptStatus('Loading prompts for ' + f.serviceKey + ' / ' + f.packKey + '…', null);
+  }
+  var qs = '?industry=' + encodeURIComponent(f.industry)
+    + '&templateFamily=' + encodeURIComponent(f.templateFamily)
+    + '&serviceKey=' + encodeURIComponent(f.serviceKey)
+    + '&packKey=' + encodeURIComponent(f.packKey);
+  return ipdFetch('/image-prompt-dashboard/prompts' + qs).then(function(data) {
+    var count = (data.prompts && data.prompts.length) ? data.prompts.length : 0;
+    console.log('[IPD] Prompt API returned ' + count + ' prompts', data);
+    ipdUpdatePromptSelectionSummary(count);
+    if (!opts.silent) {
+      ipdShowPromptStatus('Prompt API returned ' + count + ' prompts', count > 0);
+      ipdShowStatus('Prompt API returned ' + count + ' prompts.', true);
+    }
+    ipdRenderPromptCards(data.prompts || [], f);
+    return data;
+  }).catch(function(e) {
+    console.error('[IPD] Prompt load failed', e);
+    if (!opts.silent) {
+      if (out) out.innerHTML = '<p style="color:#991b1b;padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px">' + ipdEscText(e.message) + '</p>';
+      ipdShowPromptStatus(e.message, false);
+      ipdShowStatus(e.message, false);
+    }
+    throw e;
+  });
+}
+
+function ipdLoadPrompts() {
+  var f = ipdGetPromptFilters();
+  return ipdLoadPromptsForFilters(f, { silent: false });
+}
+
+function ipdDownloadPromptPack() {
+  var f = ipdGetPromptFilters();
+  var qs = '?industry=' + encodeURIComponent(f.industry)
+    + '&templateFamily=' + encodeURIComponent(f.templateFamily)
+    + '&serviceKey=' + encodeURIComponent(f.serviceKey)
+    + '&pack=' + encodeURIComponent(f.packKey);
+  var filename = 'prompt-pack-' + (f.serviceKey || f.packKey) + '.json';
+  ipdShowPromptStatus('Downloading prompt pack…', null);
+  ipdFetchDownload('/image-prompt-dashboard/export' + qs, filename)
+    .then(function() {
+      ipdShowPromptStatus('Prompt pack downloaded', true);
+      ipdShowStatus('Prompt pack downloaded', true);
+    })
+    .catch(function(e) {
+      ipdShowPromptStatus('Download failed: ' + e.message, false);
+      ipdShowStatus('Download failed: ' + e.message, false);
+    });
+}
+window.ipdDownloadPromptPack = ipdDownloadPromptPack;
+
+function ipdLoadQueue() {
+  var industry = ($('ipd-industry-current') || {}).value || 'pharmacy';
+  ipdFetch('/image-prompt-dashboard/upload-queue?industry=' + encodeURIComponent(industry)).then(function(data) {
+    if (data.workflowPipeline) ipdRenderWorkflow(data.workflowPipeline);
+    var metrics = $('ipd-queue-metrics');
+    if (metrics && data.buckets) {
+      metrics.innerHTML = data.buckets.map(function(b) {
+        return '<div class="ipd-metric"><div class="ipd-metric-val">' + b.count + '</div><div class="ipd-metric-lbl">' + b.label + '</div></div>';
+      }).join('');
+    }
+    var lists = $('ipd-queue-lists');
+    if (lists && data.buckets) {
+      lists.innerHTML = data.buckets.filter(function(b) { return b.count > 0; }).map(function(b) {
+        var rows = b.images.slice(0, 20).map(function(img) {
+          var act = '';
+          if (img.pack && img.imageKey && img.slot && img.uploadTargetPath.indexOf('(') !== 0) {
+            act = ' <span class="ipd-actions" style="margin-left:8px">'
+              + '<button class="btn btn-sm" onclick="ipdApprovalAction(\'' + img.pack + '\',\'' + img.imageKey + '\',\'' + img.slot + '\',\'approve\')">Approve</button>'
+              + '</span>';
+          }
+          return '<li style="font-size:.78rem;margin-bottom:4px">' + img.imageKey + ' · ' + img.pack + ' · ' + img.slot + act + '</li>';
+        }).join('');
+        var more = b.images.length > 20 ? '<li style="font-size:.78rem;color:var(--muted)">…and ' + (b.images.length - 20) + ' more</li>' : '';
+        return '<div style="margin-bottom:16px"><h4 style="font-size:.88rem;margin-bottom:6px">' + b.label + ' (' + b.count + ')</h4><ul style="margin:0;padding-left:18px">' + rows + more + '</ul></div>';
+      }).join('') || '<p style="color:var(--muted)">Queue is empty.</p>';
+    }
+    ipdShowStatus('Upload queue loaded.', true);
+  }).catch(function(e) { ipdShowStatus(e.message, false); });
+}
+
+function ipdCoverageStatusCell(slot) {
+  if (!slot) return '<span class="ipd-status-pill ipd-status-missing">Missing</span>';
+  var cls = 'ipd-status-' + (slot.status || 'missing');
+  var label = (slot.status || 'missing').charAt(0).toUpperCase() + (slot.status || 'missing').slice(1);
+  return '<span class="ipd-status-pill ' + cls + '" title="' + (slot.imageKey || '') + '">' + label + '</span>';
+}
+
+function ipdLoadCoverage() {
+  ipdFetch('/image-prompt-dashboard/coverage?industry=pharmacy').then(function(data) {
+    var summary = $('ipd-coverage-summary');
+    if (summary && data.summary) {
+      summary.innerHTML = [
+        { v: data.summary.averageUploadedCoveragePercent + '%', l: 'Uploaded coverage' },
+        { v: data.summary.averageApprovedCoveragePercent + '%', l: 'Approved coverage' },
+        { v: data.summary.totalServices, l: 'Services' },
+        { v: data.summary.totalMissingSlots, l: 'Missing slots' },
+        { v: data.summary.totalFallbackSlots, l: 'Fallback slots' },
+        { v: data.summary.totalApprovedSlots, l: 'Approved slots' }
+      ].map(function(m) {
+        return '<div class="ipd-metric"><div class="ipd-metric-val">' + m.v + '</div><div class="ipd-metric-lbl">' + m.l + '</div></div>';
+      }).join('');
+    }
+    var tbody = $('ipd-coverage-rows');
+    if (tbody && data.services) {
+      tbody.innerHTML = data.services.map(function(svc) {
+        var missing = svc.missingSlots && svc.missingSlots.length ? svc.missingSlots.join(', ') : '—';
+        return '<tr><td><strong>' + svc.serviceName + '</strong><br><span style="font-size:.72rem;color:var(--muted)">' + svc.serviceKey + '</span></td>'
+          + '<td>' + ipdCoverageStatusCell(svc.slots.hero) + '</td>'
+          + '<td>' + ipdCoverageStatusCell(svc.slots.support) + '</td>'
+          + '<td>' + ipdCoverageStatusCell(svc.slots.trust) + '</td>'
+          + '<td>' + ipdCoverageStatusCell(svc.slots.conversion) + '</td>'
+          + '<td>' + svc.uploadedCoveragePercent + '%</td>'
+          + '<td>' + svc.approvedCoveragePercent + '%</td>'
+          + '<td style="font-size:.75rem">' + missing + '</td></tr>';
+      }).join('');
+    }
+    return ipdFetch('/image-prompt-dashboard/future-industries');
+  }).then(function(future) {
+    var el = $('ipd-future-industries');
+    if (!el || !future.industries) return;
+    el.innerHTML = '<h4 style="font-size:.92rem;margin-bottom:8px">Future Industry Support</h4>'
+      + '<div style="display:flex;flex-wrap:wrap;gap:8px">'
+      + future.industries.map(function(ind) {
+        var ok = ind.workflowReady ? 'ipd-slot-ok' : 'ipd-slot-miss';
+        return '<span style="font-size:.78rem;padding:6px 12px;border:1px solid #e2e8f0;border-radius:8px;background:#fff">'
+          + ind.displayName + ' <span class="' + ok + '">' + (ind.workflowReady ? '✓' : '○') + '</span>'
+          + ' <span style="color:var(--muted)">(' + ind.readiness + ')</span></span>';
+      }).join('')
+      + '</div>';
+    ipdShowStatus('Coverage report loaded.', true);
+  }).catch(function(e) { ipdShowStatus(e.message, false); });
+}
+
+function ipdLoad() {
+  ipdLoadMeta().then(function() {
+    return ipdApplyPromptDefaults();
+  }).then(function() {
+    ipdSubTabSwitch(ipdActiveSub);
+  }).catch(function(e) {
+    ipdShowStatus(e.message, false);
+    ipdShowPromptStatus(e.message, false);
+  });
+}
+window.ipdLoad = ipdLoad;
+window.ipdLoadCurrent = ipdLoadCurrent;
+window.ipdLoadPrompts = ipdLoadPrompts;
+window.ipdLoadQueue = ipdLoadQueue;
+window.ipdLoadCoverage = ipdLoadCoverage;
 </script>
 
 </body>

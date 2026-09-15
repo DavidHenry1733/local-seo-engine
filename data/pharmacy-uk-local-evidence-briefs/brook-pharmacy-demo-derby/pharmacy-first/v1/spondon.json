@@ -1,0 +1,142 @@
+{
+  "kind": "pharmacy-uk-local-evidence-brief-v1",
+  "version": "v1",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaName": "Spondon",
+  "areaSlug": "spondon",
+  "savedAt": "2026-09-08T16:58:25.130Z",
+  "introductionStructureId": "setting-then-service",
+  "identity": {
+    "verifiedName": "Spondon",
+    "statements": [
+      "Spondon is a neighbourhood ward in Derby."
+    ]
+  },
+  "geography": {
+    "parentTown": "Derby",
+    "county": "Derbyshire",
+    "country": "United Kingdom",
+    "queryPlaceLabel": "Spondon, Derbyshire, UK",
+    "statements": [
+      "Spondon is a neighbourhood ward in Derby."
+    ]
+  },
+  "healthcare": [
+    {
+      "name": "Chapel Street Medical Centre",
+      "category": "healthcare",
+      "address": "10 Chapel St, Spondon, Derby DE21 7RJ"
+    },
+    {
+      "name": "Central Health Network",
+      "category": "healthcare",
+      "address": "70 Nottingham Rd, Spondon, Derby DE21 7NL"
+    },
+    {
+      "name": "Central Occupational Health",
+      "category": "healthcare",
+      "address": "70 Nottingham Rd, Spondon, Derby DE21 7NL"
+    },
+    {
+      "name": "NHS general practice services in Spondon are provided from Chapel Street Medical Centre.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Spondon are provided from Chapel Street Medical Centre.",
+      "factId": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro"
+    },
+    {
+      "name": "NHS general practice services in Spondon are provided from Central Health Network.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Spondon are provided from Central Health Network.",
+      "factId": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro"
+    },
+    {
+      "name": "NHS general practice services in Spondon are provided from Central Occupational Health.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Spondon are provided from Central Occupational Health.",
+      "factId": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro"
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Borrow Wood Park",
+      "category": "landmarks",
+      "address": "Sandringham Dr, Spondon, Derby DE21 7QN"
+    },
+    {
+      "name": "Dale Road Park",
+      "category": "landmarks",
+      "address": "Dale Rd, Spondon, Derby DE21 7DN"
+    },
+    {
+      "name": "West Park Meadow Nature Reserve",
+      "category": "landmarks",
+      "address": "West Rd, Spondon, Derby DE21 7AB"
+    },
+    {
+      "name": "Borrow Wood Park is listed as a landmark in Spondon.",
+      "category": "heritage",
+      "statement": "Borrow Wood Park is listed as a landmark in Spondon.",
+      "factId": "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon"
+    },
+    {
+      "name": "Dale Road Park is listed as a landmark in Spondon.",
+      "category": "heritage",
+      "statement": "Dale Road Park is listed as a landmark in Spondon.",
+      "factId": "spondon:heritage:dale-road-park-is-listed-as-a-landmark-in-spondo"
+    },
+    {
+      "name": "West Park Meadow Nature Reserve is listed as a landmark in Spondon.",
+      "category": "heritage",
+      "statement": "West Park Meadow Nature Reserve is listed as a landmark in Spondon.",
+      "factId": "spondon:heritage:west-park-meadow-nature-reserve-is-listed-as-a-l"
+    }
+  ],
+  "parks": [],
+  "shopping": [],
+  "civic": [
+    {
+      "name": "Spondon Library",
+      "category": "community",
+      "address": "Sitwell St, Spondon, Derby DE21 7FG"
+    }
+  ],
+  "community": [
+    {
+      "name": "Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "category": "community",
+      "statement": "Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "factId": "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc"
+    },
+    {
+      "name": "Spondon has a public library.",
+      "category": "community",
+      "statement": "Spondon has a public library.",
+      "factId": "spondon:community:spondon-has-a-public-library"
+    },
+    {
+      "name": "Spondon Library is listed as a community facility in Spondon.",
+      "category": "community",
+      "statement": "Spondon Library is listed as a community facility in Spondon.",
+      "factId": "spondon:community:spondon-library-is-listed-as-a-community-facilit"
+    }
+  ],
+  "distance": {
+    "km": 5.1,
+    "label": "approximately 5.1 km straight-line",
+    "method": "haversine-straight-line"
+  },
+  "factIds": [
+    "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+    "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby",
+    "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc",
+    "spondon:community:spondon-has-a-public-library",
+    "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+    "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+    "spondon:community:spondon-library-is-listed-as-a-community-facilit",
+    "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon",
+    "spondon:heritage:dale-road-park-is-listed-as-a-landmark-in-spondo",
+    "spondon:heritage:west-park-meadow-nature-reserve-is-listed-as-a-l",
+    "spondon:pharmacy-relationship:distance"
+  ]
+}

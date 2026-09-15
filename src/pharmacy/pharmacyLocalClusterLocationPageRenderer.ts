@@ -27,7 +27,7 @@ import { renderServicePageImagePanel } from "./pharmacyServicePageImageComponent
 import { renderMediaTextSection } from "./pharmacyMediaFloatFlowComponent.ts";
 import type { VisualExperienceServiceId } from "./pharmacyVisualExperienceConfig.ts";
 import { pharmacyLocalPageResponsiveStyleBlock } from "./pharmacyLocalPageResponsiveStyles.ts";
-import { LOCAL_CLUSTER_CONTRACT_ID, LOCAL_CLUSTER_V1_CONTRACT } from "./pharmacyLocalPageTypeContracts.ts";
+import { LOCAL_CLUSTER_CONTRACT_ID, LOCAL_CLUSTER_V1_CONTRACT, usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
 import { buildLocalClusterHubPageContent } from "./pharmacyLocalHubClusterContentEngine.ts";
 import {
   buildProfileFinalCtaHtml,
@@ -39,7 +39,6 @@ import { resolveLocalSectionHeading } from "./pharmacyLocalSectionHeadingResolve
 import {
   resolveLocalAreaTarget,
   resolveLocalClusterTarget,
-  resolveLocalHubTarget,
   resolveLocalPagePublicPath,
   resolveTenantSupportedAreaLinks,
 } from "./pharmacyLocalPageUrlResolver.ts";
@@ -50,6 +49,13 @@ import {
 } from "./pharmacyServicePageIntelligence.ts";
 import { localPageTypeTypographyStyleBlock } from "./pharmacyLocalPageTypeTypography.ts";
 import { assertLocalPageContractOrThrow } from "./pharmacyLocalPageContractValidation.ts";
+import { usesApprovedBankLocalityDirectPath, renderApprovedBankServiceHubCtaHtml, renderApprovedBankLocalityPreparationHtml } from "./pharmacyApprovedBankLocalityDirectRender.ts";
+import { getSessionAiLocalCopy } from "./contentEngine/pharmacyLocalityVariationSessionV1.ts";
+import { resolveClusterPageSlug } from "./pharmacyClusterPageUrlResolver.ts";
+
+function usesApprovedBankLocalLayout(serviceId: string): boolean {
+  return usesApprovedBankLocalityDirectPath(serviceId) && !usesPharmacyFirstPatientJourneyLocalTemplate(serviceId);
+}
 
 function esc(s: string): string {
   return s
@@ -64,7 +70,10 @@ function publicHref(ctx: ContentGenerationContext, target: Parameters<typeof res
 }
 
 function renderSectionHead(title: string, intro = ""): string {
-  return `<div class="section-head center">${title ? `<h2>${esc(title)}</h2>` : ""}${intro ? `<p>${esc(intro)}</p>` : ""}</div>`;
+  const heading = String(title || "").trim();
+  const lead = String(intro || "").trim();
+  if (!heading && !lead) return "";
+  return `<div class="section-head center">${heading ? `<h2>${esc(heading)}</h2>` : ""}${lead ? `<p>${esc(lead)}</p>` : ""}</div>`;
 }
 
 function bodyToParagraphs(body: string): string[] {
@@ -91,8 +100,8 @@ function clusterBreadcrumb(
   cluster: LocalAreaEvidenceRecord,
 ): string {
   const serviceHref = publicHref(ctx, { pageType: "service", localSegment: ctx.serviceId });
-  const hubHref = publicHref(ctx, resolveLocalHubTarget(hierarchy));
-  return `<nav class="local-breadcrumb wrap" aria-label="Breadcrumb" data-template-block="breadcrumbs"><a href="${esc(serviceHref)}">${esc(ctx.serviceName)}</a> <span aria-hidden="true">›</span> <a href="${esc(hubHref)}">Locations</a> <span aria-hidden="true">›</span> <span>${esc(cluster.name)}</span></nav>`;
+  void hierarchy;
+  return `<nav class="local-breadcrumb wrap" aria-label="Breadcrumb" data-template-block="breadcrumbs"><a href="${esc(serviceHref)}">${esc(ctx.serviceName)}</a> <span aria-hidden="true">›</span> <span>${esc(cluster.name)}</span></nav>`;
 }
 
 function renderChildAreasSection(
@@ -104,7 +113,11 @@ function renderChildAreasSection(
 ): string {
   const childAreas = hierarchy.areas.filter((a) => a.parentAreaId === cluster.areaId);
   const supporting = content.base.supportingItems || [];
-  const cards = childAreas.length
+  const direct = usesApprovedBankLocalLayout(ctx.serviceId);
+  const lockedJourney = usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId);
+  const cards = lockedJourney
+    ? ""
+    : childAreas.length && !direct
     ? childAreas
         .map(
           (a) =>
@@ -112,12 +125,18 @@ function renderChildAreasSection(
         )
         .join("\n")
     : supporting
-        .map(
-          (item) =>
-            `<article class="area-card" data-locality-evidence="${esc(item.evidence)}"><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></article>`,
-        )
+        .map((item) => {
+          const list = item.bullets?.length
+            ? `<ul class="clean">${item.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
+            : "";
+          return `<article class="area-card" data-locality-evidence="${esc(item.evidence)}"><h3>${esc(item.title)}</h3>${item.body ? `<p>${esc(item.body)}</p>` : ""}${list}</article>`;
+        })
         .join("\n");
-  const heading = childAreas.length
+  const heading = lockedJourney
+    ? content.base.processHeading || `How ${ctx.serviceName} can help`
+    : direct
+    ? content.base.processHeading || `What happens next`
+    : childAreas.length
     ? resolveLocalSectionHeading({
         kind: "child-area-cards",
         pageType: "location-cluster",
@@ -131,14 +150,32 @@ function renderChildAreasSection(
         serviceName: ctx.serviceName,
         localityLabel: cluster.name,
       });
+  const introText = lockedJourney
+    ? content.base.processIntro || intro
+    : direct
+      ? content.base.processIntro || intro
+      : intro || content.base.supportingIntro || "";
+  const introHtml = lockedJourney
+    ? `<p>${esc(introText)}</p>`
+    : bodyToParagraphs(introText)
+        .map((p) => `<p>${esc(p)}</p>`)
+        .join("\n");
   return `<section class="soft" id="child-areas" data-template-block="child-areas" data-locality-evidence="${esc(
     (content.base.sectionEvidence?.supporting || []).join("|"),
   )}">
 <div class="wrap">
-${renderSectionHead(heading, intro || content.base.supportingIntro || "")}
-<div class="areas-grid">${cards || `<article class="area-card"><h3>${esc(cluster.name)}</h3><p>Guidance for patients travelling from ${esc(cluster.name)}.</p></article>`}</div>
+${renderSectionHead(heading, "")}
+${introHtml}
+${lockedJourney ? "" : `<div class="areas-grid">${cards || `<article class="area-card"><h3>${esc(cluster.name)}</h3><p>Guidance for patients travelling from ${esc(cluster.name)}.</p></article>`}</div>`}
 </div>
 </section>`;
+}
+
+function renderServiceHubCtaSection(
+  ctx: ContentGenerationContext,
+  conversionImageHtml: string,
+): string {
+  return renderApprovedBankServiceHubCtaHtml(ctx.serviceName, ctx.serviceId, conversionImageHtml);
 }
 
 function renderClusterLinksSection(
@@ -147,38 +184,59 @@ function renderClusterLinksSection(
   cluster: LocalAreaEvidenceRecord,
   content: ReturnType<typeof buildLocalClusterHubPageContent>,
 ): string {
-  const hubHref = publicHref(ctx, resolveLocalHubTarget(hierarchy));
   const childAreas = hierarchy.areas.filter((a) => a.parentAreaId === cluster.areaId);
-  const ranked = content.base.nearbyLocalityLinks?.length
+  const rankedFromNearby = content.base.nearbyLocalityLinks?.length
     ? content.base.nearbyLocalityLinks
         .map((n) => hierarchy.clusters.find((c) => c.slug === n.areaSlug || c.name === n.areaName))
-        .filter((c): c is NonNullable<typeof c> => Boolean(c))
-    : hierarchy.clusters.filter((c) => c.slug !== cluster.slug);
+        .filter((c): c is NonNullable<typeof c> => Boolean(c) && c.slug !== cluster.slug)
+    : [];
+  const relatedOnly = usesApprovedBankLocalLayout(ctx.serviceId);
+  const lockedJourney = usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId);
+  const ranked = relatedOnly
+    ? hierarchy.clusters.filter((c) => c.slug !== cluster.slug)
+    : rankedFromNearby.length
+      ? rankedFromNearby
+      : hierarchy.clusters.filter((c) => c.slug !== cluster.slug);
   const serviceHref = publicHref(ctx, { pageType: "service", localSegment: ctx.serviceId });
-  const links = [
-    `<li><a href="${esc(hubHref)}">All ${esc(ctx.serviceName)} locations near ${esc(hierarchy.primaryLocality)}</a></li>`,
-    ...childAreas.map(
-      (a) =>
-        `<li><a href="${esc(publicHref(ctx, resolveLocalAreaTarget(a.slug, a.name)))}">${esc(ctx.serviceName)} in ${esc(a.name)}</a></li>`,
-    ),
-    ...ranked.slice(0, 4).map((c) => {
-      return `<li><a href="${esc(publicHref(ctx, resolveLocalClusterTarget(c.slug, c.name)))}">${esc(ctx.serviceName)} in ${esc(c.name)}</a></li>`;
-    }),
-    `<li><a href="${esc(serviceHref)}">${esc(ctx.serviceName)} overview</a></li>`,
-  ].join("\n");
+  const siblingClusters = hierarchy.clusters.filter((c) => c.slug !== cluster.slug);
+  const links = lockedJourney
+    ? [
+        ...siblingClusters.map(
+          (c) =>
+            `<li><a href="${esc(publicHref(ctx, resolveLocalClusterTarget(c.slug, c.name)))}">${esc(ctx.serviceName)} in ${esc(c.name)}</a></li>`,
+        ),
+        `<li><a href="${esc(serviceHref)}">${esc(ctx.serviceName)} overview</a></li>`,
+      ].join("\n")
+    : relatedOnly
+    ? ranked
+        .map((c) => `<li><a href="${esc(publicHref(ctx, resolveLocalClusterTarget(c.slug, c.name)))}">${esc(ctx.serviceName)} for patients from ${esc(c.name)}</a></li>`)
+        .join("\n")
+    : [
+        `<li><a href="${esc(serviceHref)}">All ${esc(ctx.serviceName)} locations near ${esc(hierarchy.primaryLocality)}</a></li>`,
+        ...childAreas.map(
+          (a) =>
+            `<li><a href="${esc(publicHref(ctx, resolveLocalAreaTarget(a.slug, a.name)))}">${esc(ctx.serviceName)} in ${esc(a.name)}</a></li>`,
+        ),
+        ...ranked.slice(0, 4).map((c) => {
+          return `<li><a href="${esc(publicHref(ctx, resolveLocalClusterTarget(c.slug, c.name)))}">${esc(ctx.serviceName)} in ${esc(c.name)}</a></li>`;
+        }),
+        `<li><a href="${esc(serviceHref)}">${esc(ctx.serviceName)} overview</a></li>`,
+      ].join("\n");
+  const relatedHeading = lockedJourney
+    ? `Nearby areas we also help`
+    : relatedOnly
+    ? `Other ${ctx.serviceName} locality pages`
+    : resolveLocalSectionHeading({
+        kind: "related-locations",
+        pageType: "location-cluster",
+        serviceName: ctx.serviceName,
+        localityLabel: cluster.name,
+      });
   return `<section class="cluster-link-band soft" data-template-block="parent-child-links" data-locality-evidence="${esc(
     (content.base.sectionEvidence?.internalLinks || []).join("|"),
   )}">
 <div class="wrap">
-${renderSectionHead(
-  resolveLocalSectionHeading({
-    kind: "related-locations",
-    pageType: "location-cluster",
-    serviceName: ctx.serviceName,
-    localityLabel: cluster.name,
-  }),
-  "",
-)}
+${renderSectionHead(relatedHeading, "")}
 <ul class="clean">${links}</ul>
 </div>
 </section>`;
@@ -210,6 +268,7 @@ function renderClusterTrustSection(
   profile: ReturnType<typeof buildPharmacyServicePageProfile>,
   content: ReturnType<typeof buildLocalClusterHubPageContent>,
   trustImageHtml: string,
+  registered: boolean,
 ): string {
   const title = content.base.trustHeading || "When to seek further medical help";
   const intro = content.base.trustIntro?.trim() || "";
@@ -217,17 +276,24 @@ function renderClusterTrustSection(
     intro ? "" : content.base.trustBody,
     content.base.trustBullets,
   );
-  const proseText = intro || prose || content.base.trustBody.split(/\n\n+/)[0] || "";
+  const proseText = registered
+    ? content.base.trustBody
+    : intro || prose || content.base.trustBody.split(/\n\n+/)[0] || "";
   const listHtml = bullets.length
     ? `<ul class="trust-safety-list">${bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
     : "";
+  const tag = registered ? "" : `<span class="tag">Service experience</span>\n`;
+  const proseHtml = registered
+    ? bodyToParagraphs(proseText).map((p) => `<p>${esc(p)}</p>`).join("\n")
+    : proseText
+      ? `<p>${esc(proseText)}</p>`
+      : "";
   return `<section class="about" id="cluster-trust" data-template-block="trust-split">
 <div class="wrap">
 <div class="grid-2 trust-split-row">
 <div class="trust-prose">
-<span class="tag">Service experience</span>
-<h2>${esc(title)}</h2>
-${proseText ? `<p>${esc(proseText)}</p>` : ""}
+${tag}<h2>${esc(title)}</h2>
+${proseHtml}
 ${listHtml}
 </div>
 <div class="trust-media">${trustImageHtml}</div>
@@ -241,18 +307,22 @@ function renderClusterFaqSection(
   ctx: ContentGenerationContext,
   clusterName: string,
 ): string {
-  const faqHeading = resolveLocalFaqSectionHeading({
-    pageType: "location-cluster",
-    serviceName: ctx.serviceName,
-    localityLabel: clusterName,
-  });
+  const faqHeading = usesApprovedBankLocalLayout(ctx.serviceId)
+    ? `Common ${ctx.serviceName} questions`
+    : resolveLocalFaqSectionHeading({
+        pageType: "location-cluster",
+        serviceName: ctx.serviceName,
+        localityLabel: clusterName,
+      });
   const items = content.base.faqs
     .slice(0, 6)
+    .filter((f) => String(f.question || "").trim() && String(f.answer || "").trim())
     .map(
       (f) =>
         `<div class="cluster-faq-item faq-card"><h3 class="faq-q">${esc(f.question)}</h3><p class="faq-a">${esc(f.answer)}</p></div>`,
     )
     .join("\n");
+  if (!items) return "";
   return `<section class="faq" id="faq-section" data-template-block="faq">
 <div class="wrap">${renderSectionHead(faqHeading, "")}${items}</div>
 </section>`;
@@ -285,28 +355,53 @@ export function renderLocalClusterLocationPageHtml(
     "image-panel conversion-feature-image",
   );
 
-  // Evidence CTA wins over brand header wording (unknown appointment → Contact, not Book).
-  const ctaLabel = preferredServicePageCta(ctx, profile);
-  const primaryCtaHref = resolveContactCtaHref(profile, ctaLabel) || mainServiceHref;
+  const lockedJourney = usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId);
+  const completePremisesAddress = String(profile.displayAddress || "").trim();
+  const renderProfile =
+    lockedJourney && completePremisesAddress
+      ? { ...profile, customerFacingAddress: completePremisesAddress, displayAddress: completePremisesAddress }
+      : profile;
+  const ctaLabel = lockedJourney
+    ? preferredServicePageCta(ctx, renderProfile)
+    : usesApprovedBankLocalLayout(ctx.serviceId)
+      ? content.base.ctaPrimary || "Contact the pharmacy"
+      : preferredServicePageCta(ctx, renderProfile);
+  const primaryCtaHref = lockedJourney
+    ? mainServiceHref
+    : resolveContactCtaHref(renderProfile, ctaLabel) || mainServiceHref;
   const directionsDestination =
-    profile.googlePlaceId
-      ? `place_id:${profile.googlePlaceId}`
-      : profile.fullAddress ||
-        [profile.addressLine1, profile.town, profile.postcode].filter(Boolean).join(", ");
+    renderProfile.displayAddress ||
+    renderProfile.customerFacingAddress ||
+    renderProfile.fullAddress ||
+    (renderProfile.googlePlaceId ? `place_id:${renderProfile.googlePlaceId}` : "") ||
+    [renderProfile.addressLine1, renderProfile.town, renderProfile.postcode].filter(Boolean).join(", ");
   const directionsUrl = directionsDestination
     ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(directionsDestination)}`
     : "";
 
+  const overlayCopy = getSessionAiLocalCopy(resolveClusterPageSlug(cluster.slug));
+  const geminiHeroHeading =
+    overlayCopy && String(overlayCopy.heroIntroduction || "").trim()
+      ? `${ctx.serviceName} in ${cluster.name}`
+      : "";
   const hero = renderBrandHeroComponent(components, {
     serviceName: ctx.serviceName,
-    profile,
+    profile: renderProfile,
     heroImageHtml,
-    eyebrow: servicePageHeroEyebrow(ctx, profile, ctx.serviceName),
-    headline: `${ctx.serviceName} for patients from ${cluster.name}`,
+    eyebrow: servicePageHeroEyebrow(ctx, renderProfile, ctx.serviceName),
+    headline: geminiHeroHeading
+      ? geminiHeroHeading
+      : lockedJourney
+        ? `${ctx.serviceName} — ${cluster.name}`
+        : `${ctx.serviceName} for patients from ${cluster.name}`,
     intro: content.base.heroIntro.split(/\n\n+/)[0] || content.base.heroIntro,
     primaryCtaLabel: ctaLabel,
     primaryCtaHref,
-    secondaryCtaLabel: directionsUrl ? "Get directions" : undefined,
+    secondaryCtaLabel: directionsUrl
+      ? usesApprovedBankLocalLayout(ctx.serviceId)
+        ? content.base.ctaSecondary || "Get directions"
+        : "Get directions"
+      : undefined,
     secondaryCtaHref: directionsUrl || undefined,
     componentDna,
   });
@@ -317,17 +412,23 @@ export function renderLocalClusterLocationPageHtml(
     Boolean(String(content.base.localRelevanceBody || "").trim()) ||
     content.base.localRelevanceBullets.length > 0;
 
-  const clusterContext = `<section id="cluster-context" data-template-block="service-definition">
+  const registered = usesApprovedBankLocalLayout(ctx.serviceId);
+  const overviewBullets = registered && content.base.whyChecksBullets.length
+    ? `<ul class="clean">${content.base.whyChecksBullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
+    : "";
+  const contextHead = renderSectionHead(content.clusterContextHeading, content.clusterContextIntro);
+  const contextParas = bodyToParagraphs(content.clusterContextBody)
+    .map((p) => `<p>${esc(p)}</p>`)
+    .join("\n");
+  const contextInner = [contextHead, contextParas, overviewBullets].filter(Boolean).join("\n");
+  const clusterContext = contextInner
+    ? `<section id="cluster-context" data-template-block="service-definition">
 <div class="wrap">
-${renderSectionHead(content.clusterContextHeading, content.clusterContextIntro)}
-${bodyToParagraphs(content.clusterContextBody)
-  .map((p) => `<p>${esc(p)}</p>`)
-  .join("\n")}
+${contextInner}
 </div>
-</section>`;
-
+</section>`
+    : "";
   const childAreas = renderChildAreasSection(ctx, hierarchy, cluster, content.childAreasIntro, content);
-  // Keep required cluster-relevance image slot; omit duplicate local-guidance prose when empty.
   const relevance = hasLocalRelevanceCopy
     ? renderMediaTextSection({
         sectionId: "cluster-relevance",
@@ -335,7 +436,11 @@ ${bodyToParagraphs(content.clusterContextBody)
         templateBlock: "local-relevance",
         headHtml: renderSectionHead(content.relevanceHeading, content.base.localRelevanceIntro),
         paragraphs: bodyToParagraphs(content.base.localRelevanceBody),
-        lists: content.base.localRelevanceBullets.length ? [content.base.localRelevanceBullets] : undefined,
+        lists: lockedJourney
+          ? undefined
+          : content.base.localRelevanceBullets.length
+            ? [content.base.localRelevanceBullets]
+            : undefined,
         mediaHtml: supportingImageHtml,
         hasImage: true,
         thresholds: componentDna.splitSection.layoutThresholds,
@@ -343,23 +448,34 @@ ${bodyToParagraphs(content.clusterContextBody)
     : `<section class="blue-band" id="cluster-relevance" data-template-block="local-relevance">
 <div class="wrap">${supportingImageHtml}</div>
 </section>`;
-  const trust = renderClusterTrustSection(profile, content, trustImageHtml);
-  const access = renderProfileLocalAccessSectionHtml(ctx.serviceName, profile, ctx, {
+  const preparation = registered
+    ? renderApprovedBankLocalityPreparationHtml({
+        heading: content.base.clinicalEnvironmentHeading,
+        body: content.base.clinicalEnvironmentBody,
+        bullets: content.base.preparationBullets,
+      })
+    : "";
+  const trust = renderClusterTrustSection(renderProfile, content, trustImageHtml, registered);
+  const access = renderProfileLocalAccessSectionHtml(ctx.serviceName, renderProfile, ctx, {
     title: content.base.accessHeading || `Travelling from ${cluster.name}`,
     town: cluster.name,
-    includeCoverageTags: true,
-    localAreaLinks: supportedLinks,
+    includeCoverageTags: !lockedJourney,
+    localAreaLinks: lockedJourney ? [] : supportedLinks,
     intro: content.base.accessBody,
   });
   const links = renderClusterLinksSection(ctx, hierarchy, cluster, content);
   const faq = renderClusterFaqSection(content, ctx, cluster.name);
-  const conversionAndCta = `${buildProfileFinalCtaHtml(ctx.serviceName, profile, conversionImageHtml, "", "", ctx)}${
-    content.base.ctaPhonePrompt
-      ? `<p class="locality-cta-context wrap" data-locality-cta>${esc(content.base.ctaPhonePrompt)}</p>`
-      : ""
-  }`;
+  const conversionAndCta = registered
+    ? renderServiceHubCtaSection(ctx, conversionImageHtml)
+    : `${buildProfileFinalCtaHtml(ctx.serviceName, renderProfile, conversionImageHtml, "", "", ctx)}${
+        !lockedJourney && content.base.ctaPhonePrompt
+          ? `<p class="locality-cta-context wrap" data-locality-cta>${esc(content.base.ctaPhonePrompt)}</p>`
+          : ""
+      }`;
 
-  const main = [hero, clusterContext, childAreas, relevance, trust, access, links, faq, conversionAndCta].join("\n");
+  const main = registered
+    ? [hero, clusterContext, relevance, childAreas, preparation, trust, faq, access, conversionAndCta, links].join("\n")
+    : [hero, clusterContext, childAreas, relevance, trust, access, links, faq, conversionAndCta].join("\n");
 
   const title =
     content.base.seoTitle || `${ctx.serviceName} in ${cluster.name} | ${profile.pharmacyName}`;
@@ -385,13 +501,13 @@ ${buildPharmacyServicePageStyleBlock(theme)}
 ${localPageTypeTypographyStyleBlock()}
 ${pharmacyLocalPageResponsiveStyleBlock()}
 </head>
-<body ${visualServicePageBodyAttributes(ctx.serviceId)} ${componentDnaBodyAttributes(componentDna)} data-pharmacy-template="${PHARMACY_SERVICE_PAGE_TEMPLATE_ID}" data-local-page-kind="location-cluster" data-local-page-contract="${LOCAL_CLUSTER_CONTRACT_ID}" data-publish-source="local-cluster-v1" data-local-cluster="${esc(cluster.slug)}" data-location-component="${HOMEPAGE_LOCATION_COMPONENT_ID}">
-${renderPharmacyServicePageHeader(profile, theme)}
+<body ${visualServicePageBodyAttributes(ctx.serviceId)} ${componentDnaBodyAttributes(componentDna)} data-pharmacy-template="${PHARMACY_SERVICE_PAGE_TEMPLATE_ID}" data-local-page-kind="location-cluster" data-local-page-contract="${LOCAL_CLUSTER_CONTRACT_ID}" data-publish-source="local-cluster-v1" data-local-cluster="${esc(cluster.slug)}" data-location-component="${HOMEPAGE_LOCATION_COMPONENT_ID}"${registered ? ` data-approved-bank-locality-contract="approved-bank-locality-page-v1"` : ""}>
+${renderPharmacyServicePageHeader(renderProfile, theme)}
 <main id="main-content">
 ${clusterBreadcrumb(ctx, hierarchy, cluster)}
 ${main}
 </main>
-${renderPharmacyServicePageFooter(profile, ctx.serviceName, theme)}
+${renderPharmacyServicePageFooter(renderProfile, ctx.serviceName, theme)}
 </body>
 </html>`;
 

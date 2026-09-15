@@ -1,0 +1,39 @@
+{
+  "taskId": "darfield-v3-community-enrich-2026-09-01",
+  "createdAt": "2026-09-01T17:41:06.513Z",
+  "taskBudgetUsd": 1,
+  "dataForSeoCostUsd": 0.004,
+  "openaiCostUsd": 0.025820000000000003,
+  "pageRetrievalUsd": 0,
+  "searches": 2,
+  "pageFetches": 1,
+  "events": [
+    {
+      "at": "2026-09-01T17:41:11.600Z",
+      "kind": "dataforseo-search",
+      "query": "All Saints Church listed building Historic England in Darfield, Barnsley, South Yorkshire, UK",
+      "costUsd": 0.002,
+      "resultCount": 10
+    },
+    {
+      "at": "2026-09-01T17:41:12.637Z",
+      "kind": "dataforseo-search",
+      "query": "Lundhill Colliery monument listed Historic England in Darfield, Barnsley, South Yorkshire, UK",
+      "costUsd": 0.002,
+      "resultCount": 9
+    },
+    {
+      "at": "2026-09-01T17:41:12.667Z",
+      "kind": "page-fetch",
+      "url": "https://historicengland.org.uk/listing/the-list/results/??%3F%3F%3Fcurrent=n_2_n&current=n_26_n&filters%5B0%5D%5Bfield%5D=district&filters%5B0%5D%5Btype%5D=all&filters%5B0%5D%5Bvalues%5D%5B0%5D=Barnsley&filters%5B1%5D%5Bfield%5D=period&filters%5B1%5D%5Btype%5D=all&filters%5B1%5D%5Bvalues%5D%5B0%5D=Post+Medieval"
+    },
+    {
+      "at": "2026-09-01T17:43:10.307Z",
+      "kind": "openai-generation",
+      "authorizedTaskId": "darfield-v3-community-enrich-2026-09-01",
+      "estimatedCostUsd": 0.025820000000000003,
+      "ok": false
+    }
+  ],
+  "combinedCostUsd": 0.029820000000000003
+}

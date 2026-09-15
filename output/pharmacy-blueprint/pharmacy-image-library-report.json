@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-image-library-architecture",
+  "generatedAt": "2026-06-25T11:22:24.957Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy Image Library Architecture Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "imagePacksCreated": [
+    {
+      "packKey": "core-pharmacy",
+      "packName": "Core Pharmacy",
+      "imageCount": 8
+    },
+    {
+      "packKey": "clinical-nhs-services",
+      "packName": "Clinical NHS Services",
+      "imageCount": 4
+    },
+    {
+      "packKey": "vaccination-services",
+      "packName": "Vaccination Services",
+      "imageCount": 4
+    },
+    {
+      "packKey": "travel-health-services",
+      "packName": "Travel Health Services",
+      "imageCount": 4
+    },
+    {
+      "packKey": "private-healthcare-services",
+      "packName": "Private Healthcare Services",
+      "imageCount": 4
+    },
+    {
+      "packKey": "weight-management-services",
+      "packName": "Weight Management Services",
+      "imageCount": 4
+    }
+  ],
+  "totalImagesDefined": 28,
+  "templateMappings": {
+    "clinical-nhs-services": {
+      "templateKey": "clinical-nhs-services",
+      "preferredImagePack": "clinical-nhs-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "pharmacy-first",
+        "support": "blood-pressure-check",
+        "trust": "community-pharmacy",
+        "conversion": "prescription-collection"
+      }
+    },
+    "vaccination-services": {
+      "templateKey": "vaccination-services",
+      "preferredImagePack": "vaccination-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "flu-vaccination",
+        "support": "vaccination-consultation",
+        "trust": "vaccination-record-review",
+        "conversion": "vaccination-consultation"
+      }
+    },
+    "private-healthcare-services": {
+      "templateKey": "private-healthcare-services",
+      "preferredImagePack": "private-healthcare-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "ear-wax-removal",
+        "support": "private-consultation",
+        "trust": "health-screening",
+        "conversion": "private-consultation"
+      }
+    },
+    "travel-health-services": {
+      "templateKey": "travel-health-services",
+      "preferredImagePack": "travel-health-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "travel-consultation",
+        "support": "destination-advice",
+        "trust": "travel-vaccination",
+        "conversion": "malaria-advice"
+      }
+    },
+    "weight-management-services": {
+      "templateKey": "weight-management-services",
+      "preferredImagePack": "weight-management-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "weight-consultation",
+        "support": "bmi-review",
+        "trust": "progress-monitoring",
+        "conversion": "lifestyle-support"
+      }
+    }
+  },
+  "slotMappings": {
+    "hero": {
+      "description": "Primary page hero — service introduction and emotional trust",
+      "schemaProperty": "MedicalWebPage.primaryImageOfPage / Service.image"
+    },
+    "support": {
+      "description": "Mid-page support imagery — service detail, process or local relevance",
+      "schemaProperty": "ImageObject"
+    },
+    "trust": {
+      "description": "Trust section — credentials, team, regulated care environment",
+      "schemaProperty": "LocalBusiness.image / ImageObject"
+    },
+    "conversion": {
+      "description": "Conversion band — booking, consultation or contact encouragement",
+      "schemaProperty": "ImageObject"
+    }
+  },
+  "futureOnboardingProcess": {
+    "steps": [
+      {
+        "step": 1,
+        "name": "New service",
+        "description": "Service added to pharmacy catalogue or intelligence pipeline",
+        "output": "service-intelligence.json entry"
+      },
+      {
+        "step": 2,
+        "name": "Service intelligence",
+        "description": "Profile, benefits, FAQs and trust signals generated",
+        "output": "service-intelligence.json"
+      },
+      {
+        "step": 3,
+        "name": "Template assignment",
+        "description": "Service mapped to one of five template families",
+        "output": "template-architecture.json serviceTemplateMap"
+      },
+      {
+        "step": 4,
+        "name": "Image pack assignment",
+        "description": "Preferred, secondary and fallback packs plus slot resolution assigned",
+        "output": "pharmacy-image-library.json templateFamilyMappings"
+      },
+      {
+        "step": 5,
+        "name": "Campaign blueprint",
+        "description": "Hub/cluster blueprints inherit image slot resolution from family mapping",
+        "output": "campaign blueprint JSON"
+      },
+      {
+        "step": 6,
+        "name": "Page generation",
+        "description": "Renderer resolves hero/support/trust/conversion from image library metadata or uploaded assets",
+        "output": "HTML with pharmacy-image figures"
+      }
+    ]
+  },
+  "rendererIntegrationStatus": {
+    "module": "src/pharmacy/templates/pharmacyImageLibrary.ts",
+    "integratedInto": [
+      "src/pharmacy/templates/pharmacyBrandSystem.ts",
+      "src/pharmacy/templates/pharmacyTemplateCore.ts",
+      "src/pharmacy/templates/renderClinicalNhsService.ts"
+    ],
+    "metadataOnly": true,
+    "uploadsRequiredForLiveAssets": true
+  },
+  "readyForImageUpload": true,
+  "validation": {
+    "allFiveTemplateFamiliesMapped": true,
+    "allImagePacksMapped": true,
+    "allImageSlotsMapped": true,
+    "issues": []
+  },
+  "libraryPath": "output/pharmacy-blueprint/pharmacy-image-library.json"
+}

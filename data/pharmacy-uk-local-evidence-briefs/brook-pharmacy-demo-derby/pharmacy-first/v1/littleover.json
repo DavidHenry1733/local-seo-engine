@@ -1,0 +1,101 @@
+{
+  "kind": "pharmacy-uk-local-evidence-brief-v1",
+  "version": "v1",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaName": "Littleover",
+  "areaSlug": "littleover",
+  "savedAt": "2026-09-08T15:36:26.903Z",
+  "introductionStructureId": "healthcare-setting-first",
+  "identity": {
+    "verifiedName": "Littleover",
+    "statements": [
+      "Littleover is a neighbourhood ward in Derby."
+    ]
+  },
+  "geography": {
+    "parentTown": "Derby",
+    "county": "Derbyshire",
+    "country": "United Kingdom",
+    "queryPlaceLabel": "Littleover, Derbyshire, UK",
+    "statements": [
+      "Littleover is a neighbourhood ward in Derby."
+    ]
+  },
+  "healthcare": [
+    {
+      "name": "Aspiro Healthcare - Hollybrook Medical Centre",
+      "category": "healthcare",
+      "address": "Hollybrook Way, Littleover, Derby DE23 3TX"
+    },
+    {
+      "name": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+      "factId": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-"
+    },
+    {
+      "name": "NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.",
+      "factId": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-"
+    },
+    {
+      "name": "Royal Derby Hospital is listed as a hospital in Littleover.",
+      "category": "healthcare",
+      "statement": "Royal Derby Hospital is listed as a hospital in Littleover.",
+      "factId": "littleover:healthcare:royal-derby-hospital-is-listed-as-a-hospital-in-"
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Clemson’s Park",
+      "category": "landmarks",
+      "address": "17 Cheadle Cl, Littleover, Derby DE23 3SH"
+    },
+    {
+      "name": "Clemson’s Park is listed as a landmark in Littleover.",
+      "category": "heritage",
+      "statement": "Clemson’s Park is listed as a landmark in Littleover.",
+      "factId": "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little"
+    }
+  ],
+  "parks": [],
+  "shopping": [],
+  "civic": [
+    {
+      "name": "Blagreaves Library",
+      "category": "community",
+      "address": "253 Blagreaves Ln, Littleover, Derby DE23 1PT"
+    }
+  ],
+  "community": [
+    {
+      "name": "Blagreaves Library is listed as a community facility in Littleover.",
+      "category": "community",
+      "statement": "Blagreaves Library is listed as a community facility in Littleover.",
+      "factId": "littleover:community:blagreaves-library-is-listed-as-a-community-faci"
+    },
+    {
+      "name": "Bramblebrook Community Centre is listed as a community facility in Littleover.",
+      "category": "community",
+      "statement": "Bramblebrook Community Centre is listed as a community facility in Littleover.",
+      "factId": "littleover:community:bramblebrook-community-centre-is-listed-as-a-com"
+    }
+  ],
+  "distance": {
+    "km": 3,
+    "label": "approximately 3.0 km straight-line",
+    "method": "haversine-straight-line"
+  },
+  "factIds": [
+    "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+    "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+    "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+    "littleover:healthcare:royal-derby-hospital-is-listed-as-a-hospital-in-",
+    "littleover:community:blagreaves-library-is-listed-as-a-community-faci",
+    "littleover:community:bramblebrook-community-centre-is-listed-as-a-com",
+    "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+    "littleover:pharmacy-relationship:distance"
+  ]
+}

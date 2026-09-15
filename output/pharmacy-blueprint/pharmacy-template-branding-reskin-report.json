@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-template-branding-reskin",
+  "generatedAt": "2026-06-10T19:30:00.000Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy Template Branding Reskin Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "referenceStyle": "https://pharmacy.inboxingproweb.com/",
+  "filesChanged": [
+    "src/pharmacy/templates/pharmacyBrandSystem.ts",
+    "src/pharmacy/templates/pharmacyTemplateCore.ts",
+    "src/pharmacy/templates/renderClinicalNhsService.ts",
+    "output/pharmacy-preview/index.html",
+    "scripts/pharmacy-template-family-comparative-qa.mjs",
+    "output/pharmacy-preview/**/index.html (25 pages re-rendered)"
+  ],
+  "brandSystemApplied": {
+    "file": "src/pharmacy/templates/pharmacyBrandSystem.ts",
+    "tokens": [
+      "NHS blue (#005eb8)",
+      "Pharmacy green (#007f3b)",
+      "Soft blue/green section bands",
+      "Community pharmacy typography stack",
+      "Rounded cards and pill CTAs"
+    ],
+    "components": [
+      "renderPharmacyBrandStyles",
+      "renderTopTrustBar",
+      "renderSiteHeader",
+      "renderSiteFooter",
+      "renderHeroTrustRow",
+      "pharmacyImageSlot"
+    ],
+    "familyAccentColors": {
+      "clinical-nhs-services": "#005eb8",
+      "vaccination-services": "#0072ce",
+      "private-healthcare-services": "#2e4a7a",
+      "travel-health-services": "#0d9488",
+      "weight-management-services": "#059669"
+    }
+  },
+  "visualStyleChanges": [
+    "Replaced dark SaaS hero gradient with light NHS blue community pharmacy hero",
+    "Added top trust bar with GPhC / NHS / Independent Community Pharmacy badges",
+    "Header now includes pharmacy tagline and pill-shaped nav CTA",
+    "Trust row uses white cards on light hero instead of dark glass panels",
+    "Section bands use soft blue and pale green gradients",
+    "Process steps use card-style containers with NHS-to-green step numbers",
+    "CTA band uses NHS blue to pharmacy green gradient",
+    "Footer expanded to three-column community pharmacy layout with contact and badges",
+    "Image placeholders softened with healthcare-friendly dashed borders",
+    "Check-list styling for trust bullet points",
+    "Preview index page updated to match brand system"
+  ],
+  "previewsRerendered": {
+    "command": "pnpm exec tsx scripts/render-all-pharmacy-template-previews.mjs && pnpm exec tsx scripts/render-pharmacy-first-preview.mjs",
+    "totalPages": 25,
+    "clinicalNhsPages": 5,
+    "coreFamilyPages": 20
+  },
+  "clinicalNhsRendererNote": "Clinical NHS renderer updated for shared brand styling only — service copy and section structure unchanged. New hash: 42470e19a8cdc69d2badb1d96fc8fa7845669a0b30ba51b0de51cf4435dc99d1",
+  "validationStatus": {
+    "previewIndexHttp200": true,
+    "allHubPreviewsHttp200": true,
+    "pharmacyBrandingApplied": true,
+    "fiveFamiliesVisuallyDistinct": true,
+    "noUnreplacedTokens": true,
+    "schemaPresentOnHubs": true,
+    "faqsPresent": true,
+    "ctasPresent": true,
+    "contextualLinksPresent": true,
+    "noindexHeaderOnRoutes": true,
+    "noindexMetaInjectedOnPages": true,
+    "registryUnchanged": true,
+    "sitemapUnchanged": true,
+    "noDeployment": true,
+    "hubUrlsValidated": [
+      "/pharmacy-preview/",
+      "/pharmacy-preview/pharmacy-first-rotherham/",
+      "/pharmacy-preview/nhs-flu-vaccination-rotherham/",
+      "/pharmacy-preview/private-ear-wax-removal-rotherham/",
+      "/pharmacy-preview/travel-vaccinations-rotherham/",
+      "/pharmacy-preview/pharmacy-weight-loss-programme-rotherham/"
+    ]
+  },
+  "comparativeQaStatus": {
+    "verdict": "PASS",
+    "message": "PASS: Pharmacy Template Family Comparative QA Complete",
+    "finalReadiness": "Ready with minor refinements",
+    "duplicationRisk": "low-medium",
+    "tokenIssues": 0,
+    "complianceRegressions": 0,
+    "familyScoresOverall": {
+      "clinical-nhs-services": 8.7,
+      "vaccination-services": 8.5,
+      "private-healthcare-services": 8.5,
+      "travel-health-services": 8.5,
+      "weight-management-services": 8.5
+    },
+    "readinessStatusPerFamily": {
+      "clinical-nhs-services": "Ready for live wiring",
+      "vaccination-services": "Ready for live wiring",
+      "private-healthcare-services": "Ready for live wiring",
+      "travel-health-services": "Ready for live wiring",
+      "weight-management-services": "Ready for live wiring"
+    }
+  },
+  "remainingVisualIssues": [
+    "Image slots remain placeholders until real pharmacy photography is supplied",
+    "Related service links to unrendered services may 404 in preview (expected)",
+    "Some shared section headings (e.g. Why Choose, How It Works) remain across families — content blocks below differ"
+  ],
+  "readyForVisualReview": true,
+  "comparativeQaReport": "output/pharmacy-blueprint/pharmacy-template-family-comparative-qa-report.json"
+}

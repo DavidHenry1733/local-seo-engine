@@ -1,0 +1,75 @@
+{
+  "savedAt": "2026-09-08T15:37:14.455Z",
+  "areaSlug": "chellaston",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Write as an experienced British healthcare copywriter.\n\nUsing only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.\n\nHERO INTRODUCTION:\nWrite 35–55 words introducing Pharmacy First for people in the selected area and naming Brook Pharmacy as the provider.\n\nLOCAL INTRODUCTION:\nWrite 170–230 words in three fluent British-English paragraphs.\n\nParagraph 1:\nIntroduce the area, its location and its character using verified facts.\n\nParagraph 2:\nDescribe meaningful verified landmarks, green spaces, shopping, community facilities and healthcare references. Select the most useful facts and connect them naturally. Do not list every evidence record.\n\nParagraph 3:\nMove naturally from the area and its local healthcare needs into Brook Pharmacy’s Pharmacy First service. Name Brook Pharmacy and Pharmacy First, and explain that eligible patients can receive a pharmacist consultation for certain common conditions. Do not reproduce a fixed clinical closing sentence. The transition must feel like part of the article—not a disclaimer pasted onto the end.\n\nYou may express only this Pharmacy First meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment.\n\nDo not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.\n\nDo not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.\n\nUse neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.\n\nDo not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.\n\nDo not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.\n\nReturn exactly this layout:\nHERO INTRODUCTION:\n<one paragraph>\n\nLOCAL INTRODUCTION:\n<paragraph 1>\n\n<paragraph 2>\n\n<paragraph 3>\nSelected area: Chellaston\nConfirmed pharmacy name: Brook Pharmacy Demo Derby\nConfirmed pharmacy premises locality: Derby\nSaved straight-line distance: approximately 5.8 km in a straight line\nVerified history where available:\n- Chellaston Park is a landmark in Chellaston.\n- Chellaston Brickworks Local Nature Reserve is a landmark in Chellaston.\n- Fullens Lock Park Memorial Bench is a landmark in Chellaston.\nVerified landmarks, parks, shopping, civic and community facilities:\n- Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Chellaston has a public library.\n- Chellaston Community Centre is a community facility in Chellaston.\n- Chellaston Library is a community facility in Chellaston.\n- Chellaston Leisure Limited is a community facility in Chellaston.\nVerified GP practices or healthcare facilities:\n- NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\n- Lister House at Chellaston is a hospital in Chellaston.\nApproved Pharmacy First service meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment."
+  },
+  "rawResponse": "HERO INTRODUCTION:\nBrook Pharmacy provides the Pharmacy First service for eligible residents across Chellaston. The service enables people in the area to access professional pharmacist consultations for a range of common health conditions, supporting the community with tailored advice and clinical assessments.\n\nLOCAL INTRODUCTION:\nChellaston is an established locality supported by active community structures. Civic direction in the area is provided by the Chellaston Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to focus on local priorities.\n\nThe neighbourhood includes several notable landmarks and outdoor spaces, such as Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. Community infrastructure is further supported by the public library, Chellaston Community Centre, and facilities linked with Chellaston Leisure Limited. Healthcare in the area is anchored by Chellaston Medical Centre, providing NHS general practice services, as well as Lister House at Chellaston hospital.\n\nTo complement these local healthcare provisions, Brook Pharmacy delivers Pharmacy First consultations for eligible people from the area. This service covers certain common health conditions, offering an additional pathway for personal health management. During a consultation, the pharmacist assesses symptoms, relevant medicines, and medical history to determine the appropriate response. Depending on this clinical assessment, outcomes may encompass practical health advice, suitable treatment, or referral to another healthcare professional, with eligibility depending on the individual evaluation.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Chellaston is an established locality supported by active community structures. | rule=uncertain-paraphrase | defect=Chellaston is an established locality supported by active community structures. — uncertain paraphrase: unmatched wording (established, locality, supported, active, structures) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Civic direction in the area is provided by the Chellaston Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to focus on local priorities. | rule=uncertain-paraphrase | defect=Civic direction in the area is provided by the Chellaston Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to focus on local priorities. — uncertain paraphrase: unmatched wording (direction, which, brings, focus, priorities) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The neighbourhood includes several notable landmarks and outdoor spaces, such as Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. | rule=uncertain-paraphrase | defect=The neighbourhood includes several notable landmarks and outdoor spaces, such as Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. — uncertain paraphrase: unmatched wording (includes, notable, landmarks, outdoor, spaces) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Community infrastructure is further supported by the public library, Chellaston Community Centre, and facilities linked with Chellaston Leisure Limited. | rule=uncertain-paraphrase | defect=Community infrastructure is further supported by the public library, Chellaston Community Centre, and facilities linked with Chellaston Leisure Limited. — uncertain paraphrase: unmatched wording (infrastructure, supported, facilities, linked) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Healthcare in the area is anchored by Chellaston Medical Centre, providing NHS general practice services, as well as Lister House at Chellaston hospital. | rule=uncertain-paraphrase | defect=Healthcare in the area is anchored by Chellaston Medical Centre, providing NHS general practice services, as well as Lister House at Chellaston hospital. — uncertain paraphrase: unmatched wording (healthcare, anchored, providing) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=During a consultation, the pharmacist assesses symptoms, relevant medicines, and medical history to determine the appropriate response. | rule=uncertain-paraphrase | defect=During a consultation, the pharmacist assesses symptoms, relevant medicines, and medical history to determine the appropriate response. — uncertain paraphrase: unmatched wording (assesses, relevant, history, determine, response) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Chellaston",
+    "heroHeading": "Pharmacy First in Chellaston",
+    "heroIntroduction": "Brook Pharmacy provides the Pharmacy First service for eligible residents across Chellaston. The service enables people in the area to access professional pharmacist consultations for a range of common health conditions, supporting the community with tailored advice and clinical assessments.",
+    "localIntroduction": "Chellaston is an established locality supported by active community structures. Civic direction in the area is provided by the Chellaston Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to focus on local priorities.\n\nThe neighbourhood includes several notable landmarks and outdoor spaces, such as Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. Community infrastructure is further supported by the public library, Chellaston Community Centre, and facilities linked with Chellaston Leisure Limited. Healthcare in the area is anchored by Chellaston Medical Centre, providing NHS general practice services, as well as Lister House at Chellaston hospital.\n\nTo complement these local healthcare provisions, Brook Pharmacy delivers Pharmacy First consultations for eligible people from the area. This service covers certain common health conditions, offering an additional pathway for personal health management. During a consultation, the pharmacist assesses symptoms, relevant medicines, and medical history to determine the appropriate response. Depending on this clinical assessment, outcomes may encompass practical health advice, suitable treatment, or referral to another healthcare professional, with eligibility depending on the individual evaluation. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Chellaston",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Civic direction in the area is provided by the Chellaston Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services to focus on local priorities.",
+        "editorialFactId": "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The neighbourhood includes several notable landmarks and outdoor spaces, such as Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.",
+        "editorialFactId": "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Community infrastructure is further supported by the public library, Chellaston Community Centre, and facilities linked with Chellaston Leisure Limited.",
+        "editorialFactId": "chellaston:community:chellaston-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Healthcare in the area is anchored by Chellaston Medical Centre, providing NHS general practice services, as well as Lister House at Chellaston hospital.",
+        "editorialFactId": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+        "editorialFactId": "chellaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co",
+      "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "chellaston:community:chellaston-has-a-public-library",
+      "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "chellaston:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

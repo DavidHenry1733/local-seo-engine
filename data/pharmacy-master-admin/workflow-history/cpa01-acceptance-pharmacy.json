@@ -1,0 +1,117 @@
+{
+  "version": 2,
+  "slug": "cpa01-acceptance-pharmacy",
+  "updatedAt": "2026-07-26T10:26:39.187Z",
+  "currentStage": "generate_ecosystem",
+  "transitions": [
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-26T10:26:39.187Z",
+      "operator": "admin",
+      "durationMs": 766,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-07-26T10:26:38.406Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-07-26T10:26:38.372Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-07-26T10:26:38.328Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-26T10:19:56.110Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-26T10:19:43.589Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-26T10:26:38.373Z",
+      "finishedAt": "2026-07-26T10:26:38.388Z",
+      "durationMs": 15,
+      "operator": "admin",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-26T10:26:38.360Z",
+      "finishedAt": "2026-07-26T10:26:38.361Z",
+      "durationMs": 1,
+      "operator": "admin",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-26T10:26:38.291Z",
+      "finishedAt": "2026-07-26T10:26:38.327Z",
+      "durationMs": 36,
+      "operator": "admin",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-26T10:19:56.099Z",
+      "finishedAt": "2026-07-26T10:19:56.099Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "b64ab0d9-03d9-48e9-a4f6-2c3264e4cf9f"
+    }
+  ]
+}

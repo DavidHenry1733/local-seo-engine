@@ -1,0 +1,242 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-08T15:17:49.179Z",
+  "tokenUsage": {
+    "promptTokens": 874,
+    "completionTokens": 280,
+    "totalTokens": 1154
+  },
+  "estimatedCostUsd": 0.003988,
+  "inputEvidencePackHash": "686ca0102560558dc879ff3112923542625023943473b6e62aff391a69b99af7",
+  "editorialEvidencePackHash": "1998028850e884ab62170e6ae2ee09a33e9c01a185cfc51b9f129c7cbf18e047",
+  "areaSlug": "mickleover",
+  "areaName": "Mickleover",
+  "editorialFactIdsUsed": [
+    "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+    "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-",
+    "mickleover:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Mickleover",
+    "heroHeading": "Pharmacy First in Mickleover",
+    "heroIntroduction": "For residents in Mickleover, Brook Pharmacy provides NHS Pharmacy First consultations to support local healthcare needs. This service offers professional clinical assessment and options for a range of common conditions, helping members of the community manage everyday health concerns alongside existing primary care provisions.",
+    "localIntroduction": "Mickleover is a well-established neighbourhood ward located in Derby. Characterised by its strong civic spirit and welcoming atmosphere, the area offers a settled residential setting supported by active local initiatives and essential services that serve people across the community.\n\nThe neighbourhood features key landmarks and outdoor spaces, including Mickleover Meadows, Homerton Vale, and the local War Memorial. Local civic life is supported by facilities such as Mickleover Library, the Community Centre, and the Community Pavilion, alongside an active Neighbourhood Board formed of local councillors, residents, and public service representatives. Primary healthcare needs across the area are served by general practice facilities including Mickleover Medical Centre and Mickleover Surgery.\n\nAligning with these local healthcare services, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. Covering certain common health conditions, this service allows patients to consult with a pharmacist who thoroughly assesses symptoms, relevant medicines, and medical history. Based on this individual clinical assessment, the outcome may include expert advice, suitable treatment, or a referral to another healthcare professional, ensuring appropriate care tailored to individual requirements.",
+    "localContextHeading": "Pharmacy First in Mickleover",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "The neighbourhood features key landmarks and outdoor spaces, including Mickleover Meadows, Homerton Vale, and the local War Memorial.",
+        "editorialFactId": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Local civic life is supported by facilities such as Mickleover Library, the Community Centre, and the Community Pavilion, alongside an active Neighbourhood Board formed of local councillors, residents, and public service representatives.",
+        "editorialFactId": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Primary healthcare needs across the area are served by general practice facilities including Mickleover Medical Centre and Mickleover Surgery.",
+        "editorialFactId": "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+        "editorialFactId": "mickleover:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-",
+      "mickleover:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Mickleover",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "This service offers professional clinical assessment and options for a range of common conditions, helping members of the community manage everyday health concerns alongside existing primary care provisions.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Mickleover is a well-established neighbourhood ward located in Derby.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (established) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Characterised by its strong civic spirit and welcoming atmosphere, the area offers a settled residential setting supported by active local initiatives and essential services that serve people across the community.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The neighbourhood features key landmarks and outdoor spaces, including Mickleover Meadows, Homerton Vale, and the local War Memorial.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:heritage:mickleover-meadows-is-listed-as-a-landmark-in-mi, mickleover:heritage:war-memorial-mickleover-is-listed-as-a-landmark-, mickleover:heritage:homerton-vale-is-listed-as-a-landmark-in-mickleo",
+      "providerSource": "derby.gov.uk, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (features, key, landmarks, outdoor, spaces) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Local civic life is supported by facilities such as Mickleover Library, the Community Centre, and the Community Pavilion, alongside an active Neighbourhood Board formed of local councillors, residents, and public service representatives.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co, mickleover:community:mickleover-has-a-public-library, mickleover:community:mickleover-community-centre-is-listed-as-a-commu, mickleover:community:mickleover-library-is-listed-as-a-community-faci, mickleover:community:mickleover-community-pavilion-is-listed-as-a-com",
+      "providerSource": "derby.gov.uk, derby.gov.uk, derby.gov.uk, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (life, supported, facilities, active, formed, service) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Primary healthcare needs across the area are served by general practice facilities including Mickleover Medical Centre and Mickleover Surgery.",
+      "supportingCanonicalFieldOrEntity": "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-, mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-, mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-, mickleover:community:mickleover-community-centre-is-listed-as-a-commu",
+      "providerSource": "NHS, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (primary, healthcare, needs, served, facilities) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Covering certain common health conditions, this service allows patients to consult with a pharmacist who thoroughly assesses symptoms, relevant medicines, and medical history.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Based on this individual clinical assessment, the outcome may include expert advice, suitable treatment, or a referral to another healthcare professional, ensuring appropriate care tailored to individual requirements.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Pharmacy First in Mickleover",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Mickleover",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "This service offers professional clinical assessment and options for a range of common conditions, helping members of the community manage everyday health concerns alongside existing primary care provisions.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Characterised by its strong civic spirit and welcoming atmosphere, the area offers a settled residential setting supported by active local initiatives and essential services that serve people across the community.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Covering certain common health conditions, this service allows patients to consult with a pharmacist who thoroughly assesses symptoms, relevant medicines, and medical history.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Based on this individual clinical assessment, the outcome may include expert advice, suitable treatment, or a referral to another healthcare professional, ensuring appropriate care tailored to individual requirements.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Pharmacy First in Mickleover",
+      "purpose": "section orientation",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "signals the local-context passage"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 7,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Mickleover is a well-established neighbourhood ward located in Derby. | rule=uncertain-paraphrase | defect=Mickleover is a well-established neighbourhood ward located in Derby. — uncertain paraphrase: unmatched wording (established) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The neighbourhood features key landmarks and outdoor spaces, including Mickleover Meadows, Homerton Vale, and the local War Memorial. | rule=uncertain-paraphrase | defect=The neighbourhood features key landmarks and outdoor spaces, including Mickleover Meadows, Homerton Vale, and the local War Memorial. — uncertain paraphrase: unmatched wording (features, key, landmarks, outdoor, spaces) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local civic life is supported by facilities such as Mickleover Library, the Community Centre, and the Community Pavilion, alongside an active Neighbourhood Board formed of local councillors, residents, and public service representatives. | rule=uncertain-paraphrase | defect=Local civic life is supported by facilities such as Mickleover Library, the Community Centre, and the Community Pavilion, alongside an active Neighbourhood Board formed of local councillors, residents, and public service representatives. — uncertain paraphrase: unmatched wording (life, supported, facilities, active, formed, service) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Primary healthcare needs across the area are served by general practice facilities including Mickleover Medical Centre and Mickleover Surgery. | rule=uncertain-paraphrase | defect=Primary healthcare needs across the area are served by general practice facilities including Mickleover Medical Centre and Mickleover Surgery. — uncertain paraphrase: unmatched wording (primary, healthcare, needs, served, facilities) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "HERO INTRODUCTION:\nFor residents in Mickleover, Brook Pharmacy provides NHS Pharmacy First consultations to support local healthcare needs. This service offers professional clinical assessment and options for a range of common conditions, helping members of the community manage everyday health concerns alongside existing primary care provisions.\n\nLOCAL INTRODUCTION:\nMickleover is a well-established neighbourhood ward located in Derby. Characterised by its strong civic spirit and welcoming atmosphere, the area offers a settled residential setting supported by active local initiatives and essential services that serve people across the community.\n\nThe neighbourhood features key landmarks and outdoor spaces, including Mickleover Meadows, Homerton Vale, and the local War Memorial. Local civic life is supported by facilities such as Mickleover Library, the Community Centre, and the Community Pavilion, alongside an active Neighbourhood Board formed of local councillors, residents, and public service representatives. Primary healthcare needs across the area are served by general practice facilities including Mickleover Medical Centre and Mickleover Surgery.\n\nAligning with these local healthcare services, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. Covering certain common health conditions, this service allows patients to consult with a pharmacist who thoroughly assesses symptoms, relevant medicines, and medical history. Based on this individual clinical assessment, the outcome may include expert advice, suitable treatment, or a referral to another healthcare professional, ensuring appropriate care tailored to individual requirements.",
+  "rawOpenAiResponses": [
+    "HERO INTRODUCTION:\nFor residents in Mickleover, Brook Pharmacy provides NHS Pharmacy First consultations to support local healthcare needs. This service offers professional clinical assessment and options for a range of common conditions, helping members of the community manage everyday health concerns alongside existing primary care provisions.\n\nLOCAL INTRODUCTION:\nMickleover is a well-established neighbourhood ward located in Derby. Characterised by its strong civic spirit and welcoming atmosphere, the area offers a settled residential setting supported by active local initiatives and essential services that serve people across the community.\n\nThe neighbourhood features key landmarks and outdoor spaces, including Mickleover Meadows, Homerton Vale, and the local War Memorial. Local civic life is supported by facilities such as Mickleover Library, the Community Centre, and the Community Pavilion, alongside an active Neighbourhood Board formed of local councillors, residents, and public service representatives. Primary healthcare needs across the area are served by general practice facilities including Mickleover Medical Centre and Mickleover Surgery.\n\nAligning with these local healthcare services, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. Covering certain common health conditions, this service allows patients to consult with a pharmacist who thoroughly assesses symptoms, relevant medicines, and medical history. Based on this individual clinical assessment, the outcome may include expert advice, suitable treatment, or a referral to another healthcare professional, ensuring appropriate care tailored to individual requirements."
+  ]
+}

@@ -1,0 +1,750 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-image-library-architecture",
+  "industry": "pharmacy",
+  "assetRoot": "assets/pharmacy-image-library",
+  "standardSlots": [
+    "hero",
+    "support",
+    "trust",
+    "conversion"
+  ],
+  "imagePacks": {
+    "core-pharmacy": {
+      "packKey": "core-pharmacy",
+      "packName": "Core Pharmacy",
+      "description": "Shared community pharmacy imagery for all template families",
+      "images": [
+        {
+          "imageKey": "hero",
+          "imagePack": "core-pharmacy",
+          "purpose": "Core pharmacy hero image for community pharmacy pages",
+          "recommendedPlacement": [
+            "hero"
+          ],
+          "altTextPattern": "{serviceName} at {pharmacyName} in {location}",
+          "captionPattern": "{pharmacyName} — {location}",
+          "schemaUsage": "MedicalWebPage.primaryImageOfPage",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation",
+            "community-pharmacy"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/hero.webp"
+        },
+        {
+          "imageKey": "support",
+          "imagePack": "core-pharmacy",
+          "purpose": "Core pharmacy support image for community pharmacy pages",
+          "recommendedPlacement": [
+            "support"
+          ],
+          "altTextPattern": "{serviceName} at {pharmacyName} in {location}",
+          "captionPattern": "{pharmacyName} — {location}",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation",
+            "community-pharmacy"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/support.webp"
+        },
+        {
+          "imageKey": "trust",
+          "imagePack": "core-pharmacy",
+          "purpose": "Core pharmacy trust image for community pharmacy pages",
+          "recommendedPlacement": [
+            "trust"
+          ],
+          "altTextPattern": "{serviceName} at {pharmacyName} in {location}",
+          "captionPattern": "{pharmacyName} — {location}",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation",
+            "community-pharmacy"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/trust.webp"
+        },
+        {
+          "imageKey": "conversion",
+          "imagePack": "core-pharmacy",
+          "purpose": "Core pharmacy conversion image for community pharmacy pages",
+          "recommendedPlacement": [
+            "conversion"
+          ],
+          "altTextPattern": "{serviceName} at {pharmacyName} in {location}",
+          "captionPattern": "{pharmacyName} — {location}",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation",
+            "community-pharmacy"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/conversion.webp"
+        },
+        {
+          "imageKey": "pharmacist-consultation",
+          "imagePack": "core-pharmacy",
+          "purpose": "Pharmacist-led private consultation in pharmacy consultation room",
+          "recommendedPlacement": [
+            "support",
+            "trust"
+          ],
+          "altTextPattern": "Pharmacist consultation for {serviceName} at {pharmacyName} in {location}",
+          "captionPattern": "Confidential pharmacist consultation",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "friendly-pharmacy-team"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/pharmacist-consultation.webp"
+        },
+        {
+          "imageKey": "prescription-collection",
+          "imagePack": "core-pharmacy",
+          "purpose": "Prescription collection and dispensing counter scene",
+          "recommendedPlacement": [
+            "conversion",
+            "support"
+          ],
+          "altTextPattern": "Prescription collection at {pharmacyName} in {location}",
+          "captionPattern": "NHS and private prescription support",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "community-pharmacy"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/prescription-collection.webp"
+        },
+        {
+          "imageKey": "friendly-pharmacy-team",
+          "imagePack": "core-pharmacy",
+          "purpose": "Friendly pharmacy team welcoming patients",
+          "recommendedPlacement": [
+            "trust",
+            "hero"
+          ],
+          "altTextPattern": "Pharmacy team at {pharmacyName} in {location}",
+          "captionPattern": "Your local pharmacy team",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "community-pharmacy"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/friendly-pharmacy-team.webp"
+        },
+        {
+          "imageKey": "community-pharmacy",
+          "imagePack": "core-pharmacy",
+          "purpose": "Independent community pharmacy exterior or interior",
+          "recommendedPlacement": [
+            "trust",
+            "hero"
+          ],
+          "altTextPattern": "{pharmacyName} community pharmacy in {location}",
+          "captionPattern": "Independent community pharmacy",
+          "schemaUsage": "LocalBusiness.image",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "friendly-pharmacy-team"
+          ],
+          "assetPath": "assets/pharmacy-image-library/core-pharmacy/community-pharmacy.webp"
+        }
+      ]
+    },
+    "clinical-nhs-services": {
+      "packKey": "clinical-nhs-services",
+      "packName": "Clinical NHS Services",
+      "description": "NHS clinical service imagery for Pharmacy First and commissioned pathways",
+      "images": [
+        {
+          "imageKey": "pharmacy-first",
+          "imagePack": "clinical-nhs-services",
+          "purpose": "NHS Pharmacy First consultation for minor illness",
+          "recommendedPlacement": [
+            "hero"
+          ],
+          "altTextPattern": "Pharmacy First consultation at {pharmacyName} in {location}",
+          "captionPattern": "NHS Pharmacy First — pharmacist-led care",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "pharmacy-first",
+            "nhs-blood-pressure-checks",
+            "nhs-new-medicine-service-nms",
+            "pharmacy-contraception-service",
+            "nhs-smoking-cessation-support"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation",
+            "hero"
+          ],
+          "assetPath": "assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first.webp"
+        },
+        {
+          "imageKey": "blood-pressure-check",
+          "imagePack": "clinical-nhs-services",
+          "purpose": "NHS blood pressure check in pharmacy",
+          "recommendedPlacement": [
+            "support",
+            "hero"
+          ],
+          "altTextPattern": "NHS blood pressure check at {pharmacyName} in {location}",
+          "captionPattern": "NHS hypertension case finding",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "nhs-blood-pressure-checks",
+            "pharmacy-first"
+          ],
+          "fallbackRules": [
+            "pharmacy-first",
+            "pharmacist-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/clinical-nhs-services/blood-pressure-check.webp"
+        },
+        {
+          "imageKey": "contraception-service",
+          "imagePack": "clinical-nhs-services",
+          "purpose": "Pharmacy contraception consultation",
+          "recommendedPlacement": [
+            "support"
+          ],
+          "altTextPattern": "Pharmacy contraception service at {pharmacyName} in {location}",
+          "captionPattern": "Confidential contraception advice",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "pharmacy-contraception-service"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/clinical-nhs-services/contraception-service.webp"
+        },
+        {
+          "imageKey": "smoking-cessation",
+          "imagePack": "clinical-nhs-services",
+          "purpose": "NHS smoking cessation support consultation",
+          "recommendedPlacement": [
+            "support",
+            "conversion"
+          ],
+          "altTextPattern": "NHS smoking cessation support at {pharmacyName} in {location}",
+          "captionPattern": "Stop smoking pharmacy support",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "nhs-smoking-cessation-support"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/clinical-nhs-services/smoking-cessation.webp"
+        }
+      ]
+    },
+    "vaccination-services": {
+      "packKey": "vaccination-services",
+      "packName": "Vaccination Services",
+      "description": "Immunisation and vaccination clinic imagery",
+      "images": [
+        {
+          "imageKey": "flu-vaccination",
+          "imagePack": "vaccination-services",
+          "purpose": "Seasonal flu vaccination in pharmacy",
+          "recommendedPlacement": [
+            "hero"
+          ],
+          "altTextPattern": "NHS flu vaccination at {pharmacyName} in {location}",
+          "captionPattern": "Flu jab pharmacy service",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "nhs-flu-vaccination",
+            "seasonal-flu-vaccination-private",
+            "covid-19-vaccination"
+          ],
+          "fallbackRules": [
+            "vaccination-consultation",
+            "hero"
+          ],
+          "assetPath": "assets/pharmacy-image-library/vaccination-services/flu-vaccination.webp"
+        },
+        {
+          "imageKey": "shingles-vaccination",
+          "imagePack": "vaccination-services",
+          "purpose": "Shingles vaccination appointment",
+          "recommendedPlacement": [
+            "support",
+            "hero"
+          ],
+          "altTextPattern": "Shingles vaccination at {pharmacyName} in {location}",
+          "captionPattern": "Shingles immunisation",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "shingles-vaccination",
+            "pneumococcal-vaccination"
+          ],
+          "fallbackRules": [
+            "flu-vaccination"
+          ],
+          "assetPath": "assets/pharmacy-image-library/vaccination-services/shingles-vaccination.webp"
+        },
+        {
+          "imageKey": "vaccination-consultation",
+          "imagePack": "vaccination-services",
+          "purpose": "Pre-vaccination consultation with trained vaccinator",
+          "recommendedPlacement": [
+            "support",
+            "trust"
+          ],
+          "altTextPattern": "Vaccination consultation at {pharmacyName} in {location}",
+          "captionPattern": "Vaccination suitability assessment",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/vaccination-services/vaccination-consultation.webp"
+        },
+        {
+          "imageKey": "vaccination-record-review",
+          "imagePack": "vaccination-services",
+          "purpose": "Vaccination record and documentation review",
+          "recommendedPlacement": [
+            "trust",
+            "conversion"
+          ],
+          "altTextPattern": "Vaccination records at {pharmacyName} in {location}",
+          "captionPattern": "Travel and NHS vaccination records",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "vaccination-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/vaccination-services/vaccination-record-review.webp"
+        }
+      ]
+    },
+    "travel-health-services": {
+      "packKey": "travel-health-services",
+      "packName": "Travel Health Services",
+      "description": "Travel clinic, destination advice and travel medicine imagery",
+      "images": [
+        {
+          "imageKey": "travel-consultation",
+          "imagePack": "travel-health-services",
+          "purpose": "Travel health consultation with itinerary review",
+          "recommendedPlacement": [
+            "hero"
+          ],
+          "altTextPattern": "Travel health consultation at {pharmacyName} in {location}",
+          "captionPattern": "Travel clinic consultation",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "travel-health-consultation",
+            "travel-vaccinations",
+            "malaria-prophylaxis"
+          ],
+          "fallbackRules": [
+            "destination-advice",
+            "hero"
+          ],
+          "assetPath": "assets/pharmacy-image-library/travel-health-services/travel-consultation.webp"
+        },
+        {
+          "imageKey": "destination-advice",
+          "imagePack": "travel-health-services",
+          "purpose": "Destination-specific travel health advice",
+          "recommendedPlacement": [
+            "support",
+            "hero"
+          ],
+          "altTextPattern": "Destination travel advice at {pharmacyName} in {location}",
+          "captionPattern": "Destination risk guidance",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "travel-vaccinations",
+            "travel-health-consultation"
+          ],
+          "fallbackRules": [
+            "travel-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/travel-health-services/destination-advice.webp"
+        },
+        {
+          "imageKey": "travel-vaccination",
+          "imagePack": "travel-health-services",
+          "purpose": "Travel vaccination administration",
+          "recommendedPlacement": [
+            "hero",
+            "support"
+          ],
+          "altTextPattern": "Travel vaccinations at {pharmacyName} in {location}",
+          "captionPattern": "Travel vaccines before your trip",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "travel-vaccinations",
+            "yellow-fever-vaccination-centre",
+            "rabies-vaccination"
+          ],
+          "fallbackRules": [
+            "vaccination-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/travel-health-services/travel-vaccination.webp"
+        },
+        {
+          "imageKey": "malaria-advice",
+          "imagePack": "travel-health-services",
+          "purpose": "Malaria prophylaxis and travel medicine advice",
+          "recommendedPlacement": [
+            "support",
+            "conversion"
+          ],
+          "altTextPattern": "Malaria advice at {pharmacyName} in {location}",
+          "captionPattern": "Antimalarial consultation",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "malaria-prophylaxis",
+            "travel-health-consultation"
+          ],
+          "fallbackRules": [
+            "destination-advice"
+          ],
+          "assetPath": "assets/pharmacy-image-library/travel-health-services/malaria-advice.webp"
+        }
+      ]
+    },
+    "private-healthcare-services": {
+      "packKey": "private-healthcare-services",
+      "packName": "Private Healthcare Services",
+      "description": "Private appointment and screening service imagery",
+      "images": [
+        {
+          "imageKey": "ear-wax-removal",
+          "imagePack": "private-healthcare-services",
+          "purpose": "Private ear wax removal microsuction procedure",
+          "recommendedPlacement": [
+            "hero"
+          ],
+          "altTextPattern": "Private ear wax removal at {pharmacyName} in {location}",
+          "captionPattern": "Professional ear wax removal",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "private-ear-wax-removal"
+          ],
+          "fallbackRules": [
+            "private-consultation",
+            "hero"
+          ],
+          "assetPath": "assets/pharmacy-image-library/private-healthcare-services/ear-wax-removal.webp"
+        },
+        {
+          "imageKey": "private-consultation",
+          "imagePack": "private-healthcare-services",
+          "purpose": "Private healthcare consultation in pharmacy",
+          "recommendedPlacement": [
+            "support",
+            "trust"
+          ],
+          "altTextPattern": "Private consultation at {pharmacyName} in {location}",
+          "captionPattern": "Private appointment consultation",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "*"
+          ],
+          "fallbackRules": [
+            "pharmacist-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/private-healthcare-services/private-consultation.webp"
+        },
+        {
+          "imageKey": "health-screening",
+          "imagePack": "private-healthcare-services",
+          "purpose": "Private health screening and checks",
+          "recommendedPlacement": [
+            "support",
+            "hero"
+          ],
+          "altTextPattern": "Health screening at {pharmacyName} in {location}",
+          "captionPattern": "Private health screening",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "private-blood-testing",
+            "diabetes-screening",
+            "cholesterol-testing"
+          ],
+          "fallbackRules": [
+            "private-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/private-healthcare-services/health-screening.webp"
+        },
+        {
+          "imageKey": "blood-testing",
+          "imagePack": "private-healthcare-services",
+          "purpose": "Private blood testing sample collection",
+          "recommendedPlacement": [
+            "support",
+            "conversion"
+          ],
+          "altTextPattern": "Private blood testing at {pharmacyName} in {location}",
+          "captionPattern": "Private blood tests",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "private-blood-testing"
+          ],
+          "fallbackRules": [
+            "health-screening"
+          ],
+          "assetPath": "assets/pharmacy-image-library/private-healthcare-services/blood-testing.webp"
+        }
+      ]
+    },
+    "weight-management-services": {
+      "packKey": "weight-management-services",
+      "packName": "Weight Management Services",
+      "description": "Medically supervised weight management programme imagery",
+      "images": [
+        {
+          "imageKey": "weight-consultation",
+          "imagePack": "weight-management-services",
+          "purpose": "Medically supervised weight management consultation",
+          "recommendedPlacement": [
+            "hero"
+          ],
+          "altTextPattern": "Weight management consultation at {pharmacyName} in {location}",
+          "captionPattern": "Pharmacy weight management consultation",
+          "schemaUsage": "Service.image",
+          "serviceCompatibility": [
+            "pharmacy-weight-loss-programme",
+            "weight-management-consultation",
+            "glp-1-weight-management-treatment"
+          ],
+          "fallbackRules": [
+            "bmi-review",
+            "hero"
+          ],
+          "assetPath": "assets/pharmacy-image-library/weight-management-services/weight-consultation.webp"
+        },
+        {
+          "imageKey": "bmi-review",
+          "imagePack": "weight-management-services",
+          "purpose": "BMI and body composition monitoring",
+          "recommendedPlacement": [
+            "support",
+            "trust"
+          ],
+          "altTextPattern": "BMI review at {pharmacyName} in {location}",
+          "captionPattern": "Progress and BMI monitoring",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "body-composition-and-bmi-monitoring",
+            "pharmacy-weight-loss-programme"
+          ],
+          "fallbackRules": [
+            "weight-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/weight-management-services/bmi-review.webp"
+        },
+        {
+          "imageKey": "lifestyle-support",
+          "imagePack": "weight-management-services",
+          "purpose": "Lifestyle and nutrition support in pharmacy programme",
+          "recommendedPlacement": [
+            "support",
+            "conversion"
+          ],
+          "altTextPattern": "Lifestyle weight support at {pharmacyName} in {location}",
+          "captionPattern": "Lifestyle and nutrition guidance",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "nutritional-and-lifestyle-advice",
+            "pharmacy-weight-loss-programme"
+          ],
+          "fallbackRules": [
+            "weight-consultation"
+          ],
+          "assetPath": "assets/pharmacy-image-library/weight-management-services/lifestyle-support.webp"
+        },
+        {
+          "imageKey": "progress-monitoring",
+          "imagePack": "weight-management-services",
+          "purpose": "Regular weight management progress monitoring",
+          "recommendedPlacement": [
+            "trust",
+            "conversion"
+          ],
+          "altTextPattern": "Weight programme monitoring at {pharmacyName} in {location}",
+          "captionPattern": "Medically supervised progress reviews",
+          "schemaUsage": "ImageObject",
+          "serviceCompatibility": [
+            "pharmacy-weight-loss-programme"
+          ],
+          "fallbackRules": [
+            "bmi-review"
+          ],
+          "assetPath": "assets/pharmacy-image-library/weight-management-services/progress-monitoring.webp"
+        }
+      ]
+    }
+  },
+  "templateFamilyMappings": {
+    "clinical-nhs-services": {
+      "templateKey": "clinical-nhs-services",
+      "preferredImagePack": "clinical-nhs-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "pharmacy-first",
+        "support": "blood-pressure-check",
+        "trust": "community-pharmacy",
+        "conversion": "prescription-collection"
+      }
+    },
+    "vaccination-services": {
+      "templateKey": "vaccination-services",
+      "preferredImagePack": "vaccination-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "flu-vaccination",
+        "support": "vaccination-consultation",
+        "trust": "vaccination-record-review",
+        "conversion": "vaccination-consultation"
+      }
+    },
+    "private-healthcare-services": {
+      "templateKey": "private-healthcare-services",
+      "preferredImagePack": "private-healthcare-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "ear-wax-removal",
+        "support": "private-consultation",
+        "trust": "health-screening",
+        "conversion": "private-consultation"
+      }
+    },
+    "travel-health-services": {
+      "templateKey": "travel-health-services",
+      "preferredImagePack": "travel-health-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "travel-consultation",
+        "support": "destination-advice",
+        "trust": "travel-vaccination",
+        "conversion": "malaria-advice"
+      }
+    },
+    "weight-management-services": {
+      "templateKey": "weight-management-services",
+      "preferredImagePack": "weight-management-services",
+      "secondaryImagePack": "core-pharmacy",
+      "fallbackImagePack": "core-pharmacy",
+      "slotResolution": {
+        "hero": "weight-consultation",
+        "support": "bmi-review",
+        "trust": "progress-monitoring",
+        "conversion": "lifestyle-support"
+      }
+    }
+  },
+  "slotMappings": {
+    "hero": {
+      "description": "Primary page hero — service introduction and emotional trust",
+      "schemaProperty": "MedicalWebPage.primaryImageOfPage / Service.image"
+    },
+    "support": {
+      "description": "Mid-page support imagery — service detail, process or local relevance",
+      "schemaProperty": "ImageObject"
+    },
+    "trust": {
+      "description": "Trust section — credentials, team, regulated care environment",
+      "schemaProperty": "LocalBusiness.image / ImageObject"
+    },
+    "conversion": {
+      "description": "Conversion band — booking, consultation or contact encouragement",
+      "schemaProperty": "ImageObject"
+    }
+  },
+  "onboardingProcess": {
+    "steps": [
+      {
+        "step": 1,
+        "name": "New service",
+        "description": "Service added to pharmacy catalogue or intelligence pipeline",
+        "output": "service-intelligence.json entry"
+      },
+      {
+        "step": 2,
+        "name": "Service intelligence",
+        "description": "Profile, benefits, FAQs and trust signals generated",
+        "output": "service-intelligence.json"
+      },
+      {
+        "step": 3,
+        "name": "Template assignment",
+        "description": "Service mapped to one of five template families",
+        "output": "template-architecture.json serviceTemplateMap"
+      },
+      {
+        "step": 4,
+        "name": "Image pack assignment",
+        "description": "Preferred, secondary and fallback packs plus slot resolution assigned",
+        "output": "pharmacy-image-library.json templateFamilyMappings"
+      },
+      {
+        "step": 5,
+        "name": "Campaign blueprint",
+        "description": "Hub/cluster blueprints inherit image slot resolution from family mapping",
+        "output": "campaign blueprint JSON"
+      },
+      {
+        "step": 6,
+        "name": "Page generation",
+        "description": "Renderer resolves hero/support/trust/conversion from image library metadata or uploaded assets",
+        "output": "HTML with pharmacy-image figures"
+      }
+    ]
+  },
+  "serviceImageOverrides": {
+    "pharmacy-first": {
+      "hero": "pharmacy-first",
+      "pack": "clinical-nhs-services"
+    },
+    "nhs-flu-vaccination": {
+      "hero": "flu-vaccination",
+      "pack": "vaccination-services"
+    },
+    "private-ear-wax-removal": {
+      "hero": "ear-wax-removal",
+      "pack": "private-healthcare-services"
+    },
+    "travel-vaccinations": {
+      "hero": "travel-vaccination",
+      "pack": "travel-health-services"
+    },
+    "pharmacy-weight-loss-programme": {
+      "hero": "weight-consultation",
+      "pack": "weight-management-services"
+    }
+  }
+}

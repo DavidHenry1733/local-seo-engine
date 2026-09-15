@@ -273,7 +273,7 @@ const inboxingproweb_default: TemplateDefinition = {
     BLOCKS.resource_cards,
   ],
   defaultStyle: webAgencyStyle,
-  requiredImageSlots: ["hero", "support", "conversion"],
+  requiredImageSlots: ["hero", "support", "trust", "conversion"],
   recommendedContentSections: [
     "Why local web design matters",
     "What you get with our service",

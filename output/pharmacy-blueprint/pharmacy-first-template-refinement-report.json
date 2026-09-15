@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-first-template-refinement",
+  "generatedAt": "2026-06-10T16:18:31.129Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy First Template Refinement Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "filesChanged": [
+    "src/pharmacy/templates/renderClinicalNhsService.ts",
+    "scripts/pharmacy-first-preview-qa.mjs"
+  ],
+  "refinementsApplied": [
+    "Patient-facing FAQ answer expansion helper (expandPatientFacingFaqAnswer)",
+    "Service schema name deduplication (schemaServiceName)",
+    "Cluster footer CTA buttons (Call / Ask about / Check availability)",
+    "Varied contextual link sentence patterns",
+    "Benefit-led card headings (benefitToHeading)",
+    "Why-choose trust/differentiation points (buildWhyChoosePoints)",
+    "Contextual links limited to section-head and step paragraphs"
+  ],
+  "previewPagesRerendered": [
+    "output/pharmacy-preview/pharmacy-first-rotherham/index.html",
+    "output/pharmacy-preview/pharmacy-first-aston/index.html",
+    "output/pharmacy-preview/pharmacy-first-bramley/index.html",
+    "output/pharmacy-preview/pharmacy-first-rawmarsh/index.html",
+    "output/pharmacy-preview/pharmacy-first-wickersley/index.html"
+  ],
+  "qaBefore": {
+    "verdict": "FAIL",
+    "aggregateScores": {
+      "designReadiness": 6.8,
+      "contentRelevance": 7.3,
+      "complianceSafety": 4,
+      "seoStructure": 3.4,
+      "conversionReadiness": 6.7,
+      "overall": 5.6
+    },
+    "readinessGrade": "Ready for template refinement",
+    "blockingIssueCount": 34
+  },
+  "qaAfter": {
+    "verdict": "PASS",
+    "aggregateScores": {
+      "designReadiness": 7.4,
+      "contentRelevance": 8,
+      "complianceSafety": 8,
+      "seoStructure": 8.5,
+      "conversionReadiness": 7.5,
+      "overall": 7.9
+    },
+    "readinessGrade": "Ready for live campaign wiring",
+    "blockingIssues": [],
+    "pageScores": {
+      "pharmacy-first-rotherham": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "pharmacy-first-aston": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "pharmacy-first-bramley": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "pharmacy-first-rawmarsh": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "pharmacy-first-wickersley": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      }
+    }
+  },
+  "validationTargets": {
+    "aggregateOverallMin": 7.5,
+    "complianceMin": 8,
+    "seoMin": 7,
+    "conversionMin": 7,
+    "met": true
+  },
+  "remainingIssues": [
+    "Large image placeholders (280px min-height) may create oversized blank areas before real assets"
+  ],
+  "readinessGrade": "Ready for live campaign wiring",
+  "readyForLiveCampaignWiring": true,
+  "recommendedNextAction": "Proceed to live campaign wiring: connect renderer to campaign generation with real pharmacy tokens, hero/trust/conversion images, and full cluster set."
+}

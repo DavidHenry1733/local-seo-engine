@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Flu Vaccinations Headingley | Leeds Pharmacy</title>
+<meta name="description" content="Leeds Pharmacy in Headingley — seasonal NHS flu vaccination with clear advice on suitability and booking."/>
+<link rel="canonical" href="https://leedspharmacy.co.uk/flu-vaccinations/"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@context":"https://schema.org","@type":["Pharmacy","MedicalBusiness","LocalBusiness"],"name":"Leeds Pharmacy","address":{"@type":"PostalAddress","streetAddress":"203 Kirkstall Lane, Headingley","addressLocality":"Leeds","postalCode":"LS6 3EJ","addressCountry":"GB"},"telephone":"0113 275 2103","url":"https://leedspharmacy.co.uk","amenityFeature":["Private consultation room","NHS pharmacy services"],"x-pharmacy-trust-layer":"v1"},{"@type":"FAQPage","mainEntity":[]}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --nhs-blue: #005eb8;
+  --nhs-dark: #003087;
+  --healthcare-teal: #0d9488;
+  --pharmacy-green: #007f3b;
+  --ink: #1a3347;
+  --rhythm-blue: #EAF5FA;
+  --rhythm-teal: #DFF5F1;
+  --rhythm-grey: #F2F4F7;
+  --dark-teal: #0a4f4a;
+  --dark-blue: #001a3d;
+  --teal-soft: #ecfdf5;
+  --soft-blue: #f4f9fd;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --line-soft: #e8f2f8;
+  --surface: #f8fafc;
+  --card: #ffffff;
+  --radius: 16px;
+  --radius-lg: 20px;
+  --shadow: 0 8px 24px rgba(26, 58, 82, 0.06);
+  --shadow-md: 0 12px 32px rgba(26, 58, 82, 0.08);
+  --font-heading: "Poppins", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --section-pad: 44px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  line-height: 1.65;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.25; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 48px; }
+.section-block { padding: var(--section-pad) 0; }
+.section-block + .section-block { padding-top: var(--section-pad); }
+.rhythm-blue {
+  background: var(--rhythm-blue);
+  border-top: 1px solid #c5e3ef; border-bottom: 1px solid #c5e3ef;
+}
+.rhythm-teal {
+  background: var(--rhythm-teal);
+  border-top: 1px solid #b8e6de; border-bottom: 1px solid #b8e6de;
+}
+.rhythm-grey {
+  background: var(--rhythm-grey);
+  border-top: 1px solid #dce0e6; border-bottom: 1px solid #dce0e6;
+}
+.section-head { max-width: 780px; margin-bottom: 22px; }
+.section-head--center { text-align: center; margin-left: auto; margin-right: auto; }
+.section-kicker {
+  display: inline-block; font-size: .74rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .09em; color: var(--nhs-blue);
+  background: rgba(0, 94, 184, 0.09); padding: 6px 14px; border-radius: 999px;
+  margin-bottom: 12px; border: 1px solid rgba(0, 94, 184, 0.14);
+}
+.section-title {
+  font-size: clamp(1.55rem, 2.8vw, 2.1rem); color: var(--nhs-dark); margin: 0 0 10px;
+  letter-spacing: -.02em; font-weight: 800;
+}
+.section-lead, .section-intro {
+  color: var(--muted); max-width: 640px; margin: 0 0 20px; font-size: 1.02rem; line-height: 1.65;
+}
+.section-head--center .section-lead, .section-head--center .section-intro { margin-left: auto; margin-right: auto; }
+.rhythm-blue .section-kicker { background: rgba(0, 94, 184, 0.12); }
+.rhythm-teal .section-kicker { background: rgba(13, 148, 136, 0.12); color: #0f766e; border-color: rgba(13, 148, 136, 0.2); }
+
+.preview-banner {
+  background: #fff8e6; color: #92400e; font-size: .75rem; font-weight: 700;
+  text-align: center; padding: 9px 16px; border-bottom: 1px solid #fde68a;
+}
+.preview-banner strong { color: #78350f; }
+
+.top-trust-bar {
+  background: var(--soft-blue); border-bottom: 1px solid var(--line-soft);
+  padding: 9px 0; font-size: .8rem; color: var(--muted);
+}
+.top-trust-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.trust-badges { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.trust-badge {
+  display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 999px;
+  font-size: .68rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; border: 1px solid transparent;
+}
+.trust-badge--gphc { background: #fff; border-color: #c7dff5; color: var(--nhs-blue); }
+.trust-badge--nhs { background: #e8f4fd; border-color: #b9daf5; color: var(--nhs-blue); }
+.trust-badge--local { background: var(--teal-soft); border-color: #bbf7d0; color: var(--pharmacy-green); }
+.header-contact { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+.site-header {
+  background: #fff; border-bottom: 1px solid var(--line-soft); position: sticky; top: 0; z-index: 40;
+  padding: 14px 0; box-shadow: 0 2px 12px rgba(26, 58, 82, 0.04);
+}
+.site-header-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.site-brand { display: flex; flex-direction: column; gap: 2px; text-decoration: none; line-height: 1.2; }
+.site-brand-name { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; color: var(--ink); }
+.site-brand-tagline { font-size: .72rem; font-weight: 600; color: var(--healthcare-teal); letter-spacing: .02em; }
+.site-nav-cta {
+  display: inline-flex; align-items: center; min-height: 42px; padding: 10px 18px; border-radius: 999px;
+  background: var(--nhs-blue); color: #fff !important; text-decoration: none; font-weight: 700; font-size: .88rem;
+  box-shadow: var(--shadow);
+}
+.site-nav-cta:hover { filter: brightness(1.05); text-decoration: none; }
+
+/* Hero A — NHS gradient premium */
+.hero-a {
+  background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 48%, #0e7490 100%);
+  color: #fff; padding: 88px 0 104px; position: relative; overflow: hidden; min-height: 420px;
+}
+.hero-a::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 88% 12%, rgba(255,255,255,.14) 0%, transparent 42%);
+  pointer-events: none;
+}
+.hero-a .wrap { padding-bottom: 0; position: relative; z-index: 1; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; align-items: center; }
+.hero-service-badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px;
+  background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.28);
+  font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+}
+.hero-service-badge svg { width: 16px; height: 16px; }
+.hero-tag {
+  display: inline-flex; padding: 6px 14px; border-radius: 999px; font-size: .72rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.hero-tag--nhs { background: #e8f4fd; color: #003087; border: 1px solid rgba(255,255,255,.4); }
+.hero-tag--private { background: rgba(13,148,136,.25); color: #ecfdf5; border: 1px solid rgba(255,255,255,.35); }
+.hero-tag--mixed { background: rgba(255,255,255,.2); color: #fff; border: 1px solid rgba(255,255,255,.35); }
+.hero-a .hero-eyebrow { font-size: .88rem; opacity: .92; margin-bottom: 12px; letter-spacing: .02em; }
+.hero-a h1 { font-size: clamp(2rem, 4.5vw, 2.85rem); margin: 0 0 18px; color: #fff; letter-spacing: -.025em; max-width: 780px; }
+.hero-a .hero-intro { font-size: 1.08rem; max-width: 620px; opacity: .95; margin: 0 0 28px; color: #e8f4ff; line-height: 1.75; }
+.hero-trust-row { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 28px; }
+.hero-trust-item { display: inline-flex; align-items: center; gap: 8px; font-size: .85rem; font-weight: 600; opacity: .92; }
+.hero-trust-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+.hero-local { font-size: .88rem; opacity: .88; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+.hero-local svg { width: 16px; height: 16px; }
+.hero-a .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.hero-a .hero-pill {
+  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.26);
+  border-radius: 999px; padding: 7px 15px; font-size: .82rem; font-weight: 600;
+}
+
+/* Hero B — soft healthcare premium */
+.hero-b {
+  background: linear-gradient(180deg, var(--soft-blue) 0%, #fff 82%);
+  color: var(--text); padding: 88px 0 104px; border-bottom: 1px solid var(--line-soft); min-height: 400px;
+}
+.hero-b .wrap { position: relative; z-index: 1; }
+.hero-b .hero-eyebrow {
+  display: inline-block; padding: 7px 15px; border-radius: 999px;
+  background: #e8f4fd; color: var(--nhs-blue); font-size: .72rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 16px; border: 1px solid #cce4f8;
+}
+.hero-b h1 { font-size: clamp(2rem, 4.5vw, 2.85rem); margin: 0 0 18px; color: var(--nhs-dark); letter-spacing: -.025em; max-width: 780px; }
+.hero-b .hero-intro { font-size: 1.08rem; max-width: 620px; color: var(--muted); margin: 0 0 28px; line-height: 1.75; }
+.hero-b .hero-trust-item { color: var(--muted); }
+.hero-b .hero-local { color: var(--muted); }
+
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-ctas--premium { margin-top: 8px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 15px 28px; border-radius: 999px; font-weight: 700; font-size: .95rem;
+  text-decoration: none; border: 2px solid transparent; cursor: pointer; font-family: var(--font-body);
+  transition: transform .15s, box-shadow .15s; min-height: 52px;
+}
+.btn-lg { padding: 16px 32px; font-size: 1rem; min-height: 56px; }
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); text-decoration: none; }
+.btn-primary { background: #fff; color: var(--nhs-dark); }
+.btn-secondary { background: transparent; color: inherit; border-color: rgba(255,255,255,.55); }
+.btn-teal { background: var(--healthcare-teal); color: #fff; border-color: var(--healthcare-teal); }
+.btn-outline-light { background: transparent; color: #fff; border-color: rgba(255,255,255,.65); }
+.hero-b .btn-primary { background: var(--nhs-blue); color: #fff; border-color: var(--nhs-blue); }
+.hero-b .btn-secondary { color: var(--nhs-dark); border-color: var(--border); background: #fff; }
+
+/* Trust Metrics — dark band + white cards */
+.trust-section {
+  background: linear-gradient(180deg, var(--dark-blue) 0%, var(--nhs-dark) 100%);
+  padding: 48px 0 56px; position: relative; z-index: 2;
+}
+.trust-section .wrap { padding-bottom: 0; }
+.trust-metrics {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+  margin: 0 auto; position: relative; z-index: 2;
+}
+.trust-metric {
+  background: #fff; border: none; border-radius: var(--radius-lg);
+  padding: 26px 20px; text-align: center;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+  transition: transform .18s, box-shadow .18s;
+}
+.trust-metric:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22); }
+.trust-metric-icon {
+  width: 52px; height: 52px; margin: 0 auto 14px; border-radius: 16px;
+  background: linear-gradient(135deg, #e8f4fd, var(--teal-soft));
+  display: flex; align-items: center; justify-content: center; color: var(--nhs-blue);
+}
+.trust-metric-icon svg { width: 24px; height: 24px; }
+.trust-metric .label { font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; }
+.trust-metric .value { font-size: .95rem; font-weight: 700; margin-top: 8px; color: var(--ink); line-height: 1.4; }
+
+/* Benefits Grid */
+.benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.benefits-grid--4 { grid-template-columns: repeat(2, 1fr); }
+.benefits-grid--6 { grid-template-columns: repeat(3, 1fr); }
+.benefits-grid--8 { grid-template-columns: repeat(4, 1fr); }
+.benefit-card {
+  background: var(--card); border: 1px solid var(--line-soft); border-radius: var(--radius-lg);
+  padding: 28px 24px; box-shadow: var(--shadow); transition: box-shadow .2s, border-color .2s, transform .2s;
+  height: 100%;
+}
+.benefit-card:hover { box-shadow: var(--shadow-md); border-color: #cce4f8; transform: translateY(-3px); }
+.benefit-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: linear-gradient(135deg, #e8f4fd, #ecfdf5);
+  color: var(--nhs-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+}
+.benefit-icon svg { width: 24px; height: 24px; }
+.benefit-card h3 { font-size: 1.02rem; margin: 0 0 10px; color: var(--nhs-dark); }
+.benefit-card p { margin: 0; font-size: .9rem; color: var(--muted); line-height: 1.6; }
+
+.feature-grid {
+  display: grid; gap: 18px; margin-top: 8px;
+}
+.feature-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.feature-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.feature-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px; box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s;
+}
+.feature-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.feature-icon {
+  width: 44px; height: 44px; border-radius: 12px; margin-bottom: 14px;
+  background: linear-gradient(135deg, #e8f4fd, var(--teal-soft));
+  display: flex; align-items: center; justify-content: center; color: var(--nhs-blue);
+}
+.feature-icon svg { width: 22px; height: 22px; }
+.feature-card h3 { font-size: 1rem; margin: 0 0 8px; color: var(--nhs-dark); }
+.feature-card p { margin: 0; font-size: .9rem; color: var(--muted); line-height: 1.6; }
+.coverage-badge--link {
+  text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s;
+}
+.coverage-badge--link:hover {
+  transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--nhs-blue);
+}
+.nearby-area-grid { display: grid; gap: 14px; margin-top: 12px; }
+.nearby-area-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.nearby-area-grid--4 { grid-template-columns: repeat(2, 1fr); }
+.nearby-area-card {
+  display: flex; align-items: center; gap: 10px; padding: 16px 18px;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  text-decoration: none; color: var(--text); font-weight: 600; box-shadow: var(--shadow);
+}
+.nearby-area-card:hover { border-color: var(--nhs-blue); background: #f0f9ff; text-decoration: none; }
+.nearby-area-card svg { width: 18px; height: 18px; color: var(--nhs-blue); flex-shrink: 0; }
+.local-context-panel {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 28px; box-shadow: var(--shadow);
+}
+.local-context-copy { font-size: 1.02rem; color: var(--text); line-height: 1.75; margin: 0 0 22px; max-width: 820px; }
+
+/* Process Timeline */
+.process-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; position: relative; }
+@media (min-width: 901px) {
+  .process-timeline::before {
+    content: ""; position: absolute; top: 38px; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, var(--nhs-blue), var(--healthcare-teal)); opacity: .22; z-index: 0;
+  }
+}
+.process-step {
+  background: var(--card); border: 1px solid var(--line-soft); border-radius: var(--radius-lg);
+  padding: 22px 18px; box-shadow: var(--shadow); position: relative; z-index: 1;
+}
+.process-step-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--nhs-blue), var(--healthcare-teal));
+  color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: .95rem;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0,94,184,.25);
+}
+.process-step-icon { width: 20px; height: 20px; margin-bottom: 10px; color: var(--healthcare-teal); }
+.process-step h3 { font-size: .95rem; margin: 0 0 6px; color: var(--nhs-dark); }
+.process-step p { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.5; }
+
+.content-timeline { max-width: 720px; }
+.content-timeline-step {
+  display: flex; gap: 16px; margin-bottom: 16px; padding: 18px 20px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.content-timeline-marker {
+  flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--healthcare-teal); margin-top: 6px; box-shadow: 0 0 0 4px var(--teal-soft);
+}
+.content-timeline-step h3 { font-size: .95rem; margin: 0 0 4px; color: var(--nhs-dark); }
+.content-timeline-step p { margin: 0; font-size: .88rem; color: var(--muted); }
+
+/* Professional Insight — dark feature section */
+.section-block--dark-insight {
+  background: linear-gradient(135deg, #0a4f4a 0%, #0d5c56 45%, #0f766e 100%);
+  padding: 56px 0;
+}
+.section-block--dark-insight .section-kicker {
+  background: rgba(255, 255, 255, 0.14); color: #a7f3d0; border-color: rgba(255, 255, 255, 0.22);
+}
+.section-block--dark-insight .section-title { color: #fff; }
+.section-block--dark-insight .section-lead,
+.section-block--dark-insight .section-intro { color: rgba(255, 255, 255, 0.88); }
+.section-block--dark-insight.rhythm-blue,
+.section-block--dark-insight.rhythm-teal,
+.section-block--dark-insight.rhythm-grey {
+  background: linear-gradient(135deg, #0a4f4a 0%, #0d5c56 45%, #0f766e 100%);
+  border: none;
+}
+.insight-card {
+  background: transparent; border: none; border-radius: 0; padding: 0;
+  box-shadow: none; position: relative; overflow: visible;
+}
+.insight-card::before { display: none; }
+.insight-badge {
+  display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .06em; color: #a7f3d0; margin-bottom: 14px;
+}
+.insight-card h2 { font-size: clamp(1.35rem, 2.5vw, 1.75rem); margin: 0 0 12px; color: #fff; font-weight: 800; }
+.insight-card .insight-body { color: rgba(255, 255, 255, 0.92); margin: 0 0 18px; font-size: 1.02rem; line-height: 1.7; }
+.insight-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.insight-list li {
+  padding: 12px 16px; background: rgba(255, 255, 255, 0.1); border-radius: 12px;
+  font-size: .92rem; color: #fff; border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.insight-list li::before { content: "✓ "; color: #6ee7b7; font-weight: 700; }
+
+/* Patient Education */
+.education-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.education-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.education-grid--6 { grid-template-columns: repeat(3, 1fr); }
+.education-card {
+  background: var(--card); border: 1px solid var(--line-soft); border-radius: var(--radius-lg);
+  padding: 26px 22px; box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s;
+  height: 100%;
+}
+.education-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.education-card-icon {
+  width: 44px; height: 44px; border-radius: 12px; background: var(--teal-soft);
+  color: var(--healthcare-teal); display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.education-card-icon svg { width: 22px; height: 22px; }
+.education-card h3 { font-size: .94rem; margin: 0; color: var(--nhs-dark); line-height: 1.45; }
+
+/* Myth vs Fact */
+.myth-fact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.myth-fact-card {
+  border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow);
+  border: 1px solid var(--border); background: var(--card);
+}
+.myth-fact-card .myth {
+  background: #fdf4ff; border-bottom: 1px solid #f3e8ff; padding: 16px 18px;
+}
+.myth-fact-card .fact {
+  background: #ecfdf5; padding: 16px 18px;
+}
+.myth-fact-card .label {
+  font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 6px;
+}
+.myth-fact-card .myth .label { color: #9333ea; }
+.myth-fact-card .fact .label { color: #059669; }
+.myth-fact-card p { margin: 0; font-size: .9rem; color: var(--text); line-height: 1.5; }
+
+/* Comparison Table */
+.comparison-table-wrap { overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow); border: 1px solid var(--border); }
+.comparison-table { width: 100%; border-collapse: collapse; font-size: .92rem; background: var(--card); }
+.comparison-table th {
+  background: linear-gradient(180deg, #f0f9ff, var(--surface)); color: var(--nhs-dark);
+  font-family: var(--font-heading); font-weight: 700; text-align: left; padding: 14px 18px;
+  border-bottom: 2px solid var(--border);
+}
+.comparison-table td { padding: 14px 18px; border-bottom: 1px solid var(--border); color: #334155; vertical-align: top; }
+.comparison-table tr:last-child td { border-bottom: none; }
+.comparison-table tr:nth-child(even) td { background: var(--surface); }
+
+/* Coverage Grid */
+.coverage-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px; }
+.coverage-grid--6 { grid-template-columns: repeat(3, 1fr); }
+.coverage-grid--8 { grid-template-columns: repeat(4, 1fr); }
+.coverage-grid--12 { grid-template-columns: repeat(4, 1fr); }
+.coverage-badge {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 18px;
+  background: var(--card); border: 1px solid var(--line-soft); border-radius: 999px;
+  font-size: .88rem; font-weight: 600; color: var(--nhs-dark); box-shadow: var(--shadow);
+  transition: transform .15s, box-shadow .15s, border-color .15s, background .15s;
+  text-align: center;
+}
+.coverage-badge:hover {
+  transform: translateY(-2px); box-shadow: var(--shadow-md);
+  border-color: var(--healthcare-teal); background: var(--teal-soft);
+}
+.coverage-badge svg { width: 15px; height: 15px; color: var(--healthcare-teal); flex-shrink: 0; }
+.coverage-panel {
+  background: var(--card); border: 1px solid var(--line-soft); border-radius: var(--radius-lg);
+  padding: 36px 32px; box-shadow: var(--shadow-md);
+}
+
+/* FAQ Accordion */
+.faq-accordion { display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+  background: var(--card); box-shadow: var(--shadow);
+}
+.faq-item summary {
+  padding: 18px 22px; font-weight: 600; cursor: pointer; background: var(--surface);
+  list-style: none; font-family: var(--font-heading); font-size: .95rem; color: var(--nhs-dark);
+  display: flex; align-items: center; gap: 12px;
+}
+.faq-item summary .faq-icon {
+  width: 32px; height: 32px; border-radius: 10px; background: var(--teal-soft);
+  color: var(--healthcare-teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.faq-item summary .faq-icon svg { width: 16px; height: 16px; }
+.faq-item summary .faq-q { flex: 1; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; font-size: 1.25rem; color: var(--healthcare-teal); font-weight: 400; margin-left: auto; }
+.faq-item[open] summary { border-bottom: 1px solid var(--border); background: #fff; }
+.faq-item[open] summary::after { content: "−"; }
+.faq-answer { padding: 16px 20px; color: #334155; font-size: .92rem; line-height: 1.6; }
+
+/* CTA Block — dark pharmacy blue, white buttons */
+.cta-section {
+  padding: 72px 0; background: linear-gradient(180deg, var(--dark-blue) 0%, #001428 100%);
+}
+.cta-block {
+  border-radius: var(--radius-lg); padding: 52px 40px; text-align: center; color: #fff;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+  background: linear-gradient(135deg, #001428 0%, var(--nhs-dark) 42%, var(--nhs-blue) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cta-block--book, .cta-block--advice, .cta-block--pharmacist, .cta-block--eligibility {
+  background: linear-gradient(135deg, #001428 0%, var(--nhs-dark) 42%, var(--nhs-blue) 100%);
+}
+.cta-block h2 { color: #fff; font-size: clamp(1.55rem, 3vw, 2.15rem); margin: 0 0 12px; letter-spacing: -.02em; font-weight: 800; }
+.cta-block p { opacity: .95; margin: 0 auto 28px; max-width: 580px; color: #e8f4ff; font-size: 1.05rem; line-height: 1.65; }
+.cta-block .hero-ctas { justify-content: center; gap: 14px; }
+.cta-block .btn-primary,
+.cta-block .btn-secondary,
+.cta-block .btn-teal {
+  background: #fff; color: var(--nhs-dark); border-color: #fff;
+}
+.cta-block .btn-primary:hover,
+.cta-block .btn-secondary:hover,
+.cta-block .btn-teal:hover {
+  background: #f0f9ff; color: var(--nhs-dark);
+}
+.cta-phone { color: #fff; }
+.cta-phone {
+  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none;
+}
+.cta-phone:hover { text-decoration: underline; }
+.cta-phone svg { width: 22px; height: 22px; }
+
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.related-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.related-grid--4 { grid-template-columns: repeat(2, 1fr); }
+.related-grid--6 { grid-template-columns: repeat(3, 1fr); }
+
+/* Default content cards */
+.content-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 28px; box-shadow: var(--shadow); margin-bottom: 0;
+}
+.content-card--mistakes { border-left: 4px solid #ea580c; background: #fffbf5; }
+.content-card--safety { border-left: 4px solid #dc2626; background: #fef2f2; }
+.content-card--deepdive { background: var(--surface); }
+.content-card h2 { font-size: 1.25rem; margin: 0 0 12px; color: var(--nhs-dark); }
+.content-card .card-body { color: #334155; margin: 0 0 14px; line-height: 1.7; }
+.card-more { margin: 12px 0 0; font-size: .82rem; color: var(--muted); font-style: italic; }
+.check-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.check-list li {
+  padding-left: 22px; position: relative; font-size: .92rem; color: #334155;
+}
+.check-list li::before {
+  content: "✓"; position: absolute; left: 0; color: var(--healthcare-teal); font-weight: 700;
+}
+.avoid-list li::before { content: "✕"; color: #ea580c; }
+
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.related-card {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-lg); padding: 22px 22px;
+  background: var(--card); text-decoration: none; color: var(--nhs-blue); font-weight: 700;
+  box-shadow: var(--shadow); font-size: .92rem; transition: border-color .15s, box-shadow .15s, transform .15s;
+  display: flex; align-items: center; min-height: 72px;
+}
+.related-card:hover { border-color: var(--nhs-blue); box-shadow: var(--shadow-md); background: #f0f9ff; text-decoration: none; transform: translateY(-2px); }
+.related-card::after { content: "→"; margin-left: 8px; opacity: .6; }
+
+.preview-footer {
+  background: var(--ink); color: #b8cfe0; padding: 40px 0 28px; font-size: .88rem;
+}
+.preview-footer-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px;
+}
+.preview-footer h3 { color: #fff; font-family: var(--font-heading); font-size: 1rem; margin: 0 0 8px; }
+.preview-footer p { margin: 0 0 6px; line-height: 1.6; }
+.preview-footer a { color: #fff; font-weight: 600; text-decoration: none; }
+.preview-footer a:hover { text-decoration: underline; }
+.preview-footer-note { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); font-size: .75rem; color: #8fb4cc; }
+
+.dev-panel {
+  margin-top: 48px; padding: 20px 22px; background: #0f172a; color: #94a3b8;
+  border-radius: var(--radius); font-family: ui-monospace, monospace; font-size: .78rem;
+}
+.dev-panel h3 { color: #e2e8f0; font-size: .85rem; margin: 0 0 12px; font-family: inherit; }
+.dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+.dev-check { padding: 8px 10px; border-radius: 6px; background: #1e293b; }
+.dev-check.pass { border-left: 3px solid #22c55e; }
+.dev-check.fail { border-left: 3px solid #ef4444; }
+.dev-check .status { font-weight: 700; color: #e2e8f0; }
+
+@media (max-width: 900px) {
+  .trust-metrics { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid, .benefits-grid--4, .benefits-grid--6, .benefits-grid--8,
+  .education-grid, .education-grid--3, .education-grid--6,
+  .myth-fact-grid, .process-timeline, .related-grid, .related-grid--4, .related-grid--6,
+  .coverage-grid, .coverage-grid--6, .coverage-grid--8, .coverage-grid--12,
+  .preview-footer-inner { grid-template-columns: 1fr; }
+  .top-trust-inner { flex-direction: column; align-items: flex-start; }
+  .hero-a, .hero-b { padding: 64px 0 80px; min-height: auto; }
+  .hero-ctas .btn { flex: 1 1 calc(50% - 8px); min-width: 140px; }
+  .cta-section { padding: 56px 0; }
+  .cta-block { padding: 40px 24px; }
+  .cta-block .hero-ctas .btn { flex: 1 1 100%; width: 100%; }
+  .section-block--dark-insight { padding: 44px 0; }
+}
+@media (max-width: 520px) {
+  .trust-metrics { grid-template-columns: 1fr; }
+  .wrap { padding-left: 16px; padding-right: 16px; }
+  .section-block { padding: 40px 0; }
+  .section-block + .section-block { padding-top: 40px; }
+  .hero-ctas .btn { flex: 1 1 100%; width: 100%; }
+  .comparison-table-wrap { margin: 0 -4px; }
+}
+</style>
+<style>
+.trust-panel {
+  background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+.trust-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.trust-panel-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: .88rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+.trust-panel-icon {
+  color: #15803d;
+  font-weight: 900;
+}
+.trust-credential-card { min-height: 100%; }
+.trust-card-icon { color: var(--nhs-blue); }
+.trust-card-link { margin: 10px 0 0; font-size: .88rem; }
+.trust-card-link a { color: var(--nhs-blue); font-weight: 700; text-decoration: none; }
+.trust-card-link a:hover { text-decoration: underline; }
+.trust-authority-card { padding: 24px; }
+.trust-authority-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.trust-authority-item h3 {
+  margin: 0 0 8px;
+  font-size: .95rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.trust-authority-item p {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--nhs-dark);
+}
+.trust-demo-notice {
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  color: #92400e;
+  font-size: .92rem;
+  line-height: 1.55;
+}
+.trust-demo-notice strong { color: #78350f; }
+</style>
+<style>
+.master-prose { font-size: 1.02rem; line-height: 1.75; color: var(--text); }
+.master-prose p { margin: 0 0 1rem; }
+.master-prose ul, .master-prose ol { margin: 0 0 1rem; padding-left: 1.35rem; }
+.master-prose li { margin-bottom: .45rem; }
+.master-prose h3 { font-size: 1.05rem; margin: 1.25rem 0 .5rem; color: var(--nhs-dark); }
+.master-prose .table-wrap { overflow-x: auto; margin: 0 0 1rem; }
+.master-prose table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.master-prose th, .master-prose td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+.master-prose th { background: var(--soft-blue); }
+</style>
+</head>
+<body data-publish-source="master-library">
+<div class="top-trust-bar"><div class="top-trust-inner">
+<div class="trust-badges">
+<span class="trust-badge trust-badge--gphc">GPhC Registered</span>
+<span class="trust-badge trust-badge--nhs">NHS Services</span>
+<span class="trust-badge trust-badge--local">Independent Community Pharmacy</span>
+</div>
+<div class="header-contact">Tel: 0113 275 2103</div>
+</div></div>
+<header class="site-header">
+<div class="site-header-inner">
+<a class="site-brand" href="https://leedspharmacy.co.uk">
+<span class="site-brand-name">Leeds Pharmacy</span>
+<span class="site-brand-tagline">Flu Vaccinations · Headingley</span>
+</a>
+<a class="site-nav-cta" href="#contact">Book Consultation</a>
+</div>
+</header>
+<main id="main-content">
+<header class="hero-a">
+  <div class="wrap">
+    <div class="hero-eyebrow">Leeds Pharmacy · Headingley</div>
+    <div class="hero-meta">
+  <span class="hero-service-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Flu Vaccinations</span>
+  <span class="hero-tag hero-tag--nhs">NHS Service</span>
+</div>
+    <h1>Flu Vaccinations</h1>
+    <p class="hero-intro">A flu vaccination is an immunisation that helps protect you against seasonal influenza — the virus that causes flu. Pharmacy teams in England can offer the NHS seasonal flu vaccination to eligible patient groups, and some pharmacies also offer a private flu vaccination where NHS eligibility does not apply.</p>
+    <div class="hero-trust-row">
+  <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> GPhC registered pharmacy</span>
+  <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> NHS &amp; clinical services</span>
+  <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Experienced pharmacy team</span>
+</div>
+    <div class="hero-local"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Serving Headingley — Headingley, Chapel Allerton, Meanwood</div>
+    
+    <div class="hero-ctas hero-ctas--premium">
+  <a class="btn btn-primary btn-lg" href="#contact">Call 0113 275 2103</a>
+  <a class="btn btn-secondary btn-lg" href="#contact">Check eligibility</a>
+  <a class="btn btn-outline-light btn-lg" href="tel:01132752103"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>0113 275 2103</a>
+</div>
+  </div>
+</header>
+<section class="section-block rhythm-blue" data-section-type="masterSection" data-master-section="1">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">What Flu Vaccinations Are</h2>
+
+</div>
+    <div class="content-card master-prose"><p>A flu vaccination is an immunisation that helps protect you against seasonal influenza — the virus that causes flu. Pharmacy teams in England can offer the NHS seasonal flu vaccination to eligible patient groups, and some pharmacies also offer a private flu vaccination where NHS eligibility does not apply.</p>
+<p>The pharmacist checks whether you are suitable for a flu vaccination that day, explains what to expect, and administers the vaccine where clinically appropriate. Suitability depends on age, clinical risk, commissioning rules for the current flu season, and any medical reasons to delay or avoid vaccination.</p>
+<p>A pharmacy flu vaccination does not treat flu once you are already ill, and it does not replace emergency care if you develop severe breathing difficulty, chest pain, confusion, or other urgent symptoms. It is a preventive service — not a diagnosis or treatment appointment for current illness.</p>
+<p>NHS seasonal flu vaccination — confirm local eligibility and commissioning when you call. Private flu vaccination may be available where NHS eligibility does not apply — fee confirmed at booking.</p>
+<p>Vaccine strain composition and national eligibility groups are updated each flu season. Always confirm what this pharmacy can offer for the current season before you attend.</p></div>
+  </div>
+</section>
+<section class="section-block" data-section-type="masterSection" data-master-section="2">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">Who Should Consider A Flu Vaccination</h2>
+
+</div>
+    <div class="content-card master-prose"><p><strong>If you are eligible for the NHS seasonal flu vaccine</strong> — Participating pharmacies can vaccinate people who fall into the NHS-funded groups for the current season. Exact groups change year to year — common examples have included older adults, pregnant women, and people with certain long-term conditions. Confirm eligibility when you call.</p>
+<p><strong>If you want a private flu vaccination</strong> — Where the pharmacy offers private flu vaccination, you may be able to book even if you are not in an NHS-funded group. Fees and stock must be confirmed locally.</p>
+<p><strong>If you live or work with someone at higher risk</strong> — Some people choose vaccination to reduce the chance of passing flu on to vulnerable household members. Ask whether NHS or private options apply to you.</p>
+<p>You may not be suitable for vaccination at this visit if you are acutely unwell with a high fever, have had a severe allergic reaction to a previous flu vaccine or a vaccine component, or need specialist immunology advice before immunisation. The pharmacist will explain when to wait, when to seek GP advice, or when urgent care is more appropriate.</p>
+<p>Children, pregnant women, and people with complex immunosuppression can often be assessed in pharmacy where the service and vaccine type allow — but age limits, vaccine product choice, and consent requirements apply. The pharmacist will say clearly if referral is safer.</p></div>
+  </div>
+</section>
+<section class="section-block rhythm-teal" data-section-type="masterSection" data-master-section="3">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">Why Seasonal Flu Protection Matters</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Flu can cause more than a heavy cold. For some people it leads to pneumonia, hospital admission, or worsening of long-term conditions such as asthma, COPD, heart disease, or diabetes. Even healthy adults can lose time from work and pass infection on to others.</p>
+<p>Vaccination is one of the most practical ways to reduce that risk each season. Protection is not absolute — you may still catch flu — but vaccination lowers the chance of severe illness for many people and supports community protection when uptake is high.</p>
+<p>Flu viruses change over time. That is why a new seasonal vaccine is offered each year rather than relying on last season's dose alone.</p></div>
+  </div>
+</section>
+<section class="section-block" data-section-type="masterSection" data-master-section="4">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">What Happens During The Appointment</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Contact the pharmacy by phone on 0113 275 2103 or via Call 0113 275 2103 to book to ask about appointments, walk-in availability, and whether you are likely to be eligible. Opening hours: 0900 - 1800.</p>
+<p>You will usually be seen in a private consultation room. The pharmacist confirms your identity, checks eligibility and medical history, and explains the vaccine being offered.</p>
+<p>The consultation typically includes:</p>
+<ol>
+<li>Confirmation of age, risk group, and NHS or private pathway</li>
+<li>Review of allergies, previous vaccine reactions, and current medicines</li>
+<li>Discussion of benefits, common side effects, and when to seek medical help</li>
+<li>Informed consent</li>
+<li>Administration of the vaccine where appropriate</li>
+<li>Brief aftercare advice and documentation</li>
+</ol>
+<p>The injection is usually given in the upper arm. Wear clothing that allows easy access. Tell the pharmacist if you feel unwell on the day — vaccination may need to be deferred.</p>
+<p>Appointment length is typically short once eligibility is clear. Exact timing depends on how busy the pharmacy is and whether additional clinical questions need discussion.</p></div>
+  </div>
+</section>
+<section class="section-block rhythm-grey" data-section-type="masterSection" data-master-section="5">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">After Your Flu Vaccination</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Mild soreness in the arm, a low-grade temperature, or feeling slightly under the weather for a day or two can occur after vaccination. These effects usually settle without treatment. Rest, fluids, and simple pain relief suitable for you may help if needed.</p>
+<p>Seek medical advice promptly if you develop signs of a severe allergic reaction after leaving — such as swelling of the face or throat, difficulty breathing, or a widespread rash — or if you become seriously unwell.</p>
+<p>A flu vaccination does not give instant protection. It usually takes around two weeks for immunity to build. Continue everyday hygiene measures during flu season, and seek care early if you develop flu-like symptoms and are in a higher-risk group.</p>
+<p>Keep a note of the date you were vaccinated if you need it for work, care records, or future appointments.</p></div>
+  </div>
+</section>
+<section class="section-block" data-section-type="masterSection" data-master-section="6">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">When Urgent Medical Review Is Needed</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Flu vaccination appointments are not for emergency assessment. Call 999 or go to A&amp;E for severe breathing difficulty, chest pain, collapse, sudden confusion, blue lips, or any life-threatening symptom.</p>
+<p><strong>Seek same-day medical review</strong> (GP, NHS 111, or urgent care as advised) if you have flu-like symptoms and are at higher risk of complications, if symptoms suddenly worsen, or if you are worried about dehydration, breathing, or existing long-term conditions flaring.</p>
+<p>Do not wait for a vaccination appointment if you are already seriously unwell. Vaccination is preventive — acute illness needs clinical assessment first.</p>
+<p>If the pharmacy cannot vaccinate you today, the team should leave you with a clear next step — another appointment, GP advice, or urgent care where appropriate.</p></div>
+  </div>
+</section>
+
+<section class="section-block" data-section-type="masterSection" data-master-section="9">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">Patient Concerns</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Leeds Pharmacy is a community pharmacy team serving patients in Headingley with clear advice, private consultation space where available, and practical next steps when pharmacy care is not enough.</p>
+<p>Patients trust the team for approachable conversations, careful checking of medicines and allergies, and honest guidance about when self-care, pharmacy treatment, or a GP review is the safer choice.</p>
+<p>Professional registration, clinical governance and local accountability sit behind every consultation — so you leave knowing what to do next, not just what medicine might help today.</p></div>
+  </div>
+</section>
+<section class="section-block rhythm-teal" data-section-type="masterSection" data-master-section="10">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">Why Patients Choose Flu Vaccinations</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Patients choose flu vaccination to reduce the chance of seasonal flu and its complications, protect vulnerable people around them, and complete vaccination locally without waiting for a routine GP appointment where pharmacy delivery is available.</p>
+<p>A pharmacy visit offers convenient access with a medicines-trained clinician who can confirm suitability, explain the vaccine, and document what was given.</p></div>
+  </div>
+</section>
+<section class="section-block" data-section-type="masterSection" data-master-section="11">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">Why Patients Choose A Community Pharmacy</h2>
+
+</div>
+    <div class="content-card master-prose"><p><strong>Convenient access</strong> — Community pharmacies are local and often easier to reach than booked surgery slots during busy flu season.</p>
+<p><strong>Medicines expertise</strong> — Pharmacists understand vaccine products, interactions, allergies, and when referral is safer.</p>
+<p><strong>Private consultation space</strong> — Appointments take place in a private consultation room.</p>
+<p><strong>Clear next steps</strong> — You leave knowing whether you were vaccinated, what aftercare to expect, and when to seek help if you feel unwell.</p></div>
+  </div>
+</section>
+<section class="section-block rhythm-grey" data-section-type="masterSection" data-master-section="12">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">Trust And Safety</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Pharmacists are GPhC-registered healthcare professionals with a duty to protect patient safety. Flu vaccines are only given after assessment, informed consent, and confirmation that stock, commissioning, and clinical suitability allow it.</p>
+<p>If your needs fall outside pharmacy scope — for example complex allergy history that needs a specialist setting, or vaccine products the pharmacy cannot supply — the team will say so clearly and signpost the right route.</p>
+<p>Clinical suitability is always individual. No vaccine is guaranteed as suitable before consultation. NHS seasonal flu vaccination — confirm local eligibility and commissioning when you call.</p></div>
+  </div>
+</section>
+<section class="section-block" data-section-type="masterSection" data-master-section="13">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Service information</span>
+<h2 class="section-title">Booking And Next Steps</h2>
+
+</div>
+    <div class="content-card master-prose"><p>Call 0113 275 2103 to book a flu vaccination or ask about walk-in availability and NHS eligibility for the current season. Opening hours: 0900 - 1800. Booking: Call 0113 275 2103 to book.</p>
+<p>Bring details of allergies, previous vaccine reactions, and current medicines. Wear a short sleeve or loose sleeve for easy access to your upper arm.</p>
+<p>Service notes: NHS seasonal flu vaccination — confirm local eligibility and commissioning when you call. Private options: Private flu vaccination may be available where NHS eligibility does not apply — fee confirmed at booking.</p>
+<p>After vaccination, follow the aftercare advice you are given. Seek medical help promptly for severe reactions or if you become seriously unwell. Remember that protection builds over about two weeks.</p>
+<p>Call 0113 275 2103 to book your Flu Vaccinations appointment.</p>
+<p>## Owner variable reference</p>
+<div class="table-wrap"><table><thead><tr><th>Variable</th><th>Purpose</th></tr></thead><tbody><tr><td><code>0113 275 2103</code></td><td>Primary contact number</td></tr><tr><td><code>0900 - 1800</code></td><td>Opening hours</td></tr><tr><td><code>Call 0113 275 2103 to book</code></td><td>Booking URL or call-to-book text</td></tr><tr><td><code>private consultation room</code></td><td>Consultation room description</td></tr><tr><td><code>NHS seasonal flu vaccination — confirm local eligibility and commissioning when you call</code></td><td>NHS flu service availability note</td></tr><tr><td><code>Private flu vaccination may be available where NHS eligibility does not apply — fee confirmed at booking</code></td><td>Private flu fee / availability note</td></tr><tr><td><code>{{pharmacyName}}</code></td><td>Pharmacy trading name</td></tr><tr><td><code>Headingley</code></td><td>Primary town / local area</td></tr></tbody></table></div></div>
+  </div>
+</section>
+<div data-component="pharmacy-trust-layer">
+
+<div class="trust-panel" data-component="pharmacy-trust-panel">
+  <div class="trust-panel-grid"><div class="trust-panel-badge" data-trust-signal="consultation-room-available">
+  <span class="trust-panel-icon" aria-hidden="true">✓</span>
+  <span>Consultation Room Available</span>
+</div>
+<div class="trust-panel-badge" data-trust-signal="nhs-services-available">
+  <span class="trust-panel-icon" aria-hidden="true">✓</span>
+  <span>NHS Services Available</span>
+</div></div>
+</div>
+<section class="section-block rhythm-blue trust-credentials-block" data-section-type="trustCredentials">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Patient trust</span>
+<h2 class="section-title">Why Patients Choose Leeds Pharmacy</h2>
+<p class="section-lead section-intro">Regulated pharmacy care with transparent credentials and local accountability.</p>
+</div>
+    <div class="feature-grid feature-grid--2" data-component="pharmacy-trust-credentials">
+      <div class="feature-card trust-credential-card" data-trust-card="local-coverage">
+  <div class="feature-icon trust-card-icon" aria-hidden="true">◆</div>
+  <h3>Local service coverage</h3>
+  <p>Leeds Pharmacy serves patients across Headingley, Chapel Allerton, Meanwood, Roundhay and nearby areas from Leeds.</p>
+  
+</div>
+<div class="feature-card trust-credential-card" data-trust-card="contact">
+  <div class="feature-icon trust-card-icon" aria-hidden="true">◆</div>
+  <h3>Contact the pharmacy team</h3>
+  <p>Call Leeds Pharmacy on 0113 275 2103 to book appointments, check NHS service availability or ask about private consultations in Leeds.</p>
+  
+</div>
+<div class="feature-card trust-credential-card" data-trust-card="consultation-room">
+  <div class="feature-icon trust-card-icon" aria-hidden="true">◆</div>
+  <h3>Private consultation room</h3>
+  <p>Leeds Pharmacy provides confidential pharmacist consultations in a dedicated private room — suitable for clinical services, medicines reviews and sensitive health discussions.</p>
+  
+</div>
+<div class="feature-card trust-credential-card" data-trust-card="nhs-services">
+  <div class="feature-icon trust-card-icon" aria-hidden="true">◆</div>
+  <h3>NHS pharmacy services</h3>
+  <p>Leeds Pharmacy delivers NHS-commissioned pharmacy services in Leeds where locally eligible — including clinical pathways such as Pharmacy First, vaccinations and medicines support.</p>
+  
+</div>
+    </div>
+  </div>
+</section>
+<section class="section-block trust-authority-block" data-section-type="trustAuthority">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Pharmacy authority</span>
+<h2 class="section-title">Regulatory &amp; Professional Accountability</h2>
+<p class="section-lead section-intro">Clear leadership and accreditation signals for patient confidence.</p>
+</div>
+    <div class="content-card trust-authority-card" data-component="pharmacy-trust-authority">
+      <div class="trust-authority-grid"><div class="trust-authority-item"><h3>Superintendent Pharmacist</h3><p data-trust-field="superintendent">Superintendent Pharmacist Information Available</p></div></div>
+    </div>
+  </div>
+</section>
+</div>
+<section class="section-block rhythm-teal" data-section-type="localRelevance" data-component="master-local-relevance">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+<span class="section-kicker">Local access</span>
+<h2 class="section-title">Flu Vaccinations For Patients In Headingley</h2>
+<p class="section-lead section-intro">Leeds Pharmacy is located at 203 Kirkstall Lane, Headingley, LS6 3EJ. Patients in Headingley and nearby areas including Chapel Allerton, Meanwood, Roundhay, Horsforth, Moortown can access flu vaccinations by calling 0113 275 2103. Appointments take place in the pharmacy's private consultation room — ask about NHS flu eligibility when you call.</p>
+</div>
+  </div>
+</section>
+<section class="section-block cta-section" data-component="cta-block" id="contact">
+  <div class="wrap">
+    <div class="cta-block cta-block--pharmacist">
+      <h2>Book a flu vaccination at Leeds Pharmacy</h2>
+      <p>Call 0113 275 2103 to book a flu vaccination or ask about walk-in availability and NHS eligibility for the current season. Opening hours: 0900 - 1800. Booking: Call 0113 275 2103 to book.</p>
+      <a class="cta-phone" href="tel:01132752103"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>0113 275 2103</a>
+      <a class="cta-email" href="mailto:support@leedspharmacy.co.uk">support@leedspharmacy.co.uk</a>
+      
+      <div class="hero-ctas hero-ctas--premium">
+        <a class="btn btn-primary btn-lg" href="#contact">Call 0113 275 2103</a>
+        <a class="btn btn-secondary btn-lg" href="#contact">Speak To A Pharmacist</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="preview-footer">
+<div class="preview-footer-inner">
+<div>
+<h3>Leeds Pharmacy</h3>
+<p>Your local community pharmacy in Headingley.</p>
+</div>
+<div>
+<h3>Contact</h3>
+<p><a href="tel:01132752103">0113 275 2103</a></p>
+
+<p><a href="#contact">Speak to the pharmacy team</a></p>
+</div>
+</div>
+</footer>
+</body>
+</html>

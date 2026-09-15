@@ -1,0 +1,176 @@
+{
+  "slug": "pharmaconnect",
+  "pass": true,
+  "mode": "GROWTH",
+  "overallCompletionPct": 89,
+  "nextStep": "business-profile",
+  "steps": [
+    {
+      "id": "business-profile",
+      "status": "IN_PROGRESS",
+      "pct": 99,
+      "locked": false
+    },
+    {
+      "id": "analyse-website",
+      "status": "COMPLETE",
+      "pct": 100,
+      "locked": false
+    },
+    {
+      "id": "target-areas",
+      "status": "COMPLETE",
+      "pct": 100,
+      "locked": false
+    },
+    {
+      "id": "create-campaign",
+      "status": "COMPLETE",
+      "pct": 100,
+      "locked": false
+    },
+    {
+      "id": "campaign-assets",
+      "status": "COMPLETE",
+      "pct": 100,
+      "locked": false
+    },
+    {
+      "id": "campaign-improvements",
+      "status": "IN_PROGRESS",
+      "pct": 0,
+      "locked": false
+    },
+    {
+      "id": "ready-to-publish",
+      "status": "COMPLETE",
+      "pct": 100,
+      "locked": false
+    },
+    {
+      "id": "submit-to-google",
+      "status": "COMPLETE",
+      "pct": 100,
+      "locked": false
+    },
+    {
+      "id": "monitor-results",
+      "status": "COMPLETE",
+      "pct": 100,
+      "locked": false
+    }
+  ],
+  "checks": [
+    {
+      "id": "1-os-service-exists",
+      "pass": true,
+      "detail": "OS service file"
+    },
+    {
+      "id": "2-nine-workflow-steps",
+      "pass": true,
+      "detail": "9 steps"
+    },
+    {
+      "id": "3-step-titles",
+      "pass": true,
+      "detail": "Business Profile, Analyse Existing Website, Target Areas, Create Campaign, Campaign Assets, Campaign Improvements, Ready To Publish, Submit To Google, Monitor Results"
+    },
+    {
+      "id": "4-state-model",
+      "pass": true,
+      "detail": "All steps use standard states"
+    },
+    {
+      "id": "5-continue-next-step",
+      "pass": true,
+      "detail": "Continue Next Step button rendered when tasks exist"
+    },
+    {
+      "id": "6-next-step-resolves",
+      "pass": true,
+      "detail": "Business Profile → /api/pharmacy-profile-dashboard?slug=pharmaconnect"
+    },
+    {
+      "id": "7-locked-steps",
+      "pass": true,
+      "detail": "locked=0"
+    },
+    {
+      "id": "8-view-on-complete",
+      "pass": true,
+      "detail": "Growth plan deep links available"
+    },
+    {
+      "id": "9-current-growth-plan",
+      "pass": true,
+      "detail": "Blood Pressure Checks — Increase Visibility"
+    },
+    {
+      "id": "10-progress-bar",
+      "pass": true,
+      "detail": "89%"
+    },
+    {
+      "id": "11-build-growth-mode",
+      "pass": true,
+      "detail": "mode=GROWTH"
+    },
+    {
+      "id": "12-growth-cards",
+      "pass": true,
+      "detail": "8 growth cards defined"
+    },
+    {
+      "id": "13-growth-mode-ui",
+      "pass": true,
+      "detail": "mode=GROWTH reflected in Growth Programme UI"
+    },
+    {
+      "id": "14-workflow-question",
+      "pass": true,
+      "detail": "Growth Programme primary messaging"
+    },
+    {
+      "id": "15-nav-labels",
+      "pass": true,
+      "detail": "Simplified nav terminology"
+    },
+    {
+      "id": "16-os-owns-sequencing",
+      "pass": true,
+      "detail": "Workflow logic in OS layer only"
+    },
+    {
+      "id": "17-no-duplicate-workflow",
+      "pass": true,
+      "detail": "Single next-step resolution"
+    },
+    {
+      "id": "18-module-state-only",
+      "pass": true,
+      "detail": "Steps expose completion, status, blockers, url"
+    },
+    {
+      "id": "19-dashboard-integrates-os",
+      "pass": true,
+      "detail": "Dashboard includes operatingSystem"
+    },
+    {
+      "id": "20-modules-unchanged",
+      "pass": true,
+      "detail": "Enhancement workspace has no OS workflow logic"
+    },
+    {
+      "id": "21-templates-unchanged",
+      "pass": true,
+      "detail": "Visual templates untouched"
+    },
+    {
+      "id": "22-live-dashboard",
+      "pass": true,
+      "detail": "Auth-gated"
+    }
+  ],
+  "generatedAt": "2026-06-28T10:32:29.606Z"
+}

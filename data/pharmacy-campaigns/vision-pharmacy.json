@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "slug": "vision-pharmacy",
+  "updatedAt": "2026-09-13T14:59:34.846Z",
+  "campaigns": [
+    {
+      "id": "c6b16251-291c-4879-b143-ced92de37312",
+      "name": "Pharmacy First — Pharmacy Growth",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "campaignGoal": "Pharmacy Growth",
+      "createdAt": "2026-09-10T13:43:22.882Z",
+      "status": "active",
+      "assetCounts": {
+        "servicePage": 1,
+        "localServicePage": 1,
+        "faqPage": 1,
+        "patientGuide": 1,
+        "blogPosts": 3,
+        "socialPosts": 20,
+        "gbpPosts": 10,
+        "emailSequence": 1,
+        "videoScript": 1,
+        "publishingQueue": 0,
+        "indexingQueue": 0,
+        "total": 39
+      },
+      "publishingStatus": "pending",
+      "indexingStatus": "not_registered",
+      "visibilityStatus": "unknown",
+      "publishedPages": 0,
+      "indexedPages": 0,
+      "visiblePages": 0,
+      "links": {
+        "ecosystem": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/?slug=vision-pharmacy",
+        "publishedPage": "/api/pharmacy-visual-experience/pharmacy-first/?slug=vision-pharmacy",
+        "indexing": "/api/pharmacy-growth-dashboard?slug=vision-pharmacy#indexing",
+        "visibility": "/api/pharmacy-growth-dashboard?slug=vision-pharmacy#visibility"
+      },
+      "areaSource": "custom",
+      "campaignAreas": [
+        {
+          "areaName": "Oadby",
+          "selected": true,
+          "source": "google-address-locality",
+          "priority": 1,
+          "areaId": "oadby",
+          "areaSlug": "oadby",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 0.3,
+          "distanceLabel": "0.3 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.601542099999996,
+              "longitude": -1.0847297,
+              "source": "google-places-geocode",
+              "placeId": "ChIJPUzu4FRhd0gRqKHx-ASBpSU"
+            }
+          }
+        },
+        {
+          "areaName": "Wigston",
+          "selected": true,
+          "source": "google-places-geocode",
+          "priority": 2,
+          "areaId": "wigston",
+          "areaSlug": "wigston",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 2.5,
+          "distanceLabel": "2.5 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.5863179,
+              "longitude": -1.1063539,
+              "source": "google-places-geocode",
+              "placeId": "ChIJ0_Dzdilkd0gRaiz3DcmiXsU"
+            }
+          }
+        },
+        {
+          "areaName": "Leicester",
+          "selected": true,
+          "source": "auto-imported-profile",
+          "priority": 3,
+          "areaId": "leicester",
+          "areaSlug": "leicester",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 5.3,
+          "distanceLabel": "5.3 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.6368778,
+              "longitude": -1.1397591999999999,
+              "source": "google-places-geocode",
+              "placeId": "ChIJc2y3SatCd0gRuJy0byodFZo"
+            }
+          }
+        },
+        {
+          "areaName": "Hamilton",
+          "selected": true,
+          "source": "google-places-geocode",
+          "priority": 4,
+          "areaId": "hamilton",
+          "areaSlug": "hamilton",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 6.1,
+          "distanceLabel": "6.1 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.6575107,
+              "longitude": -1.0669826,
+              "source": "google-places-geocode",
+              "placeId": "ChIJyeioHCxid0gRoEs0RkWkIzY"
+            }
+          }
+        },
+        {
+          "areaName": "Braunstone",
+          "selected": true,
+          "source": "google-places-geocode",
+          "priority": 5,
+          "areaId": "braunstone",
+          "areaSlug": "braunstone",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 6.4,
+          "distanceLabel": "6.4 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.6098868,
+              "longitude": -1.1770209999999999,
+              "source": "google-places-geocode",
+              "placeId": "ChIJW30m1ANed0gRXJt0s1y7DXE"
+            }
+          }
+        },
+        {
+          "areaName": "Blaby",
+          "selected": true,
+          "source": "google-places-geocode",
+          "priority": 6,
+          "areaId": "blaby",
+          "areaSlug": "blaby",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 6.7,
+          "distanceLabel": "6.7 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.570776099999996,
+              "longitude": -1.1656497,
+              "source": "google-places-geocode",
+              "placeId": "ChIJZQ3WPApnd0gRmJxr6sj0Rgw"
+            }
+          }
+        },
+        {
+          "areaName": "Thurmaston",
+          "selected": true,
+          "source": "google-places-geocode",
+          "priority": 7,
+          "areaId": "thurmaston",
+          "areaSlug": "thurmaston",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 7.6,
+          "distanceLabel": "7.6 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.67197710000001,
+              "longitude": -1.0911742,
+              "source": "google-places-geocode",
+              "placeId": "ChIJk6ithfRhd0gR3-m228v9xbg"
+            }
+          }
+        },
+        {
+          "areaName": "Birstall",
+          "selected": true,
+          "source": "google-places-geocode",
+          "priority": 8,
+          "areaId": "birstall",
+          "areaSlug": "birstall",
+          "latitude": null,
+          "longitude": null,
+          "distanceKm": 8.4,
+          "distanceLabel": "8.4 km",
+          "distanceMethod": "haversine",
+          "distanceProvenance": {
+            "calculationMethod": "haversine",
+            "distanceSource": "google-coordinates",
+            "pharmacy": {
+              "latitude": 52.6038759,
+              "longitude": -1.0826776999999999,
+              "source": "google-import-snapshot",
+              "placeId": "ChIJ-5Em-gJkd0gRJsMrfFKsk2I"
+            },
+            "locality": {
+              "latitude": 52.6762588,
+              "longitude": -1.1194045,
+              "source": "google-places-geocode",
+              "placeId": "ChIJv8TFu8dhd0gRSObojtxF6yQ"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-08T13:42:48.434Z",
+  "tokenUsage": {
+    "promptTokens": 256,
+    "completionTokens": 149,
+    "totalTokens": 405
+  },
+  "estimatedCostUsd": 0.0017039999999999998,
+  "inputEvidencePackHash": "ff58a159575f97ed90cc1a8a7491c014cc90f94b0828c303881e94cf2c47f499",
+  "editorialEvidencePackHash": "1e290b7178bc391c1a1bfa71b573ea929881a54a0cd2aaab2f07b6bf99a0ba69",
+  "areaSlug": "chellaston",
+  "areaName": "Chellaston",
+  "editorialFactIdsUsed": [
+    "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co",
+    "chellaston:community:chellaston-has-a-public-library",
+    "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+    "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+    "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit",
+    "chellaston:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Chellaston",
+    "heroHeading": "Pharmacy First in Chellaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+    "localIntroduction": "Chellaston is a distinct suburb supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from public services and community organisations. The area offers several key community facilities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. Notable local landmarks include Chellaston Park, the Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.\n\nLocal healthcare provision forms an integral part of the area's infrastructure. NHS general practice services in Chellaston are delivered from Chellaston Medical Centre. Additionally, hospital services within the area are provided by Lister House at Chellaston, complementing the local community amenities and green spaces.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Chellaston is a distinct suburb supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from public services and community organisations.",
+        "editorialFactId": "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area offers several key community facilities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library.",
+        "editorialFactId": "chellaston:community:chellaston-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Notable local landmarks include Chellaston Park, the Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.",
+        "editorialFactId": "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Chellaston are delivered from Chellaston Medical Centre.",
+        "editorialFactId": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Additionally, hospital services within the area are provided by Lister House at Chellaston, complementing the local community amenities and green spaces.",
+        "editorialFactId": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+        "editorialFactId": "chellaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co",
+      "chellaston:community:chellaston-has-a-public-library",
+      "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit",
+      "chellaston:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Chellaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Chellaston is a distinct suburb supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from public services and community organisations.",
+      "supportingCanonicalFieldOrEntity": "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co, chellaston:community:chellaston-has-a-public-library, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:heritage:chellaston-brickworks-local-nature-reserve-is-li",
+      "providerSource": "derby.gov.uk, derby.gov.uk, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (distinct, suburb, supported, brings) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The area offers several key community facilities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library.",
+      "supportingCanonicalFieldOrEntity": "chellaston:community:chellaston-has-a-public-library, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:community:chellaston-leisure-limited-is-listed-as-a-commun",
+      "providerSource": "derby.gov.uk, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (key, facilities, which, serves) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Notable local landmarks include Chellaston Park, the Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.",
+      "supportingCanonicalFieldOrEntity": "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell, chellaston:heritage:chellaston-brickworks-local-nature-reserve-is-li, chellaston:heritage:fullens-lock-park-memorial-bench-is-listed-as-a-",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (notable, landmarks) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Local healthcare provision forms an integral part of the area's infrastructure.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "NHS general practice services in Chellaston are delivered from Chellaston Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-, chellaston:community:chellaston-community-centre-is-listed-as-a-commu",
+      "providerSource": "NHS, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (delivered) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Additionally, hospital services within the area are provided by Lister House at Chellaston, complementing the local community amenities and green spaces.",
+      "supportingCanonicalFieldOrEntity": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:heritage:chellaston-brickworks-local-nature-reserve-is-li",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (additionally, complementing, amenities, green, spaces) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+      "supportingCanonicalFieldOrEntity": "chellaston:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Chellaston",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Local healthcare provision forms an integral part of the area's infrastructure.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "chellaston:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 7,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Chellaston is a distinct suburb supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from public services and community organisations. | rule=uncertain-paraphrase | defect=Chellaston is a distinct suburb supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from public services and community organisations. — uncertain paraphrase: unmatched wording (distinct, suburb, supported, brings) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area offers several key community facilities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. | rule=uncertain-paraphrase | defect=The area offers several key community facilities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. — uncertain paraphrase: unmatched wording (key, facilities, which, serves) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Notable local landmarks include Chellaston Park, the Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. | rule=uncertain-paraphrase | defect=Notable local landmarks include Chellaston Park, the Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. — uncertain paraphrase: unmatched wording (notable, landmarks) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=NHS general practice services in Chellaston are delivered from Chellaston Medical Centre. | rule=uncertain-paraphrase | defect=NHS general practice services in Chellaston are delivered from Chellaston Medical Centre. — uncertain paraphrase: unmatched wording (delivered) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Additionally, hospital services within the area are provided by Lister House at Chellaston, complementing the local community amenities and green spaces. | rule=uncertain-paraphrase | defect=Additionally, hospital services within the area are provided by Lister House at Chellaston, complementing the local community amenities and green spaces. — uncertain paraphrase: unmatched wording (additionally, complementing, amenities, green, spaces) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "Chellaston is a distinct suburb supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from public services and community organisations. The area offers several key community facilities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. Notable local landmarks include Chellaston Park, the Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.\n\nLocal healthcare provision forms an integral part of the area's infrastructure. NHS general practice services in Chellaston are delivered from Chellaston Medical Centre. Additionally, hospital services within the area are provided by Lister House at Chellaston, complementing the local community amenities and green spaces.",
+  "rawOpenAiResponses": [
+    "Chellaston is a distinct suburb supported by a Neighbourhood Board that brings together local councillors, residents, and representatives from public services and community organisations. The area offers several key community facilities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. Notable local landmarks include Chellaston Park, the Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.\n\nLocal healthcare provision forms an integral part of the area's infrastructure. NHS general practice services in Chellaston are delivered from Chellaston Medical Centre. Additionally, hospital services within the area are provided by Lister House at Chellaston, complementing the local community amenities and green spaces."
+  ]
+}

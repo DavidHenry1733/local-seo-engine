@@ -30,6 +30,7 @@ import {
 } from "./pharmacyVisualServicePageRenderer.ts";
 import { resolvePageComponentDna } from "./pharmacyBrandDnaComponentRenderers.ts";
 import { applyBrandDnaToServicePageProfile } from "./pharmacyBrandDnaResolver.ts";
+import { applyPremisesIdentityForServicePageRender } from "./pharmacyServicePageTrustInjection.ts";
 import { componentDnaBodyAttributes } from "./pharmacyComponentDnaResolver.ts";
 import {
   isPharmaconnectDesignSystemV1Locked,
@@ -40,13 +41,21 @@ import {
 import { loadPharmacyProfile } from "./pharmacyContentBlueprintService.ts";
 import {
   reducePharmacyNameRepetition,
+  replaceKeywordStuffedPharmacyListingNames,
   scrubUnconfirmedServiceClaims,
 } from "./pharmacyServicePagePublicationQuality.ts";
-import { validateCustomerFacingServicePageHtml } from "./pharmacyServicePagePublicationQualityGate.ts";
+import { validateCustomerFacingServicePageHtml, readEvidenceReviewApprovedForPublicationQuality } from "./pharmacyServicePagePublicationQualityGate.ts";
+import { buildPublicationQualityApprovedEvidence } from "./masterAdminCoreProductRecoveryEvidenceService.ts";
+import { applyLockedPharmacyFirstServicePageStructure } from "./pharmacyPharmacyFirstLocalPagePreviewOverlay.ts";
+import {
+  ensureProfessionalReviewPanelHtml,
+  renderProfessionalReviewPanelHtml,
+} from "./pharmacyProfessionalReviewPanel.ts";
 import { polishCommercialServicePublicHtml } from "./contentEngine/pharmacyCommercialNarrativePolishV1.ts";
 import { validatePharmacyServicePageHtml } from "./pharmacyVisualExperienceLayoutV3.ts";
 import { getServicePublishingSettings } from "./pharmacyPublishingSettingsService.ts";
 import { getServicePublishMeta } from "./pharmacyMasterPublishConfig.ts";
+import { isApprovedBankRegisteredService } from "./pharmacyServiceVariantLibrary.ts";
 import type { ContentGenerationContext } from "./contentEngine/contentGenerationContextTypes.ts";
 import { buildContentGenerationContext } from "./contentEngine/buildContentGenerationContext.ts";
 import {
@@ -62,6 +71,7 @@ import {
   parseFirstJsonLdScript,
   serializeJsonLdScript,
 } from "./pharmacyVisualExperienceSchemaEnrichment.ts";
+import { deliverApprovedCorePageJsonLd } from "./pharmacyApprovedCorePageJsonLdDelivery.ts";
 import {
   MASTER_PUBLISH_SOURCE_ROOT,
   VISUAL_EXPERIENCE_ROOT,
@@ -69,6 +79,8 @@ import {
   VISUAL_EXPERIENCE_SERVICE_CONFIG,
   type VisualExperienceServiceId,
 } from "./pharmacyVisualExperienceConfig.ts";
+
+export type { VisualExperienceServiceId };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -231,9 +243,16 @@ export function transformMasterPublishToVisualExperience(
   const brandDna = resolveBrandDnaForRender(slug);
   const presentation = resolveCurrentPharmacyPresentationProfile(slug);
   const baseProfile = presentation.servicePageProfile;
-  const profile = applyBrandDnaToServicePageProfile(baseProfile, brandDna);
+  const profile = applyPremisesIdentityForServicePageRender(
+    applyBrandDnaToServicePageProfile(baseProfile, brandDna),
+    sourceHtml,
+  );
   const theme = buildPharmacyThemeWithBrandDna(baseProfile, brandDna);
-  const ctx = buildImageRenderContext(slug, serviceId, pageSlug);
+  const ctx = {
+    ...buildImageRenderContext(slug, serviceId, pageSlug),
+    pharmacyName: profile.pharmacyName,
+    location: profile.town,
+  };
   let contentContext: ContentGenerationContext | undefined;
   try {
     contentContext =
@@ -245,9 +264,11 @@ export function transformMasterPublishToVisualExperience(
   const meta = getServicePublishMeta(serviceId);
   const town = profile.town || "your area";
   const title = `${config.serviceName} ${town} | ${profile.pharmacyName}`;
-  const metaDesc =
-    meta?.metaDescription(profile.pharmacyName, town) ||
-    `${profile.pharmacyName} in ${town} — ${config.serviceName}.`;
+  // Approved-bank core pages: disconnect master meta/long-form claim wording from SEO description.
+  const metaDesc = isApprovedBankRegisteredService(serviceId)
+    ? `${profile.pharmacyName} in ${town} — ${config.serviceName}. Call to ask how the service is arranged.`
+    : meta?.metaDescription(profile.pharmacyName, town) ||
+      `${profile.pharmacyName} in ${town} — ${config.serviceName}.`;
 
   const mainHtmlRaw = buildVisualServicePageMainHtml(sourceHtml, ctx, profile, contentContext);
   const mainHtml =
@@ -266,11 +287,16 @@ export function transformMasterPublishToVisualExperience(
       ? renderedFaqs
       : resolveServicePageFaqContent(contentContext, slug, serviceId, sourceHtml).slice(0, 10);
   schemaScripts = syncSchemaScriptsWithRenderedFaqs(schemaScripts, faqsForSchema);
-  const seoPlan = readServicePageSeoPlan(slug);
+  const seoPlan = readServicePageSeoPlan(slug, serviceId);
+  const urlPath = meta?.urlPath || `/${serviceId}/`;
+  const websiteBase = String(profile.website || "").replace(/\/$/, "");
+  const seoCanonical = String(seoPlan?.canonicalUrl || "");
   const pageUrl =
-    seoPlan?.canonicalUrl ||
-    String(profile.website || "").replace(/\/$/, "") + `/${serviceId}/` ||
-    `https://example.local/${slug}/${serviceId}/`;
+    seoCanonical.includes(`/${serviceId}`)
+      ? seoCanonical
+      : websiteBase
+        ? `${websiteBase}${urlPath}`
+        : `https://example.local/${slug}${urlPath}`;
   const schemaDoc = parseFirstJsonLdScript(schemaScripts);
   if (schemaDoc) {
     const trustEnhanced = enhanceTrustSchemaForSlug(slug, schemaDoc);
@@ -282,7 +308,8 @@ export function transformMasterPublishToVisualExperience(
         town,
         pageUrl,
         metaDescription: metaDesc,
-        website: profile.website || pageUrl,
+        website: websiteBase || pageUrl,
+        serviceId,
       },
       faqsForSchema,
     );
@@ -360,6 +387,7 @@ ${footer}
     appointmentRequired: delivery?.appointmentRequired ?? null,
     abpmConfirmed: false,
     gphcConfirmed: Boolean(String(profileData?.gphcNumber || "").trim()),
+    serviceId,
   });
   html = polishCommercialServicePublicHtml(html, {
     pharmacyName: profile.pharmacyName,
@@ -367,9 +395,25 @@ ${footer}
     serviceName: config.serviceName,
     phone: profile.displayPhone || profile.phone,
   });
+  html = replaceKeywordStuffedPharmacyListingNames(html, presentation.data);
   html = reducePharmacyNameRepetition(html, profile.pharmacyName);
+  if (serviceId === "pharmacy-first") {
+    html = applyLockedPharmacyFirstServicePageStructure(html);
+    html = ensureProfessionalReviewPanelHtml(html, renderProfessionalReviewPanelHtml(profile));
+  }
+  html = deliverApprovedCorePageJsonLd(html, { slug, serviceId });
 
-  const publicationQa = validateCustomerFacingServicePageHtml(html);
+  const tenantEvidence = contentContext?.tenantContext;
+  const approvedEvidence =
+    tenantEvidence?.approvedEvidence || buildPublicationQualityApprovedEvidence(slug, serviceId);
+  const evidenceReviewApproved =
+    tenantEvidence?.evidenceReviewApproved === true ||
+    readEvidenceReviewApprovedForPublicationQuality(slug, serviceId);
+  const publicationQa = validateCustomerFacingServicePageHtml(html, {
+    canonicalPharmacyName: profile.pharmacyName,
+    evidenceReviewApproved,
+    approvedEvidence,
+  });
   html = html.replace(
     "<body ",
     `<body data-publication-qa="${publicationQa.ok ? "pass" : "fail"}" data-publication-qa-failures="${publicationQa.failures.map((f) => f.id).join(",")}" `,

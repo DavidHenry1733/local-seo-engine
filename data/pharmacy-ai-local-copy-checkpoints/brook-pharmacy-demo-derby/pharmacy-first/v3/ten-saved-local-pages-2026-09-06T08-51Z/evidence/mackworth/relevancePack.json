@@ -1,0 +1,135 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Mackworth",
+  "areaSlug": "mackworth",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-06T07:49:01.195Z",
+  "sourceStatus": "google-places-authorised-collection-pharmacy-relationship",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [
+    {
+      "name": "Macklin Street Surgery",
+      "address": "Doctors Surgery, 90 Macklin St, Derby DE1 1JX",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "point_of_interest",
+        "health",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.921129099999995,
+        "longitude": -1.4817072
+      },
+      "placeId": "ChIJEWNN9DzxeUgR1kKuPo87bb4",
+      "rejectionReason": "outside-area-centroid"
+    },
+    {
+      "name": "Horizon Healthcare | NHS GP Practice Derby",
+      "address": "3-5 Burton Rd, Derby DE1 1TH",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "medical_center",
+        "physiotherapist",
+        "hospital",
+        "medical_clinic",
+        "point_of_interest",
+        "health",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.917034099999995,
+        "longitude": -1.4788980999999999
+      },
+      "placeId": "ChIJp1IadEPxeUgRw6xSpLUhGu4",
+      "rejectionReason": "outside-area-centroid"
+    },
+    {
+      "name": "The Vernon Street Medical Centre",
+      "address": "13 Vernon St, Derby DE1 1FW",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "point_of_interest",
+        "health",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.924054999999996,
+        "longitude": -1.490475
+      },
+      "placeId": "ChIJibdZVDfxeUgR3s_joA9bvdM",
+      "rejectionReason": "outside-area-centroid"
+    }
+  ],
+  "researchCandidates": [
+    {
+      "name": "Horizon Healthcare - Mackworth - Humbleton Drive",
+      "address": "31 Humbleton Dr, Derby DE22 4AU",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "medical_center",
+        "hospital",
+        "point_of_interest",
+        "health",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9236126,
+        "longitude": -1.5191639
+      },
+      "placeId": "ChIJ__-0g8b2eUgRk97INVld_xU",
+      "rejectionReason": "awaiting-official-source-check"
+    },
+    {
+      "name": "Brook Medical Centre",
+      "address": "183 Kedleston Rd, Derby DE22 1FT",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "hospital",
+        "medical_clinic",
+        "doctor",
+        "point_of_interest",
+        "health",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.93240050000001,
+        "longitude": -1.4943362
+      },
+      "placeId": "ChIJp-E5zQH0eUgReUux5mvHnDo",
+      "rejectionReason": "awaiting-official-source-check"
+    }
+  ],
+  "pharmacyRelationship": {
+    "from": "Brook Pharmacy Demo Derby",
+    "to": "Mackworth",
+    "distanceKm": 4.1,
+    "method": "haversine-straight-line",
+    "areaReferenceSource": "places-area-reference"
+  },
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 1,
+    "rejectedCount": 3,
+    "categoriesPresent": [],
+    "minimumMet": true
+  }
+}

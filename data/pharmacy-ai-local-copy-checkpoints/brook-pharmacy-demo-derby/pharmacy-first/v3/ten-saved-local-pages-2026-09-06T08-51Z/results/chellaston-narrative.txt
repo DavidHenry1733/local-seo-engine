@@ -1,0 +1,37 @@
+
+=== Chellaston evidence-bound local-narrative writer (fixtures, no generation) ===
+
+PASS  both-failed-chellaston-attempts-preserved-unwritten — both failed attempt logs unchanged on disk; locked Chellaston candidate remains
+PASS  chellaston-ready-evidence-unchanged — READY
+PASS  attempt-1-still-parses — data/pharmacy-ai-local-copy-attempt-logs/brook-pharmacy-demo-derby/pharmacy-first/v3/chellaston/2026-09-05T19-41-32-991Z-attempt-1.json
+PASS  attempt-1-ungrounded-clause-still-authoritative — FAIL | field=localContextParagraphs[0] | sentence=With established local healthcare and community networks, Chellaston residents have access to a range of support. | rule=ungrounded-clause | defect=With established local healthcare and community networks, Chellaston residents have access to a range of support. — no supplied fact, canonical field or approved clinical text covers this clause
+PASS  attempt-2-still-parses — data/pharmacy-ai-local-copy-attempt-logs/brook-pharmacy-demo-derby/pharmacy-first/v3/chellaston/2026-09-06T05-39-37-542Z-attempt-1.json
+PASS  attempt-2-ungrounded-clause-still-authoritative — FAIL | field=localIntroduction | sentence=Chellaston is part of Derby and has its own Neighbourhood Board, which brings together local councillors, residents, and representatives from community organisations and public services. | rule=ungrounded-clause | defect=Chellaston is part of Derby and has its own Neighbourhood Board — no supplied fact, canonical field or approved clinical text covers this clause
+PASS  rejected-in-localIntroduction-networks — ungrounded-clause
+PASS  rejected-in-localContextParagraphs[0]-networks — ungrounded-clause
+PASS  rejected-in-localAccessIntroduction-networks — ungrounded-clause
+PASS  rejected-in-localFaqs[0].answer-networks — ungrounded-clause
+PASS  rejected-in-localCtaBridge-networks — ungrounded-clause
+PASS  rejected-in-localIntroduction-parent-town — ungrounded-clause
+PASS  rejected-in-localContextParagraphs[0]-parent-town — ungrounded-clause
+PASS  rejected-in-localAccessIntroduction-parent-town — ungrounded-clause
+PASS  rejected-in-localFaqs[0].answer-parent-town — ungrounded-clause
+PASS  rejected-in-localCtaBridge-parent-town — ungrounded-clause
+PASS  both-rejected-sentences-fail-in-every-local-narrative-field — 10/10
+PASS  optional-local-narrative-fields-omissible-when-empty — groundedFailures=0 bindings=0
+PASS  internal-fact-ids-are-not-customer-facing — overlay omits identifiers
+PASS  supported-facts-with-internal-ids-remain-permitted — supported
+PASS  customer-facing-fact-id-is-rejected — FAIL | field=localIntroduction | sentence=Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. (chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co) | rule=customer-facing-fact-id | defect=supplied evidence identifiers must stay internal and must not appear in customer-facing copy
+PASS  local-factual-sentence-requires-internal-fact-id — FAIL | field=localContextParagraphs[0] | sentence=Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts
+PASS  supported-board-fact-in-localIntroduction — supported
+PASS  supported-board-fact-in-localContextParagraphs[0] — supported
+PASS  supported-board-fact-in-localAccessIntroduction — supported
+PASS  supported-board-fact-in-localFaqs[0].answer — supported
+PASS  supported-board-fact-in-localCtaBridge — supported
+PASS  area-and-tenant-isolation-no-allestree-leakage — facts=chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-,chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co,chellaston:pharmacy-relationship:distance
+PASS  writer-requires-omission-and-internal-fact-ids-on-every-local-field — optional fields omit instead of padding; parent-town inference is not licensed
+PASS  ungrounded-clause-validator-file-unchanged — src/pharmacy/contentEngine/pharmacyAiLocalCopyClaimGroundingV1.ts
+PASS  existing-successful-candidates-and-costs-unchanged — Allestree, Mickleover and Littleover preserved; locked Chellaston candidate remains
+PASS  attempt-logs-and-stopped-run-unchanged — data/pharmacy-local-page-campaign-runs/brook-pharmacy-demo-derby/pharmacy-first/v1/remaining-local-pages.json
+
+32/32 passed

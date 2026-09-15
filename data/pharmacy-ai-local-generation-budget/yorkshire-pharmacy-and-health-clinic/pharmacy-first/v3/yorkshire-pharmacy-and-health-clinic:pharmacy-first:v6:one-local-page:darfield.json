@@ -1,0 +1,39 @@
+{
+  "taskId": "yorkshire-pharmacy-and-health-clinic:pharmacy-first:v6:one-local-page:darfield",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 2,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.010252,
+  "events": [
+    {
+      "at": "2026-09-09T12:15:33.513Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-09T12:15:33.637Z",
+      "kind": "reserve",
+      "reservationId": "r-1788956133637-1"
+    },
+    {
+      "at": "2026-09-09T12:16:05.828Z",
+      "kind": "consumed",
+      "reservationId": "r-1788956133637-1",
+      "detail": "cost=0.0051660000000000005"
+    },
+    {
+      "at": "2026-09-09T13:00:43.274Z",
+      "kind": "reserve",
+      "reservationId": "r-1788958843274-2"
+    },
+    {
+      "at": "2026-09-09T13:01:04.719Z",
+      "kind": "consumed",
+      "reservationId": "r-1788958843274-2",
+      "detail": "cost=0.005086"
+    }
+  ]
+}

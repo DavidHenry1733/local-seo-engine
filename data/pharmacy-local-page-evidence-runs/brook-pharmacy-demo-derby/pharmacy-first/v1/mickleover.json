@@ -1,0 +1,1302 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "cf8b4949-1aa6-4d71-a883-bacf410f6603",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "mickleover",
+  "areaName": "Mickleover",
+  "planFingerprint": "7c62bbde1b5b624bd3ba463ff772b5b40dca9973fb7203860df21fe9da350fa5",
+  "spendingCapUsd": 0.202,
+  "status": "stopped",
+  "startedAt": "2026-09-04T17:07:31.666Z",
+  "updatedAt": "2026-09-07T10:30:17.216Z",
+  "completedAt": null,
+  "spentUsd": 0.2,
+  "reservedUsd": 0,
+  "paidCallsMade": 10,
+  "stopReason": "hospital is not defined",
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Mickleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "8989d434-1971-469f-a4e2-2a75c5e3090b",
+      "detail": "0 Places result(s) stored.",
+      "capturedAt": "2026-09-04T17:07:31.699Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Mickleover locality, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "b4896fe7-6d81-4f46-97db-94242cf0b7ec",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-05T15:48:09.644Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Mickleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "675463d5-df1d-45c5-a0ad-9804f2540e65",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-04T17:07:35.125Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Mickleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "1c39de31-d45f-4a4e-9d08-7ad7ac7aea86",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-04T17:07:37.898Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "f0f8f063-27c7-41e7-b68e-4958ae21773a",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+      "capturedAt": "2026-09-04T17:07:38.567Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "67ba3e94-72e6-4846-94fc-c002b9695ae7",
+      "detail": "Retrieved https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/mickleover-neighbourhood-ward/",
+      "capturedAt": "2026-09-04T17:07:39.231Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 3.7 km from Brook Pharmacy Demo Derby to Mickleover. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-05T15:48:09.671Z"
+    },
+    {
+      "id": "places-hospitals",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS hospital health centre in Mickleover, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "46f927de-fabd-46d8-b8dd-c6d60aa86fd8",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:19:42.782Z"
+    },
+    {
+      "id": "places-landmarks",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "parks landmarks memorial in Mickleover, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "ca00a581-f81c-46ac-b549-796144689589",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:19:43.138Z"
+    },
+    {
+      "id": "places-community",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "libraries community centres leisure centres in Mickleover, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "e342ea68-5638-4d53-815c-fd4042355274",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:19:44.547Z"
+    },
+    {
+      "id": "dataforseo-official-community",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council park library leisure community in Mickleover, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "c2fbee0b-e2c2-4ea3-8635-38d3aa3521e8",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:19:49.446Z"
+    },
+    {
+      "id": "dataforseo-official-healthcare",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS hospital health centre official in Mickleover, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "db7f53a7-7939-48c7-87dc-883e16f0a220",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:19:53.395Z"
+    },
+    {
+      "id": "page-body-community",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "e85aebf8-3e4c-40f2-bdda-6cc774f7b826",
+      "detail": "Retrieved https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "capturedAt": "2026-09-07T07:19:53.557Z"
+    },
+    {
+      "id": "page-body-healthcare",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "4fedca91-4cbc-4cbd-b07e-31982fbdec25",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+      "capturedAt": "2026-09-07T07:19:55.358Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [],
+    "places-area-reference": [
+      {
+        "name": "Mickleover",
+        "address": "Mickleover, Derby",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.909805000000006,
+          "longitude": -1.5369795
+        },
+        "placeId": "ChIJk7M9UVX2eUgRzmLiABZyxc4",
+        "locality": "Mickleover, Derby",
+        "addressComponents": [
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=14899440381054837454&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-hospitals": [
+      {
+        "name": "Mickleover Medical Centre.",
+        "address": "Vicarage Rd, Mickleover, Derby DE3 0HA",
+        "types": [
+          "medical_center",
+          "hospital",
+          "health",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9070265,
+          "longitude": -1.5464085
+        },
+        "placeId": "ChIJwZLw__32eUgRphVUh_qBrtk",
+        "locality": "Vicarage Rd, Mickleover, Derby DE3 0HA",
+        "addressComponents": [
+          {
+            "longText": "Vicarage Road",
+            "shortText": "Vicarage Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 0HA",
+            "shortText": "DE3 0HA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15685617465190258086&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Royal Derby Hospital",
+        "address": "Uttoxeter Rd, Derby DE22 3NE",
+        "types": [
+          "general_hospital",
+          "hospital",
+          "medical_clinic",
+          "health",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9109983,
+          "longitude": -1.5128643
+        },
+        "placeId": "ChIJ125I7Nn2eUgRkYtgZ6kRexE",
+        "locality": "Uttoxeter Rd, Derby DE22 3NE",
+        "addressComponents": [
+          {
+            "longText": "Uttoxeter Road",
+            "shortText": "Uttoxeter Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 3NE",
+            "shortText": "DE22 3NE",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1259619940061711249&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Mickleover Surgery",
+        "address": "10 Cavendish Way, Mickleover, Derby DE3 9BJ",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.907185299999995,
+          "longitude": -1.5363661
+        },
+        "placeId": "ChIJYVuqgB33eUgRHUKcY_Pgtb8",
+        "locality": "10 Cavendish Way, Mickleover, Derby DE3 9BJ",
+        "addressComponents": [
+          {
+            "longText": "10",
+            "shortText": "10",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Cavendish Way",
+            "shortText": "Cavendish Way",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 9BJ",
+            "shortText": "DE3 9BJ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=13814194767981724189&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-landmarks": [
+      {
+        "name": "Mickleover Meadows",
+        "address": "54, Mickleover, Derby DE3 9JJ",
+        "types": [
+          "park",
+          "tourist_attraction",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9175962,
+          "longitude": -1.5355984999999999
+        },
+        "placeId": "ChIJfQqdyRr3eUgRLd1jASOya6I",
+        "locality": "54, Mickleover, Derby DE3 9JJ",
+        "addressComponents": [
+          {
+            "longText": "54",
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 9JJ",
+            "shortText": "DE3 9JJ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=11703643920069287213&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "War Memorial - Mickleover",
+        "address": "8 Etwall Rd, Mickleover, Derby DE3 0DL",
+        "types": [
+          "historical_landmark",
+          "historical_place",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.903932499999996,
+          "longitude": -1.5469629999999999
+        },
+        "placeId": "ChIJqYYIegH3eUgRln672UqJTBQ",
+        "locality": "8 Etwall Rd, Mickleover, Derby DE3 0DL",
+        "addressComponents": [
+          {
+            "longText": "8",
+            "shortText": "8",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Etwall Road",
+            "shortText": "Etwall Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 0DL",
+            "shortText": "DE3 0DL",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1462694933562097302&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Homerton Vale",
+        "address": "Mickleover, Derby DE3 9DN",
+        "types": [
+          "park",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.914505399999996,
+          "longitude": -1.5251993
+        },
+        "placeId": "ChIJbeao6t32eUgRma-Wl4bQgDo",
+        "locality": "Mickleover, Derby DE3 9DN",
+        "addressComponents": [
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 9DN",
+            "shortText": "DE3 9DN",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=4215598527706214297&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-community": [
+      {
+        "name": "Mickleover Community Centre",
+        "address": "8 Uttoxeter Rd, Mickleover, Derby DE3 0DA",
+        "types": [
+          "community_center",
+          "cafe",
+          "event_venue",
+          "food",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.904533199999996,
+          "longitude": -1.5444430999999998
+        },
+        "placeId": "ChIJh6Ct-OH2eUgRZqI_vXqLIJM",
+        "locality": "8 Uttoxeter Rd, Mickleover, Derby DE3 0DA",
+        "addressComponents": [
+          {
+            "longText": "8",
+            "shortText": "8",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Uttoxeter Road",
+            "shortText": "Uttoxeter Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 0DA",
+            "shortText": "DE3 0DA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10601626882107482726&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Mickleover Library",
+        "address": "Holly End Rd, Mickleover, Derby DE3 0EA",
+        "types": [
+          "library",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.904803,
+          "longitude": -1.5453673
+        },
+        "placeId": "ChIJLYFTSgL3eUgRMa6ToeoczcU",
+        "locality": "Holly End Rd, Mickleover, Derby DE3 0EA",
+        "addressComponents": [
+          {
+            "longText": "Holly End Road",
+            "shortText": "Holly End Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 0EA",
+            "shortText": "DE3 0EA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=14253080189756223025&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Mickleover Community Pavilion",
+        "address": "Vicarage Rd, Mickleover, Derby DE3 0ED",
+        "types": [
+          "community_center",
+          "event_venue",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9076921,
+          "longitude": -1.5488039999999998
+        },
+        "placeId": "ChIJLbYNFv72eUgR1bMuGpcnzpA",
+        "locality": "Vicarage Rd, Mickleover, Derby DE3 0ED",
+        "addressComponents": [
+          {
+            "longText": "Vicarage Road",
+            "shortText": "Vicarage Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 0ED",
+            "shortText": "DE3 0ED",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10434320916596831189&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Mickleover, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-04T17:07:31.704Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://mickleovermedicalcentre.co.uk/",
+          "title": "Mickleover Medical Centre – NHS GP Surgery in Derby",
+          "description": "Mickleover Medical Centre – NHS GP Surgery in Derby. Our Online Booking System is now live! to make, change or cancel an appointment"
+        },
+        {
+          "url": "https://mickleoversurgery.co.uk/",
+          "title": "Mickleover Surgery – NHS GP Surgery in Derby",
+          "description": "Mickleover Surgery – NHS GP Surgery in Derby. You can now request appointments online. 10 Cavendish Way Mickleover Derby Derbyshire DE3 9BJ Get directions ..."
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+          "title": "Mickleover Medical Centre",
+          "description": "Official information from NHS about Mickleover Medical Centre including contact details, directions, opening hours and service/treatment details."
+        },
+        {
+          "url": "https://www.findmygp.org.uk/practice/mickleover-medical-centre-derby-c81042",
+          "title": "Mickleover Medical Centre Reviews & Ratings | FindMyGP",
+          "description": "Mickleover Medical Centre is an NHS GP surgery located at Vicarage Road, Derby, DE3 0HA. HA Telephone 01332 513283 Website"
+        },
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/surgery-information/about-us/",
+          "title": "About us",
+          "description": "20 Dec 2024 — The doctors and staff at the Chapel Street Medical Centre in Derby are proud to offer the highest standard of patient-centred healthcare. Read more"
+        },
+        {
+          "url": "https://mickleover-consult.uk.rapidhealth.co.uk/",
+          "title": "Your GP practice - online services menu",
+          "description": "Mickleover Surgery10 Cavendish Way, Mickleover, Derby DE3 9BJ … call the practice on 01332 519160 if you feel it is urgent for today."
+        },
+        {
+          "url": "https://releaf.co.uk/gp-practice/mickleover-surgery",
+          "title": "Mickleover Surgery, Derby | Medical Cannabis",
+          "description": "Mickleover Surgery is a GP surgery based in Derby, Derbyshire, UK. The practice has specialisations in Maternity and midwifery services, Family planning ... Read more"
+        },
+        {
+          "url": "https://mickleovermedicalcentre.co.uk/contact-us/",
+          "title": "Contact us – Mickleover Medical Centre",
+          "description": "5 May 2023 — NHS GP Surgery in Derby. Vicarage Road Mickleover Derby DE3 0HA Get directions Phone Reception 01332 513283 … reception@nhs.net. Opening times ..."
+        },
+        {
+          "url": "https://www.cqc.org.uk/location/1-542558624/registration-info",
+          "title": "Legal entitlement of Mickleover Medical Centre",
+          "description": "GP practice. Mickleover Medical Centre. Overall: Good read more about inspection ratings. Vicarage Road, Mickleover, Derby, Derbyshire, DE3 0HA (01332) 513283. Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Mickleover, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-04T17:07:35.129Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/mickleover-neighbourhood-ward/",
+          "title": "Mickleover neighbourhood ward",
+          "description": "Find out about the Mickleover neighbourhood ward. Contact details Email: neighbourhoods@derby.gov.uk"
+        },
+        {
+          "url": "https://www.facebook.com/mickleovercouncillors/photos/as-our-community-grows-there-are-an-increasing-amount-of-local-residents-who-liv/3646752645421547/",
+          "title": "Mickleover",
+          "description": "We quite often receive 'out of ward' enquiries due to the distribution of the Mickleover Directory and our facebook reach and the blue shaded ... Read more"
+        },
+        {
+          "url": "https://members.derbyshirealert.co.uk/AlertMessage/Attachment/E4E32826F903FCE787DED2F1446A7B25",
+          "title": "Locality 4 Mickleover Ward Community Care Guide",
+          "description": "The Community Nursing team can be contacted by calling the Community Access Point: 01332 564900. For equipment to support activities of daily living please ... Read more"
+        },
+        {
+          "url": "https://calmview.derbyshire.gov.uk/calmview/Record.aspx?src=CalmView.Catalog&id=D4531",
+          "title": "Mickleover Parish Council - Derbyshire Record Office Catalogue",
+          "description": "Parish Council minute books, 1894-1961, and parish meetings. It helped to provide local public services and amenities such as street lighting, recreation ..."
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://postcode-info.co.uk/england/derby/mickleover",
+          "title": "Mickleover, Derby | Map, postcode districts & nearby places",
+          "description": "Mickleover is a suburban ward to the west of Derby in England, originally a separate village that has been absorbed into the city's suburbs."
+        },
+        {
+          "url": "https://www.inderby.org.uk/parks/community-centres/mickleover-community-centre/",
+          "title": "Mickleover Community Centre | Derby Parks",
+          "description": "Mickleover Community Centre. Address: Uttoxeter Road, Mickleover, Derby, DE3 5DA. Bookings contact: David Hall, 07769 983857; Email: mickleovercc@gmail.com ... Read more"
+        },
+        {
+          "url": "https://blackwell-pc.gov.uk/",
+          "title": "Blackwell Parish Council – News and updates from Blackwell ...",
+          "description": "Contact Information · 01773 580002 · clerk@blackwell-pc.gov.uk · Facebook · Twitter · Instagram · 9am to 2pm. Monday, Wednesday and Friday. Read more"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mickleover",
+          "title": "Mickleover",
+          "description": "Mickleover is a village in the unitary authority of Derby, in Derbyshire, England. ... On 1 April 1968 the parish was abolished and merged with Derby ... Read more"
+        }
+      ]
+    },
+    "dataforseo-official-community": {
+      "query": "official council park library leisure community in Mickleover, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:19:44.551Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.inderby.org.uk/libraries/our-libraries/mickleover-library/",
+          "title": "Mickleover Library",
+          "description": "Please call the library on 01332 647884. Email libraries@derby.gov.uk. Times Mon 1pm to 5pm Tue 10am to 5pm Wed Closed Thu Sat 10am to 1pm Sun Closed …  ..."
+        },
+        {
+          "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+          "title": "Derby libraries",
+          "description": "Council's Leisure, Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Parks Sports and leisure Tourism and ..."
+        },
+        {
+          "url": "https://www.communitydirectoryderbyshire.org.uk/view/7172/mickleover-library",
+          "title": "Mickleover Library",
+          "description": "We are a public library service provided by Derby City Council / Telephone 01332 718926 Address Holly End Road Mickleover Derby. Leisure and recreation ..."
+        },
+        {
+          "url": "https://libraryon.org/libraries/derby/mickleover",
+          "title": "Mickleover Library",
+          "description": "21 Jul 2026 — Opens Friday at 10.00am Monday 1.00pm - 5.00pm. Holly End Road, Derby, Derbyshire, DE3 0GA 01332 647884 mickleover.library@derby.gov.uk. Opens ..."
+        },
+        {
+          "url": "https://www.facebook.com/groups/mickleoverlittleoversurround/posts/1289964726337654/",
+          "title": "BLAGREAVES LIBRARY",
+          "description": "We have refreshments, books for sale, newspapers, free computer access and also the library. Pop along and relax in the library with a tea or ... Read more"
+        },
+        {
+          "url": "https://libraries.derbyshire.gov.uk/our-libraries",
+          "title": "Our Libraries - Derbyshire County Council",
+          "description": "StreetKenning Park, Holmgate Road, Clay Cross · ZipChesterfield, Derbyshire S45 9PH · Phone01629 537 084 · Emailclaycross.library@derbyshire.gov.uk. Read more"
+        },
+        {
+          "url": "https://www.trip.com/travel-guide/attraction/derby/mickleover-library-143775899/",
+          "title": "Mickleover Library Tickets [2026]",
+          "description": "Book Mickleover Library tickets with limited-time offers, Holly End Rd, Mickleover, Derby DE3 0EA, United Kingdom"
+        },
+        {
+          "url": "https://content.govdelivery.com/accounts/UKDCC/bulletins/2ee9ad2",
+          "title": "Derbyshire Libraries eNewsletter – September 2021",
+          "description": "Further information and details of routes can be found here, or contact the Library Information Service on 01629 533444 or ask.library@derbyshire.gov.uk. Read more"
+        },
+        {
+          "url": "https://gftomlinson.co.uk/mickleover-library-derby-2/",
+          "title": "Mickleover Library, Derby",
+          "description": "“We are delighted to take possession of this magnificent building, which will transform library services in the Mickleover area.” David Potton, Head of Library ... Read more"
+        }
+      ]
+    },
+    "dataforseo-official-healthcare": {
+      "query": "NHS hospital health centre official in Mickleover, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:19:49.449Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://mickleovermedicalcentre.co.uk/",
+          "title": "Mickleover Medical Centre – NHS GP Surgery in Derby",
+          "description": "Mickleover Medical Centre – NHS GP Surgery in Derby. Our Online Booking System is now live! how to make, change or cancel an appointment"
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+          "title": "Mickleover Medical Centre",
+          "description": "Official information from NHS about Mickleover Medical Centre including contact details, directions, opening hours and service/treatment details."
+        },
+        {
+          "url": "https://derbyshirefamilyhealthservice.nhs.uk/breastfeeding-welcome-here/mickleover-community-centre",
+          "title": "Mickleover Community Centre",
+          "description": "Mickleover Community Centre address is: Uttoxeter Road Derby DE3 0DA United Kingdom"
+        },
+        {
+          "url": "https://mickleovermedicalcentre.co.uk/contact-us/",
+          "title": "Contact us – Mickleover Medical Centre",
+          "description": "5 May 2023 — Vicarage Road Mickleover Derby DE3 0HA Get directions Phone Reception 01332 513283. Opening times Day Opening hours Monday 8am to 6:30pm ..."
+        },
+        {
+          "url": "https://www.cqc.org.uk/provider/1-199705218/services",
+          "title": "Mickleover Medical Centre - Services",
+          "description": "Mickleover Medical Centre. Vicarage Road, Mickleover, Derby, Derbyshire, DE3 0HA (01332) 513283"
+        },
+        {
+          "url": "https://mickleoversurgery.co.uk/",
+          "title": "Mickleover Surgery – NHS GP Surgery in Derby",
+          "description": "Mickleover Surgery – NHS GP Surgery in Derby. You can now request appointments online. Find out how to make, change or cancel an appointment"
+        },
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/surgery-information/about-us/",
+          "title": "About us",
+          "description": "20 Dec 2024 — The doctors and staff at the Chapel Street Medical Centre in Derby are proud to offer the highest standard of patient-centred healthcare. Read more"
+        },
+        {
+          "url": "https://www.facebook.com/dchstrust/",
+          "title": "Derbyshire Community Health Services NHS Foundation ...",
+          "description": "Derbyshire Community Health Services NHS. Ashgate Road, Chesterfield, United Kingdom, S42. Contact info +44 1246 565000 dchst.communications@nhs.net … open ..."
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration and how to contact the ..."
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+      "title": "Mickleover Medical Centre - NHS",
+      "status": 200,
+      "textSample": "Mickleover Medical Centre - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Mickleover Medical Centre Vicarage Road, Mickleover, Derby, Derbyshire, DE3 0HA Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-04T17:07:38.567Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/mickleover-neighbourhood-ward/",
+      "title": "Mickleover neighbourhood ward - Derby City Council",
+      "status": 200,
+      "textSample": "Mickleover neighbourhood ward - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Council and democracy Neighbourhood partnerships Wards D to S Mickleover neighbourhood ward Mickleover neighbourhood ward Mickleover Neighbourhood team If you would like to get involved in your neighbourhood, you have any ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Daniel Giles Neighbourhood Manager 07342 078202 daniel.giles@derby.gov.uk Kelsey Mumford Neighbourhood Officer 07920 387463 kelsey.mumford@derby.gov.uk Nadine Thomas Local Area Coordinator, Mickleover 07385 401068 nadine.thomas@derby.gov.uk Anti-social behaviour and crime If you wish to complain about anti-social behaviour or report a crime you can contact the Mickleover Safer Neighbourhood Team, by: telephone: 101 email: peartree.neighbourhoods@derbyshire.pnn.police.co.uk Your Safer Neighbourhood Team is committed to making your community a safer and better place to live and work. Find out more about the Mickleover Safer Neighbourhood Team on Derbyshire Constabulary's website. Follow us on Twitter - @MickleoverNB&zwnj; Mickleover Neighbourhood Board Your local Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. The board: leads on behalf of the whole neighbourhood agrees the priorities for the neighbourhood decides where delegated Council budgets are to be spent monitors performance influences decisions that reflect the views of local residents decides on the vision for your neighbourhood The neighbourhood Board received a budget from October 2019 and will receive a further budget from April 2020. The budget is to enable voluntary and community groups (Non Commercial) to apply for funding for projects/events, that will both benefit and enable the community and its residents. If you would be interested in putting together a funding application for consideration of the board, please read the guidance and complete the form: Board Funding Application 2022/23 Neighbourhood board devolved budget funding guidance Mickleover Neighbourhood Forum There are no longer forum meetings held for the local area. If you would like to raise an issue or require more information, contact one of your local Councillors: Councillor Email Councillor Alison Holmes alison.holmes@derby.gov.uk Councillor Matthew Holmes matthew.holmes@derby.gov.uk Councillor Miles Pattison (Chair) miles.pattison@derby.gov.uk Previous Next More in this section Darley neighbourhood ward Littleover neighbourhood ward Mackworth neighbourhood ward Mickleover neighbourhood ward Oakwood neighbourhood ward Normanton neighbourhood ward Sinfin and Osmaston neighbourhood ward Spondon neighbourhood ward Contact details Email: neighbourhoods@derby.gov.uk Department: --> Phone: - --> --> Relay UK: --> SignVideo: Signing service Address: Community Safety and Integration Service Public Protection and Streetpride The Council House Corporation Street Derby DE1 2FS Document downloads Useful links --> Derbyshire Police --> Derby Homes --> Derby and Derbyshire Integrated Care Board --> Derbyshire Fire and Rescue Service Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-04T17:07:39.231Z"
+    },
+    "page-body-community": {
+      "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "title": "Derby libraries - Derby City Council",
+      "status": 200,
+      "textSample": "Derby libraries - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Leisure and culture Derby libraries Derby libraries All information about Libraries has been moved to the In Derby website - a separate website covering services managed by the Council's Leisure, Culture and Tourism department. Amongst other services, you can find a library , join a library , browse the library catalogue and manage your library books and ebooks . Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Allenton Library Allestree Library Alvaston Library Blagreaves Library Chaddesden Park Library Chellaston Library Derwent Community Library Local Studies Library Mackworth Library Mickleover Library Normanton Library Riverside Library Sinfin Library Spondon Library Springwood Library More information is available on In Derby: Derby Libraries Previous Next More in this section Arts and entertainment Derby libraries Derby Museums Parks Sports and leisure Tourism and travel Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-07T07:19:53.557Z"
+    },
+    "page-body-healthcare": {
+      "url": "https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+      "title": "Mickleover Medical Centre - NHS",
+      "status": 200,
+      "textSample": "Mickleover Medical Centre - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Mickleover Medical Centre Vicarage Road, Mickleover, Derby, Derbyshire, DE3 0HA Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-07T07:19:55.358Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.909805000000006,
+    "longitude": -1.5369795,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 3.7,
+  "verifiedGpPracticeCount": 3,
+  "findings": [
+    "3 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "substantive editorial evidence supports intro, context and access",
+    "Actual evidence spend $0.200 of cap $0.202. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/mickleover.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/mickleover.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 3 verified GP practice(s). Spend $0.200.",
+  "reprocessedAt": "2026-09-07T10:30:17.020Z"
+}

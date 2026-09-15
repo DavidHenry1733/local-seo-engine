@@ -18,11 +18,22 @@ import {
   type CampaignBuilderSession,
   type CampaignBuilderTargetAreaMode,
   type CampaignBuilderImagePlan,
-  DEFAULT_CAMPAIGN_BUILDER_ASSET_SELECTION,
 } from "../growthEngineCampaignBuilderModel.ts";
-import { loadCampaignBuilderSession } from "../growthEngineCampaignBuilderService.ts";
+import {
+  loadCampaignBuilderSession,
+  resolveCampaignBuilderAssetSelection,
+} from "../growthEngineCampaignBuilderService.ts";
+import { listEligibleCampaignStockPhotographs } from "../growthEngineCampaignBuilderImageStrategyService.ts";
+import { resolveCanonicalPharmacyName } from "../pharmacyServicePageProfileContext.ts";
+import { isApprovedBankRegisteredService } from "../pharmacyServiceVariantLibrary.ts";
+import { withApprovedBankServicePageContract } from "../pharmacyApprovedBankCorePageContract.ts";
+import { CUSTOMER_REGISTRY_FOUNDATION_ERROR } from "../pharmacyPublishingFoundationService.ts";
 import { buildCampaignBuilderImagePlan, campaignImagePlanPath } from "../growthEngineCampaignBuilderImagePlanService.ts";
-import { resolveCampaignBuilderSelectedAreaNames } from "../growthEngineCampaignBuilderAreaDiscoveryService.ts";
+import {
+  explicitConfirmedLocalityNames,
+  rankStoredCampaignTargetAreas,
+  resolveRecommendedCampaignTargetAreaCount,
+} from "../growthEngineCampaignTargetAreaRankingService.ts";
 import type { ProfileAreaEntry } from "../pharmacyProfileSchema.ts";
 import {
   readOrganicSearchRun,
@@ -56,10 +67,13 @@ export interface CustomerCampaignGenerationContext {
   slug: string;
   serviceId: string;
   campaignName: string;
+  pharmacyName: string;
   targetAreaMode: CampaignBuilderTargetAreaMode;
   targetAreas: string[];
   assetSelection: CampaignBuilderAssetSelection;
   imageStrategy: CampaignBuilderImageStrategy;
+  selectedStockImageIds: string[];
+  requestAiImages: boolean;
   campaignImagePlan: CampaignBuilderImagePlan | null;
   campaignImagePlanPath: string | null;
   generationContext: ContentGenerationContext;
@@ -105,15 +119,52 @@ function contextFilePath(slug: string, serviceId: string): string {
   return path.join(WORKSPACE_ROOT, "data/growth-engine", `${slug}-campaign-generation-context-${serviceId}.json`);
 }
 
-function resolveConfirmedProfileAreaNames(profile: ReturnType<typeof normalizeProfileData>): string[] {
-  const fromSelected = (profile.selectedAreas || []).filter((a: ProfileAreaEntry) => a.selected !== false);
-  if (fromSelected.length) return fromSelected.map((a: ProfileAreaEntry) => a.areaName).filter(Boolean);
-  const legacy = (profile.selectedLocalAreas || profile.localAreas || profile.nearbyAreas || []) as Array<
-    string | ProfileAreaEntry
-  >;
-  return legacy
-    .map((a) => (typeof a === "string" ? a : a.areaName || ""))
-    .filter(Boolean);
+export function resolveAuthoritativeCampaignTargetAreas(input: {
+  selectedAreas?: ProfileAreaEntry[];
+  primaryTown?: string;
+  session: Pick<CampaignBuilderSession, "targetAreaMode" | "targetAreaNames">;
+  ranked: Array<{ area: string; recommended: boolean }>;
+  commercialAuthorised?: boolean;
+}): { mode: CampaignBuilderTargetAreaMode; areas: string[]; primaryTown: string } {
+  const primaryTown = String(input.primaryTown || "").trim();
+  const confirmedAreas = explicitConfirmedLocalityNames(input.selectedAreas);
+
+  if (input.commercialAuthorised) {
+    if (!confirmedAreas.length) {
+      throw new Error("Confirmed Business Profile local areas are required before authorised commercial generation.");
+    }
+    return {
+      mode: input.session.targetAreaMode || "selectedAreas",
+      areas: confirmedAreas,
+      primaryTown,
+    };
+  }
+
+  if (confirmedAreas.length) {
+    const confirmedKeys = new Set(confirmedAreas.map((name) => name.toLowerCase()));
+    const savedConfirmed = (input.session.targetAreaNames || [])
+      .map((name) => String(name).trim())
+      .filter((name) => confirmedKeys.has(name.toLowerCase()));
+    if (savedConfirmed.length === confirmedAreas.length) {
+      return { mode: "selected", areas: savedConfirmed, primaryTown };
+    }
+    return { mode: "selected", areas: confirmedAreas, primaryTown };
+  }
+
+  const poolKeys = new Set(input.ranked.map((row) => row.area.toLowerCase()));
+  const savedInPool = (input.session.targetAreaNames || [])
+    .map((name) => String(name).trim())
+    .filter((name) => poolKeys.has(name.toLowerCase()));
+  const required = resolveRecommendedCampaignTargetAreaCount(input.ranked.length);
+  const recommended = input.ranked.filter((row) => row.recommended).map((row) => row.area);
+
+  if (input.session.targetAreaMode !== "wholeTown" && savedInPool.length === required && required > 0) {
+    return { mode: "selected", areas: savedInPool, primaryTown };
+  }
+  if (recommended.length === required && required > 0) {
+    return { mode: "selected", areas: recommended, primaryTown };
+  }
+  throw new Error(`Select exactly ${required || "the required"} target areas before generating a campaign.`);
 }
 
 export function resolveCampaignBuilderTargetAreas(
@@ -122,35 +173,14 @@ export function resolveCampaignBuilderTargetAreas(
   options?: { commercialAuthorised?: boolean },
 ): { mode: CampaignBuilderTargetAreaMode; areas: string[]; primaryTown: string } {
   const { data: profile } = loadProfileRaw(slug);
-  const primaryTown = String(profile.primaryTown || profile.townCity || "").trim();
-  const confirmedAreas = resolveConfirmedProfileAreaNames(profile);
-
-  if (options?.commercialAuthorised) {
-    if (!confirmedAreas.length) {
-      throw new Error("Confirmed Business Profile local areas are required before authorised commercial generation.");
-    }
-    return {
-      mode: session.targetAreaMode || "selectedAreas",
-      areas: confirmedAreas,
-      primaryTown,
-    };
-  }
-
-  if (session.targetAreaMode === "wholeTown") {
-    if (!primaryTown) {
-      throw new Error("Primary town or city is required before generating a campaign.");
-    }
-    if (confirmedAreas.length) {
-      return { mode: "wholeTown", areas: confirmedAreas, primaryTown };
-    }
-    return { mode: "wholeTown", areas: [primaryTown], primaryTown };
-  }
-
-  const selected = resolveCampaignBuilderSelectedAreaNames(session);
-  if (!selected.length) {
-    throw new Error("Select at least one target area, or choose whole town coverage.");
-  }
-  return { mode: session.targetAreaMode, areas: selected, primaryTown };
+  const ranked = rankStoredCampaignTargetAreas(slug, profile.selectedAreas || [], profile.rankingAreas || []);
+  return resolveAuthoritativeCampaignTargetAreas({
+    selectedAreas: profile.selectedAreas,
+    primaryTown: String(profile.primaryTown || profile.townCity || "").trim(),
+    session,
+    ranked,
+    commercialAuthorised: options?.commercialAuthorised,
+  });
 }
 
 function toGenerationAreas(names: string[]): ContentGenerationArea[] {
@@ -163,9 +193,12 @@ function toGenerationAreas(names: string[]): ContentGenerationArea[] {
   }));
 }
 
-function resolveAssetSelection(session: CampaignBuilderSession): CampaignBuilderAssetSelection {
-  if (session.mode === "all") return { ...DEFAULT_CAMPAIGN_BUILDER_ASSET_SELECTION };
-  return { ...DEFAULT_CAMPAIGN_BUILDER_ASSET_SELECTION, ...session.assetSelection };
+function resolveHandoffStockImageIds(slug: string, session: CampaignBuilderSession): string[] {
+  const eligible = new Set(
+    listEligibleCampaignStockPhotographs(slug, session).map((row) => String(row.imageId)),
+  );
+  const saved = Array.isArray(session.selectedStockImageIds) ? session.selectedStockImageIds.map(String) : [];
+  return saved.filter((id) => eligible.has(id));
 }
 
 export function buildCustomerCampaignGenerationContext(
@@ -193,6 +226,8 @@ export function buildCustomerCampaignGenerationContext(
   });
 
   const profileDoc = loadProfileRaw(slug);
+  const pharmacyName =
+    resolveCanonicalPharmacyName(profileDoc.data).value || generationContext.profile.pharmacyName;
   const encodedSlug = encodeURIComponent(slug);
   const imagePlan = buildCampaignBuilderImagePlan(slug, state);
   const organicRun = readOrganicSearchRun(slug, serviceId);
@@ -224,14 +259,19 @@ export function buildCustomerCampaignGenerationContext(
     slug,
     serviceId,
     campaignName: meta.serviceName,
+    pharmacyName,
     targetAreaMode: mode,
     targetAreas: areas,
-    assetSelection: resolveAssetSelection(state),
+    assetSelection: resolveCampaignBuilderAssetSelection(state),
     imageStrategy: state.imageStrategy || "mixed",
+    selectedStockImageIds: resolveHandoffStockImageIds(slug, state),
+    requestAiImages: state.requestAiImages === true,
     campaignImagePlan: imagePlan,
     campaignImagePlanPath: imagePlan ? campaignImagePlanPath(slug, serviceId) : null,
     generationContext: {
       ...generationContext,
+      selectedAreas: selectedAreasOverride,
+      profile: { ...generationContext.profile, pharmacyName },
       images: {
         ...generationContext.images,
         slots: imagePlan?.slots.map((s) => s.slot) || generationContext.images.slots,
@@ -250,6 +290,84 @@ export function buildCustomerCampaignGenerationContext(
       organicSearchQueries: organicRun?.queries || [],
     },
   };
+}
+
+export interface CustomerCampaignGenerationPayloadValidation {
+  ok: boolean;
+  errors: string[];
+}
+
+function missingRequiredFieldError(field: string): string {
+  return `Campaign generation cannot start: missing required field ${field}.`;
+}
+
+/** Non-mutating payload contract check. Does not write files or start generation. */
+export function validateCustomerCampaignGenerationPayload(
+  ctx: CustomerCampaignGenerationContext,
+): CustomerCampaignGenerationPayloadValidation {
+  const errors: string[] = [];
+  const missing = (field: string) => {
+    errors.push(missingRequiredFieldError(field));
+  };
+
+  if (!String(ctx.pharmacyName || "").trim()) missing("pharmacyName");
+  if (!String(ctx.serviceId || "").trim()) missing("serviceId");
+  if (!String(ctx.campaignName || "").trim()) missing("campaignName");
+  if (!Array.isArray(ctx.targetAreas)) missing("targetAreas");
+  else if (!ctx.targetAreas.length) missing("targetAreas");
+  if (!Array.isArray(ctx.selectedStockImageIds)) missing("selectedStockImageIds");
+  if (typeof ctx.requestAiImages !== "boolean") missing("requestAiImages");
+  if (!ctx.assetSelection || typeof ctx.assetSelection !== "object") missing("assetSelection");
+
+  const gen = ctx.generationContext;
+  if (!gen) {
+    missing("generationContext");
+    return { ok: false, errors };
+  }
+  if (!Array.isArray(gen.selectedAreas)) missing("generationContext.selectedAreas");
+  else if (!gen.selectedAreas.length) missing("generationContext.selectedAreas");
+  if (Array.isArray(ctx.targetAreas) && Array.isArray(gen.selectedAreas)) {
+    const contextNames = gen.selectedAreas.map((area) => area.areaName);
+    if (contextNames.join("\n") !== ctx.targetAreas.join("\n")) {
+      errors.push(
+        "Campaign generation cannot start: generationContext.selectedAreas does not match the saved target areas.",
+      );
+    }
+  }
+  if (gen.variantPack && isApprovedBankRegisteredService(gen.serviceId)) {
+    try {
+      const contract = withApprovedBankServicePageContract(gen.variantPack).servicePage;
+      if (!Array.isArray(contract.sections)) missing("approved-bank servicePage.sections");
+      if (!Array.isArray(contract.processSteps)) missing("approved-bank servicePage.processSteps");
+      if (!Array.isArray(contract.faqs)) missing("approved-bank servicePage.faqs");
+    } catch (err) {
+      errors.push(err instanceof Error ? err.message : String(err));
+    }
+  }
+
+  return { ok: errors.length === 0, errors };
+}
+
+export function assertCustomerCampaignGenerationPayloadReady(ctx: CustomerCampaignGenerationContext): void {
+  const result = validateCustomerCampaignGenerationPayload(ctx);
+  if (!result.ok) throw new Error(result.errors[0]);
+}
+
+export function toCustomerFacingGenerationError(err: unknown): string {
+  const message = err instanceof Error ? err.message : String(err);
+  if (
+    err instanceof TypeError ||
+    /^TypeError:/.test(message) ||
+    /Cannot read propert(?:y|ies) of undefined \(reading 'length'\)/.test(message) ||
+    /Registry not found/i.test(message) ||
+    /Run publishing foundation build first/i.test(message)
+  ) {
+    if (/Registry not found/i.test(message) || /publishing foundation/i.test(message)) {
+      return CUSTOMER_REGISTRY_FOUNDATION_ERROR;
+    }
+    return "Campaign generation cannot start: a required content field was missing. Check the campaign brief and try again.";
+  }
+  return message;
 }
 
 export function freezeCustomerCampaignGenerationContext(

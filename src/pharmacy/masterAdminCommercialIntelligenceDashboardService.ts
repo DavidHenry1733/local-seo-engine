@@ -25,7 +25,13 @@ import {
   isCommercialIntelligenceReadyForReview,
   isLocalMarketIntelligenceGenerated,
   isGrowthIntelligenceGenerated,
+  findActiveCommercialIntelligenceJob,
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
+import {
+  buildGoogleLocalProfileMetrics,
+  googleLocalArtifactConfidence,
+  loadCanonicalGoogleLocalCompetitorArtifact,
+} from "./googleLocalCompetitorMetricsService.ts";
 import { readCommercialIntelligenceApproval } from "./masterAdminWorkflowAckService.ts";
 import {
   isAuthorisedEcosystemQualityReviewReady,
@@ -33,6 +39,25 @@ import {
 } from "./masterAdminAuthorisedEcosystemGenerationService.ts";
 import { isLegacyAutoAdvance, legacyAutoAdvanceLabel } from "./masterAdminWorkflowLegacyService.ts";
 import { WORKFLOW_STAGE_DEFINITIONS, type WorkflowStageId } from "./masterAdminWorkflowModel.ts";
+import { resolveClinicalMissingServicePages } from "./growthEngineWebsiteDiscoveredServiceReconciliation.ts";
+import {
+  buildNationalGrowthPlatformDashboard,
+} from "./nationalGrowthPlatformDashboardService.ts";
+import { isDataForSeoConfigured } from "./dataForSeoNationalSearchAdapter.ts";
+import {
+  readOrganicSearchRun,
+} from "./competitorAnalysisOrganicSearchService.ts";
+import { isCombinedCompetitorAnalysisStored, isReliableGoogleLocalAnalysis } from "./pharmacyCompetitorIntelligenceService.ts";
+import { hasGooglePlacesApiKey } from "./googlePlacesConnection.ts";
+import type { CompetitorAnalysisProviderStatus } from "./nationalCompetitorDiscoveryModel.ts";
+import { isCoreProductRecoveryMode } from "./masterAdminCoreProductRecoveryService.ts";
+import { isBusinessProfileReviewApproved } from "./masterAdminBusinessProfileReviewService.ts";
+import {
+  ORGANIC_SEARCH_EVIDENCE_HEADING,
+  classifyOrganicSearchEvidence,
+  type ClassifiedOrganicSearchEvidenceRow,
+  type VerifiedGoogleCompetitorWebsite,
+} from "./organicSearchEvidenceClassification.ts";
 
 export interface CommercialDashboardSection {
   title: string;
@@ -57,6 +82,8 @@ export interface CommercialGoogleMetric {
   gap: string;
   recommendedTarget: string;
   opportunity: string;
+  sampleSize: number;
+  sampleSizeLabel: string;
 }
 
 export interface CommercialCompetitorSummaryLine {
@@ -110,6 +137,8 @@ export interface CommercialDashboardCompetitorAnalysis {
 }
 
 export interface CommercialIntelligenceDashboard {
+  nationalGrowthPlatform?: ReturnType<typeof buildNationalGrowthPlatformDashboard> | null;
+
   slug: string;
   pharmacyName: string;
   status: "pending_generation" | "ready_for_review" | "approved";
@@ -141,7 +170,19 @@ export interface CommercialIntelligenceDashboard {
   };
   growthIntelligence: {
     sections: CommercialDashboardSection[];
-    opportunities: Array<{ title: string; priority: string; impact: string; evidence: string }>;
+    opportunities: Array<{
+      id: string;
+      title: string;
+      priority: string;
+      impact: string;
+      evidence: string;
+      evidenceSource: string;
+      category: string;
+      serviceId: string | null;
+      /** Service-linked actions vs pharmacy-wide Google-local opportunities. */
+      scope: "service" | "pharmacy-wide";
+    }>;
+    serviceOpportunityAssessment?: import("./growthEngineServiceOpportunityEvidence.ts").PharmacyWideServiceOpportunityAssessment | null;
   };
   previouslyGenerated: {
     exists: boolean;
@@ -168,6 +209,64 @@ export interface CommercialIntelligenceDashboard {
     keywords: CommercialTrafficKeyword[];
     evidence: SectionEvidence;
   };
+  analysisProviders: Array<{
+    id: string;
+    label: string;
+    family: "google_local" | "dataforseo_organic";
+    configured: boolean;
+    generated: boolean;
+    status: CompetitorAnalysisProviderStatus | "configured";
+    statusLabel: string;
+    source: string;
+    capturedAt: string | null;
+    error: string | null;
+  }>;
+  organicSearchCompetitors: {
+    generated: boolean;
+    provider: string;
+    status: CompetitorAnalysisProviderStatus | "configured";
+    statusLabel: string;
+    error: string | null;
+    locationName: string | null;
+    languageCode: string | null;
+    competitors: Array<{
+      name: string;
+      domain: string;
+      host: string;
+      url: string;
+      position: number | null;
+      matchedQuery: string;
+      title: string;
+      description: string;
+      evidence: string;
+      source: string;
+      capturedAt: string | null;
+      taskId: string | null;
+    }>;
+    capturedAt: string | null;
+  };
+  organicSearchEvidence: {
+    heading: typeof ORGANIC_SEARCH_EVIDENCE_HEADING;
+    generated: boolean;
+    provider: string;
+    status: CompetitorAnalysisProviderStatus | "configured";
+    statusLabel: string;
+    error: string | null;
+    locationName: string | null;
+    languageCode: string | null;
+    capturedAt: string | null;
+    yourPharmacy: ClassifiedOrganicSearchEvidenceRow[];
+    verifiedLocalCompetitorMatches: ClassifiedOrganicSearchEvidenceRow[];
+    widerOrganicLandscape: ClassifiedOrganicSearchEvidenceRow[];
+    rows: ClassifiedOrganicSearchEvidenceRow[];
+  };
+  combinedCompetitorAnalysisStatus: "completed" | "partial" | "failed" | "pending";
+  staleCompletion: {
+    flagged: boolean;
+    message: string | null;
+  };
+  canGenerateCompetitorAnalysis: boolean;
+  activeCompetitorAnalysisJobId: string | null;
   sectionEvidence: {
     executiveSummary: SectionEvidence;
     googleProfileMetrics: SectionEvidence;
@@ -194,9 +293,41 @@ function websiteImportSummary(profile: ReturnType<typeof readSetupProfile>) {
       overallCompletenessPercent?: number;
       summaryLines?: string[];
     };
+    intelligence?: {
+      seoSnapshot?: {
+        missingServicePages?: string[];
+        overallCompletenessPercent?: number;
+        summaryLines?: string[];
+      };
+      customerSummary?: { alreadyHas?: string[]; missing?: string[]; competitorNote?: string };
+      businessClassification?: { clinicalServiceDetectionEnabled?: boolean };
+    };
     evidence?: Array<{ sourceUrl?: string; confidence?: number; detectionMethod?: string }>;
   } | null;
-  return snap;
+  if (!snap) return snap;
+  const clinicalEnabled = snap.intelligence?.businessClassification?.clinicalServiceDetectionEnabled === true;
+  const rawMissing =
+    snap.contentCoverage?.missingServicePages ||
+    snap.intelligence?.seoSnapshot?.missingServicePages ||
+    [];
+  const gatedMissing = resolveClinicalMissingServicePages({
+    clinicalServiceDetectionEnabled: clinicalEnabled,
+    detectedClinicalServiceIds: [],
+  });
+  // When clinical dictionaries are inactive, never surface stored clinical gap residue.
+  const missingServicePages = clinicalEnabled ? rawMissing : gatedMissing;
+  return {
+    ...snap,
+    customerSummary: snap.customerSummary || snap.intelligence?.customerSummary,
+    contentCoverage: {
+      ...(snap.contentCoverage || {}),
+      missingServicePages,
+      overallCompletenessPercent:
+        snap.contentCoverage?.overallCompletenessPercent ??
+        snap.intelligence?.seoSnapshot?.overallCompletenessPercent,
+      summaryLines: snap.contentCoverage?.summaryLines || snap.intelligence?.seoSnapshot?.summaryLines,
+    },
+  };
 }
 
 function countAssets(assets: ContentPackageAsset[], ...types: string[]): number {
@@ -214,18 +345,6 @@ function stageLabel(stageId: string): string {
 
 function notAvailable(): string {
   return "Not Available";
-}
-
-function parseMetricNumber(value: string): number | null {
-  const n = Number(String(value).replace(/[^\d.-]/g, ""));
-  return Number.isFinite(n) ? n : null;
-}
-
-function formatGap(current: number | null, target: number | null, decimals = 0): string {
-  if (current == null || target == null) return "Unknown";
-  const gap = target - current;
-  if (decimals > 0) return gap.toFixed(decimals);
-  return String(Math.round(gap));
 }
 
 function dataFreshnessLabel(iso: string | null | undefined): string {
@@ -270,7 +389,7 @@ function loadCompetitorPool(slug: string): { rows: CompetitorPoolRow[]; source: 
         name: c.name,
         rating: c.gbpRating ?? null,
         reviewCount: c.gbpReviewCount ?? 0,
-        photoCount: 0,
+        photoCount: typeof c.photoCount === "number" && c.photoCount > 0 ? c.photoCount : 0,
         categoryCount: (c.categories || []).length,
         serviceCount: (c.services || []).length,
         website: c.website || "",
@@ -294,97 +413,6 @@ function loadCompetitorPool(slug: string): { rows: CompetitorPoolRow[]; source: 
     };
   }
   return { rows: [], source: "Unknown", capturedAt: null };
-}
-
-function resolveYourGoogleMetricValues(
-  profile: ReturnType<typeof readSetupProfile>,
-  snap: ReturnType<typeof loadCompetitorSnapshot>,
-): {
-  reviews: string;
-  rating: string;
-  photos: string;
-  categories: string;
-} {
-  const state = resolveGoogleProfileOnboardingState(profile);
-  const yours = snap?.yourPharmacy;
-  const complete = Boolean(snap?.analysis?.yourPharmacyComplete && yours?.placeId);
-
-  if (state === "no_profile") {
-    return { reviews: "0", rating: "0.0", photos: "0", categories: "0" };
-  }
-
-  if (complete && yours) {
-    return {
-      reviews: String(yours.reviewCount ?? 0),
-      rating: yours.rating != null ? yours.rating.toFixed(1) : notAvailable(),
-      photos: String(yours.photoCount ?? 0),
-      categories: String(1 + (yours.secondaryCategories || []).length),
-    };
-  }
-
-  if (state === "deferred" || state === "configured" || state === "selected") {
-    return {
-      reviews: notAvailable(),
-      rating: notAvailable(),
-      photos: notAvailable(),
-      categories: notAvailable(),
-    };
-  }
-
-  return { reviews: "0", rating: "0.0", photos: "0", categories: "0" };
-}
-
-function metricOpportunity(metricId: string, gap: string): string {
-  const gapNum = parseMetricNumber(gap);
-  if (gapNum == null || gapNum <= 0) {
-    return "You are at or above the local benchmark for this metric — PharmaConnect will help you maintain visibility and trust.";
-  }
-  const actions: Record<string, string> = {
-    reviews:
-      "Review count influences patient trust and map click-through. PharmaConnect will improve Google Business Profile completeness and support structured review growth.",
-    rating:
-      "Rating gaps affect comparison shopping in local search. PharmaConnect will strengthen service delivery signals and reputation visibility on Google.",
-    photos:
-      "Photo-rich profiles earn more engagement on Google Maps. PharmaConnect will guide profile media completion and on-brand pharmacy imagery.",
-    categories:
-      "Category coverage helps Google match patient intent to your services. PharmaConnect will align your Google categories with your enabled pharmacy services.",
-  };
-  return actions[metricId] || "Closing this gap will improve local competitiveness. PharmaConnect will address it through profile and content improvements.";
-}
-
-function buildGoogleProfileMetrics(
-  slug: string,
-  profile: ReturnType<typeof readSetupProfile>,
-  snap: ReturnType<typeof loadCompetitorSnapshot>,
-): CommercialGoogleMetric[] {
-  const yours = resolveYourGoogleMetricValues(profile, snap);
-  const comparisons = snap?.analysis?.comparisons || [];
-
-  const defs = [
-    { id: "reviews", label: "Google Reviews", key: "reviews" as const, yours: yours.reviews, decimals: 0 },
-    { id: "rating", label: "Average Rating", key: "rating" as const, yours: yours.rating, decimals: 1 },
-    { id: "photos", label: "Photos", key: "photos" as const, yours: yours.photos, decimals: 0 },
-    { id: "categories", label: "Categories", key: "categories" as const, yours: yours.categories, decimals: 0 },
-  ];
-
-  return defs.map((def) => {
-    const row = comparisons.find((c) => c.id === def.id);
-    const localAverage = row?.competitorAverage || notAvailable();
-    const highest = row?.highestCompetitor || notAvailable();
-    const currentNum = parseMetricNumber(def.yours);
-    const targetNum = parseMetricNumber(highest) ?? parseMetricNumber(localAverage);
-    const gap = formatGap(currentNum, targetNum, def.decimals);
-    return {
-      id: def.id,
-      label: def.label,
-      yourPharmacy: def.yours,
-      localAverage,
-      highestCompetitor: highest,
-      gap,
-      recommendedTarget: highest !== notAvailable() ? highest : localAverage,
-      opportunity: metricOpportunity(def.id, gap),
-    };
-  });
 }
 
 function buildMeasuredCompetitorSummary(slug: string): CommercialCompetitorSummaryLine[] {
@@ -423,16 +451,26 @@ function buildMeasuredCompetitorSummary(slug: string): CommercialCompetitorSumma
       statement: `Photo counts not available for all competitors — ${notAvailable()} (${source})`,
     });
   }
-  if (topCategories) {
+  if (topCategories && topCategories.categoryCount > 0) {
     lines.push({
       label: "Largest category coverage",
       statement: `${topCategories.name} — ${topCategories.categoryCount} categories (${source})`,
     });
+  } else {
+    lines.push({
+      label: "Largest category coverage",
+      statement: `Category coverage not available — ${notAvailable()} (${source})`,
+    });
   }
-  if (topServices) {
+  if (topServices && topServices.serviceCount > 0) {
     lines.push({
       label: "Service coverage leader",
       statement: `${topServices.name} — ${topServices.serviceCount} detected service signals${topServices.website ? " · website listed" : ""} (${source})`,
+    });
+  } else {
+    lines.push({
+      label: "Service coverage leader",
+      statement: `Competitor clinical services are not available from Google Places — ${notAvailable()} (${source})`,
     });
   }
 
@@ -494,6 +532,7 @@ function mapIntelCompetitor(
   const mapsUrl =
     (c as { mapsUrl?: string }).mapsUrl ||
     (c.placeId ? `https://www.google.com/maps/search/?api=1&query_place_id=${encodeURIComponent(c.placeId)}` : "");
+  const photoCount = typeof c.photoCount === "number" ? c.photoCount : null;
   return {
     name: c.name || "Not available",
     rating: rating != null ? `${rating}★` : "Not available",
@@ -508,7 +547,7 @@ function mapIntelCompetitor(
     address: c.address || "Not available",
     placeId: c.placeId || "Not available",
     phone: c.phone || "Not available",
-    photoCount: "Not available",
+    photoCount: photoCount != null ? String(photoCount) : "Not available",
     openingStatus: c.openingHours?.openNow != null ? (c.openingHours.openNow ? "Open now" : "Closed now") : "Not available",
     capturedAt: intel.generatedAt || "Not available",
   };
@@ -560,12 +599,13 @@ function buildCompetitorAnalysis(
     evidence: buildSectionEvidence({ evidenceSource: "Unknown", capturedAt: null, confidence: "Unknown" }),
   };
 
-  const intel = loadCompetitorIntelligence(slug);
-  if (intel?.competitors.length) {
+  const artifact = loadCanonicalGoogleLocalCompetitorArtifact(slug);
+  if (artifact?.kind === "intelligence") {
+    const intel = artifact.intel;
     const rows = intel.competitors.slice(0, 12).map((c) => mapIntelCompetitor(c, intel));
     const top = [...intel.competitors].sort((a, b) => (b.gbpReviewCount || 0) - (a.gbpReviewCount || 0))[0];
     const ratings = intel.competitors.map((c) => c.gbpRating).filter((r): r is number => r != null);
-    const reviews = intel.competitors.map((c) => c.gbpReviewCount).filter((r) => r > 0);
+    const reviews = intel.competitors.map((c) => c.gbpReviewCount).filter((r): r is number => typeof r === "number" && r > 0);
     const summary = buildMeasuredCompetitorSummary(slug);
     const topByReviews = summary.find((s) => s.label === "Most reviewed competitor");
     return {
@@ -594,8 +634,8 @@ function buildCompetitorAnalysis(
     };
   }
 
-  const snap = loadCompetitorSnapshot(slug);
-  if (snap?.competitors.length && snap.source === "google-places-live") {
+  if (artifact?.kind === "snapshot") {
+    const snap = artifact.snap;
     const rows = snap.competitors.slice(0, 12).map((c) => mapSnapshotCompetitor(c, snap));
     const top = snap.competitors[0];
     const ratings = snap.competitors.map((c) => c.rating).filter((r): r is number => r != null);
@@ -660,6 +700,12 @@ function buildLocalMarketSections(
     string | { areaName?: string }
   >;
   const town = locality.available ? locality.value || localityUnavailableLabel() : localityUnavailableLabel();
+  const googleLocalArtifact = loadCanonicalGoogleLocalCompetitorArtifact(slug);
+  const googleMetricsEvidence = buildSectionEvidence({
+    evidenceSource: googleLocalArtifact?.source || "Unknown",
+    capturedAt: googleLocalArtifact?.capturedAt || null,
+    confidence: googleLocalArtifactConfidence(googleLocalArtifact),
+  });
   const lmEvidence = buildSectionEvidence({
     evidenceSource: snap?.source || "Unknown",
     capturedAt: snap?.generatedAt || null,
@@ -668,9 +714,11 @@ function buildLocalMarketSections(
 
   const googleMetricItems = googleMetrics.map(
     (m) =>
-      `${m.label} — Your Pharmacy: ${m.yourPharmacy} · Local Average: ${m.localAverage} · Highest Competitor: ${m.highestCompetitor} · Gap: ${m.gap} · Target: ${m.recommendedTarget}`,
+      `${m.label} — Your Pharmacy: ${m.yourPharmacy} · Local Average: ${m.localAverage} · Highest Competitor: ${m.highestCompetitor} · Gap: ${m.gap} · Target: ${m.recommendedTarget} · Sample: ${m.sampleSizeLabel || "Not Available"}`,
   );
-  const gapItems = googleMetrics.map((m) => `${m.label} — ${m.opportunity}`);
+  const gapItems = googleMetrics.map(
+    (m) => `${m.label} — ${m.opportunity} (sample ${m.sampleSizeLabel || "Not Available"})`,
+  );
 
   const coverageItems =
     analysis?.comparisons?.map((c) =>
@@ -693,13 +741,13 @@ function buildLocalMarketSections(
           ? "No Google Business Profile is connected — your pharmacy metrics are recorded as zero. Competitor benchmarks are from live Google Places evidence."
           : "Google Business Profile metrics compared with nearby pharmacy benchmarks from live Google Places evidence.",
       items: googleMetricItems,
-      evidence: lmEvidence,
+      evidence: googleMetricsEvidence,
     },
     {
       title: "Gap Analysis",
       narrative: "Commercial gaps measured against local competitor averages and highest nearby performers.",
       items: gapItems,
-      evidence: lmEvidence,
+      evidence: googleMetricsEvidence,
     },
     buildLocalMarketComparisonSection(snap),
     {
@@ -774,40 +822,46 @@ function buildGrowthSections(
     ];
   }
 
-  const seo = report.opportunities.filter((o) => /content|website|search|seo/i.test(o.category));
-  const google = report.opportunities.filter((o) => /google|review|photo|categor|local-visibility/i.test(o.category));
+  const assessment = report.serviceOpportunityAssessment;
+  const topFive = assessment?.topPriorityServices || [];
 
   return [
     {
-      title: "Priority Opportunities",
-      narrative: "Evidence-backed actions from Growth Intelligence — no traffic or enquiry volumes are estimated.",
-      items: report.roadmap.high.slice(0, 5).map((o) => `${o.title} (${o.evidenceSource}: ${o.evidenceSummary})`),
+      title: "Service Opportunity Matrix",
+      narrative: assessment
+        ? `${assessment.confirmedServiceCount} confirmed services assessed from stored demand, website import, organic SERP and content packages.`
+        : "Service opportunity matrix pending.",
+      items: assessment
+        ? assessment.services.slice(0, 5).map(
+            (row) =>
+              `${row.serviceName}: ${row.opportunityClassification.replace(/-/g, " ")} — ${row.priorityRationale}`,
+          )
+        : ["Service opportunity assessment not available."],
       evidence: giEvidence,
     },
     {
-      title: "Missing Content",
-      items: report.missingContent.slice(0, 6).map((o) => `${o.title} — ${o.evidenceSummary}`),
+      title: "Top Priority Services",
+      narrative: "First five services ranked by website coverage, organic visibility, then demand (highest query, pharmacy-intent, near-me).",
+      items: topFive.length
+        ? topFive.map(
+            (row) =>
+              `${row.serviceName}: ${row.priorityRationale}. Website: ${row.websiteEvidence}. Demand: ${row.demandEvidence}. Organic: ${row.organicVisibility}. Package: ${row.packageStatus}. Next: ${row.recommendedAction}`,
+          )
+        : ["No priority services ranked yet."],
       evidence: giEvidence,
     },
     {
-      title: "Google Opportunities",
-      items: google.length
-        ? google.slice(0, 5).map((o) => `${o.title} (${o.evidenceSource}: ${o.evidenceSummary})`)
-        : ["No additional Google opportunities recorded in Growth Intelligence evidence."],
+      title: "Google Profile Actions",
+      items: (assessment?.googleProfileActions || report.opportunities.filter((o) => !o.serviceId))
+        .slice(0, 5)
+        .map((o) => `${o.title} (${o.evidenceSource}: ${o.evidenceSummary})`),
       evidence: giEvidence,
     },
     {
-      title: "SEO Opportunities",
-      items: seo.length
-        ? seo.slice(0, 5).map((o) => `${o.title} (${o.evidenceSource}: ${o.evidenceSummary})`)
-        : report.localVisibility.slice(0, 4).map((o) => `${o.title} — ${o.evidenceSummary}`),
-      evidence: giEvidence,
-    },
-    {
-      title: "Evidence",
-      items: report.opportunities.slice(0, 6).map(
-        (o) => `${o.title} (${OPPORTUNITY_CATEGORY_LABELS[o.category] || o.category}: ${o.evidenceSummary})`,
-      ),
+      title: "Evidence Limitations",
+      items: assessment?.evidenceLimitations?.length
+        ? assessment.evidenceLimitations
+        : ["No evidence limitations recorded."],
       evidence: giEvidence,
     },
   ];
@@ -831,7 +885,7 @@ function buildExecutiveSummary(
 ): CommercialIntelligenceDashboard["executiveSummary"] {
   const visibility = readPharmacyVisibilityReport(slug);
   const web = websiteImportSummary(profile);
-  const topOpp = report?.roadmap.high[0] || report?.opportunities[0];
+  const topOpp = report?.roadmap?.high?.[0] || report?.opportunities?.[0];
   const town = locality.available ? locality.value || localityUnavailableLabel() : localityUnavailableLabel();
 
   const trafficDisplay =
@@ -860,7 +914,7 @@ function buildExecutiveSummary(
           : visibility?.competitorGap || `Patients searching by service and location in ${town} may not yet find your pharmacy first.`,
     biggestContentGap:
       web?.customerSummary?.missing?.[0] ||
-      report?.missingContent[0]?.title ||
+      report?.missingContent?.[0]?.title ||
       "Dedicated patient guides, FAQs and service pages for your highest-demand services.",
     googleBusinessProfileStatus: ownerGoogleStatus(profile),
     estimatedTrafficOpportunity: trafficDisplay,
@@ -944,6 +998,183 @@ function buildHistoricalEvents(slug: string): CommercialIntelligenceDashboard["h
   }));
 }
 
+function providerStatusLabel(status: CompetitorAnalysisProviderStatus, error?: string | null): string {
+  if (status === "not_configured") return "not configured";
+  if (status === "no_reliable_results") return "no reliable results";
+  if (status === "failed") return error ? `failed — ${error}` : "failed";
+  if (status === "partial") return error ? `partial — ${error}` : "partial";
+  return status;
+}
+
+function buildOrganicSearchCompetitors(slug: string): CommercialIntelligenceDashboard["organicSearchCompetitors"] {
+  const run = readOrganicSearchRun(slug);
+  const configured = isDataForSeoConfigured();
+  if (!run) {
+    const status: CompetitorAnalysisProviderStatus = configured ? "configured" : "not_configured";
+    return {
+      generated: false,
+      provider: "dataforseo-google-organic-live",
+      status,
+      statusLabel: providerStatusLabel(status),
+      error: configured ? null : "DataForSEO is not configured",
+      locationName: "United Kingdom",
+      languageCode: "en",
+      competitors: [],
+      capturedAt: null,
+    };
+  }
+  const rows = (run.competitors || []).map((c) => ({
+    name: c.title || c.domain || "Not available",
+    domain: c.domain || "",
+    host: c.host || c.domain || "",
+    url: c.url || "",
+    position: c.position,
+    matchedQuery: c.matchedQuery || "",
+    title: c.title || "",
+    description: c.description || "",
+    evidence: c.overlapEvidence || "DataForSEO Google organic SERP",
+    source: c.provider || "dataforseo-google-organic-live",
+    capturedAt: c.capturedAt || run.capturedAt,
+    taskId: c.taskId,
+  }));
+  const generated = run.status === "completed" && rows.length > 0;
+  return {
+    generated,
+    provider: run.provider || "dataforseo-google-organic-live",
+    status: run.status,
+    statusLabel: providerStatusLabel(run.status, run.error),
+    error: run.error,
+    locationName: run.locationName || "United Kingdom",
+    languageCode: run.languageCode || "en",
+    competitors: rows,
+    capturedAt: run.capturedAt,
+  };
+}
+
+function verifiedGoogleWebsitesFromArtifact(
+  artifact: ReturnType<typeof loadCanonicalGoogleLocalCompetitorArtifact>,
+): VerifiedGoogleCompetitorWebsite[] {
+  if (!artifact) return [];
+  if (artifact.kind === "intelligence") {
+    return artifact.intel.competitors.map((c) => ({
+      name: c.name,
+      website: c.website || "",
+      placeId: c.placeId,
+      source: c.source || artifact.source,
+    }));
+  }
+  return artifact.snap.competitors.map((c) => ({
+    name: c.businessName,
+    website: c.website || "",
+    placeId: c.placeId,
+    source: c.source || artifact.source,
+  }));
+}
+
+function buildOrganicSearchEvidence(
+  slug: string,
+  organic: CommercialIntelligenceDashboard["organicSearchCompetitors"],
+  artifact: ReturnType<typeof loadCanonicalGoogleLocalCompetitorArtifact>,
+): CommercialIntelligenceDashboard["organicSearchEvidence"] {
+  const profile = readSetupProfile(slug);
+  const classified = classifyOrganicSearchEvidence({
+    tenantWebsiteUrls: [profile.website, profile.googleImportSnapshot?.website],
+    pharmacyName: String(profile.tradingName || profile.pharmacyName || "").trim(),
+    verifiedGoogleCompetitorWebsites: verifiedGoogleWebsitesFromArtifact(artifact),
+    rows: organic.competitors,
+  });
+  return {
+    heading: ORGANIC_SEARCH_EVIDENCE_HEADING,
+    generated: organic.generated,
+    provider: organic.provider,
+    status: organic.status,
+    statusLabel: organic.statusLabel,
+    error: organic.error,
+    locationName: organic.locationName,
+    languageCode: organic.languageCode,
+    capturedAt: organic.capturedAt,
+    yourPharmacy: classified.yourPharmacy,
+    verifiedLocalCompetitorMatches: classified.verifiedLocalCompetitorMatches,
+    widerOrganicLandscape: classified.widerOrganicLandscape,
+    rows: classified.rows,
+  };
+}
+
+function buildGoogleProviderStatus(
+  slug: string,
+  localGenerated: boolean,
+  localSource: string,
+  localCapturedAt: string | null,
+): CommercialIntelligenceDashboard["analysisProviders"][number] {
+  const configured = hasGooglePlacesApiKey();
+  let status: CompetitorAnalysisProviderStatus = configured ? "configured" : "not_configured";
+  let error: string | null = configured ? null : "Google Places is not configured";
+  if (isReliableGoogleLocalAnalysis(slug) || (localGenerated && String(localSource || "").includes("google"))) {
+    status = "completed";
+    error = null;
+  } else if (localGenerated && !String(localSource || "").includes("google")) {
+    status = "no_reliable_results";
+    error = "Google/local competitor artifact is not live Google Places evidence.";
+  }
+  return {
+    id: "google-places-local",
+    label: "Google/local competitors",
+    family: "google_local",
+    configured,
+    generated: status === "completed",
+    status,
+    statusLabel: providerStatusLabel(status, error),
+    source: localGenerated ? localSource || "Google Places" : configured ? "Google Places (configured)" : "Google Places (not configured)",
+    capturedAt: localCapturedAt,
+    error,
+  };
+}
+
+function buildAnalysisProviders(
+  slug: string,
+  localGenerated: boolean,
+  localSource: string,
+  localCapturedAt: string | null,
+  organic: CommercialIntelligenceDashboard["organicSearchCompetitors"],
+): CommercialIntelligenceDashboard["analysisProviders"] {
+  return [
+    buildGoogleProviderStatus(slug, localGenerated, localSource, localCapturedAt),
+    {
+      id: "dataforseo-google-organic-live",
+      label: "DataForSEO organic-search competitors",
+      family: "dataforseo_organic",
+      configured: organic.status !== "not_configured" && isDataForSeoConfigured(),
+      generated: organic.generated,
+      status: organic.status,
+      statusLabel: organic.statusLabel,
+      source: organic.generated
+        ? organic.provider
+        : isDataForSeoConfigured()
+          ? "dataforseo-google-organic-live (configured)"
+          : "dataforseo-google-organic-live (not configured)",
+      capturedAt: organic.capturedAt,
+      error: organic.error,
+    },
+  ];
+}
+
+function buildStaleCompetitorCompletion(slug: string, competitorGenerated: boolean): CommercialIntelligenceDashboard["staleCompletion"] {
+  const history = getWorkflowHistory(slug);
+  const historySaysComplete = history.some(
+    (h) => h.fromStage === "commercial_intelligence" || h.fromStage === "competitor_analysis",
+  );
+  const operatorMarkedComplete =
+    isCommercialIntelligenceApproved(slug) ||
+    (isCoreProductRecoveryMode(slug) && isBusinessProfileReviewApproved(slug));
+  const flagged = !competitorGenerated && (operatorMarkedComplete || historySaysComplete);
+  return {
+    flagged,
+    message: flagged
+      ? "Workflow history marks Commercial Intelligence complete, but no valid Competitor Analysis artifact is stored. Generate Competitor Analysis to create evidence."
+      : null,
+  };
+}
+
 function buildTechnicalLog(slug: string, locality: TenantLocalityResolution): CommercialIntelligenceDashboard["technicalLog"] {
   const jobs = listMasterAdminJobs({ slug, limit: 8 });
   const executions = getWorkflowExecutions(slug).slice(0, 8);
@@ -973,6 +1204,14 @@ function buildTechnicalLog(slug: string, locality: TenantLocalityResolution): Co
 }
 
 export function buildCommercialIntelligenceDashboard(slug: string): CommercialIntelligenceDashboard {
+  const nationalGrowthPlatform = (() => {
+    try {
+      return buildNationalGrowthPlatformDashboard(slug);
+    } catch {
+      return null;
+    }
+  })();
+
   const profile = readSetupProfile(slug);
   const locality = resolveTenantLocality(profile);
   const report = loadGrowthOpportunityReport(slug);
@@ -981,8 +1220,30 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
   const assets = pkg?.assets || [];
   const visibility = readPharmacyVisibilityReport(slug);
   const snap = loadCompetitorSnapshot(slug);
+  const googleLocalArtifact = loadCanonicalGoogleLocalCompetitorArtifact(slug);
   const competitor = buildCompetitorAnalysis(slug, locality);
-  const googleProfileMetrics = buildGoogleProfileMetrics(slug, profile, snap);
+  const organicSearchCompetitors = buildOrganicSearchCompetitors(slug);
+  const organicSearchEvidence = buildOrganicSearchEvidence(slug, organicSearchCompetitors, googleLocalArtifact);
+  const staleCompletion = buildStaleCompetitorCompletion(slug, Boolean(competitor.generated));
+  const activeCompetitorJob = findActiveCommercialIntelligenceJob(slug, new Set(["orchestrate_competitor_analysis"]));
+  const analysisProviders = buildAnalysisProviders(
+    slug,
+    Boolean(competitor.generated),
+    competitor.discoverySource,
+    competitor.evidenceTimestamp,
+    organicSearchCompetitors,
+  );
+  const googleProvider = analysisProviders.find((p) => p.family === "google_local");
+  const organicProvider = analysisProviders.find((p) => p.family === "dataforseo_organic");
+  const combinedCompetitorAnalysisStatus =
+    googleProvider?.status === "completed" && (organicProvider?.status === "completed" || organicProvider?.status === "not_configured")
+      ? "completed"
+      : googleProvider?.status === "failed" && (organicProvider?.status === "failed" || organicProvider?.status === "not_configured")
+        ? "failed"
+        : googleProvider?.generated || organicProvider?.generated || googleProvider?.status === "completed" || organicProvider?.status === "completed"
+          ? "partial"
+          : "pending";
+  const googleProfileMetrics = buildGoogleLocalProfileMetrics(profile, snap, googleLocalArtifact);
   const trafficOpportunity = buildTrafficOpportunitySection(slug, locality, visibility);
   const competitorSummary = competitor.summary;
   const sectionEvidence = {
@@ -992,9 +1253,9 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
       confidence: competitor.generated ? competitor.confidence : "Unknown",
     }),
     googleProfileMetrics: buildSectionEvidence({
-      evidenceSource: snap?.source || "Google Places Local Market",
-      capturedAt: snap?.generatedAt || null,
-      confidence: snap?.source === "google-places-live" ? "High" : "Unknown",
+      evidenceSource: googleLocalArtifact?.source || "Unknown",
+      capturedAt: googleLocalArtifact?.capturedAt || null,
+      confidence: googleLocalArtifactConfidence(googleLocalArtifact),
     }),
     competitorAnalysis: competitor.evidence,
     localMarketIntelligence: buildSectionEvidence({
@@ -1045,24 +1306,38 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
     legacyAutoAdvance: isLegacyAutoAdvance(slug),
     legacyLabel: legacyAutoAdvanceLabel(slug),
     approval,
+    nationalGrowthPlatform,
     locality,
     executiveSummary: buildExecutiveSummary(slug, profile, report, competitor, locality, trafficOpportunity),
     competitorAnalysis: competitor,
     competitorSummary,
     googleProfileMetrics,
     trafficOpportunity,
+    analysisProviders,
+    organicSearchCompetitors,
+    organicSearchEvidence,
+    combinedCompetitorAnalysisStatus,
+    staleCompletion,
+    canGenerateCompetitorAnalysis: !isCombinedCompetitorAnalysisStored(slug) || staleCompletion.flagged,
+    activeCompetitorAnalysisJobId: activeCompetitorJob?.id || null,
     sectionEvidence,
     localMarketIntelligence: {
       sections: buildLocalMarketSections(slug, profile, report, locality, googleProfileMetrics, snap),
     },
     growthIntelligence: {
       sections: buildGrowthSections(report, snap?.generatedAt || null),
-      opportunities: (report?.opportunities || []).slice(0, 12).map((o) => ({
+      opportunities: (report?.opportunities || []).map((o) => ({
+        id: o.id,
         title: o.title,
         priority: o.priority,
         impact: o.whyItMatters,
         evidence: o.evidenceSummary,
+        evidenceSource: o.evidenceSource,
+        category: o.category,
+        serviceId: o.serviceId || null,
+        scope: o.serviceId ? ("service" as const) : ("pharmacy-wide" as const),
       })),
+      serviceOpportunityAssessment: report?.serviceOpportunityAssessment || null,
     },
     previouslyGenerated: (() => {
       const historical = readHistoricalEcosystemPackage(slug);

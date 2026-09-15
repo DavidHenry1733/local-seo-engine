@@ -1,0 +1,34 @@
+{
+  "checkpointId": "additional-attempt-after-unsuccessful-2026-09-03T16-49Z",
+  "generatePressed": false,
+  "authoriseAdditionalClicked": false,
+  "published": false,
+  "committed": false,
+  "freshPaidRetrieval": false,
+  "generationBudget": {
+    "consumed": 3,
+    "maxProviderCalls": 3,
+    "estimatedCostUsd": 0.045778,
+    "additionalAttemptsAuthorised": 1
+  },
+  "tests": {
+    "validate-allestree-additional-generation-authorisation-v1.ts": "15/15",
+    "validate-brook-derby-allestree-local-page-ui-v1.ts": "36/36",
+    "validate-allestree-writer-inputs-v1.ts": "27/27"
+  },
+  "browser": {
+    "route": "Target Areas, Brook Derby / pharmacy-first / Allestree",
+    "url": "https://app.pharmaconnect.uk/api/growth-engine/campaign-builder?slug=brook-pharmacy-demo-derby&step=areas&campaign=pharmacy-first",
+    "generateClicked": false,
+    "authoriseAdditionalClicked": false,
+    "generateDisabled": true,
+    "authoriseOneAdditionalAttemptVisible": true,
+    "additionalAttemptMaxCost": "up to $1.954222 remaining of the $2.00 OpenAI cap",
+    "remainingCopy": "0 of 3 OpenAI calls remaining \u00b7 $0.045778 spent",
+    "clicksNotTaken": [
+      "I authorise one additional OpenAI call for this page. Previous spend is not reset. There is no automatic retry.",
+      "Authorise one additional attempt",
+      "Generate one local-page candidate"
+    ]
+  }
+}

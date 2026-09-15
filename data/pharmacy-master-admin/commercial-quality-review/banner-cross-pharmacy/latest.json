@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "slug": "banner-cross-pharmacy",
+  "serviceId": "pharmacy-first",
+  "approvedAt": "2026-07-20T13:36:34.372Z",
+  "approvedBy": "system",
+  "generatedAt": "2026-07-20T12:07:50.806Z",
+  "generatorVersion": "content-engine-lockdown-v1",
+  "tenant": "banner-cross-pharmacy",
+  "summary": {
+    "contentGenerated": true,
+    "contentGeneratedLabel": "Complete",
+    "pagesGenerated": 8,
+    "imagesGenerated": 5,
+    "internalLinksLabel": "Passed",
+    "schemaValidationLabel": "Passed",
+    "seoValidationLabel": "Review",
+    "missingAssets": 1,
+    "criticalErrors": 0,
+    "estimatedReviewMinutes": 2,
+    "overallStatus": "READY FOR PUBLISHING",
+    "publishingReadiness": "Ready"
+  },
+  "contentTotals": {
+    "websitePages": 8,
+    "servicePages": 2,
+    "locationPages": 0,
+    "blogPosts": 3,
+    "patientGuides": 1,
+    "faqPages": 1,
+    "images": 5,
+    "schemas": 1,
+    "internalLinks": 1,
+    "sitemap": 1,
+    "registry": 1,
+    "manifest": 1
+  },
+  "checks": [
+    {
+      "id": "generation-status",
+      "label": "Generation completed",
+      "status": "PASS",
+      "detail": "Content package generated successfully"
+    },
+    {
+      "id": "manifest",
+      "label": "Manifest valid",
+      "status": "PASS",
+      "detail": "Content package manifest present"
+    },
+    {
+      "id": "registry",
+      "label": "Registry valid",
+      "status": "PASS",
+      "detail": "Ecosystem registry present"
+    },
+    {
+      "id": "required-pages",
+      "label": "Required pages generated",
+      "status": "PASS",
+      "detail": "8 website page(s) on disk"
+    },
+    {
+      "id": "output-folders",
+      "label": "Output folders complete",
+      "status": "PASS",
+      "detail": "Generated output folders present"
+    },
+    {
+      "id": "broken-output",
+      "label": "Required outputs exist",
+      "status": "PASS",
+      "detail": "All required included assets present on disk"
+    },
+    {
+      "id": "hero-images",
+      "label": "Hero images exist",
+      "status": "PASS",
+      "detail": "Hero image assigned"
+    },
+    {
+      "id": "required-images",
+      "label": "Images exist",
+      "status": "PASS",
+      "detail": "5 image assignment(s)"
+    },
+    {
+      "id": "schema",
+      "label": "Schema valid",
+      "status": "PASS",
+      "detail": "1 page(s) include schema markup"
+    },
+    {
+      "id": "internal-links",
+      "label": "Internal links valid",
+      "status": "PASS",
+      "detail": "0 local pages mapped"
+    },
+    {
+      "id": "seo",
+      "label": "SEO validation",
+      "status": "WARNING",
+      "detail": "Missing metadata: pharmacy-first, pharmacy-first-content-ecosystem, pharmacy-first-faqs, pharmacy-first-guide, pharmacy-first-what-you-need-to-know, what-is-pharmacy-first, who-should-consider-pharmacy-first"
+    },
+    {
+      "id": "duplicate-urls",
+      "label": "No duplicate URLs",
+      "status": "PASS",
+      "detail": "No duplicate URL paths detected"
+    },
+    {
+      "id": "broken-slugs",
+      "label": "No broken slugs",
+      "status": "PASS",
+      "detail": "Generated output paths match tenant"
+    },
+    {
+      "id": "templates",
+      "label": "No missing templates",
+      "status": "PASS",
+      "detail": "Supporting templates validated"
+    }
+  ],
+  "warnings": [
+    "No custom images",
+    "No Search Console",
+    "No Analytics",
+    "No Competitor Intelligence"
+  ],
+  "blockers": [],
+  "validationEvidence": {
+    "generationReportPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-generation-reports/banner-cross-pharmacy/pharmacy-first.json",
+    "manifestPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/banner-cross-pharmacy/pharmacy-first.json",
+    "registryPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/banner-cross-pharmacy/pharmacy-first/_ecosystem-index.json",
+    "previewUrl": "/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy"
+  }
+}

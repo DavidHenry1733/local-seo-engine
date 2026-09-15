@@ -1,0 +1,239 @@
+{
+  "issueId": "MAI-20260720-002",
+  "createdAt": "2026-07-20T18:26:41.427Z",
+  "createdBy": "sprint-8d-verify",
+  "updatedAt": "2026-07-20T18:26:41.954Z",
+  "tenantSlug": "banner-cross-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "",
+  "category": "Customer onboarding",
+  "severity": "high",
+  "title": "Workflow failed: Publish",
+  "description": "Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass",
+  "expectedBehaviour": "Continue Workflow completes Publish without error",
+  "actualBehaviour": "Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass",
+  "reproductionSteps": "1. Open Master Admin customer record\n2. Customer slug: banner-cross-pharmacy\n3. Click Continue Workflow at stage: Publish\n4. Action: publish",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-07-20T18:26:41.703Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "banner-cross-pharmacy",
+      "businessName": "Banner Cross Pharmacy + Travel Vaccinations & Weight Loss Clinic",
+      "website": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-07-20T12:05:25.770Z",
+      "platformClientStatus": "profile_approved"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "complete",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/banner-cross-pharmacy-campaign-generation-context-pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "generationTimestamp": "2026-07-20T12:07:50.822Z",
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/banner-cross-pharmacy/pharmacy-first.json",
+        "exists": true,
+        "modifiedAt": "2026-07-20T13:36:34.373Z",
+        "size": 7850
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/banner-cross-pharmacy/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/banner-cross-pharmacy.json",
+        "exists": true,
+        "modifiedAt": "2026-07-20T11:32:58.606Z",
+        "size": 6474
+      },
+      "pageType": "unknown",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-07-20T18:20:57.894Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-07-20T18:20:57.894Z",
+        "size": 12128351
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 981011,
+        "pmId": 3,
+        "status": "online",
+        "startTime": "2026-07-20T18:26:20.279Z",
+        "restartCount": 3248
+      },
+      "nodeEnv": "unknown"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "snapshot_present",
+      "businessProfileStatus": "profile_approved",
+      "generationStatus": "complete",
+      "publishingStatus": "published",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "1b5bb6f2-c752-46d5-8309-9a3a4d0bb546",
+        "action": "publish",
+        "status": "failed",
+        "progressLabel": "Failed",
+        "updatedAt": "2026-07-20T18:26:41.399Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "a16ad6ed-ec83-4ecd-9b5e-5233487c51b5",
+          "timestamp": "2026-07-20T18:26:41.666Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260720-002 created: Workflow failed: Publish"
+        },
+        {
+          "id": "c79efcf5-94f8-424c-b8c8-b8c67ab5b240",
+          "timestamp": "2026-07-20T18:26:41.392Z",
+          "action": "commercial_publish",
+          "status": "error",
+          "evidence": "Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass"
+        },
+        {
+          "id": "f86ce434-feb9-4224-a59a-bee0974af2c5",
+          "timestamp": "2026-07-20T18:26:41.328Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260720-001 created: Commercial publish failed"
+        },
+        {
+          "id": "44a4f290-1530-4b3a-a7ee-d7a2ff51b9cb",
+          "timestamp": "2026-07-20T16:23:12.430Z",
+          "action": "migrate_managed_publishing",
+          "status": "success",
+          "evidence": "Managed publishing allocated — banner-cross-pharmacy.sites.pharmaconnect.uk"
+        },
+        {
+          "id": "59c3ec3c-2f08-4cb5-a3b3-375941dc261f",
+          "timestamp": "2026-07-20T14:24:49.546Z",
+          "action": "validate_deployment_destination",
+          "status": "warning",
+          "evidence": "Destination not writable"
+        },
+        {
+          "id": "1880545a-11ce-41e3-8002-94967e08ad9d",
+          "timestamp": "2026-07-20T14:24:49.522Z",
+          "action": "save_deployment_configuration",
+          "status": "success",
+          "evidence": "[REDACTED]"
+        },
+        {
+          "id": "73bf7c79-0a7d-480e-854d-c5ff1403f580",
+          "timestamp": "2026-07-20T14:24:08.219Z",
+          "action": "validate_deployment_destination",
+          "status": "warning",
+          "evidence": "Destination not writable"
+        },
+        {
+          "id": "a5983114-59ad-4e82-ae01-a0189a99a49b",
+          "timestamp": "2026-07-20T14:24:08.179Z",
+          "action": "save_deployment_configuration",
+          "status": "success",
+          "evidence": "[REDACTED]"
+        },
+        {
+          "id": "32365e63-e650-4a04-8ca5-d8ead2ad8a73",
+          "timestamp": "2026-07-20T13:36:34.463Z",
+          "action": "approve_commercial_quality_review",
+          "status": "success",
+          "evidence": "Commercial Quality Review approved for Pharmacy First"
+        },
+        {
+          "id": "ef1a9821-7b35-4806-bf9c-69520f5861eb",
+          "timestamp": "2026-07-20T13:16:04.056Z",
+          "action": "continue_workflow",
+          "status": "success",
+          "evidence": "Completed job finalisation recovery (job 442312c0-744c-4bd5-99e7-e178b5871ada)"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "background_job",
+        "action": "publish",
+        "error": "Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass",
+        "timestamp": "2026-07-20T18:26:41.399Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "import_google",
+        "error": "Add a Google Maps link, or enter pharmacy name, town and postcode.",
+        "timestamp": "2026-07-19T11:08:51.121Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "commercial_publish",
+        "error": "Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass",
+        "timestamp": "2026-07-20T18:26:41.392Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/banner-cross-pharmacy/pharmacy-first.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/banner-cross-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publish-status/banner-cross-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/banner-cross-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/banner-cross-pharmacy-campaign-builder.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-07-20T18:26:41.914Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/banner-cross-pharmacy/pharmacy-first.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/banner-cross-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publish-status/banner-cross-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/banner-cross-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/banner-cross-pharmacy-campaign-builder.json"
+  ],
+  "linkedAuditEventIds": [
+    "a16ad6ed-ec83-4ecd-9b5e-5233487c51b5"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-20T18:26:41.427Z",
+      "user": "sprint-8d-verify",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": "COMMERCIAL RELEASE PROGRAMME V1\nRELEASE DEFECT\nONE ISSUE POLICY\n\nConfirmed browser-visible defect:\nManaged URL verification failed — homepage, HTTPS, or sitemap check did not pass\n\nTarget tenant:\nbanner-cross-pharmacy (Banner Cross Pharmacy + Travel Vaccinations & Weight Loss Clinic)\n\nTarget campaign:\npharmacy-first\n\nTarget URL:\nNot specified in issue record\n\nLocked systems (do not modify):\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nObjective:\nResolve the reported Customer onboarding issue for tenant banner-cross-pharmacy: Workflow failed: Publish\n\nTrace requirements:\n- Reproduce using: 1. Open Master Admin customer record\n2. Customer slug: banner-cross-pharmacy\n3. Click Continue Workflow at stage: Publish\n4. Action: publish\n- Expected behaviour: Continue Workflow completes Publish without error\n- Actual behaviour: Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass\n- Page type (from diagnostics): unknown\n- Lifecycle at report time: awaiting_review\n- Root cause to be traced.\n\nFix scope:\n- Operational/support fix only unless Product Owner approves engine changes\n- Do not modify locked rendering, generation, publishing, SEO, indexing, or ranking engines\n\nDo not modify:\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nValidation:\n- Confirm defect reproduced in browser\n- Apply fix within approved scope\n- Build and PM2 reload\n- WAIT FOR PRODUCT OWNER TEST\n- STOP.\n\nIssue ID: MAI-20260720-002\nSeverity: high\nCategory: Customer onboarding\nDiagnostic collected: 2026-07-20T18:26:41.914Z\n",
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

@@ -1,0 +1,308 @@
+{
+  "slug": "pharmaconnect",
+  "validatedAt": "2026-06-19T09:05:00.901Z",
+  "fix": "micro-layer-v1",
+  "before": {
+    "slug": "pharmaconnect",
+    "generatedAt": "2026-06-19T09:04:53.316Z",
+    "library": {
+      "blockCount": 2500,
+      "perType": {
+        "gpSurgery": 250,
+        "hospital": 250,
+        "healthCentre": 250,
+        "careHome": 250,
+        "school": 250,
+        "landmark": 250,
+        "communityFacility": 250,
+        "transportLink": 250,
+        "retailCentre": 250,
+        "residentialArea": 250
+      },
+      "perCategory": {
+        "healthcareAccess": 500,
+        "patientJourney": 500,
+        "convenience": 500,
+        "localCommunity": 500,
+        "ctaSupport": 500
+      }
+    },
+    "libraryExportPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-entity-narratives/entity-narrative-library-v1.json",
+    "entityCoverage": {
+      "pagesWithEntityNarratives": 200,
+      "avgEntitiesPerPage": 2,
+      "avgBlocksPerPage": 2,
+      "avgSectionVariantsPerPage": 0,
+      "avgWordCount": 33.3,
+      "uniqueBlockRatio": 71.7,
+      "coveragePct": 99.5,
+      "repeatedEntitySectionHeadings": 0
+    },
+    "similarity": {
+      "before": {
+        "avg": 52.6,
+        "max": 73.1,
+        "highRisk": 20
+      },
+      "after": {
+        "avg": 52.6,
+        "max": 73.1,
+        "highRisk": 20
+      }
+    },
+    "quality": {
+      "before": 45.2,
+      "after": 45.2,
+      "uniquenessBefore": 6.6,
+      "uniquenessAfter": 6.6,
+      "trustBefore": 9.8,
+      "trust": 9.8,
+      "conversionBefore": 9.1,
+      "conversion": 9.1
+    },
+    "entityUsageBefore": {
+      "pagesWithEntityNarratives": 200,
+      "avgEntitiesPerPage": 2,
+      "avgBlocksPerPage": 2,
+      "avgSectionVariantsPerPage": 0,
+      "avgWordCount": 33.3,
+      "uniqueBlockRatio": 71.7,
+      "coveragePct": 99.5,
+      "repeatedEntitySectionHeadings": 0
+    },
+    "publish": {
+      "pageCount": 240,
+      "failedCount": 0
+    }
+  },
+  "after": {
+    "quality": 45.2,
+    "uniqueness": 6.6,
+    "trust": 9.8,
+    "conversion": 9.1,
+    "similarityAvg": 52.6,
+    "worstPair": 73.1,
+    "highRisk": 20,
+    "entityCoverage": {
+      "pagesWithEntityNarratives": 200,
+      "avgEntitiesPerPage": 2,
+      "avgBlocksPerPage": 2,
+      "avgSectionVariantsPerPage": 0,
+      "avgWordCount": 33.3,
+      "uniqueBlockRatio": 71.7,
+      "coveragePct": 99.5,
+      "repeatedEntitySectionHeadings": 0
+    },
+    "utilisation": {
+      "blockUsage": [
+        {
+          "id": "gpSurgery_localCommunity_008",
+          "count": 5
+        },
+        {
+          "id": "careHome_localCommunity_030",
+          "count": 4
+        },
+        {
+          "id": "landmark_healthcareAccess_038",
+          "count": 4
+        },
+        {
+          "id": "communityFacility_localCommunity_033",
+          "count": 4
+        },
+        {
+          "id": "landmark_localCommunity_046",
+          "count": 4
+        },
+        {
+          "id": "careHome_localCommunity_044",
+          "count": 4
+        },
+        {
+          "id": "communityFacility_healthcareAccess_024",
+          "count": 3
+        },
+        {
+          "id": "residentialArea_healthcareAccess_030",
+          "count": 3
+        },
+        {
+          "id": "gpSurgery_localCommunity_033",
+          "count": 3
+        },
+        {
+          "id": "communityFacility_localCommunity_031",
+          "count": 3
+        }
+      ],
+      "entityUsage": [
+        {
+          "name": "Parkgate Shopping Park",
+          "count": 16
+        },
+        {
+          "name": "Swinton Library & Neighbourhood Hub",
+          "count": 16
+        },
+        {
+          "name": "Canklow Road Surgery",
+          "count": 15
+        },
+        {
+          "name": "Rotherham Skills Academy",
+          "count": 15
+        },
+        {
+          "name": "Weston Park Museum",
+          "count": 13
+        },
+        {
+          "name": "Wentworth Castle Gardens",
+          "count": 13
+        },
+        {
+          "name": "Rawmarsh Community Library",
+          "count": 9
+        },
+        {
+          "name": "Wentworth Woodhouse",
+          "count": 9
+        },
+        {
+          "name": "Wath-upon-Dearne Community Library",
+          "count": 8
+        },
+        {
+          "name": "Roche Abbey",
+          "count": 8
+        }
+      ],
+      "sectionVariantUsage": [],
+      "narrativeOverlapPct": 48.2
+    }
+  },
+  "checks": [
+    {
+      "label": "240 area pages generated",
+      "pass": true,
+      "value": "200"
+    },
+    {
+      "label": "240 pages published",
+      "pass": true,
+      "value": "240"
+    },
+    {
+      "label": "Publish PASS",
+      "pass": true,
+      "value": "0 failed"
+    },
+    {
+      "label": "Area Narrative Intelligence preserved",
+      "pass": true,
+      "value": "200/200"
+    },
+    {
+      "label": "Quality >= 48/50",
+      "pass": false,
+      "value": "45.2/50"
+    },
+    {
+      "label": "Uniqueness >= 9.5/10",
+      "pass": false,
+      "value": "6.6/10"
+    },
+    {
+      "label": "Similarity avg <= 52%",
+      "pass": false,
+      "value": "52.6%"
+    },
+    {
+      "label": "Worst pair < 65%",
+      "pass": false,
+      "value": "73.1%"
+    },
+    {
+      "label": "HIGH_RISK clusters = 0",
+      "pass": false,
+      "value": "20"
+    },
+    {
+      "label": "Trust >= 9/10",
+      "pass": true,
+      "value": "9.8/10"
+    },
+    {
+      "label": "Conversion >= 9/10",
+      "pass": true,
+      "value": "9.1/10"
+    },
+    {
+      "label": "Entity narrative coverage >= 80%",
+      "pass": true,
+      "value": "99.5%"
+    },
+    {
+      "label": "Entity layer lightweight (avg <= 120 words)",
+      "pass": true,
+      "value": "33.3 words"
+    },
+    {
+      "label": "Avg entities per page <= 2",
+      "pass": true,
+      "value": "2"
+    },
+    {
+      "label": "No repeated localEntityNarrative sections",
+      "pass": true,
+      "value": "0"
+    },
+    {
+      "label": "No narrative block reused in cluster",
+      "pass": true,
+      "value": "0 duplicates"
+    },
+    {
+      "label": "Dry-run preserves intro/CTA",
+      "pass": true,
+      "value": "intro+cta unchanged"
+    },
+    {
+      "label": "Dry-run injects into localContext flow",
+      "pass": true,
+      "value": "2 entities, 41 words"
+    }
+  ],
+  "passCount": 13,
+  "failCount": 5,
+  "samplePages": [
+    {
+      "pageSlug": "prescription-dispensing-bradgate",
+      "entitiesUsed": [
+        "Greenside Court Care Home in Greasbrough - Exemplar Health Care",
+        "University Centre Rotherham"
+      ],
+      "wordCount": 38,
+      "microExcerpt": "are Home in Greasbrough - Exemplar Health Care often plan pharmacy visits around care home routines. Parents linked to University Centre Rotherham appreciate clear guidance on Prescription Dispensing from Brook Pharmacy."
+    },
+    {
+      "pageSlug": "prescription-dispensing-brightside",
+      "entitiesUsed": [
+        "Thomas Rotherham College",
+        "Weston Park Museum"
+      ],
+      "wordCount": 27,
+      "microExcerpt": "ps. Term-time routines near Thomas Rotherham College make convenient pharmacy access important for Brightside families. Patients across Brightside orient healthcare journeys using familiar places like Weston Park Museum."
+    },
+    {
+      "pageSlug": "prescription-dispensing-brinsworth",
+      "entitiesUsed": [
+        "Wickersley Library",
+        "Rotherham Railway Station"
+      ],
+      "wordCount": 32,
+      "microExcerpt": "around Wickersley Library includes practical health needs that pharmacy services can support. Rotherham Railway Station connects Brinsworth to wider Rotherham travel patterns — pharmacy care should reflect that mobility."
+    }
+  ]
+}

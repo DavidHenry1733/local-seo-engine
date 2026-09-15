@@ -7,6 +7,7 @@ import { runCustomerSetupConfirm } from "./growthEngineCustomerSetupConfirmServi
 import { loadContentPackage, markContentPackageReviewed } from "./pharmacyContentPackageService.ts";
 import { writeWorkflowAcknowledgement } from "./masterAdminWorkflowAckService.ts";
 import { isBusinessProfileReviewApproved } from "./masterAdminBusinessProfileReviewService.ts";
+import { websiteImportStageComplete } from "./masterAdminWebsiteBranchSelectionService.ts";
 import {
   isCommercialIntelligenceApproved,
   isCompetitorAnalysisGenerated,
@@ -29,6 +30,22 @@ import { readLatestCommercialQualityApproval } from "./masterAdminCommercialQual
 import { readLatestCommercialIndexingApproval } from "./masterAdminCommercialIndexingReviewService.ts";
 import { readLatestCommercialPerformanceAcknowledgement } from "./masterAdminCommercialPerformanceDashboardService.ts";
 import { isAuthorisedEcosystemQualityReviewReady } from "./masterAdminAuthorisedEcosystemGenerationService.ts";
+import {
+  isCoreProductRecoveryMode,
+  readCoreProductRecoveryContract,
+  isServicePageEvidenceReviewApproved,
+  isServicePageReviewApproved,
+  isCprLocalClusterGenerationComplete,
+  isCprClusterReviewApproved,
+} from "./masterAdminCoreProductRecoveryService.ts";
+
+/** Single canonical Commercial Intelligence completion signal for timeline, preflight, and stage verification. */
+export function isCommercialIntelligenceWorkflowStageComplete(ctx: MasterAdminCustomerContext): boolean {
+  if (isCoreProductRecoveryMode(ctx.slug) && isBusinessProfileReviewApproved(ctx.slug)) {
+    return true;
+  }
+  return isCommercialIntelligenceApproved(ctx.slug);
+}
 
 export interface StageExecutionResult {
   ok: boolean;
@@ -153,7 +170,8 @@ export async function executeWorkflowStageAction(
         return { ok: true, evidence: "Business profile approved", warnings, errors, result };
       }
       case "orchestrate_competitor_analysis": {
-        const outcome = await runCompetitorAnalysisWorkflowAction(slug, operator);
+        const executingJobId = typeof body.masterAdminJobId === "string" ? body.masterAdminJobId : null;
+        const outcome = await runCompetitorAnalysisWorkflowAction(slug, operator, executingJobId);
         if (!outcome.ok) {
           return { ok: false, evidence: outcome.evidence, warnings, errors: outcome.errors.length ? outcome.errors : [outcome.evidence] };
         }
@@ -226,7 +244,7 @@ export function verifyStageCompletion(stageId: WorkflowStageId, ctx: MasterAdmin
     case "create_customer":
       return true;
     case "website_import":
-      return hasWebsite;
+      return hasWebsite && websiteImportStageComplete(ctx.slug);
     case "google_import": {
       const batch = readOnboardingBatch(ctx.slug);
       const googleMatch = data.customerSetupGoogleMatchStatus || "none";
@@ -247,10 +265,19 @@ export function verifyStageCompletion(stageId: WorkflowStageId, ctx: MasterAdmin
     case "generate_growth_intelligence":
       return isGrowthIntelligenceGenerated(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
     case "commercial_intelligence":
-      return isCommercialIntelligenceApproved(ctx.slug);
+      return isCommercialIntelligenceWorkflowStageComplete(ctx);
     case "generate_ecosystem":
+      if (isCoreProductRecoveryMode(ctx.slug)) {
+        const contract = readCoreProductRecoveryContract(ctx.slug);
+        if (!contract?.servicePageGenerated) return false;
+        if (!isServicePageReviewApproved(ctx.slug)) return true;
+        return isCprLocalClusterGenerationComplete(ctx.slug);
+      }
       return isAuthorisedEcosystemQualityReviewReady(ctx.slug);
     case "quality_review":
+      if (isCoreProductRecoveryMode(ctx.slug)) {
+        return isServicePageReviewApproved(ctx.slug);
+      }
       if (!isAuthorisedEcosystemQualityReviewReady(ctx.slug)) return false;
       return Boolean(readLatestCommercialQualityApproval(ctx.slug)?.approvedAt);
     case "publish":
@@ -276,9 +303,55 @@ export function verifyStageCompletion(stageId: WorkflowStageId, ctx: MasterAdmin
   }
 }
 
+function resolveCoreProductRecoveryWorkflowStage(ctx: MasterAdminCustomerContext): WorkflowStageId | null {
+  if (!isCoreProductRecoveryMode(ctx.slug)) return null;
+
+  const preGenerationStages = [
+    "create_customer",
+    "website_import",
+    "google_import",
+    "business_profile_intelligence",
+    "resolve_import_conflicts",
+    "approve_business_profile",
+  ] as const;
+
+  for (const stageId of preGenerationStages) {
+    if (stageId === "google_import") {
+      const state = resolveGoogleProfileOnboardingState(ctx.data);
+      if (!shouldRunGoogleImport(state) && verifyStageCompletion("website_import", ctx)) {
+        continue;
+      }
+    }
+    if (!verifyStageCompletion(stageId, ctx)) return stageId;
+  }
+
+  const contract = readCoreProductRecoveryContract(ctx.slug);
+  if (!contract?.servicePageGenerated) {
+    return "generate_ecosystem";
+  }
+
+  if (!isServicePageReviewApproved(ctx.slug)) {
+    return "quality_review";
+  }
+
+  if (!isCprLocalClusterGenerationComplete(ctx.slug)) {
+    return "generate_ecosystem";
+  }
+
+  if (!isCprClusterReviewApproved(ctx.slug)) {
+    return "quality_review";
+  }
+
+  return null;
+}
+
 export function resolveWorkflowStage(ctx: MasterAdminCustomerContext): WorkflowStageId {
   if (ctx.archived) return "archived";
   if (ctx.suspended) return "suspended";
+
+  const cprStage = resolveCoreProductRecoveryWorkflowStage(ctx);
+  if (cprStage) return cprStage;
+
   const order = [
     "create_customer",
     "website_import",

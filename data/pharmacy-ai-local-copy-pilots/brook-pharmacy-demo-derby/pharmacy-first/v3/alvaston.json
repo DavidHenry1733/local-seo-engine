@@ -1,0 +1,232 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-08T15:37:59.818Z",
+  "tokenUsage": {
+    "promptTokens": 901,
+    "completionTokens": 273,
+    "totalTokens": 1174
+  },
+  "estimatedCostUsd": 0.003986,
+  "inputEvidencePackHash": "691baf418dfc8f5f7566819417d79b7db13346c76186b1455ecc4e7aa958e628",
+  "editorialEvidencePackHash": "b203fb51116e3534ff30e7c8bf9d24242674b687c8de1be5427c014152e948ee",
+  "areaSlug": "alvaston",
+  "areaName": "Alvaston",
+  "editorialFactIdsUsed": [
+    "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+    "alvaston:community:alvaston-has-a-public-library",
+    "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+    "alvaston:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Alvaston",
+    "heroHeading": "Pharmacy First in Alvaston",
+    "heroIntroduction": "Local residents in Alvaston can access the NHS Pharmacy First service through Brook Pharmacy for help with certain common health conditions. Eligible patients receive a consultation with a pharmacist who assesses symptoms and medical history to provide appropriate advice, treatment or referral.",
+    "localIntroduction": "Alvaston is an established residential area defined by its historical landmarks and public green spaces. The character of the local area is reflected in prominent landmarks such as Elvaston Castle, alongside natural open spaces including Alvaston Park and the Alvaston Nature Trail.\n\nCivic and community life in the neighbourhood is supported by several local facilities. Residents can use the public library at Alvaston Library and Learning Centre, while local groups gather at Boulton Lane Park Community Centre and through the Field Lane Community Association. Essential health services in the area are anchored by NHS general practice services at Alvaston Medical Centre and Coleman Health Centre, with further healthcare available at Lister House at Coleman Street.\n\nTo help address local healthcare needs, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. The Pharmacy First service covers certain common health conditions. During a clinical consultation, the pharmacist carefully assesses the individual's symptoms, relevant medicines and medical history. The outcome depends entirely on this individual clinical assessment and may include self-care advice, suitable treatment or referral to another healthcare professional. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Alvaston",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "The character of the local area is reflected in prominent landmarks such as Elvaston Castle, alongside natural open spaces including Alvaston Park and the Alvaston Nature Trail.",
+        "editorialFactId": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Residents can use the public library at Alvaston Library and Learning Centre, while local groups gather at Boulton Lane Park Community Centre and through the Field Lane Community Association.",
+        "editorialFactId": "alvaston:community:alvaston-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Essential health services in the area are anchored by NHS general practice services at Alvaston Medical Centre and Coleman Health Centre, with further healthcare available at Lister House at Coleman Street.",
+        "editorialFactId": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+        "editorialFactId": "alvaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+      "alvaston:community:alvaston-has-a-public-library",
+      "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+      "alvaston:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Alvaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Eligible patients receive a consultation with a pharmacist who assesses symptoms and medical history to provide appropriate advice, treatment or referral.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (patients, receive, who, assesses, history, provide) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Alvaston is an established residential area defined by its historical landmarks and public green spaces.",
+      "supportingCanonicalFieldOrEntity": "alvaston:community:alvaston-has-a-public-library",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (established, residential, defined, historical, landmarks, green, spaces) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The character of the local area is reflected in prominent landmarks such as Elvaston Castle, alongside natural open spaces including Alvaston Park and the Alvaston Nature Trail.",
+      "supportingCanonicalFieldOrEntity": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in, alvaston:heritage:elvaston-castle-is-listed-as-a-landmark-in-alvas",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (character, local, reflected, prominent, landmarks, natural, open, spaces) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Civic and community life in the neighbourhood is supported by several local facilities.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Residents can use the public library at Alvaston Library and Learning Centre, while local groups gather at Boulton Lane Park Community Centre and through the Field Lane Community Association.",
+      "supportingCanonicalFieldOrEntity": "alvaston:community:alvaston-has-a-public-library, alvaston:community:alvaston-library-and-learning-centre-is-listed-a, alvaston:community:boulton-lane-park-community-centre-is-listed-as-, alvaston:community:field-lane-alvaston-community-association-is-lis, alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+      "providerSource": "derby.gov.uk, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (residents, use, while, local, groups, gather) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Essential health services in the area are anchored by NHS general practice services at Alvaston Medical Centre and Coleman Health Centre, with further healthcare available at Lister House at Coleman Street.",
+      "supportingCanonicalFieldOrEntity": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr, alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr, alvaston:healthcare:lister-house-at-coleman-street-is-listed-as-a-ho, alvaston:community:alvaston-library-and-learning-centre-is-listed-a",
+      "providerSource": "NHS, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (essential, anchored, healthcare) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "During a clinical consultation, the pharmacist carefully assesses the individual's symptoms, relevant medicines and medical history.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The outcome depends entirely on this individual clinical assessment and may include self-care advice, suitable treatment or referral to another healthcare professional.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (outcome, entirely, individual, clinical, assessment, another, healthcare, professional) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Pharmacy First in Alvaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "supportingCanonicalFieldOrEntity": "alvaston:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Alvaston",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Civic and community life in the neighbourhood is supported by several local facilities.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "During a clinical consultation, the pharmacist carefully assesses the individual's symptoms, relevant medicines and medical history.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Pharmacy First in Alvaston",
+      "purpose": "section orientation",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "signals the local-context passage"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "alvaston:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 7,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=heroIntroduction | sentence=Eligible patients receive a consultation with a pharmacist who assesses symptoms and medical history to provide appropriate advice, treatment or referral. | rule=uncertain-paraphrase | defect=Eligible patients receive a consultation with a pharmacist who assesses symptoms and medical history to provide appropriate advice, treatment or referral. — uncertain paraphrase: unmatched wording (patients, receive, who, assesses, history, provide) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Alvaston is an established residential area defined by its historical landmarks and public green spaces. | rule=uncertain-paraphrase | defect=Alvaston is an established residential area defined by its historical landmarks and public green spaces. — uncertain paraphrase: unmatched wording (established, residential, defined, historical, landmarks, green, spaces) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The character of the local area is reflected in prominent landmarks such as Elvaston Castle, alongside natural open spaces including Alvaston Park and the Alvaston Nature Trail. | rule=uncertain-paraphrase | defect=The character of the local area is reflected in prominent landmarks such as Elvaston Castle, alongside natural open spaces including Alvaston Park and the Alvaston Nature Trail. — uncertain paraphrase: unmatched wording (character, local, reflected, prominent, landmarks, natural, open, spaces) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Residents can use the public library at Alvaston Library and Learning Centre, while local groups gather at Boulton Lane Park Community Centre and through the Field Lane Community Association. | rule=uncertain-paraphrase | defect=Residents can use the public library at Alvaston Library and Learning Centre, while local groups gather at Boulton Lane Park Community Centre and through the Field Lane Community Association. — uncertain paraphrase: unmatched wording (residents, use, while, local, groups, gather) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Essential health services in the area are anchored by NHS general practice services at Alvaston Medical Centre and Coleman Health Centre, with further healthcare available at Lister House at Coleman Street. | rule=uncertain-paraphrase | defect=Essential health services in the area are anchored by NHS general practice services at Alvaston Medical Centre and Coleman Health Centre, with further healthcare available at Lister House at Coleman Street. — uncertain paraphrase: unmatched wording (essential, anchored, healthcare) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The outcome depends entirely on this individual clinical assessment and may include self-care advice, suitable treatment or referral to another healthcare professional. | rule=uncertain-paraphrase | defect=The outcome depends entirely on this individual clinical assessment and may include self-care advice, suitable treatment or referral to another healthcare professional. — uncertain paraphrase: unmatched wording (outcome, entirely, individual, clinical, assessment, another, healthcare, professional) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "HERO INTRODUCTION:\nLocal residents in Alvaston can access the NHS Pharmacy First service through Brook Pharmacy for help with certain common health conditions. Eligible patients receive a consultation with a pharmacist who assesses symptoms and medical history to provide appropriate advice, treatment or referral.\n\nLOCAL INTRODUCTION:\nAlvaston is an established residential area defined by its historical landmarks and public green spaces. The character of the local area is reflected in prominent landmarks such as Elvaston Castle, alongside natural open spaces including Alvaston Park and the Alvaston Nature Trail.\n\nCivic and community life in the neighbourhood is supported by several local facilities. Residents can use the public library at Alvaston Library and Learning Centre, while local groups gather at Boulton Lane Park Community Centre and through the Field Lane Community Association. Essential health services in the area are anchored by NHS general practice services at Alvaston Medical Centre and Coleman Health Centre, with further healthcare available at Lister House at Coleman Street.\n\nTo help address local healthcare needs, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. The Pharmacy First service covers certain common health conditions. During a clinical consultation, the pharmacist carefully assesses the individual's symptoms, relevant medicines and medical history. The outcome depends entirely on this individual clinical assessment and may include self-care advice, suitable treatment or referral to another healthcare professional.",
+  "rawOpenAiResponses": [
+    "HERO INTRODUCTION:\nLocal residents in Alvaston can access the NHS Pharmacy First service through Brook Pharmacy for help with certain common health conditions. Eligible patients receive a consultation with a pharmacist who assesses symptoms and medical history to provide appropriate advice, treatment or referral.\n\nLOCAL INTRODUCTION:\nAlvaston is an established residential area defined by its historical landmarks and public green spaces. The character of the local area is reflected in prominent landmarks such as Elvaston Castle, alongside natural open spaces including Alvaston Park and the Alvaston Nature Trail.\n\nCivic and community life in the neighbourhood is supported by several local facilities. Residents can use the public library at Alvaston Library and Learning Centre, while local groups gather at Boulton Lane Park Community Centre and through the Field Lane Community Association. Essential health services in the area are anchored by NHS general practice services at Alvaston Medical Centre and Coleman Health Centre, with further healthcare available at Lister House at Coleman Street.\n\nTo help address local healthcare needs, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. The Pharmacy First service covers certain common health conditions. During a clinical consultation, the pharmacist carefully assesses the individual's symptoms, relevant medicines and medical history. The outcome depends entirely on this individual clinical assessment and may include self-care advice, suitable treatment or referral to another healthcare professional."
+  ]
+}

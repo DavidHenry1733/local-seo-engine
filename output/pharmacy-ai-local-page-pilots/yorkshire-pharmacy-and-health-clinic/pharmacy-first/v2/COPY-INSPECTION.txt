@@ -1,0 +1,312 @@
+PROMPT 94 AI EDITORIAL PILOT INSPECTION
+
+===== DARFIELD =====
+promptContractVersion: v2
+model: gpt-4.1-2025-04-14
+evidenceEntityIdsUsed: []
+evidenceSelection:
+  - Darfield Library [useful-community-orientation] useInCopy=false Community facility is not uniquely helpful for patient orientation given the proximity of the pharmacy and lack of direct adjacency.
+  - Upperwood Academy [irrelevant-to-patient-decision] useInCopy=false School is not relevant for patient decision or orientation.
+
+heroHeading: Pharmacy First in Darfield
+heroIntroduction: This page is for people in Darfield looking for NHS Pharmacy First consultations. You can decide whether to contact the local pharmacy for assessment of eligible common conditions.
+localIntroduction: Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, Barnsley S73 9LR.
+localContextHeading: Understanding your local options
+localContextParagraphs[0]: The pharmacy is situated within Darfield itself, making it part of the immediate local healthcare landscape.
+relationshipToPharmacy: The pharmacy is in Darfield.
+localAccessIntroduction: If you think Pharmacy First may be suitable for your symptoms, you can call 01226 210477 before visiting to check how consultations are being arranged.
+Q: How close is the pharmacy to me in Darfield?
+A: The pharmacy is located within Darfield, around 0.5 km from the centre of the area.
+Q: When should I use another healthcare route?
+A: You should seek urgent medical care for severe or emergency symptoms, or if the pharmacist advises referral after your consultation.
+Q: What should I bring to my Pharmacy First consultation?
+A: Bring details of your symptoms and any medicines you are currently taking to help the pharmacist assess your needs.
+localCtaBridge: Contact the pharmacy to discuss your symptoms or arrange an appointment.
+
+sentence purposes:
+  [heroHeading] Pharmacy First in Darfield
+    purpose: identify the local edition
+    source: locality.areaName
+    why: tells the reader which area and service this page is for
+  [heroIntroduction] This page is for people in Darfield looking for NHS Pharmacy First consultations.
+    purpose: why this page is relevant
+    source: locality.areaName
+    why: explains why someone in this area should read this Pharmacy First page
+  [heroIntroduction] You can decide whether to contact the local pharmacy for assessment of eligible common conditions.
+    purpose: why this page is relevant
+    source: offer.lockedClinicalFacts
+    why: explains why someone in this area should read this Pharmacy First page
+  [localIntroduction] Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, Barnsley S73 9LR.
+    purpose: where the pharmacy is in relation to the area
+    source: business.address
+    why: gives the verified location relationship
+  [localContextHeading] Understanding your local options
+    purpose: section orientation
+    source: non-claim-structure
+    why: signals the local-context passage
+  [localContextParagraphs[0]] The pharmacy is situated within Darfield itself, making it part of the immediate local healthcare landscape.
+    purpose: verified local facts that help the reader
+    source: locality.areaName
+    why: orients the reader using a verified local fact
+  [relationshipToPharmacy] The pharmacy is in Darfield.
+    purpose: relationship between the area and the pharmacy
+    source: locality.areaName
+    why: states whether the pharmacy is in the area or how the area relates to the premises
+  [localAccessIntroduction] If you think Pharmacy First may be suitable for your symptoms, you can call 01226 210477 before visiting to check how consultations are being arranged.
+    purpose: what the reader should do if Pharmacy First may be suitable
+    source: business.telephone
+    why: gives the next practical step
+  [localFaqs[0].question] How close is the pharmacy to me in Darfield?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[0].answer] The pharmacy is located within Darfield, around 0.5 km from the centre of the area.
+    purpose: distance or location answer
+    source: locality.distanceLabel
+    why: repeats only the verified distance or in-area fact
+  [localFaqs[1].question] When should I use another healthcare route?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[1].answer] You should seek urgent medical care for severe or emergency symptoms, or if the pharmacist advises referral after your consultation.
+    purpose: when to use another healthcare route
+    source: offer.lockedClinicalFacts
+    why: tells the reader what happens if Pharmacy First is not the right route
+  [localFaqs[2].question] What should I bring to my Pharmacy First consultation?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[2].answer] Bring details of your symptoms and any medicines you are currently taking to help the pharmacist assess your needs.
+    purpose: pathway or preparation answer
+    source: offer.lockedClinicalFacts
+    why: helps the reader prepare or understand the consultation
+  [localCtaBridge] Contact the pharmacy to discuss your symptoms or arrange an appointment.
+    purpose: non-claim CTA
+    source: offer.lockedClinicalFacts
+    why: bridges to the approved call-to-action without extra claims
+
+repetition: {"addressMentions":1,"telephoneMentions":1,"callAheadMentions":1,"areaNameMentions":6,"failures":[]}
+
+===== WOMBWELL =====
+promptContractVersion: v2
+model: gpt-4.1-2025-04-14
+evidenceEntityIdsUsed: ["healthcare:wombwell-medical-centre","healthcare:chapelfield-medical-centre","transport:wood-walk-dovecliffe-road","transport:bleachcroft-way-wombwell-lane"]
+evidenceSelection:
+  - Wombwell Medical Centre [useful-healthcare-context] useInCopy=true Helps describe the local healthcare landscape for Wombwell residents.
+  - Chapelfield Medical Centre [useful-healthcare-context] useInCopy=true Further illustrates the healthcare options present in Wombwell.
+  - Wood Walk/Dovecliffe Road [useful-access-orientation] useInCopy=true Provides a recognised local transport point for orientation.
+  - Stairfoot Retail Park Barnsley [irrelevant-to-patient-decision] useInCopy=false Retail park does not help patient decision or orientation to the pharmacy.
+  - Wombwell Park Street Primary School [irrelevant-to-patient-decision] useInCopy=false School does not uniquely help the reader find the pharmacy.
+  - Netherwood Academy [irrelevant-to-patient-decision] useInCopy=false School does not uniquely help the reader find the pharmacy.
+  - High View Primary Learning Centre [irrelevant-to-patient-decision] useInCopy=false School does not uniquely help the reader find the pharmacy.
+  - Wombwell [irrelevant-to-patient-decision] useInCopy=false Transport stop name matches area and does not help orientation to the pharmacy.
+  - Bleachcroft Way/Wombwell Lane [useful-access-orientation] useInCopy=true Recognisable transport point that can help orient the reader to the pharmacy's location.
+
+heroHeading: Pharmacy First for Wombwell
+heroIntroduction: This page is for people living in Wombwell who are considering Pharmacy First. You can decide whether to use the service at Yorkshire Pharmacy & Health Clinic, which is located outside Wombwell.
+localIntroduction: Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.
+localContextHeading: Understanding your local healthcare options
+localContextParagraphs[0]: Wombwell is served by healthcare providers such as Wombwell Medical Centre and Chapelfield Medical Centre, giving residents access to GP services in the area.
+localContextParagraphs[1]: For those travelling from Wombwell, familiar points like Wood Walk/Dovecliffe Road and Bleachcroft Way/Wombwell Lane can help orient you towards Darfield, where the pharmacy is based.
+relationshipToPharmacy: People in Wombwell reach Yorkshire Pharmacy & Health Clinic by travelling to Darfield.
+localAccessIntroduction: If you think Pharmacy First may be suitable for your symptoms, you can call 01226 210477 before attending to check current arrangements for consultations.
+Q: How far is Yorkshire Pharmacy & Health Clinic from Wombwell?
+A: The pharmacy is 1.7 km away, located in Darfield.
+Q: When should I use another healthcare route instead of Pharmacy First?
+A: If you experience urgent symptoms such as breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or feel critically unwell, seek immediate medical attention.
+Q: What should I bring to my Pharmacy First consultation?
+A: Bring a list of your current medicines and be prepared to discuss your symptoms and any relevant medical history.
+Q: What local healthcare providers are in Wombwell?
+A: Wombwell Medical Centre and Chapelfield Medical Centre are among the healthcare providers in the area.
+localCtaBridge: Contact the pharmacy to discuss your symptoms or to arrange an appointment.
+
+sentence purposes:
+  [heroHeading] Pharmacy First for Wombwell
+    purpose: identify the local edition
+    source: locality.areaName
+    why: tells the reader which area and service this page is for
+  [heroIntroduction] This page is for people living in Wombwell who are considering Pharmacy First.
+    purpose: why this page is relevant
+    source: locality.areaName
+    why: explains why someone in this area should read this Pharmacy First page
+  [heroIntroduction] You can decide whether to use the service at Yorkshire Pharmacy & Health Clinic, which is located outside Wombwell.
+    purpose: why this page is relevant
+    source: business.name
+    why: explains why someone in this area should read this Pharmacy First page
+  [localIntroduction] Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.
+    purpose: where the pharmacy is in relation to the area
+    source: business.address
+    why: gives the verified location relationship
+  [localContextHeading] Understanding your local healthcare options
+    purpose: section orientation
+    source: non-claim-structure
+    why: signals the local-context passage
+  [localContextParagraphs[0]] Wombwell is served by healthcare providers such as Wombwell Medical Centre and Chapelfield Medical Centre, giving residents access to GP services in the area.
+    purpose: verified local facts that help the reader
+    source: healthcare:wombwell-medical-centre, healthcare:chapelfield-medical-centre
+    why: describes the local healthcare landscape without implying affiliation
+  [localContextParagraphs[1]] For those travelling from Wombwell, familiar points like Wood Walk/Dovecliffe Road and Bleachcroft Way/Wombwell Lane can help orient you towards Darfield, where the pharmacy is based.
+    purpose: verified local facts that help the reader
+    source: transport:wood-walk-dovecliffe-road, transport:bleachcroft-way-wombwell-lane
+    why: orients the reader using a verified local fact
+  [relationshipToPharmacy] People in Wombwell reach Yorkshire Pharmacy & Health Clinic by travelling to Darfield.
+    purpose: relationship between the area and the pharmacy
+    source: business.name
+    why: states whether the pharmacy is in the area or how the area relates to the premises
+  [localAccessIntroduction] If you think Pharmacy First may be suitable for your symptoms, you can call 01226 210477 before attending to check current arrangements for consultations.
+    purpose: what the reader should do if Pharmacy First may be suitable
+    source: business.telephone
+    why: gives the next practical step
+  [localFaqs[0].question] How far is Yorkshire Pharmacy & Health Clinic from Wombwell?
+    purpose: local FAQ question
+    source: business.name
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[0].answer] The pharmacy is 1.7 km away, located in Darfield.
+    purpose: distance or location answer
+    source: locality.distanceLabel
+    why: repeats only the verified distance or in-area fact
+  [localFaqs[1].question] When should I use another healthcare route instead of Pharmacy First?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[1].answer] If you experience urgent symptoms such as breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or feel critically unwell, seek immediate medical attention.
+    purpose: when to use another healthcare route
+    source: offer.lockedClinicalFacts
+    why: tells the reader what happens if Pharmacy First is not the right route
+  [localFaqs[2].question] What should I bring to my Pharmacy First consultation?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[2].answer] Bring a list of your current medicines and be prepared to discuss your symptoms and any relevant medical history.
+    purpose: pathway or preparation answer
+    source: offer.lockedClinicalFacts
+    why: helps the reader prepare or understand the consultation
+  [localFaqs[3].question] What local healthcare providers are in Wombwell?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[3].answer] Wombwell Medical Centre and Chapelfield Medical Centre are among the healthcare providers in the area.
+    purpose: pathway or preparation answer
+    source: healthcare:wombwell-medical-centre, healthcare:chapelfield-medical-centre
+    why: helps the reader prepare or understand the consultation
+  [localCtaBridge] Contact the pharmacy to discuss your symptoms or to arrange an appointment.
+    purpose: non-claim CTA
+    source: offer.lockedClinicalFacts
+    why: bridges to the approved call-to-action without extra claims
+
+repetition: {"addressMentions":1,"telephoneMentions":1,"callAheadMentions":1,"areaNameMentions":9,"failures":[]}
+
+===== WORSBROUGH =====
+promptContractVersion: v2
+model: gpt-4.1-2025-04-14
+evidenceEntityIdsUsed: ["healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice","healthcare:the-kakoty-practice-worsbrough"]
+evidenceSelection:
+  - Dr C Liley - Worsbrough Health Centre the Dove Valley Practice [useful-healthcare-context] useInCopy=true Helps describe the healthcare landscape in Worsbrough.
+  - The Kakoty Practice Worsbrough [useful-healthcare-context] useInCopy=true Adds context about local GP services in Worsbrough.
+  - Worsbrough Library [useful-community-orientation] useInCopy=false Does not help orient the reader to the pharmacy location or decision.
+  - Worsbrough Industrial Heritage Monument [useful-community-orientation] useInCopy=false Not relevant for pharmacy orientation or decision.
+  - Worsbrough Mill Country Park [useful-community-orientation] useInCopy=false Does not assist with pharmacy location or access.
+  - Worsbrough Dale Park [useful-community-orientation] useInCopy=false Not uniquely helpful for pharmacy orientation.
+  - The Mill Academy [irrelevant-to-patient-decision] useInCopy=false School location does not help with pharmacy access or decision.
+
+heroHeading: Pharmacy First for Worsbrough
+heroIntroduction: This page explains how people in Worsbrough can use Pharmacy First at Yorkshire Pharmacy & Health Clinic. You can decide whether to contact the pharmacy for eligible common conditions.
+localIntroduction: Yorkshire Pharmacy & Health Clinic is located 5.3 km from Worsbrough at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.
+localContextHeading: Healthcare and pharmacy options in Worsbrough
+localContextParagraphs[0]: Worsbrough is served by local GP practices such as Dr C Liley - Worsbrough Health Centre the Dove Valley Practice and The Kakoty Practice Worsbrough. These practices help shape the healthcare landscape for residents.
+localContextParagraphs[1]: For Pharmacy First, you may choose to use Yorkshire Pharmacy & Health Clinic in Darfield, which is outside the immediate Worsbrough area.
+relationshipToPharmacy: People in Worsbrough can reach the pharmacy by travelling to Darfield.
+localAccessIntroduction: If you think Pharmacy First may be suitable, you can call Yorkshire Pharmacy & Health Clinic on 01226 210477 before visiting to check how consultations are being arranged.
+Q: How far is Yorkshire Pharmacy & Health Clinic from Worsbrough?
+A: The pharmacy is 5.3 km from Worsbrough, located in Darfield.
+Q: When should I use another healthcare route?
+A: If you have urgent or severe symptoms such as breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or feel critically unwell, seek urgent medical care.
+Q: What happens during a Pharmacy First consultation?
+A: The pharmacist will review your symptoms, medicines, and any red-flag concerns. Outcomes may include treatment, self-care advice, or referral if needed.
+Q: What should I bring to my consultation?
+A: Bring a list of your current medicines and be ready to describe your symptoms.
+localCtaBridge: Contact the pharmacy to discuss your needs or arrange an appointment.
+
+sentence purposes:
+  [heroHeading] Pharmacy First for Worsbrough
+    purpose: identify the local edition
+    source: locality.areaName
+    why: tells the reader which area and service this page is for
+  [heroIntroduction] This page explains how people in Worsbrough can use Pharmacy First at Yorkshire Pharmacy & Health Clinic.
+    purpose: why this page is relevant
+    source: business.name
+    why: explains why someone in this area should read this Pharmacy First page
+  [heroIntroduction] You can decide whether to contact the pharmacy for eligible common conditions.
+    purpose: why this page is relevant
+    source: offer.lockedClinicalFacts
+    why: explains why someone in this area should read this Pharmacy First page
+  [localIntroduction] Yorkshire Pharmacy & Health Clinic is located 5.3 km from Worsbrough at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.
+    purpose: where the pharmacy is in relation to the area
+    source: business.address
+    why: gives the verified location relationship
+  [localContextHeading] Healthcare and pharmacy options in Worsbrough
+    purpose: section orientation
+    source: locality.areaName
+    why: signals the local-context passage
+  [localContextParagraphs[0]] Worsbrough is served by local GP practices such as Dr C Liley - Worsbrough Health Centre the Dove Valley Practice and The Kakoty Practice Worsbrough.
+    purpose: verified local facts that help the reader
+    source: healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice, healthcare:the-kakoty-practice-worsbrough
+    why: describes the local healthcare landscape without implying affiliation
+  [localContextParagraphs[0]] These practices help shape the healthcare landscape for residents.
+    purpose: verified local facts that help the reader
+    source: healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice, healthcare:the-kakoty-practice-worsbrough
+    why: describes the local healthcare landscape without implying affiliation
+  [localContextParagraphs[1]] For Pharmacy First, you may choose to use Yorkshire Pharmacy & Health Clinic in Darfield, which is outside the immediate Worsbrough area.
+    purpose: verified local facts that help the reader
+    source: business.name
+    why: orients the reader using a verified local fact
+  [relationshipToPharmacy] People in Worsbrough can reach the pharmacy by travelling to Darfield.
+    purpose: relationship between the area and the pharmacy
+    source: locality.areaName
+    why: states whether the pharmacy is in the area or how the area relates to the premises
+  [localAccessIntroduction] If you think Pharmacy First may be suitable, you can call Yorkshire Pharmacy & Health Clinic on 01226 210477 before visiting to check how consultations are being arranged.
+    purpose: what the reader should do if Pharmacy First may be suitable
+    source: business.telephone
+    why: gives the next practical step
+  [localFaqs[0].question] How far is Yorkshire Pharmacy & Health Clinic from Worsbrough?
+    purpose: local FAQ question
+    source: business.name
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[0].answer] The pharmacy is 5.3 km from Worsbrough, located in Darfield.
+    purpose: distance or location answer
+    source: locality.distanceLabel
+    why: repeats only the verified distance or in-area fact
+  [localFaqs[1].question] When should I use another healthcare route?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[1].answer] If you have urgent or severe symptoms such as breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or feel critically unwell, seek urgent medical care.
+    purpose: when to use another healthcare route
+    source: offer.lockedClinicalFacts
+    why: tells the reader what happens if Pharmacy First is not the right route
+  [localFaqs[2].question] What happens during a Pharmacy First consultation?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[2].answer] The pharmacist will review your symptoms, medicines, and any red-flag concerns.
+    purpose: pathway or preparation answer
+    source: offer.lockedClinicalFacts
+    why: helps the reader prepare or understand the consultation
+  [localFaqs[2].answer] Outcomes may include treatment, self-care advice, or referral if needed.
+    purpose: when to use another healthcare route
+    source: offer.lockedClinicalFacts
+    why: tells the reader what happens if Pharmacy First is not the right route
+  [localFaqs[3].question] What should I bring to my consultation?
+    purpose: local FAQ question
+    source: non-claim-structure
+    why: lets the reader find a specific local or pathway answer
+  [localFaqs[3].answer] Bring a list of your current medicines and be ready to describe your symptoms.
+    purpose: pathway or preparation answer
+    source: offer.lockedClinicalFacts
+    why: helps the reader prepare or understand the consultation
+  [localCtaBridge] Contact the pharmacy to discuss your needs or arrange an appointment.
+    purpose: non-claim CTA
+    source: offer.lockedClinicalFacts
+    why: bridges to the approved call-to-action without extra claims
+
+repetition: {"addressMentions":1,"telephoneMentions":1,"callAheadMentions":1,"areaNameMentions":7,"failures":[]}

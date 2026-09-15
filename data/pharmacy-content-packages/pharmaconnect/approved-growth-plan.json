@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "slug": "pharmaconnect",
+  "serviceId": "approved-growth-plan",
+  "serviceName": "Approved Growth Plan",
+  "generatedAt": "2026-08-18T17:31:52.958Z",
+  "generationStamp": {
+    "tenantSlug": "pharmaconnect",
+    "campaignId": "approved-growth-plan",
+    "generatedAt": "2026-08-18T17:31:52.958Z",
+    "sourceContext": "customer-imported-profile"
+  },
+  "generatorVersion": "content-engine-lockdown-v1",
+  "profileUpdatedAt": null,
+  "selectedAreas": [],
+  "assets": [
+    {
+      "type": "service-page",
+      "key": "gp01-web-design-pharmacy-web-design",
+      "title": "Pharmacy Growth Audits for UK community pharmacies",
+      "status": "included",
+      "previewUrl": "/api/growth-engine/pharmaconnect/review-preview?campaign=approved-growth-plan&asset=gp01-web-design-pharmacy-web-design",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmaconnect/approved-growth-plan/pages/pharmacy-growth-audit-new-service-page/index.html",
+      "required": true,
+      "included": true,
+      "count": 1,
+      "notes": "Create service page copy that helps pharmacy owners evaluate Pharmacy Growth Audits.",
+      "recommendationId": "gp01-web-design-pharmacy-web-design",
+      "gapId": "gp01-web-design-pharmacy-web-design",
+      "commercialService": "Pharmacy Growth Audits",
+      "whyRecommended": "Use this action as a structured Growth Plan candidate; do not generate content until approved.",
+      "evidence": [
+        "2 validated keyword(s) in WEB_DESIGN.",
+        "Combined search demand 240.",
+        "Cluster representative is the strongest-evidence keyword in the family; higher-volume supporting terms keep their own evidence and are not copied onto the primary.",
+        "At least one keyword has proven untapped gap evidence.",
+        "6 competitor signal(s) on the primary keyword.",
+        "Gap evidence status PROVEN_UNTAPPED remains HIGH confidence and is not upgraded.",
+        "Current Search Intelligence does not prove a commercial competitor keyword gap; GP-01 competitor signals are historic market evidence only."
+      ],
+      "evidenceSource": "PROJECT_CONFIG · PERSISTED_PROVEN",
+      "priority": "HIGH",
+      "confidence": "HIGH",
+      "provenance": "PROJECT_CONFIG · PERSISTED_PROVEN",
+      "targetPageType": "NEW_SERVICE_PAGE",
+      "generationStatus": "generated",
+      "published": false,
+      "indexed": false,
+      "customerIntent": "UK community pharmacy owners and managers evaluating Pharmacy Growth Audits for their pharmacy.",
+      "targetAudience": "UK community pharmacy owners and managers",
+      "contentAction": "NEW_SERVICE_PAGE",
+      "existingPageUrl": "https://pharmaconnect.uk/contact-us/",
+      "reasonForCreation": "Use this action as a structured Growth Plan candidate; do not generate content until approved.",
+      "internalNotes": [
+        "Approved recommendation gp01-web-design-pharmacy-web-design for gap gp01-web-design-pharmacy-web-design.",
+        "Growth Plan action: Use this action as a structured Growth Plan candidate; do not generate content until approved.",
+        "Evidence class SUPPORTED_OPPORTUNITY; type SERP_OPPORTUNITY; source Persisted GP-01.",
+        "Configured URL https://pharmaconnect.uk/contact-us/ is not a dedicated service page."
+      ]
+    }
+  ],
+  "previewUrls": [
+    "/api/growth-engine/pharmaconnect/review-preview?campaign=approved-growth-plan&asset=gp01-web-design-pharmacy-web-design"
+  ],
+  "outputPaths": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmaconnect/approved-growth-plan/pages/pharmacy-growth-audit-new-service-page/index.html"
+  ],
+  "status": "generated",
+  "reviewedAt": null,
+  "approvedAt": null,
+  "approvedBy": null,
+  "approvalStatus": "pending",
+  "generationError": null,
+  "adminDiagnostics": [
+    "generator:pharmacyContentPackageService",
+    "source:approved-growth-plan",
+    "scope:max-3-approved-items",
+    "publish:blocked",
+    "index:blocked",
+    "brief:nationalCommercialContentBrief",
+    "polish:pharmacyCommercialNarrativePolishV1",
+    "eligible:1",
+    "skipped:2",
+    "quality:bpi-polish-active"
+  ],
+  "generationReportPath": null,
+  "packageValidation": {
+    "ok": true,
+    "detail": "1 commercially valid drafts; 2 not generated"
+  },
+  "serviceValidation": {
+    "ok": true,
+    "detail": "Approved Growth Plan drafts"
+  },
+  "tenantValidation": {
+    "ok": true,
+    "detail": "Tenant-specific drafts"
+  },
+  "published": false,
+  "indexed": false,
+  "source": "approved-growth-plan",
+  "reviewState": "ready_for_review",
+  "skippedItems": [
+    {
+      "recommendationId": "si-sparse-organic-footprint",
+      "gapId": "si-sparse-organic-footprint",
+      "reason": "diagnostic_signal_only",
+      "detail": "Diagnostic Growth Plan signal does not define a customer-facing content topic."
+    },
+    {
+      "recommendationId": "si-weak-ranking-what-is-the-pharmacy-communication-form-used-for",
+      "gapId": "si-weak-ranking-what-is-the-pharmacy-communication-form-used-for",
+      "reason": "diagnostic_signal_only",
+      "detail": "Diagnostic Growth Plan signal does not define a customer-facing content topic."
+    }
+  ]
+}

@@ -36,6 +36,8 @@ import type { AreaTier }            from "../area/areaTypes";
 import type { DeployConfig }        from "./types";
 import { SelectedAreaPageDef, buildClusterConfig, writeClusterConfig } from "./buildClusterConfigs";
 import { generateClusterContent, ClusterPageInputs }                    from "./generateClusterContent";
+import { applyWebDesignNarrativePackage }                               from "../narratives/applyWebDesignNarrativePackage";
+import { applyLocalSeoNarrativePackage }                                from "../narratives/applyLocalSeoNarrativePackage";
 import { refineClusterContent }                                          from "./refineContent";
 import { renderClusterHtml, RenderProjectConfig }                        from "./renderClusterPage";
 import {
@@ -144,9 +146,23 @@ async function runOneAttempt(
   console.log(`  AI content generated.`);
 
   // ── 4. Refine readability (non-fatal) ─────────────────────────────────────
-  let ai = rawAi;
+  let ai = applyWebDesignNarrativePackage({
+    content: rawAi,
+    area: def.area,
+    city: def.city,
+    serviceName: def.service,
+    narrativeEngine: project.narrativeEngine,
+  });
+  ai = applyLocalSeoNarrativePackage({
+    content: ai,
+    area: def.area,
+    city: def.city,
+    serviceName: def.service,
+    narrativeEngine: project.narrativeEngine,
+  });
   try {
-    ai = await refineClusterContent(rawAi);
+    // TEMP TEST: refinement disabled
+    ai = ai;
     console.log(`  Readability refined.`);
   } catch (refineErr) {
     const msg = refineErr instanceof Error ? refineErr.message : String(refineErr);

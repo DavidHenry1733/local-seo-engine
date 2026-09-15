@@ -1,0 +1,202 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:32:33.472Z",
+  "tokenUsage": {
+    "promptTokens": 6665,
+    "completionTokens": 327,
+    "totalTokens": 6992
+  },
+  "estimatedCostUsd": 0.015946,
+  "inputEvidencePackHash": "b84a610b60b01eabaa69999650dc857857dfc614a5568673cd314a16992cdf06",
+  "editorialEvidencePackHash": "5008dc259f69a33c12c33c454e894c7129a5ea160d05c1683aadd9ac348fdbb6",
+  "areaSlug": "littleover",
+  "areaName": "Littleover",
+  "editorialFactIdsUsed": [
+    "littleover:community:blagreaves-library-is-listed-as-a-community-faci",
+    "littleover:community:bramblebrook-community-centre-is-listed-as-a-com",
+    "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little"
+  ],
+  "outputCopy": {
+    "area": "Littleover",
+    "heroHeading": "Pharmacy First in Littleover",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Littleover.",
+    "localIntroduction": "Pharmacy First for people in Littleover is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Blagreaves Library is listed as a community facility in Littleover. Bramblebrook Community Centre is listed as a community facility in Littleover. Clemson’s Park is listed as a landmark in Littleover."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Blagreaves Library is listed as a community facility in Littleover.",
+        "editorialFactId": "littleover:community:blagreaves-library-is-listed-as-a-community-faci"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Bramblebrook Community Centre is listed as a community facility in Littleover.",
+        "editorialFactId": "littleover:community:bramblebrook-community-centre-is-listed-as-a-com"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Clemson’s Park is listed as a landmark in Littleover.",
+        "editorialFactId": "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "littleover:community:blagreaves-library-is-listed-as-a-community-faci",
+      "littleover:community:bramblebrook-community-centre-is-listed-as-a-com",
+      "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Littleover",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Littleover.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Littleover is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Blagreaves Library is listed as a community facility in Littleover.",
+      "supportingCanonicalFieldOrEntity": "littleover:community:blagreaves-library-is-listed-as-a-community-faci, littleover:community:bramblebrook-community-centre-is-listed-as-a-com",
+      "providerSource": "Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Bramblebrook Community Centre is listed as a community facility in Littleover.",
+      "supportingCanonicalFieldOrEntity": "littleover:community:blagreaves-library-is-listed-as-a-community-faci, littleover:community:bramblebrook-community-centre-is-listed-as-a-com",
+      "providerSource": "Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Clemson’s Park is listed as a landmark in Littleover.",
+      "supportingCanonicalFieldOrEntity": "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+      "providerSource": "Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby, littleover:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Littleover",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Littleover.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Littleover is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Blagreaves Library is listed as a community facility in Littleover.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "littleover:community:blagreaves-library-is-listed-as-a-community-faci, littleover:community:bramblebrook-community-centre-is-listed-as-a-com",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Bramblebrook Community Centre is listed as a community facility in Littleover.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "littleover:community:blagreaves-library-is-listed-as-a-community-faci, littleover:community:bramblebrook-community-centre-is-listed-as-a-com",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Clemson’s Park is listed as a landmark in Littleover.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby, littleover:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Blagreaves Library is listed as a community facility in Littleover. Bramblebrook Community Centre is listed as a community facility in Littleover. Clemson’s Park is listed as a landmark in Littleover.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Blagreaves Library is listed as a community facility in Littleover.\",\n      \"editorialFactId\": \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Bramblebrook Community Centre is listed as a community facility in Littleover.\",\n      \"editorialFactId\": \"littleover:community:bramblebrook-community-centre-is-listed-as-a-com\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Clemson’s Park is listed as a landmark in Littleover.\",\n      \"editorialFactId\": \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\",\n    \"littleover:community:bramblebrook-community-centre-is-listed-as-a-com\",\n    \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Blagreaves Library is listed as a community facility in Littleover. Bramblebrook Community Centre is listed as a community facility in Littleover. Clemson’s Park is listed as a landmark in Littleover.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Blagreaves Library is listed as a community facility in Littleover.\",\n      \"editorialFactId\": \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Bramblebrook Community Centre is listed as a community facility in Littleover.\",\n      \"editorialFactId\": \"littleover:community:bramblebrook-community-centre-is-listed-as-a-com\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Clemson’s Park is listed as a landmark in Littleover.\",\n      \"editorialFactId\": \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\",\n    \"littleover:community:bramblebrook-community-centre-is-listed-as-a-com\",\n    \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n  ]\n}"
+  ]
+}

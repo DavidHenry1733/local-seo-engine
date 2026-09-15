@@ -1,0 +1,143 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-06T07:49:11.766Z",
+  "tokenUsage": {
+    "promptTokens": 5450,
+    "completionTokens": 173,
+    "totalTokens": 5623
+  },
+  "estimatedCostUsd": 0.012284,
+  "inputEvidencePackHash": "d6e2cd8ef674c06fcf67e53680466d96e3ec727f7c5e84e0a97e9b1aa46667ae",
+  "editorialEvidencePackHash": "f72bdcfd8c82b4dd339903cb99fc2f98e1de395594ac65ef7443d934c38a8ad8",
+  "areaSlug": "chaddesden",
+  "areaName": "Chaddesden",
+  "editorialFactIdsUsed": [
+    "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby",
+    "chaddesden:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Chaddesden",
+    "heroHeading": "Pharmacy First in Chaddesden",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Chaddesden.",
+    "localIntroduction": "Pharmacy First for people in Chaddesden is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+        "editorialFactId": "chaddesden:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby",
+      "chaddesden:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Chaddesden",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Chaddesden.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Chaddesden is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+      "supportingCanonicalFieldOrEntity": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby, chaddesden:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Chaddesden",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Chaddesden.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Chaddesden is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby, chaddesden:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 3,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localIntroduction\": \"Chaddesden is a neighbourhood ward in Derby.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Chaddesden is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localIntroduction\": \"Chaddesden is a neighbourhood ward in Derby.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Chaddesden is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby\"\n  ]\n}"
+  ]
+}

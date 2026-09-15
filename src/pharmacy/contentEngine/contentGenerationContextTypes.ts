@@ -119,6 +119,8 @@ export interface ContentGenerationContext {
   coverageAreas: string[];
   masterLibrary: ContentGenerationMasterLibrary;
   variantPack: ServiceVariantPack | null;
+  /** Registered approved-bank hash bound at execution time. Frozen packs must not override this. */
+  approvedBankHash?: string | null;
   links: ContentGenerationLinks;
   images: ContentGenerationImages;
   /** Tenant-specific token map for {{key}} replacement — no Brook/pharmaconnect fallbacks. */

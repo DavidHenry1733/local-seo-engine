@@ -1,0 +1,208 @@
+{
+  "slug": "pharmacy-delivered-4u-test",
+  "resolvedSlug": "pharmacy-delivered-4u-test",
+  "serviceId": "pharmacy-first",
+  "serviceName": "Pharmacy First",
+  "generatedAt": "2026-07-13T17:08:25.271Z",
+  "generatorVersion": "long-form-supporting-content-lockdown-v1",
+  "selectedAreas": [
+    "Rotherham"
+  ],
+  "profileLoaded": true,
+  "profileName": "Pharmacy Delivered 4U",
+  "campaignLoaded": false,
+  "campaignServiceId": null,
+  "brandLoaded": true,
+  "imageAssignmentsLoaded": true,
+  "selectedServiceConfigPath": "pharmacyMasterPublishConfig:pharmacy-first",
+  "serviceMasterPath": "docs/pharmacy-master-library/pharmacy-first-master-v2.md",
+  "masterPublishPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-master-publish/pharmacy-delivered-4u-test/pharmacy-first/index.html",
+  "clinicalReferencePath": null,
+  "visualOutputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/pharmacy-delivered-4u-test/pharmacy-first/index.html",
+  "contentEcosystemPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first",
+  "localClusterOutputPaths": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/local/rotherham/index.html"
+  ],
+  "assetsGenerated": [
+    "visual-service-page",
+    "content-ecosystem"
+  ],
+  "sectionsExpected": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsFound": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsMissing": [],
+  "foreignServiceContentDetected": [],
+  "tenantValidation": {
+    "ok": true,
+    "detail": "tenant ok"
+  },
+  "serviceValidation": {
+    "ok": true,
+    "detail": "service content ok"
+  },
+  "packageValidation": {
+    "ok": false,
+    "detail": "This content package needs fixing before approval."
+  },
+  "ecosystemTenantValidation": {
+    "ok": true,
+    "detail": "ecosystem tenant ok",
+    "foreignTenantAssetsDetected": [],
+    "foreignTenantAssetPaths": [],
+    "fallbackToDefaultSlugDetected": false
+  },
+  "localClusterValidation": {
+    "ok": true,
+    "detail": "1/1 local cluster pages",
+    "selectedAreasExpected": 1,
+    "localClusterPagesGenerated": 1
+  },
+  "selectedAreasExpected": 1,
+  "localClusterPagesGenerated": 1,
+  "foreignTenantAssetsDetected": [],
+  "foreignTenantAssetPaths": [],
+  "fallbackToDefaultSlugDetected": false,
+  "internalLinkValidation": {
+    "ok": true,
+    "detail": "1 local pages mapped"
+  },
+  "manifestAccuracyValidation": {
+    "ok": false,
+    "detail": "Design/map: design/map validation failed; Local cluster quality: failed: rotherham: no-image"
+  },
+  "designMapValidation": {
+    "ok": false,
+    "detail": "design/map validation failed",
+    "servicePageMapValidation": {
+      "ok": true,
+      "detail": "map iframe present"
+    },
+    "localPageMapValidation": {
+      "ok": true,
+      "detail": "map iframe present"
+    },
+    "localPageDesignValidation": {
+      "ok": false,
+      "detail": "local page not using design system"
+    },
+    "headerFooterParity": {
+      "ok": true,
+      "detail": "header/footer parity"
+    },
+    "brandParity": {
+      "ok": true,
+      "detail": "brand variables present"
+    },
+    "nearbyAreaLinksCount": 2,
+    "mapValidation": {
+      "ok": true,
+      "detail": "maps valid"
+    },
+    "moneyLinksCount": 18,
+    "internalLinksCount": 5
+  },
+  "localClusterQualityValidation": {
+    "ok": false,
+    "detail": "failed: rotherham: no-image",
+    "localPagesExpected": 1,
+    "localPagesGenerated": 1,
+    "localPagesWithImages": 0,
+    "localPagesWithBusinessMap": 1,
+    "localPagesWithAreaSpecificCopy": 1,
+    "localPagesWithInternalLinks": 1,
+    "localPagesWithMoneyLinks": 1,
+    "duplicateCopyWarnings": [],
+    "emptySectionsDetected": [],
+    "localIntelligenceUsed": 1,
+    "failedLocalPages": [
+      "rotherham:no-image"
+    ],
+    "servicePageLinksAllLocalAreas": true,
+    "localCopyDepthValidation": {
+      "ok": true,
+      "detail": "word counts ok",
+      "minWordCount": 350,
+      "pagesBelowMin": []
+    },
+    "localSimilarityScores": [],
+    "areaPrefixDetected": [],
+    "mapUsesBusinessLocation": true,
+    "servicePageLocalLinksCount": 1,
+    "localNearbyLinksCount": 0,
+    "irrelevantSectionsDetected": [],
+    "localPageWordCounts": {
+      "rotherham": 1057
+    },
+    "localPageImageCounts": {
+      "rotherham": 0
+    },
+    "failedLocalQualityReasons": [
+      "rotherham: no-image"
+    ]
+  },
+  "longFormQualityValidation": {
+    "ok": true,
+    "detail": "long-form quality ok",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 16,
+      "patient-guide": 24,
+      "what-is": 8,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 11
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 22,
+      "patient-guide": 28,
+      "what-is": 11,
+      "who-should": 5,
+      "need-to-know": 11,
+      "faq-page": 8
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [],
+    "failedLongFormAssets": [],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "errors": [
+    "Design/map: design/map validation failed",
+    "Local cluster quality: failed: rotherham: no-image"
+  ],
+  "warnings": [
+    "Layout checks: supportImageBand",
+    "Failed local pages: rotherham:no-image"
+  ]
+}

@@ -1,0 +1,8 @@
+FOCUSED TESTS PASS  110/110
+API BUILD PASS  pnpm --filter "./artifacts/api-server" run build
+GIT DIFF --CHECK PASS
+HEALTH JSON  GET http://127.0.0.1:3001/health → {"status":"ok"}
+PREVIEW  authenticated local+live 200; desktop 1280 and mobile 390; no horizontal overflow; contact/main-service links present; clinical sections present
+SERVES NEW COPY  NO — still the 14:21 candidate
+COMBINED COST THIS TASK  $0.03321 OpenAI / $0.00 new research / 2 provider calls / 0 new retrievals
+OLD LIVE-PAGE BUDGET UNCHANGED  wombwell-v3-live-page-2026-09-01.json

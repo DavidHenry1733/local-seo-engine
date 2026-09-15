@@ -1,0 +1,45 @@
+{
+  "savedAt": "2026-09-09T12:46:20.579Z",
+  "areaSlug": "fixture-area",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "tools": [
+      {
+        "google_search": {}
+      }
+    ]
+  },
+  "geminiGrounding": {
+    "webSearchQueries": [
+      "Darfield South Yorkshire landmarks",
+      "Darfield Barnsley local history",
+      "Darfield library"
+    ],
+    "groundingChunks": [
+      {
+        "title": "Darfield, South Yorkshire",
+        "uri": "https://en.wikipedia.org/wiki/Darfield,_South_Yorkshire"
+      },
+      {
+        "title": "Barnsley Council",
+        "uri": "https://www.barnsley.gov.uk/"
+      },
+      {
+        "title": "Darfield Library",
+        "uri": "https://www.barnsley.gov.uk/libraries"
+      }
+    ],
+    "groundingSupportCount": 4
+  },
+  "rawResponse": "HERO INTRODUCTION:\nPeople in Darfield can use Pharmacy First at Yorkshire Pharmacy & Health Clinic.",
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "parsedCopy": null,
+  "candidateRecordWritten": false
+}

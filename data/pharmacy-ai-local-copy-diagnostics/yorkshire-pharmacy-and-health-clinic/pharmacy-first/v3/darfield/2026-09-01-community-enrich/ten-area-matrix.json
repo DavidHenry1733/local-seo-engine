@@ -1,0 +1,512 @@
+{
+  "kind": "pharmacy-first-ten-area-variation-matrix",
+  "generatedAt": "2026-09-01T17:49:51.331Z",
+  "claim": "Do not claim all ten pages are unique. Live ecosystem pages were compared and are not unique.",
+  "liveEcosystemComparison": {
+    "strategy": "patient-journey-led for all ten",
+    "sectionSequence": [
+      "why",
+      "how",
+      "conditions",
+      "consultation",
+      "travel",
+      "gp",
+      "faq",
+      "cta",
+      "nearby"
+    ],
+    "duplicatedSupportingPassage": "Patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next step.",
+    "identityStrippedWhySimilarity": {
+      "min": 0.975,
+      "max": 1,
+      "n": 10
+    },
+    "differsOnlyBy": [
+      "area name in headings",
+      "Call … for directions from {area}",
+      "{area} is {n} km from the pharmacy",
+      "nearby locality links"
+    ],
+    "darfieldEcosystemWordingDefect": "Live ecosystem Darfield travel still says ‘directions from Darfield’ even though the pharmacy is in Darfield. That page is not this isolated variant and was not rewritten."
+  },
+  "isolatedVariantsCompared": {
+    "wombwell": {
+      "strategy": "primary-care-led",
+      "sectionSequence": [
+        "why",
+        "how",
+        "gp",
+        "conditions",
+        "consultation",
+        "travel",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": [
+        "why: accepted Wombwell civic recognition (library, Heritage Group, Citizens Advice, station artwork)",
+        "how: Pharmacy First alongside GP care",
+        "gp before conditions",
+        "travel: in-Darfield premises + 1.7 km straight-line sentence"
+      ],
+      "status": "Product Owner accepted local-detail standard. Not regenerated.",
+      "renderedCompared": true
+    },
+    "darfield": {
+      "strategy": "community-led",
+      "sectionSequence": [
+        "why",
+        "conditions",
+        "how",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": [
+        "why: Darfield Library on Church Street, regular activities/special events, History Society sessions",
+        "conditions before how",
+        "how: in-area community pharmacy pathway without GP-wait or ‘from Darfield’",
+        "gp: Garland House Surgery fact prepended",
+        "travel: consultations at the Darfield premises"
+      ],
+      "status": "Enriched isolated candidate. Not Product Owner accepted. Not published.",
+      "renderedCompared": true
+    }
+  },
+  "planningOnlyNotGenerated": {
+    "note": "Six strategies may be reused later, but strategy selection alone does not prove uniqueness. Convenience-led copy is forbidden. Landmark-led needs verified landmark facts (Worsbrough Mill host was rejected). Access-led fits farther areas only if supporting prose is not a name/distance swap.",
+    "unusedStrategies": [
+      "access-led",
+      "convenience-led",
+      "landmark-led",
+      "patient-journey-led"
+    ]
+  },
+  "areas": [
+    {
+      "area": "Darfield",
+      "areaSlug": "darfield",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": true,
+          "status": "READY",
+          "acceptedFacts": [
+            "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+            "Darfield has a public library.",
+            "Yorkshire Pharmacy & Health Clinic is in Darfield at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+          ],
+          "missingCopy": "AI v3 copy exists (isolated candidate)."
+        },
+        "placesNames": [
+          "community:Darfield Library",
+          "schools:Upperwood Academy"
+        ],
+        "liveDistanceKm": "0.5"
+      },
+      "missingCopy": "AI v3 copy exists (isolated candidate).",
+      "uniquenessStatus": "Live ecosystem HTML is a verified name/distance/link duplicate of the other nine patient-journey-led pages. Isolated community-led variant candidate exists (this enrich) and is not the live ecosystem page.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": true,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Wombwell",
+      "areaSlug": "wombwell",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": true,
+          "status": "READY",
+          "acceptedFacts": [
+            "Wombwell has a National Rail station.",
+            "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell, at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+            "NHS general practice services in Wombwell are provided from Wombwell Medical Centre."
+          ],
+          "missingCopy": "AI v3 copy exists (isolated candidate)."
+        },
+        "placesNames": [
+          "healthcare:Wombwell Medical Centre",
+          "healthcare:Chapelfield Medical Centre",
+          "schools:Wombwell Park Street Primary School",
+          "schools:Netherwood Academy",
+          "schools:High View Primary Learning Centre",
+          "transport:Wombwell",
+          "transport:Wood Walk/Dovecliffe Road",
+          "transport:Bleachcroft Way/Wombwell Lane"
+        ],
+        "liveDistanceKm": "1.7"
+      },
+      "missingCopy": "AI v3 copy exists (isolated candidate).",
+      "uniquenessStatus": "Live ecosystem HTML is a verified name/distance/link duplicate of the other nine patient-journey-led pages. Isolated primary-care-led variant exists from the restored comparison and is not the live ecosystem page. Product Owner accepted the file-based demo copy, not this ecosystem page.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": true,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Worsbrough",
+      "areaSlug": "worsbrough",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": true,
+          "status": "EVIDENCE LIMITED",
+          "acceptedFacts": [
+            "Yorkshire Pharmacy & Health Clinic is 5.3 km from Worsbrough, at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+          ],
+          "missingCopy": "Editorial pack EVIDENCE LIMITED. No AI v3 copy generated in this task."
+        },
+        "placesNames": [
+          "healthcare:Dr C Liley - Worsbrough Health Centre the Dove Valley Practice",
+          "healthcare:The Kakoty Practice Worsbrough",
+          "community:Worsbrough Library",
+          "landmarks:Worsbrough Industrial Heritage Monument",
+          "landmarks:Worsbrough Mill Country Park",
+          "landmarks:Worsbrough Dale Park",
+          "schools:The Mill Academy"
+        ],
+        "liveDistanceKm": "5.3"
+      },
+      "missingCopy": "Editorial pack EVIDENCE LIMITED. No AI v3 copy generated in this task. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Thurnscoe",
+      "areaSlug": "thurnscoe",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": false,
+          "status": "none",
+          "acceptedFacts": [],
+          "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only."
+        },
+        "placesNames": [
+          "healthcare:Dr D Shepherd - Dearne Valley Group Practice",
+          "community:Thurnscoe Library",
+          "landmarks:Thurnscoe Park",
+          "schools:Gooseacre Primary Academy",
+          "schools:The Hill Primary School Thurnscoe",
+          "transport:Thurnscoe"
+        ],
+        "liveDistanceKm": "4.6"
+      },
+      "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Grimethorpe",
+      "areaSlug": "grimethorpe",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": false,
+          "status": "none",
+          "acceptedFacts": [],
+          "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only."
+        },
+        "placesNames": [
+          "healthcare:The Grimethorpe Centre",
+          "landmarks:Grimethorpe Nature Reserve",
+          "transport:Grimethorpe Interchange"
+        ],
+        "liveDistanceKm": "4.8"
+      },
+      "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Goldthorpe",
+      "areaSlug": "goldthorpe",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": false,
+          "status": "none",
+          "acceptedFacts": [],
+          "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only."
+        },
+        "placesNames": [
+          "healthcare:BHF GOLDTHORPE SURGERY Branch",
+          "healthcare:Lakeside Surgery",
+          "healthcare:Dr A Littlewood - The Goldthorpe Medical Centre",
+          "healthcare:Hollygreen Practice",
+          "healthcare:The Goldthorpe P M S Practice",
+          "community:Goldthorpe Library",
+          "community:Dearneside Leisure Centre",
+          "schools:Goldthorpe Primary Academy",
+          "schools:Astrea Academy Dearne",
+          "schools:Highgate Primary School",
+          "schools:Sacred Heart Catholic Primary School",
+          "transport:Goldthorpe"
+        ],
+        "liveDistanceKm": "4.9"
+      },
+      "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Hoyland",
+      "areaSlug": "hoyland",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": false,
+          "status": "none",
+          "acceptedFacts": [],
+          "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only."
+        },
+        "placesNames": [
+          "schools:Kirk Balk Academy",
+          "schools:St Helen's Catholic Primary School",
+          "schools:Greenfield Primary School",
+          "schools:Hoyland Springwood Primary School",
+          "schools:Hoyland Common Primary School",
+          "schools:West Meadows Primary School",
+          "transport:Hoyland Road/Stoney Croft"
+        ],
+        "liveDistanceKm": "5.4"
+      },
+      "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Cudworth",
+      "areaSlug": "cudworth",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": false,
+          "status": "none",
+          "acceptedFacts": [],
+          "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only."
+        },
+        "placesNames": [
+          "healthcare:The NHS Cudworth Centre",
+          "healthcare:White Rose Medical Practice",
+          "landmarks:Cudworth Park",
+          "schools:Cherry Dale Primary"
+        ],
+        "liveDistanceKm": "5.5"
+      },
+      "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Royston",
+      "areaSlug": "royston",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": false,
+          "status": "none",
+          "acceptedFacts": [],
+          "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only."
+        },
+        "placesNames": [
+          "healthcare:Royston Group Practice",
+          "healthcare:High Street Practice",
+          "community:Royston Leisure Centre",
+          "community:Royston Library",
+          "community:Manor Court Community Centre",
+          "community:Meadow Crescent Community Centre",
+          "landmarks:The Royston Park",
+          "landmarks:Rabbit Ings Country Park",
+          "schools:Summerfields Primary Academy",
+          "schools:Parkside Primary Academy",
+          "schools:Meadstead Primary Academy",
+          "schools:Royston S John Baptist CE VA Primary School"
+        ],
+        "liveDistanceKm": "8.9"
+      },
+      "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    },
+    {
+      "area": "Chapeltown",
+      "areaSlug": "chapeltown",
+      "liveEcosystemStrategy": "patient-journey-led",
+      "liveSectionSequence": [
+        "why",
+        "how",
+        "conditions",
+        "consultation",
+        "travel",
+        "gp",
+        "faq",
+        "cta",
+        "nearby"
+      ],
+      "distinctiveContentRoles": "None on the live ecosystem page. Why body is the shared patient-journey sentence; travel differs by area name, ‘directions from {area}’, distance, and nearby links.",
+      "availableLocalEvidence": {
+        "editorialPack": {
+          "present": false,
+          "status": "none",
+          "acceptedFacts": [],
+          "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only."
+        },
+        "placesNames": [
+          "healthcare:Burncross Surgery - Chapelgreen Practice",
+          "healthcare:Chapeltown Surgery",
+          "community:Chapeltown Library",
+          "community:Chapeltown (& Burncross) Community Centre",
+          "landmarks:Chapeltown War Memorial",
+          "landmarks:Chapeltown Park",
+          "schools:Chapeltown Academy",
+          "schools:Ecclesfield Secondary School - Minerva Learning Trust",
+          "schools:Paces School for Conductive Education",
+          "schools:Windmill Hill Primary",
+          "transport:Chapeltown"
+        ],
+        "liveDistanceKm": "9.8"
+      },
+      "missingCopy": "No editorial-evidence pack and no AI v3 copy. Places relevance pack only. UNVERIFIED as a unique local page until an isolated candidate is generated and its rendered content is compared.",
+      "uniquenessStatus": "VERIFIED DUPLICATE on live ecosystem HTML — identity-stripped why/travel match the other nine areas except names, distances and nearby links. Isolated AI variant not generated for this area in this task.",
+      "renderedUniquenessCompared": true,
+      "isolatedVariant": false,
+      "liveHeadingCount": 9,
+      "identityStrippedWhyPreview": "why {area} patients start with the pharmacist patients look for approachable conversations, private consultation space where available, and honest guidance about the safest next st"
+    }
+  ]
+}

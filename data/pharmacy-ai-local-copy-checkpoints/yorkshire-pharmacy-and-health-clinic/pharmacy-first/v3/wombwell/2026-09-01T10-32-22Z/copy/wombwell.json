@@ -1,0 +1,128 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-01T10:32:22.888Z",
+  "tokenUsage": {
+    "promptTokens": 3572,
+    "completionTokens": 299,
+    "totalTokens": 3871
+  },
+  "estimatedCostUsd": 0.009536,
+  "inputEvidencePackHash": "8771e11338855366eb7ea7a82d43e12a6f16eeec18af6ef74c8ab9a2b8d44d55",
+  "editorialEvidencePackHash": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+  "areaSlug": "wombwell",
+  "areaName": "Wombwell",
+  "editorialFactIdsUsed": [
+    "wombwell:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Wombwell",
+    "heroHeading": "Pharmacy First for Wombwell",
+    "heroIntroduction": "Pharmacy First offers NHS help for common conditions to people in Wombwell. The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+    "localIntroduction": "",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell."
+    ],
+    "relationshipToPharmacy": "",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "heroIntroduction",
+        "sentence": "Pharmacy First offers NHS help for common conditions to people in Wombwell. The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield."
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell.",
+        "entityId": "wombwell:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "wombwell:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First for Wombwell",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First offers NHS help for common conditions to people in Wombwell.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "supportingCanonicalFieldOrEntity": "wombwell:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell.",
+      "supportingCanonicalFieldOrEntity": "wombwell:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First for Wombwell",
+      "purpose": "identify the local edition",
+      "supportingSource": "locality.areaName",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First offers NHS help for common conditions to people in Wombwell.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "locality.areaName",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "wombwell:pharmacy-relationship:distance",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "wombwell:pharmacy-relationship:distance",
+      "readerValue": "orients the reader using a verified local fact"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 2,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"area\": \"Wombwell\",\n  \"heroHeading\": \"Pharmacy First for Wombwell\",\n  \"heroIntroduction\": \"Pharmacy First offers NHS help for common conditions to people in Wombwell. The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell.\"\n  ],\n  \"relationshipToPharmacy\": \"\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"heroIntroduction\",\n      \"sentence\": \"Pharmacy First offers NHS help for common conditions to people in Wombwell. The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield.\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell.\",\n      \"entityId\": \"wombwell:pharmacy-relationship:distance\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"wombwell:pharmacy-relationship:distance\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"area\": \"Wombwell\",\n  \"heroHeading\": \"Pharmacy First for Wombwell\",\n  \"heroIntroduction\": \"Pharmacy First offers support for common conditions to people in Wombwell. You do not need to see a GP to access this NHS service.\",\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"Yorkshire Pharmacy & Health Clinic is in Darfield, approximately 1.7 km from Wombwell in a straight line.\"\n  ],\n  \"relationshipToPharmacy\": \"\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Yorkshire Pharmacy & Health Clinic is in Darfield, approximately 1.7 km from Wombwell in a straight line.\",\n      \"entityId\": \"wombwell:pharmacy-relationship:distance\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"wombwell:pharmacy-relationship:distance\"\n  ]\n}",
+    "{\n  \"area\": \"Wombwell\",\n  \"heroHeading\": \"Pharmacy First for Wombwell\",\n  \"heroIntroduction\": \"Pharmacy First offers NHS help for common conditions to people in Wombwell. The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell.\"\n  ],\n  \"relationshipToPharmacy\": \"\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"heroIntroduction\",\n      \"sentence\": \"Pharmacy First offers NHS help for common conditions to people in Wombwell. The service is provided at Yorkshire Pharmacy & Health Clinic in Darfield.\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Yorkshire Pharmacy & Health Clinic is located in Darfield, which is approximately 1.7 km in a straight line from Wombwell.\",\n      \"entityId\": \"wombwell:pharmacy-relationship:distance\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"wombwell:pharmacy-relationship:distance\"\n  ]\n}"
+  ]
+}

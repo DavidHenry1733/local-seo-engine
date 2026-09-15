@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-08-10T09:42:43.412Z",
+  "passed": true,
+  "checks": [
+    {
+      "id": "browser-script-parses",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "confirmation-string-safe",
+      "pass": true,
+      "detail": "\"confirm('Re-import Website for '+((activeCustomer.pharmacyName||activeCustomer.slug)||'this customer')+' from '+target+'?\\\\n\\\\nThis archives the current website i\""
+    },
+    {
+      "id": "confirmation-required",
+      "pass": true,
+      "detail": "confirm present"
+    },
+    {
+      "id": "loadDashboard-present",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "ier-open-present",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "reimport-button-label",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "canonical-action",
+      "pass": true,
+      "detail": "rerun_website_import"
+    },
+    {
+      "id": "reimport-control-visible-flag",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "id": "target-tenant",
+      "pass": true,
+      "detail": "pharmaconnect"
+    },
+    {
+      "id": "target-website",
+      "pass": true,
+      "detail": "https://pharmaconnect.uk/"
+    },
+    {
+      "id": "old-snapshot-preserved",
+      "pass": true,
+      "detail": "2026-08-10T08:19:01.609Z"
+    },
+    {
+      "id": "google-not-imported",
+      "pass": true,
+      "detail": "false"
+    },
+    {
+      "id": "comparison-suppressed",
+      "pass": true,
+      "detail": "suppressed"
+    },
+    {
+      "id": "market-scope-national",
+      "pass": true,
+      "detail": "national"
+    },
+    {
+      "id": "primary-market-uk",
+      "pass": true,
+      "detail": "United Kingdom"
+    },
+    {
+      "id": "no-reimport-post-in-validation",
+      "pass": true,
+      "detail": "validation does not call rerun_website_import"
+    }
+  ]
+}

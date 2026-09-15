@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "doncaster-pharmacy",
+  "updatedAt": "2026-08-20T09:25:44.702Z",
+  "campaigns": [
+    {
+      "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-confirm-profile",
+        "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=doncaster-pharmacy",
+        "evidence": [
+          "Profile completeness: 38%"
+        ],
+        "createdAt": "2026-08-20T09:25:44.702Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-confirm-profile",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=doncaster-pharmacy",
+          "evidence": [
+            "Profile completeness: 38%"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-confirm-images",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-confirm-service-page",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "No published service page found for pharmacy-first"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-confirm-ecosystem",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "No ecosystem generated for pharmacy-first"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-authority-readiness-approved",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=doncaster-pharmacy&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=doncaster-pharmacy&service=pharmacy-first"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-publish-page",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=doncaster-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-update-sitemap",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=doncaster-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-submit-indexing",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=doncaster-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-refresh-visibility",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=doncaster-pharmacy#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-prepare-gbp-posts",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-prepare-social-posts",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-prepare-email-sequence",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd-review-growth-actions",
+          "campaignId": "a5ffddcd-2a1a-40da-8f97-1e2b3fa459dd",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=doncaster-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-08-20T09:25:44.702Z",
+          "status": "complete",
+          "completedAt": "2026-08-20T09:25:44.702Z",
+          "blockedReason": null
+        }
+      ]
+    }
+  ]
+}

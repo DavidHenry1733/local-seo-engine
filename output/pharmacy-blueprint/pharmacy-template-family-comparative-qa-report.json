@@ -1,0 +1,566 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-template-family-comparative-qa",
+  "generatedAt": "2026-06-11T06:23:45.582Z",
+  "qaOnly": true,
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy Template Family Comparative QA Complete",
+  "inputReport": "output/pharmacy-blueprint/template-family-preview-report.json",
+  "previewInventory": {
+    "templateFamilies": 5,
+    "previewPages": 25,
+    "hubs": 5,
+    "clusters": 20,
+    "eachFamilyHubPlusFourClusters": true,
+    "clinicalNhsRendererUnchanged": true,
+    "clinicalNhsHash": "42470e19a8cdc69d2badb1d96fc8fa7845669a0b30ba51b0de51cf4435dc99d1"
+  },
+  "layoutDifferentiation": {
+    "clinicalNhsDistinct": true,
+    "note": "Clinical NHS uses distinct clinical-* section model vs service-* core families",
+    "heroAngles": {
+      "clinical-nhs-services": {
+        "eyebrow": "NHS Clinical Service",
+        "h1": "Pharmacy First in Rotherham"
+      },
+      "vaccination-services": {
+        "eyebrow": "Vaccination Services",
+        "h1": "NHS Flu Vaccination in Rotherham"
+      },
+      "private-healthcare-services": {
+        "eyebrow": "Private Healthcare Services",
+        "h1": "Private Ear Wax Removal in Rotherham"
+      },
+      "travel-health-services": {
+        "eyebrow": "Travel Health Services",
+        "h1": "Travel Vaccinations in Rotherham"
+      },
+      "weight-management-services": {
+        "eyebrow": "Weight Management Services",
+        "h1": "Pharmacy Weight Loss Programme in Rotherham"
+      }
+    },
+    "sectionOrders": {
+      "clinical-nhs-services": [
+        "hero-section",
+        "clinical-service-overview",
+        "clinical-conditions",
+        "clinical-how-it-works",
+        "clinical-benefits",
+        "clinical-why-choose",
+        "clinical-local-service",
+        "clinical-nearby-areas",
+        "clinical-related-services",
+        "clinical-faq",
+        "clinical-compliance",
+        "clinical-cta"
+      ],
+      "vaccination-services": [
+        "service-hero",
+        "service-overview",
+        "service-vaccine-eligibility",
+        "service-seasonal-timing",
+        "service-vaccine-expect",
+        "service-vaccine-safety",
+        "service-nhs-private",
+        "service-trust",
+        "service-process",
+        "service-benefits",
+        "service-local",
+        "service-nearby",
+        "service-related",
+        "service-faq",
+        "service-compliance",
+        "service-cta"
+      ],
+      "private-healthcare-services": [
+        "service-hero",
+        "service-overview",
+        "service-appointment-detail",
+        "service-consultation-expect",
+        "service-comfort-privacy",
+        "service-pricing-transparency",
+        "service-aftercare",
+        "service-trust",
+        "service-process",
+        "service-benefits",
+        "service-local",
+        "service-nearby",
+        "service-related",
+        "service-faq",
+        "service-compliance",
+        "service-cta"
+      ],
+      "travel-health-services": [
+        "service-hero",
+        "service-overview",
+        "service-destination-advice",
+        "service-travel-timing",
+        "service-travel-medicines",
+        "service-travel-consultation",
+        "service-popular-destinations",
+        "service-trust",
+        "service-process",
+        "service-benefits",
+        "service-local",
+        "service-nearby",
+        "service-related",
+        "service-faq",
+        "service-compliance",
+        "service-cta"
+      ],
+      "weight-management-services": [
+        "service-hero",
+        "service-overview",
+        "service-suitability",
+        "service-assessment",
+        "service-programme-structure",
+        "service-monitoring",
+        "service-lifestyle-support",
+        "service-medicine-caution",
+        "service-trust",
+        "service-process",
+        "service-benefits",
+        "service-local",
+        "service-nearby",
+        "service-related",
+        "service-faq",
+        "service-compliance",
+        "service-cta"
+      ]
+    },
+    "familiesTooSimilar": "Core families still share some structural patterns despite dedicated sections.",
+    "architectureGaps": [
+      "Further reduce shared benefit boilerplate across core families."
+    ]
+  },
+  "serviceRelevance": {
+    "clinical-nhs-services": {
+      "serviceName": "Pharmacy First",
+      "keywordHits": 5,
+      "pass": true,
+      "notes": "Conditions block, NHS eligibility framing, GP signposting present."
+    },
+    "vaccination-services": {
+      "serviceName": "NHS Flu Vaccination",
+      "keywordHits": 4,
+      "pass": true,
+      "notes": "Flu/immunisation framing; side-effect compliance notes present."
+    },
+    "private-healthcare-services": {
+      "serviceName": "Private Ear Wax Removal",
+      "keywordHits": 4,
+      "pass": true,
+      "notes": "Private appointment/consultation angle with fee transparency notes."
+    },
+    "travel-health-services": {
+      "serviceName": "Travel Vaccinations",
+      "keywordHits": 4,
+      "pass": true,
+      "notes": "Destination vaccine content and travel-timing FAQs present."
+    },
+    "weight-management-services": {
+      "serviceName": "Pharmacy Weight Loss Programme",
+      "keywordHits": 4,
+      "pass": true,
+      "notes": "Medically supervised framing; no guaranteed weight-loss claims."
+    }
+  },
+  "complianceDifferentiation": {
+    "perFamily": {
+      "clinical-nhs-services": {
+        "issues": [],
+        "familySpecificComplianceBullets": false,
+        "pass": true
+      },
+      "vaccination-services": {
+        "issues": [],
+        "familySpecificComplianceBullets": true,
+        "pass": true
+      },
+      "private-healthcare-services": {
+        "issues": [],
+        "familySpecificComplianceBullets": true,
+        "pass": true
+      },
+      "travel-health-services": {
+        "issues": [],
+        "familySpecificComplianceBullets": true,
+        "pass": true
+      },
+      "weight-management-services": {
+        "issues": [],
+        "familySpecificComplianceBullets": true,
+        "pass": true
+      }
+    },
+    "sharedBaseDisclaimers": true,
+    "note": "All families share base medical disclaimer block; family-specific compliance bullets differ via service intelligence trustSignals."
+  },
+  "seoAiStructure": {
+    "clinical-nhs-services": {
+      "h1MetaCanonical": true,
+      "schemaComplete": true,
+      "faqAiReady": true,
+      "contextualLinks": true,
+      "localRelevance": true
+    },
+    "vaccination-services": {
+      "h1MetaCanonical": true,
+      "schemaComplete": true,
+      "faqAiReady": true,
+      "contextualLinks": true,
+      "localRelevance": true
+    },
+    "private-healthcare-services": {
+      "h1MetaCanonical": true,
+      "schemaComplete": true,
+      "faqAiReady": true,
+      "contextualLinks": true,
+      "localRelevance": true
+    },
+    "travel-health-services": {
+      "h1MetaCanonical": true,
+      "schemaComplete": true,
+      "faqAiReady": true,
+      "contextualLinks": true,
+      "localRelevance": true
+    },
+    "weight-management-services": {
+      "h1MetaCanonical": true,
+      "schemaComplete": true,
+      "faqAiReady": true,
+      "contextualLinks": true,
+      "localRelevance": true
+    }
+  },
+  "conversionFlow": {
+    "clinical-nhs-services": {
+      "hubPrimaryCta": true,
+      "hubPhoneCta": true,
+      "hubTrustNearHero": true,
+      "clusterCtaButtons": true,
+      "score": 8.5
+    },
+    "vaccination-services": {
+      "hubPrimaryCta": true,
+      "hubPhoneCta": true,
+      "hubTrustNearHero": true,
+      "clusterCtaButtons": true,
+      "score": 8.5
+    },
+    "private-healthcare-services": {
+      "hubPrimaryCta": true,
+      "hubPhoneCta": true,
+      "hubTrustNearHero": true,
+      "clusterCtaButtons": true,
+      "score": 8.5
+    },
+    "travel-health-services": {
+      "hubPrimaryCta": true,
+      "hubPhoneCta": true,
+      "hubTrustNearHero": true,
+      "clusterCtaButtons": true,
+      "score": 8.5
+    },
+    "weight-management-services": {
+      "hubPrimaryCta": true,
+      "hubPhoneCta": true,
+      "hubTrustNearHero": true,
+      "clusterCtaButtons": true,
+      "score": 8.5
+    }
+  },
+  "duplicationRisk": {
+    "level": "low-medium",
+    "findings": [
+      {
+        "a": "vaccination-services",
+        "b": "private-healthcare-services",
+        "type": "headings",
+        "shared": [
+          "Why Choose PharmaConnect Demo Pharmacy",
+          "How It Works",
+          "Nearby Areas",
+          "Aston",
+          "Bramley",
+          "Rawmarsh",
+          "Wickersley",
+          "Related Services",
+          "Frequently Asked Questions",
+          "Important information"
+        ]
+      },
+      {
+        "a": "vaccination-services",
+        "b": "travel-health-services",
+        "type": "headings",
+        "shared": [
+          "Why Choose PharmaConnect Demo Pharmacy",
+          "How It Works",
+          "Nearby Areas",
+          "Aston",
+          "Bramley",
+          "Rawmarsh",
+          "Wickersley",
+          "Related Services",
+          "Frequently Asked Questions",
+          "Important information"
+        ]
+      },
+      {
+        "a": "vaccination-services",
+        "b": "weight-management-services",
+        "type": "headings",
+        "shared": [
+          "Why Choose PharmaConnect Demo Pharmacy",
+          "How It Works",
+          "Nearby Areas",
+          "Aston",
+          "Bramley",
+          "Rawmarsh",
+          "Wickersley",
+          "Related Services",
+          "Frequently Asked Questions",
+          "Important information"
+        ]
+      },
+      {
+        "a": "private-healthcare-services",
+        "b": "travel-health-services",
+        "type": "headings",
+        "shared": [
+          "Why Choose PharmaConnect Demo Pharmacy",
+          "How It Works",
+          "Nearby Areas",
+          "Aston",
+          "Bramley",
+          "Rawmarsh",
+          "Wickersley",
+          "Related Services",
+          "Frequently Asked Questions",
+          "Important information"
+        ]
+      },
+      {
+        "a": "private-healthcare-services",
+        "b": "weight-management-services",
+        "type": "headings",
+        "shared": [
+          "Why Choose PharmaConnect Demo Pharmacy",
+          "How It Works",
+          "Nearby Areas",
+          "Aston",
+          "Bramley",
+          "Rawmarsh",
+          "Wickersley",
+          "Related Services",
+          "Frequently Asked Questions",
+          "Important information"
+        ]
+      },
+      {
+        "a": "travel-health-services",
+        "b": "weight-management-services",
+        "type": "headings",
+        "shared": [
+          "Why Choose PharmaConnect Demo Pharmacy",
+          "How It Works",
+          "Nearby Areas",
+          "Aston",
+          "Bramley",
+          "Rawmarsh",
+          "Wickersley",
+          "Related Services",
+          "Frequently Asked Questions",
+          "Important information"
+        ]
+      }
+    ],
+    "repeatedComplianceWording": "Shared 4-line base disclaimer across all families (expected).",
+    "repeatedFaqPatterns": [],
+    "repeatedCtaPatterns": []
+  },
+  "familyScores": {
+    "clinical-nhs-services": {
+      "designDistinction": 9,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8.5,
+      "overall": 8.7
+    },
+    "vaccination-services": {
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "overall": 8.5
+    },
+    "private-healthcare-services": {
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "overall": 8.5
+    },
+    "travel-health-services": {
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "overall": 8.5
+    },
+    "weight-management-services": {
+      "designDistinction": 8.5,
+      "serviceRelevance": 8.5,
+      "complianceSafety": 9,
+      "seoAiReadiness": 8.5,
+      "conversionReadiness": 8.5,
+      "scalability": 8,
+      "overall": 8.5
+    }
+  },
+  "readinessStatusPerFamily": {
+    "clinical-nhs-services": "Ready for live wiring",
+    "vaccination-services": "Ready for live wiring",
+    "private-healthcare-services": "Ready for live wiring",
+    "travel-health-services": "Ready for live wiring",
+    "weight-management-services": "Ready for live wiring"
+  },
+  "issuesFound": [],
+  "complianceRisks": [],
+  "serviceRelevanceIssues": [],
+  "conversionIssues": [],
+  "recommendedLiveWiringOrder": [
+    "clinical-nhs-services",
+    "vaccination-services",
+    "private-healthcare-services",
+    "travel-health-services",
+    "weight-management-services"
+  ],
+  "finalReadinessRecommendation": "Ready with minor refinements",
+  "recommendedNextActions": [
+    "Add family-specific architecture sections (pricing, destination-advice, programme-structure) before live wiring.",
+    "Reduce FAQ answer template repetition in pharmacyTemplateCore expandPatientFacingFaqAnswer.",
+    "Proceed with Clinical NHS and Vaccination first; refine core layout differentiation in parallel."
+  ],
+  "baselinePreviewReport": "PASS",
+  "familyAudits": [
+    {
+      "templateKey": "clinical-nhs-services",
+      "serviceName": "Pharmacy First",
+      "hubPath": "output/pharmacy-preview/pharmacy-first-rotherham/index.html",
+      "hubExists": true,
+      "clusterCount": 4,
+      "issues": [],
+      "scores": {
+        "designDistinction": 9,
+        "serviceRelevance": 8.5,
+        "complianceSafety": 9,
+        "seoAiReadiness": 8.5,
+        "conversionReadiness": 8.5,
+        "scalability": 8.5,
+        "overall": 8.7
+      },
+      "readinessStatus": "Ready for live wiring",
+      "eyebrow": "NHS Clinical Service",
+      "heroH1": "Pharmacy First in Rotherham",
+      "faqSampleCount": 12
+    },
+    {
+      "templateKey": "vaccination-services",
+      "serviceName": "NHS Flu Vaccination",
+      "hubPath": "output/pharmacy-preview/nhs-flu-vaccination-rotherham/index.html",
+      "hubExists": true,
+      "clusterCount": 4,
+      "issues": [],
+      "scores": {
+        "designDistinction": 8.5,
+        "serviceRelevance": 8.5,
+        "complianceSafety": 9,
+        "seoAiReadiness": 8.5,
+        "conversionReadiness": 8.5,
+        "scalability": 8,
+        "overall": 8.5
+      },
+      "readinessStatus": "Ready for live wiring",
+      "eyebrow": "Vaccination Services",
+      "heroH1": "NHS Flu Vaccination in Rotherham",
+      "faqSampleCount": 10
+    },
+    {
+      "templateKey": "private-healthcare-services",
+      "serviceName": "Private Ear Wax Removal",
+      "hubPath": "output/pharmacy-preview/private-ear-wax-removal-rotherham/index.html",
+      "hubExists": true,
+      "clusterCount": 4,
+      "issues": [],
+      "scores": {
+        "designDistinction": 8.5,
+        "serviceRelevance": 8.5,
+        "complianceSafety": 9,
+        "seoAiReadiness": 8.5,
+        "conversionReadiness": 8.5,
+        "scalability": 8,
+        "overall": 8.5
+      },
+      "readinessStatus": "Ready for live wiring",
+      "eyebrow": "Private Healthcare Services",
+      "heroH1": "Private Ear Wax Removal in Rotherham",
+      "faqSampleCount": 10
+    },
+    {
+      "templateKey": "travel-health-services",
+      "serviceName": "Travel Vaccinations",
+      "hubPath": "output/pharmacy-preview/travel-vaccinations-rotherham/index.html",
+      "hubExists": true,
+      "clusterCount": 4,
+      "issues": [],
+      "scores": {
+        "designDistinction": 8.5,
+        "serviceRelevance": 8.5,
+        "complianceSafety": 9,
+        "seoAiReadiness": 8.5,
+        "conversionReadiness": 8.5,
+        "scalability": 8,
+        "overall": 8.5
+      },
+      "readinessStatus": "Ready for live wiring",
+      "eyebrow": "Travel Health Services",
+      "heroH1": "Travel Vaccinations in Rotherham",
+      "faqSampleCount": 10
+    },
+    {
+      "templateKey": "weight-management-services",
+      "serviceName": "Pharmacy Weight Loss Programme",
+      "hubPath": "output/pharmacy-preview/pharmacy-weight-loss-programme-rotherham/index.html",
+      "hubExists": true,
+      "clusterCount": 4,
+      "issues": [],
+      "scores": {
+        "designDistinction": 8.5,
+        "serviceRelevance": 8.5,
+        "complianceSafety": 9,
+        "seoAiReadiness": 8.5,
+        "conversionReadiness": 8.5,
+        "scalability": 8,
+        "overall": 8.5
+      },
+      "readinessStatus": "Ready for live wiring",
+      "eyebrow": "Weight Management Services",
+      "heroH1": "Pharmacy Weight Loss Programme in Rotherham",
+      "faqSampleCount": 10
+    }
+  ]
+}

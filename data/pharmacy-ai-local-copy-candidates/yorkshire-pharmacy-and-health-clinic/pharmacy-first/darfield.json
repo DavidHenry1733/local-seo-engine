@@ -1,0 +1,216 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v1",
+  "promptContractVersion": "v1",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T16:18:22.863Z",
+  "tokenUsage": {
+    "promptTokens": 1908,
+    "completionTokens": 661,
+    "totalTokens": 2569
+  },
+  "estimatedCostUsd": 0.009104000000000001,
+  "inputEvidencePackHash": "4d53bd6834f2990639e647868d7d37373f356a9f639cdff54b67beb31add52f2",
+  "areaSlug": "darfield",
+  "areaName": "Darfield",
+  "outputCopy": {
+    "area": "Darfield",
+    "heroHeading": "Pharmacy First in Darfield",
+    "heroIntroduction": "Residents of Darfield can access Pharmacy First for help with eligible common conditions. Speak to the team for advice or to arrange a consultation.",
+    "localIntroduction": "Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, just 0.5 km from the centre of the area.",
+    "localContextHeading": "Accessing Pharmacy First in Darfield",
+    "localContextParagraphs": [
+      "Pharmacy First offers a convenient way for Darfield residents to receive advice and treatment for certain common conditions. The service is available directly from the pharmacy without the need for a GP appointment.",
+      "You can discuss your symptoms with a pharmacist, who will assess your needs and recommend the appropriate next steps. Pharmacy First is designed to support your health locally and efficiently."
+    ],
+    "relationshipToPharmacy": "Yorkshire Pharmacy & Health Clinic serves patients from its address at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+    "localAccessIntroduction": "If you have questions about your symptoms or the Pharmacy First service, you are welcome to call before coming in.",
+    "localFaqs": [
+      {
+        "question": "How far is Yorkshire Pharmacy & Health Clinic from central Darfield?",
+        "answer": "The pharmacy is approximately 0.5 km from the centre of Darfield."
+      },
+      {
+        "question": "Do I need to book before visiting for Pharmacy First?",
+        "answer": "It is recommended to call ahead to check how consultations are being arranged."
+      },
+      {
+        "question": "What happens if my condition is not suitable for Pharmacy First?",
+        "answer": "The pharmacist will advise you on the most appropriate next steps, which may include referral or self-care advice."
+      },
+      {
+        "question": "Can I get treatment for minor illnesses at the pharmacy?",
+        "answer": "Pharmacy First can help with eligible common conditions; the pharmacist will assess your symptoms and advise accordingly."
+      },
+      {
+        "question": "Who can I contact with questions about Pharmacy First?",
+        "answer": "You can contact Yorkshire Pharmacy & Health Clinic on 01226 210477 for information."
+      }
+    ],
+    "localCtaBridge": "To discuss your symptoms or arrange a Pharmacy First consultation, please get in touch.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, just 0.5 km from the centre of the area."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Yorkshire Pharmacy & Health Clinic serves patients from its address at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR."
+      },
+      {
+        "field": "localFaqs",
+        "sentence": "The pharmacy is approximately 0.5 km from the centre of Darfield."
+      }
+    ],
+    "evidenceEntityIdsUsed": []
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Darfield",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Residents of Darfield can access Pharmacy First for help with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, just 0.5 km from the centre of the area.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Accessing Pharmacy First in Darfield",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Pharmacy First offers a convenient way for Darfield residents to receive advice and treatment for certain common conditions.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The service is available directly from the pharmacy without the need for a GP appointment.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "You can discuss your symptoms with a pharmacist, who will assess your needs and recommend the appropriate next steps.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Pharmacy First is designed to support your health locally and efficiently.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic serves patients from its address at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "If you have questions about your symptoms or the Pharmacy First service, you are welcome to call before coming in.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].question",
+      "exactSentence": "How far is Yorkshire Pharmacy & Health Clinic from central Darfield?",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "The pharmacy is approximately 0.5 km from the centre of Darfield.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].question",
+      "exactSentence": "Do I need to book before visiting for Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "It is recommended to call ahead to check how consultations are being arranged.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "What happens if my condition is not suitable for Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "The pharmacist will advise you on the most appropriate next steps, which may include referral or self-care advice.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "Pharmacy First can help with eligible common conditions; the pharmacist will assess your symptoms and advise accordingly.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].question",
+      "exactSentence": "Who can I contact with questions about Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].answer",
+      "exactSentence": "You can contact Yorkshire Pharmacy & Health Clinic on 01226 210477 for information.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "To discuss your symptoms or arrange a Pharmacy First consultation, please get in touch.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

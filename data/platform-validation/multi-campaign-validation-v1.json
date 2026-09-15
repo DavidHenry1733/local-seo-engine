@@ -1,0 +1,1838 @@
+{
+  "version": 1,
+  "validatedAt": "2026-06-26T13:32:00.977Z",
+  "slug": "pharmaconnect",
+  "pharmacy": "Brook Pharmacy",
+  "benchmarkServices": [
+    "pharmacy-first",
+    "blood-pressure-checks",
+    "travel-vaccinations",
+    "emergency-contraception"
+  ],
+  "summary": {
+    "overallStatus": "PASS",
+    "campaignsPassed": 4,
+    "campaignsWarning": 0,
+    "campaignsFailed": 0,
+    "passPct": 100,
+    "totalChecks": 232,
+    "passedChecks": 232,
+    "platformProven": true
+  },
+  "campaigns": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "campaignId": "debea4b8-72a8-4511-9fb3-e3ab5dc16ba1",
+      "campaignName": "Pharmacy First — Increase Visibility",
+      "overallStatus": "PASS",
+      "passPct": 100,
+      "stagesPassed": 10,
+      "stagesWarning": 0,
+      "stagesFailed": 0,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Business Profile",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "pharmacy",
+              "label": "Correct pharmacy",
+              "status": "PASS",
+              "detail": "Brook Pharmacy"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "/assets/pharmacy-logos/pharmaconnect.svg"
+            },
+            {
+              "id": "trust",
+              "label": "Trust profile",
+              "status": "PASS",
+              "detail": "GPhC 9012345"
+            },
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "professional-review",
+              "label": "Professional review",
+              "status": "PASS",
+              "detail": "2026-03-01 → 2026-09-01"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 2,
+          "name": "Campaign Creation",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "exists",
+              "label": "Campaign exists",
+              "status": "PASS",
+              "detail": "Pharmacy First — Increase Visibility"
+            },
+            {
+              "id": "visible",
+              "label": "Campaign visible in OS",
+              "status": "PASS",
+              "detail": "active"
+            },
+            {
+              "id": "service",
+              "label": "Service selected",
+              "status": "PASS",
+              "detail": "pharmacy-first"
+            },
+            {
+              "id": "areas",
+              "label": "Areas selected",
+              "status": "PASS",
+              "detail": "Brinsworth, Parkgate, Rawmarsh"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 3,
+          "name": "Image Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "library",
+              "label": "Image library",
+              "status": "PASS",
+              "detail": "operating system loaded"
+            },
+            {
+              "id": "upload",
+              "label": "Upload records",
+              "status": "PASS",
+              "detail": "13 uploads"
+            },
+            {
+              "id": "assignments",
+              "label": "Assignments",
+              "status": "PASS",
+              "detail": "4/4 slots"
+            },
+            {
+              "id": "preview",
+              "label": "Preview",
+              "status": "PASS",
+              "detail": "visual HTML slot markers"
+            },
+            {
+              "id": "image-centre",
+              "label": "Campaign Image Centre",
+              "status": "PASS",
+              "detail": "4/4"
+            },
+            {
+              "id": "visual-page",
+              "label": "Visual page",
+              "status": "PASS",
+              "detail": "built"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 4,
+          "name": "Visual Experience",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "template",
+              "label": "Approved template",
+              "status": "PASS",
+              "detail": "V3 template blocks"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "name + NHS blue"
+            },
+            {
+              "id": "localisation",
+              "label": "Localisation",
+              "status": "PASS",
+              "detail": "Rotherham coverage"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "no broken markers"
+            },
+            {
+              "id": "logo",
+              "label": "Logo",
+              "status": "PASS",
+              "detail": "header logo"
+            },
+            {
+              "id": "cta",
+              "label": "CTA",
+              "status": "PASS",
+              "detail": "primary CTA"
+            },
+            {
+              "id": "map",
+              "label": "Map",
+              "status": "PASS",
+              "detail": "maps embed"
+            },
+            {
+              "id": "footer",
+              "label": "Footer",
+              "status": "PASS",
+              "detail": "site footer"
+            },
+            {
+              "id": "mobile",
+              "label": "Mobile",
+              "status": "PASS",
+              "detail": "viewport meta"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": "output/pharmacy-visual-experience/pharmaconnect/pharmacy-first/index.html"
+        },
+        {
+          "stage": 5,
+          "name": "Quality Assurance",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "authority",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=97 gate=PASS"
+            },
+            {
+              "id": "enhancement",
+              "label": "Enhancement Engine",
+              "status": "PASS",
+              "detail": "29 recs"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "29 actions"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 6,
+          "name": "Real Enhancement Actions",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "review-date",
+              "label": "Review Date",
+              "status": "PASS",
+              "detail": "2026-03-01"
+            },
+            {
+              "id": "next-review",
+              "label": "Next Review",
+              "status": "PASS",
+              "detail": "2026-09-01"
+            },
+            {
+              "id": "canonical",
+              "label": "Canonical",
+              "status": "PASS",
+              "detail": "https://www.brookpharmacy.co.uk/services/pharmacy-first"
+            },
+            {
+              "id": "noindex",
+              "label": "Noindex",
+              "status": "PASS",
+              "detail": "indexable"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "4/4 assigned"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 7,
+          "name": "Publish Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "publish-ready",
+              "label": "Publish ready",
+              "status": "PASS",
+              "detail": "PASS"
+            },
+            {
+              "id": "published",
+              "label": "Published",
+              "status": "PASS",
+              "detail": "12 publish pages"
+            },
+            {
+              "id": "registry",
+              "label": "Publishing registry",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "publish-history",
+              "label": "Publishing history",
+              "status": "PASS",
+              "detail": "2026-06-18T14:26:11.141Z"
+            },
+            {
+              "id": "publish-status",
+              "label": "Publishing status",
+              "status": "PASS",
+              "detail": "published"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 8,
+          "name": "Indexing Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "submission",
+              "label": "Indexing submission",
+              "status": "PASS",
+              "detail": "2026-06-23T13:38:24.704Z"
+            },
+            {
+              "id": "queue",
+              "label": "Indexing queue",
+              "status": "PASS",
+              "detail": "7 indexed"
+            },
+            {
+              "id": "status",
+              "label": "Indexing status",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "refresh",
+              "label": "Indexing refresh",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.395Z"
+            },
+            {
+              "id": "indexed",
+              "label": "Indexed state",
+              "status": "PASS",
+              "detail": "indexed"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 9,
+          "name": "Visibility Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "tracking",
+              "label": "Visibility tracking",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "keywords",
+              "label": "Keyword tracking",
+              "status": "PASS",
+              "detail": "pharmacy first Rotherham"
+            },
+            {
+              "id": "authority",
+              "label": "Authority score",
+              "status": "PASS",
+              "detail": "97"
+            },
+            {
+              "id": "opportunity",
+              "label": "Opportunity engine",
+              "status": "PASS",
+              "detail": "10 opportunities"
+            },
+            {
+              "id": "monitoring",
+              "label": "Monthly monitoring",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.397Z"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 10,
+          "name": "Campaign Operating System",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "campaign-os",
+              "label": "Campaign OS",
+              "status": "PASS",
+              "detail": "health=95"
+            },
+            {
+              "id": "image-centre",
+              "label": "Image Centre",
+              "status": "PASS",
+              "detail": "100% complete"
+            },
+            {
+              "id": "authority-audit",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=97"
+            },
+            {
+              "id": "enhancement-ws",
+              "label": "Enhancement Workspace",
+              "status": "PASS",
+              "detail": "real=1"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "publishing",
+              "label": "Publishing",
+              "status": "PASS",
+              "detail": "Visible"
+            },
+            {
+              "id": "indexing",
+              "label": "Indexing",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "visibility",
+              "label": "Visibility",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "28 pending"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        }
+      ],
+      "blockers": [],
+      "recommendedRepairs": []
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "campaignId": "2e5cf653-7df3-4918-96f8-c99d687b764b",
+      "campaignName": "Blood Pressure Checks — Increase Visibility",
+      "overallStatus": "PASS",
+      "passPct": 100,
+      "stagesPassed": 10,
+      "stagesWarning": 0,
+      "stagesFailed": 0,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Business Profile",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "pharmacy",
+              "label": "Correct pharmacy",
+              "status": "PASS",
+              "detail": "Brook Pharmacy"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "/assets/pharmacy-logos/pharmaconnect.svg"
+            },
+            {
+              "id": "trust",
+              "label": "Trust profile",
+              "status": "PASS",
+              "detail": "GPhC 9012345"
+            },
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "professional-review",
+              "label": "Professional review",
+              "status": "PASS",
+              "detail": "2026-03-01 → 2026-09-01"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 2,
+          "name": "Campaign Creation",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "exists",
+              "label": "Campaign exists",
+              "status": "PASS",
+              "detail": "Blood Pressure Checks — Increase Visibility"
+            },
+            {
+              "id": "visible",
+              "label": "Campaign visible in OS",
+              "status": "PASS",
+              "detail": "active"
+            },
+            {
+              "id": "service",
+              "label": "Service selected",
+              "status": "PASS",
+              "detail": "blood-pressure-checks"
+            },
+            {
+              "id": "areas",
+              "label": "Areas selected",
+              "status": "PASS",
+              "detail": "Brinsworth, Parkgate, Rawmarsh"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 3,
+          "name": "Image Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "library",
+              "label": "Image library",
+              "status": "PASS",
+              "detail": "operating system loaded"
+            },
+            {
+              "id": "upload",
+              "label": "Upload records",
+              "status": "PASS",
+              "detail": "13 uploads"
+            },
+            {
+              "id": "assignments",
+              "label": "Assignments",
+              "status": "PASS",
+              "detail": "4/4 slots"
+            },
+            {
+              "id": "preview",
+              "label": "Preview",
+              "status": "PASS",
+              "detail": "visual HTML slot markers"
+            },
+            {
+              "id": "image-centre",
+              "label": "Campaign Image Centre",
+              "status": "PASS",
+              "detail": "4/4"
+            },
+            {
+              "id": "visual-page",
+              "label": "Visual page",
+              "status": "PASS",
+              "detail": "built"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 4,
+          "name": "Visual Experience",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "template",
+              "label": "Approved template",
+              "status": "PASS",
+              "detail": "V3 template blocks"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "name + NHS blue"
+            },
+            {
+              "id": "localisation",
+              "label": "Localisation",
+              "status": "PASS",
+              "detail": "Rotherham coverage"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "no broken markers"
+            },
+            {
+              "id": "logo",
+              "label": "Logo",
+              "status": "PASS",
+              "detail": "header logo"
+            },
+            {
+              "id": "cta",
+              "label": "CTA",
+              "status": "PASS",
+              "detail": "primary CTA"
+            },
+            {
+              "id": "map",
+              "label": "Map",
+              "status": "PASS",
+              "detail": "maps embed"
+            },
+            {
+              "id": "footer",
+              "label": "Footer",
+              "status": "PASS",
+              "detail": "site footer"
+            },
+            {
+              "id": "mobile",
+              "label": "Mobile",
+              "status": "PASS",
+              "detail": "viewport meta"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": "output/pharmacy-visual-experience/pharmaconnect/blood-pressure-checks/index.html"
+        },
+        {
+          "stage": 5,
+          "name": "Quality Assurance",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "authority",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=95 gate=PASS"
+            },
+            {
+              "id": "enhancement",
+              "label": "Enhancement Engine",
+              "status": "PASS",
+              "detail": "31 recs"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "29 actions"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 6,
+          "name": "Real Enhancement Actions",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "review-date",
+              "label": "Review Date",
+              "status": "PASS",
+              "detail": "2026-03-01"
+            },
+            {
+              "id": "next-review",
+              "label": "Next Review",
+              "status": "PASS",
+              "detail": "2026-09-01"
+            },
+            {
+              "id": "canonical",
+              "label": "Canonical",
+              "status": "PASS",
+              "detail": "https://www.brookpharmacy.co.uk/services/blood-pressure-checks"
+            },
+            {
+              "id": "noindex",
+              "label": "Noindex",
+              "status": "PASS",
+              "detail": "indexable"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "4/4 assigned"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 7,
+          "name": "Publish Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "publish-ready",
+              "label": "Publish ready",
+              "status": "PASS",
+              "detail": "PASS"
+            },
+            {
+              "id": "published",
+              "label": "Published",
+              "status": "PASS",
+              "detail": "12 publish pages"
+            },
+            {
+              "id": "registry",
+              "label": "Publishing registry",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "publish-history",
+              "label": "Publishing history",
+              "status": "PASS",
+              "detail": "2026-06-18T14:26:11.167Z"
+            },
+            {
+              "id": "publish-status",
+              "label": "Publishing status",
+              "status": "PASS",
+              "detail": "published"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 8,
+          "name": "Indexing Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "submission",
+              "label": "Indexing submission",
+              "status": "PASS",
+              "detail": "2026-06-23T13:38:24.704Z"
+            },
+            {
+              "id": "queue",
+              "label": "Indexing queue",
+              "status": "PASS",
+              "detail": "7 indexed"
+            },
+            {
+              "id": "status",
+              "label": "Indexing status",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "refresh",
+              "label": "Indexing refresh",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.395Z"
+            },
+            {
+              "id": "indexed",
+              "label": "Indexed state",
+              "status": "PASS",
+              "detail": "indexed"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 9,
+          "name": "Visibility Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "tracking",
+              "label": "Visibility tracking",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "keywords",
+              "label": "Keyword tracking",
+              "status": "PASS",
+              "detail": "blood pressure check Rotherham"
+            },
+            {
+              "id": "authority",
+              "label": "Authority score",
+              "status": "PASS",
+              "detail": "95"
+            },
+            {
+              "id": "opportunity",
+              "label": "Opportunity engine",
+              "status": "PASS",
+              "detail": "10 opportunities"
+            },
+            {
+              "id": "monitoring",
+              "label": "Monthly monitoring",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.397Z"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 10,
+          "name": "Campaign Operating System",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "campaign-os",
+              "label": "Campaign OS",
+              "status": "PASS",
+              "detail": "health=95"
+            },
+            {
+              "id": "image-centre",
+              "label": "Image Centre",
+              "status": "PASS",
+              "detail": "100% complete"
+            },
+            {
+              "id": "authority-audit",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=95"
+            },
+            {
+              "id": "enhancement-ws",
+              "label": "Enhancement Workspace",
+              "status": "PASS",
+              "detail": "real=0"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "publishing",
+              "label": "Publishing",
+              "status": "PASS",
+              "detail": "Visible"
+            },
+            {
+              "id": "indexing",
+              "label": "Indexing",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "visibility",
+              "label": "Visibility",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "28 pending"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        }
+      ],
+      "blockers": [],
+      "recommendedRepairs": []
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "campaignId": "86c92269-9c0e-4347-9aed-6561f1ab617b",
+      "campaignName": "Travel Vaccinations — Increase Visibility",
+      "overallStatus": "PASS",
+      "passPct": 100,
+      "stagesPassed": 10,
+      "stagesWarning": 0,
+      "stagesFailed": 0,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Business Profile",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "pharmacy",
+              "label": "Correct pharmacy",
+              "status": "PASS",
+              "detail": "Brook Pharmacy"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "/assets/pharmacy-logos/pharmaconnect.svg"
+            },
+            {
+              "id": "trust",
+              "label": "Trust profile",
+              "status": "PASS",
+              "detail": "GPhC 9012345"
+            },
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "professional-review",
+              "label": "Professional review",
+              "status": "PASS",
+              "detail": "2026-03-01 → 2026-09-01"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 2,
+          "name": "Campaign Creation",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "exists",
+              "label": "Campaign exists",
+              "status": "PASS",
+              "detail": "Travel Vaccinations — Increase Visibility"
+            },
+            {
+              "id": "visible",
+              "label": "Campaign visible in OS",
+              "status": "PASS",
+              "detail": "active"
+            },
+            {
+              "id": "service",
+              "label": "Service selected",
+              "status": "PASS",
+              "detail": "travel-vaccinations"
+            },
+            {
+              "id": "areas",
+              "label": "Areas selected",
+              "status": "PASS",
+              "detail": "Brinsworth, Parkgate, Rawmarsh"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 3,
+          "name": "Image Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "library",
+              "label": "Image library",
+              "status": "PASS",
+              "detail": "operating system loaded"
+            },
+            {
+              "id": "upload",
+              "label": "Upload records",
+              "status": "PASS",
+              "detail": "13 uploads"
+            },
+            {
+              "id": "assignments",
+              "label": "Assignments",
+              "status": "PASS",
+              "detail": "4/4 slots"
+            },
+            {
+              "id": "preview",
+              "label": "Preview",
+              "status": "PASS",
+              "detail": "visual HTML slot markers"
+            },
+            {
+              "id": "image-centre",
+              "label": "Campaign Image Centre",
+              "status": "PASS",
+              "detail": "4/4"
+            },
+            {
+              "id": "visual-page",
+              "label": "Visual page",
+              "status": "PASS",
+              "detail": "built"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 4,
+          "name": "Visual Experience",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "template",
+              "label": "Approved template",
+              "status": "PASS",
+              "detail": "V3 template blocks"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "name + NHS blue"
+            },
+            {
+              "id": "localisation",
+              "label": "Localisation",
+              "status": "PASS",
+              "detail": "Rotherham coverage"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "no broken markers"
+            },
+            {
+              "id": "logo",
+              "label": "Logo",
+              "status": "PASS",
+              "detail": "header logo"
+            },
+            {
+              "id": "cta",
+              "label": "CTA",
+              "status": "PASS",
+              "detail": "primary CTA"
+            },
+            {
+              "id": "map",
+              "label": "Map",
+              "status": "PASS",
+              "detail": "maps embed"
+            },
+            {
+              "id": "footer",
+              "label": "Footer",
+              "status": "PASS",
+              "detail": "site footer"
+            },
+            {
+              "id": "mobile",
+              "label": "Mobile",
+              "status": "PASS",
+              "detail": "viewport meta"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": "output/pharmacy-visual-experience/pharmaconnect/travel-vaccinations/index.html"
+        },
+        {
+          "stage": 5,
+          "name": "Quality Assurance",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "authority",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=94 gate=PASS"
+            },
+            {
+              "id": "enhancement",
+              "label": "Enhancement Engine",
+              "status": "PASS",
+              "detail": "33 recs"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "29 actions"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 6,
+          "name": "Real Enhancement Actions",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "review-date",
+              "label": "Review Date",
+              "status": "PASS",
+              "detail": "2026-03-01"
+            },
+            {
+              "id": "next-review",
+              "label": "Next Review",
+              "status": "PASS",
+              "detail": "2026-09-01"
+            },
+            {
+              "id": "canonical",
+              "label": "Canonical",
+              "status": "PASS",
+              "detail": "https://www.brookpharmacy.co.uk/services/travel-vaccinations"
+            },
+            {
+              "id": "noindex",
+              "label": "Noindex",
+              "status": "PASS",
+              "detail": "indexable"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "4/4 assigned"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 7,
+          "name": "Publish Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "publish-ready",
+              "label": "Publish ready",
+              "status": "PASS",
+              "detail": "PASS"
+            },
+            {
+              "id": "published",
+              "label": "Published",
+              "status": "PASS",
+              "detail": "12 publish pages"
+            },
+            {
+              "id": "registry",
+              "label": "Publishing registry",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "publish-history",
+              "label": "Publishing history",
+              "status": "PASS",
+              "detail": "2026-06-18T14:26:11.259Z"
+            },
+            {
+              "id": "publish-status",
+              "label": "Publishing status",
+              "status": "PASS",
+              "detail": "published"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 8,
+          "name": "Indexing Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "submission",
+              "label": "Indexing submission",
+              "status": "PASS",
+              "detail": "2026-06-23T13:38:24.704Z"
+            },
+            {
+              "id": "queue",
+              "label": "Indexing queue",
+              "status": "PASS",
+              "detail": "7 indexed"
+            },
+            {
+              "id": "status",
+              "label": "Indexing status",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "refresh",
+              "label": "Indexing refresh",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.395Z"
+            },
+            {
+              "id": "indexed",
+              "label": "Indexed state",
+              "status": "PASS",
+              "detail": "indexed"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 9,
+          "name": "Visibility Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "tracking",
+              "label": "Visibility tracking",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "keywords",
+              "label": "Keyword tracking",
+              "status": "PASS",
+              "detail": "travel vaccinations Rotherham"
+            },
+            {
+              "id": "authority",
+              "label": "Authority score",
+              "status": "PASS",
+              "detail": "94"
+            },
+            {
+              "id": "opportunity",
+              "label": "Opportunity engine",
+              "status": "PASS",
+              "detail": "10 opportunities"
+            },
+            {
+              "id": "monitoring",
+              "label": "Monthly monitoring",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.397Z"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 10,
+          "name": "Campaign Operating System",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "campaign-os",
+              "label": "Campaign OS",
+              "status": "PASS",
+              "detail": "health=95"
+            },
+            {
+              "id": "image-centre",
+              "label": "Image Centre",
+              "status": "PASS",
+              "detail": "100% complete"
+            },
+            {
+              "id": "authority-audit",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=94"
+            },
+            {
+              "id": "enhancement-ws",
+              "label": "Enhancement Workspace",
+              "status": "PASS",
+              "detail": "real=0"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "publishing",
+              "label": "Publishing",
+              "status": "PASS",
+              "detail": "Visible"
+            },
+            {
+              "id": "indexing",
+              "label": "Indexing",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "visibility",
+              "label": "Visibility",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "28 pending"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        }
+      ],
+      "blockers": [],
+      "recommendedRepairs": []
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "campaignId": "61d6088c-9ea1-48d9-9ad8-79ecc059f63c",
+      "campaignName": "Emergency Contraception — Increase Visibility",
+      "overallStatus": "PASS",
+      "passPct": 100,
+      "stagesPassed": 10,
+      "stagesWarning": 0,
+      "stagesFailed": 0,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Business Profile",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "pharmacy",
+              "label": "Correct pharmacy",
+              "status": "PASS",
+              "detail": "Brook Pharmacy"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "/assets/pharmacy-logos/pharmaconnect.svg"
+            },
+            {
+              "id": "trust",
+              "label": "Trust profile",
+              "status": "PASS",
+              "detail": "GPhC 9012345"
+            },
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "professional-review",
+              "label": "Professional review",
+              "status": "PASS",
+              "detail": "2026-03-01 → 2026-09-01"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 2,
+          "name": "Campaign Creation",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "exists",
+              "label": "Campaign exists",
+              "status": "PASS",
+              "detail": "Emergency Contraception — Increase Visibility"
+            },
+            {
+              "id": "visible",
+              "label": "Campaign visible in OS",
+              "status": "PASS",
+              "detail": "active"
+            },
+            {
+              "id": "service",
+              "label": "Service selected",
+              "status": "PASS",
+              "detail": "emergency-contraception"
+            },
+            {
+              "id": "areas",
+              "label": "Areas selected",
+              "status": "PASS",
+              "detail": "Brinsworth, Parkgate, Rawmarsh"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 3,
+          "name": "Image Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "library",
+              "label": "Image library",
+              "status": "PASS",
+              "detail": "operating system loaded"
+            },
+            {
+              "id": "upload",
+              "label": "Upload records",
+              "status": "PASS",
+              "detail": "13 uploads"
+            },
+            {
+              "id": "assignments",
+              "label": "Assignments",
+              "status": "PASS",
+              "detail": "4/4 slots"
+            },
+            {
+              "id": "preview",
+              "label": "Preview",
+              "status": "PASS",
+              "detail": "visual HTML slot markers"
+            },
+            {
+              "id": "image-centre",
+              "label": "Campaign Image Centre",
+              "status": "PASS",
+              "detail": "4/4"
+            },
+            {
+              "id": "visual-page",
+              "label": "Visual page",
+              "status": "PASS",
+              "detail": "built"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 4,
+          "name": "Visual Experience",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "template",
+              "label": "Approved template",
+              "status": "PASS",
+              "detail": "V3 template blocks"
+            },
+            {
+              "id": "branding",
+              "label": "Branding",
+              "status": "PASS",
+              "detail": "name + NHS blue"
+            },
+            {
+              "id": "localisation",
+              "label": "Localisation",
+              "status": "PASS",
+              "detail": "Rotherham coverage"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "no broken markers"
+            },
+            {
+              "id": "logo",
+              "label": "Logo",
+              "status": "PASS",
+              "detail": "header logo"
+            },
+            {
+              "id": "cta",
+              "label": "CTA",
+              "status": "PASS",
+              "detail": "primary CTA"
+            },
+            {
+              "id": "map",
+              "label": "Map",
+              "status": "PASS",
+              "detail": "maps embed"
+            },
+            {
+              "id": "footer",
+              "label": "Footer",
+              "status": "PASS",
+              "detail": "site footer"
+            },
+            {
+              "id": "mobile",
+              "label": "Mobile",
+              "status": "PASS",
+              "detail": "viewport meta"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": "output/pharmacy-visual-experience/pharmaconnect/emergency-contraception/index.html"
+        },
+        {
+          "stage": 5,
+          "name": "Quality Assurance",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "authority",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=94 gate=PASS"
+            },
+            {
+              "id": "enhancement",
+              "label": "Enhancement Engine",
+              "status": "PASS",
+              "detail": "38 recs"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "29 actions"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 6,
+          "name": "Real Enhancement Actions",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "reviewer",
+              "label": "Reviewer",
+              "status": "PASS",
+              "detail": "Dr Sarah Mitchell"
+            },
+            {
+              "id": "review-date",
+              "label": "Review Date",
+              "status": "PASS",
+              "detail": "2026-03-01"
+            },
+            {
+              "id": "next-review",
+              "label": "Next Review",
+              "status": "PASS",
+              "detail": "2026-09-01"
+            },
+            {
+              "id": "canonical",
+              "label": "Canonical",
+              "status": "PASS",
+              "detail": "https://www.brookpharmacy.co.uk/services/emergency-contraception"
+            },
+            {
+              "id": "noindex",
+              "label": "Noindex",
+              "status": "PASS",
+              "detail": "indexable"
+            },
+            {
+              "id": "images",
+              "label": "Images",
+              "status": "PASS",
+              "detail": "4/4 assigned"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 7,
+          "name": "Publish Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "publish-ready",
+              "label": "Publish ready",
+              "status": "PASS",
+              "detail": "PASS"
+            },
+            {
+              "id": "published",
+              "label": "Published",
+              "status": "PASS",
+              "detail": "12 publish pages"
+            },
+            {
+              "id": "registry",
+              "label": "Publishing registry",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "publish-history",
+              "label": "Publishing history",
+              "status": "PASS",
+              "detail": "2026-06-18T14:26:11.347Z"
+            },
+            {
+              "id": "publish-status",
+              "label": "Publishing status",
+              "status": "PASS",
+              "detail": "published"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 8,
+          "name": "Indexing Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "submission",
+              "label": "Indexing submission",
+              "status": "PASS",
+              "detail": "2026-06-23T13:38:24.704Z"
+            },
+            {
+              "id": "queue",
+              "label": "Indexing queue",
+              "status": "PASS",
+              "detail": "7 indexed"
+            },
+            {
+              "id": "status",
+              "label": "Indexing status",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "refresh",
+              "label": "Indexing refresh",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.395Z"
+            },
+            {
+              "id": "indexed",
+              "label": "Indexed state",
+              "status": "PASS",
+              "detail": "indexed"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 9,
+          "name": "Visibility Workflow",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "tracking",
+              "label": "Visibility tracking",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "keywords",
+              "label": "Keyword tracking",
+              "status": "PASS",
+              "detail": "emergency contraception Rotherham"
+            },
+            {
+              "id": "authority",
+              "label": "Authority score",
+              "status": "PASS",
+              "detail": "94"
+            },
+            {
+              "id": "opportunity",
+              "label": "Opportunity engine",
+              "status": "PASS",
+              "detail": "10 opportunities"
+            },
+            {
+              "id": "monitoring",
+              "label": "Monthly monitoring",
+              "status": "PASS",
+              "detail": "2026-06-24T14:39:44.397Z"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        },
+        {
+          "stage": 10,
+          "name": "Campaign Operating System",
+          "status": "PASS",
+          "checks": [
+            {
+              "id": "campaign-os",
+              "label": "Campaign OS",
+              "status": "PASS",
+              "detail": "health=95"
+            },
+            {
+              "id": "image-centre",
+              "label": "Image Centre",
+              "status": "PASS",
+              "detail": "100% complete"
+            },
+            {
+              "id": "authority-audit",
+              "label": "Authority Audit",
+              "status": "PASS",
+              "detail": "score=94"
+            },
+            {
+              "id": "enhancement-ws",
+              "label": "Enhancement Workspace",
+              "status": "PASS",
+              "detail": "real=0"
+            },
+            {
+              "id": "launch-queue",
+              "label": "Launch Queue",
+              "status": "PASS",
+              "detail": "13 tasks"
+            },
+            {
+              "id": "publishing",
+              "label": "Publishing",
+              "status": "PASS",
+              "detail": "Visible"
+            },
+            {
+              "id": "indexing",
+              "label": "Indexing",
+              "status": "PASS",
+              "detail": "indexed"
+            },
+            {
+              "id": "visibility",
+              "label": "Visibility",
+              "status": "PASS",
+              "detail": "visible"
+            },
+            {
+              "id": "growth",
+              "label": "Growth Actions",
+              "status": "PASS",
+              "detail": "28 pending"
+            }
+          ],
+          "issues": [],
+          "screenshotPath": null
+        }
+      ],
+      "blockers": [],
+      "recommendedRepairs": []
+    }
+  ],
+  "allBlockers": [],
+  "recommendedRepairs": []
+}

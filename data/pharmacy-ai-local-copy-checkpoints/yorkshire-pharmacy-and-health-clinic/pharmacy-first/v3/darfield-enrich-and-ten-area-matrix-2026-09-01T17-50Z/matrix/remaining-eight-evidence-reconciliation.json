@@ -1,0 +1,181 @@
+{
+  "kind": "remaining-eight-areas-evidence-input-reconciliation",
+  "checkpointId": "darfield-enrich-and-ten-area-matrix-2026-09-01T17-50Z",
+  "generatedAt": "2026-09-01T18:10:00.000Z",
+  "readOnly": true,
+  "aiCalled": false,
+  "research": false,
+  "generation": false,
+  "copyEdits": false,
+  "rendering": false,
+  "preserved": [
+    "Wombwell accepted candidate",
+    "Darfield enriched candidate",
+    "all checkpoints",
+    "Places packs",
+    "editorial packs",
+    "campaign state",
+    "approvals"
+  ],
+  "correctionToPriorMatrix": "The ten-area matrix labelled these eight as effectively distance-only. That described what the v3 writer would receive, not what the Places packs store. This file shows the mapping loss.",
+  "mappingLoss": {
+    "storedAccepted": "attributableEntities(Places pack) over SUPPORTED_LOCAL_EVIDENCE_CATEGORIES (healthcare, community, landmarks, transport, schools, retail). These are accepted, attributable Places entities — not editorial facts.",
+    "normalizedAcceptedEntities": "buildPharmacyAiLocalCopyInputV1 maps them onto locality.acceptedEntities; buildPharmacyAiLocalCopyInputV3 then filters isCustomerAppropriateOrganisationName.",
+    "v2WouldStillSendNames": "usefulLocalEvidenceEntitiesV2 would still send healthcare/community/landmarks/transport names to a v2 writer (dropping schools, retail, and area-named entities).",
+    "serializedToV3Writer": "buildAiLocalNarrativeUserPromptV3 serializes only verifiedEditorialFacts (accepted editorial facts with sourceClass primary|secondary, after the organisation-name gate). locality.acceptedEntities are on the input object but are omitted from the prompt JSON.",
+    "sufficiency": "assessEditorialSufficiency: “entity names alone are not sufficient”; “Places entity count cannot mark an area ready”.",
+    "collectionGate": "collectEditorialEvidenceForArea throws unless the area is in EDITORIAL_PILOT_AREAS (darfield, wombwell, worsbrough only).",
+    "worsbroughHealthcare": "repairEditorialPackFromStoredPages: isCustomerAppropriateOrganisationName rejects “The Kakoty Practice Worsbrough Health Centre” (Practice + Health Centre). dumpUrls then rejects the sibling “Worsbrough Health Centre” fact from the same NHS URL."
+  },
+  "roleLegend": {
+    "local introduction": "area-identity / borough / settlement paraphrase from an authoritative body",
+    "community/history": "library activity, heritage group, listed building, mill/park paraphrase from an official source — not a Places name",
+    "healthcare context": "customer-facing NHS site paraphrase — not a raw Dr-initial Places label",
+    "pharmacy relationship/access": "in-area premises or verified straight-line km; optionally a paraphrased station/interchange fact",
+    "unsuitable/irrelevant": "schools, retail, street-junction bus stops, area-named-only entities, raw provider labels, or names that cannot support a patient decision without inventing a route or habit"
+  },
+  "alreadyAssigned": {
+    "wombwell": "primary-care-led",
+    "darfield": "community-led"
+  },
+  "convenienceLed": "Not assigned. The convenience-led template uses prompt/practical/delay language that the writing contract forbids unless an objective supplied fact supports it. None of these eight areas have that fact.",
+  "patientJourneyLed": "Not assigned as a uniqueness strategy. It is the live ecosystem default and is already a verified duplicate across all ten pages.",
+  "compactTable": [
+    {
+      "area": "Worsbrough",
+      "storedAcceptedFacts": "7 Places entities: healthcare Dr C Liley - Worsbrough Health Centre the Dove Valley Practice; The Kakoty Practice Worsbrough; community Worsbrough Library; landmarks Worsbrough Industrial Heritage Monument, Worsbrough Mill Country Park, Worsbrough Dale Park; schools The Mill Academy. Live distance 5.3 km.",
+      "usefulEditorialFacts": "None for intro/community/healthcare. Editorial pack exists (EVIDENCE LIMITED). Accepted: distance only. Rejected: Kakoty Practice Worsbrough Health Centre (name gate); Worsbrough Health Centre (dumpUrls sibling).",
+      "sentToWriter": "Yorkshire Pharmacy & Health Clinic is 5.3 km from Worsbrough, at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "omitted": "All 7 Places names — buildAiLocalNarrativeUserPromptV3 omits acceptedEntities. Library/mill/park never became facts: mill host worsbrough-mill.com not-authoritative-primary; retrievedPages have no textSample. Healthcare paraphrases rejected by isCustomerAppropriateOrganisationName + dumpUrls.",
+      "evidenceGaps": "No area-identity fact. No persisted library/mill body. Places count cannot mark READY. Landmark-led is blocked until an official mill/park paraphrase exists.",
+      "roles": {
+        "local introduction": [],
+        "community/history": ["Worsbrough Library (name only)", "Worsbrough Mill Country Park (name only; host rejected)", "Worsbrough Dale Park (name only)", "Worsbrough Industrial Heritage Monument (name only)"],
+        "healthcare context": ["Worsbrough Health Centre (extractable from Dr C Liley address; editorial paraphrase rejected)", "The Kakoty Practice Worsbrough (Places name OK; Health Centre compound label rejected)"],
+        "pharmacy relationship/access": ["5.3 km straight-line — the only fact that would be sent"],
+        "unsuitable/irrelevant": ["The Mill Academy (schools)"]
+      },
+      "proposedStrategy": "landmark-led (blocked)",
+      "proposedStrategyNote": "Recovered variant that matches Places potential (mill/park). Do not write mill copy until an authorised source yields a fact. Until then the only serializable fact is distance, which is not enough to claim a unique page. Do not reuse Darfield community-led just to name the library."
+    },
+    {
+      "area": "Thurnscoe",
+      "storedAcceptedFacts": "6 Places entities: healthcare Dr D Shepherd - Dearne Valley Group Practice; community Thurnscoe Library; landmarks Thurnscoe Park; transport Thurnscoe (area-named); schools Gooseacre Primary Academy, The Hill Primary School Thurnscoe. Live distance 4.6 km.",
+      "usefulEditorialFacts": "None — no editorial pack.",
+      "sentToWriter": "none (collectEditorialEvidenceForArea refuses the area; EDITORIAL_PILOT_AREAS excludes it)",
+      "omitted": "All 6 Places names. v3 writer never runs. Dr D Shepherd label fails isCustomerAppropriateOrganisationName (RAW_PROVIDER_LABEL). Transport entity “Thurnscoe” is only the area name.",
+      "evidenceGaps": "Not in editorial pilot set. Library and park are names, not civic facts. No GP paraphrase in customer-facing language.",
+      "roles": {
+        "local introduction": [],
+        "community/history": ["Thurnscoe Library (name only)", "Thurnscoe Park (name only)"],
+        "healthcare context": ["Dr D Shepherd - Dearne Valley Group Practice — unsuitable until a customer-facing NHS name is paraphrased"],
+        "pharmacy relationship/access": ["4.6 km on live ecosystem HTML only — not in an editorial pack"],
+        "unsuitable/irrelevant": ["Gooseacre Primary Academy", "The Hill Primary School Thurnscoe", "transport entity Thurnscoe (area name only)"]
+      },
+      "proposedStrategy": "community-led (reuse, blocked)",
+      "proposedStrategyNote": "Library + park could support a community-led role after official paraphrase. Strategy reuse with Darfield does not prove uniqueness. Raw Dr-label must not be used as healthcare copy."
+    },
+    {
+      "area": "Grimethorpe",
+      "storedAcceptedFacts": "3 Places entities: healthcare The Grimethorpe Centre; landmarks Grimethorpe Nature Reserve; transport Grimethorpe Interchange (bus_stop/transit_station). Live distance 4.8 km.",
+      "usefulEditorialFacts": "None — no editorial pack.",
+      "sentToWriter": "none (not in EDITORIAL_PILOT_AREAS)",
+      "omitted": "All 3 Places names. Historical convenience-led revision is not restored: that template requires unsupported convenience claims.",
+      "evidenceGaps": "No library. Nature reserve is a Places park type, not a listing. Interchange types include bus_stop — cannot invent routes or times. No editorial collection authorised.",
+      "roles": {
+        "local introduction": [],
+        "community/history": ["Grimethorpe Nature Reserve (name only; not a verified listing)"],
+        "healthcare context": ["The Grimethorpe Centre (name only; doctor type — needs NHS paraphrase)"],
+        "pharmacy relationship/access": ["Grimethorpe Interchange (named interchange; not a timetable/route fact)", "4.8 km live only"],
+        "unsuitable/irrelevant": []
+      },
+      "proposedStrategy": "access-led (blocked)",
+      "proposedStrategyNote": "Interchange is the distinctive Places item. Do not assign convenience-led. Access-led still needs a paraphrased access fact, not a bus-stop name."
+    },
+    {
+      "area": "Goldthorpe",
+      "storedAcceptedFacts": "14 Places entities: healthcare BHF GOLDTHORPE SURGERY Branch, Lakeside Surgery, Dr A Littlewood - The Goldthorpe Medical Centre, Hollygreen Practice, The Goldthorpe P M S Practice; community Goldthorpe Library, Dearneside Leisure Centre; transport Goldthorpe (area-named), Barnsley Road/High Street, Goldthorpe Station; schools Goldthorpe Primary Academy, Astrea Academy Dearne, Highgate Primary School, Sacred Heart Catholic Primary School. Live distance 4.9 km.",
+      "usefulEditorialFacts": "None — no editorial pack.",
+      "sentToWriter": "none (not in EDITORIAL_PILOT_AREAS)",
+      "omitted": "All 14 Places names. This is the largest mapping loss. A rich Places pack is not distance-only; the writer simply never receives the names.",
+      "evidenceGaps": "No editorial collection. Goldthorpe Station could become an access-transport fact like Wombwell station only from an official body. Several GP labels are customer-facing; Dr A Littlewood is a raw provider label. Leisure centre and schools are not Pharmacy First civic facts.",
+      "roles": {
+        "local introduction": [],
+        "community/history": ["Goldthorpe Library (name only)"],
+        "healthcare context": ["Lakeside Surgery", "Hollygreen Practice", "The Goldthorpe P M S Practice", "BHF GOLDTHORPE SURGERY Branch — names only", "Dr A Littlewood - The Goldthorpe Medical Centre — raw provider label"],
+        "pharmacy relationship/access": ["Goldthorpe Station (name only)", "4.9 km live only"],
+        "unsuitable/irrelevant": ["Dearneside Leisure Centre", "Barnsley Road/High Street (junction stop)", "transport entity Goldthorpe (area name)", "four schools"]
+      },
+      "proposedStrategy": "primary-care-led (reuse, blocked)",
+      "proposedStrategyNote": "Densest GP set among the eight. Reuses Wombwell’s strategy; uniqueness still requires distinct editorial GP paraphrases, not Places names. Do not treat the library name as community-led copy."
+    },
+    {
+      "area": "Hoyland",
+      "storedAcceptedFacts": "7 Places entities: transport Hoyland Road/Stoney Croft; schools Kirk Balk Academy, St Helen's Catholic Primary School, Greenfield Primary School, Hoyland Springwood Primary School, Hoyland Common Primary School, West Meadows Primary School. healthcare/community/landmarks/retail empty. Live distance 5.4 km.",
+      "usefulEditorialFacts": "None — no editorial pack.",
+      "sentToWriter": "none (not in EDITORIAL_PILOT_AREAS)",
+      "omitted": "All 7 Places names. Unlike Goldthorpe/Royston, this pack is not civic-rich: six schools plus one junction bus stop. The prior “distance only” label is closer to the truth here.",
+      "evidenceGaps": "No library, GP, landmark or station in the accepted Places buckets. Schools are unsuitable. Junction stop cannot support access-led travel copy. Pack thinness is the gap, not only serializer drop.",
+      "roles": {
+        "local introduction": [],
+        "community/history": [],
+        "healthcare context": [],
+        "pharmacy relationship/access": ["5.4 km live only"],
+        "unsuitable/irrelevant": ["Hoyland Road/Stoney Croft (junction bus stop)", "six schools"]
+      },
+      "proposedStrategy": "none supportable",
+      "proposedStrategyNote": "No recovered variant can be filled from stored Places without inventing civic or convenience claims. Do not assign convenience-led or landmark-led."
+    },
+    {
+      "area": "Cudworth",
+      "storedAcceptedFacts": "4 Places entities: healthcare The NHS Cudworth Centre, White Rose Medical Practice; landmarks Cudworth Park; schools Cherry Dale Primary. Live distance 5.5 km.",
+      "usefulEditorialFacts": "None — no editorial pack.",
+      "sentToWriter": "none (not in EDITORIAL_PILOT_AREAS)",
+      "omitted": "All 4 Places names. Two health-centre names are customer-facing and would be healthcare-context if paraphrased from NHS pages.",
+      "evidenceGaps": "No library. Park is name-only. No editorial collection.",
+      "roles": {
+        "local introduction": [],
+        "community/history": ["Cudworth Park (name only)"],
+        "healthcare context": ["The NHS Cudworth Centre", "White Rose Medical Practice — names only"],
+        "pharmacy relationship/access": ["5.5 km live only"],
+        "unsuitable/irrelevant": ["Cherry Dale Primary"]
+      },
+      "proposedStrategy": "primary-care-led (reuse, blocked)",
+      "proposedStrategyNote": "Healthcare names look customer-facing. Reuses Wombwell/Goldthorpe’s intended role; still needs NHS paraphrases. Not community-led (no library fact)."
+    },
+    {
+      "area": "Royston",
+      "storedAcceptedFacts": "13 Places entities: healthcare Royston Group Practice, High Street Practice; community Royston Leisure Centre, Royston Library, Manor Court Community Centre, Meadow Crescent Community Centre; landmarks The Royston Park, Rabbit Ings Country Park; transport Cross Lane/East End Crescent; schools Summerfields Primary Academy, Parkside Primary Academy, Meadstead Primary Academy, Royston S John Baptist CE VA Primary School. Live distance 8.9 km.",
+      "usefulEditorialFacts": "None — no editorial pack.",
+      "sentToWriter": "none (not in EDITORIAL_PILOT_AREAS)",
+      "omitted": "All 13 Places names. Second-largest mapping loss. Civic Places set is richer than Worsbrough’s editorial output.",
+      "evidenceGaps": "Library/community centres/parks are names, not history or activity facts. Leisure centres and schools are unsuitable. Junction bus stop is not access copy. 8.9 km is live-only.",
+      "roles": {
+        "local introduction": [],
+        "community/history": ["Royston Library (name only)", "The Royston Park (name only)", "Rabbit Ings Country Park (name only)"],
+        "healthcare context": ["Royston Group Practice", "High Street Practice — names only"],
+        "pharmacy relationship/access": ["8.9 km live only"],
+        "unsuitable/irrelevant": ["Royston Leisure Centre", "Manor Court Community Centre", "Meadow Crescent Community Centre", "Cross Lane/East End Crescent", "four schools"]
+      },
+      "proposedStrategy": "community-led (reuse, blocked)",
+      "proposedStrategyNote": "Richest library/community/park Places set. Reuses Darfield’s strategy; uniqueness still needs official civic paraphrase, not a library name. Do not use 8.9 km to make this access-led if Chapeltown takes that role."
+    },
+    {
+      "area": "Chapeltown",
+      "storedAcceptedFacts": "12 Places entities: healthcare Burncross Surgery - Chapelgreen Practice, Chapeltown Surgery; community Chapeltown Library, Chapeltown (& Burncross) Community Centre; landmarks Chapeltown War Memorial, Chapeltown Park; transport Chapeltown (area-named); retail Lound Court Shopping Centre; schools Chapeltown Academy, Ecclesfield Secondary School - Minerva Learning Trust, Paces School for Conductive Education, Windmill Hill Primary. Live distance 9.8 km.",
+      "usefulEditorialFacts": "None — no editorial pack.",
+      "sentToWriter": "none (not in EDITORIAL_PILOT_AREAS)",
+      "omitted": "All 12 Places names. Transport entity is only “Chapeltown”, not a named station fact. Retail and schools are unsuitable.",
+      "evidenceGaps": "Farthest live distance is on ecosystem HTML, not in an editorial pack. Library/park/surgeries need official paraphrases. War memorial is not a listing fact.",
+      "roles": {
+        "local introduction": [],
+        "community/history": ["Chapeltown Library (name only)", "Chapeltown Park (name only)", "Chapeltown War Memorial (name only)"],
+        "healthcare context": ["Chapeltown Surgery", "Burncross Surgery - Chapelgreen Practice — names only"],
+        "pharmacy relationship/access": ["9.8 km live only — distinctive among the ten if serialized", "transport entity Chapeltown is the area name, not a station fact"],
+        "unsuitable/irrelevant": ["Lound Court Shopping Centre", "Chapeltown (& Burncross) Community Centre (venue name)", "four schools"]
+      },
+      "proposedStrategy": "access-led (blocked)",
+      "proposedStrategyNote": "Farthest verified live distance (9.8 km). Access-led is the recovered variant that fits that role once the km fact is serialized. Do not invent a rail station from the area-named transport entity."
+    }
+  ]
+}

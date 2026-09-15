@@ -48,7 +48,7 @@ async function uploadAndResolveImages(
   resolved: ImageAssignment;
   debug: Record<keyof ImageAssignment, ImageDebugEntry>;
 }> {
-  const scenes: Array<keyof ImageAssignment> = ["hero", "support", "conversion"];
+  const scenes: Array<keyof ImageAssignment> = ["hero", "support", "trust", "conversion"];
   const resolved = { ...images };
   const debug = {} as Record<keyof ImageAssignment, ImageDebugEntry>;
 

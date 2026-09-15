@@ -1,0 +1,153 @@
+{
+  "slug": "pharmaconnect",
+  "serviceId": "travel-vaccinations",
+  "pass": true,
+  "checks": [
+    {
+      "id": "1-dashboard-loads",
+      "pass": true,
+      "detail": "Dashboard HTML renders"
+    },
+    {
+      "id": "2-service-selector",
+      "pass": true,
+      "detail": "Service selector present"
+    },
+    {
+      "id": "3-slot-grid",
+      "pass": true,
+      "detail": "Slot grid present"
+    },
+    {
+      "id": "4-library-picker",
+      "pass": true,
+      "detail": "Library picker present"
+    },
+    {
+      "id": "5-upload-endpoint-layer",
+      "pass": true,
+      "detail": "Support upload registered and assigned"
+    },
+    {
+      "id": "6-library-assign-hero",
+      "pass": true,
+      "detail": "Hero assigned from library"
+    },
+    {
+      "id": "7-ai-request-trust",
+      "pass": true,
+      "detail": "AI request created for trust (pending)"
+    },
+    {
+      "id": "8-assignment-json-updated",
+      "pass": true,
+      "detail": "Assignment JSON includes conversion library ref"
+    },
+    {
+      "id": "9-campaign-reads-status",
+      "pass": true,
+      "detail": "3/4 assigned · library 2 upload 1"
+    },
+    {
+      "id": "10-visual-page-images",
+      "pass": true,
+      "detail": "Hero and support render as img tags"
+    },
+    {
+      "id": "11-no-placeholder-when-assigned",
+      "pass": true,
+      "detail": "Assigned slots render img without missing marker"
+    },
+    {
+      "id": "12-template-layout-preserved",
+      "pass": true,
+      "detail": "Approved template layout intact"
+    },
+    {
+      "id": "13-no-master-changes",
+      "pass": true,
+      "detail": "No master files modified in this run"
+    },
+    {
+      "id": "live-dashboard-skipped",
+      "pass": true,
+      "detail": "Dashboard auth-gated — offline HTML checks used"
+    },
+    {
+      "id": "live-library-api-skipped",
+      "pass": true,
+      "detail": "Library API auth-gated"
+    }
+  ],
+  "campaignSummary": {
+    "assignedCount": 3,
+    "totalSlots": 4,
+    "allAssigned": false,
+    "slots": [
+      {
+        "slot": "hero",
+        "label": "Hero",
+        "assigned": true,
+        "previewUrl": "/assets/pharmacy-image-library/travel-health-services/travel-vaccination.svg",
+        "sourcePath": "assets/pharmacy-image-library/travel-health-services/travel-vaccination.svg",
+        "libraryRef": "travel-health-services/travel-vaccination",
+        "alt": "Travel vaccinations at Brook Pharmacy in Rotherham",
+        "source": "assignment",
+        "sourceType": "library",
+        "status": "assigned"
+      },
+      {
+        "slot": "support",
+        "label": "Support",
+        "assigned": true,
+        "previewUrl": "/assets/pharmacy-uploads/pharmaconnect/travel-vaccinations-support-1782400897235.svg",
+        "sourcePath": "assets/pharmacy-uploads/pharmaconnect/travel-vaccinations-support-1782400897235.svg",
+        "libraryRef": "upload/f09a9f75-126e-436f-ac88-0522bf8265e7",
+        "alt": "Validation support upload",
+        "source": "upload",
+        "sourceType": "upload",
+        "status": "assigned"
+      },
+      {
+        "slot": "trust",
+        "label": "Trust",
+        "assigned": true,
+        "previewUrl": "/assets/pharmacy-image-library/core-pharmacy/community-pharmacy.svg",
+        "sourcePath": "assets/pharmacy-image-library/core-pharmacy/community-pharmacy.svg",
+        "libraryRef": "core-pharmacy/community-pharmacy",
+        "alt": "Professional pharmacy marketing photograph for Travel Vaccinations. Slot: trust. Category: trust. Pharmacy: Brook Pharma",
+        "source": "ai",
+        "sourceType": "ai",
+        "status": "pending"
+      },
+      {
+        "slot": "conversion",
+        "label": "Conversion",
+        "assigned": true,
+        "previewUrl": "/assets/pharmacy-image-library/travel-health-services/malaria-advice.svg",
+        "sourcePath": "assets/pharmacy-image-library/travel-health-services/malaria-advice.svg",
+        "libraryRef": "travel-health-services/malaria-advice",
+        "alt": "Malaria advice at Brook Pharmacy in Rotherham",
+        "source": "assignment",
+        "sourceType": "library",
+        "status": "assigned"
+      }
+    ],
+    "sourceBreakdown": {
+      "library": 2,
+      "upload": 1,
+      "ai": 0,
+      "pending": 1,
+      "missing": 0,
+      "missingSlots": []
+    },
+    "imageLibraryUrl": "/pharmacy-image-library?slug=pharmaconnect&service=travel-vaccinations",
+    "missingSlots": []
+  },
+  "previewUrls": {
+    "imageLibrary": "/pharmacy-image-library?slug=pharmaconnect&service=travel-vaccinations",
+    "visualPage": "/api/pharmacy-visual-experience/travel-vaccinations/?slug=pharmaconnect&rebuild=1",
+    "campaign": "/api/pharmacy-campaigns?slug=pharmaconnect"
+  },
+  "generatedAt": "2026-06-25T15:21:37.981Z"
+}

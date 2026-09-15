@@ -1,0 +1,171 @@
+{
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaName": "Allestree",
+  "areaSlug": "allestree",
+  "plannedAt": "2026-09-03T09:47:18.097Z",
+  "cacheReuse": {
+    "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/allestree.json",
+    "localPackPresent": false,
+    "localPackReady": false,
+    "localPackDetail": "Pack file is missing or unreadable.",
+    "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/allestree.json",
+    "editorialPackPresent": false,
+    "editorialReady": false,
+    "editorialDetail": "No saved editorial-evidence pack for this area.",
+    "editorialFactCount": 0,
+    "editorialPageCount": 0,
+    "placesEntityCount": 0
+  },
+  "missing": [
+    {
+      "id": "local-places-pack",
+      "layer": "local-places",
+      "status": "missing",
+      "detail": "Pack file is missing or unreadable."
+    },
+    {
+      "id": "editorial-descriptive-pack",
+      "layer": "editorial-descriptive",
+      "status": "missing",
+      "detail": "No saved editorial-evidence pack for this area."
+    }
+  ],
+  "proposedCalls": [
+    {
+      "id": "places-healthcare",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Attributable healthcare entities in Allestree",
+      "query": "GP surgeries medical centres walk-in centres NHS in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "places-schools",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Attributable schools entities in Allestree",
+      "query": "schools primary secondary in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "places-community",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Attributable community entities in Allestree",
+      "query": "libraries community centres leisure centres sports centres in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "places-landmarks",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Attributable landmarks entities in Allestree",
+      "query": "parks landmarks memorial in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "places-retail",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Attributable retail entities in Allestree",
+      "query": "retail parks shopping centres in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "places-transport",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Attributable transport entities in Allestree",
+      "query": "train station bus station transport in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "dataforseo-official-community",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "purpose": "Authoritative official-community sources for Allestree",
+      "query": "official council community information in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.002,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "dataforseo-official-transport",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "purpose": "Authoritative official-transport sources for Allestree",
+      "query": "official public transport information in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.002,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "dataforseo-official-healthcare",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "purpose": "Authoritative official-healthcare sources for Allestree",
+      "query": "NHS healthcare official in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.002,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "page-body-1",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "purpose": "Retrieve and date one authoritative page body for Allestree (after search)",
+      "estimatedCostUsd": 0,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "page-body-2",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "purpose": "Retrieve and date one authoritative page body for Allestree (after search)",
+      "estimatedCostUsd": 0,
+      "cached": false,
+      "required": true
+    },
+    {
+      "id": "page-body-3",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "purpose": "Retrieve and date one authoritative page body for Allestree (after search)",
+      "estimatedCostUsd": 0,
+      "cached": false,
+      "required": true
+    }
+  ],
+  "estimatedCostUsd": 0.198,
+  "estimatedCostLabel": "up to $0.198 for evidence preparation (Places + DataForSEO). Page retrieval is not a paid API. OpenAI is not included until Generate.",
+  "providersConfigured": {
+    "googlePlaces": true,
+    "dataForSeo": true
+  },
+  "placesNamesAreNotDescriptiveEvidence": "Places entity names alone must not count as descriptive local evidence. Editorial readiness requires dated retrieved page bodies and accepted facts from authoritative sources.",
+  "paidCollectionAuthorised": false,
+  "paidCollectionBlockedReason": "Paid collection is not authorised in this step. Review providers, proposed calls and cost first. No provider calls were made.",
+  "remainingBlocker": "Saved Allestree evidence is not READY. Local Places pack: Pack file is missing or unreadable. Editorial/descriptive pack: No saved editorial-evidence pack for this area. Places names alone cannot mark descriptive evidence ready.",
+  "wouldSave": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/allestree.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/allestree.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-page-evidence-plans/brook-pharmacy-demo-derby/pharmacy-first/v1/allestree.json"
+  ],
+  "confirmedAt": "2026-09-03T09:47:18.097Z",
+  "executed": false,
+  "paidCallsMade": 0
+}

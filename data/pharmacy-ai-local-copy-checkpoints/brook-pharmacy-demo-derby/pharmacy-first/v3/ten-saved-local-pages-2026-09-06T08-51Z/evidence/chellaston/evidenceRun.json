@@ -1,0 +1,503 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "f945b02d-2985-4fb3-827b-34c83fb1a7b8",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "chellaston",
+  "areaName": "Chellaston",
+  "planFingerprint": "7292cbdba9958712727c32a6b7c4983a847c5db7ce898af88a40dd6095d74bc4",
+  "spendingCapUsd": 0.069,
+  "status": "completed",
+  "startedAt": "2026-09-05T19:41:13.488Z",
+  "updatedAt": "2026-09-05T19:41:29.320Z",
+  "completedAt": "2026-09-05T19:41:29.320Z",
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "paidCallsMade": 4,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Chellaston, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "702a03f7-708d-497e-bdef-0987e1f5ca2d",
+      "detail": "2 Places result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:14.121Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Chellaston locality, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "2bbf3fcf-7cc3-42d9-aa89-cd3e3a868949",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:14.340Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Chellaston, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "fc32a293-18ef-4a39-93c5-3317ebfda21e",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:16.476Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Chellaston, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "2b2a90c5-0b08-40c6-a628-e6e431d5c670",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:27.928Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "f4ec112b-342e-4d70-abb8-89aed87276d3",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/chellaston-medical-centre/C81108003",
+      "capturedAt": "2026-09-05T19:41:28.300Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "afdebb2f-bb12-45c8-98c2-cf0bbb80078d",
+      "detail": "Retrieved https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/chellaston-shelton-lock-ward/",
+      "capturedAt": "2026-09-05T19:41:29.208Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 5.8 km from Brook Pharmacy Demo Derby to Chellaston. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-05T19:41:29.227Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Chellaston Medical Centre",
+        "address": "Rowallan Way, Chellaston, Derby DE73 5XD",
+        "types": [
+          "medical_center",
+          "hospital",
+          "medical_clinic",
+          "doctor",
+          "point_of_interest",
+          "health",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8673971,
+          "longitude": -1.4494274
+        },
+        "placeId": "ChIJuR03ZYDweUgRENXzjJQqaO0",
+        "locality": "Rowallan Way, Chellaston, Derby DE73 5XD",
+        "addressComponents": [
+          {
+            "longText": "Rowallan Way",
+            "shortText": "Rowallan Way",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chellaston",
+            "shortText": "Chellaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE73 5XD",
+            "shortText": "DE73 5XD",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17106970002075145488&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Lister House at Chellaston",
+        "address": "Fellow Lands Way, Chellaston, Derby DE73 6SW",
+        "types": [
+          "medical_center",
+          "hospital",
+          "doctor",
+          "point_of_interest",
+          "health",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8752503,
+          "longitude": -1.4301213
+        },
+        "placeId": "ChIJT0XffHHweUgRpG6VT3vwVBM",
+        "locality": "Fellow Lands Way, Chellaston, Derby DE73 6SW",
+        "addressComponents": [
+          {
+            "longText": "Fellow Lands Way",
+            "shortText": "Fellow Lands Way",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chellaston",
+            "shortText": "Chellaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE73 6SW",
+            "shortText": "DE73 6SW",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1393002597171162788&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Chellaston",
+        "address": "Chellaston, Derby",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.870757999999995,
+          "longitude": -1.4428739
+        },
+        "placeId": "ChIJMSuiOmPweUgRTmPggzbj92k",
+        "locality": "Chellaston, Derby",
+        "addressComponents": [
+          {
+            "longText": "Chellaston",
+            "shortText": "Chellaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=7635821516510225230&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Chellaston, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-05T19:41:14.341Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/chellaston-medical-centre/C81108003",
+          "title": "Chellaston Medical Centre",
+          "description": "Official information from NHS about Chellaston Medical Centre including contact details, directions, This GP surgery is currently accepting new patients."
+        },
+        {
+          "url": "https://melbourneandchellaston.nhs.uk/",
+          "title": "Melbourne & Chellaston Medical Practice | GP Practice",
+          "description": "Melbourne & Chellaston Medical Practice … 8EF Chellaston Medical Centre, Rowallan Way, Derby, DE73 5BG. NHS 111 is available 24 hours a day, 365 days a year."
+        },
+        {
+          "url": "https://listerhousesurgery.co.uk/",
+          "title": "Lister House Surgery – NHS GP Surgeries in Derby",
+          "description": "Lister House At Chellaston Fellow Lands Way Chellaston Derby DE73 6SW Get directions · 01332 271 212 · Home · Appointments ... You and your general practice. Read more"
+        },
+        {
+          "url": "https://www.cqc.org.uk/location/1-550980766/inspection-summary",
+          "title": "Dr Black & Partners",
+          "description": "(01332) 720077 … commissioned by NHS England. The main location is Chellaston Medical Centre. The practice is open between 8am and 6.30pm Monday to Friday."
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration"
+        },
+        {
+          "url": "https://derbygp.co.uk/",
+          "title": "Find an NHS GP in Derby | Choose From 33 Practices",
+          "description": "Finding an NHS GP in the heart of Derby is now easier than ever. There are 33 GP practices within 3 miles of Derby City Centre that are currently accepting ..."
+        },
+        {
+          "url": "https://allhealthandcare.co.uk/providers/DE73-8EF/melbourne-chellaston-medical-practice-C81108",
+          "title": "MELBOURNE & CHELLASTON MEDICAL PRACTICE",
+          "description": "MELBOURNE & CHELLASTON MEDICAL PRACTICE is located at MELBOURNE & CHELLASTON MP, PENN LANE, MELBOURNE, MELBOURNE, DERBY, DE73 8EF. Use the map and directions ... Read more"
+        },
+        {
+          "url": "https://www.whatclinic.com/doctors/uk/derbyshire/derby/chellaston-and-melbourne-medical-centre-penn-lane",
+          "title": "Chellaston and Melbourne Medical Centre Penn Lane",
+          "description": "This general medical and primary healthcare group runs two NHS medical clinics in Derby. The clinics are located at Melbourne and Chellaston in Derby. Read more"
+        },
+        {
+          "url": "https://macklinstreetsurgery.co.uk/",
+          "title": "Macklin Street Surgery – NHS GP Surgeries in Derbyshire",
+          "description": "Armed Forces veteran friendly accredited GP practice. Part of Greater Derby Primary Care Network. Macklin Street Surgery 90 Macklin Street Derby DE1 1JX Get ... Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Chellaston, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-05T19:41:16.478Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/chellaston-shelton-lock-ward/",
+          "title": "Chellaston and Shelton Lock ward",
+          "description": "Chellaston is part of the South East area. hood Team is based at the Council House, Corporation Street, Derby, DE1 2FS. 07812 301330 stephanie.holt@derby.gov. ..."
+        },
+        {
+          "url": "https://www.yumpu.com/en/document/view/7409585/chellaston-shelton-lock-neighbourhood-forum-derby-city-council",
+          "title": "Chellaston & Shelton Lock Neighbourhood Forum - Derby ...",
+          "description": "7 Jan 2013 — Neighbourhood Forum - Derby City Council. Visit www.derby.gov.uk/neighbourhoods for more information.<br. Activities and Services for Older ..."
+        },
+        {
+          "url": "https://www.southderbyshire.gov.uk/about-us/councillors-and-meetings/parish-councils",
+          "title": "Parish councils",
+          "description": "There are 31 Parish Councils in South Derbyshire. A full breakdown of chairmen and clerks is available should you wish to get in touch or attend meetings. Read more"
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/council/council-works/other-councils/town-and-parish-councils/town-and-parish-councils.aspx",
+          "title": "Town and parish councils",
+          "description": "There are 204 parish and town councils in Derbyshire. The chair of the town council is called the town mayor. will meet in their local village hall, school or  ..."
+        },
+        {
+          "url": "http://www.chellastonhistorygroup.co.uk/links.htm",
+          "title": "CHG - Links",
+          "description": "Chellaston Residents' Association is a non-profit organisation dedicated to ensuring that the interests of residents are represented at all levels. We are in ... Read more"
+        },
+        {
+          "url": "https://www.hattonparish.gov.uk/",
+          "title": "Home I Hatton Parish Council | Welcome to Our Home Page",
+          "description": "Welcome to Hatton Parish Council. Providing information about the Parish Council, the locality and general community information. Read more"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chellaston",
+          "title": "Chellaston",
+          "description": "Chellaston is a suburban village on the southern outskirts of Derby, in Derbyshire, England. the population was 15,198 - an increase of 24.95% from 2001."
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://www.facebook.com/chellaston.org.uk/posts/7215ee9c/1448157414012770/",
+          "title": "https://communications.derby.gov.uk/cr/AQii_wMQ5rGjBxi- ...",
+          "description": "Community Short Breaks are for children and young people with Special Educational Needs and Disabilities (SEND) who need extra help to take part ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/chellaston-medical-centre/C81108003",
+      "title": "Chellaston Medical Centre - NHS",
+      "status": 200,
+      "textSample": "Chellaston Medical Centre - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care Chellaston Medical Centre Rowallan Way, Chellaston, Derby, Derbyshire, DE73 5BG Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-05T19:41:28.300Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/chellaston-shelton-lock-ward/",
+      "title": "Chellaston and Shelton Lock ward - Derby City Council",
+      "status": 200,
+      "textSample": "Chellaston and Shelton Lock ward - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Council and democracy Neighbourhood partnerships Wards A to C Chellaston and Shelton Lock ward Chellaston and Shelton Lock ward Chellaston and Shelton Lock Neighbourhood team Chellaston is part of the South East area. Your Neighbourhood Team is based at the Council House, Corporation Street, Derby, DE1 2FS. If you would like to get involved in your neighbourhood, you have any ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Steph Holt Neighbourhood Manager 07812 301330 stephanie.holt@derby.gov.uk Jonathan Till Neighbourhood Officer 07812 301831 jonathan.till3@derby.gov.uk Claire Briggs Neighbourhood Officer 07721 110397 claire.briggs@derby.gov.uk Marissa Messam Local Area Coordinator, Chellaston and Shelton Lock 07766 602619 marissa.messam@derby.gov.uk Anti-social behaviour and crime If you have concerns about your neighbourhood, wish to complain about anti-social behaviour you can contact the Chellaston Safer Neighbourhood Team, by: telephone: 101 email: east.neighbourhoods@derbyshire.pnn.police.co.uk Your Safer Neighbourhood Team is committed to making your community a safer and better place to live and work. Chellaston Neighbourhood Forum These meetings take place within the Ward only if there is an identified issue that requires a meeting. When a Neighbourhood Forum is required, it will be advertised, however for further information, email Steph Holt at stephanie.holt@derby.gov.uk . Chellaston Neighbourhood Board Your local Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. The board: leads on behalf of the whole neighbourhood agrees the priorities for the neighbourhood decides where delegated Council budgets are to be spent monitors performance influences decisions that reflect the views of local residents decides on the vision for your neighbourhood. The Neighbourhood Board received a budget from April 2022. This budget is to enable voluntary and community groups (Non Commercial) to apply for funding for projects/events, that will both benefit and enable the community and its residents. If you would be interested in putting together a funding application for consideration of the Board, complete the application form using the guidance . Find out how to become a member of your Neighbourhood Board. Members of Chellaston Neighbourhood Board 2023/24 Derby City Council's councillor representatives Chair - Councillor P Ingall Councillor C Ingall Councillor Lakin Partner services Sgt Tony England - Derbyshire Police Shareen Akhtar - Derbyshire Fire & Rescue Residents Alan Radford Gillian Donaldson Glenys Radford Community organisations' representatives Amanda Kelly - Chellaston Events Group Spirit of Chellaston Craig Froggatt - AFC Chellaston John Bowden - Chellaston Residents Association Ann Witheford - Chellaston Neighbourhood Planning Forum (CNPF) Ian Colder - Chellaston Community Association James Alan Wright - Chellaston Bowls Club Chellaston Neighbourhood Board council advisors Sharon Sewell - Neighbourhood Partnership Manager Aidan Ryrie – South Area Traffic Management Manager Sarah Webster - Derby Parks Tracy O&rsquo;Connor - Derby Homes Marissa Jefford – Local Area Co-ordinator Chellaston Neighbourhood Board dates 2022-23 Monday 30 January: 6pm to 7.30pm – Acorn Close Community Room How can I join the Chellaston Neighbourhood Board? If you are interested in joining your local Neighbourhood Board, or your community group is interested in nominating a representative, download, complete and return an application form or contact us . Ward Walkabouts and Roadshow events Ward walkabouts is an initiative to strengthen community spirit and build safer communities. This involves Councillors, Neighbourhoods, Public Protection Officers, Derby Homes and the Police, together with local residents leading a high profile and visible patrol including a litter pick. The idea behind this is to get back to traditional community values of local people looking out for each other and identifying any problems raised in the area. Roadshows are similar to the Ward Walkabouts but are static events in various locations across the ward. Ward Walkabouts take place within the Ward only if there is an identified issue that requires addressing. When a Ward Walkabout is required, it will be advertised, however for further information, email Steph Holt at stephanie.holt@derby.gov.uk . More information For more information on what neighbourhood forums and boards are, and how to access funding for local projects and community groups, visit the Neighbourhood working page. Previous Next More in this section Abbey neighbourhood ward Allestree neighbourhood ward Alvaston neighbourhood ward Arboretum neighbourhood ward Blagreaves neighbourhood ward Chaddesden neighbourhood ward Chellaston and Shelton Lock ward Contact details Email: neighbourhoods@derby.gov.uk Department: --> Phone: - --> --> Relay UK: --> SignVideo: Signing service Address: Community Safety and Integration Service Public Protection and Streetpride The Council House Corporation Street Derby DE1 2FS Document downloads Useful links --> Chellaston Residents' Association --> Derbyshire Police --> Derby Homes --> Derby and Derbyshire Integrated Care Board --> Derbyshire Fire and Rescue Service --> Enthusiasm Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-05T19:41:29.208Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.870757999999995,
+    "longitude": -1.4428739,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 5.8,
+  "verifiedGpPracticeCount": 1,
+  "findings": [
+    "1 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "substantive editorial evidence supports intro, context and access",
+    "Actual evidence spend $0.068 of cap $0.069. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/chellaston.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/chellaston.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 1 verified GP practice(s). Spend $0.068.",
+  "reprocessedAt": null
+}

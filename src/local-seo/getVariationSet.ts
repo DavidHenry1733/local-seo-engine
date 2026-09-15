@@ -14,7 +14,16 @@ type VariationConfig = {
   introStyles: string[];
   ctaStyles: string[];
   headingStyles: HeadingStyle[];
+  templateStyles: string[];
   faqPools: Record<string, string[]>;
+};
+
+type PartialVariationConfig = {
+  introStyles?: string[];
+  ctaStyles?: string[];
+  headingStyles?: HeadingStyle[];
+  templateStyles?: string[];
+  faqPools?: Record<string, string[]>;
 };
 
 function readJsonFile<T>(filePath: string): T {
@@ -37,11 +46,48 @@ function pickByHash<T>(items: T[], seed: string): T {
 
 export function getVariationSet(projectRoot: string, slug: string, serviceSlug: string) {
   const configPath = path.join(projectRoot, "input", "variation.json");
-  const config = readJsonFile<VariationConfig>(configPath);
+  const globalConfig = readJsonFile<VariationConfig>(configPath);
+
+  const serviceConfigPath = path.join(projectRoot, "input", "service-variations", `${serviceSlug}.json`);
+  const serviceConfig = fs.existsSync(serviceConfigPath)
+    ? readJsonFile<PartialVariationConfig>(serviceConfigPath)
+    : {};
+
+  const config: VariationConfig = {
+    introStyles: serviceConfig.introStyles?.length ? serviceConfig.introStyles : globalConfig.introStyles,
+    ctaStyles: serviceConfig.ctaStyles?.length ? serviceConfig.ctaStyles : globalConfig.ctaStyles,
+    headingStyles: serviceConfig.headingStyles?.length ? serviceConfig.headingStyles : globalConfig.headingStyles,
+    templateStyles: serviceConfig.templateStyles?.length ? serviceConfig.templateStyles : globalConfig.templateStyles,
+    faqPools: { ...globalConfig.faqPools, ...(serviceConfig.faqPools || {}) }
+  };
 
   const introStyle = pickByHash(config.introStyles, `${slug}-intro`);
   const ctaStyle = pickByHash(config.ctaStyles, `${slug}-cta`);
   const headingStyle = pickByHash(config.headingStyles, `${slug}-heading`);
+
+  const areaPart = slug.split("-").slice(2).join("-") || slug;
+  const areaOrder = [
+    "ecclesall",
+    "fulwood",
+    "hillsborough",
+    "crookes",
+    "rotherham",
+    "bramley",
+    "aston",
+    "dinnington",
+    "parkgate",
+    "rawmarsh",
+    "swallownest",
+    "thurcroft",
+    "wickersley",
+    "maltby",
+    "kiveton-park"
+  ];
+  const areaIndex = areaOrder.indexOf(areaPart);
+  const templateSeed = areaIndex >= 0 ? areaIndex : hashString(`${slug}-template`);
+  const templateStyle = config.templateStyles[
+    templateSeed % config.templateStyles.length
+  ];
 
   const faqPool = config.faqPools[serviceSlug] || [];
   const faqSeed = hashString(`${slug}-faq`);
@@ -59,6 +105,7 @@ export function getVariationSet(projectRoot: string, slug: string, serviceSlug: 
     introStyle,
     ctaStyle,
     headingStyle,
+    templateStyle,
     selectedFaqs
   };
 }

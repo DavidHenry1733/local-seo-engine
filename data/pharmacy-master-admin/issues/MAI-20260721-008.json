@@ -1,0 +1,40 @@
+{
+  "issueId": "MAI-20260721-008",
+  "createdAt": "2026-07-21T12:00:00.000Z",
+  "createdBy": "rc1-c08-design-intelligence-validation",
+  "updatedAt": "2026-07-21T12:00:00.000Z",
+  "tenantSlug": "banner-cross-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "Website Import Design Intelligence → Layout DNA → Typography DNA → Component DNA → Canonical Render → Objective Validation",
+  "category": "Design",
+  "severity": "Critical",
+  "title": "RC1-C08 — Design Intelligence Completeness",
+  "description": "RC1-C07 PO validation failed: subjective fidelity scores (95%) contradicted browser evidence. Website Import did not capture sufficient design intelligence; renderer still produced generic PharmaConnect body layout despite imported colours/logo.",
+  "expectedBehaviour": "Design Intelligence completeness ≥95% across header/footer/layout/typography; objective DOM/screenshot similarity ≥95%; canonical render consumes captured evidence only with no silent generic fallbacks; commercial publish blocked when gates fail",
+  "actualBehaviour": "Completeness gates now pass at 100% after Elementor-aware capture fixes, but objective identity similarity remains 43% — footer 25%, navigation 0%, layout 10%, screenshot 34%. Render contract blocks incomplete lineage; publish gate correctly BLOCKED.",
+  "reproductionSteps": "Run scripts/rc1-c08-design-intelligence-validation.ts banner-cross-pharmacy pharmacy-first; compare source https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield/ vs canonical preview/publish",
+  "affectedUrl": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+  "screenshotReference": "data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c08-evidence/",
+  "status": "Blocked",
+  "assignee": "Unassigned",
+  "resolutionNotes": "Added objective completeness scoring, similarity measurement, pipeline audit, render contract enforcement, Elementor DOM extraction, desktop viewport capture fix. Capture completeness 100%; renderer body layout still generic — similarity gate fails.",
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-21T12:00:00.000Z",
+      "user": "rc1-c08-design-intelligence-validation",
+      "status": "Blocked",
+      "notes": "Design intelligence completeness 100%; objective overall identity similarity 43%; release gate BLOCKED pending renderer consumption of full Component/Layout DNA"
+    }
+  ],
+  "relatedFiles": [
+    "src/pharmacy/pharmacyWebsiteDesignExtractScript.ts",
+    "src/pharmacy/pharmacyWebsiteDesignCaptureService.ts",
+    "src/pharmacy/pharmacyDesignIntelligenceCompletenessService.ts",
+    "src/pharmacy/pharmacyDesignIntelligenceSimilarityService.ts",
+    "src/pharmacy/pharmacyDesignIntelligenceAuditService.ts",
+    "src/pharmacy/pharmacyDesignLineageRevisionService.ts",
+    "src/pharmacy/pharmacyVisualExperienceLayoutV3.ts",
+    "scripts/rc1-c08-design-intelligence-validation.ts"
+  ]
+}

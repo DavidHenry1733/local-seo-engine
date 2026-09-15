@@ -1,0 +1,202 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T07:53:53.290Z",
+  "tokenUsage": {
+    "promptTokens": 7137,
+    "completionTokens": 345,
+    "totalTokens": 7482
+  },
+  "estimatedCostUsd": 0.017034,
+  "inputEvidencePackHash": "7cc19cc20687396e723f0bb1c98be43d6b96b9e57632d9eb42852b4d10b9f843",
+  "editorialEvidencePackHash": "1f768dd17add4ff64f6b9eecc1da32deed977c473ac41fc624285df4eb4225be",
+  "areaSlug": "borrowash",
+  "areaName": "Borrowash",
+  "editorialFactIdsUsed": [
+    "borrowash:community:borrowash-library-is-listed-as-a-community-facil",
+    "borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+    "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p"
+  ],
+  "outputCopy": {
+    "area": "Borrowash",
+    "heroHeading": "Pharmacy First in Borrowash",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Borrowash.",
+    "localIntroduction": "Pharmacy First for people in Borrowash is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Borrowash Library is listed as a community facility in Borrowash. Ashbrook Community Centre is listed as a community facility in Borrowash. NHS general practice services in Borrowash are provided from Park Medical Practice."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Borrowash Library is listed as a community facility in Borrowash.",
+        "editorialFactId": "borrowash:community:borrowash-library-is-listed-as-a-community-facil"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Ashbrook Community Centre is listed as a community facility in Borrowash.",
+        "editorialFactId": "borrowash:community:ashbrook-community-centre-is-listed-as-a-communi"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Borrowash are provided from Park Medical Practice.",
+        "editorialFactId": "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "borrowash:community:borrowash-library-is-listed-as-a-community-facil",
+      "borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+      "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Borrowash",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Borrowash.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Borrowash is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Borrowash Library is listed as a community facility in Borrowash.",
+      "supportingCanonicalFieldOrEntity": "borrowash:community:borrowash-has-a-public-library, borrowash:community:borrowash-library-is-listed-as-a-community-facil, borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+      "providerSource": "libraries.derbyshire.gov.uk, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Ashbrook Community Centre is listed as a community facility in Borrowash.",
+      "supportingCanonicalFieldOrEntity": "borrowash:community:borrowash-library-is-listed-as-a-community-facil, borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+      "providerSource": "Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Borrowash are provided from Park Medical Practice.",
+      "supportingCanonicalFieldOrEntity": "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p, borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p",
+      "providerSource": "NHS, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+      "supportingCanonicalFieldOrEntity": "borrowash:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Borrowash",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Borrowash.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Borrowash is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Borrowash Library is listed as a community facility in Borrowash.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "borrowash:community:borrowash-has-a-public-library, borrowash:community:borrowash-library-is-listed-as-a-community-facil, borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Ashbrook Community Centre is listed as a community facility in Borrowash.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "borrowash:community:borrowash-library-is-listed-as-a-community-facil, borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Borrowash are provided from Park Medical Practice.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p, borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "borrowash:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Borrowash Library is listed as a community facility in Borrowash. Ashbrook Community Centre is listed as a community facility in Borrowash. NHS general practice services in Borrowash are provided from Park Medical Practice.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Borrowash Library is listed as a community facility in Borrowash.\",\n      \"editorialFactId\": \"borrowash:community:borrowash-library-is-listed-as-a-community-facil\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Ashbrook Community Centre is listed as a community facility in Borrowash.\",\n      \"editorialFactId\": \"borrowash:community:ashbrook-community-centre-is-listed-as-a-communi\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Borrowash are provided from Park Medical Practice.\",\n      \"editorialFactId\": \"borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"borrowash:community:borrowash-library-is-listed-as-a-community-facil\",\n    \"borrowash:community:ashbrook-community-centre-is-listed-as-a-communi\",\n    \"borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Borrowash Library is listed as a community facility in Borrowash. Ashbrook Community Centre is listed as a community facility in Borrowash. NHS general practice services in Borrowash are provided from Park Medical Practice.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Borrowash Library is listed as a community facility in Borrowash.\",\n      \"editorialFactId\": \"borrowash:community:borrowash-library-is-listed-as-a-community-facil\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Ashbrook Community Centre is listed as a community facility in Borrowash.\",\n      \"editorialFactId\": \"borrowash:community:ashbrook-community-centre-is-listed-as-a-communi\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Borrowash are provided from Park Medical Practice.\",\n      \"editorialFactId\": \"borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"borrowash:community:borrowash-library-is-listed-as-a-community-facil\",\n    \"borrowash:community:ashbrook-community-centre-is-listed-as-a-communi\",\n    \"borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p\"\n  ]\n}"
+  ]
+}

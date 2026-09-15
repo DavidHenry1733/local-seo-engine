@@ -18,7 +18,7 @@ import { listMasterAdminJobs, type MasterAdminJob } from "./masterAdminJobServic
 import { runPreGenerationValidation } from "./masterAdminPreGenerationValidation.ts";
 import { buildGenerationSetupState } from "./masterAdminGenerationSetupService.ts";
 import { getPharmacyComponentDnaPath } from "./masterAdminComponentDnaPersistenceService.ts";
-import { PHARMACY_WORKSPACE_ROOT, getPharmacyBrandDnaPath } from "./pharmacyWorkspacePaths.ts";
+import { PHARMACY_WORKSPACE_ROOT, getPharmacyBrandDnaPath, getContentEcosystemDir } from "./pharmacyWorkspacePaths.ts";
 import { readSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
 import { loadGenerationReport } from "./pharmacyGenerationIntegrityService.ts";
 import {
@@ -27,6 +27,14 @@ import {
   compareCanonicalPlanOutputParity,
   type CanonicalEcosystemGenerationPlan,
 } from "./masterAdminCanonicalEcosystemGenerationPlanService.ts";
+import {
+  isDashboardAuthorisedGenerationRecord,
+  isProductOwnerGenerationRequired,
+  PRODUCT_OWNER_DASHBOARD_INITIATION_SOURCE,
+} from "./masterAdminProductOwnerAcceptanceGenerationService.ts";
+import { runImageParityGate } from "./pharmacyImageParityGateService.ts";
+import { loadImageAssignments } from "./pharmacyImageOperatingSystem.ts";
+import { buildProductionPageSlotInventory } from "./imagePlatform/pharmacyProductionImageSlotInventoryService.ts";
 
 export const HISTORICAL_ACCIDENTAL_JOB_ID = "4a470616-abbc-484e-85d9-73ee1cd520d7";
 export const HISTORICAL_ACCIDENTAL_SOURCE = "Accidental pre-approval admin workflow job";
@@ -99,9 +107,12 @@ export interface AuthorisedEcosystemGenerationRecord {
   canonicalPlanId?: string | null;
   canonicalPlanRevision?: string | null;
   canonicalPlanChecksum?: string | null;
-  completenessStatus?: "COMPLETE" | "FAILED_COMPLETENESS" | "INCOMPLETE_AGAINST_CANONICAL_PLAN" | null;
+  completenessStatus?: "COMPLETE" | "FAILED_COMPLETENESS" | "INCOMPLETE_AGAINST_CANONICAL_PLAN" | "SUPERSEDED_INCOMPLETE_RC1" | null;
+  imageCompletenessStatus?: "COMPLETE" | "FAILED_IMAGE_COMPLETENESS" | null;
   completenessLabel?: string | null;
   qualityReviewReady?: boolean;
+  initiationSource?: import("./masterAdminProductOwnerAcceptanceGenerationModel.ts").AuthorisedGenerationInitiationSource | null;
+  packageRevision?: string | null;
 }
 
 const AUTHORISED_DIR = path.join(WORKSPACE_ROOT, "data/pharmacy-master-admin/authorised-ecosystem-generation");
@@ -128,9 +139,8 @@ function fileRevision(filePath: string): string | null {
   return fs.statSync(filePath).mtime.toISOString();
 }
 
-function ecosystemRoot(slug: string, serviceId: string): string {
-  return path.join(PHARMACY_WORKSPACE_ROOT, "data/pharmacy-content-ecosystem", slug, serviceId);
-}
+import { resolveClusterPageSlug, resolveClusterPageUrlPath } from "./pharmacyClusterPageUrlResolver.ts";
+import { getContentEcosystemDir } from "./pharmacyWorkspacePaths.ts";
 
 function expectedPagePlanFromCanonical(plan: CanonicalEcosystemGenerationPlan): ExpectedPagePlan {
   const c = plan.coreEcosystem;
@@ -141,7 +151,7 @@ function expectedPagePlanFromCanonical(plan: CanonicalEcosystemGenerationPlan): 
     guides: c.guides,
     blogs: c.blogs,
     faqs: c.faqs,
-    totalPages: c.totalPages,
+    totalPages: c.inventoryTotal,
     requiredImages: c.requiredImageRoles,
   };
 }
@@ -159,7 +169,7 @@ function runPostGenerationValidation(slug: string, serviceId: string): PostGener
   if (!pkg?.generatedAt) failures.push("Content package missing generatedAt");
   if (pkg?.status === "error") failures.push(pkg.generationError || "Content package error");
   const manifest = manifestPath(slug, serviceId);
-  const registry = path.join(ecosystemRoot(slug, serviceId), "_ecosystem-index.json");
+  const registry = path.join(getContentEcosystemDir(slug, serviceId), "_ecosystem-index.json");
   const sitemap = path.join(PHARMACY_WORKSPACE_ROOT, "output/pharmacy-publish", slug, "sitemap.xml");
   if (!fs.existsSync(manifest)) failures.push("Manifest missing");
   if (!fs.existsSync(registry)) failures.push("Registry missing");
@@ -215,7 +225,9 @@ export function isAuthorisedEcosystemGenerated(slug: string): boolean {
 export function isAuthorisedEcosystemQualityReviewReady(slug: string): boolean {
   const record = readAuthorisedEcosystemGenerationRecord(slug);
   if (!isAuthorisedEcosystemGenerated(slug) || !record) return false;
+  if (isProductOwnerGenerationRequired(slug) && !isDashboardAuthorisedGenerationRecord(slug, record)) return false;
   if (record.completenessStatus === "INCOMPLETE_AGAINST_CANONICAL_PLAN") return false;
+  if (record.completenessStatus === "SUPERSEDED_INCOMPLETE_RC1") return false;
   if (record.completenessStatus === "FAILED_COMPLETENESS") return false;
   if (record.qualityReviewReady === false) return false;
   return true;
@@ -229,6 +241,19 @@ export function readHistoricalEcosystemPackage(slug: string): HistoricalEcosyste
 
   const ciApproval = readCommercialIntelligenceApproval(slug);
   const authorised = readAuthorisedEcosystemGenerationRecord(slug);
+  if (authorised?.historicalArchivePath && fs.existsSync(authorised.historicalArchivePath)) {
+    return {
+      jobId: HISTORICAL_ACCIDENTAL_JOB_ID,
+      generatedAt: pkg?.generatedAt || null,
+      source: HISTORICAL_ACCIDENTAL_SOURCE,
+      manifestPath: authorised.historicalArchivePath,
+      pageCountEstimate: countPackagePages(pkg),
+      imageCountEstimate: countPackageImages(slug, ctx.serviceId),
+      productOwnerAuthorised: false,
+      label: "Not Product Owner-authorised",
+      preservedForAudit: true,
+    };
+  }
   if (authorised?.status === "completed") return null;
 
   const generatedBeforeApproval =
@@ -298,6 +323,7 @@ export function beginAuthorisedEcosystemGeneration(
   slug: string,
   operator: string,
   jobId: string,
+  initiationSource: import("./masterAdminProductOwnerAcceptanceGenerationModel.ts").AuthorisedGenerationInitiationSource = PRODUCT_OWNER_DASHBOARD_INITIATION_SOURCE,
 ): AuthorisedEcosystemGenerationRecord {
   const ctx = loadMasterAdminCustomerContext(slug)!;
   const ci = readCommercialIntelligenceApprovalExtended(slug);
@@ -313,7 +339,7 @@ export function beginAuthorisedEcosystemGeneration(
   const genEnginePath = path.join(PHARMACY_WORKSPACE_ROOT, "data/pharmacy-generation-reports", slug, `${ctx.serviceId}.json`);
   const outputPath = path.join(PHARMACY_WORKSPACE_ROOT, "output/pharmacy-publish", slug);
   const manifest = manifestPath(slug, ctx.serviceId);
-  const registry = path.join(ecosystemRoot(slug, ctx.serviceId), "_ecosystem-index.json");
+  const registry = path.join(getContentEcosystemDir(slug, ctx.serviceId), "_ecosystem-index.json");
   const sitemap = path.join(outputPath, "sitemap.xml");
 
   const record: AuthorisedEcosystemGenerationRecord = {
@@ -323,6 +349,8 @@ export function beginAuthorisedEcosystemGeneration(
     status: "running",
     jobId,
     initiatedBy: operator,
+    initiationSource,
+    packageRevision: new Date().toISOString(),
     initiatedAt: new Date().toISOString(),
     completedAt: null,
     durationMs: null,
@@ -391,12 +419,15 @@ export function completeAuthorisedEcosystemGeneration(slug: string, job: MasterA
     job.status === "completed" && plan
       ? compareCanonicalPlanOutputParity(slug, ctx.serviceId, plan)
       : null;
+  const imageParity =
+    job.status === "completed" && plan ? runImageParityGate(slug, ctx.serviceId, plan) : null;
   const completenessStatus =
     job.status !== "completed"
       ? null
-      : parity?.ok
+      : parity?.ok && imageParity?.ok
         ? "COMPLETE"
         : "FAILED_COMPLETENESS";
+  const imageCompletenessStatus = imageParity?.imageCompletenessStatus ?? null;
 
   const record: AuthorisedEcosystemGenerationRecord = {
     ...existing,
@@ -420,23 +451,52 @@ export function completeAuthorisedEcosystemGeneration(slug: string, job: MasterA
                   ...parity.missingPages.map((p) => `Missing planned page: ${p}`),
                 ]
               : []),
+            ...(imageParity && !imageParity.ok ? imageParity.failures : []),
           ],
     warnings: postGenerationValidation?.warnings || existing.warnings,
     postGenerationValidation,
     completenessStatus,
+    imageCompletenessStatus,
     completenessLabel:
       completenessStatus === "FAILED_COMPLETENESS"
-        ? "FAILED COMPLETENESS"
+        ? imageParity && !imageParity.ok
+          ? "FAILED IMAGE COMPLETENESS"
+          : "FAILED COMPLETENESS"
         : completenessStatus === "COMPLETE"
           ? "Complete against canonical plan"
           : null,
-    qualityReviewReady: completenessStatus === "COMPLETE",
+    qualityReviewReady: completenessStatus === "COMPLETE" && imageCompletenessStatus === "COMPLETE",
     canonicalPlanId: plan?.planId || existing.canonicalPlanId || null,
     canonicalPlanRevision: plan?.planRevision || existing.canonicalPlanRevision || null,
     canonicalPlanChecksum: plan?.checksum || existing.canonicalPlanChecksum || null,
   };
   writeJsonAtomic(authorisedPath(slug), record);
   return record;
+}
+
+export function rerunAuthorisedGenerationCompletenessValidation(
+  slug: string,
+  jobId: string,
+): AuthorisedEcosystemGenerationRecord | null {
+  const existing = readAuthorisedEcosystemGenerationRecord(slug);
+  if (!existing || existing.jobId !== jobId) return null;
+  const job: MasterAdminJob = {
+    id: jobId,
+    slug,
+    action: "generate_ecosystem",
+    status: "completed",
+    user: existing.initiatedBy || "system",
+    createdAt: existing.initiatedAt || new Date().toISOString(),
+    updatedAt: existing.completedAt || new Date().toISOString(),
+    startedAt: existing.initiatedAt,
+    completedAt: existing.completedAt || new Date().toISOString(),
+    progress: 100,
+    progressLabel: "completed",
+    retryCount: 0,
+    error: undefined,
+    workflowStage: "generate_ecosystem",
+  };
+  return completeAuthorisedEcosystemGeneration(slug, job);
 }
 
 export function buildExpectedPagePlanForSlug(slug: string): ExpectedPagePlan | null {
@@ -449,8 +509,19 @@ export function assertAuthorisedEcosystemGenerationAllowed(slug: string): { ok: 
   if (!isCommercialIntelligenceApproved(slug)) {
     return { ok: false, error: "Approve Intelligence before generating the approved ecosystem." };
   }
-  if (isAuthorisedEcosystemGenerated(slug) && isAuthorisedEcosystemQualityReviewReady(slug)) {
+  if (
+    isAuthorisedEcosystemGenerated(slug) &&
+    isAuthorisedEcosystemQualityReviewReady(slug) &&
+    !isProductOwnerGenerationRequired(slug)
+  ) {
     return { ok: false, error: "Authorised ecosystem already generated — open Quality Review." };
+  }
+  if (
+    isProductOwnerGenerationRequired(slug) &&
+    isAuthorisedEcosystemGenerated(slug) &&
+    isDashboardAuthorisedGenerationRecord(slug)
+  ) {
+    return { ok: false, error: "Product Owner test package already generated — open Quality Review." };
   }
 
   const activeJob = listMasterAdminJobs({ slug, limit: 5 }).find(

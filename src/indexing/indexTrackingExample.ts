@@ -28,7 +28,7 @@
 
 import { runIndexTracking, readTrackingReport } from "./indexTrackingEngine";
 
-const PROJECT_SLUG = "rotherham-proof";
+const PROJECT_SLUG = "inboxingproweb";
 
 const STATUS_ICON: Record<string, string> = {
   indexed:     "✓",

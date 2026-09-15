@@ -1,0 +1,67 @@
+{
+  "automatedOk": false,
+  "proseEdited": false,
+  "wordListAdded": false,
+  "unresolvedFactualClaims": [],
+  "decisions": [
+    {
+      "finding": "REVIEW REQUIRED | field=heroIntroduction | unmatched wording (who)",
+      "sentence": "Pharmacy First is available to people in Wombwell who need NHS advice or treatment for eligible common conditions.",
+      "exactSourcePassages": [
+        "Locked clinical / offer: Pharmacy First can help with eligible common conditions. Eligibility depends on symptoms and NHS pathway criteria, not on the area the patient travels from.",
+        "Prompt allowance: You may say Pharmacy First can help with eligible common conditions."
+      ],
+      "leftoverToken": "who",
+      "decision": "accept",
+      "reason": "The leftover token is a relative pronoun. It does not add a local fact, waiting time, GP-referral, travel or occupancy claim. The sentence stays within permitted Pharmacy First / eligible common conditions framing."
+    },
+    {
+      "finding": "REVIEW REQUIRED | field=localContextParagraphs[0] | unmatched wording (holds)",
+      "sentence": "Citizens Advice also holds advice and welfare rights drop-in sessions at the library.",
+      "exactSourcePassages": [
+        "Saved barnsley.gov.uk Wombwell Library body (retrieved 2026-09-01T11:22:31.612Z): 'Citizens Advice run advice and welfare rights drop in sessions.'",
+        "Accepted fact: 'Citizens Advice runs advice and welfare rights drop-in sessions at Wombwell Library.'"
+      ],
+      "leftoverToken": "holds",
+      "decision": "accept",
+      "reason": "'holds' paraphrases the official 'run'/'runs' drop-in sessions. 'the library' is Wombwell Library, named in the previous sentence. This is not a new factual claim and does not invent attendance or a pharmacy relationship."
+    }
+  ],
+  "completeProseRead": true,
+  "otherCheckedClaims": [
+    {
+      "sentence": "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+      "source": "barnsley.gov.uk Wombwell Library page; accepted fact",
+      "decision": "pass"
+    },
+    {
+      "sentence": "Wombwell Library hosts local history sessions run by Wombwell Heritage Group.",
+      "source": "barnsley.gov.uk: 'Local history sessions run by Wombwell Heritage Group.'",
+      "decision": "pass"
+    },
+    {
+      "sentence": "Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park, and features the Wombwell unicorn emblem.",
+      "source": "travelsouthyorkshire.com 2026-09-01T14:18:05.581Z: 'Featuring the distinctive Wombwell “unicorn” emblem and references to the Roly Poly Hill and Wishing Tree at Wombwell Park'",
+      "decision": "pass"
+    },
+    {
+      "sentence": "Wombwell has a National Rail station.",
+      "source": "nationalrail.co.uk/stations/wombwell/",
+      "decision": "pass"
+    },
+    {
+      "sentence": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "source": "canonical premises locality Darfield; 91 Snape Hill Rd, Darfield",
+      "decision": "pass"
+    }
+  ],
+  "omittedAsUnsupported": [
+    "Wombwell is a village (car-park news refers to Barnsley's towns and villages generally, not Wombwell's settlement type).",
+    "Undated ward-profile statistics (11,477, employment shares, housing mix) — no census year in the saved body.",
+    "South Area Council administrative padding.",
+    "Coal mining / colliery history — no usable official body after Historic England 403."
+  ],
+  "operatorAcceptedForCandidateRender": true,
+  "awaitingProductOwnerVisualReview": true,
+  "approved": false
+}

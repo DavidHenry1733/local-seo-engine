@@ -1,0 +1,28 @@
+{
+  "taskId": "vision-pharmacy:pharmacy-first:v3:one-local-page:wigston",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.004114,
+  "events": [
+    {
+      "at": "2026-09-14T08:24:56.826Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-14T08:24:56.901Z",
+      "kind": "reserve",
+      "reservationId": "r-1789374296901-1"
+    },
+    {
+      "at": "2026-09-14T08:25:24.183Z",
+      "kind": "consumed",
+      "reservationId": "r-1789374296901-1",
+      "detail": "cost=0.004114"
+    }
+  ]
+}

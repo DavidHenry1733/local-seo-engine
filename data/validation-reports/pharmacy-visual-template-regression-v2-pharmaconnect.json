@@ -1,0 +1,52 @@
+{
+  "slug": "pharmaconnect",
+  "pipelineVersion": "consolidated-v1",
+  "theme": {
+    "pharmacyName": "Brook Pharmacy",
+    "logoUrl": "https://palegoldenrod-wren-659378.hostingersite.com/wp-content/uploads/2026/01/freepik__create-logo-for-a-pharmacy-brook-pharmacy-with-sty__54711-scaled-e1768071326843.png",
+    "phone": "01709 210731",
+    "primaryColor": "#005eb8",
+    "secondaryColor": "#004a91",
+    "ctaColor": "#f59e0b",
+    "accentColor": "#007a7a",
+    "backgroundColor": "#ffffff",
+    "sectionBackground": "#f8fafc",
+    "textColor": "#1f2933",
+    "mutedTextColor": "#5f6c7b",
+    "headingColor": "#1f2933",
+    "fontHeading": "Open Sans",
+    "fontBody": "Open Sans",
+    "buttonRadius": "14px",
+    "cardRadius": "26px",
+    "healthcareTeal": "#007a7a"
+  },
+  "nhsInformationalBlue": "#005eb8",
+  "generatedAt": "2026-07-01T06:03:20.708Z",
+  "pass": false,
+  "pages": [
+    {
+      "serviceId": "pharmacy-first",
+      "pass": false,
+      "failures": [
+        "layout:conditionsGrid",
+        "layout:processGrid",
+        "layout:supportImageBand"
+      ]
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "pass": true,
+      "failures": []
+    }
+  ]
+}

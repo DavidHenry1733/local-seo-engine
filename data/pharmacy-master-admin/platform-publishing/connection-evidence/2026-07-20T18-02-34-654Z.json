@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "id": "host",
+      "label": "DNS/host reachable",
+      "status": "PASS",
+      "detail": "51.161.86.187"
+    },
+    {
+      "id": "connection",
+      "label": "Connection established",
+      "status": "PASS",
+      "detail": "SFTP session opened"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication successful",
+      "status": "PASS",
+      "detail": "Credentials accepted"
+    },
+    {
+      "id": "protocol",
+      "label": "Protocol supported",
+      "status": "PASS",
+      "detail": "SFTP"
+    },
+    {
+      "id": "response-time",
+      "label": "Response time",
+      "status": "PASS",
+      "detail": "2733ms"
+    },
+    {
+      "id": "session",
+      "label": "Session closed cleanly",
+      "status": "PASS",
+      "detail": "Connection closed"
+    }
+  ],
+  "evidence": "Connected to 51.161.86.187:22 via SFTP in 2733ms",
+  "failureReason": null,
+  "operator": "defect-054-verify",
+  "stamp": "2026-07-20T18:02:34.654Z",
+  "responseMs": 2733
+}

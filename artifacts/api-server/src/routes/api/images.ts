@@ -26,7 +26,7 @@ import {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
-const WORKSPACE_ROOT = "/home/inboxingproweb/local-seo-engine";
+const WORKSPACE_ROOT = process.env.WORKSPACE_ROOT ?? "/home/inboxingproweb/pharmaconnect-growth-engine";
 const OUTPUT_DIR     = path.join(WORKSPACE_ROOT, "output");
 const PROJECTS_DIR   = path.join(WORKSPACE_ROOT, "config", "projects");
 
@@ -951,7 +951,7 @@ function buildPrompt(p: PromptParams): { prompt: string; negativePrompt?: string
   // ── Email marketing hard-coded override ────────────────────────────────────
   // Uses visual metaphors (envelope icons, automation arrows, arc graphs)
   // rather than relying on readable screen text, which conflicts with "no text".
-  if (isEmailMarketingService(p.serviceKey, p.serviceName, p.mainService, p.businessType)) {
+  if (isEmailMarketingService(p.serviceKey, p.serviceName, undefined, undefined)) {
     const imageRole = p.imageRole ?? (SLOT_DEFAULT_ROLE[slot] as ExtendedImageRole) ?? "heroImage";
     const prompt    = EMAIL_MARKETING_OVERRIDE_PROMPTS[imageRole] ?? EMAIL_MARKETING_OVERRIDE_PROMPTS.heroImage;
     console.log(
@@ -1189,7 +1189,7 @@ router.post("/images/preview-prompt", (req, res) => {
 
   // ── Email marketing override ──────────────────────────────────────────────
   const emailMktgOverride =
-    isEmailMarketingService(serviceKey, serviceName, project?.mainService as string, project?.businessType as string) ||
+    isEmailMarketingService(serviceKey, serviceName, undefined, undefined) ||
     isEmailMarketingService(reqPrimaryKeyword, reqShortDesc, undefined, undefined);
 
   if (emailMktgOverride) {
@@ -1320,7 +1320,7 @@ router.post("/images/generate", async (req, res) => {
   // and making the EMAIL_MARKETING_OVERRIDE_PROMPTS unreachable.
   // Fix: detect email marketing first and suppress industry resolution for it.
   const emailMktgOverride =
-    isEmailMarketingService(serviceKey, serviceName, project?.mainService as string, project?.businessType as string) ||
+    isEmailMarketingService(serviceKey, serviceName, undefined, undefined) ||
     isEmailMarketingService(reqPrimaryKeyword, reqShortDesc, undefined, undefined);
 
   req.log.info({
@@ -1434,10 +1434,25 @@ router.post("/images/generate", async (req, res) => {
   } else {
     // Structured role-based prompt for digital/non-trade industries
     const built = buildPrompt({
-      businessType:        project?.businessType as string,
-      mainService:         project?.mainService  as string,
+      businessType:
+        req.body.businessType ||
+        project?.businessType ||
+        serviceName ||
+        serviceKey,
+
+      mainService:
+        req.body.mainService ||
+        serviceName ||
+        project?.mainService ||
+        serviceKey,
+
       serviceKey,
-      serviceName,
+
+      serviceName:
+        serviceName ||
+        req.body.mainService ||
+        project?.mainService ||
+        serviceKey,
       location:            project?.primaryLocation as string,
       imageSlot:           slot,
       imageRole:           reqImageRole as ExtendedImageRole | undefined,
@@ -1453,6 +1468,26 @@ router.post("/images/generate", async (req, res) => {
     });
     finalPrompt         = built.prompt;
     finalNegativePrompt = built.negativePrompt;
+  }
+
+  // Force strong GBP context
+  if (serviceKey === "google-business-profile") {
+    finalPrompt += `
+Professional Google Business Profile optimisation scene.
+Google Maps rankings.
+Local business visibility.
+Customer reviews.
+Calls and direction requests.
+Google Business dashboard analytics.
+Local SEO consultant improving map visibility.
+
+Avoid:
+email marketing,
+email inboxes,
+newsletters,
+mailchimp dashboards,
+generic office laptops.
+`;
   }
 
   // ── Call Ideogram v3 API ──────────────────────────────────────────────────
@@ -1688,6 +1723,15 @@ export function normaliseServiceKey(value: string): string {
     .replace(/^-+|-+$/g, "");
 
   const compact = v.replace(/[^a-z0-9]/g, "");
+
+  // Repair corrupted Local Business Visibility service slugs seen from dashboard sanitisation.
+  if (
+    v.includes("local-business-visibility") ||
+    v.includes("local-bu-ine-vi-ibility") ||
+    compact.includes("localbusinessvisibility") ||
+    compact.includes("localbuineviibility") ||
+    (compact.includes("local") && compact.includes("bu") && compact.includes("vi"))
+  ) return "local-business-visibility";
 
   if (
     v.includes("web-design") ||
@@ -2173,13 +2217,7 @@ router.get("/images/status/:slug", (req, res) => {
     status[slot] = { exists: !!filePath, ...metaForSlot };
   }
 
-    console.log("[images/status debug JSON]");
-  console.log(JSON.stringify({
-    slug,
-    query: req.query,
-    filterSvc,
-    status
-  }, null, 2));res.json({ slug, status });
+  res.json({ slug, status });
 });
 
 // ─── DELETE /api/images/:slug/:slot ───────────────────────────────────────

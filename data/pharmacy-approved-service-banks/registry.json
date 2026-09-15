@@ -1,0 +1,141 @@
+{
+  "registryId": "pharmacy-approved-service-banks-v2",
+  "immutable": true,
+  "lockedAt": "2026-08-26T14:52:06.000Z",
+  "task": "CORE-PAGE-APPROVED-BANK-RECONNECTION-28",
+  "description": "Approved tenant-neutral v2 banks for four established services. Generation selects bank by serviceId only for service pages, localities, and FAQs.",
+  "services": {
+    "blood-pressure-checks": {
+      "serviceId": "blood-pressure-checks",
+      "approvedBankVersion": "2",
+      "approvedBankHash": "523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c",
+      "approvedBankRelativePath": "data/pharmacy-approved-service-banks/banks/blood-pressure-checks/523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c.json",
+      "sourceProvenance": {
+        "source": "yorkshire-task-25-accepted-bank",
+        "sourceHash": "3a7cc611866d8ca193b033de672952cf35aa0d4b8ac711c7bbdfa434709a6fd7",
+        "sourcePath": "/home/inboxingproweb/recovery/lock-bp-and-generate-flu-from-system-25-checkpoint-20260826094045/bp-bank/blood-pressure-checks.json",
+        "localityCompletenessTask": "BLOOD-PRESSURE-LOCALITY-CONTENT-COMPLETENESS-38",
+        "priorBankHash": "eb2d7891fb119c9985a4221085a329d0995733c15b92fbb42dd310825f831059"
+      },
+      "approvalStatus": "approved-bank-v2-pending-po-campaign-review",
+      "approvedAt": "2026-08-26T14:52:06.000Z",
+      "allowedGeneratorContract": {
+        "servicePage": "approved-bank-core-page-v1",
+        "localityPage": "local-cluster-v1",
+        "selectionRule": "bank selected solely by serviceId via approved-service-bank registry v2",
+        "renderer": "shared composeServiceVariantPackClusterDraft / selectAreaVariants",
+        "corePageAuthority": "single approved bank by serviceId for service-page sections, locality sections, and FAQs",
+        "servicePageContractRelativePath": "data/pharmacy-approved-service-banks/banks/blood-pressure-checks/service-page-contract-v1.json"
+      }
+    },
+    "travel-vaccinations": {
+      "serviceId": "travel-vaccinations",
+      "approvedBankVersion": "2",
+      "approvedBankHash": "7915eefeae0bf49c75b5a21474f70fbd7aada178198427275040fe830171c41a",
+      "approvedBankRelativePath": "data/pharmacy-approved-service-banks/banks/travel-vaccinations/7915eefeae0bf49c75b5a21474f70fbd7aada178198427275040fe830171c41a.json",
+      "sourceProvenance": {
+        "source": "recovered-leeds-era-bank-with-safety-audit",
+        "sourceHash": "4eda06a0f0d52e5bdbbf8a7e8a9f4ec752517b216274ae9a668cc83acc37abb0",
+        "copyGateTask": "TRAVEL-APPROVED-BANK-COPY-GATE-31A",
+        "priorBankHash": "e4c47e931332a83bcab819012221bc0c9b634e022191f2fe0d3034f2cc51746f"
+      },
+      "approvalStatus": "approved-bank-v2-pending-po-campaign-review",
+      "approvedAt": "2026-08-27T10:40:00.000Z",
+      "allowedGeneratorContract": {
+        "servicePage": "approved-bank-core-page-v1",
+        "localityPage": "local-cluster-v1",
+        "selectionRule": "bank selected solely by serviceId via approved-service-bank registry v2",
+        "renderer": "shared composeServiceVariantPackClusterDraft / selectAreaVariants",
+        "corePageAuthority": "single approved bank by serviceId for service-page sections, locality sections, and FAQs",
+        "servicePageContractRelativePath": "data/pharmacy-approved-service-banks/banks/travel-vaccinations/service-page-contract-v1.json"
+      }
+    },
+    "flu-vaccinations": {
+      "serviceId": "flu-vaccinations",
+      "approvedBankVersion": "2",
+      "approvedBankHash": "eb79f51391b6b6e5cd0b4ac02d6cbe235306159a8847aa704eb5d64f7f4d1ce3",
+      "approvedBankRelativePath": "data/pharmacy-approved-service-banks/banks/flu-vaccinations/eb79f51391b6b6e5cd0b4ac02d6cbe235306159a8847aa704eb5d64f7f4d1ce3.json",
+      "sourceProvenance": {
+        "source": "recovered-leeds-era-bank-with-contaminated-variants-removed",
+        "sourceHash": "204827ddafb7143a0b8e4f4d947ba4232498fbab0044c19c91d21cc837a1fc70",
+        "grammarCorrectionTask": "FLU-APPROVED-BANK-COPY-QUALITY-28A",
+        "priorBankHash": "30d2080e08632b059c2caefa2e9ec107ecf9ef33ef79e5c5ba2ed57f8d15ce73",
+        "commercialContentTask": "FLU-APPROVED-BANK-COMMERCIAL-CONTENT-28B",
+        "priorCommercialBankHash": "8db16d31ac62815eb096e5724a29aa8fba8c6e0806b6d0073ae3d5746a4554e5"
+      },
+      "approvalStatus": "approved-bank-v2-pending-po-campaign-review",
+      "approvedAt": "2026-08-26T17:10:00.000Z",
+      "allowedGeneratorContract": {
+        "servicePage": "approved-bank-core-page-v1",
+        "localityPage": "local-cluster-v1",
+        "selectionRule": "bank selected solely by serviceId via approved-service-bank registry v2",
+        "renderer": "shared composeServiceVariantPackClusterDraft / selectAreaVariants",
+        "corePageAuthority": "single approved bank by serviceId for service-page sections, locality sections, and FAQs",
+        "servicePageContractRelativePath": "data/pharmacy-approved-service-banks/banks/flu-vaccinations/service-page-contract-v1.json"
+      }
+    },
+    "pharmacy-first": {
+      "serviceId": "pharmacy-first",
+      "approvedBankVersion": "2",
+      "approvedBankHash": "46de67243945c2bc572cba35aa9ac0fdd5806fb8813fbf89506bdfabdd517cdb",
+      "approvedBankRelativePath": "data/pharmacy-approved-service-banks/banks/pharmacy-first/46de67243945c2bc572cba35aa9ac0fdd5806fb8813fbf89506bdfabdd517cdb.json",
+      "sourceProvenance": {
+        "source": "signed-off-leeds-pharmacy-first-locality-pages",
+        "sourcePaths": "output/pharmacy-content-ecosystem/leeds-pharmacy/pharmacy-first/local/*/index.html",
+        "conditionsConstant": "src/pharmacy/pharmacyFirstLocalNarrative.ts PHARMACY_FIRST_CONDITIONS",
+        "patientSafetyTask": "PHARMACY-FIRST-LOCALITY-PATIENT-SAFETY-34B",
+        "priorBankHash": "3e7ee7f5724e48b5e5d6b76ecb14d50008d0f55746d467b3e243713576e3795e"
+      },
+      "approvalStatus": "approved-bank-v2-pending-po-campaign-review",
+      "approvedAt": "2026-08-27T14:00:00.000Z",
+      "allowedGeneratorContract": {
+        "servicePage": "approved-bank-core-page-v1",
+        "localityPage": "local-cluster-v1",
+        "selectionRule": "bank selected solely by serviceId via approved-service-bank registry v2",
+        "renderer": "shared composeServiceVariantPackClusterDraft / selectAreaVariants",
+        "corePageAuthority": "single approved bank by serviceId for service-page sections, locality sections, and FAQs",
+        "servicePageContractRelativePath": "data/pharmacy-approved-service-banks/banks/pharmacy-first/service-page-contract-v1.json"
+      }
+    }
+  },
+  "selection": {
+    "mode": "serviceId-only",
+    "loader": "loadServiceVariantPack \u2192 resolveApprovedServiceBank"
+  },
+  "variantValidation": {
+    "task": "FOUR-SERVICE-APPROVED-BANK-CONSOLIDATION-27",
+    "resultPath": "/tmp/consolidate27-all-variant-validation/result.json",
+    "ok": true,
+    "validatedAt": "2026-08-26T14:58:38.000Z"
+  },
+  "corePageReconnection": {
+    "task": "CORE-PAGE-APPROVED-BANK-RECONNECTION-28",
+    "servicePageContract": "approved-bank-core-page-v1",
+    "masterLongFormDisconnectedForRegisteredServices": true,
+    "mvpScope": "mvp-core-pages",
+    "updatedAt": "2026-08-26T15:53:03.602Z"
+  },
+  "grammarCorrection": {
+    "task": "FLU-APPROVED-BANK-COPY-QUALITY-28A",
+    "fluBankHash": "8db16d31ac62815eb096e5724a29aa8fba8c6e0806b6d0073ae3d5746a4554e5",
+    "updatedAt": "2026-08-26T16:40:00.000Z"
+  },
+  "commercialContentCorrection": {
+    "task": "FLU-APPROVED-BANK-COMMERCIAL-CONTENT-28B",
+    "fluBankHash": "eb79f51391b6b6e5cd0b4ac02d6cbe235306159a8847aa704eb5d64f7f4d1ce3",
+    "priorBankHash": "8db16d31ac62815eb096e5724a29aa8fba8c6e0806b6d0073ae3d5746a4554e5",
+    "updatedAt": "2026-08-26T17:10:00.000Z"
+  },
+  "copyGateCorrection": {
+    "task": "TRAVEL-APPROVED-BANK-COPY-GATE-31A",
+    "travelBankHash": "7915eefeae0bf49c75b5a21474f70fbd7aada178198427275040fe830171c41a",
+    "priorBankHash": "e4c47e931332a83bcab819012221bc0c9b634e022191f2fe0d3034f2cc51746f",
+    "updatedAt": "2026-08-27T10:40:00.000Z"
+  },
+  "patientSafetyCorrection": {
+    "task": "PHARMACY-FIRST-LOCALITY-PATIENT-SAFETY-34B",
+    "pharmacyFirstBankHash": "46de67243945c2bc572cba35aa9ac0fdd5806fb8813fbf89506bdfabdd517cdb",
+    "priorBankHash": "3e7ee7f5724e48b5e5d6b76ecb14d50008d0f55746d467b3e243713576e3795e",
+    "updatedAt": "2026-08-27T14:00:00.000Z"
+  }
+}

@@ -1,0 +1,597 @@
+{
+  "rootCause": "pharmacy-first local pages were filtered to zero by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane-only manifest) in buildBenchmarkServiceEcosystem despite operator-selected profile areas",
+  "filesChanged": [
+    "src/pharmacy/pharmacyLocalAreaResolver.ts",
+    "src/pharmacy/pharmacyLocalLocationGenerationService.ts",
+    "src/pharmacy/pharmacyLocalLocationHubRenderer.ts",
+    "src/pharmacy/contentEngine/buildContentGenerationContext.ts",
+    "src/pharmacy/contentEngine/contentGenerationContextTypes.ts",
+    "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+    "src/pharmacy/rebindPharmacyFirstLocalPages.ts",
+    "src/pharmacy/pharmacyCanonicalFinalRenderService.ts",
+    "src/pharmacy/pharmacyContentEcosystemPreviewRoute.ts"
+  ],
+  "trace": {
+    "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+    "tenantSlug": "banner-cross-pharmacy",
+    "primaryLocation": "Sheffield",
+    "postcode": "S118TP",
+    "townCity": "Sheffield",
+    "storedServiceAreas": [
+      "Ecclesall",
+      "Fulwood",
+      "Sheffield City Centre",
+      "Broomhill",
+      "Kelham Island",
+      "Dore",
+      "Hillsborough",
+      "Crookes"
+    ],
+    "storedNeighbourhoods": [
+      "Ecclesall",
+      "Fulwood",
+      "Sheffield City Centre",
+      "Broomhill",
+      "Kelham Island",
+      "Dore",
+      "Hillsborough",
+      "Crookes",
+      "Nether Edge",
+      "Woodseats"
+    ],
+    "importedLocationEvidence": [],
+    "googleLocationEvidence": [
+      "googlePlaceId:ChIJOZWN4bODeUgR97tRhB5EHRU",
+      "displayAddress:BANNER CROSS PHARMACY+ Travel Vaccination Clinic & Weight Loss Clinic, BANNER CROSS PHARMACY, Ecclesall Rd, Sheffield S11 8TP, UK"
+    ],
+    "localIntelligenceAreas": [],
+    "selectedAreasSource": "profile.selectedAreas",
+    "selectedAreasFilters": [
+      "benchmarkServiceEcosystemBuilder filters pharmacy-first areas against PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane manifest)"
+    ],
+    "rejectedAreas": [
+      {
+        "name": "Nether Edge",
+        "reason": "operator deselected in profile"
+      },
+      {
+        "name": "Woodseats",
+        "reason": "operator deselected in profile"
+      }
+    ],
+    "rejectionReasons": [
+      "Nether Edge: operator deselected in profile",
+      "Woodseats: operator deselected in profile"
+    ],
+    "firstEmptySelectionDecision": "All operator-selected areas removed by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS allow-list in buildBenchmarkServiceEcosystem",
+    "responsibleFile": "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+    "responsibleFunction": "buildBenchmarkServiceEcosystem",
+    "responsibleLine": 647,
+    "areasConsidered": [
+      "Sheffield",
+      "Ecclesall",
+      "Fulwood",
+      "Sheffield City Centre",
+      "Broomhill",
+      "Kelham Island",
+      "Dore",
+      "Hillsborough",
+      "Crookes"
+    ]
+  },
+  "hierarchy": {
+    "ok": true,
+    "primaryLocality": "Sheffield",
+    "primaryLocalitySlug": "sheffield",
+    "hub": {
+      "areaId": "hub:sheffield",
+      "name": "Sheffield",
+      "slug": "hub",
+      "type": "city-town-hub",
+      "parentAreaId": null,
+      "source": "business-profile:primaryTown",
+      "evidence": [
+        "Primary town/city hub for service coverage"
+      ],
+      "serviceIds": [
+        "pharmacy-first"
+      ],
+      "generationEligible": true,
+      "generationReason": "primary locality hub",
+      "approved": true
+    },
+    "clusters": [
+      {
+        "areaId": "cluster:ecclesall",
+        "name": "Ecclesall",
+        "slug": "cluster-ecclesall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:85",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "cluster slot 1 by profile order/priority",
+        "approved": true,
+        "relationship": "district cluster under Sheffield",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:fulwood",
+        "name": "Fulwood",
+        "slug": "cluster-fulwood",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:82",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "cluster slot 2 by profile order/priority",
+        "approved": true,
+        "relationship": "district cluster under Sheffield",
+        "priority": 2,
+        "order": 2
+      }
+    ],
+    "areas": [
+      {
+        "areaId": "area:sheffield-city-centre",
+        "name": "Sheffield City Centre",
+        "slug": "sheffield-city-centre",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:ecclesall",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:80",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 1 under Ecclesall",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "area:broomhill",
+        "name": "Broomhill",
+        "slug": "broomhill",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:fulwood",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:70",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 2 under Fulwood",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "area:kelham-island",
+        "name": "Kelham Island",
+        "slug": "kelham-island",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:ecclesall",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:67",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 3 under Ecclesall",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "area:dore",
+        "name": "Dore",
+        "slug": "dore",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:fulwood",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:65",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 4 under Fulwood",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 6,
+        "order": 6
+      }
+    ],
+    "generationAreas": [
+      {
+        "areaId": "cluster:ecclesall",
+        "name": "Ecclesall",
+        "slug": "cluster-ecclesall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:85",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "cluster slot 1 by profile order/priority",
+        "approved": true,
+        "relationship": "district cluster under Sheffield",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:fulwood",
+        "name": "Fulwood",
+        "slug": "cluster-fulwood",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:82",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "cluster slot 2 by profile order/priority",
+        "approved": true,
+        "relationship": "district cluster under Sheffield",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "area:sheffield-city-centre",
+        "name": "Sheffield City Centre",
+        "slug": "sheffield-city-centre",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:ecclesall",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:80",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 1 under Ecclesall",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "area:broomhill",
+        "name": "Broomhill",
+        "slug": "broomhill",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:fulwood",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:70",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 2 under Fulwood",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "area:kelham-island",
+        "name": "Kelham Island",
+        "slug": "kelham-island",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:ecclesall",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:67",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 3 under Ecclesall",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "area:dore",
+        "name": "Dore",
+        "slug": "dore",
+        "type": "neighbourhood-area",
+        "parentAreaId": "cluster:fulwood",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:local-seo-engine-area-engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:65",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "area page slot 4 under Fulwood",
+        "approved": true,
+        "relationship": "neighbourhood served from Sheffield",
+        "priority": 6,
+        "order": 6
+      }
+    ],
+    "trace": {
+      "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+      "tenantSlug": "banner-cross-pharmacy",
+      "primaryLocation": "Sheffield",
+      "postcode": "S118TP",
+      "townCity": "Sheffield",
+      "storedServiceAreas": [
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes"
+      ],
+      "storedNeighbourhoods": [
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes",
+        "Nether Edge",
+        "Woodseats"
+      ],
+      "importedLocationEvidence": [],
+      "googleLocationEvidence": [
+        "googlePlaceId:ChIJOZWN4bODeUgR97tRhB5EHRU",
+        "displayAddress:BANNER CROSS PHARMACY+ Travel Vaccination Clinic & Weight Loss Clinic, BANNER CROSS PHARMACY, Ecclesall Rd, Sheffield S11 8TP, UK"
+      ],
+      "localIntelligenceAreas": [],
+      "selectedAreasSource": "profile.selectedAreas",
+      "selectedAreasFilters": [
+        "benchmarkServiceEcosystemBuilder filters pharmacy-first areas against PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane manifest)"
+      ],
+      "rejectedAreas": [
+        {
+          "name": "Nether Edge",
+          "reason": "operator deselected in profile"
+        },
+        {
+          "name": "Woodseats",
+          "reason": "operator deselected in profile"
+        }
+      ],
+      "rejectionReasons": [
+        "Nether Edge: operator deselected in profile",
+        "Woodseats: operator deselected in profile"
+      ],
+      "firstEmptySelectionDecision": "All operator-selected areas removed by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS allow-list in buildBenchmarkServiceEcosystem",
+      "responsibleFile": "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+      "responsibleFunction": "buildBenchmarkServiceEcosystem",
+      "responsibleLine": 647,
+      "areasConsidered": [
+        "Sheffield",
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes"
+      ]
+    }
+  },
+  "selectedAreas": [
+    "Sheffield City Centre",
+    "Broomhill",
+    "Kelham Island",
+    "Dore"
+  ],
+  "canonicalPagesAdded": 7,
+  "desktopPass": true,
+  "mobilePass": false,
+  "previewUrls": {
+    "hubPreview": "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy",
+    "clusterPreview": "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy",
+    "areaPreviews": [
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-sheffield-city-centre/?slug=banner-cross-pharmacy",
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-broomhill/?slug=banner-cross-pharmacy"
+    ]
+  },
+  "browser": {
+    "desktop": {
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy": {
+        "pass": true,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": false
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-1440-aHR0cDovLzEyNy4wLjAuMToz.png"
+      },
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy": {
+        "pass": true,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": false
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-1440-aHR0cDovLzEyNy4wLjAuMToz.png"
+      },
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-sheffield-city-centre/?slug=banner-cross-pharmacy": {
+        "pass": true,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": false
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-1440-aHR0cDovLzEyNy4wLjAuMToz.png"
+      },
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-broomhill/?slug=banner-cross-pharmacy": {
+        "pass": true,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": false
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-1440-aHR0cDovLzEyNy4wLjAuMToz.png"
+      }
+    },
+    "mobile": {
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy": {
+        "pass": false,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": true
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-390-aHR0cDovLzEyNy4wLjAuMToz.png"
+      },
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy": {
+        "pass": false,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": true
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-390-aHR0cDovLzEyNy4wLjAuMToz.png"
+      },
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-sheffield-city-centre/?slug=banner-cross-pharmacy": {
+        "pass": false,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": true
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-390-aHR0cDovLzEyNy4wLjAuMToz.png"
+      },
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/local-broomhill/?slug=banner-cross-pharmacy": {
+        "pass": false,
+        "checks": {
+          "h1Visible": true,
+          "bodyVisible": true,
+          "ctaVisible": true,
+          "breadcrumbVisible": true,
+          "headerVisible": true,
+          "footerVisible": true,
+          "horizontalOverflow": true
+        },
+        "consoleErrors": [],
+        "failedResources": [],
+        "screenshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-l2-local-page-generation/shot-390-aHR0cDovLzEyNy4wLjAuMToz.png"
+      }
+    }
+  }
+}

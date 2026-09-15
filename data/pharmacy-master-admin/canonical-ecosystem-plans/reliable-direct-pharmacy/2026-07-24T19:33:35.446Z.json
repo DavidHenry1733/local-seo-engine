@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "planId": "e670c13dcf63a54b",
+  "planRevision": "2026-07-24T19:33:35.446Z",
+  "createdAt": "2026-07-24T19:33:35.446Z",
+  "slug": "reliable-direct-pharmacy",
+  "frozen": false,
+  "frozenAt": null,
+  "sourceRevisions": {
+    "businessProfileRevision": "2026-07-24T08:08:33.507Z",
+    "commercialIntelligenceRevision": "2026-07-24T13:26:18.650Z|2026-07-24T13:26:24.086Z|2026-07-24T13:26:24.123Z",
+    "engineRevision": "canonical-ecosystem-plan-v1",
+    "campaignMode": "wholeTown"
+  },
+  "primaryService": "pharmacy-first",
+  "additionalServices": [],
+  "confirmedTown": "Sheffield",
+  "campaignMode": "wholeTown",
+  "areaEntries": [
+    {
+      "areaName": "Sheffield",
+      "areaSlug": "hub",
+      "areaType": "city-town-hub",
+      "classification": "location-hub",
+      "parent": null,
+      "pageType": "location-hub",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/hub/",
+      "source": "business-profile:primaryTown"
+    },
+    {
+      "areaName": "Ecclesall",
+      "areaSlug": "cluster-ecclesall",
+      "areaType": "priority cluster",
+      "classification": "location-cluster",
+      "parent": "Sheffield",
+      "pageType": "location-cluster",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-ecclesall/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Fulwood",
+      "areaSlug": "cluster-fulwood",
+      "areaType": "priority cluster",
+      "classification": "location-cluster",
+      "parent": "Sheffield",
+      "pageType": "location-cluster",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-fulwood/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Sheffield City Centre",
+      "areaSlug": "cluster-sheffield-city-centre",
+      "areaType": "priority cluster",
+      "classification": "location-cluster",
+      "parent": "Sheffield",
+      "pageType": "location-cluster",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-sheffield-city-centre/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Broomhill",
+      "areaSlug": "cluster-broomhill",
+      "areaType": "priority cluster",
+      "classification": "location-cluster",
+      "parent": "Sheffield",
+      "pageType": "location-cluster",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-broomhill/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Kelham Island",
+      "areaSlug": "cluster-kelham-island",
+      "areaType": "priority cluster",
+      "classification": "location-cluster",
+      "parent": "Sheffield",
+      "pageType": "location-cluster",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-kelham-island/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Dore",
+      "areaSlug": "dore",
+      "areaType": "secondary cluster",
+      "classification": "location-area",
+      "parent": "Ecclesall",
+      "pageType": "location-area",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/dore/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Hillsborough",
+      "areaSlug": "hillsborough",
+      "areaType": "secondary cluster",
+      "classification": "location-area",
+      "parent": "Fulwood",
+      "pageType": "location-area",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/hillsborough/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Crookes",
+      "areaSlug": "crookes",
+      "areaType": "secondary cluster",
+      "classification": "location-area",
+      "parent": "Sheffield City Centre",
+      "pageType": "location-area",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/crookes/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    }
+  ],
+  "pageInventory": [
+    {
+      "pageType": "homepage",
+      "slug": "index",
+      "title": "Homepage",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/",
+      "source": "v1-core-contract"
+    },
+    {
+      "pageType": "service",
+      "slug": "pharmacy-first",
+      "title": "Reliable Direct Pharmacy",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first/",
+      "source": "approved-business-profile:primary-service"
+    },
+    {
+      "pageType": "location-hub",
+      "slug": "hub",
+      "title": "Sheffield",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/hub/",
+      "source": "business-profile:primaryTown"
+    },
+    {
+      "pageType": "location-cluster",
+      "slug": "cluster-ecclesall",
+      "title": "Ecclesall",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-ecclesall/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "location-cluster",
+      "slug": "cluster-fulwood",
+      "title": "Fulwood",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-fulwood/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "location-cluster",
+      "slug": "cluster-sheffield-city-centre",
+      "title": "Sheffield City Centre",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-sheffield-city-centre/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "location-cluster",
+      "slug": "cluster-broomhill",
+      "title": "Broomhill",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-broomhill/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "location-cluster",
+      "slug": "cluster-kelham-island",
+      "title": "Kelham Island",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-kelham-island/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "location-area",
+      "slug": "dore",
+      "title": "Dore",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/dore/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "location-area",
+      "slug": "hillsborough",
+      "title": "Hillsborough",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/hillsborough/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "location-area",
+      "slug": "crookes",
+      "title": "Crookes",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/crookes/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "pageType": "guide",
+      "slug": "pharmacy-first-guide",
+      "title": "Reliable Direct Pharmacy patient guide",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-guide/",
+      "source": "v1-engine-contract:1-guide"
+    },
+    {
+      "pageType": "blog",
+      "slug": "what-is-pharmacy-first",
+      "title": "what-is-pharmacy-first",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/what-is-pharmacy-first/",
+      "source": "v1-engine-contract:3-blogs"
+    },
+    {
+      "pageType": "blog",
+      "slug": "who-should-consider-pharmacy-first",
+      "title": "who-should-consider-pharmacy-first",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/who-should-consider-pharmacy-first/",
+      "source": "v1-engine-contract:3-blogs"
+    },
+    {
+      "pageType": "blog",
+      "slug": "pharmacy-first-what-you-need-to-know",
+      "title": "pharmacy-first-what-you-need-to-know",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-what-you-need-to-know/",
+      "source": "v1-engine-contract:3-blogs"
+    },
+    {
+      "pageType": "faq",
+      "slug": "pharmacy-first-faqs",
+      "title": "Reliable Direct Pharmacy FAQs",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-faqs/",
+      "source": "v1-engine-contract:1-faq"
+    },
+    {
+      "pageType": "supporting",
+      "slug": "pharmacy-first-content-ecosystem",
+      "title": "Content ecosystem summary",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-content-ecosystem/",
+      "source": "v1-engine-contract:1-supporting"
+    }
+  ],
+  "imageInventory": [
+    {
+      "pageType": "service",
+      "slot": "hero",
+      "role": "hero",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "1200x675",
+      "selectedAsset": "clinical-nhs-services/pharmacy-first",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    },
+    {
+      "pageType": "service",
+      "slot": "support",
+      "role": "support",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "800x600",
+      "selectedAsset": "core-pharmacy/pharmacist-consultation",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    },
+    {
+      "pageType": "service",
+      "slot": "trust",
+      "role": "trust",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "800x600",
+      "selectedAsset": "core-pharmacy/community-pharmacy",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    },
+    {
+      "pageType": "service",
+      "slot": "conversion",
+      "role": "conversion",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "800x600",
+      "selectedAsset": "core-pharmacy/prescription-collection",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    }
+  ],
+  "coreEcosystem": {
+    "homepage": 1,
+    "servicePages": 1,
+    "locationHub": 1,
+    "clusters": 5,
+    "areaPages": 3,
+    "blogs": 3,
+    "guides": 1,
+    "faqs": 1,
+    "supportingPages": 1,
+    "images": 4,
+    "requiredImageRoles": 4,
+    "totalPages": 17
+  },
+  "recommendedFutureContent": [
+    {
+      "title": "Submit Pharmacy First page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    },
+    {
+      "title": "Submit Blood Pressure Checks page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    },
+    {
+      "title": "Submit Travel Vaccinations page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    },
+    {
+      "title": "Submit Prescription Dispensing page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    },
+    {
+      "title": "Cluster pages missing for Pharmacy First",
+      "source": "growth_intelligence",
+      "classification": "post_launch_opportunity",
+      "detail": "Content package manifest shows this asset is not included."
+    }
+  ],
+  "exclusions": [],
+  "warnings": [
+    "Campaign Builder wholeTown mode aligned to hub + all confirmed profile areas"
+  ],
+  "blockers": [],
+  "expectedDurationMinutes": 30,
+  "checksum": "777beaf21784e498b06fab387bb000dee53af8c2d54b4ebb6ce64a43348911b9"
+}

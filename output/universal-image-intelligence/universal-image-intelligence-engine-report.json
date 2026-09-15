@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "universal-image-intelligence-engine",
+  "generatedAt": "2026-06-11T07:08:07.102Z",
+  "verdict": "PASS",
+  "message": "PASS: Universal Image Intelligence Engine Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "imagesGenerated": false,
+  "ideogramCalled": false,
+  "industryAdapters": [
+    {
+      "adapterKey": "pharmacy",
+      "displayName": "UK Community Pharmacy",
+      "services": 62,
+      "templateFamilies": 5
+    },
+    {
+      "adapterKey": "digital-services",
+      "displayName": "Digital Services (Web Design, SEO, Hosting, Email)",
+      "services": 6,
+      "templateFamilies": null
+    }
+  ],
+  "totalPrompts": 62,
+  "pharmacyCoverage": {
+    "templateFamilies": 5,
+    "imagePacks": 6,
+    "promptsImported": 38
+  },
+  "digitalServicesCoverage": {
+    "services": 6,
+    "promptsGenerated": 24,
+    "manifestImages": 27
+  },
+  "safetyComplianceStatus": {
+    "crossIndustrySlotStandard": true,
+    "pharmacySafetyRulesInherited": true,
+    "digitalNoRankingClaimsInPrompts": true,
+    "noIdeogramCallsInEngine": true
+  },
+  "uploadPathStrategy": {
+    "pharmacy": "assets/pharmacy-image-library/{pack}/{imageKey}.webp",
+    "digitalServices": "assets/image-library/{service}/{slot}/{filename}.webp",
+    "unifiedResolver": "src/image-intelligence/universalImageIntelligenceEngine.ts"
+  },
+  "readyForCrossIndustryResolution": true,
+  "validation": {
+    "pharmacyAndDigitalAdapters": true,
+    "fourStandardSlots": true,
+    "resolutionPipelineDefined": true,
+    "runtimeModulePresent": true,
+    "issues": []
+  },
+  "enginePath": "output/universal-image-intelligence/universal-image-intelligence-engine.json",
+  "generatorScript": "scripts/build-universal-image-intelligence-engine.mjs"
+}

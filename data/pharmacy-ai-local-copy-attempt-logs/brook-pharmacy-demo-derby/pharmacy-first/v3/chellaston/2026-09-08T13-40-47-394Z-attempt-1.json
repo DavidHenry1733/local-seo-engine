@@ -1,0 +1,89 @@
+{
+  "savedAt": "2026-09-08T13:40:47.394Z",
+  "areaSlug": "chellaston",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write two useful natural paragraphs in fluent British English, totalling 110–170 words. Introduce the area, then describe meaningful local features and healthcare references. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Do not describe Pharmacy First, healthcare outcomes, access, convenience, availability or eligibility. Return only the two finished local paragraphs.\n\n- NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\n- Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Chellaston has a public library.\n- Lister House at Chellaston is a hospital in Chellaston.\n- Chellaston Community Centre is a community facility in Chellaston.\n- Chellaston Library is a community facility in Chellaston.\n- Chellaston Leisure Limited is a community facility in Chellaston.\n- Chellaston Park is a landmark in Chellaston.\n- Chellaston Brickworks Local Nature Reserve is a landmark in Chellaston.\n- Fullens Lock Park Memorial Bench is a landmark in Chellaston."
+  },
+  "rawResponse": "Chellaston is a well-structured area supported locally by a Neighbourhood Board comprising local councillors, residents, and representatives from public services and community organisations. The locality features a range of civic and recreational amenities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. Outdoor spaces and notable local landmarks include Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.\n\nIn terms of healthcare provision, Chellaston is served by local medical infrastructure. NHS general practice services in the area are provided from Chellaston Medical Centre. Additionally, hospital services are present locally, with Lister House at Chellaston operating as a hospital within the area. These healthcare facilities sit alongside the community's civic and recreational spaces to complete the key features of the local area.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localIntroduction | sentence=These healthcare facilities sit alongside the community's civic and recreational spaces to complete the key features of the local area. | rule=ungrounded-clause | defect=These healthcare facilities sit alongside the community's civic and recreational spaces to complete the key features of the local area. — no supplied fact, canonical field or approved clinical text covers this clause",
+      "FAIL | field=localIntroduction | sentence=These healthcare facilities sit alongside the community's civic and recreational spaces to complete the key features of the local area. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts"
+    ],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Chellaston is a well-structured area supported locally by a Neighbourhood Board comprising local councillors, residents, and representatives from public services and community organisations. | rule=uncertain-paraphrase | defect=Chellaston is a well-structured area supported locally by a Neighbourhood Board comprising local councillors, residents, and representatives from public services and community organisations. — uncertain paraphrase: unmatched wording (structured, supported, locally, comprising) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The locality features a range of civic and recreational amenities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. | rule=uncertain-paraphrase | defect=The locality features a range of civic and recreational amenities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. — uncertain paraphrase: unmatched wording (locality, features, range, recreational, amenities, which, serves) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Outdoor spaces and notable local landmarks include Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. | rule=uncertain-paraphrase | defect=Outdoor spaces and notable local landmarks include Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench. — uncertain paraphrase: unmatched wording (outdoor, spaces, notable, landmarks) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=In terms of healthcare provision, Chellaston is served by local medical infrastructure. | rule=uncertain-paraphrase | defect=In terms of healthcare provision, Chellaston is served by local medical infrastructure. — uncertain paraphrase: unmatched wording (terms, healthcare, provision, served, infrastructure) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Additionally, hospital services are present locally, with Lister House at Chellaston operating as a hospital within the area. | rule=uncertain-paraphrase | defect=Additionally, hospital services are present locally, with Lister House at Chellaston operating as a hospital within the area. — uncertain paraphrase: unmatched wording (additionally, locally, operating) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Chellaston",
+    "heroHeading": "Pharmacy First in Chellaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+    "localIntroduction": "Chellaston is a well-structured area supported locally by a Neighbourhood Board comprising local councillors, residents, and representatives from public services and community organisations. The locality features a range of civic and recreational amenities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library. Outdoor spaces and notable local landmarks include Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.\n\nIn terms of healthcare provision, Chellaston is served by local medical infrastructure. NHS general practice services in the area are provided from Chellaston Medical Centre. Additionally, hospital services are present locally, with Lister House at Chellaston operating as a hospital within the area. These healthcare facilities sit alongside the community's civic and recreational spaces to complete the key features of the local area.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Chellaston is a well-structured area supported locally by a Neighbourhood Board comprising local councillors, residents, and representatives from public services and community organisations.",
+        "editorialFactId": "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The locality features a range of civic and recreational amenities, including Chellaston Community Centre, Chellaston Leisure Limited, and Chellaston Library, which serves as a public library.",
+        "editorialFactId": "chellaston:community:chellaston-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Outdoor spaces and notable local landmarks include Chellaston Park, Chellaston Brickworks Local Nature Reserve, and the Fullens Lock Park Memorial Bench.",
+        "editorialFactId": "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "In terms of healthcare provision, Chellaston is served by local medical infrastructure.",
+        "editorialFactId": "chellaston:heritage:chellaston-brickworks-local-nature-reserve-is-li"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in the area are provided from Chellaston Medical Centre.",
+        "editorialFactId": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Additionally, hospital services are present locally, with Lister House at Chellaston operating as a hospital within the area.",
+        "editorialFactId": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+        "editorialFactId": "chellaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co",
+      "chellaston:community:chellaston-has-a-public-library",
+      "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "chellaston:heritage:chellaston-brickworks-local-nature-reserve-is-li",
+      "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit",
+      "chellaston:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

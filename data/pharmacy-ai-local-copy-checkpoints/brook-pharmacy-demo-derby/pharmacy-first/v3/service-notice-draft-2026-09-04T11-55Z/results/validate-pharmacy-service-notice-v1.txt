@@ -1,0 +1,52 @@
+
+=== Pharmacy service notices ===
+
+PASS  notice-id — pharmacy-first-england-nhs-v1
+PASS  notice-version — v1
+PASS  notice-status-draft — draft
+PASS  notice-renderer-owned — renderer-owned
+PASS  notice-exact-draft — catalog wording
+PASS  notice-heading — Eligibility and important information
+PASS  identity-not-content-approval — Reviewer identity confirmation is not approval of this page content. A designated clinical reviewer must explicitly approve this wording.
+PASS  select-match-pharmacy-first — profile-matched
+PASS  unknown-does-not-select — funding-unknown,uk-nation-unknown,delivery-unknown,supply-not-confirmed,supply-unknown-or-none,fee-unknown-not-free,walk-in-unknown-not-available
+PASS  unknown-funding-blocks — funding-unknown,uk-nation-unknown,delivery-unknown,supply-not-confirmed,supply-unknown-or-none,fee-unknown-not-free,walk-in-unknown-not-available
+PASS  unknown-nation-blocks — funding-unknown,uk-nation-unknown,delivery-unknown,supply-not-confirmed,supply-unknown-or-none,fee-unknown-not-free,walk-in-unknown-not-available
+PASS  unknown-delivery-blocks — funding-unknown,uk-nation-unknown,delivery-unknown,supply-not-confirmed,supply-unknown-or-none,fee-unknown-not-free,walk-in-unknown-not-available
+PASS  unknown-supply-blocks — funding-unknown,uk-nation-unknown,delivery-unknown,supply-not-confirmed,supply-unknown-or-none,fee-unknown-not-free,walk-in-unknown-not-available
+PASS  private-funding-no-nhs-notice — none
+PASS  scotland-no-england-notice — none
+PASS  remote-delivery-no-match — none
+PASS  unconfirmed-supply-no-match — none
+PASS  other-service-no-pharmacy-first-notice — none
+PASS  unknown-fee-not-treated-as-free — fee-unknown-not-free,walk-in-unknown-not-available
+PASS  unknown-walkin-not-treated-as-available — fee-unknown-not-free,walk-in-unknown-not-available
+PASS  brook-unknown-facts-not-invented — funding-unknown,uk-nation-unknown,delivery-unknown,supply-not-confirmed,supply-unknown-or-none,fee-unknown-not-free,walk-in-unknown-not-available
+PASS  brook-funding-still-unknown — unknown
+PASS  tenant-isolation-names — both tenants load
+PASS  tenant-isolation-unknown-neither-matches — none/none
+PASS  local-preview-route — service-notice-draft-v1
+PASS  service-preview-route — service-notice-draft-v1
+PASS  local-has-notice — 61448
+PASS  service-has-notice — 50446
+PASS  service-local-same-id — pharmacy-first-england-nhs-v1
+PASS  service-local-same-body — shared wording
+PASS  local-after-overview — after child-areas
+PASS  service-after-overview — after service-definition
+PASS  local-not-in-footer — local footer clean
+PASS  service-not-in-footer — service footer clean
+PASS  not-collapsed — not details
+PASS  draft-banner-local — draft demonstration
+PASS  draft-banner-service — draft demonstration
+PASS  heading-visible — Eligibility and important information
+PASS  tenant-isolation-preview — service-notice-draft-v1-unavailable
+PASS  tenant-isolation-no-brook-html — no leak
+PASS  accepted-local-unchanged-in-preview — ai-local-area-page-pilot-v3
+PASS  accepted-service-unchanged-in-preview — sales-demo-brook-service-page
+PASS  accepted-allestree-file-hash — ff61fa498953
+PASS  accepted-visual-file-hash — 76159044696d
+PASS  asset-wired — service-notice-draft-v1
+PASS  inject-between-overview-and-next — order
+PASS  inject-not-in-footer-snippet — snippet footer
+
+47/47 passed

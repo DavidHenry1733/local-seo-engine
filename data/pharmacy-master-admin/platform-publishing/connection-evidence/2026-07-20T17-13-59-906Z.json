@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "id": "host",
+      "label": "DNS/host reachable",
+      "status": "FAIL",
+      "detail": "Timeout (control socket)"
+    },
+    {
+      "id": "connection",
+      "label": "Connection established",
+      "status": "FAIL",
+      "detail": "Timeout (control socket)"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication successful",
+      "status": "FAIL",
+      "detail": "Timeout (control socket)"
+    },
+    {
+      "id": "protocol",
+      "label": "Protocol supported",
+      "status": "FAIL",
+      "detail": "FTPS connection failed"
+    },
+    {
+      "id": "response-time",
+      "label": "Response time",
+      "status": "FAIL",
+      "detail": "Not completed"
+    },
+    {
+      "id": "session",
+      "label": "Session closed cleanly",
+      "status": "PASS",
+      "detail": "No active session"
+    }
+  ],
+  "evidence": "Timeout (control socket)",
+  "failureReason": "Connection timed out",
+  "operator": "admin",
+  "stamp": "2026-07-20T17:13:59.906Z",
+  "responseMs": 15030
+}

@@ -1,0 +1,300 @@
+{
+  "ok": false,
+  "originalPackHash": "065e896a318589d4230f15670de7ff42f9594629b872507b4260ca15727239a9",
+  "originalPackUnchanged": true,
+  "lockedClinicalFactsSupplied": {
+    "serviceName": "Pharmacy First",
+    "serviceId": "pharmacy-first",
+    "conditionSet": "sore throat, earache, impetigo, infected insect bites, shingles, sinusitis, and uncomplicated UTI in eligible women",
+    "suitability": "The pharmacist confirms what can be assessed on the day. Eligibility depends on symptoms and NHS pathway criteria, not on the area the patient travels from.",
+    "process": "Call before visiting to check how a consultation is being arranged. The pharmacist reviews symptoms, medicines and red-flag concerns. Outcomes may include treatment where appropriate, self-care advice, safety-netting, or referral.",
+    "safety": "Seek urgent medical care for breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or any emergency symptoms that make you feel critically unwell.",
+    "allowedCta": [
+      "Book An Appointment",
+      "Call the pharmacy",
+      "Get directions"
+    ]
+  },
+  "mergedFactStatements": [
+    "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+    "Darfield has a public library.",
+    "Yorkshire Pharmacy & Health Clinic is in Darfield at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "NHS general practice services in Darfield are provided from Garland House Surgery.",
+    "Darfield History Society runs local history group sessions.",
+    "Darfield Library is on Church Street.",
+    "Darfield Library runs regular activities and special events for children and adults."
+  ],
+  "openaiLedger": {
+    "attempted": 2,
+    "successful": 0,
+    "failed": 1,
+    "retried": 1,
+    "promptTokens": 6210,
+    "completionTokens": 1675,
+    "estimatedCostUsd": 0.025820000000000003,
+    "failures": [
+      {
+        "areaSlug": "darfield",
+        "detail": "FAIL | field=localContextParagraphs[0] | sentence=This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community. | rule=empty-local-claim | defect=“residents can access” is empty pathway wording"
+      }
+    ]
+  },
+  "durableBudget": {
+    "taskId": "darfield-v3-community-enrich-2026-09-01",
+    "maxProviderCalls": 2,
+    "maxCostUsd": 0.996,
+    "reserved": 0,
+    "consumed": 2,
+    "failed": 0,
+    "uncertain": 0,
+    "estimatedCostUsd": 0.025820000000000003,
+    "events": [
+      {
+        "at": "2026-09-01T17:42:57.311Z",
+        "kind": "created",
+        "detail": "calls=2 cost=0.996"
+      },
+      {
+        "at": "2026-09-01T17:42:57.455Z",
+        "kind": "reserve",
+        "reservationId": "r-1788284577455-1"
+      },
+      {
+        "at": "2026-09-01T17:43:04.376Z",
+        "kind": "consumed",
+        "reservationId": "r-1788284577455-1",
+        "detail": "cost=0.012694"
+      },
+      {
+        "at": "2026-09-01T17:43:04.465Z",
+        "kind": "reserve",
+        "reservationId": "r-1788284584465-2"
+      },
+      {
+        "at": "2026-09-01T17:43:10.261Z",
+        "kind": "consumed",
+        "reservationId": "r-1788284584465-2",
+        "detail": "cost=0.013126"
+      }
+    ]
+  },
+  "combinedCostUsd": 0.029820000000000003,
+  "attemptLogPaths": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/darfield/2026-09-01T17-43-04-459Z-attempt-1.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/darfield/2026-09-01T17-43-10-284Z-attempt-2.json"
+  ],
+  "detail": "FAIL | field=localContextParagraphs[0] | sentence=This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community. | rule=empty-local-claim | defect=“residents can access” is empty pathway wording",
+  "failures": [
+    "FAIL | field=localContextParagraphs[0] | sentence=This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community. | rule=empty-local-claim | defect=“residents can access” is empty pathway wording"
+  ],
+  "validator": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localContextParagraphs[0] | sentence=This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community. | rule=empty-local-claim | defect=“residents can access” is empty pathway wording"
+    ],
+    "reviews": [
+      "REVIEW REQUIRED | field=heroIntroduction | sentence=Pharmacy First is available in Darfield, providing NHS consultations for eligible common conditions. | rule=uncertain-paraphrase | defect=providing NHS consultations for eligible common conditions. — uncertain paraphrase: unmatched wording (providing) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=heroIntroduction | sentence=Yorkshire Pharmacy & Health Clinic delivers this service locally, supporting the health needs of Darfield residents. | rule=uncertain-paraphrase | defect=Yorkshire Pharmacy & Health Clinic delivers this service locally — uncertain paraphrase: unmatched wording (delivers, service, locally) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=heroIntroduction | sentence=Yorkshire Pharmacy & Health Clinic delivers this service locally, supporting the health needs of Darfield residents. | rule=uncertain-paraphrase | defect=supporting the health needs of Darfield residents. — uncertain paraphrase: unmatched wording (supporting, needs, residents) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults. | rule=uncertain-paraphrase | defect=which runs regular activities and special events for children and adults. — uncertain paraphrase: unmatched wording (which) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement. | rule=uncertain-paraphrase | defect=Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement. — uncertain paraphrase: unmatched wording (organised, reflecting, ongoing, community, engagement) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localContextParagraphs[0] | sentence=Why Darfield patients start with the pharmacist: NHS general practice services in Darfield are provided from Garland House Surgery. | rule=uncertain-paraphrase | defect=Why Darfield patients start with the pharmacist: NHS general practice services in Darfield are provided from Garland House Surgery. — uncertain paraphrase: unmatched wording (why, patients, start) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localContextParagraphs[0] | sentence=Alongside these services, Yorkshire Pharmacy & Health Clinic offers Pharmacy First consultations in the heart of Darfield. | rule=uncertain-paraphrase | defect=Alongside these services, Yorkshire Pharmacy & Health Clinic offers Pharmacy First consultations in the heart of Darfield. — uncertain paraphrase: unmatched wording (alongside, these, heart) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localContextParagraphs[0] | sentence=This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community. | rule=uncertain-paraphrase | defect=This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community. — uncertain paraphrase: unmatched wording (means, residents, access, assessment, familiar, location, own, community) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=relationshipToPharmacy | sentence=Yorkshire Pharmacy & Health Clinic is based in Darfield. | rule=uncertain-paraphrase | defect=Yorkshire Pharmacy & Health Clinic is based in Darfield. — uncertain paraphrase: unmatched wording (based) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=relationshipToPharmacy | sentence=All Pharmacy First consultations take place at this Darfield location. | rule=uncertain-paraphrase | defect=All Pharmacy First consultations take place at this Darfield location. — uncertain paraphrase: unmatched wording (all, location) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localCtaBridge | sentence=To discuss your symptoms or arrange a Pharmacy First consultation, please contact the pharmacy team. | rule=uncertain-paraphrase | defect=To discuss your symptoms or arrange a Pharmacy First consultation, please contact the pharmacy team. — uncertain paraphrase: unmatched wording (please, contact, team) is not proof of a new fact, and is not established as supported"
+    ],
+    "claims": [
+      {
+        "generatedField": "heroHeading",
+        "exactSentence": "Pharmacy First in Darfield",
+        "supportingCanonicalFieldOrEntity": "business.address",
+        "providerSource": "canonical-pharmacy-profile",
+        "validationResult": "pass",
+        "detail": "canonical-or-clinical-support"
+      },
+      {
+        "generatedField": "heroIntroduction",
+        "exactSentence": "Pharmacy First is available in Darfield, providing NHS consultations for eligible common conditions.",
+        "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+        "providerSource": "approved-clinical-copy",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (providing) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "heroIntroduction",
+        "exactSentence": "Yorkshire Pharmacy & Health Clinic delivers this service locally, supporting the health needs of Darfield residents.",
+        "supportingCanonicalFieldOrEntity": "business.name, locality.areaName",
+        "providerSource": "canonical-pharmacy-profile, campaign-builder-selected-area",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (delivers, service, locally) is not proof of a new fact, and is not established as supported; uncertain-paraphrase: uncertain paraphrase: unmatched wording (supporting, needs, residents) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "localIntroduction",
+        "exactSentence": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+        "supportingCanonicalFieldOrEntity": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+        "providerSource": "barnsley.gov.uk",
+        "validationResult": "pass",
+        "detail": "clauseCoveredByFactV3"
+      },
+      {
+        "generatedField": "localIntroduction",
+        "exactSentence": "The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults.",
+        "supportingCanonicalFieldOrEntity": "darfield:community:darfield-library-runs-regular-activities-and-spe",
+        "providerSource": "barnsley.gov.uk",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (which) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "localIntroduction",
+        "exactSentence": "Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement.",
+        "supportingCanonicalFieldOrEntity": "darfield:heritage:darfield-history-society-runs-local-history-grou",
+        "providerSource": "barnsley.gov.uk",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (organised, reflecting, ongoing, community, engagement) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "localContextParagraphs[0]",
+        "exactSentence": "Why Darfield patients start with the pharmacist: NHS general practice services in Darfield are provided from Garland House Surgery.",
+        "supportingCanonicalFieldOrEntity": "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+        "providerSource": "NHS",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (why, patients, start) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "localContextParagraphs[0]",
+        "exactSentence": "Alongside these services, Yorkshire Pharmacy & Health Clinic offers Pharmacy First consultations in the heart of Darfield.",
+        "supportingCanonicalFieldOrEntity": "darfield:pharmacy-relationship:in-area",
+        "providerSource": "canonical-pharmacy-profile",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (alongside, these, heart) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "localContextParagraphs[0]",
+        "exactSentence": "This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community.",
+        "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+        "providerSource": "approved-clinical-copy",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (means, residents, access, assessment, familiar, location, own, community) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "relationshipToPharmacy",
+        "exactSentence": "Yorkshire Pharmacy & Health Clinic is based in Darfield.",
+        "supportingCanonicalFieldOrEntity": "darfield:pharmacy-relationship:in-area",
+        "providerSource": "canonical-pharmacy-profile",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (based) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "relationshipToPharmacy",
+        "exactSentence": "All Pharmacy First consultations take place at this Darfield location.",
+        "supportingCanonicalFieldOrEntity": "business.address",
+        "providerSource": "canonical-pharmacy-profile",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (all, location) is not proof of a new fact, and is not established as supported"
+      },
+      {
+        "generatedField": "localCtaBridge",
+        "exactSentence": "To discuss your symptoms or arrange a Pharmacy First consultation, please contact the pharmacy team.",
+        "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+        "providerSource": "approved-clinical-copy",
+        "validationResult": "review",
+        "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (please, contact, team) is not proof of a new fact, and is not established as supported"
+      }
+    ]
+  },
+  "publicationGate": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localContextParagraphs[0] | sentence=This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community. | rule=empty-local-claim | defect=“residents can access” is empty pathway wording"
+    ],
+    "reviews": []
+  },
+  "sourceReview": {
+    "wombwellLeak": false,
+    "pharmacyInDarfield": true,
+    "travellingFromDarfield": false,
+    "gpWait": false,
+    "inventedHabits": false,
+    "libraryListOnly": false,
+    "factsUsed": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "darfield:community:darfield-library-is-on-church-street",
+      "darfield:community:darfield-library-runs-regular-activities-and-spe",
+      "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "darfield:pharmacy-relationship:in-area"
+    ],
+    "knownFactIds": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "darfield:community:darfield-has-a-public-library",
+      "darfield:pharmacy-relationship:in-area",
+      "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "darfield:community:darfield-library-is-on-church-street",
+      "darfield:community:darfield-library-runs-regular-activities-and-spe"
+    ]
+  },
+  "formatted": "heroHeading: Pharmacy First in Darfield\nheroIntroduction: Pharmacy First is available in Darfield, providing NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic delivers this service locally, supporting the health needs of Darfield residents.\nlocalIntroduction: Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults. Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement.\nlocalContextParagraphs[0]: Why Darfield patients start with the pharmacist: NHS general practice services in Darfield are provided from Garland House Surgery. Alongside these services, Yorkshire Pharmacy & Health Clinic offers Pharmacy First consultations in the heart of Darfield. This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community.\nrelationshipToPharmacy: Yorkshire Pharmacy & Health Clinic is based in Darfield. All Pharmacy First consultations take place at this Darfield location.\nlocalCtaBridge: To discuss your symptoms or arrange a Pharmacy First consultation, please contact the pharmacy team.",
+  "copy": {
+    "area": "Darfield",
+    "heroHeading": "Pharmacy First in Darfield",
+    "heroIntroduction": "Pharmacy First is available in Darfield, providing NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic delivers this service locally, supporting the health needs of Darfield residents.",
+    "localIntroduction": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults. Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Why Darfield patients start with the pharmacist: NHS general practice services in Darfield are provided from Garland House Surgery. Alongside these services, Yorkshire Pharmacy & Health Clinic offers Pharmacy First consultations in the heart of Darfield. This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community."
+    ],
+    "relationshipToPharmacy": "Yorkshire Pharmacy & Health Clinic is based in Darfield. All Pharmacy First consultations take place at this Darfield location.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "To discuss your symptoms or arrange a Pharmacy First consultation, please contact the pharmacy team.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+        "entityId": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults.",
+        "entityId": "darfield:community:darfield-library-is-on-church-street"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults.",
+        "entityId": "darfield:community:darfield-library-runs-regular-activities-and-spe"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement.",
+        "entityId": "darfield:heritage:darfield-history-society-runs-local-history-grou"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Darfield are provided from Garland House Surgery.",
+        "entityId": "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Yorkshire Pharmacy & Health Clinic is based in Darfield. All Pharmacy First consultations take place at this Darfield location.",
+        "entityId": "darfield:pharmacy-relationship:in-area"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "darfield:community:darfield-library-is-on-church-street",
+      "darfield:community:darfield-library-runs-regular-activities-and-spe",
+      "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "darfield:pharmacy-relationship:in-area"
+    ]
+  },
+  "generatedAt": null,
+  "tokenUsage": null,
+  "estimatedCostUsd": 0.025820000000000003,
+  "raw": "{\n  \"area\": \"Darfield\",\n  \"heroHeading\": \"Pharmacy First in Darfield\",\n  \"heroIntroduction\": \"Pharmacy First is available in Darfield, providing NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic delivers this service locally, supporting the health needs of Darfield residents.\",\n  \"localIntroduction\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults. Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"Why Darfield patients start with the pharmacist: NHS general practice services in Darfield are provided from Garland House Surgery. Alongside these services, Yorkshire Pharmacy & Health Clinic offers Pharmacy First consultations in the heart of Darfield. This means local residents can access NHS pharmacist advice and assessment for eligible common conditions at a familiar location within their own community.\"\n  ],\n  \"relationshipToPharmacy\": \"Yorkshire Pharmacy & Health Clinic is based in Darfield. All Pharmacy First consultations take place at this Darfield location.\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"To discuss your symptoms or arrange a Pharmacy First consultation, please contact the pharmacy team.\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.\",\n      \"entityId\": \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults.\",\n      \"entityId\": \"darfield:community:darfield-library-is-on-church-street\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The area is home to Darfield Library on Church Street, which runs regular activities and special events for children and adults.\",\n      \"entityId\": \"darfield:community:darfield-library-runs-regular-activities-and-spe\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Local history group sessions are organised by the Darfield History Society, reflecting the area’s ongoing community engagement.\",\n      \"entityId\": \"darfield:heritage:darfield-history-society-runs-local-history-grou\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Darfield are provided from Garland House Surgery.\",\n      \"entityId\": \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Yorkshire Pharmacy & Health Clinic is based in Darfield. All Pharmacy First consultations take place at this Darfield location.\",\n      \"entityId\": \"darfield:pharmacy-relationship:in-area\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\",\n    \"darfield:community:darfield-library-is-on-church-street\",\n    \"darfield:community:darfield-library-runs-regular-activities-and-spe\",\n    \"darfield:heritage:darfield-history-society-runs-local-history-grou\",\n    \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\",\n    \"darfield:pharmacy-relationship:in-area\"\n  ]\n}",
+  "record": null
+}

@@ -1,0 +1,131 @@
+{
+  "pass": true,
+  "generatedAt": "2026-08-20T11:45:45.115Z",
+  "checks": [
+    {
+      "id": "table-headers",
+      "pass": true,
+      "detail": "BPR hours table uses Day | Opening hours"
+    },
+    {
+      "id": "seven-day-labels",
+      "pass": true,
+      "detail": "Monday through Sunday labels exist"
+    },
+    {
+      "id": "confirm-hours-action",
+      "pass": true,
+      "detail": "One Confirm hours action"
+    },
+    {
+      "id": "google-badge",
+      "pass": true,
+      "detail": "Imported from Google badge"
+    },
+    {
+      "id": "no-hardcoded-times-ui",
+      "pass": true,
+      "detail": "Hours table renderer does not hard-code example times"
+    },
+    {
+      "id": "precedence",
+      "pass": true,
+      "detail": "Google > website > manual, with conflict branch"
+    },
+    {
+      "id": "uses-imported-evidence",
+      "pass": true,
+      "detail": "BPR reads Google snapshot and intelligence hours"
+    },
+    {
+      "id": "no-auto-accept-summary",
+      "pass": true,
+      "detail": "Opening hours summary is not silently auto-accepted"
+    },
+    {
+      "id": "persist-on-confirm",
+      "pass": true,
+      "detail": "Confirmed hours persist to canonical weekly fields"
+    },
+    {
+      "id": "no-google-fetch-in-hours-service",
+      "pass": true,
+      "detail": "Hours mapper does not call Google Places"
+    },
+    {
+      "id": "parse-seven-days",
+      "pass": true,
+      "detail": "Sunday=Closed"
+    },
+    {
+      "id": "parse-split-thursday",
+      "pass": true,
+      "detail": "8:30 AM – 1:00 PM; 2:00 PM – 6:00 PM"
+    },
+    {
+      "id": "parse-closed-sunday",
+      "pass": true,
+      "detail": "Closed"
+    },
+    {
+      "id": "parse-periods-closed-fill",
+      "pass": true,
+      "detail": "9:00 AM – 5:30 PM; 6:00 PM – 8:00 PM"
+    },
+    {
+      "id": "google-seven-rows",
+      "pass": true,
+      "detail": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]"
+    },
+    {
+      "id": "google-source",
+      "pass": true,
+      "detail": "google"
+    },
+    {
+      "id": "google-not-missing",
+      "pass": true,
+      "detail": "needs_confirmation / Confirm hours"
+    },
+    {
+      "id": "google-closed-and-split",
+      "pass": true,
+      "detail": "closed+split preserved"
+    },
+    {
+      "id": "blocker-cleared",
+      "pass": true,
+      "detail": "verified"
+    },
+    {
+      "id": "persisted-after-refresh",
+      "pass": true,
+      "detail": "Sun=Closed Thu=8:30 AM – 1:00 PM; 2:00 PM – 6:00 PM"
+    },
+    {
+      "id": "website-when-google-absent",
+      "pass": true,
+      "detail": "website"
+    },
+    {
+      "id": "website-saturday-closed",
+      "pass": true,
+      "detail": "Saturday Closed from website"
+    },
+    {
+      "id": "conflict-requires-confirmation",
+      "pass": true,
+      "detail": "conflict"
+    },
+    {
+      "id": "no-source-manual",
+      "pass": true,
+      "detail": "missing / none"
+    },
+    {
+      "id": "no-silent-merge",
+      "pass": true,
+      "detail": "conflict"
+    }
+  ]
+}

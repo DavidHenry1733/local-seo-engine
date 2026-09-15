@@ -19,5 +19,10 @@ export const imagePacks: Record<ServiceKey, {
     hero: "assets/hosting/hero-v1.png",
     support: "assets/hosting/support-v1.png",
     conversion: "assets/hosting/conversion-v1.png"
+  },
+  local_business_visibility: {
+    hero: "assets/local-business-visibility/hero-v1.png",
+    support: "assets/local-business-visibility/trust-v1.png",
+    conversion: "assets/local-business-visibility/conversion-v1.png"
   }
 };

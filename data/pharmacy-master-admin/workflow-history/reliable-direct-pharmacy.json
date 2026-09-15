@@ -1,0 +1,262 @@
+{
+  "version": 2,
+  "slug": "reliable-direct-pharmacy",
+  "updatedAt": "2026-07-25T13:19:08.979Z",
+  "currentStage": "quality_review",
+  "transitions": [
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-25T13:19:08.979Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: generate_ecosystem",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-25T11:06:28.959Z",
+      "operator": "product-owner",
+      "durationMs": 60835533,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job eaa7bd57-fbe0-45a5-a252-e67b6ab69377 completed — generate_ecosystem"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-24T18:12:33.418Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: generate_ecosystem",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "commercial_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-24T16:27:04.499Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial Intelligence approved by Product Owner",
+      "evidence": "approvedVersion=2026-07-24T13:26:18.650Z|2026-07-24T13:26:24.086Z|2026-07-24T13:26:24.123Z"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "commercial_intelligence",
+      "timestamp": "2026-07-24T11:40:58.412Z",
+      "operator": "nt-e2e-07",
+      "durationMs": 6942144,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Growth Intelligence already complete"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-24T09:45:16.261Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: generate_ecosystem",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-24T09:11:49.917Z",
+      "operator": "nt-e2e-07-test",
+      "durationMs": 3796285,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Generate Growth Intelligence: Growth intelligence acknowledged at 2026-07-24T09:11:49.517Z"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-07-24T08:08:33.627Z",
+      "operator": "nt-e2e-05-verify",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-07-24T08:08:33.625Z",
+      "operator": "nt-e2e-05-verify",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-07-24T08:08:33.600Z",
+      "operator": "nt-e2e-05-verify",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "google_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-23T18:31:16.077Z",
+      "operator": "admin",
+      "durationMs": 13772107,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job 8f804ec8-da27-4b47-8c6c-f2829b774999 completed — import_website"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "google_import",
+      "timestamp": "2026-07-23T14:41:43.963Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-23T14:41:37.685Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_ecosystem",
+      "startedAt": "2026-07-25T13:18:51.616Z",
+      "finishedAt": "2026-07-25T13:19:08.967Z",
+      "durationMs": 17351,
+      "operator": "admin",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 3,
+      "status": "completed",
+      "jobId": "2a3ea0b5-7e5c-4e50-a628-11c9f431a1e6"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_ecosystem",
+      "startedAt": "2026-07-25T08:16:29.888Z",
+      "finishedAt": "2026-07-25T08:16:32.849Z",
+      "durationMs": 2961,
+      "operator": "product-owner",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 2,
+      "status": "completed",
+      "jobId": "eaa7bd57-fbe0-45a5-a252-e67b6ab69377"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_ecosystem",
+      "startedAt": "2026-07-24T18:12:30.571Z",
+      "finishedAt": "2026-07-24T18:12:33.406Z",
+      "durationMs": 2835,
+      "operator": "admin",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 1,
+      "status": "completed",
+      "jobId": "79327576-5cc8-4c23-81a6-cd36defa62ca"
+    },
+    {
+      "stageId": "commercial_intelligence",
+      "actionId": "approve_commercial_intelligence",
+      "startedAt": "2026-07-24T16:27:04.490Z",
+      "finishedAt": "2026-07-24T16:27:04.492Z",
+      "durationMs": 2,
+      "operator": "admin",
+      "evidence": "Commercial Intelligence approved (2026-07-24T16:27:04.462Z)",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_ecosystem",
+      "startedAt": "2026-07-24T09:44:59.455Z",
+      "finishedAt": "2026-07-24T09:45:16.236Z",
+      "durationMs": 16781,
+      "operator": "admin",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "4a470616-abbc-484e-85d9-73ee1cd520d7"
+    },
+    {
+      "stageId": "generate_growth_intelligence",
+      "actionId": "orchestrate_growth_intelligence",
+      "startedAt": "2026-07-24T09:11:49.663Z",
+      "finishedAt": "2026-07-24T09:11:49.801Z",
+      "durationMs": 138,
+      "operator": "nt-e2e-07-test",
+      "evidence": "Growth intelligence acknowledged at 2026-07-24T09:11:49.517Z",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-24T08:08:33.626Z",
+      "finishedAt": "2026-07-24T08:08:33.626Z",
+      "durationMs": 0,
+      "operator": "nt-e2e-05-verify",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-24T08:08:33.601Z",
+      "finishedAt": "2026-07-24T08:08:33.625Z",
+      "durationMs": 24,
+      "operator": "nt-e2e-05-verify",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-24T08:08:33.579Z",
+      "finishedAt": "2026-07-24T08:08:33.600Z",
+      "durationMs": 21,
+      "operator": "nt-e2e-05-verify",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-23T14:41:43.960Z",
+      "finishedAt": "2026-07-23T14:41:43.960Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "8f804ec8-da27-4b47-8c6c-f2829b774999"
+    }
+  ]
+}

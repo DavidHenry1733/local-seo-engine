@@ -9,6 +9,9 @@ import fs   from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import OpenAI from "openai";
+import { buildBusinessIntelligencePrompt } from "./businessIntelligence";
+import { buildOutcomeIntelligencePrompt } from "./outcomeIntelligence";
+import { buildStructuredIntelligencePrompt } from "./structuredIntelligence";
 import type { AreaContentSignals } from "../area/areaTypes";
 import { buildLocalAreaContext, buildLocalContextPromptBlock } from "./localContext";
 import { getServiceMistakes } from "./serviceMistakeMap";
@@ -133,6 +136,13 @@ export interface ClusterPageInputs {
    */
   industryProfile?:    Record<string, unknown>;
   /**
+   * Locked service blueprint loaded from config/service-blueprints.
+   * This overrides generic AI behaviour and hard-locks audience,
+   * service intent, forbidden topics and section direction.
+   */
+  serviceBlueprint?:  Record<string, unknown>;
+
+  /**
    * Who the service is aimed at. Controls audience framing in the prompt so
    * the model never guesses B2B vs B2C.
    * - household          → homeowners, families, individuals
@@ -186,6 +196,7 @@ export interface ClusterPageInputs {
 const DIGITAL_INDUSTRY_TYPES = new Set([
   "web-design",
   "local-seo",
+  "local-business-visibility",
   "seo",
   "web-hosting",
   "email-marketing",
@@ -206,6 +217,13 @@ function getClient(): OpenAI {
   }
   return new OpenAI({ baseURL, apiKey });
 }
+
+/** Shared OpenAI integration client — Replit/VPS AI_INTEGRATIONS_* credentials. */
+export function getOpenAiIntegrationClient(): OpenAI {
+  return getClient();
+}
+
+export const OPENAI_INTEGRATION_CHAT_MODEL = "gpt-4.1";
 
 // ── Prompt loader ──────────────────────────────────────────────────────────────
 
@@ -240,6 +258,13 @@ function buildPrompt(inputs: ClusterPageInputs): string {
     : "cluster-page-prompt.txt";
   const promptPath = findPromptFile(promptFileName);
   let prompt = fs.readFileSync(promptPath, "utf8");
+  prompt += "\n\n" + buildBusinessIntelligencePrompt();
+  prompt += "\n\n" + buildOutcomeIntelligencePrompt();
+  prompt += buildStructuredIntelligencePrompt({
+    serviceKey: (inputs as any).serviceKey,
+    serviceName: inputs.serviceName,
+    location: inputs.location,
+  });
 
   const replacements: Record<string, string> = {
     "{{BRAND_NAME}}":          inputs.brandName,
@@ -327,6 +352,37 @@ function buildPrompt(inputs: ClusterPageInputs): string {
       `Proof points     : ${proofPts}\n` +
       `Local SEO angles : ${arr(p["localSeoAngles"])}\n`;
   }
+
+
+  // ── Service blueprint context block ───────────────────────────────────────
+  // Hard-locks service intent, audience and prohibited drift.
+  if (inputs.serviceBlueprint) {
+    const bp = inputs.serviceBlueprint as Record<string, unknown>;
+
+    const arr = (v: unknown): string =>
+      Array.isArray(v) ? (v as string[]).join(", ") : String(v ?? "");
+
+    prompt +=
+      `\n\nSERVICE BLUEPRINT — MANDATORY RULES:\n\n` +
+      `Service           : ${bp["serviceName"]}\n` +
+      `Page purpose      : ${bp["pagePurpose"]}\n` +
+      `Target audience   : ${arr(bp["audience"])}\n` +
+      `Tone              : ${bp["tone"]}\n` +
+      `Mandatory topics  : ${arr(bp["mandatoryTopics"])}\n` +
+      `Forbidden topics  : ${arr(bp["forbiddenTopics"])}\n` +
+      `Required sections : ${arr(bp["sectionOrder"])}\n` +
+      `Primary CTA       : ${String((bp["cta"] as any)?.primary ?? "")}\n` +
+      `Secondary CTA     : ${String((bp["cta"] as any)?.secondary ?? "")}\n` +
+
+      `\nSTRICT CONTENT RULES:\n` +
+      `You MUST write ONLY about the defined service.\n` +
+      `You MUST target ONLY the defined audience.\n` +
+      `You MUST naturally include the mandatory topics.\n` +
+      `You MUST NEVER mention forbidden topics.\n` +
+      `If forbidden topics appear, the output is invalid.\n` +
+      `Do NOT improvise industries, property services, household scenarios or unrelated audiences.\n`;
+  }
+
 
   // ── Buyer-type context block ──────────────────────────────────────────────
   // Tells the model exactly who the service is aimed at so it never guesses
@@ -620,10 +676,17 @@ export async function generateClusterContent(
     inputs.industryType !== undefined &&
     !DIGITAL_INDUSTRY_TYPES.has(inputs.industryType);
 
+  const isGBP =
+    inputs.industryType === "google-business-profile";
+
   const systemMessage = isTradeIndustry
     ? "You are NOT a copywriter for agencies. You are NOT a marketing assistant. You are NOT writing about services FOR trades. You are generating a REAL SERVICE PAGE for a REAL LOCAL BUSINESS. The business OWNS the service — it sells that service directly to homeowners and householders.\n\nVOICE LOCK (MANDATORY): speaker = \"local service provider\" | reader = \"person with a real problem at home\". Every sentence must sound like: \"We fix your problem\" — NEVER \"We help businesses\" or \"We provide services for companies\". The reader is a homeowner, resident, tenant or landlord — NEVER a business, company, or organisation. If you detect B2B framing anywhere in your output, STOP and rewrite it for homeowners before returning.\n\nReturn only valid JSON — no prose, no markdown, no explanation."
-    : "You are a commercial copywriter producing structured JSON content for local SEO pages. Return only valid JSON — no prose, no markdown, no explanation.";
+    : isGBP
+      ? "You are a senior Google Business Profile optimisation consultant writing for LOCAL BUSINESSES. The audience is businesses, trades, clinics, restaurants and service companies wanting more visibility in Google Maps and local search. NEVER mention homeowners, landlords, tenants, rentals, properties, property details or domestic household scenarios. NEVER drift into property services. Focus ONLY on local visibility, Google Maps rankings, customer reviews, calls, direction requests and local business growth. Return only valid JSON — no prose, no markdown, no explanation."
+      : "You are a commercial copywriter producing structured JSON content for local SEO pages. Return only valid JSON — no prose, no markdown, no explanation.";
 
+  fs.writeFileSync("/tmp/last-cluster-prompt.txt", prompt, "utf8");
+  console.log("  [debug] Final cluster prompt written to /tmp/last-cluster-prompt.txt");
   console.log(`  Generating cluster AI content for: ${inputs.primaryKeyword}…`);
 
   const response = await client.chat.completions.create({

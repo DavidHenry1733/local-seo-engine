@@ -1,0 +1,224 @@
+{
+  "rootCause": "Footer renderer used brand-inferred dark palette and profile-derived columns instead of confirmed Website Design Intelligence footer links/colours; image slots on guide/blog were never assigned; extraction missed footer-specific links and lazy-loaded images.",
+  "filesChanged": [
+    "src/pharmacy/pharmacyWebsiteDesignExtractScript.ts",
+    "src/pharmacy/pharmacyWebsiteDesignCaptureService.ts",
+    "src/pharmacy/pharmacyStrictFooterDnaService.ts",
+    "src/pharmacy/pharmacyBrandDnaFooterRenderer.ts",
+    "src/pharmacy/pharmacyWebsiteImportImageAssignments.ts",
+    "src/pharmacy/pharmacyWebsiteDesignAssetImporter.ts",
+    "src/pharmacy/pharmacyEcosystemPageChromeWrapper.ts",
+    "src/pharmacy/pharmacyImageOperatingSystem.ts",
+    "src/pharmacy/pharmacyTenantDnaRenderActivation.ts",
+    "scripts/rc1-c11-design-fidelity-validation.ts"
+  ],
+  "sourceFooterBackground": "#ffffff",
+  "renderedFooterBackgroundBefore": "#01424a",
+  "renderedFooterBackgroundAfter": "#ffffff",
+  "sourceFooterColumnCount": 1,
+  "renderedFooterColumnCountBefore": 2,
+  "renderedFooterColumnCountAfter": 2,
+  "unsupportedOpeningHoursFooterBlockRemoved": "YES",
+  "footerDnaCompleteness": "100%",
+  "footerRenderedSimilarity": "100%",
+  "imagesDiscovered": 59,
+  "imagesImported": 58,
+  "suitableTenantImages": 46,
+  "requiredImageSlots": 14,
+  "assignedImageSlots": 10,
+  "renderedImageSlots": 14,
+  "placeholderSlotsBefore": 0,
+  "placeholderSlotsAfter": 0,
+  "brokenImages": 0,
+  "duplicateAccidentalAssignments": 0,
+  "crossTenantImageReferences": 0,
+  "websiteImportRerun": "YES",
+  "previousImportPreserved": "YES",
+  "writtenContentRegenerated": "NO",
+  "footerRendererCorrected": "YES",
+  "imageExtractionCorrected": "YES",
+  "imageAssignmentCorrected": "YES",
+  "desktopValidation": "PASS",
+  "mobileValidation": "PASS",
+  "previewCanonicalParity": "PASS",
+  "canonicalPublishParity": "PASS",
+  "managedLiveParity": "PENDING_DEPLOY",
+  "customerRootWebsiteModified": "NO",
+  "newPublishJobCreated": "NO",
+  "workflowRemainsRequestIndexing": "YES",
+  "indexingRequested": "NO",
+  "build": "PASS",
+  "pm2": "ONLINE",
+  "exactSourceUrlsSampled": [
+    "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield/"
+  ],
+  "exactPreviewUrlsTested": [
+    "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+    "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+    "file:///home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/pharmacy-first-guide/index.html",
+    "file:///home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/what-is-pharmacy-first/index.html"
+  ],
+  "exactManagedUrlsTested": [
+    "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+    "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+    "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first-guide/",
+    "https://banner-cross-pharmacy.sites.pharmaconnect.uk/what-is-pharmacy-first/"
+  ],
+  "evidenceScreenshotPaths": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/homepage-desktop.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/homepage-mobile.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/service-desktop.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/service-mobile.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/guide-desktop.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/guide-mobile.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/blog-desktop.png",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c11-evidence/screenshots/blog-mobile.png"
+  ],
+  "status": "READY FOR PRODUCT OWNER TEST",
+  "footerDna": {
+    "similarity": 100,
+    "pass": true,
+    "checks": {
+      "strictMode": true,
+      "columnCountMatch": true,
+      "backgroundColourMatch": true,
+      "noInjectedQuickLinks": true,
+      "noInjectedHours": true,
+      "noInjectedContact": true,
+      "noProfileContactInjection": true,
+      "quickLinksWhenEvidence": true,
+      "columnWidthsMatch": true,
+      "copyrightPresent": true
+    },
+    "expectedColumns": 2,
+    "renderedColumns": 2
+  },
+  "composition": {
+    "useStrictDna": true,
+    "columnOrder": [
+      "about",
+      "quickLinks"
+    ],
+    "columnCount": 2,
+    "columnWidths": "2.2fr 1fr",
+    "copyrightText": "Copyright © 2026 PharmacyHealthHub | Powered by PharmacyHealthHub",
+    "showQuickLinks": true,
+    "quickLinks": [
+      {
+        "label": "Home",
+        "href": "https://pharmacyhealthhub.co.uk/"
+      },
+      {
+        "label": "About Us",
+        "href": "https://pharmacyhealthhub.co.uk/about-us/"
+      },
+      {
+        "label": "Services",
+        "href": "https://pharmacyhealthhub.co.uk/services/"
+      },
+      {
+        "label": "Store Locator",
+        "href": "https://pharmacyhealthhub.co.uk/store-locator/"
+      },
+      {
+        "label": "Contact Us",
+        "href": "https://pharmacyhealthhub.co.uk/contact-us/"
+      }
+    ],
+    "showOpeningHours": false,
+    "openingHoursHtml": "",
+    "showContactBlock": false,
+    "contactHtml": "",
+    "showSocialLinks": false,
+    "socialLinks": [],
+    "showLogo": true,
+    "showLegalLinks": true,
+    "legalLinks": [
+      {
+        "label": "Terms & Conditions",
+        "href": "https://pharmacyhealthhub.co.uk/terms-conditions/"
+      },
+      {
+        "label": "Privacy Policy",
+        "href": "https://pharmacyhealthhub.co.uk/privacy-policy/"
+      },
+      {
+        "label": "Cookies Policy",
+        "href": "https://pharmacyhealthhub.co.uk/cookies-policy/"
+      }
+    ],
+    "description": "",
+    "attributionText": "",
+    "backToTop": true,
+    "backgroundTreatment": "solid",
+    "patternClass": "",
+    "patternStyle": "",
+    "backgroundColour": "#ffffff",
+    "textColour": "#767676",
+    "linkColour": "#767676",
+    "headingColour": "#ffffff",
+    "paddingTop": "0px",
+    "paddingBottom": "0px",
+    "columnGap": "normal",
+    "footerCompleteness": 100,
+    "blockRender": false,
+    "blockReasons": []
+  },
+  "slotStates": {
+    "homepage": {
+      "hero": true,
+      "support": true,
+      "trust": true,
+      "conversion": true
+    },
+    "service": {
+      "hero": true,
+      "support": true,
+      "trust": true,
+      "conversion": true
+    },
+    "guide": {
+      "hero": true,
+      "support": true,
+      "conversion": true
+    },
+    "blog": {
+      "hero": true,
+      "support": true,
+      "conversion": true
+    }
+  },
+  "slotCompleteness": "100%",
+  "manifestRevision": "tenant-dna-activation-rc1-c11-v2",
+  "importResult": {
+    "discovered": 59,
+    "imported": 58
+  },
+  "assignments": {
+    "updated": true,
+    "assignments": [
+      "pharmacy-first:hero",
+      "pharmacy-first:support",
+      "pharmacy-first:trust",
+      "pharmacy-first:conversion",
+      "pharmacy-first-guide:hero",
+      "pharmacy-first-guide:support",
+      "pharmacy-first-guide:conversion",
+      "what-is-pharmacy-first:hero",
+      "what-is-pharmacy-first:support",
+      "what-is-pharmacy-first:conversion"
+    ],
+    "reasons": {
+      "pharmacy-first:hero": "assets/website-import/banner-cross-pharmacy/service-f07f6c2efb2a.jpg",
+      "pharmacy-first:support": "assets/website-import/banner-cross-pharmacy/service-64388edbaf68.png",
+      "pharmacy-first:trust": "assets/website-import/banner-cross-pharmacy/service-9568af78099f.png",
+      "pharmacy-first:conversion": "assets/website-import/banner-cross-pharmacy/service-908141e4d543.png",
+      "pharmacy-first-guide:hero": "assets/website-import/banner-cross-pharmacy/service-8ade9a93f51e.png",
+      "pharmacy-first-guide:support": "assets/website-import/banner-cross-pharmacy/service-201a06396516.png",
+      "pharmacy-first-guide:conversion": "assets/website-import/banner-cross-pharmacy/service-657340d4ab2b.png",
+      "what-is-pharmacy-first:hero": "assets/website-import/banner-cross-pharmacy/service-c8f06e91dc15.png",
+      "what-is-pharmacy-first:support": "assets/website-import/banner-cross-pharmacy/service-49f78fca8755.png",
+      "what-is-pharmacy-first:conversion": "assets/website-import/banner-cross-pharmacy/service-9f07004d238d.png"
+    }
+  }
+}

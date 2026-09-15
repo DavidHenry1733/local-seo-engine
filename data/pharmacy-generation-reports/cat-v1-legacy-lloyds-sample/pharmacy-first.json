@@ -1,0 +1,236 @@
+{
+  "slug": "cat-v1-legacy-lloyds-sample",
+  "resolvedSlug": "cat-v1-legacy-lloyds-sample",
+  "serviceId": "pharmacy-first",
+  "serviceName": "Pharmacy First",
+  "generatedAt": "2026-08-01T08:08:44.144Z",
+  "generatorVersion": "long-form-supporting-content-lockdown-v1",
+  "selectedAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Sheffield City Centre",
+    "Broomhill",
+    "Kelham Island",
+    "Dore",
+    "Hillsborough",
+    "Crookes"
+  ],
+  "profileLoaded": true,
+  "profileName": "CAT V1 Legacy Lloyds Sample",
+  "campaignLoaded": true,
+  "campaignServiceId": "pharmacy-first",
+  "brandLoaded": true,
+  "imageAssignmentsLoaded": true,
+  "selectedServiceConfigPath": "pharmacyMasterPublishConfig:pharmacy-first",
+  "serviceMasterPath": "docs/pharmacy-master-library/pharmacy-first-master-v2.md",
+  "masterPublishPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-master-publish/cat-v1-legacy-lloyds-sample/pharmacy-first/index.html",
+  "clinicalReferencePath": null,
+  "visualOutputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/cat-v1-legacy-lloyds-sample/pharmacy-first/index.html",
+  "contentEcosystemPath": null,
+  "localClusterOutputPaths": [],
+  "assetsGenerated": [
+    "visual-service-page"
+  ],
+  "sectionsExpected": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsFound": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsMissing": [],
+  "foreignServiceContentDetected": [],
+  "tenantValidation": {
+    "ok": true,
+    "detail": "tenant ok"
+  },
+  "serviceValidation": {
+    "ok": true,
+    "detail": "service content ok"
+  },
+  "packageValidation": {
+    "ok": false,
+    "detail": "This content package needs fixing before approval."
+  },
+  "ecosystemTenantValidation": {
+    "ok": false,
+    "detail": "Ecosystem output missing",
+    "foreignTenantAssetsDetected": [],
+    "foreignTenantAssetPaths": [],
+    "fallbackToDefaultSlugDetected": false
+  },
+  "localClusterValidation": {
+    "ok": false,
+    "detail": "Expected 8 local cluster pages, generated 0",
+    "selectedAreasExpected": 8,
+    "localClusterPagesGenerated": 0
+  },
+  "selectedAreasExpected": 8,
+  "localClusterPagesGenerated": 0,
+  "foreignTenantAssetsDetected": [],
+  "foreignTenantAssetPaths": [],
+  "fallbackToDefaultSlugDetected": false,
+  "internalLinkValidation": {
+    "ok": false,
+    "detail": "Internal link map missing",
+    "legacyClusterReferences": 0,
+    "brokenLinks": 0
+  },
+  "manifestAccuracyValidation": {
+    "ok": false,
+    "detail": "Ecosystem tenant: Ecosystem output missing; Local cluster: Expected 8 local cluster pages, generated 0; Internal links: Internal link map missing; Design/map: design/map validation failed; Local map: local page missing; Header/footer: header/footer mismatch; Brand parity: default blue/demo branding detected; Local cluster quality: failed: ecclesall:missing page; fulwood:missing page; sheffield-city-centre:missing page; broomhill:missing page; kelham-island:missing page; Long-form quality: failed: supporting-service-page:missing; patient-guide:missing; what-is:missing; who-should:missing; need-to-know:missing"
+  },
+  "designMapValidation": {
+    "ok": false,
+    "detail": "design/map validation failed",
+    "servicePageMapValidation": {
+      "ok": true,
+      "detail": "map iframe present"
+    },
+    "localPageMapValidation": {
+      "ok": false,
+      "detail": "local page missing"
+    },
+    "localPageDesignValidation": {
+      "ok": false,
+      "detail": "local page not using design system"
+    },
+    "headerFooterParity": {
+      "ok": false,
+      "detail": "header/footer mismatch"
+    },
+    "brandParity": {
+      "ok": false,
+      "detail": "default blue/demo branding detected"
+    },
+    "nearbyAreaLinksCount": 0,
+    "mapValidation": {
+      "ok": false,
+      "detail": "map iframe present; local page missing"
+    },
+    "moneyLinksCount": 0,
+    "internalLinksCount": 0
+  },
+  "localClusterQualityValidation": {
+    "ok": false,
+    "detail": "failed: ecclesall:missing page; fulwood:missing page; sheffield-city-centre:missing page; broomhill:missing page; kelham-island:missing page",
+    "localPagesExpected": 8,
+    "localPagesGenerated": 0,
+    "localPagesWithImages": 0,
+    "localPagesWithBusinessMap": 0,
+    "localPagesWithAreaSpecificCopy": 0,
+    "localPagesWithInternalLinks": 0,
+    "localPagesWithMoneyLinks": 0,
+    "duplicateCopyWarnings": [],
+    "emptySectionsDetected": [],
+    "localIntelligenceUsed": 0,
+    "failedLocalPages": [
+      "ecclesall:missing",
+      "fulwood:missing",
+      "sheffield-city-centre:missing",
+      "broomhill:missing",
+      "kelham-island:missing",
+      "dore:missing",
+      "hillsborough:missing",
+      "crookes:missing",
+      "service-page:missing-local-links"
+    ],
+    "servicePageLinksAllLocalAreas": false,
+    "localCopyDepthValidation": {
+      "ok": true,
+      "detail": "word counts ok",
+      "minWordCount": 350,
+      "pagesBelowMin": []
+    },
+    "localSimilarityScores": [],
+    "areaPrefixDetected": [],
+    "mapUsesBusinessLocation": false,
+    "servicePageLocalLinksCount": 0,
+    "localNearbyLinksCount": 0,
+    "irrelevantSectionsDetected": [],
+    "localPageWordCounts": {},
+    "localPageImageCounts": {},
+    "failedLocalQualityReasons": [
+      "ecclesall:missing page",
+      "fulwood:missing page",
+      "sheffield-city-centre:missing page",
+      "broomhill:missing page",
+      "kelham-island:missing page",
+      "dore:missing page",
+      "hillsborough:missing page",
+      "crookes:missing page",
+      "service page links 0/8",
+      "service page map: map query contains area: Sheffield City Centre"
+    ]
+  },
+  "longFormQualityValidation": {
+    "ok": false,
+    "detail": "failed: supporting-service-page:missing; patient-guide:missing; what-is:missing; who-should:missing; need-to-know:missing",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {},
+    "serviceMentionsBySection": {},
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [
+      "supporting-service-page: file missing",
+      "patient-guide: file missing",
+      "what-is: file missing",
+      "who-should: file missing",
+      "need-to-know: file missing",
+      "faq-page: file missing"
+    ],
+    "failedLongFormAssets": [
+      "supporting-service-page:missing",
+      "patient-guide:missing",
+      "what-is:missing",
+      "who-should:missing",
+      "need-to-know:missing",
+      "faq-page:missing"
+    ],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "errors": [
+    "Ecosystem tenant: Ecosystem output missing",
+    "Local cluster: Expected 8 local cluster pages, generated 0",
+    "Internal links: Internal link map missing",
+    "Design/map: design/map validation failed",
+    "Local map: local page missing",
+    "Header/footer: header/footer mismatch",
+    "Brand parity: default blue/demo branding detected",
+    "Local cluster quality: failed: ecclesall:missing page; fulwood:missing page; sheffield-city-centre:missing page; broomhill:missing page; kelham-island:missing page",
+    "Long-form quality: failed: supporting-service-page:missing; patient-guide:missing; what-is:missing; who-should:missing; need-to-know:missing"
+  ],
+  "warnings": [
+    "CPR-01 service-page-only scope — ecosystem and area pages skipped",
+    "Layout checks: serviceDefinitionSplit, supportImageBand, profileFooter",
+    "Failed local pages: ecclesall:missing; fulwood:missing; sheffield-city-centre:missing; broomhill:missing; kelham-island:missing; dore:missing; hillsborough:missing; crookes:missing; service-page:missing-local-links",
+    "Long-form assets: supporting-service-page:missing; patient-guide:missing; what-is:missing; who-should:missing; need-to-know:missing; faq-page:missing"
+  ]
+}

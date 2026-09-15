@@ -1,0 +1,122 @@
+{
+  "contractId": "pharmacy-local-editorial-evidence-v3",
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Duffield",
+  "areaSlug": "duffield",
+  "collectedAt": "2026-09-06T07:02:58.402Z",
+  "geographicContext": {
+    "areaName": "Duffield",
+    "parentTown": "Derby",
+    "county": "Derbyshire",
+    "country": "United Kingdom",
+    "queryPlaceLabel": "Duffield, Derby, Derbyshire, UK"
+  },
+  "searches": [
+    {
+      "topic": "official-gp-practices",
+      "query": "NHS GP surgery practice official in Duffield, Derby, Derbyshire, UK",
+      "disambiguated": true,
+      "costUsd": 0.002,
+      "resultCount": 9,
+      "capturedAt": "2026-09-06T07:02:52.222Z",
+      "provider": "dataforseo"
+    },
+    {
+      "topic": "descriptive-locality",
+      "query": "official council parish ward community information in Duffield, Derby, Derbyshire, UK",
+      "disambiguated": true,
+      "costUsd": 0.002,
+      "resultCount": 9,
+      "capturedAt": "2026-09-06T07:02:53.946Z",
+      "provider": "dataforseo"
+    }
+  ],
+  "retrievedPages": [
+    {
+      "url": "https://www.nhs.uk/services/gp-surgery/appletree-medical-practice/C81048",
+      "title": "Appletree Medical Practice - NHS",
+      "publisher": "NHS",
+      "sourceClass": "primary",
+      "status": 200,
+      "retrievedAt": "2026-09-06T07:02:56.161Z",
+      "textSample": "Appletree Medical Practice - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care Appletree Medical Practice 47A Town Street, Duffield, Belper, Derbyshire, DE56 4GG Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright"
+    },
+    {
+      "url": "https://www.duffieldparishcouncil.gov.uk/",
+      "title": "Security Challenge",
+      "publisher": "duffieldparishcouncil.gov.uk",
+      "sourceClass": "primary",
+      "status": 401,
+      "retrievedAt": "2026-09-06T07:02:58.342Z",
+      "textSample": "Security Challenge Security Check We just need to quickly confirm you're a real visitor before you continue. Slide the button all the way to the right using your mouse or keyboard. Slide to verify &rarr; Can't use the slider? Type the characters in an image instead Enter the characters shown in the image below, then select Submit to continue. Characters shown in the image Submit Use the slider instead Why am I seeing this page? This quick step is part of our routine security process to verify that you are human and not a robot. We often display this challenge when we detect traffic coming from networks or services that are commonly used by bots, such as data centers, certain cloud services (e.g., AWS, Azure), or VPNs/proxy services. Completing the challenge confirms your intent and allows you immediate access to the site. Thank you for helping us maintain a secure environment!"
+    }
+  ],
+  "rejectedSources": [
+    {
+      "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://derbyfamilymedicalcentre.co.uk/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://derbygp.co.uk/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://www.belperpcn.co.uk/our-practices/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://www.nuffieldhealth.com/hospitals/derby/private-gp-service",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://derwentvalleymedicalpractice.co.uk/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://www.villagesurgeryderby.org.uk/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://party.coop/2026/01/05/community-duffield/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://www.facebook.com/p/Duffield-Parish-Council-100068674822910/",
+      "reason": "disallowed-host"
+    },
+    {
+      "url": "https://www.duffieldvillage.co.uk/about-duffield/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://uk.linkedin.com/company/duffield-parish-council",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Duffield,_Derbyshire",
+      "reason": "disallowed-host"
+    }
+  ],
+  "facts": [],
+  "sufficiency": {
+    "status": "EVIDENCE LIMITED",
+    "intro": false,
+    "localContext": false,
+    "relationshipAccess": false,
+    "faq": false,
+    "reasons": [
+      "no attributable identity fact from an authoritative web source",
+      "no useful locality fact from an authoritative web source",
+      "no verified pharmacy relationship or access fact",
+      "GP research returned zero verified practices — recorded, not a retry"
+    ],
+    "acceptedFactCount": 0,
+    "placesEntityCount": 0
+  },
+  "costUsd": 0.068
+}

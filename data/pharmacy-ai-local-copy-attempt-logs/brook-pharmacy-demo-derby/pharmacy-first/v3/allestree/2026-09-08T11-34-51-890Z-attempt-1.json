@@ -1,0 +1,86 @@
+{
+  "savedAt": "2026-09-08T11:34:51.890Z",
+  "areaSlug": "allestree",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write two useful natural paragraphs in fluent British English, totalling 110–170 words. Introduce the area, then describe meaningful local features and healthcare references. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Do not describe Pharmacy First, healthcare outcomes, access, convenience, availability or eligibility. Return only the two finished local paragraphs.\n\n- NHS general practice services in Allestree are provided from Park Lane Surgery.\n- Allestree is a neighbourhood ward in Derby.\n- Allestree has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Allestree Park has a Friends of Allestree Park group.\n- Allestree Carnival is a community organisation on the council neighbourhood page.\n- Allestree has a public library.\n- NHS general practice services in Allestree are provided from Park Farm Medical Centre.\n- Allestree Park is a landmark in Allestree.\n- War Memorial - Allestree is a landmark in Allestree.\n- Allestree Memorial Hall is a landmark in Allestree."
+  },
+  "rawResponse": "Allestree is a well-established neighbourhood ward located within the city of Derby. Local civic engagement is spearheaded by a dedicated Neighbourhood Board made up of local ward councillors, residents, and representatives from public services and community organisations. The area benefits from active local groups, including the Allestree Carnival community organisation and the Friends of Allestree Park group.\n\nKey landmarks situated across the ward include the expansive Allestree Park, the local War Memorial, and Allestree Memorial Hall. The neighbourhood is also served by a public library that provides an important community facility. NHS general practice medical services in Allestree are provided from two main sites: Park Lane Surgery and Park Farm Medical Centre.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Allestree is a well-established neighbourhood ward located within the city of Derby. | rule=uncertain-paraphrase | defect=Allestree is a well-established neighbourhood ward located within the city of Derby. — uncertain paraphrase: unmatched wording (established, city) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local civic engagement is spearheaded by a dedicated Neighbourhood Board made up of local ward councillors, residents, and representatives from public services and community organisations. | rule=uncertain-paraphrase | defect=Local civic engagement is spearheaded by a dedicated Neighbourhood Board made up of local ward councillors, residents, and representatives from public services and community organisations. — uncertain paraphrase: unmatched wording (engagement, spearheaded, dedicated, made) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area benefits from active local groups, including the Allestree Carnival community organisation and the Friends of Allestree Park group. | rule=uncertain-paraphrase | defect=The area benefits from active local groups, including the Allestree Carnival community organisation and the Friends of Allestree Park group. — uncertain paraphrase: unmatched wording (benefits, active, groups) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Key landmarks situated across the ward include the expansive Allestree Park, the local War Memorial, and Allestree Memorial Hall. | rule=uncertain-paraphrase | defect=Key landmarks situated across the ward include the expansive Allestree Park, the local War Memorial, and Allestree Memorial Hall. — uncertain paraphrase: unmatched wording (key, landmarks, situated, expansive) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The neighbourhood is also served by a public library that provides an important community facility. | rule=uncertain-paraphrase | defect=The neighbourhood is also served by a public library that provides an important community facility. — uncertain paraphrase: unmatched wording (served, provides, important, facility) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=NHS general practice medical services in Allestree are provided from two main sites: Park Lane Surgery and Park Farm Medical Centre. | rule=uncertain-paraphrase | defect=NHS general practice medical services in Allestree are provided from two main sites: Park Lane Surgery and Park Farm Medical Centre. — uncertain paraphrase: unmatched wording (two, main, sites) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Allestree",
+    "heroHeading": "Pharmacy First in Allestree",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Allestree.",
+    "localIntroduction": "Allestree is a well-established neighbourhood ward located within the city of Derby. Local civic engagement is spearheaded by a dedicated Neighbourhood Board made up of local ward councillors, residents, and representatives from public services and community organisations. The area benefits from active local groups, including the Allestree Carnival community organisation and the Friends of Allestree Park group.\n\nKey landmarks situated across the ward include the expansive Allestree Park, the local War Memorial, and Allestree Memorial Hall. The neighbourhood is also served by a public library that provides an important community facility. NHS general practice medical services in Allestree are provided from two main sites: Park Lane Surgery and Park Farm Medical Centre.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Allestree is a well-established neighbourhood ward located within the city of Derby.",
+        "editorialFactId": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Local civic engagement is spearheaded by a dedicated Neighbourhood Board made up of local ward councillors, residents, and representatives from public services and community organisations.",
+        "editorialFactId": "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area benefits from active local groups, including the Allestree Carnival community organisation and the Friends of Allestree Park group.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Key landmarks situated across the ward include the expansive Allestree Park, the local War Memorial, and Allestree Memorial Hall.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The neighbourhood is also served by a public library that provides an important community facility.",
+        "editorialFactId": "allestree:community:allestree-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice medical services in Allestree are provided from two main sites: Park Lane Surgery and Park Farm Medical Centre.",
+        "editorialFactId": "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+        "editorialFactId": "allestree:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby",
+      "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou",
+      "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+      "allestree:community:allestree-has-a-public-library",
+      "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+      "allestree:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

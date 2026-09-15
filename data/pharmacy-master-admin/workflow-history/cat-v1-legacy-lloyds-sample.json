@@ -1,0 +1,108 @@
+{
+  "version": 2,
+  "slug": "cat-v1-legacy-lloyds-sample",
+  "updatedAt": "2026-08-01T08:08:17.000Z",
+  "currentStage": "generate_growth_intelligence",
+  "transitions": [
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-08-01T08:08:17.000Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-08-01T08:08:16.995Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-08-01T08:08:16.994Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-01T08:08:13.406Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-08-01T08:07:04.032Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:08:16.996Z",
+      "finishedAt": "2026-08-01T08:08:16.999Z",
+      "durationMs": 3,
+      "operator": "cpr-cat-v1",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:08:16.994Z",
+      "finishedAt": "2026-08-01T08:08:16.995Z",
+      "durationMs": 1,
+      "operator": "cpr-cat-v1",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:08:16.992Z",
+      "finishedAt": "2026-08-01T08:08:16.993Z",
+      "durationMs": 1,
+      "operator": "cpr-cat-v1",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-01T08:08:13.316Z",
+      "finishedAt": "2026-08-01T08:08:13.316Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "2a6325b8-7cd6-4368-b4eb-0a4a077b5081"
+    }
+  ]
+}

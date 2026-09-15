@@ -1,0 +1,81 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "id": "1-checkbox-name-attr",
+      "pass": true,
+      "detail": "Step 4 checkboxes use name=w-services"
+    },
+    {
+      "id": "2-dom-guard-collect",
+      "pass": true,
+      "detail": "Services collected only when checkbox DOM exists"
+    },
+    {
+      "id": "3-no-hardcoded-defaults",
+      "pass": true,
+      "detail": "Wizard starts with empty selectedServices"
+    },
+    {
+      "id": "4-review-no-collect-on-render",
+      "pass": true,
+      "detail": "Step 5 does not wipe services via collectWizardData"
+    },
+    {
+      "id": "5-session-storage-key",
+      "pass": true,
+      "detail": "Wizard persists to sessionStorage"
+    },
+    {
+      "id": "6-step4-to-step5-persist",
+      "pass": true,
+      "detail": "pharmacy-first, blood-pressure-checks, travel-vaccinations"
+    },
+    {
+      "id": "7-back-next-preserve",
+      "pass": true,
+      "detail": "Selections preserved without checkbox DOM"
+    },
+    {
+      "id": "8-reload-restore",
+      "pass": true,
+      "detail": "Session round-trip restores services"
+    },
+    {
+      "id": "9-review-preview-three",
+      "pass": true,
+      "detail": "Pharmacy First, Blood Pressure Checks, Travel Vaccinations"
+    },
+    {
+      "id": "10-preview-all-services",
+      "pass": true,
+      "detail": "10 services"
+    },
+    {
+      "id": "11-step4-validation",
+      "pass": true,
+      "detail": "Validation rejects empty selection"
+    },
+    {
+      "id": "12-create-one-service",
+      "pass": true,
+      "detail": "1 campaign · pharmacy-first"
+    },
+    {
+      "id": "13-create-three-services",
+      "pass": true,
+      "detail": "pharmacy-first, blood-pressure-checks, travel-vaccinations"
+    },
+    {
+      "id": "14-create-all-services",
+      "pass": true,
+      "detail": "10/10 campaigns"
+    },
+    {
+      "id": "15-no-regression",
+      "pass": true,
+      "detail": "pharmaconnect profile unchanged"
+    }
+  ],
+  "generatedAt": "2026-06-28T14:53:17.414Z"
+}

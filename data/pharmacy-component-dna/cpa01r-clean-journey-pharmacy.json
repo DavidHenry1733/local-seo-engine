@@ -1,0 +1,250 @@
+{
+  "variants": {
+    "headerVariant": "topbar-white-navigation",
+    "topBarVariant": "contact-hours-strip",
+    "navigationVariant": "horizontal-multi-link",
+    "heroVariant": "split-text-left-image-right",
+    "sectionFlowVariant": "alternating-media",
+    "mediaTextVariant": "split-wide-image",
+    "serviceCardVariant": "card-grid-three",
+    "trustPanelVariant": "split-image-trust",
+    "processVariant": "numbered-cards",
+    "faqVariant": "stacked-cards",
+    "ctaVariant": "split-image-phone",
+    "mapContactVariant": "split-map-details",
+    "footerVariant": "four-column-contact",
+    "mobileHeaderVariant": "stacked-nav",
+    "imageTreatmentVariant": "rounded-balanced"
+  },
+  "header": {
+    "logoPosition": "left",
+    "logoMaxHeight": "56px",
+    "navGap": "16px",
+    "navAlign": "end",
+    "navFontSize": "13px",
+    "ctaLayout": "group",
+    "ctaGap": "10px",
+    "sticky": true,
+    "topBar": true,
+    "phoneTreatment": "hidden",
+    "emailTreatment": "plain",
+    "socialTreatment": "hidden",
+    "desktopBreakpoint": "980px",
+    "mobileBreakpoint": "640px",
+    "variant": "topbar-white-navigation",
+    "topBarVariant": "contact-hours-strip",
+    "navigationVariant": "horizontal-multi-link",
+    "mobileHeaderVariant": "stacked-nav"
+  },
+  "footer": {
+    "columnWidths": "2.2fr 1fr 1.15fr 1.5fr",
+    "columnOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ],
+    "columnGap": "40px",
+    "headingSpacing": "16px",
+    "paragraphSpacing": "10px",
+    "sectionPaddingTop": "56px",
+    "sectionPaddingBottom": "0",
+    "bottomBarPadding": "18px",
+    "hoursTableLayout": "table",
+    "contactIconSize": "36px",
+    "contactIconStyle": "circular-outlined",
+    "socialIconSize": "38px",
+    "socialIconStyle": "circular-outlined",
+    "badgePlacement": "brand-column",
+    "badgeMaxHeight": "56px",
+    "badgeAlignment": "start",
+    "badgeSpacing": "10px",
+    "badgeImageFallbackText": true,
+    "legalBarLayout": "split",
+    "patternTreatment": "generic",
+    "backToTop": true,
+    "stackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ],
+    "variant": "four-column-contact"
+  },
+  "hero": {
+    "layout": "split-text-left-image-right",
+    "textColumnRatio": "1fr",
+    "imageColumnRatio": "1fr",
+    "verticalAlign": "center",
+    "gap": "48px",
+    "paddingY": "88px",
+    "maxTextWidth": "720px",
+    "variant": "split-text-left-image-right"
+  },
+  "splitSection": {
+    "textRatio": "1fr",
+    "imageRatio": "1fr",
+    "desktopLayout": "text-left",
+    "mobileStack": "text-first",
+    "verticalAlign": "center",
+    "gap": "32px",
+    "paddingY": "72px",
+    "maxWidth": "1180px",
+    "sectionSpacing": "84px",
+    "variant": "split-wide-image",
+    "flowVariant": "alternating-media",
+    "compositionMode": "media-float-flow",
+    "contentContinuation": true,
+    "layoutThresholds": {
+      "maxWordsBalancedSplit": 110,
+      "maxParagraphsBalancedSplit": 2,
+      "minWordsFloatFlow": 90,
+      "minParagraphsFloatFlow": 3,
+      "floatFlowOpeningParagraphs": 2
+    }
+  },
+  "image": {
+    "heroAspectRatio": "16 / 10",
+    "inlineAspectRatio": "4 / 3",
+    "sectionAspectRatio": "21 / 9",
+    "maxHeight": "520px",
+    "borderRadius": "10px",
+    "shadow": "var(--shadow2)",
+    "splitRatio": "1fr 1fr",
+    "alignment": "center",
+    "objectFit": "cover",
+    "responsiveCrop": true,
+    "variant": "rounded-balanced",
+    "slotTreatments": {
+      "hero": {
+        "widthRatio": "1fr",
+        "maxHeight": "520px",
+        "aspectRatio": "16 / 10"
+      },
+      "support": {
+        "widthRatio": "1fr",
+        "maxHeight": "480px",
+        "aspectRatio": "4 / 3"
+      },
+      "trust": {
+        "widthRatio": "1fr",
+        "maxHeight": "480px",
+        "aspectRatio": "4 / 3"
+      },
+      "conversion": {
+        "widthRatio": "100%",
+        "maxHeight": "560px",
+        "aspectRatio": "21 / 9"
+      },
+      "local": {
+        "widthRatio": "1fr",
+        "maxHeight": "480px",
+        "aspectRatio": "4 / 3"
+      },
+      "fullWidthFeature": {
+        "widthRatio": "100%",
+        "maxHeight": "560px",
+        "aspectRatio": "21 / 9"
+      }
+    }
+  },
+  "map": {
+    "minHeight": "440px",
+    "borderRadius": "10px",
+    "containerPadding": "0",
+    "headingStyle": "section-head",
+    "gap": "32px",
+    "layout": "split-map-details",
+    "iframeBorder": "0",
+    "stackBelow": "980px",
+    "mapColumnRatio": "1.65fr",
+    "detailsColumnRatio": "0.95fr",
+    "stackOrder": "details-first"
+  },
+  "card": {
+    "radius": "10px",
+    "shadow": "var(--shadow2)",
+    "padding": "24px",
+    "headingSpacing": "12px",
+    "iconPlacement": "top",
+    "border": "1px solid var(--line)",
+    "hoverTreatment": "lift",
+    "columns": 3,
+    "gap": "24px",
+    "variant": "card-grid-three"
+  },
+  "cta": {
+    "buttonFamily": "filled-only",
+    "spacing": "8px 14px",
+    "alignment": "center",
+    "dualCta": true,
+    "iconSpacing": "8px",
+    "buttonRadius": "10px",
+    "bandPadding": "84px",
+    "variant": "split-image-phone",
+    "headerPrimary": {
+      "style": "filled",
+      "background": "#1CA9C9",
+      "foreground": "#ffffff",
+      "border": "none",
+      "padding": "8px 14px",
+      "radius": "10px",
+      "fontWeight": "600"
+    },
+    "headerSecondary": {
+      "style": "filled",
+      "background": "#1CA9C9",
+      "foreground": "#ffffff",
+      "border": "none",
+      "padding": "8px 14px",
+      "radius": "10px",
+      "fontWeight": "600"
+    }
+  },
+  "contact": {
+    "role": "hero-contact",
+    "background": "#005EB8",
+    "foreground": "#ffffff",
+    "showIcon": true,
+    "clickable": true,
+    "padding": "12px 18px",
+    "radius": "10px"
+  },
+  "faq": {
+    "style": "stacked-cards",
+    "itemSpacing": "16px",
+    "icon": "none",
+    "headingSize": "1.125rem",
+    "bodySpacing": "12px",
+    "padding": "20px"
+  },
+  "process": {
+    "layout": "numbered-cards",
+    "stepSpacing": "24px",
+    "numberStyle": "badge",
+    "connector": false,
+    "cardPadding": "24px",
+    "columns": 4
+  },
+  "trust": {
+    "layout": "split-image-trust",
+    "cardColumns": 2,
+    "badgeLayout": "inline",
+    "evidenceLayout": "grid",
+    "iconTreatment": "circular-outlined",
+    "spacing": "24px",
+    "gap": "20px"
+  },
+  "table": {
+    "rowBorder": "1px solid color-mix(in srgb, var(--brand-footer-text, #fff) 14%, transparent)",
+    "cellPadding": "10px 0",
+    "headerWeight": "600",
+    "columnAlign": "split",
+    "stripe": false
+  },
+  "version": "component-dna-v1",
+  "sourceBrandRevision": "1110d5f30a5ed7c2",
+  "sourceImportRevision": "45a4d81c7d64fdef",
+  "generatedAt": "2026-07-26T13:07:15.459Z",
+  "updatedAt": "2026-07-26T13:07:15.459Z"
+}

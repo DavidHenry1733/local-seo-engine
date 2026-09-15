@@ -1,0 +1,53 @@
+{
+  "id": "multi-area-local-page-workflow-2026-09-05T05-54Z",
+  "task": "BROOK — ENABLE MULTI-AREA LOCAL-PAGE WORKFLOW",
+  "checkpointAt": "2026-09-05T05:54:43.000Z",
+  "slug": "brook-pharmacy-demo-derby",
+  "campaignId": "pharmacy-first",
+  "noPublication": true,
+  "noCommit": true,
+  "noClinicalApproval": true,
+  "noEvidenceCollection": true,
+  "noGeneration": true,
+  "allestreeUnchanged": true,
+  "selectionsUnchanged": [
+    "Allestree",
+    "Mickleover",
+    "Littleover",
+    "Chellaston",
+    "Duffield",
+    "Alvaston",
+    "Mackworth",
+    "Chaddesden",
+    "Spondon",
+    "Borrowash"
+  ],
+  "campaignBuilderUrl": "https://app.pharmaconnect.uk/api/growth-engine/campaign-builder?slug=brook-pharmacy-demo-derby&step=areas&campaign=pharmacy-first",
+  "protectedUnchanged": {
+    "output/pharmacy-ai-local-page-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/local/allestree/index.html": "ff61fa498953a9f9babdf6fb0106a900e8b97f3d40c56a41936c056af54c8337",
+    "data/pharmacy-ai-local-copy-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/allestree.json": "b0b802374239e0c3d6f8e4a20e4c5cb47bad7b3697e90052da131d4955234dbc",
+    "data/growth-engine/brook-pharmacy-demo-derby-campaign-builder.json": "68639097040dc821c6759f92c3153f503d73a433080e0bfb1a5927ad84bef015",
+    "data/pharmacy-ai-local-generation-budget/brook-pharmacy-demo-derby/pharmacy-first/v3/brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:allestree.json": "eaa3da1e737fa1d99291b662452317d4960981e295d13eec16a2cca79d6eb480"
+  },
+  "sourceFiles": [
+    "src/pharmacy/growthEngineLocalPageCandidateService.ts",
+    "src/pharmacy/growthEngineCampaignBuilderPage.ts",
+    "src/pharmacy/growthEngineCampaignBuilderRoutingService.ts",
+    "artifacts/api-server/src/routes/growthEngineCampaignBuilderPageRouter.ts",
+    "artifacts/api-server/src/routes/api/growthEngineCampaignBuilder.ts",
+    "scripts/validate-brook-derby-multi-area-local-page-workflow-v1.ts"
+  ],
+  "tests": {
+    "scripts/validate-brook-derby-multi-area-local-page-workflow-v1.ts": "27/27",
+    "scripts/validate-brook-derby-allestree-local-page-ui-v1.ts": "36/36"
+  },
+  "deployment": {
+    "apiServerBuild": "artifacts/api-server pnpm run build",
+    "pm2": "pharmaconnect-growth-engine restarted"
+  },
+  "browser": {
+    "1440x900": "overflowX=0; Allestree, Mickleover and Littleover panels isolated; 10 of 10 selected",
+    "390px": "overflowX=0; Littleover panel unchanged; Generate disabled"
+  },
+  "note": "Reusable Campaign Builder local-page workflow now focuses any selected area via ?area=. Allestree evidence, candidate, Preview and generation counters preserved. No pages generated, no evidence collected, no allowances granted, no publication."
+}

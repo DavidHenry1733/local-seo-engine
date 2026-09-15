@@ -1,0 +1,2879 @@
+{
+  "schemaVersion": "1.0",
+  "industryType": "pharmacy",
+  "displayName": "Pharmacy",
+  "region": "United Kingdom",
+  "generatedAt": "2026-06-10T15:09:36.171Z",
+  "phase": "business-intelligence-discovery",
+  "purpose": "Foundation intelligence layer for pharmacy campaign generation, content generation, local SEO, blog, social, email, YouTube and AI search optimisation. Intelligence only — no pages, content or campaigns.",
+  "industryOverview": {
+    "industryType": "Community Healthcare Retail — Primary Care Access Point",
+    "summary": "UK pharmacy combines regulated medicines supply with expanding clinical services. Community pharmacies are among the most accessible healthcare settings, delivering prescription dispensing, NHS clinical pathways and private health services in local high streets, health centres and increasingly online.",
+    "models": {
+      "nhsPharmacyModel": {
+        "name": "NHS Community Pharmacy Model",
+        "description": "Contracted via the Community Pharmacy Contractual Framework (CPCF) with NHS England and Community Pharmacy England. Pharmacies dispense NHS prescriptions, deliver Advanced and Enhanced services (Pharmacy First, NMS, contraception, blood pressure checks, vaccinations) and act as a front door to reduce GP and A&E pressure.",
+        "characteristics": [
+          "NHS prescription dispensing at scale",
+          "Commissioned clinical services",
+          "EPS integration with GP practices",
+          "Quality payments and service targets",
+          "Superintendent pharmacist governance",
+          "GPhC registration required"
+        ],
+        "fundingSources": [
+          "CPCF global sum",
+          "Dispensing fees",
+          "Advanced service fees",
+          "Enhanced service payments",
+          "Market entry and quality payments"
+        ],
+        "patientAccess": "Walk-in and appointment hybrid; typically longest opening hours in primary care"
+      },
+      "independentPharmacyModel": {
+        "name": "Independent Pharmacy Model",
+        "description": "Single-site or small multi-site businesses owned by pharmacist proprietors. Compete on personal service, local trust, flexible delivery and differentiated private clinics.",
+        "characteristics": [
+          "Strong local reputation",
+          "Personal pharmacist relationships",
+          "Flexible service mix",
+          "Private travel and wellness clinics",
+          "Delivery and compliance services",
+          "Community engagement"
+        ],
+        "competitiveFocus": [
+          "Trust and continuity",
+          "Service breadth beyond dispensing",
+          "Local SEO and reviews",
+          "Private revenue diversification"
+        ]
+      },
+      "smallChainModel": {
+        "name": "Small Chain Model (2–20 branches)",
+        "description": "Regional groups sharing branding, procurement and clinical SOPs while retaining local branch identity.",
+        "characteristics": [
+          "Shared brand and marketing",
+          "Centralised buying",
+          "Standardised service menus",
+          "Multi-branch SEO footprint",
+          "Regional clinical leads"
+        ],
+        "competitiveFocus": [
+          "Brand recognition with local presence",
+          "Consistent service standards",
+          "Cross-branch prescription transfer"
+        ]
+      },
+      "largeChainModel": {
+        "name": "Large Chain Model (national/multiple hundreds)",
+        "description": "National operators with standardised formats, central marketing, hub-and-spoke dispensing and high street or supermarket presence.",
+        "characteristics": [
+          "National brand trust",
+          "Standardised pricing and promotions",
+          "High footfall locations",
+          "Centralised digital prescription apps",
+          "Scale NHS contract delivery"
+        ],
+        "competitiveFocus": [
+          "Convenience and opening hours",
+          "Omni-channel prescription management",
+          "National vaccination programmes"
+        ]
+      },
+      "onlinePharmacyModel": {
+        "name": "Online Pharmacy Model",
+        "description": "Distance-selling pharmacies dispensing via post with digital consultations, repeat prescription apps and private treatment programmes.",
+        "characteristics": [
+          "Postal dispensing",
+          "Digital triage and consultations",
+          "Subscription repeats",
+          "National reach without physical local presence",
+          "GPhC distance-selling logo required"
+        ],
+        "competitiveFocus": [
+          "Convenience and discretion",
+          "Price comparison",
+          "Digital UX",
+          "Repeat automation"
+        ],
+        "limitations": [
+          "Reduced face-to-face trust",
+          "Local SEO less relevant",
+          "Regulatory advertising constraints on prescription-only medicines"
+        ]
+      }
+    },
+    "regulatoryContext": {
+      "primaryRegulator": "General Pharmaceutical Council (GPhC)",
+      "keyLegislation": [
+        "Human Medicines Regulations 2012",
+        "Community Pharmacy Contractual Framework",
+        "Medicines Act frameworks",
+        "GDPR and NHS data governance"
+      ],
+      "professionalRoles": [
+        "Responsible Pharmacist",
+        "Superintendent Pharmacist",
+        "Independent Prescriber Pharmacists (where qualified)"
+      ]
+    },
+    "marketDynamics": {
+      "trends": [
+        "Clinical service expansion via Pharmacy First",
+        "GP access pressure driving pharmacy-first behaviour",
+        "Private vaccination and travel growth",
+        "Weight management pharmacotherapy demand",
+        "Digital prescription nomination competition",
+        "Hub-and-spoke dispensing centralisation"
+      ],
+      "patientExpectations": [
+        "Same-day minor illness care",
+        "Extended opening hours",
+        "Delivery and click-and-collect",
+        "Transparent private pricing",
+        "Trusted pharmacist advice without appointment"
+      ]
+    }
+  },
+  "coreServices": {
+    "prescriptionServices": [
+      {
+        "serviceKey": "prescription-dispensing",
+        "serviceName": "Prescription Dispensing",
+        "category": "prescription",
+        "description": "Accurate dispensing of NHS and private prescriptions with clinical checks, labelling and patient counselling.",
+        "customerBenefits": [
+          "Reliable access to prescribed medicines",
+          "Professional safety checks before supply",
+          "Clear dosage and usage guidance"
+        ],
+        "commonProblemsSolved": [
+          "Long GP wait for repeat authorisation",
+          "Confusion over dosage or interactions",
+          "Difficulty collecting during work hours"
+        ],
+        "customerIntent": [
+          "collect prescription",
+          "dispense my prescription",
+          "pharmacy near me prescription"
+        ]
+      },
+      {
+        "serviceKey": "electronic-prescription-service-eps",
+        "serviceName": "Electronic Prescription Service (EPS)",
+        "category": "prescription",
+        "description": "Digital prescription routing from GP to nominated pharmacy without paper tokens.",
+        "customerBenefits": [
+          "No lost paper prescriptions",
+          "Faster handover from GP to pharmacy",
+          "Nominated pharmacy convenience"
+        ],
+        "commonProblemsSolved": [
+          "Paper prescription delays",
+          "Lost prescription tokens",
+          "Multiple trips to GP surgery"
+        ],
+        "customerIntent": [
+          "EPS prescription",
+          "nominated pharmacy",
+          "electronic prescription"
+        ]
+      },
+      {
+        "serviceKey": "repeat-prescription-service",
+        "serviceName": "Repeat Prescription Service",
+        "category": "prescription",
+        "description": "Managed repeat ordering, tracking and readiness notification for ongoing medications.",
+        "customerBenefits": [
+          "Fewer GP appointments for routine repeats",
+          "Predictable medicine supply",
+          "Reminders when ready to collect"
+        ],
+        "commonProblemsSolved": [
+          "Running out of regular medication",
+          "Forgotten repeat orders",
+          "GP surgery backlog for repeat sign-off"
+        ],
+        "customerIntent": [
+          "repeat prescription",
+          "order repeat medication",
+          "repeat prescription pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "prescription-delivery",
+        "serviceName": "Prescription Delivery",
+        "category": "prescription",
+        "description": "Home delivery for eligible patients including housebound, elderly and rural communities.",
+        "customerBenefits": [
+          "Medicines brought to the door",
+          "Reduced travel for mobility-limited patients",
+          "Discreet secure delivery"
+        ],
+        "commonProblemsSolved": [
+          "Unable to travel to pharmacy",
+          "Carer burden collecting multiple prescriptions",
+          "Rural access barriers"
+        ],
+        "customerIntent": [
+          "prescription delivery",
+          "pharmacy home delivery",
+          "deliver my prescription"
+        ]
+      },
+      {
+        "serviceKey": "blister-packs-and-compliance-aids",
+        "serviceName": "Blister Packs and Compliance Aids",
+        "category": "prescription",
+        "description": "Weekly or monthly monitored dosage systems for complex medication regimens.",
+        "customerBenefits": [
+          "Reduced missed or double doses",
+          "Carer-friendly organisation",
+          "Safer multi-medicine management"
+        ],
+        "commonProblemsSolved": [
+          "Confusion with multiple daily tablets",
+          "Medication errors in elderly care",
+          "Hospital discharge complexity"
+        ],
+        "customerIntent": [
+          "blister pack pharmacy",
+          "dosette box service",
+          "medication compliance aid"
+        ]
+      },
+      {
+        "serviceKey": "emergency-supply",
+        "serviceName": "Emergency Supply",
+        "category": "prescription",
+        "description": "Professional assessment for urgent supply when regular prescription unavailable.",
+        "customerBenefits": [
+          "Bridge supply when GP unavailable",
+          "Avoid treatment interruption",
+          "Pharmacist clinical judgement"
+        ],
+        "commonProblemsSolved": [
+          "Holiday abroad without enough medication",
+          "GP closed over weekend",
+          "Lost or stolen prescription"
+        ],
+        "customerIntent": [
+          "emergency prescription supply",
+          "urgent medication pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "prescription-collection-service",
+        "serviceName": "Prescription Collection Service",
+        "category": "prescription",
+        "description": "Collection from GP surgery or coordination on patient's behalf.",
+        "customerBenefits": [
+          "Single trip for patient",
+          "Time saved for working carers",
+          "Coordinated repeat workflow"
+        ],
+        "commonProblemsSolved": [
+          "No time to visit GP and pharmacy same day",
+          "Multiple family prescriptions",
+          "Work-hour conflicts"
+        ],
+        "customerIntent": [
+          "prescription collection service",
+          "pharmacy collects prescription"
+        ]
+      },
+      {
+        "serviceKey": "private-prescription-dispensing",
+        "serviceName": "Private Prescription Dispensing",
+        "category": "prescription",
+        "description": "Supply of privately prescribed medicines including specialist and travel-related items.",
+        "customerBenefits": [
+          "Access to non-NHS prescribed treatments",
+          "Specialist medicine availability",
+          "Professional counselling on private items"
+        ],
+        "commonProblemsSolved": [
+          "GP unable to prescribe specific item on NHS",
+          "Specialist private only medicines",
+          "Need fast private supply"
+        ],
+        "customerIntent": [
+          "private prescription pharmacy",
+          "dispense private prescription"
+        ]
+      }
+    ],
+    "nhsServices": [
+      {
+        "serviceKey": "pharmacy-first",
+        "serviceName": "Pharmacy First",
+        "category": "nhs",
+        "description": "NHS-funded consultations for common conditions including earache, sore throat, UTIs, shingles, impetigo and insect bites without GP appointment.",
+        "customerBenefits": [
+          "Same-day access for minor illness",
+          "Reduced GP pressure",
+          "Free NHS care where eligible"
+        ],
+        "commonProblemsSolved": [
+          "Cannot get GP appointment",
+          "Minor illness worsening while waiting",
+          "Uncertainty whether to visit A&E"
+        ],
+        "customerIntent": [
+          "Pharmacy First",
+          "pharmacy for sore throat",
+          "UTI pharmacy treatment"
+        ]
+      },
+      {
+        "serviceKey": "nhs-blood-pressure-checks",
+        "serviceName": "NHS Blood Pressure Checks",
+        "category": "nhs",
+        "description": "Hypertension case-finding and monitoring through pharmacy blood pressure service.",
+        "customerBenefits": [
+          "Convenient screening without GP wait",
+          "Early detection of hypertension",
+          "Ongoing monitoring support"
+        ],
+        "commonProblemsSolved": [
+          "Undiagnosed high blood pressure",
+          "Infrequent GP monitoring",
+          "White-coat anxiety at surgery"
+        ],
+        "customerIntent": [
+          "blood pressure check pharmacy",
+          "NHS hypertension check",
+          "free blood pressure test"
+        ]
+      },
+      {
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "serviceName": "NHS New Medicine Service (NMS)",
+        "category": "nhs",
+        "description": "Structured follow-up support for patients starting new medicines for eligible conditions.",
+        "customerBenefits": [
+          "Better understanding of new treatment",
+          "Side effect management guidance",
+          "Improved adherence and outcomes"
+        ],
+        "commonProblemsSolved": [
+          "Anxiety about starting new medication",
+          "Side effects without follow-up",
+          "Poor adherence after discharge"
+        ],
+        "customerIntent": [
+          "New Medicine Service",
+          "NMS pharmacy",
+          "new prescription support"
+        ]
+      },
+      {
+        "serviceKey": "pharmacy-contraception-service",
+        "serviceName": "Pharmacy Contraception Service",
+        "category": "nhs",
+        "description": "Supply and ongoing provision of oral contraception through qualified pharmacy teams.",
+        "customerBenefits": [
+          "No GP appointment needed",
+          "Discreet accessible service",
+          "Continuity of contraceptive supply"
+        ],
+        "commonProblemsSolved": [
+          "GP appointment delays",
+          "Running out of pill supply",
+          "Embarrassment requesting at surgery"
+        ],
+        "customerIntent": [
+          "pharmacy contraception service",
+          "pill pharmacy without GP",
+          "NHS contraception pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "nhs-flu-vaccination",
+        "serviceName": "NHS Flu Vaccination",
+        "category": "nhs",
+        "description": "Seasonal influenza immunisation for eligible NHS groups and increasingly wider populations.",
+        "customerBenefits": [
+          "Convenient walk-in or booked jab",
+          "Community access without GP visit",
+          "Protection during flu season"
+        ],
+        "commonProblemsSolved": [
+          "Flu risk for elderly or clinical groups",
+          "GP clinic fully booked",
+          "Workplace flu exposure"
+        ],
+        "customerIntent": [
+          "NHS flu jab pharmacy",
+          "free flu vaccine pharmacy",
+          "flu jab near me"
+        ]
+      },
+      {
+        "serviceKey": "nhs-smoking-cessation-support",
+        "serviceName": "NHS Smoking Cessation Support",
+        "category": "nhs",
+        "description": "Behavioural support and nicotine replacement or prescribed cessation products.",
+        "customerBenefits": [
+          "Local accessible quit support",
+          "Product supply with advice",
+          "Structured quit programme"
+        ],
+        "commonProblemsSolved": [
+          "Failed previous quit attempts",
+          "GP limited cessation time",
+          "Need NRT supply with guidance"
+        ],
+        "customerIntent": [
+          "stop smoking pharmacy",
+          "NRT pharmacy",
+          "quit smoking support"
+        ]
+      },
+      {
+        "serviceKey": "discharge-medicines-service",
+        "serviceName": "Discharge Medicines Service",
+        "category": "nhs",
+        "description": "Medicines reconciliation and counselling after hospital discharge.",
+        "customerBenefits": [
+          "Reduced readmission risk",
+          "Clarity on changed medicines",
+          "Bridge supply at discharge"
+        ],
+        "commonProblemsSolved": [
+          "Confusion after hospital medication changes",
+          "Duplicate or omitted medicines",
+          "No GP follow-up immediately after discharge"
+        ],
+        "customerIntent": [
+          "discharge medicines service",
+          "hospital discharge pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "supervised-consumption",
+        "serviceName": "Supervised Consumption",
+        "category": "nhs",
+        "description": "Daily supervised dosing for opioid substitution therapy and similar regimens.",
+        "customerBenefits": [
+          "Safe structured dosing",
+          "Reduced diversion risk",
+          "Regular pharmacist contact"
+        ],
+        "commonProblemsSolved": [
+          "Opioid dependency management",
+          "Need daily supervised access point",
+          "Risk of unsupervised misuse"
+        ],
+        "customerIntent": [
+          "supervised consumption pharmacy",
+          "methadone pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "palliative-care-dispensing",
+        "serviceName": "Palliative Care Dispensing",
+        "category": "nhs",
+        "description": "Priority supply and support for end-of-life and palliative medicines.",
+        "customerBenefits": [
+          "Rapid access in crisis",
+          "24-hour support pathways where available",
+          "Compassionate medicines management"
+        ],
+        "commonProblemsSolved": [
+          "Urgent symptom control needs",
+          "Out-of-hours medicine access",
+          "Complex palliative regimens"
+        ],
+        "customerIntent": [
+          "palliative care pharmacy",
+          "urgent end of life medication"
+        ]
+      },
+      {
+        "serviceKey": "hepatitis-c-testing-and-referral",
+        "serviceName": "Hepatitis C Testing and Referral",
+        "category": "nhs",
+        "description": "Point-of-care testing and NHS referral pathways where commissioned.",
+        "customerBenefits": [
+          "Accessible screening",
+          "Early detection",
+          "Pharmacy-to-specialist pathway"
+        ],
+        "commonProblemsSolved": [
+          "Undiagnosed hepatitis C",
+          "Stigma around testing at GP",
+          "Need discreet testing access"
+        ],
+        "customerIntent": [
+          "hepatitis C test pharmacy",
+          "pharmacy hepatitis screening"
+        ]
+      }
+    ],
+    "privateServices": [
+      {
+        "serviceKey": "private-health-consultations",
+        "serviceName": "Private Health Consultations",
+        "category": "private",
+        "description": "Paid clinical consultations for conditions, wellness checks and treatment planning outside NHS pathways.",
+        "customerBenefits": [
+          "Flexible appointment times",
+          "Extended consultation time",
+          "Immediate access without GP referral"
+        ],
+        "commonProblemsSolved": [
+          "GP waiting lists",
+          "Need same-week appointment",
+          "Desire second opinion"
+        ],
+        "customerIntent": [
+          "private pharmacy consultation",
+          "book pharmacist appointment"
+        ]
+      },
+      {
+        "serviceKey": "private-ear-wax-removal",
+        "serviceName": "Private Ear Wax Removal",
+        "category": "private",
+        "description": "Microsuction or irrigation ear wax removal by trained clinicians.",
+        "customerBenefits": [
+          "Safe professional removal",
+          "Immediate hearing improvement",
+          "Avoid GP referral wait"
+        ],
+        "commonProblemsSolved": [
+          "Blocked ears affecting hearing",
+          "Failed home remedies",
+          "GP unable to offer rapid removal"
+        ],
+        "customerIntent": [
+          "ear wax removal pharmacy",
+          "microsuction near me"
+        ]
+      },
+      {
+        "serviceKey": "private-blood-testing",
+        "serviceName": "Private Blood Testing",
+        "category": "private",
+        "description": "Diagnostic blood panels and health screening without GP referral.",
+        "customerBenefits": [
+          "Fast results for health monitoring",
+          "Choice of test panels",
+          "Convenient sample collection"
+        ],
+        "commonProblemsSolved": [
+          "GP won't order specific tests",
+          "Annual health MOT desire",
+          "Monitoring private treatment"
+        ],
+        "customerIntent": [
+          "private blood test pharmacy",
+          "health screening blood test"
+        ]
+      },
+      {
+        "serviceKey": "vitamin-b12-injections",
+        "serviceName": "Vitamin B12 Injections",
+        "category": "private",
+        "description": "Administration of B12 injections for deficiency management where clinically appropriate.",
+        "customerBenefits": [
+          "Regular injection schedule",
+          "Avoid GP nurse appointment backlog",
+          "Consistent supply point"
+        ],
+        "commonProblemsSolved": [
+          "B12 deficiency fatigue",
+          "GP nurse clinic delays",
+          "Need reliable injection site"
+        ],
+        "customerIntent": [
+          "B12 injection pharmacy",
+          "vitamin B12 jab"
+        ]
+      },
+      {
+        "serviceKey": "emergency-hormonal-contraception",
+        "serviceName": "Emergency Hormonal Contraception",
+        "category": "private",
+        "description": "Morning-after pill supply and counselling; NHS or private depending on eligibility.",
+        "customerBenefits": [
+          "Rapid access after unprotected sex",
+          "Confidential professional advice",
+          "Weekend and evening availability"
+        ],
+        "commonProblemsSolved": [
+          "Missed contraception",
+          "GP closed over weekend",
+          "Embarrassment at walk-in centre"
+        ],
+        "customerIntent": [
+          "morning after pill pharmacy",
+          "emergency contraception near me"
+        ]
+      },
+      {
+        "serviceKey": "private-minor-ailment-treatment",
+        "serviceName": "Private Minor Ailment Treatment",
+        "category": "private",
+        "description": "Over-the-counter and PGD-led treatment for common conditions where NHS pathway unavailable.",
+        "customerBenefits": [
+          "Immediate product and advice supply",
+          "Pharmacist-led treatment",
+          "No appointment needed"
+        ],
+        "commonProblemsSolved": [
+          "Minor symptoms need fast relief",
+          "GP appointment unavailable",
+          "Uncertainty on suitable product"
+        ],
+        "customerIntent": [
+          "pharmacist minor ailment treatment",
+          "pharmacy treatment without GP"
+        ]
+      },
+      {
+        "serviceKey": "compounding-and-specialist-supply",
+        "serviceName": "Compounding and Specialist Supply",
+        "category": "private",
+        "description": "Custom preparation or sourcing of specialist medicines.",
+        "customerBenefits": [
+          "Access to tailored formulations",
+          "Specialist import coordination",
+          "Professional formulation advice"
+        ],
+        "commonProblemsSolved": [
+          "Standard product unsuitable",
+          "Paediatric liquid formulation needed",
+          "Allergy to excipients"
+        ],
+        "customerIntent": [
+          "specialist pharmacy compounding",
+          "custom medicine pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "private-prescription-service-fees",
+        "serviceName": "Private Prescription Service Fees",
+        "category": "private",
+        "description": "Transparent private dispensing for items not available on NHS.",
+        "customerBenefits": [
+          "Clear pricing upfront",
+          "Professional supply chain",
+          "Clinical counselling included"
+        ],
+        "commonProblemsSolved": [
+          "NHS not funding required treatment",
+          "Need private supply quickly",
+          "Specialist medicine cost clarity"
+        ],
+        "customerIntent": [
+          "private prescription cost",
+          "private dispensing fee"
+        ]
+      }
+    ],
+    "travelServices": [
+      {
+        "serviceKey": "travel-health-consultation",
+        "serviceName": "Travel Health Consultation",
+        "category": "travel",
+        "description": "Personalised risk assessment based on destination, duration, activities and medical history.",
+        "customerBenefits": [
+          "Tailored travel health plan",
+          "Professional itinerary review",
+          "Clear vaccine and medicine schedule"
+        ],
+        "commonProblemsSolved": [
+          "Uncertainty on required vaccines",
+          "Complex multi-country itinerary",
+          "Medical conditions affecting travel"
+        ],
+        "customerIntent": [
+          "travel clinic consultation",
+          "travel health advice pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "travel-vaccinations",
+        "serviceName": "Travel Vaccinations",
+        "category": "travel",
+        "description": "Private immunisations for hepatitis A/B, typhoid, rabies, Japanese encephalitis and other destination-specific vaccines.",
+        "customerBenefits": [
+          "Convenient community access",
+          "Flexible booking",
+          "Certificate documentation"
+        ],
+        "commonProblemsSolved": [
+          "Last-minute travel plans",
+          "GP travel clinic wait",
+          "Incomplete vaccination records"
+        ],
+        "customerIntent": [
+          "travel vaccinations near me",
+          "travel vaccines pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "malaria-prophylaxis",
+        "serviceName": "Malaria Prophylaxis",
+        "category": "travel",
+        "description": "Prescription and supply of antimalarial tablets with counselling on adherence and side effects.",
+        "customerBenefits": [
+          "Correct prophylaxis for destination",
+          "Professional dosing guidance",
+          "Supply before departure"
+        ],
+        "commonProblemsSolved": [
+          "Confusion over which tablets needed",
+          "Drug interactions concern",
+          "Running out before trip ends"
+        ],
+        "customerIntent": [
+          "malaria tablets pharmacy",
+          "antimalarial prescription"
+        ]
+      },
+      {
+        "serviceKey": "travel-first-aid-and-kit-supply",
+        "serviceName": "Travel First Aid and Kit Supply",
+        "category": "travel",
+        "description": "Curated travel health kits, altitude sickness products and destination-specific supplies.",
+        "customerBenefits": [
+          "Preparedness for common travel illness",
+          "Pharmacist product selection",
+          "One-stop travel health shop"
+        ],
+        "commonProblemsSolved": [
+          "Unsure what to pack medically",
+          "Remote destination limited healthcare",
+          "Family travel preparation"
+        ],
+        "customerIntent": [
+          "travel health kit pharmacy",
+          "travel sickness tablets"
+        ]
+      },
+      {
+        "serviceKey": "yellow-fever-vaccination-centre",
+        "serviceName": "Yellow Fever Vaccination Centre",
+        "category": "travel",
+        "description": "WHO-certified yellow fever immunisation with International Certificate of Vaccination.",
+        "customerBenefits": [
+          "Mandatory certificate for entry countries",
+          "Accredited centre supply",
+          "Official documentation"
+        ],
+        "commonProblemsSolved": [
+          "Country entry requirement",
+          "Last-minute certificate need",
+          "GP not a yellow fever centre"
+        ],
+        "customerIntent": [
+          "yellow fever vaccine near me",
+          "yellow fever certificate pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "rabies-vaccination",
+        "serviceName": "Rabies Vaccination",
+        "category": "travel",
+        "description": "Pre-exposure and post-exposure rabies immunisation for high-risk travel.",
+        "customerBenefits": [
+          "Protection for adventure travel",
+          "Structured course scheduling",
+          "Emergency post-bite guidance"
+        ],
+        "commonProblemsSolved": [
+          "Wildlife exposure risk",
+          "Remote travel without rapid healthcare",
+          "Occupational animal contact"
+        ],
+        "customerIntent": [
+          "rabies vaccine travel",
+          "rabies jab pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "altitude-sickness-prevention",
+        "serviceName": "Altitude Sickness Prevention",
+        "category": "travel",
+        "description": "Acetazolamide supply and advice for high-altitude trekking and travel.",
+        "customerBenefits": [
+          "Reduced altitude illness risk",
+          "Dosing guidance for ascent profile",
+          "Product availability before departure"
+        ],
+        "commonProblemsSolved": [
+          "Trekking to high elevation",
+          "Uncertainty on prevention timing",
+          "Previous altitude sickness"
+        ],
+        "customerIntent": [
+          "altitude sickness tablets pharmacy",
+          "acetazolamide travel"
+        ]
+      }
+    ],
+    "vaccinationServices": [
+      {
+        "serviceKey": "seasonal-flu-vaccination-private",
+        "serviceName": "Seasonal Flu Vaccination (Private)",
+        "category": "vaccination",
+        "description": "Private flu jab for those not eligible for NHS programme or wanting earlier/convenient access.",
+        "customerBenefits": [
+          "Walk-in convenience",
+          "Workplace-friendly timing",
+          "Immediate protection"
+        ],
+        "commonProblemsSolved": [
+          "Not NHS eligible but wants jab",
+          "Employer health requirement",
+          "GP clinic full"
+        ],
+        "customerIntent": [
+          "private flu jab",
+          "flu vaccine walk in"
+        ]
+      },
+      {
+        "serviceKey": "shingles-vaccination",
+        "serviceName": "Shingles Vaccination",
+        "category": "vaccination",
+        "description": "Private Shingrix or Zostavax supply for eligible adults seeking protection.",
+        "customerBenefits": [
+          "Reduced shingles risk",
+          "Pharmacy accessibility",
+          "Flexible booking"
+        ],
+        "commonProblemsSolved": [
+          "Age-related shingles risk",
+          "GP waiting list",
+          "Previous chickenpox history concern"
+        ],
+        "customerIntent": [
+          "shingles vaccine pharmacy",
+          "Shingrix near me"
+        ]
+      },
+      {
+        "serviceKey": "pneumococcal-vaccination",
+        "serviceName": "Pneumococcal Vaccination",
+        "category": "vaccination",
+        "description": "Private pneumococcal immunisation for at-risk groups and travellers.",
+        "customerBenefits": [
+          "Pneumonia prevention",
+          "Complement to flu programme",
+          "Professional risk assessment"
+        ],
+        "commonProblemsSolved": [
+          "Respiratory vulnerability",
+          "Age or condition risk",
+          "Incomplete vaccination history"
+        ],
+        "customerIntent": [
+          "pneumonia vaccine pharmacy",
+          "pneumococcal jab"
+        ]
+      },
+      {
+        "serviceKey": "meningitis-acwy-vaccination",
+        "serviceName": "Meningitis ACWY Vaccination",
+        "category": "vaccination",
+        "description": "MenACWY for university entrants, travellers and at-risk groups.",
+        "customerBenefits": [
+          "Meningitis protection",
+          "University requirement compliance",
+          "Certificate supply"
+        ],
+        "commonProblemsSolved": [
+          "Starting university",
+          "Hajj/Umrah travel requirement",
+          "Shared accommodation risk"
+        ],
+        "customerIntent": [
+          "MenACWY vaccine",
+          "meningitis jab pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "chickenpox-vaccination",
+        "serviceName": "Chickenpox Vaccination",
+        "category": "vaccination",
+        "description": "Private varicella immunisation for children and adults without immunity.",
+        "customerBenefits": [
+          "Family protection planning",
+          "Avoid infection during pregnancy planning",
+          "Childcare exposure risk"
+        ],
+        "commonProblemsSolved": [
+          "Child not yet had chickenpox",
+          "Adult without immunity",
+          "Contact with vulnerable person"
+        ],
+        "customerIntent": [
+          "chickenpox vaccine pharmacy",
+          "varicella jab"
+        ]
+      },
+      {
+        "serviceKey": "hpv-vaccination",
+        "serviceName": "HPV Vaccination",
+        "category": "vaccination",
+        "description": "Private human papillomavirus immunisation beyond NHS age programmes.",
+        "customerBenefits": [
+          "Extended protection",
+          "Catch-up for missed NHS doses",
+          "Gender-neutral access"
+        ],
+        "commonProblemsSolved": [
+          "Missed school programme",
+          "Adult seeking protection",
+          "Partner health planning"
+        ],
+        "customerIntent": [
+          "HPV vaccine pharmacy",
+          "Gardasil pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "covid-19-vaccination",
+        "serviceName": "COVID-19 Vaccination",
+        "category": "vaccination",
+        "description": "NHS or private COVID immunisation where commissioned and available.",
+        "customerBenefits": [
+          "Booster protection",
+          "Travel or employer requirement",
+          "Clinical vulnerability"
+        ],
+        "commonProblemsSolved": [
+          "Seasonal booster need",
+          "Travel certificate requirement",
+          "Immunocompromised protection"
+        ],
+        "customerIntent": [
+          "COVID vaccine pharmacy",
+          "COVID booster near me"
+        ]
+      },
+      {
+        "serviceKey": "whooping-cough-pertussis-vaccination",
+        "serviceName": "Whooping Cough (Pertussis) Vaccination",
+        "category": "vaccination",
+        "description": "Pregnancy and family pertussis protection programmes where available.",
+        "customerBenefits": [
+          "Newborn protection via maternal immunity",
+          "Accessible community supply",
+          "Aligned with NHS pregnancy guidance"
+        ],
+        "commonProblemsSolved": [
+          "Pregnancy immunisation timing",
+          "GP appointment delay",
+          "Family cocooning protection"
+        ],
+        "customerIntent": [
+          "whooping cough vaccine pregnancy pharmacy",
+          "pertussis jab"
+        ]
+      },
+      {
+        "serviceKey": "rsv-vaccination",
+        "serviceName": "RSV Vaccination",
+        "category": "vaccination",
+        "description": "Respiratory syncytial virus immunisation for eligible older adults and pregnancy programmes.",
+        "customerBenefits": [
+          "RSV season protection",
+          "Community pharmacy access",
+          "NHS programme alignment"
+        ],
+        "commonProblemsSolved": [
+          "Age-related RSV risk",
+          "Pregnancy protection guidance",
+          "Respiratory condition vulnerability"
+        ],
+        "customerIntent": [
+          "RSV vaccine pharmacy",
+          "RSV jab over 60"
+        ]
+      }
+    ],
+    "weightManagement": [
+      {
+        "serviceKey": "weight-management-consultation",
+        "serviceName": "Weight Management Consultation",
+        "category": "weight-management",
+        "description": "Pharmacist-led assessment of BMI, lifestyle, comorbidities and treatment eligibility.",
+        "customerBenefits": [
+          "Professional baseline assessment",
+          "Realistic goal setting",
+          "Safe treatment pathway"
+        ],
+        "commonProblemsSolved": [
+          "Repeated failed diets",
+          "Obesity-related health risks",
+          "Confusion over treatment options"
+        ],
+        "customerIntent": [
+          "weight loss consultation pharmacy",
+          "pharmacy weight management"
+        ]
+      },
+      {
+        "serviceKey": "pharmacy-weight-loss-programme",
+        "serviceName": "Pharmacy Weight Loss Programme",
+        "category": "weight-management",
+        "description": "Structured support combining lifestyle advice, monitoring and approved treatments.",
+        "customerBenefits": [
+          "Accountability and follow-up",
+          "Integrated product and advice",
+          "Local accessible programme"
+        ],
+        "commonProblemsSolved": [
+          "Need structured support not just product",
+          "Yo-yo dieting history",
+          "Motivation and tracking gaps"
+        ],
+        "customerIntent": [
+          "pharmacy weight loss programme",
+          "supervised weight loss"
+        ]
+      },
+      {
+        "serviceKey": "glp-1-weight-management-treatment",
+        "serviceName": "GLP-1 Weight Management Treatment",
+        "category": "weight-management",
+        "description": "Supply and monitoring of GLP-1 receptor agonists where clinically indicated and legally supplied.",
+        "customerBenefits": [
+          "Medically supervised pharmacotherapy",
+          "Regular check-ins",
+          "Supply chain reliability"
+        ],
+        "commonProblemsSolved": [
+          "Prescription weight loss eligibility",
+          "Online unregulated supply concerns",
+          "Need local clinical oversight"
+        ],
+        "customerIntent": [
+          "GLP-1 pharmacy",
+          "weight loss injection pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "body-composition-and-bmi-monitoring",
+        "serviceName": "Body Composition and BMI Monitoring",
+        "category": "weight-management",
+        "description": "Regular tracking of weight, BMI and progress markers.",
+        "customerBenefits": [
+          "Objective progress measurement",
+          "Motivation through data",
+          "Early plateau identification"
+        ],
+        "commonProblemsSolved": [
+          "Unclear whether programme working",
+          "Need accountability weigh-ins",
+          "Health metric tracking"
+        ],
+        "customerIntent": [
+          "BMI check pharmacy",
+          "weight monitoring service"
+        ]
+      },
+      {
+        "serviceKey": "nutritional-and-lifestyle-advice",
+        "serviceName": "Nutritional and Lifestyle Advice",
+        "category": "weight-management",
+        "description": "Evidence-based dietary and activity guidance from pharmacy health teams.",
+        "customerBenefits": [
+          "Practical everyday changes",
+          "Complements medical treatment",
+          "No fad diet misinformation"
+        ],
+        "commonProblemsSolved": [
+          "Overwhelming online diet advice",
+          "Need trusted local guidance",
+          "Medication plus lifestyle integration"
+        ],
+        "customerIntent": [
+          "nutrition advice pharmacy",
+          "healthy weight pharmacy"
+        ]
+      }
+    ],
+    "testingServices": [
+      {
+        "serviceKey": "blood-pressure-monitoring",
+        "serviceName": "Blood Pressure Monitoring",
+        "category": "testing",
+        "description": "Regular BP checks with trend tracking and GP referral when indicated.",
+        "customerBenefits": [
+          "Continuous monitoring",
+          "White-coat effect reduction with familiar setting",
+          "Actionable readings"
+        ],
+        "commonProblemsSolved": [
+          "Hypertension management gaps",
+          "Infrequent GP checks",
+          "Uncertainty if medication working"
+        ],
+        "customerIntent": [
+          "blood pressure monitoring pharmacy",
+          "BP check walk in"
+        ]
+      },
+      {
+        "serviceKey": "diabetes-screening",
+        "serviceName": "Diabetes Screening",
+        "category": "testing",
+        "description": "Blood glucose and HbA1c point-of-care testing where available.",
+        "customerBenefits": [
+          "Early diabetes detection",
+          "Convenient screening",
+          "Referral to GP when needed"
+        ],
+        "commonProblemsSolved": [
+          "Family history concern",
+          "Symptoms of hyperglycaemia",
+          "Annual health check desire"
+        ],
+        "customerIntent": [
+          "diabetes test pharmacy",
+          "blood sugar test pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "cholesterol-testing",
+        "serviceName": "Cholesterol Testing",
+        "category": "testing",
+        "description": "Lipid panel screening for cardiovascular risk assessment.",
+        "customerBenefits": [
+          "Heart health awareness",
+          "Monitoring on treatment",
+          "Private fast results"
+        ],
+        "commonProblemsSolved": [
+          "Family CVD history",
+          "Statins monitoring gaps",
+          "Preventive health interest"
+        ],
+        "customerIntent": [
+          "cholesterol test pharmacy",
+          "lipid profile test"
+        ]
+      },
+      {
+        "serviceKey": "covid-19-lateral-flow-supply",
+        "serviceName": "COVID-19 Lateral Flow Supply",
+        "category": "testing",
+        "description": "Retail and professional supply of diagnostic test kits.",
+        "customerBenefits": [
+          "Home testing availability",
+          "Travel or event requirement",
+          "Symptom checking"
+        ],
+        "commonProblemsSolved": [
+          "Need tests before travel",
+          "Household exposure",
+          "Workplace testing policy"
+        ],
+        "customerIntent": [
+          "COVID test pharmacy",
+          "lateral flow pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "urinalysis-and-uti-screening",
+        "serviceName": "Urinalysis and UTI Screening",
+        "category": "testing",
+        "description": "Dipstick testing supporting Pharmacy First UTI pathways.",
+        "customerBenefits": [
+          "Rapid initial assessment",
+          "Same-day treatment pathway",
+          "Reduced GP visits"
+        ],
+        "commonProblemsSolved": [
+          "UTI symptoms",
+          "Recurrent infection concern",
+          "Weekend symptom onset"
+        ],
+        "customerIntent": [
+          "UTI test pharmacy",
+          "urine test pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "pregnancy-testing",
+        "serviceName": "Pregnancy Testing",
+        "category": "testing",
+        "description": "Professional pregnancy test with confidential counselling.",
+        "customerBenefits": [
+          "Accurate early detection",
+          "Immediate advice on next steps",
+          "Discreet service"
+        ],
+        "commonProblemsSolved": [
+          "Missed period anxiety",
+          "Contraception failure concern",
+          "Need same-day result"
+        ],
+        "customerIntent": [
+          "pregnancy test pharmacy",
+          "pharmacy pregnancy test"
+        ]
+      },
+      {
+        "serviceKey": "drug-tariff-and-point-of-care-diagnostics",
+        "serviceName": "Drug Tariff and Point-of-Care Diagnostics",
+        "category": "testing",
+        "description": "Expanding POC tests including flu, strep and other rapid diagnostics.",
+        "customerBenefits": [
+          "Fast result-driven treatment",
+          "Reduced unnecessary antibiotics",
+          "Immediate clinical decision"
+        ],
+        "commonProblemsSolved": [
+          "Unsure viral vs bacterial",
+          "Need rapid diagnosis",
+          "School or work return decision"
+        ],
+        "customerIntent": [
+          "rapid strep test pharmacy",
+          "flu test pharmacy"
+        ]
+      }
+    ],
+    "consultationServices": [
+      {
+        "serviceKey": "medicines-use-review-mur-structured-medication-review",
+        "serviceName": "Medicines Use Review (MUR) / Structured Medication Review",
+        "category": "consultation",
+        "description": "In-depth review of medicines adherence, interactions and optimisation.",
+        "customerBenefits": [
+          "Safer medicine use",
+          "Reduced waste and side effects",
+          "Personalised medicines plan"
+        ],
+        "commonProblemsSolved": [
+          "Polypharmacy confusion",
+          "Suspected drug interactions",
+          "Poor symptom control on current meds"
+        ],
+        "customerIntent": [
+          "medicines review pharmacy",
+          "medication review appointment"
+        ]
+      },
+      {
+        "serviceKey": "minor-illness-consultation",
+        "serviceName": "Minor Illness Consultation",
+        "category": "consultation",
+        "description": "Pharmacist assessment of self-limiting conditions with treatment or referral.",
+        "customerBenefits": [
+          "Expert triage without GP",
+          "Immediate OTC or PGD treatment",
+          "Clear safety-netting advice"
+        ],
+        "commonProblemsSolved": [
+          "Unsure severity of symptoms",
+          "GP unavailable",
+          "Need same-day advice"
+        ],
+        "customerIntent": [
+          "pharmacist consultation minor illness",
+          "see pharmacist instead of GP"
+        ]
+      },
+      {
+        "serviceKey": "healthy-living-advice",
+        "serviceName": "Healthy Living Advice",
+        "category": "consultation",
+        "description": "Lifestyle counselling on diet, exercise, alcohol, smoking and sleep.",
+        "customerBenefits": [
+          "Preventive health support",
+          "Trusted local health professional",
+          "Holistic wellbeing guidance"
+        ],
+        "commonProblemsSolved": [
+          "Multiple modifiable risk factors",
+          "Post-diagnosis lifestyle change",
+          "Health anxiety and misinformation"
+        ],
+        "customerIntent": [
+          "healthy living pharmacy",
+          "lifestyle advice pharmacist"
+        ]
+      },
+      {
+        "serviceKey": "asthma-and-copd-inhaler-technique-review",
+        "serviceName": "Asthma and COPD Inhaler Technique Review",
+        "category": "consultation",
+        "description": "Device technique checks to improve respiratory medicine effectiveness.",
+        "customerBenefits": [
+          "Better symptom control",
+          "Reduced hospital admissions",
+          "Correct device use"
+        ],
+        "commonProblemsSolved": [
+          "Poor inhaler technique",
+          "Frequent rescue inhaler use",
+          "New device confusion"
+        ],
+        "customerIntent": [
+          "inhaler technique check pharmacy",
+          "asthma review pharmacy"
+        ]
+      },
+      {
+        "serviceKey": "pain-management-consultation",
+        "serviceName": "Pain Management Consultation",
+        "category": "consultation",
+        "description": "Assessment of acute and chronic pain with appropriate product selection.",
+        "customerBenefits": [
+          "Safe analgesic guidance",
+          "Avoid dangerous combinations",
+          "Referral when red flags present"
+        ],
+        "commonProblemsSolved": [
+          "Chronic pain self-medicating",
+          "Paracetamol/ibuprofen confusion",
+          "Unsafe OTC stacking"
+        ],
+        "customerIntent": [
+          "pain management pharmacy",
+          "pharmacist pain advice"
+        ]
+      },
+      {
+        "serviceKey": "skin-condition-assessment",
+        "serviceName": "Skin Condition Assessment",
+        "category": "consultation",
+        "description": "Pharmacist review of eczema, acne, fungal infections and minor dermatology.",
+        "customerBenefits": [
+          "Appropriate treatment selection",
+          "Avoid steroid misuse",
+          "Referral for suspicious lesions"
+        ],
+        "commonProblemsSolved": [
+          "Persistent rash",
+          "OTC product not working",
+          "Uncertainty on severity"
+        ],
+        "customerIntent": [
+          "skin consultation pharmacy",
+          "pharmacist skin advice"
+        ]
+      },
+      {
+        "serviceKey": "sleep-and-stress-support-consultation",
+        "serviceName": "Sleep and Stress Support Consultation",
+        "category": "consultation",
+        "description": "Guidance on short-term sleep aids, stress management and when to seek GP care.",
+        "customerBenefits": [
+          "Non-prescription support options",
+          "Safety on sedating products",
+          "Signposting to mental health services"
+        ],
+        "commonProblemsSolved": [
+          "Insomnia affecting daily life",
+          "Stress-related symptoms",
+          "Dependency concerns on sleep aids"
+        ],
+        "customerIntent": [
+          "sleep advice pharmacy",
+          "stress support pharmacist"
+        ]
+      },
+      {
+        "serviceKey": "children-s-health-consultation",
+        "serviceName": "Children's Health Consultation",
+        "category": "consultation",
+        "description": "Weight-appropriate dosing and condition advice for paediatric minor illness.",
+        "customerBenefits": [
+          "Safe children's dosing",
+          "Parent reassurance",
+          "Red flag identification"
+        ],
+        "commonProblemsSolved": [
+          "Child fever at night",
+          "Dosing confusion by age",
+          "When to escalate to GP"
+        ],
+        "customerIntent": [
+          "children pharmacy consultation",
+          "calpol dosing advice pharmacy"
+        ]
+      }
+    ]
+  },
+  "coreServiceSummary": {
+    "totalServices": 62,
+    "categories": {
+      "prescriptionServices": 8,
+      "nhsServices": 10,
+      "privateServices": 8,
+      "travelServices": 7,
+      "vaccinationServices": 9,
+      "weightManagement": 5,
+      "testingServices": 7,
+      "consultationServices": 8
+    }
+  },
+  "customerPersonas": [
+    {
+      "personaKey": "regular-nhs-patient",
+      "personaName": "Regular NHS Prescription Patient",
+      "goals": [
+        "Reliable repeat supply",
+        "Minimal GP involvement",
+        "Affordable medicines access"
+      ],
+      "frustrations": [
+        "Repeat prescription delays",
+        "Stock shortages",
+        "Queue times",
+        "Confusing generic switches"
+      ],
+      "searchIntent": [
+        "repeat prescription pharmacy",
+        "pharmacy near me",
+        "prescription ready notification"
+      ],
+      "preferredMessaging": [
+        "Convenient",
+        "Reliable",
+        "Friendly local team",
+        "We manage your repeats"
+      ]
+    },
+    {
+      "personaKey": "elderly-carer",
+      "personaName": "Elderly Patient or Family Carer",
+      "goals": [
+        "Safe medication management",
+        "Home delivery",
+        "Clear instructions",
+        "One pharmacy for whole household"
+      ],
+      "frustrations": [
+        "Complex regimens",
+        "Multiple pharmacy visits",
+        "Small print on labels",
+        "Hospital discharge confusion"
+      ],
+      "searchIntent": [
+        "prescription delivery pharmacy",
+        "blister pack pharmacy",
+        "pharmacy for elderly"
+      ],
+      "preferredMessaging": [
+        "Patient",
+        "Clear",
+        "Safety-first",
+        "We support carers and families"
+      ]
+    },
+    {
+      "personaKey": "busy-professional",
+      "personaName": "Busy Working Adult",
+      "goals": [
+        "Fast service",
+        "Extended hours",
+        "Online repeat ordering",
+        "Walk-in vaccinations"
+      ],
+      "frustrations": [
+        "9–5 GP-only availability",
+        "Long pharmacy queues",
+        "No parking",
+        "Unclear wait times"
+      ],
+      "searchIntent": [
+        "pharmacy open late",
+        "walk in flu jab",
+        "express prescription"
+      ],
+      "preferredMessaging": [
+        "Quick",
+        "Flexible hours",
+        "Book online",
+        "In and out fast"
+      ]
+    },
+    {
+      "personaKey": "parent-family",
+      "personaName": "Parent / Family Health Manager",
+      "goals": [
+        "Child-safe treatments",
+        "Same-day minor illness care",
+        "Trusted advice",
+        "Affordable OTC guidance"
+      ],
+      "frustrations": [
+        "GP wait for minor illness",
+        "Uncertainty on children's dosing",
+        "Weekend illness with no GP",
+        "School sickness policies"
+      ],
+      "searchIntent": [
+        "Pharmacy First child",
+        "pharmacist advice child fever",
+        "pharmacy open Sunday"
+      ],
+      "preferredMessaging": [
+        "Family-friendly",
+        "Expert paediatric guidance",
+        "Open when you need us"
+      ]
+    },
+    {
+      "personaKey": "travel-health",
+      "personaName": "Travel Health Customer",
+      "goals": [
+        "Complete vaccine schedule before departure",
+        "Malaria tablets",
+        "Professional itinerary advice",
+        "Certificates and documentation"
+      ],
+      "frustrations": [
+        "GP travel clinic wait",
+        "Conflicting online advice",
+        "Last-minute travel plans",
+        "Unclear total cost"
+      ],
+      "searchIntent": [
+        "travel vaccinations near me",
+        "malaria tablets pharmacy",
+        "yellow fever vaccine"
+      ],
+      "preferredMessaging": [
+        "Expert travel clinic",
+        "Book consultation",
+        "Destination-specific advice"
+      ]
+    },
+    {
+      "personaKey": "pharmacy-first-seeker",
+      "personaName": "Minor Illness / Pharmacy First Seeker",
+      "goals": [
+        "Avoid GP wait",
+        "Same-day treatment",
+        "Free NHS care where eligible",
+        "Clear referral if needed"
+      ],
+      "frustrations": [
+        "GP phone lines busy",
+        "A&E inappropriate waits",
+        "Uncertainty if condition is serious",
+        "Previous antibiotic delays"
+      ],
+      "searchIntent": [
+        "Pharmacy First",
+        "pharmacy UTI treatment",
+        "sore throat pharmacy"
+      ],
+      "preferredMessaging": [
+        "See us first",
+        "NHS service",
+        "Same-day care",
+        "Expert triage"
+      ]
+    },
+    {
+      "personaKey": "wellness-vaccination",
+      "personaName": "Private Wellness and Vaccination Customer",
+      "goals": [
+        "Convenient immunisation",
+        "Preventive health",
+        "Discreet service",
+        "Flexible payment"
+      ],
+      "frustrations": [
+        "NHS eligibility confusion",
+        "Corporate flu programme gaps",
+        "Online booking failures",
+        "Hidden fees"
+      ],
+      "searchIntent": [
+        "private flu jab",
+        "shingles vaccine pharmacy",
+        "walk in vaccination"
+      ],
+      "preferredMessaging": [
+        "Walk in welcome",
+        "Transparent pricing",
+        "Protect your health",
+        "Book online"
+      ]
+    },
+    {
+      "personaKey": "chronic-condition",
+      "personaName": "Chronic Condition Manager",
+      "goals": [
+        "Stable medicines supply",
+        "Regular monitoring",
+        "Inhaler technique support",
+        "Medication reviews"
+      ],
+      "frustrations": [
+        "Fragmented care between GP and pharmacy",
+        "Device technique never checked",
+        "Side effects on new medicines",
+        "Appointment gaps for monitoring"
+      ],
+      "searchIntent": [
+        "medication review pharmacy",
+        "inhaler technique check",
+        "blood pressure monitoring pharmacy"
+      ],
+      "preferredMessaging": [
+        "Long-term support",
+        "Regular check-ins",
+        "Optimise your medicines"
+      ]
+    },
+    {
+      "personaKey": "weight-management",
+      "personaName": "Weight Management Seeker",
+      "goals": [
+        "Medically supervised weight loss",
+        "Realistic sustainable results",
+        "Regular monitoring",
+        "Non-judgemental support"
+      ],
+      "frustrations": [
+        "Fad diet misinformation",
+        "Unsafe online GLP-1 suppliers",
+        "GP limited obesity appointments",
+        "Shame in healthcare settings"
+      ],
+      "searchIntent": [
+        "pharmacy weight loss",
+        "GLP-1 pharmacy",
+        "weight management consultation"
+      ],
+      "preferredMessaging": [
+        "Evidence-based",
+        "Supportive",
+        "Medically supervised",
+        "Book confidential consultation"
+      ]
+    },
+    {
+      "personaKey": "care-home-liaison",
+      "personaName": "Care Home or Supported Living Liaison",
+      "goals": [
+        "Reliable multi-patient supply",
+        "Compliance packaging",
+        "Audit-ready records",
+        "Responsive account management"
+      ],
+      "frustrations": [
+        "Medication errors on transfer",
+        "Late deliveries",
+        "Poor communication on changes",
+        "Invoice disputes"
+      ],
+      "searchIntent": [
+        "care home pharmacy",
+        "nursing home prescription delivery",
+        "compliance aid pharmacy"
+      ],
+      "preferredMessaging": [
+        "Dedicated account support",
+        "Safe reliable supply",
+        "Care sector specialists"
+      ]
+    }
+  ],
+  "competitiveAdvantages": {
+    "convenience": {
+      "advantage": "Convenience",
+      "description": "High street presence, extended hours, walk-in access and delivery reduce friction versus GP appointments.",
+      "customerValue": "Healthcare fits around work, family and travel schedules.",
+      "messagingAngles": [
+        "Open late and weekends",
+        "No appointment needed",
+        "Same-day service",
+        "Delivery to your door"
+      ]
+    },
+    "speed": {
+      "advantage": "Speed",
+      "description": "Pharmacy First and PGD pathways deliver same-day assessment and treatment.",
+      "customerValue": "Symptoms addressed immediately without weeks waiting for GP.",
+      "messagingAngles": [
+        "Same-day care",
+        "Fast prescription turnaround",
+        "Quick travel clinic booking"
+      ]
+    },
+    "expertise": {
+      "advantage": "Expertise",
+      "description": "Pharmacists are medicines experts with 5-year MPharm training plus clinical service accreditation.",
+      "customerValue": "Trusted advice on medicines, interactions and minor illness.",
+      "messagingAngles": [
+        "Ask your pharmacist",
+        "Qualified healthcare professional",
+        "Medicines specialists"
+      ]
+    },
+    "accessibility": {
+      "advantage": "Accessibility",
+      "description": "More pharmacy branches than GP practices; disproportionately serve deprived and rural communities.",
+      "customerValue": "Healthcare within walking distance or short drive.",
+      "messagingAngles": [
+        "Your local pharmacy",
+        "Healthcare on your high street",
+        "Accessible consultation room"
+      ]
+    },
+    "serviceRange": {
+      "advantage": "Service Range",
+      "description": "From NHS prescriptions to travel clinics, vaccinations, testing and weight management.",
+      "customerValue": "One trusted location for multiple health needs.",
+      "messagingAngles": [
+        "Full service pharmacy",
+        "NHS and private care",
+        "One stop health hub"
+      ]
+    },
+    "location": {
+      "advantage": "Location",
+      "description": "Proximity, parking, public transport and local community integration drive choice.",
+      "customerValue": "Minimal travel burden especially for elderly and chronic patients.",
+      "messagingAngles": [
+        "Town centre location",
+        "Free parking",
+        "Serving [area] for [X] years"
+      ]
+    },
+    "pricing": {
+      "advantage": "Pricing",
+      "description": "Transparent private fees, NHS free services and competitive OTC value.",
+      "customerValue": "Predictable costs; NHS services free at point of use.",
+      "messagingAngles": [
+        "Free NHS blood pressure check",
+        "Transparent travel clinic pricing",
+        "Prescription exemption support"
+      ]
+    }
+  },
+  "customerPainPoints": {
+    "prescriptionFrustrations": [
+      "Repeat prescription not ready when expected",
+      "GP slow to authorise repeats",
+      "Medicine out of stock nationally",
+      "Confusion when brand switched to generic",
+      "Multiple trips between GP and pharmacy",
+      "Nominated pharmacy errors in EPS",
+      "Prescription charge confusion",
+      "Difficulty collecting during work hours",
+      "Hospital discharge medicines not aligned with GP script",
+      "Lost paper prescription tokens"
+    ],
+    "appointmentFrustrations": [
+      "Cannot get GP appointment for minor illness",
+      "Long phone queues to GP surgery",
+      "Travel clinic months in advance at GP",
+      "Weight management GP referral delays",
+      "No weekend GP for urgent contraception",
+      "Blood test appointment weeks away",
+      "Medication review only at annual GP visit",
+      "Vaccination clinics fully booked",
+      "Specialist referral before simple treatment",
+      "Online booking systems crashing"
+    ],
+    "travelHealthFrustrations": [
+      "Unclear which vaccines are needed",
+      "Conflicting online travel advice",
+      "Last-minute trip with incomplete schedule",
+      "GP not a yellow fever centre",
+      "High private travel clinic costs",
+      "Uncertainty on malaria tablet side effects",
+      "Certificate documentation delays",
+      "Multi-visit vaccine courses hard to schedule",
+      "Children's travel vaccines unavailable locally",
+      "Insurance not covering travel health consult"
+    ],
+    "accessFrustrations": [
+      "Pharmacy closed when needed",
+      "No parking at city centre branch",
+      "Long dispensing queues",
+      "No delivery for housebound patient",
+      "Rural pharmacy closures",
+      "Disability access limitations",
+      "Language barriers in health advice",
+      "Digital-only services excluding elderly",
+      "Distance-selling pharmacy impersonal",
+      "Branch relocation without notice"
+    ],
+    "communicationFrustrations": [
+      "No notification when prescription ready",
+      "Unclear opening hours online",
+      "Website not showing available services",
+      "Phone not answered during advertised hours",
+      "Conflicting advice from different staff",
+      "GP and pharmacy records not aligned",
+      "Private pricing not published online",
+      "Appointment confirmation missing",
+      "Follow-up after New Medicine Service absent",
+      "Review responses ignored on Google"
+    ]
+  },
+  "trustSignals": {
+    "nhsAffiliation": {
+      "signal": "NHS Affiliation",
+      "indicators": [
+        "NHS logo usage compliant with guidelines",
+        "Pharmacy First provider",
+        "NHS flu and vaccination site",
+        "EPS registered dispenser",
+        "CPCF contracted premises"
+      ],
+      "customerImpact": "Signals legitimate NHS-funded care and regulatory oversight"
+    },
+    "pharmacistExpertise": {
+      "signal": "Pharmacist Expertise",
+      "indicators": [
+        "Named superintendent and responsible pharmacist",
+        "GPhC registration numbers displayed",
+        "Independent prescriber qualifications",
+        "Clinical service accreditation certificates",
+        "Continuing professional development"
+      ],
+      "customerImpact": "Confidence in clinical advice and safe supply"
+    },
+    "reviews": {
+      "signal": "Reviews and Reputation",
+      "indicators": [
+        "Google rating and review volume",
+        "NHS.uk service reviews",
+        "Facebook recommendations",
+        "Trustpilot for online pharmacies",
+        "Pharmacist response to feedback"
+      ],
+      "customerImpact": "Social proof for service quality and staff empathy"
+    },
+    "accreditations": {
+      "signal": "Accreditations",
+      "indicators": [
+        "GPhC registered pharmacy premises",
+        "Yellow fever vaccination centre certification",
+        "Healthy Living Pharmacy status",
+        "Disability Confident employer",
+        "CPD and service-specific training badges"
+      ],
+      "customerImpact": "Third-party validation beyond marketing claims"
+    },
+    "serviceQuality": {
+      "signal": "Service Quality Indicators",
+      "indicators": [
+        "Private consultation rooms",
+        "Clear service menus on website",
+        "Transparent pricing for private care",
+        "Waiting time expectations",
+        "Prescription accuracy track record",
+        "Stock availability communication",
+        "Multilingual support",
+        "Accessible premises"
+      ],
+      "customerImpact": "Tangible evidence of professional standards and patient-centred care"
+    }
+  },
+  "serviceRelationships": {
+    "nodes": [
+      {
+        "id": "travel-vaccinations",
+        "label": "Travel Vaccinations"
+      },
+      {
+        "id": "travel-health-consultation",
+        "label": "Travel Health Consultation"
+      },
+      {
+        "id": "malaria-prophylaxis",
+        "label": "Malaria Prophylaxis"
+      },
+      {
+        "id": "yellow-fever",
+        "label": "Yellow Fever Vaccination"
+      },
+      {
+        "id": "travel-first-aid",
+        "label": "Travel First Aid Kit"
+      },
+      {
+        "id": "pharmacy-first",
+        "label": "Pharmacy First"
+      },
+      {
+        "id": "minor-illness-consultation",
+        "label": "Minor Illness Consultation"
+      },
+      {
+        "id": "prescription-dispensing",
+        "label": "Prescription Dispensing"
+      },
+      {
+        "id": "repeat-prescription",
+        "label": "Repeat Prescription Service"
+      },
+      {
+        "id": "nms",
+        "label": "NHS New Medicine Service"
+      },
+      {
+        "id": "mur",
+        "label": "Medicines Use Review"
+      },
+      {
+        "id": "blood-pressure",
+        "label": "Blood Pressure Checks"
+      },
+      {
+        "id": "hypertension-monitoring",
+        "label": "Hypertension Monitoring"
+      },
+      {
+        "id": "nhs-flu",
+        "label": "NHS Flu Vaccination"
+      },
+      {
+        "id": "private-flu",
+        "label": "Private Flu Vaccination"
+      },
+      {
+        "id": "shingles-vaccine",
+        "label": "Shingles Vaccination"
+      },
+      {
+        "id": "pneumococcal-vaccine",
+        "label": "Pneumococcal Vaccination"
+      },
+      {
+        "id": "contraception",
+        "label": "Pharmacy Contraception Service"
+      },
+      {
+        "id": "ehc",
+        "label": "Emergency Hormonal Contraception"
+      },
+      {
+        "id": "smoking-cessation",
+        "label": "Smoking Cessation Support"
+      },
+      {
+        "id": "weight-consultation",
+        "label": "Weight Management Consultation"
+      },
+      {
+        "id": "glp1",
+        "label": "GLP-1 Weight Management"
+      },
+      {
+        "id": "bmi-monitoring",
+        "label": "BMI Monitoring"
+      },
+      {
+        "id": "healthy-living",
+        "label": "Healthy Living Advice"
+      },
+      {
+        "id": "blood-testing",
+        "label": "Private Blood Testing"
+      },
+      {
+        "id": "cholesterol-test",
+        "label": "Cholesterol Testing"
+      },
+      {
+        "id": "diabetes-screening",
+        "label": "Diabetes Screening"
+      },
+      {
+        "id": "ear-wax-removal",
+        "label": "Ear Wax Removal"
+      },
+      {
+        "id": "inhaler-technique",
+        "label": "Inhaler Technique Review"
+      },
+      {
+        "id": "discharge-medicines",
+        "label": "Discharge Medicines Service"
+      },
+      {
+        "id": "prescription-delivery",
+        "label": "Prescription Delivery"
+      },
+      {
+        "id": "blister-packs",
+        "label": "Blister Packs / Compliance Aids"
+      }
+    ],
+    "edges": [
+      {
+        "from": "travel-health-consultation",
+        "to": "travel-vaccinations",
+        "relationship": "informs_required_immunisations"
+      },
+      {
+        "from": "travel-vaccinations",
+        "to": "malaria-prophylaxis",
+        "relationship": "often_co_prescribed"
+      },
+      {
+        "from": "travel-health-consultation",
+        "to": "malaria-prophylaxis",
+        "relationship": "risk_assessment"
+      },
+      {
+        "from": "travel-vaccinations",
+        "to": "yellow-fever",
+        "relationship": "destination_dependent"
+      },
+      {
+        "from": "travel-health-consultation",
+        "to": "travel-first-aid",
+        "relationship": "recommends_kit"
+      },
+      {
+        "from": "pharmacy-first",
+        "to": "minor-illness-consultation",
+        "relationship": "clinical_pathway"
+      },
+      {
+        "from": "minor-illness-consultation",
+        "to": "prescription-dispensing",
+        "relationship": "treatment_supply"
+      },
+      {
+        "from": "prescription-dispensing",
+        "to": "nms",
+        "relationship": "triggers_for_new_medicines"
+      },
+      {
+        "from": "prescription-dispensing",
+        "to": "mur",
+        "relationship": "optimises_ongoing_therapy"
+      },
+      {
+        "from": "repeat-prescription",
+        "to": "prescription-dispensing",
+        "relationship": "feeds_supply"
+      },
+      {
+        "from": "repeat-prescription",
+        "to": "prescription-delivery",
+        "relationship": "delivery_option"
+      },
+      {
+        "from": "repeat-prescription",
+        "to": "blister-packs",
+        "relationship": "compliance_support"
+      },
+      {
+        "from": "blood-pressure",
+        "to": "hypertension-monitoring",
+        "relationship": "ongoing_monitoring"
+      },
+      {
+        "from": "hypertension-monitoring",
+        "to": "mur",
+        "relationship": "medication_review"
+      },
+      {
+        "from": "blood-pressure",
+        "to": "healthy-living",
+        "relationship": "lifestyle_referral"
+      },
+      {
+        "from": "nhs-flu",
+        "to": "private-flu",
+        "relationship": "alternative_pathway"
+      },
+      {
+        "from": "nhs-flu",
+        "to": "pneumococcal-vaccine",
+        "relationship": "seasonal_co_promotion"
+      },
+      {
+        "from": "shingles-vaccine",
+        "to": "private-flu",
+        "relationship": "adult_immunisation_bundle"
+      },
+      {
+        "from": "contraception",
+        "to": "ehc",
+        "relationship": "emergency_pathway"
+      },
+      {
+        "from": "smoking-cessation",
+        "to": "healthy-living",
+        "relationship": "lifestyle_support"
+      },
+      {
+        "from": "weight-consultation",
+        "to": "glp1",
+        "relationship": "treatment_eligibility"
+      },
+      {
+        "from": "weight-consultation",
+        "to": "bmi-monitoring",
+        "relationship": "baseline_and_tracking"
+      },
+      {
+        "from": "weight-consultation",
+        "to": "healthy-living",
+        "relationship": "behaviour_change"
+      },
+      {
+        "from": "glp1",
+        "to": "bmi-monitoring",
+        "relationship": "treatment_monitoring"
+      },
+      {
+        "from": "blood-testing",
+        "to": "cholesterol-test",
+        "relationship": "panel_component"
+      },
+      {
+        "from": "blood-testing",
+        "to": "diabetes-screening",
+        "relationship": "panel_component"
+      },
+      {
+        "from": "diabetes-screening",
+        "to": "mur",
+        "relationship": "medicines_optimisation"
+      },
+      {
+        "from": "inhaler-technique",
+        "to": "mur",
+        "relationship": "device_optimisation"
+      },
+      {
+        "from": "discharge-medicines",
+        "to": "nms",
+        "relationship": "post_discharge_support"
+      },
+      {
+        "from": "discharge-medicines",
+        "to": "blister-packs",
+        "relationship": "regimen_simplification"
+      },
+      {
+        "from": "travel-vaccinations",
+        "to": "blood-testing",
+        "relationship": "pre_travel_screening"
+      },
+      {
+        "from": "ear-wax-removal",
+        "to": "minor-illness-consultation",
+        "relationship": "symptom_assessment"
+      }
+    ]
+  },
+  "faqIntelligence": {
+    "totalQuestions": 100,
+    "categories": {
+      "prescriptions": 15,
+      "nhsClinicalServices": 20,
+      "travelHealth": 15,
+      "vaccinations": 15,
+      "privateServices": 10,
+      "weightManagement": 8,
+      "testing": 7,
+      "generalAccess": 10
+    },
+    "questions": [
+      {
+        "id": "faq-prescriptions-1",
+        "category": "prescriptions",
+        "question": "How do I order a repeat prescription at a pharmacy?"
+      },
+      {
+        "id": "faq-prescriptions-2",
+        "category": "prescriptions",
+        "question": "What is a nominated pharmacy and how do I change it?"
+      },
+      {
+        "id": "faq-prescriptions-3",
+        "category": "prescriptions",
+        "question": "How long does it take for a pharmacy to dispense a prescription?"
+      },
+      {
+        "id": "faq-prescriptions-4",
+        "category": "prescriptions",
+        "question": "Can a pharmacy give me an emergency supply if I run out?"
+      },
+      {
+        "id": "faq-prescriptions-5",
+        "category": "prescriptions",
+        "question": "Do pharmacies deliver prescriptions to my home?"
+      },
+      {
+        "id": "faq-prescriptions-6",
+        "category": "prescriptions",
+        "question": "What is EPS and do I still need a paper prescription?"
+      },
+      {
+        "id": "faq-prescriptions-7",
+        "category": "prescriptions",
+        "question": "Can I collect a prescription for someone else?"
+      },
+      {
+        "id": "faq-prescriptions-8",
+        "category": "prescriptions",
+        "question": "Why was my prescription item changed to a generic medicine?"
+      },
+      {
+        "id": "faq-prescriptions-9",
+        "category": "prescriptions",
+        "question": "How do blister packs help if I take multiple medicines?"
+      },
+      {
+        "id": "faq-prescriptions-10",
+        "category": "prescriptions",
+        "question": "Can a pharmacy refuse to dispense my prescription?"
+      },
+      {
+        "id": "faq-prescriptions-11",
+        "category": "prescriptions",
+        "question": "What should I do if my prescription is wrong or missing an item?"
+      },
+      {
+        "id": "faq-prescriptions-12",
+        "category": "prescriptions",
+        "question": "Are there charges for NHS prescriptions in England?"
+      },
+      {
+        "id": "faq-prescriptions-13",
+        "category": "prescriptions",
+        "question": "How do I get free prescriptions if I am eligible?"
+      },
+      {
+        "id": "faq-prescriptions-14",
+        "category": "prescriptions",
+        "question": "Can I get a private prescription dispensed at any pharmacy?"
+      },
+      {
+        "id": "faq-prescriptions-15",
+        "category": "prescriptions",
+        "question": "What is the difference between a GP prescription and a hospital prescription?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-1",
+        "category": "nhsClinicalServices",
+        "question": "What conditions can Pharmacy First treat?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-2",
+        "category": "nhsClinicalServices",
+        "question": "Is Pharmacy First free on the NHS?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-3",
+        "category": "nhsClinicalServices",
+        "question": "Do I need to book for Pharmacy First or can I walk in?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-4",
+        "category": "nhsClinicalServices",
+        "question": "Can a pharmacy treat a UTI without a GP appointment?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-5",
+        "category": "nhsClinicalServices",
+        "question": "What is the NHS New Medicine Service?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-6",
+        "category": "nhsClinicalServices",
+        "question": "Who is eligible for a free NHS flu jab at a pharmacy?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-7",
+        "category": "nhsClinicalServices",
+        "question": "Can I get contraception from a pharmacy without seeing my GP?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-8",
+        "category": "nhsClinicalServices",
+        "question": "What happens during a pharmacy blood pressure check?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-9",
+        "category": "nhsClinicalServices",
+        "question": "Can pharmacists prescribe antibiotics?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-10",
+        "category": "nhsClinicalServices",
+        "question": "What is a PGD and how does it allow pharmacy treatment?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-11",
+        "category": "nhsClinicalServices",
+        "question": "Can pharmacies help me stop smoking?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-12",
+        "category": "nhsClinicalServices",
+        "question": "What is the Discharge Medicines Service after hospital?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-13",
+        "category": "nhsClinicalServices",
+        "question": "Are pharmacy consultations confidential?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-14",
+        "category": "nhsClinicalServices",
+        "question": "Can a pharmacist refer me to my GP or A&E?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-15",
+        "category": "nhsClinicalServices",
+        "question": "What training do pharmacists have for clinical services?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-16",
+        "category": "nhsClinicalServices",
+        "question": "Can I get shingles treatment through Pharmacy First?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-17",
+        "category": "nhsClinicalServices",
+        "question": "Does Pharmacy First cover earache in children?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-18",
+        "category": "nhsClinicalServices",
+        "question": "Can pharmacies treat insect bites and stings?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-19",
+        "category": "nhsClinicalServices",
+        "question": "What is supervised consumption at a pharmacy?"
+      },
+      {
+        "id": "faq-nhsClinicalServices-20",
+        "category": "nhsClinicalServices",
+        "question": "Are NHS pharmacy services available at weekends?"
+      },
+      {
+        "id": "faq-travelHealth-1",
+        "category": "travelHealth",
+        "question": "How far in advance should I get travel vaccinations?"
+      },
+      {
+        "id": "faq-travelHealth-2",
+        "category": "travelHealth",
+        "question": "Which travel vaccines do I need for my destination?"
+      },
+      {
+        "id": "faq-travelHealth-3",
+        "category": "travelHealth",
+        "question": "Are travel vaccinations free on the NHS?"
+      },
+      {
+        "id": "faq-travelHealth-4",
+        "category": "travelHealth",
+        "question": "Can I get malaria tablets from a pharmacy?"
+      },
+      {
+        "id": "faq-travelHealth-5",
+        "category": "travelHealth",
+        "question": "Do I need a yellow fever certificate and where can I get one?"
+      },
+      {
+        "id": "faq-travelHealth-6",
+        "category": "travelHealth",
+        "question": "Can a pharmacy help with last-minute travel health advice?"
+      },
+      {
+        "id": "faq-travelHealth-7",
+        "category": "travelHealth",
+        "question": "What is the difference between a GP travel clinic and a pharmacy travel clinic?"
+      },
+      {
+        "id": "faq-travelHealth-8",
+        "category": "travelHealth",
+        "question": "Do I need rabies vaccination for my trip?"
+      },
+      {
+        "id": "faq-travelHealth-9",
+        "category": "travelHealth",
+        "question": "Can children receive travel vaccinations at a pharmacy?"
+      },
+      {
+        "id": "faq-travelHealth-10",
+        "category": "travelHealth",
+        "question": "What should I take in a travel first aid kit?"
+      },
+      {
+        "id": "faq-travelHealth-11",
+        "category": "travelHealth",
+        "question": "Are pharmacy travel consultations covered by travel insurance?"
+      },
+      {
+        "id": "faq-travelHealth-12",
+        "category": "travelHealth",
+        "question": "How long do travel vaccines last?"
+      },
+      {
+        "id": "faq-travelHealth-13",
+        "category": "travelHealth",
+        "question": "Can I get travel vaccines if I am pregnant or breastfeeding?"
+      },
+      {
+        "id": "faq-travelHealth-14",
+        "category": "travelHealth",
+        "question": "What malaria tablets are best for my destination?"
+      },
+      {
+        "id": "faq-travelHealth-15",
+        "category": "travelHealth",
+        "question": "Do pharmacies offer altitude sickness prevention advice?"
+      },
+      {
+        "id": "faq-vaccinations-1",
+        "category": "vaccinations",
+        "question": "Can I walk in for a flu jab without an appointment?"
+      },
+      {
+        "id": "faq-vaccinations-2",
+        "category": "vaccinations",
+        "question": "What is the difference between NHS and private flu jabs?"
+      },
+      {
+        "id": "faq-vaccinations-3",
+        "category": "vaccinations",
+        "question": "Who should get the shingles vaccine?"
+      },
+      {
+        "id": "faq-vaccinations-4",
+        "category": "vaccinations",
+        "question": "Can I get a COVID booster at my local pharmacy?"
+      },
+      {
+        "id": "faq-vaccinations-5",
+        "category": "vaccinations",
+        "question": "Are pharmacy vaccinations safe?"
+      },
+      {
+        "id": "faq-vaccinations-6",
+        "category": "vaccinations",
+        "question": "What are common side effects after a pharmacy jab?"
+      },
+      {
+        "id": "faq-vaccinations-7",
+        "category": "vaccinations",
+        "question": "Can I get multiple vaccines on the same day?"
+      },
+      {
+        "id": "faq-vaccinations-8",
+        "category": "vaccinations",
+        "question": "Do pharmacies vaccinate children?"
+      },
+      {
+        "id": "faq-vaccinations-9",
+        "category": "vaccinations",
+        "question": "How much does a private flu jab cost?"
+      },
+      {
+        "id": "faq-vaccinations-10",
+        "category": "vaccinations",
+        "question": "Can I get a pneumonia vaccine at a pharmacy?"
+      },
+      {
+        "id": "faq-vaccinations-11",
+        "category": "vaccinations",
+        "question": "What is MenACWY and do I need it for university?"
+      },
+      {
+        "id": "faq-vaccinations-12",
+        "category": "vaccinations",
+        "question": "Can I get HPV vaccination as an adult at a pharmacy?"
+      },
+      {
+        "id": "faq-vaccinations-13",
+        "category": "vaccinations",
+        "question": "Do I need ID to receive a vaccination at a pharmacy?"
+      },
+      {
+        "id": "faq-vaccinations-14",
+        "category": "vaccinations",
+        "question": "Can pregnant women get vaccinated at a pharmacy?"
+      },
+      {
+        "id": "faq-vaccinations-15",
+        "category": "vaccinations",
+        "question": "How do I book a vaccination appointment online?"
+      },
+      {
+        "id": "faq-privateServices-1",
+        "category": "privateServices",
+        "question": "How much does ear wax removal cost at a pharmacy?"
+      },
+      {
+        "id": "faq-privateServices-2",
+        "category": "privateServices",
+        "question": "Can a pharmacy do private blood tests without a GP referral?"
+      },
+      {
+        "id": "faq-privateServices-3",
+        "category": "privateServices",
+        "question": "Is emergency contraception available at pharmacies?"
+      },
+      {
+        "id": "faq-privateServices-4",
+        "category": "privateServices",
+        "question": "How quickly can I get the morning after pill?"
+      },
+      {
+        "id": "faq-privateServices-5",
+        "category": "privateServices",
+        "question": "Can pharmacies provide B12 injections?"
+      },
+      {
+        "id": "faq-privateServices-6",
+        "category": "privateServices",
+        "question": "What private services do independent pharmacies typically offer?"
+      },
+      {
+        "id": "faq-privateServices-7",
+        "category": "privateServices",
+        "question": "Are private pharmacy consultations worth it compared to GP?"
+      },
+      {
+        "id": "faq-privateServices-8",
+        "category": "privateServices",
+        "question": "Can I pay for a pharmacist appointment for minor illness?"
+      },
+      {
+        "id": "faq-privateServices-9",
+        "category": "privateServices",
+        "question": "Do pharmacies offer health MOT or screening packages?"
+      },
+      {
+        "id": "faq-privateServices-10",
+        "category": "privateServices",
+        "question": "How do I know if a private pharmacy service is legitimate?"
+      },
+      {
+        "id": "faq-weightManagement-1",
+        "category": "weightManagement",
+        "question": "Can pharmacies help with weight loss?"
+      },
+      {
+        "id": "faq-weightManagement-2",
+        "category": "weightManagement",
+        "question": "What is a pharmacy weight management consultation?"
+      },
+      {
+        "id": "faq-weightManagement-3",
+        "category": "weightManagement",
+        "question": "Are GLP-1 weight loss injections available at pharmacies?"
+      },
+      {
+        "id": "faq-weightManagement-4",
+        "category": "weightManagement",
+        "question": "Who is eligible for pharmacy weight loss treatment?"
+      },
+      {
+        "id": "faq-weightManagement-5",
+        "category": "weightManagement",
+        "question": "How much does a pharmacy weight loss programme cost?"
+      },
+      {
+        "id": "faq-weightManagement-6",
+        "category": "weightManagement",
+        "question": "Is pharmacy weight management safe?"
+      },
+      {
+        "id": "faq-weightManagement-7",
+        "category": "weightManagement",
+        "question": "Can a pharmacist prescribe weight loss medication?"
+      },
+      {
+        "id": "faq-weightManagement-8",
+        "category": "weightManagement",
+        "question": "What lifestyle support do pharmacies offer for obesity?"
+      },
+      {
+        "id": "faq-testing-1",
+        "category": "testing",
+        "question": "Can I get a blood pressure check without an appointment?"
+      },
+      {
+        "id": "faq-testing-2",
+        "category": "testing",
+        "question": "Do pharmacies offer cholesterol testing?"
+      },
+      {
+        "id": "faq-testing-3",
+        "category": "testing",
+        "question": "Can a pharmacy test for diabetes?"
+      },
+      {
+        "id": "faq-testing-4",
+        "category": "testing",
+        "question": "Are pharmacy health tests accurate?"
+      },
+      {
+        "id": "faq-testing-5",
+        "category": "testing",
+        "question": "Can I buy a pregnancy test and get advice at the pharmacy?"
+      },
+      {
+        "id": "faq-testing-6",
+        "category": "testing",
+        "question": "Do pharmacies sell COVID test kits?"
+      },
+      {
+        "id": "faq-testing-7",
+        "category": "testing",
+        "question": "Can a pharmacy test for a urine infection?"
+      },
+      {
+        "id": "faq-generalAccess-1",
+        "category": "generalAccess",
+        "question": "What are pharmacy opening hours near me?"
+      },
+      {
+        "id": "faq-generalAccess-2",
+        "category": "generalAccess",
+        "question": "Is there a pharmacy open late or on Sunday?"
+      },
+      {
+        "id": "faq-generalAccess-3",
+        "category": "generalAccess",
+        "question": "What is the difference between a chain pharmacy and an independent pharmacy?"
+      },
+      {
+        "id": "faq-generalAccess-4",
+        "category": "generalAccess",
+        "question": "Can I speak to a pharmacist for free advice?"
+      },
+      {
+        "id": "faq-generalAccess-5",
+        "category": "generalAccess",
+        "question": "Do I need to register with a pharmacy?"
+      },
+      {
+        "id": "faq-generalAccess-6",
+        "category": "generalAccess",
+        "question": "Can pharmacies access my NHS medical records?"
+      },
+      {
+        "id": "faq-generalAccess-7",
+        "category": "generalAccess",
+        "question": "What accessibility services do pharmacies offer?"
+      },
+      {
+        "id": "faq-generalAccess-8",
+        "category": "generalAccess",
+        "question": "Can pharmacies help with NHS prescription exemptions?"
+      },
+      {
+        "id": "faq-generalAccess-9",
+        "category": "generalAccess",
+        "question": "How do I find a pharmacy that offers parking?"
+      },
+      {
+        "id": "faq-generalAccess-10",
+        "category": "generalAccess",
+        "question": "What should I bring to my first pharmacy appointment?"
+      }
+    ]
+  },
+  "reviewIntelligence": {
+    "commonPositiveThemes": [
+      "Friendly helpful staff who take time to explain",
+      "Fast prescription service and short waits",
+      "Pharmacist saved a GP visit for minor illness",
+      "Excellent travel clinic advice and flexible booking",
+      "Reliable prescription delivery for elderly parent",
+      "Professional flu jab quick and painless",
+      "Open late / Sunday when GP closed",
+      "Sorted repeat prescription without hassle",
+      "Discreet and non-judgemental contraception service",
+      "Clear pricing for private services upfront",
+      "Blister packs made medication management easier",
+      "Pharmacist noticed interaction GP missed",
+      "Same-day UTI treatment through Pharmacy First",
+      "Personal service — staff know customers by name",
+      "Free blood pressure check with helpful advice"
+    ],
+    "commonNegativeThemes": [
+      "Long queue and understaffed dispensary",
+      "Prescription not ready despite app notification",
+      "Medicine out of stock with no ETA",
+      "Rude or rushed staff during busy period",
+      "Phone never answered",
+      "Incorrect item dispensed",
+      "Hidden private service costs",
+      "Appointment booked but clinic understaffed",
+      "Parking difficult at branch location",
+      "Website services not matching in-store reality",
+      "Delivery late or missed",
+      "Insufficient privacy in consultation area",
+      "Pushy retail upselling",
+      "Conflicting advice from different pharmacists",
+      "Closed during advertised hours"
+    ],
+    "commonServiceRequests": [
+      "Repeat prescription ordering and tracking",
+      "Same-day minor illness treatment",
+      "Flu jab walk-in availability",
+      "Travel vaccination appointment and pricing",
+      "Prescription delivery registration",
+      "Blood pressure check",
+      "Emergency contraception",
+      "Blister pack setup",
+      "Ear wax removal appointment",
+      "Weight management consultation",
+      "Contraception without GP",
+      "Inhaler technique check",
+      "Private blood test availability",
+      "Opening hours on bank holidays",
+      "Stock check for specific medicine"
+    ]
+  },
+  "aiSearchIntelligence": {
+    "commonPharmacySearches": [
+      "pharmacy near me",
+      "chemist near me",
+      "pharmacy open now",
+      "24 hour pharmacy near me",
+      "pharmacy open Sunday",
+      "independent pharmacy near me",
+      "NHS pharmacy near me",
+      "pharmacy [town name]",
+      "late night pharmacy [town]",
+      "pharmacy with parking near me"
+    ],
+    "questionSearches": [
+      "can a pharmacist prescribe antibiotics",
+      "what is Pharmacy First",
+      "do I need appointment for flu jab pharmacy",
+      "how to order repeat prescription to pharmacy",
+      "can pharmacy treat UTI",
+      "what travel vaccines do I need",
+      "how much is private flu jab",
+      "can I get contraception from pharmacy",
+      "what is EPS nominated pharmacy",
+      "can pharmacy give emergency prescription",
+      "how long does pharmacy keep prescription",
+      "can pharmacist help with sore throat",
+      "do pharmacies do blood tests",
+      "can I get weight loss injection at pharmacy",
+      "what does New Medicine Service involve"
+    ],
+    "localIntentSearches": [
+      "pharmacy [town]",
+      "chemist [town]",
+      "Pharmacy First [town]",
+      "flu jab [town]",
+      "travel clinic [town]",
+      "prescription delivery [town]",
+      "ear wax removal [town]",
+      "weight loss pharmacy [town]",
+      "pharmacy open late [town]",
+      "independent pharmacy [town]",
+      "blood pressure check [town]",
+      "morning after pill [town]"
+    ],
+    "transactionalSearches": [
+      "book flu jab online",
+      "book travel vaccination appointment",
+      "order repeat prescription online",
+      "register for prescription delivery",
+      "book pharmacy appointment",
+      "buy malaria tablets",
+      "private prescription online pharmacy",
+      "book ear wax removal",
+      "book weight loss consultation pharmacy",
+      "sign up nominated pharmacy EPS"
+    ],
+    "informationalSearches": [
+      "Pharmacy First conditions list",
+      "NHS prescription charges 2025",
+      "travel vaccination schedule by country",
+      "difference NHS private flu jab",
+      "how EPS prescriptions work",
+      "pharmacy contraception service eligibility",
+      "GLP-1 weight loss pharmacy UK",
+      "malaria tablets side effects",
+      "when to see pharmacist vs GP",
+      "free prescription exemption criteria",
+      "New Medicine Service eligible medicines",
+      "yellow fever countries requirement"
+    ],
+    "aiAnswerOptimisationTopics": [
+      "What can a UK pharmacist treat without a GP?",
+      "How does Pharmacy First work?",
+      "Where can I get travel vaccinations near me?",
+      "Can I get a repeat prescription without visiting my GP?",
+      "What is the difference between a chain and independent pharmacy?",
+      "Are pharmacy consultations free on the NHS?",
+      "How do I nominate a pharmacy for electronic prescriptions?",
+      "What weight loss services do UK pharmacies offer?",
+      "Can pharmacies vaccinate children for travel?",
+      "What should I expect at a pharmacy blood pressure check?"
+    ],
+    "searchIntentMapping": {
+      "navigational": [
+        "[pharmacy name] [town]",
+        "[chain name] pharmacy hours",
+        "pharmacy website [brand]"
+      ],
+      "informational": [
+        "what is pharmacy first",
+        "travel vaccines for thailand",
+        "how repeat prescription works"
+      ],
+      "commercial": [
+        "best pharmacy [town]",
+        "pharmacy reviews [town]",
+        "travel clinic prices"
+      ],
+      "transactional": [
+        "book flu jab [town]",
+        "order repeat prescription",
+        "pharmacy delivery sign up"
+      ],
+      "local": [
+        "pharmacy near me",
+        "chemist open now [postcode]",
+        "Pharmacy First walk in [area]"
+      ]
+    }
+  },
+  "generationHints": {
+    "tone": "Professional, reassuring, clinically credible, accessible, community-focused. Avoid medical guarantees. Signpost to GP/A&E when appropriate.",
+    "buyerTypeDefault": "household",
+    "mandatoryCompliance": [
+      "GPhC advertising standards",
+      "POM cannot be advertised to public",
+      "NHS logo usage rules",
+      "No guaranteed clinical outcomes",
+      "Yellow fever centre claims must be accurate"
+    ],
+    "contentPillars": [
+      "Access and convenience",
+      "Clinical capability",
+      "Medicines expertise",
+      "Local trust",
+      "NHS and private service clarity"
+    ],
+    "forbiddenClaims": [
+      "Guaranteed cure",
+      "Instant weight loss results",
+      "Cheapest prescription prices without context",
+      "Unqualified prescribing claims",
+      "Anti-GP positioning that undermines primary care"
+    ]
+  }
+}

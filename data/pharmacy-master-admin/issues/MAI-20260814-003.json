@@ -1,0 +1,284 @@
+{
+  "issueId": "MAI-20260814-003",
+  "createdAt": "2026-08-14T08:42:39.144Z",
+  "createdBy": "admin",
+  "updatedAt": "2026-08-14T08:42:40.485Z",
+  "tenantSlug": "pharmaconnect",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "",
+  "category": "Customer onboarding",
+  "severity": "high",
+  "title": "Workflow failed: Competitor Analysis",
+  "description": "National Growth Engine competitor discovery has not yet been generated.",
+  "expectedBehaviour": "Continue Workflow completes Competitor Analysis without error",
+  "actualBehaviour": "National Growth Engine competitor discovery has not yet been generated.",
+  "reproductionSteps": "1. Open Master Admin customer record\n2. Customer slug: pharmaconnect\n3. Click Continue Workflow at stage: Competitor Analysis\n4. Action: orchestrate_competitor_analysis",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-08-14T08:42:39.841Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "pharmaconnect",
+      "businessName": "PharmaConnect",
+      "website": "https://pharmaconnect.uk/",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-08-13T07:01:48.989Z",
+      "platformClientStatus": "profile_approved"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "not_started",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/pharmaconnect-campaign-generation-context-pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "generationTimestamp": null,
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/pharmaconnect/pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/pharmaconnect/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/pharmaconnect.json",
+        "exists": true,
+        "modifiedAt": "2026-08-11T08:32:41.215Z",
+        "size": 6597
+      },
+      "pageType": "unknown",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-08-14T08:34:17.924Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-08-14T08:34:17.924Z",
+        "size": 13727509
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 705357,
+        "pmId": 1,
+        "status": "online",
+        "startTime": "2026-08-14T07:24:57.972Z",
+        "restartCount": 183
+      },
+      "nodeEnv": "production"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "none",
+      "businessProfileStatus": "profile_approved",
+      "generationStatus": "idle",
+      "publishingStatus": "not_started",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "f840446b-9737-4a49-9298-09046f5f01d5",
+        "action": "orchestrate_competitor_analysis",
+        "status": "failed",
+        "progressLabel": "Failed",
+        "updatedAt": "2026-08-14T08:42:39.080Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "d387ef4b-4eda-4e42-bed0-699075799518",
+          "timestamp": "2026-08-14T08:42:39.510Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260814-003 created: Workflow failed: Competitor Analysis"
+        },
+        {
+          "id": "62b0963f-979c-49cb-a2c1-426eea271cb2",
+          "timestamp": "2026-08-14T08:42:38.889Z",
+          "action": "orchestrate_competitor_analysis",
+          "status": "error",
+          "evidence": "National Competitor Intelligence required — LOCAL competitor analysis was not executed."
+        },
+        {
+          "id": "5353ba43-a3fe-41fb-adc2-38a49e827f8c",
+          "timestamp": "2026-08-14T08:40:56.851Z",
+          "action": "continue_workflow",
+          "status": "error",
+          "evidence": "National Growth Engine competitor discovery has not yet been generated."
+        },
+        {
+          "id": "c781ac78-cf72-4501-81c3-dfcd41c4de11",
+          "timestamp": "2026-08-14T08:40:56.680Z",
+          "action": "workflow_failure_ticket",
+          "status": "error",
+          "evidence": "Issue MAI-20260814-002 created for failed Competitor Analysis"
+        },
+        {
+          "id": "f92a1144-28d5-4b70-9c0d-d4c4635a8b34",
+          "timestamp": "2026-08-14T08:40:56.565Z",
+          "action": "issue_cursor_prompt_generated",
+          "status": "success",
+          "evidence": "Cursor prompt generated for MAI-20260814-002"
+        },
+        {
+          "id": "214e2a93-40d7-4261-9b95-d0cdc1deb87d",
+          "timestamp": "2026-08-14T08:40:56.478Z",
+          "action": "issue_diagnostics_refresh",
+          "status": "success",
+          "evidence": "Diagnostics refreshed for MAI-20260814-002"
+        },
+        {
+          "id": "d06491eb-f843-4d3e-9103-490f541dc050",
+          "timestamp": "2026-08-14T08:40:55.958Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260814-002 created: Workflow failed: Competitor Analysis"
+        },
+        {
+          "id": "c5a00ed2-f2b3-4a0d-ad25-489f168cffba",
+          "timestamp": "2026-08-14T08:40:55.469Z",
+          "action": "orchestrate_competitor_analysis",
+          "status": "error",
+          "evidence": "National Competitor Intelligence required — LOCAL competitor analysis was not executed."
+        },
+        {
+          "id": "479742d1-2baa-4df0-84e9-1efa91f695c3",
+          "timestamp": "2026-08-14T07:37:03.966Z",
+          "action": "continue_workflow",
+          "status": "error",
+          "evidence": "National Growth Engine competitor discovery has not yet been generated."
+        },
+        {
+          "id": "78e6710d-7f9d-45bd-8b74-da4e85d6d52d",
+          "timestamp": "2026-08-14T07:37:03.839Z",
+          "action": "workflow_failure_ticket",
+          "status": "error",
+          "evidence": "Issue MAI-20260814-001 created for failed Competitor Analysis"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "background_job",
+        "action": "orchestrate_competitor_analysis",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T08:42:39.080Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "orchestrate_competitor_analysis",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T08:40:55.629Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "orchestrate_competitor_analysis",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T07:37:02.775Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "orchestrate_competitor_analysis",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T08:42:38.889Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T08:40:56.851Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T08:40:56.680Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "orchestrate_competitor_analysis",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T08:40:55.469Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T07:37:03.966Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T07:37:03.839Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "orchestrate_competitor_analysis",
+        "error": "National Growth Engine competitor discovery has not yet been generated.",
+        "timestamp": "2026-08-14T07:37:02.640Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmaconnect.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/pharmaconnect.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/pharmaconnect.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/pharmaconnect-campaign-builder.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-08-14T08:42:40.275Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmaconnect.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/pharmaconnect.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/pharmaconnect.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/pharmaconnect-campaign-builder.json"
+  ],
+  "linkedAuditEventIds": [
+    "d387ef4b-4eda-4e42-bed0-699075799518"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-08-14T08:42:39.144Z",
+      "user": "admin",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": "COMMERCIAL RELEASE PROGRAMME V1\nRELEASE DEFECT\nONE ISSUE POLICY\n\nConfirmed browser-visible defect:\nNational Growth Engine competitor discovery has not yet been generated.\n\nTarget tenant:\npharmaconnect (PharmaConnect)\n\nTarget campaign:\npharmacy-first\n\nTarget URL:\nNot specified in issue record\n\nLocked systems (do not modify):\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nObjective:\nResolve the reported Customer onboarding issue for tenant pharmaconnect: Workflow failed: Competitor Analysis\n\nTrace requirements:\n- Reproduce using: 1. Open Master Admin customer record\n2. Customer slug: pharmaconnect\n3. Click Continue Workflow at stage: Competitor Analysis\n4. Action: orchestrate_competitor_analysis\n- Expected behaviour: Continue Workflow completes Competitor Analysis without error\n- Actual behaviour: National Growth Engine competitor discovery has not yet been generated.\n- Page type (from diagnostics): unknown\n- Lifecycle at report time: awaiting_review\n- Root cause to be traced.\n\nFix scope:\n- Operational/support fix only unless Product Owner approves engine changes\n- Do not modify locked rendering, generation, publishing, SEO, indexing, or ranking engines\n\nDo not modify:\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nValidation:\n- Confirm defect reproduced in browser\n- Apply fix within approved scope\n- Build and PM2 reload\n- WAIT FOR PRODUCT OWNER TEST\n- STOP.\n\nIssue ID: MAI-20260814-003\nSeverity: high\nCategory: Customer onboarding\nDiagnostic collected: 2026-08-14T08:42:40.275Z\n",
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

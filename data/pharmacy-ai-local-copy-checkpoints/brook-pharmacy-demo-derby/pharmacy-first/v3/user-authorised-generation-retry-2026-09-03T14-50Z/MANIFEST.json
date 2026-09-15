@@ -1,0 +1,55 @@
+{
+  "kind": "brook-derby-allestree-additional-generation-authorisation-checkpoint",
+  "label": "ALLESTREE \u2014 one user-authorised generation retry",
+  "continuesFrom": "allestree-evidence-quality-2026-09-03T12-00Z",
+  "status": "preview-only-not-published",
+  "approved": false,
+  "published": false,
+  "checkpointAt": "2026-09-03T14-50Z",
+  "checkpointId": "user-authorised-generation-retry-2026-09-03T14-50Z",
+  "slug": "brook-pharmacy-demo-derby",
+  "firstAcceptanceArea": "Allestree",
+  "generatePressed": false,
+  "additionalAttemptAuthorised": false,
+  "freshPaidRetrieval": false,
+  "blanketExecutionFlag": false,
+  "generationBudget": {
+    "consumed": 2,
+    "maxProviderCalls": 2,
+    "estimatedCostUsd": 0.029486000000000002
+  },
+  "copied": [
+    {
+      "path": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativeEngineV3.ts",
+      "sha256": "3bdedd9790a1aea58b845d06d1074f83529768453238afc0388e2658a70ff92f"
+    },
+    {
+      "path": "src/pharmacy/growthEngineLocalPageCandidateService.ts",
+      "sha256": "d8e4aada44017c47b424c4de4337a0a7d595aacc15edad4473fcf67f32bfd5f2"
+    },
+    {
+      "path": "src/pharmacy/growthEngineCampaignBuilderPage.ts",
+      "sha256": "f1c680f5efcb8ec824c23ad11aa596727fc1e50950cfb28146ae4d1d579313a2"
+    },
+    {
+      "path": "artifacts/api-server/src/routes/api/growthEngineCampaignBuilder.ts",
+      "sha256": "d2d78f0202d1cf22778cbdb8cdc9e7a0bc307ba45b43c3bdd1c8c3170ec92726"
+    },
+    {
+      "path": "scripts/validate-allestree-additional-generation-authorisation-v1.ts",
+      "sha256": "3c8d5006e4ab3e110b726d6e3a7abd1185940a3938e9e5aae6d348eff62315e1"
+    },
+    {
+      "path": "scripts/validate-brook-derby-allestree-local-page-ui-v1.ts",
+      "sha256": "a4472aa4ffc7a372f4bbcc2a1e57ece45e1d9ddcab48d22102ad9817afac3674"
+    },
+    {
+      "path": "scripts/validate-allestree-writer-inputs-v1.ts",
+      "sha256": "d8bb9c2d0cf7664d163b99cb872687cd86317fd9e2400f651c2f6969df1acc51"
+    },
+    {
+      "path": "data/pharmacy-ai-local-generation-budget/brook-pharmacy-demo-derby/pharmacy-first/v3/brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:allestree.json",
+      "sha256": "402f09069f40fc21d53beaa529c7c07fe4f3fd49c9f46c540cd1393320edbc2a"
+    }
+  ]
+}

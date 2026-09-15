@@ -1,0 +1,309 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v2",
+  "promptContractVersion": "v2",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T22:23:08.201Z",
+  "tokenUsage": {
+    "promptTokens": 2533,
+    "completionTokens": 525,
+    "totalTokens": 3058
+  },
+  "estimatedCostUsd": 0.009266,
+  "inputEvidencePackHash": "4d53bd6834f2990639e647868d7d37373f356a9f639cdff54b67beb31add52f2",
+  "areaSlug": "darfield",
+  "areaName": "Darfield",
+  "evidenceSelection": [
+    {
+      "entityId": "community:darfield-library",
+      "name": "Darfield Library",
+      "category": "community",
+      "classification": "useful-community-orientation",
+      "useInCopy": false,
+      "reason": "Community facility is not uniquely helpful for patient orientation given the proximity of the pharmacy and lack of direct adjacency."
+    },
+    {
+      "entityId": "schools:upperwood-academy",
+      "name": "Upperwood Academy",
+      "category": "schools",
+      "classification": "irrelevant-to-patient-decision",
+      "useInCopy": false,
+      "reason": "School is not relevant for patient decision or orientation."
+    }
+  ],
+  "outputCopy": {
+    "area": "Darfield",
+    "heroHeading": "Pharmacy First in Darfield",
+    "heroIntroduction": "This page is for people in Darfield looking for NHS Pharmacy First consultations. You can decide whether to contact the local pharmacy for assessment of eligible common conditions.",
+    "localIntroduction": "Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, Barnsley S73 9LR.",
+    "localContextHeading": "Understanding your local options",
+    "localContextParagraphs": [
+      "The pharmacy is situated within Darfield itself, making it part of the immediate local healthcare landscape."
+    ],
+    "relationshipToPharmacy": "The pharmacy is in Darfield.",
+    "localAccessIntroduction": "If you think Pharmacy First may be suitable for your symptoms, you can call 01226 210477 before visiting to check how consultations are being arranged.",
+    "localFaqs": [
+      {
+        "question": "How close is the pharmacy to me in Darfield?",
+        "answer": "The pharmacy is located within Darfield, around 0.5 km from the centre of the area."
+      },
+      {
+        "question": "When should I use another healthcare route?",
+        "answer": "You should seek urgent medical care for severe or emergency symptoms, or if the pharmacist advises referral after your consultation."
+      },
+      {
+        "question": "What should I bring to my Pharmacy First consultation?",
+        "answer": "Bring details of your symptoms and any medicines you are currently taking to help the pharmacist assess your needs."
+      }
+    ],
+    "localCtaBridge": "Contact the pharmacy to discuss your symptoms or arrange an appointment.",
+    "evidenceClaims": [],
+    "evidenceEntityIdsUsed": [],
+    "evidenceSelection": [
+      {
+        "entityId": "community:darfield-library",
+        "name": "Darfield Library",
+        "category": "community",
+        "classification": "useful-community-orientation",
+        "useInCopy": false,
+        "reason": "Community facility is not uniquely helpful for patient orientation given the proximity of the pharmacy and lack of direct adjacency."
+      },
+      {
+        "entityId": "schools:upperwood-academy",
+        "name": "Upperwood Academy",
+        "category": "schools",
+        "classification": "irrelevant-to-patient-decision",
+        "useInCopy": false,
+        "reason": "School is not relevant for patient decision or orientation."
+      }
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Darfield",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "This page is for people in Darfield looking for NHS Pharmacy First consultations.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "You can decide whether to contact the local pharmacy for assessment of eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, Barnsley S73 9LR.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Understanding your local options",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The pharmacy is situated within Darfield itself, making it part of the immediate local healthcare landscape.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "The pharmacy is in Darfield.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "If you think Pharmacy First may be suitable for your symptoms, you can call 01226 210477 before visiting to check how consultations are being arranged.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].question",
+      "exactSentence": "How close is the pharmacy to me in Darfield?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "The pharmacy is located within Darfield, around 0.5 km from the centre of the area.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].question",
+      "exactSentence": "When should I use another healthcare route?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "You should seek urgent medical care for severe or emergency symptoms, or if the pharmacist advises referral after your consultation.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "What should I bring to my Pharmacy First consultation?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "Bring details of your symptoms and any medicines you are currently taking to help the pharmacist assess your needs.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "Contact the pharmacy to discuss your symptoms or arrange an appointment.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Darfield",
+      "purpose": "identify the local edition",
+      "supportingSource": "locality.areaName",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "This page is for people in Darfield looking for NHS Pharmacy First consultations.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "locality.areaName",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "You can decide whether to contact the local pharmacy for assessment of eligible common conditions.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Yorkshire Pharmacy & Health Clinic is located in Darfield at 91 Snape Hill Rd, Barnsley S73 9LR.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Understanding your local options",
+      "purpose": "section orientation",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "signals the local-context passage"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "The pharmacy is situated within Darfield itself, making it part of the immediate local healthcare landscape.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "locality.areaName",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "The pharmacy is in Darfield.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "locality.areaName",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "localAccessIntroduction",
+      "sentence": "If you think Pharmacy First may be suitable for your symptoms, you can call 01226 210477 before visiting to check how consultations are being arranged.",
+      "purpose": "what the reader should do if Pharmacy First may be suitable",
+      "supportingSource": "business.telephone",
+      "readerValue": "gives the next practical step"
+    },
+    {
+      "field": "localFaqs[0].question",
+      "sentence": "How close is the pharmacy to me in Darfield?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[0].answer",
+      "sentence": "The pharmacy is located within Darfield, around 0.5 km from the centre of the area.",
+      "purpose": "distance or location answer",
+      "supportingSource": "locality.distanceLabel",
+      "readerValue": "repeats only the verified distance or in-area fact"
+    },
+    {
+      "field": "localFaqs[1].question",
+      "sentence": "When should I use another healthcare route?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[1].answer",
+      "sentence": "You should seek urgent medical care for severe or emergency symptoms, or if the pharmacist advises referral after your consultation.",
+      "purpose": "when to use another healthcare route",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader what happens if Pharmacy First is not the right route"
+    },
+    {
+      "field": "localFaqs[2].question",
+      "sentence": "What should I bring to my Pharmacy First consultation?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[2].answer",
+      "sentence": "Bring details of your symptoms and any medicines you are currently taking to help the pharmacist assess your needs.",
+      "purpose": "pathway or preparation answer",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "helps the reader prepare or understand the consultation"
+    },
+    {
+      "field": "localCtaBridge",
+      "sentence": "Contact the pharmacy to discuss your symptoms or arrange an appointment.",
+      "purpose": "non-claim CTA",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "bridges to the approved call-to-action without extra claims"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 1,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

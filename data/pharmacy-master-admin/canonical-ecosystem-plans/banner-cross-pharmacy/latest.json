@@ -1,0 +1,430 @@
+{
+  "version": 2,
+  "planId": "8aabb3827eec7701",
+  "planRevision": "2026-07-25T08:01:20.141Z",
+  "createdAt": "2026-07-25T08:01:20.141Z",
+  "slug": "banner-cross-pharmacy",
+  "frozen": false,
+  "frozenAt": null,
+  "sourceRevisions": {
+    "businessProfileRevision": "2026-07-20T09:37:27.259Z",
+    "commercialIntelligenceRevision": "legacy-1",
+    "engineRevision": "rc1-cluster-page-architecture-v1",
+    "campaignMode": "wholeTown"
+  },
+  "primaryService": "pharmacy-first",
+  "additionalServices": [],
+  "confirmedTown": "Sheffield",
+  "campaignMode": "wholeTown",
+  "areaEntries": [
+    {
+      "areaName": "Ecclesall",
+      "areaSlug": "cluster-ecclesall",
+      "areaType": "priority cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-ecclesall/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Fulwood",
+      "areaSlug": "cluster-fulwood",
+      "areaType": "priority cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-fulwood/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Sheffield City Centre",
+      "areaSlug": "cluster-sheffield-city-centre",
+      "areaType": "priority cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-sheffield-city-centre/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Broomhill",
+      "areaSlug": "cluster-broomhill",
+      "areaType": "priority cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-broomhill/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Kelham Island",
+      "areaSlug": "cluster-kelham-island",
+      "areaType": "priority cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-kelham-island/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Dore",
+      "areaSlug": "cluster-dore",
+      "areaType": "secondary cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-dore/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Hillsborough",
+      "areaSlug": "cluster-hillsborough",
+      "areaType": "secondary cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-hillsborough/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    },
+    {
+      "areaName": "Crookes",
+      "areaSlug": "cluster-crookes",
+      "areaType": "secondary cluster",
+      "classification": "cluster-page",
+      "parentServiceHub": "pharmacy-first",
+      "pageType": "cluster-page",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "generationEligible": true,
+      "serviceRelevance": [
+        "pharmacy-first"
+      ],
+      "expectedUrlPath": "/local/cluster-crookes/",
+      "source": "operator-confirmed:profile.selectedAreas"
+    }
+  ],
+  "pageInventory": [
+    {
+      "pageType": "homepage",
+      "slug": "index",
+      "title": "Homepage",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/",
+      "source": "v1-core-contract",
+      "inventoryId": "page-001:homepage:index",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "service-hub",
+      "slug": "pharmacy-first",
+      "title": "Banner Cross Pharmacy + Travel Vaccinations & Weight Loss Clinic",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first/",
+      "source": "approved-business-profile:primary-service-hub",
+      "inventoryId": "page-002:service-hub:pharmacy-first",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-ecclesall",
+      "title": "Ecclesall",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-ecclesall/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-003:cluster-page:cluster-ecclesall",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-fulwood",
+      "title": "Fulwood",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-fulwood/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-004:cluster-page:cluster-fulwood",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-sheffield-city-centre",
+      "title": "Sheffield City Centre",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-sheffield-city-centre/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-005:cluster-page:cluster-sheffield-city-centre",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-broomhill",
+      "title": "Broomhill",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-broomhill/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-006:cluster-page:cluster-broomhill",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-kelham-island",
+      "title": "Kelham Island",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-kelham-island/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-007:cluster-page:cluster-kelham-island",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-dore",
+      "title": "Dore",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-dore/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-008:cluster-page:cluster-dore",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-hillsborough",
+      "title": "Hillsborough",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-hillsborough/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-009:cluster-page:cluster-hillsborough",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "cluster-page",
+      "slug": "cluster-crookes",
+      "title": "Crookes",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/local/cluster-crookes/",
+      "source": "operator-confirmed:profile.selectedAreas",
+      "inventoryId": "page-010:cluster-page:cluster-crookes",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "guide",
+      "slug": "pharmacy-first-guide",
+      "title": "Banner Cross Pharmacy + Travel Vaccinations & Weight Loss Clinic patient guide",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-guide/",
+      "source": "v1-engine-contract:1-guide",
+      "inventoryId": "page-011:guide:pharmacy-first-guide",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "blog",
+      "slug": "what-is-pharmacy-first",
+      "title": "what-is-pharmacy-first",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/what-is-pharmacy-first/",
+      "source": "v1-engine-contract:3-blogs",
+      "inventoryId": "page-012:blog:what-is-pharmacy-first",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "blog",
+      "slug": "who-should-consider-pharmacy-first",
+      "title": "who-should-consider-pharmacy-first",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/who-should-consider-pharmacy-first/",
+      "source": "v1-engine-contract:3-blogs",
+      "inventoryId": "page-013:blog:who-should-consider-pharmacy-first",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "blog",
+      "slug": "pharmacy-first-what-you-need-to-know",
+      "title": "pharmacy-first-what-you-need-to-know",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-what-you-need-to-know/",
+      "source": "v1-engine-contract:3-blogs",
+      "inventoryId": "page-014:blog:pharmacy-first-what-you-need-to-know",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "faq",
+      "slug": "pharmacy-first-faqs",
+      "title": "Banner Cross Pharmacy + Travel Vaccinations & Weight Loss Clinic FAQs",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-faqs/",
+      "source": "v1-engine-contract:1-faq",
+      "inventoryId": "page-015:faq:pharmacy-first-faqs",
+      "countedInTotal": true
+    },
+    {
+      "pageType": "supporting",
+      "slug": "pharmacy-first-content-ecosystem",
+      "title": "Content ecosystem summary",
+      "inclusionStatus": "included",
+      "exclusionReason": null,
+      "expectedUrlPath": "/pharmacy-first-content-ecosystem/",
+      "source": "v1-engine-contract:1-supporting",
+      "inventoryId": "page-016:supporting:pharmacy-first-content-ecosystem",
+      "countedInTotal": true
+    }
+  ],
+  "imageInventory": [
+    {
+      "pageType": "service",
+      "slot": "hero",
+      "role": "hero",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "1200x675",
+      "selectedAsset": "pf-hero-community-environment",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    },
+    {
+      "pageType": "service",
+      "slot": "support",
+      "role": "support",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "800x600",
+      "selectedAsset": "pf-support-medication-talk",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    },
+    {
+      "pageType": "service",
+      "slot": "trust",
+      "role": "trust",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "800x600",
+      "selectedAsset": "pf-trust-professional-care",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    },
+    {
+      "pageType": "service",
+      "slot": "conversion",
+      "role": "conversion",
+      "serviceId": "pharmacy-first",
+      "orientation": "landscape",
+      "minimumDimensions": "800x600",
+      "selectedAsset": "pf-conversion-follow-up",
+      "assignmentStatus": "assigned",
+      "source": "image-platform:v1-four-role-contract"
+    }
+  ],
+  "inventoryReconciliation": {
+    "inventoryTotal": 16,
+    "categorySum": 16,
+    "schedulerTotal": 16,
+    "dashboardTotal": 16,
+    "reconciled": true,
+    "totalCalculation": "homepage(1) + serviceHubs(1) + clusterPages(8) + blogs(3) + guides(1) + faqs(1) + supportingPages(1) = 16",
+    "uncategorizedPageTypes": []
+  },
+  "coreEcosystem": {
+    "homepage": 1,
+    "serviceHubs": 1,
+    "clusterPages": 8,
+    "blogs": 3,
+    "guides": 1,
+    "faqs": 1,
+    "supportingPages": 1,
+    "images": 4,
+    "requiredImageRoles": 4,
+    "totalPages": 16,
+    "inventoryTotal": 16,
+    "categorySum": 16,
+    "approvedAreas": 8
+  },
+  "recommendedFutureContent": [
+    {
+      "title": "Submit Pharmacy First page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    },
+    {
+      "title": "Submit Blood Pressure Checks page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    },
+    {
+      "title": "Submit Travel Vaccinations page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    },
+    {
+      "title": "Submit Prescription Dispensing page for indexing to begin visibility tracking.",
+      "source": "commercial_intelligence",
+      "classification": "optional_recommendation",
+      "detail": "Visibility recommendation"
+    }
+  ],
+  "exclusions": [],
+  "warnings": [
+    "Campaign Builder wholeTown mode aligned to hub + all confirmed profile areas"
+  ],
+  "blockers": [],
+  "expectedDurationMinutes": 30,
+  "checksum": "dd974ac8cdeeb97b7a55d3f4307f87937dbc5807617cbca74202c1cbff123ccc"
+}

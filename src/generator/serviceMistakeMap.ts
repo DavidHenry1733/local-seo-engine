@@ -9,7 +9,7 @@ const BASE_MAP: ServiceMistakeMap = {
   "web-design": [
     {
       mistake: "Outdated or dated design",
-      impact: "First impressions are formed in under a second. An outdated design signals to visitors that the business is not professional or trustworthy, pushing potential enquiries toward competitors with a more polished presence.",
+      impact: "An outdated design can damage trust within seconds. Visitors often judge whether a business feels professional before they read the full page, and a dated website can push potential enquiries toward competitors with a more polished online presence.",
     },
     {
       mistake: "Poor mobile experience",
@@ -25,7 +25,7 @@ const BASE_MAP: ServiceMistakeMap = {
     },
     {
       mistake: "Weak trust signals",
-      impact: "Without reviews, accreditations or client case studies, visitors have no reason to trust the business over a competitor. Trust signals are often the deciding factor between an enquiry and a bounce.",
+      impact: "Without reviews, accreditations, testimonials or relevant examples, visitors have fewer reasons to trust the business over a competitor. Clear trust signals can be the difference between an enquiry and a lost visitor.",
     },
     {
       mistake: "Generic non-local content",

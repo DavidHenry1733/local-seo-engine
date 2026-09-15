@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "cpa01r-clean-journey-pharmacy",
+  "updatedAt": "2026-07-26T13:06:55.909Z",
+  "campaigns": [
+    {
+      "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 10,
+      "inProgressTasks": 0,
+      "pendingTasks": 2,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-confirm-profile",
+        "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cpa01r-clean-journey-pharmacy",
+        "evidence": [
+          "Profile completeness: 38%"
+        ],
+        "createdAt": "2026-07-26T13:06:55.908Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-confirm-profile",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cpa01r-clean-journey-pharmacy",
+          "evidence": [
+            "Profile completeness: 38%"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-confirm-images",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "0/4 image slots assigned — review library assignments"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-confirm-service-page",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "No published service page found for pharmacy-first"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm image assignments before service page review"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-confirm-ecosystem",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "No ecosystem generated for pharmacy-first"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-authority-readiness-approved",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=cpa01r-clean-journey-pharmacy&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=cpa01r-clean-journey-pharmacy&service=pharmacy-first"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-publish-page",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=cpa01r-clean-journey-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-update-sitemap",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=cpa01r-clean-journey-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-submit-indexing",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=cpa01r-clean-journey-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-refresh-visibility",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=cpa01r-clean-journey-pharmacy#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-prepare-gbp-posts",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-prepare-social-posts",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-prepare-email-sequence",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "97b98b26-bdfc-4616-bf72-2515fc4bd10a-review-growth-actions",
+          "campaignId": "97b98b26-bdfc-4616-bf72-2515fc4bd10a",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=cpa01r-clean-journey-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-07-26T13:06:55.908Z",
+          "status": "complete",
+          "completedAt": "2026-07-26T13:06:55.908Z",
+          "blockedReason": null
+        }
+      ]
+    }
+  ]
+}

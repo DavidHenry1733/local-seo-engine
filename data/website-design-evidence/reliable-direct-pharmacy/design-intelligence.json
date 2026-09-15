@@ -1,0 +1,193 @@
+{
+  "version": "design-intelligence-v1",
+  "tenant": "reliable-direct-pharmacy",
+  "sourceRevision": "d4b4ea5d43d161ae",
+  "capturedAt": "2026-07-23T14:41:43.927Z",
+  "primaryUrl": "https://reliabledirectpharmacy.co.uk",
+  "navigation": {
+    "tree": [],
+    "hierarchyDepth": 0,
+    "rootId": "nav-root"
+  },
+  "header": {
+    "rowCount": 2,
+    "announcementBar": {
+      "selector": ".top-header",
+      "backgroundColour": "#005EB8",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "center",
+      "sticky": false
+    },
+    "logoBlock": {
+      "selector": "header .logo img",
+      "backgroundColour": "#ffffff",
+      "textColour": "#004281",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "left",
+      "sticky": false,
+      "logoUrl": "https://img1.wsimg.com/isteam/stock/Ry6QDqK",
+      "logoMaxHeight": "48px",
+      "logoPosition": "left"
+    },
+    "navigationBlock": {
+      "selector": "header nav",
+      "backgroundColour": "#ffffff",
+      "textColour": "#004281",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "end",
+      "sticky": false,
+      "navPlacement": "inline",
+      "mobileMenuBehaviour": "stacked-nav"
+    },
+    "ctaBlock": {
+      "selector": "header .btn, header .theme-btn",
+      "backgroundColour": "#1CA9C9",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "right",
+      "sticky": false,
+      "labels": [
+        "Book An Appointment"
+      ],
+      "hrefs": [
+        "https://reliabledirectpharmacy.co.uk"
+      ]
+    },
+    "spacing": {
+      "paddingY": "",
+      "paddingX": "",
+      "gap": "24px"
+    },
+    "alignment": {
+      "logo": "left",
+      "nav": "center",
+      "cta": "right"
+    },
+    "sticky": true,
+    "responsive": {
+      "desktopBreakpoint": "980px",
+      "mobileMenuBehaviour": "stacked-nav"
+    }
+  },
+  "footer": {
+    "upperLayer": {
+      "selector": "footer",
+      "backgroundColour": "#004281",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "56px",
+      "paddingBottom": "0"
+    },
+    "lowerLayer": {
+      "selector": "footer .footer-bottom",
+      "backgroundColour": "#004281",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "18px"
+    },
+    "groups": [
+      {
+        "id": "footer-primary",
+        "role": "company",
+        "selector": "footer",
+        "heading": "Footer",
+        "links": [],
+        "backgroundColour": "#004281",
+        "textColour": "#ffffff"
+      }
+    ],
+    "mobileStackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ]
+  },
+  "colours": [
+    {
+      "role": "primary",
+      "selector": ":root",
+      "computedColour": "#005EB8",
+      "hex": "#005EB8",
+      "layer": "body"
+    },
+    {
+      "role": "secondary",
+      "selector": ":root",
+      "computedColour": "#00478a",
+      "hex": "#00478a",
+      "layer": "body"
+    },
+    {
+      "role": "accent",
+      "selector": ":root",
+      "computedColour": "#00478a",
+      "hex": "#00478a",
+      "layer": "body"
+    },
+    {
+      "role": "header-background",
+      "selector": ":root",
+      "computedColour": "#ffffff",
+      "hex": "#ffffff",
+      "layer": "footer-upper"
+    },
+    {
+      "role": "footer-background",
+      "selector": ":root",
+      "computedColour": "#004281",
+      "hex": "#004281",
+      "layer": "footer-upper"
+    }
+  ],
+  "images": [
+    {
+      "id": "logo-primary",
+      "role": "logo",
+      "selector": "header .logo img",
+      "asset": "https://img1.wsimg.com/isteam/stock/Ry6QDqK",
+      "width": 0,
+      "height": 0,
+      "aspectRatio": "",
+      "alt": "Reliable Direct Pharmacy",
+      "lazyLoad": false,
+      "backgroundImage": "",
+      "visibility": "visible"
+    }
+  ],
+  "validation": {
+    "navigationTreeComplete": false,
+    "headerHierarchyComplete": true,
+    "footerHierarchyComplete": true,
+    "colourRolesComplete": true,
+    "imageRolesComplete": true,
+    "navigationFlatteningRemoved": true,
+    "footerLayerMergeRemoved": true
+  },
+  "summary": {
+    "layoutClassification": "with-top-bar",
+    "headerStyle": "inline",
+    "footerStyle": "compact",
+    "navigationStyle": "inline",
+    "typographySystem": "Poppins / Inter",
+    "buttonStyle": "filled-only · 10px · filled",
+    "colourSystem": "#005EB8, #00478a, #00478a",
+    "logoPlacement": "left",
+    "evidenceCompleteness": 100,
+    "fallbackReason": "navigation-links-not-extracted-from-html"
+  }
+}

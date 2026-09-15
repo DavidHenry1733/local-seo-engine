@@ -112,10 +112,10 @@ function buildSafetyStatement(
   const id = String(serviceId || "").toLowerCase();
   const svc = String(serviceName || "").toLowerCase();
   if (id === "travel-vaccinations" || svc.includes("travel vaccination")) {
-    return `Travel vaccine needs depend on destination and clinical suitability. ${name} will explain what can be offered locally and signpost to GP or another service when appropriate.`;
+    return `Travel vaccine needs depend on destination and clinical suitability. ${name} will explain what can be offered locally and advise where to seek further help, including GP or another service when appropriate.`;
   }
   if (id === "pharmacy-first" || svc.includes("pharmacy first") || !serviceId) {
-    return `If symptoms fall outside NHS Pharmacy First scope, ${name} will signpost you to GP or urgent care when appropriate.`;
+    return `If symptoms fall outside NHS Pharmacy First scope, ${name} will explain the appropriate next steps, including GP or urgent care when appropriate.`;
   }
   if (id === "blood-pressure-checks" || svc.includes("blood pressure")) {
     return "If a blood pressure check is not suitable for you, contact the pharmacy for guidance on what to do next.";
@@ -188,8 +188,8 @@ export function renderStructuredLocalAccessSection(
   const displayPhone = profile.displayPhone || profile.phone;
   const hours = resolveOpeningHours(profile);
   const bookingLine = profile.consultationRoomAvailable
-    ? "Private consultation room appointments may be available — call to confirm."
-    : "Call the pharmacy to ask about walk-in availability or booking.";
+    ? "A private consultation room may be available — call to confirm."
+    : "Call the pharmacy to ask how this service is arranged.";
 
   const accessCard = `<div class="local-access-card card">
 <h3>Access ${esc(serviceName)}</h3>
@@ -197,7 +197,7 @@ export function renderStructuredLocalAccessSection(
 <li><strong>Address:</strong> ${esc(profile.fullAddress)}</li>
 ${profile.phone ? `<li><strong>Phone:</strong> <a href="${esc(telHref)}">${esc(displayPhone)}</a></li>` : ""}
 ${profile.email ? `<li><strong>Email:</strong> <a href="mailto:${esc(profile.email)}">${esc(profile.email)}</a></li>` : ""}
-<li><strong>Opening hours:</strong> ${esc(hours)}</li>
+${hours ? `<li><strong>Opening hours:</strong> ${esc(hours)}</li>` : ""}
 <li>${esc(stripUnsupportedLocalCopy(bookingLine, profile))}</li>
 </ul>
 </div>`;

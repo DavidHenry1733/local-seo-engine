@@ -1,0 +1,167 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-06T07:49:20.023Z",
+  "tokenUsage": {
+    "promptTokens": 5712,
+    "completionTokens": 274,
+    "totalTokens": 5986
+  },
+  "estimatedCostUsd": 0.013616,
+  "inputEvidencePackHash": "e4345ab895576cfcb80bc07a0c55581ae55b242b26ed570cb493560901e3edb4",
+  "editorialEvidencePackHash": "64613eeeb3a40af9ccdbed9dad17bdc3511f4bd61275ffd68fcde166a2a2af4e",
+  "areaSlug": "spondon",
+  "areaName": "Spondon",
+  "editorialFactIdsUsed": [
+    "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby",
+    "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+    "spondon:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Spondon",
+    "heroHeading": "Pharmacy First in Spondon",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Spondon.",
+    "localIntroduction": "Pharmacy First for people in Spondon is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "NHS general practice services in Spondon are provided from Chapel Street Medical Centre."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Spondon are provided from Chapel Street Medical Centre.",
+        "editorialFactId": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+        "editorialFactId": "spondon:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby",
+      "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+      "spondon:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Spondon",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Spondon.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Spondon is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Spondon are provided from Chapel Street Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+      "supportingCanonicalFieldOrEntity": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby, spondon:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Spondon",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Spondon.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Spondon is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Spondon are provided from Chapel Street Medical Centre.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby, spondon:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 4,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localIntroduction\": \"Spondon is a neighbourhood ward in Derby.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Spondon are provided from Chapel Street Medical Centre.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Spondon is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Spondon are provided from Chapel Street Medical Centre.\",\n      \"editorialFactId\": \"spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby\",\n    \"spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localIntroduction\": \"Spondon is a neighbourhood ward in Derby.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Spondon are provided from Chapel Street Medical Centre.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Spondon is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Spondon are provided from Chapel Street Medical Centre.\",\n      \"editorialFactId\": \"spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby\",\n    \"spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro\"\n  ]\n}"
+  ]
+}

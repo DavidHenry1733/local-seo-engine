@@ -1,0 +1,264 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "cf8b4949-1aa6-4d71-a883-bacf410f6603",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "mickleover",
+  "areaName": "Mickleover",
+  "planFingerprint": "2e7d4c08a32fed9c10fa7326b6e58cd46f087b0f6f2409d965a6e5e5744c4fbf",
+  "spendingCapUsd": 0.2,
+  "status": "completed",
+  "startedAt": "2026-09-04T17:07:31.666Z",
+  "updatedAt": "2026-09-04T17:07:39.323Z",
+  "completedAt": "2026-09-04T17:07:39.323Z",
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "paidCallsMade": 4,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Mickleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "8989d434-1971-469f-a4e2-2a75c5e3090b",
+      "detail": "0 Places result(s) stored.",
+      "capturedAt": "2026-09-04T17:07:31.699Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Mickleover locality in Mickleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "b03598b5-fa6c-4dbb-8f8c-a6350699f162",
+      "detail": "0 Places result(s) stored.",
+      "capturedAt": "2026-09-04T17:07:31.701Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Mickleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "675463d5-df1d-45c5-a0ad-9804f2540e65",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-04T17:07:35.125Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Mickleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "1c39de31-d45f-4a4e-9d08-7ad7ac7aea86",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-04T17:07:37.898Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "f0f8f063-27c7-41e7-b68e-4958ae21773a",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+      "capturedAt": "2026-09-04T17:07:38.567Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "67ba3e94-72e6-4846-94fc-c002b9695ae7",
+      "detail": "Retrieved https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/mickleover-neighbourhood-ward/",
+      "capturedAt": "2026-09-04T17:07:39.231Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "skipped-blocked",
+      "reservedUsd": 0,
+      "actualCostUsd": null,
+      "reservationId": null,
+      "detail": "Straight-line distance is blocked until a recorded area reference point exists.",
+      "capturedAt": null
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [],
+    "places-area-reference": []
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Mickleover, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-04T17:07:31.704Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://mickleovermedicalcentre.co.uk/",
+          "title": "Mickleover Medical Centre – NHS GP Surgery in Derby",
+          "description": "Mickleover Medical Centre – NHS GP Surgery in Derby. Our Online Booking System is now live! to make, change or cancel an appointment"
+        },
+        {
+          "url": "https://mickleoversurgery.co.uk/",
+          "title": "Mickleover Surgery – NHS GP Surgery in Derby",
+          "description": "Mickleover Surgery – NHS GP Surgery in Derby. You can now request appointments online. 10 Cavendish Way Mickleover Derby Derbyshire DE3 9BJ Get directions ..."
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+          "title": "Mickleover Medical Centre",
+          "description": "Official information from NHS about Mickleover Medical Centre including contact details, directions, opening hours and service/treatment details."
+        },
+        {
+          "url": "https://www.findmygp.org.uk/practice/mickleover-medical-centre-derby-c81042",
+          "title": "Mickleover Medical Centre Reviews & Ratings | FindMyGP",
+          "description": "Mickleover Medical Centre is an NHS GP surgery located at Vicarage Road, Derby, DE3 0HA. HA Telephone 01332 513283 Website"
+        },
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/surgery-information/about-us/",
+          "title": "About us",
+          "description": "20 Dec 2024 — The doctors and staff at the Chapel Street Medical Centre in Derby are proud to offer the highest standard of patient-centred healthcare. Read more"
+        },
+        {
+          "url": "https://mickleover-consult.uk.rapidhealth.co.uk/",
+          "title": "Your GP practice - online services menu",
+          "description": "Mickleover Surgery10 Cavendish Way, Mickleover, Derby DE3 9BJ … call the practice on 01332 519160 if you feel it is urgent for today."
+        },
+        {
+          "url": "https://releaf.co.uk/gp-practice/mickleover-surgery",
+          "title": "Mickleover Surgery, Derby | Medical Cannabis",
+          "description": "Mickleover Surgery is a GP surgery based in Derby, Derbyshire, UK. The practice has specialisations in Maternity and midwifery services, Family planning ... Read more"
+        },
+        {
+          "url": "https://mickleovermedicalcentre.co.uk/contact-us/",
+          "title": "Contact us – Mickleover Medical Centre",
+          "description": "5 May 2023 — NHS GP Surgery in Derby. Vicarage Road Mickleover Derby DE3 0HA Get directions Phone Reception 01332 513283 … reception@nhs.net. Opening times ..."
+        },
+        {
+          "url": "https://www.cqc.org.uk/location/1-542558624/registration-info",
+          "title": "Legal entitlement of Mickleover Medical Centre",
+          "description": "GP practice. Mickleover Medical Centre. Overall: Good read more about inspection ratings. Vicarage Road, Mickleover, Derby, Derbyshire, DE3 0HA (01332) 513283. Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Mickleover, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-04T17:07:35.129Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/mickleover-neighbourhood-ward/",
+          "title": "Mickleover neighbourhood ward",
+          "description": "Find out about the Mickleover neighbourhood ward. Contact details Email: neighbourhoods@derby.gov.uk"
+        },
+        {
+          "url": "https://www.facebook.com/mickleovercouncillors/photos/as-our-community-grows-there-are-an-increasing-amount-of-local-residents-who-liv/3646752645421547/",
+          "title": "Mickleover",
+          "description": "We quite often receive 'out of ward' enquiries due to the distribution of the Mickleover Directory and our facebook reach and the blue shaded ... Read more"
+        },
+        {
+          "url": "https://members.derbyshirealert.co.uk/AlertMessage/Attachment/E4E32826F903FCE787DED2F1446A7B25",
+          "title": "Locality 4 Mickleover Ward Community Care Guide",
+          "description": "The Community Nursing team can be contacted by calling the Community Access Point: 01332 564900. For equipment to support activities of daily living please ... Read more"
+        },
+        {
+          "url": "https://calmview.derbyshire.gov.uk/calmview/Record.aspx?src=CalmView.Catalog&id=D4531",
+          "title": "Mickleover Parish Council - Derbyshire Record Office Catalogue",
+          "description": "Parish Council minute books, 1894-1961, and parish meetings. It helped to provide local public services and amenities such as street lighting, recreation ..."
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://postcode-info.co.uk/england/derby/mickleover",
+          "title": "Mickleover, Derby | Map, postcode districts & nearby places",
+          "description": "Mickleover is a suburban ward to the west of Derby in England, originally a separate village that has been absorbed into the city's suburbs."
+        },
+        {
+          "url": "https://www.inderby.org.uk/parks/community-centres/mickleover-community-centre/",
+          "title": "Mickleover Community Centre | Derby Parks",
+          "description": "Mickleover Community Centre. Address: Uttoxeter Road, Mickleover, Derby, DE3 5DA. Bookings contact: David Hall, 07769 983857; Email: mickleovercc@gmail.com ... Read more"
+        },
+        {
+          "url": "https://blackwell-pc.gov.uk/",
+          "title": "Blackwell Parish Council – News and updates from Blackwell ...",
+          "description": "Contact Information · 01773 580002 · clerk@blackwell-pc.gov.uk · Facebook · Twitter · Instagram · 9am to 2pm. Monday, Wednesday and Friday. Read more"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mickleover",
+          "title": "Mickleover",
+          "description": "Mickleover is a village in the unitary authority of Derby, in Derbyshire, England. ... On 1 April 1968 the parish was abolished and merged with Derby ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/mickleover-medical-centre/C81042",
+      "title": "Mickleover Medical Centre - NHS",
+      "status": 200,
+      "textSample": "Mickleover Medical Centre - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Mickleover Medical Centre Vicarage Road, Mickleover, Derby, Derbyshire, DE3 0HA Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-04T17:07:38.567Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/mickleover-neighbourhood-ward/",
+      "title": "Mickleover neighbourhood ward - Derby City Council",
+      "status": 200,
+      "textSample": "Mickleover neighbourhood ward - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Council and democracy Neighbourhood partnerships Wards D to S Mickleover neighbourhood ward Mickleover neighbourhood ward Mickleover Neighbourhood team If you would like to get involved in your neighbourhood, you have any ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Daniel Giles Neighbourhood Manager 07342 078202 daniel.giles@derby.gov.uk Kelsey Mumford Neighbourhood Officer 07920 387463 kelsey.mumford@derby.gov.uk Nadine Thomas Local Area Coordinator, Mickleover 07385 401068 nadine.thomas@derby.gov.uk Anti-social behaviour and crime If you wish to complain about anti-social behaviour or report a crime you can contact the Mickleover Safer Neighbourhood Team, by: telephone: 101 email: peartree.neighbourhoods@derbyshire.pnn.police.co.uk Your Safer Neighbourhood Team is committed to making your community a safer and better place to live and work. Find out more about the Mickleover Safer Neighbourhood Team on Derbyshire Constabulary's website. Follow us on Twitter - @MickleoverNB&zwnj; Mickleover Neighbourhood Board Your local Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. The board: leads on behalf of the whole neighbourhood agrees the priorities for the neighbourhood decides where delegated Council budgets are to be spent monitors performance influences decisions that reflect the views of local residents decides on the vision for your neighbourhood The neighbourhood Board received a budget from October 2019 and will receive a further budget from April 2020. The budget is to enable voluntary and community groups (Non Commercial) to apply for funding for projects/events, that will both benefit and enable the community and its residents. If you would be interested in putting together a funding application for consideration of the board, please read the guidance and complete the form: Board Funding Application 2022/23 Neighbourhood board devolved budget funding guidance Mickleover Neighbourhood Forum There are no longer forum meetings held for the local area. If you would like to raise an issue or require more information, contact one of your local Councillors: Councillor Email Councillor Alison Holmes alison.holmes@derby.gov.uk Councillor Matthew Holmes matthew.holmes@derby.gov.uk Councillor Miles Pattison (Chair) miles.pattison@derby.gov.uk Previous Next More in this section Darley neighbourhood ward Littleover neighbourhood ward Mackworth neighbourhood ward Mickleover neighbourhood ward Oakwood neighbourhood ward Normanton neighbourhood ward Sinfin and Osmaston neighbourhood ward Spondon neighbourhood ward Contact details Email: neighbourhoods@derby.gov.uk Department: --> Phone: - --> --> Relay UK: --> SignVideo: Signing service Address: Community Safety and Integration Service Public Protection and Streetpride The Council House Corporation Street Derby DE1 2FS Document downloads Useful links --> Derbyshire Police --> Derby Homes --> Derby and Derbyshire Integrated Care Board --> Derbyshire Fire and Rescue Service Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-04T17:07:39.231Z"
+    }
+  },
+  "areaReferencePoint": null,
+  "distanceKm": null,
+  "verifiedGpPracticeCount": 1,
+  "findings": [
+    "1 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "no verified pharmacy relationship or access fact",
+    "Actual evidence spend $0.068 of cap $0.200. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/mickleover.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/mickleover.json",
+  "editorialSufficiency": "EVIDENCE LIMITED",
+  "outcomeSummary": "Collection finished. Evidence is LIMITED: no verified pharmacy relationship or access fact. Spend $0.068.",
+  "reprocessedAt": null
+}

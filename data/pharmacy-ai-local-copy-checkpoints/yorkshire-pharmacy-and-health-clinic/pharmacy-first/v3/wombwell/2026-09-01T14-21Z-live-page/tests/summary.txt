@@ -1,0 +1,6 @@
+Focused tests: PASS 110/110
+Command: npx tsx src/pharmacy/contentEngine/validatePharmacyAiLocalEditorialEvidencePilotV3.ts
+API build: PASS (pnpm --filter "./artifacts/api-server" run build)
+git diff --check: PASS
+GET /health: 200 {"status":"ok"}
+Authenticated Preview: serves NEW copy (see live-preview-check.json)

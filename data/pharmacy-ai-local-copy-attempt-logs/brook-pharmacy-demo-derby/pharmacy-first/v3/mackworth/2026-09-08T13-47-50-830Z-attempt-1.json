@@ -1,0 +1,75 @@
+{
+  "savedAt": "2026-09-08T13:47:50.830Z",
+  "areaSlug": "mackworth",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write two useful natural paragraphs in fluent British English, totalling 110–170 words. Introduce the area, then describe meaningful local features and healthcare references. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Do not describe Pharmacy First, healthcare outcomes, access, convenience, availability or eligibility. Return only the two finished local paragraphs.\n\n- Mackworth has a public library.\n- Horizon Healthcare - Mackworth - Humbleton Drive is a hospital in Mackworth.\n- Mackworth Estate Community Hall is a community facility in Mackworth.\n- West End Community Centre is a community facility in Mackworth.\n- Mackworth Castle is a landmark in Mackworth.\n- Mackworth park is a landmark in Mackworth.\n- Markeaton Park is a landmark in Mackworth."
+  },
+  "rawResponse": "Mackworth is an area characterised by a variety of local landmarks, green spaces, and shared public amenities. Among its notable features are Mackworth Castle, Mackworth park, and Markeaton Park, providing prominent landmarks across the locality. Community life is enriched by useful services, including a public library. Furthermore, neighbourhood gatherings and activities are hosted at local facilities, specifically the Mackworth Estate Community Hall and the West End Community Centre.\n\nAlongside its civic and recreational spaces, Mackworth contains key health infrastructure. Healthcare in the area is represented by Horizon Healthcare - Mackworth - Humbleton Drive, which operates as a local hospital. Together with the public library, community hubs, parks, and historic sites, this facility plays a distinct role in the structure of the Mackworth area.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Mackworth is an area characterised by a variety of local landmarks, green spaces, and shared public amenities. | rule=uncertain-paraphrase | defect=Mackworth is an area characterised by a variety of local landmarks, green spaces, and shared public amenities. — uncertain paraphrase: unmatched wording (characterised, variety, local, landmarks, green, spaces, shared, amenities) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Among its notable features are Mackworth Castle, Mackworth park, and Markeaton Park, providing prominent landmarks across the locality. | rule=uncertain-paraphrase | defect=Among its notable features are Mackworth Castle, Mackworth park, and Markeaton Park, providing prominent landmarks across the locality. — uncertain paraphrase: unmatched wording (notable, features, providing, prominent, landmarks, locality) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Community life is enriched by useful services, including a public library. | rule=uncertain-paraphrase | defect=Community life is enriched by useful services, including a public library. — uncertain paraphrase: unmatched wording (life, enriched, useful) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Furthermore, neighbourhood gatherings and activities are hosted at local facilities, specifically the Mackworth Estate Community Hall and the West End Community Centre. | rule=uncertain-paraphrase | defect=Furthermore, neighbourhood gatherings and activities are hosted at local facilities, specifically the Mackworth Estate Community Hall and the West End Community Centre. — uncertain paraphrase: unmatched wording (furthermore, neighbourhood, gatherings, activities, hosted, local, facilities, specifically) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Healthcare in the area is represented by Horizon Healthcare - Mackworth - Humbleton Drive, which operates as a local hospital. | rule=uncertain-paraphrase | defect=Healthcare in the area is represented by Horizon Healthcare - Mackworth - Humbleton Drive, which operates as a local hospital. — uncertain paraphrase: unmatched wording (represented, which, operates, local) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Together with the public library, community hubs, parks, and historic sites, this facility plays a distinct role in the structure of the Mackworth area. | rule=uncertain-paraphrase | defect=Together with the public library, community hubs, parks, and historic sites, this facility plays a distinct role in the structure of the Mackworth area. — uncertain paraphrase: unmatched wording (hubs, parks, historic, sites, plays, distinct, role, structure) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Mackworth",
+    "heroHeading": "Pharmacy First in Mackworth",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Mackworth.",
+    "localIntroduction": "Mackworth is an area characterised by a variety of local landmarks, green spaces, and shared public amenities. Among its notable features are Mackworth Castle, Mackworth park, and Markeaton Park, providing prominent landmarks across the locality. Community life is enriched by useful services, including a public library. Furthermore, neighbourhood gatherings and activities are hosted at local facilities, specifically the Mackworth Estate Community Hall and the West End Community Centre.\n\nAlongside its civic and recreational spaces, Mackworth contains key health infrastructure. Healthcare in the area is represented by Horizon Healthcare - Mackworth - Humbleton Drive, which operates as a local hospital. Together with the public library, community hubs, parks, and historic sites, this facility plays a distinct role in the structure of the Mackworth area.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Mackworth.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Among its notable features are Mackworth Castle, Mackworth park, and Markeaton Park, providing prominent landmarks across the locality.",
+        "editorialFactId": "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Furthermore, neighbourhood gatherings and activities are hosted at local facilities, specifically the Mackworth Estate Community Hall and the West End Community Centre.",
+        "editorialFactId": "mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Healthcare in the area is represented by Horizon Healthcare - Mackworth - Humbleton Drive, which operates as a local hospital.",
+        "editorialFactId": "mackworth:healthcare:horizon-healthcare-mackworth-humbleton-drive-is-"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Together with the public library, community hubs, parks, and historic sites, this facility plays a distinct role in the structure of the Mackworth area.",
+        "editorialFactId": "mackworth:community:mackworth-has-a-public-library"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Mackworth.",
+        "editorialFactId": "mackworth:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack",
+      "mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c",
+      "mackworth:healthcare:horizon-healthcare-mackworth-humbleton-drive-is-",
+      "mackworth:community:mackworth-has-a-public-library",
+      "mackworth:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

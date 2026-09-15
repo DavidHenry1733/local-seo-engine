@@ -1,0 +1,37 @@
+{
+  "issueId": "MAI-20260721-001",
+  "createdAt": "2026-07-21T07:10:00.000Z",
+  "createdBy": "rc1-c02-remediation",
+  "updatedAt": "2026-07-21T07:10:00.000Z",
+  "tenantSlug": "banner-cross-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "Publish package assembly",
+  "category": "Publishing",
+  "severity": "Critical",
+  "title": "RC1-C02 — Published package integrity",
+  "description": "Published managed site did not match generated preview — ecosystem HTML only, missing visual experience chrome, bundled assets, and root index",
+  "expectedBehaviour": "Published package matches prepared output including visual experience service page, bundled assets, static URL rewrites, and working root URL",
+  "actualBehaviour": "Service page shipped ecosystem long-form HTML without full chrome; / returned 403; /api preview links broken on static host; assets not bundled",
+  "reproductionSteps": "Publish Banner Cross v1 and open https://banner-cross-pharmacy.sites.pharmaconnect.uk/ in browser",
+  "affectedUrl": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+  "screenshotReference": "",
+  "status": "Awaiting Product Owner Test",
+  "assignee": "Unassigned",
+  "resolutionNotes": "Automated remediation: pharmacyPublishPackageAssembler deployed; package synced to current v1; automated browser validation PASS — pending PO sign-off",
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-21T07:10:00.000Z",
+      "user": "rc1-c02-remediation",
+      "status": "Awaiting Product Owner Test",
+      "notes": "Pipeline corrected and package re-synced to current release v1 without regeneration"
+    }
+  ],
+  "diagnosticSnapshot": {},
+  "relatedFiles": [
+    "src/pharmacy/pharmacyPublishPackageAssembler.ts",
+    "src/pharmacy/pharmacyLivePublishService.ts",
+    "output/pharmacy-publish/banner-cross-pharmacy",
+    "output/pharmacy-visual-experience/banner-cross-pharmacy/pharmacy-first/index.html"
+  ]
+}

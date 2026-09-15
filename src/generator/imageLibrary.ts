@@ -73,6 +73,7 @@ const SERVICE_DISPLAY_NAMES: Record<string, string> = {
   "local-seo":               "Local SEO",
   "google-business-profile": "Google Business Profile",
   "email-marketing":         "Email Marketing",
+  "local-business-visibility": "Local Business Visibility",
 };
 
 /** Convert underscore, space, or camel service key to hyphen-form used in library paths. */

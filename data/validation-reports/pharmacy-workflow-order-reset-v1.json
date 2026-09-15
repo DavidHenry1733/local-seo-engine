@@ -1,0 +1,99 @@
+{
+  "slug": "pharmaconnect",
+  "validatedAt": "2026-06-29T13:07:54.078Z",
+  "passed": 16,
+  "total": 18,
+  "allPass": false,
+  "checks": [
+    {
+      "id": "nine-steps",
+      "pass": true,
+      "detail": "9 steps"
+    },
+    {
+      "id": "step-order",
+      "pass": true,
+      "detail": "Create Profile → Choose Service & Area → Confirm Brand & Images → Create Content Package → Review Content Package → Approve Content Package → Publish → Submit To Google → Track Results"
+    },
+    {
+      "id": "profile-complete-no-block",
+      "pass": true,
+      "detail": "profile complete=true, step=COMPLETE"
+    },
+    {
+      "id": "next-after-profile-is-service-area",
+      "pass": true,
+      "detail": "workflow advanced"
+    },
+    {
+      "id": "generate-asset-step",
+      "pass": true,
+      "detail": "/api/pharmacy-content-package?slug=pharmaconnect&service=blood-pressure-checks"
+    },
+    {
+      "id": "review-content-step",
+      "pass": true,
+      "detail": "/api/pharmacy-asset-review?slug=pharmaconnect&service=blood-pressure-checks"
+    },
+    {
+      "id": "approve-asset-step",
+      "pass": true,
+      "detail": "/api/pharmacy-asset-review?slug=pharmaconnect&service=blood-pressure-checks#approve"
+    },
+    {
+      "id": "growth-hidden-before-approval",
+      "pass": true,
+      "detail": "hideGrowthMetrics=false, approved=true"
+    },
+    {
+      "id": "performance-hidden-in-html",
+      "pass": true,
+      "detail": "shown after approval"
+    },
+    {
+      "id": "publish-locked-before-approval",
+      "pass": true,
+      "detail": "publish locked=false, status=COMPLETE"
+    },
+    {
+      "id": "indexing-locked-before-publish",
+      "pass": true,
+      "detail": "index locked=false"
+    },
+    {
+      "id": "track-locked-before-submit",
+      "pass": true,
+      "detail": "track locked=false"
+    },
+    {
+      "id": "continue-resolves",
+      "pass": false,
+      "detail": "complete"
+    },
+    {
+      "id": "all-steps-in-dashboard",
+      "pass": true,
+      "detail": "9 step titles in dashboard HTML"
+    },
+    {
+      "id": "current-step-highlight",
+      "pass": false,
+      "detail": "current step badge present"
+    },
+    {
+      "id": "no-script-errors",
+      "pass": true,
+      "detail": "no developer script messages"
+    },
+    {
+      "id": "asset-first-label",
+      "pass": true,
+      "detail": "Growth Programme"
+    },
+    {
+      "id": "outstanding-no-complete-profile-when-done",
+      "pass": true,
+      "detail": "none"
+    }
+  ]
+}

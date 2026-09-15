@@ -1,0 +1,143 @@
+{
+  "version": 2,
+  "slug": "sprint-6d-orchestration-validation",
+  "updatedAt": "2026-07-19T08:41:38.215Z",
+  "currentStage": "generate_ecosystem",
+  "transitions": [
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-19T08:33:59.830Z",
+      "operator": "sprint-6d-validation",
+      "durationMs": 48,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Generate Growth Intelligence: Growth intelligence acknowledged at 2026-07-19T08:33:59.814Z"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-07-19T08:33:59.782Z",
+      "operator": "sprint-6d-validation",
+      "durationMs": 64,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Approve Business Profile: Profile approval simulated (validation)"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-07-19T08:33:59.718Z",
+      "operator": "sprint-6d-validation",
+      "durationMs": 50,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile Intelligence: Business Profile Intelligence acknowledged at 2026-07-19T08:33:59.696Z"
+    },
+    {
+      "fromStage": "google_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-19T08:33:59.667Z",
+      "operator": "sprint-6d-validation",
+      "durationMs": 50,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Import Google: Google import simulated (validation)"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "google_import",
+      "timestamp": "2026-07-19T08:33:59.617Z",
+      "operator": "sprint-6d-validation",
+      "durationMs": 95,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Import Website: Website import simulated (validation)"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-19T08:33:59.521Z",
+      "operator": "sprint-6d-validation",
+      "durationMs": null,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Approve Business Profile: Profile approval simulated (validation)"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_ecosystem",
+      "startedAt": "2026-07-19T08:41:36.496Z",
+      "finishedAt": "2026-07-19T08:41:38.215Z",
+      "durationMs": 1719,
+      "operator": "admin",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "abb6093a-0503-4b4c-9d73-e3115067cbfb"
+    },
+    {
+      "stageId": "generate_growth_intelligence",
+      "actionId": "orchestrate_growth_intelligence",
+      "startedAt": "2026-07-19T08:33:59.816Z",
+      "finishedAt": "2026-07-19T08:33:59.817Z",
+      "durationMs": 1,
+      "operator": "sprint-6d-validation",
+      "evidence": "Growth intelligence acknowledged at 2026-07-19T08:33:59.814Z",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_profile",
+      "startedAt": "2026-07-19T08:33:59.767Z",
+      "finishedAt": "2026-07-19T08:33:59.767Z",
+      "durationMs": 0,
+      "operator": "sprint-6d-validation",
+      "evidence": "Profile approval simulated (validation)",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "orchestrate_bpi",
+      "startedAt": "2026-07-19T08:33:59.698Z",
+      "finishedAt": "2026-07-19T08:33:59.699Z",
+      "durationMs": 1,
+      "operator": "sprint-6d-validation",
+      "evidence": "Business Profile Intelligence acknowledged at 2026-07-19T08:33:59.696Z",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "google_import",
+      "actionId": "import_google",
+      "startedAt": "2026-07-19T08:33:59.647Z",
+      "finishedAt": "2026-07-19T08:33:59.648Z",
+      "durationMs": 1,
+      "operator": "sprint-6d-validation",
+      "evidence": "Google import simulated (validation)",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-19T08:33:59.552Z",
+      "finishedAt": "2026-07-19T08:33:59.553Z",
+      "durationMs": 1,
+      "operator": "sprint-6d-validation",
+      "evidence": "Website import simulated (validation)",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-08T13:43:51.393Z",
+  "tokenUsage": {
+    "promptTokens": 252,
+    "completionTokens": 153,
+    "totalTokens": 405
+  },
+  "estimatedCostUsd": 0.001728,
+  "inputEvidencePackHash": "691baf418dfc8f5f7566819417d79b7db13346c76186b1455ecc4e7aa958e628",
+  "editorialEvidencePackHash": "b203fb51116e3534ff30e7c8bf9d24242674b687c8de1be5427c014152e948ee",
+  "areaSlug": "alvaston",
+  "areaName": "Alvaston",
+  "editorialFactIdsUsed": [
+    "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+    "alvaston:community:alvaston-has-a-public-library",
+    "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+    "alvaston:healthcare:lister-house-at-coleman-street-is-listed-as-a-ho",
+    "alvaston:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Alvaston",
+    "heroHeading": "Pharmacy First in Alvaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+    "localIntroduction": "Alvaston is a distinct local area enriched by notable landmarks and picturesque outdoor spaces. Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.\n\nHealthcare within the area is delivered through a network of established medical facilities. NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre. In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike.",
+        "editorialFactId": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.",
+        "editorialFactId": "alvaston:community:alvaston-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre.",
+        "editorialFactId": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure.",
+        "editorialFactId": "alvaston:healthcare:lister-house-at-coleman-street-is-listed-as-a-ho"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+        "editorialFactId": "alvaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+      "alvaston:community:alvaston-has-a-public-library",
+      "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+      "alvaston:healthcare:lister-house-at-coleman-street-is-listed-as-a-ho",
+      "alvaston:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Alvaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Alvaston is a distinct local area enriched by notable landmarks and picturesque outdoor spaces.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike.",
+      "supportingCanonicalFieldOrEntity": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in, alvaston:heritage:elvaston-castle-is-listed-as-a-landmark-in-alvas",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (prominent, local, sites, historic, which, provide, scenic, surroundings, residents, visitors, alike) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.",
+      "supportingCanonicalFieldOrEntity": "alvaston:community:alvaston-has-a-public-library, alvaston:community:alvaston-library-and-learning-centre-is-listed-a, alvaston:community:boulton-lane-park-community-centre-is-listed-as-, alvaston:community:field-lane-alvaston-community-association-is-lis, alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+      "providerSource": "derby.gov.uk, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (served, facilities) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Healthcare within the area is delivered through a network of established medical facilities.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre.",
+      "supportingCanonicalFieldOrEntity": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr, alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr, alvaston:community:alvaston-library-and-learning-centre-is-listed-a",
+      "providerSource": "NHS, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure.",
+      "supportingCanonicalFieldOrEntity": "alvaston:healthcare:lister-house-at-coleman-street-is-listed-as-a-ho",
+      "providerSource": "Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (addition, based, completing, primary, local, infrastructure) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "supportingCanonicalFieldOrEntity": "alvaston:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Alvaston",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Alvaston is a distinct local area enriched by notable landmarks and picturesque outdoor spaces.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Healthcare within the area is delivered through a network of established medical facilities.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr, alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr, alvaston:community:alvaston-library-and-learning-centre-is-listed-a",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "alvaston:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. | rule=uncertain-paraphrase | defect=Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. — uncertain paraphrase: unmatched wording (prominent, local, sites, historic, which, provide, scenic, surroundings, residents, visitors, alike) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association. | rule=uncertain-paraphrase | defect=The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association. — uncertain paraphrase: unmatched wording (served, facilities) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure. | rule=uncertain-paraphrase | defect=In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure. — uncertain paraphrase: unmatched wording (addition, based, completing, primary, local, infrastructure) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "Alvaston is a distinct local area enriched by notable landmarks and picturesque outdoor spaces. Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.\n\nHealthcare within the area is delivered through a network of established medical facilities. NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre. In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure.",
+  "rawOpenAiResponses": [
+    "Alvaston is a distinct local area enriched by notable landmarks and picturesque outdoor spaces. Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.\n\nHealthcare within the area is delivered through a network of established medical facilities. NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre. In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure."
+  ]
+}

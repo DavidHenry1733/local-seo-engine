@@ -169,10 +169,16 @@ importers:
       openai:
         specifier: ^6.34.0
         version: 6.34.0(zod@4.3.6)
+      ssh2:
+        specifier: ^1.17.0
+        version: 1.17.0
       ssh2-sftp-client:
         specifier: ^12.1.1
         version: 12.1.1
     devDependencies:
+      playwright:
+        specifier: 1.49.1
+        version: 1.49.1
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -200,6 +206,9 @@ importers:
       archiver:
         specifier: ^7.0.1
         version: 7.0.1
+      basic-ftp:
+        specifier: ^5.3.0
+        version: 5.3.0
       bcryptjs:
         specifier: ^3.0.3
         version: 3.0.3
@@ -233,6 +242,12 @@ importers:
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
+      ssh2:
+        specifier: ^1.17.0
+        version: 1.17.0
+      ssh2-sftp-client:
+        specifier: ^12.1.1
+        version: 12.1.1
     devDependencies:
       '@types/bcryptjs':
         specifier: ^3.0.0
@@ -2715,6 +2730,11 @@ packages:
     resolution: {integrity: sha512-CTXd6rk/M3/ULNQj8FBqBWHYBVYybQ3VPBw0xGKFe3tuH7ytT6ACnvzpIQ3UZtB8yvUKC2cXn1a+x+5EVQLovA==}
     engines: {node: '>=14.14'}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -3273,6 +3293,16 @@ packages:
 
   pino@9.14.0:
     resolution: {integrity: sha512-8OEwKp5juEvb/MjpIc4hjqfgCNysrS94RIOMXYvpYCdm/jglrKEiAYmiumbmGhCvs+IcInsphYDFwqrjr7398w==}
+    hasBin: true
+
+  playwright-core@1.49.1:
+    resolution: {integrity: sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.49.1:
+    resolution: {integrity: sha512-VYL8zLoNTBxVOrJBbDuRgDWa3i+mfQgDTrL8Ah9QXZ7ax4Dsj0MSq5bYgytRnDVVe+njoKnfsYkH3HzqVj5UZA==}
+    engines: {node: '>=18'}
     hasBin: true
 
   postcss-selector-parser@6.0.10:
@@ -5998,6 +6028,9 @@ snapshots:
       jsonfile: 6.2.0
       universalify: 2.0.1
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -6568,6 +6601,14 @@ snapshots:
       safe-stable-stringify: 2.5.0
       sonic-boom: 4.2.1
       thread-stream: 3.1.0
+
+  playwright-core@1.49.1: {}
+
+  playwright@1.49.1:
+    dependencies:
+      playwright-core: 1.49.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   postcss-selector-parser@6.0.10:
     dependencies:

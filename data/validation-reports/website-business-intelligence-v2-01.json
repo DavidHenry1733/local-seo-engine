@@ -1,0 +1,256 @@
+{
+  "ticket": "PC-WEBSITE-BUSINESS-INTELLIGENCE-V2-01",
+  "generatedAt": "2026-08-10T10:45:18.231Z",
+  "pass": true,
+  "checks": [
+    {
+      "id": "svc-genuine-service",
+      "pass": true,
+      "detail": "service-page"
+    },
+    {
+      "id": "svc-article-not-service",
+      "pass": true,
+      "detail": "blog"
+    },
+    {
+      "id": "svc-pricing-not-service",
+      "pass": true,
+      "detail": "pricing"
+    },
+    {
+      "id": "svc-offer-not-service",
+      "pass": true,
+      "detail": "offer"
+    },
+    {
+      "id": "svc-landing-not-service",
+      "pass": true,
+      "detail": "landing"
+    },
+    {
+      "id": "svc-utility-not-service",
+      "pass": true,
+      "detail": "hero/form/thank-you -> utility"
+    },
+    {
+      "id": "commercial-only-core-services",
+      "pass": true,
+      "detail": "Pharmacy Website Design · Local SEO for Pharmacies · Pharmacy Website Hosting · Pharmacy Email Communication"
+    },
+    {
+      "id": "service-label-not-slogan",
+      "pass": true,
+      "detail": "Pharmacy Website Design"
+    },
+    {
+      "id": "audience-explicit",
+      "pass": true,
+      "detail": "UK community pharmacies · UK pharmacies · community pharmacies"
+    },
+    {
+      "id": "audience-incidental-noun-rejected",
+      "pass": true,
+      "detail": "incidental patients/bookings not extracted"
+    },
+    {
+      "id": "pricing-commercial-context",
+      "pass": true,
+      "detail": "price:From £299/year · discount:25% discount · package:Growth Package"
+    },
+    {
+      "id": "pricing-unrelated-number-rejected",
+      "pass": true,
+      "detail": "no invented prices from unrelated numbers"
+    },
+    {
+      "id": "offer-founder-partner",
+      "pass": true,
+      "detail": "Growth Engine Founder Partner Programme:programme"
+    },
+    {
+      "id": "cta-meaningful",
+      "pass": true,
+      "detail": "Contact Us · Get Started · Join Founder Partner · Request a Free Audit"
+    },
+    {
+      "id": "cta-nav-label-rejected",
+      "pass": true,
+      "detail": "nav-only labels excluded"
+    },
+    {
+      "id": "contact-mailto",
+      "pass": true,
+      "detail": "hello@example.com"
+    },
+    {
+      "id": "contact-tel-valid",
+      "pass": true,
+      "detail": "01709 210731 / reject=too-few-digits"
+    },
+    {
+      "id": "trust-about-founder-experience",
+      "pass": true,
+      "detail": "about_description,founder,experience,testimonial"
+    },
+    {
+      "id": "trust-generic-adjective-rejected",
+      "pass": true,
+      "detail": "generic adjectives not treated as proof"
+    },
+    {
+      "id": "social-canonical-accepted",
+      "pass": true,
+      "detail": "linkedin:https://www.linkedin.com/company/example-agency"
+    },
+    {
+      "id": "social-share-rejected",
+      "pass": true,
+      "detail": "share/login/generic rejected; profile accepted"
+    },
+    {
+      "id": "snapshot-timestamp",
+      "pass": true,
+      "detail": "2026-08-10T09:46:16.566Z"
+    },
+    {
+      "id": "snapshot-pages-28",
+      "pass": true,
+      "detail": "28"
+    },
+    {
+      "id": "pc-core-services-semantic",
+      "pass": true,
+      "detail": "Pharmacy Website Design · Local SEO for Pharmacies · Pharmacy Website Hosting · Pharmacy Email Communication"
+    },
+    {
+      "id": "pc-article-excluded",
+      "pass": true,
+      "detail": "no dated article in commercial services"
+    },
+    {
+      "id": "pc-pricing-as-commercial",
+      "pass": true,
+      "detail": "Pharmacy Pricing & Packages"
+    },
+    {
+      "id": "pc-founder-as-offer",
+      "pass": true,
+      "detail": "Growth Engine Founder Partner Programme:programme · See Where Your Pharmacy Appears in Google Search and Maps:free_audit"
+    },
+    {
+      "id": "pc-landing-excluded",
+      "pass": true,
+      "detail": "landing not in services"
+    },
+    {
+      "id": "pc-utility-no-bi",
+      "pass": true,
+      "detail": "utility excluded from services"
+    },
+    {
+      "id": "pc-audience-from-stored-meta",
+      "pass": true,
+      "detail": "UK community pharmacies · community pharmacies · UK pharmacies"
+    },
+    {
+      "id": "pc-trust-inventory-about",
+      "pass": true,
+      "detail": "about_description:About PharmaConnect | Digital Services f"
+    },
+    {
+      "id": "national-identity",
+      "pass": true,
+      "detail": "name=PharmaConnect scope=national market=United Kingdom"
+    },
+    {
+      "id": "branch-selection-inactive",
+      "pass": true,
+      "detail": "false"
+    },
+    {
+      "id": "leeds-present",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/leeds-pharmacy.json"
+    },
+    {
+      "id": "snapshot-unchanged",
+      "pass": true,
+      "detail": "pharmaconnect.json bytes unchanged"
+    },
+    {
+      "id": "leeds-mtime-unchanged",
+      "pass": true,
+      "detail": "leeds profile not modified"
+    },
+    {
+      "id": "provenance-source-url",
+      "pass": true,
+      "detail": "commercial+audience retain sourceUrl"
+    }
+  ],
+  "pharmaconnectRecovered": {
+    "commercialServices": [
+      {
+        "name": "Pharmacy Website Design",
+        "url": "https://pharmaconnect.uk/pharmacy-website-design"
+      },
+      {
+        "name": "Local SEO for Pharmacies",
+        "url": "https://pharmaconnect.uk/local-seo-for-pharmacies"
+      },
+      {
+        "name": "Pharmacy Website Hosting",
+        "url": "https://pharmaconnect.uk/pharmacy-website-hosting"
+      },
+      {
+        "name": "Pharmacy Email Communication",
+        "url": "https://pharmaconnect.uk/pharmacy-email-marketing"
+      }
+    ],
+    "offers": [
+      {
+        "name": "Growth Engine Founder Partner Programme",
+        "type": "programme",
+        "url": "https://pharmaconnect.uk/founder-partner"
+      },
+      {
+        "name": "See Where Your Pharmacy Appears in Google Search and Maps",
+        "type": "free_audit",
+        "url": "https://pharmaconnect.uk/seo-audit"
+      }
+    ],
+    "pricing": [
+      {
+        "kind": "package",
+        "value": "Pharmacy Pricing & Packages",
+        "url": "https://pharmaconnect.uk/prices-2"
+      }
+    ],
+    "audience": [
+      {
+        "value": "UK community pharmacies",
+        "url": "https://pharmaconnect.uk/",
+        "method": "homepage-meta-description"
+      },
+      {
+        "value": "community pharmacies",
+        "url": "https://pharmaconnect.uk/about-pharmaconnect",
+        "method": "page-title"
+      },
+      {
+        "value": "UK pharmacies",
+        "url": "https://pharmaconnect.uk/pharmacy-website-design",
+        "method": "page-title"
+      }
+    ],
+    "trust": [
+      {
+        "kind": "about_description",
+        "value": "About PharmaConnect | Digital Services for Community Pharmacies",
+        "url": "https://pharmaconnect.uk/about-pharmaconnect"
+      }
+    ],
+    "note": "Contact phone/email and rich CTA/social/pricing amounts require fresh import HTML — not present in stored snapshot page bodies."
+  }
+}

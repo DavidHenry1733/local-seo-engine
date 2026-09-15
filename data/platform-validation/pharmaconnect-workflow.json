@@ -1,0 +1,518 @@
+{
+  "version": 1,
+  "validatedAt": "2026-06-26T13:06:19.019Z",
+  "validationCampaign": {
+    "pharmacy": "Brook Pharmacy",
+    "slug": "pharmaconnect",
+    "service": "blood-pressure-checks",
+    "serviceName": "Blood Pressure Checks",
+    "campaignId": "2e5cf653-7df3-4918-96f8-c99d687b764b"
+  },
+  "summary": {
+    "overallStatus": "WARNING",
+    "stagesPassed": 6,
+    "stagesWarning": 2,
+    "stagesFailed": 0,
+    "publishReady": false,
+    "freezeDevelopment": true
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Business Profile",
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "profile-loads",
+          "label": "Profile loads",
+          "status": "PASS",
+          "detail": "Brook Pharmacy"
+        },
+        {
+          "id": "required-fields",
+          "label": "Required fields present",
+          "status": "PASS",
+          "detail": "9/9 required checks"
+        },
+        {
+          "id": "professional-review",
+          "label": "Professional Review saves",
+          "status": "PASS",
+          "detail": "reviewer=Dr Sarah Mitchell"
+        },
+        {
+          "id": "trust-signals",
+          "label": "Trust Signals",
+          "status": "PASS",
+          "detail": "GPhC=9012345"
+        },
+        {
+          "id": "brand-colours",
+          "label": "Brand colours",
+          "status": "PASS",
+          "detail": "#005eb8"
+        },
+        {
+          "id": "logo",
+          "label": "Logo loads",
+          "status": "PASS",
+          "detail": "/assets/pharmacy-logos/pharmaconnect.svg"
+        },
+        {
+          "id": "contact-details",
+          "label": "Contact details",
+          "status": "PASS",
+          "detail": "01709 210731 · support@inboxingproweb.com"
+        }
+      ],
+      "issues": [],
+      "screenshotPath": null,
+      "blockedNextStage": false
+    },
+    {
+      "stage": 2,
+      "name": "Campaign Creation",
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "campaign-exists",
+          "label": "Campaign stored",
+          "status": "PASS",
+          "detail": "Blood Pressure Checks — Increase Visibility"
+        },
+        {
+          "id": "service-selection",
+          "label": "Service selection",
+          "status": "PASS",
+          "detail": "blood-pressure-checks"
+        },
+        {
+          "id": "area-selection",
+          "label": "Area selection (coverage)",
+          "status": "PASS",
+          "detail": "Brinsworth, Parkgate, Rawmarsh"
+        },
+        {
+          "id": "campaign-os",
+          "label": "Campaign appears in Campaign OS",
+          "status": "PASS",
+          "detail": "Blood Pressure Checks — Increase Visibility"
+        }
+      ],
+      "issues": [],
+      "screenshotPath": null,
+      "blockedNextStage": false
+    },
+    {
+      "stage": 3,
+      "name": "Image Workflow",
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "library-data",
+          "label": "Image Library data",
+          "status": "PASS",
+          "detail": "operating system doc loaded"
+        },
+        {
+          "id": "slot-assignment",
+          "label": "Slot assignment",
+          "status": "PASS",
+          "detail": "4/4 slots assigned"
+        },
+        {
+          "id": "persistence",
+          "label": "Assignment persists",
+          "status": "PASS",
+          "detail": "4 persisted keys"
+        },
+        {
+          "id": "upload-records",
+          "label": "Upload works (records)",
+          "status": "PASS",
+          "detail": "13 uploads on file"
+        },
+        {
+          "id": "ai-requests",
+          "label": "AI request records",
+          "status": "PASS",
+          "detail": "0 BP-specific AI requests (0 ok if not used)"
+        },
+        {
+          "id": "preview-images",
+          "label": "Images on visual page",
+          "status": "PASS",
+          "detail": "visual HTML has assigned slot markers"
+        },
+        {
+          "id": "campaign-image-centre",
+          "label": "Campaign Image Centre",
+          "status": "PASS",
+          "detail": "4/4"
+        }
+      ],
+      "issues": [],
+      "screenshotPath": null,
+      "blockedNextStage": false
+    },
+    {
+      "stage": 4,
+      "name": "Visual Page",
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "template",
+          "label": "Approved template",
+          "status": "PASS",
+          "detail": "visual experience template"
+        },
+        {
+          "id": "branding",
+          "label": "Brook branding",
+          "status": "PASS",
+          "detail": "name + NHS blue"
+        },
+        {
+          "id": "logo",
+          "label": "Logo visible",
+          "status": "PASS",
+          "detail": "header/footer logo"
+        },
+        {
+          "id": "localisation",
+          "label": "Brook localisation",
+          "status": "PASS",
+          "detail": "Rotherham + coverage areas"
+        },
+        {
+          "id": "images-render",
+          "label": "Images render",
+          "status": "PASS",
+          "detail": "no broken image markers"
+        },
+        {
+          "id": "no-placeholders",
+          "label": "No placeholders",
+          "status": "PASS",
+          "detail": "v3-placeholder blocks"
+        },
+        {
+          "id": "no-duplicates",
+          "label": "No duplicate sections",
+          "status": "PASS",
+          "detail": "ok"
+        },
+        {
+          "id": "cta",
+          "label": "CTA",
+          "status": "PASS",
+          "detail": "primary CTA present"
+        },
+        {
+          "id": "map",
+          "label": "Map",
+          "status": "PASS",
+          "detail": "Google Maps embed"
+        },
+        {
+          "id": "footer",
+          "label": "Footer",
+          "status": "PASS",
+          "detail": "site footer"
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile layout",
+          "status": "PASS",
+          "detail": "viewport meta"
+        }
+      ],
+      "issues": [],
+      "screenshotPath": "output/pharmacy-visual-experience/pharmaconnect/blood-pressure-checks/index.html",
+      "blockedNextStage": false
+    },
+    {
+      "stage": 5,
+      "name": "Quality Assurance",
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "authority-audit",
+          "label": "Authority Audit",
+          "status": "PASS",
+          "detail": "score=95 gate=PASS"
+        },
+        {
+          "id": "enhancement-engine",
+          "label": "Enhancement Engine",
+          "status": "PASS",
+          "detail": "31 recommendations"
+        },
+        {
+          "id": "publish-gate",
+          "label": "Publish Gate",
+          "status": "PASS",
+          "detail": "PASS"
+        },
+        {
+          "id": "launch-queue",
+          "label": "Launch Queue",
+          "status": "PASS",
+          "detail": "13 tasks"
+        },
+        {
+          "id": "growth-actions",
+          "label": "Growth Actions",
+          "status": "PASS",
+          "detail": "28 pending"
+        }
+      ],
+      "issues": [],
+      "screenshotPath": null,
+      "blockedNextStage": false
+    },
+    {
+      "stage": 6,
+      "name": "Real Enhancement Actions",
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "reviewer_profile",
+          "label": "reviewer_profile",
+          "status": "PASS",
+          "detail": "verified"
+        },
+        {
+          "id": "clinical_review_date",
+          "label": "clinical_review_date",
+          "status": "PASS",
+          "detail": "verified"
+        },
+        {
+          "id": "next_review_date",
+          "label": "next_review_date",
+          "status": "PASS",
+          "detail": "verified"
+        },
+        {
+          "id": "images",
+          "label": "images",
+          "status": "PASS",
+          "detail": "verified"
+        },
+        {
+          "id": "canonical",
+          "label": "canonical",
+          "status": "PASS",
+          "detail": "verified"
+        },
+        {
+          "id": "noindex",
+          "label": "noindex",
+          "status": "PASS",
+          "detail": "verified"
+        },
+        {
+          "id": "refresh-chain",
+          "label": "Refresh chain",
+          "status": "PASS",
+          "detail": "score 95→95"
+        },
+        {
+          "id": "campaign-os-update",
+          "label": "Campaign OS updates",
+          "status": "PASS",
+          "detail": "gate=PASS realCompleted=0"
+        }
+      ],
+      "issues": [],
+      "screenshotPath": null,
+      "blockedNextStage": false
+    },
+    {
+      "stage": 7,
+      "name": "Publish Readiness",
+      "status": "WARNING",
+      "checks": [
+        {
+          "id": "publish-gate",
+          "label": "Publish gate",
+          "status": "PASS",
+          "detail": "PASS score=95"
+        },
+        {
+          "id": "launch-queue-ready",
+          "label": "Launch queue",
+          "status": "WARNING",
+          "detail": "3 blocked / 13 tasks"
+        },
+        {
+          "id": "publishing-workflow",
+          "label": "Publishing workflow",
+          "status": "PASS",
+          "detail": "Pharmacy First is at Visible — Copy ecosystem GBP posts into your Google Business Profile weekly schedule."
+        },
+        {
+          "id": "indexing",
+          "label": "Indexing readiness",
+          "status": "PASS",
+          "detail": "indexed"
+        },
+        {
+          "id": "visibility",
+          "label": "Visibility readiness",
+          "status": "PASS",
+          "detail": "visible"
+        },
+        {
+          "id": "blockers",
+          "label": "Remaining blockers",
+          "status": "PASS",
+          "detail": "none"
+        }
+      ],
+      "issues": [],
+      "screenshotPath": null,
+      "blockedNextStage": false
+    },
+    {
+      "stage": 8,
+      "name": "Operator Experience",
+      "status": "WARNING",
+      "checks": [
+        {
+          "id": "wording",
+          "label": "Confusing wording",
+          "status": "WARNING",
+          "detail": "Multiple 'Increase Visibility' campaign names identical"
+        },
+        {
+          "id": "navigation",
+          "label": "Broken navigation",
+          "status": "PASS",
+          "detail": "Internal service routes resolve (auth required for dashboards)"
+        },
+        {
+          "id": "missing-buttons",
+          "label": "Missing buttons",
+          "status": "PASS",
+          "detail": "Primary actions present in Campaign OS and Enhancement Workspace"
+        },
+        {
+          "id": "duplicate-info",
+          "label": "Duplicate information",
+          "status": "WARNING",
+          "detail": "Authority + Enhancement + Growth overlap on Campaign OS"
+        },
+        {
+          "id": "click-depth",
+          "label": "Click depth",
+          "status": "WARNING",
+          "detail": "6+ pages for full workflow"
+        },
+        {
+          "id": "dead-links",
+          "label": "Dead links",
+          "status": "PASS",
+          "detail": "Visual preview public; dashboard links require login"
+        },
+        {
+          "id": "layout",
+          "label": "Layout",
+          "status": "PASS",
+          "detail": "Campaign OS panels render structured sections"
+        }
+      ],
+      "issues": [
+        {
+          "id": "UX-auth-wall",
+          "summary": "All /api/* dashboard routes redirect to login when unauthenticated",
+          "recommendedFix": "Document demo login credentials on Executive Dashboard; consider read-only demo session for customer demos",
+          "priority": "High"
+        },
+        {
+          "id": "UX-campaign-noise",
+          "summary": "Campaign OS shows multiple duplicate Pharmacy First campaigns as primary",
+          "recommendedFix": "Archive test campaigns; default Campaign OS to Blood Pressure validation campaign",
+          "priority": "Medium"
+        },
+        {
+          "id": "UX-navigation-depth",
+          "summary": "Full workflow spans Profile → Campaign OS → Image Library → Enhancement Workspace → Publishing Settings → Launch Queue (6+ pages)",
+          "recommendedFix": "Add 'Validation campaign checklist' single-page wizard for demo operators",
+          "priority": "Medium"
+        },
+        {
+          "id": "UX-enhancement-overload",
+          "summary": "31 enhancement recommendations for Blood Pressure — overwhelming for pharmacy owner",
+          "recommendedFix": "Filter workspace to real-action types only during validation phase",
+          "priority": "Medium"
+        },
+        {
+          "id": "UX-demo-trust-label",
+          "summary": "Demo trust data not clearly labelled on visual page for end patients",
+          "recommendedFix": "Add visible 'Demo preview' banner on visual experience pages when demoMode=true",
+          "priority": "Low"
+        },
+        {
+          "id": "UX-image-library-route",
+          "summary": "Image Library accessible at both /pharmacy-image-library and /api/pharmacy-image-library",
+          "recommendedFix": "Standardise links to /api/pharmacy-image-library everywhere",
+          "priority": "Low"
+        }
+      ],
+      "screenshotPath": null,
+      "blockedNextStage": false
+    }
+  ],
+  "allIssues": [
+    {
+      "id": "UX-auth-wall",
+      "summary": "All /api/* dashboard routes redirect to login when unauthenticated",
+      "recommendedFix": "Document demo login credentials on Executive Dashboard; consider read-only demo session for customer demos",
+      "priority": "High",
+      "stage": 8,
+      "stageName": "Operator Experience"
+    },
+    {
+      "id": "UX-campaign-noise",
+      "summary": "Campaign OS shows multiple duplicate Pharmacy First campaigns as primary",
+      "recommendedFix": "Archive test campaigns; default Campaign OS to Blood Pressure validation campaign",
+      "priority": "Medium",
+      "stage": 8,
+      "stageName": "Operator Experience"
+    },
+    {
+      "id": "UX-navigation-depth",
+      "summary": "Full workflow spans Profile → Campaign OS → Image Library → Enhancement Workspace → Publishing Settings → Launch Queue (6+ pages)",
+      "recommendedFix": "Add 'Validation campaign checklist' single-page wizard for demo operators",
+      "priority": "Medium",
+      "stage": 8,
+      "stageName": "Operator Experience"
+    },
+    {
+      "id": "UX-enhancement-overload",
+      "summary": "31 enhancement recommendations for Blood Pressure — overwhelming for pharmacy owner",
+      "recommendedFix": "Filter workspace to real-action types only during validation phase",
+      "priority": "Medium",
+      "stage": 8,
+      "stageName": "Operator Experience"
+    },
+    {
+      "id": "UX-demo-trust-label",
+      "summary": "Demo trust data not clearly labelled on visual page for end patients",
+      "recommendedFix": "Add visible 'Demo preview' banner on visual experience pages when demoMode=true",
+      "priority": "Low",
+      "stage": 8,
+      "stageName": "Operator Experience"
+    },
+    {
+      "id": "UX-image-library-route",
+      "summary": "Image Library accessible at both /pharmacy-image-library and /api/pharmacy-image-library",
+      "recommendedFix": "Standardise links to /api/pharmacy-image-library everywhere",
+      "priority": "Low",
+      "stage": 8,
+      "stageName": "Operator Experience"
+    }
+  ]
+}

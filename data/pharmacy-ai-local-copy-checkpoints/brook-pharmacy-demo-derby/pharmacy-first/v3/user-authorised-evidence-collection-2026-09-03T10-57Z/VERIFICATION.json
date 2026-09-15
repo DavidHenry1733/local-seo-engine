@@ -1,0 +1,26 @@
+{
+  "kind": "brook-derby-user-authorised-evidence-collection-verification",
+  "checkpointId": "user-authorised-evidence-collection-2026-09-03T10-57Z",
+  "focusedTests": {
+    "authorisedCollection": "14/14 passed",
+    "ui": "34/34 passed",
+    "contentContract": "13/13 passed",
+    "gitDiffCheck": "clean"
+  },
+  "browser": {
+    "url": "https://app.pharmaconnect.uk/api/growth-engine/campaign-builder?slug=brook-pharmacy-demo-derby&step=areas&campaign=pharmacy-first",
+    "authenticated": true,
+    "targetAreas": "Evidence preparation panel shows plan, providers, $0.068, evidence-only cap field, Authorise this plan, Start paid collection disabled, Generate disabled. Save preparation plan clicked. Authorise, Start and Generate not pressed.",
+    "authorisePressed": false,
+    "startPressed": false,
+    "generatePressed": false
+  },
+  "unauthenticatedApi": {
+    "collect": "401",
+    "authorise": "401",
+    "areasWithoutToken": "302"
+  },
+  "proposedCostUsd": 0.068,
+  "paidCalls": 0,
+  "liveAllestreePackWritten": false
+}

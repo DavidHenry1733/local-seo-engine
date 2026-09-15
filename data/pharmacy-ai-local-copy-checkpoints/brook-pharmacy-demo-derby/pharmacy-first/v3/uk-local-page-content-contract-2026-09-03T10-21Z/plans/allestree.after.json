@@ -1,0 +1,308 @@
+{
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaName": "Allestree",
+  "areaSlug": "allestree",
+  "plannedAt": "2026-09-03T10:21:14.015Z",
+  "contentContractId": "pharmacy-uk-local-page-content-v1",
+  "contentContractVersion": "v1",
+  "cacheReuse": {
+    "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/allestree.json",
+    "localPackPresent": false,
+    "localPackReady": false,
+    "localPackDetail": "Pack file is missing or unreadable.",
+    "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/allestree.json",
+    "editorialPackPresent": false,
+    "editorialReady": false,
+    "editorialDetail": "No saved editorial-evidence pack for this area.",
+    "editorialFactCount": 0,
+    "editorialPageCount": 0,
+    "placesEntityCount": 0
+  },
+  "missing": [
+    {
+      "id": "local-places-pack",
+      "layer": "local-places",
+      "status": "missing",
+      "detail": "Pack file is missing or unreadable."
+    },
+    {
+      "id": "editorial-descriptive-pack",
+      "layer": "editorial-descriptive",
+      "status": "missing",
+      "detail": "No saved editorial-evidence pack for this area."
+    },
+    {
+      "id": "location-and-access-reference",
+      "layer": "location-and-access",
+      "status": "missing-area-reference",
+      "detail": "No recorded area reference point for Allestree. Distance stays unstated until a locality reference is retrieved. Do not substitute the pharmacy postal address."
+    }
+  ],
+  "proposedCalls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Verified GP practices in or around Allestree (up to three after official-source checks)",
+      "query": "NHS GP surgery medical practice in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true,
+      "contentRole": "local-primary-care",
+      "costVerification": "Public Google Maps Platform pricing list plus the configured searchText field mask (displayName, formattedAddress, types, location, addressComponents, googleMapsUri are Pro fields). No billing API or test call was made."
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "purpose": "Recorded area reference point for Allestree; not an organisation inventory",
+      "query": "Allestree locality in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.032,
+      "cached": false,
+      "required": true,
+      "contentRole": "location-and-access",
+      "costVerification": "Public Google Maps Platform pricing list plus the configured searchText field mask (displayName, formattedAddress, types, location, addressComponents, googleMapsUri are Pro fields). No billing API or test call was made."
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "purpose": "Official NHS/GP sources to verify practice identity and address for Allestree",
+      "query": "NHS GP surgery practice official in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.002,
+      "cached": false,
+      "required": true,
+      "contentRole": "local-primary-care",
+      "costVerification": "This project’s stored live Google Organic Live Advanced task costs on the configured endpoint are $0.002 (see Yorkshire editorial packs). No new DataForSEO call was made."
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "purpose": "Meaningful descriptive locality information for Allestree; one search only",
+      "query": "official council parish ward community information in Allestree, Derby, Derbyshire, UK",
+      "estimatedCostUsd": 0.002,
+      "cached": false,
+      "required": true,
+      "contentRole": "recognisable-local-context",
+      "costVerification": "This project’s stored live Google Organic Live Advanced task costs on the configured endpoint are $0.002 (see Yorkshire editorial packs). No new DataForSEO call was made."
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "purpose": "Retrieve dated official GP/NHS page body for Allestree. Search snippets are not factual support.",
+      "estimatedCostUsd": 0,
+      "cached": false,
+      "required": true,
+      "contentRole": "local-primary-care",
+      "costVerification": "Not a paid search API."
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "purpose": "Retrieve dated official locality page body for Allestree. Historical and current information must be distinguished; uncertain statistics omitted.",
+      "estimatedCostUsd": 0,
+      "cached": false,
+      "required": true,
+      "contentRole": "recognisable-local-context",
+      "costVerification": "Not a paid search API."
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "purpose": "No recorded area reference point for Allestree. Distance stays unstated until a locality reference is retrieved. Do not substitute the pharmacy postal address.",
+      "estimatedCostUsd": 0,
+      "cached": false,
+      "required": true,
+      "contentRole": "location-and-access",
+      "costVerification": "Local straight-line calculation. Not a provider call."
+    }
+  ],
+  "estimatedCostUsd": 0.068,
+  "optionalEstimatedCostUsd": 0,
+  "estimatedCostLabel": "Required evidence preparation is about $0.068 at documented list/recorded rates (Places Text Search Pro $0.032/call if billed; DataForSEO organic live advanced $0.002/search from recorded live costs). Remaining Google monthly free Pro quota is unverified. Optional extra searches are not proposed. Page retrieval and distance calculation are not paid APIs. OpenAI is not included until Generate.",
+  "costBasis": {
+    "googlePlaces": {
+      "endpoint": "https://places.googleapis.com/v1/places:searchText",
+      "fieldMask": "places.id,places.displayName,places.formattedAddress,places.types,places.location,places.googleMapsUri,places.addressComponents",
+      "sku": "Places API Text Search Pro",
+      "skuId": "4FDA-34B1-A910",
+      "publicListUsdPerRequest": 0.032,
+      "monthlyFreeCap": 5000,
+      "remainingFreeQuota": "unverified",
+      "verification": "Public Google Maps Platform pricing list plus the configured searchText field mask (displayName, formattedAddress, types, location, addressComponents, googleMapsUri are Pro fields). No billing API or test call was made.",
+      "uncertainty": "This project’s remaining monthly free Pro quota and the SKU actually billed in Google Cloud are unverified. List price $0.032 applies only after the 5,000 monthly free Pro requests, if that cap still applies to this project."
+    },
+    "dataForSeo": {
+      "endpoint": "https://api.dataforseo.com/v3/serp/google/organic/live/advanced",
+      "recordedLiveUsdPerSearch": 0.002,
+      "verification": "This project’s stored live Google Organic Live Advanced task costs on the configured endpoint are $0.002 (see Yorkshire editorial packs). No new DataForSEO call was made.",
+      "uncertainty": "Current public DataForSEO list price was not independently fetched in this task. The estimate uses recorded live costs for the configured endpoint and depth."
+    },
+    "pageRetrieval": {
+      "adapter": "safe-html-fetch",
+      "usd": 0,
+      "verification": "Not a paid search API."
+    },
+    "distance": {
+      "adapter": "haversine-local-computation",
+      "usd": 0,
+      "verification": "Local straight-line calculation. Not a provider call."
+    }
+  },
+  "sourceToFieldMapping": [
+    {
+      "contentRole": "service-led-introduction",
+      "required": true,
+      "adapters": [
+        "canonical-pharmacy-profile",
+        "approved-service-bank"
+      ],
+      "storedFields": [
+        "pharmacyName",
+        "displayAddress",
+        "phone",
+        "website",
+        "latitude",
+        "longitude",
+        "offer.serviceName",
+        "offer.serviceId"
+      ],
+      "notes": "Lead with the reader’s need and approved Pharmacy First information. Use the selected local audience and the pharmacy’s actual premises. No paid search."
+    },
+    {
+      "contentRole": "recognisable-local-context",
+      "required": false,
+      "adapters": [
+        "dataforseo-google-organic-live-advanced",
+        "safe-html-fetch"
+      ],
+      "storedFields": [
+        "editorial.searches.query",
+        "editorial.retrievedPages.publisher",
+        "editorial.retrievedPages.url",
+        "editorial.retrievedPages.textSample",
+        "editorial.retrievedPages.retrievedAt",
+        "editorial.geographicContext",
+        "editorial.facts.normalizedStatement",
+        "editorial.facts.sourceClass",
+        "editorial.facts.permittedCopyRole"
+      ],
+      "notes": "One targeted official-locality search and retrieved page bodies. Select two or three useful sourced details when they exist. Do not force a minimum. Places names/categories and search snippets are not descriptive evidence. Extra category searches are not proposed when this role is thin."
+    },
+    {
+      "contentRole": "local-primary-care",
+      "required": true,
+      "adapters": [
+        "google-places-search-text",
+        "dataforseo-google-organic-live-advanced",
+        "safe-html-fetch"
+      ],
+      "storedFields": [
+        "localPack.healthcare.name",
+        "localPack.healthcare.address",
+        "localPack.healthcare.placeId",
+        "localPack.healthcare.sourceRef",
+        "localPack.healthcare.retrievedAt",
+        "editorial.retrievedPages.publisher",
+        "editorial.retrievedPages.url",
+        "editorial.retrievedPages.textSample",
+        "editorial.facts.normalizedStatement"
+      ],
+      "notes": "Research up to three relevant GP practices in or around the area. Verify identity, address and official source from retrieved page bodies. Do not imply registration, referrals or partnerships. Do not invent practices."
+    },
+    {
+      "contentRole": "location-and-access",
+      "required": true,
+      "adapters": [
+        "canonical-pharmacy-profile",
+        "haversine-local-computation",
+        "google-places-search-text"
+      ],
+      "storedFields": [
+        "pharmacyCoordinates.latitude",
+        "pharmacyCoordinates.longitude",
+        "pharmacyCoordinates.source",
+        "areaCentroid",
+        "distanceKm",
+        "distanceMethod",
+        "phone"
+      ],
+      "notes": "Actual consultation premises and verified contact from the canonical profile. Approximate straight-line distance from a recorded area reference point to canonical pharmacy coordinates. Label the basis and state the distance once. No routes, journey times, parking or availability. If the area reference is missing, one locality Places search is required; the postal address must not be used as a substitute origin."
+    },
+    {
+      "contentRole": "clinical-sections",
+      "required": true,
+      "adapters": [
+        "approved-renderer-owned-clinical-bank"
+      ],
+      "storedFields": [
+        "PHARMACY_FIRST_LOCKED_CLINICAL_FACTS_V1.conditionSet",
+        "PHARMACY_FIRST_LOCKED_CLINICAL_FACTS_V1.suitability",
+        "PHARMACY_FIRST_LOCKED_CLINICAL_FACTS_V1.process",
+        "PHARMACY_FIRST_LOCKED_CLINICAL_FACTS_V1.safety"
+      ],
+      "notes": "Preserve existing approved renderer-owned clinical content. The AI must not be required to repeat it in supplemental fields."
+    },
+    {
+      "contentRole": "optional-local-questions",
+      "required": false,
+      "adapters": [
+        "editorial-facts"
+      ],
+      "storedFields": [
+        "editorial.facts.permittedCopyRole",
+        "copy.localFaqs"
+      ],
+      "notes": "Include only useful, supported questions not answered elsewhere. Omission must not produce fallback filler or empty sections. No extra paid search."
+    }
+  ],
+  "evidenceQualityRules": [
+    "Places names and categories alone are not descriptive evidence.",
+    "Search snippets alone must not establish factual support.",
+    "Record publisher, URL, retrieved body, retrieval date, geographic attribution and supported facts.",
+    "Distinguish historical information from current information.",
+    "Omit uncertain statistics.",
+    "Do not collect organisations simply to increase evidence volume.",
+    "Missing optional facts must not force unnecessary paid searches.",
+    "Ambiguous geography or missing premises coordinates must be explicit."
+  ],
+  "distancePlan": {
+    "contentRole": "location-and-access",
+    "method": "haversine-straight-line",
+    "pharmacyCoordinates": {
+      "latitude": 52.91678930677714,
+      "longitude": -1.4825298233725033,
+      "source": "profile:coordinates"
+    },
+    "areaReferencePoint": null,
+    "areaReferenceStatus": "missing",
+    "distanceKm": null,
+    "postalAddressVerified": false,
+    "demoPostalMustNotBeOrigin": true,
+    "originWarning": "Displayed demo postal address and inconsistent DA5 postcode must not be used as the distance origin or marked verified. Use canonical pharmacy map/Google coordinates.",
+    "missingPremisesCoordinates": false,
+    "ambiguousGeography": true,
+    "detail": "No recorded area reference point for Allestree. Distance stays unstated until a locality reference is retrieved. Do not substitute the pharmacy postal address."
+  },
+  "providersConfigured": {
+    "googlePlaces": false,
+    "dataForSeo": true
+  },
+  "placesNamesAreNotDescriptiveEvidence": "Places entity names alone must not count as descriptive local evidence. Editorial readiness requires dated retrieved page bodies and accepted facts from authoritative sources. Search snippets are not factual support.",
+  "paidCollectionAuthorised": false,
+  "paidCollectionBlockedReason": "Paid collection is not authorised in this step. Review providers, proposed calls and cost first. No provider calls were made.",
+  "remainingBlocker": "Saved Allestree evidence is not READY. Local Places pack: Pack file is missing or unreadable. Editorial/descriptive pack: No saved editorial-evidence pack for this area. Places names alone cannot mark descriptive evidence ready. Displayed demo postal address and inconsistent DA5 postcode must not be used as the distance origin or marked verified. Use canonical pharmacy map/Google coordinates.",
+  "wouldSave": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/allestree.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/allestree.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-page-evidence-plans/brook-pharmacy-demo-derby/pharmacy-first/v1/allestree.json"
+  ],
+  "confirmedAt": "2026-09-03T10:21:14.015Z",
+  "executed": false,
+  "paidCallsMade": 0
+}

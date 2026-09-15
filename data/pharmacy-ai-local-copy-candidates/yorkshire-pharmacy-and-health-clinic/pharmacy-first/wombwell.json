@@ -1,0 +1,209 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v1",
+  "promptContractVersion": "v1",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T16:20:41.832Z",
+  "tokenUsage": {
+    "promptTokens": 2724,
+    "completionTokens": 691,
+    "totalTokens": 3415
+  },
+  "estimatedCostUsd": 0.010976,
+  "inputEvidencePackHash": "8771e11338855366eb7ea7a82d43e12a6f16eeec18af6ef74c8ab9a2b8d44d55",
+  "areaSlug": "wombwell",
+  "areaName": "Wombwell",
+  "outputCopy": {
+    "area": "Wombwell",
+    "heroHeading": "Pharmacy First in Wombwell",
+    "heroIntroduction": "Residents of Wombwell can access Pharmacy First for support with eligible common conditions. Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+    "localIntroduction": "Wombwell is located 1.7 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "localContextHeading": "Accessing Pharmacy First from Wombwell",
+    "localContextParagraphs": [
+      "Pharmacy First offers convenient care for people in Wombwell who need advice or treatment for certain minor illnesses. The pharmacy team can assess your symptoms and guide you through the next steps.",
+      "You may find it helpful to call ahead to confirm how consultations are being arranged. The pharmacy is within easy reach for those travelling from Wombwell."
+    ],
+    "relationshipToPharmacy": "People in Wombwell can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR for Pharmacy First services.",
+    "localAccessIntroduction": "You can phone the pharmacy on 01226 210477 or visit their website for further information before attending.",
+    "localFaqs": [
+      {
+        "question": "How far is the pharmacy from Wombwell?",
+        "answer": "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell."
+      },
+      {
+        "question": "Should I call before visiting for Pharmacy First?",
+        "answer": "It is recommended to call ahead to check how consultations are being managed and to discuss your symptoms."
+      },
+      {
+        "question": "What if Pharmacy First is not suitable for my symptoms?",
+        "answer": "If your condition is not suitable for Pharmacy First, the pharmacy team will advise you on the most appropriate next steps."
+      },
+      {
+        "question": "Can I get advice for minor illnesses at the pharmacy?",
+        "answer": "Yes, you can seek advice and assessment for eligible common conditions through Pharmacy First."
+      },
+      {
+        "question": "How do I contact the pharmacy from Wombwell?",
+        "answer": "You can call 01226 210477 or visit the pharmacy’s website for more details."
+      }
+    ],
+    "localCtaBridge": "To discuss your symptoms or arrange a Pharmacy First consultation, please get in touch with the pharmacy.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Wombwell is located 1.7 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "People in Wombwell can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR for Pharmacy First services."
+      },
+      {
+        "field": "localFaqs",
+        "sentence": "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell."
+      }
+    ],
+    "evidenceEntityIdsUsed": []
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Wombwell",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Residents of Wombwell can access Pharmacy First for support with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Wombwell is located 1.7 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Accessing Pharmacy First from Wombwell",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Pharmacy First offers convenient care for people in Wombwell who need advice or treatment for certain minor illnesses.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The pharmacy team can assess your symptoms and guide you through the next steps.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "You may find it helpful to call ahead to confirm how consultations are being arranged.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "The pharmacy is within easy reach for those travelling from Wombwell.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "People in Wombwell can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR for Pharmacy First services.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "You can phone the pharmacy on 01226 210477 or visit their website for further information before attending.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].question",
+      "exactSentence": "Should I call before visiting for Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "It is recommended to call ahead to check how consultations are being managed and to discuss your symptoms.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "What if Pharmacy First is not suitable for my symptoms?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "If your condition is not suitable for Pharmacy First, the pharmacy team will advise you on the most appropriate next steps.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "Yes, you can seek advice and assessment for eligible common conditions through Pharmacy First.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].answer",
+      "exactSentence": "You can call 01226 210477 or visit the pharmacy’s website for more details.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "To discuss your symptoms or arrange a Pharmacy First consultation, please get in touch with the pharmacy.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

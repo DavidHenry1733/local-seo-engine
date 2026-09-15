@@ -1,0 +1,199 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:mickleover",
+  "maxProviderCalls": 12,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 11,
+  "failed": 0,
+  "uncertain": 1,
+  "estimatedCostUsd": 0.089474,
+  "events": [
+    {
+      "at": "2026-09-05T19:40:57.070Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-05T19:40:57.199Z",
+      "kind": "reserve",
+      "reservationId": "r-1788637257199-1"
+    },
+    {
+      "at": "2026-09-05T19:41:01.769Z",
+      "kind": "consumed",
+      "reservationId": "r-1788637257199-1",
+      "detail": "cost=0.01307"
+    },
+    {
+      "at": "2026-09-07T07:22:13.706Z",
+      "kind": "reserve",
+      "reservationId": "r-1788765733706-2"
+    },
+    {
+      "at": "2026-09-07T07:22:20.629Z",
+      "kind": "consumed",
+      "reservationId": "r-1788765733706-2",
+      "detail": "cost=0.015882"
+    },
+    {
+      "at": "2026-09-07T07:25:32.078Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=3 remainingCostUsd=1.971048"
+    },
+    {
+      "at": "2026-09-07T07:25:32.217Z",
+      "kind": "reserve",
+      "reservationId": "r-1788765932217-3"
+    },
+    {
+      "at": "2026-09-07T07:25:35.880Z",
+      "kind": "consumed",
+      "reservationId": "r-1788765932217-3",
+      "detail": "cost=0.015792"
+    },
+    {
+      "at": "2026-09-07T10:01:29.863Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=4 remainingCostUsd=1.955256"
+    },
+    {
+      "at": "2026-09-07T10:01:29.977Z",
+      "kind": "reserve",
+      "reservationId": "r-1788775289977-4"
+    },
+    {
+      "at": "2026-09-07T10:01:32.139Z",
+      "kind": "consumed",
+      "reservationId": "r-1788775289977-4",
+      "detail": "cost=0.015421999999999998"
+    },
+    {
+      "at": "2026-09-07T10:30:17.479Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=5 remainingCostUsd=1.939834"
+    },
+    {
+      "at": "2026-09-07T10:30:17.647Z",
+      "kind": "reserve",
+      "reservationId": "r-1788777017647-5"
+    },
+    {
+      "at": "2026-09-07T10:30:17.650Z",
+      "kind": "uncertain",
+      "reservationId": "r-1788777017647-5",
+      "detail": "cost=0"
+    },
+    {
+      "at": "2026-09-07T10:32:26.251Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=6 remainingCostUsd=1.939834"
+    },
+    {
+      "at": "2026-09-07T10:32:26.409Z",
+      "kind": "reserve",
+      "reservationId": "r-1788777146409-5"
+    },
+    {
+      "at": "2026-09-07T10:32:29.886Z",
+      "kind": "consumed",
+      "reservationId": "r-1788777146409-5",
+      "detail": "cost=0.016008"
+    },
+    {
+      "at": "2026-09-08T13:05:08.270Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=7 remainingCostUsd=1.923826"
+    },
+    {
+      "at": "2026-09-08T13:05:08.496Z",
+      "kind": "reserve",
+      "reservationId": "r-1788872708496-6"
+    },
+    {
+      "at": "2026-09-08T13:05:34.456Z",
+      "kind": "consumed",
+      "reservationId": "r-1788872708496-6",
+      "detail": "cost=0.0018"
+    },
+    {
+      "at": "2026-09-08T13:06:14.948Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=8 remainingCostUsd=1.922026"
+    },
+    {
+      "at": "2026-09-08T13:06:15.079Z",
+      "kind": "reserve",
+      "reservationId": "r-1788872775079-7"
+    },
+    {
+      "at": "2026-09-08T13:06:43.068Z",
+      "kind": "consumed",
+      "reservationId": "r-1788872775079-7",
+      "detail": "cost=0.002032"
+    },
+    {
+      "at": "2026-09-08T13:08:44.343Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=9 remainingCostUsd=1.919994"
+    },
+    {
+      "at": "2026-09-08T13:08:44.483Z",
+      "kind": "reserve",
+      "reservationId": "r-1788872924483-8"
+    },
+    {
+      "at": "2026-09-08T13:09:38.436Z",
+      "kind": "consumed",
+      "reservationId": "r-1788872924483-8",
+      "detail": "cost=0.001872"
+    },
+    {
+      "at": "2026-09-08T13:23:08.574Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=10 remainingCostUsd=1.918122"
+    },
+    {
+      "at": "2026-09-08T13:23:08.720Z",
+      "kind": "reserve",
+      "reservationId": "r-1788873788720-9"
+    },
+    {
+      "at": "2026-09-08T13:23:25.329Z",
+      "kind": "consumed",
+      "reservationId": "r-1788873788720-9",
+      "detail": "cost=0.001824"
+    },
+    {
+      "at": "2026-09-08T13:35:46.513Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=11 remainingCostUsd=1.916298"
+    },
+    {
+      "at": "2026-09-08T13:35:46.626Z",
+      "kind": "reserve",
+      "reservationId": "r-1788874546626-10"
+    },
+    {
+      "at": "2026-09-08T13:36:37.397Z",
+      "kind": "consumed",
+      "reservationId": "r-1788874546626-10",
+      "detail": "cost=0.001784"
+    },
+    {
+      "at": "2026-09-08T15:17:33.433Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=12 remainingCostUsd=1.914514"
+    },
+    {
+      "at": "2026-09-08T15:17:33.636Z",
+      "kind": "reserve",
+      "reservationId": "r-1788880653636-11"
+    },
+    {
+      "at": "2026-09-08T15:17:49.118Z",
+      "kind": "consumed",
+      "reservationId": "r-1788880653636-11",
+      "detail": "cost=0.003988"
+    }
+  ]
+}

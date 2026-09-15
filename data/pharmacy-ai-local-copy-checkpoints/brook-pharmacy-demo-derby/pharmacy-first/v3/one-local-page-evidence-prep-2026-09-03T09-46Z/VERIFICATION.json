@@ -1,0 +1,16 @@
+{
+  "verifiedAt": "2026-09-03T09-46Z",
+  "focusedTests": {
+    "script": "scripts/validate-brook-derby-allestree-local-page-ui-v1.ts",
+    "passed": 31,
+    "total": 31
+  },
+  "browser": {
+    "targetAreas": "Evidence preparation panel for Allestree; missing local-places and editorial-descriptive; proposed cost $0.198; Start paid collection disabled; Generate disabled; demo-location warning present",
+    "savePlan": "Save preparation plan clicked; button disabled after save; Start paid collection and Generate not pressed",
+    "generatePressed": false,
+    "paidCollectionPressed": false
+  },
+  "proposedCostUsd": 0.198,
+  "blocker": "Saved Allestree Places pack and editorial/descriptive pack are missing. Paid collection is not authorised in this step."
+}

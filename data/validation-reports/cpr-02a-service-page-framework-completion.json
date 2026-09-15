@@ -1,0 +1,332 @@
+{
+  "sprint": "CPR-02A",
+  "validatedAt": "2026-07-26T09:03:41.779Z",
+  "catalogueSourceFile": "/home/inboxingproweb/pharmaconnect-growth-engine/config/pharmacy/locked-commercial-service-catalogue.json",
+  "lockedServices": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations"
+    },
+    {
+      "serviceId": "prescription-dispensing",
+      "serviceName": "Prescription Dispensing"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception"
+    },
+    {
+      "serviceId": "repeat-prescriptions",
+      "serviceName": "Repeat Prescriptions"
+    }
+  ],
+  "lockedServiceVerifications": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "approvalStatus": "locked",
+      "locked": true,
+      "knowledgePackAvailable": true,
+      "servicePageGeneratorSupport": true,
+      "imagePlatformSupport": true,
+      "schemaSupport": true
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "approvalStatus": "locked",
+      "locked": true,
+      "knowledgePackAvailable": true,
+      "servicePageGeneratorSupport": true,
+      "imagePlatformSupport": true,
+      "schemaSupport": true
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "approvalStatus": "locked",
+      "locked": true,
+      "knowledgePackAvailable": true,
+      "servicePageGeneratorSupport": true,
+      "imagePlatformSupport": true,
+      "schemaSupport": true
+    },
+    {
+      "serviceId": "prescription-dispensing",
+      "serviceName": "Prescription Dispensing",
+      "approvalStatus": "locked",
+      "locked": true,
+      "knowledgePackAvailable": true,
+      "servicePageGeneratorSupport": true,
+      "imagePlatformSupport": true,
+      "schemaSupport": true
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "approvalStatus": "locked",
+      "locked": true,
+      "knowledgePackAvailable": true,
+      "servicePageGeneratorSupport": true,
+      "imagePlatformSupport": true,
+      "schemaSupport": true
+    },
+    {
+      "serviceId": "repeat-prescriptions",
+      "serviceName": "Repeat Prescriptions",
+      "approvalStatus": "locked",
+      "locked": true,
+      "knowledgePackAvailable": true,
+      "servicePageGeneratorSupport": true,
+      "imagePlatformSupport": true,
+      "schemaSupport": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "Locked service catalogue proven from config",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/config/pharmacy/locked-commercial-service-catalogue.json"
+    },
+    {
+      "name": "Locked service count is 6",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "Catalogue not array-position derived",
+      "pass": true
+    },
+    {
+      "name": "Service pharmacy-first knowledge pack",
+      "pass": true
+    },
+    {
+      "name": "Service pharmacy-first generator support",
+      "pass": true
+    },
+    {
+      "name": "Service pharmacy-first image platform",
+      "pass": true
+    },
+    {
+      "name": "Service pharmacy-first schema support",
+      "pass": true
+    },
+    {
+      "name": "Service blood-pressure-checks knowledge pack",
+      "pass": true
+    },
+    {
+      "name": "Service blood-pressure-checks generator support",
+      "pass": true
+    },
+    {
+      "name": "Service blood-pressure-checks image platform",
+      "pass": true
+    },
+    {
+      "name": "Service blood-pressure-checks schema support",
+      "pass": true
+    },
+    {
+      "name": "Service travel-vaccinations knowledge pack",
+      "pass": true
+    },
+    {
+      "name": "Service travel-vaccinations generator support",
+      "pass": true
+    },
+    {
+      "name": "Service travel-vaccinations image platform",
+      "pass": true
+    },
+    {
+      "name": "Service travel-vaccinations schema support",
+      "pass": true
+    },
+    {
+      "name": "Service prescription-dispensing knowledge pack",
+      "pass": true
+    },
+    {
+      "name": "Service prescription-dispensing generator support",
+      "pass": true
+    },
+    {
+      "name": "Service prescription-dispensing image platform",
+      "pass": true
+    },
+    {
+      "name": "Service prescription-dispensing schema support",
+      "pass": true
+    },
+    {
+      "name": "Service emergency-contraception knowledge pack",
+      "pass": true
+    },
+    {
+      "name": "Service emergency-contraception generator support",
+      "pass": true
+    },
+    {
+      "name": "Service emergency-contraception image platform",
+      "pass": true
+    },
+    {
+      "name": "Service emergency-contraception schema support",
+      "pass": true
+    },
+    {
+      "name": "Service repeat-prescriptions knowledge pack",
+      "pass": true
+    },
+    {
+      "name": "Service repeat-prescriptions generator support",
+      "pass": true
+    },
+    {
+      "name": "Service repeat-prescriptions image platform",
+      "pass": true
+    },
+    {
+      "name": "Service repeat-prescriptions schema support",
+      "pass": true
+    },
+    {
+      "name": "Evidence status labels",
+      "pass": true
+    },
+    {
+      "name": "Evidence readiness Trust section",
+      "pass": true
+    },
+    {
+      "name": "Evidence readiness SEO section",
+      "pass": true
+    },
+    {
+      "name": "Evidence readiness Image section",
+      "pass": true
+    },
+    {
+      "name": "Required evidence gate module",
+      "pass": true
+    },
+    {
+      "name": "Required evidence gate in dashboard",
+      "pass": true
+    },
+    {
+      "name": "SEO plan in dashboard",
+      "pass": true
+    },
+    {
+      "name": "Future link plan entries",
+      "pass": true
+    },
+    {
+      "name": "Output scope validator",
+      "pass": true
+    },
+    {
+      "name": "FAILED_SCOPE in platform service",
+      "pass": true
+    },
+    {
+      "name": "SPR approve button",
+      "pass": true
+    },
+    {
+      "name": "SPR reject button",
+      "pass": true
+    },
+    {
+      "name": "SPR quality checks panel",
+      "pass": true
+    },
+    {
+      "name": "Dashboard initiation source constant",
+      "pass": true
+    },
+    {
+      "name": "Direct generation blocked without dashboard source",
+      "pass": true
+    },
+    {
+      "name": "Required evidence gate returns blockers",
+      "pass": true,
+      "detail": "Business name is required before service page generation.; Town or City is required before service page generation.; Postcode is required before service page generation."
+    },
+    {
+      "name": "SEO pre-generation plan validation",
+      "pass": true
+    },
+    {
+      "name": "Cross-profile planning validation",
+      "pass": true,
+      "detail": "3 synthetic profiles verified"
+    },
+    {
+      "name": "Forbidden output types defined",
+      "pass": true
+    },
+    {
+      "name": "Output scope validator runs",
+      "pass": true
+    },
+    {
+      "name": "No tenant slug hard-code in recovery",
+      "pass": true
+    },
+    {
+      "name": "No customer slug hard-code in evidence service",
+      "pass": true
+    },
+    {
+      "name": "Embedded JavaScript parse",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "API-server build",
+      "pass": true
+    }
+  ],
+  "acceptance": {
+    "lockedServiceCatalogueProven": "YES",
+    "lockedSupportedServiceCount": 6,
+    "evidenceReadinessPanel": "PASS",
+    "requiredEvidenceGate": "PASS",
+    "seoContract": "PASS",
+    "futureClusterLinkPlan": "PASS",
+    "forbiddenPageOutputsBlocked": "PASS",
+    "servicePageReviewWorkspace": "PASS",
+    "crossProfilePlanningValidation": "PASS",
+    "dashboardOnlyGenerationEnforced": "YES",
+    "directScriptGenerationRejected": "PASS",
+    "customerCreatedDuringImplementation": "NO",
+    "pageGeneratedDuringImplementation": "NO",
+    "publishingPerformed": "NO",
+    "indexingPerformed": "NO",
+    "rankTrackingInitialised": "NO",
+    "tenantSpecificCodeDetected": "NO",
+    "customerSpecificCodeDetected": "NO",
+    "changedModuleValidation": "PASS",
+    "embeddedJavaScriptParse": "PASS",
+    "apiServerBuild": "PASS",
+    "applicationReloaded": "NO",
+    "pm2": "ONLINE",
+    "port3001": "LISTENING",
+    "masterAdminUrl": "https://app.pharmaconnect.uk/api/admin/master",
+    "status": "READY FOR PRODUCT OWNER NEW-CUSTOMER SERVICE-PAGE TEST"
+  }
+}

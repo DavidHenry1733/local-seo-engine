@@ -1,0 +1,81 @@
+{
+  "kind": "brook-derby-uk-local-page-content-contract-checkpoint",
+  "label": "LOCAL PAGE ENGINE \u2014 standardise content contract and evidence plan",
+  "continuesFrom": "one-local-page-evidence-prep-2026-09-03T09-46Z",
+  "status": "preview-only-not-published",
+  "approved": false,
+  "published": false,
+  "checkpointAt": "2026-09-03T10-21Z",
+  "checkpointId": "uk-local-page-content-contract-2026-09-03T10-21Z",
+  "slug": "brook-pharmacy-demo-derby",
+  "firstAcceptanceArea": "Allestree",
+  "contentContractId": "pharmacy-uk-local-page-content-v1",
+  "targetAreasUrl": "https://app.pharmaconnect.uk/api/growth-engine/campaign-builder?slug=brook-pharmacy-demo-derby&step=areas&campaign=pharmacy-first",
+  "generatePressed": false,
+  "paidCalls": 0,
+  "paidCollectionExecuted": false,
+  "focusedValidation": "scripts/validate-uk-local-page-content-contract-v1.ts 13/13; scripts/validate-brook-derby-allestree-local-page-ui-v1.ts 33/33; git diff --check clean",
+  "copied": [
+    {
+      "path": "src/pharmacy/contentEngine/pharmacyUkLocalPageContentContractV1.ts",
+      "sha256": "03c58a1614d442de2ad5087526433204ec8a5b402d93b9b432f5af7374dcee2f"
+    },
+    {
+      "path": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+      "sha256": "caf63e008445829d37c167e3d26dbf3af682dbd257e5091368017d840fa5ac77"
+    },
+    {
+      "path": "src/pharmacy/contentEngine/pharmacyLocalEditorialEvidenceCollectorV3.ts",
+      "sha256": "54718eb005dbe513986282a2104035cbbe49aa24ac3db80ef66bd625574c25c3"
+    },
+    {
+      "path": "src/pharmacy/growthEngineLocalPageEvidencePreparationService.ts",
+      "sha256": "ef8f1ee6af3b5e72da13bbe1cd40b83d600a56af84ed4116d681c95724376e70"
+    },
+    {
+      "path": "src/pharmacy/growthEngineCampaignBuilderPage.ts",
+      "sha256": "d4e6ad447fb1adb7727b059fefcf8d4b7230aafae755748733d0ae99a9f529a3"
+    },
+    {
+      "path": "src/pharmacy/pharmacyLocalRelevancePackService.ts",
+      "sha256": "c65ccb40c0c59745fe874c9bea769bf9f8c0cfd90ec1e8372a7bc4bffd106978"
+    },
+    {
+      "path": "scripts/validate-uk-local-page-content-contract-v1.ts",
+      "sha256": "b2cdec613d72267bc7ed7a3072f6e47a13e8afdb6bd703239182e0ce9d6a7bbd"
+    },
+    {
+      "path": "scripts/validate-brook-derby-allestree-local-page-ui-v1.ts",
+      "sha256": "7a5705f4270a557370bfcedef62fb20b2791ab9cd0fb07a31530e17f243a566e"
+    },
+    {
+      "path": "data/pharmacy-uk-local-page-content-contracts/v1/uk-local-page-content-contract.json",
+      "sha256": "7a8e7acdea8e3ac61e546a345be69e449fe17ac99bb08179154b480632a8d4b6"
+    },
+    {
+      "path": "data/pharmacy-local-page-evidence-plans/brook-pharmacy-demo-derby/pharmacy-first/v1/allestree.json",
+      "sha256": "46743c4116a3b86a51dd17df359f4f3cd7a571cca5b97860159d254b014ac3f4"
+    },
+    {
+      "path": "data/pharmacy-local-page-evidence-plans/brook-pharmacy-demo-derby/pharmacy-first/v1/allestree.before-uk-content-contract-v1.json",
+      "sha256": "971dc7f1484bc6bf3880e9d4d50ec793f8ea202289efd2fbc0bb6166284ae6b8"
+    }
+  ],
+  "protectedUnchanged": {
+    "data/pharmacy-profiles/brook-pharmacy.json": "8ca9151abf92d3b187c6397a33276a48d72ab8891e697d62637a03e82250b169",
+    "data/pharmacy-profiles/brook-pharmacy-demo-derby.json": "64cf09e6973684ff3d8622373c6aecd17a3aac2f5edde3ba22fb85690d7498e1",
+    "data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json": "c9b83e07a2bfd8494071f81c8dcfc93e195a718ee96e8ad99ed807287387d35b",
+    "data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-builder.json": "4dc96b27e8fca9c969577a44c4aa903a2a26e37ecba5fd5742b360ed5d253e3f",
+    "data/pharmacy-local-relevance-packs/yorkshire-pharmacy-and-health-clinic/wombwell.json": "8771e11338855366eb7ea7a82d43e12a6f16eeec18af6ef74c8ab9a2b8d44d55",
+    "data/pharmacy-local-editorial-evidence-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell.json": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d"
+  },
+  "campaignBuilderSession": {
+    "path": "data/growth-engine/brook-pharmacy-demo-derby-campaign-builder.json",
+    "sha256": "a4b8bb0a67f35672605c89e85df95c3a91f9a5e71200f09a6db383384b204aa8",
+    "note": "updatedAt touched by Target Areas render. selectedServiceId pharmacy-first and the ten Derby areas are unchanged. Not a campaign rewrite."
+  },
+  "rollback": {
+    "note": "Restore copied source files from source/. Revert allestree.json from plans/allestree.before.json if needed. Do not delete Yorkshire packs or Brook outputs.",
+    "restoreFrom": "source/"
+  }
+}

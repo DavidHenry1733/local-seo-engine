@@ -1,0 +1,103 @@
+{
+  "version": 2,
+  "updatedAt": "2026-07-19T11:04:34.922Z",
+  "referenceSlug": "pharmaconnect",
+  "services": [
+    {
+      "id": "website-import",
+      "label": "Website Import",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": "2026-07-19T10:19:59.085Z",
+      "lastAttemptedRun": "2026-07-19T10:19:59.085Z",
+      "lastError": null,
+      "evidenceSource": "audit-log",
+      "detail": "No stored proof — not yet run",
+      "retryAction": "import_website"
+    },
+    {
+      "id": "google-places",
+      "label": "Google APIs",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": null,
+      "lastAttemptedRun": null,
+      "lastError": null,
+      "evidenceSource": "audit-log",
+      "detail": "No stored proof — not yet run",
+      "retryAction": "import_google"
+    },
+    {
+      "id": "static-publishing",
+      "label": "Publishing",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": null,
+      "lastAttemptedRun": null,
+      "lastError": null,
+      "evidenceSource": "audit-log",
+      "detail": "No stored proof — not yet run",
+      "retryAction": "publish"
+    },
+    {
+      "id": "ftp-publishing",
+      "label": "FTP",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": null,
+      "lastAttemptedRun": null,
+      "lastError": null,
+      "evidenceSource": "audit-log",
+      "detail": "No stored proof — not yet run",
+      "retryAction": "publish"
+    },
+    {
+      "id": "google-search-console",
+      "label": "Search Console",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": null,
+      "lastAttemptedRun": null,
+      "lastError": null,
+      "evidenceSource": "audit-log",
+      "detail": "No stored proof — not yet run",
+      "retryAction": "request_indexing"
+    },
+    {
+      "id": "rank-tracking",
+      "label": "Rank Tracking",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": null,
+      "lastAttemptedRun": null,
+      "lastError": null,
+      "evidenceSource": "audit-log",
+      "detail": "No stored proof — not yet run",
+      "retryAction": "init_rank_tracking"
+    },
+    {
+      "id": "indexing",
+      "label": "Indexing",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": null,
+      "lastAttemptedRun": null,
+      "lastError": null,
+      "evidenceSource": "pharmacy-indexing-bridge",
+      "detail": "Indexing bridge uses stored registry — GSC linkage informs status",
+      "retryAction": "request_indexing"
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "status": "not_initialised",
+      "statusLabel": "Not initialised",
+      "lastSuccessfulRun": null,
+      "lastAttemptedRun": null,
+      "lastError": null,
+      "evidenceSource": "environment.SMTP_*",
+      "detail": "SMTP not configured",
+      "retryAction": "system-health/refresh"
+    }
+  ]
+}

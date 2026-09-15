@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "serviceId": "pharmacy-first",
+  "masterFile": "docs/pharmacy-master-library/pharmacy-first-master-v2.md",
+  "slug": "pharmacy-delivered-4u-test",
+  "localArea": "Rotherham",
+  "selectedAreas": [
+    "Rotherham"
+  ],
+  "localClusterPagesGenerated": 1,
+  "generatedAt": "2026-07-13T17:08:25.779Z",
+  "generationStamp": {
+    "tenantSlug": "pharmacy-delivered-4u-test",
+    "campaignId": "pharmacy-first",
+    "generatedAt": "2026-07-13T17:08:25.779Z",
+    "sourceContext": "customer-imported-profile"
+  },
+  "contentEngineContract": "1.0.0",
+  "longFormQualityValidation": {
+    "ok": true,
+    "detail": "long-form quality ok",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 16,
+      "patient-guide": 24,
+      "what-is": 8,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 11
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 22,
+      "patient-guide": 28,
+      "what-is": 11,
+      "who-should": 5,
+      "need-to-know": 11,
+      "faq-page": 8
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [],
+    "failedLongFormAssets": [],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "assets": [
+    {
+      "id": "root-service-page",
+      "type": "Supporting service page",
+      "urlPath": "/pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/pages/pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§10",
+        "tenant overview",
+        "CTA"
+      ],
+      "wordCount": 718
+    },
+    {
+      "id": "local-cluster-rotherham",
+      "type": "Local cluster page",
+      "urlPath": "/local/rotherham/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/local/rotherham/index.html",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§10",
+        "Trust layer",
+        "Local layer (Rotherham)",
+        "Map",
+        "CTA"
+      ],
+      "wordCount": 2426
+    },
+    {
+      "id": "patient-guide",
+      "type": "Patient guide article",
+      "urlPath": "/pharmacy-first-guide/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/pages/pharmacy-first-guide/index.html",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 1538
+    },
+    {
+      "id": "faq-page",
+      "type": "FAQ page",
+      "urlPath": "/pharmacy-first-faqs/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/pages/pharmacy-first-faqs/index.html",
+      "sourceSections": [
+        "§7",
+        "tenant FAQs"
+      ],
+      "wordCount": 212
+    },
+    {
+      "id": "what-is-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/what-is-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/pages/what-is-pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§10"
+      ],
+      "wordCount": 684
+    },
+    {
+      "id": "who-should-consider-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/who-should-consider-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/pages/who-should-consider-pharmacy-first/index.html",
+      "sourceSections": [
+        "§2"
+      ],
+      "wordCount": 280
+    },
+    {
+      "id": "pharmacy-first-what-you-need-to-know",
+      "type": "Blog post",
+      "urlPath": "/pharmacy-first-what-you-need-to-know/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/pages/pharmacy-first-what-you-need-to-know/index.html",
+      "sourceSections": [
+        "§3",
+        "§6",
+        "§9"
+      ],
+      "wordCount": 479
+    },
+    {
+      "id": "social-pack",
+      "type": "Social post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/packs/social-posts.json",
+      "sourceSections": [
+        "§8",
+        "§7",
+        "§2",
+        "§10",
+        "§13"
+      ],
+      "wordCount": 393
+    },
+    {
+      "id": "gbp-pack",
+      "type": "GBP post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/packs/gbp-posts.json",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§7",
+        "§13"
+      ],
+      "wordCount": 278
+    },
+    {
+      "id": "email-sequence",
+      "type": "Email sequence",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/packs/email-sequence.json",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 439
+    },
+    {
+      "id": "video-script",
+      "type": "YouTube / video script",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/packs/video-script.md",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§13"
+      ],
+      "wordCount": 139
+    },
+    {
+      "id": "ecosystem-summary",
+      "type": "Content ecosystem summary",
+      "urlPath": "/pharmacy-first-content-ecosystem/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmacy-delivered-4u-test/pharmacy-first/pages/pharmacy-first-content-ecosystem/index.html",
+      "sourceSections": [
+        "Meta index"
+      ],
+      "wordCount": 6
+    }
+  ],
+  "internalLinkMap": {
+    "slug": "pharmacy-delivered-4u-test",
+    "serviceId": "pharmacy-first",
+    "mainServiceUrlPath": "/pharmacy-first/",
+    "localClusterPages": [
+      {
+        "areaName": "Rotherham",
+        "areaSlug": "rotherham",
+        "urlPath": "/local/rotherham/",
+        "outputPath": "local/rotherham/index.html",
+        "nearbyAreas": []
+      }
+    ],
+    "generatedAt": "2026-07-13T17:08:25.779Z",
+    "generationStamp": {
+      "tenantSlug": "pharmacy-delivered-4u-test",
+      "campaignId": "pharmacy-first",
+      "generatedAt": "2026-07-13T17:08:25.779Z",
+      "sourceContext": "customer-imported-profile"
+    }
+  },
+  "generatorReport": {
+    "generatorId": "benchmark-service-ecosystem",
+    "receivedContext": true,
+    "contextVersion": "1.0.0",
+    "slug": "pharmacy-delivered-4u-test",
+    "serviceId": "pharmacy-first",
+    "missingFields": [],
+    "unusedFields": [],
+    "tokensReplaced": [],
+    "tokensUnresolved": [],
+    "tenantValidation": {
+      "ok": true,
+      "detail": "tenant ok"
+    },
+    "serviceValidation": {
+      "ok": true,
+      "detail": "pharmacy-first: 15 sections"
+    },
+    "brandValidation": {
+      "ok": true,
+      "detail": "brand present"
+    },
+    "linksValidation": {
+      "ok": true,
+      "detail": "/api/pharmacy-visual-experience/pharmacy-first/?slug=pharmacy-delivered-4u-test"
+    },
+    "imageValidation": {
+      "ok": true,
+      "detail": "assignments loaded"
+    }
+  }
+}

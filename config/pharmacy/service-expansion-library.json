@@ -1,0 +1,482 @@
+{
+  "version": "1.0",
+  "purpose": "Structured content depth modules for Content Expansion Layer V1 — additional sections, deep dives and expanded FAQs.",
+  "categoryDefaults": {
+    "core-pharmacy": {
+      "expansionSections": [
+        { "type": "preparationGuide", "heading": "What To Bring Or Prepare" },
+        { "type": "deepDive", "heading": "How Our Pharmacy Team Supports You" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Professional Medicines Support",
+          "paragraphs": [
+            "Community pharmacy services are built around regulated medicines supply with pharmacist oversight on every prescription.",
+            "Our team explains how the service works, what to expect at collection or delivery, and when to contact your GP."
+          ],
+          "bulletTopics": ["Clinical accuracy checks", "Patient counselling at handover", "EPS and repeat integration", "Safety-netting when symptoms change"]
+        }
+      ],
+      "preparationGuide": ["Photo ID if collecting controlled medicines", "Current medicines list including OTC products", "GP surgery details for repeat authorisation", "Nomination form if switching pharmacy for EPS"],
+      "timelineNotes": [],
+      "comparisonPoints": [],
+      "expandedFaqQuestions": [
+        "Can someone else collect my prescription?",
+        "How long does dispensing usually take?",
+        "What if my medicine is out of stock?",
+        "Do you offer medicines use reviews?"
+      ],
+      "relatedTopicLinks": ["Repeat Prescriptions", "Prescription Delivery", "Medication Reviews"],
+      "contentTargets": { "minWordCount": 900, "minFaqCount": 10, "minExpansionSections": 2 }
+    },
+    "nhs-clinical": {
+      "expansionSections": [
+        { "type": "preparationGuide", "heading": "Before Your Pharmacy Appointment" },
+        { "type": "comparison", "heading": "Pharmacy Care Vs GP Appointments" },
+        { "type": "deepDive", "heading": "What Happens During Assessment" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "NHS Pharmacy Clinical Pathways",
+          "paragraphs": [
+            "NHS pharmacy clinical services follow commissioned specifications and PGDs where applicable — offering convenient access for selected conditions.",
+            "Pharmacists assess whether your symptoms fall within pharmacy scope, provide supply or advice where eligible, and refer clearly when GP or urgent care is more appropriate."
+          ],
+          "bulletTopics": ["Structured clinical assessment", "Supply where pathway allows", "Self-care and safety-netting advice", "GP, NHS 111 or A&E referral when needed"]
+        }
+      ],
+      "preparationGuide": ["List of current medicines", "Recent symptom timeline", "NHS number if available", "Blood pressure readings if you monitor at home"],
+      "timelineNotes": ["Same-day walk-in where capacity allows", "Follow-up review when clinically indicated"],
+      "comparisonPoints": [
+        "Pharmacy access can reduce GP waiting times for suitable minor illness",
+        "Red-flag symptoms still require GP or urgent care — not pharmacy treatment",
+        "NHS eligibility and commissioning vary by location and presentation"
+      ],
+      "expandedFaqQuestions": [
+        "Is this service free on the NHS?",
+        "Do I need to register with the pharmacy?",
+        "What happens if the pharmacist cannot treat me?",
+        "Can I walk in or do I need an appointment?",
+        "How long does a pharmacy consultation take?"
+      ],
+      "relatedTopicLinks": ["Pharmacy First", "Blood Pressure Checks", "New Medicine Service"],
+      "contentTargets": { "minWordCount": 1100, "minFaqCount": 10, "minExpansionSections": 3 }
+    },
+    "private-clinical": {
+      "expansionSections": [
+        { "type": "preparationGuide", "heading": "How To Prepare For Your Consultation" },
+        { "type": "timeline", "heading": "Planning Timeline" },
+        { "type": "comparison", "heading": "Private Pharmacy Services Explained" },
+        { "type": "deepDive", "heading": "In-Depth Service Information" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Private Clinical Assessment",
+          "paragraphs": [
+            "Private pharmacy services provide faster access where clinically appropriate, with fees and treatment options explained before you commit.",
+            "A qualified pharmacist assesses suitability, discusses expected outcomes realistically, and signposts to GP care when symptoms need investigation beyond pharmacy scope."
+          ],
+          "bulletTopics": ["Initial suitability assessment", "Transparent fee discussion", "Treatment or supply where appropriate", "Follow-up and monitoring plan"]
+        }
+      ],
+      "preparationGuide": ["Medical history including allergies", "Current prescription and OTC medicines", "Relevant previous test results", "Insurance or employer details if applicable"],
+      "timelineNotes": ["Book early for services needing lead time", "Initial consultation before any supply", "Follow-up reviews as clinically advised"],
+      "comparisonPoints": [
+        "Private services are typically self-pay unless employer-funded",
+        "NHS pathways may cover related care for eligible patients — we explain options at consultation",
+        "Assessment is required before treatment — instant supply without review is not offered"
+      ],
+      "expandedFaqQuestions": [
+        "How much does the consultation cost?",
+        "Do I need a GP referral for private treatment?",
+        "How soon can I be seen?",
+        "What payment methods do you accept?",
+        "Is there a follow-up included?"
+      ],
+      "relatedTopicLinks": ["Travel Vaccinations", "Weight Management", "Health Screening"],
+      "contentTargets": { "minWordCount": 1200, "minFaqCount": 10, "minExpansionSections": 3 }
+    },
+    "specialist": {
+      "expansionSections": [
+        { "type": "preparationGuide", "heading": "Preparing For Your Specialist Appointment" },
+        { "type": "deepDive", "heading": "Advanced Pharmacy Practice" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Specialist Pharmacy Scope",
+          "paragraphs": [
+            "Specialist pharmacy services extend access to advanced clinical care within qualified pharmacist scope — including independent prescribing and occupational health programmes where commissioned.",
+            "Scope boundaries are explained clearly so patients understand what can be managed in pharmacy versus when GP or specialist referral is required."
+          ],
+          "bulletTopics": ["Scope of practice review", "Structured clinical assessment", "Prescribing or supply pathway", "Monitoring and follow-up planning"]
+        }
+      ],
+      "preparationGuide": ["Full medicines list", "Previous clinic letters if relevant", "Employer occupational health forms if applicable", "Identification for corporate programmes"],
+      "timelineNotes": ["Initial assessment before prescribing", "Structured follow-up intervals"],
+      "comparisonPoints": ["Pharmacist prescribing complements but does not replace GP care", "Corporate programmes may have separate booking processes"],
+      "expandedFaqQuestions": [
+        "What qualifications do your prescribers hold?",
+        "Which conditions can be treated in pharmacy?",
+        "Can my employer arrange this service?",
+        "How does follow-up work?"
+      ],
+      "relatedTopicLinks": ["Independent Prescribing", "Occupational Health Services", "Corporate Vaccinations"],
+      "contentTargets": { "minWordCount": 1000, "minFaqCount": 10, "minExpansionSections": 2 }
+    }
+  },
+  "services": {
+    "travel-vaccinations": {
+      "expansionSections": [
+        { "type": "preparationGuide", "heading": "What To Bring To Your Travel Health Appointment" },
+        { "type": "timeline", "heading": "Travel Vaccination Planning Timeline" },
+        { "type": "deepDive", "heading": "Common Travel Vaccines Explained" },
+        { "type": "deepDive", "heading": "Destination Risk And Malaria Prevention" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Hepatitis A, Typhoid And Combined Courses",
+          "paragraphs": [
+            "Hepatitis A and typhoid are among the most commonly discussed travel vaccines for many destinations, particularly where food and water hygiene standards differ from the UK.",
+            "Combined courses may be recommended depending on your itinerary, previous vaccinations and medical history — confirmed only after a full travel risk assessment."
+          ],
+          "bulletTopics": ["Hepatitis A protection for many destinations", "Typhoid for higher-risk travel regions", "Booster intervals and course completion", "Certificate documentation where required"]
+        },
+        {
+          "heading": "Rabies, Yellow Fever And Specialist Vaccines",
+          "paragraphs": [
+            "Rabies vaccination may be advised for extended stays, rural travel, or activities with animal exposure risk — discussed during destination review.",
+            "Yellow fever vaccination is required for entry to some countries and must be documented on an International Certificate of Vaccination where applicable; availability and scheduling need advance planning."
+          ],
+          "bulletTopics": ["Rabies pre-exposure courses for high-risk travel", "Yellow fever certificate requirements", "Japanese encephalitis for rural Asia travel", "Last-minute options where clinically possible"]
+        },
+        {
+          "heading": "Malaria Prevention And Travel Health Precautions",
+          "paragraphs": [
+            "Malaria prevention advice forms part of a comprehensive travel health consultation — tablets may be recommended alongside bite avoidance measures depending on destination and season.",
+            "Travel health precautions also cover insect bite avoidance, safe food and water, sun protection and altitude illness where relevant to your trip."
+          ],
+          "bulletTopics": ["Malaria chemoprophylaxis advice", "Insect bite prevention", "Safe food and water guidance", "Altitude and adventure travel considerations"]
+        }
+      ],
+      "preparationGuide": ["Full travel itinerary with dates and regions", "Previous vaccination records", "Current medicines and allergy history", "Planned activities (trekking, rural travel, VFR visits)", "Employer or visa health requirements if applicable"],
+      "timelineNotes": [
+        "6–8 weeks before travel: ideal time to start multi-course vaccines",
+        "4 weeks before: many single-dose vaccines can still be useful",
+        "1–2 weeks before: limited options — urgent consultation still worthwhile",
+        "At consultation: personalised vaccination schedule created"
+      ],
+      "comparisonPoints": [
+        "Some travel vaccines may be NHS-funded for specific risk groups — many destination vaccines are private",
+        "Pharmacy travel consultations complement but do not replace specialist travel clinic care for complex cases",
+        "Fees and availability are confirmed before any supply"
+      ],
+      "expandedFaqQuestions": [
+        "Is it safe for children to have travel vaccines?",
+        "What if I am travelling at short notice?",
+        "Do I need a yellow fever certificate?",
+        "Which vaccines are not available on the NHS?",
+        "Can you advise on malaria tablets for my destination?",
+        "How many appointments will I need?",
+        "What side effects should I expect after vaccination?"
+      ],
+      "relatedTopicLinks": ["Travel Health Consultations", "Pharmacy First", "Prescription Delivery"],
+      "contentTargets": { "minWordCount": 1400, "minFaqCount": 12, "minExpansionSections": 4 }
+    },
+    "blood-pressure-checks": {
+      "expansionSections": [
+        { "type": "preparationGuide", "heading": "Preparing For Your Blood Pressure Check" },
+        { "type": "deepDive", "heading": "Understanding Hypertension And Cardiovascular Risk" },
+        { "type": "deepDive", "heading": "Systolic, Diastolic And Ambulatory Monitoring" },
+        { "type": "comparison", "heading": "Pharmacy Screening Vs GP Blood Pressure Care" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Why High Blood Pressure Matters",
+          "paragraphs": [
+            "Hypertension often causes no symptoms but increases the risk of stroke, heart disease and kidney problems over time — making routine screening valuable.",
+            "A pharmacy blood pressure check helps identify raised readings early and supports appropriate follow-up, whether that means lifestyle advice, repeat measurement or GP referral."
+          ],
+          "bulletTopics": ["Hypertension and silent symptoms", "Cardiovascular risk awareness", "Stroke and heart disease prevention", "Kidney health monitoring"]
+        },
+        {
+          "heading": "Reading Your Results",
+          "paragraphs": [
+            "Blood pressure is recorded as systolic (pressure when the heart beats) and diastolic (pressure when the heart rests) — measured in mmHg.",
+            "One raised reading does not diagnose hypertension. The NHS Hypertension Case-Finding Service may recommend ambulatory blood pressure monitoring (ABPM) or GP follow-up depending on the result and your risk factors."
+          ],
+          "bulletTopics": ["Systolic and diastolic explained", "When ABPM may be offered", "Lifestyle factors affecting readings", "Referral pathways to your GP"]
+        }
+      ],
+      "preparationGuide": ["Avoid caffeine 30 minutes before if possible", "Rest for 5 minutes before measurement", "Wear loose sleeves for arm access", "Bring previous home readings if you monitor"],
+      "timelineNotes": ["Single check: baseline screening in pharmacy", "Raised reading: repeat measurement or ABPM referral", "Ongoing: regular checks for over-40s and high-risk groups"],
+      "comparisonPoints": [
+        "Pharmacy checks offer convenient screening without a routine GP appointment",
+        "Diagnosis and long-term treatment remain with your GP",
+        "Emergency symptoms such as chest pain require urgent care — not a pharmacy check alone"
+      ],
+      "expandedFaqQuestions": [
+        "What is a normal blood pressure reading?",
+        "What is ambulatory blood pressure monitoring?",
+        "Will the pharmacist tell me if I have hypertension?",
+        "What lifestyle changes can lower blood pressure?",
+        "How does the NHS Hypertension Case-Finding Service work?",
+        "Should I check my blood pressure at home as well?"
+      ],
+      "relatedTopicLinks": ["Pharmacy First", "Weight Management", "Diabetes Screening"],
+      "contentTargets": { "minWordCount": 1300, "minFaqCount": 12, "minExpansionSections": 4 }
+    },
+    "pharmacy-first": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "Pharmacy First Conditions Explained" },
+        { "type": "comparison", "heading": "When To Use Pharmacy First Vs Your GP" },
+        { "type": "preparationGuide", "heading": "What To Expect At Your Consultation" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Common Pharmacy First Pathways",
+          "paragraphs": [
+            "Pharmacy First covers selected NHS pathways including sore throat, earache, sinusitis, impetigo, infected insect bites, shingles and uncomplicated UTIs in women aged 16–64 — subject to clinical assessment and local commissioning.",
+            "The pharmacist assesses your symptoms against the pathway criteria, provides supply or advice where eligible, and refers to GP or urgent care when presentation falls outside scope."
+          ],
+          "bulletTopics": ["Sore throat assessment", "Earache and sinusitis pathways", "Skin infections including impetigo and insect bites", "Shingles and uncomplicated UTI assessment"]
+        }
+      ],
+      "preparationGuide": ["Symptom start date and severity", "Current medicines and allergies", "Pregnancy status if relevant", "Child's age for paediatric presentations"],
+      "timelineNotes": ["Same-day consultation where capacity allows", "Referral immediately if red-flag symptoms present"],
+      "comparisonPoints": ["Free at point of care where NHS commissioned", "Not for emergencies — call 999 for serious symptoms", "GP still needed for chronic or complex conditions"],
+      "expandedFaqQuestions": [
+        "Can Pharmacy First treat my child's sore throat?",
+        "What if I have a UTI but am outside the age range?",
+        "Will I get antibiotics at the pharmacy?",
+        "What symptoms mean I should see a GP instead?",
+        "Is Pharmacy First available at every pharmacy?"
+      ],
+      "relatedTopicLinks": ["Blood Pressure Checks", "NHS Health Advice", "Prescription Dispensing"],
+      "contentTargets": { "minWordCount": 1200, "minFaqCount": 12, "minExpansionSections": 3 }
+    },
+    "repeat-prescriptions": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "EPS Nomination And Repeat Ordering Explained" },
+        { "type": "preparationGuide", "heading": "Setting Up Repeat Prescriptions" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Medication Continuity And EPS",
+          "paragraphs": [
+            "Repeat prescription services help patients stay on regular medicines without gaps. EPS nomination sends prescriptions electronically from your GP surgery to your chosen pharmacy.",
+            "Our team advises on reorder timing, coordinates with your surgery when authorisation is delayed, and supports carers managing medicines for others."
+          ],
+          "bulletTopics": ["Electronic Prescription Service nomination", "Reorder lead times", "Surgery liaison when authorisation delayed", "Carer and housebound support"]
+        }
+      ],
+      "preparationGuide": ["GP surgery name and repeat slip", "List of repeat items and intervals", "Nomination preference for EPS", "Delivery address if using home delivery"],
+      "timelineNotes": ["Order 7–10 days before medicines run out", "Allow extra time after bank holidays", "Nomination changes take effect on next prescription"],
+      "comparisonPoints": ["Pharmacy cannot authorise repeats without GP approval", "EPS reduces collection delays compared with paper prescriptions"],
+      "expandedFaqQuestions": [
+        "How do I nominate this pharmacy for EPS?",
+        "Can you remind me when my repeat is due?",
+        "What if my surgery rejects a repeat request?",
+        "Can I order repeats online or by phone?",
+        "Can a carer collect on my behalf?"
+      ],
+      "relatedTopicLinks": ["Prescription Delivery", "Prescription Dispensing", "Dosette Trays"],
+      "contentTargets": { "minWordCount": 1000, "minFaqCount": 10, "minExpansionSections": 2 }
+    },
+    "prescription-delivery": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "Home Delivery For Medication Continuity" },
+        { "type": "preparationGuide", "heading": "Arranging Prescription Delivery" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Who Delivery Helps Most",
+          "paragraphs": [
+            "Prescription delivery supports elderly patients, those with mobility limitations, carers, and patients recovering from hospital admission who cannot easily collect in person.",
+            "Medicines are dispensed with the same clinical checks as in-store collection, with safe handover arrangements confirmed before the first delivery."
+          ],
+          "bulletTopics": ["Elderly and housebound patients", "Mobility and transport barriers", "Long-term condition medicines supply", "Safe receipt and handover protocols"]
+        }
+      ],
+      "preparationGuide": ["Confirmed delivery address", "Safe receipt contact or neighbour arrangement", "Repeat prescription set up with GP", "Any access instructions for drivers"],
+      "timelineNotes": ["First delivery after dispensing check completed", "Regular delivery slots where available", "Address changes require pharmacy notification"],
+      "comparisonPoints": ["Not all medicines suit postal delivery", "Delivery area coverage varies locally", "Collection remains available for urgent items"],
+      "expandedFaqQuestions": [
+        "Is prescription delivery free?",
+        "Which medicines cannot be delivered?",
+        "Can someone else sign for my delivery?",
+        "How do I combine delivery with repeat prescriptions?",
+        "What if I am not home for delivery?"
+      ],
+      "relatedTopicLinks": ["Repeat Prescriptions", "Care Home Support", "Dosette Trays"],
+      "contentTargets": { "minWordCount": 1000, "minFaqCount": 10, "minExpansionSections": 2 }
+    },
+    "weight-management": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "Structured Weight Management Support" },
+        { "type": "timeline", "heading": "Your Weight Management Journey" },
+        { "type": "preparationGuide", "heading": "Before Your Initial Assessment" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Assessment, Eligibility And Realistic Outcomes",
+          "paragraphs": [
+            "Pharmacy weight management combines BMI assessment, lifestyle counselling and eligible treatment pathways where clinically appropriate.",
+            "Outcomes vary by individual — goals should be realistic, with ongoing monitoring for safety and progress rather than promised rapid results."
+          ],
+          "bulletTopics": ["BMI and lifestyle review", "Treatment suitability assessment", "Ongoing monitoring appointments", "Realistic goal setting"]
+        }
+      ],
+      "preparationGuide": ["Current weight and height", "Medical history including diabetes and blood pressure", "Previous weight loss attempts", "List of current medicines"],
+      "timelineNotes": ["Initial assessment before any treatment", "Regular follow-up reviews", "Lifestyle support alongside any eligible treatment"],
+      "comparisonPoints": ["Private fees apply unless employer-funded", "GP remains responsible for complex medical management", "Not a substitute for specialist dietetic care where needed"],
+      "expandedFaqQuestions": [
+        "What BMI do I need for pharmacy weight support?",
+        "Are there side effects to weight management treatment?",
+        "How often will I need follow-up appointments?",
+        "Can you help with diet and exercise plans?",
+        "Do I need blood tests before starting?"
+      ],
+      "relatedTopicLinks": ["Blood Pressure Checks", "Diabetes Screening", "Health Screening"],
+      "contentTargets": { "minWordCount": 1200, "minFaqCount": 10, "minExpansionSections": 3 }
+    },
+    "ear-wax-removal": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "Microsuction And Safe Ear Wax Removal" },
+        { "type": "preparationGuide", "heading": "Before Your Ear Wax Appointment" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "When Professional Removal Is Needed",
+          "paragraphs": [
+            "Cerumen impaction can cause hearing reduction, discomfort and hearing aid problems. Professional microsuction or irrigation is safer than home removal with cotton buds or objects.",
+            "Examination comes first — referral is recommended if infection, perforation or sudden hearing loss suggests pathology beyond simple wax blockage."
+          ],
+          "bulletTopics": ["Microsuction technique", "Ear examination before treatment", "Hearing aid clearance", "Referral for ear pathology"]
+        }
+      ],
+      "preparationGuide": ["Use olive oil drops if advised before appointment", "Avoid cotton buds before visit", "Bring hearing aid if wax affects fit", "Disclose previous ear surgery"],
+      "timelineNotes": ["Single appointment for many cases", "Follow-up if wax deeply impacted"],
+      "comparisonPoints": ["Not suitable if active ear infection suspected", "GP referral if perforation or pain with discharge"],
+      "expandedFaqQuestions": [
+        "Is microsuction painful?",
+        "How long does ear wax removal take?",
+        "Will my hearing improve immediately?",
+        "Can I use cotton buds between appointments?",
+        "Do I need GP referral first?"
+      ],
+      "relatedTopicLinks": ["Health Screening", "NHS Health Advice", "Private Prescribing"],
+      "contentTargets": { "minWordCount": 1000, "minFaqCount": 10, "minExpansionSections": 2 }
+    },
+    "smoking-cessation": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "Quit Plans And Nicotine Replacement Therapy" },
+        { "type": "timeline", "heading": "Your Stop Smoking Timeline" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "NHS Stop Smoking Support",
+          "paragraphs": [
+            "Pharmacy stop smoking services combine behavioural support with licensed nicotine replacement therapy where eligible under NHS pathways.",
+            "Regular reviews improve quit rates compared with unassisted attempts — relapse is common and support continues without judgement."
+          ],
+          "bulletTopics": ["Quit date planning", "NRT product options", "Behavioural trigger management", "Follow-up carbon monoxide monitoring"]
+        }
+      ],
+      "preparationGuide": ["Current daily cigarette count", "Previous quit attempts", "Preferred NRT format if known", "Pregnancy status if relevant"],
+      "timelineNotes": ["Week 1: quit date and NRT initiation", "Weeks 2–4: withdrawal support reviews", "Week 12: progress review and relapse prevention"],
+      "comparisonPoints": ["NHS support may cover products for eligible patients", "Specialist mental health support needed for complex cases"],
+      "expandedFaqQuestions": [
+        "Is stop smoking support free on the NHS?",
+        "Which NRT products can the pharmacy supply?",
+        "What if I start smoking again?",
+        "Can I use e-cigarettes alongside NRT?",
+        "How long does the programme last?"
+      ],
+      "relatedTopicLinks": ["Pharmacy First", "Blood Pressure Checks", "Health Screening"],
+      "contentTargets": { "minWordCount": 1100, "minFaqCount": 10, "minExpansionSections": 2 }
+    },
+    "pharmacy-contraception-service": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "NHS Pharmacy Contraception Service Explained" },
+        { "type": "preparationGuide", "heading": "Before Your Contraception Consultation" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Oral Contraception Supply And Safety Checks",
+          "paragraphs": [
+            "The NHS Pharmacy Contraception Service allows commissioned pharmacies to supply selected oral contraception after assessment, including blood pressure checks and contraindication screening.",
+            "Some presentations require GP or specialist referral rather than pharmacy supply — suitability is confirmed individually, not from online information alone."
+          ],
+          "bulletTopics": ["Oral contraception review", "Blood pressure screening", "Contraindication assessment", "Missed pill guidance"]
+        }
+      ],
+      "preparationGuide": ["Current contraceptive brand and pack", "Medical history including migraine and VTE risk", "Recent blood pressure reading if known", "Pregnancy status"],
+      "timelineNotes": ["Annual review typically required", "BP check at supply or renewal"],
+      "comparisonPoints": ["Not all contraceptive methods are in pharmacy scope", "Sexual health clinics for complex cases"],
+      "expandedFaqQuestions": [
+        "Can I switch my pill at the pharmacy?",
+        "Do I need a blood pressure check every time?",
+        "What if I missed pills this week?",
+        "Is the contraception service free on the NHS?",
+        "Which pills are included in the service?"
+      ],
+      "relatedTopicLinks": ["Blood Pressure Checks", "Pharmacy First", "NHS Health Advice"],
+      "contentTargets": { "minWordCount": 1100, "minFaqCount": 10, "minExpansionSections": 2 }
+    },
+    "new-medicine-service": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "How The New Medicine Service Works" },
+        { "type": "timeline", "heading": "NMS Appointment Timeline" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Support When Starting New Medicines",
+          "paragraphs": [
+            "The NHS New Medicine Service provides structured follow-up when you start selected new medicines — helping identify problems early and improve adherence.",
+            "A pharmacist discusses how to take your medicine, checks for side effects at follow-up, and refers to your GP if concerns arise."
+          ],
+          "bulletTopics": ["Initial medicines discussion", "Follow-up appointment", "Side effect monitoring", "Adherence support"]
+        }
+      ],
+      "preparationGuide": ["New prescription medicine", "Any side effects noticed so far", "Questions about dosage or timing", "GP contact details"],
+      "timelineNotes": ["Day 7–14: initial NMS discussion", "Day 14–28: follow-up review", "Ongoing: GP for dose changes"],
+      "comparisonPoints": ["Free NHS service for eligible new medicine starters", "Not available for all medicine types"],
+      "expandedFaqQuestions": [
+        "Why have I been invited to NMS?",
+        "Is NMS mandatory?",
+        "Which medicines qualify for NMS?",
+        "What happens at the follow-up call?",
+        "What if I experience side effects?"
+      ],
+      "relatedTopicLinks": ["Prescription Dispensing", "Medication Reviews", "Pharmacy First"],
+      "contentTargets": { "minWordCount": 1000, "minFaqCount": 10, "minExpansionSections": 2 }
+    },
+    "travel-health-consultations": {
+      "expansionSections": [
+        { "type": "deepDive", "heading": "Comprehensive Travel Health Planning" },
+        { "type": "comparison", "heading": "Travel Health Consultation Vs Vaccinations Only" }
+      ],
+      "deepDiveBlocks": [
+        {
+          "heading": "Beyond Vaccinations Alone",
+          "paragraphs": [
+            "Travel health consultations review your full itinerary, medical history and planned activities — covering vaccines, malaria prophylaxis, altitude illness and travel precautions in one structured appointment.",
+            "Complex multi-country trips may need longer planning horizons than a single-vaccine appointment."
+          ],
+          "bulletTopics": ["Multi-country itinerary review", "Malaria chemoprophylaxis planning", "Adventure and altitude travel", "Travel health record documentation"]
+        }
+      ],
+      "preparationGuide": ["Detailed itinerary with dates", "Previous travel vaccines", "Medical history", "Activity plans including rural or adventure travel"],
+      "timelineNotes": ["8+ weeks before: ideal for complex itineraries", "Consultation creates combined vaccine and health plan"],
+      "comparisonPoints": ["Broader than vaccinations-only appointments", "May recommend specialist referral for complex medical cases"],
+      "expandedFaqQuestions": [
+        "Is a travel health consultation different from vaccinations?",
+        "Can you advise on malaria tablets for multiple countries?",
+        "Do I need this if I already had travel vaccines elsewhere?",
+        "How long does a full consultation take?"
+      ],
+      "relatedTopicLinks": ["Travel Vaccinations", "Prescription Dispensing", "Health Screening"],
+      "contentTargets": { "minWordCount": 1200, "minFaqCount": 10, "minExpansionSections": 2 }
+    }
+  }
+}

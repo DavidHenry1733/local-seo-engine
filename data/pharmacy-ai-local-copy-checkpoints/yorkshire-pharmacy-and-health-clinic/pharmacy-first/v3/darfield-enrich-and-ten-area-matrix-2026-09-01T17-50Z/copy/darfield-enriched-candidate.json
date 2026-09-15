@@ -1,0 +1,220 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-01T17:49:51.331Z",
+  "tokenUsage": {
+    "promptTokens": 6210,
+    "completionTokens": 1675,
+    "totalTokens": 7885
+  },
+  "estimatedCostUsd": 0.025820000000000003,
+  "inputEvidencePackHash": "4d53bd6834f2990639e647868d7d37373f356a9f639cdff54b67beb31add52f2",
+  "editorialEvidencePackHash": "065e896a318589d4230f15670de7ff42f9594629b872507b4260ca15727239a9",
+  "areaSlug": "darfield",
+  "areaName": "Darfield",
+  "editorialFactIdsUsed": [
+    "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+    "darfield:community:darfield-library-is-on-church-street",
+    "darfield:community:darfield-library-runs-regular-activities-and-spe",
+    "darfield:heritage:darfield-history-society-runs-local-history-grou",
+    "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+    "darfield:pharmacy-relationship:in-area"
+  ],
+  "outputCopy": {
+    "area": "Darfield",
+    "heroHeading": "Pharmacy First in Darfield",
+    "heroIntroduction": "Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area.",
+    "localIntroduction": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. Darfield Library is on Church Street and runs regular activities and special events for children and adults. Darfield History Society runs local history group sessions.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "NHS general practice services in Darfield are provided from Garland House Surgery."
+    ],
+    "relationshipToPharmacy": "Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+        "entityId": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. Darfield Library is on Church Street and runs regular activities and special events for children and adults. Darfield History Society runs local history group sessions.",
+        "entityId": "darfield:community:darfield-library-is-on-church-street"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Darfield are provided from Garland House Surgery.",
+        "entityId": "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+        "entityId": "darfield:pharmacy-relationship:in-area"
+      }
+    ],
+    "evidenceEntityIdsUsed": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "darfield:community:darfield-library-is-on-church-street",
+      "darfield:community:darfield-library-runs-regular-activities-and-spe",
+      "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "darfield:pharmacy-relationship:in-area"
+    ],
+    "editorialFactIdsUsed": [
+      "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "darfield:community:darfield-library-is-on-church-street",
+      "darfield:community:darfield-library-runs-regular-activities-and-spe",
+      "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "darfield:pharmacy-relationship:in-area"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Darfield",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "business.address, offer.lockedClinicalFacts",
+      "providerSource": "canonical-pharmacy-profile, approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support, canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area.",
+      "supportingCanonicalFieldOrEntity": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns, darfield:pharmacy-relationship:in-area",
+      "providerSource": "barnsley.gov.uk, canonical-pharmacy-profile",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (provides, service, living, surrounding) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+      "supportingCanonicalFieldOrEntity": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "providerSource": "barnsley.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Darfield Library is on Church Street and runs regular activities and special events for children and adults.",
+      "supportingCanonicalFieldOrEntity": "darfield:community:darfield-has-a-public-library, darfield:community:darfield-library-is-on-church-street, darfield:community:darfield-library-runs-regular-activities-and-spe",
+      "providerSource": "barnsley.gov.uk, barnsley.gov.uk, barnsley.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Darfield History Society runs local history group sessions.",
+      "supportingCanonicalFieldOrEntity": "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "providerSource": "barnsley.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Darfield are provided from Garland House Surgery.",
+      "supportingCanonicalFieldOrEntity": "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "supportingCanonicalFieldOrEntity": "darfield:pharmacy-relationship:in-area",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (residents) is not proof of a new fact, and is not established as supported"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Darfield",
+      "purpose": "identify the local edition",
+      "supportingSource": "business.address",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "business.address, offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Darfield Library is on Church Street and runs regular activities and special events for children and adults.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "darfield:community:darfield-has-a-public-library, darfield:community:darfield-library-is-on-church-street, darfield:community:darfield-library-runs-regular-activities-and-spe",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Darfield History Society runs local history group sessions.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "darfield:heritage:darfield-history-society-runs-local-history-grou",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Darfield are provided from Garland House Surgery.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 7,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=heroIntroduction | sentence=Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area. | rule=uncertain-paraphrase | defect=Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area. — uncertain paraphrase: unmatched wording (provides, service, living, surrounding) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=relationshipToPharmacy | sentence=Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield. | rule=uncertain-paraphrase | defect=Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield. — uncertain paraphrase: unmatched wording (residents) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"area\": \"Darfield\",\n  \"heroHeading\": \"Pharmacy First in Darfield\",\n  \"heroIntroduction\": \"Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area.\",\n  \"localIntroduction\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. The area is home to a public library and the Darfield History Society, which runs local history group sessions.\",\n  \"localContextHeading\": \"Why Darfield patients start with the pharmacist\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Darfield are provided from Garland House Surgery. Pharmacy First can help with eligible common conditions, and the pharmacist will confirm what can be assessed on the day according to NHS pathway criteria.\"\n  ],\n  \"relationshipToPharmacy\": \"Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.\",\n      \"entityId\": \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The area is home to a public library and the Darfield History Society, which runs local history group sessions.\",\n      \"entityId\": \"darfield:community:darfield-has-a-public-library\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The area is home to a public library and the Darfield History Society, which runs local history group sessions.\",\n      \"entityId\": \"darfield:heritage:darfield-history-society-runs-local-history-grou\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Darfield are provided from Garland House Surgery.\",\n      \"entityId\": \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n      \"entityId\": \"darfield:pharmacy-relationship:in-area\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [\n    \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\",\n    \"darfield:community:darfield-has-a-public-library\",\n    \"darfield:heritage:darfield-history-society-runs-local-history-grou\",\n    \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\",\n    \"darfield:pharmacy-relationship:in-area\"\n  ],\n  \"editorialFactIdsUsed\": [\n    \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\",\n    \"darfield:community:darfield-has-a-public-library\",\n    \"darfield:heritage:darfield-history-society-runs-local-history-grou\",\n    \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\",\n    \"darfield:pharmacy-relationship:in-area\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"area\": \"Darfield\",\n  \"heroHeading\": \"Pharmacy First in Darfield\",\n  \"heroIntroduction\": \"Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic provides this service locally, supporting people in Darfield and the surrounding Barnsley area.\",\n  \"localIntroduction\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. The community benefits from local amenities such as its public library, and groups like the Darfield History Society help keep the area’s heritage alive.\",\n  \"localContextHeading\": \"Why Darfield patients start with the pharmacist\",\n  \"localContextParagraphs\": \"NHS general practice services in Darfield are provided from Garland House Surgery, giving residents access to primary care in the area. For NHS Pharmacy First consultations, people in Darfield can visit Yorkshire Pharmacy & Health Clinic, which is located within the community itself. Pharmacy First can help with eligible common conditions, and the pharmacist will confirm what can be assessed on the day according to NHS pathway criteria.\",\n  \"relationshipToPharmacy\": \"Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"If you have questions about the service or your eligibility, the pharmacy team will be happy to help.\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.\",\n      \"entityId\": \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The community benefits from local amenities such as its public library, and groups like the Darfield History Society help keep the area’s heritage alive.\",\n      \"entityId\": \"darfield:community:darfield-has-a-public-library\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The community benefits from local amenities such as its public library, and groups like the Darfield History Society help keep the area’s heritage alive.\",\n      \"entityId\": \"darfield:heritage:darfield-history-society-runs-local-history-grou\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Darfield are provided from Garland House Surgery, giving residents access to primary care in the area.\",\n      \"entityId\": \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n      \"entityId\": \"darfield:pharmacy-relationship:in-area\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\",\n    \"darfield:community:darfield-has-a-public-library\",\n    \"darfield:heritage:darfield-history-society-runs-local-history-grou\",\n    \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\",\n    \"darfield:pharmacy-relationship:in-area\"\n  ]\n}",
+    "{\n  \"area\": \"Darfield\",\n  \"heroHeading\": \"Pharmacy First in Darfield\",\n  \"heroIntroduction\": \"Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area.\",\n  \"localIntroduction\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. The area is home to a public library and the Darfield History Society, which runs local history group sessions.\",\n  \"localContextHeading\": \"Why Darfield patients start with the pharmacist\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Darfield are provided from Garland House Surgery. Pharmacy First can help with eligible common conditions, and the pharmacist will confirm what can be assessed on the day according to NHS pathway criteria.\"\n  ],\n  \"relationshipToPharmacy\": \"Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.\",\n      \"entityId\": \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The area is home to a public library and the Darfield History Society, which runs local history group sessions.\",\n      \"entityId\": \"darfield:community:darfield-has-a-public-library\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"The area is home to a public library and the Darfield History Society, which runs local history group sessions.\",\n      \"entityId\": \"darfield:heritage:darfield-history-society-runs-local-history-grou\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Darfield are provided from Garland House Surgery.\",\n      \"entityId\": \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n      \"entityId\": \"darfield:pharmacy-relationship:in-area\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [\n    \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\",\n    \"darfield:community:darfield-has-a-public-library\",\n    \"darfield:heritage:darfield-history-society-runs-local-history-grou\",\n    \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\",\n    \"darfield:pharmacy-relationship:in-area\"\n  ],\n  \"editorialFactIdsUsed\": [\n    \"darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns\",\n    \"darfield:community:darfield-has-a-public-library\",\n    \"darfield:heritage:darfield-history-society-runs-local-history-grou\",\n    \"darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr\",\n    \"darfield:pharmacy-relationship:in-area\"\n  ]\n}"
+  ],
+  "sourceCorrectedAt": "2026-09-01T17:49:51.331Z",
+  "parentCheckpoint": "data/pharmacy-ai-local-copy-checkpoints/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/darfield/2026-09-01T16-36Z-demo-standard",
+  "derivativeKind": "source-corrected-community-enrich",
+  "operatorCorrection": {
+    "reason": "AI draft and retry failed empty-local-claim / ungrounded character clauses. Operator kept supplied Darfield civic facts from the retry and previous accepted hero/relationship; removed ungrounded identity, GP-wait, clinical stuffing, and empty pathway wording. No third model call.",
+    "aiCallsUsed": 2,
+    "thirdModelCall": false,
+    "originalPackUnmutated": true
+  },
+  "label": "DARFIELD COMMUNITY-LED ENRICHED CANDIDATE — NOT PUBLISHED"
+}

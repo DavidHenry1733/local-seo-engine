@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "image-prompt-dashboard-visible-render-fix",
+  "generatedAt": "2026-06-11T08:55:18.980Z",
+  "verdict": "PASS: Image Prompt Cards Visible In Dashboard",
+  "pass": true,
+  "elementsConfirmed": {
+    "ipd-prompts-status": true,
+    "ipd-prompts-output": true,
+    "ipd-prompts-selection": true,
+    "ipd-industry-prompts": true,
+    "ipd-family-prompts": true,
+    "ipd-service-prompts": true,
+    "ipd-pack-prompts": true
+  },
+  "loadSequenceFixed": {
+    "ipdLoadMeta": true,
+    "ipdApplyPromptDefaults": true,
+    "ipdLoadPrompts": true,
+    "ipdLoadPromptPanel": true,
+    "panelSequenceInLoadPromptPanel": true,
+    "applyDefaultsDoesNotStopEarly": true
+  },
+  "tabSwitch": {
+    "ipdSwitchSub": true,
+    "ipdSubTabSwitch": true,
+    "promptsTabCallsLoadPanel": true,
+    "onclickUsesIpdSwitchSub": true
+  },
+  "cssVisibility": {
+    "outputDisplayBlock": true,
+    "panelActiveDisplay": true,
+    "promptCardVisible": true,
+    "textareaVisible": true
+  },
+  "promptCardOutput": {
+    "status": "operational",
+    "browserVisibleContainerId": "ipd-prompts-output",
+    "selectionSummaryId": "ipd-prompts-selection",
+    "statusBarId": "ipd-prompts-status",
+    "features": {
+      "selectionSummary": true,
+      "promptCountInStatus": true,
+      "consoleLog": true,
+      "textareaPrompts": true,
+      "copyButtons": true,
+      "downloadSingle": true,
+      "containerIdIpdPromptsOutput": true
+    },
+    "expectedPromptCountForDefaults": 4
+  },
+  "issues": [],
+  "userVerification": "Campaign Content → Image Library → Prompt Generator — blue selection box + prompt cards in #ipd-prompts-output"
+}

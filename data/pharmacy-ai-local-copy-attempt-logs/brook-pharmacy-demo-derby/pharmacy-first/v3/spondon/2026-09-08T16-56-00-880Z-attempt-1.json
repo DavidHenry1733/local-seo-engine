@@ -1,0 +1,83 @@
+{
+  "savedAt": "2026-09-08T16:56:00.880Z",
+  "areaSlug": "spondon",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Write as an experienced British healthcare copywriter.\n\nUsing only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.\n\nHERO INTRODUCTION:\nWrite 35–55 words introducing Pharmacy First for people in the selected area and naming Brook Pharmacy as the provider.\n\nLOCAL INTRODUCTION:\nWrite 170–230 words in three fluent British-English paragraphs.\n\nParagraph 1:\nIntroduce the area, its location and its character using verified facts.\n\nParagraph 2:\nDescribe meaningful verified landmarks, green spaces, shopping, community facilities and healthcare references. Select the most useful facts and connect them naturally. Do not list every evidence record.\n\nParagraph 3:\nMove naturally from the area and its local healthcare needs into Brook Pharmacy’s Pharmacy First service. Name Brook Pharmacy and Pharmacy First, and explain that eligible patients can receive a pharmacist consultation for certain common conditions. Do not reproduce a fixed clinical closing sentence. The transition must feel like part of the article—not a disclaimer pasted onto the end.\n\nYou may express only this Pharmacy First meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment.\n\nDo not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.\n\nDo not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.\n\nUse neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.\n\nDo not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.\n\nDo not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.\n\nReturn exactly this layout:\nHERO INTRODUCTION:\n<one paragraph>\n\nLOCAL INTRODUCTION:\n<paragraph 1>\n\n<paragraph 2>\n\n<paragraph 3>\nSelected area: Spondon\nConfirmed pharmacy name: Brook Pharmacy Demo Derby\nConfirmed pharmacy premises locality: Derby\nSaved straight-line distance: approximately 5.1 km in a straight line\nVerified area identity and geographical context:\n- Spondon is a neighbourhood ward in Derby.\nVerified history where available:\n- Borrow Wood Park is a landmark in Spondon.\n- Dale Road Park is a landmark in Spondon.\n- West Park Meadow Nature Reserve is a landmark in Spondon.\nVerified landmarks, parks, shopping, civic and community facilities:\n- Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Spondon has a public library.\n- Spondon Library is a community facility in Spondon.\nVerified GP practices or healthcare facilities:\n- NHS general practice services in Spondon are provided from Chapel Street Medical Centre.\n- NHS general practice services in Spondon are provided from Central Health Network.\n- NHS general practice services in Spondon are provided from Central Occupational Health.\nApproved Pharmacy First service meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment."
+  },
+  "rawResponse": "HERO INTRODUCTION:\nResidents in Spondon can access the NHS Pharmacy First service at Brook Pharmacy. This service offers clinical consultations with a qualified pharmacist for certain common health conditions, providing local health advice, appropriate treatment or onward referral based on an individual clinical assessment.\n\nLOCAL INTRODUCTION:\nSpondon is a neighbourhood ward situated within the city of Derby. The area maintains a dedicated civic structure led by its local Neighbourhood Board. This board brings together ward councillors, local residents, and formal representatives from community organisations as well as key public services to collaborate on matters affecting the neighbourhood.\n\nThe area is home to several public parks and green spaces, including Borrow Wood Park, Dale Road Park, and West Park Meadow Nature Reserve. Essential community facilities in the neighbourhood include Spondon Library, which serves local residents. Primary NHS healthcare provision across the area is delivered through Chapel Street Medical Centre, Central Health Network, and Central Occupational Health.\n\nAlongside general practice, Brook Pharmacy provides the NHS Pharmacy First service for eligible people from the local area. Under Pharmacy First, individuals with certain common health conditions can receive a consultation directly with a pharmacist. The pharmacist evaluates current symptoms, existing medical history, and relevant medicines to determine the most appropriate approach. The outcome of the clinical assessment may include healthcare advice, suitable treatment, or a referral to another healthcare professional. Eligibility and any subsequent treatment depend on this individual assessment.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localIntroduction | sentence=The area maintains a dedicated civic structure led by its local Neighbourhood Board. | rule=ungrounded-clause | defect=The area maintains a dedicated civic structure led by its local Neighbourhood Board. — no supplied fact, canonical field or approved clinical text covers this clause",
+      "FAIL | field=localIntroduction | sentence=The area maintains a dedicated civic structure led by its local Neighbourhood Board. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts"
+    ],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Spondon is a neighbourhood ward situated within the city of Derby. | rule=uncertain-paraphrase | defect=Spondon is a neighbourhood ward situated within the city of Derby. — uncertain paraphrase: unmatched wording (situated, city) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=This board brings together ward councillors, local residents, and formal representatives from community organisations as well as key public services to collaborate on matters affecting the neighbourhood. | rule=uncertain-paraphrase | defect=This board brings together ward councillors, local residents, and formal representatives from community organisations as well as key public services to collaborate on matters affecting the neighbourhood. — uncertain paraphrase: unmatched wording (brings, formal, key, collaborate, matters, affecting) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area is home to several public parks and green spaces, including Borrow Wood Park, Dale Road Park, and West Park Meadow Nature Reserve. | rule=uncertain-paraphrase | defect=The area is home to several public parks and green spaces, including Borrow Wood Park, Dale Road Park, and West Park Meadow Nature Reserve. — uncertain paraphrase: unmatched wording (parks, green, spaces) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Essential community facilities in the neighbourhood include Spondon Library, which serves local residents. | rule=uncertain-paraphrase | defect=Essential community facilities in the neighbourhood include Spondon Library, which serves local residents. — uncertain paraphrase: unmatched wording (essential, facilities, which, serves) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Primary NHS healthcare provision across the area is delivered through Chapel Street Medical Centre, Central Health Network, and Central Occupational Health. | rule=uncertain-paraphrase | defect=Primary NHS healthcare provision across the area is delivered through Chapel Street Medical Centre, Central Health Network, and Central Occupational Health. — uncertain paraphrase: unmatched wording (primary, healthcare, provision, delivered) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Spondon",
+    "heroHeading": "Pharmacy First in Spondon",
+    "heroIntroduction": "Residents in Spondon can access the NHS Pharmacy First service at Brook Pharmacy. This service offers clinical consultations with a qualified pharmacist for certain common health conditions, providing local health advice, appropriate treatment or onward referral based on an individual clinical assessment.",
+    "localIntroduction": "Spondon is a neighbourhood ward situated within the city of Derby. The area maintains a dedicated civic structure led by its local Neighbourhood Board. This board brings together ward councillors, local residents, and formal representatives from community organisations as well as key public services to collaborate on matters affecting the neighbourhood.\n\nThe area is home to several public parks and green spaces, including Borrow Wood Park, Dale Road Park, and West Park Meadow Nature Reserve. Essential community facilities in the neighbourhood include Spondon Library, which serves local residents. Primary NHS healthcare provision across the area is delivered through Chapel Street Medical Centre, Central Health Network, and Central Occupational Health.\n\nAlongside general practice, Brook Pharmacy provides the NHS Pharmacy First service for eligible people from the local area. Under Pharmacy First, individuals with certain common health conditions can receive a consultation directly with a pharmacist. The pharmacist evaluates current symptoms, existing medical history, and relevant medicines to determine the most appropriate approach. The outcome of the clinical assessment may include healthcare advice, suitable treatment, or a referral to another healthcare professional. Eligibility and any subsequent treatment depend on this individual assessment. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Spondon",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "This board brings together ward councillors, local residents, and formal representatives from community organisations as well as key public services to collaborate on matters affecting the neighbourhood.",
+        "editorialFactId": "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area is home to several public parks and green spaces, including Borrow Wood Park, Dale Road Park, and West Park Meadow Nature Reserve.",
+        "editorialFactId": "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area is home to several public parks and green spaces, including Borrow Wood Park, Dale Road Park, and West Park Meadow Nature Reserve.",
+        "editorialFactId": "spondon:heritage:dale-road-park-is-listed-as-a-landmark-in-spondo"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area is home to several public parks and green spaces, including Borrow Wood Park, Dale Road Park, and West Park Meadow Nature Reserve.",
+        "editorialFactId": "spondon:heritage:west-park-meadow-nature-reserve-is-listed-as-a-l"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Primary NHS healthcare provision across the area is delivered through Chapel Street Medical Centre, Central Health Network, and Central Occupational Health.",
+        "editorialFactId": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+        "editorialFactId": "spondon:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc",
+      "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon",
+      "spondon:heritage:dale-road-park-is-listed-as-a-landmark-in-spondo",
+      "spondon:heritage:west-park-meadow-nature-reserve-is-listed-as-a-l",
+      "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+      "spondon:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

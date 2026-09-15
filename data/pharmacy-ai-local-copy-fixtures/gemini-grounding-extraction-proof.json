@@ -1,0 +1,54 @@
+{
+  "providerCalled": false,
+  "requestConfiguration": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "tools": [
+      {
+        "google_search": {}
+      }
+    ]
+  },
+  "extraction": {
+    "webSearchQueries": [
+      "Darfield South Yorkshire landmarks",
+      "Darfield Barnsley local history",
+      "Darfield library"
+    ],
+    "groundingChunks": [
+      {
+        "title": "Darfield, South Yorkshire",
+        "uri": "https://en.wikipedia.org/wiki/Darfield,_South_Yorkshire"
+      },
+      {
+        "title": "Barnsley Council",
+        "uri": "https://www.barnsley.gov.uk/"
+      },
+      {
+        "title": "Darfield Library",
+        "uri": "https://www.barnsley.gov.uk/libraries"
+      }
+    ],
+    "groundingSupportCount": 4
+  },
+  "structuralCheckPassed": true,
+  "savedAttemptPath": "data/pharmacy-ai-local-copy-attempt-logs/gemini-grounding-fixture/pharmacy-first/fixture/fixture-area/2026-09-09T12-46-20-579Z-attempt-1.json",
+  "savedAttemptFieldNames": [
+    "savedAt",
+    "areaSlug",
+    "attemptNumber",
+    "promptContractId",
+    "promptContractVersion",
+    "sanitizedRequest",
+    "geminiGrounding",
+    "rawResponse",
+    "validationResult",
+    "parsedCopy",
+    "candidateRecordWritten"
+  ],
+  "geminiGroundingFieldNames": [
+    "webSearchQueries",
+    "groundingChunks",
+    "groundingSupportCount"
+  ]
+}

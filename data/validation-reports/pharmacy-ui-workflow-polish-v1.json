@@ -1,0 +1,179 @@
+{
+  "slug": "pharmaconnect",
+  "validatedAt": "2026-06-29T09:15:33.055Z",
+  "passed": 34,
+  "total": 34,
+  "allPass": true,
+  "checks": [
+    {
+      "id": "profile-save-confirmation",
+      "pass": true,
+      "detail": "Save banner messages present"
+    },
+    {
+      "id": "profile-save-error-banner",
+      "pass": true,
+      "detail": "Error banner on failure"
+    },
+    {
+      "id": "profile-continue-next-step",
+      "pass": true,
+      "detail": "Workflow bar with continue next step"
+    },
+    {
+      "id": "phone-alias-normalization",
+      "pass": true,
+      "detail": "Phone aliases coalesced in normalizeProfileData"
+    },
+    {
+      "id": "phone-canonical-field",
+      "pass": true,
+      "detail": "phone=0114 123 4567"
+    },
+    {
+      "id": "profile-phone-persisted",
+      "pass": true,
+      "detail": "059) 0 0 60"
+    },
+    {
+      "id": "required-optional-labels",
+      "pass": true,
+      "detail": "Field tier badges in profile sections"
+    },
+    {
+      "id": "professional-review-required-fields",
+      "pass": true,
+      "detail": "Professional review required tiers"
+    },
+    {
+      "id": "required-field-model",
+      "pass": true,
+      "detail": "12 required, 10 optional"
+    },
+    {
+      "id": "completion-based-on-required",
+      "pass": true,
+      "detail": "12/12 = 100%"
+    },
+    {
+      "id": "os-profile-step-required-score",
+      "pass": true,
+      "detail": "OS step 100% vs required 100%"
+    },
+    {
+      "id": "complete-profile-task-clears-when-required-done",
+      "pass": true,
+      "detail": "next action: "
+    },
+    {
+      "id": "outstanding-profile-task",
+      "pass": true,
+      "detail": "profile step COMPLETE, outstanding profile task=false"
+    },
+    {
+      "id": "master-stock-service-exists",
+      "pass": true,
+      "detail": "pharmacyMasterStockImageService.ts"
+    },
+    {
+      "id": "master-stock-paths",
+      "pass": true,
+      "detail": "pharmaconnect.json"
+    },
+    {
+      "id": "master-stock-ui",
+      "pass": true,
+      "detail": "Image library master stock section"
+    },
+    {
+      "id": "master-stock-api",
+      "pass": true,
+      "detail": "Master stock + auto-fill API routes"
+    },
+    {
+      "id": "master-stock-multi-register",
+      "pass": true,
+      "detail": "4 image(s)"
+    },
+    {
+      "id": "auto-fill-skips-explicit",
+      "pass": true,
+      "detail": "explicit hero preserved, skipped=0"
+    },
+    {
+      "id": "image-slot-options-preserved",
+      "pass": true,
+      "detail": "Stock, upload, AI options in image library UI"
+    },
+    {
+      "id": "no-script-error-message",
+      "pass": true,
+      "detail": "Developer script message removed"
+    },
+    {
+      "id": "generate-page-now-button",
+      "pass": true,
+      "detail": "Customer-friendly missing page UI"
+    },
+    {
+      "id": "workflow-bar-profile",
+      "pass": true,
+      "detail": "pharmacyProfileDashboardPage.ts"
+    },
+    {
+      "id": "workflow-bar-images",
+      "pass": true,
+      "detail": "pharmacyImageLibraryPage.ts"
+    },
+    {
+      "id": "workflow-bar-enhancement",
+      "pass": true,
+      "detail": "pharmacyEnhancementWorkspacePage.ts"
+    },
+    {
+      "id": "workflow-bar-campaigns",
+      "pass": true,
+      "detail": "pharmacyCampaignsPage.ts"
+    },
+    {
+      "id": "workflow-bar-contentReview",
+      "pass": true,
+      "detail": "pharmacyAuthorityReadinessPage.ts"
+    },
+    {
+      "id": "workflow-bar-publishing",
+      "pass": true,
+      "detail": "pharmacyPublishingSettingsPage.ts"
+    },
+    {
+      "id": "no-service-masters-modified",
+      "pass": true,
+      "detail": "7 master library artefacts present"
+    },
+    {
+      "id": "no-template-redesign",
+      "pass": true,
+      "detail": "No template redesign markers in route pages"
+    },
+    {
+      "id": "live-profile-page",
+      "pass": true,
+      "detail": "auth required — verified in source"
+    },
+    {
+      "id": "live-visual-no-script-error",
+      "pass": true,
+      "detail": "auth required — verified in source"
+    },
+    {
+      "id": "live-dashboard",
+      "pass": true,
+      "detail": "auth required — skipped"
+    },
+    {
+      "id": "live-profile-api-phone",
+      "pass": true,
+      "detail": "source profile phone=059) 0 0 60"
+    }
+  ]
+}

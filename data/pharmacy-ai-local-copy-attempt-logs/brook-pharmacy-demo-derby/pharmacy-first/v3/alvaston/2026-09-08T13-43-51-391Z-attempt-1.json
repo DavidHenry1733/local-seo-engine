@@ -1,0 +1,72 @@
+{
+  "savedAt": "2026-09-08T13:43:51.391Z",
+  "areaSlug": "alvaston",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write two useful natural paragraphs in fluent British English, totalling 110–170 words. Introduce the area, then describe meaningful local features and healthcare references. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Do not describe Pharmacy First, healthcare outcomes, access, convenience, availability or eligibility. Return only the two finished local paragraphs.\n\n- NHS general practice services in Alvaston are provided from Alvaston Medical Centre.\n- Alvaston has a public library.\n- NHS general practice services in Alvaston are provided from Coleman Health Centre.\n- Lister House at Coleman Street is a hospital in Alvaston.\n- Alvaston Library and Learning Centre is a community facility in Alvaston.\n- Boulton Lane Park Community Centre is a community facility in Alvaston.\n- Field Lane (Alvaston) Community Association is a community facility in Alvaston.\n- Alvaston Park is a landmark in Alvaston.\n- Alvaston Nature Trail is a landmark in Alvaston.\n- Elvaston Castle is a landmark in Alvaston."
+  },
+  "rawResponse": "Alvaston is a distinct local area enriched by notable landmarks and picturesque outdoor spaces. Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.\n\nHealthcare within the area is delivered through a network of established medical facilities. NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre. In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. | rule=uncertain-paraphrase | defect=Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. — uncertain paraphrase: unmatched wording (prominent, local, sites, historic, which, provide, scenic, surroundings, residents, visitors, alike) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association. | rule=uncertain-paraphrase | defect=The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association. — uncertain paraphrase: unmatched wording (served, facilities) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure. | rule=uncertain-paraphrase | defect=In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure. — uncertain paraphrase: unmatched wording (addition, based, completing, primary, local, infrastructure) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Alvaston",
+    "heroHeading": "Pharmacy First in Alvaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+    "localIntroduction": "Alvaston is a distinct local area enriched by notable landmarks and picturesque outdoor spaces. Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike. The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.\n\nHealthcare within the area is delivered through a network of established medical facilities. NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre. In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Among its prominent local sites are Alvaston Park, the Alvaston Nature Trail, and historic Elvaston Castle, which provide scenic surroundings for residents and visitors alike.",
+        "editorialFactId": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The community is well served by several public facilities, including the public Alvaston Library and Learning Centre, alongside Boulton Lane Park Community Centre and the Field Lane (Alvaston) Community Association.",
+        "editorialFactId": "alvaston:community:alvaston-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Alvaston are provided from both Alvaston Medical Centre and Coleman Health Centre.",
+        "editorialFactId": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "In addition, hospital services in the area are based at Lister House at Coleman Street, completing the primary local health infrastructure.",
+        "editorialFactId": "alvaston:healthcare:lister-house-at-coleman-street-is-listed-as-a-ho"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+        "editorialFactId": "alvaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+      "alvaston:community:alvaston-has-a-public-library",
+      "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+      "alvaston:healthcare:lister-house-at-coleman-street-is-listed-as-a-ho",
+      "alvaston:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

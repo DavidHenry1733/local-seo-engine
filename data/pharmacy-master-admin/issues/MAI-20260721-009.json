@@ -1,0 +1,40 @@
+{
+  "issueId": "MAI-20260721-009",
+  "createdAt": "2026-07-21T12:20:00.000Z",
+  "createdBy": "rc1-c10-tenant-dna-render-validation",
+  "updatedAt": "2026-07-21T12:20:00.000Z",
+  "tenantSlug": "banner-cross-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "Canonical Renderer — tenant DNA activation",
+  "category": "Design",
+  "severity": "Critical",
+  "title": "RC1-C10 — Tenant DNA Renderer Activation",
+  "description": "RC1-C09 proved renderer ignored persisted Component/Layout DNA and always emitted lockdown-v1 body with generic fallbacks.",
+  "expectedBehaviour": "When tenant Design Intelligence exists, renderer consumes Brand DNA, Component DNA and Layout DNA via resolveComponentDnaForRender; no lockdown-v1 body; manifest records fallbacks",
+  "actualBehaviour": "Tenant DNA renderer activated: tenant-dna-v1 template, renderBrandHeroComponent, typography roles, footer/header DNA consumption, library image substitution blocked for trust/conversion",
+  "reproductionSteps": "Run scripts/rc1-c10-tenant-dna-render-validation.ts banner-cross-pharmacy pharmacy-first",
+  "affectedUrl": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+  "screenshotReference": "data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c10-evidence/",
+  "status": "Awaiting Product Owner Test",
+  "assignee": "Unassigned",
+  "resolutionNotes": "Implemented pharmacyTenantDnaRenderActivation module; replaced lockdown-v1 body template marker; wired hero, cards, spacing, typography, images, manifest fallbacks; deployed canonical render v1.",
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-21T12:20:00.000Z",
+      "user": "rc1-c10-tenant-dna-render-validation",
+      "status": "Awaiting Product Owner Test",
+      "notes": "Local desktop/mobile PASS; preview parity PASS; live deployed; rendererRevision tenant-dna-activation-rc1-c10-v1"
+    }
+  ],
+  "relatedFiles": [
+    "src/pharmacy/pharmacyTenantDnaRenderActivation.ts",
+    "src/pharmacy/pharmacyVisualExperienceLayoutV3.ts",
+    "src/pharmacy/pharmacyVisualServicePageRenderer.ts",
+    "src/pharmacy/pharmacyBrandDnaRenderTokens.ts",
+    "src/pharmacy/pharmacyBrandDnaComponentRenderers.ts",
+    "src/pharmacy/pharmacyBrandDnaFooterRenderer.ts",
+    "src/pharmacy/pharmacyCanonicalFinalRenderService.ts",
+    "scripts/rc1-c10-tenant-dna-render-validation.ts"
+  ]
+}

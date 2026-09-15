@@ -1,0 +1,28 @@
+{
+  "taskId": "yorkshire-pharmacy-and-health-clinic:pharmacy-first:v4:one-local-page:wombwell",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.003608,
+  "events": [
+    {
+      "at": "2026-09-09T09:33:20.667Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-09T09:33:20.830Z",
+      "kind": "reserve",
+      "reservationId": "r-1788946400830-1"
+    },
+    {
+      "at": "2026-09-09T09:33:38.249Z",
+      "kind": "consumed",
+      "reservationId": "r-1788946400830-1",
+      "detail": "cost=0.003608"
+    }
+  ]
+}

@@ -56,6 +56,7 @@ style={{ background: "white", borderBottom: "1px solid hsl(220 16% 90%)" }}>
   <div className="text-sm font-bold mr-4 whitespace-nowrap" style={{ color: "hsl(220 20% 16%)" }}>
     InboxingPro SEO Engine
   </div>
+  <a href="/api/admin/master" className="text-xs font-semibold px-3 py-2 rounded-lg whitespace-nowrap" style={{ color: "hsl(0 0% 100%)", background: "hsl(217 80% 45%)" }}>Client Portfolio</a>
   <a href="/api/dashboard#overview" className="text-xs font-semibold px-3 py-2 rounded-lg whitespace-nowrap" style={{ color: "hsl(217 80% 45%)" }}>Overview</a>
   <a href="/api/dashboard#campaigns" className="text-xs font-semibold px-3 py-2 rounded-lg whitespace-nowrap" style={{ color: "hsl(217 80% 45%)" }}>Campaigns</a>
   <a href="/api/dashboard#wizard" className="text-xs font-semibold px-3 py-2 rounded-lg whitespace-nowrap" style={{ color: "hsl(217 80% 45%)" }}>Setup Wizard</a>

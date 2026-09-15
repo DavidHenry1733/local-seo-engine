@@ -424,7 +424,7 @@ const INTERNAL_TOKEN = '${internalToken.replace(/'/g, "\\'")}';
 <!-- Top bar -->
 <header class="topbar">
   <div style="display:flex;align-items:center;gap:14px">
-    <a href="/api/dashboard" target="_top" onclick="if(window.parent!==window){window.parent.postMessage({type:'wizard-nav',action:'show-overview'},'*');return false;}" style="font-size:.8rem;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:var(--card);line-height:1.4" title="Back to Command Centre">← Dashboard</a>
+    <a href="/api/admin/master" target="_top" style="font-size:.8rem;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:var(--card);line-height:1.4" title="Back to pharmacy/client list">← Dashboard</a>
     <div>
       <div class="topbar-title">Local SEO Page Builder</div>
       <div class="topbar-sub">Setup Wizard</div>
@@ -2389,12 +2389,21 @@ App.deleteCampaign = async function(campaignId) {
   const slug = state.project?.clientSlug;
   if (!slug) return;
   if (!confirm('Delete this campaign? This cannot be undone.')) return;
-  await apiFetch('/api/campaigns/' + slug + '/' + campaignId, { method: 'DELETE' });
-  if (state.campaignId === campaignId) {
-    state.campaignId = null;
-    state.campaign = {};
+  try {
+    const res = await apiFetch('/api/campaigns/' + slug + '/' + campaignId, { method: 'DELETE' });
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      alert(d.error || 'Failed to delete campaign (HTTP ' + res.status + ')');
+      return;
+    }
+    if (state.campaignId === campaignId) {
+      state.campaignId = null;
+      state.campaign = {};
+    }
+    App.loadCampaignHub(slug);
+  } catch (e) {
+    alert(e.message || 'Failed to delete campaign');
   }
-  App.loadCampaignHub(slug);
 };
 
 // Updates campaign metadata after a stage completes
@@ -3237,7 +3246,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (svcName && svcKey) {
     svcName.addEventListener('input', () => {
       if (!svcKey._touched) {
-        svcKey.value = svcName.value.toLowerCase().replace(/\\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        svcKey.value = svcName.value.toLowerCase().replace(/[\s_]+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
         autoFillMoneyPageUrl(svcKey.value);
       }
     });
@@ -3288,10 +3297,18 @@ App.saveStage2 = async function() {
   }
 
   const domain = state.project?.domain?.replace(/\\/$/, '') || '';
+  const canonicalServiceKey = String(getVal('serviceKey') || getVal('serviceName') || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[\s_]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
   state.campaign = {
     cityName: getVal('cityName'),
     serviceName: getVal('serviceName'),
-    serviceKey: getVal('serviceKey'),
+    serviceKey: canonicalServiceKey,
     maxPriorityAreas: parseInt(getVal('maxPriorityAreas') || '5', 10),
     maxSecondaryAreas: parseInt(getVal('maxSecondaryAreas') || '4', 10),
     includeSecondary: document.getElementById('includeSecondary').checked,
@@ -3697,6 +3714,34 @@ function getServiceKey() {
   return fixes[norm] || norm;
 }
 
+function resolveActiveCampaignContext() {
+  const clientSlug = state.project?.clientSlug || '';
+
+  let campaignSlug =
+    state.campaign?.slug ||
+    state.campaign?.campaignSlug ||
+    state.campaignId ||
+    '';
+
+  if (state.campaignId && Array.isArray(state._campaignMeta)) {
+    const active = state._campaignMeta.find(x => x.id === state.campaignId);
+    if (active?.slug) campaignSlug = active.slug;
+  }
+
+  const slug = campaignSlug || clientSlug;
+
+  return {
+    slug,
+    campaignSlug,
+    clientSlug,
+    campaignId: state.campaignId || '',
+    serviceKey: getServiceKey(),
+    serviceName: state.campaign?.serviceName || state.project?.serviceName || '',
+    cityName: state.campaign?.cityName || '',
+    primaryKeyword: state.campaign?.primaryKeyword || state.campaign?.focusKeyword || state.project?.primaryKeyword || ''
+  };
+}
+
 function getImageRole(slot) {
   // Maps the 4 wizard image slots to the most appropriate AI image role
   if (slot === 'hero')       return 'heroImage';
@@ -3815,8 +3860,16 @@ function setApprovalBadge(slot, status, source) {
 }
 
 App.generateImage = async function(slot) {
-  const slug = state.project?.clientSlug;
-  if (!slug) { alert('Load a project first (Stage 1)'); return; }
+  let slug = state.campaignId || state.project?.clientSlug || '';
+
+  if (state.campaignId && Array.isArray(state._campaignMeta)) {
+    const active = state._campaignMeta.find(x => x.id === state.campaignId);
+    if (active?.slug) slug = active.slug;
+  }
+
+  console.log('[generateImage] resolved slug=' + slug + ' campaignId=' + state.campaignId + ' serviceKey=' + getServiceKey());
+
+  if (!slug) { alert('No active campaign or project loaded. Resume/create a campaign first.'); return; }
 
   const imageMode = state.project?.imageMode;
   if (imageMode === 'own' || imageMode === 'skip') {
@@ -3892,8 +3945,9 @@ App.generateImage = async function(slot) {
 };
 
 App.uploadImage = async function(slot, input) {
-  const slug = state.project?.clientSlug;
-  if (!slug) { alert('Load a project first (Stage 1)'); return; }
+  const ctx = resolveActiveCampaignContext();
+  const slug = ctx.slug;
+  if (!slug) { alert('No active campaign or project loaded.'); return; }
   const file = input.files[0];
   if (!file) return;
   console.log('[uploadImage] START slot=' + slot + ' file=' + file.name + ' size=' + file.size + ' ts=' + new Date().toISOString());
@@ -4016,8 +4070,9 @@ App.toggleImageLibrary = async function(slot) {
 };
 
 App.loadImageLibrary = async function(slot) {
-  const slug = state.project?.clientSlug;
-  if (!slug) { alert('Load a project first (Stage 1)'); return; }
+  const ctx = resolveActiveCampaignContext();
+  const slug = ctx.slug;
+  if (!slug) { alert('No active campaign or project loaded.'); return; }
   const grid = document.getElementById(\`img-lib-grid-\${slot}\`);
   if (!grid) return;
   grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);font-size:.78rem;text-align:center;padding:8px">Loading…</div>';
@@ -4587,8 +4642,9 @@ App.createFullCampaign = async function() {
 };
 
 App.generateAllImages = async function() {
-  const slug = state.project?.clientSlug;
-  if (!slug) { alert('Load a project first (Stage 1)'); return; }
+  const ctx = resolveActiveCampaignContext();
+  const slug = ctx.slug;
+  if (!slug) { alert('No active campaign or project loaded.'); return; }
   const imageMode = state.project?.imageMode;
   if (imageMode === 'own' || imageMode === 'skip') {
     alert('AI generation is disabled. Upload your own images instead.');
@@ -4596,7 +4652,7 @@ App.generateAllImages = async function() {
   }
   const allStatus = document.getElementById('img-all-status');
   allStatus.textContent = 'Generating all 3 images…';
-  const slots = ['hero', 'support', 'conversion'];
+  const slots = ['hero', 'support', 'trust', 'conversion'];
   let done = 0;
   for (const slot of slots) {
     allStatus.textContent = \`Generating \${slot} image (\${++done}/3)…\`;
@@ -4607,9 +4663,24 @@ App.generateAllImages = async function() {
 };
 
 App.saveImageSelection = async function() {
-  const slug = state.project?.clientSlug;
-  console.log('[saveImageSelection] START slug=' + slug + ' ts=' + new Date().toISOString());
-  if (!slug) { alert('Load a project first (Stage 1)'); return; }
+
+  let slug =
+    state.campaignId ||
+    state.project?.clientSlug ||
+    '';
+
+  // If we have campaign metadata, prefer the active campaign slug
+  if (state.campaignId && Array.isArray(state._campaignMeta)) {
+    const active = state._campaignMeta.find(x => x.id === state.campaignId);
+    if (active?.slug) slug = active.slug;
+  }
+
+  console.log('[saveImageSelection] START slug=' + slug + ' campaignId=' + state.campaignId + ' ts=' + new Date().toISOString());
+
+  if (!slug) {
+    alert('No active campaign or project loaded.');
+    return;
+  }
   const btn = document.getElementById('btn-save-images');
   const statusEl = document.getElementById('img-save-status');
   btn.disabled = true;
@@ -4624,7 +4695,7 @@ App.saveImageSelection = async function() {
     if (r.ok) { const d = await r.json(); serverStatus = d.status || {}; }
   } catch(_) {}
 
-  const slots = ['hero', 'support', 'conversion'];
+  const slots = ['hero', 'support', 'trust', 'conversion'];
   let saved = 0, missing = 0;
   for (const slot of slots) {
     const info = serverStatus[slot] || {};
@@ -4666,13 +4737,19 @@ App.saveImageSelection = async function() {
 App.renderImageDiagnostics = async function() {
   const el = document.getElementById('img-diagnostics');
   if (!el) return;
-  const slug = state.project?.clientSlug;
-  if (!slug) { el.innerHTML = '<em>No project loaded</em>'; return; }
+  let slug = state.campaignId || state.project?.clientSlug || '';
+
+  if (state.campaignId && Array.isArray(state._campaignMeta)) {
+    const active = state._campaignMeta.find(x => x.id === state.campaignId);
+    if (active?.slug) slug = active.slug;
+  }
+
+  if (!slug) { el.innerHTML = '<em>No active campaign or project loaded</em>'; return; }
   try {
     const r = await apiFetch('/api/images/status/' + slug);
     if (!r.ok) { el.innerHTML = '<em>Could not fetch status</em>'; return; }
     const d = await r.json();
-    const rows = ['hero','support','conversion'].map(slot => {
+    const rows = ['hero','support','trust','conversion'].map(slot => {
       const i = d.status[slot] || {};
       const exists = i.exists ? '<span style="color:green">✓ yes</span>' : '<span style="color:red">✗ no</span>';
       const status = i.status || '—';

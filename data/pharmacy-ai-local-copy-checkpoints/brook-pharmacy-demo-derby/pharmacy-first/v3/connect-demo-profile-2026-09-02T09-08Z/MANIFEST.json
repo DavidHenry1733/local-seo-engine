@@ -1,0 +1,69 @@
+{
+  "kind": "brook-pharmacy-demo-derby-connect-profile-checkpoint",
+  "label": "BROOK \u2014 CONNECT A REAL DEMO PROFILE",
+  "status": "preview-only-not-published",
+  "approved": false,
+  "published": false,
+  "checkpointAt": "2026-09-02T09-08Z",
+  "checkpointId": "connect-demo-profile-2026-09-02T09-08Z",
+  "slug": "brook-pharmacy-demo-derby",
+  "profileUrl": "https://app.pharmaconnect.uk/api/pharmacy-profile-wizard?slug=brook-pharmacy-demo-derby",
+  "targetAreasUrl": "https://app.pharmaconnect.uk/api/growth-engine/campaign-builder?slug=brook-pharmacy-demo-derby&step=areas&campaign=pharmacy-first",
+  "overlayPreviewUrl": "https://app.pharmaconnect.uk/api/growth-engine/yorkshire-pharmacy-and-health-clinic/review-preview?campaign=pharmacy-first&asset=sales-demo-brook-service-page",
+  "areas": [
+    "Allestree",
+    "Mickleover",
+    "Littleover",
+    "Chellaston",
+    "Duffield",
+    "Alvaston",
+    "Mackworth",
+    "Chaddesden",
+    "Spondon",
+    "Borrowash"
+  ],
+  "paidDiscoveryCalls": 0,
+  "generateMyCampaignPressed": false,
+  "singleAreaGenerationUiComplete": false,
+  "copied": [
+    {
+      "path": "data/pharmacy-profiles/brook-pharmacy-demo-derby.json",
+      "sha256": "64cf09e6973684ff3d8622373c6aecd17a3aac2f5edde3ba22fb85690d7498e1"
+    },
+    {
+      "path": "data/growth-engine/brook-pharmacy-demo-derby-campaign-builder.json",
+      "sha256": "fd89c4432bce0c4c20eab0bd6c49c9d567edeaee8859595cab4ba19fbe5cfdcb"
+    },
+    {
+      "path": "data/growth-engine/brook-pharmacy-demo-derby-campaign-generation-context-pharmacy-first.json",
+      "sha256": "89ca7db6db2a6822964ae03105fe298d7fc8b3cf9a38e221cfed877df8ce65e2"
+    },
+    {
+      "path": "config/projects/brook-pharmacy-demo-derby.json",
+      "sha256": "fb4e47f868c6507cb498718057b8fec7d9feaaf9777011e834377d09273fa6e2"
+    },
+    {
+      "path": "data/pharmacy-master-admin/onboarding-batches/brook-pharmacy-demo-derby.json",
+      "sha256": "ee1e944e4d9b889ce6b1408b1e7b62ad1a5a3b3e28337b5fb5f5f99c855de125"
+    },
+    {
+      "path": "data/pharmacy-campaigns/brook-pharmacy-demo-derby.json",
+      "sha256": "474b16c110e4ccc32fe27f6790aafa336edbb461c08f8b446c33bdf19ed3efa1"
+    },
+    {
+      "path": "data/pharmacy-registry/brook-pharmacy-demo-derby.json",
+      "sha256": "5d5a74fce6a9b4e40b78635b4459040a0ab9809382101fadfae2e1fae7d0dc94"
+    }
+  ],
+  "protectedUnchanged": {
+    "data/pharmacy-profiles/brook-pharmacy.json": "8ca9151abf92d3b187c6397a33276a48d72ab8891e697d62637a03e82250b169",
+    "data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json": "c9b83e07a2bfd8494071f81c8dcfc93e195a718ee96e8ad99ed807287387d35b",
+    "data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-builder.json": "4dc96b27e8fca9c969577a44c4aa903a2a26e37ecba5fd5742b360ed5d253e3f",
+    "output/pharmacy-visual-experience/yorkshire-pharmacy-and-health-clinic/pharmacy-first/index.html": "76159044696d7407ba72a75b3c3fb70a74f75c614cb505b7fadf513084eb78e4",
+    "src/pharmacy/pharmacySalesDemoBrookServicePreview.ts": "4b0a8fe31ce4eff680a21221e3a515ae1fee0dc07543b880a9499e0ee25c0346"
+  },
+  "rollback": {
+    "note": "Delete slug-scoped files listed in copied[].path and remove registry/client-meta/users entries for brook-pharmacy-demo-derby. Restore copied JSON from source/.",
+    "restoreFrom": "source/"
+  }
+}

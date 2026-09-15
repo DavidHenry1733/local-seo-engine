@@ -1,0 +1,322 @@
+{
+  "version": "design-intelligence-v1",
+  "tenant": "cat-v1-modern-pillsorted",
+  "sourceRevision": "df0dd9b1d622fab3",
+  "capturedAt": "2026-08-01T08:06:40.897Z",
+  "primaryUrl": "https://pillsorted.com",
+  "navigation": {
+    "tree": [
+      {
+        "id": "nav-1",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 1,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/app/home",
+        "text": "My Health Hub",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-2",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 2,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/app/your-medications",
+        "text": "Medications",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-3",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 3,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/shop/",
+        "text": "Pharmacy",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-4",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 4,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/how-it-works",
+        "text": "NHS Prescriptions",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-5",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 5,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/private-prescriptions",
+        "text": "Private Prescriptions",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-6",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 6,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/how-it-works",
+        "text": "Patients",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-7",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 7,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/how-it-works/clinicians",
+        "text": "Clinicians",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-8",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 8,
+        "selector": "header nav a",
+        "href": "https://www.pillsorted.com/how-it-works/carers",
+        "text": "Carers",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      }
+    ],
+    "hierarchyDepth": 1,
+    "rootId": "nav-1"
+  },
+  "header": {
+    "rowCount": 2,
+    "announcementBar": {
+      "selector": ".top-header",
+      "backgroundColour": "#32373c",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "center",
+      "sticky": false
+    },
+    "logoBlock": {
+      "selector": "header .logo img",
+      "backgroundColour": "#32373c",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "left",
+      "sticky": false,
+      "logoUrl": "https://www.pillsorted.com/app/images/nhs-services-logo.png",
+      "logoMaxHeight": "48px",
+      "logoPosition": "left"
+    },
+    "navigationBlock": {
+      "selector": "header nav",
+      "backgroundColour": "#32373c",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "end",
+      "sticky": false,
+      "navPlacement": "horizontal-multi-link",
+      "mobileMenuBehaviour": "stacked-nav"
+    },
+    "ctaBlock": {
+      "selector": "header .btn, header .theme-btn",
+      "backgroundColour": "#32373c",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "right",
+      "sticky": false,
+      "labels": [
+        "Book An Appointment"
+      ],
+      "hrefs": [
+        "https://pillsorted.com"
+      ]
+    },
+    "spacing": {
+      "paddingY": "",
+      "paddingX": "",
+      "gap": "16px"
+    },
+    "alignment": {
+      "logo": "left",
+      "nav": "center",
+      "cta": "right"
+    },
+    "sticky": true,
+    "responsive": {
+      "desktopBreakpoint": "980px",
+      "mobileMenuBehaviour": "stacked-nav"
+    }
+  },
+  "footer": {
+    "upperLayer": {
+      "selector": "footer",
+      "backgroundColour": "#003087",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "56px",
+      "paddingBottom": "0"
+    },
+    "lowerLayer": {
+      "selector": "footer .footer-bottom",
+      "backgroundColour": "#003087",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "18px"
+    },
+    "groups": [
+      {
+        "id": "footer-primary",
+        "role": "company",
+        "selector": "footer",
+        "heading": "Footer",
+        "links": [],
+        "backgroundColour": "#003087",
+        "textColour": "#ffffff"
+      }
+    ],
+    "mobileStackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ]
+  },
+  "colours": [
+    {
+      "role": "primary",
+      "selector": ":root",
+      "computedColour": "#32373c",
+      "hex": "#32373c",
+      "layer": "body"
+    },
+    {
+      "role": "secondary",
+      "selector": ":root",
+      "computedColour": "#26292d",
+      "hex": "#26292d",
+      "layer": "body"
+    },
+    {
+      "role": "accent",
+      "selector": ":root",
+      "computedColour": "#1CA9C9",
+      "hex": "#1CA9C9",
+      "layer": "body"
+    },
+    {
+      "role": "header-background",
+      "selector": ":root",
+      "computedColour": "#32373c",
+      "hex": "#32373c",
+      "layer": "footer-upper"
+    },
+    {
+      "role": "footer-background",
+      "selector": ":root",
+      "computedColour": "#003087",
+      "hex": "#003087",
+      "layer": "footer-upper"
+    }
+  ],
+  "images": [
+    {
+      "id": "logo-primary",
+      "role": "logo",
+      "selector": "header .logo img",
+      "asset": "https://www.pillsorted.com/app/images/nhs-services-logo.png",
+      "width": 0,
+      "height": 0,
+      "aspectRatio": "",
+      "alt": "PillSorted",
+      "lazyLoad": false,
+      "backgroundImage": "",
+      "visibility": "visible"
+    }
+  ],
+  "validation": {
+    "navigationTreeComplete": true,
+    "headerHierarchyComplete": true,
+    "footerHierarchyComplete": true,
+    "colourRolesComplete": true,
+    "imageRolesComplete": true,
+    "navigationFlatteningRemoved": true,
+    "footerLayerMergeRemoved": true
+  },
+  "summary": {
+    "layoutClassification": "with-top-bar",
+    "headerStyle": "horizontal-multi-link",
+    "footerStyle": "compact",
+    "navigationStyle": "horizontal-multi-link",
+    "typographySystem": "Poppins / Inter",
+    "buttonStyle": "filled-only · 14px · filled",
+    "colourSystem": "#32373c, #26292d, #1CA9C9",
+    "logoPlacement": "left",
+    "evidenceCompleteness": 88,
+    "fallbackReason": null
+  }
+}

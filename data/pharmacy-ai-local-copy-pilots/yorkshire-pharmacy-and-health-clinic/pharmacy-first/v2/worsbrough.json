@@ -1,0 +1,478 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v2",
+  "promptContractVersion": "v2",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T22:23:29.206Z",
+  "tokenUsage": {
+    "promptTokens": 2943,
+    "completionTokens": 1285,
+    "totalTokens": 4228
+  },
+  "estimatedCostUsd": 0.016166,
+  "inputEvidencePackHash": "e84f2b2c368ca31770110628853b3624c8248f288a93da0990b1f5107c2c71cc",
+  "areaSlug": "worsbrough",
+  "areaName": "Worsbrough",
+  "evidenceSelection": [
+    {
+      "entityId": "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice",
+      "name": "Dr C Liley - Worsbrough Health Centre the Dove Valley Practice",
+      "category": "healthcare",
+      "classification": "useful-healthcare-context",
+      "useInCopy": true,
+      "reason": "Helps describe the healthcare landscape in Worsbrough."
+    },
+    {
+      "entityId": "healthcare:the-kakoty-practice-worsbrough",
+      "name": "The Kakoty Practice Worsbrough",
+      "category": "healthcare",
+      "classification": "useful-healthcare-context",
+      "useInCopy": true,
+      "reason": "Adds context about local GP services in Worsbrough."
+    },
+    {
+      "entityId": "community:worsbrough-library",
+      "name": "Worsbrough Library",
+      "category": "community",
+      "classification": "useful-community-orientation",
+      "useInCopy": false,
+      "reason": "Does not help orient the reader to the pharmacy location or decision."
+    },
+    {
+      "entityId": "landmarks:worsbrough-industrial-heritage-monument",
+      "name": "Worsbrough Industrial Heritage Monument",
+      "category": "landmarks",
+      "classification": "useful-community-orientation",
+      "useInCopy": false,
+      "reason": "Not relevant for pharmacy orientation or decision."
+    },
+    {
+      "entityId": "landmarks:worsbrough-mill-country-park",
+      "name": "Worsbrough Mill Country Park",
+      "category": "landmarks",
+      "classification": "useful-community-orientation",
+      "useInCopy": false,
+      "reason": "Does not assist with pharmacy location or access."
+    },
+    {
+      "entityId": "landmarks:worsbrough-dale-park",
+      "name": "Worsbrough Dale Park",
+      "category": "landmarks",
+      "classification": "useful-community-orientation",
+      "useInCopy": false,
+      "reason": "Not uniquely helpful for pharmacy orientation."
+    },
+    {
+      "entityId": "schools:the-mill-academy",
+      "name": "The Mill Academy",
+      "category": "schools",
+      "classification": "irrelevant-to-patient-decision",
+      "useInCopy": false,
+      "reason": "School location does not help with pharmacy access or decision."
+    }
+  ],
+  "outputCopy": {
+    "area": "Worsbrough",
+    "heroHeading": "Pharmacy First for Worsbrough",
+    "heroIntroduction": "This page explains how people in Worsbrough can use Pharmacy First at Yorkshire Pharmacy & Health Clinic. You can decide whether to contact the pharmacy for eligible common conditions.",
+    "localIntroduction": "Yorkshire Pharmacy & Health Clinic is located 5.3 km from Worsbrough at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+    "localContextHeading": "Healthcare and pharmacy options in Worsbrough",
+    "localContextParagraphs": [
+      "Worsbrough is served by local GP practices such as Dr C Liley - Worsbrough Health Centre the Dove Valley Practice and The Kakoty Practice Worsbrough. These practices help shape the healthcare landscape for residents.",
+      "For Pharmacy First, you may choose to use Yorkshire Pharmacy & Health Clinic in Darfield, which is outside the immediate Worsbrough area."
+    ],
+    "relationshipToPharmacy": "People in Worsbrough can reach the pharmacy by travelling to Darfield.",
+    "localAccessIntroduction": "If you think Pharmacy First may be suitable, you can call Yorkshire Pharmacy & Health Clinic on 01226 210477 before visiting to check how consultations are being arranged.",
+    "localFaqs": [
+      {
+        "question": "How far is Yorkshire Pharmacy & Health Clinic from Worsbrough?",
+        "answer": "The pharmacy is 5.3 km from Worsbrough, located in Darfield."
+      },
+      {
+        "question": "When should I use another healthcare route?",
+        "answer": "If you have urgent or severe symptoms such as breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or feel critically unwell, seek urgent medical care."
+      },
+      {
+        "question": "What happens during a Pharmacy First consultation?",
+        "answer": "The pharmacist will review your symptoms, medicines, and any red-flag concerns. Outcomes may include treatment, self-care advice, or referral if needed."
+      },
+      {
+        "question": "What should I bring to my consultation?",
+        "answer": "Bring a list of your current medicines and be ready to describe your symptoms."
+      }
+    ],
+    "localCtaBridge": "Contact the pharmacy to discuss your needs or arrange an appointment.",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Worsbrough is served by local GP practices such as Dr C Liley - Worsbrough Health Centre the Dove Valley Practice and The Kakoty Practice Worsbrough.",
+        "entityId": "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Worsbrough is served by local GP practices such as Dr C Liley - Worsbrough Health Centre the Dove Valley Practice and The Kakoty Practice Worsbrough.",
+        "entityId": "healthcare:the-kakoty-practice-worsbrough"
+      }
+    ],
+    "evidenceEntityIdsUsed": [
+      "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice",
+      "healthcare:the-kakoty-practice-worsbrough"
+    ],
+    "evidenceSelection": [
+      {
+        "entityId": "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice",
+        "name": "Dr C Liley - Worsbrough Health Centre the Dove Valley Practice",
+        "category": "healthcare",
+        "classification": "useful-healthcare-context",
+        "useInCopy": true,
+        "reason": "Helps describe the healthcare landscape in Worsbrough."
+      },
+      {
+        "entityId": "healthcare:the-kakoty-practice-worsbrough",
+        "name": "The Kakoty Practice Worsbrough",
+        "category": "healthcare",
+        "classification": "useful-healthcare-context",
+        "useInCopy": true,
+        "reason": "Adds context about local GP services in Worsbrough."
+      },
+      {
+        "entityId": "community:worsbrough-library",
+        "name": "Worsbrough Library",
+        "category": "community",
+        "classification": "useful-community-orientation",
+        "useInCopy": false,
+        "reason": "Does not help orient the reader to the pharmacy location or decision."
+      },
+      {
+        "entityId": "landmarks:worsbrough-industrial-heritage-monument",
+        "name": "Worsbrough Industrial Heritage Monument",
+        "category": "landmarks",
+        "classification": "useful-community-orientation",
+        "useInCopy": false,
+        "reason": "Not relevant for pharmacy orientation or decision."
+      },
+      {
+        "entityId": "landmarks:worsbrough-mill-country-park",
+        "name": "Worsbrough Mill Country Park",
+        "category": "landmarks",
+        "classification": "useful-community-orientation",
+        "useInCopy": false,
+        "reason": "Does not assist with pharmacy location or access."
+      },
+      {
+        "entityId": "landmarks:worsbrough-dale-park",
+        "name": "Worsbrough Dale Park",
+        "category": "landmarks",
+        "classification": "useful-community-orientation",
+        "useInCopy": false,
+        "reason": "Not uniquely helpful for pharmacy orientation."
+      },
+      {
+        "entityId": "schools:the-mill-academy",
+        "name": "The Mill Academy",
+        "category": "schools",
+        "classification": "irrelevant-to-patient-decision",
+        "useInCopy": false,
+        "reason": "School location does not help with pharmacy access or decision."
+      }
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First for Worsbrough",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "This page explains how people in Worsbrough can use Pharmacy First at Yorkshire Pharmacy & Health Clinic.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "You can decide whether to contact the pharmacy for eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is located 5.3 km from Worsbrough at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Healthcare and pharmacy options in Worsbrough",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Worsbrough is served by local GP practices such as Dr C Liley - Worsbrough Health Centre the Dove Valley Practice and The Kakoty Practice Worsbrough.",
+      "supportingCanonicalFieldOrEntity": "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice, healthcare:the-kakoty-practice-worsbrough",
+      "providerSource": "googlePlaces, googlePlaces",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "These practices help shape the healthcare landscape for residents.",
+      "supportingCanonicalFieldOrEntity": "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice, healthcare:the-kakoty-practice-worsbrough",
+      "providerSource": "googlePlaces, googlePlaces",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "For Pharmacy First, you may choose to use Yorkshire Pharmacy & Health Clinic in Darfield, which is outside the immediate Worsbrough area.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "People in Worsbrough can reach the pharmacy by travelling to Darfield.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "If you think Pharmacy First may be suitable, you can call Yorkshire Pharmacy & Health Clinic on 01226 210477 before visiting to check how consultations are being arranged.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].question",
+      "exactSentence": "How far is Yorkshire Pharmacy & Health Clinic from Worsbrough?",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "The pharmacy is 5.3 km from Worsbrough, located in Darfield.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].question",
+      "exactSentence": "When should I use another healthcare route?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "If you have urgent or severe symptoms such as breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or feel critically unwell, seek urgent medical care.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "What happens during a Pharmacy First consultation?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "The pharmacist will review your symptoms, medicines, and any red-flag concerns.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "Outcomes may include treatment, self-care advice, or referral if needed.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].question",
+      "exactSentence": "What should I bring to my consultation?",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "Bring a list of your current medicines and be ready to describe your symptoms.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "Contact the pharmacy to discuss your needs or arrange an appointment.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First for Worsbrough",
+      "purpose": "identify the local edition",
+      "supportingSource": "locality.areaName",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "This page explains how people in Worsbrough can use Pharmacy First at Yorkshire Pharmacy & Health Clinic.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "business.name",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "You can decide whether to contact the pharmacy for eligible common conditions.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Yorkshire Pharmacy & Health Clinic is located 5.3 km from Worsbrough at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Healthcare and pharmacy options in Worsbrough",
+      "purpose": "section orientation",
+      "supportingSource": "locality.areaName",
+      "readerValue": "signals the local-context passage"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Worsbrough is served by local GP practices such as Dr C Liley - Worsbrough Health Centre the Dove Valley Practice and The Kakoty Practice Worsbrough.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice, healthcare:the-kakoty-practice-worsbrough",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "These practices help shape the healthcare landscape for residents.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "healthcare:dr-c-liley-worsbrough-health-centre-the-dove-valley-practice, healthcare:the-kakoty-practice-worsbrough",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "For Pharmacy First, you may choose to use Yorkshire Pharmacy & Health Clinic in Darfield, which is outside the immediate Worsbrough area.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "business.name",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "People in Worsbrough can reach the pharmacy by travelling to Darfield.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "locality.areaName",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "localAccessIntroduction",
+      "sentence": "If you think Pharmacy First may be suitable, you can call Yorkshire Pharmacy & Health Clinic on 01226 210477 before visiting to check how consultations are being arranged.",
+      "purpose": "what the reader should do if Pharmacy First may be suitable",
+      "supportingSource": "business.telephone",
+      "readerValue": "gives the next practical step"
+    },
+    {
+      "field": "localFaqs[0].question",
+      "sentence": "How far is Yorkshire Pharmacy & Health Clinic from Worsbrough?",
+      "purpose": "local FAQ question",
+      "supportingSource": "business.name",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[0].answer",
+      "sentence": "The pharmacy is 5.3 km from Worsbrough, located in Darfield.",
+      "purpose": "distance or location answer",
+      "supportingSource": "locality.distanceLabel",
+      "readerValue": "repeats only the verified distance or in-area fact"
+    },
+    {
+      "field": "localFaqs[1].question",
+      "sentence": "When should I use another healthcare route?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[1].answer",
+      "sentence": "If you have urgent or severe symptoms such as breathing difficulties, chest pain, severe dehydration, confusion, a non-blanching rash, or feel critically unwell, seek urgent medical care.",
+      "purpose": "when to use another healthcare route",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader what happens if Pharmacy First is not the right route"
+    },
+    {
+      "field": "localFaqs[2].question",
+      "sentence": "What happens during a Pharmacy First consultation?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[2].answer",
+      "sentence": "The pharmacist will review your symptoms, medicines, and any red-flag concerns.",
+      "purpose": "pathway or preparation answer",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "helps the reader prepare or understand the consultation"
+    },
+    {
+      "field": "localFaqs[2].answer",
+      "sentence": "Outcomes may include treatment, self-care advice, or referral if needed.",
+      "purpose": "when to use another healthcare route",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader what happens if Pharmacy First is not the right route"
+    },
+    {
+      "field": "localFaqs[3].question",
+      "sentence": "What should I bring to my consultation?",
+      "purpose": "local FAQ question",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "lets the reader find a specific local or pathway answer"
+    },
+    {
+      "field": "localFaqs[3].answer",
+      "sentence": "Bring a list of your current medicines and be ready to describe your symptoms.",
+      "purpose": "pathway or preparation answer",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "helps the reader prepare or understand the consultation"
+    },
+    {
+      "field": "localCtaBridge",
+      "sentence": "Contact the pharmacy to discuss your needs or arrange an appointment.",
+      "purpose": "non-claim CTA",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "bridges to the approved call-to-action without extra claims"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 1,
+    "areaNameMentions": 7,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

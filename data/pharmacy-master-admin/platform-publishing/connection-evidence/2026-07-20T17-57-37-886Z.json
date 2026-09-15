@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "id": "host",
+      "label": "DNS/host reachable",
+      "status": "FAIL",
+      "detail": "getConnection: Connection lost before handshake"
+    },
+    {
+      "id": "connection",
+      "label": "Connection established",
+      "status": "FAIL",
+      "detail": "getConnection: Connection lost before handshake"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication successful",
+      "status": "FAIL",
+      "detail": "getConnection: Connection lost before handshake"
+    },
+    {
+      "id": "protocol",
+      "label": "Protocol supported",
+      "status": "FAIL",
+      "detail": "SFTP connection failed"
+    },
+    {
+      "id": "response-time",
+      "label": "Response time",
+      "status": "FAIL",
+      "detail": "Not completed"
+    },
+    {
+      "id": "session",
+      "label": "Session closed cleanly",
+      "status": "PASS",
+      "detail": "No active session"
+    }
+  ],
+  "evidence": "getConnection: Connection lost before handshake",
+  "failureReason": "getConnection: Connection lost before handshake",
+  "operator": "defect-054-test",
+  "stamp": "2026-07-20T17:57:37.886Z",
+  "responseMs": 96
+}

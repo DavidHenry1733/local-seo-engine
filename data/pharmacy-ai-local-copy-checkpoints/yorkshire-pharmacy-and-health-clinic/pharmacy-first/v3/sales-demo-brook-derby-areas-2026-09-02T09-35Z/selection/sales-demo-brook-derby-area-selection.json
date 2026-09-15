@@ -1,0 +1,162 @@
+{
+  "kind": "sales-demo-brook-derby-area-selection",
+  "version": 1,
+  "status": "preview-only-not-published",
+  "approved": false,
+  "published": false,
+  "generatedAt": "2026-09-02T09:35:00.000Z",
+  "demoLocation": {
+    "label": "Demonstration location — not a live pharmacy listing",
+    "mapPinName": "The Durham Ox",
+    "mapAddress": "56 Burton Rd, Derby DE1 1TG, UK",
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "coordinateSource": "Google Maps embed on https://pharmacy.inboxingproweb.com/",
+    "notUsed": "Displayed demo-site address 56 West Burton Road, Derby, DA5 4NR was not used as the discovery origin"
+  },
+  "discovery": {
+    "workflow": "discoverPharmacyAreas",
+    "source": "local-seo-engine-area-engine",
+    "catalog": "config/areas/derby.json",
+    "town": "Derby",
+    "limit": 10,
+    "paidCalls": 0,
+    "estimatedCostUsd": 0,
+    "provider": null,
+    "note": "Reusable saved Derby city catalog. Ranking uses the existing opportunity score (catalog demand, competition, affluence and priority points). Catalog searchDemand is derived from the saved priority list, not live search-demand measurement. Placeholder catalog distanceKm values were not used."
+  },
+  "excluded": {
+    "yorkshireAreas": [
+      "Darfield",
+      "Wombwell",
+      "Worsbrough",
+      "Thurnscoe",
+      "Grimethorpe",
+      "Goldthorpe",
+      "Hoyland",
+      "Cudworth",
+      "Royston",
+      "Chapeltown"
+    ],
+    "reason": "Do not reuse Yorkshire areas"
+  },
+  "selectionRule": "Take the ten areas returned by discoverPharmacyAreas({ town: \"Derby\", limit: 10 }). Mark all ten selected for this demonstration. The engine default would select only the first eight; Spondon and Borrowash are included to meet the ten-area request, not because live demand data ranked them highest.",
+  "areas": [
+    {
+      "areaName": "Allestree",
+      "order": 1,
+      "engineRank": 1,
+      "score": 80,
+      "tier": "priority",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Highest engine opportunity score in the saved Derby catalog (priority cluster)."
+    },
+    {
+      "areaName": "Mickleover",
+      "order": 2,
+      "engineRank": 2,
+      "score": 75,
+      "tier": "priority",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Second engine opportunity score in the saved Derby catalog (priority cluster)."
+    },
+    {
+      "areaName": "Littleover",
+      "order": 3,
+      "engineRank": 3,
+      "score": 70,
+      "tier": "priority",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Third engine opportunity score in the saved Derby catalog (priority cluster)."
+    },
+    {
+      "areaName": "Chellaston",
+      "order": 4,
+      "engineRank": 4,
+      "score": 68,
+      "tier": "priority",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Fourth engine opportunity score in the saved Derby catalog (priority cluster)."
+    },
+    {
+      "areaName": "Duffield",
+      "order": 5,
+      "engineRank": 5,
+      "score": 62,
+      "tier": "priority",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Fifth engine opportunity score in the saved Derby catalog (priority cluster)."
+    },
+    {
+      "areaName": "Alvaston",
+      "order": 6,
+      "engineRank": 6,
+      "score": 48,
+      "tier": "secondary",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Sixth engine opportunity score in the saved Derby catalog (secondary cluster)."
+    },
+    {
+      "areaName": "Mackworth",
+      "order": 7,
+      "engineRank": 7,
+      "score": 48,
+      "tier": "secondary",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Tied sixth/seventh engine opportunity score; listed after Alvaston by engine rank (secondary cluster)."
+    },
+    {
+      "areaName": "Chaddesden",
+      "order": 8,
+      "engineRank": 8,
+      "score": 45,
+      "tier": "secondary",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Eighth engine opportunity score in the saved Derby catalog (secondary cluster)."
+    },
+    {
+      "areaName": "Spondon",
+      "order": 9,
+      "engineRank": 9,
+      "score": 45,
+      "tier": "secondary",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Ninth in the ranked limit-10 list. Included to complete ten demonstration labels; not described as highest demand."
+    },
+    {
+      "areaName": "Borrowash",
+      "order": 10,
+      "engineRank": 10,
+      "score": 35,
+      "tier": "secondary",
+      "selected": true,
+      "source": "local-seo-engine-area-engine",
+      "catalog": "config/areas/derby.json",
+      "selectionBasis": "Tenth in the ranked limit-10 list. Included to complete ten demonstration labels; not described as highest demand."
+    }
+  ],
+  "nextTask": {
+    "intent": "one platform-generated local demo page using accepted content roles and an existing section variant",
+    "suggestedFirstArea": "Allestree",
+    "localCopyGenerated": false,
+    "areaPagesGenerated": false
+  }
+}

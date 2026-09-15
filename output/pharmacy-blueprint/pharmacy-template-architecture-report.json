@@ -1,0 +1,136 @@
+{
+  "reportType": "pharmacy-template-architecture",
+  "verdict": "PASS: Pharmacy Template Architecture Complete",
+  "generatedAt": "2026-06-10T15:51:21.928Z",
+  "templateFamiliesCreated": [
+    {
+      "templateKey": "clinical-nhs-services",
+      "templateName": "Clinical NHS Services",
+      "sectionCount": 14,
+      "servicesAssigned": 28
+    },
+    {
+      "templateKey": "private-healthcare-services",
+      "templateName": "Private Healthcare Services",
+      "sectionCount": 13,
+      "servicesAssigned": 12
+    },
+    {
+      "templateKey": "travel-health-services",
+      "templateName": "Travel Health Services",
+      "sectionCount": 13,
+      "servicesAssigned": 7
+    },
+    {
+      "templateKey": "weight-management-services",
+      "templateName": "Weight Management Services",
+      "sectionCount": 13,
+      "servicesAssigned": 5
+    },
+    {
+      "templateKey": "vaccination-services",
+      "templateName": "Vaccination Services",
+      "sectionCount": 13,
+      "servicesAssigned": 10
+    }
+  ],
+  "servicesMapped": 62,
+  "unmappedServices": [],
+  "pharmacyFirstTemplateAssignment": {
+    "serviceKey": "pharmacy-first",
+    "serviceName": "Pharmacy First",
+    "category": "nhs",
+    "assignedTemplateKey": "clinical-nhs-services",
+    "assignmentReason": "Flagship NHS Advanced Service for minor illness",
+    "confidenceScore": 1
+  },
+  "pharmacyFirstCampaignValidation": {
+    "mapsToClinicalNhs": true,
+    "hubSectionsSupported": true,
+    "hubSectionMapping": {
+      "service-overview": true,
+      "conditions-covered": true,
+      "who-it-helps": true,
+      "how-it-works": true,
+      "eligibility-cost": true,
+      "why-choose-us": true,
+      "areas-we-cover": true,
+      "related-services": true,
+      "faq": true,
+      "book-cta": true
+    },
+    "clusterSectionsSupported": true,
+    "contentEngineSupported": true,
+    "complianceGuardrailsAlign": true,
+    "pass": true
+  },
+  "validationStatus": {
+    "templateFamilyCount": 5,
+    "templateFamilyCountExpected": 5,
+    "allTemplatesHave10To14Sections": true,
+    "sectionCounts": [
+      {
+        "templateKey": "clinical-nhs-services",
+        "sectionCount": 14
+      },
+      {
+        "templateKey": "private-healthcare-services",
+        "sectionCount": 13
+      },
+      {
+        "templateKey": "travel-health-services",
+        "sectionCount": 13
+      },
+      {
+        "templateKey": "weight-management-services",
+        "sectionCount": 13
+      },
+      {
+        "templateKey": "vaccination-services",
+        "sectionCount": 13
+      }
+    ],
+    "totalServicesMapped": 62,
+    "totalServicesExpected": 62,
+    "unmappedCount": 0,
+    "pharmacyFirstAssignment": {
+      "serviceKey": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Flagship NHS Advanced Service for minor illness",
+      "confidenceScore": 1
+    },
+    "pharmacyFirstCampaignValidation": {
+      "mapsToClinicalNhs": true,
+      "hubSectionsSupported": true,
+      "hubSectionMapping": {
+        "service-overview": true,
+        "conditions-covered": true,
+        "who-it-helps": true,
+        "how-it-works": true,
+        "eligibility-cost": true,
+        "why-choose-us": true,
+        "areas-we-cover": true,
+        "related-services": true,
+        "faq": true,
+        "book-cta": true
+      },
+      "clusterSectionsSupported": true,
+      "contentEngineSupported": true,
+      "complianceGuardrailsAlign": true,
+      "pass": true
+    },
+    "complianceDataPresent": true,
+    "noPagesGenerated": true,
+    "noContentGenerated": true,
+    "noDeployment": true,
+    "noRegistryChanges": true,
+    "noSitemapChanges": true
+  },
+  "readyForFirstPharmacyPageTemplateBuild": true,
+  "remainingBlockers": [],
+  "outputFiles": {
+    "templateArchitecture": "/home/inboxingproweb/local-seo-engine/output/pharmacy-blueprint/template-architecture.json"
+  }
+}

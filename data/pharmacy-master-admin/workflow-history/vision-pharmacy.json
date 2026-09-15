@@ -1,0 +1,474 @@
+{
+  "version": 2,
+  "slug": "vision-pharmacy",
+  "updatedAt": "2026-09-13T14:15:08.532Z",
+  "currentStage": "quality_review",
+  "transitions": [
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-09-13T14:14:21.013Z",
+      "operator": "admin",
+      "durationMs": 342,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-09-13T14:14:20.623Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Service Page Review approved — cluster generation stage",
+      "evidence": "Service page review decision 2026-09-13T14:14:20.551Z"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-09-13T13:07:00.992Z",
+      "operator": "admin",
+      "durationMs": 390,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-09-13T13:07:00.557Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Service Page Review approved — cluster generation stage",
+      "evidence": "Service page review decision 2026-09-13T13:07:00.503Z"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-09-13T09:42:30.899Z",
+      "operator": "admin",
+      "durationMs": 6865288,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-09-13T07:48:05.558Z",
+      "operator": "admin",
+      "durationMs": 1043,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-09-13T07:48:04.474Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-09-13T07:48:04.471Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-09-13T07:48:04.441Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-11T13:00:54.609Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-09-11T13:00:40.180Z",
+      "operator": "admin",
+      "durationMs": 4019022,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (94253911-85f5-477c-9d3e-977c3cfb4932) for https://www.visionpharmacy.com"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-11T11:53:41.122Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-09-11T11:53:25.682Z",
+      "operator": "admin",
+      "durationMs": 903901,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (8a58c082-0d37-4501-b1e4-e6950570ac3d) for https://www.visionpharmacy.com"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-11T11:38:21.707Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-09-11T11:38:06.698Z",
+      "operator": "admin",
+      "durationMs": 365155,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (96c901ed-967b-42ed-9b01-fc04aab80e0e) for https://www.visionpharmacy.com"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-11T11:32:01.469Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-09-11T11:31:46.656Z",
+      "operator": "admin",
+      "durationMs": 436259,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (8318146e-6ead-4256-aa77-e6c97e90f857) for https://www.visionpharmacy.com"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-11T11:24:30.359Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-09-11T11:24:17.842Z",
+      "operator": "admin",
+      "durationMs": 643243,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (17c5146c-c5aa-470f-b816-79feab573c35) for https://www.visionpharmacy.com"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-11T11:13:34.562Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-09-11T11:13:17.822Z",
+      "operator": "admin",
+      "durationMs": 17266860,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (4d985802-c5ca-4d85-a2b0-786fcb69916a) for https://www.visionpharmacy.com"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-11T06:25:30.909Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Website import complete after branch selection",
+      "evidence": "Branch confirmed — website import stage complete"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-09-11T06:22:45.452Z",
+      "operator": "master-admin",
+      "durationMs": 51626787,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Branch detection: 5 branches; status=branch_selection_required"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-10T16:02:18.620Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Website import complete after branch selection",
+      "evidence": "Branch confirmed — website import stage complete"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-09-10T13:43:28.335Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-09-13T14:15:08.532Z",
+      "finishedAt": "2026-09-13T14:15:08.532Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+      "warnings": [],
+      "errors": [
+        "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "5954355f-3ee2-49e4-9fa7-43ded2599b18"
+    },
+    {
+      "stageId": "quality_review",
+      "actionId": "approve_service_page_review",
+      "startedAt": "2026-09-13T14:14:20.553Z",
+      "finishedAt": "2026-09-13T14:14:20.588Z",
+      "durationMs": 35,
+      "operator": "admin",
+      "evidence": "Service Page Review approved for CPR acceptance",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 1,
+      "status": "completed"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-09-13T13:50:08.798Z",
+      "finishedAt": "2026-09-13T13:50:08.798Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+      "warnings": [],
+      "errors": [
+        "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "1b3892f2-c391-4f4f-9dd4-f355d1898672"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-09-13T13:49:57.650Z",
+      "finishedAt": "2026-09-13T13:49:57.650Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+      "warnings": [],
+      "errors": [
+        "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "2c9de1d9-e91d-4f00-961f-0cca9cd066f8"
+    },
+    {
+      "stageId": "quality_review",
+      "actionId": "approve_service_page_review",
+      "startedAt": "2026-09-13T13:07:00.506Z",
+      "finishedAt": "2026-09-13T13:07:00.544Z",
+      "durationMs": 38,
+      "operator": "admin",
+      "evidence": "Service Page Review approved for CPR acceptance",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-09-13T07:48:04.473Z",
+      "finishedAt": "2026-09-13T07:48:04.474Z",
+      "durationMs": 1,
+      "operator": "admin",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-09-13T07:48:04.442Z",
+      "finishedAt": "2026-09-13T07:48:04.470Z",
+      "durationMs": 28,
+      "operator": "admin",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-09-13T07:48:04.379Z",
+      "finishedAt": "2026-09-13T07:48:04.439Z",
+      "durationMs": 60,
+      "operator": "admin",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-11T13:00:54.563Z",
+      "finishedAt": "2026-09-11T13:00:54.563Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Branch selected: Vision Pharmacy",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "94253911-85f5-477c-9d3e-977c3cfb4932"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-11T11:53:41.078Z",
+      "finishedAt": "2026-09-11T11:53:41.078Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Branch selected: Vision Pharmacy",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "8a58c082-0d37-4501-b1e4-e6950570ac3d"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-11T11:38:21.645Z",
+      "finishedAt": "2026-09-11T11:38:21.645Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Branch selected: Vision Pharmacy",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "96c901ed-967b-42ed-9b01-fc04aab80e0e"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-11T11:32:01.383Z",
+      "finishedAt": "2026-09-11T11:32:01.383Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Branch selected: Vision Pharmacy",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "8318146e-6ead-4256-aa77-e6c97e90f857"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-11T11:24:30.260Z",
+      "finishedAt": "2026-09-11T11:24:30.260Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Branch selected: Vision Pharmacy",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "17c5146c-c5aa-470f-b816-79feab573c35"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-11T11:13:34.495Z",
+      "finishedAt": "2026-09-11T11:13:34.495Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Branch selected: Vision Pharmacy",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "4d985802-c5ca-4d85-a2b0-786fcb69916a"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-10T13:55:18.356Z",
+      "finishedAt": "2026-09-10T13:55:18.356Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Multiple pharmacy branches detected — select the branch being onboarded.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "f137f7a7-511f-43dd-b2ed-5203a943a8e9"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-10T13:44:05.477Z",
+      "finishedAt": "2026-09-10T13:44:05.477Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Multiple pharmacy branches detected — select the branch being onboarded.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "2317059c-1faf-4da5-8376-00a831a8a6ed"
+    },
+    {
+      "stageId": "google_import",
+      "actionId": "import_google",
+      "startedAt": "2026-09-10T13:43:38.402Z",
+      "finishedAt": "2026-09-10T13:43:38.402Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "No Google Business Profile found. You can continue with website import only.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "56e5dd46-f97c-4549-ab5b-7776fa73cc02"
+    }
+  ]
+}

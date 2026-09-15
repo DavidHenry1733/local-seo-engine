@@ -1,0 +1,800 @@
+{
+  "version": "brand-dna-extraction-v1",
+  "slug": "broom-lane-pharmacy",
+  "sourceUrl": "https://www.broomlanepharmacy.co.uk/",
+  "extractedAt": "2026-07-18T10:34:41.064Z",
+  "fields": {
+    "colours.primary": {
+      "value": "#66a960",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/assets/css/style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 100,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "--main-color"
+    },
+    "colours.secondary": {
+      "value": "#1682b0",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/assets/css/style.css",
+      "extractionMethod": "css-hover-accent",
+      "confidence": 75,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "#1682b0 hover accent"
+    },
+    "colours.accent": {
+      "value": "#1682b0",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/assets/css/style.css",
+      "extractionMethod": "css-hover-accent",
+      "confidence": 78,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "colours.background": {
+      "value": "#F8F9FA",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/assets/css/style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "--bg-color"
+    },
+    "colours.heading": {
+      "value": "#0E0C0A",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 82,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "--heading-color"
+    },
+    "colours.body": {
+      "value": "#2D4443",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 82,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "--text-color"
+    },
+    "colours.muted": {
+      "value": "#2D4443",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 75,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "--text-color"
+    },
+    "colours.button": {
+      "value": "#66a960",
+      "source": "website-css",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "theme-btn.style-one",
+      "confidence": 85,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "colours.buttonText": {
+      "value": "#ffffff",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 70,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.headerBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.headerText": {
+      "value": "#0E0C0A",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.topBarBackground": {
+      "value": "#66a960",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.topBarText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "colours.footerBackground": {
+      "value": "#10263D",
+      "source": "website-css",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "footer-widget background",
+      "confidence": 72,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": ".footer-widget"
+    },
+    "colours.footerText": {
+      "value": "#ffffff",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 0,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "colours.footerLink": {
+      "value": "#ffffff",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 50,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "colours.footerAccent": {
+      "value": "#cbd5e1",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 40,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "colours.sectionBackground": {
+      "value": "#F8F9FA",
+      "source": "website-css",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "--bg-color",
+      "confidence": 70,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.pageBackground": {
+      "value": "#F8F9FA",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.surface": {
+      "value": "#F8F9FA",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.headingPrimary": {
+      "value": "#0E0C0A",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.headingSecondary": {
+      "value": "#fff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.bodyText": {
+      "value": "#2D4443",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.mutedText": {
+      "value": "#2D4443",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.primaryAction": {
+      "value": "#66a960",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.primaryActionText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.secondaryAction": {
+      "value": "#fff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.secondaryActionText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.link": {
+      "value": "#fff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.iconPrimary": {
+      "value": "#66a960",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.iconSecondary": {
+      "value": "#fff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.border": {
+      "value": "color-mix(in srgb, var(--brand-text) 12%, white)",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.footerBackground": {
+      "value": "#10263D",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.footerText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.footerLink": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.footerBottomBarBackground": {
+      "value": "#10263D",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.trustBackground": {
+      "value": "#F8F9FA",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.cardBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "semanticColours.mapPanelBackground": {
+      "value": "#F8F9FA",
+      "source": "website-css",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "typography.headingFont": {
+      "value": "Albert Sans",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 90,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "--heading-font"
+    },
+    "typography.bodyFont": {
+      "value": "Rubik",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 90,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": "--body-font"
+    },
+    "typography.headingWeight": {
+      "value": "800",
+      "source": "website-intelligence",
+      "evidenceSource": "pharmacy-profile.json",
+      "extractionMethod": "stored-profile",
+      "confidence": 60,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "typography.bodyWeight": {
+      "value": "400",
+      "source": "website-intelligence",
+      "evidenceSource": "pharmacy-profile.json",
+      "extractionMethod": "stored-profile",
+      "confidence": 60,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "typography.h1Scale": {
+      "value": "clamp(2.5rem,5vw,5.3125rem)",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "h1 font-size 85px scaled",
+      "confidence": 70,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "typography.h2Scale": {
+      "value": "clamp(1.75rem,3vw,3rem)",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "h2 font-size 48px scaled",
+      "confidence": 70,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "typography.bodySize": {
+      "value": "18px",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "body font-size",
+      "confidence": 75,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "layout.headerLayout": {
+      "value": "with-top-bar",
+      "source": "website-html",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "top-header detected",
+      "confidence": 90,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "layout.heroLayout": {
+      "value": "split",
+      "source": "website-css",
+      "evidenceSource": "assets/css/pages/home-one.css",
+      "extractionMethod": "medolia split hero template",
+      "confidence": 75,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "layout.logoMaxHeight": {
+      "value": "230px",
+      "source": "website-html",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "brand-logo img width",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "surfaces.buttonRadius": {
+      "value": "10px",
+      "source": "website-css",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "theme-btn / medolia border-radius",
+      "confidence": 72,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "surfaces.cardRadius": {
+      "value": "10px",
+      "source": "website-css",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "medolia-choose-item border-radius",
+      "confidence": 70,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "spacing.sectionY": {
+      "value": "72px",
+      "source": "platform-default",
+      "evidenceSource": "pharmaconnect-defaults",
+      "extractionMethod": "platform-spacing",
+      "confidence": 0,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "identity.logoUrl": {
+      "value": "https://www.broomlanepharmacy.co.uk/assets/images/logo1.png",
+      "source": "website-html",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "brand-logo img src",
+      "confidence": 88,
+      "importedAt": "2026-07-18T10:34:41.064Z",
+      "selectorOrProperty": ".brand-logo img"
+    },
+    "identity.faviconUrl": {
+      "value": "https://www.broomlanepharmacy.co.uk/assets/images/favicon.png?v=2",
+      "source": "website-html",
+      "evidenceSource": "https://www.broomlanepharmacy.co.uk/",
+      "extractionMethod": "link rel=icon",
+      "confidence": 85,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "spacing.containerMax": {
+      "value": "1314px",
+      "source": "website-css",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": ".container max-width",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    "layout.topInfoBarText": {
+      "value": "Monday to Friday: 9:00 am - 6:00 pm | Saturday & Sunday: Closed | +441709361398 | info@broomlanepharmacy.co.uk",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "contact + hours",
+      "confidence": 85,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    }
+  },
+  "populatedFromWebsite": [
+    "colours.primary",
+    "colours.secondary",
+    "colours.accent",
+    "colours.background",
+    "colours.heading",
+    "colours.body",
+    "colours.muted",
+    "colours.button",
+    "colours.buttonText",
+    "semanticColours.headerBackground",
+    "semanticColours.headerText",
+    "semanticColours.topBarBackground",
+    "semanticColours.topBarText",
+    "colours.footerBackground",
+    "colours.sectionBackground",
+    "semanticColours.pageBackground",
+    "semanticColours.surface",
+    "semanticColours.headingPrimary",
+    "semanticColours.headingSecondary",
+    "semanticColours.bodyText",
+    "semanticColours.mutedText",
+    "semanticColours.primaryAction",
+    "semanticColours.primaryActionText",
+    "semanticColours.secondaryAction",
+    "semanticColours.secondaryActionText",
+    "semanticColours.link",
+    "semanticColours.iconPrimary",
+    "semanticColours.iconSecondary",
+    "semanticColours.border",
+    "semanticColours.footerBackground",
+    "semanticColours.footerText",
+    "semanticColours.footerLink",
+    "semanticColours.footerBottomBarBackground",
+    "semanticColours.trustBackground",
+    "semanticColours.cardBackground",
+    "semanticColours.mapPanelBackground",
+    "typography.headingFont",
+    "typography.bodyFont",
+    "typography.headingWeight",
+    "typography.bodyWeight",
+    "typography.h1Scale",
+    "typography.h2Scale",
+    "typography.bodySize",
+    "layout.headerLayout",
+    "layout.heroLayout",
+    "layout.logoMaxHeight",
+    "surfaces.buttonRadius",
+    "surfaces.cardRadius",
+    "identity.logoUrl",
+    "identity.faviconUrl",
+    "spacing.containerMax",
+    "layout.topInfoBarText"
+  ],
+  "usingDefaults": [
+    "colours.footerText",
+    "colours.footerLink",
+    "colours.footerAccent",
+    "spacing.sectionY"
+  ],
+  "styleEvidence": [
+    {
+      "role": "h1",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": "h1 / --heading-color",
+      "property": "color",
+      "computedValue": "#0E0C0A",
+      "extractionMethod": "css-variable-or-rule",
+      "confidence": 82,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "h2",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": "h2",
+      "property": "color",
+      "computedValue": "#0E0C0A",
+      "extractionMethod": "css-rule-inheritance",
+      "confidence": 78,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "h3",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": "h3",
+      "property": "color",
+      "computedValue": "#0E0C0A",
+      "extractionMethod": "css-rule-inheritance",
+      "confidence": 75,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "paragraph",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": "p / --text-color",
+      "property": "color",
+      "computedValue": "#2D4443",
+      "extractionMethod": "css-variable",
+      "confidence": 82,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "navigation-link",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".main-menu a",
+      "property": "color",
+      "computedValue": "#0E0C0A",
+      "extractionMethod": "css-rule",
+      "confidence": 70,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "primary-button",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".theme-btn.style-one",
+      "property": "background-color",
+      "computedValue": "#66a960",
+      "extractionMethod": "css-rule",
+      "confidence": 85,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "primary-button-text",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".theme-btn.style-one",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "secondary-button",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".theme-btn.style-two",
+      "property": "background-color",
+      "computedValue": "#fff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "top-bar",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".top-header",
+      "property": "background-color",
+      "computedValue": "#66a960",
+      "extractionMethod": "css-rule",
+      "confidence": 88,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "top-bar-text",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".top-header",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "main-header",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".header-upper / .main-header",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 75,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "hero",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".banner-section",
+      "property": "background-color",
+      "computedValue": "#F8F9FA",
+      "extractionMethod": "css-inferred",
+      "confidence": 55,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "service-card",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".choose-item, .service-card",
+      "property": "background-color",
+      "computedValue": "#F8F9FA",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "icon",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".choose-item .icon",
+      "property": "color",
+      "computedValue": "#66a960",
+      "extractionMethod": "css-inferred",
+      "confidence": 65,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "content-section",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": "section",
+      "property": "background-color",
+      "computedValue": "#F8F9FA",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "cta-section",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".cta-section",
+      "property": "background-color",
+      "computedValue": "#66a960",
+      "extractionMethod": "css-inferred",
+      "confidence": 55,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "footer",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".footer-widget / footer",
+      "property": "background-color",
+      "computedValue": "#10263D",
+      "extractionMethod": "css-rule",
+      "confidence": 72,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "footer-heading",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".footer-widget h3",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "footer-link",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".footer-widget a",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "map-contact",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".contact-section",
+      "property": "background-color",
+      "computedValue": "#F8F9FA",
+      "extractionMethod": "css-inferred",
+      "confidence": 45,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    },
+    {
+      "role": "mobile-navigation",
+      "pageUrl": "https://www.broomlanepharmacy.co.uk/",
+      "selectorOrSignature": ".mobile-menu",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 40,
+      "importedAt": "2026-07-18T10:34:41.064Z"
+    }
+  ],
+  "conflicts": [],
+  "completeness": {
+    "overall": 76,
+    "categories": [
+      {
+        "category": "identity",
+        "status": "extracted",
+        "score": 100
+      },
+      {
+        "category": "semantic colours",
+        "status": "extracted",
+        "score": 95
+      },
+      {
+        "category": "typography",
+        "status": "extracted",
+        "score": 90
+      },
+      {
+        "category": "header/navigation",
+        "status": "extracted",
+        "score": 95
+      },
+      {
+        "category": "CTAs",
+        "status": "extracted",
+        "score": 90
+      },
+      {
+        "category": "hero",
+        "status": "partial",
+        "score": 100
+      },
+      {
+        "category": "section rhythm",
+        "status": "default-fallback",
+        "score": 30
+      },
+      {
+        "category": "cards",
+        "status": "partial",
+        "score": 65
+      },
+      {
+        "category": "imagery",
+        "status": "default-fallback",
+        "score": 30
+      },
+      {
+        "category": "footer",
+        "status": "extracted",
+        "score": 88
+      },
+      {
+        "category": "responsive behaviour",
+        "status": "partial",
+        "score": 55
+      }
+    ],
+    "computedAt": "2026-07-18T10:34:42.167Z"
+  }
+}

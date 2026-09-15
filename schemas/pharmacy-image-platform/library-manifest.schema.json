@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pharmaconnect.uk/schemas/pharmacy-image-platform/library-manifest.schema.json",
+  "title": "PharmaConnectImagePlatformLibraryManifest",
+  "type": "object",
+  "required": ["schemaVersion", "platformRevision", "generatedAt", "assetRoot", "services"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "platformRevision": { "type": "string", "minLength": 8 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "assetRoot": { "const": "assets/pharmacy-image-platform" },
+    "services": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["serviceId", "roles"],
+        "properties": {
+          "serviceId": { "type": "string" },
+          "roles": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": ["approvedAssetIds"],
+              "properties": {
+                "approvedAssetIds": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

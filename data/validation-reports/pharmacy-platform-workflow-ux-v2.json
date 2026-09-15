@@ -1,0 +1,121 @@
+{
+  "slug": "pharmaconnect",
+  "pass": true,
+  "checks": [
+    {
+      "id": "1-content-review-renamed",
+      "pass": true,
+      "detail": "Nav and page use Content Review"
+    },
+    {
+      "id": "2-overall-review-status",
+      "pass": true,
+      "detail": "Overall Review Status label"
+    },
+    {
+      "id": "3-review-panels-split",
+      "pass": true,
+      "detail": "Three review sections"
+    },
+    {
+      "id": "4-ready-with-recommendations",
+      "pass": true,
+      "detail": "Ready + recommendations messaging"
+    },
+    {
+      "id": "5-every-warning-has-action",
+      "pass": true,
+      "detail": "Tasks include action buttons"
+    },
+    {
+      "id": "6-content-review-ui-module",
+      "pass": true,
+      "detail": "Content review UI helper"
+    },
+    {
+      "id": "7-create-or-manage-growth-plans",
+      "pass": true,
+      "detail": "Start a Growth Plan"
+    },
+    {
+      "id": "8-campaign-coverage-logic",
+      "pass": true,
+      "detail": "4/10"
+    },
+    {
+      "id": "9-regenerate-available",
+      "pass": true,
+      "detail": "Regenerate Page in Campaign OS"
+    },
+    {
+      "id": "10-regenerate-api",
+      "pass": true,
+      "detail": "Regenerate API route"
+    },
+    {
+      "id": "11-stale-detection-runs",
+      "pass": true,
+      "detail": "isStale=false"
+    },
+    {
+      "id": "12-regenerate-executes",
+      "pass": true,
+      "detail": "/api/pharmacy-campaigns?slug=pharmaconnect&campaignId=debea4b8-72a8-4511-9fb3-e3ab5dc16ba1"
+    },
+    {
+      "id": "13-profile-update-banner",
+      "pass": true,
+      "detail": "Profile update / stale UI"
+    },
+    {
+      "id": "14-plain-campaign-status",
+      "pass": true,
+      "detail": "Plain campaign status strip"
+    },
+    {
+      "id": "15-terminology-simplified",
+      "pass": true,
+      "detail": "Simplified dashboard terminology"
+    },
+    {
+      "id": "16-structured-data-placeholder",
+      "pass": true,
+      "detail": "Structured data review page"
+    },
+    {
+      "id": "17-no-dead-end-blockers",
+      "pass": true,
+      "detail": "Blockers link to actions"
+    },
+    {
+      "id": "18-templates-unchanged",
+      "pass": true,
+      "detail": "Visual templates untouched"
+    },
+    {
+      "id": "19-all-tasks-have-buttons",
+      "pass": true,
+      "detail": "6 tasks with buttons"
+    },
+    {
+      "id": "20-live-dashboard",
+      "pass": true,
+      "detail": "Auth-gated"
+    }
+  ],
+  "coverage": {
+    "enabledServiceCount": 10,
+    "activeCampaignCount": 4,
+    "missingServiceIds": [
+      "prescription-dispensing",
+      "repeat-prescriptions",
+      "pharmacy-contraception-service",
+      "new-medicine-service",
+      "malaria-prevention",
+      "medication-reviews"
+    ],
+    "allCampaignsCreated": false
+  },
+  "staleCount": 0,
+  "generatedAt": "2026-06-28T10:33:14.477Z"
+}

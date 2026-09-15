@@ -1,0 +1,41 @@
+PROMPT 95 AI EDITORIAL EVIDENCE PILOT INSPECTION
+
+===== DARFIELD =====
+promptContractVersion: v3
+model: gpt-4.1-2025-04-14
+editorialFactIdsUsed: ["darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns","darfield:community:darfield-library-is-on-church-street","darfield:community:darfield-library-runs-regular-activities-and-spe","darfield:heritage:darfield-history-society-runs-local-history-grou","darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr","darfield:pharmacy-relationship:in-area"]
+
+heroHeading: Pharmacy First in Darfield
+heroIntroduction: Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions. Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area.
+localIntroduction: Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire. Darfield Library is on Church Street and runs regular activities and special events for children and adults. Darfield History Society runs local history group sessions.
+localContextHeading: 
+localContextParagraphs[0]: NHS general practice services in Darfield are provided from Garland House Surgery.
+relationshipToPharmacy: Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.
+localAccessIntroduction: 
+localCtaBridge: 
+
+sentence purposes:
+  [heroHeading] Pharmacy First in Darfield
+    purpose: identify the local edition
+    source: business.address
+    why: tells the reader which area and service this page is for
+  [heroIntroduction] Pharmacy First is available in Darfield, offering NHS consultations for eligible common conditions.
+    purpose: why this page is relevant
+    source: business.address, offer.lockedClinicalFacts
+    why: explains why someone in this area should read this Pharmacy First page
+  [localIntroduction] Darfield is in the Metropolitan Borough of Barnsley, South Yorkshire.
+    purpose: where the pharmacy is in relation to the area
+    source: darfield:area-identity:darfield-is-in-the-metropolitan-borough-of-barns
+    why: gives the verified location relationship
+  [localIntroduction] Darfield Library is on Church Street and runs regular activities and special events for children and adults.
+    purpose: where the pharmacy is in relation to the area
+    source: darfield:community:darfield-has-a-public-library, darfield:community:darfield-library-is-on-church-street, darfield:community:darfield-library-runs-regular-activities-and-spe
+    why: gives the verified location relationship
+  [localIntroduction] Darfield History Society runs local history group sessions.
+    purpose: where the pharmacy is in relation to the area
+    source: darfield:heritage:darfield-history-society-runs-local-history-grou
+    why: gives the verified location relationship
+  [localContextParagraphs[0]] NHS general practice services in Darfield are provided from Garland House Surgery.
+    purpose: verified local facts that help the reader
+    source: darfield:healthcare:nhs-general-practice-services-in-darfield-are-pr
+    why: describes the local healthcare landscape without implying affiliation

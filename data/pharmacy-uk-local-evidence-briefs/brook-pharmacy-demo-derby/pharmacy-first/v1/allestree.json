@@ -1,0 +1,126 @@
+{
+  "kind": "pharmacy-uk-local-evidence-brief-v1",
+  "version": "v1",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaName": "Allestree",
+  "areaSlug": "allestree",
+  "savedAt": "2026-09-08T15:17:13.028Z",
+  "introductionStructureId": "named-landmark-first",
+  "identity": {
+    "verifiedName": "Allestree",
+    "statements": [
+      "Allestree is a neighbourhood ward in Derby."
+    ]
+  },
+  "geography": {
+    "parentTown": "Derby",
+    "county": "Derbyshire",
+    "country": "United Kingdom",
+    "queryPlaceLabel": "Allestree, Derbyshire, UK",
+    "statements": [
+      "Allestree is a neighbourhood ward in Derby."
+    ]
+  },
+  "healthcare": [
+    {
+      "name": "Park Farm Medical Centre",
+      "category": "healthcare",
+      "address": "3 Park Farm Centre, Allestree, Derby DE22 2QN"
+    },
+    {
+      "name": "NHS general practice services in Allestree are provided from Park Lane Surgery.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Allestree are provided from Park Lane Surgery.",
+      "factId": "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p"
+    },
+    {
+      "name": "NHS general practice services in Allestree are provided from Park Farm Medical Centre.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Allestree are provided from Park Farm Medical Centre.",
+      "factId": "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p"
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Allestree Park",
+      "category": "landmarks",
+      "address": "Duffield Rd, Derby DE22 2EU"
+    },
+    {
+      "name": "War Memorial - Allestree",
+      "category": "landmarks",
+      "address": "St Edmund's Cl, Derby DE22 2DZ"
+    },
+    {
+      "name": "Allestree Memorial Hall",
+      "category": "landmarks",
+      "address": "1 Cornhill, Derby DE22 2GG"
+    },
+    {
+      "name": "Allestree Park is listed as a landmark in Allestree.",
+      "category": "heritage",
+      "statement": "Allestree Park is listed as a landmark in Allestree.",
+      "factId": "allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest"
+    },
+    {
+      "name": "War Memorial - Allestree is listed as a landmark in Allestree.",
+      "category": "heritage",
+      "statement": "War Memorial - Allestree is listed as a landmark in Allestree.",
+      "factId": "allestree:heritage:war-memorial-allestree-is-listed-as-a-landmark-i"
+    },
+    {
+      "name": "Allestree Memorial Hall is listed as a landmark in Allestree.",
+      "category": "heritage",
+      "statement": "Allestree Memorial Hall is listed as a landmark in Allestree.",
+      "factId": "allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-"
+    }
+  ],
+  "parks": [],
+  "shopping": [],
+  "civic": [],
+  "community": [
+    {
+      "name": "Allestree has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "category": "community",
+      "statement": "Allestree has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "factId": "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou"
+    },
+    {
+      "name": "Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.",
+      "category": "community",
+      "statement": "Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.",
+      "factId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+    },
+    {
+      "name": "Allestree Carnival is listed as a community organisation on the council neighbourhood page.",
+      "category": "community",
+      "statement": "Allestree Carnival is listed as a community organisation on the council neighbourhood page.",
+      "factId": "allestree:community:allestree-carnival-is-listed-as-a-community-orga"
+    },
+    {
+      "name": "Allestree has a public library.",
+      "category": "community",
+      "statement": "Allestree has a public library.",
+      "factId": "allestree:community:allestree-has-a-public-library"
+    }
+  ],
+  "distance": {
+    "km": 4.1,
+    "label": "approximately 4.1 km straight-line",
+    "method": "haversine-straight-line"
+  },
+  "factIds": [
+    "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+    "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby",
+    "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou",
+    "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+    "allestree:community:allestree-carnival-is-listed-as-a-community-orga",
+    "allestree:community:allestree-has-a-public-library",
+    "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+    "allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest",
+    "allestree:heritage:war-memorial-allestree-is-listed-as-a-landmark-i",
+    "allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-",
+    "allestree:pharmacy-relationship:distance"
+  ]
+}

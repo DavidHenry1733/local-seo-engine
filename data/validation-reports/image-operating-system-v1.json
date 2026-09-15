@@ -1,0 +1,61 @@
+{
+  "pass": true,
+  "slug": "pharmaconnect",
+  "checks": [
+    {
+      "id": "dashboard-overview",
+      "pass": true,
+      "detail": "total=80 assigned=40"
+    },
+    {
+      "id": "service-matrix",
+      "pass": true,
+      "detail": "80 cells"
+    },
+    {
+      "id": "assignment-test",
+      "pass": true,
+      "detail": "source=assignment exists=true"
+    },
+    {
+      "id": "upload-test",
+      "pass": true,
+      "detail": "path=assets/pharmacy-uploads/pharmaconnect/test-hero-1782327094437.svg"
+    },
+    {
+      "id": "ai-request-test",
+      "pass": true,
+      "detail": "request=7092c711 status=pending"
+    },
+    {
+      "id": "campaign-integration",
+      "pass": true,
+      "detail": "assigned=4/4"
+    },
+    {
+      "id": "visual-page-integration",
+      "pass": true,
+      "detail": "4/4 slots with assets"
+    },
+    {
+      "id": "dashboard-html",
+      "pass": true,
+      "detail": "53124 bytes"
+    },
+    {
+      "id": "assignments-json",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-image-assignments/pharmaconnect.json"
+    }
+  ],
+  "failed": [],
+  "dashboardRoute": "/api/pharmacy-image-library?slug=pharmaconnect",
+  "apiRoutes": [
+    "GET /api/pharmacy/image-library/pharmaconnect/data",
+    "GET /api/pharmacy/image-library/pharmaconnect/assignments",
+    "POST /api/pharmacy/image-library/pharmaconnect/assign",
+    "POST /api/pharmacy/image-library/pharmaconnect/upload",
+    "POST /api/pharmacy/image-library/pharmaconnect/ai-request",
+    "PATCH /api/pharmacy/image-library/pharmaconnect/ai-request/:requestId"
+  ]
+}

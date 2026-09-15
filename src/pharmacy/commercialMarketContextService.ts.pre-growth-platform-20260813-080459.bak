@@ -1,0 +1,184 @@
+/**
+ * Commercial Market Context V1
+ *
+ * Separates a business's physical locality from the commercial market
+ * in which it competes.
+ *
+ * Important:
+ * - A community pharmacy normally competes locally.
+ * - A national B2B/service provider may have a physical office locality,
+ *   but that locality must not define its competitor universe.
+ * - This service does not perform competitor discovery.
+ * - It provides the routing contract used by downstream intelligence.
+ */
+
+import type { PharmacyProfileData } from "./pharmacyProfileSchema.ts";
+import {
+  resolveTenantLocality,
+  type TenantLocalityResolution,
+} from "./masterAdminPrimaryLocalityService.ts";
+
+export type CommercialMarketScope = "local" | "national";
+
+export type CommercialBusinessModel =
+  | "community_pharmacy"
+  | "b2b_service_provider";
+
+export type CommercialCompetitorStrategy =
+  | "google_places_local"
+  | "national_commercial";
+
+export interface CommercialMarketContext {
+  businessModel: CommercialBusinessModel;
+  marketScope: CommercialMarketScope;
+  marketCountry: string;
+  customerMarket: string;
+  competitorType: string;
+  competitorStrategy: CommercialCompetitorStrategy;
+
+  physicalLocality: TenantLocalityResolution;
+  localityDefinesCommercialMarket: boolean;
+
+  localMarketIntelligenceApplicable: boolean;
+  healthcareIntelligenceApplicable: boolean;
+
+  evidence: string[];
+}
+
+function text(value: unknown): string {
+  if (Array.isArray(value)) {
+    return value.map((v) => text(v)).filter(Boolean).join(" ");
+  }
+
+  if (value && typeof value === "object") {
+    return Object.values(value as Record<string, unknown>)
+      .map((v) => text(v))
+      .filter(Boolean)
+      .join(" ");
+  }
+
+  return String(value ?? "").trim();
+}
+
+function profileEvidence(profile: PharmacyProfileData): string {
+  const p = profile as PharmacyProfileData & Record<string, unknown>;
+
+  return [
+    p.businessName,
+    p.businessType,
+    p.mainService,
+    p.description,
+    p.primaryLocation,
+    p.serviceAreas,
+    p.services,
+    p.profileBusinessType,
+    p.profileBusinessModel,
+    p.profileIndustry,
+    p.profileSector,
+    p.profileCustomerType,
+    p.profileTargetMarket,
+    p.profileServiceArea,
+  ]
+    .map((v) => text(v))
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function hasNationalCoverage(profile: PharmacyProfileData, corpus: string): boolean {
+  const p = profile as PharmacyProfileData & Record<string, unknown>;
+
+  const explicitCoverage = [
+    p.primaryLocation,
+    p.serviceAreas,
+    p.profileServiceArea,
+    p.profileTargetMarket,
+  ]
+    .map((v) => text(v))
+    .join(" ")
+    .toLowerCase();
+
+  if (
+    /\bunited kingdom\b|\buk[- ]wide\b|\bnationwide\b|\bacross the uk\b/.test(
+      explicitCoverage,
+    )
+  ) {
+    return true;
+  }
+
+  const nations = ["england", "scotland", "wales", "northern ireland"];
+  const nationCount = nations.filter((n) => explicitCoverage.includes(n)).length;
+
+  return nationCount >= 3 || /\bnational\b/.test(corpus);
+}
+
+function isB2BPharmacyDigitalProvider(corpus: string): boolean {
+  const pharmacyAudience =
+    /\bcommunity pharmacies\b|\bcommunity pharmacy\b|\bfor pharmacies\b|\bpharmacy businesses\b/.test(
+      corpus,
+    );
+
+  const digitalServices =
+    /\bpharmacy digital growth\b|\bpharmacy website\b|\bwebsite design\b|\bweb design\b|\blocal seo\b|\bseo\b|\bemail marketing\b|\bwebsite hosting\b|\bweb hosting\b|\bgrowth audit\b|\bdigital marketing\b/.test(
+      corpus,
+    );
+
+  return pharmacyAudience && digitalServices;
+}
+
+export function resolveCommercialMarketContext(
+  profile: PharmacyProfileData,
+): CommercialMarketContext {
+  const corpus = profileEvidence(profile);
+  const physicalLocality = resolveTenantLocality(profile);
+
+  const nationalCoverage = hasNationalCoverage(profile, corpus);
+  const b2bDigitalProvider = isB2BPharmacyDigitalProvider(corpus);
+
+  if (nationalCoverage && b2bDigitalProvider) {
+    return {
+      businessModel: "b2b_service_provider",
+      marketScope: "national",
+      marketCountry: "United Kingdom",
+      customerMarket: "community_pharmacies",
+      competitorType: "pharmacy_digital_service_providers",
+      competitorStrategy: "national_commercial",
+
+      physicalLocality,
+      localityDefinesCommercialMarket: false,
+
+      localMarketIntelligenceApplicable: false,
+      healthcareIntelligenceApplicable: false,
+
+      evidence: [
+        "Profile evidence indicates UK-wide/national service coverage.",
+        "Profile evidence indicates digital/commercial services supplied to pharmacies.",
+        physicalLocality.available
+          ? `Physical locality retained as business evidence: ${physicalLocality.value}.`
+          : "No verified physical locality is required to define the national commercial market.",
+      ],
+    };
+  }
+
+  return {
+    businessModel: "community_pharmacy",
+    marketScope: "local",
+    marketCountry: "United Kingdom",
+    customerMarket: "patients_and_local_healthcare_consumers",
+    competitorType: "community_pharmacies",
+    competitorStrategy: "google_places_local",
+
+    physicalLocality,
+    localityDefinesCommercialMarket: true,
+
+    localMarketIntelligenceApplicable: true,
+    healthcareIntelligenceApplicable: true,
+
+    evidence: [
+      "No supported national B2B pharmacy-digital-service pattern was detected.",
+      physicalLocality.available
+        ? `Local commercial market resolved from verified locality: ${physicalLocality.value}.`
+        : "Local commercial market requires verified locality evidence.",
+    ],
+  };
+}

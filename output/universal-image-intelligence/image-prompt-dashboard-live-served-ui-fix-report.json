@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-06-11T09:48:23.942Z",
+  "result": "PASS: Live Image Prompt Dashboard Verified In Served HTML",
+  "servedHtmlContainsLatestCode": true,
+  "markerResults": {
+    "ipd-live-debug": true,
+    "ipdApiPath": true,
+    "IPD_DASHBOARD_BUILD_TS": true,
+    "data-ipd-action": true,
+    "Copy Prompt": true,
+    "pharmacy-first": true,
+    "ipd-prompts-output": true,
+    "ipdLoadPromptsForFilters": true,
+    "IPD_FALLBACK_SERVICES": true
+  },
+  "metaApiStatus": {
+    "httpStatus": 200,
+    "ok": true,
+    "featuredHubServices": true,
+    "hasServicesByTemplateFamily": true
+  },
+  "promptsApiStatus": {
+    "httpStatus": 200,
+    "ok": true,
+    "promptCount": 4
+  },
+  "browserFallbackStatus": {
+    "htmlPreseededServiceOptions": true,
+    "ipdFallbackServices": true,
+    "ipdLiveDebugPanel": true,
+    "ipdApiPathAuthToken": true,
+    "immediateDefaultPromptLoad": true,
+    "manualTextareaCopyHint": true
+  },
+  "dashboardBuildTimestamp": "2026-06-11T09:48:23.864Z",
+  "distBuildTimestamp": "2026-06-11T09:48:21.204Z",
+  "pm2RestartTimestamp": "2026-06-11T09:48:21.489Z",
+  "dashboardOpenUrl": "http://127.0.0.1:3000/api/dashboard?slug=inboxingproweb&_t=local-seo-engine-production-secret-change-later-2026",
+  "validationNotes": {
+    "rootCauseFixed": "ipdFetch now appends INTERNAL_TOKEN (_t) like apiFetch — unauthenticated fetches were returning 401/302",
+    "issues": []
+  }
+}

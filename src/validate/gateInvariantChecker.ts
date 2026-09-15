@@ -577,7 +577,7 @@ function checkImageInvariants(
 
   // D2. Image Library assignment checks (only when library is enabled and pageImages provided)
   if (input.imageLibraryEnabled && input.pageImages) {
-    const slots = ["hero", "support", "conversion"] as const;
+    const slots = ["hero", "support", "trust", "conversion"] as const;
     const usedIds: string[] = [];
 
     for (const slot of slots) {

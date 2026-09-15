@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-template-family-preview-v1",
+  "generatedAt": "2026-06-11T06:43:15.569Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy Template Family Preview System Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "templateFamiliesAvailable": 5,
+  "clinicalNhsRendererUnchanged": true,
+  "clinicalNhsHash": "b31fdae81645e2b0818d7edd38f4e678d09b1a17b7ef1a0e1eaae07b85fea266",
+  "templateFamiliesRendered": [
+    {
+      "templateKey": "clinical-nhs-services",
+      "serviceKey": "pharmacy-first",
+      "displayName": "Clinical NHS Services (Pharmacy First)",
+      "pageCount": 5,
+      "pass": true,
+      "readinessScore": 9,
+      "issues": []
+    },
+    {
+      "templateKey": "vaccination-services",
+      "serviceKey": "nhs-flu-vaccination",
+      "displayName": "Vaccination — NHS Flu Vaccination",
+      "pageCount": 5,
+      "pass": true,
+      "readinessScore": 9,
+      "issues": []
+    },
+    {
+      "templateKey": "private-healthcare-services",
+      "serviceKey": "private-ear-wax-removal",
+      "displayName": "Private Healthcare — Ear Wax Removal",
+      "pageCount": 5,
+      "pass": true,
+      "readinessScore": 9,
+      "issues": []
+    },
+    {
+      "templateKey": "travel-health-services",
+      "serviceKey": "travel-vaccinations",
+      "displayName": "Travel Health — Travel Vaccinations",
+      "pageCount": 5,
+      "pass": true,
+      "readinessScore": 9,
+      "issues": []
+    },
+    {
+      "templateKey": "weight-management-services",
+      "serviceKey": "pharmacy-weight-loss-programme",
+      "displayName": "Weight Management — Pharmacy Weight Loss Programme",
+      "pageCount": 5,
+      "pass": true,
+      "readinessScore": 9,
+      "issues": []
+    }
+  ],
+  "previewPagesGenerated": [
+    "output/pharmacy-preview/pharmacy-first-rotherham/index.html",
+    "output/pharmacy-preview/pharmacy-first-aston/index.html",
+    "output/pharmacy-preview/pharmacy-first-bramley/index.html",
+    "output/pharmacy-preview/pharmacy-first-rawmarsh/index.html",
+    "output/pharmacy-preview/pharmacy-first-wickersley/index.html",
+    "output/pharmacy-preview/nhs-flu-vaccination-rotherham/index.html",
+    "output/pharmacy-preview/nhs-flu-vaccination-aston/index.html",
+    "output/pharmacy-preview/nhs-flu-vaccination-bramley/index.html",
+    "output/pharmacy-preview/nhs-flu-vaccination-rawmarsh/index.html",
+    "output/pharmacy-preview/nhs-flu-vaccination-wickersley/index.html",
+    "output/pharmacy-preview/private-ear-wax-removal-rotherham/index.html",
+    "output/pharmacy-preview/private-ear-wax-removal-aston/index.html",
+    "output/pharmacy-preview/private-ear-wax-removal-bramley/index.html",
+    "output/pharmacy-preview/private-ear-wax-removal-rawmarsh/index.html",
+    "output/pharmacy-preview/private-ear-wax-removal-wickersley/index.html",
+    "output/pharmacy-preview/travel-vaccinations-rotherham/index.html",
+    "output/pharmacy-preview/travel-vaccinations-aston/index.html",
+    "output/pharmacy-preview/travel-vaccinations-bramley/index.html",
+    "output/pharmacy-preview/travel-vaccinations-rawmarsh/index.html",
+    "output/pharmacy-preview/travel-vaccinations-wickersley/index.html",
+    "output/pharmacy-preview/pharmacy-weight-loss-programme-rotherham/index.html",
+    "output/pharmacy-preview/pharmacy-weight-loss-programme-aston/index.html",
+    "output/pharmacy-preview/pharmacy-weight-loss-programme-bramley/index.html",
+    "output/pharmacy-preview/pharmacy-weight-loss-programme-rawmarsh/index.html",
+    "output/pharmacy-preview/pharmacy-weight-loss-programme-wickersley/index.html"
+  ],
+  "totalPreviewPages": 25,
+  "validationResults": {
+    "fiveTemplateFamilies": true,
+    "clinicalNhsExists": true,
+    "clinicalNhsUnchanged": true,
+    "fourNewPreviewSets": true,
+    "allSectionsPresent": true,
+    "schemaValid": true,
+    "faqsPresent": true,
+    "internalLinksPresent": true,
+    "ctaPresent": true,
+    "imageSlotsPresent": true,
+    "noUnreplacedTokens": true
+  },
+  "issuesFound": [],
+  "readinessScorePerTemplate": {
+    "clinical-nhs-services": 9,
+    "vaccination-services": 9,
+    "private-healthcare-services": 9,
+    "travel-health-services": 9,
+    "weight-management-services": 9
+  },
+  "recommendedTemplateOrderForLiveWiring": [
+    "clinical-nhs-services",
+    "vaccination-services",
+    "private-healthcare-services",
+    "travel-health-services",
+    "weight-management-services"
+  ],
+  "filesCreated": [
+    "src/pharmacy/templates/pharmacyTemplateCore.ts",
+    "src/pharmacy/templates/renderVaccinationService.ts",
+    "src/pharmacy/templates/renderPrivateHealthcareService.ts",
+    "src/pharmacy/templates/renderTravelHealthService.ts",
+    "src/pharmacy/templates/renderWeightManagementService.ts",
+    "scripts/lib/pharmacy-family-preview.mjs",
+    "scripts/render-vaccination-preview.mjs",
+    "scripts/render-private-healthcare-preview.mjs",
+    "scripts/render-travel-health-preview.mjs",
+    "scripts/render-weight-management-preview.mjs",
+    "scripts/render-all-pharmacy-template-previews.mjs"
+  ]
+}

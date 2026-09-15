@@ -1,0 +1,204 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:01:29.015Z",
+  "tokenUsage": {
+    "promptTokens": 6598,
+    "completionTokens": 394,
+    "totalTokens": 6992
+  },
+  "estimatedCostUsd": 0.016347999999999998,
+  "inputEvidencePackHash": "74d50e35fe0a40bc69859c5f18f0822a74e08e0229bccacf231439c178913c72",
+  "editorialEvidencePackHash": "339609bcc7a775249df7a89ba6f7b8057291c14c91bb1c6557fcf9e58686676b",
+  "areaSlug": "allestree",
+  "areaName": "Allestree",
+  "editorialFactIdsUsed": [
+    "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+    "allestree:community:allestree-carnival-is-listed-as-a-community-orga",
+    "allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-"
+  ],
+  "outputCopy": {
+    "area": "Allestree",
+    "heroHeading": "Pharmacy First in Allestree",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Allestree.",
+    "localIntroduction": "Pharmacy First for people in Allestree is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.",
+      "Allestree Carnival is listed as a community organisation on the council neighbourhood page.",
+      "Allestree Memorial Hall is listed as a landmark in Allestree."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Allestree Carnival is listed as a community organisation on the council neighbourhood page.",
+        "editorialFactId": "allestree:community:allestree-carnival-is-listed-as-a-community-orga"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Allestree Memorial Hall is listed as a landmark in Allestree.",
+        "editorialFactId": "allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+      "allestree:community:allestree-carnival-is-listed-as-a-community-orga",
+      "allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Allestree",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Allestree.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Allestree is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.",
+      "supportingCanonicalFieldOrEntity": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:community:allestree-park-is-named-on-the-local-authority-n, allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest",
+      "providerSource": "derby.gov.uk, derby.gov.uk, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Allestree Carnival is listed as a community organisation on the council neighbourhood page.",
+      "supportingCanonicalFieldOrEntity": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:community:allestree-carnival-is-listed-as-a-community-orga, allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest, allestree:heritage:war-memorial-allestree-is-listed-as-a-landmark-i, allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-",
+      "providerSource": "derby.gov.uk, derby.gov.uk, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[2]",
+      "exactSentence": "Allestree Memorial Hall is listed as a landmark in Allestree.",
+      "supportingCanonicalFieldOrEntity": "allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest, allestree:heritage:war-memorial-allestree-is-listed-as-a-landmark-i, allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+      "supportingCanonicalFieldOrEntity": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Allestree",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Allestree.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Allestree is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:community:allestree-park-is-named-on-the-local-authority-n, allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Allestree Carnival is listed as a community organisation on the council neighbourhood page.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:community:allestree-carnival-is-listed-as-a-community-orga, allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest, allestree:heritage:war-memorial-allestree-is-listed-as-a-landmark-i, allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[2]",
+      "sentence": "Allestree Memorial Hall is listed as a landmark in Allestree.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest, allestree:heritage:war-memorial-allestree-is-listed-as-a-landmark-i, allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.\",\n    \"Allestree Carnival is listed as a community organisation on the council neighbourhood page.\",\n    \"Allestree Memorial Hall is listed as a landmark in Allestree.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.\",\n      \"editorialFactId\": \"allestree:community:allestree-park-is-named-on-the-local-authority-n\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Allestree Carnival is listed as a community organisation on the council neighbourhood page.\",\n      \"editorialFactId\": \"allestree:community:allestree-carnival-is-listed-as-a-community-orga\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Allestree Memorial Hall is listed as a landmark in Allestree.\",\n      \"editorialFactId\": \"allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"allestree:community:allestree-park-is-named-on-the-local-authority-n\",\n    \"allestree:community:allestree-carnival-is-listed-as-a-community-orga\",\n    \"allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.\",\n    \"Allestree Carnival is listed as a community organisation on the council neighbourhood page.\",\n    \"Allestree Memorial Hall is listed as a landmark in Allestree.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Allestree Park is named on the local-authority neighbourhood page, with a Friends of Allestree Park group.\",\n      \"editorialFactId\": \"allestree:community:allestree-park-is-named-on-the-local-authority-n\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Allestree Carnival is listed as a community organisation on the council neighbourhood page.\",\n      \"editorialFactId\": \"allestree:community:allestree-carnival-is-listed-as-a-community-orga\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Allestree Memorial Hall is listed as a landmark in Allestree.\",\n      \"editorialFactId\": \"allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"allestree:community:allestree-park-is-named-on-the-local-authority-n\",\n    \"allestree:community:allestree-carnival-is-listed-as-a-community-orga\",\n    \"allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-\"\n  ]\n}"
+  ]
+}

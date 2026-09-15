@@ -1,0 +1,133 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Chaddesden",
+  "areaSlug": "chaddesden",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-06T07:49:09.447Z",
+  "sourceStatus": "google-places-authorised-collection-pharmacy-relationship",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [
+    {
+      "name": "The Vernon Street Medical Centre",
+      "address": "13 Vernon St, Derby DE1 1FW",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.924054999999996,
+        "longitude": -1.490475
+      },
+      "placeId": "ChIJibdZVDfxeUgR3s_joA9bvdM",
+      "rejectionReason": "outside-area-centroid"
+    },
+    {
+      "name": "Village Surgery Medical Centre",
+      "address": "Browning St, Sunny Hill, Derby DE23 8AL",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "hospital",
+        "medical_clinic",
+        "doctor",
+        "health",
+        "service",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.8963672,
+        "longitude": -1.4846924
+      },
+      "placeId": "ChIJgbw_2MTweUgRzSTEGNx-nFc",
+      "rejectionReason": "outside-area-centroid"
+    }
+  ],
+  "researchCandidates": [
+    {
+      "name": "Park Medical Practice Chaddesden",
+      "address": "Maine Dr, Chaddesden, Derby DE21 6LA",
+      "category": "healthcare",
+      "types": [
+        "medical_clinic",
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9289796,
+        "longitude": -1.4340448
+      },
+      "placeId": "ChIJT3cnyr_xeUgRBA955GRsILA",
+      "rejectionReason": "awaiting-official-source-check"
+    },
+    {
+      "name": "Derwent Valley Medical Practice",
+      "address": "20 St Mark's Rd, Chaddesden, Derby DE21 6AT",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9267107,
+        "longitude": -1.457739
+      },
+      "placeId": "ChIJo6xkgQvxeUgRt1bOFnySBGI",
+      "rejectionReason": "awaiting-official-source-check"
+    },
+    {
+      "name": "Horizon Healthcare | NHS GP Practice Derby",
+      "address": "3-5 Burton Rd, Derby DE1 1TH",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "medical_center",
+        "hospital",
+        "medical_clinic",
+        "physiotherapist",
+        "health",
+        "service",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.917034099999995,
+        "longitude": -1.4788980999999999
+      },
+      "placeId": "ChIJp1IadEPxeUgRw6xSpLUhGu4",
+      "rejectionReason": "awaiting-official-source-check"
+    }
+  ],
+  "pharmacyRelationship": {
+    "from": "Brook Pharmacy Demo Derby",
+    "to": "Chaddesden",
+    "distanceKm": 2.9,
+    "method": "haversine-straight-line",
+    "areaReferenceSource": "places-area-reference"
+  },
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 1,
+    "rejectedCount": 2,
+    "categoriesPresent": [],
+    "minimumMet": true
+  }
+}

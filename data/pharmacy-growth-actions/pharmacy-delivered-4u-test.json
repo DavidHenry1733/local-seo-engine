@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "slug": "pharmacy-delivered-4u-test",
+  "generatedAt": "2026-07-05T12:57:47.694Z",
+  "lastUpdated": "2026-07-13T12:28:46.702Z",
+  "totalActions": 10,
+  "pendingActions": 10,
+  "inProgressActions": 0,
+  "completeActions": 0,
+  "deferredActions": 0,
+  "topPriorityActions": [
+    {
+      "id": "authority-blood-pressure-checks-add-canonical",
+      "title": "Add canonical URL (Blood Pressure Checks)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Technical publish readiness blocked — canonical URL missing.",
+      "evidence": [
+        "Technical Publish Readiness: Canonical"
+      ],
+      "recommendedNextStep": "Review authority audit technical signals and confirm canonical before live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=blood-pressure-checks",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "authority-pharmacy-first-add-canonical",
+      "title": "Add canonical URL (Pharmacy First)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Technical publish readiness blocked — canonical URL missing.",
+      "evidence": [
+        "Technical Publish Readiness: Canonical"
+      ],
+      "recommendedNextStep": "Review authority audit technical signals and confirm canonical before live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=pharmacy-first",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "authority-blood-pressure-checks-remove-noindex",
+      "title": "Remove noindex before live publish (Blood Pressure Checks)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Authority audit flagged noindex on the service page — blocks live indexing.",
+      "evidence": [
+        "Page marked noindex — remove before live publish"
+      ],
+      "recommendedNextStep": "Remove noindex meta tag before submitting for live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=blood-pressure-checks",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "authority-pharmacy-first-remove-noindex",
+      "title": "Remove noindex before live publish (Pharmacy First)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Authority audit flagged noindex on the service page — blocks live indexing.",
+      "evidence": [
+        "Page marked noindex — remove before live publish"
+      ],
+      "recommendedNextStep": "Remove noindex meta tag before submitting for live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=pharmacy-first",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "profile-add-logo",
+      "title": "Add pharmacy logo to complete profile",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Logo completes branding and improves trust on every published page header.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Profile completeness is at 100% — logo is the remaining branding gap.",
+      "evidence": [],
+      "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=pharmacy-delivered-4u-test#branding",
+      "dependencyOrder": 10,
+      "urgency": 4,
+      "rankScore": 69
+    }
+  ],
+  "actionsByCategory": {
+    "Trust": [
+      {
+        "id": "authority-blood-pressure-checks-add-canonical",
+        "title": "Add canonical URL (Blood Pressure Checks)",
+        "category": "Trust",
+        "priority": "Critical",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Technical publish readiness blocked — canonical URL missing.",
+        "evidence": [
+          "Technical Publish Readiness: Canonical"
+        ],
+        "recommendedNextStep": "Review authority audit technical signals and confirm canonical before live publish.",
+        "linkedModule": "Authority Audit",
+        "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=blood-pressure-checks",
+        "dependencyOrder": 11,
+        "urgency": 5,
+        "rankScore": 85
+      },
+      {
+        "id": "authority-pharmacy-first-add-canonical",
+        "title": "Add canonical URL (Pharmacy First)",
+        "category": "Trust",
+        "priority": "Critical",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Technical publish readiness blocked — canonical URL missing.",
+        "evidence": [
+          "Technical Publish Readiness: Canonical"
+        ],
+        "recommendedNextStep": "Review authority audit technical signals and confirm canonical before live publish.",
+        "linkedModule": "Authority Audit",
+        "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=pharmacy-first",
+        "dependencyOrder": 11,
+        "urgency": 5,
+        "rankScore": 85
+      },
+      {
+        "id": "authority-blood-pressure-checks-remove-noindex",
+        "title": "Remove noindex before live publish (Blood Pressure Checks)",
+        "category": "Trust",
+        "priority": "Critical",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Authority audit flagged noindex on the service page — blocks live indexing.",
+        "evidence": [
+          "Page marked noindex — remove before live publish"
+        ],
+        "recommendedNextStep": "Remove noindex meta tag before submitting for live publish.",
+        "linkedModule": "Authority Audit",
+        "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=blood-pressure-checks",
+        "dependencyOrder": 11,
+        "urgency": 5,
+        "rankScore": 85
+      },
+      {
+        "id": "authority-pharmacy-first-remove-noindex",
+        "title": "Remove noindex before live publish (Pharmacy First)",
+        "category": "Trust",
+        "priority": "Critical",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Authority audit flagged noindex on the service page — blocks live indexing.",
+        "evidence": [
+          "Page marked noindex — remove before live publish"
+        ],
+        "recommendedNextStep": "Remove noindex meta tag before submitting for live publish.",
+        "linkedModule": "Authority Audit",
+        "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=pharmacy-first",
+        "dependencyOrder": 11,
+        "urgency": 5,
+        "rankScore": 85
+      },
+      {
+        "id": "authority-blood-pressure-checks-add-reviewer",
+        "title": "Add named professional reviewer (Blood Pressure Checks)",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Human expertise signal missing — named pharmacist or clinical reviewer required.",
+        "evidence": [
+          "Human Expertise: Named pharmacist / reviewer"
+        ],
+        "recommendedNextStep": "Add reviewer name, role and qualifications in Profile Dashboard.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=pharmacy-delivered-4u-test#section-professional-review",
+        "dependencyOrder": 8,
+        "urgency": 4,
+        "rankScore": 64
+      },
+      {
+        "id": "authority-pharmacy-first-add-reviewer",
+        "title": "Add named professional reviewer (Pharmacy First)",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Human expertise signal missing — named pharmacist or clinical reviewer required.",
+        "evidence": [
+          "Human Expertise: Named pharmacist / reviewer"
+        ],
+        "recommendedNextStep": "Add reviewer name, role and qualifications in Profile Dashboard.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=pharmacy-delivered-4u-test#section-professional-review",
+        "dependencyOrder": 8,
+        "urgency": 4,
+        "rankScore": 64
+      }
+    ],
+    "Profile": [
+      {
+        "id": "profile-add-logo",
+        "title": "Add pharmacy logo to complete profile",
+        "category": "Profile",
+        "priority": "High",
+        "impact": "Logo completes branding and improves trust on every published page header.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Profile completeness is at 100% — logo is the remaining branding gap.",
+        "evidence": [],
+        "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=pharmacy-delivered-4u-test#branding",
+        "dependencyOrder": 10,
+        "urgency": 4,
+        "rankScore": 69
+      }
+    ],
+    "Competitor Gap": [
+      {
+        "id": "competitor-promote-pharmacy-first",
+        "title": "Promote Pharmacy First as a priority service",
+        "category": "Competitor Gap",
+        "priority": "High",
+        "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+        "evidence": [
+          "60% of local competitors promote Pharmacy First",
+          "Pharmacy First page published and in visibility registry"
+        ],
+        "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+        "linkedModule": "Competitor Intelligence",
+        "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=pharmacy-delivered-4u-test",
+        "dependencyOrder": 4,
+        "urgency": 4,
+        "rankScore": 56
+      }
+    ],
+    "Content": [
+      {
+        "id": "content-gbp-posts-pharmacy-first",
+        "title": "Build Google Business Profile posts from Pharmacy First ecosystem",
+        "category": "Content",
+        "priority": "Medium",
+        "impact": "GBP posts reinforce service relevance and drive local discovery between website updates.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Pharmacy First content ecosystem includes ready GBP post assets.",
+        "evidence": [
+          "GBP post pack available at pharmacy-first/packs/gbp-posts.json"
+        ],
+        "recommendedNextStep": "Copy ecosystem GBP posts into your Google Business Profile weekly schedule.",
+        "linkedModule": "Content Ecosystem",
+        "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+        "dependencyOrder": 3,
+        "urgency": 3,
+        "rankScore": 41
+      },
+      {
+        "id": "content-travel-vaccinations-seasonal",
+        "title": "Publish Travel Vaccinations content before peak travel season",
+        "category": "Content",
+        "priority": "Medium",
+        "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Travel Vaccinations page is published for Rotherham — refresh promotion ahead of peak demand.",
+        "evidence": [
+          "travel vaccinations Rotherham",
+          "70% of local competitors promote travel vaccinations"
+        ],
+        "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+        "linkedModule": "Visual Experience",
+        "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+        "dependencyOrder": 3,
+        "urgency": 3,
+        "rankScore": 41
+      }
+    ]
+  },
+  "actions": [
+    {
+      "id": "authority-blood-pressure-checks-add-canonical",
+      "title": "Add canonical URL (Blood Pressure Checks)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Technical publish readiness blocked — canonical URL missing.",
+      "evidence": [
+        "Technical Publish Readiness: Canonical"
+      ],
+      "recommendedNextStep": "Review authority audit technical signals and confirm canonical before live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=blood-pressure-checks",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "authority-pharmacy-first-add-canonical",
+      "title": "Add canonical URL (Pharmacy First)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Technical publish readiness blocked — canonical URL missing.",
+      "evidence": [
+        "Technical Publish Readiness: Canonical"
+      ],
+      "recommendedNextStep": "Review authority audit technical signals and confirm canonical before live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=pharmacy-first",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "authority-blood-pressure-checks-remove-noindex",
+      "title": "Remove noindex before live publish (Blood Pressure Checks)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Authority audit flagged noindex on the service page — blocks live indexing.",
+      "evidence": [
+        "Page marked noindex — remove before live publish"
+      ],
+      "recommendedNextStep": "Remove noindex meta tag before submitting for live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=blood-pressure-checks",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "authority-pharmacy-first-remove-noindex",
+      "title": "Remove noindex before live publish (Pharmacy First)",
+      "category": "Trust",
+      "priority": "Critical",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Authority audit flagged noindex on the service page — blocks live indexing.",
+      "evidence": [
+        "Page marked noindex — remove before live publish"
+      ],
+      "recommendedNextStep": "Remove noindex meta tag before submitting for live publish.",
+      "linkedModule": "Authority Audit",
+      "linkedUrl": "/api/pharmacy-authority-readiness?slug=pharmacy-delivered-4u-test&service=pharmacy-first",
+      "dependencyOrder": 11,
+      "urgency": 5,
+      "rankScore": 85
+    },
+    {
+      "id": "profile-add-logo",
+      "title": "Add pharmacy logo to complete profile",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Logo completes branding and improves trust on every published page header.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Profile completeness is at 100% — logo is the remaining branding gap.",
+      "evidence": [],
+      "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=pharmacy-delivered-4u-test#branding",
+      "dependencyOrder": 10,
+      "urgency": 4,
+      "rankScore": 69
+    },
+    {
+      "id": "authority-blood-pressure-checks-add-reviewer",
+      "title": "Add named professional reviewer (Blood Pressure Checks)",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Human expertise signal missing — named pharmacist or clinical reviewer required.",
+      "evidence": [
+        "Human Expertise: Named pharmacist / reviewer"
+      ],
+      "recommendedNextStep": "Add reviewer name, role and qualifications in Profile Dashboard.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=pharmacy-delivered-4u-test#section-professional-review",
+      "dependencyOrder": 8,
+      "urgency": 4,
+      "rankScore": 64
+    },
+    {
+      "id": "authority-pharmacy-first-add-reviewer",
+      "title": "Add named professional reviewer (Pharmacy First)",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Resolves Authority & AI Readiness blockers before live publish and indexing.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Human expertise signal missing — named pharmacist or clinical reviewer required.",
+      "evidence": [
+        "Human Expertise: Named pharmacist / reviewer"
+      ],
+      "recommendedNextStep": "Add reviewer name, role and qualifications in Profile Dashboard.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=pharmacy-delivered-4u-test#section-professional-review",
+      "dependencyOrder": 8,
+      "urgency": 4,
+      "rankScore": 64
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "60% of local competitors promote Pharmacy First",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=pharmacy-delivered-4u-test",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-gbp-posts-pharmacy-first",
+      "title": "Build Google Business Profile posts from Pharmacy First ecosystem",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "GBP posts reinforce service relevance and drive local discovery between website updates.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Pharmacy First content ecosystem includes ready GBP post assets.",
+      "evidence": [
+        "GBP post pack available at pharmacy-first/packs/gbp-posts.json"
+      ],
+      "recommendedNextStep": "Copy ecosystem GBP posts into your Google Business Profile weekly schedule.",
+      "linkedModule": "Content Ecosystem",
+      "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for Rotherham — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations Rotherham",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    }
+  ]
+}

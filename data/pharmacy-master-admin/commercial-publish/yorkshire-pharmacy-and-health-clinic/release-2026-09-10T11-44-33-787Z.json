@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "slug": "yorkshire-pharmacy-and-health-clinic",
+  "serviceId": "pharmacy-first",
+  "releaseVersion": "2026-09-10T11:44:33.787Z",
+  "releaseId": "v1",
+  "generationVersion": null,
+  "qualityReviewApprovalReference": "",
+  "manifestHash": "e43e693d2dd0cf5f",
+  "registryHash": "1b2f4e3da01379dc",
+  "sitemapHash": "4b38636bc3f1b19e",
+  "fileTotals": {
+    "mode": "initial_publish",
+    "totalFiles": 11,
+    "newFiles": 11,
+    "changedFiles": 0,
+    "unchangedFiles": 0,
+    "deletedFiles": 0,
+    "pages": 11,
+    "images": 0,
+    "sitemap": true,
+    "registry": true,
+    "manifest": true,
+    "redirects": 0
+  },
+  "destination": {
+    "publicWebsite": "https://local.yorkshirepharmacyhealthclinic.co.uk/",
+    "customerEcosystemUrl": "https://local.yorkshirepharmacyhealthclinic.co.uk/",
+    "managedTargetUrl": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/",
+    "internalManagedUrl": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/",
+    "dnsStatus": "not configured",
+    "sslStatus": "managed preview active",
+    "publishMethod": "PharmaConnect Managed Infrastructure",
+    "protocol": "HTTPS",
+    "remotePath": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current",
+    "host": "yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk",
+    "lastConnectionTestAt": "2026-07-20T18:10:51.136Z",
+    "lastConnectionTestOk": true,
+    "connectionStatus": "Healthy",
+    "lastSuccessfulPublish": null,
+    "currentLiveVersion": null,
+    "proposedVersion": "2026-09-10T11:44:33.820Z",
+    "credentialsConfigured": true,
+    "destinationConfigured": true,
+    "targetWritable": true
+  },
+  "publishMethod": "PharmaConnect Managed Infrastructure",
+  "operator": "admin",
+  "startedAt": "2026-09-10T11:44:25.051Z",
+  "completedAt": "2026-09-10T11:44:33.787Z",
+  "durationMs": 8736,
+  "publishedVersion": 1,
+  "currentRelease": "v1",
+  "previousRelease": null,
+  "rollbackTarget": null,
+  "liveVerification": {
+    "homepage": {
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "servicePage": {
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "guidePage": {
+      "url": null,
+      "ok": true,
+      "status": null,
+      "https": true,
+      "skipped": true
+    },
+    "blogPages": [],
+    "images": {
+      "ok": true,
+      "skipped": true,
+      "reason": "No bundled image assets in generated package"
+    },
+    "manifest": {
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/manifest.json",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "registry": {
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/registry.json",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "sitemap": {
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/sitemap.xml",
+      "ok": true,
+      "status": 200,
+      "https": true
+    },
+    "https": {
+      "ok": true,
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/pharmacy-first/",
+      "httpReachable": true
+    },
+    "managedHostname": {
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true
+    },
+    "managedUrl": {
+      "url": "https://yorkshire-pharmacy-and-health-clinic.sites.pharmaconnect.uk/pharmacy-first/",
+      "ok": true
+    },
+    "remoteVerification": {
+      "mode": "sftp_remote_verification",
+      "checks": {
+        "homepage": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current/pharmacy-first/index.html"
+        },
+        "servicePage": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current/pharmacy-first/index.html"
+        },
+        "sitemap": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current/sitemap.xml"
+        },
+        "manifest": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current/manifest.json"
+        },
+        "registry": {
+          "ok": true,
+          "path": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current/registry.json"
+        },
+        "guidePage": {
+          "ok": false,
+          "path": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current/pharmacy-first-guide/index.html"
+        }
+      },
+      "verifiedAt": "2026-09-10T11:44:33.281Z"
+    },
+    "customerLiveUrl": {
+      "url": null,
+      "ok": true,
+      "skipped": true,
+      "reason": "Customer CNAME not verified"
+    },
+    "verifiedAt": "2026-09-10T11:44:33.749Z"
+  },
+  "rollbackReference": null,
+  "jobId": "74d02a98-c5c0-42b8-bc13-17d17fd76f18"
+}

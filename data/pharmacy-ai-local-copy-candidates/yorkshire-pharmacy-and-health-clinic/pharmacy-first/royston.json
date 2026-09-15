@@ -1,0 +1,223 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v1",
+  "promptContractVersion": "v1",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T16:21:44.867Z",
+  "tokenUsage": {
+    "promptTokens": 3157,
+    "completionTokens": 701,
+    "totalTokens": 3858
+  },
+  "estimatedCostUsd": 0.011922,
+  "inputEvidencePackHash": "f6a1e5de90f1b6d9b6914bfc4e50de14c01dc9422043f565766de113b1d2f7fd",
+  "areaSlug": "royston",
+  "areaName": "Royston",
+  "outputCopy": {
+    "area": "Royston",
+    "heroHeading": "Pharmacy First in Royston",
+    "heroIntroduction": "Residents in Royston can use Pharmacy First for help with eligible common conditions. Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+    "localIntroduction": "Royston is 8.9 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "localContextHeading": "Accessing Pharmacy First from Royston",
+    "localContextParagraphs": [
+      "People living in Royston can travel to Yorkshire Pharmacy & Health Clinic for advice and treatment through Pharmacy First. The service is available to those who meet NHS criteria, regardless of where they live.",
+      "Pharmacy First can support you with a range of minor health conditions. The pharmacy team will guide you through the process and advise if another service is more appropriate."
+    ],
+    "relationshipToPharmacy": "People in Royston can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK for Pharmacy First services.",
+    "localAccessIntroduction": "You may wish to phone the pharmacy on 01226 210477 to check current arrangements or ask any questions before travelling.",
+    "localFaqs": [
+      {
+        "question": "How far is Yorkshire Pharmacy & Health Clinic from Royston?",
+        "answer": "The pharmacy is 8.9 km from Royston."
+      },
+      {
+        "question": "Is it necessary to call before visiting from Royston?",
+        "answer": "It is recommended to call ahead so the team can confirm how consultations are being arranged and answer any queries."
+      },
+      {
+        "question": "Can I use Pharmacy First if I live in Royston?",
+        "answer": "Yes, eligibility is based on your symptoms and NHS criteria, not your home address."
+      },
+      {
+        "question": "What if Pharmacy First is not suitable for my condition?",
+        "answer": "If your needs are outside the scope of Pharmacy First, the pharmacy team will advise you on the most appropriate next steps."
+      },
+      {
+        "question": "What should I bring to my Pharmacy First appointment?",
+        "answer": "Bring details of any medicines you are taking and information about your symptoms to help the pharmacist assess your needs."
+      }
+    ],
+    "localCtaBridge": "Contact the pharmacy to arrange your Pharmacy First consultation or ask for further information.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Royston is 8.9 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "People in Royston can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK for Pharmacy First services."
+      },
+      {
+        "field": "localFaqs",
+        "sentence": "The pharmacy is 8.9 km from Royston."
+      }
+    ],
+    "evidenceEntityIdsUsed": []
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Royston",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Residents in Royston can use Pharmacy First for help with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Royston is 8.9 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Accessing Pharmacy First from Royston",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "People living in Royston can travel to Yorkshire Pharmacy & Health Clinic for advice and treatment through Pharmacy First.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The service is available to those who meet NHS criteria, regardless of where they live.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Pharmacy First can support you with a range of minor health conditions.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "The pharmacy team will guide you through the process and advise if another service is more appropriate.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "People in Royston can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK for Pharmacy First services.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "You may wish to phone the pharmacy on 01226 210477 to check current arrangements or ask any questions before travelling.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].question",
+      "exactSentence": "How far is Yorkshire Pharmacy & Health Clinic from Royston?",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "The pharmacy is 8.9 km from Royston.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "It is recommended to call ahead so the team can confirm how consultations are being arranged and answer any queries.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "Can I use Pharmacy First if I live in Royston?",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "Yes, eligibility is based on your symptoms and NHS criteria, not your home address.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].question",
+      "exactSentence": "What if Pharmacy First is not suitable for my condition?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "If your needs are outside the scope of Pharmacy First, the pharmacy team will advise you on the most appropriate next steps.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].question",
+      "exactSentence": "What should I bring to my Pharmacy First appointment?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].answer",
+      "exactSentence": "Bring details of any medicines you are taking and information about your symptoms to help the pharmacist assess your needs.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "Contact the pharmacy to arrange your Pharmacy First consultation or ask for further information.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

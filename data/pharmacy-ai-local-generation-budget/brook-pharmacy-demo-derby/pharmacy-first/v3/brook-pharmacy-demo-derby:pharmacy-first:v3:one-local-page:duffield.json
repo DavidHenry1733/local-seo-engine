@@ -1,0 +1,103 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:duffield",
+  "maxProviderCalls": 6,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 6,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.07671999999999998,
+  "events": [
+    {
+      "at": "2026-09-06T07:43:08.619Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-07T07:38:38.216Z",
+      "kind": "reserve",
+      "reservationId": "r-1788766718216-1"
+    },
+    {
+      "at": "2026-09-07T07:38:43.819Z",
+      "kind": "consumed",
+      "reservationId": "r-1788766718216-1",
+      "detail": "cost=0.019108"
+    },
+    {
+      "at": "2026-09-07T07:41:00.593Z",
+      "kind": "reserve",
+      "reservationId": "r-1788766860593-2"
+    },
+    {
+      "at": "2026-09-07T07:41:04.688Z",
+      "kind": "consumed",
+      "reservationId": "r-1788766860593-2",
+      "detail": "cost=0.018706"
+    },
+    {
+      "at": "2026-09-07T07:44:03.544Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=3 remainingCostUsd=1.962186"
+    },
+    {
+      "at": "2026-09-07T07:44:03.795Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767043795-3"
+    },
+    {
+      "at": "2026-09-07T07:44:11.486Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767043795-3",
+      "detail": "cost=0.01723"
+    },
+    {
+      "at": "2026-09-07T10:32:37.166Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=4 remainingCostUsd=1.944956"
+    },
+    {
+      "at": "2026-09-07T10:32:37.264Z",
+      "kind": "reserve",
+      "reservationId": "r-1788777157264-4"
+    },
+    {
+      "at": "2026-09-07T10:32:40.013Z",
+      "kind": "consumed",
+      "reservationId": "r-1788777157264-4",
+      "detail": "cost=0.016176"
+    },
+    {
+      "at": "2026-09-08T13:42:48.908Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=5 remainingCostUsd=1.92878"
+    },
+    {
+      "at": "2026-09-08T13:42:49.004Z",
+      "kind": "reserve",
+      "reservationId": "r-1788874969004-5"
+    },
+    {
+      "at": "2026-09-08T13:42:58.235Z",
+      "kind": "consumed",
+      "reservationId": "r-1788874969004-5",
+      "detail": "cost=0.001758"
+    },
+    {
+      "at": "2026-09-08T15:37:15.074Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=6 remainingCostUsd=1.927022"
+    },
+    {
+      "at": "2026-09-08T15:37:15.238Z",
+      "kind": "reserve",
+      "reservationId": "r-1788881835238-6"
+    },
+    {
+      "at": "2026-09-08T15:37:35.079Z",
+      "kind": "consumed",
+      "reservationId": "r-1788881835238-6",
+      "detail": "cost=0.0037419999999999997"
+    }
+  ]
+}

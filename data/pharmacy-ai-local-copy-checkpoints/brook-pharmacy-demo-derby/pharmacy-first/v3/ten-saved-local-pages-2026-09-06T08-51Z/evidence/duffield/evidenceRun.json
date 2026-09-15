@@ -1,0 +1,750 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "519e72e6-64ec-40f5-8d20-eb2b614adcaa",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "duffield",
+  "areaName": "Duffield",
+  "planFingerprint": "f893a779c23b308a66b2dff746015e97d7275de9fdebcca14f625541a151fbca",
+  "spendingCapUsd": 0.069,
+  "status": "completed",
+  "startedAt": "2026-09-06T07:02:51.044Z",
+  "updatedAt": "2026-09-06T07:02:58.414Z",
+  "completedAt": "2026-09-06T07:02:58.414Z",
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "paidCallsMade": 4,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Duffield, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "83bbfedb-14df-4ee0-84c6-614e5faff80c",
+      "detail": "5 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:02:51.893Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Duffield locality, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "6fd72498-ee79-4778-bb18-0376b68f2a41",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:02:52.213Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Duffield, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "3636555b-9803-415b-ad8c-b77cf96c614e",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:02:53.934Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Duffield, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "b18c65b5-8cbb-4355-bfd6-1b8f4192538b",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:02:55.348Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "e231407e-e6c3-4824-8150-a6bb6f6bc561",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/appletree-medical-practice/C81048",
+      "capturedAt": "2026-09-06T07:02:56.161Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "10fda04d-8fc6-4735-834d-51c5d212fad5",
+      "detail": "Retrieved https://www.duffieldparishcouncil.gov.uk/",
+      "capturedAt": "2026-09-06T07:02:58.342Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "skipped-blocked",
+      "reservedUsd": 0,
+      "actualCostUsd": null,
+      "reservationId": null,
+      "detail": "Straight-line distance is blocked until a recorded area reference point exists.",
+      "capturedAt": null
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Appletree Medical Practice",
+        "address": "47A Town St, Duffield, Belper DE56 4GG",
+        "types": [
+          "medical_center",
+          "hospital",
+          "doctor",
+          "service",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9854559,
+          "longitude": -1.4856977
+        },
+        "placeId": "ChIJ88IOKprzeUgRYnku0w9nu8o",
+        "locality": "47A Town St, Duffield, Belper DE56 4GG",
+        "addressComponents": [
+          {
+            "longText": "47A",
+            "shortText": "47A",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Town Street",
+            "shortText": "Town St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Duffield",
+            "shortText": "Duffield",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Belper",
+            "shortText": "Belper",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE56 4GG",
+            "shortText": "DE56 4GG",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=14608383133971544418&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Macklin Street Surgery",
+        "address": "Doctors Surgery, 90 Macklin St, Derby DE1 1JX",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.921129099999995,
+          "longitude": -1.4817072
+        },
+        "placeId": "ChIJEWNN9DzxeUgR1kKuPo87bb4",
+        "locality": "Doctors Surgery, 90 Macklin St, Derby DE1 1JX",
+        "addressComponents": [
+          {
+            "longText": "Doctors Surgery",
+            "shortText": "Doctors Surgery",
+            "types": [
+              "premise"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "90",
+            "shortText": "90",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Macklin Street",
+            "shortText": "Macklin St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1JX",
+            "shortText": "DE1 1JX",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=13721689126085739222&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Horizon Healthcare | NHS GP Practice Derby",
+        "address": "3-5 Burton Rd, Derby DE1 1TH",
+        "types": [
+          "doctor",
+          "medical_center",
+          "physiotherapist",
+          "medical_clinic",
+          "hospital",
+          "service",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.917034099999995,
+          "longitude": -1.4788980999999999
+        },
+        "placeId": "ChIJp1IadEPxeUgRw6xSpLUhGu4",
+        "locality": "3-5 Burton Rd, Derby DE1 1TH",
+        "addressComponents": [
+          {
+            "longText": "3-5",
+            "shortText": "3-5",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Burton Road",
+            "shortText": "Burton Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1TH",
+            "shortText": "DE1 1TH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17157062794451004611&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Wilson Street Surgery",
+        "address": "11 Wilson St, Derby DE1 1PG",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.919137,
+          "longitude": -1.4800832
+        },
+        "placeId": "ChIJ8x9-KD3xeUgR60K2Y2U9tnY",
+        "locality": "11 Wilson St, Derby DE1 1PG",
+        "addressComponents": [
+          {
+            "longText": "11",
+            "shortText": "11",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Wilson Street",
+            "shortText": "Wilson St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1PG",
+            "shortText": "DE1 1PG",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=8554092047910716139&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Peartree Medical Centre",
+        "address": "159 Pear Tree Rd, Derby DE23 8NQ",
+        "types": [
+          "medical_center",
+          "hospital",
+          "service",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.905449399999995,
+          "longitude": -1.4759936999999999
+        },
+        "placeId": "ChIJUVHrjEjxeUgRpFrATG36hu4",
+        "locality": "159 Pear Tree Rd, Derby DE23 8NQ",
+        "addressComponents": [
+          {
+            "longText": "159",
+            "shortText": "159",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Pear Tree Road",
+            "shortText": "Pear Tree Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE23 8NQ",
+            "shortText": "DE23 8NQ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17187700375252130468&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Duffield",
+        "address": "Duffield, Belper",
+        "types": [
+          "locality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.984696,
+          "longitude": -1.4873129999999999
+        },
+        "placeId": "ChIJ4eMcg5nzeUgRHHUeG2aUmW0",
+        "locality": "Duffield, Belper",
+        "addressComponents": [
+          {
+            "longText": "Duffield",
+            "shortText": "Duffield",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Belper",
+            "shortText": "Belper",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=7897506587833431324&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Duffield, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:02:52.222Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/appletree-medical-practice/C81048",
+          "title": "Appletree Medical Practice",
+          "description": "Appletree Medical Practice. 47A Town Street, Duffield, Belper, Derbyshire, DE56 4GG. Information: This GP surgery is currently accepting new patients. Read more"
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+          "title": "List of GP practices in Derby and Derbyshire - May 2025",
+          "description": "20 May 2025 — View a full list of GP practices across Derby and Derbyshire, including practice codes, addresses and contact information."
+        },
+        {
+          "url": "https://derbyfamilymedicalcentre.co.uk/",
+          "title": "Derby Family Medical Centre – NHS GP Surgery in Normanton",
+          "description": "Derby Family Medical Centre – NHS GP Surgery in Normanton. Please call 111 or 999 for any medical assistance during this time."
+        },
+        {
+          "url": "https://derbygp.co.uk/",
+          "title": "Find an NHS GP in Derby | Choose From 33 Practices",
+          "description": "Finding an NHS GP in the heart of Derby is now easier than ever. There are 33 GP practices within 3 miles of Derby City Centre that are currently accepting ..."
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration"
+        },
+        {
+          "url": "https://www.belperpcn.co.uk/our-practices/",
+          "title": "Our Practices",
+          "description": "Appletree Medical Practice – Duffield Surgery 47a Town Street, Duffield, Belper, DE56 4GG 01332 842288. Monday To Friday 8:00am to 6:30pm"
+        },
+        {
+          "url": "https://www.nuffieldhealth.com/hospitals/derby/private-gp-service",
+          "title": "Private GP service in Derby",
+          "description": "Nuffield Health Derby Hospital … call us on 0300 790 6190. General Practice (GP) Standard private GP appointments last 30 minutes and cost £90. call 0300 790 ..."
+        },
+        {
+          "url": "https://derwentvalleymedicalpractice.co.uk/",
+          "title": "Derwent Valley Medical Practice – NHS GP Surgery in Derby",
+          "description": "Derwent Valley Medical Practice – NHS GP Surgery in Derby. Find out how to make, change or cancel an appointment."
+        },
+        {
+          "url": "https://www.villagesurgeryderby.org.uk/",
+          "title": "Village Surgery: Homepage",
+          "description": "This guidance has been developed nationally by NHS England to set out what you can expect from us as your GP practice, and what we ask from you as our patient. Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Duffield, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:02:53.946Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.duffieldparishcouncil.gov.uk/",
+          "title": "Duffield Parish Council",
+          "description": "We strive to make Duffield a better place to live, work and visit. Our website includes a wealth of information about how we conduct business and what we do. Read more"
+        },
+        {
+          "url": "https://party.coop/2026/01/05/community-duffield/",
+          "title": "Community Duffield",
+          "description": "5 Jan 2026 — Mark Spilsbury Chair of the Duffield Parish Council. Communities, Housing & Local Government. We are somewhere in the middle with just under 4, ..."
+        },
+        {
+          "url": "https://www.facebook.com/p/Duffield-Parish-Council-100068674822910/",
+          "title": "Duffield Parish Council | Belper",
+          "description": "Duffield Parish Council is a large Parish Council within Amber Valley, Derbyshire. email clerk@duffieldparishcouncil.gov.uk"
+        },
+        {
+          "url": "https://www.duffieldvillage.co.uk/about-duffield/",
+          "title": "About Duffield",
+          "description": "We have had our own Parish Council since 1897 and a Village Community Association since 1972. The village of Duffield offers a wide range of clubs and ... Read more"
+        },
+        {
+          "url": "https://www.southderbyshire.gov.uk/about-us/councillors-and-meetings/parish-councils",
+          "title": "Parish councils",
+          "description": "There are 31 Parish Councils in South Derbyshire. A full breakdown of chairmen and clerks is available should you wish to get in touch or attend meetings. Read more"
+        },
+        {
+          "url": "https://uk.linkedin.com/company/duffield-parish-council",
+          "title": "Duffield Parish Council",
+          "description": "Duffield Parish Council provides local services to Duffield residents. We strive to make Duffield a better place to live, work and visit. Read more"
+        },
+        {
+          "url": "https://www.ne-derbyshire.gov.uk/",
+          "title": "North East Derbyshire District Council: Home",
+          "description": "Pay your council tax, visit our leisure centres, submit planning application and report issues. Phone 01246 231111. Chesterfield, Derbyshire, S42 6NG."
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Duffield,_Derbyshire",
+          "title": "Duffield, Derbyshire",
+          "description": "Duffield is a village in the Amber Valley district of Derbyshire, 5 miles (8.0 km) north of Derby. It is centred on the western bank of the River Derwent at ... Read more"
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/council/council-works/other-councils/town-and-parish-councils/town-and-parish-councils.aspx",
+          "title": "Town and parish councils",
+          "description": "Parish and town councils (sometimes called civil parishes) are one of the 3 tiers of local government. They provide a variety of services."
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/appletree-medical-practice/C81048",
+      "title": "Appletree Medical Practice - NHS",
+      "status": 200,
+      "textSample": "Appletree Medical Practice - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care Appletree Medical Practice 47A Town Street, Duffield, Belper, Derbyshire, DE56 4GG Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-06T07:02:56.161Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.duffieldparishcouncil.gov.uk/",
+      "title": "Security Challenge",
+      "status": 401,
+      "textSample": "Security Challenge Security Check We just need to quickly confirm you're a real visitor before you continue. Slide the button all the way to the right using your mouse or keyboard. Slide to verify &rarr; Can't use the slider? Type the characters in an image instead Enter the characters shown in the image below, then select Submit to continue. Characters shown in the image Submit Use the slider instead Why am I seeing this page? This quick step is part of our routine security process to verify that you are human and not a robot. We often display this challenge when we detect traffic coming from networks or services that are commonly used by bots, such as data centers, certain cloud services (e.g., AWS, Azure), or VPNs/proxy services. Completing the challenge confirms your intent and allows you immediate access to the site. Thank you for helping us maintain a secure environment!",
+      "retrievedAt": "2026-09-06T07:02:58.342Z"
+    }
+  },
+  "areaReferencePoint": null,
+  "distanceKm": null,
+  "verifiedGpPracticeCount": 0,
+  "findings": [
+    "0 verified GP practice(s) after official-source checks.",
+    "Zero verified GP practices is a recorded research outcome, not an automatic retry.",
+    "no attributable identity fact from an authoritative web source no useful locality fact from an authoritative web source no verified pharmacy relationship or access fact GP research returned zero verified practices — recorded, not a retry",
+    "Actual evidence spend $0.068 of cap $0.069. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/duffield.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/duffield.json",
+  "editorialSufficiency": "EVIDENCE LIMITED",
+  "outcomeSummary": "Collection finished. Evidence is LIMITED: no attributable identity fact from an authoritative web source; no useful locality fact from an authoritative web source; no verified pharmacy relationship or access fact; GP research returned zero verified practices — recorded, not a retry. Spend $0.068.",
+  "reprocessedAt": null
+}

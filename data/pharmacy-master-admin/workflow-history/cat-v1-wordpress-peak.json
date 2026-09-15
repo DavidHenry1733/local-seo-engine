@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "slug": "cat-v1-wordpress-peak",
+  "updatedAt": "2026-08-01T08:05:02.041Z",
+  "currentStage": "generate_growth_intelligence",
+  "transitions": [
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-08-01T08:05:02.041Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-08-01T08:05:01.996Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-08-01T08:05:01.965Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-08-01T08:04:57.905Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:05:02.019Z",
+      "finishedAt": "2026-08-01T08:05:02.034Z",
+      "durationMs": 15,
+      "operator": "cpr-cat-v1",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:05:01.982Z",
+      "finishedAt": "2026-08-01T08:05:01.990Z",
+      "durationMs": 8,
+      "operator": "cpr-cat-v1",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:05:01.950Z",
+      "finishedAt": "2026-08-01T08:05:01.956Z",
+      "durationMs": 6,
+      "operator": "cpr-cat-v1",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-01T08:04:59.126Z",
+      "finishedAt": "2026-08-01T08:04:59.126Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Website import incomplete. Could not fetch https://www.peakpharmacy.co.uk: HTTP 403 for https://www.peakpharmacy.co.uk",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "0a33b568-ca33-4944-90ba-226835f72d42"
+    }
+  ]
+}

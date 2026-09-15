@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-08-10T09:25:57.549Z",
+  "passed": true,
+  "checks": [
+    {
+      "id": "existing-capability-found",
+      "pass": true,
+      "detail": "actionId=rerun_website_import"
+    },
+    {
+      "id": "reimport-gate-allowed",
+      "pass": true,
+      "detail": "allowed"
+    },
+    {
+      "id": "blocker-requires-reimport",
+      "pass": true,
+      "detail": "Evidence quality assessment missing from import snapshot — re-import required."
+    },
+    {
+      "id": "website-reimport-required-flag",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "id": "target-tenant",
+      "pass": true,
+      "detail": "pharmaconnect"
+    },
+    {
+      "id": "target-website",
+      "pass": true,
+      "detail": "https://pharmaconnect.uk/"
+    },
+    {
+      "id": "snapshot-preserved",
+      "pass": true,
+      "detail": "importedAt=2026-08-10T08:19:01.609Z"
+    },
+    {
+      "id": "google-not-imported",
+      "pass": true,
+      "detail": "false"
+    },
+    {
+      "id": "comparison-suppressed",
+      "pass": true,
+      "detail": "suppressed"
+    },
+    {
+      "id": "market-scope-national",
+      "pass": true,
+      "detail": "national"
+    },
+    {
+      "id": "primary-market-uk",
+      "pass": true,
+      "detail": "United Kingdom"
+    },
+    {
+      "id": "business-profile-not-approved",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "ui-control-label",
+      "pass": true,
+      "detail": "Re-import Website + handler present in IER page"
+    },
+    {
+      "id": "ui-uses-canonical-action",
+      "pass": true,
+      "detail": "handler posts to rerun_website_import"
+    },
+    {
+      "id": "no-auto-import-on-render",
+      "pass": true,
+      "detail": "re-import only via deliberate handler"
+    },
+    {
+      "id": "canonical-website",
+      "pass": true,
+      "detail": "https://pharmaconnect.uk/"
+    }
+  ],
+  "snapAt": "2026-08-10T08:19:01.609Z"
+}

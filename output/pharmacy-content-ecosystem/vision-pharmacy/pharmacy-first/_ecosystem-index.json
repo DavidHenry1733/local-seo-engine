@@ -1,0 +1,1288 @@
+{
+  "version": 1,
+  "serviceId": "pharmacy-first",
+  "slug": "vision-pharmacy",
+  "assets": [
+    {
+      "id": "local-cluster-oadby",
+      "type": "Cluster page",
+      "urlPath": "/local/oadby/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/vision-pharmacy/pharmacy-first/local/oadby/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Oadby",
+        "rc1-cluster-page",
+        "patient-journey-led"
+      ],
+      "wordCount": 3473
+    },
+    {
+      "id": "local-cluster-wigston",
+      "type": "Cluster page",
+      "urlPath": "/local/wigston/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/vision-pharmacy/pharmacy-first/local/wigston/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Wigston",
+        "rc1-cluster-page",
+        "patient-journey-led"
+      ],
+      "wordCount": 3496
+    },
+    {
+      "id": "local-cluster-hamilton",
+      "type": "Cluster page",
+      "urlPath": "/local/hamilton/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/vision-pharmacy/pharmacy-first/local/hamilton/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Hamilton",
+        "rc1-cluster-page",
+        "patient-journey-led"
+      ],
+      "wordCount": 3463
+    },
+    {
+      "id": "local-cluster-braunstone",
+      "type": "Cluster page",
+      "urlPath": "/local/braunstone/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/vision-pharmacy/pharmacy-first/local/braunstone/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Braunstone",
+        "rc1-cluster-page",
+        "patient-journey-led"
+      ],
+      "wordCount": 3458
+    },
+    {
+      "id": "local-cluster-blaby",
+      "type": "Cluster page",
+      "urlPath": "/local/blaby/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/vision-pharmacy/pharmacy-first/local/blaby/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Blaby",
+        "rc1-cluster-page",
+        "patient-journey-led"
+      ],
+      "wordCount": 3503
+    },
+    {
+      "id": "local-cluster-thurmaston",
+      "type": "Cluster page",
+      "urlPath": "/local/thurmaston/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/vision-pharmacy/pharmacy-first/local/thurmaston/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Thurmaston",
+        "rc1-cluster-page",
+        "patient-journey-led"
+      ],
+      "wordCount": 3496
+    },
+    {
+      "id": "local-cluster-birstall",
+      "type": "Cluster page",
+      "urlPath": "/local/birstall/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/vision-pharmacy/pharmacy-first/local/birstall/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Birstall",
+        "rc1-cluster-page",
+        "patient-journey-led"
+      ],
+      "wordCount": 3506
+    }
+  ],
+  "selectedAreas": [
+    "Oadby",
+    "Wigston",
+    "Hamilton",
+    "Braunstone",
+    "Blaby",
+    "Thurmaston",
+    "Birstall"
+  ],
+  "localClusterPagesGenerated": 7,
+  "localLocationHubGenerated": true,
+  "localLocationClustersGenerated": 7,
+  "localLocationAreasGenerated": 0,
+  "localLocationHierarchy": {
+    "ok": true,
+    "primaryLocality": "Leicester",
+    "primaryLocalitySlug": "leicester",
+    "hub": {
+      "areaId": "hub:leicester",
+      "name": "Leicester",
+      "slug": "hub",
+      "type": "city-town-hub",
+      "parentAreaId": null,
+      "source": "business-profile:primaryTown",
+      "evidence": [
+        "Primary town/city hub for service coverage"
+      ],
+      "serviceIds": [
+        "pharmacy-first"
+      ],
+      "generationEligible": true,
+      "generationReason": "primary locality hub",
+      "approved": true
+    },
+    "clusters": [
+      {
+        "areaId": "cluster:oadby",
+        "name": "Oadby",
+        "slug": "oadby",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-address-locality",
+          "profile.areaType:primary locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "distanceLabel": "0.3 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:wigston",
+        "name": "Wigston",
+        "slug": "wigston",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "distanceLabel": "2.5 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:hamilton",
+        "name": "Hamilton",
+        "slug": "hamilton",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "distanceLabel": "6.1 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:braunstone",
+        "name": "Braunstone",
+        "slug": "braunstone",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "distanceLabel": "6.4 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:blaby",
+        "name": "Blaby",
+        "slug": "blaby",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "distanceLabel": "6.7 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:thurmaston",
+        "name": "Thurmaston",
+        "slug": "thurmaston",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "distanceLabel": "7.6 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:birstall",
+        "name": "Birstall",
+        "slug": "birstall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "distanceLabel": "8.4 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 7,
+        "order": 7
+      }
+    ],
+    "areas": [],
+    "generationAreas": [
+      {
+        "areaId": "cluster:oadby",
+        "name": "Oadby",
+        "slug": "oadby",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-address-locality",
+          "profile.areaType:primary locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "distanceLabel": "0.3 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:wigston",
+        "name": "Wigston",
+        "slug": "wigston",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "distanceLabel": "2.5 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:hamilton",
+        "name": "Hamilton",
+        "slug": "hamilton",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "distanceLabel": "6.1 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:braunstone",
+        "name": "Braunstone",
+        "slug": "braunstone",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "distanceLabel": "6.4 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:blaby",
+        "name": "Blaby",
+        "slug": "blaby",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "distanceLabel": "6.7 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:thurmaston",
+        "name": "Thurmaston",
+        "slug": "thurmaston",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "distanceLabel": "7.6 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:birstall",
+        "name": "Birstall",
+        "slug": "birstall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:leicester",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "distanceLabel": "8.4 km",
+        "relationship": "local guidance for patients around Leicester",
+        "priority": 7,
+        "order": 7
+      }
+    ],
+    "trace": {
+      "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/vision-pharmacy.json",
+      "tenantSlug": "vision-pharmacy",
+      "primaryLocation": "Leicester",
+      "postcode": "LE24DD",
+      "townCity": "Leicester",
+      "storedServiceAreas": [
+        "Oadby",
+        "Wigston",
+        "Leicester",
+        "Hamilton",
+        "Braunstone",
+        "Blaby",
+        "Thurmaston",
+        "Birstall"
+      ],
+      "storedNeighbourhoods": [
+        "Oadby",
+        "Wigston",
+        "Leicester",
+        "Hamilton",
+        "Braunstone",
+        "Blaby",
+        "Thurmaston",
+        "Birstall",
+        "Kibworth",
+        "Beaumont Leys",
+        "Glenfield",
+        "Anstey",
+        "Syston",
+        "Market Harborough",
+        "Loughborough",
+        "Hinckley"
+      ],
+      "importedLocationEvidence": [],
+      "googleLocationEvidence": [
+        "googlePlaceId:ChIJ-5Em-gJkd0gRJsMrfFKsk2I",
+        "displayAddress:Unit 4 Cross St, Oadby, Leicester LE2 4DD, UK"
+      ],
+      "localIntelligenceAreas": [],
+      "selectedAreasSource": "frozen-campaign:pharmacy-first",
+      "selectedAreasFilters": [
+        "benchmarkServiceEcosystemBuilder filters pharmacy-first areas against PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane manifest)"
+      ],
+      "rejectedAreas": [],
+      "rejectionReasons": [],
+      "firstEmptySelectionDecision": "All operator-selected areas removed by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS allow-list in buildBenchmarkServiceEcosystem",
+      "responsibleFile": "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+      "responsibleFunction": "buildBenchmarkServiceEcosystem",
+      "responsibleLine": 647,
+      "areasConsidered": [
+        "Oadby",
+        "Wigston",
+        "Leicester",
+        "Hamilton",
+        "Braunstone",
+        "Blaby",
+        "Thurmaston",
+        "Birstall"
+      ]
+    }
+  },
+  "generatedAt": "2026-09-13T14:59:38.952Z",
+  "internalLinkMap": {
+    "slug": "vision-pharmacy",
+    "serviceId": "pharmacy-first",
+    "mainServiceUrlPath": "/pharmacy-first/",
+    "serviceHubUrlPath": "/pharmacy-first/",
+    "localClusterPages": [
+      {
+        "areaName": "Oadby",
+        "areaSlug": "oadby",
+        "urlPath": "/local/oadby/",
+        "outputPath": "local/oadby/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Wigston",
+            "areaSlug": "wigston",
+            "urlPath": "/local/wigston/"
+          },
+          {
+            "areaName": "Hamilton",
+            "areaSlug": "hamilton",
+            "urlPath": "/local/hamilton/"
+          },
+          {
+            "areaName": "Braunstone",
+            "areaSlug": "braunstone",
+            "urlPath": "/local/braunstone/"
+          },
+          {
+            "areaName": "Blaby",
+            "areaSlug": "blaby",
+            "urlPath": "/local/blaby/"
+          },
+          {
+            "areaName": "Thurmaston",
+            "areaSlug": "thurmaston",
+            "urlPath": "/local/thurmaston/"
+          },
+          {
+            "areaName": "Birstall",
+            "areaSlug": "birstall",
+            "urlPath": "/local/birstall/"
+          }
+        ]
+      },
+      {
+        "areaName": "Wigston",
+        "areaSlug": "wigston",
+        "urlPath": "/local/wigston/",
+        "outputPath": "local/wigston/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Oadby",
+            "areaSlug": "oadby",
+            "urlPath": "/local/oadby/"
+          },
+          {
+            "areaName": "Hamilton",
+            "areaSlug": "hamilton",
+            "urlPath": "/local/hamilton/"
+          },
+          {
+            "areaName": "Braunstone",
+            "areaSlug": "braunstone",
+            "urlPath": "/local/braunstone/"
+          },
+          {
+            "areaName": "Blaby",
+            "areaSlug": "blaby",
+            "urlPath": "/local/blaby/"
+          },
+          {
+            "areaName": "Thurmaston",
+            "areaSlug": "thurmaston",
+            "urlPath": "/local/thurmaston/"
+          },
+          {
+            "areaName": "Birstall",
+            "areaSlug": "birstall",
+            "urlPath": "/local/birstall/"
+          }
+        ]
+      },
+      {
+        "areaName": "Hamilton",
+        "areaSlug": "hamilton",
+        "urlPath": "/local/hamilton/",
+        "outputPath": "local/hamilton/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Oadby",
+            "areaSlug": "oadby",
+            "urlPath": "/local/oadby/"
+          },
+          {
+            "areaName": "Wigston",
+            "areaSlug": "wigston",
+            "urlPath": "/local/wigston/"
+          },
+          {
+            "areaName": "Braunstone",
+            "areaSlug": "braunstone",
+            "urlPath": "/local/braunstone/"
+          },
+          {
+            "areaName": "Blaby",
+            "areaSlug": "blaby",
+            "urlPath": "/local/blaby/"
+          },
+          {
+            "areaName": "Thurmaston",
+            "areaSlug": "thurmaston",
+            "urlPath": "/local/thurmaston/"
+          },
+          {
+            "areaName": "Birstall",
+            "areaSlug": "birstall",
+            "urlPath": "/local/birstall/"
+          }
+        ]
+      },
+      {
+        "areaName": "Braunstone",
+        "areaSlug": "braunstone",
+        "urlPath": "/local/braunstone/",
+        "outputPath": "local/braunstone/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Oadby",
+            "areaSlug": "oadby",
+            "urlPath": "/local/oadby/"
+          },
+          {
+            "areaName": "Wigston",
+            "areaSlug": "wigston",
+            "urlPath": "/local/wigston/"
+          },
+          {
+            "areaName": "Hamilton",
+            "areaSlug": "hamilton",
+            "urlPath": "/local/hamilton/"
+          },
+          {
+            "areaName": "Blaby",
+            "areaSlug": "blaby",
+            "urlPath": "/local/blaby/"
+          },
+          {
+            "areaName": "Thurmaston",
+            "areaSlug": "thurmaston",
+            "urlPath": "/local/thurmaston/"
+          },
+          {
+            "areaName": "Birstall",
+            "areaSlug": "birstall",
+            "urlPath": "/local/birstall/"
+          }
+        ]
+      },
+      {
+        "areaName": "Blaby",
+        "areaSlug": "blaby",
+        "urlPath": "/local/blaby/",
+        "outputPath": "local/blaby/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Oadby",
+            "areaSlug": "oadby",
+            "urlPath": "/local/oadby/"
+          },
+          {
+            "areaName": "Wigston",
+            "areaSlug": "wigston",
+            "urlPath": "/local/wigston/"
+          },
+          {
+            "areaName": "Hamilton",
+            "areaSlug": "hamilton",
+            "urlPath": "/local/hamilton/"
+          },
+          {
+            "areaName": "Braunstone",
+            "areaSlug": "braunstone",
+            "urlPath": "/local/braunstone/"
+          },
+          {
+            "areaName": "Thurmaston",
+            "areaSlug": "thurmaston",
+            "urlPath": "/local/thurmaston/"
+          },
+          {
+            "areaName": "Birstall",
+            "areaSlug": "birstall",
+            "urlPath": "/local/birstall/"
+          }
+        ]
+      },
+      {
+        "areaName": "Thurmaston",
+        "areaSlug": "thurmaston",
+        "urlPath": "/local/thurmaston/",
+        "outputPath": "local/thurmaston/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Oadby",
+            "areaSlug": "oadby",
+            "urlPath": "/local/oadby/"
+          },
+          {
+            "areaName": "Wigston",
+            "areaSlug": "wigston",
+            "urlPath": "/local/wigston/"
+          },
+          {
+            "areaName": "Hamilton",
+            "areaSlug": "hamilton",
+            "urlPath": "/local/hamilton/"
+          },
+          {
+            "areaName": "Braunstone",
+            "areaSlug": "braunstone",
+            "urlPath": "/local/braunstone/"
+          },
+          {
+            "areaName": "Blaby",
+            "areaSlug": "blaby",
+            "urlPath": "/local/blaby/"
+          },
+          {
+            "areaName": "Birstall",
+            "areaSlug": "birstall",
+            "urlPath": "/local/birstall/"
+          }
+        ]
+      },
+      {
+        "areaName": "Birstall",
+        "areaSlug": "birstall",
+        "urlPath": "/local/birstall/",
+        "outputPath": "local/birstall/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Oadby",
+            "areaSlug": "oadby",
+            "urlPath": "/local/oadby/"
+          },
+          {
+            "areaName": "Wigston",
+            "areaSlug": "wigston",
+            "urlPath": "/local/wigston/"
+          },
+          {
+            "areaName": "Hamilton",
+            "areaSlug": "hamilton",
+            "urlPath": "/local/hamilton/"
+          },
+          {
+            "areaName": "Braunstone",
+            "areaSlug": "braunstone",
+            "urlPath": "/local/braunstone/"
+          },
+          {
+            "areaName": "Blaby",
+            "areaSlug": "blaby",
+            "urlPath": "/local/blaby/"
+          },
+          {
+            "areaName": "Thurmaston",
+            "areaSlug": "thurmaston",
+            "urlPath": "/local/thurmaston/"
+          }
+        ]
+      }
+    ],
+    "localLocationClusters": [
+      {
+        "areaName": "Oadby",
+        "areaSlug": "oadby",
+        "urlPath": "/local/oadby/",
+        "outputPath": "local/oadby/index.html"
+      },
+      {
+        "areaName": "Wigston",
+        "areaSlug": "wigston",
+        "urlPath": "/local/wigston/",
+        "outputPath": "local/wigston/index.html"
+      },
+      {
+        "areaName": "Hamilton",
+        "areaSlug": "hamilton",
+        "urlPath": "/local/hamilton/",
+        "outputPath": "local/hamilton/index.html"
+      },
+      {
+        "areaName": "Braunstone",
+        "areaSlug": "braunstone",
+        "urlPath": "/local/braunstone/",
+        "outputPath": "local/braunstone/index.html"
+      },
+      {
+        "areaName": "Blaby",
+        "areaSlug": "blaby",
+        "urlPath": "/local/blaby/",
+        "outputPath": "local/blaby/index.html"
+      },
+      {
+        "areaName": "Thurmaston",
+        "areaSlug": "thurmaston",
+        "urlPath": "/local/thurmaston/",
+        "outputPath": "local/thurmaston/index.html"
+      },
+      {
+        "areaName": "Birstall",
+        "areaSlug": "birstall",
+        "urlPath": "/local/birstall/",
+        "outputPath": "local/birstall/index.html"
+      }
+    ],
+    "localLocationHierarchy": {
+      "ok": true,
+      "primaryLocality": "Leicester",
+      "primaryLocalitySlug": "leicester",
+      "hub": {
+        "areaId": "hub:leicester",
+        "name": "Leicester",
+        "slug": "hub",
+        "type": "city-town-hub",
+        "parentAreaId": null,
+        "source": "business-profile:primaryTown",
+        "evidence": [
+          "Primary town/city hub for service coverage"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "primary locality hub",
+        "approved": true
+      },
+      "clusters": [
+        {
+          "areaId": "cluster:oadby",
+          "name": "Oadby",
+          "slug": "oadby",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-address-locality",
+            "profile.areaType:primary locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 1 for approved area",
+          "approved": true,
+          "distanceLabel": "0.3 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 1,
+          "order": 1
+        },
+        {
+          "areaId": "cluster:wigston",
+          "name": "Wigston",
+          "slug": "wigston",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 2 for approved area",
+          "approved": true,
+          "distanceLabel": "2.5 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 2,
+          "order": 2
+        },
+        {
+          "areaId": "cluster:hamilton",
+          "name": "Hamilton",
+          "slug": "hamilton",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 3 for approved area",
+          "approved": true,
+          "distanceLabel": "6.1 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 3,
+          "order": 3
+        },
+        {
+          "areaId": "cluster:braunstone",
+          "name": "Braunstone",
+          "slug": "braunstone",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 4 for approved area",
+          "approved": true,
+          "distanceLabel": "6.4 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 4,
+          "order": 4
+        },
+        {
+          "areaId": "cluster:blaby",
+          "name": "Blaby",
+          "slug": "blaby",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 5 for approved area",
+          "approved": true,
+          "distanceLabel": "6.7 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 5,
+          "order": 5
+        },
+        {
+          "areaId": "cluster:thurmaston",
+          "name": "Thurmaston",
+          "slug": "thurmaston",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 6 for approved area",
+          "approved": true,
+          "distanceLabel": "7.6 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 6,
+          "order": 6
+        },
+        {
+          "areaId": "cluster:birstall",
+          "name": "Birstall",
+          "slug": "birstall",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 7 for approved area",
+          "approved": true,
+          "distanceLabel": "8.4 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 7,
+          "order": 7
+        }
+      ],
+      "areas": [],
+      "generationAreas": [
+        {
+          "areaId": "cluster:oadby",
+          "name": "Oadby",
+          "slug": "oadby",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-address-locality",
+            "profile.areaType:primary locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 1 for approved area",
+          "approved": true,
+          "distanceLabel": "0.3 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 1,
+          "order": 1
+        },
+        {
+          "areaId": "cluster:wigston",
+          "name": "Wigston",
+          "slug": "wigston",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 2 for approved area",
+          "approved": true,
+          "distanceLabel": "2.5 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 2,
+          "order": 2
+        },
+        {
+          "areaId": "cluster:hamilton",
+          "name": "Hamilton",
+          "slug": "hamilton",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 3 for approved area",
+          "approved": true,
+          "distanceLabel": "6.1 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 3,
+          "order": 3
+        },
+        {
+          "areaId": "cluster:braunstone",
+          "name": "Braunstone",
+          "slug": "braunstone",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 4 for approved area",
+          "approved": true,
+          "distanceLabel": "6.4 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 4,
+          "order": 4
+        },
+        {
+          "areaId": "cluster:blaby",
+          "name": "Blaby",
+          "slug": "blaby",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 5 for approved area",
+          "approved": true,
+          "distanceLabel": "6.7 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 5,
+          "order": 5
+        },
+        {
+          "areaId": "cluster:thurmaston",
+          "name": "Thurmaston",
+          "slug": "thurmaston",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 6 for approved area",
+          "approved": true,
+          "distanceLabel": "7.6 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 6,
+          "order": 6
+        },
+        {
+          "areaId": "cluster:birstall",
+          "name": "Birstall",
+          "slug": "birstall",
+          "type": "district-cluster",
+          "parentAreaId": "hub:leicester",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 7 for approved area",
+          "approved": true,
+          "distanceLabel": "8.4 km",
+          "relationship": "local guidance for patients around Leicester",
+          "priority": 7,
+          "order": 7
+        }
+      ],
+      "trace": {
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/vision-pharmacy.json",
+        "tenantSlug": "vision-pharmacy",
+        "primaryLocation": "Leicester",
+        "postcode": "LE24DD",
+        "townCity": "Leicester",
+        "storedServiceAreas": [
+          "Oadby",
+          "Wigston",
+          "Leicester",
+          "Hamilton",
+          "Braunstone",
+          "Blaby",
+          "Thurmaston",
+          "Birstall"
+        ],
+        "storedNeighbourhoods": [
+          "Oadby",
+          "Wigston",
+          "Leicester",
+          "Hamilton",
+          "Braunstone",
+          "Blaby",
+          "Thurmaston",
+          "Birstall",
+          "Kibworth",
+          "Beaumont Leys",
+          "Glenfield",
+          "Anstey",
+          "Syston",
+          "Market Harborough",
+          "Loughborough",
+          "Hinckley"
+        ],
+        "importedLocationEvidence": [],
+        "googleLocationEvidence": [
+          "googlePlaceId:ChIJ-5Em-gJkd0gRJsMrfFKsk2I",
+          "displayAddress:Unit 4 Cross St, Oadby, Leicester LE2 4DD, UK"
+        ],
+        "localIntelligenceAreas": [],
+        "selectedAreasSource": "frozen-campaign:pharmacy-first",
+        "selectedAreasFilters": [
+          "benchmarkServiceEcosystemBuilder filters pharmacy-first areas against PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane manifest)"
+        ],
+        "rejectedAreas": [],
+        "rejectionReasons": [],
+        "firstEmptySelectionDecision": "All operator-selected areas removed by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS allow-list in buildBenchmarkServiceEcosystem",
+        "responsibleFile": "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+        "responsibleFunction": "buildBenchmarkServiceEcosystem",
+        "responsibleLine": 647,
+        "areasConsidered": [
+          "Oadby",
+          "Wigston",
+          "Leicester",
+          "Hamilton",
+          "Braunstone",
+          "Blaby",
+          "Thurmaston",
+          "Birstall"
+        ]
+      }
+    },
+    "architecture": "rc1-cluster-page-v1",
+    "generatedAt": "2026-09-13T14:59:36.419Z",
+    "generationStamp": {
+      "tenantSlug": "vision-pharmacy",
+      "campaignId": "pharmacy-first",
+      "generatedAt": "2026-09-13T14:59:36.419Z",
+      "sourceContext": "customer-imported-profile",
+      "runId": "e0f027de-6a8f-4626-83cb-5e5e5eabe87b",
+      "approvedBankHash": "46de67243945c2bc572cba35aa9ac0fdd5806fb8813fbf89506bdfabdd517cdb"
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "issueId": "MAI-20260724-002",
+  "createdAt": "2026-07-24T07:55:48.641Z",
+  "createdBy": "test",
+  "updatedAt": "2026-07-24T07:55:48.641Z",
+  "tenantSlug": "reliable-direct-pharmacy",
+  "campaignId": "",
+  "serviceId": "",
+  "affectedPageOrModule": "Business Profile Review",
+  "category": "Onboarding",
+  "severity": "High",
+  "title": "Business Profile Review missing source evidence",
+  "description": "Missing source evidence: Google Intelligence",
+  "expectedBehaviour": "Website and Google intelligence available for review.",
+  "actualBehaviour": "Missing source evidence: Google Intelligence",
+  "reproductionSteps": "Open Business Profile Review.",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-07-24T07:55:48.653Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "reliable-direct-pharmacy",
+      "businessName": "Reliable Direct Pharmacy",
+      "website": "https://reliabledirectpharmacy.co.uk",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-07-24T06:37:54.902Z",
+      "platformClientStatus": "setup_required"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "not_started",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/reliable-direct-pharmacy-campaign-generation-context-pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "generationTimestamp": null,
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/reliable-direct-pharmacy/pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/reliable-direct-pharmacy/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/reliable-direct-pharmacy.json",
+        "exists": true,
+        "modifiedAt": "2026-07-23T14:41:43.934Z",
+        "size": 6660
+      },
+      "pageType": "Business Profile Review",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-07-24T06:29:04.915Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-07-24T06:29:04.915Z",
+        "size": 12521445
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 3255841,
+        "pmId": 3,
+        "status": "online",
+        "startTime": "2026-07-24T06:29:25.681Z",
+        "restartCount": 3279
+      },
+      "nodeEnv": "unknown"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "none",
+      "businessProfileStatus": "setup_required",
+      "generationStatus": "idle",
+      "publishingStatus": "not_started",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "8f804ec8-da27-4b47-8c6c-f2829b774999",
+        "action": "import_website",
+        "status": "completed",
+        "progressLabel": "Completed",
+        "updatedAt": "2026-07-23T14:41:43.955Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "3618a2f6-c182-4068-b870-67bca2c248e5",
+          "timestamp": "2026-07-24T07:55:48.514Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 5 review decisions"
+        },
+        {
+          "id": "29a88e02-0022-4af7-8a81-4a7f95bafb2d",
+          "timestamp": "2026-07-24T07:40:36.969Z",
+          "action": "approve_business_profile_review",
+          "status": "error",
+          "evidence": "Approval failed: Missing source evidence: Google Intelligence"
+        },
+        {
+          "id": "3dff01ab-5499-4fd8-a6c9-d7400cf4cf48",
+          "timestamp": "2026-07-24T07:40:36.931Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260724-001 created: Business Profile Review missing source evidence"
+        },
+        {
+          "id": "cd56d1a3-02c8-4d23-bbf3-fcf515b43c64",
+          "timestamp": "2026-07-24T07:40:22.679Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 5 review decisions"
+        },
+        {
+          "id": "ff439ab9-f83d-493a-a10c-8dd7ca983eec",
+          "timestamp": "2026-07-24T07:40:19.939Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 5 review decisions"
+        },
+        {
+          "id": "206ae74a-d1e7-4a37-afe3-15891ad899c7",
+          "timestamp": "2026-07-24T07:40:11.862Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 4 review decisions"
+        },
+        {
+          "id": "6f67dd83-59b9-4237-8a51-c43f5110267b",
+          "timestamp": "2026-07-24T07:39:57.952Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 3 review decisions"
+        },
+        {
+          "id": "0f9200cd-a7cc-47cc-8c21-1c43d7261935",
+          "timestamp": "2026-07-24T07:39:40.025Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 2 review decisions"
+        },
+        {
+          "id": "e2058792-af43-4175-82d5-ad8d3b0c74a5",
+          "timestamp": "2026-07-24T07:39:36.796Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 1 review decisions"
+        },
+        {
+          "id": "07863b90-150a-4999-a602-feb1184cfa39",
+          "timestamp": "2026-07-24T06:37:54.908Z",
+          "action": "save_onboarding_intake",
+          "status": "success",
+          "evidence": "Town=Sheffield; Google state=no_profile; address=set"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "audit_log",
+        "action": "approve_business_profile_review",
+        "error": "Missing source evidence: Google Intelligence",
+        "timestamp": "2026-07-24T07:40:36.969Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/reliable-direct-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/reliable-direct-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/reliable-direct-pharmacy.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-07-24T07:55:48.641Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/reliable-direct-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/reliable-direct-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/reliable-direct-pharmacy.json"
+  ],
+  "linkedAuditEventIds": [
+    "4db3104e-28d1-4548-a328-961eec86cbce"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-24T07:55:48.641Z",
+      "user": "test",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": null,
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

@@ -1,0 +1,132 @@
+{
+  "defect": "NT-E2E-24",
+  "rootCause": "NT-E2E-22 rewriteClusterLinksInHtml() only handled /local/ path patterns, not /local-cluster-cluster-* hrefs emitted by resolveLocalPagePublicPath via canonicalPageSlugForLocalUrlPath when sibling cluster slugs retained double-prefix from frozen campaign generationAreas.",
+  "responsibleFile": "src/pharmacy/pharmacyClusterPageUrlResolver.ts",
+  "responsibleFunction": "rewriteClusterLinksInHtml",
+  "filesChanged": [
+    "src/pharmacy/pharmacyClusterPageUrlResolver.ts",
+    "src/pharmacy/pharmacyLocalPageUrlResolver.ts",
+    "src/pharmacy/rc1ClusterPageOutputCorrectionService.ts",
+    "src/pharmacy/pharmacyGenerationIntegrityService.ts"
+  ],
+  "legacyReferencesBefore": 0,
+  "legacyReferencesAfter": 0,
+  "sharedClusterUrlResolverReused": true,
+  "nearbyAreaLinksCorrected": "PASS",
+  "supportedAreaLinksCorrected": "PASS",
+  "relatedLocationLinksCorrected": "PASS",
+  "breadcrumbsCorrected": "PASS",
+  "serviceHubClusterLinks": "PASS",
+  "clusterServiceHubLinks": "PASS",
+  "brokenInternalLinks": 0,
+  "orphanPages": 0,
+  "canonicalInventoryCount": 16,
+  "generatedPageCount": 16,
+  "planOutputParity": "PASS",
+  "internalLinkValidation": "PASS",
+  "qualityReviewUpdated": true,
+  "authorisedJobPreserved": true,
+  "newGenerationJobCreated": false,
+  "publishingPerformed": false,
+  "indexingPerformed": false,
+  "rankTrackingInitialised": false,
+  "browserValidation": "PASS",
+  "browserResults": [
+    {
+      "label": "Service Hub",
+      "url": "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=reliable-direct-pharmacy",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "ecclesall",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-ecclesall/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "fulwood",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-fulwood/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "sheffield-city-centre",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-sheffield-city-centre/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "broomhill",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-broomhill/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "kelham-island",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-kelham-island/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "dore",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-dore/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "hillsborough",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-hillsborough/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    },
+    {
+      "label": "crookes",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-crookes/",
+      "ok": true,
+      "status": 200,
+      "clusterClusterLink": 0,
+      "bareAreaLink": false,
+      "canonicalClusterLinks": 0
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "tenantSpecificCodeDetected": false,
+  "changedModuleValidation": "PASS",
+  "internalLinksCheck": {
+    "id": "internal-links",
+    "label": "Internal links valid",
+    "status": "PASS",
+    "detail": "8 local pages mapped"
+  },
+  "generationReportInternalLinks": {
+    "ok": true,
+    "detail": "8 local pages mapped"
+  },
+  "status": "READY FOR PRODUCT OWNER QUALITY REVIEW"
+}

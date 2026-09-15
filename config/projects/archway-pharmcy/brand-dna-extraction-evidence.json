@@ -1,0 +1,704 @@
+{
+  "version": "brand-dna-extraction-v1",
+  "slug": "archway-pharmcy",
+  "sourceUrl": "https://archwaypharmacy.co.uk/",
+  "extractedAt": "2026-07-17T15:18:03.685Z",
+  "fields": {
+    "colours.primary": {
+      "value": "#4289b5",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 90,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "colours.secondary": {
+      "value": "#326788",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "css-variable-or-import",
+      "confidence": 50,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": "--secondary-color"
+    },
+    "colours.accent": {
+      "value": "#1CA9C9",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "css-hover-accent",
+      "confidence": 90,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "colours.background": {
+      "value": "#ffffff",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "css-variable",
+      "confidence": 40,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": "--bg-color"
+    },
+    "colours.heading": {
+      "value": "#2e607f",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 40,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": "--heading-color"
+    },
+    "colours.body": {
+      "value": "#334155",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 40,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": "--text-color"
+    },
+    "colours.muted": {
+      "value": "#5d6b7f",
+      "source": "website-intelligence",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": "--text-color"
+    },
+    "colours.button": {
+      "value": "#4289b5",
+      "source": "website-import",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "theme-btn.style-one",
+      "confidence": 40,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "colours.buttonText": {
+      "value": "#ffffff",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 70,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.headerBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.headerText": {
+      "value": "#2e607f",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.topBarBackground": {
+      "value": "#4289b5",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.topBarText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "colours.footerBackground": {
+      "value": "#2e607f",
+      "source": "website-css",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "footer-widget background",
+      "confidence": 35,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": ".footer-widget"
+    },
+    "colours.footerText": {
+      "value": "#ffffff",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "colours.footerLink": {
+      "value": "#ffffff",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 50,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "colours.footerAccent": {
+      "value": "#cbd5e1",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 40,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "colours.sectionBackground": {
+      "value": "#f8fafc",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "--bg-color",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.pageBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.surface": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.headingPrimary": {
+      "value": "#2e607f",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.headingSecondary": {
+      "value": "#326788",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.bodyText": {
+      "value": "#334155",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.mutedText": {
+      "value": "#334155",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.primaryAction": {
+      "value": "#4289b5",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.primaryActionText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.secondaryAction": {
+      "value": "#326788",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.secondaryActionText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.link": {
+      "value": "#326788",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.iconPrimary": {
+      "value": "#4289b5",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.iconSecondary": {
+      "value": "#326788",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.border": {
+      "value": "color-mix(in srgb, var(--brand-text) 12%, white)",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.footerBackground": {
+      "value": "#2e607f",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.footerText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.footerLink": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.footerBottomBarBackground": {
+      "value": "#2e607f",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.trustBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.cardBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "semanticColours.mapPanelBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "typography.headingFont": {
+      "value": "Roboto",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 70,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": "--heading-font"
+    },
+    "typography.bodyFont": {
+      "value": "Roboto",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 70,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": "--body-font"
+    },
+    "typography.headingWeight": {
+      "value": "800",
+      "source": "website-intelligence",
+      "evidenceSource": "pharmacy-profile.json",
+      "extractionMethod": "stored-profile",
+      "confidence": 60,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "typography.bodyWeight": {
+      "value": "400",
+      "source": "website-intelligence",
+      "evidenceSource": "pharmacy-profile.json",
+      "extractionMethod": "stored-profile",
+      "confidence": 60,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "typography.h1Scale": {
+      "value": "clamp(2.5rem,5vw,5.3125rem)",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "h1 font-size 85px scaled",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "typography.h2Scale": {
+      "value": "clamp(1.75rem,3vw,3rem)",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "h2 font-size 48px scaled",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "typography.bodySize": {
+      "value": "18px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "body font-size",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "layout.headerLayout": {
+      "value": "with-top-bar",
+      "source": "website-html",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "top-header detected",
+      "confidence": 90,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "layout.heroLayout": {
+      "value": "split",
+      "source": "website-import",
+      "evidenceSource": "assets/css/pages/home-one.css",
+      "extractionMethod": "medolia split hero template",
+      "confidence": 75,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "layout.logoMaxHeight": {
+      "value": "48px",
+      "source": "platform-default",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "brand-logo img width",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "surfaces.buttonRadius": {
+      "value": "10px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "theme-btn / medolia border-radius",
+      "confidence": 72,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "surfaces.cardRadius": {
+      "value": "10px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "medolia-choose-item border-radius",
+      "confidence": 70,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "spacing.sectionY": {
+      "value": "72px",
+      "source": "platform-default",
+      "evidenceSource": "pharmaconnect-defaults",
+      "extractionMethod": "platform-spacing",
+      "confidence": 0,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "identity.logoUrl": {
+      "value": "https://archwaypharmacy.co.uk/images/logo.png",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 90,
+      "importedAt": "2026-07-17T15:18:03.685Z",
+      "selectorOrProperty": ".brand-logo img"
+    },
+    "identity.faviconUrl": {
+      "value": "https://archwaypharmacy.co.uk/images/favicon.png",
+      "source": "website-import",
+      "evidenceSource": "https://archwaypharmacy.co.uk/",
+      "extractionMethod": "link rel=icon",
+      "confidence": 85,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "spacing.containerMax": {
+      "value": "1314px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": ".container max-width",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    "layout.topInfoBarText": {
+      "value": "+44 7450 209982 | pharmacy.fa562@nhs.net",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "contact + hours",
+      "confidence": 85,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    }
+  },
+  "populatedFromWebsite": [
+    "colours.primary",
+    "colours.secondary",
+    "colours.accent",
+    "colours.background",
+    "colours.heading",
+    "colours.body",
+    "colours.muted",
+    "colours.button",
+    "colours.buttonText",
+    "semanticColours.headerText",
+    "semanticColours.topBarBackground",
+    "semanticColours.topBarText",
+    "colours.footerBackground",
+    "semanticColours.pageBackground",
+    "semanticColours.surface",
+    "semanticColours.headingPrimary",
+    "semanticColours.headingSecondary",
+    "semanticColours.bodyText",
+    "semanticColours.mutedText",
+    "semanticColours.primaryAction",
+    "semanticColours.primaryActionText",
+    "semanticColours.secondaryAction",
+    "semanticColours.secondaryActionText",
+    "semanticColours.link",
+    "semanticColours.iconPrimary",
+    "semanticColours.iconSecondary",
+    "semanticColours.border",
+    "semanticColours.headerBackground",
+    "semanticColours.footerBackground",
+    "semanticColours.footerText",
+    "semanticColours.footerLink",
+    "semanticColours.footerBottomBarBackground",
+    "semanticColours.trustBackground",
+    "semanticColours.cardBackground",
+    "semanticColours.mapPanelBackground",
+    "typography.headingFont",
+    "typography.bodyFont",
+    "typography.headingWeight",
+    "typography.bodyWeight",
+    "layout.headerLayout",
+    "layout.heroLayout",
+    "identity.logoUrl",
+    "identity.faviconUrl",
+    "layout.topInfoBarText"
+  ],
+  "usingDefaults": [
+    "semanticColours.headerBackground",
+    "colours.footerText",
+    "colours.footerLink",
+    "colours.footerAccent",
+    "colours.sectionBackground",
+    "typography.h1Scale",
+    "typography.h2Scale",
+    "typography.bodySize",
+    "layout.logoMaxHeight",
+    "surfaces.buttonRadius",
+    "surfaces.cardRadius",
+    "spacing.sectionY",
+    "spacing.containerMax"
+  ],
+  "styleEvidence": [
+    {
+      "role": "primary-button-text",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".theme-btn.style-one",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "top-bar-text",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".top-header",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "main-header",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".header-upper / .main-header",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 75,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "hero",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".banner-section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 55,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "service-card",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".choose-item, .service-card",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "content-section",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": "section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "footer-heading",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".footer-widget h3",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "footer-link",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".footer-widget a",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "map-contact",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".contact-section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 45,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    },
+    {
+      "role": "mobile-navigation",
+      "pageUrl": "https://archwaypharmacy.co.uk/",
+      "selectorOrSignature": ".mobile-menu",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 40,
+      "importedAt": "2026-07-17T15:18:03.685Z"
+    }
+  ],
+  "conflicts": [
+    {
+      "field": "pharmacyName",
+      "businessProfileValue": "Archway Pharmcy",
+      "websiteEvidenceValue": "Archway Pharmacy",
+      "resolution": "business-profile-wins",
+      "requiresCustomerConfirmation": false
+    }
+  ],
+  "completeness": {
+    "overall": 67,
+    "categories": [
+      {
+        "category": "identity",
+        "status": "extracted",
+        "score": 100
+      },
+      {
+        "category": "semantic colours",
+        "status": "extracted",
+        "score": 95
+      },
+      {
+        "category": "typography",
+        "status": "extracted",
+        "score": 90
+      },
+      {
+        "category": "header/navigation",
+        "status": "extracted",
+        "score": 95
+      },
+      {
+        "category": "CTAs",
+        "status": "partial",
+        "score": 50
+      },
+      {
+        "category": "hero",
+        "status": "partial",
+        "score": 65
+      },
+      {
+        "category": "section rhythm",
+        "status": "default-fallback",
+        "score": 30
+      },
+      {
+        "category": "cards",
+        "status": "default-fallback",
+        "score": 25
+      },
+      {
+        "category": "imagery",
+        "status": "default-fallback",
+        "score": 30
+      },
+      {
+        "category": "footer",
+        "status": "extracted",
+        "score": 88
+      },
+      {
+        "category": "responsive behaviour",
+        "status": "partial",
+        "score": 55
+      },
+      {
+        "category": "conflicts",
+        "status": "customer-confirmation-required",
+        "score": 85,
+        "notes": "1 field conflict(s) require customer confirmation"
+      }
+    ],
+    "computedAt": "2026-07-17T15:18:03.689Z"
+  }
+}

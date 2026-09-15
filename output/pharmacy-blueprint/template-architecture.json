@@ -1,0 +1,2643 @@
+{
+  "schemaVersion": "1.0",
+  "architectureType": "pharmacy-service-template-architecture",
+  "generatedAt": "2026-06-10T15:51:21.926Z",
+  "phase": "template-architecture-v1",
+  "sourceFiles": {
+    "businessIntelligence": "output/pharmacy-blueprint/business-intelligence.json",
+    "serviceIntelligence": "output/pharmacy-blueprint/service-intelligence.json",
+    "referenceCampaignBlueprint": "output/pharmacy-blueprint/campaign-blueprints/pharmacy-first-rotherham.json"
+  },
+  "intelligenceOnly": true,
+  "noPagesGenerated": true,
+  "noContentGenerated": true,
+  "noDeployment": true,
+  "noRegistryChanges": true,
+  "noSitemapChanges": true,
+  "templateFamilies": [
+    {
+      "templateKey": "clinical-nhs-services",
+      "templateName": "Clinical NHS Services",
+      "purpose": "NHS and core clinical pharmacy access pages for same-day care, dispensing support and commissioned pathways.",
+      "serviceCategories": [
+        "nhs",
+        "prescription",
+        "consultation",
+        "testing"
+      ],
+      "includedServices": [
+        "prescription-dispensing",
+        "electronic-prescription-service-eps",
+        "repeat-prescription-service",
+        "prescription-delivery",
+        "blister-packs-and-compliance-aids",
+        "emergency-supply",
+        "prescription-collection-service",
+        "pharmacy-first",
+        "nhs-blood-pressure-checks",
+        "nhs-new-medicine-service-nms",
+        "pharmacy-contraception-service",
+        "nhs-smoking-cessation-support",
+        "discharge-medicines-service",
+        "supervised-consumption",
+        "palliative-care-dispensing",
+        "hepatitis-c-testing-and-referral",
+        "blood-pressure-monitoring",
+        "covid-19-lateral-flow-supply",
+        "urinalysis-and-uti-screening",
+        "drug-tariff-and-point-of-care-diagnostics",
+        "medicines-use-review-mur-structured-medication-review",
+        "minor-illness-consultation",
+        "healthy-living-advice",
+        "asthma-and-copd-inhaler-technique-review",
+        "pain-management-consultation",
+        "skin-condition-assessment",
+        "sleep-and-stress-support-consultation",
+        "children-s-health-consultation"
+      ],
+      "excludedServices": [
+        "private-only retail",
+        "travel-only",
+        "standalone vaccination programmes",
+        "weight-management programmes"
+      ],
+      "primaryIntent": "Can the pharmacy help me today?",
+      "secondaryIntents": [
+        "Can I avoid a GP wait?",
+        "Is this an NHS service?",
+        "Can I walk in?",
+        "What conditions are covered?"
+      ],
+      "conversionGoals": [
+        "walk-in visit",
+        "phone call",
+        "appointment request"
+      ],
+      "complianceLevel": "nhs-clinical-service",
+      "pageTone": "Reassuring, accessible, clinically credible, NHS-aware, safety-first",
+      "trustPositioning": "GPhC-registered NHS pharmacy with pharmacist-led care and clear GP/A&E referral pathways",
+      "recommendedSchemaTypes": [
+        "Pharmacy",
+        "MedicalBusiness",
+        "Service",
+        "FAQPage",
+        "MedicalWebPage"
+      ],
+      "requiredSections": [
+        "hero",
+        "service-overview",
+        "how-it-works",
+        "eligibility-cost",
+        "faq",
+        "cta-primary"
+      ],
+      "optionalSections": [
+        "conditions-scope",
+        "areas-we-cover",
+        "related-services",
+        "trust-compliance"
+      ],
+      "ctaStrategy": {
+        "primary": "Walk in today",
+        "secondary": "Call the pharmacy",
+        "tertiary": "Book appointment",
+        "placement": [
+          "hero",
+          "how-it-works",
+          "footer"
+        ]
+      },
+      "faqStrategy": {
+        "minCount": 10,
+        "schema": "FAQPage",
+        "includeNhsEligibility": true,
+        "includeReferralGuidance": true
+      },
+      "internalLinkingStrategy": {
+        "hubToClusters": true,
+        "clusterToHub": true,
+        "relatedNhsServices": true,
+        "maxContextualLinks": 10
+      },
+      "aiSearchStrategy": {
+        "targetSpeakable": true,
+        "featuredSnippets": [
+          "eligibility",
+          "cost",
+          "conditions",
+          "walk-in"
+        ],
+        "aiOverviewFocus": "NHS pharmacy clinical access"
+      },
+      "contentEngineHooks": {
+        "assetTypes": [
+          "blog_post",
+          "gbp_post",
+          "facebook_post",
+          "youtube_script"
+        ],
+        "focus": "access-without-GP-wait",
+        "tone": "Professional, reassuring, clinically credible, accessible, community-focused. Avoid medical guarantees. Signpost to GP/A&E when appropriate."
+      },
+      "imageStrategy": {
+        "hero": "pharmacist consultation room",
+        "support": "NHS clinical service in pharmacy",
+        "trust": "GPhC credentials and team",
+        "conversion": "walk-in or phone CTA scene"
+      },
+      "localSeoStrategy": {
+        "hubPattern": "{service}-{location}",
+        "clusterPattern": "{service}-{area}",
+        "keywords": [
+          "NHS",
+          "walk-in",
+          "same-day",
+          "near me"
+        ]
+      },
+      "contentRules": {
+        "wordsToUse": [
+          "NHS",
+          "pharmacist-led",
+          "same-day",
+          "walk-in",
+          "consultation",
+          "where eligible",
+          "where clinically appropriate",
+          "private consultation room",
+          "refer to GP",
+          "free at point of care"
+        ],
+        "wordsToAvoid": [
+          "guaranteed cure",
+          "replace your GP",
+          "always free",
+          "instant antibiotics",
+          "skip the doctor",
+          "cheapest",
+          "miracle"
+        ],
+        "claimsToAvoid": [
+          "Universal NHS entitlement",
+          "All conditions treated",
+          "No need for GP ever",
+          "Guaranteed same-day treatment"
+        ],
+        "complianceWarnings": [
+          "Pharmacy First pathway limits",
+          "PGD scope boundaries",
+          "Safeguarding for minors",
+          "POM supply rules"
+        ],
+        "requiredDisclaimers": [
+          "Not for emergencies — call 999",
+          "Individual assessment required",
+          "GP referral when red flags present"
+        ],
+        "recommendedProofPoints": [
+          "GPhC registration",
+          "NHS service provider",
+          "Trained clinical team",
+          "Private consultation room"
+        ]
+      },
+      "sections": [
+        {
+          "sectionKey": "hero",
+          "sectionName": "Hero",
+          "sectionPurpose": "Immediate service recognition and same-day access promise",
+          "contentInputsRequired": [
+            "heroPositioning",
+            "primaryKeyword",
+            "keyBenefits"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}",
+            "{primaryKeyword}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": true,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": "hero",
+          "complianceNotes": [
+            "NHS eligibility qualifier required where applicable"
+          ]
+        },
+        {
+          "sectionKey": "service-overview",
+          "sectionName": "Service Overview",
+          "sectionPurpose": "Explain NHS/clinical service scope in plain language",
+          "contentInputsRequired": [
+            "shortDescription",
+            "longDescription"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-180",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "who-this-helps",
+          "sectionName": "Who This Service Helps",
+          "sectionPurpose": "Primary and secondary audience framing",
+          "contentInputsRequired": [
+            "primaryAudience",
+            "secondaryAudience",
+            "customerPersonas"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "conditions-scope",
+          "sectionName": "Conditions or Service Scope",
+          "sectionPurpose": "List pathways, conditions or service boundaries",
+          "contentInputsRequired": [
+            "conditionsList",
+            "serviceScope",
+            "problemsSolved"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-160",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "Only list commissioned/eligible pathways"
+          ]
+        },
+        {
+          "sectionKey": "how-it-works",
+          "sectionName": "How It Works",
+          "sectionPurpose": "Step-by-step patient journey from arrival to outcome",
+          "contentInputsRequired": [
+            "processSteps"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-180",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "eligibility-cost",
+          "sectionName": "Eligibility and Cost",
+          "sectionPurpose": "NHS entitlement, exemptions and private elements",
+          "contentInputsRequired": [
+            "eligibilityRules",
+            "costGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-150",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "NHS logo rules",
+            "No universal free claims without eligibility"
+          ]
+        },
+        {
+          "sectionKey": "benefits",
+          "sectionName": "Key Benefits",
+          "sectionPurpose": "Patient outcomes and access benefits",
+          "contentInputsRequired": [
+            "serviceBenefits"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-140",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "problems-solved",
+          "sectionName": "Problems We Solve",
+          "sectionPurpose": "Pain points addressed by pharmacy access",
+          "contentInputsRequired": [
+            "problemsSolved"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-140",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "why-choose-us",
+          "sectionName": "Why Choose Our Pharmacy",
+          "sectionPurpose": "Local trust, team credentials, consultation room",
+          "contentInputsRequired": [
+            "trustSignals",
+            "evidencePoints",
+            "localProof"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-150",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": "trust",
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "areas-we-cover",
+          "sectionName": "Areas We Cover",
+          "sectionPurpose": "Cluster links for local SEO neighbourhoods",
+          "contentInputsRequired": [
+            "clusterBlueprints",
+            "location"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "related-services",
+          "sectionName": "Related NHS Services",
+          "sectionPurpose": "Cross-link supporting and upsell NHS services",
+          "contentInputsRequired": [
+            "internalLinkingOpportunities"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "trust-compliance",
+          "sectionName": "Trust and Safety",
+          "sectionPurpose": "GPhC, safeguarding, referral pathways",
+          "contentInputsRequired": [
+            "trustSignals",
+            "complianceGuardrails"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "Red flag referral language mandatory"
+          ]
+        },
+        {
+          "sectionKey": "faq",
+          "sectionName": "Frequently Asked Questions",
+          "sectionPurpose": "Service-specific FAQ with schema",
+          "contentInputsRequired": [
+            "customerQuestions",
+            "faqSet"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "300-600",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "cta-primary",
+          "sectionName": "Book or Visit Today",
+          "sectionPurpose": "Walk-in, phone and appointment CTAs",
+          "contentInputsRequired": [
+            "ctaStrategy"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        }
+      ]
+    },
+    {
+      "templateKey": "private-healthcare-services",
+      "templateName": "Private Healthcare Services",
+      "purpose": "Private fee-based clinical and screening services requiring appointment-led conversion.",
+      "serviceCategories": [
+        "private",
+        "testing"
+      ],
+      "includedServices": [
+        "private-prescription-dispensing",
+        "private-health-consultations",
+        "private-ear-wax-removal",
+        "private-blood-testing",
+        "vitamin-b12-injections",
+        "emergency-hormonal-contraception",
+        "private-minor-ailment-treatment",
+        "compounding-and-specialist-supply",
+        "private-prescription-service-fees",
+        "diabetes-screening",
+        "cholesterol-testing",
+        "pregnancy-testing"
+      ],
+      "excludedServices": [
+        "NHS commissioned-only pathways without private option"
+      ],
+      "primaryIntent": "I need a private healthcare service.",
+      "secondaryIntents": [
+        "How much does it cost?",
+        "Can I book without GP referral?",
+        "How quickly can I be seen?"
+      ],
+      "conversionGoals": [
+        "appointment booking",
+        "phone call",
+        "lead form"
+      ],
+      "complianceLevel": "private-healthcare",
+      "pageTone": "Professional, discreet, transparent, premium-accessible",
+      "trustPositioning": "Qualified private clinic standards within a regulated pharmacy setting",
+      "recommendedSchemaTypes": [
+        "Pharmacy",
+        "MedicalBusiness",
+        "Service",
+        "FAQPage"
+      ],
+      "requiredSections": [
+        "hero",
+        "service-overview",
+        "pricing-transparency",
+        "faq",
+        "cta-booking"
+      ],
+      "optionalSections": [
+        "results-follow-up",
+        "preparation",
+        "areas-we-cover"
+      ],
+      "ctaStrategy": {
+        "primary": "Book appointment",
+        "secondary": "Call for availability",
+        "tertiary": "Request callback",
+        "placement": [
+          "hero",
+          "pricing",
+          "footer"
+        ]
+      },
+      "faqStrategy": {
+        "minCount": 8,
+        "includePricing": true,
+        "includePreparation": true
+      },
+      "internalLinkingStrategy": {
+        "hubToClusters": true,
+        "relatedPrivateServices": true,
+        "upsellScreeningPackages": true
+      },
+      "aiSearchStrategy": {
+        "featuredSnippets": [
+          "cost",
+          "how it works",
+          "booking"
+        ],
+        "localIntent": "private {service} {location}"
+      },
+      "contentEngineHooks": {
+        "assetTypes": [
+          "blog_post",
+          "gbp_post",
+          "email_sequence"
+        ],
+        "focus": "private-access-and-pricing"
+      },
+      "imageStrategy": {
+        "hero": "private consultation",
+        "support": "clinical procedure setting",
+        "trust": "credentials and clean room",
+        "conversion": "booking confirmation"
+      },
+      "localSeoStrategy": {
+        "hubPattern": "{service}-{location}",
+        "keywords": [
+          "private",
+          "book",
+          "appointment",
+          "cost"
+        ]
+      },
+      "contentRules": {
+        "wordsToUse": [
+          "book appointment",
+          "private consultation",
+          "transparent pricing",
+          "qualified clinician",
+          "discreet",
+          "professional",
+          "fast access"
+        ],
+        "wordsToAvoid": [
+          "NHS free",
+          "guaranteed results",
+          "cheapest",
+          "DIY",
+          "miracle cure"
+        ],
+        "claimsToAvoid": [
+          "Clinical outcome guarantees",
+          "Before/after promises",
+          "Unsubstantiated cheapest claims"
+        ],
+        "complianceWarnings": [
+          "POM advertising ban",
+          "Diagnostic test limits",
+          "Cosmetic/medical boundary"
+        ],
+        "requiredDisclaimers": [
+          "Private fees apply",
+          "Not a substitute for emergency care",
+          "Results interpretation limits for screening"
+        ],
+        "recommendedProofPoints": [
+          "Clear pricing",
+          "Qualified staff",
+          "Hygiene standards",
+          "Patient reviews"
+        ]
+      },
+      "sections": [
+        {
+          "sectionKey": "hero",
+          "sectionName": "Hero",
+          "sectionPurpose": "Private service value proposition and booking path",
+          "contentInputsRequired": [
+            "heroPositioning",
+            "primaryKeyword"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": "hero",
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "service-overview",
+          "sectionName": "Service Overview",
+          "sectionPurpose": "What the private service includes",
+          "contentInputsRequired": [
+            "shortDescription",
+            "longDescription"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-180",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "who-this-helps",
+          "sectionName": "Who This Service Is For",
+          "sectionPurpose": "Ideal patient profiles and suitability",
+          "contentInputsRequired": [
+            "primaryAudience",
+            "secondaryAudience"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "what-to-expect",
+          "sectionName": "What to Expect",
+          "sectionPurpose": "Appointment flow, duration, preparation",
+          "contentInputsRequired": [
+            "processSteps",
+            "preparationGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-160",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "benefits",
+          "sectionName": "Benefits of Choosing Us",
+          "sectionPurpose": "Speed, discretion, expertise, convenience",
+          "contentInputsRequired": [
+            "serviceBenefits"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-140",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "pricing-transparency",
+          "sectionName": "Pricing and Packages",
+          "sectionPurpose": "Transparent fees where publishable",
+          "contentInputsRequired": [
+            "pricingGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "Publish clear private fees",
+            "No hidden cost implication"
+          ]
+        },
+        {
+          "sectionKey": "clinical-standards",
+          "sectionName": "Clinical Standards",
+          "sectionPurpose": "Qualifications, equipment, hygiene protocols",
+          "contentInputsRequired": [
+            "trustSignals",
+            "evidencePoints"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-140",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": "trust",
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "preparation",
+          "sectionName": "How to Prepare",
+          "sectionPurpose": "Before-appointment checklist",
+          "contentInputsRequired": [
+            "preparationChecklist"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "results-follow-up",
+          "sectionName": "Results and Follow-Up",
+          "sectionPurpose": "Turnaround times, GP referral, next steps",
+          "contentInputsRequired": [
+            "followUpGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "Diagnostic limits — not a substitute for GP diagnosis"
+          ]
+        },
+        {
+          "sectionKey": "areas-we-cover",
+          "sectionName": "Areas We Serve",
+          "sectionPurpose": "Local cluster coverage",
+          "contentInputsRequired": [
+            "clusterBlueprints"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "related-services",
+          "sectionName": "Related Private Services",
+          "sectionPurpose": "Cross-sell complementary private care",
+          "contentInputsRequired": [
+            "internalLinkingOpportunities"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "faq",
+          "sectionName": "Frequently Asked Questions",
+          "sectionPurpose": "Private service FAQs",
+          "contentInputsRequired": [
+            "customerQuestions"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "300-500",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "cta-booking",
+          "sectionName": "Book Your Appointment",
+          "sectionPurpose": "Primary booking and phone CTAs",
+          "contentInputsRequired": [
+            "ctaStrategy"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        }
+      ]
+    },
+    {
+      "templateKey": "travel-health-services",
+      "templateName": "Travel Health Services",
+      "purpose": "Destination-led travel clinic pages for vaccines, malaria and travel medicine advice.",
+      "serviceCategories": [
+        "travel"
+      ],
+      "includedServices": [
+        "travel-health-consultation",
+        "travel-vaccinations",
+        "malaria-prophylaxis",
+        "travel-first-aid-and-kit-supply",
+        "yellow-fever-vaccination-centre",
+        "rabies-vaccination",
+        "altitude-sickness-prevention"
+      ],
+      "excludedServices": [],
+      "primaryIntent": "What vaccines or travel medicines do I need?",
+      "secondaryIntents": [
+        "When should I book?",
+        "How much will it cost?",
+        "Do I need yellow fever certificate?"
+      ],
+      "conversionGoals": [
+        "travel consultation booking",
+        "vaccination appointment",
+        "phone enquiry"
+      ],
+      "complianceLevel": "travel-clinic",
+      "pageTone": "Expert, advisory, itinerary-focused, practical",
+      "trustPositioning": "Destination-aware travel clinic with documented vaccination records",
+      "recommendedSchemaTypes": [
+        "Pharmacy",
+        "MedicalBusiness",
+        "Service",
+        "FAQPage"
+      ],
+      "requiredSections": [
+        "hero",
+        "destination-advice",
+        "how-it-works",
+        "timing-schedule",
+        "faq",
+        "cta-consultation"
+      ],
+      "optionalSections": [
+        "certificates",
+        "related-travel-services"
+      ],
+      "ctaStrategy": {
+        "primary": "Book travel consultation",
+        "secondary": "Call travel clinic",
+        "placement": [
+          "hero",
+          "timing-schedule"
+        ]
+      },
+      "faqStrategy": {
+        "minCount": 8,
+        "includeDestination": true,
+        "includeTiming": true
+      },
+      "internalLinkingStrategy": {
+        "travelConsultToVaccines": true,
+        "malariaCoPrescribe": true,
+        "clusterLocalTravellers": true
+      },
+      "aiSearchStrategy": {
+        "featuredSnippets": [
+          "vaccines for {country}",
+          "when to book",
+          "malaria tablets"
+        ],
+        "aiOverviewFocus": "travel health planning"
+      },
+      "contentEngineHooks": {
+        "assetTypes": [
+          "blog_post",
+          "youtube_script",
+          "gbp_post"
+        ],
+        "focus": "destination-guides"
+      },
+      "imageStrategy": {
+        "hero": "travel health consultation",
+        "support": "world map / itinerary",
+        "trust": "vaccination certificate",
+        "conversion": "consultation booking"
+      },
+      "localSeoStrategy": {
+        "keywords": [
+          "travel clinic",
+          "travel vaccinations",
+          "malaria tablets",
+          "{location}"
+        ]
+      },
+      "contentRules": {
+        "wordsToUse": [
+          "travel consultation",
+          "destination-specific",
+          "itinerary",
+          "certificate",
+          "malaria prophylaxis",
+          "vaccination schedule",
+          "book before travel"
+        ],
+        "wordsToAvoid": [
+          "all destinations covered without assessment",
+          "guaranteed entry",
+          "no consultation needed"
+        ],
+        "claimsToAvoid": [
+          "Guaranteed visa/entry approval",
+          "One vaccine fits all destinations"
+        ],
+        "complianceWarnings": [
+          "Yellow fever centre accreditation",
+          "Cold chain",
+          "Last-minute travel limits"
+        ],
+        "requiredDisclaimers": [
+          "Requirements vary by destination",
+          "Consultation required for personalised advice"
+        ],
+        "recommendedProofPoints": [
+          "Travel health trained staff",
+          "Certificate issuance",
+          "Vaccine record keeping"
+        ]
+      },
+      "sections": [
+        {
+          "sectionKey": "hero",
+          "sectionName": "Hero",
+          "sectionPurpose": "Travel health urgency and consultation booking",
+          "contentInputsRequired": [
+            "heroPositioning",
+            "primaryKeyword"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": "hero",
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "service-overview",
+          "sectionName": "Travel Health Overview",
+          "sectionPurpose": "Scope of travel clinic services",
+          "contentInputsRequired": [
+            "shortDescription"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-150",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "destination-advice",
+          "sectionName": "Destination Health Advice",
+          "sectionPurpose": "Country-specific risk framing",
+          "contentInputsRequired": [
+            "destinationGuidance",
+            "itineraryInputs"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-180",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "vaccines-required",
+          "sectionName": "Vaccines and Medicines You May Need",
+          "sectionPurpose": "Linked vaccine and malaria pathways",
+          "contentInputsRequired": [
+            "vaccineSchedule",
+            "relatedServices"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-180",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "how-it-works",
+          "sectionName": "How Our Travel Clinic Works",
+          "sectionPurpose": "Consult → plan → vaccinate → certify",
+          "contentInputsRequired": [
+            "processSteps"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-150",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "timing-schedule",
+          "sectionName": "When to Book Before Travel",
+          "sectionPurpose": "Lead times and multi-dose courses",
+          "contentInputsRequired": [
+            "timingGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "Last-minute travel limitations"
+          ]
+        },
+        {
+          "sectionKey": "pricing",
+          "sectionName": "Travel Clinic Pricing",
+          "sectionPurpose": "Consultation and vaccine fee transparency",
+          "contentInputsRequired": [
+            "pricingGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "certificates",
+          "sectionName": "Certificates and Documentation",
+          "sectionPurpose": "Yellow fever ICVP and records",
+          "contentInputsRequired": [
+            "certificateGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-150",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "Yellow fever centre accreditation only if certified"
+          ]
+        },
+        {
+          "sectionKey": "benefits",
+          "sectionName": "Why Use Our Travel Clinic",
+          "sectionPurpose": "Convenience vs GP travel clinic waits",
+          "contentInputsRequired": [
+            "serviceBenefits"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "areas-we-cover",
+          "sectionName": "Serving Local Travellers",
+          "sectionPurpose": "Cluster geography for local SEO",
+          "contentInputsRequired": [
+            "clusterBlueprints"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "related-travel-services",
+          "sectionName": "Related Travel Services",
+          "sectionPurpose": "Malaria, rabies, first aid kits",
+          "contentInputsRequired": [
+            "internalLinkingOpportunities"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "faq",
+          "sectionName": "Travel Health FAQs",
+          "sectionPurpose": "Destination, cost, timing questions",
+          "contentInputsRequired": [
+            "customerQuestions"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "300-500",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "cta-consultation",
+          "sectionName": "Book Travel Consultation",
+          "sectionPurpose": "Consultation booking CTA",
+          "contentInputsRequired": [
+            "ctaStrategy"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        }
+      ]
+    },
+    {
+      "templateKey": "weight-management-services",
+      "templateName": "Weight Management Services",
+      "purpose": "Medically supervised weight management and GLP-1 programme pages.",
+      "serviceCategories": [
+        "weight-management"
+      ],
+      "includedServices": [
+        "weight-management-consultation",
+        "pharmacy-weight-loss-programme",
+        "glp-1-weight-management-treatment",
+        "body-composition-and-bmi-monitoring",
+        "nutritional-and-lifestyle-advice"
+      ],
+      "excludedServices": [],
+      "primaryIntent": "Can you help me lose weight safely?",
+      "secondaryIntents": [
+        "Am I eligible?",
+        "Do you offer GLP-1?",
+        "What does the programme include?"
+      ],
+      "conversionGoals": [
+        "eligibility assessment",
+        "consultation booking",
+        "lead form"
+      ],
+      "complianceLevel": "weight-management-clinical",
+      "pageTone": "Supportive, non-judgemental, evidence-based, medically supervised",
+      "trustPositioning": "Pharmacy-supervised programme with monitoring — not fad dieting",
+      "recommendedSchemaTypes": [
+        "Pharmacy",
+        "MedicalBusiness",
+        "Service",
+        "FAQPage"
+      ],
+      "requiredSections": [
+        "hero",
+        "who-eligible",
+        "programme-structure",
+        "faq",
+        "cta-assessment"
+      ],
+      "optionalSections": [
+        "glp1-pathway",
+        "monitoring",
+        "lifestyle-support"
+      ],
+      "ctaStrategy": {
+        "primary": "Book eligibility assessment",
+        "secondary": "Request programme info",
+        "placement": [
+          "hero",
+          "who-eligible",
+          "footer"
+        ]
+      },
+      "faqStrategy": {
+        "minCount": 8,
+        "includeEligibility": true,
+        "includeGlp1": true,
+        "noOutcomeGuarantees": true
+      },
+      "internalLinkingStrategy": {
+        "linkHealthyLiving": true,
+        "linkBmiMonitoring": true,
+        "hubClusterLocal": true
+      },
+      "aiSearchStrategy": {
+        "featuredSnippets": [
+          "eligibility",
+          "GLP-1 pharmacy",
+          "programme cost"
+        ],
+        "caution": "no weight loss guarantees"
+      },
+      "contentEngineHooks": {
+        "assetTypes": [
+          "blog_post",
+          "email_sequence",
+          "facebook_post"
+        ],
+        "focus": "safe-supervised-weight-management"
+      },
+      "imageStrategy": {
+        "hero": "supportive consultation",
+        "support": "BMI monitoring",
+        "trust": "pharmacist supervision",
+        "conversion": "assessment booking"
+      },
+      "localSeoStrategy": {
+        "keywords": [
+          "weight management",
+          "weight loss pharmacy",
+          "GLP-1",
+          "{location}"
+        ]
+      },
+      "contentRules": {
+        "wordsToUse": [
+          "medically supervised",
+          "eligibility assessment",
+          "sustainable",
+          "BMI monitoring",
+          "lifestyle support",
+          "NICE-aligned"
+        ],
+        "wordsToAvoid": [
+          "guaranteed weight loss",
+          "rapid results",
+          "miracle",
+          "without assessment",
+          "cheapest GLP-1"
+        ],
+        "claimsToAvoid": [
+          "Fixed kg loss promises",
+          "Off-label promotion",
+          "Comparison to unregulated online suppliers without context"
+        ],
+        "complianceWarnings": [
+          "GLP-1 legal supply frameworks",
+          "POM advertising",
+          "Mental health sensitivity"
+        ],
+        "requiredDisclaimers": [
+          "Individual results vary",
+          "Clinical eligibility required",
+          "Not emergency eating disorder care"
+        ],
+        "recommendedProofPoints": [
+          "Pharmacist supervision",
+          "Regular monitoring",
+          "Structured programme"
+        ]
+      },
+      "sections": [
+        {
+          "sectionKey": "hero",
+          "sectionName": "Hero",
+          "sectionPurpose": "Safe medically supported weight management positioning",
+          "contentInputsRequired": [
+            "heroPositioning"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": "hero",
+          "complianceNotes": [
+            "No guaranteed weight loss claims"
+          ]
+        },
+        {
+          "sectionKey": "service-overview",
+          "sectionName": "Weight Management Overview",
+          "sectionPurpose": "Programme scope and medical supervision",
+          "contentInputsRequired": [
+            "shortDescription"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-150",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "who-eligible",
+          "sectionName": "Who May Be Eligible",
+          "sectionPurpose": "BMI, comorbidities, clinical criteria",
+          "contentInputsRequired": [
+            "eligibilityRules"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-140",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "NICE-aligned eligibility language"
+          ]
+        },
+        {
+          "sectionKey": "programme-structure",
+          "sectionName": "Our Programme Structure",
+          "sectionPurpose": "Consultation, monitoring, lifestyle, pharmacotherapy",
+          "contentInputsRequired": [
+            "programmeSteps"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-180",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "glp1-pathway",
+          "sectionName": "Medical Treatment Options",
+          "sectionPurpose": "GLP-1 where legally supplied — eligibility only",
+          "contentInputsRequired": [
+            "treatmentOptions"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-150",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "POM advertising restrictions",
+            "No outcome guarantees"
+          ]
+        },
+        {
+          "sectionKey": "lifestyle-support",
+          "sectionName": "Lifestyle and Nutrition Support",
+          "sectionPurpose": "Behaviour change alongside medical pathway",
+          "contentInputsRequired": [
+            "lifestyleGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-140",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "monitoring",
+          "sectionName": "Progress Monitoring",
+          "sectionPurpose": "BMI, check-ins, accountability",
+          "contentInputsRequired": [
+            "monitoringPlan"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "benefits",
+          "sectionName": "Benefits of Pharmacy-Led Support",
+          "sectionPurpose": "Local access, supervised care, continuity",
+          "contentInputsRequired": [
+            "serviceBenefits"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "pricing",
+          "sectionName": "Programme Fees",
+          "sectionPurpose": "Consultation and programme pricing transparency",
+          "contentInputsRequired": [
+            "pricingGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "trust-safety",
+          "sectionName": "Trust and Clinical Safety",
+          "sectionPurpose": "Pharmacist oversight, safeguarding, referrals",
+          "contentInputsRequired": [
+            "trustSignals"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": "trust",
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "areas-we-cover",
+          "sectionName": "Areas We Serve",
+          "sectionPurpose": "Local cluster links",
+          "contentInputsRequired": [
+            "clusterBlueprints"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "faq",
+          "sectionName": "Weight Management FAQs",
+          "sectionPurpose": "Eligibility, GLP-1, cost, safety",
+          "contentInputsRequired": [
+            "customerQuestions"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "300-500",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "cta-assessment",
+          "sectionName": "Book Eligibility Assessment",
+          "sectionPurpose": "Assessment booking and lead form",
+          "contentInputsRequired": [
+            "ctaStrategy"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        }
+      ]
+    },
+    {
+      "templateKey": "vaccination-services",
+      "templateName": "Vaccination Services",
+      "purpose": "Immunisation pages for NHS and private vaccine programmes.",
+      "serviceCategories": [
+        "vaccination",
+        "nhs"
+      ],
+      "includedServices": [
+        "nhs-flu-vaccination",
+        "seasonal-flu-vaccination-private",
+        "shingles-vaccination",
+        "pneumococcal-vaccination",
+        "meningitis-acwy-vaccination",
+        "chickenpox-vaccination",
+        "hpv-vaccination",
+        "covid-19-vaccination",
+        "whooping-cough-pertussis-vaccination",
+        "rsv-vaccination"
+      ],
+      "excludedServices": [],
+      "primaryIntent": "Can I get vaccinated here?",
+      "secondaryIntents": [
+        "Am I eligible for NHS jab?",
+        "Can I walk in?",
+        "How much is private vaccine?"
+      ],
+      "conversionGoals": [
+        "vaccination booking",
+        "phone enquiry",
+        "walk-in visit where appropriate"
+      ],
+      "complianceLevel": "vaccination-programme",
+      "pageTone": "Clear, seasonal, public-health aligned, accessible",
+      "trustPositioning": "Registered vaccinators with NHS programme alignment and safe storage",
+      "recommendedSchemaTypes": [
+        "Pharmacy",
+        "MedicalBusiness",
+        "Service",
+        "FAQPage"
+      ],
+      "requiredSections": [
+        "hero",
+        "who-eligible",
+        "how-it-works",
+        "pricing",
+        "faq",
+        "cta-book-jab"
+      ],
+      "optionalSections": [
+        "seasonal-timing",
+        "related-vaccines"
+      ],
+      "ctaStrategy": {
+        "primary": "Book vaccination",
+        "secondary": "Walk in for flu jab",
+        "tertiary": "Call for availability",
+        "placement": [
+          "hero",
+          "seasonal-timing"
+        ]
+      },
+      "faqStrategy": {
+        "minCount": 8,
+        "includeEligibility": true,
+        "includeSideEffects": true
+      },
+      "internalLinkingStrategy": {
+        "crossLinkVaccinePortfolio": true,
+        "seasonalCampaignLinks": true
+      },
+      "aiSearchStrategy": {
+        "featuredSnippets": [
+          "free flu jab eligibility",
+          "walk in",
+          "side effects"
+        ],
+        "speakable": "vaccination availability {location}"
+      },
+      "contentEngineHooks": {
+        "assetTypes": [
+          "gbp_post",
+          "facebook_post",
+          "email_sequence"
+        ],
+        "focus": "seasonal-immunisation"
+      },
+      "imageStrategy": {
+        "hero": "vaccination in pharmacy",
+        "support": "seasonal campaign",
+        "trust": "trained vaccinator",
+        "conversion": "booking jab"
+      },
+      "localSeoStrategy": {
+        "keywords": [
+          "flu jab",
+          "vaccination",
+          "walk in",
+          "{location}"
+        ]
+      },
+      "contentRules": {
+        "wordsToUse": [
+          "book vaccination",
+          "walk-in",
+          "NHS eligible",
+          "private jab",
+          "protection",
+          "seasonal",
+          "qualified vaccinator"
+        ],
+        "wordsToAvoid": [
+          "100% protection",
+          "no side effects",
+          "mandatory",
+          "guaranteed immunity"
+        ],
+        "claimsToAvoid": [
+          "Absolute immunity claims",
+          "Anti-GP framing",
+          "Unqualified NHS free for all without eligibility"
+        ],
+        "complianceWarnings": [
+          "JCVI programme rules",
+          "Anaphylaxis protocols",
+          "Age restrictions"
+        ],
+        "requiredDisclaimers": [
+          "Eligibility varies",
+          "Common side effects possible",
+          "Seek urgent care for severe reaction"
+        ],
+        "recommendedProofPoints": [
+          "NHS or private programme clarity",
+          "Cold chain compliance",
+          "Booking availability"
+        ]
+      },
+      "sections": [
+        {
+          "sectionKey": "hero",
+          "sectionName": "Hero",
+          "sectionPurpose": "Vaccination availability and booking/walk-in",
+          "contentInputsRequired": [
+            "heroPositioning"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": "hero",
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "service-overview",
+          "sectionName": "Vaccination Service Overview",
+          "sectionPurpose": "NHS vs private programme clarity",
+          "contentInputsRequired": [
+            "shortDescription"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-150",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "Distinguish NHS eligibility from private supply"
+          ]
+        },
+        {
+          "sectionKey": "who-eligible",
+          "sectionName": "Who Can Get Vaccinated",
+          "sectionPurpose": "Age, clinical group, NHS eligibility",
+          "contentInputsRequired": [
+            "eligibilityRules"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "100-140",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "vaccine-detail",
+          "sectionName": "About This Vaccination",
+          "sectionPurpose": "Disease protection, schedule, boosters",
+          "contentInputsRequired": [
+            "vaccineFacts"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "120-160",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "how-it-works",
+          "sectionName": "How to Get Vaccinated",
+          "sectionPurpose": "Book, walk-in, course scheduling",
+          "contentInputsRequired": [
+            "processSteps"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "side-effects",
+          "sectionName": "What to Expect After Vaccination",
+          "sectionPurpose": "Common side effects and safety-netting",
+          "contentInputsRequired": [
+            "aftercareGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": [
+            "MHRA Yellow Card signposting where appropriate"
+          ]
+        },
+        {
+          "sectionKey": "pricing",
+          "sectionName": "Cost and NHS Eligibility",
+          "sectionPurpose": "Free NHS vs private fee",
+          "contentInputsRequired": [
+            "pricingGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "benefits",
+          "sectionName": "Why Get Vaccinated Locally",
+          "sectionPurpose": "Convenience, community access, hours",
+          "contentInputsRequired": [
+            "serviceBenefits"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "80-120",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "seasonal-timing",
+          "sectionName": "When to Vaccinate",
+          "sectionPurpose": "Seasonal campaigns and booking windows",
+          "contentInputsRequired": [
+            "seasonalGuidance"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "areas-we-cover",
+          "sectionName": "Areas We Serve",
+          "sectionPurpose": "Local cluster SEO",
+          "contentInputsRequired": [
+            "clusterBlueprints"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "related-vaccines",
+          "sectionName": "Other Vaccinations Available",
+          "sectionPurpose": "Cross-link vaccine portfolio",
+          "contentInputsRequired": [
+            "internalLinkingOpportunities"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "60-100",
+          "schemaUse": false,
+          "ctaUse": false,
+          "internalLinkUse": true,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "faq",
+          "sectionName": "Vaccination FAQs",
+          "sectionPurpose": "Eligibility, booking, side effects",
+          "contentInputsRequired": [
+            "customerQuestions"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "300-500",
+          "schemaUse": true,
+          "ctaUse": false,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        },
+        {
+          "sectionKey": "cta-book-jab",
+          "sectionName": "Book Your Vaccination",
+          "sectionPurpose": "Booking and walk-in CTAs",
+          "contentInputsRequired": [
+            "ctaStrategy"
+          ],
+          "dynamicTokens": [
+            "{serviceName}",
+            "{location}",
+            "{pharmacyName}"
+          ],
+          "recommendedWordCount": "40-80",
+          "schemaUse": false,
+          "ctaUse": true,
+          "internalLinkUse": false,
+          "imageUse": null,
+          "complianceNotes": []
+        }
+      ]
+    }
+  ],
+  "serviceMappings": [
+    {
+      "serviceKey": "prescription-dispensing",
+      "serviceName": "Prescription Dispensing",
+      "category": "prescription",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Core NHS medicines supply and dispensing access",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "electronic-prescription-service-eps",
+      "serviceName": "Electronic Prescription Service (EPS)",
+      "category": "prescription",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS EPS infrastructure for prescription access",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "repeat-prescription-service",
+      "serviceName": "Repeat Prescription Service",
+      "category": "prescription",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS repeat medicines access workflow",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "prescription-delivery",
+      "serviceName": "Prescription Delivery",
+      "category": "prescription",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS prescription fulfilment and patient access",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "blister-packs-and-compliance-aids",
+      "serviceName": "Blister Packs and Compliance Aids",
+      "category": "prescription",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Medicines compliance support within NHS care",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "emergency-supply",
+      "serviceName": "Emergency Supply",
+      "category": "prescription",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Urgent medicines access — same-day pharmacy help",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "prescription-collection-service",
+      "serviceName": "Prescription Collection Service",
+      "category": "prescription",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Prescription access coordination",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "private-prescription-dispensing",
+      "serviceName": "Private Prescription Dispensing",
+      "category": "prescription",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private fee-based prescription supply",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Flagship NHS Advanced Service for minor illness",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "nhs-blood-pressure-checks",
+      "serviceName": "NHS Blood Pressure Checks",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS Hypertension Case Finding commissioned service",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "nhs-new-medicine-service-nms",
+      "serviceName": "NHS New Medicine Service (NMS)",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS Advanced Service for new medicine support",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "pharmacy-contraception-service",
+      "serviceName": "Pharmacy Contraception Service",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS commissioned contraception pathway",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "nhs-flu-vaccination",
+      "serviceName": "NHS Flu Vaccination",
+      "category": "nhs",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "NHS seasonal immunisation programme",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "nhs-smoking-cessation-support",
+      "serviceName": "NHS Smoking Cessation Support",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS public health cessation programme",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "discharge-medicines-service",
+      "serviceName": "Discharge Medicines Service",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS hospital discharge reconciliation service",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "supervised-consumption",
+      "serviceName": "Supervised Consumption",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS clinical supervision service",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "palliative-care-dispensing",
+      "serviceName": "Palliative Care Dispensing",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Priority NHS medicines access for end-of-life care",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "hepatitis-c-testing-and-referral",
+      "serviceName": "Hepatitis C Testing and Referral",
+      "category": "nhs",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS commissioned screening and referral pathway",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "private-health-consultations",
+      "serviceName": "Private Health Consultations",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private appointment-led clinical consultations",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "private-ear-wax-removal",
+      "serviceName": "Private Ear Wax Removal",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private clinical procedure service",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "private-blood-testing",
+      "serviceName": "Private Blood Testing",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private health screening and diagnostics",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "vitamin-b12-injections",
+      "serviceName": "Vitamin B12 Injections",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private injectable treatment service",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "emergency-hormonal-contraception",
+      "serviceName": "Emergency Hormonal Contraception",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private/emergency contraception access — appointment-led",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "private-minor-ailment-treatment",
+      "serviceName": "Private Minor Ailment Treatment",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private PGD-led treatment outside NHS pathway",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "compounding-and-specialist-supply",
+      "serviceName": "Compounding and Specialist Supply",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Specialist private medicines supply",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "private-prescription-service-fees",
+      "serviceName": "Private Prescription Service Fees",
+      "category": "private",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private dispensing fee transparency",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "travel-health-consultation",
+      "serviceName": "Travel Health Consultation",
+      "category": "travel",
+      "assignedTemplateKey": "travel-health-services",
+      "assignmentReason": "Destination travel health advisory hub",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "category": "travel",
+      "assignedTemplateKey": "travel-health-services",
+      "assignmentReason": "Travel immunisation core service",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "malaria-prophylaxis",
+      "serviceName": "Malaria Prophylaxis",
+      "category": "travel",
+      "assignedTemplateKey": "travel-health-services",
+      "assignmentReason": "Travel medicine prescribing pathway",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "travel-first-aid-and-kit-supply",
+      "serviceName": "Travel First Aid and Kit Supply",
+      "category": "travel",
+      "assignedTemplateKey": "travel-health-services",
+      "assignmentReason": "Travel health retail adjunct",
+      "confidenceScore": 0.85
+    },
+    {
+      "serviceKey": "yellow-fever-vaccination-centre",
+      "serviceName": "Yellow Fever Vaccination Centre",
+      "category": "travel",
+      "assignedTemplateKey": "travel-health-services",
+      "assignmentReason": "Certified travel vaccination with ICVP",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "rabies-vaccination",
+      "serviceName": "Rabies Vaccination",
+      "category": "travel",
+      "assignedTemplateKey": "travel-health-services",
+      "assignmentReason": "Travel-specific immunisation",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "altitude-sickness-prevention",
+      "serviceName": "Altitude Sickness Prevention",
+      "category": "travel",
+      "assignedTemplateKey": "travel-health-services",
+      "assignmentReason": "Travel medicine prophylaxis",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "seasonal-flu-vaccination-private",
+      "serviceName": "Seasonal Flu Vaccination (Private)",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "Private immunisation programme",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "shingles-vaccination",
+      "serviceName": "Shingles Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "Adult immunisation service",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "pneumococcal-vaccination",
+      "serviceName": "Pneumococcal Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "Adult immunisation service",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "meningitis-acwy-vaccination",
+      "serviceName": "Meningitis ACWY Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "Travel/university immunisation",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "chickenpox-vaccination",
+      "serviceName": "Chickenpox Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "Private paediatric/adult immunisation",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "hpv-vaccination",
+      "serviceName": "HPV Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "Immunisation programme",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "covid-19-vaccination",
+      "serviceName": "COVID-19 Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "NHS/private COVID immunisation",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "whooping-cough-pertussis-vaccination",
+      "serviceName": "Whooping Cough (Pertussis) Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "NHS pregnancy immunisation programme",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "rsv-vaccination",
+      "serviceName": "RSV Vaccination",
+      "category": "vaccination",
+      "assignedTemplateKey": "vaccination-services",
+      "assignmentReason": "NHS adult immunisation programme",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "weight-management-consultation",
+      "serviceName": "Weight Management Consultation",
+      "category": "weight-management",
+      "assignedTemplateKey": "weight-management-services",
+      "assignmentReason": "Weight programme entry consultation",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "pharmacy-weight-loss-programme",
+      "serviceName": "Pharmacy Weight Loss Programme",
+      "category": "weight-management",
+      "assignedTemplateKey": "weight-management-services",
+      "assignmentReason": "Structured weight management programme",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "glp-1-weight-management-treatment",
+      "serviceName": "GLP-1 Weight Management Treatment",
+      "category": "weight-management",
+      "assignedTemplateKey": "weight-management-services",
+      "assignmentReason": "Medically supervised GLP-1 pathway",
+      "confidenceScore": 1
+    },
+    {
+      "serviceKey": "body-composition-and-bmi-monitoring",
+      "serviceName": "Body Composition and BMI Monitoring",
+      "category": "weight-management",
+      "assignedTemplateKey": "weight-management-services",
+      "assignmentReason": "Programme monitoring component",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "nutritional-and-lifestyle-advice",
+      "serviceName": "Nutritional and Lifestyle Advice",
+      "category": "weight-management",
+      "assignedTemplateKey": "weight-management-services",
+      "assignmentReason": "Weight programme lifestyle support",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "blood-pressure-monitoring",
+      "serviceName": "Blood Pressure Monitoring",
+      "category": "testing",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Supports NHS hypertension monitoring pathway",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "diabetes-screening",
+      "serviceName": "Diabetes Screening",
+      "category": "testing",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private health screening service",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "cholesterol-testing",
+      "serviceName": "Cholesterol Testing",
+      "category": "testing",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private cardiovascular screening",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "covid-19-lateral-flow-supply",
+      "serviceName": "COVID-19 Lateral Flow Supply",
+      "category": "testing",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "OTC diagnostic access within pharmacy care",
+      "confidenceScore": 0.8
+    },
+    {
+      "serviceKey": "urinalysis-and-uti-screening",
+      "serviceName": "Urinalysis and UTI Screening",
+      "category": "testing",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Pharmacy First UTI diagnostic support",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "pregnancy-testing",
+      "serviceName": "Pregnancy Testing",
+      "category": "testing",
+      "assignedTemplateKey": "private-healthcare-services",
+      "assignmentReason": "Private diagnostic with counselling",
+      "confidenceScore": 0.85
+    },
+    {
+      "serviceKey": "drug-tariff-and-point-of-care-diagnostics",
+      "serviceName": "Drug Tariff and Point-of-Care Diagnostics",
+      "category": "testing",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "POC diagnostics supporting NHS clinical services",
+      "confidenceScore": 0.85
+    },
+    {
+      "serviceKey": "medicines-use-review-mur-structured-medication-review",
+      "serviceName": "Medicines Use Review (MUR) / Structured Medication Review",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS medicines optimisation consultation",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "minor-illness-consultation",
+      "serviceName": "Minor Illness Consultation",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Pharmacist minor illness triage aligned with NHS access",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "healthy-living-advice",
+      "serviceName": "Healthy Living Advice",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Preventive NHS-aligned pharmacy advice",
+      "confidenceScore": 0.85
+    },
+    {
+      "serviceKey": "asthma-and-copd-inhaler-technique-review",
+      "serviceName": "Asthma and COPD Inhaler Technique Review",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "NHS respiratory medicines optimisation",
+      "confidenceScore": 0.95
+    },
+    {
+      "serviceKey": "pain-management-consultation",
+      "serviceName": "Pain Management Consultation",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Pharmacist-led OTC and safety consultation",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "skin-condition-assessment",
+      "serviceName": "Skin Condition Assessment",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Minor ailment assessment within pharmacy scope",
+      "confidenceScore": 0.9
+    },
+    {
+      "serviceKey": "sleep-and-stress-support-consultation",
+      "serviceName": "Sleep and Stress Support Consultation",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Pharmacy wellbeing consultation with GP signposting",
+      "confidenceScore": 0.85
+    },
+    {
+      "serviceKey": "children-s-health-consultation",
+      "serviceName": "Children's Health Consultation",
+      "category": "consultation",
+      "assignedTemplateKey": "clinical-nhs-services",
+      "assignmentReason": "Paediatric minor illness pharmacy access",
+      "confidenceScore": 0.95
+    }
+  ],
+  "mappingSummary": {
+    "total": 62,
+    "byTemplate": {
+      "clinical-nhs-services": 28,
+      "private-healthcare-services": 12,
+      "travel-health-services": 7,
+      "weight-management-services": 5,
+      "vaccination-services": 10
+    }
+  },
+  "pharmacyFirstCampaignValidation": {
+    "mapsToClinicalNhs": true,
+    "hubSectionsSupported": true,
+    "hubSectionMapping": {
+      "service-overview": true,
+      "conditions-covered": true,
+      "who-it-helps": true,
+      "how-it-works": true,
+      "eligibility-cost": true,
+      "why-choose-us": true,
+      "areas-we-cover": true,
+      "related-services": true,
+      "faq": true,
+      "book-cta": true
+    },
+    "clusterSectionsSupported": true,
+    "contentEngineSupported": true,
+    "complianceGuardrailsAlign": true,
+    "pass": true
+  },
+  "implementationGuidance": {
+    "templateSelection": {
+      "step1": "Resolve serviceKey from campaign blueprint or page config",
+      "step2": "Look up serviceMappings[serviceKey].assignedTemplateKey",
+      "step3": "Load templateFamilies[assignedTemplateKey] for section architecture and rules",
+      "step4": "Apply hub vs cluster pageType from campaign blueprint (cluster may omit optional sections)",
+      "fallback": "If mapping missing, halt generation and report unmapped service"
+    },
+    "serviceIntelligenceFeed": {
+      "hubSections": "Map serviceIntelligence.serviceBenefits → benefits section; problemsSolved → problems section; customerQuestions → faq section",
+      "trust": "Merge serviceIntelligence.trustSignals with businessIntelligence.trustSignals",
+      "links": "Use internalLinkingOpportunities for related-services and contextual anchors",
+      "localSeo": "Combine localSearchIntent with campaign identity keywords"
+    },
+    "campaignBlueprintFeed": {
+      "hub": "campaignBlueprint.hubBlueprint provides H1, meta, hero, FAQ set, CTA strategy, section hints",
+      "clusters": "campaignBlueprint.clusterBlueprints provide area slugs, local angles, FAQ variants, hub links",
+      "compliance": "campaignBlueprint.complianceGuardrails override template contentRules where stricter",
+      "contentEngine": "campaignBlueprint.contentEngineBlueprint.assetPlan connects to template contentEngineHooks"
+    },
+    "contentEngineConnection": {
+      "rule": "Only generate asset types listed in template.contentEngineHooks.assetTypes",
+      "topicSource": "Prefer campaignBlueprint.contentEngineBlueprint.assetPlan topics",
+      "tone": "Apply template.contentRules + campaign complianceGuardrails",
+      "linking": "All assets link to campaignBlueprint.hubBlueprint.urlPattern"
+    },
+    "internalLinkApplication": {
+      "hubToCluster": "Render areas-we-cover from campaignBlueprint.internalLinkMap.hubToClusters",
+      "clusterToHub": "Every cluster page includes cluster-to-hub link in hero or breadcrumb",
+      "relatedServices": "Render related-services from internalLinkMap.relatedServices using assigned template keys for URL patterns",
+      "contextualAnchors": "Inject max internalLinkingStrategy.maxContextualLinks body links in narrative sections"
+    },
+    "imageSlotSelection": {
+      "hero": "template.imageStrategy.hero — campaign pane hero slot if assigned",
+      "support": "template.imageStrategy.support — mid-page section with imageUse: support",
+      "trust": "template.imageStrategy.trust — why-choose-us / trust sections",
+      "conversion": "template.imageStrategy.conversion — CTA band",
+      "rule": "Never use image-library fallback when campaign pane images assigned (parity with hosting template)"
+    }
+  }
+}

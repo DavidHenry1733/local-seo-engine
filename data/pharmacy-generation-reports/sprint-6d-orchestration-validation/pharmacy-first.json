@@ -1,0 +1,216 @@
+{
+  "slug": "sprint-6d-orchestration-validation",
+  "resolvedSlug": "sprint-6d-orchestration-validation",
+  "serviceId": "pharmacy-first",
+  "serviceName": "Pharmacy First",
+  "generatedAt": "2026-07-19T08:41:37.366Z",
+  "generatorVersion": "long-form-supporting-content-lockdown-v1",
+  "selectedAreas": [
+    "Sheffield"
+  ],
+  "profileLoaded": true,
+  "profileName": "Sprint 6D Orchestration Validation",
+  "campaignLoaded": false,
+  "campaignServiceId": null,
+  "brandLoaded": true,
+  "imageAssignmentsLoaded": true,
+  "selectedServiceConfigPath": "pharmacyMasterPublishConfig:pharmacy-first",
+  "serviceMasterPath": "docs/pharmacy-master-library/pharmacy-first-master-v2.md",
+  "masterPublishPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-master-publish/sprint-6d-orchestration-validation/pharmacy-first/index.html",
+  "clinicalReferencePath": null,
+  "visualOutputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/sprint-6d-orchestration-validation/pharmacy-first/index.html",
+  "contentEcosystemPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first",
+  "localClusterOutputPaths": [],
+  "assetsGenerated": [
+    "visual-service-page",
+    "content-ecosystem"
+  ],
+  "sectionsExpected": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsFound": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsMissing": [],
+  "foreignServiceContentDetected": [],
+  "tenantValidation": {
+    "ok": true,
+    "detail": "tenant ok"
+  },
+  "serviceValidation": {
+    "ok": true,
+    "detail": "service content ok"
+  },
+  "packageValidation": {
+    "ok": false,
+    "detail": "This content package needs fixing before approval."
+  },
+  "ecosystemTenantValidation": {
+    "ok": true,
+    "detail": "ecosystem tenant ok",
+    "foreignTenantAssetsDetected": [],
+    "foreignTenantAssetPaths": [],
+    "fallbackToDefaultSlugDetected": false
+  },
+  "localClusterValidation": {
+    "ok": false,
+    "detail": "Expected 1 local cluster pages, generated 0",
+    "selectedAreasExpected": 1,
+    "localClusterPagesGenerated": 0
+  },
+  "selectedAreasExpected": 1,
+  "localClusterPagesGenerated": 0,
+  "foreignTenantAssetsDetected": [],
+  "foreignTenantAssetPaths": [],
+  "fallbackToDefaultSlugDetected": false,
+  "internalLinkValidation": {
+    "ok": true,
+    "detail": "0 local pages mapped"
+  },
+  "manifestAccuracyValidation": {
+    "ok": false,
+    "detail": "Local cluster: Expected 1 local cluster pages, generated 0; Design/map: design/map validation failed; Local map: local page missing; Header/footer: header/footer mismatch; Brand parity: default blue/demo branding detected; Local cluster quality: failed: sheffield:missing page; service page links 0/1; service page map: map query contains area: Sheffield; Long-form quality: failed: who-should:tenant name missing from middle body"
+  },
+  "designMapValidation": {
+    "ok": false,
+    "detail": "design/map validation failed",
+    "servicePageMapValidation": {
+      "ok": true,
+      "detail": "map iframe present"
+    },
+    "localPageMapValidation": {
+      "ok": false,
+      "detail": "local page missing"
+    },
+    "localPageDesignValidation": {
+      "ok": false,
+      "detail": "local page not using design system"
+    },
+    "headerFooterParity": {
+      "ok": false,
+      "detail": "header/footer mismatch"
+    },
+    "brandParity": {
+      "ok": false,
+      "detail": "default blue/demo branding detected"
+    },
+    "nearbyAreaLinksCount": 0,
+    "mapValidation": {
+      "ok": false,
+      "detail": "map iframe present; local page missing"
+    },
+    "moneyLinksCount": 0,
+    "internalLinksCount": 0
+  },
+  "localClusterQualityValidation": {
+    "ok": false,
+    "detail": "failed: sheffield:missing page; service page links 0/1; service page map: map query contains area: Sheffield",
+    "localPagesExpected": 1,
+    "localPagesGenerated": 0,
+    "localPagesWithImages": 0,
+    "localPagesWithBusinessMap": 0,
+    "localPagesWithAreaSpecificCopy": 0,
+    "localPagesWithInternalLinks": 0,
+    "localPagesWithMoneyLinks": 0,
+    "duplicateCopyWarnings": [],
+    "emptySectionsDetected": [],
+    "localIntelligenceUsed": 0,
+    "failedLocalPages": [
+      "sheffield:missing",
+      "service-page:missing-local-links"
+    ],
+    "servicePageLinksAllLocalAreas": false,
+    "localCopyDepthValidation": {
+      "ok": true,
+      "detail": "word counts ok",
+      "minWordCount": 350,
+      "pagesBelowMin": []
+    },
+    "localSimilarityScores": [],
+    "areaPrefixDetected": [],
+    "mapUsesBusinessLocation": false,
+    "servicePageLocalLinksCount": 0,
+    "localNearbyLinksCount": 0,
+    "irrelevantSectionsDetected": [],
+    "localPageWordCounts": {},
+    "localPageImageCounts": {},
+    "failedLocalQualityReasons": [
+      "sheffield:missing page",
+      "service page links 0/1",
+      "service page map: map query contains area: Sheffield"
+    ]
+  },
+  "longFormQualityValidation": {
+    "ok": false,
+    "detail": "failed: who-should:tenant name missing from middle body",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 16,
+      "patient-guide": 24,
+      "what-is": 8,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 11
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 22,
+      "patient-guide": 28,
+      "what-is": 11,
+      "who-should": 5,
+      "need-to-know": 11,
+      "faq-page": 7
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [
+      "who-should: tenant only in intro/footer",
+      "who-should: tenant name missing from middle body"
+    ],
+    "failedLongFormAssets": [
+      "who-should:tenant name missing from middle body"
+    ],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "errors": [
+    "Local cluster: Expected 1 local cluster pages, generated 0",
+    "Design/map: design/map validation failed",
+    "Local map: local page missing",
+    "Header/footer: header/footer mismatch",
+    "Brand parity: default blue/demo branding detected",
+    "Local cluster quality: failed: sheffield:missing page; service page links 0/1; service page map: map query contains area: Sheffield",
+    "Long-form quality: failed: who-should:tenant name missing from middle body"
+  ],
+  "warnings": [
+    "Layout checks: serviceDefinitionSplit, supportImageBand",
+    "Failed local pages: sheffield:missing; service-page:missing-local-links",
+    "Long-form assets: who-should:tenant name missing from middle body"
+  ]
+}

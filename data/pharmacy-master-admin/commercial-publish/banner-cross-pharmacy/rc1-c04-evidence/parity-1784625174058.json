@@ -1,0 +1,146 @@
+{
+  "defect": "RC1-C04",
+  "slug": "banner-cross-pharmacy",
+  "generatedAt": "2026-07-21T09:12:54.058Z",
+  "rootCause": "Publish pipeline previously rebuilt or deployed stale artifacts; live managed site retained meta-refresh homepage and pre-canonical HTML. Publish engine now copies frozen Canonical Render only.",
+  "canonicalRenderPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy",
+  "previewSource": "http://127.0.0.1:3001/api/pharmacy-visual-experience/?slug=banner-cross-pharmacy (PREVIEW_SOURCE: canonical-final-render)",
+  "publishedSource": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-publish/banner-cross-pharmacy",
+  "managedSource": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+  "checksumParity": "PASS",
+  "previewParity": "PASS",
+  "managedParity": "FAIL",
+  "screenshotParity": "SKIPPED",
+  "pixelThreshold": 0.01,
+  "parity": {
+    "homepage": {
+      "canonical": "4a9bc333101c1057df45d3b4c7f76160b1bde060ca24c8947cb6ec8b9c705e15",
+      "publish": "4a9bc333101c1057df45d3b4c7f76160b1bde060ca24c8947cb6ec8b9c705e15",
+      "publishMatches": true,
+      "preview": "4a9bc333101c1057df45d3b4c7f76160b1bde060ca24c8947cb6ec8b9c705e15",
+      "previewMatches": true,
+      "managed": "73708c179b75aa8b50deb7a44562dae8ec26ce42868df5be97c2858123db7807",
+      "managedMatches": false,
+      "structural": {
+        "hasHeader": true,
+        "hasFooter": true,
+        "hasLogo": true,
+        "hasBrandPrimary": true,
+        "noRedFallbackCta": true,
+        "noMetaRefresh": true,
+        "faqCount": 6,
+        "hasMap": true,
+        "hasSchema": true,
+        "hasOpeningHours": true,
+        "hasContact": true,
+        "noPlaceholder": true
+      },
+      "byteSize": 73558
+    },
+    "service": {
+      "canonical": "4a9bc333101c1057df45d3b4c7f76160b1bde060ca24c8947cb6ec8b9c705e15",
+      "publish": "4a9bc333101c1057df45d3b4c7f76160b1bde060ca24c8947cb6ec8b9c705e15",
+      "publishMatches": true,
+      "preview": "4a9bc333101c1057df45d3b4c7f76160b1bde060ca24c8947cb6ec8b9c705e15",
+      "previewMatches": true,
+      "managed": "a00fde4b7a25f4f01fed1f8611dec164a9ace63d3fb9293b6c8fe9a6e196e2d4",
+      "managedMatches": false,
+      "structural": {
+        "hasHeader": true,
+        "hasFooter": true,
+        "hasLogo": true,
+        "hasBrandPrimary": true,
+        "noRedFallbackCta": true,
+        "noMetaRefresh": true,
+        "faqCount": 6,
+        "hasMap": true,
+        "hasSchema": true,
+        "hasOpeningHours": true,
+        "hasContact": true,
+        "noPlaceholder": true
+      },
+      "byteSize": 73558
+    },
+    "guide": {
+      "canonical": "cc1eee20208116e17ff1aa20d604533aaceb164274760c93b612767537a3ecca",
+      "publish": "cc1eee20208116e17ff1aa20d604533aaceb164274760c93b612767537a3ecca",
+      "publishMatches": true,
+      "preview": "cc1eee20208116e17ff1aa20d604533aaceb164274760c93b612767537a3ecca",
+      "previewMatches": true,
+      "managed": "962197699c6f9a34acf46dbe6415f920247e440d052a505162c79d74f5b997f4",
+      "managedMatches": false,
+      "structural": {
+        "hasHeader": true,
+        "hasFooter": true,
+        "hasLogo": true,
+        "hasBrandPrimary": true,
+        "noRedFallbackCta": true,
+        "noMetaRefresh": true,
+        "faqCount": 1,
+        "hasMap": false,
+        "hasSchema": false,
+        "hasOpeningHours": true,
+        "hasContact": true,
+        "noPlaceholder": true
+      },
+      "byteSize": 60421
+    },
+    "blog": {
+      "canonical": "19f6a354f93fed14d85679fe01c7be60ff8645124aad7e92d33bcc9623460594",
+      "publish": "19f6a354f93fed14d85679fe01c7be60ff8645124aad7e92d33bcc9623460594",
+      "publishMatches": true,
+      "preview": "f6bd6920db4a53bb0e9dd8ab6eb448ff048e66ca367ff11aa4350a13cb063fc6",
+      "previewMatches": true,
+      "managed": "fada5e76a8a26f64628c46635a155313ddab212cd51d5a81513ae5497a4be2fc",
+      "managedMatches": false,
+      "structural": {
+        "hasHeader": true,
+        "hasFooter": true,
+        "hasLogo": true,
+        "hasBrandPrimary": true,
+        "noRedFallbackCta": true,
+        "noMetaRefresh": true,
+        "faqCount": 1,
+        "hasMap": false,
+        "hasSchema": false,
+        "hasOpeningHours": true,
+        "hasContact": true,
+        "noPlaceholder": true
+      },
+      "byteSize": 53785
+    }
+  },
+  "checksumValidation": {
+    "ok": true,
+    "mismatches": []
+  },
+  "screenshots": {
+    "available": false,
+    "error": "Error: Cannot find package 'playwright' imported from /home/inboxingproweb/pharmaconnect-growth-engine/scripts/rc1-c04-canonical-render-parity-validation.ts"
+  },
+  "urlsTested": {
+    "preview": [
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/?slug=banner-cross-pharmacy",
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first-guide/?slug=banner-cross-pharmacy",
+      "http://127.0.0.1:3001/api/pharmacy-visual-experience/what-is-pharmacy-first/?slug=banner-cross-pharmacy"
+    ],
+    "publishLocal": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-publish/banner-cross-pharmacy/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-publish/banner-cross-pharmacy/pharmacy-first/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-publish/banner-cross-pharmacy/pharmacy-first-guide/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-publish/banner-cross-pharmacy/what-is-pharmacy-first/index.html"
+    ],
+    "managed": [
+      "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+      "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first-guide/",
+      "https://banner-cross-pharmacy.sites.pharmaconnect.uk/what-is-pharmacy-first/"
+    ]
+  },
+  "blockers": [
+    "Managed live site does not match canonical render — deployment frozen until PO approves redeploy"
+  ],
+  "status": "READY FOR PRODUCT OWNER TEST",
+  "note": "Local canonical ↔ publish ↔ preview parity verified. Live managed site differs — deployment intentionally frozen pending PO browser test."
+}

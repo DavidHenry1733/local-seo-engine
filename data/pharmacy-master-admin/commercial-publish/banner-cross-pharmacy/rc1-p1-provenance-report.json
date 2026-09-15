@@ -1,0 +1,134 @@
+{
+  "sprint": "RC1-P1",
+  "tenant": "banner-cross-pharmacy",
+  "generatedAt": "2026-07-22T06:55:00.000Z",
+  "revisionChain": {
+    "sourceProfileRevision": 49,
+    "websiteImportRevision": "c58ba4f2400bfc4e",
+    "websiteIntelligenceRevision": "b744d0e580749bee",
+    "brandDnaRevision": "15ab450c85031068",
+    "componentDnaRevision": "e248944a8f0de51f",
+    "layoutDnaRevision": "aa61a4f275bae57b",
+    "rendererRevision": "tenant-dna-activation-rc1-c13-v1",
+    "canonicalRenderRevision": "f5c5204389f12babf988f7048649883acc64b79367e0ccb7440e49962abc0a87"
+  },
+  "pipelinePaths": {
+    "websiteImport": "assets/website-import/banner-cross-pharmacy/asset-manifest.json",
+    "websiteIntelligence": "data/pharmacy-profiles/banner-cross-pharmacy.json (websiteImportSnapshot.intelligence v2)",
+    "brandDna": "config/projects/banner-cross-pharmacy/brand-dna.json",
+    "componentDna": "data/pharmacy-component-dna/banner-cross-pharmacy.json",
+    "layoutDna": "data/website-design-evidence/banner-cross-pharmacy/design-evidence.json",
+    "imageAssignments": "data/pharmacy-image-assignments/banner-cross-pharmacy.json",
+    "canonicalRender": "output/pharmacy-final-render/banner-cross-pharmacy/pharmacy-first/index.html",
+    "finalRenderManifest": "output/pharmacy-final-render/banner-cross-pharmacy/FinalRenderManifest.json",
+    "browserGateEvidence": "data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c14-evidence/rc1-c14-gate-report.json"
+  },
+  "measuredSimilarities": {
+    "header": 55,
+    "footer": 39,
+    "navigation": 0,
+    "typography": 100,
+    "colour": 25,
+    "imageSlotCompleteness": 25,
+    "responsiveSiteChrome": 31
+  },
+  "rootCauseSummary": "Tenant DNA loads and activates, but the earliest structural defect is design-evidence navigation capture storing a flat sibling list (service links as level-1 isDropdown items without nested children). Site-chrome navigation then promotes footer utility links into header primary nav and collapses services into a dropdown—outputs that never existed in the source header DOM. Footer background was captured as #ffffff in design-evidence while live source footer is teal (#01424a in brand DNA). Colour tokens prefer captured evidence header text (#767676) over brand DNA headerText (#01424a). Validation reports navigation 0% because the source WordPress nav uses nested ul.nav.navbar-nav (labels not readable by primaryNavLabels child-walk) and image-slot 25% because lazy below-fold images report naturalWidth=0 during headless capture despite correct HTML assignments.",
+  "firstIncorrectDecision": "design-evidence navigation.items captured as flat level-1 siblings (Flu Vaccine…Diabetes marked isDropdown:true without nesting under All Services children[])",
+  "firstIncorrectFile": "data/website-design-evidence/banner-cross-pharmacy/design-evidence.json (capture pipeline → pharmacyWebsiteDesignCaptureService)",
+  "firstIncorrectFunction": "navigation hierarchy flattening at design-evidence capture (header.navItems / navigation.items writer)",
+  "firstIncorrectLine": "design-evidence.json:229-313 (header.navItems flat capture)",
+  "failureTypes": {
+    "navigation": "incorrect source evidence structure + correct evidence but wrong renderer selection (footer utility promotion into header) + validation selector mismatch (Bootstrap ul.nav.navbar-nav vs nav.nav-links primaryNavLabels)",
+    "header": "geometry/CTA placement divergence (CTA outside nav in .nav-cta-group), top bar injected, header text colour evidence override (#767676 vs brand #01424a)",
+    "footer": "footer background capture error (#ffffff in evidence vs #01424a rendered), strict footer omits hours/contact blocks present on source, generic social URLs",
+    "colour": "design-evidence footer.backgroundColour #ffffff + header text #767676 preferred over brand-dna semanticColours",
+    "image": "validation lazy-load false negative (3/4 slots naturalWidth=0 in headless); source page lacks data-image-slot attributes",
+    "responsive": "downstream of header/nav/footer chrome mismatches across desktop/tablet/mobile; mobile stacked-nav vs source Bootstrap collapse"
+  },
+  "sourceDecisionTable": [
+    {"component":"announcement/contact bar","expectedSource":"design-evidence header.topBarText / profile hours","actualSource":"profile opening hours + Google import phone","tenantDnaLoaded":"YES","tenantDnaConsumed":"PARTIAL","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"TENANT EVIDENCE IGNORED — component-dna header.topBar=false but renderer emits site-top-bar from profile","responsibleFile":"pharmacyBrandDnaComponentRenderers.ts","responsibleFunction":"renderBrandHeaderComponent","responsibleLine":"191-202","requiredFix":"Gate top bar on component-dna.header.topBar when strict tenant chrome active"},
+    {"component":"header shell","expectedSource":"design-evidence header + component-dna header variant","actualSource":"component-dna standard-navigation + site chrome colours","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"header text colour from evidence #767676 not brand-dna #01424a","responsibleFile":"pharmacySiteChromeColourService.ts","responsibleFunction":"resolveSiteChromeColourTokens","responsibleLine":"94-151","requiredFix":"Prefer brand-dna semanticColours.headerText when tenant DNA active"},
+    {"component":"logo block","expectedSource":"website-import logo-0a892009df57.png","actualSource":"mirrored /assets/brands/banner-cross-pharmacy/logo.png","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"none — logo provenance correct","responsibleFile":"pharmacyBrandDnaComponentRenderers.ts","responsibleFunction":"renderBrandHeaderComponent","responsibleLine":"102-105","requiredFix":"none"},
+    {"component":"primary navigation","expectedSource":"design-evidence header.navItems primary only (Home, About us, All Services)","actualSource":"site chrome model + footer quickLinks promotion","tenantDnaLoaded":"YES","tenantDnaConsumed":"PARTIAL","genericSelected":"NO","fallbackUsed":"YES","firstIncorrectDecision":"GENERIC COMPONENT SUBSTITUTED — Store Locator + Contact Us promoted from footer.quickLinks into header primary","responsibleFile":"pharmacySiteChromeNavigationService.ts","responsibleFunction":"classifySiteChromeNavigation","responsibleLine":"132-147","requiredFix":"Do not promote footer links unless present in captured header.navItems"},
+    {"component":"dropdown navigation","expectedSource":"nested children under All Services","actualSource":"dropdownChildren from flat isDropdown items","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"flat capture lost parent-child nesting at design-evidence stage","responsibleFile":"design-evidence capture","responsibleFunction":"navigation.items writer","responsibleLine":"340-425","requiredFix":"Capture nested children[] under All Services in design-evidence"},
+    {"component":"header CTA","expectedSource":"design-evidence header.ctaLabels (empty on source branch)","actualSource":"profile headerCta Book An Appointment","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"CTA placed outside nav (.nav-cta-group) changing header geometry vs source","responsibleFile":"pharmacyBrandDnaComponentRenderers.ts","responsibleFunction":"renderBrandHeaderComponent","responsibleLine":"161-189","requiredFix":"Match source CTA placement inside nav row when evidence shows inline CTA"},
+    {"component":"hero image","expectedSource":"website-import assignment service-f07f6c2efb2a.jpg","actualSource":"assignment consumed correctly","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"validation lazy-load marks missing — not render failure","responsibleFile":"pharmacyTruthfulVisualValidationService.ts","responsibleFunction":"COMPONENT_EXTRACT_SCRIPT imageSlots","responsibleLine":"224-232","requiredFix":"Scroll into view / eager load before slot completeness check"},
+    {"component":"support image","expectedSource":"website-import service-64388edbaf68.png","actualSource":"assignment consumed","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"lazy-load validation false negative","responsibleFile":"pharmacyTruthfulVisualValidationHarness.ts","responsibleFunction":"waitForPageReadiness","responsibleLine":"149-157","requiredFix":"Force lazy images into view before signature extract"},
+    {"component":"trust image","expectedSource":"website-import service-9568af78099f.png","actualSource":"assignment consumed","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"lazy-load validation false negative","responsibleFile":"pharmacyTruthfulVisualValidationService.ts","responsibleFunction":"COMPONENT_EXTRACT_SCRIPT","responsibleLine":"224-232","requiredFix":"same as support"},
+    {"component":"conversion image","expectedSource":"website-import service-908141e4d543.png","actualSource":"assignment consumed","tenantDnaLoaded":"YES","tenantDnaConsumed":"YES","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"lazy-load validation false negative","responsibleFile":"pharmacyTruthfulVisualValidationService.ts","responsibleFunction":"COMPONENT_EXTRACT_SCRIPT","responsibleLine":"224-232","requiredFix":"same as support"},
+    {"component":"footer shell","expectedSource":"design-evidence footer #01424a (brand-dna)","actualSource":"strict footer #01424a from brand semantic override","tenantDnaLoaded":"YES","tenantDnaConsumed":"PARTIAL","genericSelected":"NO","fallbackUsed":"YES","firstIncorrectDecision":"design-evidence footer.backgroundColour captured #ffffff — semantic override fixes render but breaks source comparison","responsibleFile":"pharmacyWebsiteDesignCaptureService.ts","responsibleFunction":"footer colour capture","responsibleLine":"design-evidence.json:549","requiredFix":"Capture visible non-white footer layer background at import"},
+    {"component":"footer social links","expectedSource":"footer.socialLinks from import (empty)","actualSource":"parseFooterSocialFromContact generic platform root URLs","tenantDnaLoaded":"YES","tenantDnaConsumed":"NO","genericSelected":"YES","fallbackUsed":"YES","firstIncorrectDecision":"GENERIC COMPONENT SUBSTITUTED — Facebook/Twitter/Youtube root URLs","responsibleFile":"pharmacySiteChromeNavigationService.ts","responsibleFunction":"parseFooterSocialFromContact","responsibleLine":"72-86","requiredFix":"Omit social block when no tenant URLs; record fallback in manifest"},
+    {"component":"footer badge","expectedSource":"website-import badge assets","actualSource":"text badge NHS Services","tenantDnaLoaded":"YES","tenantDnaConsumed":"NO","genericSelected":"YES","fallbackUsed":"YES","firstIncorrectDecision":"GENERIC COMPONENT SUBSTITUTED — text badge when badgeAssets empty","responsibleFile":"pharmacyBrandDnaFooterRenderer.ts","responsibleFunction":"renderFooterBadges","responsibleLine":"100-117","requiredFix":"Use imported badge assets or omit; record fallback"},
+    {"component":"service cards / body sections","expectedSource":"master content manifest","actualSource":"visual experience V3 generated content","tenantDnaLoaded":"N/A","tenantDnaConsumed":"N/A","genericSelected":"NO","fallbackUsed":"NO","firstIncorrectDecision":"out of site-chrome scope — content pipeline not gated","responsibleFile":"pharmacyVisualExperienceLayoutV3.ts","responsibleFunction":"buildVisualExperienceLayoutV3Html","responsibleLine":"N/A","requiredFix":"deferred — content defect separate sprint"}
+  ],
+  "genericRendererAudit": [
+    {"function":"parseFooterSocialFromContact","file":"pharmacySiteChromeNavigationService.ts","line":"72-86","component":"footer social links","condition":"footer.socialLinks empty","tenantDnaExisted":"YES","allowed":"NO","manifestRecorded":"NO","classification":"INVALID"},
+    {"function":"renderFooterBadges","file":"pharmacyBrandDnaFooterRenderer.ts","line":"100-117","component":"footer badge","condition":"badgeAssets empty","tenantDnaExisted":"YES","allowed":"NO","manifestRecorded":"NO","classification":"INVALID"},
+    {"function":"classifySiteChromeNavigation footer promotion","file":"pharmacySiteChromeNavigationService.ts","line":"132-147","component":"header nav Store Locator/Contact Us","condition":"utilityLabels in footer.quickLinks","tenantDnaExisted":"YES","allowed":"PARTIAL","manifestRecorded":"NO","classification":"INVALID"},
+    {"function":"resolveSiteChromeColourTokens footer override","file":"pharmacySiteChromeColourService.ts","line":"117-124","component":"footer colours","condition":"evidence footer #ffffff","tenantDnaExisted":"YES","allowed":"YES","manifestRecorded":"NO","classification":"VALID"},
+    {"function":"resolveServicePageTemplateId","file":"pharmacyTenantDnaRenderActivation.ts","line":"57-59","component":"page template","condition":"hasActivatedTenantDesignDna","tenantDnaExisted":"YES","selected":"tenant-dna-v1 not lockdown","manifestRecorded":"NO","classification":"VALID"},
+    {"function":"getPharmaConnectComponentDnaDefaults","file":"pharmacyComponentDnaResolver.ts","line":"N/A","component":"all chrome","condition":"no persisted component DNA","tenantDnaExisted":"YES — not invoked","allowed":"FORBIDDEN if invoked","manifestRecorded":"N/A","classification":"FORBIDDEN (not selected)"}
+  ],
+  "manifestTruth": {
+    "fallbackFlagsRecorded": 0,
+    "fallbacksActuallyExecuted": 4,
+    "manifestFalseNegatives": 4,
+    "missingFallbackFlags": [
+      "footer-social-generic-platform-urls",
+      "footer-badge-text-fallback",
+      "header-nav-footer-utility-promotion",
+      "footer-colour-evidence-white-semantic-override"
+    ]
+  },
+  "orderedFirstFailureList": [
+    "1. design-evidence navigation flat capture (lost All Services hierarchy)",
+    "2. design-evidence footer.backgroundColour captured #ffffff instead of teal layer",
+    "3. site chrome promotes footer Store Locator/Contact Us into header primary nav",
+    "4. site chrome colour service prefers evidence header text #767676 over brand-dna #01424a",
+    "5. strict footer omits opening-hours/contact blocks (component-dna columnOrder unused)",
+    "6. generic footer social URLs substituted when socialLinks empty",
+    "7. validation primaryNavLabels cannot read Bootstrap nested ul.nav (nav similarity 0%)",
+    "8. validation lazy-image completeness false negative (image-slot 25%)"
+  ],
+  "nextFixPlan": [
+    {
+      "id": 1,
+      "file": "pharmacyWebsiteDesignCaptureService.ts (design-evidence writer)",
+      "behaviour": "Capture navigation as nested children[] under All Services; capture footer visible-layer background #01424a not wrapper white",
+      "metricAffected": "navigation similarity, colour similarity, footer similarity",
+      "dependencies": "none — earliest pipeline stage",
+      "regressionRisk": "low — improves evidence fidelity only",
+      "acceptanceTest": "RC1-C13 gate navigation ≥95% after renderer consumes nested model; footer colour ≥95%"
+    },
+    {
+      "id": 2,
+      "file": "pharmacySiteChromeNavigationService.ts:classifySiteChromeNavigation",
+      "behaviour": "Stop promoting footer.quickLinks into header primary unless same label exists in header.navItems; omit generic social when footer.socialLinks empty",
+      "metricAffected": "navigation similarity 0→expected ≥60+, footer similarity",
+      "dependencies": "fix 1 optional but recommended",
+      "regressionRisk": "medium — may remove Store Locator/Contact from header if source lacks them",
+      "acceptanceTest": "Browser primaryNavLabels match source header items on PHH branch page"
+    },
+    {
+      "id": 3,
+      "file": "pharmacySiteChromeColourService.ts:resolveSiteChromeColourTokens",
+      "behaviour": "When hasActivatedTenantDesignDna, prefer brand-dna semanticColours over design-evidence for headerText and footer backgrounds when evidence confidence low or #ffffff on footer",
+      "metricAffected": "colour similarity 25→expected ≥95%, header similarity",
+      "dependencies": "fix 1 footer capture",
+      "regressionRisk": "low",
+      "acceptanceTest": "Rendered --header-text matches brand-dna #01424a; colour gate ≥95%"
+    }
+  ],
+  "validation": {
+    "rendererOutputModified": false,
+    "canonicalRenderRebuilt": false,
+    "deploymentPerformed": false,
+    "newPublishJob": false,
+    "websiteImportRerun": false,
+    "googleImportRerun": false,
+    "writtenContentRegenerated": false,
+    "workflowRemainsRequestIndexing": true,
+    "indexingRequested": false
+  },
+  "status": "BLOCKED — PROVENANCE COMPLETE"
+}

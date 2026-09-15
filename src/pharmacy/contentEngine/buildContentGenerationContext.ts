@@ -152,9 +152,11 @@ export function buildContentGenerationContext(
           priority: "priority" in a ? a.priority : undefined,
           order: "order" in a ? a.order : undefined,
         }));
-  const selectedAreas = localLocationHierarchy.ok
-    ? hierarchyToContentGenerationAreas(localLocationHierarchy)
-    : profileSelectedAreas;
+  const selectedAreas = options.selectedAreasOverride?.length
+    ? options.selectedAreasOverride
+    : localLocationHierarchy.ok
+      ? hierarchyToContentGenerationAreas(localLocationHierarchy)
+      : profileSelectedAreas;
   const primaryTown = String(raw.primaryTown || raw.townCity || profile.town || "").trim();
   const localArea = options.localArea || primaryTown || selectedAreas[0]?.areaName || "";
 

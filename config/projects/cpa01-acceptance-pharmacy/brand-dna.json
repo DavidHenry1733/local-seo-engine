@@ -1,0 +1,477 @@
+{
+  "version": "brand-dna-v1",
+  "slug": "cpa01-acceptance-pharmacy",
+  "sourceUrl": "https://www.archwaypharmacy.co.uk",
+  "frozenAt": "2026-07-26T10:19:56.001Z",
+  "businessName": "Archway Pharmacy",
+  "logoUrl": "https://www.archwaypharmacy.co.uk/images/logo.png",
+  "faviconUrl": "https://www.archwaypharmacy.co.uk/images/favicon.png",
+  "colours": {
+    "primary": "#4289b5",
+    "secondary": "#326788",
+    "accent": "#326788",
+    "background": "#ffffff",
+    "heading": "#2e607f",
+    "headingPrimary": "#2e607f",
+    "headingSecondary": "#326788",
+    "body": "#334155",
+    "muted": "#5d6b7f",
+    "button": "#4289b5",
+    "buttonText": "#ffffff",
+    "headerBackground": "#ffffff",
+    "headerText": "#2e607f",
+    "footerBackground": "#2e607f",
+    "footerText": "#ffffff",
+    "footerLink": "#ffffff",
+    "footerAccent": "#ffffff",
+    "sectionBackground": "#f8fafc",
+    "topBarBackground": "#4289b5",
+    "topBarText": "#ffffff"
+  },
+  "semanticColours": {
+    "pageBackground": "#ffffff",
+    "surface": "#f8fafc",
+    "headingPrimary": "#2e607f",
+    "headingSecondary": "#326788",
+    "bodyText": "#334155",
+    "mutedText": "#5d6b7f",
+    "primaryAction": "#4289b5",
+    "primaryActionText": "#ffffff",
+    "secondaryAction": "#326788",
+    "secondaryActionText": "#ffffff",
+    "link": "#326788",
+    "iconPrimary": "#4289b5",
+    "iconSecondary": "#326788",
+    "border": "color-mix(in srgb, var(--brand-text) 12%, white)",
+    "topBarBackground": "#4289b5",
+    "topBarText": "#ffffff",
+    "headerBackground": "#ffffff",
+    "headerText": "#2e607f",
+    "footerBackground": "#2e607f",
+    "footerText": "#ffffff",
+    "footerLink": "#ffffff",
+    "footerBottomBarBackground": "#2e607f",
+    "trustBackground": "#f8fafc",
+    "cardBackground": "#ffffff",
+    "mapPanelBackground": "#f8fafc"
+  },
+  "typography": {
+    "headingFont": "Roboto",
+    "bodyFont": "Roboto",
+    "headingWeight": "800",
+    "bodyWeight": "400",
+    "h1Scale": "clamp(2.5rem,5vw,5.3125rem)",
+    "h2Scale": "clamp(1.75rem,3vw,3rem)",
+    "h3Size": "22px",
+    "bodySize": "18px"
+  },
+  "typographyRoles": {
+    "h1": {
+      "fontFamily": "Roboto",
+      "fontSize": "clamp(2.5rem,5vw,5.3125rem)",
+      "fontWeight": "800",
+      "lineHeight": "1.08",
+      "colour": "#2e607f"
+    },
+    "h2": {
+      "fontFamily": "Roboto",
+      "fontSize": "clamp(1.75rem,3vw,3rem)",
+      "fontWeight": "800",
+      "lineHeight": "1.12",
+      "colour": "#2e607f"
+    },
+    "h3": {
+      "fontFamily": "Roboto",
+      "fontSize": "22px",
+      "fontWeight": "800",
+      "lineHeight": "1.2",
+      "colour": "#2e607f"
+    },
+    "body": {
+      "fontFamily": "Roboto",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "1.65",
+      "colour": "#334155"
+    },
+    "navigation": {
+      "fontFamily": "Roboto",
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "lineHeight": "1.4",
+      "colour": "#2e607f"
+    },
+    "button": {
+      "fontFamily": "Roboto",
+      "fontSize": "18px",
+      "fontWeight": "600",
+      "lineHeight": "1.2",
+      "colour": "#ffffff"
+    },
+    "footer": {
+      "fontFamily": "Roboto",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "1.6",
+      "colour": "#ffffff"
+    }
+  },
+  "layout": {
+    "headerLayout": "with-top-bar",
+    "topInfoBar": true,
+    "navigationStyle": "multi-link",
+    "heroLayout": "split",
+    "footerLayout": "multi-column",
+    "logoMaxHeight": "48px"
+  },
+  "surfaces": {
+    "buttonRadius": "10px",
+    "buttonWeight": "600",
+    "buttonShadow": true,
+    "cardRadius": "10px",
+    "cardBorder": "1px solid var(--line)",
+    "cardShadow": "var(--shadow2)",
+    "sectionPadding": "72px",
+    "heroPadding": "88px",
+    "iconRadius": "14px",
+    "iconStyle": "rounded"
+  },
+  "trustCta": {
+    "trustCardRadius": "10px",
+    "trustItemStyle": "card",
+    "ctaBandStyle": "gradient",
+    "ctaButtonRadius": "10px"
+  },
+  "navigationLinks": [
+    {
+      "label": "Home",
+      "href": "https://archwaypharmacy.co.uk/"
+    },
+    {
+      "label": "Services",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "About Us",
+      "href": "https://archwaypharmacy.co.uk/about"
+    },
+    {
+      "label": "Essentials Service",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "NHS Advance Service",
+      "href": "https://archwaypharmacy.co.uk/services"
+    },
+    {
+      "label": "FAQs",
+      "href": "https://archwaypharmacy.co.uk/FAQs"
+    },
+    {
+      "label": "Contact Us",
+      "href": "https://archwaypharmacy.co.uk/contact"
+    },
+    {
+      "label": "Weight Loss Clinic",
+      "href": "https://archwaypharmacy.co.uk/weight-loss-clinic"
+    }
+  ],
+  "detectedServiceLinks": [
+    {
+      "label": "NHS Essential Services",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "Dispensing medicines",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "Repeat dispensing (eRD)",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "Dispensing appliances",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "Discharge Medicines Service",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "Public health",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    }
+  ],
+  "footerLinks": [
+    {
+      "label": "Home",
+      "href": "https://archwaypharmacy.co.uk/"
+    },
+    {
+      "label": "About Us",
+      "href": "https://archwaypharmacy.co.uk/about"
+    },
+    {
+      "label": "Essentials Service",
+      "href": "https://archwaypharmacy.co.uk/essential-services"
+    },
+    {
+      "label": "NHS Advance Service",
+      "href": "https://archwaypharmacy.co.uk/services"
+    },
+    {
+      "label": "FAQs",
+      "href": "https://archwaypharmacy.co.uk/FAQs"
+    },
+    {
+      "label": "Contact Us",
+      "href": "https://archwaypharmacy.co.uk/contact"
+    },
+    {
+      "label": "Weight Loss Clinic",
+      "href": "https://archwaypharmacy.co.uk/weight-loss-clinic"
+    }
+  ],
+  "navigation": {
+    "confirmedItems": [
+      {
+        "label": "Home",
+        "href": "https://archwaypharmacy.co.uk/"
+      },
+      {
+        "label": "Services",
+        "href": "https://archwaypharmacy.co.uk/essential-services"
+      },
+      {
+        "label": "About Us",
+        "href": "https://archwaypharmacy.co.uk/about"
+      },
+      {
+        "label": "Essentials Service",
+        "href": "https://archwaypharmacy.co.uk/essential-services"
+      },
+      {
+        "label": "NHS Advance Service",
+        "href": "https://archwaypharmacy.co.uk/services"
+      },
+      {
+        "label": "FAQs",
+        "href": "https://archwaypharmacy.co.uk/FAQs"
+      },
+      {
+        "label": "Contact Us",
+        "href": "https://archwaypharmacy.co.uk/contact"
+      },
+      {
+        "label": "Weight Loss Clinic",
+        "href": "https://archwaypharmacy.co.uk/weight-loss-clinic"
+      }
+    ]
+  },
+  "footer": {
+    "confirmedItems": [
+      {
+        "label": "Home",
+        "href": "https://archwaypharmacy.co.uk/"
+      },
+      {
+        "label": "About Us",
+        "href": "https://archwaypharmacy.co.uk/about"
+      },
+      {
+        "label": "Essentials Service",
+        "href": "https://archwaypharmacy.co.uk/essential-services"
+      },
+      {
+        "label": "NHS Advance Service",
+        "href": "https://archwaypharmacy.co.uk/services"
+      },
+      {
+        "label": "FAQs",
+        "href": "https://archwaypharmacy.co.uk/FAQs"
+      },
+      {
+        "label": "Contact Us",
+        "href": "https://archwaypharmacy.co.uk/contact"
+      },
+      {
+        "label": "Weight Loss Clinic",
+        "href": "https://archwaypharmacy.co.uk/weight-loss-clinic"
+      }
+    ],
+    "legalItems": [],
+    "showLogo": true,
+    "columnCount": 4
+  },
+  "headerCtaText": "Book An Appointment",
+  "headerCtaUrl": "https://www.archwaypharmacy.co.uk",
+  "topInfoBarText": "+44 7450 209982 | pharmacy.fa562@nhs.net",
+  "styleEvidence": [
+    {
+      "role": "primary-button-text",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".theme-btn.style-one",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "top-bar-text",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".top-header",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "main-header",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".header-upper / .main-header",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 75,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "hero",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".banner-section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 55,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "service-card",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".choose-item, .service-card",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "content-section",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": "section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "footer-heading",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".footer-widget h3",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "footer-link",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".footer-widget a",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "map-contact",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".contact-section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 45,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    },
+    {
+      "role": "mobile-navigation",
+      "pageUrl": "https://www.archwaypharmacy.co.uk",
+      "selectorOrSignature": ".mobile-menu",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 40,
+      "importedAt": "2026-07-26T10:19:55.737Z"
+    }
+  ],
+  "footerEvidence": {
+    "background": "#2e607f",
+    "bottomBarBackground": "#2e607f",
+    "headingColour": "#ffffff",
+    "textColour": "#ffffff",
+    "linkColour": "#ffffff",
+    "columnCount": 4,
+    "showLogo": true,
+    "hasDescriptionBlock": true,
+    "hasQuickLinks": true,
+    "hasOpeningHours": false,
+    "hasContactBlock": true,
+    "hasSocialLinks": false,
+    "hasRegulatoryRow": false,
+    "hasCopyrightRow": true,
+    "hasLegalLinks": false,
+    "openingHoursLayout": "table",
+    "contactLayout": "column",
+    "columnOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ],
+    "columnWidths": "2.2fr 1fr 1.15fr 1.5fr",
+    "backgroundTreatment": "pattern-generic",
+    "badges": [
+      "NHS Services"
+    ],
+    "badgeAssets": [],
+    "backToTop": true,
+    "socialLinks": []
+  },
+  "mapConfig": {
+    "latitude": "",
+    "longitude": "",
+    "canonicalAddress": "",
+    "embedMode": "address-query",
+    "fallbackMode": "address-query"
+  },
+  "conflicts": [
+    {
+      "field": "phone",
+      "businessProfileValue": "01142661234",
+      "websiteEvidenceValue": "+44 7450 209982",
+      "resolution": "business-profile-wins",
+      "requiresCustomerConfirmation": true
+    },
+    {
+      "field": "pharmacyName",
+      "businessProfileValue": "CPA01 Acceptance Pharmacy",
+      "websiteEvidenceValue": "Archway Pharmacy",
+      "resolution": "business-profile-wins",
+      "requiresCustomerConfirmation": false
+    }
+  ],
+  "confidence": {
+    "logo": 90,
+    "colours": 90,
+    "fonts": 70,
+    "layout": 85
+  },
+  "source": "website-import",
+  "sourceImportRevision": "dc4c445029bf389c",
+  "websiteIntelligenceRevision": "2026-07-26T10:19:44.655Z",
+  "generatedAt": "2026-07-26T10:19:56.000Z"
+}

@@ -1,0 +1,353 @@
+{
+  "version": "design-intelligence-v1",
+  "tenant": "leeds-pharmacy",
+  "sourceRevision": "dfa35f594f19b4a7",
+  "capturedAt": "2026-08-02T09:01:46.349Z",
+  "primaryUrl": "https://leedspharmacy.co.uk",
+  "navigation": {
+    "tree": [
+      {
+        "id": "nav-1",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 1,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/",
+        "text": "LEEDS PHARMACY",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-2",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 2,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/prescriptions",
+        "text": "Prescriptions",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-3",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 3,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/#nominate",
+        "text": "Book an Appointment",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-4",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 4,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/pharmacy-services",
+        "text": "Pharmacy Services",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-5",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 5,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/health-advice",
+        "text": "Health Advice",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-6",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 6,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/contact",
+        "text": "Contact",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-7",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 7,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/faqs",
+        "text": "FAQs",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-8",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 8,
+        "selector": "header nav a",
+        "href": "https://leedspharmacy.co.uk/about-us",
+        "text": "About us",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      }
+    ],
+    "hierarchyDepth": 1,
+    "rootId": "nav-1"
+  },
+  "header": {
+    "rowCount": 1,
+    "announcementBar": null,
+    "logoBlock": {
+      "selector": "header .logo img",
+      "backgroundColour": "#ffffff",
+      "textColour": "#004281",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "left",
+      "sticky": false,
+      "logoUrl": "https://leedspharmacy.co.uk/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.65081cea.jpg&amp;w=128&amp;q=75",
+      "logoMaxHeight": "48px",
+      "logoPosition": "left"
+    },
+    "navigationBlock": {
+      "selector": "header nav",
+      "backgroundColour": "#ffffff",
+      "textColour": "#004281",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "end",
+      "sticky": false,
+      "navPlacement": "inline",
+      "mobileMenuBehaviour": "stacked-nav"
+    },
+    "ctaBlock": {
+      "selector": "header .btn, header .theme-btn",
+      "backgroundColour": "#1CA9C9",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "right",
+      "sticky": false,
+      "labels": [
+        "Book An Appointment"
+      ],
+      "hrefs": [
+        "https://leedspharmacy.co.uk"
+      ]
+    },
+    "spacing": {
+      "paddingY": "",
+      "paddingX": "",
+      "gap": "24px"
+    },
+    "alignment": {
+      "logo": "left",
+      "nav": "center",
+      "cta": "right"
+    },
+    "sticky": true,
+    "responsive": {
+      "desktopBreakpoint": "980px",
+      "mobileMenuBehaviour": "stacked-nav"
+    }
+  },
+  "footer": {
+    "upperLayer": {
+      "selector": "footer",
+      "backgroundColour": "#004281",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "56px",
+      "paddingBottom": "0"
+    },
+    "lowerLayer": {
+      "selector": "footer .footer-bottom",
+      "backgroundColour": "#004281",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "18px"
+    },
+    "groups": [
+      {
+        "id": "footer-primary",
+        "role": "company",
+        "selector": "footer",
+        "heading": "Footer",
+        "links": [
+          {
+            "text": "LEEDS PHARMACY",
+            "href": "https://leedspharmacy.co.uk/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Prescriptions",
+            "href": "https://leedspharmacy.co.uk/prescriptions",
+            "selector": "footer a"
+          },
+          {
+            "text": "Book an Appointment",
+            "href": "https://leedspharmacy.co.uk/#nominate",
+            "selector": "footer a"
+          },
+          {
+            "text": "Pharmacy Services",
+            "href": "https://leedspharmacy.co.uk/pharmacy-services",
+            "selector": "footer a"
+          },
+          {
+            "text": "Health Advice",
+            "href": "https://leedspharmacy.co.uk/health-advice",
+            "selector": "footer a"
+          },
+          {
+            "text": "Contact",
+            "href": "https://leedspharmacy.co.uk/contact",
+            "selector": "footer a"
+          },
+          {
+            "text": "FAQs",
+            "href": "https://leedspharmacy.co.uk/faqs",
+            "selector": "footer a"
+          },
+          {
+            "text": "About us",
+            "href": "https://leedspharmacy.co.uk/about-us",
+            "selector": "footer a"
+          }
+        ],
+        "backgroundColour": "#004281",
+        "textColour": "#ffffff"
+      }
+    ],
+    "mobileStackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ]
+  },
+  "colours": [
+    {
+      "role": "primary",
+      "selector": ":root",
+      "computedColour": "#005EB8",
+      "hex": "#005EB8",
+      "layer": "body"
+    },
+    {
+      "role": "secondary",
+      "selector": ":root",
+      "computedColour": "#00478a",
+      "hex": "#00478a",
+      "layer": "body"
+    },
+    {
+      "role": "accent",
+      "selector": ":root",
+      "computedColour": "#00478a",
+      "hex": "#00478a",
+      "layer": "body"
+    },
+    {
+      "role": "header-background",
+      "selector": ":root",
+      "computedColour": "#ffffff",
+      "hex": "#ffffff",
+      "layer": "footer-upper"
+    },
+    {
+      "role": "footer-background",
+      "selector": ":root",
+      "computedColour": "#004281",
+      "hex": "#004281",
+      "layer": "footer-upper"
+    }
+  ],
+  "images": [
+    {
+      "id": "logo-primary",
+      "role": "logo",
+      "selector": "header .logo img",
+      "asset": "https://leedspharmacy.co.uk/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.65081cea.jpg&amp;w=128&amp;q=75",
+      "width": 0,
+      "height": 0,
+      "aspectRatio": "",
+      "alt": "Leeds Pharmacy",
+      "lazyLoad": false,
+      "backgroundImage": "",
+      "visibility": "visible"
+    }
+  ],
+  "validation": {
+    "navigationTreeComplete": true,
+    "headerHierarchyComplete": true,
+    "footerHierarchyComplete": true,
+    "colourRolesComplete": true,
+    "imageRolesComplete": true,
+    "navigationFlatteningRemoved": true,
+    "footerLayerMergeRemoved": true
+  },
+  "summary": {
+    "layoutClassification": "with-top-bar",
+    "headerStyle": "inline",
+    "footerStyle": "four-column-contact",
+    "navigationStyle": "inline",
+    "typographySystem": "Poppins / Arial",
+    "buttonStyle": "filled-only · 10px · filled",
+    "colourSystem": "#005EB8, #00478a, #00478a",
+    "logoPlacement": "left",
+    "evidenceCompleteness": 100,
+    "fallbackReason": null
+  }
+}

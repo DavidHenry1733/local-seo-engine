@@ -1,0 +1,87 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:borrowash",
+  "maxProviderCalls": 5,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 5,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.043242,
+  "events": [
+    {
+      "at": "2026-09-06T07:49:25.383Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-07T07:53:50.235Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767630235-1"
+    },
+    {
+      "at": "2026-09-07T07:53:53.246Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767630235-1",
+      "detail": "cost=0.017034"
+    },
+    {
+      "at": "2026-09-07T10:32:53.490Z",
+      "kind": "reserve",
+      "reservationId": "r-1788777173490-2"
+    },
+    {
+      "at": "2026-09-07T10:32:55.896Z",
+      "kind": "consumed",
+      "reservationId": "r-1788777173490-2",
+      "detail": "cost=0.016764"
+    },
+    {
+      "at": "2026-09-08T13:48:39.691Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=3 remainingCostUsd=1.966202"
+    },
+    {
+      "at": "2026-09-08T13:48:39.813Z",
+      "kind": "reserve",
+      "reservationId": "r-1788875319813-3"
+    },
+    {
+      "at": "2026-09-08T13:49:10.381Z",
+      "kind": "consumed",
+      "reservationId": "r-1788875319813-3",
+      "detail": "cost=0.0014919999999999998"
+    },
+    {
+      "at": "2026-09-08T16:58:46.944Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=4 remainingCostUsd=1.96471"
+    },
+    {
+      "at": "2026-09-08T16:58:47.030Z",
+      "kind": "reserve",
+      "reservationId": "r-1788886727030-4"
+    },
+    {
+      "at": "2026-09-08T16:59:09.384Z",
+      "kind": "consumed",
+      "reservationId": "r-1788886727030-4",
+      "detail": "cost=0.0041"
+    },
+    {
+      "at": "2026-09-08T16:59:32.906Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=5 remainingCostUsd=1.96061"
+    },
+    {
+      "at": "2026-09-08T16:59:33.063Z",
+      "kind": "reserve",
+      "reservationId": "r-1788886773063-5"
+    },
+    {
+      "at": "2026-09-08T16:59:53.457Z",
+      "kind": "consumed",
+      "reservationId": "r-1788886773063-5",
+      "detail": "cost=0.0038520000000000004"
+    }
+  ]
+}

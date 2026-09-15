@@ -1,0 +1,156 @@
+{
+  "sprint": "CPR-01",
+  "validatedAt": "2026-07-26T07:44:35.819Z",
+  "checks": [
+    {
+      "name": "CPR model module exists",
+      "passed": true
+    },
+    {
+      "name": "CPR service module exists",
+      "passed": true
+    },
+    {
+      "name": "Generate action label",
+      "passed": true
+    },
+    {
+      "name": "Service-page-only content scope",
+      "passed": true
+    },
+    {
+      "name": "Service-page-only image scope",
+      "passed": true
+    },
+    {
+      "name": "generate_service_page job action",
+      "passed": true
+    },
+    {
+      "name": "No second service page generator",
+      "passed": true
+    },
+    {
+      "name": "SPG API route",
+      "passed": true
+    },
+    {
+      "name": "SPG confirm route",
+      "passed": true
+    },
+    {
+      "name": "SPG confirm wired",
+      "passed": true
+    },
+    {
+      "name": "SPR API route",
+      "passed": true
+    },
+    {
+      "name": "CGE blocked for CPR tenants",
+      "passed": true
+    },
+    {
+      "name": "UI SPG modal",
+      "passed": true
+    },
+    {
+      "name": "UI SPR modal",
+      "passed": true
+    },
+    {
+      "name": "UI openServicePageGeneration",
+      "passed": true
+    },
+    {
+      "name": "UI openServicePageReview",
+      "passed": true
+    },
+    {
+      "name": "UI confirmServicePageGeneration",
+      "passed": true
+    },
+    {
+      "name": "UI SPG banner",
+      "passed": true
+    },
+    {
+      "name": "UI panel service-page-generation",
+      "passed": true
+    },
+    {
+      "name": "UI panel service-page-review",
+      "passed": true
+    },
+    {
+      "name": "UI evidence contract sections",
+      "passed": true
+    },
+    {
+      "name": "UI no auto-approve SPR",
+      "passed": true
+    },
+    {
+      "name": "CPR contract on new customer create",
+      "passed": true
+    },
+    {
+      "name": "Evidence contract builder",
+      "passed": true
+    },
+    {
+      "name": "Service page review builder",
+      "passed": true
+    },
+    {
+      "name": "Future link plan persisted",
+      "passed": true
+    },
+    {
+      "name": "Reliable Direct not CPR tenant",
+      "passed": true
+    },
+    {
+      "name": "API-server build",
+      "passed": true
+    }
+  ],
+  "acceptance": {
+    "newCustomerCreatedByPo": false,
+    "selectedCustomerSlug": "—",
+    "primaryService": "—",
+    "townOrCity": "—",
+    "requiredEvidenceComplete": false,
+    "generateServicePageOnlyAction": "PASS",
+    "servicePageGenerated": "NO",
+    "additionalPagesGenerated": "NO",
+    "servicePageTitle": "—",
+    "servicePageCanonicalUrl": "—",
+    "wordCount": null,
+    "imageAssignments": [],
+    "placeholderImages": 0,
+    "duplicatePageImages": 0,
+    "metadata": "FAIL",
+    "schema": "FAIL",
+    "internalLinks": "FAIL",
+    "crossTenantContentDetected": "NO",
+    "cssOrCodeFragmentsDetected": "NO",
+    "desktopRendering": "FAIL",
+    "tabletRendering": "FAIL",
+    "mobileRendering": "FAIL",
+    "browserValidation": "FAIL",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "publishingPerformed": "NO",
+    "indexingPerformed": "NO",
+    "rankTrackingInitialised": "NO",
+    "tenantSpecificCodeDetected": "YES",
+    "changedModuleValidation": "PASS",
+    "apiServerBuild": "PASS",
+    "applicationReloaded": "YES",
+    "pm2": "ONLINE",
+    "masterAdminUrl": "/api/admin/master",
+    "servicePageReviewUrl": "/api/admin/master?panel=service-page-generation",
+    "status": "BLOCKED"
+  }
+}

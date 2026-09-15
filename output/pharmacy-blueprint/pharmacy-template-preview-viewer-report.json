@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-template-preview-viewer",
+  "generatedAt": "2026-06-10T19:00:00.000Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy Template Preview Viewer Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "routeUsed": "/pharmacy-preview/:pageSlug/",
+  "routeFiles": [
+    "artifacts/api-server/src/routes/pharmacyPreview.ts",
+    "artifacts/api-server/src/app.ts"
+  ],
+  "previewIndex": {
+    "path": "output/pharmacy-preview/index.html",
+    "url": "/pharmacy-preview/",
+    "status": "available",
+    "httpStatus": 200
+  },
+  "hubPreviewUrls": [
+    {
+      "templateFamily": "clinical-nhs-services",
+      "serviceName": "Pharmacy First",
+      "pageSlug": "pharmacy-first-rotherham",
+      "url": "/pharmacy-preview/pharmacy-first-rotherham/",
+      "httpStatus": 200,
+      "layoutMarker": "clinical-service-overview",
+      "pass": true
+    },
+    {
+      "templateFamily": "vaccination-services",
+      "serviceName": "NHS Flu Vaccination",
+      "pageSlug": "nhs-flu-vaccination-rotherham",
+      "url": "/pharmacy-preview/nhs-flu-vaccination-rotherham/",
+      "httpStatus": 200,
+      "layoutMarker": "service-vaccine-eligibility",
+      "pass": true
+    },
+    {
+      "templateFamily": "private-healthcare-services",
+      "serviceName": "Private Ear Wax Removal",
+      "pageSlug": "private-ear-wax-removal-rotherham",
+      "url": "/pharmacy-preview/private-ear-wax-removal-rotherham/",
+      "httpStatus": 200,
+      "layoutMarker": "service-pricing-transparency",
+      "pass": true
+    },
+    {
+      "templateFamily": "travel-health-services",
+      "serviceName": "Travel Vaccinations",
+      "pageSlug": "travel-vaccinations-rotherham",
+      "url": "/pharmacy-preview/travel-vaccinations-rotherham/",
+      "httpStatus": 200,
+      "layoutMarker": "service-destination-advice",
+      "pass": true
+    },
+    {
+      "templateFamily": "weight-management-services",
+      "serviceName": "Pharmacy Weight Loss Programme",
+      "pageSlug": "pharmacy-weight-loss-programme-rotherham",
+      "url": "/pharmacy-preview/pharmacy-weight-loss-programme-rotherham/",
+      "httpStatus": 200,
+      "layoutMarker": "service-programme-structure",
+      "pass": true
+    }
+  ],
+  "validation": {
+    "allHubsHttp200": true,
+    "previewIndexHttp200": true,
+    "schemaPresentOnHubs": true,
+    "schemaBlocksPerHub": 4,
+    "imagePlaceholdersVisible": true,
+    "imageSlotsPerHub": 6,
+    "internalLinksRewritten": true,
+    "clusterPreviewSample": {
+      "url": "/pharmacy-preview/pharmacy-first-aston/",
+      "httpStatus": 200
+    },
+    "registryUnchanged": true,
+    "sitemapUnchanged": true,
+    "noDeployment": true
+  },
+  "noindexStatus": {
+    "responseHeader": "X-Robots-Tag: noindex, nofollow",
+    "metaTagInjected": true,
+    "appliesToIndexAndPages": true
+  },
+  "pm2Restart": {
+    "command": "pm2 restart local-seo-engine --update-env",
+    "status": "online"
+  },
+  "buildStatus": {
+    "command": "pnpm --filter @workspace/api-server build",
+    "pass": true
+  },
+  "serverBaseUrl": "http://127.0.0.1:3000",
+  "notes": [
+    "Preview pages served from output/pharmacy-preview/{pageSlug}/index.html",
+    "Relative cluster links rewritten to /pharmacy-preview/{slug}/ routes",
+    "Related service links to unrendered services may 404 — expected for preview-only scope"
+  ]
+}

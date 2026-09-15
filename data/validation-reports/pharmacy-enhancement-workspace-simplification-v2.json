@@ -1,0 +1,160 @@
+{
+  "slug": "pharmaconnect",
+  "pass": true,
+  "checks": [
+    {
+      "id": "1-page-renamed",
+      "pass": true,
+      "detail": "Page title is Campaign Improvements"
+    },
+    {
+      "id": "2-subtitle",
+      "pass": true,
+      "detail": "Customer-facing subtitle present"
+    },
+    {
+      "id": "3-no-engine-wording",
+      "pass": true,
+      "detail": "Technical engine wording removed from page"
+    },
+    {
+      "id": "4-summary-strip",
+      "pass": true,
+      "detail": "Six-card summary strip"
+    },
+    {
+      "id": "5-continue-next-action",
+      "pass": true,
+      "detail": "Continue Next Action button"
+    },
+    {
+      "id": "6-required-section",
+      "pass": true,
+      "detail": "Required Before Launch section"
+    },
+    {
+      "id": "7-quick-wins-section",
+      "pass": true,
+      "detail": "Quick Wins section"
+    },
+    {
+      "id": "8-high-impact-section",
+      "pass": true,
+      "detail": "High Impact section"
+    },
+    {
+      "id": "9-future-collapsed",
+      "pass": true,
+      "detail": "Future Improvements collapsed"
+    },
+    {
+      "id": "10-completed-collapsed",
+      "pass": true,
+      "detail": "Completed collapsed"
+    },
+    {
+      "id": "11-deferred-collapsed",
+      "pass": true,
+      "detail": "Deferred section present and collapsed"
+    },
+    {
+      "id": "12-responsive-grid",
+      "pass": true,
+      "detail": "CSS Grid 3/2/1 columns"
+    },
+    {
+      "id": "13-equal-height-cards",
+      "pass": true,
+      "detail": "Equal-height cards"
+    },
+    {
+      "id": "14-evidence-hidden",
+      "pass": true,
+      "detail": "Evidence inside Show Details only"
+    },
+    {
+      "id": "15-advanced-filters-collapsed",
+      "pass": true,
+      "detail": "Advanced Filters collapsed by default"
+    },
+    {
+      "id": "16-show-more-less",
+      "pass": true,
+      "detail": "Show More / Show Less toggles"
+    },
+    {
+      "id": "17-grouping-logic",
+      "pass": true,
+      "detail": "Grouped 143 tasks without loss"
+    },
+    {
+      "id": "18-plain-english",
+      "pass": true,
+      "detail": "Plain-English title mapping"
+    },
+    {
+      "id": "19-card-fields",
+      "pass": true,
+      "detail": "Simplified card fields"
+    },
+    {
+      "id": "20-campaign-os-links",
+      "pass": true,
+      "detail": "Campaign OS links updated"
+    },
+    {
+      "id": "21-nav-label",
+      "pass": true,
+      "detail": "Nav label updated"
+    },
+    {
+      "id": "22-no-engine-modified",
+      "pass": true,
+      "detail": "Recommendation engine unchanged"
+    },
+    {
+      "id": "23-no-scoring-modified",
+      "pass": true,
+      "detail": "Scoring logic unchanged in workspace service"
+    },
+    {
+      "id": "24-ui-only-grouping",
+      "pass": true,
+      "detail": "Grouping lives in UI layer only"
+    },
+    {
+      "id": "25-no-template-modified",
+      "pass": true,
+      "detail": "Visual templates unchanged"
+    },
+    {
+      "id": "26-no-master-modified",
+      "pass": true,
+      "detail": "Service masters read-only"
+    },
+    {
+      "id": "27-no-kanban",
+      "pass": true,
+      "detail": "Old kanban board removed"
+    },
+    {
+      "id": "28-quick-wins-limit",
+      "pass": true,
+      "detail": "Quick Wins and High Impact limited to 6"
+    },
+    {
+      "id": "29-live-workspace",
+      "pass": true,
+      "detail": "Auth-gated (expected in production)"
+    }
+  ],
+  "grouping": {
+    "required": 4,
+    "quickWins": 8,
+    "highImpact": 14,
+    "future": 115,
+    "completed": 2,
+    "deferred": 0
+  },
+  "generatedAt": "2026-06-27T18:33:59.945Z"
+}

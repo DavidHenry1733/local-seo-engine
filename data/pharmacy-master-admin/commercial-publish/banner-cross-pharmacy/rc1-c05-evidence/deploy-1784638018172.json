@@ -1,0 +1,169 @@
+{
+  "defect": "RC1-C05",
+  "slug": "banner-cross-pharmacy",
+  "generatedAt": "2026-07-21T12:46:58.172Z",
+  "rootCause": "Managed live site served stale pre-canonical release (305-byte meta-refresh homepage). Canonical render and publish package were validated in RC1-C04 but not deployed.",
+  "releaseUpdated": "v1",
+  "newReleaseCreated": false,
+  "staleConfirmed": true,
+  "preDeploy": {
+    "canonical": {
+      "homepage": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/index.html",
+        "sha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+        "bytes": 71316,
+        "mtime": "2026-07-21T12:46:30.049Z"
+      },
+      "service": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/pharmacy-first/index.html",
+        "sha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+        "bytes": 71316,
+        "mtime": "2026-07-21T12:46:30.116Z"
+      },
+      "guide": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/pharmacy-first-guide/index.html",
+        "sha256": "1fecbcd3c5039a8f354d342c25f4d1dffb37eebe4c8e4f5f7f895dccbd89b4d1",
+        "bytes": 58586,
+        "mtime": "2026-07-21T12:46:30.207Z"
+      },
+      "blog": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/banner-cross-pharmacy/what-is-pharmacy-first/index.html",
+        "sha256": "6b058128edec17762a2d79d1b5bb6fa59b97eaa37d267eecd052ed4b8fa42e0e",
+        "bytes": 51950,
+        "mtime": "2026-07-21T12:46:30.293Z"
+      }
+    },
+    "managed": {
+      "homepage": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/index.html",
+        "sha256": "c79b1c4bef25d5098c748598a56c4eb040b715b0ce95bbead43ca3d4df81cabe",
+        "bytes": 73764,
+        "mtime": "2026-07-21T12:18:25.266Z"
+      },
+      "service": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/pharmacy-first/index.html",
+        "sha256": "c79b1c4bef25d5098c748598a56c4eb040b715b0ce95bbead43ca3d4df81cabe",
+        "bytes": 73764,
+        "mtime": "2026-07-21T12:18:25.309Z"
+      },
+      "guide": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/pharmacy-first-guide/index.html",
+        "sha256": "86f4bdf4e7a1f31a3697b8afb9745d0ffc919b4e37c85038695d060440f7559f",
+        "bytes": 61048,
+        "mtime": "2026-07-21T12:18:25.504Z"
+      },
+      "blog": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/what-is-pharmacy-first/index.html",
+        "sha256": "c71595919b35daa5027f23a42a2d320f3b915a52213fe4511aad341954621e39",
+        "bytes": 54412,
+        "mtime": "2026-07-21T12:18:25.664Z"
+      }
+    }
+  },
+  "postDeploy": {
+    "managed": {
+      "homepage": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/index.html",
+        "sha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+        "bytes": 71316,
+        "mtime": "2026-07-21T12:46:57.578Z"
+      },
+      "service": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/pharmacy-first/index.html",
+        "sha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+        "bytes": 71316,
+        "mtime": "2026-07-21T12:46:57.592Z"
+      },
+      "guide": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/pharmacy-first-guide/index.html",
+        "sha256": "1fecbcd3c5039a8f354d342c25f4d1dffb37eebe4c8e4f5f7f895dccbd89b4d1",
+        "bytes": 58586,
+        "mtime": "2026-07-21T12:46:57.688Z"
+      },
+      "blog": {
+        "path": "/var/www/pharmaconnect-sites/banner-cross-pharmacy/current/what-is-pharmacy-first/index.html",
+        "sha256": "6b058128edec17762a2d79d1b5bb6fa59b97eaa37d267eecd052ed4b8fa42e0e",
+        "bytes": 51950,
+        "mtime": "2026-07-21T12:46:57.808Z"
+      }
+    }
+  },
+  "filesCopiedToCurrent": 17,
+  "filesCopiedToRelease": 17,
+  "canonicalChecksum": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+  "managedChecksum": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+  "checksumParity": "PASS",
+  "liveChecks": {
+    "homepage": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+      "status": 200,
+      "responseMs": 85,
+      "liveSha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+      "canonicalSha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+      "matchesCanonical": true,
+      "hasHeader": true,
+      "hasFooter": true,
+      "hasLogo": true,
+      "noMetaRefresh": true,
+      "faqCount": 6,
+      "hasMap": true,
+      "hasSchema": true,
+      "noPlaceholder": true
+    },
+    "service": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+      "status": 200,
+      "responseMs": 11,
+      "liveSha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+      "canonicalSha256": "5b5eb648771970418e532349d3a7c2afcfebac455b8efdd900e27807ac59e3aa",
+      "matchesCanonical": true,
+      "hasHeader": true,
+      "hasFooter": true,
+      "hasLogo": true,
+      "noMetaRefresh": true,
+      "faqCount": 6,
+      "hasMap": true,
+      "hasSchema": true,
+      "noPlaceholder": true
+    },
+    "guide": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first-guide/",
+      "status": 200,
+      "responseMs": 8,
+      "liveSha256": "1fecbcd3c5039a8f354d342c25f4d1dffb37eebe4c8e4f5f7f895dccbd89b4d1",
+      "canonicalSha256": "1fecbcd3c5039a8f354d342c25f4d1dffb37eebe4c8e4f5f7f895dccbd89b4d1",
+      "matchesCanonical": true,
+      "hasHeader": true,
+      "hasFooter": true,
+      "hasLogo": true,
+      "noMetaRefresh": true,
+      "faqCount": 1,
+      "hasMap": false,
+      "hasSchema": false,
+      "noPlaceholder": true
+    },
+    "blog": {
+      "url": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/what-is-pharmacy-first/",
+      "status": 200,
+      "responseMs": 8,
+      "liveSha256": "6b058128edec17762a2d79d1b5bb6fa59b97eaa37d267eecd052ed4b8fa42e0e",
+      "canonicalSha256": "6b058128edec17762a2d79d1b5bb6fa59b97eaa37d267eecd052ed4b8fa42e0e",
+      "matchesCanonical": true,
+      "hasHeader": true,
+      "hasFooter": true,
+      "hasLogo": true,
+      "noMetaRefresh": true,
+      "faqCount": 1,
+      "hasMap": false,
+      "hasSchema": false,
+      "noPlaceholder": true
+    }
+  },
+  "urlsTested": {
+    "homepage": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+    "service": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+    "guide": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first-guide/",
+    "blog": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/what-is-pharmacy-first/"
+  },
+  "status": "READY FOR PRODUCT OWNER TEST"
+}

@@ -92,6 +92,13 @@ type SavedRelevanceEntity = {
   location?: { latitude?: number; longitude?: number } | null;
   distanceKm?: number | null;
   distanceLabel?: string;
+  provider?: string;
+  source?: string;
+  retrievedAt?: string;
+  sourceRef?: string;
+  placeId?: string;
+  confidence?: number;
+  relationship?: string;
 };
 
 function num(value: unknown): number | null {
@@ -241,9 +248,12 @@ function centroidFromEntities(entities: Array<{ latitude?: number | null; longit
 function factFromSaved(entity: SavedRelevanceEntity, provenance: string): NamedLocalityFact | null {
   const name = String(entity.name || "").trim();
   if (!name) return null;
+  const retrieved = String(entity.retrievedAt || "").trim();
+  const provider = String(entity.provider || entity.source || "").trim();
+  const sourceRef = String(entity.sourceRef || entity.placeId || "").trim();
   return {
     name,
-    provenance,
+    provenance: [provenance, provider, retrieved, sourceRef].filter(Boolean).join(":"),
     category: String(entity.category || (entity.types || [])[0] || ""),
     distanceLabel: entity.distanceLabel || undefined,
     latitude: entity.location?.latitude ?? null,
@@ -340,73 +350,90 @@ function bindOne(
   const discovery = areaDiscoveryForName(ctx.areaDiscovery, areaName);
   const savedArea = selectedAreaEntry(ctx, areaName);
 
-  const savedLandmarks = packEntities(pack, ["topLandmarks", "landmarks", "community"]).map((e) =>
-    factFromSaved(e, "local-relevance-pack:google-or-saved"),
-  );
-  const savedHealthcare = packEntities(pack, ["topHealthcare", "healthcare"]).map((e) =>
-    factFromSaved(e, "local-relevance-pack:google-or-saved"),
-  );
-  const savedTransport = packEntities(pack, ["transport"]).map((e) => factFromSaved(e, "local-relevance-pack:google-or-saved"));
-  const savedSchools = packEntities(pack, ["schools"]).map((e) => factFromSaved(e, "local-relevance-pack:google-or-saved"));
-  const savedRetail = packEntities(pack, ["retail"]).map((e) => factFromSaved(e, "local-relevance-pack:google-or-saved"));
-  const savedCommunity = packEntities(pack, ["topCommunity", "community"]).map((e) =>
-    factFromSaved(e, "local-relevance-pack:google-or-saved"),
-  );
+  const packIsV3 = String(pack?.version || "") === "v3";
+  const packFact = (e: SavedRelevanceEntity) =>
+    packIsV3 || e.relationship || belongsToArea(e, areaName, siblingNames)
+      ? factFromSaved(e, packIsV3 ? "local-evidence-pack-v3" : "local-relevance-pack:google-or-saved")
+      : null;
 
-  const profileLandmarks = profileEntities(ctx.rawProfile, "landmarks")
-    .filter((e) => belongsToArea(e, areaName, siblingNames))
-    .map((e) => factFromProfile(e, "profile:approved-landmarks"));
-  const profileHealthcare = [
-    ...profileEntities(ctx.rawProfile, "gpSurgeries"),
-    ...profileEntities(ctx.rawProfile, "healthCentres"),
-    ...profileEntities(ctx.rawProfile, "hospitals"),
-  ]
-    .filter((e) => belongsToArea(e, areaName, siblingNames))
-    .map((e) => factFromProfile(e, "profile:approved-healthcare"));
-  const profileTransport = profileEntities(ctx.rawProfile, "transportLinks")
-    .filter((e) => belongsToArea(e, areaName, siblingNames))
-    .map((e) => factFromProfile(e, "profile:approved-transport"));
-  const profileSchools = profileEntities(ctx.rawProfile, "schools")
-    .filter((e) => belongsToArea(e, areaName, siblingNames))
-    .map((e) => factFromProfile(e, "profile:approved-schools"));
-  const profileRetail = profileEntities(ctx.rawProfile, "retailCentres")
-    .filter((e) => belongsToArea(e, areaName, siblingNames))
-    .map((e) => factFromProfile(e, "profile:approved-retail"));
-  const profileCommunity = profileEntities(ctx.rawProfile, "communityFacilities")
-    .filter((e) => belongsToArea(e, areaName, siblingNames))
-    .map((e) => factFromProfile(e, "profile:approved-community"));
+  const savedLandmarks = packEntities(pack, packIsV3 ? ["landmarks"] : ["topLandmarks", "landmarks"]).map(packFact);
+  const savedHealthcare = packEntities(pack, packIsV3 ? ["healthcare"] : ["topHealthcare", "healthcare"]).map(packFact);
+  const savedTransport = packEntities(pack, ["transport"]).map(packFact);
+  const savedSchools = packEntities(pack, ["schools"]).map(packFact);
+  const savedRetail = packEntities(pack, ["retail"]).map(packFact);
+  const savedCommunity = packEntities(pack, packIsV3 ? ["community"] : ["topCommunity", "community"]).map(packFact);
 
-  const marketHealthcare = providersForArea(ctx.localMarket, areaName, {
-    groupKeys: ["gpSurgeries", "healthCentres", "communityClinics", "hospitals"],
-    limit: 6,
-  })
-    .filter((p) => belongsToArea({ name: p.businessName, address: p.address }, areaName, siblingNames))
-    .slice(0, 3)
-    .map((p) => factFromProvider(p, "local-market:healthcare"));
+  const profileLandmarks = packIsV3
+    ? []
+    : profileEntities(ctx.rawProfile, "landmarks")
+        .filter((e) => belongsToArea(e, areaName, siblingNames))
+        .map((e) => factFromProfile(e, "profile:approved-landmarks"));
+  const profileHealthcare = packIsV3
+    ? []
+    : [
+        ...profileEntities(ctx.rawProfile, "gpSurgeries"),
+        ...profileEntities(ctx.rawProfile, "healthCentres"),
+        ...profileEntities(ctx.rawProfile, "hospitals"),
+      ]
+        .filter((e) => belongsToArea(e, areaName, siblingNames))
+        .map((e) => factFromProfile(e, "profile:approved-healthcare"));
+  const profileTransport = packIsV3
+    ? []
+    : profileEntities(ctx.rawProfile, "transportLinks")
+        .filter((e) => belongsToArea(e, areaName, siblingNames))
+        .map((e) => factFromProfile(e, "profile:approved-transport"));
+  const profileSchools = packIsV3
+    ? []
+    : profileEntities(ctx.rawProfile, "schools")
+        .filter((e) => belongsToArea(e, areaName, siblingNames))
+        .map((e) => factFromProfile(e, "profile:approved-schools"));
+  const profileRetail = packIsV3
+    ? []
+    : profileEntities(ctx.rawProfile, "retailCentres")
+        .filter((e) => belongsToArea(e, areaName, siblingNames))
+        .map((e) => factFromProfile(e, "profile:approved-retail"));
+  const profileCommunity = packIsV3
+    ? []
+    : profileEntities(ctx.rawProfile, "communityFacilities")
+        .filter((e) => belongsToArea(e, areaName, siblingNames))
+        .map((e) => factFromProfile(e, "profile:approved-community"));
+
+  const marketHealthcare = packIsV3
+    ? []
+    : providersForArea(ctx.localMarket, areaName, {
+        groupKeys: ["gpSurgeries", "healthCentres", "communityClinics", "hospitals"],
+        limit: 6,
+      })
+        .filter((p) => belongsToArea({ name: p.businessName, address: p.address }, areaName, siblingNames))
+        .slice(0, 3)
+        .map((p) => factFromProvider(p, "local-market:healthcare"));
 
   const landmarks = uniqueFacts(
-    [...savedLandmarks, ...savedCommunity, ...profileLandmarks, ...profileCommunity].filter((f): f is NamedLocalityFact => Boolean(f)),
-    4,
+    (packIsV3
+      ? savedLandmarks
+      : [...savedLandmarks, ...savedCommunity, ...profileLandmarks, ...profileCommunity]
+    ).filter((f): f is NamedLocalityFact => Boolean(f)),
+    packIsV3 ? 6 : 4,
   );
   const healthcare = uniqueFacts(
     [...savedHealthcare, ...profileHealthcare, ...marketHealthcare].filter((f): f is NamedLocalityFact => Boolean(f)),
-    3,
+    packIsV3 ? 8 : 3,
   );
   const community = uniqueFacts(
     [...savedCommunity, ...profileCommunity].filter((f): f is NamedLocalityFact => Boolean(f)),
-    3,
+    packIsV3 ? 6 : 3,
   );
   const transport = uniqueFacts(
     [...savedTransport, ...profileTransport].filter((f): f is NamedLocalityFact => Boolean(f)),
-    3,
+    packIsV3 ? 6 : 3,
   );
   const schools = uniqueFacts(
     [...savedSchools, ...profileSchools].filter((f): f is NamedLocalityFact => Boolean(f)),
-    2,
+    packIsV3 ? 8 : 2,
   );
   const retail = uniqueFacts(
     [...savedRetail, ...profileRetail].filter((f): f is NamedLocalityFact => Boolean(f)),
-    2,
+    packIsV3 ? 4 : 2,
   );
 
   const located = [...landmarks, ...healthcare, ...community, ...transport].filter(
@@ -469,7 +496,10 @@ function bindOne(
   const evidenceLimited =
     landmarks.length === 0 &&
     healthcare.length === 0 &&
+    community.length === 0 &&
     transport.length === 0 &&
+    schools.length === 0 &&
+    retail.length === 0 &&
     distanceKm == null &&
     !discoveryReason;
 

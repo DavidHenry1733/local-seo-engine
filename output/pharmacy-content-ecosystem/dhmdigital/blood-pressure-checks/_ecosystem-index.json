@@ -1,0 +1,1466 @@
+{
+  "version": 1,
+  "serviceId": "blood-pressure-checks",
+  "masterFile": "docs/pharmacy-master-library/blood-pressure-checks-master-v1.md",
+  "slug": "dhmdigital",
+  "localArea": "Sheffield",
+  "selectedAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Sheffield City Centre",
+    "Broomhill",
+    "Kelham Island",
+    "Dore",
+    "Hillsborough",
+    "Crookes",
+    "Nether Edge",
+    "Woodseats"
+  ],
+  "localClusterPagesGenerated": 10,
+  "localLocationHubGenerated": true,
+  "localLocationClustersGenerated": 10,
+  "localLocationAreasGenerated": 0,
+  "localLocationHierarchy": {
+    "ok": true,
+    "primaryLocality": "Sheffield",
+    "primaryLocalitySlug": "sheffield",
+    "hub": {
+      "areaId": "hub:sheffield",
+      "name": "Sheffield",
+      "slug": "hub",
+      "type": "city-town-hub",
+      "parentAreaId": null,
+      "source": "business-profile:primaryTown",
+      "evidence": [
+        "Primary town/city hub for service coverage"
+      ],
+      "serviceIds": [
+        "blood-pressure-checks"
+      ],
+      "generationEligible": true,
+      "generationReason": "primary locality hub",
+      "approved": true
+    },
+    "clusters": [
+      {
+        "areaId": "cluster:ecclesall",
+        "name": "Ecclesall",
+        "slug": "ecclesall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:85",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:fulwood",
+        "name": "Fulwood",
+        "slug": "fulwood",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:82",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:sheffield-city-centre",
+        "name": "Sheffield City Centre",
+        "slug": "sheffield-city-centre",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:80",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:broomhill",
+        "name": "Broomhill",
+        "slug": "broomhill",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:70",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:kelham-island",
+        "name": "Kelham Island",
+        "slug": "kelham-island",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:67",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:dore",
+        "name": "Dore",
+        "slug": "dore",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:65",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:hillsborough",
+        "name": "Hillsborough",
+        "slug": "hillsborough",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:63",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 7,
+        "order": 7
+      },
+      {
+        "areaId": "cluster:crookes",
+        "name": "Crookes",
+        "slug": "crookes",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:58",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 8 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 8,
+        "order": 8
+      },
+      {
+        "areaId": "cluster:nether-edge",
+        "name": "Nether Edge",
+        "slug": "nether-edge",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:53",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 9 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 9,
+        "order": 9
+      },
+      {
+        "areaId": "cluster:woodseats",
+        "name": "Woodseats",
+        "slug": "woodseats",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:53",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 10 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 10,
+        "order": 10
+      }
+    ],
+    "areas": [],
+    "generationAreas": [
+      {
+        "areaId": "cluster:ecclesall",
+        "name": "Ecclesall",
+        "slug": "ecclesall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:85",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:fulwood",
+        "name": "Fulwood",
+        "slug": "fulwood",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:82",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:sheffield-city-centre",
+        "name": "Sheffield City Centre",
+        "slug": "sheffield-city-centre",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:80",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:broomhill",
+        "name": "Broomhill",
+        "slug": "broomhill",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:70",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:kelham-island",
+        "name": "Kelham Island",
+        "slug": "kelham-island",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:priority cluster",
+          "profile.confidence:67",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:dore",
+        "name": "Dore",
+        "slug": "dore",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:65",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:hillsborough",
+        "name": "Hillsborough",
+        "slug": "hillsborough",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:63",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 7,
+        "order": 7
+      },
+      {
+        "areaId": "cluster:crookes",
+        "name": "Crookes",
+        "slug": "crookes",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:58",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 8 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 8,
+        "order": 8
+      },
+      {
+        "areaId": "cluster:nether-edge",
+        "name": "Nether Edge",
+        "slug": "nether-edge",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:53",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 9 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 9,
+        "order": 9
+      },
+      {
+        "areaId": "cluster:woodseats",
+        "name": "Woodseats",
+        "slug": "woodseats",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "operator-confirmed:profile.selectedAreas",
+        "evidence": [
+          "profile.source:engine",
+          "profile.areaType:secondary cluster",
+          "profile.confidence:53",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "blood-pressure-checks"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 10 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 10,
+        "order": 10
+      }
+    ],
+    "trace": {
+      "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/dhmdigital.json",
+      "tenantSlug": "dhmdigital",
+      "primaryLocation": "Sheffield",
+      "postcode": "S60 2DH",
+      "townCity": "Sheffield",
+      "storedServiceAreas": [
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes",
+        "Nether Edge",
+        "Woodseats"
+      ],
+      "storedNeighbourhoods": [
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes",
+        "Nether Edge",
+        "Woodseats"
+      ],
+      "importedLocationEvidence": [],
+      "googleLocationEvidence": [],
+      "localIntelligenceAreas": [],
+      "selectedAreasSource": "profile.selectedAreas",
+      "selectedAreasFilters": [
+        "none"
+      ],
+      "rejectedAreas": [],
+      "rejectionReasons": [],
+      "areasConsidered": [
+        "Sheffield",
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes",
+        "Nether Edge",
+        "Woodseats"
+      ]
+    }
+  },
+  "generatedAt": "2026-08-25T12:40:39.398Z",
+  "generationStamp": {
+    "tenantSlug": "dhmdigital",
+    "campaignId": "blood-pressure-checks",
+    "generatedAt": "2026-08-25T12:40:39.398Z",
+    "sourceContext": "customer-imported-profile"
+  },
+  "contentEngineContract": "1.0.0",
+  "longFormQualityValidation": {
+    "ok": true,
+    "detail": "long-form quality ok",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 19,
+      "patient-guide": 32,
+      "what-is": 8,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 16
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 25,
+      "patient-guide": 20,
+      "what-is": 12,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 7
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [],
+    "failedLongFormAssets": [],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "assets": [
+    {
+      "id": "root-service-page",
+      "type": "Supporting service page",
+      "urlPath": "/blood-pressure-checks/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/pages/blood-pressure-checks/index.html",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§10",
+        "tenant overview",
+        "CTA"
+      ],
+      "wordCount": 667
+    },
+    {
+      "id": "local-cluster-ecclesall",
+      "type": "Cluster page",
+      "urlPath": "/local/ecclesall/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/ecclesall/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Ecclesall",
+        "rc1-cluster-page",
+        "community-led"
+      ],
+      "wordCount": 2470
+    },
+    {
+      "id": "local-cluster-fulwood",
+      "type": "Cluster page",
+      "urlPath": "/local/fulwood/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/fulwood/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Fulwood",
+        "rc1-cluster-page",
+        "primary-care-led"
+      ],
+      "wordCount": 2459
+    },
+    {
+      "id": "local-cluster-sheffield-city-centre",
+      "type": "Cluster page",
+      "urlPath": "/local/sheffield-city-centre/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/sheffield-city-centre/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Sheffield City Centre",
+        "rc1-cluster-page",
+        "landmark-led"
+      ],
+      "wordCount": 2506
+    },
+    {
+      "id": "local-cluster-broomhill",
+      "type": "Cluster page",
+      "urlPath": "/local/broomhill/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/broomhill/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Broomhill",
+        "rc1-cluster-page",
+        "access-led"
+      ],
+      "wordCount": 2462
+    },
+    {
+      "id": "local-cluster-kelham-island",
+      "type": "Cluster page",
+      "urlPath": "/local/kelham-island/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/kelham-island/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Kelham Island",
+        "rc1-cluster-page",
+        "convenience-led"
+      ],
+      "wordCount": 2499
+    },
+    {
+      "id": "local-cluster-dore",
+      "type": "Cluster page",
+      "urlPath": "/local/dore/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/dore/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Dore",
+        "rc1-cluster-page",
+        "community-led"
+      ],
+      "wordCount": 2480
+    },
+    {
+      "id": "local-cluster-hillsborough",
+      "type": "Cluster page",
+      "urlPath": "/local/hillsborough/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/hillsborough/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Hillsborough",
+        "rc1-cluster-page",
+        "community-led"
+      ],
+      "wordCount": 2475
+    },
+    {
+      "id": "local-cluster-crookes",
+      "type": "Cluster page",
+      "urlPath": "/local/crookes/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/crookes/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Crookes",
+        "rc1-cluster-page",
+        "community-led"
+      ],
+      "wordCount": 2475
+    },
+    {
+      "id": "local-cluster-nether-edge",
+      "type": "Cluster page",
+      "urlPath": "/local/nether-edge/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/nether-edge/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Nether Edge",
+        "rc1-cluster-page",
+        "community-led"
+      ],
+      "wordCount": 2487
+    },
+    {
+      "id": "local-cluster-woodseats",
+      "type": "Cluster page",
+      "urlPath": "/local/woodseats/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/local/woodseats/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Woodseats",
+        "rc1-cluster-page",
+        "community-led"
+      ],
+      "wordCount": 2466
+    },
+    {
+      "id": "patient-guide",
+      "type": "Patient guide article",
+      "urlPath": "/blood-pressure-checks-guide/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/pages/blood-pressure-checks-guide/index.html",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 1594
+    },
+    {
+      "id": "faq-page",
+      "type": "FAQ page",
+      "urlPath": "/blood-pressure-checks-faqs/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/pages/blood-pressure-checks-faqs/index.html",
+      "sourceSections": [
+        "§7",
+        "tenant FAQs"
+      ],
+      "wordCount": 410
+    },
+    {
+      "id": "what-is-blood-pressure-checks",
+      "type": "Blog post",
+      "urlPath": "/what-is-blood-pressure-checks/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/pages/what-is-blood-pressure-checks/index.html",
+      "sourceSections": [
+        "§1",
+        "§10"
+      ],
+      "wordCount": 345
+    },
+    {
+      "id": "who-should-consider-blood-pressure-checks",
+      "type": "Blog post",
+      "urlPath": "/who-should-consider-blood-pressure-checks/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/pages/who-should-consider-blood-pressure-checks/index.html",
+      "sourceSections": [
+        "§2"
+      ],
+      "wordCount": 248
+    },
+    {
+      "id": "blood-pressure-checks-what-you-need-to-know",
+      "type": "Blog post",
+      "urlPath": "/blood-pressure-checks-what-you-need-to-know/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/pages/blood-pressure-checks-what-you-need-to-know/index.html",
+      "sourceSections": [
+        "§3",
+        "§6",
+        "§9"
+      ],
+      "wordCount": 580
+    },
+    {
+      "id": "social-pack",
+      "type": "Social post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/packs/social-posts.json",
+      "sourceSections": [
+        "§8",
+        "§7",
+        "§2",
+        "§10",
+        "§13"
+      ],
+      "wordCount": 599
+    },
+    {
+      "id": "gbp-pack",
+      "type": "GBP post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/packs/gbp-posts.json",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§7",
+        "§13"
+      ],
+      "wordCount": 301
+    },
+    {
+      "id": "email-sequence",
+      "type": "Email sequence",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/packs/email-sequence.json",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 546
+    },
+    {
+      "id": "video-script",
+      "type": "YouTube / video script",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/packs/video-script.md",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§13"
+      ],
+      "wordCount": 111
+    },
+    {
+      "id": "review-trust",
+      "type": "Review & Trust pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/packs/review-trust.json",
+      "sourceSections": [
+        "profile",
+        "confirmed trust evidence"
+      ],
+      "wordCount": 0
+    },
+    {
+      "id": "ecosystem-summary",
+      "type": "Content ecosystem summary",
+      "urlPath": "/blood-pressure-checks-content-ecosystem/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/dhmdigital/blood-pressure-checks/pages/blood-pressure-checks-content-ecosystem/index.html",
+      "sourceSections": [
+        "Meta index"
+      ],
+      "wordCount": 7
+    }
+  ],
+  "internalLinkMap": {
+    "slug": "dhmdigital",
+    "serviceId": "blood-pressure-checks",
+    "mainServiceUrlPath": "/blood-pressure-checks/",
+    "localClusterPages": [
+      {
+        "areaName": "Ecclesall",
+        "areaSlug": "ecclesall",
+        "urlPath": "/local/ecclesall/",
+        "outputPath": "local/ecclesall/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Fulwood",
+        "areaSlug": "fulwood",
+        "urlPath": "/local/fulwood/",
+        "outputPath": "local/fulwood/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Sheffield City Centre",
+        "areaSlug": "sheffield-city-centre",
+        "urlPath": "/local/sheffield-city-centre/",
+        "outputPath": "local/sheffield-city-centre/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Broomhill",
+        "areaSlug": "broomhill",
+        "urlPath": "/local/broomhill/",
+        "outputPath": "local/broomhill/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Kelham Island",
+        "areaSlug": "kelham-island",
+        "urlPath": "/local/kelham-island/",
+        "outputPath": "local/kelham-island/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Dore",
+        "areaSlug": "dore",
+        "urlPath": "/local/dore/",
+        "outputPath": "local/dore/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Hillsborough",
+        "areaSlug": "hillsborough",
+        "urlPath": "/local/hillsborough/",
+        "outputPath": "local/hillsborough/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Crookes",
+        "areaSlug": "crookes",
+        "urlPath": "/local/crookes/",
+        "outputPath": "local/crookes/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Nether Edge",
+        "areaSlug": "nether-edge",
+        "urlPath": "/local/nether-edge/",
+        "outputPath": "local/nether-edge/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Woodseats",
+            "areaSlug": "woodseats",
+            "urlPath": "/local/woodseats/"
+          }
+        ]
+      },
+      {
+        "areaName": "Woodseats",
+        "areaSlug": "woodseats",
+        "urlPath": "/local/woodseats/",
+        "outputPath": "local/woodseats/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "ecclesall",
+            "urlPath": "/local/ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "fulwood",
+            "urlPath": "/local/fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "sheffield-city-centre",
+            "urlPath": "/local/sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "broomhill",
+            "urlPath": "/local/broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "kelham-island",
+            "urlPath": "/local/kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "dore",
+            "urlPath": "/local/dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "hillsborough",
+            "urlPath": "/local/hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "crookes",
+            "urlPath": "/local/crookes/"
+          },
+          {
+            "areaName": "Nether Edge",
+            "areaSlug": "nether-edge",
+            "urlPath": "/local/nether-edge/"
+          }
+        ]
+      }
+    ],
+    "generatedAt": "2026-08-25T12:40:39.398Z",
+    "generationStamp": {
+      "tenantSlug": "dhmdigital",
+      "campaignId": "blood-pressure-checks",
+      "generatedAt": "2026-08-25T12:40:39.398Z",
+      "sourceContext": "customer-imported-profile"
+    }
+  },
+  "generatorReport": {
+    "generatorId": "benchmark-service-ecosystem",
+    "receivedContext": true,
+    "contextVersion": "1.0.0",
+    "slug": "dhmdigital",
+    "serviceId": "blood-pressure-checks",
+    "missingFields": [],
+    "unusedFields": [],
+    "tokensReplaced": [],
+    "tokensUnresolved": [],
+    "tenantValidation": {
+      "ok": true,
+      "detail": "tenant ok"
+    },
+    "serviceValidation": {
+      "ok": true,
+      "detail": "blood-pressure-checks: 14 sections"
+    },
+    "brandValidation": {
+      "ok": true,
+      "detail": "brand present"
+    },
+    "linksValidation": {
+      "ok": true,
+      "detail": "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=dhmdigital"
+    },
+    "imageValidation": {
+      "ok": true,
+      "detail": "assignments loaded"
+    }
+  }
+}

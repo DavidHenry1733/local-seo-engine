@@ -1,0 +1,1988 @@
+{
+  "schemaVersion": "1.0",
+  "blueprintType": "pharmacy-campaign-blueprint",
+  "generatedAt": "2026-06-10T15:32:50.414Z",
+  "phase": "campaign-blueprint-generator-v1",
+  "sourceFiles": {
+    "businessIntelligence": "output/pharmacy-blueprint/business-intelligence.json",
+    "serviceIntelligence": "output/pharmacy-blueprint/service-intelligence.json"
+  },
+  "intelligenceOnly": true,
+  "noPagesGenerated": true,
+  "noRegistryChanges": true,
+  "noSitemapChanges": true,
+  "campaignIdentity": {
+    "campaignName": "Pharmacy First — Rotherham",
+    "campaignSlug": "pharmacy-first-rotherham",
+    "campaignId": "pharmacy-first-rotherham",
+    "serviceName": "Pharmacy First",
+    "serviceKey": "pharmacy-first",
+    "serviceCategory": "nhs",
+    "location": "Rotherham",
+    "locationSlug": "rotherham",
+    "primaryKeyword": "Pharmacy First Rotherham",
+    "secondaryKeywords": [
+      "pharmacy first Rotherham",
+      "pharmacy first near me Rotherham",
+      "NHS pharmacy first Rotherham",
+      "pharmacy first pharmacy",
+      "pharmacy first near me",
+      "book pharmacy first appointment",
+      "best pharmacy for pharmacy first",
+      "Pharmacy First Rotherham",
+      "pharmacy for sore throat Rotherham",
+      "UTI pharmacy treatment Rotherham"
+    ],
+    "customerIntent": [
+      "Pharmacy First",
+      "pharmacy for sore throat",
+      "UTI pharmacy treatment"
+    ],
+    "primaryAudience": "Patients seeking NHS clinical care without a GP appointment",
+    "secondaryAudience": [
+      "Busy working adults",
+      "Parents managing family health",
+      "Chronic condition managers"
+    ],
+    "complianceLevel": "nhs-clinical-service",
+    "pharmacyName": "{pharmacyName}",
+    "domain": "{domain}"
+  },
+  "hubBlueprint": {
+    "pageType": "service-hub",
+    "pageSlug": "pharmacy-first-rotherham",
+    "remotePath": "/pharmacy-first-rotherham/",
+    "urlPattern": "https://{domain}/pharmacy-first-rotherham/",
+    "h1": "Pharmacy First in Rotherham",
+    "metaTitle": "Pharmacy First Rotherham | Same-Day NHS Care | {pharmacyName}",
+    "metaDescription": "Pharmacy First in Rotherham — NHS minor illness consultations for sore throat, UTI, earache and more. Walk in or book. Qualified pharmacists at {pharmacyName}.",
+    "heroPositioning": "Get same-day NHS Pharmacy First care in Rotherham without waiting for a GP appointment. Our pharmacist team assesses common conditions, provides treatment where appropriate, and refers you safely when needed.",
+    "keyBenefits": [
+      "Same-day access for minor illness",
+      "Reduced GP pressure",
+      "Free NHS care where eligible",
+      "Professional pharmacist oversight for pharmacy first",
+      "Convenient local access on your high street",
+      "Clear advice from a qualified medicines expert",
+      "Reduced need to wait for GP appointments where appropriate",
+      "Confidential consultation in a private room"
+    ],
+    "problemsSolved": [
+      "Cannot get GP appointment",
+      "Minor illness worsening while waiting",
+      "Uncertainty whether to visit A&E",
+      "Difficulty accessing GP appointments quickly",
+      "Uncertainty whether symptoms need urgent care",
+      "Confusion about eligibility and cost",
+      "Limited awareness that pharmacies offer this service",
+      "Transport or mobility barriers to healthcare"
+    ],
+    "trustSignals": [
+      "GPhC-registered pharmacy premises",
+      "Qualified pharmacist clinical oversight",
+      "Private consultation room available",
+      "Clear service information on website and in-store",
+      "NHS commissioned service provider",
+      "NHS service specification compliance",
+      "Patient reviews citing helpful pharmacist advice",
+      "Transparent pricing for private elements",
+      "NHS logo usage compliant with guidelines",
+      "Pharmacy First provider"
+    ],
+    "serviceSections": [
+      {
+        "id": "service-overview",
+        "title": "What is Pharmacy First?",
+        "purpose": "Explain NHS service scope and patient access"
+      },
+      {
+        "id": "conditions-covered",
+        "title": "Conditions We Can Help With",
+        "purpose": "List Pharmacy First clinical pathways",
+        "items": [
+          "Earache",
+          "Sore throat",
+          "Urinary tract infection (UTI)",
+          "Shingles",
+          "Impetigo",
+          "Insect bites and stings",
+          "Sinusitis (where pathway applies)",
+          "Infected insect bite"
+        ]
+      },
+      {
+        "id": "who-it-helps",
+        "title": "Who Pharmacy First Is For",
+        "purpose": "Primary and secondary audiences for Rotherham"
+      },
+      {
+        "id": "how-it-works",
+        "title": "How It Works",
+        "purpose": "Step-by-step: walk in, consultation, treatment, referral"
+      },
+      {
+        "id": "eligibility-cost",
+        "title": "Eligibility and Cost",
+        "purpose": "NHS free at point of use where eligible; private elements clarified"
+      },
+      {
+        "id": "why-choose-us",
+        "title": "Why Choose {pharmacyName}",
+        "purpose": "Local trust, hours, consultation room, trained team"
+      },
+      {
+        "id": "areas-we-cover",
+        "title": "Areas We Cover",
+        "purpose": "Link to cluster pages for Rotherham neighbourhoods"
+      },
+      {
+        "id": "related-services",
+        "title": "Related Pharmacy Services",
+        "purpose": "Internal links to supporting NHS services"
+      },
+      {
+        "id": "faq",
+        "title": "Frequently Asked Questions",
+        "purpose": "FAQPage schema source"
+      },
+      {
+        "id": "book-cta",
+        "title": "Book or Visit Today",
+        "purpose": "Primary conversion section"
+      }
+    ],
+    "faqSet": [
+      {
+        "id": "pharmacy-first-faq-1",
+        "question": "Is Pharmacy First free on the NHS?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-2",
+        "question": "Which NHS service specification covers Pharmacy First?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-3",
+        "question": "Where can I access Pharmacy First near me?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-4",
+        "question": "Can a pharmacy help with pharmacy for sore throat?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-5",
+        "question": "Can a pharmacy help with UTI pharmacy treatment?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-6",
+        "question": "What is Pharmacy First at a community pharmacy?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-7",
+        "question": "How do I access Pharmacy First at my local pharmacy?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-8",
+        "question": "Do I need an appointment for Pharmacy First?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-9",
+        "question": "Is Pharmacy First available on the NHS?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-10",
+        "question": "How much does Pharmacy First cost at a pharmacy?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-11",
+        "question": "Who is eligible for Pharmacy First?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      },
+      {
+        "id": "pharmacy-first-faq-12",
+        "question": "How long does a pharmacy first appointment take?",
+        "answerHint": "Answer using NHS Pharmacy First eligibility, local access in Rotherham, and when to refer to GP/A&E. Do not guarantee outcomes."
+      }
+    ],
+    "ctaStrategy": {
+      "primary": {
+        "label": "Book Pharmacy First appointment",
+        "action": "book-consultation",
+        "placement": [
+          "hero",
+          "footer",
+          "post-faq"
+        ]
+      },
+      "secondary": {
+        "label": "Call the pharmacy",
+        "action": "phone",
+        "placement": [
+          "header",
+          "hero"
+        ]
+      },
+      "tertiary": {
+        "label": "Walk in today",
+        "action": "visit",
+        "placement": [
+          "hero",
+          "how-it-works"
+        ]
+      },
+      "messaging": "Emphasise same-day access, NHS eligibility, and pharmacist-led safety-netting — not GP replacement for all conditions."
+    },
+    "schemaRecommendations": [
+      {
+        "type": "Pharmacy",
+        "reason": "Local business entity"
+      },
+      {
+        "type": "MedicalBusiness",
+        "reason": "Healthcare provider"
+      },
+      {
+        "type": "Service",
+        "reason": "Pharmacy First service offering"
+      },
+      {
+        "type": "FAQPage",
+        "reason": "FAQ section"
+      },
+      {
+        "type": "MedicalWebPage",
+        "reason": "Health content page"
+      }
+    ],
+    "internalLinkTargets": {
+      "clusters": [
+        {
+          "area": "Wickersley",
+          "pageSlug": "pharmacy-first-wickersley",
+          "anchorText": "Pharmacy First Wickersley"
+        },
+        {
+          "area": "Rawmarsh",
+          "pageSlug": "pharmacy-first-rawmarsh",
+          "anchorText": "Pharmacy First Rawmarsh"
+        },
+        {
+          "area": "Parkgate",
+          "pageSlug": "pharmacy-first-parkgate",
+          "anchorText": "Pharmacy First Parkgate"
+        },
+        {
+          "area": "Maltby",
+          "pageSlug": "pharmacy-first-maltby",
+          "anchorText": "Pharmacy First Maltby"
+        },
+        {
+          "area": "Dinnington",
+          "pageSlug": "pharmacy-first-dinnington",
+          "anchorText": "Pharmacy First Dinnington"
+        },
+        {
+          "area": "Thurcroft",
+          "pageSlug": "pharmacy-first-thurcroft",
+          "anchorText": "Pharmacy First Thurcroft"
+        },
+        {
+          "area": "Swallownest",
+          "pageSlug": "pharmacy-first-swallownest",
+          "anchorText": "Pharmacy First Swallownest"
+        },
+        {
+          "area": "Aston",
+          "pageSlug": "pharmacy-first-aston",
+          "anchorText": "Pharmacy First Aston"
+        },
+        {
+          "area": "Bramley",
+          "pageSlug": "pharmacy-first-bramley",
+          "anchorText": "Pharmacy First Bramley"
+        },
+        {
+          "area": "Kimberworth",
+          "pageSlug": "pharmacy-first-kimberworth",
+          "anchorText": "Pharmacy First Kimberworth"
+        }
+      ],
+      "relatedServices": [
+        {
+          "serviceKey": "nhs-blood-pressure-checks",
+          "label": "NHS Blood Pressure Checks"
+        },
+        {
+          "serviceKey": "nhs-new-medicine-service-nms",
+          "label": "NHS New Medicine Service (NMS)"
+        },
+        {
+          "serviceKey": "nhs-flu-vaccination",
+          "label": "NHS Flu Vaccination"
+        }
+      ],
+      "upsellServices": [
+        {
+          "serviceKey": "nhs-new-medicine-service-nms",
+          "label": "NHS New Medicine Service (NMS)"
+        },
+        {
+          "serviceKey": "nhs-blood-pressure-checks",
+          "label": "NHS Blood Pressure Checks"
+        }
+      ],
+      "supportingServices": []
+    }
+  },
+  "clusterBlueprints": [
+    {
+      "area": "Wickersley",
+      "pageSlug": "pharmacy-first-wickersley",
+      "remotePath": "/pharmacy-first-wickersley/",
+      "urlPattern": "https://{domain}/pharmacy-first-wickersley/",
+      "keyword": "Pharmacy First Wickersley",
+      "localKeyword": "pharmacy first Wickersley",
+      "h1": "Pharmacy First Wickersley",
+      "metaTitle": "Pharmacy First Wickersley | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Wickersley — same-day pharmacist consultations for minor illness. Serving Wickersley and Rotherham from {pharmacyName}.",
+      "localAngle": "Serving Wickersley, Sunnyside and surrounding Rotherham suburbs with same-day minor illness access.",
+      "serviceRelevance": "Residents of Wickersley benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Wickersley",
+        "secondary": "Call us from Wickersley",
+        "walkIn": "Walk in from Wickersley — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Wickersley?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Wickersley."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Wickersley?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Wickersley?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Wickersley residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Wickersley?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Rawmarsh",
+            "pageSlug": "pharmacy-first-rawmarsh",
+            "anchorText": "Pharmacy First Rawmarsh"
+          },
+          {
+            "area": "Parkgate",
+            "pageSlug": "pharmacy-first-parkgate",
+            "anchorText": "Pharmacy First Parkgate"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Rawmarsh",
+      "pageSlug": "pharmacy-first-rawmarsh",
+      "remotePath": "/pharmacy-first-rawmarsh/",
+      "urlPattern": "https://{domain}/pharmacy-first-rawmarsh/",
+      "keyword": "Pharmacy First Rawmarsh",
+      "localKeyword": "pharmacy first Rawmarsh",
+      "h1": "Pharmacy First Rawmarsh",
+      "metaTitle": "Pharmacy First Rawmarsh | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Rawmarsh — same-day pharmacist consultations for minor illness. Serving Rawmarsh and Rotherham from {pharmacyName}.",
+      "localAngle": "Convenient Pharmacy First access for Rawmarsh, Parkgate corridor and Meadowhall-area residents.",
+      "serviceRelevance": "Residents of Rawmarsh benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Rawmarsh",
+        "secondary": "Call us from Rawmarsh",
+        "walkIn": "Walk in from Rawmarsh — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Rawmarsh?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Rawmarsh."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Rawmarsh?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Rawmarsh?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Rawmarsh residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Rawmarsh?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Wickersley",
+            "pageSlug": "pharmacy-first-wickersley",
+            "anchorText": "Pharmacy First Wickersley"
+          },
+          {
+            "area": "Parkgate",
+            "pageSlug": "pharmacy-first-parkgate",
+            "anchorText": "Pharmacy First Parkgate"
+          },
+          {
+            "area": "Maltby",
+            "pageSlug": "pharmacy-first-maltby",
+            "anchorText": "Pharmacy First Maltby"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Parkgate",
+      "pageSlug": "pharmacy-first-parkgate",
+      "remotePath": "/pharmacy-first-parkgate/",
+      "urlPattern": "https://{domain}/pharmacy-first-parkgate/",
+      "keyword": "Pharmacy First Parkgate",
+      "localKeyword": "pharmacy first Parkgate",
+      "h1": "Pharmacy First Parkgate",
+      "metaTitle": "Pharmacy First Parkgate | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Parkgate — same-day pharmacist consultations for minor illness. Serving Parkgate and Rotherham from {pharmacyName}.",
+      "localAngle": "Local Pharmacy First support for Parkgate, Rawmarsh and Rotherham Valley communities.",
+      "serviceRelevance": "Residents of Parkgate benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Parkgate",
+        "secondary": "Call us from Parkgate",
+        "walkIn": "Walk in from Parkgate — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Parkgate?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Parkgate."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Parkgate?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Parkgate?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Parkgate residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Parkgate?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Rawmarsh",
+            "pageSlug": "pharmacy-first-rawmarsh",
+            "anchorText": "Pharmacy First Rawmarsh"
+          },
+          {
+            "area": "Maltby",
+            "pageSlug": "pharmacy-first-maltby",
+            "anchorText": "Pharmacy First Maltby"
+          },
+          {
+            "area": "Dinnington",
+            "pageSlug": "pharmacy-first-dinnington",
+            "anchorText": "Pharmacy First Dinnington"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Maltby",
+      "pageSlug": "pharmacy-first-maltby",
+      "remotePath": "/pharmacy-first-maltby/",
+      "urlPattern": "https://{domain}/pharmacy-first-maltby/",
+      "keyword": "Pharmacy First Maltby",
+      "localKeyword": "pharmacy first Maltby",
+      "h1": "Pharmacy First Maltby",
+      "metaTitle": "Pharmacy First Maltby | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Maltby — same-day pharmacist consultations for minor illness. Serving Maltby and Rotherham from {pharmacyName}.",
+      "localAngle": "Pharmacy First for Maltby, Tickhill Road corridor and eastern Rotherham families.",
+      "serviceRelevance": "Residents of Maltby benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Maltby",
+        "secondary": "Call us from Maltby",
+        "walkIn": "Walk in from Maltby — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Maltby?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Maltby."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Maltby?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Maltby?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Maltby residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Maltby?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Parkgate",
+            "pageSlug": "pharmacy-first-parkgate",
+            "anchorText": "Pharmacy First Parkgate"
+          },
+          {
+            "area": "Dinnington",
+            "pageSlug": "pharmacy-first-dinnington",
+            "anchorText": "Pharmacy First Dinnington"
+          },
+          {
+            "area": "Thurcroft",
+            "pageSlug": "pharmacy-first-thurcroft",
+            "anchorText": "Pharmacy First Thurcroft"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Dinnington",
+      "pageSlug": "pharmacy-first-dinnington",
+      "remotePath": "/pharmacy-first-dinnington/",
+      "urlPattern": "https://{domain}/pharmacy-first-dinnington/",
+      "keyword": "Pharmacy First Dinnington",
+      "localKeyword": "pharmacy first Dinnington",
+      "h1": "Pharmacy First Dinnington",
+      "metaTitle": "Pharmacy First Dinnington | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Dinnington — same-day pharmacist consultations for minor illness. Serving Dinnington and Rotherham from {pharmacyName}.",
+      "localAngle": "Same-day NHS Pharmacy First for Dinnington, Anston and north Rotherham border communities.",
+      "serviceRelevance": "Residents of Dinnington benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Dinnington",
+        "secondary": "Call us from Dinnington",
+        "walkIn": "Walk in from Dinnington — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Dinnington?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Dinnington."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Dinnington?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Dinnington?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Dinnington residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Dinnington?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Maltby",
+            "pageSlug": "pharmacy-first-maltby",
+            "anchorText": "Pharmacy First Maltby"
+          },
+          {
+            "area": "Thurcroft",
+            "pageSlug": "pharmacy-first-thurcroft",
+            "anchorText": "Pharmacy First Thurcroft"
+          },
+          {
+            "area": "Swallownest",
+            "pageSlug": "pharmacy-first-swallownest",
+            "anchorText": "Pharmacy First Swallownest"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Thurcroft",
+      "pageSlug": "pharmacy-first-thurcroft",
+      "remotePath": "/pharmacy-first-thurcroft/",
+      "urlPattern": "https://{domain}/pharmacy-first-thurcroft/",
+      "keyword": "Pharmacy First Thurcroft",
+      "localKeyword": "pharmacy first Thurcroft",
+      "h1": "Pharmacy First Thurcroft",
+      "metaTitle": "Pharmacy First Thurcroft | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Thurcroft — same-day pharmacist consultations for minor illness. Serving Thurcroft and Rotherham from {pharmacyName}.",
+      "localAngle": "Accessible minor illness care for Thurcroft, Laughton Common and nearby villages.",
+      "serviceRelevance": "Residents of Thurcroft benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Thurcroft",
+        "secondary": "Call us from Thurcroft",
+        "walkIn": "Walk in from Thurcroft — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Thurcroft?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Thurcroft."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Thurcroft?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Thurcroft?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Thurcroft residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Thurcroft?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Dinnington",
+            "pageSlug": "pharmacy-first-dinnington",
+            "anchorText": "Pharmacy First Dinnington"
+          },
+          {
+            "area": "Swallownest",
+            "pageSlug": "pharmacy-first-swallownest",
+            "anchorText": "Pharmacy First Swallownest"
+          },
+          {
+            "area": "Aston",
+            "pageSlug": "pharmacy-first-aston",
+            "anchorText": "Pharmacy First Aston"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Swallownest",
+      "pageSlug": "pharmacy-first-swallownest",
+      "remotePath": "/pharmacy-first-swallownest/",
+      "urlPattern": "https://{domain}/pharmacy-first-swallownest/",
+      "keyword": "Pharmacy First Swallownest",
+      "localKeyword": "pharmacy first Swallownest",
+      "h1": "Pharmacy First Swallownest",
+      "metaTitle": "Pharmacy First Swallownest | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Swallownest — same-day pharmacist consultations for minor illness. Serving Swallownest and Rotherham from {pharmacyName}.",
+      "localAngle": "Pharmacy First serving Swallownest, Aughton and south-east Rotherham neighbourhoods.",
+      "serviceRelevance": "Residents of Swallownest benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Swallownest",
+        "secondary": "Call us from Swallownest",
+        "walkIn": "Walk in from Swallownest — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Swallownest?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Swallownest."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Swallownest?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Swallownest?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Swallownest residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Swallownest?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Thurcroft",
+            "pageSlug": "pharmacy-first-thurcroft",
+            "anchorText": "Pharmacy First Thurcroft"
+          },
+          {
+            "area": "Aston",
+            "pageSlug": "pharmacy-first-aston",
+            "anchorText": "Pharmacy First Aston"
+          },
+          {
+            "area": "Bramley",
+            "pageSlug": "pharmacy-first-bramley",
+            "anchorText": "Pharmacy First Bramley"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Aston",
+      "pageSlug": "pharmacy-first-aston",
+      "remotePath": "/pharmacy-first-aston/",
+      "urlPattern": "https://{domain}/pharmacy-first-aston/",
+      "keyword": "Pharmacy First Aston",
+      "localKeyword": "pharmacy first Aston",
+      "h1": "Pharmacy First Aston",
+      "metaTitle": "Pharmacy First Aston | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Aston — same-day pharmacist consultations for minor illness. Serving Aston and Rotherham from {pharmacyName}.",
+      "localAngle": "Local pharmacist-led care for Aston, Swallownest and Crystal Peaks catchment.",
+      "serviceRelevance": "Residents of Aston benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Aston",
+        "secondary": "Call us from Aston",
+        "walkIn": "Walk in from Aston — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Aston?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Aston."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Aston?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Aston?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Aston residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Aston?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Swallownest",
+            "pageSlug": "pharmacy-first-swallownest",
+            "anchorText": "Pharmacy First Swallownest"
+          },
+          {
+            "area": "Bramley",
+            "pageSlug": "pharmacy-first-bramley",
+            "anchorText": "Pharmacy First Bramley"
+          },
+          {
+            "area": "Kimberworth",
+            "pageSlug": "pharmacy-first-kimberworth",
+            "anchorText": "Pharmacy First Kimberworth"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Bramley",
+      "pageSlug": "pharmacy-first-bramley",
+      "remotePath": "/pharmacy-first-bramley/",
+      "urlPattern": "https://{domain}/pharmacy-first-bramley/",
+      "keyword": "Pharmacy First Bramley",
+      "localKeyword": "pharmacy first Bramley",
+      "h1": "Pharmacy First Bramley",
+      "metaTitle": "Pharmacy First Bramley | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Bramley — same-day pharmacist consultations for minor illness. Serving Bramley and Rotherham from {pharmacyName}.",
+      "localAngle": "Pharmacy First for Bramley, Ravenfield and communities between Rotherham and Maltby.",
+      "serviceRelevance": "Residents of Bramley benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Bramley",
+        "secondary": "Call us from Bramley",
+        "walkIn": "Walk in from Bramley — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Bramley?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Bramley."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Bramley?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Bramley?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Bramley residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Bramley?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Aston",
+            "pageSlug": "pharmacy-first-aston",
+            "anchorText": "Pharmacy First Aston"
+          },
+          {
+            "area": "Kimberworth",
+            "pageSlug": "pharmacy-first-kimberworth",
+            "anchorText": "Pharmacy First Kimberworth"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    },
+    {
+      "area": "Kimberworth",
+      "pageSlug": "pharmacy-first-kimberworth",
+      "remotePath": "/pharmacy-first-kimberworth/",
+      "urlPattern": "https://{domain}/pharmacy-first-kimberworth/",
+      "keyword": "Pharmacy First Kimberworth",
+      "localKeyword": "pharmacy first Kimberworth",
+      "h1": "Pharmacy First Kimberworth",
+      "metaTitle": "Pharmacy First Kimberworth | Rotherham | {pharmacyName}",
+      "metaDescription": "NHS Pharmacy First for Kimberworth — same-day pharmacist consultations for minor illness. Serving Kimberworth and Rotherham from {pharmacyName}.",
+      "localAngle": "Serving Kimberworth, Greasbrough and north-west Rotherham with walk-in Pharmacy First.",
+      "serviceRelevance": "Residents of Kimberworth benefit from local Pharmacy First access for common conditions without GP waits — especially useful for families, working adults and carers in the Rotherham area.",
+      "localCta": {
+        "primary": "Book Pharmacy First — serving Kimberworth",
+        "secondary": "Call us from Kimberworth",
+        "walkIn": "Walk in from Kimberworth — check opening hours"
+      },
+      "faqVariants": [
+        {
+          "question": "Is Pharmacy First available in Kimberworth?",
+          "answerHint": "Confirm service at {pharmacyName} and travel from Kimberworth."
+        },
+        {
+          "question": "Do I need a GP appointment before Pharmacy First in Kimberworth?",
+          "answerHint": "Explain NHS walk-in eligibility; no GP referral required for eligible pathways."
+        },
+        {
+          "question": "Can I walk in for Pharmacy First near Kimberworth?",
+          "answerHint": "Walk-in and booked appointments; advise checking opening hours."
+        },
+        {
+          "question": "What conditions can Pharmacy First treat for Kimberworth residents?",
+          "answerHint": "List core pathways: sore throat, UTI, earache, shingles, impetigo, insect bites."
+        },
+        {
+          "question": "Is Pharmacy First free for patients in Kimberworth?",
+          "answerHint": "NHS-funded where eligible; no charge at point of care for qualifying consultations."
+        }
+      ],
+      "internalLinks": {
+        "hub": {
+          "pageSlug": "pharmacy-first-rotherham",
+          "anchorText": "Pharmacy First Rotherham",
+          "rel": "parent-hub"
+        },
+        "nearbyAreas": [
+          {
+            "area": "Bramley",
+            "pageSlug": "pharmacy-first-bramley",
+            "anchorText": "Pharmacy First Bramley"
+          }
+        ],
+        "relatedServices": [
+          {
+            "serviceKey": "nhs-blood-pressure-checks",
+            "anchorText": "NHS Blood Pressure Checks",
+            "pageSlugPattern": "{nhs-blood-pressure-checks}-{locationSlug}"
+          },
+          {
+            "serviceKey": "nhs-new-medicine-service-nms",
+            "anchorText": "NHS New Medicine Service (NMS)",
+            "pageSlugPattern": "{nhs-new-medicine-service-nms}-{locationSlug}"
+          }
+        ]
+      }
+    }
+  ],
+  "contentEngineBlueprint": {
+    "campaignFocusKeyword": "Pharmacy First Rotherham",
+    "linkedHubUrl": "https://{domain}/pharmacy-first-rotherham/",
+    "assetPlan": {
+      "blogPosts": [
+        {
+          "id": "blog-1",
+          "topic": "Complete guide to Pharmacy First at UK community pharmacies",
+          "angle": "pillar-guide",
+          "targetKeyword": "Pharmacy First Rotherham"
+        },
+        {
+          "id": "blog-2",
+          "topic": "Who should use Pharmacy First and when to see your GP instead",
+          "angle": "gp-vs-pharmacy",
+          "targetKeyword": "pharmacy first Rotherham"
+        },
+        {
+          "id": "blog-3",
+          "topic": "How Pharmacy First works: step-by-step patient journey",
+          "angle": "patient-journey",
+          "targetKeyword": "pharmacy first Rotherham"
+        },
+        {
+          "id": "blog-4",
+          "topic": "NHS vs private options for pharmacy first",
+          "angle": "local-rotherham",
+          "targetKeyword": "pharmacy first Rotherham"
+        }
+      ],
+      "facebookPosts": [
+        {
+          "id": "facebook-1",
+          "topic": "Did you know you can get Pharmacy First at your local pharmacy?",
+          "format": "awareness"
+        },
+        {
+          "id": "facebook-2",
+          "topic": "Skip the GP wait — ask us about Pharmacy First",
+          "format": "faq"
+        },
+        {
+          "id": "facebook-3",
+          "topic": "5 things to know before your pharmacy first appointment",
+          "format": "walk-in-reminder"
+        },
+        {
+          "id": "facebook-4",
+          "topic": "Our pharmacy team is here to help with Pharmacy First",
+          "format": "community"
+        }
+      ],
+      "linkedinPosts": [
+        {
+          "id": "linkedin-1",
+          "topic": "How community pharmacy Pharmacy First reduces primary care pressure",
+          "format": "thought-leadership"
+        },
+        {
+          "id": "linkedin-2",
+          "topic": "The clinical role of pharmacists in pharmacy first",
+          "format": "workforce"
+        },
+        {
+          "id": "linkedin-3",
+          "topic": "Pharmacy First and the future of Pharmacy First",
+          "format": "primary-care"
+        },
+        {
+          "id": "linkedin-4",
+          "topic": "Why Pharmacy First belongs in neighbourhood healthcare strategy",
+          "format": "compliance"
+        }
+      ],
+      "gbpPosts": [
+        {
+          "id": "gbp-1",
+          "topic": "Now offering Pharmacy First — book your appointment today",
+          "ctaType": "BOOK"
+        },
+        {
+          "id": "gbp-2",
+          "topic": "Walk in for Pharmacy First at our pharmacy",
+          "ctaType": "LEARN_MORE"
+        },
+        {
+          "id": "gbp-3",
+          "topic": "Free NHS pharmacy first available here where eligible",
+          "ctaType": "CALL"
+        },
+        {
+          "id": "gbp-4",
+          "topic": "Expert pharmacist-led pharmacy first service",
+          "ctaType": "BOOK"
+        }
+      ],
+      "redditPosts": [
+        {
+          "id": "reddit-1",
+          "topic": "What to expect from Pharmacy First in Rotherham — patient perspective",
+          "subredditHint": "CasualUK or local subreddit if appropriate"
+        },
+        {
+          "id": "reddit-2",
+          "topic": "When should you use Pharmacy First vs GP for a sore throat?",
+          "subredditHint": "AskUK"
+        },
+        {
+          "id": "reddit-3",
+          "topic": "Experiences with pharmacy UTI treatment without GP wait",
+          "subredditHint": "AskUK"
+        },
+        {
+          "id": "reddit-4",
+          "topic": "How community pharmacies in Rotherham are handling minor illness access",
+          "subredditHint": "unitedkingdom"
+        }
+      ],
+      "youtubeTopics": [
+        {
+          "id": "youtube-1",
+          "topic": "What is Pharmacy First? Pharmacist explains in 60 seconds",
+          "format": "60s-explainer"
+        },
+        {
+          "id": "youtube-2",
+          "topic": "Inside a pharmacy pharmacy first appointment",
+          "format": "walkthrough"
+        },
+        {
+          "id": "youtube-3",
+          "topic": "How to prepare for Pharmacy First at your local pharmacy",
+          "format": "faq-answers"
+        },
+        {
+          "id": "youtube-4",
+          "topic": "Pharmacy First: NHS eligibility explained",
+          "format": "local-service"
+        }
+      ],
+      "emailSequence": {
+        "id": "email-sequence-1",
+        "sequenceName": "Pharmacy First — Rotherham patient nurture",
+        "emailCount": 4,
+        "outline": [
+          {
+            "email": 1,
+            "subject": "Introducing Pharmacy First at {pharmacyName}",
+            "purpose": "Service awareness and eligibility",
+            "cta": "Learn about Pharmacy First"
+          },
+          {
+            "email": 2,
+            "subject": "When to visit us instead of waiting for your GP",
+            "purpose": "Conditions covered and safety-netting",
+            "cta": "See conditions we treat"
+          },
+          {
+            "email": 3,
+            "subject": "Book or walk in — Pharmacy First this week",
+            "purpose": "Conversion push with hours and booking link",
+            "cta": "Book appointment"
+          },
+          {
+            "email": 4,
+            "subject": "Your health questions answered",
+            "purpose": "FAQ recap and related services (NMS, BP checks)",
+            "cta": "Explore our services"
+          }
+        ]
+      }
+    },
+    "toneNotes": "Professional, reassuring, clinically credible, accessible, community-focused. Avoid medical guarantees. Signpost to GP/A&E when appropriate.",
+    "forbiddenClaims": [
+      "Guaranteed cure",
+      "Instant weight loss results",
+      "Cheapest prescription prices without context",
+      "Unqualified prescribing claims",
+      "Anti-GP positioning that undermines primary care"
+    ]
+  },
+  "aiSearchBlueprint": {
+    "aiAnswerTopics": [
+      "Explain Pharmacy First in the context of UK community pharmacy clinical services",
+      "Compare pharmacy pharmacy first with GP pathway — when to use each",
+      "Summarise NHS eligibility and cost for Pharmacy First",
+      "Step-by-step: how to access Pharmacy First at a local pharmacy",
+      "List qualifications and regulations governing Pharmacy First",
+      "Patient safety and referral criteria for Pharmacy First"
+    ],
+    "featuredSnippetTargets": [
+      {
+        "query": "What is Pharmacy First?",
+        "answerFormat": "40–60 word direct answer + bullet list where appropriate",
+        "pageTarget": "hub"
+      },
+      {
+        "query": "How much does Pharmacy First cost?",
+        "answerFormat": "40–60 word direct answer + bullet list where appropriate",
+        "pageTarget": "hub"
+      },
+      {
+        "query": "Is Pharmacy First available on the NHS?",
+        "answerFormat": "40–60 word direct answer + bullet list where appropriate",
+        "pageTarget": "hub"
+      },
+      {
+        "query": "Who is eligible for Pharmacy First?",
+        "answerFormat": "40–60 word direct answer + bullet list where appropriate",
+        "pageTarget": "hub"
+      },
+      {
+        "query": "Do you need an appointment for Pharmacy First?",
+        "answerFormat": "40–60 word direct answer + bullet list where appropriate",
+        "pageTarget": "hub"
+      },
+      {
+        "query": "How long does Pharmacy First take?",
+        "answerFormat": "40–60 word direct answer + bullet list where appropriate",
+        "pageTarget": "hub"
+      }
+    ],
+    "faqSchemaTargets": [
+      {
+        "question": "Is Pharmacy First free on the NHS?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "Which NHS service specification covers Pharmacy First?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "Where can I access Pharmacy First near me?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "Can a pharmacy help with pharmacy for sore throat?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "Can a pharmacy help with UTI pharmacy treatment?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "What is Pharmacy First at a community pharmacy?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "How do I access Pharmacy First at my local pharmacy?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "Do I need an appointment for Pharmacy First?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "Is Pharmacy First available on the NHS?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      },
+      {
+        "question": "How much does Pharmacy First cost at a pharmacy?",
+        "schemaType": "FAQPage",
+        "pageTargets": [
+          "hub",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh"
+        ]
+      }
+    ],
+    "speakableAnswerTargets": [
+      {
+        "question": "What is Pharmacy First in Rotherham?",
+        "speakableSummary": "{pharmacyName} offers NHS Pharmacy First in Rotherham. Pharmacists assess and treat common minor illnesses such as sore throat, UTI and earache without a GP appointment where clinically appropriate.",
+        "pageTarget": "pharmacy-first-rotherham"
+      },
+      {
+        "question": "Is Pharmacy First free in Rotherham?",
+        "speakableSummary": "Pharmacy First is an NHS-funded service. Eligible patients in Rotherham receive consultations free at the point of care through participating pharmacies.",
+        "pageTarget": "pharmacy-first-rotherham"
+      },
+      {
+        "question": "Do I need an appointment for Pharmacy First near Rotherham?",
+        "speakableSummary": "Many pharmacies offering Pharmacy First in Rotherham accept walk-ins and booked appointments. Contact {pharmacyName} for today's availability.",
+        "pageTarget": "pharmacy-first-rotherham"
+      }
+    ],
+    "localIntentQuestions": [
+      "Pharmacy First Wickersley",
+      "Pharmacy First Rawmarsh",
+      "Pharmacy First Parkgate",
+      "Pharmacy First Maltby",
+      "Pharmacy First Dinnington",
+      "Pharmacy First Rotherham walk in",
+      "NHS pharmacy first Rotherham",
+      "pharmacy for sore throat Rotherham",
+      "UTI treatment pharmacy Rotherham",
+      "same day pharmacy appointment Rotherham"
+    ],
+    "commonQuestions": [
+      "Can I get Pharmacy First at a pharmacy?",
+      "Is Pharmacy First free on the NHS?",
+      "Do I need an appointment for Pharmacy First?",
+      "How much does Pharmacy First cost in the UK?",
+      "What is Pharmacy First and who is it for?",
+      "Can a pharmacist provide Pharmacy First without a GP?",
+      "Where can I find Pharmacy First near me?",
+      "How long does Pharmacy First take at a pharmacy?"
+    ]
+  },
+  "complianceGuardrails": {
+    "nhsClaimsGuidance": [
+      "Only claim NHS funding/free at point of use where the service is NHS-commissioned and patient is eligible.",
+      "Use NHS logo only in accordance with NHS Identity guidelines and only for commissioned services.",
+      "Do not imply universal NHS entitlement — eligibility varies by service pathway and patient group.",
+      "Reference Pharmacy First as an NHS Advanced Service under the Community Pharmacy Contractual Framework.",
+      "Signpost to GP or NHS 111/A&E when symptoms exceed Pharmacy First scope."
+    ],
+    "pharmacyFirstWordingConstraints": [
+      "Use 'Pharmacy First' as the official NHS service name (capitalised).",
+      "List only conditions within current Pharmacy First clinical pathways.",
+      "Do not claim pharmacists can prescribe all antibiotics — supply is pathway-dependent via PGD/protocol.",
+      "Avoid 'skip the GP entirely' — use 'for eligible minor illness' or 'without a GP appointment where appropriate'.",
+      "Include safeguarding language for children, pregnancy and red-flag symptoms.",
+      "Do not guarantee same-day treatment — say 'where clinically appropriate' and subject to availability."
+    ],
+    "medicalAdviceDisclaimers": [
+      "Content is for general information — not a substitute for personal medical advice.",
+      "Patients with severe, worsening or emergency symptoms should call 999 or attend A&E.",
+      "Pharmacists assess suitability individually — not all patients qualify for every pathway.",
+      "Always read the patient information leaflet supplied with medicines."
+    ],
+    "pomAdvertisingRestrictions": [
+      "Do not advertise Prescription-Only Medicines (POMs) to the public.",
+      "Do not name POM products in promotional content unless legally permitted (e.g. within professional scope).",
+      "Weight management and GLP-1 content must not promote off-label or unlicensed supply.",
+      "No before/after clinical outcome imagery implying guaranteed results."
+    ],
+    "claimsToAvoid": [
+      "Guaranteed cure",
+      "Instant weight loss results",
+      "Cheapest prescription prices without context",
+      "Unqualified prescribing claims",
+      "Anti-GP positioning that undermines primary care",
+      "Guaranteed cure or instant recovery",
+      "Cheapest pharmacy service in Rotherham without substantiation",
+      "Replace your GP for all health needs",
+      "Rank #1 or best pharmacy guaranteed",
+      "Antibiotics always available without assessment",
+      "Invented patient statistics or review counts"
+    ],
+    "reviewTestimonialCaution": [
+      "Do not fabricate patient reviews or testimonials.",
+      "Health testimonials must not guarantee clinical outcomes.",
+      "Avoid identifiable patient stories without documented consent.",
+      "GPhC standards apply to testimonials used in pharmacy marketing.",
+      "NHS reviews on NHS.uk should not be misrepresented as owned testimonials."
+    ],
+    "complianceLevel": "nhs-clinical-service",
+    "serviceSpecificCompliance": [
+      "NHS service specifications",
+      "CPCF requirements",
+      "PGD governance where applicable",
+      "NHS logo usage compliance"
+    ]
+  },
+  "internalLinkMap": {
+    "hubSlug": "pharmacy-first-rotherham",
+    "hubPath": "/pharmacy-first-rotherham/",
+    "hubToClusters": [
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-wickersley",
+        "anchorText": "Pharmacy First Wickersley",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-rawmarsh",
+        "anchorText": "Pharmacy First Rawmarsh",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-parkgate",
+        "anchorText": "Pharmacy First Parkgate",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-maltby",
+        "anchorText": "Pharmacy First Maltby",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-dinnington",
+        "anchorText": "Pharmacy First Dinnington",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-thurcroft",
+        "anchorText": "Pharmacy First Thurcroft",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-swallownest",
+        "anchorText": "Pharmacy First Swallownest",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-aston",
+        "anchorText": "Pharmacy First Aston",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-bramley",
+        "anchorText": "Pharmacy First Bramley",
+        "linkType": "hub-to-cluster"
+      },
+      {
+        "from": "pharmacy-first-rotherham",
+        "to": "pharmacy-first-kimberworth",
+        "anchorText": "Pharmacy First Kimberworth",
+        "linkType": "hub-to-cluster"
+      }
+    ],
+    "clustersToHub": [
+      {
+        "from": "pharmacy-first-wickersley",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-rawmarsh",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-parkgate",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-maltby",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-dinnington",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-thurcroft",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-swallownest",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-aston",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-bramley",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      },
+      {
+        "from": "pharmacy-first-kimberworth",
+        "to": "pharmacy-first-rotherham",
+        "anchorText": "Pharmacy First Rotherham",
+        "linkType": "cluster-to-hub"
+      }
+    ],
+    "clusterToCluster": [
+      {
+        "from": "pharmacy-first-wickersley",
+        "to": "pharmacy-first-rawmarsh",
+        "anchorText": "Pharmacy First Rawmarsh",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-wickersley",
+        "to": "pharmacy-first-parkgate",
+        "anchorText": "Pharmacy First Parkgate",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-rawmarsh",
+        "to": "pharmacy-first-wickersley",
+        "anchorText": "Pharmacy First Wickersley",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-rawmarsh",
+        "to": "pharmacy-first-parkgate",
+        "anchorText": "Pharmacy First Parkgate",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-rawmarsh",
+        "to": "pharmacy-first-maltby",
+        "anchorText": "Pharmacy First Maltby",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-parkgate",
+        "to": "pharmacy-first-rawmarsh",
+        "anchorText": "Pharmacy First Rawmarsh",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-parkgate",
+        "to": "pharmacy-first-maltby",
+        "anchorText": "Pharmacy First Maltby",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-parkgate",
+        "to": "pharmacy-first-dinnington",
+        "anchorText": "Pharmacy First Dinnington",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-maltby",
+        "to": "pharmacy-first-parkgate",
+        "anchorText": "Pharmacy First Parkgate",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-maltby",
+        "to": "pharmacy-first-dinnington",
+        "anchorText": "Pharmacy First Dinnington",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-maltby",
+        "to": "pharmacy-first-thurcroft",
+        "anchorText": "Pharmacy First Thurcroft",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-dinnington",
+        "to": "pharmacy-first-maltby",
+        "anchorText": "Pharmacy First Maltby",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-dinnington",
+        "to": "pharmacy-first-thurcroft",
+        "anchorText": "Pharmacy First Thurcroft",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-dinnington",
+        "to": "pharmacy-first-swallownest",
+        "anchorText": "Pharmacy First Swallownest",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-thurcroft",
+        "to": "pharmacy-first-dinnington",
+        "anchorText": "Pharmacy First Dinnington",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-thurcroft",
+        "to": "pharmacy-first-swallownest",
+        "anchorText": "Pharmacy First Swallownest",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-thurcroft",
+        "to": "pharmacy-first-aston",
+        "anchorText": "Pharmacy First Aston",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-swallownest",
+        "to": "pharmacy-first-thurcroft",
+        "anchorText": "Pharmacy First Thurcroft",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-swallownest",
+        "to": "pharmacy-first-aston",
+        "anchorText": "Pharmacy First Aston",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-swallownest",
+        "to": "pharmacy-first-bramley",
+        "anchorText": "Pharmacy First Bramley",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-aston",
+        "to": "pharmacy-first-swallownest",
+        "anchorText": "Pharmacy First Swallownest",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-aston",
+        "to": "pharmacy-first-bramley",
+        "anchorText": "Pharmacy First Bramley",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-aston",
+        "to": "pharmacy-first-kimberworth",
+        "anchorText": "Pharmacy First Kimberworth",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-bramley",
+        "to": "pharmacy-first-aston",
+        "anchorText": "Pharmacy First Aston",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-bramley",
+        "to": "pharmacy-first-kimberworth",
+        "anchorText": "Pharmacy First Kimberworth",
+        "linkType": "cluster-to-nearby-cluster"
+      },
+      {
+        "from": "pharmacy-first-kimberworth",
+        "to": "pharmacy-first-bramley",
+        "anchorText": "Pharmacy First Bramley",
+        "linkType": "cluster-to-nearby-cluster"
+      }
+    ],
+    "clustersToRelatedServices": [
+      {
+        "from": "pharmacy-first-wickersley",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-wickersley",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-rawmarsh",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-rawmarsh",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-parkgate",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-parkgate",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-maltby",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-maltby",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-dinnington",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-dinnington",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-thurcroft",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-thurcroft",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-swallownest",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-swallownest",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-aston",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-aston",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-bramley",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-bramley",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-kimberworth",
+        "serviceKey": "nhs-blood-pressure-checks",
+        "anchorText": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "{nhs-blood-pressure-checks}-rotherham"
+      },
+      {
+        "from": "pharmacy-first-kimberworth",
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "anchorText": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "{nhs-new-medicine-service-nms}-rotherham"
+      }
+    ],
+    "relatedServices": [
+      {
+        "serviceKey": "nhs-blood-pressure-checks",
+        "label": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "nhs-blood-pressure-checks-rotherham",
+        "linkFrom": [
+          "pharmacy-first-rotherham",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh",
+          "pharmacy-first-parkgate",
+          "pharmacy-first-maltby",
+          "pharmacy-first-dinnington",
+          "pharmacy-first-thurcroft",
+          "pharmacy-first-swallownest",
+          "pharmacy-first-aston",
+          "pharmacy-first-bramley",
+          "pharmacy-first-kimberworth"
+        ],
+        "linkType": "related-service"
+      },
+      {
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "label": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "nhs-new-medicine-service-nms-rotherham",
+        "linkFrom": [
+          "pharmacy-first-rotherham",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh",
+          "pharmacy-first-parkgate",
+          "pharmacy-first-maltby",
+          "pharmacy-first-dinnington",
+          "pharmacy-first-thurcroft",
+          "pharmacy-first-swallownest",
+          "pharmacy-first-aston",
+          "pharmacy-first-bramley",
+          "pharmacy-first-kimberworth"
+        ],
+        "linkType": "related-service"
+      },
+      {
+        "serviceKey": "nhs-flu-vaccination",
+        "label": "NHS Flu Vaccination",
+        "pageSlugPattern": "nhs-flu-vaccination-rotherham",
+        "linkFrom": [
+          "pharmacy-first-rotherham",
+          "pharmacy-first-wickersley",
+          "pharmacy-first-rawmarsh",
+          "pharmacy-first-parkgate",
+          "pharmacy-first-maltby",
+          "pharmacy-first-dinnington",
+          "pharmacy-first-thurcroft",
+          "pharmacy-first-swallownest",
+          "pharmacy-first-aston",
+          "pharmacy-first-bramley",
+          "pharmacy-first-kimberworth"
+        ],
+        "linkType": "related-service"
+      }
+    ],
+    "upsellServices": [
+      {
+        "serviceKey": "nhs-new-medicine-service-nms",
+        "label": "NHS New Medicine Service (NMS)",
+        "pageSlugPattern": "nhs-new-medicine-service-nms-rotherham",
+        "linkFrom": [
+          "pharmacy-first-rotherham"
+        ],
+        "linkType": "upsell-service"
+      },
+      {
+        "serviceKey": "nhs-blood-pressure-checks",
+        "label": "NHS Blood Pressure Checks",
+        "pageSlugPattern": "nhs-blood-pressure-checks-rotherham",
+        "linkFrom": [
+          "pharmacy-first-rotherham"
+        ],
+        "linkType": "upsell-service"
+      }
+    ],
+    "supportingServices": [],
+    "moneyPageTargets": [],
+    "totalLinks": 51
+  }
+}

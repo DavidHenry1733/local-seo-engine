@@ -1,0 +1,22 @@
+GIT COMMIT NOT MADE
+
+Branch: fix/image-library-stabilisation-20260520-101828
+HEAD: 160f0f3 Lock accepted Yorkshire BP Local Content Engine V1 system.
+
+The completed Pharmacy First workflow and presentation exist as untracked source plus mixed modifications to already-tracked API wiring. They cannot be committed without a broader unrelated diff.
+
+Exact separation blockers:
+
+1. Tracked files that register live Preview/Review Centre routes also contain unrelated working-tree changes. A commit of any of these would include image-library, visual-experience, CORS, health-router and destructive-endpoint auth edits that are not Pharmacy First local-page work:
+   - artifacts/api-server/src/app.ts
+   - artifacts/api-server/src/index.ts
+   - artifacts/api-server/src/routes/index.ts
+   - artifacts/api-server/src/middlewares/requireAuth.ts
+
+2. The Pharmacy First source itself is untracked on this branch and sits among hundreds of other untracked pharmacy/growth-engine files (website intelligence, customer setup, image platform, master admin, other campaigns). Files that belong to the completed workflow also contain other Campaign Builder surfaces in the same file, so they are not a clean identifiable subset.
+
+3. Committing only the untracked local-page/Review Centre files listed in MANIFEST.json sourceFiles would not restore a runnable demonstration, because route registration lives in the mixed tracked files in (1).
+
+Per instruction: do not commit a broader diff. The durable checkpoint is the recoverability artefact.
+
+No files were staged. git add ., git add -A and directory-wide add were not used.

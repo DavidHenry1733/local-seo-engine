@@ -65,7 +65,7 @@ async function loadRegistry() {
           { blockId: "resource_cards", label: "Resource cards — internal links grid",     required: false },
         ],
         defaultStyle: { primaryColor: "#003A6D", accentColor: "#1CA9C9", heroStyle: "split_image_right", fontStack: "sans_modern", borderRadius: "soft", ctaStyle: "solid" },
-        requiredImageSlots: ["hero", "support", "conversion"],
+        requiredImageSlots: ["hero", "support", "trust", "conversion"],
         recommendedContentSections: ["Why local web design matters", "What you get with our service", "How enquiries work", "Competitors in your market", "Consequences of no website", "Find us", "Frequently asked questions", "Related local pages"],
       },
       trades_home_services: {

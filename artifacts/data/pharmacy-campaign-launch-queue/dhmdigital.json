@@ -1,0 +1,1694 @@
+{
+  "version": 1,
+  "slug": "dhmdigital",
+  "updatedAt": "2026-06-28T15:32:48.128Z",
+  "campaigns": [
+    {
+      "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "9939f539-5213-41cf-b056-95f0ee17438f-confirm-profile",
+        "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+        "evidence": [
+          "Profile completeness: 0%"
+        ],
+        "createdAt": "2026-06-28T15:32:48.082Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-confirm-profile",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Profile completeness: 0%"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-confirm-images",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-confirm-service-page",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "No published service page found for pharmacy-first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-confirm-ecosystem",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "No ecosystem generated for pharmacy-first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-authority-readiness-approved",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=dhmdigital&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=dhmdigital&service=pharmacy-first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-publish-page",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-update-sitemap",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-submit-indexing",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-refresh-visibility",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-prepare-gbp-posts",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-prepare-social-posts",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-prepare-email-sequence",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "9939f539-5213-41cf-b056-95f0ee17438f-review-growth-actions",
+          "campaignId": "9939f539-5213-41cf-b056-95f0ee17438f",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=dhmdigital",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-06-28T15:32:48.082Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T15:32:48.083Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-confirm-profile",
+        "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+        "evidence": [
+          "Profile completeness: 0%"
+        ],
+        "createdAt": "2026-06-28T15:32:48.090Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-confirm-profile",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Profile completeness: 0%"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-confirm-images",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-confirm-service-page",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/",
+          "evidence": [
+            "No published service page found for blood-pressure-checks"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-confirm-ecosystem",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "No ecosystem generated for blood-pressure-checks"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-authority-readiness-approved",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=dhmdigital&service=blood-pressure-checks",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=dhmdigital&service=blood-pressure-checks"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-publish-page",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-update-sitemap",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-submit-indexing",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-refresh-visibility",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-prepare-gbp-posts",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-prepare-social-posts",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-prepare-email-sequence",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "55c7b6df-5a8c-415b-895f-2733c2dd3a04-review-growth-actions",
+          "campaignId": "55c7b6df-5a8c-415b-895f-2733c2dd3a04",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=dhmdigital",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-06-28T15:32:48.090Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T15:32:48.090Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-confirm-profile",
+        "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+        "evidence": [
+          "Profile completeness: 0%"
+        ],
+        "createdAt": "2026-06-28T15:32:48.098Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-confirm-profile",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Profile completeness: 0%"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-confirm-images",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-confirm-service-page",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+          "evidence": [
+            "No published service page found for travel-vaccinations"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-confirm-ecosystem",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "No ecosystem generated for travel-vaccinations"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-authority-readiness-approved",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=dhmdigital&service=travel-vaccinations",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=dhmdigital&service=travel-vaccinations"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-publish-page",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-update-sitemap",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-submit-indexing",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-refresh-visibility",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-prepare-gbp-posts",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-prepare-social-posts",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-prepare-email-sequence",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4-review-growth-actions",
+          "campaignId": "d873ca43-a2d3-42b3-8d0d-fa98d86b05d4",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=dhmdigital",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-06-28T15:32:48.098Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T15:32:48.098Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+      "serviceId": "prescription-dispensing",
+      "serviceName": "Prescription Dispensing",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "56a60037-5f13-469f-b192-257280be3abd-confirm-profile",
+        "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+        "evidence": [
+          "Profile completeness: 0%"
+        ],
+        "createdAt": "2026-06-28T15:32:48.105Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-confirm-profile",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Profile completeness: 0%"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-confirm-images",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/prescription-dispensing/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-confirm-service-page",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/prescription-dispensing/",
+          "evidence": [
+            "No published service page found for prescription-dispensing"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-confirm-ecosystem",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "No ecosystem generated for prescription-dispensing"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-authority-readiness-approved",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=dhmdigital&service=prescription-dispensing",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Authority audit not run",
+            "Missing: Authority audit not run",
+            "Audit: /api/pharmacy-authority-readiness?slug=dhmdigital&service=prescription-dispensing"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority audit not run"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-publish-page",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-update-sitemap",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-submit-indexing",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-refresh-visibility",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-prepare-gbp-posts",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-prepare-social-posts",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-prepare-email-sequence",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "56a60037-5f13-469f-b192-257280be3abd-review-growth-actions",
+          "campaignId": "56a60037-5f13-469f-b192-257280be3abd",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=dhmdigital",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-06-28T15:32:48.105Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T15:32:48.105Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-confirm-profile",
+        "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+        "evidence": [
+          "Profile completeness: 0%"
+        ],
+        "createdAt": "2026-06-28T15:32:48.112Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-confirm-profile",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Profile completeness: 0%"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-confirm-images",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/emergency-contraception/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-confirm-service-page",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/emergency-contraception/",
+          "evidence": [
+            "No published service page found for emergency-contraception"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-confirm-ecosystem",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "No ecosystem generated for emergency-contraception"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-authority-readiness-approved",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=dhmdigital&service=emergency-contraception",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=dhmdigital&service=emergency-contraception"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-publish-page",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-update-sitemap",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-submit-indexing",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-refresh-visibility",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-prepare-gbp-posts",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-prepare-social-posts",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-prepare-email-sequence",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "7fd77e31-9f45-42f0-a1e9-0eabec284165-review-growth-actions",
+          "campaignId": "7fd77e31-9f45-42f0-a1e9-0eabec284165",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=dhmdigital",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-06-28T15:32:48.112Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T15:32:48.112Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+      "serviceId": "repeat-prescriptions",
+      "serviceName": "Repeat Prescriptions",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-confirm-profile",
+        "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+        "evidence": [
+          "Profile completeness: 0%"
+        ],
+        "createdAt": "2026-06-28T15:32:48.120Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-confirm-profile",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Profile completeness: 0%"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-confirm-images",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/repeat-prescriptions/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-confirm-service-page",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/repeat-prescriptions/",
+          "evidence": [
+            "No published service page found for repeat-prescriptions"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-confirm-ecosystem",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/repeat-prescriptions/",
+          "evidence": [
+            "No ecosystem generated for repeat-prescriptions"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-authority-readiness-approved",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=dhmdigital&service=repeat-prescriptions",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Authority audit not run",
+            "Missing: Authority audit not run",
+            "Audit: /api/pharmacy-authority-readiness?slug=dhmdigital&service=repeat-prescriptions"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority audit not run"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-publish-page",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-update-sitemap",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-submit-indexing",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-refresh-visibility",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-prepare-gbp-posts",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/repeat-prescriptions/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-prepare-social-posts",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/repeat-prescriptions/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-prepare-email-sequence",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/repeat-prescriptions/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997-review-growth-actions",
+          "campaignId": "94e9dcfa-5f2a-4b6d-98af-b1c434c52997",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=dhmdigital",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-06-28T15:32:48.120Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T15:32:48.120Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+      "serviceId": "new-medicine-service",
+      "serviceName": "New Medicine Service",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-confirm-profile",
+        "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+        "evidence": [
+          "Profile completeness: 0%"
+        ],
+        "createdAt": "2026-06-28T15:32:48.127Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-confirm-profile",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Profile completeness: 0%"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-confirm-images",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/new-medicine-service/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-confirm-service-page",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/new-medicine-service/",
+          "evidence": [
+            "No published service page found for new-medicine-service"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-confirm-ecosystem",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/new-medicine-service/",
+          "evidence": [
+            "No ecosystem generated for new-medicine-service"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-authority-readiness-approved",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=dhmdigital&service=new-medicine-service",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Authority audit not run",
+            "Missing: Authority audit not run",
+            "Audit: /api/pharmacy-authority-readiness?slug=dhmdigital&service=new-medicine-service"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority audit not run"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-publish-page",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=dhmdigital",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-update-sitemap",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-submit-indexing",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-refresh-visibility",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=dhmdigital#visibility",
+          "evidence": [
+            "Visibility tracking not yet refreshed"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-prepare-gbp-posts",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/new-medicine-service/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-prepare-social-posts",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/new-medicine-service/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-prepare-email-sequence",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/new-medicine-service/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "d45549e0-3822-4d37-8502-5a3eaa807e59-review-growth-actions",
+          "campaignId": "d45549e0-3822-4d37-8502-5a3eaa807e59",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=dhmdigital",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-06-28T15:32:48.127Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T15:32:48.128Z",
+          "blockedReason": null
+        }
+      ]
+    }
+  ]
+}

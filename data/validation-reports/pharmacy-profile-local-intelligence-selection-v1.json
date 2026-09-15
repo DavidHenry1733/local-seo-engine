@@ -1,0 +1,116 @@
+{
+  "validatedAt": "2026-06-19T08:04:31.573Z",
+  "routeUrl": "/api/pharmacy-setup (Local Intelligence tab)",
+  "generateEndpoint": "/api/pharmacy-local-intelligence/pharmaconnect/generate",
+  "checks": [
+    {
+      "label": "Setup page contains Local Intelligence section",
+      "pass": true,
+      "value": "local-intelligence tab"
+    },
+    {
+      "label": "Generate Local Intelligence button exists",
+      "pass": true,
+      "value": "button + handler"
+    },
+    {
+      "label": "Checkbox entity groups exist",
+      "pass": true,
+      "value": "entity cards"
+    },
+    {
+      "label": "Major Employers removed from setup UI",
+      "pass": true,
+      "value": "not in LOCAL_INTEL_GROUPS"
+    },
+    {
+      "label": "Profile schema accepts selected entity fields",
+      "pass": true,
+      "value": "gpSurgeries, hospitals, healthCentres, careHomes, schools, landmarks, communityFacilities, transportLinks, retailCentres, residentialAreas"
+    },
+    {
+      "label": "Save payload includes selected entities",
+      "pass": true,
+      "value": "captureLocalEntitySelections"
+    },
+    {
+      "label": "Compatibility fields populated on normalize",
+      "pass": true,
+      "value": "localGpSurgeries=1"
+    },
+    {
+      "label": "Generate API route exists",
+      "pass": true,
+      "value": "/api/pharmacy-local-intelligence/:slug/generate"
+    },
+    {
+      "label": "Demo generation excludes Major Employers",
+      "pass": true,
+      "value": "10 entities"
+    },
+    {
+      "label": "Pharmaconnect demo profile can store selected entities",
+      "pass": true,
+      "value": "1 GP, 2 schools"
+    },
+    {
+      "label": "Audit includes local intelligence checks",
+      "pass": true,
+      "value": "3 checks"
+    }
+  ],
+  "passCount": 11,
+  "failCount": 0,
+  "demoGenerationTotals": {
+    "gpSurgeries": 1,
+    "hospitals": 1,
+    "healthCentres": 1,
+    "careHomes": 1,
+    "schools": 3,
+    "landmarks": 1,
+    "communityFacilities": 1,
+    "transportLinks": 1,
+    "retailCentres": 0,
+    "residentialAreas": 0
+  },
+  "sampleSavedProfileFields": {
+    "gpSurgeries": [
+      {
+        "id": "gpsurgeries-kimberworth-park-medical-centre",
+        "name": "Kimberworth Park Medical Centre",
+        "address": "",
+        "category": "GP Surgery",
+        "entityType": "gpSurgeries",
+        "distanceKm": null,
+        "distanceLabel": "",
+        "source": "demo pack",
+        "types": [],
+        "selected": false
+      }
+    ],
+    "hospitals": [
+      {
+        "id": "hospitals-rotherham-hospital-urgent-care-center-aande",
+        "name": "Rotherham Hospital Urgent Care Center/A&E",
+        "address": "",
+        "category": "Hospital",
+        "entityType": "hospitals",
+        "distanceKm": null,
+        "distanceLabel": "",
+        "source": "demo pack",
+        "types": [],
+        "selected": false
+      }
+    ],
+    "localGpSurgeries": [
+      "Kimberworth Park Medical Centre"
+    ],
+    "nearbyHospitals": [
+      "Rotherham Hospital Urgent Care Center/A&E"
+    ],
+    "communityLinks": [
+      "Kimberworth Library"
+    ],
+    "localIntelligenceGenerated": true
+  }
+}

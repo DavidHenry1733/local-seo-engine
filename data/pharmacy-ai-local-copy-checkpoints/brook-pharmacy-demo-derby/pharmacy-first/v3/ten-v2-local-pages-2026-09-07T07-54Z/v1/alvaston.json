@@ -1,0 +1,165 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-06T07:48:49.462Z",
+  "tokenUsage": {
+    "promptTokens": 5444,
+    "completionTokens": 185,
+    "totalTokens": 5629
+  },
+  "estimatedCostUsd": 0.012368,
+  "inputEvidencePackHash": "ad20eed3113f87621bf5621eb9c164906ea2e89f0fe47b460a5fd997036ea9ba",
+  "editorialEvidencePackHash": "ab828e57033d9012e655726a05adf5bade274adeb264ea6c117e22b5b81df2a5",
+  "areaSlug": "alvaston",
+  "areaName": "Alvaston",
+  "editorialFactIdsUsed": [
+    "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+    "alvaston:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Alvaston",
+    "heroHeading": "Pharmacy First in Alvaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+    "localIntroduction": "Pharmacy First for people in Alvaston is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "NHS general practice services in Alvaston are provided from Alvaston Medical Centre."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Alvaston are provided from Alvaston Medical Centre.",
+        "editorialFactId": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+        "editorialFactId": "alvaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+      "alvaston:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Alvaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Alvaston is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Alvaston are provided from Alvaston Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "supportingCanonicalFieldOrEntity": "alvaston:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Alvaston",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Alvaston is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Alvaston are provided from Alvaston Medical Centre.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "alvaston:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 4,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Alvaston are provided from Alvaston Medical Centre.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Alvaston are provided from Alvaston Medical Centre.\",\n      \"editorialFactId\": \"alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Alvaston are provided from Alvaston Medical Centre.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Alvaston are provided from Alvaston Medical Centre.\",\n      \"editorialFactId\": \"alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"alvaston:healthcare:nhs-general-practice-services-in-alvaston-are-pr\"\n  ]\n}"
+  ]
+}

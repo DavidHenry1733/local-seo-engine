@@ -1,0 +1,69 @@
+{
+  "savedAt": "2026-09-08T15:38:15.802Z",
+  "areaSlug": "mackworth",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Write as an experienced British healthcare copywriter.\n\nUsing only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.\n\nHERO INTRODUCTION:\nWrite 35–55 words introducing Pharmacy First for people in the selected area and naming Brook Pharmacy as the provider.\n\nLOCAL INTRODUCTION:\nWrite 170–230 words in three fluent British-English paragraphs.\n\nParagraph 1:\nIntroduce the area, its location and its character using verified facts.\n\nParagraph 2:\nDescribe meaningful verified landmarks, green spaces, shopping, community facilities and healthcare references. Select the most useful facts and connect them naturally. Do not list every evidence record.\n\nParagraph 3:\nMove naturally from the area and its local healthcare needs into Brook Pharmacy’s Pharmacy First service. Name Brook Pharmacy and Pharmacy First, and explain that eligible patients can receive a pharmacist consultation for certain common conditions. Do not reproduce a fixed clinical closing sentence. The transition must feel like part of the article—not a disclaimer pasted onto the end.\n\nYou may express only this Pharmacy First meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment.\n\nDo not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.\n\nDo not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.\n\nUse neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.\n\nDo not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.\n\nDo not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.\n\nReturn exactly this layout:\nHERO INTRODUCTION:\n<one paragraph>\n\nLOCAL INTRODUCTION:\n<paragraph 1>\n\n<paragraph 2>\n\n<paragraph 3>\nSelected area: Mackworth\nConfirmed pharmacy name: Brook Pharmacy Demo Derby\nConfirmed pharmacy premises locality: Derby\nSaved straight-line distance: approximately 4.1 km in a straight line\nVerified history where available:\n- Mackworth Castle is a landmark in Mackworth.\n- Mackworth park is a landmark in Mackworth.\n- Markeaton Park is a landmark in Mackworth.\nVerified landmarks, parks, shopping, civic and community facilities:\n- Mackworth has a public library.\n- Mackworth Estate Community Hall is a community facility in Mackworth.\n- West End Community Centre is a community facility in Mackworth.\nVerified GP practices or healthcare facilities:\n- Horizon Healthcare - Mackworth - Humbleton Drive is a hospital in Mackworth.\nApproved Pharmacy First service meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment."
+  },
+  "rawResponse": "HERO INTRODUCTION:\nResidents in Mackworth can access professional advice and care for a range of common health conditions through Pharmacy First at Brook Pharmacy. This service allows eligible individuals to consult a qualified pharmacist locally, helping support healthcare needs across the community.\n\nLOCAL INTRODUCTION:\nMackworth is a historic locality containing notable heritage and natural spaces. The area features historical landmarks such as Mackworth Castle alongside dedicated outdoor spaces including Mackworth Park, giving local residents access to traditional landmarks and open green space within their immediate surroundings.\n\nCommunity amenities throughout the neighbourhood serve a variety of daily civic and social needs. Local residents can use the public library, alongside shared spaces at the Mackworth Estate Community Hall and the West End Community Centre. Green spaces extend to Markeaton Park, while local medical provision includes facilities such as Horizon Healthcare - Mackworth - Humbleton Drive.\n\nTo support the community's healthcare needs alongside existing services, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. Under Pharmacy First, individuals with certain common health conditions can receive a structured consultation with a pharmacist. During the assessment, the pharmacist examines symptoms, relevant medicines and medical history. Depending on the individual clinical assessment, the outcome may include practical advice, suitable treatment or referral to another healthcare professional. Eligibility and treatment decisions remain subject to this individual clinical review.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localIntroduction | sentence=Mackworth is a historic locality containing notable heritage and natural spaces. | rule=ungrounded-clause | defect=Mackworth is a historic locality containing notable heritage and natural spaces. — no supplied fact, canonical field or approved clinical text covers this clause",
+      "FAIL | field=localIntroduction | sentence=Mackworth is a historic locality containing notable heritage and natural spaces. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts"
+    ],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area features historical landmarks such as Mackworth Castle alongside dedicated outdoor spaces including Mackworth Park, giving local residents access to traditional landmarks and open green space within their immediate surroundings. | rule=uncertain-paraphrase | defect=The area features historical landmarks such as Mackworth Castle alongside dedicated outdoor spaces including Mackworth Park, giving local residents access to traditional landmarks and open green space within their immediate surroundings. — uncertain paraphrase: unmatched wording (features, historical, landmarks, dedicated, outdoor, spaces, giving, local, residents, access, traditional, landmarks, open, green, space, immediate, surroundings) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local residents can use the public library, alongside shared spaces at the Mackworth Estate Community Hall and the West End Community Centre. | rule=uncertain-paraphrase | defect=Local residents can use the public library, alongside shared spaces at the Mackworth Estate Community Hall and the West End Community Centre. — uncertain paraphrase: unmatched wording (local, residents, use, shared, spaces) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Green spaces extend to Markeaton Park, while local medical provision includes facilities such as Horizon Healthcare - Mackworth - Humbleton Drive. | rule=uncertain-paraphrase | defect=Green spaces extend to Markeaton Park, while local medical provision includes facilities such as Horizon Healthcare - Mackworth - Humbleton Drive. — uncertain paraphrase: unmatched wording (green, spaces, extend, while, local, provision, includes, facilities) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Mackworth",
+    "heroHeading": "Pharmacy First in Mackworth",
+    "heroIntroduction": "Residents in Mackworth can access professional advice and care for a range of common health conditions through Pharmacy First at Brook Pharmacy. This service allows eligible individuals to consult a qualified pharmacist locally, helping support healthcare needs across the community.",
+    "localIntroduction": "Mackworth is a historic locality containing notable heritage and natural spaces. The area features historical landmarks such as Mackworth Castle alongside dedicated outdoor spaces including Mackworth Park, giving local residents access to traditional landmarks and open green space within their immediate surroundings.\n\nCommunity amenities throughout the neighbourhood serve a variety of daily civic and social needs. Local residents can use the public library, alongside shared spaces at the Mackworth Estate Community Hall and the West End Community Centre. Green spaces extend to Markeaton Park, while local medical provision includes facilities such as Horizon Healthcare - Mackworth - Humbleton Drive.\n\nTo support the community's healthcare needs alongside existing services, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. Under Pharmacy First, individuals with certain common health conditions can receive a structured consultation with a pharmacist. During the assessment, the pharmacist examines symptoms, relevant medicines and medical history. Depending on the individual clinical assessment, the outcome may include practical advice, suitable treatment or referral to another healthcare professional. Eligibility and treatment decisions remain subject to this individual clinical review. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Mackworth",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Mackworth.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "The area features historical landmarks such as Mackworth Castle alongside dedicated outdoor spaces including Mackworth Park, giving local residents access to traditional landmarks and open green space within their immediate surroundings.",
+        "editorialFactId": "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Local residents can use the public library, alongside shared spaces at the Mackworth Estate Community Hall and the West End Community Centre.",
+        "editorialFactId": "mackworth:community:mackworth-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Green spaces extend to Markeaton Park, while local medical provision includes facilities such as Horizon Healthcare - Mackworth - Humbleton Drive.",
+        "editorialFactId": "mackworth:healthcare:horizon-healthcare-mackworth-humbleton-drive-is-"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Mackworth.",
+        "editorialFactId": "mackworth:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack",
+      "mackworth:community:mackworth-has-a-public-library",
+      "mackworth:healthcare:horizon-healthcare-mackworth-humbleton-drive-is-",
+      "mackworth:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

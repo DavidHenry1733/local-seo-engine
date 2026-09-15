@@ -1,0 +1,118 @@
+{
+  "slug": "pharmaconnect",
+  "pass": true,
+  "signalCount": 155,
+  "checks": [
+    {
+      "id": "0-signal-count",
+      "pass": true,
+      "detail": "155 measurable enhancement signals defined"
+    },
+    {
+      "id": "1-enhancement-json-created",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-authority-enhancements/pharmaconnect.json"
+    },
+    {
+      "id": "2-four-services-analysed",
+      "pass": true,
+      "detail": "4 services"
+    },
+    {
+      "id": "3-all-ten-categories-scored",
+      "pass": true,
+      "detail": "All 10 categories scored per service"
+    },
+    {
+      "id": "4-recommendations-generated",
+      "pass": true,
+      "detail": "pharmacy-first:38, blood-pressure-checks:40, travel-vaccinations:42, emergency-contraception:47"
+    },
+    {
+      "id": "5-current-vs-potential-scores",
+      "pass": true,
+      "detail": "pharmacy-first:91→100, blood-pressure-checks:90→100, travel-vaccinations:88→100, emergency-contraception:88→100"
+    },
+    {
+      "id": "6-campaign-os-integration",
+      "pass": true,
+      "detail": "Emergency Contraception: 88→100 · 47 recs"
+    },
+    {
+      "id": "7-enhancement-page-loads",
+      "pass": true,
+      "detail": "Dashboard HTML renders"
+    },
+    {
+      "id": "8-no-template-modified",
+      "pass": true,
+      "detail": "Visual template unchanged"
+    },
+    {
+      "id": "9-no-master-modified",
+      "pass": true,
+      "detail": "Master library read-only in this run"
+    },
+    {
+      "id": "service-pharmacy-first",
+      "pass": true,
+      "detail": "91→100 · 38 recs"
+    },
+    {
+      "id": "service-blood-pressure-checks",
+      "pass": true,
+      "detail": "90→100 · 40 recs"
+    },
+    {
+      "id": "service-travel-vaccinations",
+      "pass": true,
+      "detail": "88→100 · 42 recs"
+    },
+    {
+      "id": "service-emergency-contraception",
+      "pass": true,
+      "detail": "88→100 · 47 recs"
+    },
+    {
+      "id": "10-live-enhancement-page",
+      "pass": true,
+      "detail": "Auth-gated — offline HTML validation used"
+    }
+  ],
+  "summary": {
+    "averageCurrentScore": 89,
+    "averagePotentialScore": 100,
+    "totalRecommendations": 167,
+    "easyWins": 0,
+    "highImpactImprovements": 33,
+    "estimatedOverallImprovement": 11,
+    "servicesAnalysed": 4
+  },
+  "services": [
+    {
+      "serviceId": "pharmacy-first",
+      "currentAuthorityScore": 91,
+      "potentialAuthorityScore": 100,
+      "totalRecommendations": 38
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "currentAuthorityScore": 90,
+      "potentialAuthorityScore": 100,
+      "totalRecommendations": 40
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "currentAuthorityScore": 88,
+      "potentialAuthorityScore": 100,
+      "totalRecommendations": 42
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "currentAuthorityScore": 88,
+      "potentialAuthorityScore": 100,
+      "totalRecommendations": 47
+    }
+  ],
+  "generatedAt": "2026-06-26T10:58:43.559Z"
+}

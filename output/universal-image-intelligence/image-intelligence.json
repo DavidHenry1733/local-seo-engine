@@ -1,0 +1,1406 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "universal-image-intelligence",
+  "generatedAt": "2026-06-11T07:10:12.819Z",
+  "intelligenceOnly": true,
+  "noImagesGenerated": true,
+  "noIdeogramCalls": true,
+  "standardSlots": [
+    "hero",
+    "support",
+    "trust",
+    "conversion"
+  ],
+  "universalSlotMapping": {
+    "version": "1.0",
+    "description": "Cross-industry hero/support/trust/conversion slot standard with industry-specific imageKey resolution",
+    "slots": {
+      "hero": {
+        "purpose": "Primary above-the-fold visual — service introduction and trust",
+        "aspectRatio": "16:9",
+        "stylePreset": "Realistic",
+        "schemaProperty": "MedicalWebPage.primaryImageOfPage / WebPage.primaryImageOfPage",
+        "pageSectionIds": [
+          "service-hero",
+          "hero-section"
+        ],
+        "placement": "hero-media"
+      },
+      "support": {
+        "purpose": "Mid-page supporting imagery — service detail, process, local relevance",
+        "aspectRatio": "4:3",
+        "stylePreset": "Realistic",
+        "schemaProperty": "ImageObject",
+        "pageSectionIds": [
+          "service-local",
+          "service-support",
+          "clinical-local-service"
+        ],
+        "placement": "mid-page"
+      },
+      "trust": {
+        "purpose": "Trust and credibility — team, credentials, evidence",
+        "aspectRatio": "1:1",
+        "stylePreset": "Realistic",
+        "schemaProperty": "LocalBusiness.image / ImageObject",
+        "pageSectionIds": [
+          "service-trust"
+        ],
+        "placement": "trust-grid"
+      },
+      "conversion": {
+        "purpose": "Conversion band — booking, enquiry, contact encouragement",
+        "aspectRatio": "16:9",
+        "stylePreset": "Realistic",
+        "schemaProperty": "ImageObject",
+        "pageSectionIds": [
+          "service-cta",
+          "clinical-cta"
+        ],
+        "placement": "cta-band"
+      }
+    },
+    "industryOverrides": {
+      "pharmacy": {
+        "assetRoot": "assets/pharmacy-image-library",
+        "slotResolutionSource": "templateFamilyMappings.slotResolution",
+        "familySlotMappings": {
+          "clinical-nhs-services": {
+            "hero": "pharmacy-first",
+            "support": "blood-pressure-check",
+            "trust": "community-pharmacy",
+            "conversion": "prescription-collection"
+          },
+          "vaccination-services": {
+            "hero": "flu-vaccination",
+            "support": "vaccination-consultation",
+            "trust": "vaccination-record-review",
+            "conversion": "vaccination-consultation"
+          },
+          "private-healthcare-services": {
+            "hero": "ear-wax-removal",
+            "support": "private-consultation",
+            "trust": "health-screening",
+            "conversion": "private-consultation"
+          },
+          "travel-health-services": {
+            "hero": "travel-consultation",
+            "support": "destination-advice",
+            "trust": "travel-vaccination",
+            "conversion": "malaria-advice"
+          },
+          "weight-management-services": {
+            "hero": "weight-consultation",
+            "support": "bmi-review",
+            "trust": "progress-monitoring",
+            "conversion": "lifestyle-support"
+          }
+        }
+      },
+      "digital-services": {
+        "assetRoot": "assets/image-library",
+        "slotResolutionSource": "manifest.service+slot",
+        "slotPattern": "{serviceKey}/{slot}/{filename}.webp"
+      }
+    },
+    "crossIndustryRules": [
+      "All industries MUST implement hero, support, trust, and conversion slots",
+      "Slot aspect ratios are consistent; style preset may vary by industry adapter",
+      "Fallback chain: preferred pack → secondary pack → core/fallback pack → metadata placeholder"
+    ]
+  },
+  "promptComponentLibrary": {
+    "version": "1.0",
+    "categories": [
+      "style",
+      "scene",
+      "brand",
+      "composition",
+      "lighting",
+      "compliance",
+      "slot-intent",
+      "negative"
+    ],
+    "components": {
+      "style.realistic-photo": {
+        "componentKey": "style.realistic-photo",
+        "category": "style",
+        "label": "Realistic photography",
+        "text": "Photorealistic documentary-style photograph.",
+        "appliesTo": [
+          "pharmacy"
+        ],
+        "polarity": "positive"
+      },
+      "style.digital-illustration": {
+        "componentKey": "style.digital-illustration",
+        "category": "style",
+        "label": "Digital illustration",
+        "text": "Clean professional digital service illustration or premium UI mockup.",
+        "appliesTo": [
+          "digital-services"
+        ],
+        "polarity": "positive"
+      },
+      "style.premium-ui-mockup": {
+        "componentKey": "style.premium-ui-mockup",
+        "category": "style",
+        "label": "Premium UI mockup",
+        "text": "High-quality premium UI mockup illustration with realistic website interface quality.",
+        "appliesTo": [
+          "digital-services"
+        ],
+        "slots": [
+          "hero",
+          "support"
+        ],
+        "polarity": "positive"
+      },
+      "scene.pharmacy-consultation": {
+        "componentKey": "scene.pharmacy-consultation",
+        "category": "scene",
+        "label": "Pharmacy consultation",
+        "text": "Pharmacist conducting a calm private consultation with a patient in a pharmacy consultation room.",
+        "appliesTo": [
+          "pharmacy"
+        ],
+        "polarity": "positive"
+      },
+      "scene.pharmacy-counter": {
+        "componentKey": "scene.pharmacy-counter",
+        "category": "scene",
+        "label": "Pharmacy counter",
+        "text": "Welcoming community pharmacy interior with pharmacist greeting a patient at the dispensary counter.",
+        "appliesTo": [
+          "pharmacy"
+        ],
+        "polarity": "positive"
+      },
+      "scene.pharmacy-team": {
+        "componentKey": "scene.pharmacy-team",
+        "category": "scene",
+        "label": "Pharmacy team",
+        "text": "Friendly qualified pharmacy team in a tidy dispensary with warm professional lighting.",
+        "appliesTo": [
+          "pharmacy"
+        ],
+        "slots": [
+          "trust",
+          "hero"
+        ],
+        "polarity": "positive"
+      },
+      "scene.digital-consultation": {
+        "componentKey": "scene.digital-consultation",
+        "category": "scene",
+        "label": "Digital consultation",
+        "text": "Consultant reviewing digital strategy with a local business owner in a modern professional setting.",
+        "appliesTo": [
+          "digital-services"
+        ],
+        "slots": [
+          "support",
+          "conversion"
+        ],
+        "polarity": "positive"
+      },
+      "scene.local-search-results": {
+        "componentKey": "scene.local-search-results",
+        "category": "scene",
+        "label": "Local search visibility",
+        "text": "Local business ranking prominently in Google Maps and local search results visualization.",
+        "appliesTo": [
+          "digital-services"
+        ],
+        "slots": [
+          "hero",
+          "trust"
+        ],
+        "polarity": "positive"
+      },
+      "brand.pharmacy-nhs-green": {
+        "componentKey": "brand.pharmacy-nhs-green",
+        "category": "brand",
+        "label": "Pharmacy NHS green brand",
+        "text": "NHS blue and pharmacy green accent decor, authentic UK independent community pharmacy feel.",
+        "appliesTo": [
+          "pharmacy"
+        ],
+        "polarity": "positive"
+      },
+      "brand.digital-blue": {
+        "componentKey": "brand.digital-blue",
+        "category": "brand",
+        "label": "Digital brand blues",
+        "text": "Brand accent colours #005EB8 #1CA9C9 #003A6D, clean modern professional tone.",
+        "appliesTo": [
+          "digital-services"
+        ],
+        "polarity": "positive"
+      },
+      "composition.clean-professional": {
+        "componentKey": "composition.clean-professional",
+        "category": "composition",
+        "label": "Clean professional composition",
+        "text": "Clean composition, shallow depth of field, sharp focus on subjects, uncluttered background.",
+        "appliesTo": [
+          "*"
+        ],
+        "polarity": "positive"
+      },
+      "composition.hero-wide": {
+        "componentKey": "composition.hero-wide",
+        "category": "composition",
+        "label": "Hero wide shot",
+        "text": "Wide shot optimised for hero section, strong visual hierarchy, space for page headline overlay.",
+        "appliesTo": [
+          "*"
+        ],
+        "slots": [
+          "hero"
+        ],
+        "polarity": "positive"
+      },
+      "composition.trust-portrait": {
+        "componentKey": "composition.trust-portrait",
+        "category": "composition",
+        "label": "Trust portrait",
+        "text": "Balanced square-friendly composition emphasising credibility and human connection.",
+        "appliesTo": [
+          "*"
+        ],
+        "slots": [
+          "trust"
+        ],
+        "polarity": "positive"
+      },
+      "lighting.warm-trustworthy": {
+        "componentKey": "lighting.warm-trustworthy",
+        "category": "lighting",
+        "label": "Warm trustworthy lighting",
+        "text": "Warm trustworthy natural or interior lighting, soft shadows, professional healthcare editorial tone.",
+        "appliesTo": [
+          "*"
+        ],
+        "polarity": "positive"
+      },
+      "compliance.no-logos-text": {
+        "componentKey": "compliance",
+        "category": "compliance",
+        "label": "No logos or readable text",
+        "text": "No visible brand logos, no readable text, labels, medication packaging brands, or patient identifiable data.",
+        "appliesTo": [
+          "*"
+        ],
+        "polarity": "positive"
+      },
+      "slot-intent.hero": {
+        "componentKey": "slot-intent.hero",
+        "category": "slot-intent",
+        "label": "Hero slot intent",
+        "text": "Suitable for the hero section — service introduction and immediate trust.",
+        "appliesTo": [
+          "*"
+        ],
+        "slots": [
+          "hero"
+        ],
+        "polarity": "positive"
+      },
+      "slot-intent.support": {
+        "componentKey": "slot-intent.support",
+        "category": "slot-intent",
+        "label": "Support slot intent",
+        "text": "Suitable for the support section — service detail, process explanation, local relevance.",
+        "appliesTo": [
+          "*"
+        ],
+        "slots": [
+          "support"
+        ],
+        "polarity": "positive"
+      },
+      "slot-intent.trust": {
+        "componentKey": "slot-intent.trust",
+        "category": "slot-intent",
+        "label": "Trust slot intent",
+        "text": "Suitable for the trust section — credentials, team, regulated care environment.",
+        "appliesTo": [
+          "*"
+        ],
+        "slots": [
+          "trust"
+        ],
+        "polarity": "positive"
+      },
+      "slot-intent.conversion": {
+        "componentKey": "slot-intent.conversion",
+        "category": "slot-intent",
+        "label": "Conversion slot intent",
+        "text": "Suitable for the conversion section — encouraging contact, booking or visit.",
+        "appliesTo": [
+          "*"
+        ],
+        "slots": [
+          "conversion"
+        ],
+        "polarity": "positive"
+      },
+      "negative.base-universal": {
+        "componentKey": "negative.base-universal",
+        "category": "negative",
+        "label": "Universal negative base",
+        "text": "blurry, distorted, watermark, text overlay, readable labels, brand logos, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity",
+        "appliesTo": [
+          "*"
+        ],
+        "polarity": "negative"
+      },
+      "negative.pharmacy-clinical": {
+        "componentKey": "negative.pharmacy-clinical",
+        "category": "negative",
+        "label": "Pharmacy clinical negative",
+        "text": "NHS logo, fake NHS branding, POM packaging, needles close-up unless vaccination, distressing illness, blood, before and after weight loss, patient names, medical records with identifiable data, exaggerated medical claims",
+        "appliesTo": [
+          "pharmacy"
+        ],
+        "polarity": "negative"
+      },
+      "negative.digital-services": {
+        "componentKey": "negative.digital-services",
+        "category": "negative",
+        "label": "Digital services negative",
+        "text": "meaningless office stock photos, random bright backgrounds, generic laptops with no context, abstract charts with no meaning, photorealistic people unless specified for web-design",
+        "appliesTo": [
+          "digital-services"
+        ],
+        "polarity": "negative"
+      },
+      "negative.slot-hero-clutter": {
+        "componentKey": "negative.slot-hero-clutter",
+        "category": "negative",
+        "label": "Hero clutter negative",
+        "text": "cluttered backgrounds, extreme close-ups, dark oppressive shadows",
+        "appliesTo": [
+          "*"
+        ],
+        "slots": [
+          "hero"
+        ],
+        "polarity": "negative"
+      }
+    },
+    "assemblyRules": {
+      "positive": [
+        "style.{industryStyle}",
+        "scene.{sceneKey}",
+        "brand.{brandKey}",
+        "composition.{compositionKey}",
+        "lighting.{lightingKey}",
+        "slot-intent.{slot}",
+        "compliance.no-logos-text"
+      ],
+      "negative": [
+        "negative.base-universal",
+        "negative.{industryNegative}",
+        "negative.slot-{slot}-clutter"
+      ]
+    },
+    "industryPresets": {
+      "pharmacy.clinical-nhs-services.hero": {
+        "positive": [
+          "style.realistic-photo",
+          "scene.pharmacy-consultation",
+          "brand.pharmacy-nhs-green",
+          "composition.hero-wide",
+          "lighting.warm-trustworthy",
+          "slot-intent.hero",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.pharmacy-clinical",
+          "negative.slot-hero-clutter"
+        ]
+      },
+      "pharmacy.clinical-nhs-services.support": {
+        "positive": [
+          "style.realistic-photo",
+          "scene.pharmacy-consultation",
+          "brand.pharmacy-nhs-green",
+          "composition.clean-professional",
+          "lighting.warm-trustworthy",
+          "slot-intent.support",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.pharmacy-clinical"
+        ]
+      },
+      "pharmacy.clinical-nhs-services.trust": {
+        "positive": [
+          "style.realistic-photo",
+          "scene.pharmacy-team",
+          "brand.pharmacy-nhs-green",
+          "composition.trust-portrait",
+          "lighting.warm-trustworthy",
+          "slot-intent.trust",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.pharmacy-clinical"
+        ]
+      },
+      "pharmacy.clinical-nhs-services.conversion": {
+        "positive": [
+          "style.realistic-photo",
+          "scene.pharmacy-counter",
+          "brand.pharmacy-nhs-green",
+          "composition.clean-professional",
+          "lighting.warm-trustworthy",
+          "slot-intent.conversion",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.pharmacy-clinical"
+        ]
+      },
+      "pharmacy.default.hero": {
+        "positive": [
+          "style.realistic-photo",
+          "scene.pharmacy-counter",
+          "brand.pharmacy-nhs-green",
+          "composition.hero-wide",
+          "lighting.warm-trustworthy",
+          "slot-intent.hero",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.pharmacy-clinical"
+        ]
+      },
+      "digital-services.default.hero": {
+        "positive": [
+          "style.premium-ui-mockup",
+          "scene.digital-consultation",
+          "brand.digital-blue",
+          "composition.hero-wide",
+          "slot-intent.hero",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.digital-services"
+        ]
+      },
+      "digital-services.default.support": {
+        "positive": [
+          "style.digital-illustration",
+          "scene.digital-consultation",
+          "brand.digital-blue",
+          "composition.clean-professional",
+          "slot-intent.support",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.digital-services"
+        ]
+      },
+      "digital-services.default.trust": {
+        "positive": [
+          "style.digital-illustration",
+          "scene.local-search-results",
+          "brand.digital-blue",
+          "composition.trust-portrait",
+          "slot-intent.trust",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.digital-services"
+        ]
+      },
+      "digital-services.default.conversion": {
+        "positive": [
+          "style.digital-illustration",
+          "scene.digital-consultation",
+          "brand.digital-blue",
+          "composition.clean-professional",
+          "slot-intent.conversion",
+          "compliance.no-logos-text"
+        ],
+        "negative": [
+          "negative.base-universal",
+          "negative.digital-services"
+        ]
+      }
+    },
+    "totalComponents": 23
+  },
+  "imagePackAssignmentEngine": {
+    "version": "1.0",
+    "coreFallbackPack": "core-pharmacy",
+    "resolveOrder": [
+      "serviceOverride",
+      "templateFamilyMapping",
+      "assignmentRule",
+      "industryDefault",
+      "coreFallback"
+    ],
+    "industryDefaults": {
+      "pharmacy": {
+        "preferredImagePack": "core-pharmacy",
+        "secondaryImagePack": "core-pharmacy",
+        "fallbackImagePack": "core-pharmacy"
+      },
+      "digital-services": {
+        "preferredImagePack": "digital-services",
+        "secondaryImagePack": "digital-services",
+        "fallbackImagePack": "digital-services"
+      }
+    },
+    "templateFamilyMappings": {
+      "clinical-nhs-services": {
+        "preferredImagePack": "clinical-nhs-services",
+        "secondaryImagePack": "core-pharmacy",
+        "fallbackImagePack": "core-pharmacy",
+        "slotResolution": {
+          "hero": "pharmacy-first",
+          "support": "blood-pressure-check",
+          "trust": "community-pharmacy",
+          "conversion": "prescription-collection"
+        }
+      },
+      "vaccination-services": {
+        "preferredImagePack": "vaccination-services",
+        "secondaryImagePack": "core-pharmacy",
+        "fallbackImagePack": "core-pharmacy",
+        "slotResolution": {
+          "hero": "flu-vaccination",
+          "support": "vaccination-consultation",
+          "trust": "vaccination-record-review",
+          "conversion": "vaccination-consultation"
+        }
+      },
+      "private-healthcare-services": {
+        "preferredImagePack": "private-healthcare-services",
+        "secondaryImagePack": "core-pharmacy",
+        "fallbackImagePack": "core-pharmacy",
+        "slotResolution": {
+          "hero": "ear-wax-removal",
+          "support": "private-consultation",
+          "trust": "health-screening",
+          "conversion": "private-consultation"
+        }
+      },
+      "travel-health-services": {
+        "preferredImagePack": "travel-health-services",
+        "secondaryImagePack": "core-pharmacy",
+        "fallbackImagePack": "core-pharmacy",
+        "slotResolution": {
+          "hero": "travel-consultation",
+          "support": "destination-advice",
+          "trust": "travel-vaccination",
+          "conversion": "malaria-advice"
+        }
+      },
+      "weight-management-services": {
+        "preferredImagePack": "weight-management-services",
+        "secondaryImagePack": "core-pharmacy",
+        "fallbackImagePack": "core-pharmacy",
+        "slotResolution": {
+          "hero": "weight-consultation",
+          "support": "bmi-review",
+          "trust": "progress-monitoring",
+          "conversion": "lifestyle-support"
+        }
+      }
+    },
+    "serviceOverrides": {
+      "pharmacy-first": {
+        "hero": "pharmacy-first",
+        "pack": "clinical-nhs-services"
+      },
+      "nhs-flu-vaccination": {
+        "hero": "flu-vaccination",
+        "pack": "vaccination-services"
+      },
+      "private-ear-wax-removal": {
+        "hero": "ear-wax-removal",
+        "pack": "private-healthcare-services"
+      },
+      "travel-vaccinations": {
+        "hero": "travel-vaccination",
+        "pack": "travel-health-services"
+      },
+      "pharmacy-weight-loss-programme": {
+        "hero": "weight-consultation",
+        "pack": "weight-management-services"
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "pharmacy-family-clinical-nhs-services",
+        "priority": 1,
+        "when": {
+          "industryType": "pharmacy",
+          "templateFamilyKey": "clinical-nhs-services"
+        },
+        "assign": {
+          "preferredImagePack": "clinical-nhs-services",
+          "secondaryImagePack": "core-pharmacy",
+          "fallbackImagePack": "core-pharmacy",
+          "slotResolution": {
+            "hero": "pharmacy-first",
+            "support": "blood-pressure-check",
+            "trust": "community-pharmacy",
+            "conversion": "prescription-collection"
+          }
+        },
+        "reason": "Pharmacy template family: clinical-nhs-services"
+      },
+      {
+        "ruleId": "pharmacy-family-private-healthcare-services",
+        "priority": 2,
+        "when": {
+          "industryType": "pharmacy",
+          "templateFamilyKey": "private-healthcare-services"
+        },
+        "assign": {
+          "preferredImagePack": "private-healthcare-services",
+          "secondaryImagePack": "core-pharmacy",
+          "fallbackImagePack": "core-pharmacy",
+          "slotResolution": {
+            "hero": "ear-wax-removal",
+            "support": "private-consultation",
+            "trust": "health-screening",
+            "conversion": "private-consultation"
+          }
+        },
+        "reason": "Pharmacy template family: private-healthcare-services"
+      },
+      {
+        "ruleId": "pharmacy-family-travel-health-services",
+        "priority": 3,
+        "when": {
+          "industryType": "pharmacy",
+          "templateFamilyKey": "travel-health-services"
+        },
+        "assign": {
+          "preferredImagePack": "travel-health-services",
+          "secondaryImagePack": "core-pharmacy",
+          "fallbackImagePack": "core-pharmacy",
+          "slotResolution": {
+            "hero": "travel-consultation",
+            "support": "destination-advice",
+            "trust": "travel-vaccination",
+            "conversion": "malaria-advice"
+          }
+        },
+        "reason": "Pharmacy template family: travel-health-services"
+      },
+      {
+        "ruleId": "pharmacy-family-weight-management-services",
+        "priority": 4,
+        "when": {
+          "industryType": "pharmacy",
+          "templateFamilyKey": "weight-management-services"
+        },
+        "assign": {
+          "preferredImagePack": "weight-management-services",
+          "secondaryImagePack": "core-pharmacy",
+          "fallbackImagePack": "core-pharmacy",
+          "slotResolution": {
+            "hero": "weight-consultation",
+            "support": "bmi-review",
+            "trust": "progress-monitoring",
+            "conversion": "lifestyle-support"
+          }
+        },
+        "reason": "Pharmacy template family: weight-management-services"
+      },
+      {
+        "ruleId": "pharmacy-family-vaccination-services",
+        "priority": 5,
+        "when": {
+          "industryType": "pharmacy",
+          "templateFamilyKey": "vaccination-services"
+        },
+        "assign": {
+          "preferredImagePack": "vaccination-services",
+          "secondaryImagePack": "core-pharmacy",
+          "fallbackImagePack": "core-pharmacy",
+          "slotResolution": {
+            "hero": "flu-vaccination",
+            "support": "vaccination-consultation",
+            "trust": "vaccination-record-review",
+            "conversion": "vaccination-consultation"
+          }
+        },
+        "reason": "Pharmacy template family: vaccination-services"
+      },
+      {
+        "ruleId": "digital-services-default",
+        "priority": 100,
+        "when": {
+          "industryType": "digital-services"
+        },
+        "assign": {
+          "preferredImagePack": "digital-services",
+          "secondaryImagePack": "digital-services",
+          "fallbackImagePack": "digital-services",
+          "slotResolution": {
+            "hero": "{serviceKey}-hero",
+            "support": "{serviceKey}-support",
+            "trust": "{serviceKey}-trust",
+            "conversion": "{serviceKey}-conversion"
+          }
+        },
+        "reason": "Digital services use service+slot manifest lookup"
+      }
+    ],
+    "packRegistry": {
+      "core-pharmacy": {
+        "industryType": "pharmacy",
+        "crossFamily": true,
+        "imageCount": 8
+      },
+      "clinical-nhs-services": {
+        "industryType": "pharmacy",
+        "imageCount": 4
+      },
+      "vaccination-services": {
+        "industryType": "pharmacy",
+        "imageCount": 4
+      },
+      "travel-health-services": {
+        "industryType": "pharmacy",
+        "imageCount": 4
+      },
+      "private-healthcare-services": {
+        "industryType": "pharmacy",
+        "imageCount": 4
+      },
+      "weight-management-services": {
+        "industryType": "pharmacy",
+        "imageCount": 4
+      },
+      "digital-services": {
+        "industryType": "digital-services",
+        "manifestBased": true
+      }
+    }
+  },
+  "businessOnboardingWorkflow": {
+    "version": "1.0",
+    "name": "Future Business Image Intelligence Onboarding",
+    "description": "End-to-end workflow for onboarding a new business/industry into the universal image intelligence system",
+    "stages": [
+      {
+        "step": 1,
+        "stage": "business-discovery",
+        "name": "Business discovery",
+        "description": "Capture industryType, business model, brand style, compliance level",
+        "outputs": [
+          "business-intelligence.json"
+        ],
+        "gate": "industryType defined"
+      },
+      {
+        "step": 2,
+        "stage": "service-intelligence",
+        "name": "Service intelligence",
+        "description": "Generate service profiles, benefits, FAQs, trust signals per service",
+        "outputs": [
+          "service-intelligence.json"
+        ],
+        "gate": "≥1 service profile complete"
+      },
+      {
+        "step": 3,
+        "stage": "template-assignment",
+        "name": "Template assignment",
+        "description": "Map services to template families and page structures",
+        "outputs": [
+          "template-architecture.json"
+        ],
+        "gate": "all services mapped to template family"
+      },
+      {
+        "step": 4,
+        "stage": "image-pack-design",
+        "name": "Image pack design",
+        "description": "Define image packs, slot resolution, and service compatibility per family",
+        "outputs": [
+          "{industry}-image-library.json"
+        ],
+        "gate": "hero/support/trust/conversion mapped per family"
+      },
+      {
+        "step": 5,
+        "stage": "prompt-component-setup",
+        "name": "Prompt component setup",
+        "description": "Create or extend prompt component library presets for industry",
+        "outputs": [
+          "image-intelligence.json promptComponentLibrary"
+        ],
+        "gate": "industry presets for all slots"
+      },
+      {
+        "step": 6,
+        "stage": "ai-prompt-generation",
+        "name": "AI prompt generation",
+        "description": "Build industry AI prompt library from components and service scenes",
+        "outputs": [
+          "{industry}-ai-image-prompt-library.json"
+        ],
+        "gate": "prompt per imageKey with safety notes"
+      },
+      {
+        "step": 7,
+        "stage": "campaign-blueprint",
+        "name": "Campaign blueprint",
+        "description": "Hub/cluster blueprints inherit image slot resolution from pack assignment",
+        "outputs": [
+          "campaign-blueprints/*.json"
+        ],
+        "gate": "blueprint references image pack"
+      },
+      {
+        "step": 8,
+        "stage": "image-generation",
+        "name": "Image generation",
+        "description": "Generate images via Ideogram using composed prompts (manual or automated)",
+        "outputs": [
+          "asset files"
+        ],
+        "gate": "assets at uploadTargetPath"
+      },
+      {
+        "step": 9,
+        "stage": "quality-approval",
+        "name": "Quality & approval",
+        "description": "Score, review, approve images through approval workflow",
+        "outputs": [
+          "approved manifest entries"
+        ],
+        "gate": "quality score ≥ threshold AND approved stage"
+      },
+      {
+        "step": 10,
+        "stage": "preview-validation",
+        "name": "Preview validation",
+        "description": "Render preview pages and validate slot placement",
+        "outputs": [
+          "preview HTML"
+        ],
+        "gate": "all 4 slots render correctly"
+      },
+      {
+        "step": 11,
+        "stage": "live-campaign",
+        "name": "Live campaign wiring",
+        "description": "Approved images served in live page generation pipeline",
+        "outputs": [
+          "live pages"
+        ],
+        "gate": "deployment approval (out of scope for intelligence phase)"
+      }
+    ],
+    "newIndustryChecklist": [
+      "Register industry adapter in image-intelligence.json industryAdapters",
+      "Add industryDefaults to imagePackAssignmentEngine",
+      "Create prompt component presets for each template family × slot",
+      "Define industry-specific negative prompt components",
+      "Configure quality scoring industryModifiers",
+      "Set compliance autoRejectRules for regulated industries"
+    ]
+  },
+  "imageApprovalWorkflow": {
+    "version": "1.0",
+    "name": "Universal Image Approval Workflow",
+    "stages": [
+      {
+        "stageId": "pending-generation",
+        "name": "Pending generation",
+        "description": "Slot identified, prompt resolved, awaiting AI generation or upload",
+        "requiredRole": null,
+        "autoAdvance": false,
+        "nextStages": [
+          "generated"
+        ]
+      },
+      {
+        "stageId": "generated",
+        "name": "Generated / uploaded",
+        "description": "Image file exists at uploadTargetPath",
+        "requiredRole": null,
+        "autoAdvance": true,
+        "nextStages": [
+          "quality-scored",
+          "rejected"
+        ]
+      },
+      {
+        "stageId": "quality-scored",
+        "name": "Quality scored",
+        "description": "Automated quality scoring complete",
+        "requiredRole": null,
+        "autoAdvance": true,
+        "nextStages": [
+          "compliance-review",
+          "rejected"
+        ]
+      },
+      {
+        "stageId": "compliance-review",
+        "name": "Compliance review",
+        "description": "Clinical/regulatory review for healthcare or regulated content",
+        "requiredRole": "compliance-reviewer",
+        "autoAdvance": false,
+        "nextStages": [
+          "brand-review",
+          "rejected"
+        ]
+      },
+      {
+        "stageId": "brand-review",
+        "name": "Brand review",
+        "description": "Brand consistency and visual quality sign-off",
+        "requiredRole": "brand-reviewer",
+        "autoAdvance": false,
+        "nextStages": [
+          "approved",
+          "rejected"
+        ]
+      },
+      {
+        "stageId": "approved",
+        "name": "Approved",
+        "description": "Image approved for campaign use",
+        "requiredRole": "approver",
+        "autoAdvance": false,
+        "nextStages": [
+          "archived"
+        ]
+      },
+      {
+        "stageId": "rejected",
+        "name": "Rejected",
+        "description": "Image rejected — regenerate or replace",
+        "requiredRole": null,
+        "autoAdvance": false,
+        "nextStages": [
+          "pending-generation"
+        ]
+      },
+      {
+        "stageId": "archived",
+        "name": "Archived",
+        "description": "Previously approved image retired from active use",
+        "requiredRole": "admin",
+        "autoAdvance": false,
+        "nextStages": []
+      }
+    ],
+    "roles": {
+      "compliance-reviewer": "Reviews healthcare/regulatory compliance (pharmacy, clinical services)",
+      "brand-reviewer": "Reviews brand consistency, lighting, composition",
+      "approver": "Final sign-off for campaign use",
+      "admin": "Archive and lifecycle management"
+    },
+    "autoTransitions": {
+      "generated→quality-scored": "Automatic after quality scoring runs",
+      "quality-scored→compliance-review": "When normalisedScore ≥ manualReview threshold",
+      "quality-scored→rejected": "When normalisedScore < autoReject OR autoRejectRule triggered"
+    },
+    "manifestFields": {
+      "approvalStage": "stage",
+      "approvedAt": "ISO timestamp when stage=approved",
+      "approvedBy": "reviewer user id",
+      "qualityScore": "normalisedScore from quality framework"
+    }
+  },
+  "imageQualityScoringFramework": {
+    "version": "1.0",
+    "name": "Universal Image Quality Scoring Framework",
+    "scale": "0-100 normalised weighted score",
+    "dimensions": [
+      {
+        "dimensionId": "technical",
+        "label": "Technical quality",
+        "weight": 0.2,
+        "maxScore": 10,
+        "criteria": [
+          "Sharp focus",
+          "Correct aspect ratio for slot",
+          "Appropriate resolution",
+          "No compression artefacts",
+          "Balanced exposure"
+        ],
+        "industryModifiers": {
+          "pharmacy": 1,
+          "digital-services": 1
+        }
+      },
+      {
+        "dimensionId": "brand",
+        "label": "Brand alignment",
+        "weight": 0.2,
+        "maxScore": 10,
+        "criteria": [
+          "Matches industry brand style",
+          "Consistent with other slot images",
+          "Appropriate colour tone",
+          "Professional presentation"
+        ],
+        "industryModifiers": {
+          "pharmacy": 1.1,
+          "digital-services": 1
+        }
+      },
+      {
+        "dimensionId": "compliance",
+        "label": "Compliance & safety",
+        "weight": 0.25,
+        "maxScore": 10,
+        "criteria": [
+          "No readable text/logos",
+          "No POM branding (pharmacy)",
+          "No fake NHS logo",
+          "No patient identifiable data",
+          "No before/after claims",
+          "No exaggerated medical claims"
+        ],
+        "industryModifiers": {
+          "pharmacy": 1.3,
+          "digital-services": 0.9
+        }
+      },
+      {
+        "dimensionId": "slot-fit",
+        "label": "Slot fit",
+        "weight": 0.15,
+        "maxScore": 10,
+        "criteria": [
+          "Appropriate for hero/support/trust/conversion intent",
+          "Composition suits page section",
+          "Emotional tone matches slot purpose"
+        ],
+        "industryModifiers": {
+          "pharmacy": 1,
+          "digital-services": 1
+        }
+      },
+      {
+        "dimensionId": "accessibility",
+        "label": "Accessibility",
+        "weight": 0.1,
+        "maxScore": 10,
+        "criteria": [
+          "Alt text accurately describes scene",
+          "Sufficient contrast for overlay text areas",
+          "No flashing/strobing elements",
+          "Diverse representation without stereotyping"
+        ],
+        "industryModifiers": {
+          "pharmacy": 1,
+          "digital-services": 1
+        }
+      },
+      {
+        "dimensionId": "seo",
+        "label": "SEO & metadata",
+        "weight": 0.1,
+        "maxScore": 10,
+        "criteria": [
+          "Descriptive filename pattern",
+          "Alt includes service and location tokens",
+          "Caption supports page context",
+          "Schema usage appropriate"
+        ],
+        "industryModifiers": {
+          "pharmacy": 1,
+          "digital-services": 1
+        }
+      }
+    ],
+    "thresholds": {
+      "autoApprove": 85,
+      "manualReview": 70,
+      "autoReject": 55,
+      "description": "normalisedScore: ≥85 fast-track to compliance-review, 70-84 manual review, <55 auto-reject"
+    },
+    "autoRejectRules": [
+      {
+        "ruleId": "readable-text",
+        "check": "hasReadableText",
+        "message": "Readable text or labels detected in image"
+      },
+      {
+        "ruleId": "brand-logo",
+        "check": "hasBrandLogo",
+        "message": "Visible brand logo detected"
+      },
+      {
+        "ruleId": "nhs-logo",
+        "check": "hasNhsLogo",
+        "message": "NHS logo detected (pharmacy compliance violation)"
+      },
+      {
+        "ruleId": "patient-data",
+        "check": "hasPatientData",
+        "message": "Identifiable patient data detected"
+      },
+      {
+        "ruleId": "before-after",
+        "check": "hasBeforeAfter",
+        "message": "Before/after transformation imagery detected"
+      },
+      {
+        "ruleId": "wrong-aspect",
+        "check": "hasWrongAspectRatio",
+        "message": "Aspect ratio does not match slot requirement"
+      }
+    ],
+    "scoringNotes": [
+      "Auto-checks (autoChecks map) trigger immediate reject regardless of dimension scores",
+      "Pharmacy compliance dimension weighted higher via industryModifier",
+      "Manual dimension scores entered during review; automated checks populate autoChecks"
+    ]
+  },
+  "industryAdapters": {
+    "pharmacy": {
+      "adapterKey": "pharmacy",
+      "industryType": "pharmacy",
+      "displayName": "UK Community Pharmacy",
+      "assetRoot": "assets/pharmacy-image-library",
+      "libraryPaths": {
+        "imageLibrary": "output/pharmacy-blueprint/pharmacy-image-library.json",
+        "aiPromptLibrary": "output/pharmacy-blueprint/pharmacy-ai-image-prompt-library.json",
+        "templateArchitecture": "output/pharmacy-blueprint/template-architecture.json",
+        "serviceIntelligence": "output/pharmacy-blueprint/service-intelligence.json"
+      },
+      "supportedSlots": [
+        "hero",
+        "support",
+        "trust",
+        "conversion"
+      ],
+      "services": [
+        "prescription-dispensing",
+        "electronic-prescription-service-eps",
+        "repeat-prescription-service",
+        "prescription-delivery",
+        "blister-packs-and-compliance-aids",
+        "emergency-supply",
+        "prescription-collection-service",
+        "private-prescription-dispensing",
+        "pharmacy-first",
+        "nhs-blood-pressure-checks",
+        "nhs-new-medicine-service-nms",
+        "pharmacy-contraception-service",
+        "nhs-flu-vaccination",
+        "nhs-smoking-cessation-support",
+        "discharge-medicines-service",
+        "supervised-consumption",
+        "palliative-care-dispensing",
+        "hepatitis-c-testing-and-referral",
+        "private-health-consultations",
+        "private-ear-wax-removal",
+        "private-blood-testing",
+        "vitamin-b12-injections",
+        "emergency-hormonal-contraception",
+        "private-minor-ailment-treatment",
+        "compounding-and-specialist-supply",
+        "private-prescription-service-fees",
+        "travel-health-consultation",
+        "travel-vaccinations",
+        "malaria-prophylaxis",
+        "travel-first-aid-and-kit-supply",
+        "yellow-fever-vaccination-centre",
+        "rabies-vaccination",
+        "altitude-sickness-prevention",
+        "seasonal-flu-vaccination-private",
+        "shingles-vaccination",
+        "pneumococcal-vaccination",
+        "meningitis-acwy-vaccination",
+        "chickenpox-vaccination",
+        "hpv-vaccination",
+        "covid-19-vaccination",
+        "whooping-cough-pertussis-vaccination",
+        "rsv-vaccination",
+        "weight-management-consultation",
+        "pharmacy-weight-loss-programme",
+        "glp-1-weight-management-treatment",
+        "body-composition-and-bmi-monitoring",
+        "nutritional-and-lifestyle-advice",
+        "blood-pressure-monitoring",
+        "diabetes-screening",
+        "cholesterol-testing",
+        "covid-19-lateral-flow-supply",
+        "urinalysis-and-uti-screening",
+        "pregnancy-testing",
+        "drug-tariff-and-point-of-care-diagnostics",
+        "medicines-use-review-mur-structured-medication-review",
+        "minor-illness-consultation",
+        "healthy-living-advice",
+        "asthma-and-copd-inhaler-technique-review",
+        "pain-management-consultation",
+        "skin-condition-assessment",
+        "sleep-and-stress-support-consultation",
+        "children-s-health-consultation"
+      ],
+      "templateFamilies": [
+        "clinical-nhs-services",
+        "private-healthcare-services",
+        "travel-health-services",
+        "weight-management-services",
+        "vaccination-services"
+      ],
+      "imagePacks": [
+        "core-pharmacy",
+        "clinical-nhs-services",
+        "vaccination-services",
+        "travel-health-services",
+        "private-healthcare-services",
+        "weight-management-services"
+      ],
+      "pharmacySlotMappings": {
+        "clinical-nhs-services": {
+          "hero": "pharmacy-first",
+          "support": "blood-pressure-check",
+          "trust": "community-pharmacy",
+          "conversion": "prescription-collection"
+        },
+        "vaccination-services": {
+          "hero": "flu-vaccination",
+          "support": "vaccination-consultation",
+          "trust": "vaccination-record-review",
+          "conversion": "vaccination-consultation"
+        },
+        "private-healthcare-services": {
+          "hero": "ear-wax-removal",
+          "support": "private-consultation",
+          "trust": "health-screening",
+          "conversion": "private-consultation"
+        },
+        "travel-health-services": {
+          "hero": "travel-consultation",
+          "support": "destination-advice",
+          "trust": "travel-vaccination",
+          "conversion": "malaria-advice"
+        },
+        "weight-management-services": {
+          "hero": "weight-consultation",
+          "support": "bmi-review",
+          "trust": "progress-monitoring",
+          "conversion": "lifestyle-support"
+        }
+      },
+      "templateFamilyPackMap": {
+        "clinical-nhs-services": "clinical-nhs-services",
+        "vaccination-services": "vaccination-services",
+        "private-healthcare-services": "private-healthcare-services",
+        "travel-health-services": "travel-health-services",
+        "weight-management-services": "weight-management-services"
+      },
+      "resolverModule": "src/pharmacy/templates/pharmacyImageLibrary.ts",
+      "totalImagesDefined": 28,
+      "totalPromptsDefined": 38
+    },
+    "digital-services": {
+      "adapterKey": "digital-services",
+      "industryType": "digital-services",
+      "displayName": "Digital Services (Web Design, SEO, Hosting, Email)",
+      "assetRoot": "assets/image-library",
+      "libraryPaths": {
+        "manifest": "assets/image-library/image-library.json",
+        "promptBlueprints": "config/imagePromptBlueprints.json",
+        "imageConfig": "input/image-config.json"
+      },
+      "supportedSlots": [
+        "hero",
+        "support",
+        "trust",
+        "conversion"
+      ],
+      "services": [
+        "web-hosting",
+        "web-design",
+        "local-seo",
+        "email-marketing",
+        "google-business-profile",
+        "local-business-visibility"
+      ],
+      "manifestServicesPresent": [
+        "web-hosting",
+        "web-design",
+        "local-seo",
+        "email-marketing",
+        "local-business-visibility"
+      ],
+      "approvedImagesInManifest": 27,
+      "slotMappings": {
+        "web-hosting": {
+          "hero": "web-hosting-hero",
+          "support": "web-hosting-support",
+          "trust": "web-hosting-trust",
+          "conversion": "web-hosting-conversion"
+        },
+        "web-design": {
+          "hero": "web-design-hero",
+          "support": "web-design-support",
+          "trust": "web-design-trust",
+          "conversion": "web-design-conversion"
+        },
+        "local-seo": {
+          "hero": "local-seo-hero",
+          "support": "local-seo-support",
+          "trust": "local-seo-trust",
+          "conversion": "local-seo-conversion"
+        },
+        "email-marketing": {
+          "hero": "email-marketing-hero",
+          "support": "email-marketing-support",
+          "trust": "email-marketing-trust",
+          "conversion": "email-marketing-conversion"
+        },
+        "google-business-profile": {
+          "hero": "google-business-profile-hero",
+          "support": "google-business-profile-support",
+          "trust": "google-business-profile-trust",
+          "conversion": "google-business-profile-conversion"
+        },
+        "local-business-visibility": {
+          "hero": "local-business-visibility-hero",
+          "support": "local-business-visibility-support",
+          "trust": "local-business-visibility-trust",
+          "conversion": "local-business-visibility-conversion"
+        }
+      },
+      "resolverModule": "src/generator/imageLibrary.ts",
+      "promptResolverModule": "src/local-seo/generateImagePrompt.ts"
+    }
+  },
+  "runtimeModules": {
+    "loader": "src/image-intelligence/loadImageIntelligence.ts",
+    "promptComponents": "src/image-intelligence/promptComponentLibrary.ts",
+    "packAssignment": "src/image-intelligence/imagePackAssignmentEngine.ts",
+    "approval": "src/image-intelligence/imageApprovalWorkflow.ts",
+    "qualityScoring": "src/image-intelligence/imageQualityScoring.ts",
+    "universalResolver": "src/image-intelligence/universalImageIntelligenceEngine.ts"
+  },
+  "references": {
+    "universalEngine": "output/universal-image-intelligence/universal-image-intelligence-engine.json",
+    "pharmacyImageLibrary": "output/pharmacy-blueprint/pharmacy-image-library.json",
+    "pharmacyAiPromptLibrary": "output/pharmacy-blueprint/pharmacy-ai-image-prompt-library.json",
+    "digitalManifest": "assets/image-library/image-library.json"
+  },
+  "generatorScript": "scripts/build-image-intelligence.mjs"
+}

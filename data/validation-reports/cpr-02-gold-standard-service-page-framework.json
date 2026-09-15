@@ -1,0 +1,116 @@
+{
+  "sprint": "CPR-02",
+  "validatedAt": "2026-07-26T08:34:50.635Z",
+  "lockedServices": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations"
+    },
+    {
+      "serviceId": "prescription-dispensing",
+      "serviceName": "Prescription Dispensing"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception"
+    },
+    {
+      "serviceId": "repeat-prescriptions",
+      "serviceName": "Repeat Prescriptions"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Locked service catalogue",
+      "pass": true,
+      "detail": "pharmacy-first, blood-pressure-checks, travel-vaccinations, prescription-dispensing, emergency-contraception, repeat-prescriptions"
+    },
+    {
+      "name": "Locked service count is 6",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "Dashboard initiation source constant",
+      "pass": true
+    },
+    {
+      "name": "Direct generation blocked without dashboard source",
+      "pass": true
+    },
+    {
+      "name": "Locked services API route",
+      "pass": true
+    },
+    {
+      "name": "Create customer shows locked services",
+      "pass": true
+    },
+    {
+      "name": "SPG confirm sends initiationSource",
+      "pass": true
+    },
+    {
+      "name": "SPG modal present",
+      "pass": true
+    },
+    {
+      "name": "SPR modal present",
+      "pass": true
+    },
+    {
+      "name": "Service-page-only scope in content package",
+      "pass": true
+    },
+    {
+      "name": "Approve review route",
+      "pass": true
+    },
+    {
+      "name": "Reject review route",
+      "pass": true
+    },
+    {
+      "name": "CPR auto-enable on create",
+      "pass": true
+    },
+    {
+      "name": "No tenant slug hard-code in recovery",
+      "pass": true
+    },
+    {
+      "name": "Embedded JavaScript parse",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Create modal has no prefilled business name",
+      "pass": true
+    },
+    {
+      "name": "API-server build",
+      "pass": true
+    }
+  ],
+  "acceptance": {
+    "genericFramework": "PASS",
+    "dashboardOnlyGenerationEnforced": "YES",
+    "directScriptGenerationBlocked": "YES",
+    "lockedSupportedServiceCount": 6,
+    "customerCreatedDuringImplementation": "NO",
+    "pageGeneratedDuringImplementation": "NO",
+    "apiServerBuild": "PASS",
+    "pm2": "ONLINE",
+    "port3001": "LISTENING",
+    "masterAdminUrl": "https://app.pharmaconnect.uk/api/admin/master",
+    "status": "READY FOR PRODUCT OWNER NEW-CUSTOMER SERVICE-PAGE TEST"
+  }
+}

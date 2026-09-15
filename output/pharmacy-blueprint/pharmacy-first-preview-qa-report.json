@@ -1,0 +1,525 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-first-preview-qa",
+  "generatedAt": "2026-06-10T16:18:31.088Z",
+  "qaOnly": true,
+  "pagesModified": false,
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy First Preview QA Complete",
+  "validationCampaign": "pharmacy-first-rotherham",
+  "templateFamily": "clinical-nhs-services",
+  "pagesAudited": [
+    "output/pharmacy-preview/pharmacy-first-rotherham/index.html",
+    "output/pharmacy-preview/pharmacy-first-aston/index.html",
+    "output/pharmacy-preview/pharmacy-first-bramley/index.html",
+    "output/pharmacy-preview/pharmacy-first-rawmarsh/index.html",
+    "output/pharmacy-preview/pharmacy-first-wickersley/index.html"
+  ],
+  "pageScores": {
+    "pharmacy-first-rotherham": {
+      "designReadiness": 7.4,
+      "contentRelevance": 8,
+      "complianceSafety": 8,
+      "seoStructure": 8.5,
+      "conversionReadiness": 7.5,
+      "overall": 7.9
+    },
+    "pharmacy-first-aston": {
+      "designReadiness": 7.4,
+      "contentRelevance": 8,
+      "complianceSafety": 8,
+      "seoStructure": 8.5,
+      "conversionReadiness": 7.5,
+      "overall": 7.9
+    },
+    "pharmacy-first-bramley": {
+      "designReadiness": 7.4,
+      "contentRelevance": 8,
+      "complianceSafety": 8,
+      "seoStructure": 8.5,
+      "conversionReadiness": 7.5,
+      "overall": 7.9
+    },
+    "pharmacy-first-rawmarsh": {
+      "designReadiness": 7.4,
+      "contentRelevance": 8,
+      "complianceSafety": 8,
+      "seoStructure": 8.5,
+      "conversionReadiness": 7.5,
+      "overall": 7.9
+    },
+    "pharmacy-first-wickersley": {
+      "designReadiness": 7.4,
+      "contentRelevance": 8,
+      "complianceSafety": 8,
+      "seoStructure": 8.5,
+      "conversionReadiness": 7.5,
+      "overall": 7.9
+    }
+  },
+  "aggregateScores": {
+    "designReadiness": 7.4,
+    "contentRelevance": 8,
+    "complianceSafety": 8,
+    "seoStructure": 8.5,
+    "conversionReadiness": 7.5,
+    "overall": 7.9
+  },
+  "structureValidation": {
+    "allPagesExist": true,
+    "allHaveH1": true,
+    "allHaveMeta": true,
+    "allHaveCanonical": true,
+    "allHavePreviewBanner": true,
+    "allSectionsPresent": true,
+    "noUnreplacedTokens": true
+  },
+  "designValidation": {
+    "nhsBrandDirection": true,
+    "mobileFriendly": true,
+    "cardLayout": true,
+    "imagePlaceholdersPresent": true,
+    "issues": [
+      "Large image placeholders (280px min-height) may create oversized blank areas before real assets"
+    ]
+  },
+  "serviceRelevanceValidation": {
+    "pharmacyFirstNamed": true,
+    "nhsPositioning": true,
+    "conditionsCovered": true,
+    "howItWorks": true,
+    "eligibilityFraming": true,
+    "localAvailability": true,
+    "nearbyAreas": true,
+    "relatedServices": true,
+    "issues": []
+  },
+  "complianceValidation": {
+    "noGuaranteedOutcomes": true,
+    "noPomAdvertising": true,
+    "noMisleadingNhsClaims": true,
+    "disclaimersPresent": true,
+    "noReviewTestimonials": true,
+    "issues": []
+  },
+  "schemaValidation": {
+    "allPagesValid": true,
+    "jsonLdParses": true,
+    "issues": []
+  },
+  "internalLinkValidation": {
+    "hubToCluster": true,
+    "clusterToHub": true,
+    "relatedServices": true,
+    "moneyPageLinks": false,
+    "issues": [
+      "Links to cluster pages not in preview set (pharmacy-first-parkgate, pharmacy-first-maltby, pharmacy-first-dinnington, pharmacy-first-thurcroft, pharmacy-first-swallownest…) — expected until full campaign render",
+      "Links to cluster pages not in preview set (pharmacy-first-swallownest, pharmacy-first-kimberworth…) — expected until full campaign render",
+      "Links to cluster pages not in preview set (pharmacy-first-kimberworth…) — expected until full campaign render",
+      "Links to cluster pages not in preview set (pharmacy-first-parkgate, pharmacy-first-maltby…) — expected until full campaign render",
+      "Links to cluster pages not in preview set (pharmacy-first-parkgate…) — expected until full campaign render"
+    ]
+  },
+  "faqValidation": {
+    "hubFaqCount": 12,
+    "clusterFaqCount": [
+      {
+        "slug": "pharmacy-first-aston",
+        "count": 5
+      },
+      {
+        "slug": "pharmacy-first-bramley",
+        "count": 5
+      },
+      {
+        "slug": "pharmacy-first-rawmarsh",
+        "count": 5
+      },
+      {
+        "slug": "pharmacy-first-wickersley",
+        "count": 5
+      }
+    ],
+    "issues": []
+  },
+  "conversionValidation": {
+    "primaryCta": true,
+    "phoneCta": true,
+    "localClusterCta": true,
+    "issues": []
+  },
+  "readinessGrade": "Ready for live campaign wiring",
+  "meetsRefinementTargets": true,
+  "readyForLiveCampaignWiring": true,
+  "blockingIssues": [],
+  "recommendedNextAction": "Proceed to live campaign wiring with real pharmacy tokens, images, and full cluster set.",
+  "pageAudits": [
+    {
+      "slug": "pharmacy-first-rotherham",
+      "pageType": "hub",
+      "faqCount": 12,
+      "scores": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "checks": {
+        "htmlExists": true,
+        "h1": true,
+        "metaTitle": true,
+        "metaDescription": true,
+        "canonical": true,
+        "previewBanner": true,
+        "viewport": true,
+        "noUnreplacedTokens": true,
+        "section_clinical-service-overview": true,
+        "section_clinical-conditions": true,
+        "section_clinical-how-it-works": true,
+        "section_clinical-benefits": true,
+        "section_clinical-local-service": true,
+        "section_clinical-nearby-areas": true,
+        "section_clinical-related-services": true,
+        "section_clinical-faq": true,
+        "section_clinical-compliance": true,
+        "section_clinical-cta": true,
+        "section_clinical-why-choose": true,
+        "mobileCss": true,
+        "nhsPalette": true,
+        "cardLayout": true,
+        "imagePlaceholders": true,
+        "serviceName": true,
+        "nhsPositioning": true,
+        "conditions": true,
+        "howItWorks": true,
+        "eligibility": true,
+        "localAvailability": true,
+        "nearbyAreas": true,
+        "relatedServices": true,
+        "faqCount": 12,
+        "schemaCount": 4,
+        "schemaLocalBusiness": true,
+        "schemaMedicalBusiness": true,
+        "schemaService": true,
+        "schemaFaqPage": true,
+        "hubClusterLinks": true,
+        "relatedServiceLinks": true,
+        "moneyPageLinks": false,
+        "primaryCta": true,
+        "phoneCta": true,
+        "heroCta": true
+      },
+      "issues": {
+        "structure": [],
+        "design": [
+          "Large image placeholders (280px min-height) may create oversized blank areas before real assets"
+        ],
+        "content": [],
+        "compliance": [],
+        "seo": [],
+        "links": [
+          "Links to cluster pages not in preview set (pharmacy-first-parkgate, pharmacy-first-maltby, pharmacy-first-dinnington, pharmacy-first-thurcroft, pharmacy-first-swallownest…) — expected until full campaign render"
+        ],
+        "faq": [],
+        "conversion": []
+      }
+    },
+    {
+      "slug": "pharmacy-first-aston",
+      "pageType": "cluster",
+      "faqCount": 5,
+      "scores": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "checks": {
+        "htmlExists": true,
+        "h1": true,
+        "metaTitle": true,
+        "metaDescription": true,
+        "canonical": true,
+        "previewBanner": true,
+        "viewport": true,
+        "noUnreplacedTokens": true,
+        "section_clinical-service-overview": true,
+        "section_clinical-conditions": true,
+        "section_clinical-how-it-works": true,
+        "section_clinical-benefits": true,
+        "section_clinical-local-service": true,
+        "section_clinical-nearby-areas": true,
+        "section_clinical-related-services": true,
+        "section_clinical-faq": true,
+        "section_clinical-compliance": true,
+        "section_clinical-cta": true,
+        "mobileCss": true,
+        "nhsPalette": true,
+        "cardLayout": true,
+        "imagePlaceholders": true,
+        "serviceName": true,
+        "nhsPositioning": true,
+        "conditions": true,
+        "howItWorks": true,
+        "eligibility": true,
+        "localAvailability": true,
+        "nearbyAreas": true,
+        "relatedServices": true,
+        "faqCount": 5,
+        "schemaCount": 4,
+        "schemaLocalBusiness": true,
+        "schemaMedicalBusiness": true,
+        "schemaService": true,
+        "schemaFaqPage": true,
+        "hubClusterLinks": true,
+        "relatedServiceLinks": true,
+        "moneyPageLinks": false,
+        "primaryCta": true,
+        "phoneCta": true,
+        "heroCta": true
+      },
+      "issues": {
+        "structure": [],
+        "design": [
+          "Large image placeholders (280px min-height) may create oversized blank areas before real assets"
+        ],
+        "content": [],
+        "compliance": [],
+        "seo": [],
+        "links": [
+          "Links to cluster pages not in preview set (pharmacy-first-swallownest, pharmacy-first-kimberworth…) — expected until full campaign render"
+        ],
+        "faq": [],
+        "conversion": []
+      }
+    },
+    {
+      "slug": "pharmacy-first-bramley",
+      "pageType": "cluster",
+      "faqCount": 5,
+      "scores": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "checks": {
+        "htmlExists": true,
+        "h1": true,
+        "metaTitle": true,
+        "metaDescription": true,
+        "canonical": true,
+        "previewBanner": true,
+        "viewport": true,
+        "noUnreplacedTokens": true,
+        "section_clinical-service-overview": true,
+        "section_clinical-conditions": true,
+        "section_clinical-how-it-works": true,
+        "section_clinical-benefits": true,
+        "section_clinical-local-service": true,
+        "section_clinical-nearby-areas": true,
+        "section_clinical-related-services": true,
+        "section_clinical-faq": true,
+        "section_clinical-compliance": true,
+        "section_clinical-cta": true,
+        "mobileCss": true,
+        "nhsPalette": true,
+        "cardLayout": true,
+        "imagePlaceholders": true,
+        "serviceName": true,
+        "nhsPositioning": true,
+        "conditions": true,
+        "howItWorks": true,
+        "eligibility": true,
+        "localAvailability": true,
+        "nearbyAreas": true,
+        "relatedServices": true,
+        "faqCount": 5,
+        "schemaCount": 4,
+        "schemaLocalBusiness": true,
+        "schemaMedicalBusiness": true,
+        "schemaService": true,
+        "schemaFaqPage": true,
+        "hubClusterLinks": true,
+        "relatedServiceLinks": true,
+        "moneyPageLinks": false,
+        "primaryCta": true,
+        "phoneCta": true,
+        "heroCta": true
+      },
+      "issues": {
+        "structure": [],
+        "design": [
+          "Large image placeholders (280px min-height) may create oversized blank areas before real assets"
+        ],
+        "content": [],
+        "compliance": [],
+        "seo": [],
+        "links": [
+          "Links to cluster pages not in preview set (pharmacy-first-kimberworth…) — expected until full campaign render"
+        ],
+        "faq": [],
+        "conversion": []
+      }
+    },
+    {
+      "slug": "pharmacy-first-rawmarsh",
+      "pageType": "cluster",
+      "faqCount": 5,
+      "scores": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "checks": {
+        "htmlExists": true,
+        "h1": true,
+        "metaTitle": true,
+        "metaDescription": true,
+        "canonical": true,
+        "previewBanner": true,
+        "viewport": true,
+        "noUnreplacedTokens": true,
+        "section_clinical-service-overview": true,
+        "section_clinical-conditions": true,
+        "section_clinical-how-it-works": true,
+        "section_clinical-benefits": true,
+        "section_clinical-local-service": true,
+        "section_clinical-nearby-areas": true,
+        "section_clinical-related-services": true,
+        "section_clinical-faq": true,
+        "section_clinical-compliance": true,
+        "section_clinical-cta": true,
+        "mobileCss": true,
+        "nhsPalette": true,
+        "cardLayout": true,
+        "imagePlaceholders": true,
+        "serviceName": true,
+        "nhsPositioning": true,
+        "conditions": true,
+        "howItWorks": true,
+        "eligibility": true,
+        "localAvailability": true,
+        "nearbyAreas": true,
+        "relatedServices": true,
+        "faqCount": 5,
+        "schemaCount": 4,
+        "schemaLocalBusiness": true,
+        "schemaMedicalBusiness": true,
+        "schemaService": true,
+        "schemaFaqPage": true,
+        "hubClusterLinks": true,
+        "relatedServiceLinks": true,
+        "moneyPageLinks": false,
+        "primaryCta": true,
+        "phoneCta": true,
+        "heroCta": true
+      },
+      "issues": {
+        "structure": [],
+        "design": [
+          "Large image placeholders (280px min-height) may create oversized blank areas before real assets"
+        ],
+        "content": [],
+        "compliance": [],
+        "seo": [],
+        "links": [
+          "Links to cluster pages not in preview set (pharmacy-first-parkgate, pharmacy-first-maltby…) — expected until full campaign render"
+        ],
+        "faq": [],
+        "conversion": []
+      }
+    },
+    {
+      "slug": "pharmacy-first-wickersley",
+      "pageType": "cluster",
+      "faqCount": 5,
+      "scores": {
+        "designReadiness": 7.4,
+        "contentRelevance": 8,
+        "complianceSafety": 8,
+        "seoStructure": 8.5,
+        "conversionReadiness": 7.5,
+        "overall": 7.9
+      },
+      "checks": {
+        "htmlExists": true,
+        "h1": true,
+        "metaTitle": true,
+        "metaDescription": true,
+        "canonical": true,
+        "previewBanner": true,
+        "viewport": true,
+        "noUnreplacedTokens": true,
+        "section_clinical-service-overview": true,
+        "section_clinical-conditions": true,
+        "section_clinical-how-it-works": true,
+        "section_clinical-benefits": true,
+        "section_clinical-local-service": true,
+        "section_clinical-nearby-areas": true,
+        "section_clinical-related-services": true,
+        "section_clinical-faq": true,
+        "section_clinical-compliance": true,
+        "section_clinical-cta": true,
+        "mobileCss": true,
+        "nhsPalette": true,
+        "cardLayout": true,
+        "imagePlaceholders": true,
+        "serviceName": true,
+        "nhsPositioning": true,
+        "conditions": true,
+        "howItWorks": true,
+        "eligibility": true,
+        "localAvailability": true,
+        "nearbyAreas": true,
+        "relatedServices": true,
+        "faqCount": 5,
+        "schemaCount": 4,
+        "schemaLocalBusiness": true,
+        "schemaMedicalBusiness": true,
+        "schemaService": true,
+        "schemaFaqPage": true,
+        "hubClusterLinks": true,
+        "relatedServiceLinks": true,
+        "moneyPageLinks": false,
+        "primaryCta": true,
+        "phoneCta": true,
+        "heroCta": true
+      },
+      "issues": {
+        "structure": [],
+        "design": [
+          "Large image placeholders (280px min-height) may create oversized blank areas before real assets"
+        ],
+        "content": [],
+        "compliance": [],
+        "seo": [],
+        "links": [
+          "Links to cluster pages not in preview set (pharmacy-first-parkgate…) — expected until full campaign render"
+        ],
+        "faq": [],
+        "conversion": []
+      }
+    }
+  ],
+  "inputs": {
+    "businessIntelligence": "output/pharmacy-blueprint/business-intelligence.json",
+    "serviceIntelligence": "output/pharmacy-blueprint/service-intelligence.json",
+    "templateArchitecture": "output/pharmacy-blueprint/template-architecture.json",
+    "campaignBlueprint": "output/pharmacy-blueprint/campaign-blueprints/pharmacy-first-rotherham.json",
+    "templateV1Report": "output/pharmacy-blueprint/clinical-nhs-template-v1-report.json"
+  },
+  "templateV1Baseline": "PASS"
+}

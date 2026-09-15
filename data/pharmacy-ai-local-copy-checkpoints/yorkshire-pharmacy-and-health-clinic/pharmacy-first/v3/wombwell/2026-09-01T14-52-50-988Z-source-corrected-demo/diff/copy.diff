@@ -1,0 +1,47 @@
+--- /tmp/wombwell-before-parent.json	2026-09-01 16:09:24.428786365 +0000
++++ /tmp/wombwell-after-corrected.json	2026-09-01 16:09:24.428786365 +0000
+@@ -2,10 +2,10 @@
+   "area": "Wombwell",
+   "heroHeading": "Pharmacy First in Wombwell",
+   "heroIntroduction": "Pharmacy First is available to people in Wombwell, offering NHS consultations for eligible common conditions. This service is provided by Yorkshire Pharmacy & Health Clinic in Darfield, supporting residents of Wombwell and the wider Barnsley area.",
+-  "localIntroduction": "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire. The area features a public library, which hosts local history sessions run by Wombwell Heritage Group. Citizens Advice also holds advice and welfare rights drop-in sessions at the library. Wombwell station, part of the National Rail network, displays community artwork including the Wombwell unicorn emblem and references to local landmarks such as Roly Poly Hill and the Wishing Tree at Wombwell Park.",
++  "localIntroduction": "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire. The area features a public library, which hosts local history sessions run by Wombwell Heritage Group. Citizens Advice also holds advice and welfare rights drop-in sessions at the library. Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park, and features the Wombwell unicorn emblem.",
+   "localContextHeading": "",
+   "localContextParagraphs": [
+-    "Wombwell’s public library and station artwork highlight the area’s active community spaces and local heritage. With NHS general practice services provided from Wombwell Medical Centre, residents have established routes to healthcare support. For NHS Pharmacy First consultations, people in Wombwell can access Yorkshire Pharmacy & Health Clinic in Darfield, which is approximately 1.7 km away in a straight line. Pharmacy First can help with eligible common conditions, and the pharmacist will confirm what can be assessed on the day according to NHS pathway criteria."
++    "NHS general practice services in Wombwell are provided from Wombwell Medical Centre. For NHS Pharmacy First consultations, people in Wombwell can access Yorkshire Pharmacy & Health Clinic in Darfield, which is approximately 1.7 km away in a straight line. Pharmacy First can help with eligible common conditions, and the pharmacist will confirm what can be assessed on the day according to NHS pathway criteria."
+   ],
+   "relationshipToPharmacy": "Pharmacy First consultations for Wombwell residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+   "localAccessIntroduction": "",
+@@ -38,24 +38,19 @@
+       "entityId": "wombwell:community:citizens-advice-runs-advice-and-welfare-rights-d"
+     },
+     {
+-      "field": "localIntroduction",
+-      "sentence": "Wombwell station, part of the National Rail network, displays community artwork including the Wombwell unicorn emblem and references to local landmarks such as Roly Poly Hill and the Wishing Tree at Wombwell Park.",
+-      "entityId": "wombwell:community:artwork-at-wombwell-station-refers-to-the-roly-p"
+-    },
+-    {
+       "field": "localContextParagraphs",
+-      "sentence": "Wombwell’s public library and station artwork highlight the area’s active community spaces and local heritage.",
+-      "entityId": "wombwell:community:the-artwork-at-wombwell-station-features-the-wom"
++      "sentence": "For NHS Pharmacy First consultations, people in Wombwell can access Yorkshire Pharmacy & Health Clinic in Darfield, which is approximately 1.7 km away in a straight line.",
++      "entityId": "wombwell:pharmacy-relationship:distance"
+     },
+     {
+-      "field": "localContextParagraphs",
+-      "sentence": "With NHS general practice services provided from Wombwell Medical Centre, residents have established routes to healthcare support.",
+-      "entityId": "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr"
++      "field": "localIntroduction",
++      "sentence": "Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park, and features the Wombwell unicorn emblem.",
++      "entityId": "wombwell:community:artwork-at-wombwell-station-refers-to-the-roly-p"
+     },
+     {
+       "field": "localContextParagraphs",
+-      "sentence": "For NHS Pharmacy First consultations, people in Wombwell can access Yorkshire Pharmacy & Health Clinic in Darfield, which is approximately 1.7 km away in a straight line.",
+-      "entityId": "wombwell:pharmacy-relationship:distance"
++      "sentence": "NHS general practice services in Wombwell are provided from Wombwell Medical Centre.",
++      "entityId": "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr"
+     }
+   ],
+   "evidenceEntityIdsUsed": [

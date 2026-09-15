@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "slug": "cat-v1-independent-holloway",
+  "updatedAt": "2026-08-01T08:03:57.157Z",
+  "currentStage": "generate_growth_intelligence",
+  "transitions": [
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-08-01T08:03:57.157Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-08-01T08:03:57.155Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-08-01T08:03:57.154Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-08-01T08:03:52.130Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:03:57.156Z",
+      "finishedAt": "2026-08-01T08:03:57.156Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:03:57.155Z",
+      "finishedAt": "2026-08-01T08:03:57.155Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:03:57.153Z",
+      "finishedAt": "2026-08-01T08:03:57.153Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-01T08:03:54.315Z",
+      "finishedAt": "2026-08-01T08:03:54.315Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Website import incomplete. Could not fetch https://www.hollowaypharmacy.co.uk: getaddrinfo ENOTFOUND www.hollowaypharmacy.co.uk",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "af1999ae-4ad1-46cf-9689-b613e0b0c1f5"
+    }
+  ]
+}

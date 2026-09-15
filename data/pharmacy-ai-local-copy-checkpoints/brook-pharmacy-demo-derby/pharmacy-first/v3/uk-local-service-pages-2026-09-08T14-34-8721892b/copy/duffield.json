@@ -1,0 +1,229 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-08T13:42:58.291Z",
+  "tokenUsage": {
+    "promptTokens": 163,
+    "completionTokens": 179,
+    "totalTokens": 342
+  },
+  "estimatedCostUsd": 0.001758,
+  "inputEvidencePackHash": "899d24b79f249244a69f1e0cfa2f84a8622ccb52a54f1362a12dd466eb12b588",
+  "editorialEvidencePackHash": "d7c0e77f97d50ed267d65841c4de00425b988ec341ff16c381ee4fbbc3c6a3c1",
+  "areaSlug": "duffield",
+  "areaName": "Duffield",
+  "editorialFactIdsUsed": [
+    "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in",
+    "duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield",
+    "duffield:healthcare:nhs-general-practice-services-in-duffield-are-pr",
+    "duffield:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Duffield",
+    "heroHeading": "Pharmacy First in Duffield",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Duffield.",
+    "localIntroduction": "Duffield is a vibrant village steeped in history and surrounded by attractive countryside. Among its key landmarks is the National Trust site of Duffield Castle, alongside the poignant Duffield War Memorial, both of which highlight the area's rich heritage. The village is also home to Eyes Meadow, a popular local landmark providing expansive green space for recreation and outdoor pursuits. Furthermore, Duffield Library functions as an important community facility, serving as a central hub for reading, learning, and local engagement.\n\nAlongside these historic and recreational spaces, the village is well supported by local health services tailored to the needs of the population. NHS general practice services in Duffield are provided from Appletree Medical Practice, delivering core medical care to local residents. Combined with its public amenities, picturesque surroundings, and strong civic identity, Duffield continues to offer a welcoming environment for all who live in and visit the area.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 7.6 km in a straight line from Duffield.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Among its key landmarks is the National Trust site of Duffield Castle, alongside the poignant Duffield War Memorial, both of which highlight the area's rich heritage.",
+        "editorialFactId": "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The village is also home to Eyes Meadow, a popular local landmark providing expansive green space for recreation and outdoor pursuits.",
+        "editorialFactId": "duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Duffield are provided from Appletree Medical Practice, delivering core medical care to local residents.",
+        "editorialFactId": "duffield:healthcare:nhs-general-practice-services-in-duffield-are-pr"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 7.6 km in a straight line from Duffield.",
+        "editorialFactId": "duffield:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in",
+      "duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield",
+      "duffield:healthcare:nhs-general-practice-services-in-duffield-are-pr",
+      "duffield:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Duffield",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Duffield.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Duffield is a vibrant village steeped in history and surrounded by attractive countryside.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Among its key landmarks is the National Trust site of Duffield Castle, alongside the poignant Duffield War Memorial, both of which highlight the area's rich heritage.",
+      "supportingCanonicalFieldOrEntity": "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in, duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la",
+      "providerSource": "Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (key, landmarks, site, poignant, which, highlight, rich, heritage) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The village is also home to Eyes Meadow, a popular local landmark providing expansive green space for recreation and outdoor pursuits.",
+      "supportingCanonicalFieldOrEntity": "duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield",
+      "providerSource": "Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (village, popular, local, providing, expansive, green, space, recreation, outdoor, pursuits) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Furthermore, Duffield Library functions as an important community facility, serving as a central hub for reading, learning, and local engagement.",
+      "supportingCanonicalFieldOrEntity": "duffield:community:duffield-library-is-listed-as-a-community-facili",
+      "providerSource": "Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (furthermore, functions, important, serving, central, hub, reading, learning, local, engagement) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Alongside these historic and recreational spaces, the village is well supported by local health services tailored to the needs of the population.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "NHS general practice services in Duffield are provided from Appletree Medical Practice, delivering core medical care to local residents.",
+      "supportingCanonicalFieldOrEntity": "duffield:healthcare:nhs-general-practice-services-in-duffield-are-pr",
+      "providerSource": "NHS",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (delivering, core, local, residents) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Combined with its public amenities, picturesque surroundings, and strong civic identity, Duffield continues to offer a welcoming environment for all who live in and visit the area.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 7.6 km in a straight line from Duffield.",
+      "supportingCanonicalFieldOrEntity": "duffield:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Duffield",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Duffield.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Duffield is a vibrant village steeped in history and surrounded by attractive countryside.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Alongside these historic and recreational spaces, the village is well supported by local health services tailored to the needs of the population.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Combined with its public amenities, picturesque surroundings, and strong civic identity, Duffield continues to offer a welcoming environment for all who live in and visit the area.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 7.6 km in a straight line from Duffield.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "duffield:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 7,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Among its key landmarks is the National Trust site of Duffield Castle, alongside the poignant Duffield War Memorial, both of which highlight the area's rich heritage. | rule=uncertain-paraphrase | defect=Among its key landmarks is the National Trust site of Duffield Castle, alongside the poignant Duffield War Memorial, both of which highlight the area's rich heritage. — uncertain paraphrase: unmatched wording (key, landmarks, site, poignant, which, highlight, rich, heritage) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The village is also home to Eyes Meadow, a popular local landmark providing expansive green space for recreation and outdoor pursuits. | rule=uncertain-paraphrase | defect=The village is also home to Eyes Meadow, a popular local landmark providing expansive green space for recreation and outdoor pursuits. — uncertain paraphrase: unmatched wording (village, popular, local, providing, expansive, green, space, recreation, outdoor, pursuits) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Furthermore, Duffield Library functions as an important community facility, serving as a central hub for reading, learning, and local engagement. | rule=uncertain-paraphrase | defect=Furthermore, Duffield Library functions as an important community facility, serving as a central hub for reading, learning, and local engagement. — uncertain paraphrase: unmatched wording (furthermore, functions, important, serving, central, hub, reading, learning, local, engagement) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=NHS general practice services in Duffield are provided from Appletree Medical Practice, delivering core medical care to local residents. | rule=uncertain-paraphrase | defect=NHS general practice services in Duffield are provided from Appletree Medical Practice, delivering core medical care to local residents. — uncertain paraphrase: unmatched wording (delivering, core, local, residents) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "Duffield is a vibrant village steeped in history and surrounded by attractive countryside. Among its key landmarks is the National Trust site of Duffield Castle, alongside the poignant Duffield War Memorial, both of which highlight the area's rich heritage. The village is also home to Eyes Meadow, a popular local landmark providing expansive green space for recreation and outdoor pursuits. Furthermore, Duffield Library functions as an important community facility, serving as a central hub for reading, learning, and local engagement.\n\nAlongside these historic and recreational spaces, the village is well supported by local health services tailored to the needs of the population. NHS general practice services in Duffield are provided from Appletree Medical Practice, delivering core medical care to local residents. Combined with its public amenities, picturesque surroundings, and strong civic identity, Duffield continues to offer a welcoming environment for all who live in and visit the area.",
+  "rawOpenAiResponses": [
+    "Duffield is a vibrant village steeped in history and surrounded by attractive countryside. Among its key landmarks is the National Trust site of Duffield Castle, alongside the poignant Duffield War Memorial, both of which highlight the area's rich heritage. The village is also home to Eyes Meadow, a popular local landmark providing expansive green space for recreation and outdoor pursuits. Furthermore, Duffield Library functions as an important community facility, serving as a central hub for reading, learning, and local engagement.\n\nAlongside these historic and recreational spaces, the village is well supported by local health services tailored to the needs of the population. NHS general practice services in Duffield are provided from Appletree Medical Practice, delivering core medical care to local residents. Combined with its public amenities, picturesque surroundings, and strong civic identity, Duffield continues to offer a welcoming environment for all who live in and visit the area."
+  ]
+}

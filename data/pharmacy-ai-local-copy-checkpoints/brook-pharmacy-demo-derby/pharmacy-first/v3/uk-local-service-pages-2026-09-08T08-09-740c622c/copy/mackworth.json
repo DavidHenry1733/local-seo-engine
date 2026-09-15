@@ -1,0 +1,204 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:32:46.391Z",
+  "tokenUsage": {
+    "promptTokens": 6869,
+    "completionTokens": 338,
+    "totalTokens": 7207
+  },
+  "estimatedCostUsd": 0.016442,
+  "inputEvidencePackHash": "442ee8ef9236151271a336dac3c8349ac4127b5b62498563c8de694dca3054a6",
+  "editorialEvidencePackHash": "635a48ace7defd354b865cb2919c50ea523d6099078d7cfddd441571703a9bc1",
+  "areaSlug": "mackworth",
+  "areaName": "Mackworth",
+  "editorialFactIdsUsed": [
+    "mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c",
+    "mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo",
+    "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack"
+  ],
+  "outputCopy": {
+    "area": "Mackworth",
+    "heroHeading": "Pharmacy First in Mackworth",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Mackworth.",
+    "localIntroduction": "Pharmacy First for people in Mackworth is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Mackworth Estate Community Hall is listed as a community facility in Mackworth.",
+      "Mackworth park is listed as a landmark in Mackworth.",
+      "Mackworth Castle is listed as a landmark in Mackworth."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Mackworth.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Mackworth Estate Community Hall is listed as a community facility in Mackworth.",
+        "editorialFactId": "mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Mackworth park is listed as a landmark in Mackworth.",
+        "editorialFactId": "mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Mackworth Castle is listed as a landmark in Mackworth.",
+        "editorialFactId": "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c",
+      "mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo",
+      "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Mackworth",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Mackworth.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Mackworth is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Mackworth Estate Community Hall is listed as a community facility in Mackworth.",
+      "supportingCanonicalFieldOrEntity": "mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c, mackworth:community:west-end-community-centre-is-listed-as-a-communi, mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack, mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Mackworth park is listed as a landmark in Mackworth.",
+      "supportingCanonicalFieldOrEntity": "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack, mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo, mackworth:heritage:markeaton-park-is-listed-as-a-landmark-in-mackwo",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[2]",
+      "exactSentence": "Mackworth Castle is listed as a landmark in Mackworth.",
+      "supportingCanonicalFieldOrEntity": "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack, mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo, mackworth:heritage:markeaton-park-is-listed-as-a-landmark-in-mackwo",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Mackworth.",
+      "supportingCanonicalFieldOrEntity": "mackworth:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Mackworth",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Mackworth.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Mackworth is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Mackworth Estate Community Hall is listed as a community facility in Mackworth.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c, mackworth:community:west-end-community-centre-is-listed-as-a-communi, mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack, mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Mackworth park is listed as a landmark in Mackworth.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack, mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo, mackworth:heritage:markeaton-park-is-listed-as-a-landmark-in-mackwo",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[2]",
+      "sentence": "Mackworth Castle is listed as a landmark in Mackworth.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack, mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo, mackworth:heritage:markeaton-park-is-listed-as-a-landmark-in-mackwo",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Mackworth.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "mackworth:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Mackworth Estate Community Hall is listed as a community facility in Mackworth.\",\n    \"Mackworth park is listed as a landmark in Mackworth.\",\n    \"Mackworth Castle is listed as a landmark in Mackworth.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mackworth Estate Community Hall is listed as a community facility in Mackworth.\",\n      \"editorialFactId\": \"mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mackworth park is listed as a landmark in Mackworth.\",\n      \"editorialFactId\": \"mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mackworth Castle is listed as a landmark in Mackworth.\",\n      \"editorialFactId\": \"mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c\",\n    \"mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo\",\n    \"mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Mackworth Estate Community Hall is listed as a community facility in Mackworth.\",\n    \"Mackworth park is listed as a landmark in Mackworth.\",\n    \"Mackworth Castle is listed as a landmark in Mackworth.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mackworth Estate Community Hall is listed as a community facility in Mackworth.\",\n      \"editorialFactId\": \"mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mackworth park is listed as a landmark in Mackworth.\",\n      \"editorialFactId\": \"mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mackworth Castle is listed as a landmark in Mackworth.\",\n      \"editorialFactId\": \"mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"mackworth:community:mackworth-estate-community-hall-is-listed-as-a-c\",\n    \"mackworth:heritage:mackworth-park-is-listed-as-a-landmark-in-mackwo\",\n    \"mackworth:heritage:mackworth-castle-is-listed-as-a-landmark-in-mack\"\n  ]\n}"
+  ]
+}

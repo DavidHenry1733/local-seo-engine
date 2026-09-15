@@ -1,0 +1,75 @@
+{
+  "savedAt": "2026-09-08T15:36:50.256Z",
+  "areaSlug": "littleover",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Write as an experienced British healthcare copywriter.\n\nUsing only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.\n\nHERO INTRODUCTION:\nWrite 35–55 words introducing Pharmacy First for people in the selected area and naming Brook Pharmacy as the provider.\n\nLOCAL INTRODUCTION:\nWrite 170–230 words in three fluent British-English paragraphs.\n\nParagraph 1:\nIntroduce the area, its location and its character using verified facts.\n\nParagraph 2:\nDescribe meaningful verified landmarks, green spaces, shopping, community facilities and healthcare references. Select the most useful facts and connect them naturally. Do not list every evidence record.\n\nParagraph 3:\nMove naturally from the area and its local healthcare needs into Brook Pharmacy’s Pharmacy First service. Name Brook Pharmacy and Pharmacy First, and explain that eligible patients can receive a pharmacist consultation for certain common conditions. Do not reproduce a fixed clinical closing sentence. The transition must feel like part of the article—not a disclaimer pasted onto the end.\n\nYou may express only this Pharmacy First meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment.\n\nDo not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.\n\nDo not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.\n\nUse neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.\n\nDo not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.\n\nDo not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.\n\nReturn exactly this layout:\nHERO INTRODUCTION:\n<one paragraph>\n\nLOCAL INTRODUCTION:\n<paragraph 1>\n\n<paragraph 2>\n\n<paragraph 3>\nSelected area: Littleover\nConfirmed pharmacy name: Brook Pharmacy Demo Derby\nConfirmed pharmacy premises locality: Derby\nSaved straight-line distance: approximately 3 km in a straight line\nVerified area identity and geographical context:\n- Littleover is a neighbourhood ward in Derby.\nVerified history where available:\n- Clemson’s Park is a landmark in Littleover.\nVerified landmarks, parks, shopping, civic and community facilities:\n- Blagreaves Library is a community facility in Littleover.\n- Bramblebrook Community Centre is a community facility in Littleover.\nVerified GP practices or healthcare facilities:\n- NHS general practice services in Littleover are provided from The Lanes Medical Centre.\n- NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.\n- Royal Derby Hospital is a hospital in Littleover.\nApproved Pharmacy First service meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment."
+  },
+  "rawResponse": "HERO INTRODUCTION:\nLocal residents in Littleover can access NHS healthcare support through Pharmacy First at Brook Pharmacy. This service allows eligible patients to consult a pharmacist for certain common health conditions, helping the local community receive professional advice and clinical assessment.\n\nLOCAL INTRODUCTION:\nLittleover is a neighbourhood ward situated within Derby. The area features a mix of residential areas and open spaces, with Clemson’s Park providing a notable landmark that contributes to the local history and character of the neighbourhood.\n\nResidents across Littleover have access to useful civic and community facilities, including Blagreaves Library and Bramblebrook Community Centre. Healthcare provision in the area is well established, with NHS general practice services provided from The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre. Furthermore, Royal Derby Hospital is a major hospital facility situated within the neighbourhood.\n\nWorking alongside these existing medical services, Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area. The Pharmacy First scheme covers certain common health conditions, allowing individuals to discuss their health needs with a trained pharmacist. During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. Depending on the findings, the outcome may include tailored advice, suitable treatment or a referral to another healthcare professional. Eligibility for the service and any recommended treatment depend entirely on the individual clinical assessment.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Littleover is a neighbourhood ward situated within Derby. | rule=uncertain-paraphrase | defect=Littleover is a neighbourhood ward situated within Derby. — uncertain paraphrase: unmatched wording (situated) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area features a mix of residential areas and open spaces, with Clemson’s Park providing a notable landmark that contributes to the local history and character of the neighbourhood. | rule=uncertain-paraphrase | defect=The area features a mix of residential areas and open spaces, with Clemson’s Park providing a notable landmark that contributes to the local history and character of the neighbourhood. — uncertain paraphrase: unmatched wording (features, mix, residential, areas, open, spaces, providing, notable, contributes, local, history, character) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Residents across Littleover have access to useful civic and community facilities, including Blagreaves Library and Bramblebrook Community Centre. | rule=uncertain-paraphrase | defect=Residents across Littleover have access to useful civic and community facilities, including Blagreaves Library and Bramblebrook Community Centre. — uncertain paraphrase: unmatched wording (residents, access, useful, facilities) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Healthcare provision in the area is well established, with NHS general practice services provided from The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre. | rule=uncertain-paraphrase | defect=Healthcare provision in the area is well established, with NHS general practice services provided from The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre. — uncertain paraphrase: unmatched wording (provision, established) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Furthermore, Royal Derby Hospital is a major hospital facility situated within the neighbourhood. | rule=uncertain-paraphrase | defect=Furthermore, Royal Derby Hospital is a major hospital facility situated within the neighbourhood. — uncertain paraphrase: unmatched wording (furthermore, major, situated) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. | rule=uncertain-paraphrase | defect=During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. — uncertain paraphrase: unmatched wording (carefully, assesses, relevant, history) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Littleover",
+    "heroHeading": "Pharmacy First in Littleover",
+    "heroIntroduction": "Local residents in Littleover can access NHS healthcare support through Pharmacy First at Brook Pharmacy. This service allows eligible patients to consult a pharmacist for certain common health conditions, helping the local community receive professional advice and clinical assessment.",
+    "localIntroduction": "Littleover is a neighbourhood ward situated within Derby. The area features a mix of residential areas and open spaces, with Clemson’s Park providing a notable landmark that contributes to the local history and character of the neighbourhood.\n\nResidents across Littleover have access to useful civic and community facilities, including Blagreaves Library and Bramblebrook Community Centre. Healthcare provision in the area is well established, with NHS general practice services provided from The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre. Furthermore, Royal Derby Hospital is a major hospital facility situated within the neighbourhood.\n\nWorking alongside these existing medical services, Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area. The Pharmacy First scheme covers certain common health conditions, allowing individuals to discuss their health needs with a trained pharmacist. During each consultation, the pharmacist carefully assesses symptoms, relevant medicines and medical history. Depending on the findings, the outcome may include tailored advice, suitable treatment or a referral to another healthcare professional. Eligibility for the service and any recommended treatment depend entirely on the individual clinical assessment. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Littleover",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "The area features a mix of residential areas and open spaces, with Clemson’s Park providing a notable landmark that contributes to the local history and character of the neighbourhood.",
+        "editorialFactId": "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Residents across Littleover have access to useful civic and community facilities, including Blagreaves Library and Bramblebrook Community Centre.",
+        "editorialFactId": "littleover:community:blagreaves-library-is-listed-as-a-community-faci"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Healthcare provision in the area is well established, with NHS general practice services provided from The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre.",
+        "editorialFactId": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Furthermore, Royal Derby Hospital is a major hospital facility situated within the neighbourhood.",
+        "editorialFactId": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+        "editorialFactId": "littleover:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+      "littleover:community:blagreaves-library-is-listed-as-a-community-faci",
+      "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "littleover:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

@@ -148,7 +148,8 @@ async function main() {
 
   // ── Generate AI content ───────────────────────────────────────────────────
   const rawAi = await generatePageContent(pageInputs);
-  const ai    = await refineHubContent(rawAi);
+  // TEMP TEST: refinement disabled
+  const ai = rawAi;
 
   // ── Read master template ──────────────────────────────────────────────────
   const templatePath = path.join(process.cwd(), "templates", "index.html");

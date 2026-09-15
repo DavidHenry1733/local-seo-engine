@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "image-prompt-dashboard-prompts-debug",
+  "generatedAt": "2026-06-11T08:34:28.145Z",
+  "verdict": "PASS: Image Prompt Dashboard Prompts Visible",
+  "pass": true,
+  "filesExist": {
+    "output/pharmacy-blueprint/pharmacy-ai-image-prompt-library.json": true,
+    "output/pharmacy-blueprint/pharmacy-production-image-library.json": true,
+    "output/universal-image-intelligence/image-intelligence.json": true
+  },
+  "promptCount": {
+    "expected": 38,
+    "actual": 38
+  },
+  "defaultSelection": {
+    "industry": "pharmacy",
+    "templateFamily": "clinical-nhs-services",
+    "serviceKey": "pharmacy-first",
+    "packKey": "clinical-nhs-services"
+  },
+  "serviceLayerPromptCount": 4,
+  "dashboardJs": {
+    "ipdLoadPrompts": true,
+    "ipdOnIndustryChange": true,
+    "ipdOnFamilyChange": true,
+    "ipdOnServiceChange": true,
+    "ipdApplyPromptDefaults": true,
+    "ipdPromptCards": true,
+    "ipdPromptsStatus": true,
+    "selectorIndustry": true,
+    "selectorFamily": true,
+    "selectorService": true,
+    "selectorPack": true,
+    "fetchJsonHeaders": true,
+    "noPromptsMessage": true,
+    "defaultPharmacyFirst": true
+  },
+  "apiProbe": {
+    "authenticatedNote": "Dashboard fetch uses session cookie when logged in; unauthenticated probe below",
+    "withJsonHeaders": {
+      "httpStatus": 401,
+      "returnsJsonError": true,
+      "bodyPreview": "{\"error\":\"Session expired. Please refresh the page and log in again.\"}"
+    },
+    "withoutJsonHeaders": {
+      "httpStatus": 302,
+      "redirectsToLogin": true
+    },
+    "packQueryAliasSupported": true
+  },
+  "rootCauseFixed": [
+    "ipdFetch now sends Accept: application/json to avoid login redirect HTML breaking JSON.parse",
+    "ipdApplyPromptDefaults selects pharmacy / clinical-nhs-services / pharmacy-first / clinical-nhs-services",
+    "API accepts pack= as alias for packKey=",
+    "Visible error states for empty results and API failures"
+  ],
+  "issues": [],
+  "recommendedUserCheck": "Open Campaign Content → Image Library → Prompt Generator while logged in; expect 4 prompts for Pharmacy First"
+}

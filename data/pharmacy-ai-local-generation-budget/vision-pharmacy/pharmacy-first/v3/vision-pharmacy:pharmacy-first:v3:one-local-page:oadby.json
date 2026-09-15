@@ -1,0 +1,28 @@
+{
+  "taskId": "vision-pharmacy:pharmacy-first:v3:one-local-page:oadby",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.0036580000000000002,
+  "events": [
+    {
+      "at": "2026-09-14T08:24:36.732Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-14T08:24:36.815Z",
+      "kind": "reserve",
+      "reservationId": "r-1789374276814-1"
+    },
+    {
+      "at": "2026-09-14T08:24:56.236Z",
+      "kind": "consumed",
+      "reservationId": "r-1789374276814-1",
+      "detail": "cost=0.0036580000000000002"
+    }
+  ]
+}

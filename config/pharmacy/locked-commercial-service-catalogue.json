@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "purpose": "CPR commercial release — explicitly locked supported services for Master Admin onboarding and service-page-only generation.",
+  "approvalDocumentation": "docs/pharmacy-master-library/MASTER-LIBRARY-PUBLISH-VALIDATION-V1.md",
+  "publishConfigSource": "src/pharmacy/pharmacyMasterPublishConfig.ts",
+  "lockedCommercialSupportedServiceCount": 7,
+  "services": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "locked": true,
+      "approvalStatus": "locked",
+      "knowledgePackSources": [
+        "config/pharmacy/service-expertise-library.json",
+        "data/pharmacy-service-expertise/pharmacy-first.json"
+      ],
+      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/pharmacy-first/service-catalog.json",
+      "masterFile": "pharmacy-first-master-v2.md"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "locked": true,
+      "approvalStatus": "locked",
+      "knowledgePackSources": [
+        "config/pharmacy/service-expertise-library.json",
+        "data/pharmacy-service-expertise/blood-pressure-checks.json"
+      ],
+      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/blood-pressure-checks/service-catalog.json",
+      "masterFile": "blood-pressure-checks-master-v1.md"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "locked": true,
+      "approvalStatus": "locked",
+      "knowledgePackSources": [
+        "config/pharmacy/service-expertise-library.json",
+        "data/pharmacy-service-expertise/travel-vaccinations.json"
+      ],
+      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/travel-vaccinations/service-catalog.json",
+      "masterFile": "travel-vaccinations-master-v1.md"
+    },
+    {
+      "serviceId": "flu-vaccinations",
+      "serviceName": "Flu Vaccinations",
+      "locked": true,
+      "approvalStatus": "locked",
+      "knowledgePackSources": [
+        "config/pharmacy/service-expertise-library.json",
+        "data/pharmacy-service-expertise/flu-vaccinations.json"
+      ],
+      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/flu-vaccinations/service-catalog.json",
+      "masterFile": "flu-vaccinations-master-v1.md"
+    },
+    {
+      "serviceId": "prescription-dispensing",
+      "serviceName": "Prescription Dispensing",
+      "locked": true,
+      "approvalStatus": "locked",
+      "knowledgePackSources": [
+        "config/pharmacy/service-expertise-library.json",
+        "data/pharmacy-service-expertise/prescription-dispensing.json"
+      ],
+      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/prescription-dispensing/service-catalog.json",
+      "masterFile": "prescription-dispensing-master-v1.md"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "locked": true,
+      "approvalStatus": "locked",
+      "knowledgePackSources": [
+        "docs/pharmacy-master-library/research/emergency-contraception-research-v1.md"
+      ],
+      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/emergency-contraception/service-catalog.json",
+      "masterFile": "emergency-contraception-master-v1.md"
+    },
+    {
+      "serviceId": "repeat-prescriptions",
+      "serviceName": "Repeat Prescriptions",
+      "locked": true,
+      "approvalStatus": "locked",
+      "knowledgePackSources": [
+        "config/pharmacy/service-expertise-library.json",
+        "data/pharmacy-service-expertise/repeat-prescriptions.json"
+      ],
+      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/repeat-prescriptions/service-catalog.json",
+      "masterFile": "repeat-prescriptions-master-v2.md"
+    }
+  ]
+}

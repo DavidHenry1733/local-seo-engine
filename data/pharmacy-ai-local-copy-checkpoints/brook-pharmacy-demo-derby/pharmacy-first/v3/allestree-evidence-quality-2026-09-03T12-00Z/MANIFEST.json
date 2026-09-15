@@ -1,0 +1,54 @@
+{
+  "kind": "brook-derby-allestree-evidence-quality-checkpoint",
+  "label": "ALLESTREE \u2014 fix the actual evidence blocker",
+  "continuesFrom": "user-authorised-evidence-collection-2026-09-03T10-57Z",
+  "status": "preview-only-not-published",
+  "approved": false,
+  "published": false,
+  "checkpointAt": "2026-09-03T12-00Z",
+  "checkpointId": "allestree-evidence-quality-2026-09-03T12-00Z",
+  "slug": "brook-pharmacy-demo-derby",
+  "firstAcceptanceArea": "Allestree",
+  "runId": "c7a7c587-22f0-474a-a59a-745a5bbe34a3",
+  "spentUsd": 0.068,
+  "paidCallsMade": 4,
+  "verifiedGpPracticeCount": 3,
+  "editorialSufficiency": "READY",
+  "generatePressed": false,
+  "freshPaidRetrieval": false,
+  "blanketExecutionFlag": false,
+  "copied": [
+    {
+      "path": "src/pharmacy/growthEngineLocalPageEvidenceCollectionService.ts",
+      "sha256": "619fd10dbe8073645877efc24cf08bcc011bdcb04ff276970896176b44b7a512"
+    },
+    {
+      "path": "src/pharmacy/growthEngineLocalPageEvidencePreparationService.ts",
+      "sha256": "ed632b9b25f9981dcf9fec671b892b7eafd9ac43d4e34793dbc08524d0aea34b"
+    },
+    {
+      "path": "src/pharmacy/growthEngineCampaignBuilderPage.ts",
+      "sha256": "8fd1761407366b19887b0f623cb86164f2b397e326fe891281a781fca339fb2e"
+    },
+    {
+      "path": "artifacts/api-server/src/routes/api/growthEngineCampaignBuilder.ts",
+      "sha256": "850814370246a542396e90ef4f9c52a2ecd0081017ea18c743a68057e9f9ba6c"
+    },
+    {
+      "path": "src/pharmacy/contentEngine/pharmacyLocalEditorialEvidenceContractV3.ts",
+      "sha256": "429379b3c1f062c47f291bf9480952a8210a6a3c0966e4300cdaa63628dd7e7a"
+    },
+    {
+      "path": "src/pharmacy/contentEngine/pharmacyLocalEvidenceGeographicAttributionV1.ts",
+      "sha256": "26b4c8f6f4ac11c3d1fcda5f2fc6b100b5e813edb7532963bcabaae22b21eb1e"
+    },
+    {
+      "path": "src/pharmacy/contentEngine/pharmacyLocalEvidencePackContractV1.ts",
+      "sha256": "c62810e54f7025b3bdafb05797b221fa9c366d8cb8d1005b5b85e05149610777"
+    },
+    {
+      "path": "scripts/validate-allestree-evidence-quality-from-saved-run-v1.ts",
+      "sha256": "0c4f3427a9bdb63a789f42091d821f0499b915e30655e593eb21c46cb46acfb9"
+    }
+  ]
+}

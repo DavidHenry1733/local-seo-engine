@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "slug": "cat-v1-bespoke-avicenna",
+  "updatedAt": "2026-08-01T08:05:28.922Z",
+  "currentStage": "generate_growth_intelligence",
+  "transitions": [
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-08-01T08:05:28.922Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-08-01T08:05:28.921Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-08-01T08:05:28.920Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-08-01T08:05:24.980Z",
+      "operator": "cpr-cat-v1",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:05:28.922Z",
+      "finishedAt": "2026-08-01T08:05:28.922Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:05:28.920Z",
+      "finishedAt": "2026-08-01T08:05:28.921Z",
+      "durationMs": 1,
+      "operator": "cpr-cat-v1",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-01T08:05:28.919Z",
+      "finishedAt": "2026-08-01T08:05:28.919Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-01T08:05:26.534Z",
+      "finishedAt": "2026-08-01T08:05:26.534Z",
+      "durationMs": 0,
+      "operator": "cpr-cat-v1",
+      "evidence": "Website import incomplete. Could not fetch https://www.avicennapharmacy.co.uk: write EPROTO 40B8807A6C7F0000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:ssl/record/rec_layer_s3.c:916:SSL alert number 80\n",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "f7dbe7c3-b594-4031-abb2-836b009a0756"
+    }
+  ]
+}

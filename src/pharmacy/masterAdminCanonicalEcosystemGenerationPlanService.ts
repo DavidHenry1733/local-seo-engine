@@ -12,7 +12,14 @@ import { loadMasterAdminCustomerContext } from "./masterAdminCustomerContextServ
 import { buildGenerationSetupState } from "./masterAdminGenerationSetupService.ts";
 import { loadCampaignBuilderSession } from "./growthEngineCampaignBuilderService.ts";
 import { PAGE_IMAGE_SLOTS, loadImageAssignments } from "./pharmacyImageOperatingSystem.ts";
+import { RC1_IMG1_PAGE_SLOT_PLANS } from "./pharmacyImageLibraryAssignmentService.ts";
+import { buildProductionPageSlotInventory } from "./imagePlatform/pharmacyProductionImageSlotInventoryService.ts";
 import { slugifyArea } from "./pharmacyAreaNarrativeProfiles.ts";
+import {
+  resolveClusterPageSlug,
+  resolveClusterPageUrlPath,
+  resolveClusterPageFilesystemRelativePath,
+} from "./pharmacyClusterPageUrlResolver.ts";
 import type { ProfileAreaEntry } from "./pharmacyProfileSchema.ts";
 import { readAuthorisedEcosystemGenerationRecord } from "./masterAdminAuthorisedEcosystemGenerationService.ts";
 import { buildCommercialIntelligenceDashboard } from "./masterAdminCommercialIntelligenceDashboardService.ts";
@@ -49,6 +56,7 @@ export interface CanonicalAreaPlanEntry {
 }
 
 export interface CanonicalPagePlanEntry {
+  inventoryId: string;
   pageType: string;
   slug: string;
   title: string;
@@ -56,6 +64,17 @@ export interface CanonicalPagePlanEntry {
   exclusionReason: string | null;
   expectedUrlPath: string;
   source: string;
+  countedInTotal: boolean;
+}
+
+export interface CanonicalInventoryReconciliation {
+  inventoryTotal: number;
+  categorySum: number;
+  schedulerTotal: number;
+  dashboardTotal: number;
+  reconciled: boolean;
+  totalCalculation: string;
+  uncategorizedPageTypes: string[];
 }
 
 export interface CanonicalImagePlanEntry {
@@ -98,6 +117,7 @@ export interface CanonicalEcosystemGenerationPlan {
   areaEntries: CanonicalAreaPlanEntry[];
   pageInventory: CanonicalPagePlanEntry[];
   imageInventory: CanonicalImagePlanEntry[];
+  inventoryReconciliation: CanonicalInventoryReconciliation;
   coreEcosystem: {
     homepage: number;
     serviceHubs: number;
@@ -109,6 +129,8 @@ export interface CanonicalEcosystemGenerationPlan {
     images: number;
     requiredImageRoles: number;
     totalPages: number;
+    inventoryTotal: number;
+    categorySum: number;
     approvedAreas: number;
   };
   recommendedFutureContent: CanonicalRecommendationEntry[];
@@ -121,6 +143,136 @@ export interface CanonicalEcosystemGenerationPlan {
 
 const PLAN_DIR = path.join(WORKSPACE_ROOT, "data/pharmacy-master-admin/canonical-ecosystem-plans");
 const ENGINE_REVISION = "rc1-cluster-page-architecture-v1";
+const COUNTED_PAGE_TYPES = new Set([
+  "homepage",
+  "service-hub",
+  "cluster-page",
+  "blog",
+  "guide",
+  "faq",
+  "supporting",
+]);
+
+function finalizePageInventory(pages: Omit<CanonicalPagePlanEntry, "inventoryId" | "countedInTotal">[]): CanonicalPagePlanEntry[] {
+  return pages.map((page, index) => ({
+    ...page,
+    inventoryId: `page-${String(index + 1).padStart(3, "0")}:${page.pageType}:${page.slug}`,
+    countedInTotal: page.inclusionStatus === "included" && COUNTED_PAGE_TYPES.has(page.pageType),
+  }));
+}
+
+export function reconcileCoreEcosystemFromInventory(
+  pageInventory: CanonicalPagePlanEntry[],
+): {
+  coreEcosystem: CanonicalEcosystemGenerationPlan["coreEcosystem"];
+  inventoryReconciliation: CanonicalInventoryReconciliation;
+} {
+  const counted = pageInventory.filter((p) => p.countedInTotal);
+  const byType = (type: string) => counted.filter((p) => p.pageType === type).length;
+  const homepage = byType("homepage");
+  const serviceHubs = byType("service-hub");
+  const clusterPages = byType("cluster-page");
+  const blogs = byType("blog");
+  const guides = byType("guide");
+  const faqs = byType("faq");
+  const supportingPages = byType("supporting");
+  const categorySum = homepage + serviceHubs + clusterPages + blogs + guides + faqs + supportingPages;
+  const inventoryTotal = counted.length;
+  const uncategorizedPageTypes = [
+    ...new Set(
+      counted.filter((p) => !COUNTED_PAGE_TYPES.has(p.pageType)).map((p) => p.pageType),
+    ),
+  ];
+  const totalCalculation = [
+    `homepage(${homepage})`,
+    `serviceHubs(${serviceHubs})`,
+    `clusterPages(${clusterPages})`,
+    `blogs(${blogs})`,
+    `guides(${guides})`,
+    `faqs(${faqs})`,
+    `supportingPages(${supportingPages})`,
+  ].join(" + ");
+  const inventoryReconciliation: CanonicalInventoryReconciliation = {
+    inventoryTotal,
+    categorySum,
+    schedulerTotal: inventoryTotal,
+    dashboardTotal: inventoryTotal,
+    reconciled: categorySum === inventoryTotal && uncategorizedPageTypes.length === 0,
+    totalCalculation: `${totalCalculation} = ${categorySum}`,
+    uncategorizedPageTypes,
+  };
+  const coreEcosystem = {
+    homepage,
+    serviceHubs,
+    clusterPages,
+    blogs,
+    guides,
+    faqs,
+    supportingPages,
+    images: 0,
+    requiredImageRoles: PAGE_IMAGE_SLOTS.length,
+    totalPages: inventoryTotal,
+    inventoryTotal,
+    categorySum,
+    approvedAreas: clusterPages,
+  };
+  return { coreEcosystem, inventoryReconciliation };
+}
+
+function hydratePageInventory(pages: CanonicalPagePlanEntry[]): CanonicalPagePlanEntry[] {
+  if (pages.length > 0 && pages.every((p) => p.inventoryId && typeof p.countedInTotal === "boolean")) {
+    return pages;
+  }
+  return finalizePageInventory(
+    pages.map(({ inventoryId: _id, countedInTotal: _counted, ...page }) => page),
+  );
+}
+
+export function normalizeCanonicalPlanInventory(
+  plan: CanonicalEcosystemGenerationPlan,
+): CanonicalEcosystemGenerationPlan {
+  const pageInventory = hydratePageInventory(plan.pageInventory);
+  const { coreEcosystem: coreFromInventory, inventoryReconciliation } =
+    reconcileCoreEcosystemFromInventory(pageInventory);
+  const coreEcosystem = {
+    ...coreFromInventory,
+    images: plan.coreEcosystem?.images ?? 0,
+    requiredImageRoles: plan.coreEcosystem?.requiredImageRoles ?? PAGE_IMAGE_SLOTS.length,
+    approvedAreas: plan.coreEcosystem?.approvedAreas ?? coreFromInventory.approvedAreas,
+  };
+  inventoryReconciliation.dashboardTotal = coreEcosystem.totalPages;
+  inventoryReconciliation.schedulerTotal = coreEcosystem.totalPages;
+  inventoryReconciliation.reconciled =
+    inventoryReconciliation.reconciled &&
+    coreEcosystem.categorySum === coreEcosystem.inventoryTotal &&
+    coreEcosystem.inventoryTotal === coreEcosystem.totalPages;
+  return {
+    ...plan,
+    pageInventory,
+    coreEcosystem,
+    inventoryReconciliation,
+  };
+}
+
+export function deriveCanonicalPlanReadinessCounts(plan: CanonicalEcosystemGenerationPlan) {
+  const normalized = normalizeCanonicalPlanInventory(plan);
+  const { coreEcosystem, inventoryReconciliation } = normalized;
+  const total = coreEcosystem.inventoryTotal;
+  return {
+    expectedHomepageCount: coreEcosystem.homepage,
+    expectedServiceHubCount: coreEcosystem.serviceHubs,
+    approvedAreaCount: coreEcosystem.approvedAreas,
+    clusterPagesToGenerate: coreEcosystem.clusterPages,
+    expectedGuideCount: coreEcosystem.guides,
+    expectedBlogCount: coreEcosystem.blogs,
+    expectedFaqCount: coreEcosystem.faqs,
+    expectedSupportingPageCount: coreEcosystem.supportingPages,
+    expectedTotalPageCount: total,
+    schedulerPageCount: total,
+    inventoryReconciliation,
+    coreEcosystemInventory: coreEcosystem,
+  };
+}
 
 function planPath(slug: string, revision?: string): string {
   if (revision) return path.join(PLAN_DIR, slug, `${revision}.json`);
@@ -178,10 +330,10 @@ function buildAreaEntries(
   const confirmed = resolveConfirmedProfileAreas(profile);
 
   for (const entry of confirmed) {
-    const areaSlug = slugifyArea(entry.areaName);
+    const pageSlug = resolveClusterPageSlug(entry.areaName);
     entries.push({
       areaName: entry.areaName,
-      areaSlug: `cluster-${areaSlug}`,
+      areaSlug: pageSlug,
       areaType: entry.areaType || "cluster",
       classification: "cluster-page",
       parentServiceHub: serviceId,
@@ -190,7 +342,7 @@ function buildAreaEntries(
       exclusionReason: null,
       generationEligible: true,
       serviceRelevance: [serviceId],
-      expectedUrlPath: `/local/cluster-${areaSlug}/`,
+      expectedUrlPath: resolveClusterPageUrlPath(entry.areaName),
       source: "operator-confirmed:profile.selectedAreas",
     });
   }
@@ -205,7 +357,7 @@ function buildPageInventory(
   services: string[],
   areaEntries: CanonicalAreaPlanEntry[],
 ): CanonicalPagePlanEntry[] {
-  const pages: CanonicalPagePlanEntry[] = [
+  const pages: Omit<CanonicalPagePlanEntry, "inventoryId" | "countedInTotal">[] = [
     {
       pageType: "homepage",
       slug: "index",
@@ -294,24 +446,30 @@ function buildPageInventory(
     source: "v1-engine-contract:1-supporting",
   });
 
-  return pages;
+  return finalizePageInventory(pages);
 }
 
-function buildImageInventory(slug: string, serviceId: string): CanonicalImagePlanEntry[] {
+function buildImageInventory(slug: string, serviceId: string, plan?: CanonicalEcosystemGenerationPlan): CanonicalImagePlanEntry[] {
   const assignments = loadImageAssignments(slug);
   const inventory: CanonicalImagePlanEntry[] = [];
-  for (const slot of PAGE_IMAGE_SLOTS) {
-    const key = `${serviceId}:${serviceId}:${slot}`;
+  const slotPlans = plan
+    ? buildProductionPageSlotInventory(slug, serviceId, plan)
+    : RC1_IMG1_PAGE_SLOT_PLANS.filter((p) => p.serviceId === serviceId);
+  for (const slotPlan of slotPlans) {
+    const key = `${slotPlan.pageSlug}:${slotPlan.serviceId}:${slotPlan.slot}`;
     const assigned = assignments.assignments?.[key];
     inventory.push({
-      pageType: "service",
-      slot,
-      role: slot,
+      pageType: slotPlan.pageType === "homepage" && slotPlan.pageSlug.startsWith("local-cluster-")
+        ? "cluster-page"
+        : slotPlan.pageType,
+      slot: slotPlan.slot,
+      role: slotPlan.role,
       serviceId,
-      orientation: slot === "hero" ? "landscape" : "landscape",
-      minimumDimensions: slot === "hero" ? "1200x675" : "800x600",
-      selectedAsset: assigned?.assetId || assigned?.libraryRef || null,
-      assignmentStatus: assigned ? "assigned" : "missing",
+      orientation: slotPlan.slot === "hero" ? "landscape" : "landscape",
+      minimumDimensions: slotPlan.slot === "hero" ? "1200x675" : "800x600",
+      selectedAsset: (assigned as { assetId?: string })?.assetId || assigned?.libraryRef || null,
+      assignmentStatus:
+        assigned?.sourceType === "image-platform" || assigned?.sourceType === "upload" ? "assigned" : "missing",
       source: "image-platform:v1-four-role-contract",
     });
   }
@@ -354,22 +512,20 @@ export function buildCanonicalEcosystemGenerationPlan(slug: string): CanonicalEc
   const areaEntries = buildAreaEntries(serviceId, profile);
   const serviceName = ctx?.displayName || profile.pharmacyName || serviceId;
   const pageInventory = buildPageInventory(slug, serviceId, serviceName, services, areaEntries);
-  const imageInventory = buildImageInventory(slug, serviceId);
-  const includedPages = pageInventory.filter((p) => p.inclusionStatus === "included");
-
+  const imageInventory = buildImageInventory(slug, serviceId, plan);
+  const { coreEcosystem: coreFromInventory, inventoryReconciliation } = reconcileCoreEcosystemFromInventory(pageInventory);
   const coreEcosystem = {
-    homepage: includedPages.filter((p) => p.pageType === "homepage").length,
-    serviceHubs: includedPages.filter((p) => p.pageType === "service-hub").length,
-    clusterPages: includedPages.filter((p) => p.pageType === "cluster-page").length,
-    blogs: includedPages.filter((p) => p.pageType === "blog").length,
-    guides: includedPages.filter((p) => p.pageType === "guide").length,
-    faqs: includedPages.filter((p) => p.pageType === "faq").length,
-    supportingPages: includedPages.filter((p) => p.pageType === "supporting").length,
+    ...coreFromInventory,
     images: imageInventory.filter((i) => i.assignmentStatus === "assigned").length,
     requiredImageRoles: PAGE_IMAGE_SLOTS.length,
-    totalPages: includedPages.length,
     approvedAreas: areaEntries.filter((a) => a.inclusionStatus === "included").length,
   };
+  inventoryReconciliation.dashboardTotal = coreEcosystem.totalPages;
+  inventoryReconciliation.schedulerTotal = coreEcosystem.totalPages;
+  inventoryReconciliation.reconciled =
+    inventoryReconciliation.reconciled &&
+    coreEcosystem.categorySum === coreEcosystem.inventoryTotal &&
+    coreEcosystem.inventoryTotal === coreEcosystem.totalPages;
 
   const planRevision = new Date().toISOString();
   const planId = createHash("sha256")
@@ -398,6 +554,7 @@ export function buildCanonicalEcosystemGenerationPlan(slug: string): CanonicalEc
     areaEntries,
     pageInventory,
     imageInventory,
+    inventoryReconciliation,
     coreEcosystem,
     recommendedFutureContent: classifyCiRecommendations(slug),
     exclusions: [],
@@ -409,7 +566,7 @@ export function buildCanonicalEcosystemGenerationPlan(slug: string): CanonicalEc
         ? ["Some V1 image roles are not yet assigned"]
         : []),
     ],
-    blockers: [],
+    blockers: inventoryReconciliation.reconciled ? [] : ["Canonical page inventory reconciliation failed"],
     expectedDurationMinutes: 30,
   };
 
@@ -423,7 +580,8 @@ export function readCanonicalEcosystemGenerationPlan(slug: string): CanonicalEco
   const file = planPath(slug);
   if (!fs.existsSync(file)) return null;
   try {
-    return JSON.parse(fs.readFileSync(file, "utf8")) as CanonicalEcosystemGenerationPlan;
+    const raw = JSON.parse(fs.readFileSync(file, "utf8")) as CanonicalEcosystemGenerationPlan;
+    return normalizeCanonicalPlanInventory(raw);
   } catch {
     return null;
   }
@@ -444,7 +602,7 @@ export function freezeCanonicalEcosystemGenerationPlan(slug: string, planId: str
 }
 
 export function getCanonicalPlanSchedulerPageCount(plan: CanonicalEcosystemGenerationPlan): number {
-  return plan.coreEcosystem.totalPages;
+  return normalizeCanonicalPlanInventory(plan).inventoryReconciliation.schedulerTotal;
 }
 
 export interface PlanOutputParityResult {
@@ -481,7 +639,9 @@ export function compareCanonicalPlanOutputParity(
       exists = fs.existsSync(path.join(WORKSPACE_ROOT, "output/pharmacy-visual-experience", slug, page.slug, "index.html"))
         || fs.existsSync(path.join(ecoRoot, "pages", page.slug, "index.html"));
     } else if (page.pageType === "cluster-page" || page.pageType.startsWith("location-")) {
-      exists = fs.existsSync(path.join(ecoRoot, "local", page.slug, "index.html"));
+      exists = fs.existsSync(
+        path.join(ecoRoot, resolveClusterPageFilesystemRelativePath(page.slug)),
+      );
     } else {
       exists = fs.existsSync(path.join(ecoRoot, "pages", page.slug, "index.html"));
     }
@@ -492,7 +652,7 @@ export function compareCanonicalPlanOutputParity(
   const ok = missingPages.length === 0 && failures.length === 0;
   return {
     ok,
-    plannedCount: plan.coreEcosystem.totalPages,
+    plannedCount: plan.inventoryReconciliation?.inventoryTotal ?? plan.coreEcosystem.inventoryTotal,
     generatedCount,
     missingPages,
     unexpectedPages,
@@ -512,12 +672,12 @@ export function markAuthorisedGenerationIncompleteAgainstPlan(
     const raw = JSON.parse(fs.readFileSync(authPath, "utf8")) as Record<string, unknown>;
     if (raw.jobId !== jobId) return;
     raw.status = "completed";
-    raw.completenessStatus = "INCOMPLETE_AGAINST_CANONICAL_PLAN";
-    raw.completenessLabel = "Authorised Generation — Incomplete Against Canonical Plan";
+    raw.completenessStatus = "SUPERSEDED_INCOMPLETE_RC1";
+    raw.completenessLabel = "Superseded — Incomplete Against RC1 Content Architecture V1";
     raw.canonicalPlanId = plan.planId;
     raw.canonicalPlanRevision = plan.planRevision;
     raw.canonicalPlanChecksum = plan.checksum;
-    raw.expectedPageCount = plan.coreEcosystem.totalPages;
+    raw.expectedPageCount = plan.inventoryReconciliation?.inventoryTotal ?? plan.coreEcosystem.inventoryTotal;
     raw.qualityReviewReady = false;
     writeJsonAtomic(authPath, raw);
   } catch {

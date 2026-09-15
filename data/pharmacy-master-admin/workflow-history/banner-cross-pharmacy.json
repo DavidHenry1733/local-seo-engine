@@ -1,0 +1,306 @@
+{
+  "version": 2,
+  "slug": "banner-cross-pharmacy",
+  "updatedAt": "2026-08-01T15:28:34.060Z",
+  "currentStage": "quality_review",
+  "transitions": [
+    {
+      "fromStage": "request_indexing",
+      "toStage": "quality_review",
+      "timestamp": "2026-08-01T15:28:34.060Z",
+      "operator": "rc1-c05-canonical-release-deploy",
+      "durationMs": 1025774434,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Copied 23 file(s) to /var/www/pharmaconnect-sites/banner-cross-pharmacy/current; release v1 updated in place"
+    },
+    {
+      "fromStage": "publish",
+      "toStage": "request_indexing",
+      "timestamp": "2026-07-20T18:32:19.603Z",
+      "operator": "sprint-8d-verify",
+      "durationMs": null,
+      "reason": "Background job completed: publish",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "publish",
+      "timestamp": "2026-07-20T13:36:34.456Z",
+      "operator": "system",
+      "durationMs": null,
+      "reason": "Commercial Quality Review approved",
+      "evidence": "QA snapshot 2026-07-20T13:36:34.372Z"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-20T13:16:04.055Z",
+      "operator": "system",
+      "durationMs": null,
+      "reason": "Completed job finalisation recovery (job 442312c0-744c-4bd5-99e7-e178b5871ada)",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-20T10:14:57.062Z",
+      "operator": "admin",
+      "durationMs": 2249633,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Generate Growth Intelligence: Growth intelligence acknowledged at 2026-07-20T10:14:56.946Z"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-07-20T09:37:27.424Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-07-20T09:37:27.399Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-07-20T09:37:27.370Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "google_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-19T11:54:20.643Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_google",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "google_import",
+      "timestamp": "2026-07-19T10:19:59.144Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-19T10:04:13.802Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "publish",
+      "actionId": "publish",
+      "startedAt": "2026-07-20T18:32:19.581Z",
+      "finishedAt": "2026-07-20T18:32:19.581Z",
+      "durationMs": 0,
+      "operator": "sprint-8d-verify",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "a1f66100-42aa-4f79-b818-bc61a8acf2eb"
+    },
+    {
+      "stageId": "publish",
+      "actionId": "publish",
+      "startedAt": "2026-07-20T18:30:18.302Z",
+      "finishedAt": "2026-07-20T18:30:18.302Z",
+      "durationMs": 0,
+      "operator": "sprint-8d-verify",
+      "evidence": "getConnection: Connection lost before handshake",
+      "warnings": [],
+      "errors": [
+        "getConnection: Connection lost before handshake"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "1b384881-d8b0-4633-9e98-05cbfafb007c"
+    },
+    {
+      "stageId": "publish",
+      "actionId": "publish",
+      "startedAt": "2026-07-20T18:26:41.411Z",
+      "finishedAt": "2026-07-20T18:26:41.411Z",
+      "durationMs": 0,
+      "operator": "sprint-8d-verify",
+      "evidence": "Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass",
+      "warnings": [],
+      "errors": [
+        "Managed URL verification failed — homepage, HTTPS, or sitemap check did not pass"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "1b5bb6f2-c752-46d5-8309-9a3a4d0bb546"
+    },
+    {
+      "stageId": "quality_review",
+      "actionId": "approve_commercial_quality_review",
+      "startedAt": "2026-07-20T13:36:34.437Z",
+      "finishedAt": "2026-07-20T13:36:34.450Z",
+      "durationMs": 13,
+      "operator": "system",
+      "evidence": "Commercial Quality Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_ecosystem",
+      "startedAt": "2026-07-20T12:07:47.800Z",
+      "finishedAt": "2026-07-20T13:16:04.035Z",
+      "durationMs": 4096235,
+      "operator": "system",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "442312c0-744c-4bd5-99e7-e178b5871ada"
+    },
+    {
+      "stageId": "generate_growth_intelligence",
+      "actionId": "orchestrate_growth_intelligence",
+      "startedAt": "2026-07-20T10:14:56.977Z",
+      "finishedAt": "2026-07-20T10:14:56.978Z",
+      "durationMs": 1,
+      "operator": "admin",
+      "evidence": "Growth intelligence acknowledged at 2026-07-20T10:14:56.946Z",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-20T09:37:27.411Z",
+      "finishedAt": "2026-07-20T09:37:27.419Z",
+      "durationMs": 8,
+      "operator": "admin",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-20T09:37:27.378Z",
+      "finishedAt": "2026-07-20T09:37:27.391Z",
+      "durationMs": 13,
+      "operator": "admin",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-20T09:37:27.315Z",
+      "finishedAt": "2026-07-20T09:37:27.369Z",
+      "durationMs": 54,
+      "operator": "admin",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "google_import",
+      "actionId": "import_google",
+      "startedAt": "2026-07-19T11:54:17.716Z",
+      "finishedAt": "2026-07-19T11:54:20.639Z",
+      "durationMs": 2923,
+      "operator": "admin",
+      "evidence": "Google Profile imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 1,
+      "status": "completed",
+      "jobId": "1be2c4b6-aa2a-4b0c-b338-b8e3f74bac87"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-19T11:38:27.782Z",
+      "finishedAt": "2026-07-19T11:38:27.782Z",
+      "durationMs": 0,
+      "operator": "defect-039-validation",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "281c42ff-1e3f-4462-8cc4-b3db8836c27e"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-19T11:36:45.554Z",
+      "finishedAt": "2026-07-19T11:36:45.554Z",
+      "durationMs": 0,
+      "operator": "defect-039-validation",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "235a8e05-e6f1-4724-a61c-761efa3901b6"
+    },
+    {
+      "stageId": "google_import",
+      "actionId": "import_google",
+      "startedAt": "2026-07-19T11:08:49.568Z",
+      "finishedAt": "2026-07-19T11:08:51.122Z",
+      "durationMs": 1554,
+      "operator": "admin",
+      "evidence": "Add a Google Maps link, or enter pharmacy name, town and postcode.",
+      "warnings": [],
+      "errors": [
+        "Add a Google Maps link, or enter pharmacy name, town and postcode."
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "ab406a54-e5cb-473b-be4c-4bdc8b89db2d"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-19T10:19:32.361Z",
+      "finishedAt": "2026-07-19T10:19:59.117Z",
+      "durationMs": 26756,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "9a8e1730-44c0-4ca8-9fa0-b3d403582bb9"
+    }
+  ]
+}

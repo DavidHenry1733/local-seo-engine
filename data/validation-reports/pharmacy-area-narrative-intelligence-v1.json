@@ -1,0 +1,663 @@
+{
+  "slug": "pharmaconnect",
+  "generatedAt": "2026-06-19T09:51:08.807Z",
+  "narrativeProfiles": [
+    {
+      "areaSlug": "bradgate",
+      "areaName": "Bradgate",
+      "narrativeType": "wellbeing_focus"
+    },
+    {
+      "areaSlug": "brightside",
+      "areaName": "Brightside",
+      "narrativeType": "community_health"
+    },
+    {
+      "areaSlug": "brinsworth",
+      "areaName": "Brinsworth",
+      "narrativeType": "working_professionals"
+    },
+    {
+      "areaSlug": "clifton",
+      "areaName": "Clifton",
+      "narrativeType": "preventative_health"
+    },
+    {
+      "areaSlug": "dalton",
+      "areaName": "Dalton",
+      "narrativeType": "medication_support"
+    },
+    {
+      "areaSlug": "eastwood",
+      "areaName": "Eastwood",
+      "narrativeType": "community_health"
+    },
+    {
+      "areaSlug": "kimberworth",
+      "areaName": "Kimberworth",
+      "narrativeType": "young_families"
+    },
+    {
+      "areaSlug": "parkgate",
+      "areaName": "Parkgate",
+      "narrativeType": "convenience_access"
+    },
+    {
+      "areaSlug": "rawmarsh",
+      "areaName": "Rawmarsh",
+      "narrativeType": "retirement_health"
+    },
+    {
+      "areaSlug": "rotherham",
+      "areaName": "Rotherham",
+      "narrativeType": "health_management"
+    }
+  ],
+  "pageCounts": {
+    "area": 200,
+    "service": 20,
+    "hubs": 20,
+    "totalPublished": 240
+  },
+  "narrativeCoverage": {
+    "profilesBuilt": 10,
+    "pagesWithNarrativeIntelligence": 200,
+    "pagesWithNarrativeSection": 200
+  },
+  "diversity": {
+    "introDiversity": 100,
+    "journeyDiversity": 100,
+    "ctaDiversity": 100,
+    "narrativeDiversity": 90
+  },
+  "similarity": {
+    "before": {
+      "avg": 51.6,
+      "maxClusterMax": 64.8,
+      "highRisk": 0
+    },
+    "after": {
+      "avg": 51.6,
+      "maxClusterMax": 64.8,
+      "highRisk": 0
+    },
+    "clustersBefore": [
+      {
+        "serviceId": "blood-pressure-checks",
+        "serviceName": "Blood Pressure Checks",
+        "avgTextSimilarityPct": 53.1,
+        "maxTextSimilarityPct": 64.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "covid-vaccinations",
+        "serviceName": "COVID Vaccinations",
+        "avgTextSimilarityPct": 52.4,
+        "maxTextSimilarityPct": 64.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "ear-wax-removal",
+        "serviceName": "Ear Wax Removal",
+        "avgTextSimilarityPct": 53.7,
+        "maxTextSimilarityPct": 64.7,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "emergency-contraception",
+        "serviceName": "Emergency Contraception",
+        "avgTextSimilarityPct": 53,
+        "maxTextSimilarityPct": 64.8,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "flu-vaccinations",
+        "serviceName": "Flu Vaccinations",
+        "avgTextSimilarityPct": 51,
+        "maxTextSimilarityPct": 64,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "health-checks",
+        "serviceName": "Health Checks",
+        "avgTextSimilarityPct": 50.9,
+        "maxTextSimilarityPct": 63.1,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "malaria-prevention",
+        "serviceName": "Malaria Prevention",
+        "avgTextSimilarityPct": 50.4,
+        "maxTextSimilarityPct": 63.3,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "medication-reviews",
+        "serviceName": "Medication Reviews",
+        "avgTextSimilarityPct": 53.6,
+        "maxTextSimilarityPct": 62.8,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "minor-ailments",
+        "serviceName": "Minor Ailments",
+        "avgTextSimilarityPct": 51.6,
+        "maxTextSimilarityPct": 64.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "new-medicine-service",
+        "serviceName": "New Medicine Service",
+        "avgTextSimilarityPct": 53.6,
+        "maxTextSimilarityPct": 64.3,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "nhs-services",
+        "serviceName": "NHS Services",
+        "avgTextSimilarityPct": 52.7,
+        "maxTextSimilarityPct": 61.4,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "pharmacy-contraception-service",
+        "serviceName": "Pharmacy Contraception Service",
+        "avgTextSimilarityPct": 51.2,
+        "maxTextSimilarityPct": 63.9,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "pharmacy-first",
+        "serviceName": "Pharmacy First",
+        "avgTextSimilarityPct": 48.7,
+        "maxTextSimilarityPct": 63.3,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "prescription-dispensing",
+        "serviceName": "Prescription Dispensing",
+        "avgTextSimilarityPct": 51.3,
+        "maxTextSimilarityPct": 61.8,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "repeat-prescriptions",
+        "serviceName": "Repeat Prescriptions",
+        "avgTextSimilarityPct": 49.8,
+        "maxTextSimilarityPct": 63.4,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "smoking-cessation",
+        "serviceName": "Smoking Cessation",
+        "avgTextSimilarityPct": 51.4,
+        "maxTextSimilarityPct": 64,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "travel-health-consultations",
+        "serviceName": "Travel Health Consultations",
+        "avgTextSimilarityPct": 50.8,
+        "maxTextSimilarityPct": 62.9,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "travel-vaccinations",
+        "serviceName": "Travel Vaccinations",
+        "avgTextSimilarityPct": 48.2,
+        "maxTextSimilarityPct": 61.4,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "vitamin-b12-injections",
+        "serviceName": "Vitamin B12 Injections",
+        "avgTextSimilarityPct": 52.3,
+        "maxTextSimilarityPct": 63.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "weight-management",
+        "serviceName": "Weight Management",
+        "avgTextSimilarityPct": 52.5,
+        "maxTextSimilarityPct": 64.3,
+        "riskLevel": "REVIEW"
+      }
+    ],
+    "clustersAfter": [
+      {
+        "serviceId": "blood-pressure-checks",
+        "serviceName": "Blood Pressure Checks",
+        "avgTextSimilarityPct": 53.1,
+        "maxTextSimilarityPct": 64.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "covid-vaccinations",
+        "serviceName": "COVID Vaccinations",
+        "avgTextSimilarityPct": 52.4,
+        "maxTextSimilarityPct": 64.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "ear-wax-removal",
+        "serviceName": "Ear Wax Removal",
+        "avgTextSimilarityPct": 53.7,
+        "maxTextSimilarityPct": 64.7,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "emergency-contraception",
+        "serviceName": "Emergency Contraception",
+        "avgTextSimilarityPct": 53,
+        "maxTextSimilarityPct": 64.8,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "flu-vaccinations",
+        "serviceName": "Flu Vaccinations",
+        "avgTextSimilarityPct": 51,
+        "maxTextSimilarityPct": 64,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "health-checks",
+        "serviceName": "Health Checks",
+        "avgTextSimilarityPct": 50.9,
+        "maxTextSimilarityPct": 63.1,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "malaria-prevention",
+        "serviceName": "Malaria Prevention",
+        "avgTextSimilarityPct": 50.4,
+        "maxTextSimilarityPct": 63.3,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "medication-reviews",
+        "serviceName": "Medication Reviews",
+        "avgTextSimilarityPct": 53.6,
+        "maxTextSimilarityPct": 62.8,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "minor-ailments",
+        "serviceName": "Minor Ailments",
+        "avgTextSimilarityPct": 51.6,
+        "maxTextSimilarityPct": 64.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "new-medicine-service",
+        "serviceName": "New Medicine Service",
+        "avgTextSimilarityPct": 53.6,
+        "maxTextSimilarityPct": 64.3,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "nhs-services",
+        "serviceName": "NHS Services",
+        "avgTextSimilarityPct": 52.7,
+        "maxTextSimilarityPct": 61.4,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "pharmacy-contraception-service",
+        "serviceName": "Pharmacy Contraception Service",
+        "avgTextSimilarityPct": 51.2,
+        "maxTextSimilarityPct": 63.9,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "pharmacy-first",
+        "serviceName": "Pharmacy First",
+        "avgTextSimilarityPct": 48.7,
+        "maxTextSimilarityPct": 63.3,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "prescription-dispensing",
+        "serviceName": "Prescription Dispensing",
+        "avgTextSimilarityPct": 51.3,
+        "maxTextSimilarityPct": 61.8,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "repeat-prescriptions",
+        "serviceName": "Repeat Prescriptions",
+        "avgTextSimilarityPct": 49.8,
+        "maxTextSimilarityPct": 63.4,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "smoking-cessation",
+        "serviceName": "Smoking Cessation",
+        "avgTextSimilarityPct": 51.4,
+        "maxTextSimilarityPct": 64,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "travel-health-consultations",
+        "serviceName": "Travel Health Consultations",
+        "avgTextSimilarityPct": 50.8,
+        "maxTextSimilarityPct": 62.9,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "travel-vaccinations",
+        "serviceName": "Travel Vaccinations",
+        "avgTextSimilarityPct": 48.2,
+        "maxTextSimilarityPct": 61.4,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "vitamin-b12-injections",
+        "serviceName": "Vitamin B12 Injections",
+        "avgTextSimilarityPct": 52.3,
+        "maxTextSimilarityPct": 63.5,
+        "riskLevel": "REVIEW"
+      },
+      {
+        "serviceId": "weight-management",
+        "serviceName": "Weight Management",
+        "avgTextSimilarityPct": 52.5,
+        "maxTextSimilarityPct": 64.3,
+        "riskLevel": "REVIEW"
+      }
+    ]
+  },
+  "quality": {
+    "before": 48.6,
+    "after": 48.6,
+    "uniquenessBefore": 10,
+    "uniquenessAfter": 10,
+    "trust": 9.8,
+    "conversion": 9.1,
+    "localRelevance": 9.7,
+    "lowWordCount": 0
+  },
+  "entityCoverageMin": 10,
+  "publish": {
+    "pageCount": 240,
+    "failedCount": 0
+  },
+  "differentiationV2": {
+    "modifiedPageCount": 200,
+    "pairFixCount": 44,
+    "highRiskPairsFixed": [
+      {
+        "serviceId": "new-medicine-service",
+        "pageA": "new-medicine-service-bradgate",
+        "pageB": "new-medicine-service-clifton",
+        "beforePct": 70.9,
+        "afterPct": 66.4,
+        "pageModified": "new-medicine-service-bradgate",
+        "attempt": 1
+      },
+      {
+        "serviceId": "medication-reviews",
+        "pageA": "medication-reviews-eastwood",
+        "pageB": "medication-reviews-rotherham",
+        "beforePct": 70.5,
+        "afterPct": 61.9,
+        "pageModified": "medication-reviews-eastwood",
+        "attempt": 1
+      },
+      {
+        "serviceId": "travel-vaccinations",
+        "pageA": "travel-vaccinations-eastwood",
+        "pageB": "travel-vaccinations-rotherham",
+        "beforePct": 70.5,
+        "afterPct": 54.1,
+        "pageModified": "travel-vaccinations-eastwood",
+        "attempt": 1
+      },
+      {
+        "serviceId": "covid-vaccinations",
+        "pageA": "covid-vaccinations-dalton",
+        "pageB": "covid-vaccinations-parkgate",
+        "beforePct": 70,
+        "afterPct": 57.9,
+        "pageModified": "covid-vaccinations-dalton",
+        "attempt": 1
+      },
+      {
+        "serviceId": "new-medicine-service",
+        "pageA": "new-medicine-service-eastwood",
+        "pageB": "new-medicine-service-rotherham",
+        "beforePct": 69.4,
+        "afterPct": 64.2,
+        "pageModified": "new-medicine-service-rotherham",
+        "attempt": 1
+      },
+      {
+        "serviceId": "health-checks",
+        "pageA": "health-checks-bradgate",
+        "pageB": "health-checks-clifton",
+        "beforePct": 69.4,
+        "afterPct": 50.6,
+        "pageModified": "health-checks-bradgate",
+        "attempt": 1
+      },
+      {
+        "serviceId": "blood-pressure-checks",
+        "pageA": "blood-pressure-checks-bradgate",
+        "pageB": "blood-pressure-checks-clifton",
+        "beforePct": 69.2,
+        "afterPct": 63.3,
+        "pageModified": "blood-pressure-checks-bradgate",
+        "attempt": 2
+      },
+      {
+        "serviceId": "repeat-prescriptions",
+        "pageA": "repeat-prescriptions-eastwood",
+        "pageB": "repeat-prescriptions-rotherham",
+        "beforePct": 69.1,
+        "afterPct": 51.3,
+        "pageModified": "repeat-prescriptions-eastwood",
+        "attempt": 1
+      },
+      {
+        "serviceId": "medication-reviews",
+        "pageA": "medication-reviews-bradgate",
+        "pageB": "medication-reviews-kimberworth",
+        "beforePct": 69,
+        "afterPct": 55.6,
+        "pageModified": "medication-reviews-bradgate",
+        "attempt": 1
+      },
+      {
+        "serviceId": "ear-wax-removal",
+        "pageA": "ear-wax-removal-bradgate",
+        "pageB": "ear-wax-removal-clifton",
+        "beforePct": 68.8,
+        "afterPct": 53.4,
+        "pageModified": "ear-wax-removal-bradgate",
+        "attempt": 1
+      }
+    ]
+  },
+  "reports": {
+    "intelligence": "/home/inboxingproweb/pharmaconnect-growth-engine/data/validation-reports/pharmacy-intelligence-v1.md",
+    "quality": "/home/inboxingproweb/pharmaconnect-growth-engine/data/validation-reports/pharmacy-quality-audit-v1.md"
+  },
+  "validation": {
+    "slug": "pharmaconnect",
+    "validatedAt": "2026-06-19T09:51:20.041Z",
+    "checks": [
+      {
+        "label": "Narrative library valid",
+        "pass": true,
+        "value": "PASS"
+      },
+      {
+        "label": "10 narrative profiles",
+        "pass": true,
+        "value": "10"
+      },
+      {
+        "label": "All selected areas have profiles",
+        "pass": true,
+        "value": "OK"
+      },
+      {
+        "label": "200 area pages",
+        "pass": true,
+        "value": "200"
+      },
+      {
+        "label": "All area pages use narrative intelligence",
+        "pass": true,
+        "value": "200/200"
+      },
+      {
+        "label": "Narrative type on every page",
+        "pass": true,
+        "value": "200/200"
+      },
+      {
+        "label": "Narrative section on every page",
+        "pass": true,
+        "value": "200/200"
+      },
+      {
+        "label": "Intro diversity >= 80%",
+        "pass": true,
+        "value": "100%"
+      },
+      {
+        "label": "Journey diversity >= 80%",
+        "pass": true,
+        "value": "100%"
+      },
+      {
+        "label": "CTA diversity >= 70%",
+        "pass": true,
+        "value": "100%"
+      },
+      {
+        "label": "Narrative type diversity >= 40%",
+        "pass": true,
+        "value": "90%"
+      },
+      {
+        "label": "Max pair < 65% all clusters",
+        "pass": true,
+        "value": "64.8%"
+      },
+      {
+        "label": "Avg similarity < 55%",
+        "pass": true,
+        "value": "51.6%"
+      },
+      {
+        "label": "HIGH_RISK clusters minimized",
+        "pass": true,
+        "value": "0/20"
+      },
+      {
+        "label": "Quality >= 45/50",
+        "pass": true,
+        "value": "48.6/50"
+      },
+      {
+        "label": "Trust >= 9/10",
+        "pass": true,
+        "value": "9.8/10"
+      },
+      {
+        "label": "Conversion >= 9/10",
+        "pass": true,
+        "value": "9.1/10"
+      },
+      {
+        "label": "Entity coverage >= 8/10",
+        "pass": true,
+        "value": "10/10"
+      },
+      {
+        "label": "0 LOW_WORD_COUNT",
+        "pass": true,
+        "value": "0"
+      },
+      {
+        "label": "240 pages published",
+        "pass": true,
+        "value": "240"
+      },
+      {
+        "label": "Publish PASS",
+        "pass": true,
+        "value": "0 failed"
+      }
+    ],
+    "passCount": 21,
+    "failCount": 0,
+    "diversity": {
+      "introDiversity": 100,
+      "journeyDiversity": 100,
+      "ctaDiversity": 100,
+      "narrativeDiversity": 90
+    },
+    "similarity": {
+      "avg": 51.6,
+      "maxClusterMax": 64.8,
+      "highRisk": 0,
+      "clustersOverMax": []
+    },
+    "quality": {
+      "overall": 48.6,
+      "trust": 9.8,
+      "conversion": 9.1,
+      "localRelevance": 9.7,
+      "lowWordCount": 0
+    },
+    "entityCoverageMin": 10,
+    "publish": {
+      "pageCount": 240,
+      "failedCount": 0
+    },
+    "profiles": [
+      {
+        "areaSlug": "bradgate",
+        "narrativeType": "wellbeing_focus"
+      },
+      {
+        "areaSlug": "brightside",
+        "narrativeType": "community_health"
+      },
+      {
+        "areaSlug": "brinsworth",
+        "narrativeType": "working_professionals"
+      },
+      {
+        "areaSlug": "clifton",
+        "narrativeType": "preventative_health"
+      },
+      {
+        "areaSlug": "dalton",
+        "narrativeType": "medication_support"
+      },
+      {
+        "areaSlug": "eastwood",
+        "narrativeType": "community_health"
+      },
+      {
+        "areaSlug": "kimberworth",
+        "narrativeType": "young_families"
+      },
+      {
+        "areaSlug": "parkgate",
+        "narrativeType": "convenience_access"
+      },
+      {
+        "areaSlug": "rawmarsh",
+        "narrativeType": "retirement_health"
+      },
+      {
+        "areaSlug": "rotherham",
+        "narrativeType": "health_management"
+      }
+    ]
+  }
+}

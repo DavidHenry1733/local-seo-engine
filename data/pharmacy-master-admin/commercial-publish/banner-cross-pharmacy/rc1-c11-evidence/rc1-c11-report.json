@@ -1,0 +1,104 @@
+{
+  "rootCause": "Renderer injected profile contact/hours/quick-links despite Footer DNA flags; trust/conversion slots still used library SVG while 27 website-import assets existed.",
+  "footerSimilarityBefore": "25%",
+  "footerSimilarityAfter": "100%",
+  "importedImagesFound": 36,
+  "importedImagesRendered": 4,
+  "placeholderImagesRemaining": 0,
+  "footerRendererCorrected": "YES",
+  "imageRendererCorrected": "YES",
+  "desktopValidation": "PASS",
+  "mobileValidation": "PASS",
+  "previewParity": "PASS",
+  "liveParity": "PASS",
+  "build": "PASS",
+  "pm2": "ONLINE",
+  "exactUrlsTested": [
+    "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+    "https://banner-cross-pharmacy.sites.pharmaconnect.uk/pharmacy-first/",
+    "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy"
+  ],
+  "status": "READY FOR PRODUCT OWNER TEST",
+  "footerDna": {
+    "similarity": 100,
+    "pass": true,
+    "checks": {
+      "strictMode": true,
+      "columnCountMatch": true,
+      "noInjectedQuickLinks": true,
+      "noInjectedHours": true,
+      "noInjectedContact": true,
+      "noProfileContactInjection": true,
+      "columnWidthsMatch": true,
+      "copyrightPresent": true
+    },
+    "expectedColumns": 1,
+    "renderedColumns": 1
+  },
+  "imageAudit": {
+    "importedImagesFound": 36,
+    "importedImagesRendered": 4,
+    "placeholderImagesRemaining": 0,
+    "completeness": 100,
+    "pass": true,
+    "rows": [
+      {
+        "slot": "hero",
+        "captured": true,
+        "stored": true,
+        "availableToRenderer": true,
+        "rendered": true,
+        "missing": false,
+        "placeholderUsed": false,
+        "source": "website-import"
+      },
+      {
+        "slot": "support",
+        "captured": true,
+        "stored": true,
+        "availableToRenderer": true,
+        "rendered": true,
+        "missing": false,
+        "placeholderUsed": false,
+        "source": "website-import"
+      },
+      {
+        "slot": "trust",
+        "captured": true,
+        "stored": true,
+        "availableToRenderer": true,
+        "rendered": true,
+        "missing": false,
+        "placeholderUsed": false,
+        "source": "website-import"
+      },
+      {
+        "slot": "conversion",
+        "captured": true,
+        "stored": true,
+        "availableToRenderer": true,
+        "rendered": true,
+        "missing": false,
+        "placeholderUsed": false,
+        "source": "website-import"
+      }
+    ]
+  },
+  "seeded": {
+    "updated": true,
+    "assignments": [
+      "hero",
+      "support",
+      "trust",
+      "conversion"
+    ]
+  },
+  "manifestRevision": "tenant-dna-activation-rc1-c11-v1",
+  "footerComparison": {
+    "pass": true,
+    "columnMatch": true,
+    "bgMatch": true,
+    "previewColumns": 1,
+    "publishedColumns": 1
+  }
+}

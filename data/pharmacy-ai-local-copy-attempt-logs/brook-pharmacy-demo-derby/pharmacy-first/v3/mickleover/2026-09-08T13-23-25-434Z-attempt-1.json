@@ -1,0 +1,82 @@
+{
+  "savedAt": "2026-09-08T13:23:25.434Z",
+  "areaSlug": "mickleover",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write two useful natural paragraphs in fluent British English, totalling 110–170 words. Introduce the area, then describe meaningful local features and healthcare references. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Do not describe Pharmacy First, healthcare outcomes, access, convenience, availability or eligibility. Return only the two finished local paragraphs.\n\n- NHS general practice services in Mickleover are provided from Mickleover Medical Centre.\n- Mickleover is a neighbourhood ward in Derby.\n- Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Mickleover has a public library.\n- NHS general practice services in Mickleover are provided from Mickleover Medical Centre..\n- NHS general practice services in Mickleover are provided from Mickleover Surgery.\n- Mickleover Community Centre is a community facility in Mickleover.\n- Mickleover Library is a community facility in Mickleover.\n- Mickleover Community Pavilion is a community facility in Mickleover.\n- Mickleover Meadows is a landmark in Mickleover.\n- War Memorial - Mickleover is a landmark in Mickleover.\n- Homerton Vale is a landmark in Mickleover."
+  },
+  "rawResponse": "Mickleover is a neighbourhood ward situated within the city of Derby. Local governance and civic participation are supported by a Neighbourhood Board, which brings together local councillors, residents, and representatives from both community organisations and public services. The ward contains a variety of useful community facilities for local people, including Mickleover Community Centre, Mickleover Community Pavilion, and Mickleover Library, which operates as a public library.\n\nThe neighbourhood also features several distinct local landmarks, including Mickleover Meadows, Homerton Vale, and the War Memorial - Mickleover. Healthcare needs in the area are supported by primary care establishments located directly within the ward. NHS general practice services in Mickleover are provided from two local sites, namely Mickleover Medical Centre and Mickleover Surgery.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localIntroduction | sentence=Healthcare needs in the area are supported by primary care establishments located directly within the ward. | rule=ungrounded-clause | defect=Healthcare needs in the area are supported by primary care establishments located directly within the ward. — no supplied fact, canonical field or approved clinical text covers this clause",
+      "FAIL | field=localIntroduction | sentence=Healthcare needs in the area are supported by primary care establishments located directly within the ward. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts"
+    ],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Mickleover is a neighbourhood ward situated within the city of Derby. | rule=uncertain-paraphrase | defect=Mickleover is a neighbourhood ward situated within the city of Derby. — uncertain paraphrase: unmatched wording (situated, city) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local governance and civic participation are supported by a Neighbourhood Board, which brings together local councillors, residents, and representatives from both community organisations and public services. | rule=uncertain-paraphrase | defect=Local governance and civic participation are supported by a Neighbourhood Board, which brings together local councillors, residents, and representatives from both community organisations and public services. — uncertain paraphrase: unmatched wording (governance, participation, supported, which, brings) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The ward contains a variety of useful community facilities for local people, including Mickleover Community Centre, Mickleover Community Pavilion, and Mickleover Library, which operates as a public library. | rule=uncertain-paraphrase | defect=The ward contains a variety of useful community facilities for local people, including Mickleover Community Centre, Mickleover Community Pavilion, and Mickleover Library, which operates as a public library. — uncertain paraphrase: unmatched wording (contains, variety, useful, facilities, which, operates) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The neighbourhood also features several distinct local landmarks, including Mickleover Meadows, Homerton Vale, and the War Memorial - Mickleover. | rule=uncertain-paraphrase | defect=The neighbourhood also features several distinct local landmarks, including Mickleover Meadows, Homerton Vale, and the War Memorial - Mickleover. — uncertain paraphrase: unmatched wording (features, distinct, landmarks) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=NHS general practice services in Mickleover are provided from two local sites, namely Mickleover Medical Centre and Mickleover Surgery. | rule=uncertain-paraphrase | defect=NHS general practice services in Mickleover are provided from two local sites, namely Mickleover Medical Centre and Mickleover Surgery. — uncertain paraphrase: unmatched wording (two, sites, namely) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Mickleover",
+    "heroHeading": "Pharmacy First in Mickleover",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Mickleover.",
+    "localIntroduction": "Mickleover is a neighbourhood ward situated within the city of Derby. Local governance and civic participation are supported by a Neighbourhood Board, which brings together local councillors, residents, and representatives from both community organisations and public services. The ward contains a variety of useful community facilities for local people, including Mickleover Community Centre, Mickleover Community Pavilion, and Mickleover Library, which operates as a public library.\n\nThe neighbourhood also features several distinct local landmarks, including Mickleover Meadows, Homerton Vale, and the War Memorial - Mickleover. Healthcare needs in the area are supported by primary care establishments located directly within the ward. NHS general practice services in Mickleover are provided from two local sites, namely Mickleover Medical Centre and Mickleover Surgery.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Mickleover is a neighbourhood ward situated within the city of Derby.",
+        "editorialFactId": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Local governance and civic participation are supported by a Neighbourhood Board, which brings together local councillors, residents, and representatives from both community organisations and public services.",
+        "editorialFactId": "mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The ward contains a variety of useful community facilities for local people, including Mickleover Community Centre, Mickleover Community Pavilion, and Mickleover Library, which operates as a public library.",
+        "editorialFactId": "mickleover:community:mickleover-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The neighbourhood also features several distinct local landmarks, including Mickleover Meadows, Homerton Vale, and the War Memorial - Mickleover.",
+        "editorialFactId": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Mickleover are provided from two local sites, namely Mickleover Medical Centre and Mickleover Surgery.",
+        "editorialFactId": "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+        "editorialFactId": "mickleover:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co",
+      "mickleover:community:mickleover-has-a-public-library",
+      "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-",
+      "mickleover:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

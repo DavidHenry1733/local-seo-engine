@@ -1,0 +1,272 @@
+{
+  "version": "final-render-manifest-v1",
+  "tenant": "brook-pharmacy",
+  "serviceId": "pharmacy-first",
+  "renderVersion": "canonical-final-render-v1",
+  "generatedAt": "2026-07-31T11:43:45.250Z",
+  "sourceProfileRevision": 2,
+  "brandDnaRevision": "missing",
+  "componentDnaRevision": "missing",
+  "websiteImportRevision": "6e31fcfa3dcf36c9",
+  "websiteIntelligenceRevision": "dc16f1d0764ed2cf",
+  "layoutDnaRevision": "missing",
+  "fallbackAttempts": [
+    "design-intelligence:design-intelligence-missing"
+  ],
+  "fallbackBlocks": [
+    "design-intelligence"
+  ],
+  "rendererRevision": "tenant-dna-activation-rc1-r1-v1",
+  "canonicalRenderRevision": "d34becab5d62465f5e56da4ee6a6c49621ab17cb5de51fd3683015aa871ef8e4",
+  "revisionChainComplete": false,
+  "fallbackFlags": [
+    "brand-dna-missing",
+    "component-dna-missing",
+    "design-intelligence"
+  ],
+  "fallbackReasons": [
+    "brand-dna-missing",
+    "component-dna-missing",
+    "design-intelligence"
+  ],
+  "defaultTemplateUsed": true,
+  "contentManifestRevision": "2026-07-16T14:20:08.673Z",
+  "canonicalRenderRoot": "output/pharmacy-final-render/brook-pharmacy",
+  "managedWebsiteBase": "https://brook-pharmacy.sites.pharmaconnect.uk",
+  "customerEcosystemBase": null,
+  "activePublishBaseUrl": "https://brook-pharmacy.sites.pharmaconnect.uk",
+  "publishBaseMode": "internal_managed",
+  "pages": [
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "relativePath": "index.html",
+      "checksumSha256": "50ae8bbb345b8a5713662c17f9eb7c07e748bcebc06bd557d2a17c0d6be95447",
+      "byteSize": 46674,
+      "sourcePipeline": "homepage-copy"
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "relativePath": "pharmacy-first/index.html",
+      "checksumSha256": "c3b86911dc51c1c38949ba9b0a8a5039e039ff452a4921ebe7a2387230ed6e22",
+      "byteSize": 46674,
+      "sourcePipeline": "visual-experience"
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "relativePath": "pharmacy-first-guide/index.html",
+      "checksumSha256": "d538e74e73ed4039645ac350240f2da531fea8843cd3fe7623057fb7308090f3",
+      "byteSize": 35285,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "pharmacy-first-faqs",
+      "pageType": "faq",
+      "relativePath": "pharmacy-first-faqs/index.html",
+      "checksumSha256": "5e3459e9af5097b808a25b086311a748e4fb7578f6e322349f14fc88c7a19097",
+      "byteSize": 27057,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "relativePath": "what-is-pharmacy-first/index.html",
+      "checksumSha256": "42bcee2e33e03b863164398b19697817b7432383edbce8b0b548ff65ad6c269f",
+      "byteSize": 29108,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "who-should-consider-pharmacy-first",
+      "pageType": "blog",
+      "relativePath": "who-should-consider-pharmacy-first/index.html",
+      "checksumSha256": "263e59002b6d6814b85290af66f8b4381b13b6db5719e204d85aeae4377ed1ee",
+      "byteSize": 26464,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "pharmacy-first-what-you-need-to-know",
+      "pageType": "support",
+      "relativePath": "pharmacy-first-what-you-need-to-know/index.html",
+      "checksumSha256": "2dd174ad9b208bd1ffc10b5762c89c738a7bc601eac1b810fc4571eb89be5979",
+      "byteSize": 28018,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    },
+    {
+      "pageSlug": "pharmacy-first-content-ecosystem",
+      "pageType": "hub",
+      "relativePath": "pharmacy-first-content-ecosystem/index.html",
+      "checksumSha256": "3017215d1a8a6a8a5a15f49f6f1fa50ab191677aba6a61340e72f8fa3d11532b",
+      "byteSize": 27036,
+      "sourcePipeline": "ecosystem-chrome-wrap"
+    }
+  ],
+  "assets": [],
+  "pageInventory": [
+    "index",
+    "pharmacy-first",
+    "pharmacy-first-guide",
+    "pharmacy-first-faqs",
+    "what-is-pharmacy-first",
+    "who-should-consider-pharmacy-first",
+    "pharmacy-first-what-you-need-to-know",
+    "pharmacy-first-content-ecosystem"
+  ],
+  "assetInventory": [],
+  "sharedCss": [
+    "inline-brand-dna"
+  ],
+  "sharedJs": [],
+  "fonts": [
+    "Poppins",
+    "Inter"
+  ],
+  "logoFiles": [],
+  "imageFiles": [],
+  "headerComponent": "standard-navigation",
+  "footerComponent": "four-column-contact",
+  "navigationComponent": "inline",
+  "mapConfiguration": {
+    "embedPresent": true,
+    "latitude": "",
+    "longitude": ""
+  },
+  "schemaInventory": 2,
+  "sitemap": "sitemap.xml",
+  "registry": "FinalRenderManifest.json",
+  "robots": "robots.txt",
+  "notFoundPage": "404.html",
+  "imageAssignmentRevision": "1c1d06fc3b73b302",
+  "imagePlatformSchemaVersion": "1.1",
+  "productionLibraryRevision": "69c19f8020ddc1d6",
+  "pharmacyFirstServiceManifestRevision": "bcb46b21ef6292fc",
+  "imagePlatformSlotMappings": [
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "hero",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "support",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "trust",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "slot": "conversion",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "hero",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "support",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "trust",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "slot": "conversion",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "slot": "hero",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "slot": "support",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "slot": "conversion",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "slot": "hero",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "slot": "support",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    },
+    {
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "slot": "conversion",
+      "assetId": "",
+      "filePath": "",
+      "assignmentReason": "",
+      "fallbackAttempts": 0
+    }
+  ]
+}

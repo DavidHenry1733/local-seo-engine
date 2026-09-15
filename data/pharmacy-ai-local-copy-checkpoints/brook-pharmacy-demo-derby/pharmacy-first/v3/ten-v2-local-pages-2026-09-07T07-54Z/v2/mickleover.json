@@ -1,0 +1,228 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T07:25:35.974Z",
+  "tokenUsage": {
+    "promptTokens": 6284,
+    "completionTokens": 403,
+    "totalTokens": 6687
+  },
+  "estimatedCostUsd": 0.015792,
+  "inputEvidencePackHash": "6f54dbbf9a15fdd8a92e67ce17392e0910097c4d957442caebaea0ca76d6c84a",
+  "editorialEvidencePackHash": "cdfda5eaad65d398be014071672d94e48bb0ffc2665e5ae09cbef961989739e2",
+  "areaSlug": "mickleover",
+  "areaName": "Mickleover",
+  "editorialFactIdsUsed": [
+    "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+    "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-",
+    "mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co",
+    "mickleover:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Mickleover",
+    "heroHeading": "Pharmacy First in Mickleover",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Mickleover.",
+    "localIntroduction": "Pharmacy First for people in Mickleover is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Mickleover is a neighbourhood ward in Derby. NHS general practice services in Mickleover are provided from Mickleover Medical Centre. Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. Pharmacy First can help with eligible common conditions."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Mickleover is a neighbourhood ward in Derby.",
+        "editorialFactId": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Mickleover are provided from Mickleover Medical Centre.",
+        "editorialFactId": "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+        "editorialFactId": "mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Pharmacy First can help with eligible common conditions."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+        "editorialFactId": "mickleover:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-",
+      "mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co",
+      "mickleover:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Mickleover",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Mickleover.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Mickleover is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Mickleover is a neighbourhood ward in Derby.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Mickleover are provided from Mickleover Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co",
+      "providerSource": "derby.gov.uk, derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Pharmacy First can help with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+      "supportingCanonicalFieldOrEntity": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Mickleover",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Mickleover.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Mickleover is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Mickleover is a neighbourhood ward in Derby.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Mickleover are provided from Mickleover Medical Centre.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Pharmacy First can help with eligible common conditions.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 3.7 km in a straight line from Mickleover.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby, mickleover:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Mickleover is a neighbourhood ward in Derby. NHS general practice services in Mickleover are provided from Mickleover Medical Centre. Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. Pharmacy First can help with eligible common conditions.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Mickleover are provided from Mickleover Medical Centre.\",\n      \"editorialFactId\": \"mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\",\n      \"editorialFactId\": \"mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Pharmacy First can help with eligible common conditions.\",\n      \"editorialFactId\": \"\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby\",\n    \"mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-\",\n    \"mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Mickleover is a neighbourhood ward in Derby. NHS general practice services in Mickleover are provided from Mickleover Medical Centre. Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. Pharmacy First can help with eligible common conditions.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Mickleover are provided from Mickleover Medical Centre.\",\n      \"editorialFactId\": \"mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Mickleover has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\",\n      \"editorialFactId\": \"mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Pharmacy First can help with eligible common conditions.\",\n      \"editorialFactId\": \"\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"mickleover:area-identity:mickleover-is-a-neighbourhood-ward-in-derby\",\n    \"mickleover:healthcare:nhs-general-practice-services-in-mickleover-are-\",\n    \"mickleover:community:mickleover-has-a-neighbourhood-board-of-local-co\"\n  ]\n}"
+  ]
+}

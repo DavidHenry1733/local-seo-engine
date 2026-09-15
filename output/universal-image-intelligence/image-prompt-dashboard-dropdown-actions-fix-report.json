@@ -1,0 +1,111 @@
+{
+  "generatedAt": "2026-06-11T09:37:36.668Z",
+  "result": "PASS: Image Prompt Dashboard Dropdown And Actions Fixed",
+  "dropdownStatus": {
+    "serviceLabel": "Service",
+    "featuredServicesInClinicalList": true,
+    "featuredHubServices": [
+      "pharmacy-first",
+      "nhs-flu-vaccination",
+      "private-ear-wax-removal",
+      "travel-vaccinations",
+      "pharmacy-weight-loss-programme"
+    ],
+    "clinicalServiceCount": 32,
+    "sampleServiceNames": [
+      "Pharmacy First",
+      "NHS Flu Vaccination",
+      "Private Ear Wax Removal",
+      "Travel Vaccinations",
+      "Pharmacy Weight Loss Programme",
+      "Asthma and COPD Inhaler Technique Review",
+      "Blister Packs and Compliance Aids",
+      "Blood Pressure Monitoring"
+    ]
+  },
+  "defaultServiceStatus": {
+    "defaults": {
+      "industry": "pharmacy",
+      "templateFamily": "clinical-nhs-services",
+      "serviceKey": "pharmacy-first",
+      "packKey": "clinical-nhs-services"
+    },
+    "defaultsMatchRequired": true,
+    "pharmacyFirstInList": true
+  },
+  "actionButtonStatus": {
+    "delegatedEventListener": true,
+    "noInlineOnclickCopy": true,
+    "fetchBlobDownload": true,
+    "functions": [
+      {
+        "name": "ipdLoadMeta",
+        "present": true
+      },
+      {
+        "name": "ipdApplyPromptDefaults",
+        "present": true
+      },
+      {
+        "name": "ipdOnIndustryChange",
+        "present": true
+      },
+      {
+        "name": "ipdOnFamilyChange",
+        "present": true
+      },
+      {
+        "name": "ipdOnServiceChange",
+        "present": true
+      },
+      {
+        "name": "ipdLoadPromptPanel",
+        "present": true
+      },
+      {
+        "name": "ipdLoadPrompts",
+        "present": true
+      },
+      {
+        "name": "ipdCopyPrompt",
+        "present": true
+      },
+      {
+        "name": "ipdCopyBothFromCard",
+        "present": true
+      },
+      {
+        "name": "ipdDownloadSinglePrompt",
+        "present": true
+      },
+      {
+        "name": "ipdDownloadPromptPack",
+        "present": true
+      },
+      {
+        "name": "ipdInitPromptActions",
+        "present": true
+      },
+      {
+        "name": "data-ipd-action",
+        "present": true
+      },
+      {
+        "name": "ipdResolveServices",
+        "present": true
+      }
+    ]
+  },
+  "apiStatus": {
+    "status": "auth-required",
+    "notes": "API returned 401 — meta structure validated at service layer only",
+    "servicesByTemplateFamily": true,
+    "servicesByIndustry": true,
+    "featuredHubServices": true,
+    "defaultPromptSelection": true
+  },
+  "validationNotes": {
+    "exportSinglePromptWorks": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,730 @@
+{
+  "version": 1,
+  "slug": "onboarding-svc-test-three",
+  "updatedAt": "2026-06-28T14:53:16.475Z",
+  "campaigns": [
+    {
+      "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "d39427ac-e2cb-43cd-b751-8718857607d0-confirm-profile",
+        "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-three",
+        "evidence": [
+          "Profile completeness: 33%"
+        ],
+        "createdAt": "2026-06-28T14:53:16.458Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-confirm-profile",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-three",
+          "evidence": [
+            "Profile completeness: 33%"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-confirm-images",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-confirm-service-page",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "No published service page found for pharmacy-first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-confirm-ecosystem",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "No ecosystem generated for pharmacy-first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-authority-readiness-approved",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=onboarding-svc-test-three&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=onboarding-svc-test-three&service=pharmacy-first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-publish-page",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=onboarding-svc-test-three",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-update-sitemap",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-submit-indexing",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-refresh-visibility",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-prepare-gbp-posts",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-prepare-social-posts",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-prepare-email-sequence",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "d39427ac-e2cb-43cd-b751-8718857607d0-review-growth-actions",
+          "campaignId": "d39427ac-e2cb-43cd-b751-8718857607d0",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=onboarding-svc-test-three",
+          "evidence": [
+            "7 growth actions available"
+          ],
+          "createdAt": "2026-06-28T14:53:16.458Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T14:53:16.458Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-confirm-profile",
+        "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-three",
+        "evidence": [
+          "Profile completeness: 33%"
+        ],
+        "createdAt": "2026-06-28T14:53:16.466Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-confirm-profile",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-three",
+          "evidence": [
+            "Profile completeness: 33%"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-confirm-images",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-confirm-service-page",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/",
+          "evidence": [
+            "No published service page found for blood-pressure-checks"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-confirm-ecosystem",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "No ecosystem generated for blood-pressure-checks"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-authority-readiness-approved",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=onboarding-svc-test-three&service=blood-pressure-checks",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=onboarding-svc-test-three&service=blood-pressure-checks"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-publish-page",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=onboarding-svc-test-three",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-update-sitemap",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-submit-indexing",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-refresh-visibility",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-prepare-gbp-posts",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-prepare-social-posts",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-prepare-email-sequence",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea-review-growth-actions",
+          "campaignId": "198e2e19-7c6f-4647-8b07-d7514d2fa6ea",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=onboarding-svc-test-three",
+          "evidence": [
+            "7 growth actions available"
+          ],
+          "createdAt": "2026-06-28T14:53:16.466Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T14:53:16.467Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-confirm-profile",
+        "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-three",
+        "evidence": [
+          "Profile completeness: 33%"
+        ],
+        "createdAt": "2026-06-28T14:53:16.475Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-confirm-profile",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=onboarding-svc-test-three",
+          "evidence": [
+            "Profile completeness: 33%"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-confirm-images",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-confirm-service-page",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+          "evidence": [
+            "No published service page found for travel-vaccinations"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-confirm-ecosystem",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "No ecosystem generated for travel-vaccinations"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-authority-readiness-approved",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=onboarding-svc-test-three&service=travel-vaccinations",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=onboarding-svc-test-three&service=travel-vaccinations"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-publish-page",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=onboarding-svc-test-three",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-update-sitemap",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-submit-indexing",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-refresh-visibility",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=onboarding-svc-test-three#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-prepare-gbp-posts",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-prepare-social-posts",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-prepare-email-sequence",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "d05c46fa-5147-4311-b46d-12241b3cc1cd-review-growth-actions",
+          "campaignId": "d05c46fa-5147-4311-b46d-12241b3cc1cd",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=onboarding-svc-test-three",
+          "evidence": [
+            "7 growth actions available"
+          ],
+          "createdAt": "2026-06-28T14:53:16.475Z",
+          "status": "complete",
+          "completedAt": "2026-06-28T14:53:16.475Z",
+          "blockedReason": null
+        }
+      ]
+    }
+  ]
+}

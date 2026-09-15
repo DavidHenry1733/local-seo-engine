@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "slug": "rc1-import-queue-test-pharmacy",
+  "updatedAt": "2026-07-31T14:29:49.585Z",
+  "currentStage": "business_profile_intelligence",
+  "transitions": [
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-31T14:29:49.585Z",
+      "operator": "cpr-rc1-blocker-02",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-31T14:29:44.786Z",
+      "operator": "cpr-rc1-blocker-02",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-31T14:29:49.554Z",
+      "finishedAt": "2026-07-31T14:29:49.554Z",
+      "durationMs": 0,
+      "operator": "cpr-rc1-blocker-02",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "a941f752-efc0-45db-a468-2ee352c041a4"
+    }
+  ]
+}

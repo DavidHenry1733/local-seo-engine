@@ -1,0 +1,80 @@
+{
+  "checkpointId": "allestree-local-page-preview-2026-09-03T17-51Z",
+  "generatePressed": true,
+  "generateVia": "authenticated Campaign Builder UI",
+  "published": false,
+  "committed": false,
+  "freshPaidRetrieval": false,
+  "candidateRewritten": false,
+  "evidenceRecollected": false,
+  "sourceRoute": "ai-local-area-page-pilot-v3",
+  "previewUrl": "https://app.pharmaconnect.uk/api/growth-engine/brook-pharmacy-demo-derby/review-preview?campaign=pharmacy-first&asset=ai-local-area-page-pilot-v3&area=allestree",
+  "generationBudget": {
+    "consumed": 5,
+    "maxProviderCalls": 5,
+    "estimatedCostUsd": 0.077736,
+    "reserved": 0,
+    "maxCostUsd": 2
+  },
+  "tests": {
+    "validate-brook-derby-allestree-local-page-ui-v1.ts": "35/35"
+  },
+  "browser": {
+    "tab": "457711",
+    "openedFrom": "Campaign Builder Target Areas → Open unpublished Preview",
+    "desktop": {
+      "viewport": "default",
+      "title": "Pharmacy First in Allestree | Brook Pharmacy Demo Derby",
+      "banner": "AI editorial evidence pilot — not published",
+      "identity": "Brook Pharmacy Demo Derby",
+      "h1": "Pharmacy First — Allestree",
+      "supportedFacts": [
+        "Allestree is a neighbourhood ward in Derby",
+        "Neighbourhood Board",
+        "Park Lane Surgery",
+        "Friends of Allestree Park",
+        "Allestree Carnival"
+      ],
+      "distance": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+      "clinicalSections": [
+        "How Pharmacy First can help",
+        "Conditions Pharmacy First may cover",
+        "What happens during the consultation",
+        "When to contact a GP, NHS 111 or emergency services"
+      ],
+      "branding": {
+        "logoAlt": "Brook Pharmacy Demo Derby logo",
+        "logoLoaded": true,
+        "phone": "01332 445076"
+      },
+      "images": {
+        "hero": { "loaded": true, "naturalWidth": 1400, "naturalHeight": 785 },
+        "support": { "loaded": true, "naturalWidth": 1400, "naturalHeight": 1050 },
+        "trust": { "loaded": true, "naturalWidth": 1400, "naturalHeight": 1050 },
+        "conversion": { "loaded": true, "naturalWidth": 1400, "naturalHeight": 785 },
+        "missingSlots": 0
+      },
+      "previewLinks": {
+        "services": "#cluster-context",
+        "about": "#cluster-trust",
+        "contact": "tel:01332445076",
+        "viewFaqs": "#faq-section",
+        "servicesNavigatedTo": "#cluster-context",
+        "aboutNavigatedTo": "#cluster-trust"
+      }
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "hamburgerVisible": true,
+      "hamburgerOpened": true,
+      "heroStacked": true,
+      "distanceVisible": true,
+      "identityVisible": true
+    }
+  },
+  "defectsFixed": [
+    "Pharmacy First production library assignment-only skipped library fallback for tenants without assignments; visualDemoMode retry now reaches the approved platform images.",
+    "Assemble throwing after a saved candidate caused Generate to 500; assemble is now isolated so copy save is not lost.",
+    "Preview hash links #service-definition and #trust did not match local-page section ids; wrapAiPilotPreviewHtmlV3 now applies repairPreviewSectionHashLinks."
+  ]
+}

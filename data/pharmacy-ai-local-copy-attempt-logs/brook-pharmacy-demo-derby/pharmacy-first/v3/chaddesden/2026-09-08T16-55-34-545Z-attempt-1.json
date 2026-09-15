@@ -1,0 +1,124 @@
+{
+  "savedAt": "2026-09-08T16:55:34.545Z",
+  "areaSlug": "chaddesden",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Write as an experienced British healthcare copywriter.\n\nUsing only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.\n\nHERO INTRODUCTION:\nWrite 35–55 words introducing Pharmacy First for people in the selected area and naming Brook Pharmacy as the provider.\n\nLOCAL INTRODUCTION:\nWrite 170–230 words in three fluent British-English paragraphs.\n\nParagraph 1:\nIntroduce the area, its location and its character using verified facts.\n\nParagraph 2:\nDescribe meaningful verified landmarks, green spaces, shopping, community facilities and healthcare references. Select the most useful facts and connect them naturally. Do not list every evidence record.\n\nParagraph 3:\nMove naturally from the area and its local healthcare needs into Brook Pharmacy’s Pharmacy First service. Name Brook Pharmacy and Pharmacy First, and explain that eligible patients can receive a pharmacist consultation for certain common conditions. Do not reproduce a fixed clinical closing sentence. The transition must feel like part of the article—not a disclaimer pasted onto the end.\n\nYou may express only this Pharmacy First meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment.\n\nDo not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.\n\nDo not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.\n\nUse neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.\n\nDo not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.\n\nDo not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.\n\nReturn exactly this layout:\nHERO INTRODUCTION:\n<one paragraph>\n\nLOCAL INTRODUCTION:\n<paragraph 1>\n\n<paragraph 2>\n\n<paragraph 3>\nSelected area: Chaddesden\nConfirmed pharmacy name: Brook Pharmacy Demo Derby\nConfirmed pharmacy premises locality: Derby\nSaved straight-line distance: approximately 2.9 km in a straight line\nVerified area identity and geographical context:\n- Chaddesden is a neighbourhood ward in Derby.\nVerified history where available:\n- Chaddesden Park is a landmark in Chaddesden.\n- Chaddesden Wood Local Nature Reserve is a landmark in Chaddesden.\n- Derby War Memorial is a landmark in Chaddesden.\nVerified landmarks, parks, shopping, civic and community facilities:\n- Derwent Community Library is a community facility in Chaddesden.\n- The Phillip Whitehead Memorial Library Chaddesden Park is a community facility in Chaddesden.\n- Derwent Family Hub is a community facility in Chaddesden.\nVerified GP practices or healthcare facilities:\n- NHS general practice services in Chaddesden are provided from The Park Medical Practice.\n- NHS general practice services in Chaddesden are provided from Park Medical Practice Chaddesden.\n- Florence Nightingale Community Hospital is a hospital in Chaddesden.\nApproved Pharmacy First service meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment."
+  },
+  "rawResponse": "HERO INTRODUCTION:\nLocal residents in Chaddesden can access professional healthcare support through the Pharmacy First scheme provided by Brook Pharmacy. This service allows eligible patients to consult a pharmacist for advice and management regarding a range of common health conditions.\n\nLOCAL INTRODUCTION:\nChaddesden is a neighbourhood ward located within the city of Derby. The local area contains a range of public facilities, healthcare settings, and outdoor spaces that serve the day-to-day requirements of local residents across the community.\n\nKey open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial. Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub. Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital.\n\nTo assist local residents with everyday healthcare needs alongside these established facilities, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. The Pharmacy First service covers certain common health conditions. During a clinical consultation, the pharmacist evaluates symptoms, relevant medicines, and medical history. The outcome depends entirely on this individual clinical assessment and may include tailored advice, suitable treatment, or referral to another healthcare professional.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Chaddesden is a neighbourhood ward located within the city of Derby. | rule=uncertain-paraphrase | defect=Chaddesden is a neighbourhood ward located within the city of Derby. — uncertain paraphrase: unmatched wording (city) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Key open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial. | rule=uncertain-paraphrase | defect=Key open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial. — uncertain paraphrase: unmatched wording (key, open, spaces, landmarks, throughout) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub. | rule=uncertain-paraphrase | defect=Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub. — uncertain paraphrase: unmatched wording (educational, support, delivered, facilities) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital. | rule=uncertain-paraphrase | defect=Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital. — uncertain paraphrase: unmatched wording (residents, access, locally, via, practices, secondary, healthcare, provision) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=During a clinical consultation, the pharmacist evaluates symptoms, relevant medicines, and medical history. | rule=uncertain-paraphrase | defect=During a clinical consultation, the pharmacist evaluates symptoms, relevant medicines, and medical history. — uncertain paraphrase: unmatched wording (clinical, evaluates, relevant, history) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Chaddesden",
+    "heroHeading": "Pharmacy First in Chaddesden",
+    "heroIntroduction": "Local residents in Chaddesden can access professional healthcare support through the Pharmacy First scheme provided by Brook Pharmacy. This service allows eligible patients to consult a pharmacist for advice and management regarding a range of common health conditions.",
+    "localIntroduction": "Chaddesden is a neighbourhood ward located within the city of Derby. The local area contains a range of public facilities, healthcare settings, and outdoor spaces that serve the day-to-day requirements of local residents across the community.\n\nKey open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial. Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub. Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital.\n\nTo assist local residents with everyday healthcare needs alongside these established facilities, Brook Pharmacy provides Pharmacy First consultations for eligible people from the area. The Pharmacy First service covers certain common health conditions. During a clinical consultation, the pharmacist evaluates symptoms, relevant medicines, and medical history. The outcome depends entirely on this individual clinical assessment and may include tailored advice, suitable treatment, or referral to another healthcare professional. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Chaddesden",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Key open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial.",
+        "editorialFactId": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Key open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial.",
+        "editorialFactId": "chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Key open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial.",
+        "editorialFactId": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Key open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial.",
+        "editorialFactId": "chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Key open spaces and landmarks throughout the neighbourhood include Chaddesden Park, Chaddesden Wood Local Nature Reserve, and the Derby War Memorial.",
+        "editorialFactId": "chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub.",
+        "editorialFactId": "chaddesden:community:derwent-community-library-is-listed-as-a-communi"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub.",
+        "editorialFactId": "chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub.",
+        "editorialFactId": "chaddesden:community:derwent-family-hub-is-listed-as-a-community-faci"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Civic and educational support is delivered through community facilities such as Derwent Community Library, The Phillip Whitehead Memorial Library Chaddesden Park, and the Derwent Family Hub.",
+        "editorialFactId": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital.",
+        "editorialFactId": "chaddesden:healthcare:nhs-general-practice-services-in-chaddesden-are-"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital.",
+        "editorialFactId": "chaddesden:healthcare:florence-nightingale-community-hospital-is-liste"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital.",
+        "editorialFactId": "chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Residents access general medical care locally via NHS practices including The Park Medical Practice and Park Medical Practice Chaddesden, as well as secondary healthcare provision at Florence Nightingale Community Hospital.",
+        "editorialFactId": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+        "editorialFactId": "chaddesden:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby",
+      "chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde",
+      "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd",
+      "chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a",
+      "chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch",
+      "chaddesden:community:derwent-community-library-is-listed-as-a-communi",
+      "chaddesden:community:derwent-family-hub-is-listed-as-a-community-faci",
+      "chaddesden:healthcare:nhs-general-practice-services-in-chaddesden-are-",
+      "chaddesden:healthcare:florence-nightingale-community-hospital-is-liste",
+      "chaddesden:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

@@ -1,0 +1,53 @@
+{
+  "taskId": "wombwell-v3-live-page-2026-09-01",
+  "createdAt": "2026-09-01T14:17:49.199Z",
+  "taskBudgetUsd": 1,
+  "dataForSeoCostUsd": 0.004,
+  "openaiCostUsd": 0.02599,
+  "pageRetrievalUsd": 0,
+  "searches": 2,
+  "pageFetches": 4,
+  "events": [
+    {
+      "at": "2026-09-01T14:17:51.990Z",
+      "kind": "dataforseo-search",
+      "query": "listed building heritage colliery history in Wombwell, Barnsley, South Yorkshire, UK",
+      "costUsd": 0.002,
+      "resultCount": 9
+    },
+    {
+      "at": "2026-09-01T14:18:03.550Z",
+      "kind": "dataforseo-search",
+      "query": "official council Wombwell Park history in Wombwell, Barnsley, South Yorkshire, UK",
+      "costUsd": 0.002,
+      "resultCount": 9
+    },
+    {
+      "at": "2026-09-01T14:18:03.552Z",
+      "kind": "page-fetch",
+      "url": "https://www.barnsley.gov.uk/news/barnsley-council-s-love-where-you-live-supports-improvements-to-wombwell-car-park/"
+    },
+    {
+      "at": "2026-09-01T14:18:04.018Z",
+      "kind": "page-fetch",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/03851221/officers"
+    },
+    {
+      "at": "2026-09-01T14:18:04.870Z",
+      "kind": "page-fetch",
+      "url": "https://www.travelsouthyorkshire.com/en-gb/newsupdates/wombwell-station-artwork"
+    },
+    {
+      "at": "2026-09-01T14:19:56.872Z",
+      "kind": "page-fetch",
+      "url": "https://historicengland.org.uk/listing/the-list/results/?search=Wombwell&searchType=NHLE+Simple"
+    },
+    {
+      "at": "2026-09-01T14:21:19.381Z",
+      "kind": "openai-generation",
+      "authorizedTaskId": "wombwell-v3-live-page-2026-09-01",
+      "estimatedCostUsd": 0.02599,
+      "ok": false
+    }
+  ]
+}

@@ -9,6 +9,7 @@
  * - confirmBody / final CTA: contact the pharmacy
  */
 import type { VerifiedLocalityEvidence } from "./pharmacyVerifiedLocalityEvidenceV1.ts";
+import { slugifyArea } from "../pharmacyAreaNarrativeProfiles.ts";
 
 export type LocalitySiblingFact = {
   areaName: string;
@@ -18,6 +19,52 @@ export type LocalitySiblingFact = {
   areaType?: string;
   order?: number;
 };
+
+type CampaignSiblingSource = {
+  selectedAreas?: Array<{ areaName: string; areaSlug: string; selected?: boolean; order?: number }>;
+  rawProfile?: {
+    selectedAreas?: Array<{
+      areaName?: string;
+      selected?: boolean;
+      distanceKm?: number | null;
+      distanceLabel?: string;
+      areaType?: string;
+      order?: number;
+    }>;
+  };
+};
+
+/** Campaign Builder saved target areas first; profile rows supply distance evidence by name even when unselected. */
+export function siblingFactsFromCampaignContext(ctx: CampaignSiblingSource | undefined): LocalitySiblingFact[] {
+  const profileRows = ctx?.rawProfile?.selectedAreas || [];
+  const profileByName = new Map(
+    profileRows.map((row) => [String(row.areaName || "").trim().toLowerCase(), row]),
+  );
+  const campaign = (ctx?.selectedAreas || []).filter((area) => area.selected !== false && String(area.areaName || "").trim());
+  if (campaign.length) {
+    return campaign.map((area, idx) => {
+      const row = profileByName.get(String(area.areaName || "").trim().toLowerCase());
+      return {
+        areaName: area.areaName,
+        areaSlug: area.areaSlug,
+        distanceKm: row?.distanceKm == null ? null : Number(row.distanceKm),
+        distanceLabel: String(row?.distanceLabel || "").trim(),
+        areaType: String(row?.areaType || "").trim(),
+        order: typeof area.order === "number" ? area.order : idx + 1,
+      };
+    });
+  }
+  return profileRows
+    .filter((row) => row && row.selected !== false && String(row.areaName || "").trim())
+    .map((row) => ({
+      areaName: String(row.areaName || "").trim(),
+      areaSlug: slugifyArea(String(row.areaName || "").trim()),
+      distanceKm: row.distanceKm == null ? null : Number(row.distanceKm),
+      distanceLabel: String(row.distanceLabel || "").trim(),
+      areaType: String(row.areaType || "").trim(),
+      order: typeof row.order === "number" ? row.order : undefined,
+    }));
+}
 
 export type LocalityEvidenceInventory = {
   areaName: string;
@@ -229,6 +276,12 @@ export function buildUniqueLocalityNarrative(inv: LocalityEvidenceInventory): Un
     dist
       ? `Patients travelling from ${area} can reach ${pharmacy} on ${place}. The pharmacy is approximately ${dist} away.`
       : `Patients travelling from ${area} can reach ${pharmacy} on ${place}.`,
+    dist
+      ? `${pharmacy} on ${place} is the confirmed location for a journey that starts in ${area}, ${dist} away.`
+      : `${pharmacy} on ${place} is the confirmed location for a journey that starts in ${area}.`,
+    dist
+      ? `A visit from ${area} reaches ${pharmacy} on ${place}, ${dist} away.`
+      : `A visit from ${area} reaches ${pharmacy} on ${place}.`,
   ];
 
   // Travel: map / directions only — no contact instruction.
@@ -264,6 +317,14 @@ export function buildUniqueLocalityNarrative(inv: LocalityEvidenceInventory): Un
     {
       h: `Map for ${area} travellers`,
       b: `The directions below show the confirmed location for journeys from ${area}.`,
+    },
+    {
+      h: `Route from ${area}`,
+      b: `Follow the map from ${area} to the confirmed pharmacy address.`,
+    },
+    {
+      h: `Finding the pharmacy from ${area}`,
+      b: `The map and directions start from ${area} and finish at the pharmacy.`,
     },
   ];
 
@@ -309,9 +370,19 @@ export function buildUniqueLocalityNarrative(inv: LocalityEvidenceInventory): Un
       i: `This page is for patients travelling from ${area}.`,
       b: `Use the map and directions when you are ready to visit.`,
     },
+    {
+      h: `Arriving from ${area}`,
+      i: `This page is for a journey that starts in ${area}.`,
+      b: `The map below shows where the pharmacy is.`,
+    },
+    {
+      h: `${area} travel page`,
+      i: `Read this page if you are coming from ${area}.`,
+      b: `Directions and the pharmacy map are below.`,
+    },
   ];
 
-  const idx = slot % heroBySlot.length;
+  const idx = slot % Math.min(heroBySlot.length, accessBySlot.length, relBySlot.length);
   let heroIntro = heroBySlot[idx]!;
   if (words(heroIntro) > 42 && dist) {
     heroIntro = `${pharmacy} is on ${place}, approximately ${dist} from ${area}.`;

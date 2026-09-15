@@ -71,6 +71,73 @@ body[data-local-page-contract="local-area-v1"] .area-card {
 .area-card p{margin:0;font-size:var(--body-size,17px);color:var(--brand-muted);line-height:1.6}
 .cluster-link-band{padding:32px 0}
 .cluster-link-band ul.clean li{font-size:var(--body-size,17px);line-height:1.65}
+body[data-local-page-contract="local-cluster-v1"] main section,
+body[data-local-page-contract="local-area-v1"] main section {
+  min-height: 0;
+  padding-block: clamp(28px, 4vw, 56px);
+}
+body[data-local-page-contract="local-cluster-v1"] .card,
+body[data-local-page-contract="local-area-v1"] .card,
+body[data-local-page-contract="local-cluster-v1"] .card h3,
+body[data-local-page-contract="local-area-v1"] .card h3,
+body[data-local-page-contract="local-cluster-v1"] .card-grid-equal .card-body,
+body[data-local-page-contract="local-area-v1"] .card-grid-equal .card-body,
+body[data-local-page-contract="local-cluster-v1"] .card-grid-equal h3.card-title-line-1,
+body[data-local-page-contract="local-area-v1"] .card-grid-equal h3.card-title-line-1,
+body[data-local-page-contract="local-cluster-v1"] .card-grid-equal h3.card-title-line-2,
+body[data-local-page-contract="local-area-v1"] .card-grid-equal h3.card-title-line-2,
+body[data-local-page-contract="local-cluster-v1"] .conditions-grid .card-body,
+body[data-local-page-contract="local-area-v1"] .conditions-grid .card-body,
+body[data-local-page-contract="local-cluster-v1"] .area-card,
+body[data-local-page-contract="local-area-v1"] .area-card,
+body[data-local-page-contract="local-cluster-v1"] .area-card h3,
+body[data-local-page-contract="local-area-v1"] .area-card h3 {
+  min-height: 0;
+  height: auto;
+}
+body[data-local-page-contract="local-cluster-v1"] .hero,
+body[data-local-page-contract="local-area-v1"] .hero {
+  min-height: 0;
+}
+body[data-local-page-contract="local-cluster-v1"] .image-panel,
+body[data-local-page-contract="local-area-v1"] .image-panel,
+body[data-local-page-contract="local-cluster-v1"] .hero-image-wrap,
+body[data-local-page-contract="local-area-v1"] .hero-image-wrap,
+body[data-local-page-contract="local-cluster-v1"] .trust-media,
+body[data-local-page-contract="local-area-v1"] .trust-media,
+body[data-local-page-contract="local-cluster-v1"] .trust-block-media,
+body[data-local-page-contract="local-area-v1"] .trust-block-media {
+  min-height: 0;
+  height: auto;
+  max-height: none;
+}
+body[data-local-page-contract="local-cluster-v1"] .grid-2.trust-split-row,
+body[data-local-page-contract="local-area-v1"] .grid-2.trust-split-row {
+  align-items: start;
+}
+body[data-local-page-contract="local-cluster-v1"] .conversion-image-section,
+body[data-local-page-contract="local-area-v1"] .conversion-image-section {
+  padding: 0 0 24px;
+}
+body[data-local-page-contract="local-cluster-v1"] .conversion-image-section .wrap,
+body[data-local-page-contract="local-area-v1"] .conversion-image-section .wrap {
+  padding-top: 24px;
+}
+body[data-local-page-contract="local-cluster-v1"] .conversion-image-section .image-panel,
+body[data-local-page-contract="local-area-v1"] .conversion-image-section .image-panel {
+  aspect-ratio: auto;
+  max-height: 280px;
+}
+body[data-local-page-contract="local-cluster-v1"] .pharmacy-map-card,
+body[data-local-page-contract="local-area-v1"] .pharmacy-map-card {
+  min-height: 0;
+  height: auto;
+}
+body[data-local-page-contract="local-cluster-v1"] .pharmacy-map-card iframe,
+body[data-local-page-contract="local-area-v1"] .pharmacy-map-card iframe {
+  min-height: 220px;
+  height: 220px;
+}
 /* Shared locality narrative alignment — headings/subtitles/body use section-head.center contract */
 body[data-local-page-contract="local-cluster-v1"] main section .section-head.center p,
 body[data-local-page-contract="local-cluster-v1"] main section p.narrative-center,

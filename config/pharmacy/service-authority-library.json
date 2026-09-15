@@ -1,0 +1,738 @@
+{
+  "version": "1.0",
+  "purpose": "Expert-style educational content and authority signals for AI Authority Layer V1.",
+  "categoryDefaults": {
+    "core-pharmacy": {
+      "professionalInsights": [
+        "Medicines supply works best when patients reorder before running out and bring an accurate medicines list to every consultation.",
+        "Pharmacist clinical checks on every prescription help identify interactions and support safe ongoing use."
+      ],
+      "commonPatientMistakes": [
+        "Running out of essential medicines before reordering",
+        "Not declaring over-the-counter products during counselling",
+        "Collecting prescriptions without understanding dosage changes"
+      ],
+      "patientEducationTopics": [
+        "How dispensing and clinical checks work",
+        "EPS nomination and electronic prescriptions",
+        "When to contact your GP about medicine changes"
+      ],
+      "whenToSeekAdvice": [
+        "New side effects after starting or changing medicines",
+        "Missed doses on critical medications",
+        "Uncertainty about whether a prescription has been sent"
+      ],
+      "authorityStatements": [
+        "Regulated dispensing with pharmacist oversight is the foundation of safe community pharmacy care.",
+        "Patient counselling at collection helps reduce medicines errors and improves adherence."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Pharmacies just put labels on boxes without checking prescriptions.",
+          "fact": "Every prescription is clinically screened by a pharmacist before supply, including interaction and dosage checks."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "How long will my prescription take to dispense?",
+        "Can someone else collect my medicines?",
+        "Will the pharmacist explain any changes to my treatment?"
+      ],
+      "bestPracticeGuidance": [
+        "Reorder repeats before your last dose",
+        "Keep an up-to-date medicines list",
+        "Ask about new medicines at collection"
+      ],
+      "safetyConsiderations": [
+        "Report suspected adverse reactions promptly",
+        "Do not share prescription medicines with others",
+        "Seek urgent care for severe allergic reactions"
+      ]
+    },
+    "nhs-clinical": {
+      "professionalInsights": [
+        "NHS pharmacy clinical services can reduce unnecessary GP appointments for suitable presentations when commissioned locally.",
+        "Pharmacist assessment ensures patients receive appropriate care or clear referral — not treatment outside clinical scope."
+      ],
+      "commonPatientMistakes": [
+        "Assuming every pharmacy offers every NHS pathway",
+        "Delaying care when symptoms worsen while waiting",
+        "Expecting treatment without individual assessment"
+      ],
+      "patientEducationTopics": [
+        "How NHS pharmacy clinical pathways work",
+        "What happens during pharmacist assessment",
+        "When GP or urgent care is more appropriate"
+      ],
+      "whenToSeekAdvice": [
+        "Symptoms worsen after initial pharmacy advice",
+        "Red-flag symptoms such as severe pain, breathing difficulty or confusion",
+        "Presentation falls outside the NHS service specification"
+      ],
+      "authorityStatements": [
+        "Participating pharmacies follow NHS service specifications and PGDs where applicable.",
+        "Early access to pharmacist assessment can prevent minor illness from escalating unnecessarily."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Pharmacy NHS services replace your GP entirely.",
+          "fact": "Pharmacy clinical services complement GP care for selected conditions — GPs remain responsible for ongoing and complex medical management."
+        },
+        {
+          "myth": "Every NHS pharmacy service is free for everyone.",
+          "fact": "Eligibility and commissioning vary by service, location and clinical presentation — suitability is confirmed at assessment."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Is this service free on the NHS?",
+        "Do I need an appointment?",
+        "What if the pharmacist cannot help me?"
+      ],
+      "bestPracticeGuidance": [
+        "Describe symptoms clearly including duration",
+        "Bring your medicines list",
+        "Follow safety-netting advice and return if symptoms change"
+      ],
+      "safetyConsiderations": [
+        "Not for emergencies — call 999",
+        "Children and vulnerable adults may need GP assessment",
+        "Referral to GP or NHS 111 when red flags present"
+      ]
+    },
+    "private-clinical": {
+      "professionalInsights": [
+        "Private pharmacy services offer faster access where clinically appropriate, with fees explained transparently before treatment.",
+        "Realistic expectations and thorough assessment produce better patient satisfaction than overpromising outcomes."
+      ],
+      "commonPatientMistakes": [
+        "Assuming NHS funding covers private services",
+        "Not disclosing full medical history before assessment",
+        "Expecting instant treatment without suitability review"
+      ],
+      "patientEducationTopics": [
+        "How private pharmacy consultations work",
+        "Fee transparency and treatment options",
+        "Follow-up and monitoring expectations"
+      ],
+      "whenToSeekAdvice": [
+        "Complex medical history affecting treatment suitability",
+        "Symptoms needing GP investigation before private care",
+        "Uncertainty about whether private or NHS route is appropriate"
+      ],
+      "authorityStatements": [
+        "Qualified pharmacists assess suitability before any private supply or treatment.",
+        "Private pharmacy care should feel clear, proportionate and professionally governed."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Private pharmacy services guarantee faster cures.",
+          "fact": "Private services offer convenient access and structured assessment — outcomes depend on individual clinical circumstances."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "How much does the consultation cost?",
+        "Do I need a GP referral?",
+        "How soon can I be seen?"
+      ],
+      "bestPracticeGuidance": [
+        "Book ahead for services needing lead time",
+        "Bring complete medical history",
+        "Ask about follow-up before committing to treatment"
+      ],
+      "safetyConsiderations": [
+        "Individual assessment required before supply",
+        "GP referral when symptoms need investigation",
+        "Treatment contraindications must be screened"
+      ]
+    },
+    "specialist": {
+      "professionalInsights": [
+        "Specialist pharmacy services extend access within qualified scope — boundaries are explained clearly so patients know what can be managed in pharmacy.",
+        "Structured assessment and follow-up are essential for advanced services such as prescribing and occupational health."
+      ],
+      "commonPatientMistakes": [
+        "Assuming all conditions can be treated in pharmacy",
+        "Not bringing a complete medicines list to prescribing clinics",
+        "Skipping follow-up monitoring appointments"
+      ],
+      "patientEducationTopics": [
+        "Scope of pharmacist prescribing and specialist services",
+        "Corporate and occupational health booking processes",
+        "Monitoring and follow-up requirements"
+      ],
+      "whenToSeekAdvice": [
+        "Complex multi-morbidity needing GP coordination",
+        "Conditions outside pharmacist scope of practice",
+        "Employer health requirements needing occupational review"
+      ],
+      "authorityStatements": [
+        "Advanced services are delivered by appropriately qualified pharmacy professionals.",
+        "Specialist pharmacy care complements primary care — it does not replace it."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Pharmacist prescribers can treat any condition a GP can.",
+          "fact": "Independent prescribing scope is defined by training, competence and clinical governance — not all conditions are suitable for pharmacy prescribing."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Am I eligible for pharmacist prescribing?",
+        "Can my employer arrange this service?",
+        "What conditions are in scope?"
+      ],
+      "bestPracticeGuidance": [
+        "Bring all current medicines to prescribing appointments",
+        "Understand follow-up requirements before starting treatment",
+        "Coordinate with your GP for shared care"
+      ],
+      "safetyConsiderations": [
+        "Scope boundaries must be respected",
+        "Safeguarding applies to all clinical consultations",
+        "Referral when presentation exceeds pharmacy competence"
+      ]
+    }
+  },
+  "services": {
+    "travel-vaccinations": {
+      "professionalInsights": [
+        "Travel health planning is often most effective when started several weeks before departure.",
+        "Vaccine recommendations depend on destination, itinerary and planned activities — not a one-size-fits-all list.",
+        "A structured travel risk assessment helps prioritise vaccines when time before departure is limited."
+      ],
+      "commonPatientMistakes": [
+        "Booking too close to departure",
+        "Assuming all destinations have the same vaccination requirements",
+        "Ignoring malaria prevention advice",
+        "Relying on outdated vaccination records from previous trips"
+      ],
+      "patientEducationTopics": [
+        "Why travel vaccinations are recommended",
+        "Understanding destination-specific risks",
+        "Timing vaccination schedules before travel",
+        "How hepatitis A, typhoid and yellow fever fit into travel planning"
+      ],
+      "whenToSeekAdvice": [
+        "Travel to high-risk destinations",
+        "Long-term overseas travel or multiple countries",
+        "Existing health conditions affecting vaccine suitability",
+        "Travel at short notice with incomplete vaccination history"
+      ],
+      "authorityStatements": [
+        "Professional travel health guidance helps travellers understand destination risk before departure — not after illness abroad.",
+        "Pharmacy travel consultations combine vaccine planning with broader travel health precautions."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Travel vaccinations are only needed for tropical countries.",
+          "fact": "Vaccination recommendations depend on destination, activities and personal circumstances — not latitude alone."
+        },
+        {
+          "myth": "One appointment is always enough before any trip.",
+          "fact": "Some vaccines require multiple doses over several weeks — last-minute travel may limit full protection."
+        },
+        {
+          "myth": "All travel vaccines are available free on the NHS.",
+          "fact": "Some vaccines may be NHS-funded for specific risk groups; many destination-specific vaccines are private — eligibility is confirmed at consultation."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Which vaccines do I actually need for my trip?",
+        "How far ahead should I book travel vaccinations?",
+        "Is it too late if I am travelling next week?",
+        "Do children need different travel vaccines?"
+      ],
+      "bestPracticeGuidance": [
+        "Book 6–8 weeks before departure where possible",
+        "Bring your full itinerary including rural or adventure activities",
+        "Keep a personal vaccination record for future trips"
+      ],
+      "safetyConsiderations": [
+        "Vaccine suitability depends on medical history — disclose allergies and pregnancy status",
+        "Malaria prevention requires individual risk assessment",
+        "Seek urgent medical care abroad for fever after travel to malaria areas"
+      ]
+    },
+    "blood-pressure-checks": {
+      "professionalInsights": [
+        "High blood pressure often develops without noticeable symptoms — which is why routine screening matters.",
+        "Regular monitoring can help identify raised readings earlier and support timely GP follow-up.",
+        "A single pharmacy reading is a screening tool, not a definitive hypertension diagnosis."
+      ],
+      "commonPatientMistakes": [
+        "Waiting for symptoms before getting checked",
+        "Ignoring repeated elevated readings",
+        "Assuming one normal reading means no future monitoring is needed",
+        "Checking blood pressure immediately after caffeine or exercise"
+      ],
+      "patientEducationTopics": [
+        "Understanding systolic and diastolic readings",
+        "Cardiovascular risk awareness",
+        "Importance of ongoing monitoring",
+        "When ambulatory blood pressure monitoring may be recommended"
+      ],
+      "whenToSeekAdvice": [
+        "Repeatedly raised readings on home or pharmacy checks",
+        "Age over 40 without recent blood pressure screening",
+        "Family history of stroke, heart disease or hypertension",
+        "Diabetes, smoking or other cardiovascular risk factors"
+      ],
+      "authorityStatements": [
+        "Community pharmacy blood pressure checks provide convenient access to NHS Hypertension Case-Finding screening where commissioned.",
+        "Early detection of raised blood pressure supports better long-term cardiovascular outcomes."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "High blood pressure always causes headaches or dizziness.",
+          "fact": "Hypertension is often silent — many people have raised readings without any symptoms at all."
+        },
+        {
+          "myth": "One normal reading means you do not need checking again.",
+          "fact": "Blood pressure varies through the day; ongoing monitoring is recommended for at-risk groups and after raised readings."
+        },
+        {
+          "myth": "A pharmacy can diagnose and treat hypertension on the spot.",
+          "fact": "Pharmacy checks screen for raised readings and guide appropriate follow-up — diagnosis and long-term treatment remain with your GP."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "What do my blood pressure numbers mean?",
+        "Do I need to see my GP after a raised reading?",
+        "How often should I have my blood pressure checked?",
+        "What is ambulatory blood pressure monitoring?"
+      ],
+      "bestPracticeGuidance": [
+        "Rest quietly for five minutes before measurement",
+        "Track readings over time rather than relying on one check",
+        "Follow lifestyle advice and GP referral guidance given"
+      ],
+      "safetyConsiderations": [
+        "Chest pain, sudden weakness or severe headache need urgent care — not a routine pharmacy check",
+        "Do not stop prescribed blood pressure medicines without GP advice",
+        "Pregnancy-related hypertension needs immediate GP or midwife review"
+      ]
+    },
+    "pharmacy-first": {
+      "professionalInsights": [
+        "Pharmacy First can provide same-day assessment for suitable minor illnesses — reducing unnecessary GP waiting for eligible pathways.",
+        "Early pharmacist advice often prevents minor conditions from worsening while patients wait for GP access.",
+        "Clear referral when symptoms fall outside scope is as important as supply when eligible."
+      ],
+      "commonPatientMistakes": [
+        "Expecting treatment for conditions outside Pharmacy First scope",
+        "Delaying GP care when red-flag symptoms are present",
+        "Assuming antibiotics will always be supplied",
+        "Not returning if symptoms worsen after initial consultation"
+      ],
+      "patientEducationTopics": [
+        "When Pharmacy First is appropriate",
+        "Conditions covered by NHS pathways",
+        "When a GP or urgent care service may be more suitable",
+        "Benefits of early treatment advice for minor illness"
+      ],
+      "whenToSeekAdvice": [
+        "Sore throat, earache, sinusitis or UTI symptoms within pathway criteria",
+        "Minor skin infections such as impetigo or infected insect bites",
+        "Uncertainty about whether symptoms need urgent care"
+      ],
+      "authorityStatements": [
+        "Pharmacy First puts pharmacist clinical skills at the front of NHS minor illness access where commissioned.",
+        "Appropriate early treatment or referral protects patients and reduces pressure on GP appointments."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Pharmacy First means you never need to see a GP.",
+          "fact": "Pharmacy First covers selected minor illness pathways — GPs remain essential for chronic, complex and red-flag presentations."
+        },
+        {
+          "myth": "Every sore throat gets antibiotics from Pharmacy First.",
+          "fact": "Antibiotics are supplied only when clinically indicated under the pathway — many sore throats are viral and do not need them."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Can the pharmacy treat my sore throat without a GP?",
+        "Is Pharmacy First free?",
+        "What if my symptoms get worse after the pharmacy visit?",
+        "Can children use Pharmacy First?"
+      ],
+      "bestPracticeGuidance": [
+        "Describe when symptoms started and how they have changed",
+        "Return or seek GP care if safety-netting advice triggers",
+        "Do not use Pharmacy First for emergencies"
+      ],
+      "safetyConsiderations": [
+        "Call 999 for emergencies — not Pharmacy First",
+        "Referral to GP or urgent care when red flags present",
+        "Safeguarding assessment for vulnerable patients and children"
+      ]
+    },
+    "weight-management": {
+      "professionalInsights": [
+        "Sustainable weight management combines realistic goal-setting, lifestyle support and eligible treatment — not quick fixes.",
+        "Pharmacy weight programmes focus on structured assessment and ongoing monitoring rather than guaranteed outcomes.",
+        "Patients who engage with lifestyle advice alongside any eligible treatment tend to achieve more durable results."
+      ],
+      "commonPatientMistakes": [
+        "Expecting rapid guaranteed weight loss",
+        "Not disclosing medical history affecting treatment suitability",
+        "Skipping follow-up monitoring appointments",
+        "Ignoring the lifestyle component of weight management"
+      ],
+      "patientEducationTopics": [
+        "Realistic expectations for weight management",
+        "Lifestyle support and behaviour change",
+        "Long-term weight management planning",
+        "Treatment suitability and eligibility assessment"
+      ],
+      "whenToSeekAdvice": [
+        "BMI and health status suggest structured support may help",
+        "Previous diet attempts without sustained success",
+        "Medical conditions such as diabetes or hypertension alongside weight concerns"
+      ],
+      "authorityStatements": [
+        "Pharmacy weight management combines clinical assessment with practical lifestyle support.",
+        "Eligibility for certain treatments depends on individual assessment and current clinical guidance."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Pharmacy weight management guarantees a specific amount of weight loss.",
+          "fact": "Outcomes vary by individual — programmes focus on realistic goals, safety monitoring and sustainable behaviour change."
+        },
+        {
+          "myth": "Treatment alone works without lifestyle changes.",
+          "fact": "Eligible treatment pathways work best alongside dietary, activity and behavioural support."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Am I eligible for pharmacy weight support?",
+        "How much weight can I expect to lose?",
+        "Are there side effects I should know about?",
+        "How often are follow-up appointments?"
+      ],
+      "bestPracticeGuidance": [
+        "Set realistic goals with your pharmacist",
+        "Attend monitoring appointments",
+        "Combine treatment with sustainable lifestyle changes where advised"
+      ],
+      "safetyConsiderations": [
+        "Full medical history required before treatment suitability assessment",
+        "Report side effects promptly at follow-up",
+        "GP coordination for complex medical conditions"
+      ]
+    },
+    "repeat-prescriptions": {
+      "professionalInsights": [
+        "Medication continuity depends on reordering before the last dose — not after supplies run out.",
+        "EPS nomination reduces delays by sending prescriptions electronically to your chosen pharmacy."
+      ],
+      "commonPatientMistakes": [
+        "Running out before reordering",
+        "Not updating nomination after changing pharmacy",
+        "Assuming all repeat items renew automatically without GP authorisation"
+      ],
+      "patientEducationTopics": [
+        "How repeat ordering works with your GP surgery",
+        "EPS nomination explained",
+        "Planning reorder timing to avoid gaps"
+      ],
+      "whenToSeekAdvice": [
+        "GP surgery delays authorising a repeat",
+        "Medication changes from your doctor",
+        "Setting up EPS for the first time"
+      ],
+      "authorityStatements": [
+        "A reliable repeat prescription process supports adherence and reduces avoidable medicines gaps.",
+        "Pharmacy teams can advise on reorder timing and EPS setup."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Pharmacists can authorise repeat prescriptions without your GP.",
+          "fact": "GP surgeries authorise repeat prescriptions — pharmacies dispense and support reorder timing once authorised."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "How do I nominate this pharmacy for EPS?",
+        "Can you remind me when my repeat is due?",
+        "What if my surgery is slow to authorise?"
+      ],
+      "bestPracticeGuidance": [
+        "Reorder 7–10 days before medicines run out",
+        "Keep repeat intervals updated with your surgery",
+        "Use EPS nomination for faster electronic supply"
+      ],
+      "safetyConsiderations": [
+        "Do not stop essential medicines without clinical advice",
+        "Report supply delays before running out completely"
+      ]
+    },
+    "prescription-delivery": {
+      "professionalInsights": [
+        "Home delivery maintains medication continuity for patients who cannot collect in person — with the same dispensing standards as in-store supply.",
+        "Safe handover arrangements are confirmed before the first delivery to protect medicines supply."
+      ],
+      "commonPatientMistakes": [
+        "Not informing the pharmacy of address changes",
+        "Assuming all medicines can be posted",
+        "Missing delivery windows without a safe receipt plan"
+      ],
+      "patientEducationTopics": [
+        "Who prescription delivery helps most",
+        "How delivery integrates with repeat prescriptions",
+        "Safe receipt and handover expectations"
+      ],
+      "whenToSeekAdvice": [
+        "Mobility limitations prevent collection",
+        "Caring for housebound relatives",
+        "Post-discharge medicines supply at home"
+      ],
+      "authorityStatements": [
+        "Domiciliary supply supports medication continuity for elderly and mobility-limited patients.",
+        "Pharmacy teams apply identical dispensing governance to delivered medicines."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "All medicines can always be delivered by post.",
+          "fact": "Delivery suitability depends on medicine type, storage requirements and local delivery routes — confirmed before arranging supply."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Do you deliver to my address?",
+        "Is delivery free?",
+        "Can a carer receive medicines on my behalf?"
+      ],
+      "bestPracticeGuidance": [
+        "Confirm delivery address and safe receipt contact",
+        "Link delivery to a reliable repeat prescription process",
+        "Notify the pharmacy of any access changes promptly"
+      ],
+      "safetyConsiderations": [
+        "Controlled medicines may have specific delivery requirements",
+        "Ensure a safe receipt point for temperature-sensitive items where applicable"
+      ]
+    },
+    "new-medicine-service": {
+      "professionalInsights": [
+        "The New Medicine Service improves outcomes by catching problems early when patients start selected new medicines.",
+        "Follow-up contact is as important as the initial discussion — many issues appear days after starting treatment."
+      ],
+      "commonPatientMistakes": [
+        "Skipping the NMS follow-up appointment",
+        "Stopping a new medicine without advice due to mild side effects",
+        "Not asking about inhaler technique or dosing at the first collection"
+      ],
+      "patientEducationTopics": [
+        "Why NMS invitations are sent",
+        "What happens at the follow-up review",
+        "How to report side effects appropriately"
+      ],
+      "whenToSeekAdvice": [
+        "Starting a new medicine on the NMS eligible list",
+        "Uncertain about how to take a new treatment",
+        "Mild side effects within the first weeks of starting"
+      ],
+      "authorityStatements": [
+        "NMS is an NHS service designed to improve adherence and safety for new medicine starters.",
+        "Structured pharmacy follow-up reduces early discontinuation of important treatments."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "NMS is mandatory and will affect your prescription if you decline.",
+          "fact": "NMS is an optional NHS support service — declining does not affect your entitlement to prescribed medicines."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Why have I been invited to NMS?",
+        "What happens at the follow-up?",
+        "What if I get side effects from my new medicine?"
+      ],
+      "bestPracticeGuidance": [
+        "Attend the follow-up review",
+        "Ask about technique for inhalers and devices",
+        "Contact the pharmacy or GP before stopping a new medicine"
+      ],
+      "safetyConsiderations": [
+        "Report severe side effects to GP promptly",
+        "Do not adjust doses without prescriber advice"
+      ]
+    },
+    "smoking-cessation": {
+      "professionalInsights": [
+        "Quit attempts succeed more often with structured behavioural support and licensed NRT than going alone.",
+        "Relapse is common — non-judgemental follow-up keeps patients engaged with their quit plan."
+      ],
+      "commonPatientMistakes": [
+        "Trying to quit without support or NRT",
+        "Stopping NRT too early before cravings settle",
+        "Not identifying smoking triggers in advance"
+      ],
+      "patientEducationTopics": [
+        "Nicotine dependence and withdrawal",
+        "NRT options and how they help",
+        "Planning a quit date with pharmacy support"
+      ],
+      "whenToSeekAdvice": [
+        "Ready to set a quit date",
+        "Previous quit attempts that relapsed",
+        "Pregnancy or mental health conditions affecting quit planning"
+      ],
+      "authorityStatements": [
+        "Pharmacists provide practical, non-judgemental stop smoking support with evidence-based NRT where eligible.",
+        "Structured quit planning improves long-term success rates compared with unassisted attempts."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "NRT is just replacing one addiction with another.",
+          "fact": "Licensed NRT delivers controlled nicotine without the harmful chemicals in cigarette smoke — it is a stepping stone to becoming smoke-free."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Is stop smoking support free on the NHS?",
+        "Which NRT products can you supply?",
+        "What if I start smoking again?"
+      ],
+      "bestPracticeGuidance": [
+        "Set a firm quit date",
+        "Attend follow-up reviews",
+        "Identify triggers and plan alternatives"
+      ],
+      "safetyConsiderations": [
+        "Pregnancy requires specialist quit support",
+        "Mental health conditions may need coordinated care with GP"
+      ]
+    },
+    "pharmacy-contraception-service": {
+      "professionalInsights": [
+        "The NHS Pharmacy Contraception Service provides convenient repeat oral contraception supply where clinically appropriate after assessment.",
+        "Blood pressure and medical history review help ensure safe supply — some patients need GP referral instead."
+      ],
+      "commonPatientMistakes": [
+        "Not declaring medical history affecting contraception suitability",
+        "Missing blood pressure checks at renewal",
+        "Assuming all contraceptive pills are available through pharmacy supply"
+      ],
+      "patientEducationTopics": [
+        "How the NHS Pharmacy Contraception Service works",
+        "Blood pressure checks and safety screening",
+        "When GP or sexual health clinic referral is needed"
+      ],
+      "whenToSeekAdvice": [
+        "Needing repeat oral contraception supply",
+        "Switching contraceptive pill brands",
+        "Missed pills requiring clinical guidance"
+      ],
+      "authorityStatements": [
+        "Pharmacy contraception consultations provide convenient access where commissioning and clinical criteria are met.",
+        "Pharmacists follow PGD and service specification requirements for safe supply."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Pharmacies can supply any contraceptive method.",
+          "fact": "The NHS Pharmacy Contraception Service covers selected oral contraception — other methods may need GP or sexual health clinic access."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Can I get my pill from the pharmacy?",
+        "Do I need a blood pressure check?",
+        "What if I missed pills this week?"
+      ],
+      "bestPracticeGuidance": [
+        "Bring your current pill pack to consultations",
+        "Declare full medical history including migraine history",
+        "Attend BP checks when requested"
+      ],
+      "safetyConsiderations": [
+        "Certain medical conditions require GP referral not pharmacy supply",
+        "Missed pill rules vary by pill type — ask for specific guidance"
+      ]
+    },
+    "ear-wax-removal": {
+      "professionalInsights": [
+        "Professional ear wax removal is safer than home methods — cotton buds often push wax deeper and risk canal injury.",
+        "Examination before removal identifies when referral is needed for infection or perforation."
+      ],
+      "commonPatientMistakes": [
+        "Using cotton buds regularly",
+        "Attempting home removal with objects",
+        "Ignoring pain, discharge or sudden hearing loss"
+      ],
+      "patientEducationTopics": [
+        "When ear wax becomes problematic",
+        "Microsuction vs irrigation suitability",
+        "Aftercare following professional removal"
+      ],
+      "whenToSeekAdvice": [
+        "Blocked ears affecting hearing or comfort",
+        "Hearing aid users with recurrent wax build-up",
+        "Previous ear surgery requiring careful assessment"
+      ],
+      "authorityStatements": [
+        "Trained pharmacy teams assess the ear before any removal procedure.",
+        "Safe technique and aftercare advice support clearer hearing and comfort."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "Cotton buds are the best way to clean ears.",
+          "fact": "Cotton buds often compact wax and damage the canal — professional removal is safer when wax is impacted."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Is microsuction safe?",
+        "Will my hearing improve straight away?",
+        "Do I need GP referral first?"
+      ],
+      "bestPracticeGuidance": [
+        "Use olive oil drops if advised before appointment",
+        "Avoid inserting objects into the ear canal",
+        "Seek GP review for pain or discharge"
+      ],
+      "safetyConsiderations": [
+        "Referral if perforated eardrum suspected",
+        "Sudden hearing loss needs urgent assessment",
+        "Active ear infection is not wax removal alone"
+      ]
+    },
+    "travel-health-consultations": {
+      "professionalInsights": [
+        "Travel health consultations review the whole trip — not just individual vaccines — covering malaria, altitude and activity-related risk.",
+        "Complex itineraries need longer planning horizons than single-vaccine appointments."
+      ],
+      "commonPatientMistakes": [
+        "Planning only vaccinations without broader travel health advice",
+        "Booking too late for multi-course vaccine schedules",
+        "Not bringing detailed itinerary information"
+      ],
+      "patientEducationTopics": [
+        "Full itinerary review and risk planning",
+        "Malaria prophylaxis decision-making",
+        "Difference between travel health consultation and vaccinations-only appointments"
+      ],
+      "whenToSeekAdvice": [
+        "Multi-country or long-duration travel",
+        "Adventure, rural or backpacking itineraries",
+        "Complex medical history affecting travel health"
+      ],
+      "authorityStatements": [
+        "In-depth travel health planning reduces avoidable risks on complex trips.",
+        "Pharmacist travel medicine advice complements vaccination scheduling."
+      ],
+      "mythVsFact": [
+        {
+          "myth": "A travel health consultation is the same as a quick vaccination appointment.",
+          "fact": "Full travel health consultations review itinerary, medical history and all health risks — vaccination is one component of broader planning."
+        }
+      ],
+      "patientQuestionsWeOftenHear": [
+        "Do I need a full consultation if I only want one vaccine?",
+        "Can you advise on malaria tablets for several countries?",
+        "How long does a comprehensive consultation take?"
+      ],
+      "bestPracticeGuidance": [
+        "Bring detailed itinerary with dates and regions",
+        "Book 8+ weeks ahead for complex trips",
+        "Keep a travel health record for future journeys"
+      ],
+      "safetyConsiderations": [
+        "Complex medical cases may need GP or travel clinic referral",
+        "Malaria prophylaxis requires individual risk assessment"
+      ]
+    }
+  }
+}

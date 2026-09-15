@@ -1,0 +1,204 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:32:52.768Z",
+  "tokenUsage": {
+    "promptTokens": 6985,
+    "completionTokens": 351,
+    "totalTokens": 7336
+  },
+  "estimatedCostUsd": 0.016778,
+  "inputEvidencePackHash": "ba982ba281b15688b59a11dd1f2ebb97fb3ca940a3ce4a98dd84086b948d660f",
+  "editorialEvidencePackHash": "7a88af47877ac43d3a0cacc9f56dcf04ad5f358d665b81e4c64405713ca82d23",
+  "areaSlug": "spondon",
+  "areaName": "Spondon",
+  "editorialFactIdsUsed": [
+    "spondon:community:spondon-library-is-listed-as-a-community-facilit",
+    "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon",
+    "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc"
+  ],
+  "outputCopy": {
+    "area": "Spondon",
+    "heroHeading": "Pharmacy First in Spondon",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Spondon.",
+    "localIntroduction": "Pharmacy First for people in Spondon is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Spondon Library is listed as a community facility in Spondon.",
+      "Borrow Wood Park is listed as a landmark in Spondon.",
+      "Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Spondon Library is listed as a community facility in Spondon.",
+        "editorialFactId": "spondon:community:spondon-library-is-listed-as-a-community-facilit"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Borrow Wood Park is listed as a landmark in Spondon.",
+        "editorialFactId": "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+        "editorialFactId": "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "spondon:community:spondon-library-is-listed-as-a-community-facilit",
+      "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon",
+      "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Spondon",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Spondon.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Spondon is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Spondon Library is listed as a community facility in Spondon.",
+      "supportingCanonicalFieldOrEntity": "spondon:community:spondon-has-a-public-library, spondon:community:spondon-library-is-listed-as-a-community-facilit",
+      "providerSource": "derby.gov.uk, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Borrow Wood Park is listed as a landmark in Spondon.",
+      "supportingCanonicalFieldOrEntity": "spondon:community:spondon-library-is-listed-as-a-community-facilit, spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon, spondon:heritage:dale-road-park-is-listed-as-a-landmark-in-spondo, spondon:heritage:west-park-meadow-nature-reserve-is-listed-as-a-l",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[2]",
+      "exactSentence": "Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "supportingCanonicalFieldOrEntity": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby, spondon:community:spondon-has-a-neighbourhood-board-of-local-counc, spondon:community:spondon-has-a-public-library, spondon:community:spondon-library-is-listed-as-a-community-facilit",
+      "providerSource": "derby.gov.uk, derby.gov.uk, derby.gov.uk, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+      "supportingCanonicalFieldOrEntity": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby, spondon:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Spondon",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Spondon.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Spondon is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Spondon Library is listed as a community facility in Spondon.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "spondon:community:spondon-has-a-public-library, spondon:community:spondon-library-is-listed-as-a-community-facilit",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Borrow Wood Park is listed as a landmark in Spondon.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "spondon:community:spondon-library-is-listed-as-a-community-facilit, spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon, spondon:heritage:dale-road-park-is-listed-as-a-landmark-in-spondo, spondon:heritage:west-park-meadow-nature-reserve-is-listed-as-a-l",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[2]",
+      "sentence": "Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby, spondon:community:spondon-has-a-neighbourhood-board-of-local-counc, spondon:community:spondon-has-a-public-library, spondon:community:spondon-library-is-listed-as-a-community-facilit",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "spondon:area-identity:spondon-is-a-neighbourhood-ward-in-derby, spondon:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Spondon Library is listed as a community facility in Spondon.\",\n    \"Borrow Wood Park is listed as a landmark in Spondon.\",\n    \"Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Spondon Library is listed as a community facility in Spondon.\",\n      \"editorialFactId\": \"spondon:community:spondon-library-is-listed-as-a-community-facilit\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Borrow Wood Park is listed as a landmark in Spondon.\",\n      \"editorialFactId\": \"spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\",\n      \"editorialFactId\": \"spondon:community:spondon-has-a-neighbourhood-board-of-local-counc\"\n    }\n  ],\n  \"editorialFactIdsUsed\": [\n    \"spondon:community:spondon-library-is-listed-as-a-community-facilit\",\n    \"spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon\",\n    \"spondon:community:spondon-has-a-neighbourhood-board-of-local-counc\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Spondon Library is listed as a community facility in Spondon.\",\n    \"Borrow Wood Park is listed as a landmark in Spondon.\",\n    \"Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Spondon Library is listed as a community facility in Spondon.\",\n      \"editorialFactId\": \"spondon:community:spondon-library-is-listed-as-a-community-facilit\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Borrow Wood Park is listed as a landmark in Spondon.\",\n      \"editorialFactId\": \"spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\",\n      \"editorialFactId\": \"spondon:community:spondon-has-a-neighbourhood-board-of-local-counc\"\n    }\n  ],\n  \"editorialFactIdsUsed\": [\n    \"spondon:community:spondon-library-is-listed-as-a-community-facilit\",\n    \"spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon\",\n    \"spondon:community:spondon-has-a-neighbourhood-board-of-local-counc\"\n  ]\n}"
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "slug": "dhmdigital",
+  "checkedAt": "2026-07-02T11:27:11.123Z",
+  "overallReady": false,
+  "connectedCount": 2,
+  "integrations": [
+    {
+      "id": "google-places",
+      "name": "Google Places API",
+      "status": "ready",
+      "lastCheckedAt": "2026-07-02T11:27:11.088Z",
+      "testResult": "Ready — cached live snapshot available",
+      "unlocks": "Local Healthcare Intelligence, competitor discovery, and pharmacy lookup",
+      "nextAction": "No action required — integration is ready",
+      "checks": [
+        {
+          "id": "credential",
+          "ok": true,
+          "label": "API key configured",
+          "detail": "GOOGLE_PLACES_API_KEY is set",
+          "liveData": false
+        },
+        {
+          "id": "snapshot",
+          "ok": true,
+          "label": "Local snapshot saved",
+          "detail": "10 competitors · 60 healthcare providers",
+          "liveData": true
+        }
+      ],
+      "artifactPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/dhmdigital-competitors.json"
+    },
+    {
+      "id": "website-import",
+      "name": "Website Import",
+      "status": "limited",
+      "lastCheckedAt": "2026-07-02T11:27:11.095Z",
+      "testResult": "Limited — URL present; run live fetch test",
+      "unlocks": "Business Profile brand import, colours, logo, services, and opening hours",
+      "nextAction": "Run live integration proof with website fetch enabled",
+      "checks": [
+        {
+          "id": "website-url",
+          "ok": true,
+          "label": "Website URL on profile",
+          "detail": "https://dhmdigital.net",
+          "liveData": false
+        },
+        {
+          "id": "prior-import",
+          "ok": false,
+          "label": "Prior import fields",
+          "detail": "No prior website import recorded on profile",
+          "liveData": false
+        }
+      ]
+    },
+    {
+      "id": "image-generation",
+      "name": "Image Generation (Ideogram)",
+      "status": "not_connected",
+      "lastCheckedAt": "2026-07-02T11:27:11.095Z",
+      "testResult": "Not Connected — no Ideogram API key",
+      "unlocks": "AI images for service pages and campaign assets",
+      "nextAction": "Set IDEOGRAM_API_KEY in environment or project settings",
+      "checks": [
+        {
+          "id": "credential",
+          "ok": false,
+          "label": "API key configured",
+          "detail": "IDEOGRAM_API_KEY not set",
+          "liveData": false
+        }
+      ]
+    },
+    {
+      "id": "static-publishing",
+      "name": "Static Publishing",
+      "status": "ready",
+      "lastCheckedAt": "2026-07-02T11:27:11.114Z",
+      "testResult": "Ready — static publishing output prepared",
+      "unlocks": "Local HTML output, sitemap, and page tracker for indexing",
+      "nextAction": "No action required — integration is ready",
+      "checks": [
+        {
+          "id": "static-output",
+          "ok": true,
+          "label": "Static HTML output",
+          "detail": "18 pages in publish output",
+          "liveData": true
+        },
+        {
+          "id": "sitemap",
+          "ok": true,
+          "label": "Sitemap generated",
+          "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-publish/dhmdigital/sitemap.xml",
+          "liveData": true
+        },
+        {
+          "id": "publish-prepared",
+          "ok": true,
+          "label": "Publish manifest",
+          "detail": "Prepared 2026-07-02 · 18 pages",
+          "liveData": true
+        },
+        {
+          "id": "last-published",
+          "ok": false,
+          "label": "Last live publish",
+          "detail": "Not published live yet",
+          "liveData": false
+        }
+      ],
+      "artifactPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-publish/dhmdigital/_publish-index.json"
+    },
+    {
+      "id": "ftp-publishing",
+      "name": "FTP / Live Publishing",
+      "status": "limited",
+      "lastCheckedAt": "2026-07-02T11:27:11.122Z",
+      "testResult": "Not Connected — FTP not configured",
+      "unlocks": "Upload published pages and sitemap to your live website",
+      "nextAction": "Configure deploy host and DEPLOY_USERNAME / DEPLOY_PASSWORD",
+      "checks": [
+        {
+          "id": "deploy-config",
+          "ok": true,
+          "label": "FTP host configured",
+          "detail": "ftp.dhmdigital.net:21",
+          "liveData": false
+        },
+        {
+          "id": "credentials",
+          "ok": false,
+          "label": "FTP credentials",
+          "detail": "Set DEPLOY_USERNAME and DEPLOY_PASSWORD",
+          "liveData": false
+        }
+      ]
+    },
+    {
+      "id": "google-search-console",
+      "name": "Google Search Console",
+      "status": "limited",
+      "lastCheckedAt": "2026-07-02T11:27:11.123Z",
+      "testResult": "Limited — credentials present but no live index tracking file yet",
+      "unlocks": "Live indexing status, URL submission, and search performance",
+      "nextAction": "Run index tracking refresh after pages are registered",
+      "checks": [
+        {
+          "id": "service-account",
+          "ok": false,
+          "label": "Service account JSON",
+          "detail": "Not configured",
+          "liveData": false
+        },
+        {
+          "id": "oauth-client",
+          "ok": false,
+          "label": "OAuth client",
+          "detail": "GSC_OAUTH_CLIENT_ID not set",
+          "liveData": false
+        },
+        {
+          "id": "oauth-connected",
+          "ok": true,
+          "label": "OAuth connected",
+          "detail": "Refresh token available",
+          "liveData": false
+        },
+        {
+          "id": "index-tracking",
+          "ok": false,
+          "label": "Index tracking data",
+          "detail": "No index-tracking.json — refresh will use estimated status",
+          "liveData": false
+        }
+      ]
+    },
+    {
+      "id": "rank-tracking",
+      "name": "Rank Tracking",
+      "status": "not_connected",
+      "lastCheckedAt": "2026-07-02T11:27:11.123Z",
+      "testResult": "Not Connected — build rank tracking from Search Console",
+      "unlocks": "Keyword positions, movement, and visibility in Growth Dashboard",
+      "nextAction": "Run: npx tsx scripts/build-rank-tracking.ts dhmdigital",
+      "checks": [
+        {
+          "id": "rank-file",
+          "ok": false,
+          "label": "Rank tracking file",
+          "detail": "rank-tracking.json not found",
+          "liveData": false
+        },
+        {
+          "id": "keywords",
+          "ok": false,
+          "label": "Keywords tracked",
+          "detail": "No live keyword data",
+          "liveData": false
+        },
+        {
+          "id": "visibility-report",
+          "ok": false,
+          "label": "Visibility report",
+          "detail": "10 pages tracked",
+          "liveData": false
+        }
+      ]
+    }
+  ]
+}

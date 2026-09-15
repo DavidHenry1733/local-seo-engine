@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.1",
+  "platformRevision": "69c19f8020ddc1d6",
+  "generatedAt": "2026-07-22T16:49:21.207Z",
+  "assetRoot": "assets/pharmacy-image-platform",
+  "validationResult": "READY",
+  "missingRequirements": [],
+  "sharedNeutralFallback": {
+    "registeredAt": "2026-08-26T18:30:00.000Z",
+    "registeredBy": "APPROVED-CORE-PAGE-SHARED-RENDERER-QUALITY-29",
+    "note": "Cross-service neutral photographic assets stored under pharmacy-first catalogue.",
+    "assetIds": [
+      "pf-hero-community-environment",
+      "pf-hero-pharmacist-patient",
+      "pf-support-patient-centred",
+      "pf-support-advice",
+      "pf-support-medication-talk",
+      "pf-trust-diverse-team",
+      "pf-trust-welcoming",
+      "pf-conversion-reception"
+    ]
+  },
+  "services": {
+    "pharmacy-first": {
+      "serviceId": "pharmacy-first",
+      "approvedAssetCount": 20,
+      "roles": {
+        "hero": {
+          "approvedAssetIds": [
+            "pf-hero-consultation-room",
+            "pf-hero-pharmacist-patient",
+            "pf-hero-community-environment",
+            "pf-hero-confidential-consultation"
+          ]
+        },
+        "support": {
+          "approvedAssetIds": [
+            "pf-support-advice",
+            "pf-support-medication-talk",
+            "pf-support-patient-centred",
+            "pf-support-next-steps",
+            "pf-guide-editorial-care",
+            "pf-guide-editorial-waiting",
+            "pf-blog-editorial-advice",
+            "pf-blog-editorial-pharmacy-first"
+          ]
+        },
+        "trust": {
+          "approvedAssetIds": [
+            "pf-trust-team",
+            "pf-trust-professional-care",
+            "pf-trust-welcoming",
+            "pf-trust-diverse-team"
+          ]
+        },
+        "conversion": {
+          "approvedAssetIds": [
+            "pf-conversion-booking",
+            "pf-conversion-reception",
+            "pf-conversion-follow-up",
+            "pf-conversion-service-enquiry"
+          ]
+        }
+      }
+    }
+  }
+}

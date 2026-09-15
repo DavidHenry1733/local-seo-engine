@@ -1,0 +1,81 @@
+{
+  "attempts": [
+    {
+      "file": "2026-09-01T12-33-31-060Z-attempt-1.json",
+      "savedAt": "2026-09-01T12:33:31.060Z",
+      "attemptNumber": 1,
+      "model": "gpt-4.1",
+      "temperature": 0.4,
+      "hasRetryNote": false,
+      "failures": [
+        "grammar: sentence missing a clear verb: Wombwell sits within the Metropolitan Borough of Barnsley, giving the area a dis"
+      ],
+      "candidateRecordWritten": false,
+      "factIds": [
+        "wombwell:access-transport:wombwell-has-a-national-rail-station",
+        "wombwell:pharmacy-relationship:distance",
+        "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+        "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+        "wombwell:community:wombwell-has-a-public-library"
+      ]
+    },
+    {
+      "file": "2026-09-01T12-33-35-374Z-attempt-2.json",
+      "savedAt": "2026-09-01T12:33:35.374Z",
+      "attemptNumber": 2,
+      "model": "gpt-4.1",
+      "temperature": 0.3,
+      "hasRetryNote": true,
+      "failures": [
+        "grammar: sentence missing a clear verb: The area also benefits from community resources such as a public library.",
+        "generic filler"
+      ],
+      "candidateRecordWritten": false,
+      "factIds": [
+        "wombwell:access-transport:wombwell-has-a-national-rail-station",
+        "wombwell:pharmacy-relationship:distance",
+        "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+        "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+        "wombwell:community:wombwell-has-a-public-library"
+      ]
+    },
+    {
+      "file": "2026-09-01T12-35-39-845Z-attempt-1.json",
+      "savedAt": "2026-09-01T12:35:39.845Z",
+      "attemptNumber": 1,
+      "model": "gpt-4.1",
+      "temperature": 0.4,
+      "hasRetryNote": false,
+      "failures": [
+        "generic filler"
+      ],
+      "candidateRecordWritten": false,
+      "factIds": [
+        "wombwell:access-transport:wombwell-has-a-national-rail-station",
+        "wombwell:pharmacy-relationship:distance",
+        "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+        "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+        "wombwell:community:wombwell-has-a-public-library"
+      ]
+    },
+    {
+      "file": "2026-09-01T12-35-43-358Z-attempt-2.json",
+      "savedAt": "2026-09-01T12:35:43.358Z",
+      "attemptNumber": 2,
+      "model": "gpt-4.1",
+      "temperature": 0.3,
+      "hasRetryNote": true,
+      "failures": [
+        "ungrounded factual sentence: With Pharmacy First, you have another option for support with common health concerns."
+      ],
+      "candidateRecordWritten": false,
+      "factIds": [
+        "wombwell:access-transport:wombwell-has-a-national-rail-station",
+        "wombwell:pharmacy-relationship:distance",
+        "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+        "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+        "wombwell:community:wombwell-has-a-public-library"
+      ]
+    }
+  ]
+}

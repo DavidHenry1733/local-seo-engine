@@ -1,0 +1,261 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T07:38:29.298Z",
+  "tokenUsage": {
+    "promptTokens": 7465,
+    "completionTokens": 703,
+    "totalTokens": 8168
+  },
+  "estimatedCostUsd": 0.020554,
+  "inputEvidencePackHash": "ff58a159575f97ed90cc1a8a7491c014cc90f94b0828c303881e94cf2c47f499",
+  "editorialEvidencePackHash": "1e290b7178bc391c1a1bfa71b573ea929881a54a0cd2aaab2f07b6bf99a0ba69",
+  "areaSlug": "chellaston",
+  "areaName": "Chellaston",
+  "editorialFactIdsUsed": [
+    "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+    "chellaston:community:chellaston-community-centre-is-listed-as-a-commu",
+    "chellaston:community:chellaston-library-is-listed-as-a-community-faci",
+    "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+    "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co",
+    "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit",
+    "chellaston:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Chellaston",
+    "heroHeading": "Pharmacy First in Chellaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+    "localIntroduction": "Pharmacy First for people in Chellaston is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area. Chellaston Library is also listed as a community facility in Chellaston. NHS general practice services in Chellaston are provided from Chellaston Medical Centre.",
+      "Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. Lister House at Chellaston is listed as a hospital in Chellaston."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.",
+        "editorialFactId": "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.",
+        "editorialFactId": "chellaston:community:chellaston-community-centre-is-listed-as-a-commu"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Chellaston Library is also listed as a community facility in Chellaston.",
+        "editorialFactId": "chellaston:community:chellaston-library-is-listed-as-a-community-faci"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Chellaston are provided from Chellaston Medical Centre.",
+        "editorialFactId": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+        "editorialFactId": "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Lister House at Chellaston is listed as a hospital in Chellaston.",
+        "editorialFactId": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+        "editorialFactId": "chellaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "chellaston:community:chellaston-community-centre-is-listed-as-a-commu",
+      "chellaston:community:chellaston-library-is-listed-as-a-community-faci",
+      "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co",
+      "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit",
+      "chellaston:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Chellaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Chellaston is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.",
+      "supportingCanonicalFieldOrEntity": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell, chellaston:heritage:chellaston-brickworks-local-nature-reserve-is-li, chellaston:heritage:fullens-lock-park-memorial-bench-is-listed-as-a-, chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:community:chellaston-leisure-limited-is-listed-as-a-commun, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places, Google Places, Google Places, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3, clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Chellaston Library is also listed as a community facility in Chellaston.",
+      "supportingCanonicalFieldOrEntity": "chellaston:community:chellaston-has-a-public-library, chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:community:chellaston-leisure-limited-is-listed-as-a-commun, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "providerSource": "derby.gov.uk, Google Places, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Chellaston are provided from Chellaston Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "supportingCanonicalFieldOrEntity": "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co, chellaston:community:chellaston-has-a-public-library, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci",
+      "providerSource": "derby.gov.uk, derby.gov.uk, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Lister House at Chellaston is listed as a hospital in Chellaston.",
+      "supportingCanonicalFieldOrEntity": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+      "supportingCanonicalFieldOrEntity": "chellaston:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Chellaston",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Chellaston is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell, chellaston:heritage:chellaston-brickworks-local-nature-reserve-is-li, chellaston:heritage:fullens-lock-park-memorial-bench-is-listed-as-a-, chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:community:chellaston-leisure-limited-is-listed-as-a-commun, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Chellaston Library is also listed as a community facility in Chellaston.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chellaston:community:chellaston-has-a-public-library, chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:community:chellaston-leisure-limited-is-listed-as-a-commun, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Chellaston are provided from Chellaston Medical Centre.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co, chellaston:community:chellaston-has-a-public-library, chellaston:community:chellaston-community-centre-is-listed-as-a-commu, chellaston:community:chellaston-library-is-listed-as-a-community-faci",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Lister House at Chellaston is listed as a hospital in Chellaston.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit, chellaston:community:chellaston-library-is-listed-as-a-community-faci, chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "chellaston:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 8,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area. Chellaston Library is also listed as a community facility in Chellaston. NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\",\n    \"Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. Lister House at Chellaston is listed as a hospital in Chellaston.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.\",\n      \"editorialFactId\": \"chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.\",\n      \"editorialFactId\": \"chellaston:community:chellaston-community-centre-is-listed-as-a-commu\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston Library is also listed as a community facility in Chellaston.\",\n      \"editorialFactId\": \"chellaston:community:chellaston-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\",\n      \"editorialFactId\": \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\",\n      \"editorialFactId\": \"chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Lister House at Chellaston is listed as a hospital in Chellaston.\",\n      \"editorialFactId\": \"chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell\",\n    \"chellaston:community:chellaston-community-centre-is-listed-as-a-commu\",\n    \"chellaston:community:chellaston-library-is-listed-as-a-community-faci\",\n    \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\",\n    \"chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co\",\n    \"chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area. Chellaston Library is also listed as a community facility in Chellaston. NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\",\n    \"Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. Lister House at Chellaston is listed as a hospital in Chellaston.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.\",\n      \"editorialFactId\": \"chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston Park is listed as a landmark in Chellaston, and Chellaston Community Centre is listed as a community facility in the area.\",\n      \"editorialFactId\": \"chellaston:community:chellaston-community-centre-is-listed-as-a-commu\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston Library is also listed as a community facility in Chellaston.\",\n      \"editorialFactId\": \"chellaston:community:chellaston-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\",\n      \"editorialFactId\": \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chellaston has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\",\n      \"editorialFactId\": \"chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Lister House at Chellaston is listed as a hospital in Chellaston.\",\n      \"editorialFactId\": \"chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chellaston:heritage:chellaston-park-is-listed-as-a-landmark-in-chell\",\n    \"chellaston:community:chellaston-community-centre-is-listed-as-a-commu\",\n    \"chellaston:community:chellaston-library-is-listed-as-a-community-faci\",\n    \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\",\n    \"chellaston:community:chellaston-has-a-neighbourhood-board-of-local-co\",\n    \"chellaston:healthcare:lister-house-at-chellaston-is-listed-as-a-hospit\"\n  ]\n}"
+  ]
+}

@@ -1,0 +1,641 @@
+{
+  "slug": "vision-pharmacy",
+  "pharmacyName": "Vision Pharmacy",
+  "updatedAt": "2026-09-15T13:41:03.737Z",
+  "version": 1,
+  "services": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "pageUrl": "/api/pharmacy-visual-experience/pharmacy-first/?slug=vision-pharmacy",
+      "overallScore": 74,
+      "label": "Needs Enhancement",
+      "publishGate": "PASS_WITH_RECOMMENDATIONS",
+      "categoryScores": {
+        "humanExpertise": 50,
+        "pharmacyLocalAuthority": 82,
+        "clinicalTrust": 89,
+        "informationGain": 100,
+        "aiCitationReadiness": 100,
+        "structuredDataReadiness": 60,
+        "contentEcosystemSupport": 10,
+        "technicalPublishReadiness": 100
+      },
+      "missingSignals": [
+        "Human Expertise: Named pharmacist / reviewer",
+        "Human Expertise: Superintendent pharmacist",
+        "Human Expertise: GPhC registration details",
+        "Human Expertise: Next review date",
+        "Pharmacy Local Authority: Address",
+        "Pharmacy Local Authority: Private service availability",
+        "Clinical Trust: Service limitations",
+        "Structured Data Readiness: LocalBusiness",
+        "Structured Data Readiness: Pharmacy",
+        "Structured Data Readiness: Organization",
+        "Structured Data Readiness: Person / reviewer",
+        "Content Ecosystem Support: Service page",
+        "Content Ecosystem Support: Local page",
+        "Content Ecosystem Support: Guide",
+        "Content Ecosystem Support: FAQ page",
+        "Content Ecosystem Support: Blogs",
+        "Content Ecosystem Support: Social posts",
+        "Content Ecosystem Support: GBP posts",
+        "Content Ecosystem Support: Email sequence",
+        "Content Ecosystem Support: Video script"
+      ],
+      "criticalIssues": [],
+      "recommendedEnhancements": [
+        "Human Expertise: add named pharmacist / reviewer",
+        "Human Expertise: add superintendent pharmacist",
+        "Pharmacy Local Authority: add address",
+        "Pharmacy Local Authority: add private service availability",
+        "Structured Data Readiness: add localbusiness",
+        "Structured Data Readiness: add pharmacy",
+        "Content Ecosystem Support: add service page",
+        "Content Ecosystem Support: add local page"
+      ],
+      "evidence": {
+        "humanExpertise": [
+          {
+            "signal": "Named pharmacist / reviewer",
+            "present": false,
+            "detail": "No reviewer in profile"
+          },
+          {
+            "signal": "Superintendent pharmacist",
+            "present": false,
+            "detail": "Missing superintendent name"
+          },
+          {
+            "signal": "Professional role stated",
+            "present": true,
+            "detail": "Pharmacist professional role in page copy"
+          },
+          {
+            "signal": "GPhC registration details",
+            "present": false,
+            "detail": "GPhC not confirmed"
+          },
+          {
+            "signal": "Years experience",
+            "present": true,
+            "detail": "Years serving community not stated"
+          },
+          {
+            "signal": "Review date",
+            "present": true,
+            "detail": "Formal clinical review date on page"
+          },
+          {
+            "signal": "Next review date",
+            "present": false,
+            "detail": "Scheduled next review date"
+          },
+          {
+            "signal": "Professional accountability statement",
+            "present": true,
+            "detail": "Accountability / registration statement"
+          }
+        ],
+        "pharmacyLocalAuthority": [
+          {
+            "signal": "Pharmacy name",
+            "present": true,
+            "detail": "Vision Pharmacy"
+          },
+          {
+            "signal": "Town / city",
+            "present": true,
+            "detail": "Leicester"
+          },
+          {
+            "signal": "Address",
+            "present": false,
+            "detail": "Unit 4 Cross St, LE24DD"
+          },
+          {
+            "signal": "Phone",
+            "present": true,
+            "detail": "0116 367 8663"
+          },
+          {
+            "signal": "Opening hours",
+            "present": true,
+            "detail": "Opening hours or hours section"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map or local access section"
+          },
+          {
+            "signal": "Coverage areas",
+            "present": true,
+            "detail": "Oadby, Wigston, Leicester, Hamilton, Braunstone, Blaby, Thurmaston, Birstall"
+          },
+          {
+            "signal": "Consultation room",
+            "present": true,
+            "detail": "Consultation room availability"
+          },
+          {
+            "signal": "NHS service availability",
+            "present": true,
+            "detail": "NHS services referenced"
+          },
+          {
+            "signal": "Private service availability",
+            "present": false,
+            "detail": "Private services referenced"
+          },
+          {
+            "signal": "Local access wording",
+            "present": true,
+            "detail": "Local access section"
+          }
+        ],
+        "clinicalTrust": [
+          {
+            "signal": "Eligibility",
+            "present": true,
+            "detail": "Eligibility criteria"
+          },
+          {
+            "signal": "Exclusions",
+            "present": true,
+            "detail": "Exclusion criteria"
+          },
+          {
+            "signal": "When to seek urgent help",
+            "present": true,
+            "detail": "Urgent care escalation"
+          },
+          {
+            "signal": "Safety warnings",
+            "present": true,
+            "detail": "Safety warnings"
+          },
+          {
+            "signal": "During consultation",
+            "present": true,
+            "detail": "Consultation process"
+          },
+          {
+            "signal": "After consultation",
+            "present": true,
+            "detail": "Post-consultation guidance"
+          },
+          {
+            "signal": "Escalation advice",
+            "present": true,
+            "detail": "Escalation pathways"
+          },
+          {
+            "signal": "Patient expectations",
+            "present": true,
+            "detail": "Patient expectations"
+          },
+          {
+            "signal": "Service limitations",
+            "present": false,
+            "detail": "Service scope limits"
+          }
+        ],
+        "informationGain": [
+          {
+            "signal": "Local booking process",
+            "present": true,
+            "detail": "Walk-in and telephone enquiries"
+          },
+          {
+            "signal": "What patients should bring",
+            "present": true,
+            "detail": "Patient preparation items"
+          },
+          {
+            "signal": "Appointment / walk-in options",
+            "present": true,
+            "detail": "Access options"
+          },
+          {
+            "signal": "Local service availability",
+            "present": true,
+            "detail": "Local availability wording"
+          },
+          {
+            "signal": "Local contact process",
+            "present": true,
+            "detail": "Contact process"
+          },
+          {
+            "signal": "Nearby area relevance",
+            "present": true,
+            "detail": "Oadby, Wigston, Leicester"
+          },
+          {
+            "signal": "Pharmacy-specific service notes",
+            "present": true,
+            "detail": "Pharmacy-branded service notes"
+          },
+          {
+            "signal": "Consultation room access",
+            "present": true,
+            "detail": "Consultation room access"
+          },
+          {
+            "signal": "Practical next steps",
+            "present": true,
+            "detail": "Actionable next steps"
+          },
+          {
+            "signal": "Service-specific patient preparation",
+            "present": true,
+            "detail": "Pre-appointment preparation"
+          }
+        ],
+        "aiCitationReadiness": [
+          {
+            "signal": "Clear short-answer blocks",
+            "present": true,
+            "detail": "Concise service definition"
+          },
+          {
+            "signal": "FAQs",
+            "present": true,
+            "detail": "21 FAQ items detected"
+          },
+          {
+            "signal": "Concise definitions",
+            "present": true,
+            "detail": "Definition section"
+          },
+          {
+            "signal": "Factual statements",
+            "present": true,
+            "detail": "~1621 words of factual copy"
+          },
+          {
+            "signal": "Structured headings",
+            "present": true,
+            "detail": "Multiple H2 sections"
+          },
+          {
+            "signal": "Service-specific questions",
+            "present": true,
+            "detail": "Service FAQs"
+          },
+          {
+            "signal": "Local service answers",
+            "present": true,
+            "detail": "Localised answers"
+          },
+          {
+            "signal": "Page summary",
+            "present": true,
+            "detail": "Meta description summary"
+          },
+          {
+            "signal": "Schema candidates",
+            "present": true,
+            "detail": "BreadcrumbList, ListItem, Service, Place, MedicalBusiness"
+          },
+          {
+            "signal": "Reviewer attribution",
+            "present": true,
+            "detail": "Expert attribution"
+          }
+        ],
+        "structuredDataReadiness": [
+          {
+            "signal": "LocalBusiness",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Pharmacy",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "MedicalBusiness",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "WebPage",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "FAQPage",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "BreadcrumbList",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "ImageObject",
+            "present": true,
+            "detail": "ImageObject or img alt"
+          },
+          {
+            "signal": "Organization",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "Person / reviewer",
+            "present": false,
+            "detail": "Missing superintendent Person"
+          },
+          {
+            "signal": "reviewedBy / author equivalent",
+            "present": true,
+            "detail": "Reviewer schema or equivalent"
+          }
+        ],
+        "contentEcosystemSupport": [
+          {
+            "signal": "Service page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Local page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Guide",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "FAQ page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Blogs",
+            "present": false,
+            "detail": "No blog posts"
+          },
+          {
+            "signal": "Social posts",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "GBP posts",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Email sequence",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Video script",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Internal support assets",
+            "present": true,
+            "detail": "7 ecosystem assets"
+          }
+        ],
+        "technicalPublishReadiness": [
+          {
+            "signal": "Page title",
+            "present": true,
+            "detail": "Title tag present"
+          },
+          {
+            "signal": "Meta description",
+            "present": true,
+            "detail": "Meta description"
+          },
+          {
+            "signal": "H1",
+            "present": true,
+            "detail": "Primary H1"
+          },
+          {
+            "signal": "Canonical",
+            "present": true,
+            "detail": "https://vision-pharmacy.sites.pharmaconnect.uk/pharmacy-first/"
+          },
+          {
+            "signal": "Indexable (no noindex)",
+            "present": true,
+            "detail": "Indexable for live publish"
+          },
+          {
+            "signal": "Images assigned",
+            "present": true,
+            "detail": "4/4 page slots assigned"
+          },
+          {
+            "signal": "Alt text",
+            "present": true,
+            "detail": "6/6 images with alt"
+          },
+          {
+            "signal": "CTA",
+            "present": true,
+            "detail": "Call-to-action"
+          },
+          {
+            "signal": "Footer",
+            "present": true,
+            "detail": "Site footer"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map section"
+          },
+          {
+            "signal": "No placeholder text",
+            "present": true,
+            "detail": "No visible placeholders"
+          },
+          {
+            "signal": "No demo/mock wording",
+            "present": true,
+            "detail": "Clean copy"
+          },
+          {
+            "signal": "No broken image placeholders",
+            "present": true,
+            "detail": "Images resolve on page"
+          }
+        ]
+      },
+      "lastAuditedAt": "2026-09-15T13:41:03.737Z"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "pageUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=vision-pharmacy",
+      "overallScore": 0,
+      "label": "Not Ready",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 0,
+        "pharmacyLocalAuthority": 0,
+        "clinicalTrust": 0,
+        "informationGain": 0,
+        "aiCitationReadiness": 0,
+        "structuredDataReadiness": 0,
+        "contentEcosystemSupport": 0,
+        "technicalPublishReadiness": 0
+      },
+      "missingSignals": [
+        "Visual service page not built"
+      ],
+      "criticalIssues": [
+        "Visual service page HTML missing — run visual build pipeline"
+      ],
+      "recommendedEnhancements": [
+        "Build visual experience page before publish audit"
+      ],
+      "evidence": {
+        "humanExpertise": [],
+        "pharmacyLocalAuthority": [],
+        "clinicalTrust": [],
+        "informationGain": [],
+        "aiCitationReadiness": [],
+        "structuredDataReadiness": [],
+        "contentEcosystemSupport": [],
+        "technicalPublishReadiness": []
+      },
+      "lastAuditedAt": "2026-09-15T13:41:03.737Z"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "pageUrl": "/api/pharmacy-visual-experience/travel-vaccinations/?slug=vision-pharmacy",
+      "overallScore": 0,
+      "label": "Not Ready",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 0,
+        "pharmacyLocalAuthority": 0,
+        "clinicalTrust": 0,
+        "informationGain": 0,
+        "aiCitationReadiness": 0,
+        "structuredDataReadiness": 0,
+        "contentEcosystemSupport": 0,
+        "technicalPublishReadiness": 0
+      },
+      "missingSignals": [
+        "Visual service page not built"
+      ],
+      "criticalIssues": [
+        "Visual service page HTML missing — run visual build pipeline"
+      ],
+      "recommendedEnhancements": [
+        "Build visual experience page before publish audit"
+      ],
+      "evidence": {
+        "humanExpertise": [],
+        "pharmacyLocalAuthority": [],
+        "clinicalTrust": [],
+        "informationGain": [],
+        "aiCitationReadiness": [],
+        "structuredDataReadiness": [],
+        "contentEcosystemSupport": [],
+        "technicalPublishReadiness": []
+      },
+      "lastAuditedAt": "2026-09-15T13:41:03.737Z"
+    },
+    {
+      "serviceId": "flu-vaccinations",
+      "serviceName": "Flu Vaccinations",
+      "pageUrl": "/api/pharmacy-visual-experience/flu-vaccinations/?slug=vision-pharmacy",
+      "overallScore": 0,
+      "label": "Not Ready",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 0,
+        "pharmacyLocalAuthority": 0,
+        "clinicalTrust": 0,
+        "informationGain": 0,
+        "aiCitationReadiness": 0,
+        "structuredDataReadiness": 0,
+        "contentEcosystemSupport": 0,
+        "technicalPublishReadiness": 0
+      },
+      "missingSignals": [
+        "Visual service page not built"
+      ],
+      "criticalIssues": [
+        "Visual service page HTML missing — run visual build pipeline"
+      ],
+      "recommendedEnhancements": [
+        "Build visual experience page before publish audit"
+      ],
+      "evidence": {
+        "humanExpertise": [],
+        "pharmacyLocalAuthority": [],
+        "clinicalTrust": [],
+        "informationGain": [],
+        "aiCitationReadiness": [],
+        "structuredDataReadiness": [],
+        "contentEcosystemSupport": [],
+        "technicalPublishReadiness": []
+      },
+      "lastAuditedAt": "2026-09-15T13:41:03.737Z"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "pageUrl": "/api/pharmacy-visual-experience/emergency-contraception/?slug=vision-pharmacy",
+      "overallScore": 0,
+      "label": "Not Ready",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 0,
+        "pharmacyLocalAuthority": 0,
+        "clinicalTrust": 0,
+        "informationGain": 0,
+        "aiCitationReadiness": 0,
+        "structuredDataReadiness": 0,
+        "contentEcosystemSupport": 0,
+        "technicalPublishReadiness": 0
+      },
+      "missingSignals": [
+        "Visual service page not built"
+      ],
+      "criticalIssues": [
+        "Visual service page HTML missing — run visual build pipeline"
+      ],
+      "recommendedEnhancements": [
+        "Build visual experience page before publish audit"
+      ],
+      "evidence": {
+        "humanExpertise": [],
+        "pharmacyLocalAuthority": [],
+        "clinicalTrust": [],
+        "informationGain": [],
+        "aiCitationReadiness": [],
+        "structuredDataReadiness": [],
+        "contentEcosystemSupport": [],
+        "technicalPublishReadiness": []
+      },
+      "lastAuditedAt": "2026-09-15T13:41:03.737Z"
+    }
+  ],
+  "summary": {
+    "averageScore": 15,
+    "label": "Not Ready",
+    "publishGate": "FAIL",
+    "servicesAudited": 5
+  }
+}

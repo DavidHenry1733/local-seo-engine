@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-production-image-library",
+  "generatedAt": "2026-06-11T07:26:26.520Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy Production Image Library Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "imagesGenerated": false,
+  "ideogramCalled": false,
+  "packsCreated": [
+    {
+      "packKey": "core-pharmacy",
+      "packName": "Core Pharmacy",
+      "imageCount": 8,
+      "slotMappings": {
+        "hero": "hero",
+        "support": "support",
+        "trust": "trust",
+        "conversion": "conversion"
+      }
+    },
+    {
+      "packKey": "clinical-nhs-services",
+      "packName": "Clinical NHS Services",
+      "imageCount": 8,
+      "slotMappings": {
+        "hero": "pharmacy-first-consultation",
+        "support": "minor-illness-advice",
+        "trust": "blood-pressure-check",
+        "conversion": "nhs-service-support"
+      }
+    },
+    {
+      "packKey": "vaccination-services",
+      "packName": "Vaccination Services",
+      "imageCount": 8,
+      "slotMappings": {
+        "hero": "flu-vaccination",
+        "support": "vaccination-consultation",
+        "trust": "vaccination-record-review",
+        "conversion": "vaccine-availability"
+      }
+    },
+    {
+      "packKey": "travel-health-services",
+      "packName": "Travel Health Services",
+      "imageCount": 8,
+      "slotMappings": {
+        "hero": "travel-consultation",
+        "support": "destination-advice",
+        "trust": "travel-vaccination",
+        "conversion": "travel-medicine-planning"
+      }
+    },
+    {
+      "packKey": "private-healthcare-services",
+      "packName": "Private Healthcare Services",
+      "imageCount": 8,
+      "slotMappings": {
+        "hero": "ear-wax-removal",
+        "support": "private-consultation",
+        "trust": "health-screening",
+        "conversion": "aftercare-guidance"
+      }
+    },
+    {
+      "packKey": "weight-management-services",
+      "packName": "Weight Management Services",
+      "imageCount": 8,
+      "slotMappings": {
+        "hero": "weight-consultation",
+        "support": "bmi-review",
+        "trust": "progress-monitoring",
+        "conversion": "private-weight-support"
+      }
+    }
+  ],
+  "imageCount": 48,
+  "slotCoverage": {
+    "clinical-nhs-services": {
+      "allSlotsCovered": true,
+      "slots": {
+        "hero": {
+          "imageKey": "pharmacy-first-consultation",
+          "resolvedInPack": "clinical-nhs-services",
+          "covered": true
+        },
+        "support": {
+          "imageKey": "minor-illness-advice",
+          "resolvedInPack": "clinical-nhs-services",
+          "covered": true
+        },
+        "trust": {
+          "imageKey": "blood-pressure-check",
+          "resolvedInPack": "clinical-nhs-services",
+          "covered": true
+        },
+        "conversion": {
+          "imageKey": "nhs-service-support",
+          "resolvedInPack": "clinical-nhs-services",
+          "covered": true
+        }
+      }
+    },
+    "private-healthcare-services": {
+      "allSlotsCovered": true,
+      "slots": {
+        "hero": {
+          "imageKey": "ear-wax-removal",
+          "resolvedInPack": "private-healthcare-services",
+          "covered": true
+        },
+        "support": {
+          "imageKey": "private-consultation",
+          "resolvedInPack": "private-healthcare-services",
+          "covered": true
+        },
+        "trust": {
+          "imageKey": "health-screening",
+          "resolvedInPack": "private-healthcare-services",
+          "covered": true
+        },
+        "conversion": {
+          "imageKey": "aftercare-guidance",
+          "resolvedInPack": "private-healthcare-services",
+          "covered": true
+        }
+      }
+    },
+    "travel-health-services": {
+      "allSlotsCovered": true,
+      "slots": {
+        "hero": {
+          "imageKey": "travel-consultation",
+          "resolvedInPack": "travel-health-services",
+          "covered": true
+        },
+        "support": {
+          "imageKey": "destination-advice",
+          "resolvedInPack": "travel-health-services",
+          "covered": true
+        },
+        "trust": {
+          "imageKey": "travel-vaccination",
+          "resolvedInPack": "travel-health-services",
+          "covered": true
+        },
+        "conversion": {
+          "imageKey": "travel-medicine-planning",
+          "resolvedInPack": "travel-health-services",
+          "covered": true
+        }
+      }
+    },
+    "weight-management-services": {
+      "allSlotsCovered": true,
+      "slots": {
+        "hero": {
+          "imageKey": "weight-consultation",
+          "resolvedInPack": "weight-management-services",
+          "covered": true
+        },
+        "support": {
+          "imageKey": "bmi-review",
+          "resolvedInPack": "weight-management-services",
+          "covered": true
+        },
+        "trust": {
+          "imageKey": "progress-monitoring",
+          "resolvedInPack": "weight-management-services",
+          "covered": true
+        },
+        "conversion": {
+          "imageKey": "private-weight-support",
+          "resolvedInPack": "weight-management-services",
+          "covered": true
+        }
+      }
+    },
+    "vaccination-services": {
+      "allSlotsCovered": true,
+      "slots": {
+        "hero": {
+          "imageKey": "flu-vaccination",
+          "resolvedInPack": "vaccination-services",
+          "covered": true
+        },
+        "support": {
+          "imageKey": "vaccination-consultation",
+          "resolvedInPack": "vaccination-services",
+          "covered": true
+        },
+        "trust": {
+          "imageKey": "vaccination-record-review",
+          "resolvedInPack": "vaccination-services",
+          "covered": true
+        },
+        "conversion": {
+          "imageKey": "vaccine-availability",
+          "resolvedInPack": "vaccination-services",
+          "covered": true
+        }
+      }
+    }
+  },
+  "slotCoverageSummary": {
+    "allFiveFamiliesComplete": true,
+    "hero": true,
+    "support": true,
+    "trust": true,
+    "conversion": true
+  },
+  "onboardingWorkflow": {
+    "version": "1.0",
+    "name": "Pharmacy Production Image Onboarding",
+    "pipeline": [
+      {
+        "step": 1,
+        "stage": "business-intelligence",
+        "name": "Business Intelligence",
+        "output": "business-intelligence.json",
+        "gate": "industryType=pharmacy"
+      },
+      {
+        "step": 2,
+        "stage": "service-intelligence",
+        "name": "Service Intelligence",
+        "output": "service-intelligence.json",
+        "gate": "all services profiled"
+      },
+      {
+        "step": 3,
+        "stage": "template-architecture",
+        "name": "Template Architecture",
+        "output": "template-architecture.json",
+        "gate": "5 template families defined"
+      },
+      {
+        "step": 4,
+        "stage": "campaign-blueprint",
+        "name": "Campaign Blueprint",
+        "output": "campaign-blueprints/*.json",
+        "gate": "hub + cluster blueprints"
+      },
+      {
+        "step": 5,
+        "stage": "image-pack-blueprint",
+        "name": "Image Pack Blueprint",
+        "output": "pharmacy-production-image-library.json",
+        "gate": "8 images per pack, slot mappings"
+      },
+      {
+        "step": 6,
+        "stage": "prompt-generation",
+        "name": "Prompt Generation",
+        "output": "pharmacy-ai-image-prompt-library.json",
+        "gate": "promptReference resolvable per image"
+      },
+      {
+        "step": 7,
+        "stage": "image-generation",
+        "name": "Image Generation",
+        "output": "Ideogram candidates (manual)",
+        "gate": "4 candidates per prompt"
+      },
+      {
+        "step": 8,
+        "stage": "upload",
+        "name": "Upload",
+        "output": "assets/pharmacy-image-library/{pack}/{imageKey}.webp",
+        "gate": "file at uploadTargetPath"
+      },
+      {
+        "step": 9,
+        "stage": "approval",
+        "name": "Approval",
+        "output": "approval record via imageApprovalWorkflow",
+        "gate": "quality score ≥ threshold AND approved stage"
+      },
+      {
+        "step": 10,
+        "stage": "preview",
+        "name": "Preview",
+        "output": "output/pharmacy-preview/",
+        "gate": "all 4 slots render with assets or library-ref"
+      },
+      {
+        "step": 11,
+        "stage": "live",
+        "name": "Live",
+        "output": "live campaign pages",
+        "gate": "deployment approval (separate phase)"
+      }
+    ]
+  },
+  "futureIndustryReadiness": {
+    "workflowLocked": true,
+    "industriesValidated": [
+      {
+        "industry": "dentist",
+        "readiness": "workflow-ready",
+        "existingAssets": 0,
+        "gaps": [
+          "business-intelligence.json",
+          "service-intelligence.json",
+          "template-architecture.json",
+          "production-image-library.json"
+        ]
+      },
+      {
+        "industry": "accountant",
+        "readiness": "asset-pack-exists",
+        "existingAssets": 8,
+        "gaps": [
+          "service-intelligence",
+          "template-architecture",
+          "production-image-library",
+          "ai-prompt-library"
+        ]
+      },
+      {
+        "industry": "electrician",
+        "readiness": "asset-pack-exists",
+        "existingAssets": 8,
+        "gaps": [
+          "service-intelligence",
+          "template-architecture",
+          "production-image-library",
+          "ai-prompt-library"
+        ]
+      },
+      {
+        "industry": "builder",
+        "readiness": "asset-pack-exists",
+        "existingAssets": 8,
+        "gaps": [
+          "service-intelligence",
+          "template-architecture",
+          "production-image-library",
+          "ai-prompt-library"
+        ]
+      },
+      {
+        "industry": "hairdresser",
+        "readiness": "asset-pack-exists",
+        "existingAssets": 8,
+        "gaps": [
+          "service-intelligence",
+          "template-architecture",
+          "production-image-library",
+          "ai-prompt-library"
+        ]
+      }
+    ],
+    "allFiveIndustriesOnboardable": true
+  },
+  "readyForIdeogramGeneration": true,
+  "validation": {
+    "issues": []
+  },
+  "libraryPath": "output/pharmacy-blueprint/pharmacy-production-image-library.json"
+}

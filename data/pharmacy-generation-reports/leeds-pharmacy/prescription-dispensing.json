@@ -1,0 +1,182 @@
+{
+  "slug": "leeds-pharmacy",
+  "resolvedSlug": "leeds-pharmacy",
+  "serviceId": "prescription-dispensing",
+  "serviceName": "Prescription Dispensing",
+  "generatedAt": "2026-08-06T16:30:43.932Z",
+  "generatorVersion": "long-form-supporting-content-lockdown-v1",
+  "selectedAreas": [
+    "Headingley",
+    "Chapel Allerton",
+    "Meanwood",
+    "Roundhay",
+    "Horsforth",
+    "Moortown",
+    "Wetherby",
+    "Otley"
+  ],
+  "profileLoaded": true,
+  "profileName": "Leeds Pharmacy",
+  "campaignLoaded": true,
+  "campaignServiceId": "pharmacy-first",
+  "brandLoaded": true,
+  "imageAssignmentsLoaded": true,
+  "selectedServiceConfigPath": "pharmacyMasterPublishConfig:prescription-dispensing",
+  "serviceMasterPath": "docs/pharmacy-master-library/prescription-dispensing-master-v1.md",
+  "masterPublishPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-master-publish/leeds-pharmacy/prescription-dispensing/index.html",
+  "clinicalReferencePath": null,
+  "visualOutputPath": null,
+  "contentEcosystemPath": null,
+  "localClusterOutputPaths": [],
+  "assetsGenerated": [],
+  "sectionsExpected": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsFound": [],
+  "sectionsMissing": [],
+  "foreignServiceContentDetected": [],
+  "tenantValidation": {
+    "ok": true,
+    "detail": "pending"
+  },
+  "serviceValidation": {
+    "ok": false,
+    "detail": "Visual service page missing"
+  },
+  "packageValidation": {
+    "ok": false,
+    "detail": "Visual service page missing"
+  },
+  "ecosystemTenantValidation": {
+    "ok": false,
+    "detail": "Ecosystem output missing",
+    "foreignTenantAssetsDetected": [],
+    "foreignTenantAssetPaths": [],
+    "fallbackToDefaultSlugDetected": false
+  },
+  "localClusterValidation": {
+    "ok": false,
+    "detail": "Expected 8 local cluster pages, generated 0",
+    "selectedAreasExpected": 8,
+    "localClusterPagesGenerated": 0
+  },
+  "selectedAreasExpected": 8,
+  "localClusterPagesGenerated": 0,
+  "foreignTenantAssetsDetected": [],
+  "foreignTenantAssetPaths": [],
+  "fallbackToDefaultSlugDetected": false,
+  "internalLinkValidation": {
+    "ok": false,
+    "detail": "Internal link map missing",
+    "legacyClusterReferences": 0,
+    "brokenLinks": 0
+  },
+  "manifestAccuracyValidation": {
+    "ok": true,
+    "detail": "pending"
+  },
+  "designMapValidation": {
+    "ok": true,
+    "detail": "pending",
+    "servicePageMapValidation": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "localPageMapValidation": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "localPageDesignValidation": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "headerFooterParity": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "brandParity": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "nearbyAreaLinksCount": 0,
+    "mapValidation": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "moneyLinksCount": 0,
+    "internalLinksCount": 0
+  },
+  "localClusterQualityValidation": {
+    "ok": true,
+    "detail": "pending",
+    "localPagesExpected": 0,
+    "localPagesGenerated": 0,
+    "localPagesWithImages": 0,
+    "localPagesWithBusinessMap": 0,
+    "localPagesWithAreaSpecificCopy": 0,
+    "localPagesWithInternalLinks": 0,
+    "localPagesWithMoneyLinks": 0,
+    "duplicateCopyWarnings": [],
+    "emptySectionsDetected": [],
+    "localIntelligenceUsed": 0,
+    "failedLocalPages": [],
+    "servicePageLinksAllLocalAreas": true,
+    "localCopyDepthValidation": {
+      "ok": true,
+      "detail": "pending",
+      "minWordCount": 350,
+      "pagesBelowMin": []
+    },
+    "localSimilarityScores": [],
+    "areaPrefixDetected": [],
+    "mapUsesBusinessLocation": true,
+    "servicePageLocalLinksCount": 0,
+    "localNearbyLinksCount": 0,
+    "irrelevantSectionsDetected": [],
+    "localPageWordCounts": {},
+    "localPageImageCounts": {},
+    "failedLocalQualityReasons": []
+  },
+  "longFormQualityValidation": {
+    "ok": true,
+    "detail": "pending",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {},
+    "serviceMentionsBySection": {},
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "pending"
+    },
+    "genericLongFormWarnings": [],
+    "failedLongFormAssets": [],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "pending",
+      "failedPages": []
+    }
+  },
+  "errors": [
+    "Error: We could not create this content package because the selected service content is missing.",
+    "Ecosystem tenant: Ecosystem output missing",
+    "Local cluster: Expected 8 local cluster pages, generated 0",
+    "Internal links: Internal link map missing"
+  ],
+  "warnings": [
+    "CPR-01 service-page-only scope — ecosystem and area pages skipped"
+  ]
+}

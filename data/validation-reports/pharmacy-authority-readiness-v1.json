@@ -1,0 +1,112 @@
+{
+  "slug": "pharmaconnect",
+  "pass": true,
+  "checks": [
+    {
+      "id": "1-data-file-created",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-authority-readiness/pharmaconnect.json"
+    },
+    {
+      "id": "2-four-services-audited",
+      "pass": true,
+      "detail": "4 services"
+    },
+    {
+      "id": "3-category-scores-present",
+      "pass": true,
+      "detail": "All 8 categories scored per service"
+    },
+    {
+      "id": "4-overall-scores-present",
+      "pass": true,
+      "detail": "pharmacy-first:91, blood-pressure-checks:90, travel-vaccinations:88, emergency-contraception:88"
+    },
+    {
+      "id": "5-publish-gates-present",
+      "pass": true,
+      "detail": "pharmacy-first:FAIL, blood-pressure-checks:FAIL, travel-vaccinations:FAIL, emergency-contraception:FAIL"
+    },
+    {
+      "id": "6-missing-signals-generated",
+      "pass": true,
+      "detail": "Avg 8 missing signals per service"
+    },
+    {
+      "id": "7-full-audit-page-loads",
+      "pass": true,
+      "detail": "Dashboard HTML renders"
+    },
+    {
+      "id": "8-campaign-os-authority-data",
+      "pass": true,
+      "detail": "Emergency Contraception: 88 · FAIL"
+    },
+    {
+      "id": "9-no-template-redesign",
+      "pass": true,
+      "detail": "Approved template layout intact"
+    },
+    {
+      "id": "10-no-master-modification",
+      "pass": true,
+      "detail": "Master files read-only in this run"
+    },
+    {
+      "id": "service-pharmacy-first",
+      "pass": true,
+      "detail": "91 · FAIL"
+    },
+    {
+      "id": "service-blood-pressure-checks",
+      "pass": true,
+      "detail": "90 · FAIL"
+    },
+    {
+      "id": "service-travel-vaccinations",
+      "pass": true,
+      "detail": "88 · FAIL"
+    },
+    {
+      "id": "service-emergency-contraception",
+      "pass": true,
+      "detail": "88 · FAIL"
+    },
+    {
+      "id": "live-audit-page",
+      "pass": true,
+      "detail": "Auth-gated — offline HTML validation used"
+    }
+  ],
+  "doc": {
+    "summary": {
+      "averageScore": 89,
+      "label": "Strong",
+      "publishGate": "FAIL",
+      "servicesAudited": 4
+    },
+    "services": [
+      {
+        "serviceId": "pharmacy-first",
+        "overallScore": 91,
+        "publishGate": "FAIL"
+      },
+      {
+        "serviceId": "blood-pressure-checks",
+        "overallScore": 90,
+        "publishGate": "FAIL"
+      },
+      {
+        "serviceId": "travel-vaccinations",
+        "overallScore": 88,
+        "publishGate": "FAIL"
+      },
+      {
+        "serviceId": "emergency-contraception",
+        "overallScore": 88,
+        "publishGate": "FAIL"
+      }
+    ]
+  },
+  "generatedAt": "2026-06-26T09:35:10.206Z"
+}

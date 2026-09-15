@@ -1,0 +1,121 @@
+{
+  "version": "v3",
+  "slug": "vision-pharmacy",
+  "area": "Oadby",
+  "areaSlug": "oadby",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-13T13:38:32.337Z",
+  "sourceStatus": "google-places-live",
+  "pharmacyCoordinates": {
+    "latitude": 52.6038759,
+    "longitude": -1.0826776999999999,
+    "source": "google-import-snapshot"
+  },
+  "healthcare": [
+    {
+      "name": "Oadby Urgent Care Centre",
+      "address": "18 The Parade, Oadby, Leicester LE2 5BJ",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "hospital",
+        "medical_clinic",
+        "health",
+        "point_of_interest",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.5984037,
+        "longitude": -1.0840258999999999
+      },
+      "placeId": "ChIJV8C-mh1kd0gRXW3P8YWj4MQ",
+      "source": "googlePlaces",
+      "provider": "googlePlaces",
+      "retrievedAt": "2026-09-13T13:38:32.337Z",
+      "sourceRef": "https://maps.google.com/?cid=14186518621899943261&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+      "confidence": 92,
+      "relationship": "name-in-address",
+      "areaName": "Oadby"
+    }
+  ],
+  "community": [
+    {
+      "name": "Oadby Library (with Family Hub support)",
+      "address": "10 The Parade, Oadby, Leicester LE2 5BF",
+      "category": "community",
+      "types": [
+        "library",
+        "point_of_interest",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.5983352,
+        "longitude": -1.083143
+      },
+      "placeId": "ChIJe5wvcB1kd0gRgXM-lqVmvEE",
+      "source": "googlePlaces",
+      "provider": "googlePlaces",
+      "retrievedAt": "2026-09-13T13:38:32.337Z",
+      "sourceRef": "https://maps.google.com/?cid=4736773769463231361&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+      "confidence": 92,
+      "relationship": "name-in-address",
+      "areaName": "Oadby"
+    }
+  ],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [
+    {
+      "name": "Spire Leicester Hospital",
+      "address": "Gartree Rd, Oadby, Leicester LE2 2FF",
+      "category": "healthcare",
+      "types": [
+        "medical_center",
+        "doctor",
+        "hospital",
+        "medical_clinic",
+        "health",
+        "point_of_interest",
+        "service",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.613530999999995,
+        "longitude": -1.078217
+      },
+      "placeId": "ChIJVyphsf9jd0gRWZKNhdmKuqM",
+      "rejectionReason": "attributed-to-sibling-area"
+    },
+    {
+      "name": "Peace memorial park",
+      "address": "28 Paddock St, Wigston LE18 2AN",
+      "category": "landmarks",
+      "types": [
+        "park",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.584098,
+        "longitude": -1.1060062
+      },
+      "placeId": "ChIJAwvnH8Nnd0gRtF6dptTRMBU",
+      "rejectionReason": "attributed-to-sibling-area"
+    }
+  ],
+  "researchCandidates": [],
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 2,
+    "rejectedCount": 2,
+    "categoriesPresent": [
+      "healthcare",
+      "community"
+    ],
+    "minimumMet": true
+  }
+}

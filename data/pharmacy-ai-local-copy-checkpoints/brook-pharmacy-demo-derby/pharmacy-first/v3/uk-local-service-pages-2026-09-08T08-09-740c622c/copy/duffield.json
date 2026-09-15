@@ -1,0 +1,204 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:32:40.033Z",
+  "tokenUsage": {
+    "promptTokens": 6768,
+    "completionTokens": 330,
+    "totalTokens": 7098
+  },
+  "estimatedCostUsd": 0.016176,
+  "inputEvidencePackHash": "899d24b79f249244a69f1e0cfa2f84a8622ccb52a54f1362a12dd466eb12b588",
+  "editorialEvidencePackHash": "d7c0e77f97d50ed267d65841c4de00425b988ec341ff16c381ee4fbbc3c6a3c1",
+  "areaSlug": "duffield",
+  "areaName": "Duffield",
+  "editorialFactIdsUsed": [
+    "duffield:community:duffield-library-is-listed-as-a-community-facili",
+    "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in",
+    "duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la"
+  ],
+  "outputCopy": {
+    "area": "Duffield",
+    "heroHeading": "Pharmacy First in Duffield",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Duffield.",
+    "localIntroduction": "Pharmacy First for people in Duffield is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Duffield Library is listed as a community facility in Duffield.",
+      "Duffield War Memorial is listed as a landmark in Duffield.",
+      "National Trust - Duffield Castle is listed as a landmark in Duffield."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 7.6 km in a straight line from Duffield.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Duffield Library is listed as a community facility in Duffield.",
+        "editorialFactId": "duffield:community:duffield-library-is-listed-as-a-community-facili"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Duffield War Memorial is listed as a landmark in Duffield.",
+        "editorialFactId": "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "National Trust - Duffield Castle is listed as a landmark in Duffield.",
+        "editorialFactId": "duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "duffield:community:duffield-library-is-listed-as-a-community-facili",
+      "duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in",
+      "duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Duffield",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Duffield.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Duffield is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Duffield Library is listed as a community facility in Duffield.",
+      "supportingCanonicalFieldOrEntity": "duffield:community:duffield-library-is-listed-as-a-community-facili, duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in",
+      "providerSource": "Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Duffield War Memorial is listed as a landmark in Duffield.",
+      "supportingCanonicalFieldOrEntity": "duffield:community:duffield-library-is-listed-as-a-community-facili, duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield, duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in, duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[2]",
+      "exactSentence": "National Trust - Duffield Castle is listed as a landmark in Duffield.",
+      "supportingCanonicalFieldOrEntity": "duffield:community:duffield-library-is-listed-as-a-community-facili, duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield, duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in, duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 7.6 km in a straight line from Duffield.",
+      "supportingCanonicalFieldOrEntity": "duffield:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Duffield",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Duffield.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Duffield is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Duffield Library is listed as a community facility in Duffield.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "duffield:community:duffield-library-is-listed-as-a-community-facili, duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Duffield War Memorial is listed as a landmark in Duffield.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "duffield:community:duffield-library-is-listed-as-a-community-facili, duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield, duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in, duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[2]",
+      "sentence": "National Trust - Duffield Castle is listed as a landmark in Duffield.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "duffield:community:duffield-library-is-listed-as-a-community-facili, duffield:heritage:eyes-meadow-is-listed-as-a-landmark-in-duffield, duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in, duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 7.6 km in a straight line from Duffield.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "duffield:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Duffield Library is listed as a community facility in Duffield.\",\n    \"Duffield War Memorial is listed as a landmark in Duffield.\",\n    \"National Trust - Duffield Castle is listed as a landmark in Duffield.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Duffield Library is listed as a community facility in Duffield.\",\n      \"editorialFactId\": \"duffield:community:duffield-library-is-listed-as-a-community-facili\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Duffield War Memorial is listed as a landmark in Duffield.\",\n      \"editorialFactId\": \"duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"National Trust - Duffield Castle is listed as a landmark in Duffield.\",\n      \"editorialFactId\": \"duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"duffield:community:duffield-library-is-listed-as-a-community-facili\",\n    \"duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in\",\n    \"duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Duffield Library is listed as a community facility in Duffield.\",\n    \"Duffield War Memorial is listed as a landmark in Duffield.\",\n    \"National Trust - Duffield Castle is listed as a landmark in Duffield.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Duffield Library is listed as a community facility in Duffield.\",\n      \"editorialFactId\": \"duffield:community:duffield-library-is-listed-as-a-community-facili\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Duffield War Memorial is listed as a landmark in Duffield.\",\n      \"editorialFactId\": \"duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"National Trust - Duffield Castle is listed as a landmark in Duffield.\",\n      \"editorialFactId\": \"duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"duffield:community:duffield-library-is-listed-as-a-community-facili\",\n    \"duffield:heritage:duffield-war-memorial-is-listed-as-a-landmark-in\",\n    \"duffield:heritage:national-trust-duffield-castle-is-listed-as-a-la\"\n  ]\n}"
+  ]
+}

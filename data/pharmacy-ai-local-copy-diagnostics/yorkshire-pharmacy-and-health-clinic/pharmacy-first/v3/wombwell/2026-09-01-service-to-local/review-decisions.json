@@ -1,0 +1,186 @@
+{
+  "kind": "wombwell-v3-service-to-local-source-based-review",
+  "taskId": "wombwell-v3-service-to-local-2026-09-01",
+  "reviewedAt": "2026-09-01T16:05:00.000Z",
+  "completeProseRead": true,
+  "proseEdited": false,
+  "wordListAdded": false,
+  "silentlyTurnedReviewsIntoPass": false,
+  "rendered": false,
+  "operatorAcceptedForCandidateRender": false,
+  "approved": false,
+  "awaitingProductOwnerVisualReview": true,
+  "newProviderCallsThisContinuation": 0,
+  "newRetrievalsThisContinuation": 0,
+  "durableBudgetUntouched": true,
+  "outcome": "BLOCKED — isolated rendering not performed",
+  "exactBlocker": "Draft 2 still has an unresolved duplicate-check FAIL (Darfield named in hero, local context and access). Several REVIEW REQUIRED findings were rejected on source review because they add unsupported catchment, character, patient-habit or healthcare-route claims. Rejected reviews were not converted to PASS. Draft 1 remains blocked by clinical-broadening and unsupported-character FAILs. No further provider calls are available on this task id (2/2 consumed).",
+  "selectedDraftForInspection": 2,
+  "whyDraft2InspectedAsFinalCopy": "Attempt 1 failed clinical and character checks. Attempt 2 is the corrective retry and the copy stored in generate-result.json.",
+  "automatedFailuresOnDraft2": [
+    {
+      "finding": "premises locality repeated across local context and access fields",
+      "sentences": [
+        "This service is provided by Yorkshire Pharmacy & Health Clinic in Darfield, supporting residents of Wombwell and the wider Barnsley area.",
+        "For NHS Pharmacy First consultations, people in Wombwell can access Yorkshire Pharmacy & Health Clinic in Darfield, which is approximately 1.7 km away in a straight line.",
+        "Pharmacy First consultations for Wombwell residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield."
+      ],
+      "decision": "fail-unresolved",
+      "reason": "Duplicate-check kept. Darfield is named in hero, local context and relationshipToPharmacy. Copy was not rewritten. This FAIL was not bypassed."
+    }
+  ],
+  "reviewRequiredDecisionsDraft2": [
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First is available to people in Wombwell, offering NHS consultations for eligible common conditions.",
+      "automated": "pass (not REVIEW REQUIRED)",
+      "decision": "accept",
+      "exactSourcePassages": [
+        "Locked clinical: You may say Pharmacy First can help with eligible common conditions.",
+        "Selected area: Wombwell."
+      ],
+      "reason": "Service-led, within the locked Pharmacy First / eligible common conditions framing. No leftover-token review was raised on this sentence."
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "This service is provided by Yorkshire Pharmacy & Health Clinic in Darfield, supporting residents of Wombwell and the wider Barnsley area.",
+      "automated": "REVIEW REQUIRED unmatched wording (service) (supporting, residents, wider)",
+      "decision": "reject",
+      "exactSourcePassages": [
+        "Canonical identity: Yorkshire Pharmacy & Health Clinic, 91 Snape Hill Rd, Darfield.",
+        "No supplied fact states a ‘wider Barnsley area’ catchment or that the pharmacy supports residents of that catchment."
+      ],
+      "reason": "‘Yorkshire Pharmacy & Health Clinic in Darfield’ is supported. ‘supporting residents of Wombwell and the wider Barnsley area’ is an unsupported catchment claim. Not converted to PASS."
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+      "automated": "pass",
+      "decision": "accept",
+      "exactSourcePassages": [
+        "Accepted fact from barnsley.gov.uk Wombwell Library body retrieved 2026-09-01T11:22:31.612Z: ‘Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.’"
+      ]
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "The area features a public library, which hosts local history sessions run by Wombwell Heritage Group.",
+      "automated": "REVIEW REQUIRED unmatched wording (which)",
+      "decision": "accept",
+      "exactSourcePassages": [
+        "Accepted fact: ‘Wombwell has a public library.’",
+        "Accepted fact / barnsley.gov.uk: ‘Wombwell Library hosts local history sessions run by Wombwell Heritage Group.’"
+      ],
+      "reason": "‘which’ is a relative pronoun joining two supported facts. It does not add attendance, demand or a pharmacy relationship."
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Citizens Advice also holds advice and welfare rights drop-in sessions at the library.",
+      "automated": "REVIEW REQUIRED unmatched wording (holds)",
+      "decision": "accept",
+      "exactSourcePassages": [
+        "Saved barnsley.gov.uk Wombwell Library body 2026-09-01T11:22:31.612Z: Citizens Advice run advice and welfare rights drop in sessions.",
+        "Accepted fact: ‘Citizens Advice runs advice and welfare rights drop-in sessions at Wombwell Library.’"
+      ],
+      "reason": "‘holds’ paraphrases official ‘run’/‘runs’. ‘the library’ is Wombwell Library, named in the previous sentence. Same leftover-token decision as the 14:21 candidate."
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Wombwell station, part of the National Rail network, displays community artwork including the Wombwell unicorn emblem and references to local landmarks such as Roly Poly Hill and the Wishing Tree at Wombwell Park.",
+      "automated": "REVIEW REQUIRED unmatched wording (network, displays, including, references, landmarks)",
+      "decision": "reject",
+      "exactSourcePassages": [
+        "nationalrail.co.uk/stations/wombwell/ 2026-09-01T06:07:51.505Z supports: Wombwell has a National Rail station.",
+        "Travel South Yorkshire 2026-09-01T14:18:05.581Z: ‘Artwork at Wombwell station … following a collaboration between SYMCA, Barnsley Council and the town’s community.’",
+        "Travel South Yorkshire: ‘Featuring the distinctive Wombwell “unicorn” emblem and references to the Roly Poly Hill and Wishing Tree at Wombwell Park’."
+      ],
+      "reason": "Unicorn, Roly Poly Hill and Wishing Tree are in the TSY artwork description. ‘part of the National Rail network’, ‘displays community artwork’ and ‘local landmarks such as’ go beyond the saved statements (station existence; artwork features/refers to). Not converted to PASS."
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Wombwell’s public library and station artwork highlight the area’s active community spaces and local heritage.",
+      "automated": "REVIEW REQUIRED unmatched wording (highlight, active, spaces)",
+      "decision": "reject",
+      "exactSourcePassages": [
+        "Library and Heritage Group sessions are supported.",
+        "Station artwork is supported.",
+        "No supplied fact states ‘active community spaces’ or that those items ‘highlight local heritage’ as a present-day character claim. TSY promotional wording (‘rich history’, ‘community spirit’) was already prohibited."
+      ],
+      "reason": "Unsupported character claim. Not converted to PASS."
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "With NHS general practice services provided from Wombwell Medical Centre, residents have established routes to healthcare support.",
+      "automated": "REVIEW REQUIRED unmatched wording (residents, established, routes, healthcare, support)",
+      "decision": "reject",
+      "exactSourcePassages": [
+        "Accepted fact: ‘NHS general practice services in Wombwell are provided from Wombwell Medical Centre.’",
+        "Prohibited inference on that fact: presence does not prove a relationship with the pharmacy, registration, waiting times, or eligibility."
+      ],
+      "reason": "The Medical Centre fact is supported. ‘residents have established routes to healthcare support’ invents patient habits and a pathway. Not converted to PASS."
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "For NHS Pharmacy First consultations, people in Wombwell can access Yorkshire Pharmacy & Health Clinic in Darfield, which is approximately 1.7 km away in a straight line.",
+      "automated": "REVIEW REQUIRED unmatched wording (access) (which, away)",
+      "decision": "accept-sentence-reject-as-duplicate",
+      "exactSourcePassages": [
+        "Canonical premises locality Darfield.",
+        "Verified distance 1.7 km; prompt requires approximate straight-line labelling."
+      ],
+      "reason": "The distance wording is source-supported. Leftover tokens ‘which’/‘away’ do not add a new fact. The sentence still repeats Darfield already used in the hero and access field, which remains the unresolved duplicate FAIL."
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Pharmacy First can help with eligible common conditions, and the pharmacist will confirm what can be assessed on the day according to NHS pathway criteria.",
+      "automated": "REVIEW REQUIRED unmatched wording (according)",
+      "decision": "reject",
+      "exactSourcePassages": [
+        "Locked clinical: ‘You may say Pharmacy First can help with eligible common conditions.’",
+        "Locked suitability: ‘The pharmacist confirms what can be assessed on the day. Eligibility depends on symptoms and NHS pathway criteria…’"
+      ],
+      "reason": "The leftover token ‘according’ is not a new fact, but restating locked consultation/eligibility copy in the local overlay is a clinical-integrity defect. Renderer-owned clinical sections already cover this. Not converted to PASS for render."
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Pharmacy First consultations for Wombwell residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "automated": "REVIEW REQUIRED unmatched wording (residents)",
+      "decision": "accept",
+      "exactSourcePassages": [
+        "Canonical premises locality Darfield.",
+        "Selected reader area Wombwell."
+      ],
+      "reason": "‘residents’ here means people in the selected area, not an invented occupancy or GP-registration claim. Location is supported. Duplicate of Darfield elsewhere remains a separate FAIL."
+    },
+    {
+      "field": "localCtaBridge",
+      "sentence": "Contact the pharmacy team to discuss your symptoms or book a consultation.",
+      "automated": "REVIEW REQUIRED unmatched wording (contact, team)",
+      "decision": "accept",
+      "exactSourcePassages": [
+        "Allowed CTAs include Call the pharmacy / Book An Appointment.",
+        "Locked process: Call before visiting to check how a consultation is being arranged."
+      ],
+      "reason": "Generic allowed CTA language. No availability or treatment promise."
+    }
+  ],
+  "draft1ClinicalFailuresNotBypassed": [
+    {
+      "sentence": "Pharmacy First offers professional help for common health concerns to people in Wombwell.",
+      "rule": "clinical-broadening",
+      "decision": "fail-unresolved"
+    },
+    {
+      "sentence": "…all without needing to see a GP first.",
+      "rule": "clinical-broadening / uncertain-paraphrase",
+      "decision": "fail-unresolved",
+      "reason": "Invented GP-skip. Not in locked clinical facts supplied to the writer."
+    }
+  ],
+  "workCompletedThisContinuation": [
+    "No OpenAI calls. No DataForSeo or page fetches. Durable budgets not reset.",
+    "Every REVIEW REQUIRED finding on the final draft received an explicit source-based accept or reject. Rejects were not turned into PASS.",
+    "Isolated rendering skipped because unresolved FAIL and rejected factual reviews remain.",
+    "Approved master, Yorkshire main page, Darfield, campaign builder, Review Centre, approvals and on-disk editorial pack left unchanged.",
+    "Recoverable checkpoint updated with this review."
+  ]
+}

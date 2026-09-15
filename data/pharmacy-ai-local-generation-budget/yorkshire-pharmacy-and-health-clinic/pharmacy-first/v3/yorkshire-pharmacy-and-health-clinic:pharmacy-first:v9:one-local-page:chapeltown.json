@@ -1,0 +1,28 @@
+{
+  "taskId": "yorkshire-pharmacy-and-health-clinic:pharmacy-first:v9:one-local-page:chapeltown",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.0035600000000000002,
+  "events": [
+    {
+      "at": "2026-09-09T16:07:21.552Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-09T16:07:21.682Z",
+      "kind": "reserve",
+      "reservationId": "r-1788970041682-1"
+    },
+    {
+      "at": "2026-09-09T16:07:39.421Z",
+      "kind": "consumed",
+      "reservationId": "r-1788970041682-1",
+      "detail": "cost=0.0035600000000000002"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:duffield",
+  "maxProviderCalls": 3,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 3,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.055043999999999996,
+  "events": [
+    {
+      "at": "2026-09-06T07:43:08.619Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-07T07:38:38.216Z",
+      "kind": "reserve",
+      "reservationId": "r-1788766718216-1"
+    },
+    {
+      "at": "2026-09-07T07:38:43.819Z",
+      "kind": "consumed",
+      "reservationId": "r-1788766718216-1",
+      "detail": "cost=0.019108"
+    },
+    {
+      "at": "2026-09-07T07:41:00.593Z",
+      "kind": "reserve",
+      "reservationId": "r-1788766860593-2"
+    },
+    {
+      "at": "2026-09-07T07:41:04.688Z",
+      "kind": "consumed",
+      "reservationId": "r-1788766860593-2",
+      "detail": "cost=0.018706"
+    },
+    {
+      "at": "2026-09-07T07:44:03.544Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=3 remainingCostUsd=1.962186"
+    },
+    {
+      "at": "2026-09-07T07:44:03.795Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767043795-3"
+    },
+    {
+      "at": "2026-09-07T07:44:11.486Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767043795-3",
+      "detail": "cost=0.01723"
+    }
+  ]
+}

@@ -1,15 +1,21 @@
 import type { TemplateId } from "../templates/templateRegistry";
 
-export type ServiceKey = "web_design" | "local_seo" | "website_hosting";
+export type ServiceKey = "web_design" | "local_seo" | "website_hosting" | "local_business_visibility";
 
 export type DeployConfig = {
   enabled: boolean;
-  protocol: "ftp";
+  protocol: "ftp" | "sftp";
   host: string;
   port: number;
   remoteRoot: string;
   username?: string;
   password?: string;
+};
+
+export type NarrativeEngineConfig = {
+  enabled: boolean;
+  serviceKeys: string[];
+  areas?: string[];
 };
 
 export type AreaProfile = {
@@ -85,6 +91,7 @@ export type ProjectConfig = {
   areaConfig?: string;
   areaConfigs?: string[];
   deploy?: DeployConfig;
+  narrativeEngine?: NarrativeEngineConfig;
   aiCitationOptimisation?: {
     enabled: boolean;
   };

@@ -1,0 +1,192 @@
+{
+  "build": {
+    "slug": "pharmaconnect",
+    "generatedAt": "2026-06-19T10:37:30.687Z",
+    "discovery": {
+      "source": "demo-fallback",
+      "competitorCount": 10,
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-competitor-intelligence/pharmaconnect.json"
+    },
+    "intelligence": {
+      "avgRating": 4.1,
+      "avgReviewCount": 53,
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-competitor-intelligence/pharmaconnect-intelligence.json"
+    },
+    "gapAnalysis": {
+      "serviceComparisons": 20,
+      "reviewGap": "low",
+      "serviceGap": "medium",
+      "contentGap": "low",
+      "visibilityGap": "high",
+      "trustGap": "high",
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-competitor-intelligence/pharmaconnect-gap-analysis.json"
+    },
+    "opportunities": {
+      "summary": {
+        "critical": 0,
+        "high": 5,
+        "medium": 5,
+        "low": 0,
+        "total": 10
+      },
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-opportunity-engine/pharmaconnect.json",
+      "dashboardPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-opportunity-engine/pharmaconnect-dashboard.json"
+    },
+    "outputs": {
+      "competitorIntelDir": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-competitor-intelligence",
+      "opportunityEngineDir": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-opportunity-engine"
+    }
+  },
+  "validation": {
+    "slug": "pharmaconnect",
+    "validatedAt": "2026-06-19T10:37:31.751Z",
+    "discovery": {
+      "competitorCount": 10,
+      "source": "demo-fallback"
+    },
+    "intelligence": {
+      "competitorCount": 10,
+      "avgRating": 4.1
+    },
+    "gapAnalysis": {
+      "serviceComparisons": 20,
+      "gaps": [
+        {
+          "key": "reviewGap",
+          "level": "low"
+        },
+        {
+          "key": "serviceGap",
+          "level": "medium"
+        },
+        {
+          "key": "contentGap",
+          "level": "low"
+        },
+        {
+          "key": "visibilityGap",
+          "level": "high"
+        },
+        {
+          "key": "trustGap",
+          "level": "high"
+        }
+      ]
+    },
+    "opportunities": {
+      "critical": 0,
+      "high": 5,
+      "medium": 5,
+      "low": 0,
+      "total": 10
+    },
+    "dashboardPaths": {
+      "competitorIntel": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-competitor-intelligence/pharmaconnect-dashboard.json",
+      "opportunityEngine": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-opportunity-engine/pharmaconnect-dashboard.json"
+    },
+    "checks": [
+      {
+        "label": "Discovery output exists",
+        "pass": true,
+        "value": "found"
+      },
+      {
+        "label": "Minimum 5 competitors",
+        "pass": true,
+        "value": "10"
+      },
+      {
+        "label": "Target up to 10 competitors",
+        "pass": true,
+        "value": "10"
+      },
+      {
+        "label": "Competitor fields complete",
+        "pass": true,
+        "value": "PASS"
+      },
+      {
+        "label": "Intelligence output exists",
+        "pass": true,
+        "value": "found"
+      },
+      {
+        "label": "GBP categories captured",
+        "pass": true,
+        "value": "categories"
+      },
+      {
+        "label": "GBP services captured",
+        "pass": true,
+        "value": "services"
+      },
+      {
+        "label": "Opening hours captured",
+        "pass": true,
+        "value": "hours"
+      },
+      {
+        "label": "Gap analysis exists",
+        "pass": true,
+        "value": "found"
+      },
+      {
+        "label": "All 5 gap types generated",
+        "pass": true,
+        "value": "5/5"
+      },
+      {
+        "label": "Minimum 20 service comparisons",
+        "pass": true,
+        "value": "20"
+      },
+      {
+        "label": "Opportunity report exists",
+        "pass": true,
+        "value": "found"
+      },
+      {
+        "label": "Opportunities generated",
+        "pass": true,
+        "value": "10"
+      },
+      {
+        "label": "Priority tiers present",
+        "pass": true,
+        "value": "0C / 5H / 5M / 0L"
+      },
+      {
+        "label": "Dashboard JSON (competitor intel)",
+        "pass": true,
+        "value": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-competitor-intelligence/pharmaconnect-dashboard.json"
+      },
+      {
+        "label": "Dashboard JSON (opportunity engine)",
+        "pass": true,
+        "value": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-opportunity-engine/pharmaconnect-dashboard.json"
+      },
+      {
+        "label": "Dashboard keys complete",
+        "pass": true,
+        "value": "7/7"
+      },
+      {
+        "label": "Review comparison present",
+        "pass": true,
+        "value": "reviewComparison"
+      },
+      {
+        "label": "Trust comparison present",
+        "pass": true,
+        "value": "trustComparison"
+      },
+      {
+        "label": "Recommended actions present",
+        "pass": true,
+        "value": "10"
+      }
+    ],
+    "passCount": 20,
+    "totalChecks": 20
+  }
+}

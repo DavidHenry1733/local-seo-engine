@@ -1,0 +1,79 @@
+{
+  "slug": "pharmaconnect",
+  "serviceId": "pharmacy-first",
+  "validatedAt": "2026-06-26T12:10:52.790Z",
+  "checks": [
+    {
+      "id": "1-workspace-loads",
+      "pass": true,
+      "detail": "35 ready tasks"
+    },
+    {
+      "id": "2-reviewer-task-found",
+      "pass": true,
+      "detail": "Enhance: Named accountability"
+    },
+    {
+      "id": "3-reviewer-complete-rejected",
+      "pass": true,
+      "detail": "Completion rejected without reviewer fields"
+    },
+    {
+      "id": "4-reviewer-complete",
+      "pass": true,
+      "detail": "Real reviewer task completed"
+    },
+    {
+      "id": "5-clinical-dates-saved",
+      "pass": true,
+      "detail": "clinicalReviewDate and nextReviewDate saved"
+    },
+    {
+      "id": "6-publishing-settings-saved",
+      "pass": true,
+      "detail": "canonicalUrl saved, noindex=false"
+    },
+    {
+      "id": "7-authority-audit-refreshed",
+      "pass": true,
+      "detail": "score=97"
+    },
+    {
+      "id": "8-review-dates-detected",
+      "pass": true,
+      "detail": "review=true next=true"
+    },
+    {
+      "id": "9-canonical-detected",
+      "pass": true,
+      "detail": "https://www.example-pharmacy.co.uk/services/pharmacy-first"
+    },
+    {
+      "id": "10-noindex-removed-audit",
+      "pass": true,
+      "detail": "Indexable signal present"
+    },
+    {
+      "id": "11-publish-gate-blockers-reduced",
+      "pass": true,
+      "detail": "critical=1 gate=FAIL"
+    },
+    {
+      "id": "12-campaign-os-progress",
+      "pass": true,
+      "detail": "realCompleted=1 remaining=29 gate=FAIL"
+    },
+    {
+      "id": "13-campaign-os-display",
+      "pass": true,
+      "detail": "real=1 gate=FAIL next=Open Profile Dashboard"
+    },
+    {
+      "id": "14-protected-files-unchanged",
+      "pass": true,
+      "detail": "22 master/template/visual files unchanged"
+    }
+  ],
+  "failed": 0,
+  "passed": true
+}

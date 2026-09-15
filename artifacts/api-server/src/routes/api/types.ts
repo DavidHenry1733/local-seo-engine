@@ -19,6 +19,12 @@ export interface DeployConfig {
   password?: string;
 }
 
+export interface NarrativeEngineConfig {
+  enabled: boolean;
+  serviceKeys: string[];
+  areas?: string[];
+}
+
 export interface BrandingConfig {
   primaryColor: string;
   accentColor: string;
@@ -61,6 +67,7 @@ export interface ProjectConfig {
   services: ServiceConfig[];
   locations: string[];
   deploy: DeployConfig & { username?: string; password?: string };
+  narrativeEngine?: NarrativeEngineConfig;
   /** Template to use when generating pages for this project. */
   templateId?: string;
   // Extended profile

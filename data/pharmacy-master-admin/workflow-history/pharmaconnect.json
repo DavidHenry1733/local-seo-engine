@@ -1,0 +1,293 @@
+{
+  "version": 2,
+  "slug": "pharmaconnect",
+  "updatedAt": "2026-08-14T08:42:39.143Z",
+  "currentStage": "competitor_analysis",
+  "transitions": [
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "competitor_analysis",
+      "timestamp": "2026-08-13T07:01:49.742Z",
+      "operator": "admin",
+      "durationMs": 652,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-08-13T07:01:49.057Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-08-13T07:01:49.054Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-08-13T07:01:49.051Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-11T08:23:09.398Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-08-11T08:20:39.787Z",
+      "operator": "admin",
+      "durationMs": 2550157,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (f1d67450-b98a-401d-b10e-8d91015ca228) for https://pharmaconnect.uk"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-11T07:38:09.560Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-08-11T07:36:09.282Z",
+      "operator": "admin",
+      "durationMs": 1178945,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (455ac0e8-50a5-421d-b827-da5908770b3c) for https://pharmaconnect.uk"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-11T07:16:30.276Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-08-11T07:14:25.981Z",
+      "operator": "admin",
+      "durationMs": 75508560,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (2aefde92-3e95-4fe0-acd2-2aa91a831fab) for https://pharmaconnect.uk"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-10T10:15:57.360Z",
+      "operator": "admin",
+      "durationMs": 1895102,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job 4076ca7f-ab43-4e2d-b68a-634276e35062 completed — import_website"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "website_import",
+      "timestamp": "2026-08-10T09:44:22.224Z",
+      "operator": "admin",
+      "durationMs": 5113117,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Website import queued (4076ca7f-ab43-4e2d-b68a-634276e35062) for https://pharmaconnect.uk"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-10T08:19:09.067Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-08-10T06:16:53.543Z",
+      "operator": "defect-037",
+      "durationMs": null,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "System health cache refreshed by background worker"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "competitor_analysis",
+      "actionId": "orchestrate_competitor_analysis",
+      "startedAt": "2026-08-14T08:42:38.154Z",
+      "finishedAt": "2026-08-14T08:42:39.143Z",
+      "durationMs": 989,
+      "operator": "admin",
+      "evidence": "National Growth Engine competitor discovery has not yet been generated.",
+      "warnings": [],
+      "errors": [
+        "National Growth Engine competitor discovery has not yet been generated."
+      ],
+      "retryCount": 2,
+      "status": "failed",
+      "jobId": "f840446b-9737-4a49-9298-09046f5f01d5"
+    },
+    {
+      "stageId": "competitor_analysis",
+      "actionId": "orchestrate_competitor_analysis",
+      "startedAt": "2026-08-14T08:40:55.028Z",
+      "finishedAt": "2026-08-14T08:40:55.636Z",
+      "durationMs": 608,
+      "operator": "admin",
+      "evidence": "National Growth Engine competitor discovery has not yet been generated.",
+      "warnings": [],
+      "errors": [
+        "National Growth Engine competitor discovery has not yet been generated."
+      ],
+      "retryCount": 1,
+      "status": "failed",
+      "jobId": "f460db46-7e43-4015-b642-7cba84236bc1"
+    },
+    {
+      "stageId": "competitor_analysis",
+      "actionId": "orchestrate_competitor_analysis",
+      "startedAt": "2026-08-14T07:37:02.216Z",
+      "finishedAt": "2026-08-14T07:37:02.832Z",
+      "durationMs": 616,
+      "operator": "admin",
+      "evidence": "National Growth Engine competitor discovery has not yet been generated.",
+      "warnings": [],
+      "errors": [
+        "National Growth Engine competitor discovery has not yet been generated."
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "01ebf812-9939-4bf8-9059-c57a88494522"
+    },
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-13T07:01:49.055Z",
+      "finishedAt": "2026-08-13T07:01:49.056Z",
+      "durationMs": 1,
+      "operator": "admin",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-13T07:01:49.052Z",
+      "finishedAt": "2026-08-13T07:01:49.053Z",
+      "durationMs": 1,
+      "operator": "admin",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-13T07:01:49.037Z",
+      "finishedAt": "2026-08-13T07:01:49.050Z",
+      "durationMs": 13,
+      "operator": "admin",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-11T08:23:09.312Z",
+      "finishedAt": "2026-08-11T08:23:09.312Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported (national market — branch selection not applicable).",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "f1d67450-b98a-401d-b10e-8d91015ca228"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-11T07:38:09.491Z",
+      "finishedAt": "2026-08-11T07:38:09.491Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported (national market — branch selection not applicable).",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "455ac0e8-50a5-421d-b827-da5908770b3c"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-11T07:16:30.235Z",
+      "finishedAt": "2026-08-11T07:16:30.235Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported (national market — branch selection not applicable).",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "2aefde92-3e95-4fe0-acd2-2aa91a831fab"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-10T09:46:22.054Z",
+      "finishedAt": "2026-08-10T09:46:22.054Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Multiple pharmacy branches detected — select the branch being onboarded.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "4076ca7f-ab43-4e2d-b68a-634276e35062"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-10T08:17:50.822Z",
+      "finishedAt": "2026-08-10T08:19:09.038Z",
+      "durationMs": 78216,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "01894b28-b3da-47a8-bbc3-9fd23a1e4fc3"
+    }
+  ]
+}

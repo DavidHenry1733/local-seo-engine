@@ -1,0 +1,146 @@
+import {
+  buildCommercialKeywordTaxonomy,
+} from "./commercialKeywordIntelligenceModel.ts";
+
+export function buildPharmaConnectCommercialKeywordTaxonomy(){
+  return buildCommercialKeywordTaxonomy({
+    market:"UK Community Pharmacy Digital Growth",
+    country:"United Kingdom",
+    languageCode:"en",
+
+    targetMarketTerms:[
+      "pharmacy",
+      "pharmacies",
+      "community pharmacy",
+      "community pharmacies",
+      "independent pharmacy",
+      "independent pharmacies",
+      "pharmacy owner",
+      "pharmacy owners",
+      "pharmacy group",
+      "pharmacy groups",
+      "pharmacist business",
+    ],
+
+    serviceTerms:[
+      "website design",
+      "web design",
+      "website development",
+      "pharmacy website",
+      "pharmacy websites",
+      "seo",
+      "local seo",
+      "search engine optimisation",
+      "google business profile",
+      "digital marketing",
+      "online marketing",
+      "marketing agency",
+      "email marketing",
+      "email campaigns",
+      "website hosting",
+      "web hosting",
+      "growth audit",
+      "seo audit",
+      "digital audit",
+      "growth strategy",
+      "digital strategy",
+      "marketing strategy",
+    ],
+
+    highIntentTerms:[
+      "pharmacy website design",
+      "pharmacy web design",
+      "websites for pharmacies",
+      "website design for pharmacies",
+      "seo for pharmacies",
+      "pharmacy seo",
+      "pharmacy local seo",
+      "local seo for pharmacies",
+      "pharmacy digital marketing",
+      "digital marketing for pharmacies",
+      "pharmacy marketing agency",
+      "marketing for pharmacies",
+      "email marketing for pharmacies",
+      "pharmacy email marketing",
+      "pharmacy website hosting",
+      "website hosting for pharmacies",
+      "pharmacy growth services",
+      "pharmacy digital growth",
+      "pharmacy seo audit",
+      "pharmacy marketing audit",
+    ],
+
+    negativeIntentGroups:{
+      employment:[
+        "jobs",
+        "job",
+        "vacancy",
+        "vacancies",
+        "salary",
+        "career",
+        "careers",
+        "recruitment",
+      ],
+
+      education:[
+        "course",
+        "courses",
+        "degree",
+        "university",
+        "training",
+        "student",
+        "students",
+        "exam",
+        "qualification",
+      ],
+
+      editorial:[
+        "news",
+        "journal",
+        "article",
+        "research",
+        "publication",
+        "magazine",
+      ],
+
+      regulatory:[
+        "regulation",
+        "regulator",
+        "gphc",
+        "guidance",
+        "standards",
+        "inspection",
+      ],
+
+      patientRetail:[
+        "buy medicine",
+        "buy medicines",
+        "online pharmacy",
+        "prescription delivery",
+        "repeat prescription",
+        "chemist near me",
+        "pharmacy near me",
+        "medicine delivery",
+      ],
+
+      clinical:[
+        "dosage",
+        "side effects",
+        "symptoms",
+        "treatment",
+        "clinical trial",
+        "drug interaction",
+      ],
+
+      pharmaceuticalIndustry:[
+        "drug development",
+        "pharmaceutical manufacturer",
+        "pharmaceutical manufacturing",
+        "clinical research organisation",
+        "clinical research organization",
+        "wholesale medicines",
+        "pharmaceutical wholesaler",
+      ],
+    },
+  });
+}

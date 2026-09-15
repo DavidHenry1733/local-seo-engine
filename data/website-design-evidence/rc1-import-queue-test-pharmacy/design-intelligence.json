@@ -1,0 +1,192 @@
+{
+  "version": "design-intelligence-v1",
+  "tenant": "rc1-import-queue-test-pharmacy",
+  "sourceRevision": "8b10e983d6894e16",
+  "capturedAt": "2026-07-31T14:29:49.347Z",
+  "primaryUrl": "https://www.jhootspharmacy.co.uk",
+  "navigation": {
+    "tree": [
+      {
+        "id": "nav-1",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 1,
+        "selector": "header nav a",
+        "href": "https://www.jhlpharmacies.co.uk/",
+        "text": "Visit JHL Pharmacies",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      }
+    ],
+    "hierarchyDepth": 1,
+    "rootId": "nav-1"
+  },
+  "header": {
+    "rowCount": 1,
+    "announcementBar": null,
+    "logoBlock": {
+      "selector": "header .logo img",
+      "backgroundColour": "#ffffff",
+      "textColour": "#004281",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "left",
+      "sticky": false,
+      "logoUrl": "",
+      "logoMaxHeight": "48px",
+      "logoPosition": "left"
+    },
+    "navigationBlock": {
+      "selector": "header nav",
+      "backgroundColour": "#ffffff",
+      "textColour": "#004281",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "end",
+      "sticky": false,
+      "navPlacement": "inline",
+      "mobileMenuBehaviour": "stacked-nav"
+    },
+    "ctaBlock": {
+      "selector": "header .btn, header .theme-btn",
+      "backgroundColour": "#1CA9C9",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "right",
+      "sticky": false,
+      "labels": [
+        "Book An Appointment"
+      ],
+      "hrefs": [
+        "https://www.jhootspharmacy.co.uk"
+      ]
+    },
+    "spacing": {
+      "paddingY": "",
+      "paddingX": "",
+      "gap": "24px"
+    },
+    "alignment": {
+      "logo": "left",
+      "nav": "center",
+      "cta": "right"
+    },
+    "sticky": true,
+    "responsive": {
+      "desktopBreakpoint": "980px",
+      "mobileMenuBehaviour": "stacked-nav"
+    }
+  },
+  "footer": {
+    "upperLayer": {
+      "selector": "footer",
+      "backgroundColour": "#004281",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "56px",
+      "paddingBottom": "0"
+    },
+    "lowerLayer": {
+      "selector": "footer .footer-bottom",
+      "backgroundColour": "#004281",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "18px"
+    },
+    "groups": [
+      {
+        "id": "footer-primary",
+        "role": "company",
+        "selector": "footer",
+        "heading": "Footer",
+        "links": [
+          {
+            "text": "Visit JHL Pharmacies",
+            "href": "https://www.jhlpharmacies.co.uk/",
+            "selector": "footer a"
+          }
+        ],
+        "backgroundColour": "#004281",
+        "textColour": "#ffffff"
+      }
+    ],
+    "mobileStackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ]
+  },
+  "colours": [
+    {
+      "role": "primary",
+      "selector": ":root",
+      "computedColour": "#005EB8",
+      "hex": "#005EB8",
+      "layer": "body"
+    },
+    {
+      "role": "secondary",
+      "selector": ":root",
+      "computedColour": "#00478a",
+      "hex": "#00478a",
+      "layer": "body"
+    },
+    {
+      "role": "accent",
+      "selector": ":root",
+      "computedColour": "#00478a",
+      "hex": "#00478a",
+      "layer": "body"
+    },
+    {
+      "role": "header-background",
+      "selector": ":root",
+      "computedColour": "#ffffff",
+      "hex": "#ffffff",
+      "layer": "footer-upper"
+    },
+    {
+      "role": "footer-background",
+      "selector": ":root",
+      "computedColour": "#004281",
+      "hex": "#004281",
+      "layer": "footer-upper"
+    }
+  ],
+  "images": [],
+  "validation": {
+    "navigationTreeComplete": false,
+    "headerHierarchyComplete": false,
+    "footerHierarchyComplete": true,
+    "colourRolesComplete": true,
+    "imageRolesComplete": false,
+    "navigationFlatteningRemoved": true,
+    "footerLayerMergeRemoved": true
+  },
+  "summary": {
+    "layoutClassification": "with-top-bar",
+    "headerStyle": "inline",
+    "footerStyle": "compact",
+    "navigationStyle": "inline",
+    "typographySystem": "Inter Tight / Inter Tight",
+    "buttonStyle": "filled-only · 10px · filled",
+    "colourSystem": "#005EB8, #00478a, #00478a",
+    "logoPlacement": "left",
+    "evidenceCompleteness": 88,
+    "fallbackReason": null
+  }
+}

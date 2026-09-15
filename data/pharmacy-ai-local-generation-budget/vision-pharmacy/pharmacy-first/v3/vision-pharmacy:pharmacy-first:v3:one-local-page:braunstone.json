@@ -1,0 +1,28 @@
+{
+  "taskId": "vision-pharmacy:pharmacy-first:v3:one-local-page:braunstone",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.003698,
+  "events": [
+    {
+      "at": "2026-09-14T08:26:06.255Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-14T08:26:06.331Z",
+      "kind": "reserve",
+      "reservationId": "r-1789374366331-1"
+    },
+    {
+      "at": "2026-09-14T08:26:23.106Z",
+      "kind": "consumed",
+      "reservationId": "r-1789374366331-1",
+      "detail": "cost=0.003698"
+    }
+  ]
+}

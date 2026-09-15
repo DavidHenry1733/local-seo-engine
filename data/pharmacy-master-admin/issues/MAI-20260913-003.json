@@ -1,0 +1,309 @@
+{
+  "issueId": "MAI-20260913-003",
+  "createdAt": "2026-09-13T14:15:08.568Z",
+  "createdBy": "admin",
+  "updatedAt": "2026-09-13T14:15:10.028Z",
+  "tenantSlug": "vision-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "",
+  "category": "Customer onboarding",
+  "severity": "high",
+  "title": "Workflow failed: Generate Ecosystem",
+  "description": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+  "expectedBehaviour": "Continue Workflow completes Generate Ecosystem without error",
+  "actualBehaviour": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+  "reproductionSteps": "1. Open Master Admin customer record\n2. Customer slug: vision-pharmacy\n3. Click Continue Workflow at stage: Generate Ecosystem\n4. Action: generate_local_cluster_pages",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-09-13T14:15:09.522Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "vision-pharmacy",
+      "businessName": "Vision Pharmacy | Ear Ache & Sore Throat Clinic | Sinusitis, Shingles Treatment | Infected Bites | UTI Treatment | Impetigo",
+      "website": "https://www.visionpharmacy.com/",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-09-13T14:15:04.796Z",
+      "platformClientStatus": "profile_approved"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "package_exists",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/vision-pharmacy-campaign-generation-context-pharmacy-first.json",
+        "exists": true,
+        "modifiedAt": "2026-09-13T14:15:04.746Z",
+        "size": 343512
+      },
+      "generationTimestamp": "2026-09-13T09:41:05.637Z",
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/vision-pharmacy/pharmacy-first.json",
+        "exists": true,
+        "modifiedAt": "2026-09-13T11:13:26.651Z",
+        "size": 6588
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/vision-pharmacy/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/vision-pharmacy.json",
+        "exists": true,
+        "modifiedAt": "2026-09-11T13:00:52.183Z",
+        "size": 6597
+      },
+      "pageType": "unknown",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-09-13T13:45:04.135Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-09-13T13:45:04.135Z",
+        "size": 15547851
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 2614126,
+        "pmId": 1,
+        "status": "online",
+        "startTime": "2026-09-13T13:45:04.788Z",
+        "restartCount": 547
+      },
+      "nodeEnv": "production"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "snapshot_present",
+      "businessProfileStatus": "profile_approved",
+      "generationStatus": "idle",
+      "publishingStatus": "not_started",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "5954355f-3ee2-49e4-9fa7-43ded2599b18",
+        "action": "generate_local_cluster_pages",
+        "status": "failed",
+        "progressLabel": "Failed",
+        "updatedAt": "2026-09-13T14:15:08.500Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "ae8ee802-a41a-4c08-b056-56bf6f9c0dca",
+          "timestamp": "2026-09-13T14:15:09.130Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260913-003 created: Workflow failed: Generate Ecosystem"
+        },
+        {
+          "id": "b2c7231f-3d82-4105-bf15-bff3f4bb9865",
+          "timestamp": "2026-09-13T13:50:10.370Z",
+          "action": "continue_workflow",
+          "status": "error",
+          "evidence": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph"
+        },
+        {
+          "id": "61b4242d-4aaa-48a2-a0e4-2a45408927e0",
+          "timestamp": "2026-09-13T13:50:10.288Z",
+          "action": "workflow_failure_ticket",
+          "status": "error",
+          "evidence": "Issue MAI-20260913-002 created for failed Generate Ecosystem"
+        },
+        {
+          "id": "71ff580d-839a-4723-955c-353a0ffe6222",
+          "timestamp": "2026-09-13T13:50:10.211Z",
+          "action": "issue_cursor_prompt_generated",
+          "status": "success",
+          "evidence": "Cursor prompt generated for MAI-20260913-002"
+        },
+        {
+          "id": "cf1245eb-baa3-4d50-9823-ac1f531a56a3",
+          "timestamp": "2026-09-13T13:50:09.848Z",
+          "action": "issue_diagnostics_refresh",
+          "status": "success",
+          "evidence": "Diagnostics refreshed for MAI-20260913-002"
+        },
+        {
+          "id": "acb609de-6cad-4a18-9c4e-3a1bcec4a6d9",
+          "timestamp": "2026-09-13T13:50:09.203Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260913-002 created: Workflow failed: Generate Ecosystem"
+        },
+        {
+          "id": "f8ebccfb-e7fc-4d30-9786-8f2e0281646a",
+          "timestamp": "2026-09-13T13:49:59.632Z",
+          "action": "continue_workflow",
+          "status": "error",
+          "evidence": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph"
+        },
+        {
+          "id": "a62ba3b6-2b7a-449d-ba9a-6e71a2d8ac95",
+          "timestamp": "2026-09-13T13:49:59.492Z",
+          "action": "workflow_failure_ticket",
+          "status": "error",
+          "evidence": "Issue MAI-20260913-001 created for failed Generate Ecosystem"
+        },
+        {
+          "id": "84b32bd7-b6e3-4e7c-a02c-3678fb0895f5",
+          "timestamp": "2026-09-13T13:49:59.337Z",
+          "action": "issue_cursor_prompt_generated",
+          "status": "success",
+          "evidence": "Cursor prompt generated for MAI-20260913-001"
+        },
+        {
+          "id": "2feedcfe-b84a-4fab-9d1f-582fe1c56aa8",
+          "timestamp": "2026-09-13T13:49:58.845Z",
+          "action": "issue_diagnostics_refresh",
+          "status": "success",
+          "evidence": "Diagnostics refreshed for MAI-20260913-001"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+        "timestamp": "2026-09-13T14:15:08.500Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+        "timestamp": "2026-09-13T13:50:08.782Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+        "timestamp": "2026-09-13T13:49:57.625Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Locality patient-copy quality gate failed: oadby: unsupported-claim:walk-in-assumption; unsupported-claim:book-an-appointment; unsupported-claim:booking-options; unsupported-claim:treatment-or-referral; unsupported-claim:treatment-is-supplied; pharmacy-name-overuse:3 | oadby: verified local evidence was not consumed in the page body | wigston: unsupported-claim:walk-in-assumption; unsupported-claim:book-an-appointment; unsupported-claim:booking-options; unsupported-claim:treatment-or-referral; unsupported-claim:treatment-is-supplied; distance-repeated:3; distance-label-overuse:3 | hamilton: unsupported-claim:walk-in-assumption; unsupported-claim:book-an-appointment; unsupported-claim:booking-options; unsupported-claim:treatment-or-referral; unsupported-claim:treatment-is-supplied; distance-repeated:2; distance-label-overuse:2 | hamilton: verified local evidence was not consumed in the page body | braunstone: unsupported-claim:walk-in-assumption; unsupported-claim:book-an-appointment; unsupported-claim:booking-options; unsupported-claim:treatment-or-referral; unsupported-claim:treatment-is-supplied; distance-repeated:3; distance-label-overuse:3 | braunstone: verified local evidence was not consumed in the page body | blaby: unsupported-claim:walk-in-assumption; unsupported-claim:book-an-appointment; unsupported-claim:booking-options; unsupported-claim:treatment-or-referral; unsupported-claim:treatment-is-supplied; distance-repeated:3; distance-label-overuse:3",
+        "timestamp": "2026-09-13T13:38:46.670Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_service_page",
+        "error": "FAILED_TENANT_CONTEXT: Business name not used meaningfully in generated page",
+        "timestamp": "2026-09-13T09:38:07.837Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_service_page",
+        "error": "Service offered confirmation is required — confirm the locked service is offered by this pharmacy.",
+        "timestamp": "2026-09-13T09:33:40.199Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_service_page",
+        "error": "Service page failed publication quality gate: unconfirmed-walkin-claim:Unconfirmed walk-in availability claim detected",
+        "timestamp": "2026-09-13T09:09:22.049Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+        "timestamp": "2026-09-13T13:50:10.370Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+        "timestamp": "2026-09-13T13:50:10.288Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+        "timestamp": "2026-09-13T13:49:59.632Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph",
+        "timestamp": "2026-09-13T13:49:59.492Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "approve_business_profile_review",
+        "error": "Confirm proposed canonical service: Ear Wax Removal; Confirm proposed canonical service: Emergency Contraception; Confirm proposed canonical service: Flu Vaccination; Confirm proposed canonical service: Malaria Prevention; Confirm proposed canonical service: Pharmacy First; Confirm proposed canonical service: Prescription Dispensing; Confirm proposed canonical service: Travel Clinic; Confirm proposed canonical service: Vaccinations",
+        "timestamp": "2026-09-13T06:53:11.977Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "approve_business_profile_review",
+        "error": "Confirm proposed canonical service: Ear Wax Removal; Confirm proposed canonical service: Emergency Contraception; Confirm proposed canonical service: Flu Vaccination; Confirm proposed canonical service: Malaria Prevention; Confirm proposed canonical service: Pharmacy First; Confirm proposed canonical service: Prescription Dispensing; Confirm proposed canonical service: Travel Clinic; Confirm proposed canonical service: Vaccinations",
+        "timestamp": "2026-09-13T06:53:11.791Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/vision-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/vision-pharmacy/pharmacy-first.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/vision-pharmacy-campaign-generation-context-pharmacy-first.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/vision-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/vision-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/vision-pharmacy-campaign-builder.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-09-13T14:15:09.759Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/vision-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/vision-pharmacy/pharmacy-first.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/vision-pharmacy-campaign-generation-context-pharmacy-first.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/vision-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/vision-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/vision-pharmacy-campaign-builder.json"
+  ],
+  "linkedAuditEventIds": [
+    "ae8ee802-a41a-4c08-b056-56bf6f9c0dca"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-09-13T14:15:08.568Z",
+      "user": "admin",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": "COMMERCIAL RELEASE PROGRAMME V1\nRELEASE DEFECT\nONE ISSUE POLICY\n\nConfirmed browser-visible defect:\nLocality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph\n\nTarget tenant:\nvision-pharmacy (Vision Pharmacy | Ear Ache & Sore Throat Clinic | Sinusitis, Shingles Treatment | Infected Bites | UTI Treatment | Impetigo)\n\nTarget campaign:\npharmacy-first\n\nTarget URL:\nNot specified in issue record\n\nLocked systems (do not modify):\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nObjective:\nResolve the reported Customer onboarding issue for tenant vision-pharmacy: Workflow failed: Generate Ecosystem\n\nTrace requirements:\n- Reproduce using: 1. Open Master Admin customer record\n2. Customer slug: vision-pharmacy\n3. Click Continue Workflow at stage: Generate Ecosystem\n4. Action: generate_local_cluster_pages\n- Expected behaviour: Continue Workflow completes Generate Ecosystem without error\n- Actual behaviour: Locality patient-copy quality gate failed: wigston/hamilton: duplicate locality introduction or access paragraph | wigston/braunstone: duplicate locality introduction or access paragraph | wigston/blaby: duplicate locality introduction or access paragraph | wigston/thurmaston: duplicate locality introduction or access paragraph | wigston/birstall: duplicate locality introduction or access paragraph | hamilton/braunstone: duplicate locality introduction or access paragraph | hamilton/blaby: duplicate locality introduction or access paragraph | hamilton/thurmaston: duplicate locality introduction or access paragraph\n- Page type (from diagnostics): unknown\n- Lifecycle at report time: awaiting_review\n- Root cause to be traced.\n\nFix scope:\n- Operational/support fix only unless Product Owner approves engine changes\n- Do not modify locked rendering, generation, publishing, SEO, indexing, or ranking engines\n\nDo not modify:\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nValidation:\n- Confirm defect reproduced in browser\n- Apply fix within approved scope\n- Build and PM2 reload\n- WAIT FOR PRODUCT OWNER TEST\n- STOP.\n\nIssue ID: MAI-20260913-003\nSeverity: high\nCategory: Customer onboarding\nDiagnostic collected: 2026-09-13T14:15:09.759Z\n",
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

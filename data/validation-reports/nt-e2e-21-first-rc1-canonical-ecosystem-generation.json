@@ -1,0 +1,384 @@
+{
+  "readiness": {
+    "canGenerate": true,
+    "inventory": 16,
+    "scheduler": 16,
+    "dashboard": 16,
+    "historicalWarning": true,
+    "supersededWarning": true,
+    "canonicalPlanId": "1162494caf64289d"
+  },
+  "cancelNoOp": {
+    "ok": true,
+    "note": "Cancel is UI-only; no service call on cancel"
+  },
+  "generationStarted": true,
+  "authorisedJobId": "eaa7bd57-fbe0-45a5-a252-e67b6ab69377",
+  "duplicateGenerationImmediate": false,
+  "generationCompleted": true,
+  "generationDurationMs": 2895,
+  "progressUpdates": true,
+  "progressLog": [
+    {
+      "percent": 0,
+      "stage": "Queued",
+      "elapsedMs": 176
+    }
+  ],
+  "canonicalPlanId": "1162494caf64289d",
+  "pagesExpected": 16,
+  "pagesGenerated": 10,
+  "planOutputParity": false,
+  "parityDetail": {
+    "ok": false,
+    "plannedCount": 16,
+    "generatedCount": 10,
+    "missingPages": [
+      "cluster-page:cluster-sheffield-city-centre",
+      "cluster-page:cluster-broomhill",
+      "cluster-page:cluster-kelham-island",
+      "cluster-page:cluster-dore",
+      "cluster-page:cluster-hillsborough",
+      "cluster-page:cluster-crookes"
+    ],
+    "unexpectedPages": [],
+    "imageGaps": [],
+    "failures": []
+  },
+  "homepage": 1,
+  "serviceHub": 1,
+  "clusterPages": 2,
+  "blogs": 3,
+  "guide": 1,
+  "faq": 1,
+  "supportingPage": 1,
+  "images": 5,
+  "manifest": "PASS",
+  "registry": "FAIL",
+  "sitemap": "FAIL",
+  "schema": false,
+  "metadata": false,
+  "internalLinks": false,
+  "qualityReviewOpened": true,
+  "qualityReview": {
+    "inventory": 16,
+    "generated": 10,
+    "parityPass": false,
+    "warnings": [
+      "No custom images",
+      "No Search Console",
+      "No Analytics",
+      "No Competitor Intelligence"
+    ],
+    "errors": [],
+    "previewLinks": 5
+  },
+  "previewValidation": [
+    {
+      "label": "Homepage",
+      "url": "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=reliable-direct-pharmacy",
+      "ok": true,
+      "status": 200,
+      "hasTenant": true,
+      "hasRotherham": false,
+      "hasBannerCross": false,
+      "hasPlaceholder": false,
+      "hasSchema": false,
+      "hasNav": false
+    },
+    {
+      "label": "Service Hub",
+      "url": "http://127.0.0.1:3001/api/pharmacy-visual-experience/pharmacy-first/?slug=reliable-direct-pharmacy&page=pharmacy-first",
+      "ok": true,
+      "status": 200,
+      "hasTenant": true,
+      "hasRotherham": false,
+      "hasBannerCross": false,
+      "hasPlaceholder": false,
+      "hasSchema": false,
+      "hasNav": false
+    },
+    {
+      "label": "Ecclesall Cluster",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-ecclesall/",
+      "ok": true,
+      "status": 200,
+      "hasTenant": true,
+      "hasRotherham": false,
+      "hasBannerCross": false,
+      "hasPlaceholder": false,
+      "hasSchema": false,
+      "hasNav": false
+    },
+    {
+      "label": "Crookes Cluster",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/local/cluster-crookes/",
+      "ok": true,
+      "status": 200,
+      "hasTenant": true,
+      "hasRotherham": false,
+      "hasBannerCross": false,
+      "hasPlaceholder": false,
+      "hasSchema": false,
+      "hasNav": false
+    },
+    {
+      "label": "Guide",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/pharmacy-first-guide/",
+      "ok": true,
+      "status": 200,
+      "hasTenant": true,
+      "hasRotherham": false,
+      "hasBannerCross": false,
+      "hasPlaceholder": false,
+      "hasSchema": false,
+      "hasNav": false
+    },
+    {
+      "label": "Blog",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/what-is-pharmacy-first/",
+      "ok": true,
+      "status": 200,
+      "hasTenant": true,
+      "hasRotherham": false,
+      "hasBannerCross": false,
+      "hasPlaceholder": false,
+      "hasSchema": false,
+      "hasNav": false
+    },
+    {
+      "label": "FAQ",
+      "url": "http://127.0.0.1:3001/api/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/pharmacy-first-faqs/",
+      "ok": true,
+      "status": 200,
+      "hasTenant": true,
+      "hasRotherham": false,
+      "hasBannerCross": false,
+      "hasPlaceholder": false,
+      "hasSchema": false,
+      "hasNav": false
+    }
+  ],
+  "publishingPerformed": false,
+  "indexingPerformed": false,
+  "duplicateGeneration": true,
+  "completedJobCount": 3,
+  "supersededPackagePreserved": true,
+  "newRc1PackageCreated": true,
+  "workflowHistoryPreserved": true,
+  "pageValidation": [
+    {
+      "inventoryId": "page-001:homepage:index",
+      "pageType": "homepage",
+      "slug": "index",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": true,
+        "hasCanonical": false,
+        "hasMeta": true,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-002:service-hub:pharmacy-first",
+      "pageType": "service-hub",
+      "slug": "pharmacy-first",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": true,
+        "hasCanonical": false,
+        "hasMeta": true,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-003:cluster-page:cluster-ecclesall",
+      "pageType": "cluster-page",
+      "slug": "cluster-ecclesall",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": true,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-004:cluster-page:cluster-fulwood",
+      "pageType": "cluster-page",
+      "slug": "cluster-fulwood",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": true,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-005:cluster-page:cluster-sheffield-city-centre",
+      "pageType": "cluster-page",
+      "slug": "cluster-sheffield-city-centre",
+      "exists": false,
+      "htmlChecks": null
+    },
+    {
+      "inventoryId": "page-006:cluster-page:cluster-broomhill",
+      "pageType": "cluster-page",
+      "slug": "cluster-broomhill",
+      "exists": false,
+      "htmlChecks": null
+    },
+    {
+      "inventoryId": "page-007:cluster-page:cluster-kelham-island",
+      "pageType": "cluster-page",
+      "slug": "cluster-kelham-island",
+      "exists": false,
+      "htmlChecks": null
+    },
+    {
+      "inventoryId": "page-008:cluster-page:cluster-dore",
+      "pageType": "cluster-page",
+      "slug": "cluster-dore",
+      "exists": false,
+      "htmlChecks": null
+    },
+    {
+      "inventoryId": "page-009:cluster-page:cluster-hillsborough",
+      "pageType": "cluster-page",
+      "slug": "cluster-hillsborough",
+      "exists": false,
+      "htmlChecks": null
+    },
+    {
+      "inventoryId": "page-010:cluster-page:cluster-crookes",
+      "pageType": "cluster-page",
+      "slug": "cluster-crookes",
+      "exists": false,
+      "htmlChecks": null
+    },
+    {
+      "inventoryId": "page-011:guide:pharmacy-first-guide",
+      "pageType": "guide",
+      "slug": "pharmacy-first-guide",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": false,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-012:blog:what-is-pharmacy-first",
+      "pageType": "blog",
+      "slug": "what-is-pharmacy-first",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": false,
+        "hasTenant": true,
+        "hasRotherham": true,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-013:blog:who-should-consider-pharmacy-first",
+      "pageType": "blog",
+      "slug": "who-should-consider-pharmacy-first",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": false,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-014:blog:pharmacy-first-what-you-need-to-know",
+      "pageType": "blog",
+      "slug": "pharmacy-first-what-you-need-to-know",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": false,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": true
+      }
+    },
+    {
+      "inventoryId": "page-015:faq:pharmacy-first-faqs",
+      "pageType": "faq",
+      "slug": "pharmacy-first-faqs",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": false,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": false
+      }
+    },
+    {
+      "inventoryId": "page-016:supporting:pharmacy-first-content-ecosystem",
+      "pageType": "supporting",
+      "slug": "pharmacy-first-content-ecosystem",
+      "exists": true,
+      "htmlChecks": {
+        "hasSchema": false,
+        "hasCanonical": false,
+        "hasMeta": false,
+        "hasTenant": true,
+        "hasRotherham": false,
+        "hasBannerCross": false,
+        "hasPlaceholder": false,
+        "hasInternalLinks": false
+      }
+    }
+  ],
+  "packageGeneratedAt": "2026-07-25T08:16:32.761Z",
+  "authorisedRecord": {
+    "jobId": "eaa7bd57-fbe0-45a5-a252-e67b6ab69377",
+    "completenessStatus": "FAILED_COMPLETENESS",
+    "qualityReviewReady": false,
+    "pageCount": 77
+  },
+  "jobsBeforeCount": 2,
+  "consoleErrors": [],
+  "failedRequests": [],
+  "status": "NEEDS ATTENTION"
+}

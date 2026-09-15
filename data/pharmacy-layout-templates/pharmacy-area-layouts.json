@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-18T13:46:22.650Z",
+  "templateCount": 8,
+  "templates": [
+    {
+      "id": "classic-clinical",
+      "name": "Classic Clinical Flow",
+      "clinicalOrder": [
+        "problem",
+        "benefits",
+        "eligibility",
+        "howItWorks",
+        "preparationGuide",
+        "patientOutcomes",
+        "trustSafety",
+        "patientEducation",
+        "mythVsFact"
+      ],
+      "narrativeAfter": "benefits"
+    },
+    {
+      "id": "process-first",
+      "name": "Process First",
+      "clinicalOrder": [
+        "problem",
+        "howItWorks",
+        "eligibility",
+        "preparationGuide",
+        "benefits",
+        "patientOutcomes",
+        "trustSafety",
+        "mythVsFact",
+        "patientEducation"
+      ],
+      "narrativeAfter": "howItWorks"
+    },
+    {
+      "id": "eligibility-led",
+      "name": "Eligibility Led",
+      "clinicalOrder": [
+        "problem",
+        "eligibility",
+        "benefits",
+        "preparationGuide",
+        "howItWorks",
+        "trustSafety",
+        "patientOutcomes",
+        "patientEducation",
+        "mythVsFact"
+      ],
+      "narrativeAfter": "eligibility"
+    },
+    {
+      "id": "education-forward",
+      "name": "Education Forward",
+      "clinicalOrder": [
+        "problem",
+        "patientEducation",
+        "benefits",
+        "eligibility",
+        "howItWorks",
+        "preparationGuide",
+        "mythVsFact",
+        "trustSafety",
+        "patientOutcomes"
+      ],
+      "narrativeAfter": "patientEducation"
+    },
+    {
+      "id": "trust-forward",
+      "name": "Trust Forward",
+      "clinicalOrder": [
+        "problem",
+        "trustSafety",
+        "benefits",
+        "eligibility",
+        "howItWorks",
+        "preparationGuide",
+        "mythVsFact",
+        "patientEducation",
+        "patientOutcomes"
+      ],
+      "narrativeAfter": "trustSafety"
+    },
+    {
+      "id": "preparation-led",
+      "name": "Preparation Led",
+      "clinicalOrder": [
+        "problem",
+        "preparationGuide",
+        "eligibility",
+        "howItWorks",
+        "benefits",
+        "patientOutcomes",
+        "trustSafety",
+        "patientEducation",
+        "mythVsFact"
+      ],
+      "narrativeAfter": "preparationGuide"
+    },
+    {
+      "id": "outcomes-focused",
+      "name": "Outcomes Focused",
+      "clinicalOrder": [
+        "problem",
+        "benefits",
+        "howItWorks",
+        "patientOutcomes",
+        "eligibility",
+        "preparationGuide",
+        "trustSafety",
+        "mythVsFact",
+        "patientEducation"
+      ],
+      "narrativeAfter": "patientOutcomes"
+    },
+    {
+      "id": "myth-fact-mid",
+      "name": "Myth Fact Mid Flow",
+      "clinicalOrder": [
+        "problem",
+        "benefits",
+        "eligibility",
+        "mythVsFact",
+        "howItWorks",
+        "preparationGuide",
+        "trustSafety",
+        "patientEducation",
+        "patientOutcomes"
+      ],
+      "narrativeAfter": "mythVsFact"
+    }
+  ]
+}

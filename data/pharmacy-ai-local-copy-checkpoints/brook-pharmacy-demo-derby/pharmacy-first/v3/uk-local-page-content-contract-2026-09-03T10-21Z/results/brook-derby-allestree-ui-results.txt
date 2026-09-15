@@ -1,0 +1,38 @@
+
+=== Brook Derby Allestree local-page UI (no generation) ===
+
+PASS  derby-session-allestree-selected — campaign=pharmacy-first areas=Allestree,Mickleover,Littleover,Chellaston,Duffield,Alvaston,Mackworth,Chaddesden,Spondon,Borrowash
+PASS  other-nine-still-selected — count=10
+PASS  allestree-authorised-for-derby — writer/preview allow the first selected Derby area
+PASS  yorkshire-wombwell-unchanged — Yorkshire Wombwell remains a v3 preview area, not the one-page generate path
+PASS  selected-derby-areas-are-reusable — any selected Campaign Builder area can use the one-page path
+PASS  unselected-area-stays-closed — areas not selected in Campaign Builder stay closed
+PASS  preflight-reports-missing-evidence — local=missing editorial=missing blocker=Saved Allestree evidence is missing. Reuse saved evidence first. Collecting it would require paid retrievals. Do not generate until that evidence is stored.
+PASS  preflight-shows-cost-and-scope — up to $2.00 OpenAI cap for this v3 page | 1 local page (Allestree) — not the full campaign and not the other 9 selected areas
+PASS  preflight-lists-paid-calls-without-running-them — google-places-evidence:true, dataforseo-editorial-search:true, editorial-page-retrieval:true, openai-copy:false
+PASS  preflight-no-existing-candidate — no Allestree copy record
+PASS  generate-refuses-without-evidence — Saved Allestree evidence is missing. Reuse saved evidence first. Collecting it would require paid retrievals. Do not generate until that evidence is stored.
+PASS  ui-binds-first-selected-area — panel uses the first selected eligible area, not a tenant hard-code
+PASS  ui-has-allestree — Allestree row
+PASS  ui-has-generate-one — Generate one local-page candidate
+PASS  ui-shows-scope-and-cost — scope + cost on Target Areas
+PASS  ui-generate-disabled — button stays disabled while evidence is missing
+PASS  ui-evidence-prep-missing-layers — preparation UI names missing Places and editorial layers
+PASS  ui-evidence-prep-proposed-calls — proposed providers/calls shown; paid start disabled
+PASS  ui-evidence-prep-content-contract — Target Areas shows the UK contract and targeted GP search, not blanket category searches
+PASS  ui-shows-demo-warning — demo-address / map warning
+PASS  ui-preview-and-review-wired — unpublished Preview and Review Centre links are on Target Areas
+PASS  ui-preserves-auth-handoff — one-local fetch and links keep the authenticated _t handoff
+PASS  ui-does-not-press-full-campaign — Generate My Campaign is not on the areas step
+PASS  other-tenants-not-derby-hardcoded — other tenants do not inherit the Derby one-page panel
+PASS  preview-path-wired — review-preview-ai-pilot-v3-unavailable
+PASS  wombwell-preview-preserved — ai-local-area-page-pilot-v3
+PASS  review-has-no-false-candidate — generated=false candidate=false
+PASS  review-still-empty-without-candidate — Review Centre waits for a candidate record
+PASS  evidence-plan-reuses-empty-cache — localPresent=false editorialPresent=false
+PASS  evidence-plan-call-counts-and-cost — places=places-gp-practices,places-area-reference seo=dataforseo-official-gp-practices,dataforseo-descriptive-locality pages=2 usd=0.068
+PASS  evidence-plan-uses-content-contract — contract=pharmacy-uk-local-page-content-v1 originBlock=true centroid=missing
+PASS  evidence-plan-does-not-execute — executed=false paid=0
+PASS  evidence-plan-confirm-still-unpaid — confirmedAt=2026-09-03T10:21:14.015Z executed=false
+
+33/33 passed

@@ -89,3 +89,8 @@ export function resolveLocalPageTypeContract(pageType: LocalPageType): LocalPage
 export function contractIdForPageType(pageType: LocalPageType): string {
   return resolveLocalPageTypeContract(pageType).contractId;
 }
+
+/** Locked Headingley local-cluster-v1 / patient-journey-led template for Pharmacy First. */
+export function usesPharmacyFirstPatientJourneyLocalTemplate(serviceId: string): boolean {
+  return String(serviceId || "").trim().toLowerCase() === "pharmacy-first";
+}

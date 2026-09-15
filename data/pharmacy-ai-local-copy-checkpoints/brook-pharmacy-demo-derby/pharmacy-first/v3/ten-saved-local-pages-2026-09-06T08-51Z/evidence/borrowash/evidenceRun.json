@@ -1,0 +1,508 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "06ef2eb7-0421-402b-b3a6-c075701210b9",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "borrowash",
+  "areaName": "Borrowash",
+  "planFingerprint": "a1dd4ff62325682bef2eae04380a8cc90cb46e075be4553a0d45e4f0dc132b07",
+  "spendingCapUsd": 0.069,
+  "status": "completed",
+  "startedAt": "2026-09-06T07:49:20.333Z",
+  "updatedAt": "2026-09-06T07:49:25.222Z",
+  "completedAt": "2026-09-06T07:49:25.221Z",
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "paidCallsMade": 4,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Borrowash, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "d60bff2e-7bf7-4386-8eb0-97449d1a7548",
+      "detail": "2 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:21.677Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Borrowash locality, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "6e7da7d9-178b-4871-af23-b818a25c252d",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:21.892Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Borrowash, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "fcdda7dc-f04e-4abe-82dd-c86398b99971",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:23.226Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Borrowash, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "b55ba7a0-b251-4342-bdf3-2ddbd494f9e5",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:24.261Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "8bcfc494-24c5-482c-8cf8-fa08c0bec897",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/overdale-medical-practice/C81066",
+      "capturedAt": "2026-09-06T07:49:24.636Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "571fc5f4-1dbe-4740-b2df-753fb6e59c8b",
+      "detail": "Retrieved https://www.ockbrookandborrowashparishcouncil.gov.uk/",
+      "capturedAt": "2026-09-06T07:49:25.144Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 7.3 km from Brook Pharmacy Demo Derby to Borrowash. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-06T07:49:25.155Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Park Medical Practice",
+        "address": "46 Derby Rd, Borrowash, Derby DE72 3HA",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9078795,
+          "longitude": -1.3846239999999999
+        },
+        "placeId": "ChIJSUdYHQDveUgR2QzABhPhynA",
+        "locality": "46 Derby Rd, Borrowash, Derby DE72 3HA",
+        "addressComponents": [
+          {
+            "longText": "46",
+            "shortText": "46",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Derby Road",
+            "shortText": "Derby Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HA",
+            "shortText": "DE72 3HA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=8127555949377359065&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Overdale Medical Practice",
+        "address": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.912257999999994,
+          "longitude": -1.37843
+        },
+        "placeId": "ChIJs3gorTXueUgRdfBX4LX-NwA",
+        "locality": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "addressComponents": [
+          {
+            "longText": "207",
+            "shortText": "207",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Victoria Avenue",
+            "shortText": "Victoria Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HG",
+            "shortText": "DE72 3HG",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15761180825481333&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Borrowash",
+        "address": "Borrowash, Derby",
+        "types": [
+          "locality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.904858,
+          "longitude": -1.3754722
+        },
+        "placeId": "ChIJj9reQ8nveUgRxuvV9bWnM48",
+        "locality": "Borrowash, Derby",
+        "addressComponents": [
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10318775571191294918&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Borrowash, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:21.894Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.parkmedical.org.uk/",
+          "title": "The Park Medical Practice Derby - Tel: 01332 667 911 ...",
+          "description": "NHS 111 is available 24 hours a day, 365 days a year. Borrowash Surgery The Park Medical Practice, 46 Derby Road, Borrowash, Derby, DE72 3HA Get Directions ..."
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/overdale-medical-practice/C81066",
+          "title": "Overdale Medical Practice",
+          "description": "This GP surgery is currently closed. 207 Victoria Avenue, Borrowash, Derby, Derbyshire, DE72 3HG is currently accepting new patients."
+        },
+        {
+          "url": "https://overdalepractice.com/",
+          "title": "Overdale Medical Practice – NHS Medical Practice in ...",
+          "description": "The Practice has two sites based in Borrowash and Breaston. Our phone lines are open Monday – Friday: Borrowash Surgery 8:30am – 18.30pm 8.30am – 18.00pm. ..."
+        },
+        {
+          "url": "https://www.parkmedical.org.uk/location/borrowash-surgery/",
+          "title": "Borrowash Surgery",
+          "description": "Borrowash Surgery. The Park Medical Practice, 46 Derby Road, Borrowash, Derby, DE72 3HA. Get Directions · 01332 667911 · SDERCCG.C81051-Reception@nhs.net. Read more"
+        },
+        {
+          "url": "https://vernonstreetandthelanes.co.uk/",
+          "title": "Vernon Street Medical Centre – NHS GP Surgery in Derby",
+          "description": "Vernon Street Medical Centre – NHS GP Surgery in Derby … 13 Vernon Street Derby DE1 1FW Get directions 01332 332812. Derbyshire DE23"
+        },
+        {
+          "url": "https://allhealthandcare.co.uk/providers/DE72-3HG/overdale-medical-practice-C81066",
+          "title": "OVERDALE MEDICAL PRACTICE - Borrowash",
+          "description": "OVERDALE MEDICAL PRACTICE — NHS GP practice. Postcode: DE72 3HG. Town/City: Borrowash. Address: 207 VICTORIA AVENUE."
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration"
+        },
+        {
+          "url": "https://www.ht1.uk/gp-surgery/derby-overdale-medical-practice-c81066",
+          "title": "Overdale Medical Practice | Derby, Derbyshire, de72 3hg",
+          "description": "9 Jun 2015 — Overdale Medical Practice is a GP practice in Derby, Derbyshire. 207 Victoria Avenue, Borrowash, Derby, Derbyshire, De72 3hg, England. Opening ..."
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+          "title": "List of GP practices in Derby and Derbyshire - May 2025",
+          "description": "20 May 2025 — View a full list of GP practices across Derby and Derbyshire, including practice codes, addresses and contact information."
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Borrowash, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:23.244Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.ockbrookandborrowashparishcouncil.gov.uk/",
+          "title": "Ockbrook and Borrowash Parish Council",
+          "description": "Ockbrook & Borrowash Parish Council provides your local services. We strive to make Ockbrook & Borrowash a better place to live, work and visit. Our website ... Read more"
+        },
+        {
+          "url": "https://www.facebook.com/erewashbc/posts/elections-for-ockbrook-and-borrowash-parish-council-took-place-in-three-wardsele/477813729039713/",
+          "title": "Elections for Ockbrook and Borrowash Parish Council took ...",
+          "description": "Elections for Ockbrook and Borrowash Parish Council took place in three wards. Elected in Borrowash East ward are Terry Holbrook, Amanda ... Read more"
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://www.ashbrookcentre.uk/",
+          "title": "Borrowash Community Centre | Ashbrook Centre",
+          "description": "The Ashbrook Community Centre is where residents of Ockbrook & Borrowash can meet & use the facilities for a wide range of activities."
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/leisure/local-studies/local-studies-libraries/local-libraries/borrowash/local-studies-at-borrowash-library.aspx",
+          "title": "Local studies at Borrowash Library",
+          "description": "Resources include histories and photographic books, parish council minutes and magazines, press cuttings, maps and a collection of over 250 local ..."
+        },
+        {
+          "url": "https://www.ockbrookandborrowashparishcouncil.gov.uk/news/2026/07/dcc-community-news-20th-july-2026",
+          "title": "DCC Community News - 20th July 2026",
+          "description": "20 Jul 2026 — The latest news from Ockbrook & Borrowash Parish Council."
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Borrowash",
+          "title": "Borrowash",
+          "description": "Borrowash /ˈbɒroʊwɒʃ/ is a village in the Erewash district of Derbyshire, England, situated immediately east of the Derby city boundary. Read more"
+        },
+        {
+          "url": "https://www.erewash.gov.uk/",
+          "title": "Erewash Borough Council: Homepage",
+          "description": "Erewash Borough is a great place to live and work. We want all our communities to share in the benefits of our area's success."
+        },
+        {
+          "url": "https://discover-derby.co.uk/borrowash/",
+          "title": "Borrowash | Derby Canal | St Stephen's Church",
+          "description": "Borrowash is a large, busy commuter centre for Nottingham and Derby and lies on the old road between the two cities."
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/overdale-medical-practice/C81066",
+      "title": "Overdale Medical Practice - NHS",
+      "status": 200,
+      "textSample": "Overdale Medical Practice - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care Overdale Medical Practice 207 Victoria Avenue, Borrowash, Derby, Derbyshire, DE72 3HG Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-06T07:49:24.636Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.ockbrookandborrowashparishcouncil.gov.uk/",
+      "title": "Security Challenge",
+      "status": 401,
+      "textSample": "Security Challenge Security Check We just need to quickly confirm you're a real visitor before you continue. Slide the button all the way to the right using your mouse or keyboard. Slide to verify &rarr; Can't use the slider? Type the characters in an image instead Enter the characters shown in the image below, then select Submit to continue. Characters shown in the image Submit Use the slider instead Why am I seeing this page? This quick step is part of our routine security process to verify that you are human and not a robot. We often display this challenge when we detect traffic coming from networks or services that are commonly used by bots, such as data centers, certain cloud services (e.g., AWS, Azure), or VPNs/proxy services. Completing the challenge confirms your intent and allows you immediate access to the site. Thank you for helping us maintain a secure environment!",
+      "retrievedAt": "2026-09-06T07:49:25.144Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.904858,
+    "longitude": -1.3754722,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 7.3,
+  "verifiedGpPracticeCount": 0,
+  "findings": [
+    "0 verified GP practice(s) after official-source checks.",
+    "Zero verified GP practices is a recorded research outcome, not an automatic retry.",
+    "no attributable identity fact from an authoritative web source no useful locality fact from an authoritative web source GP research returned zero verified practices — recorded, not a retry",
+    "Actual evidence spend $0.068 of cap $0.069. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/borrowash.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/borrowash.json",
+  "editorialSufficiency": "EVIDENCE LIMITED",
+  "outcomeSummary": "Collection finished. Evidence is LIMITED: no attributable identity fact from an authoritative web source; no useful locality fact from an authoritative web source; GP research returned zero verified practices — recorded, not a retry. Spend $0.068.",
+  "reprocessedAt": null
+}

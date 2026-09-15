@@ -1,0 +1,120 @@
+{
+  "faqHubBefore": "Location hub questions",
+  "faqClusterBefore": "Cluster questions",
+  "faqHubAfter": "Pharmacy First FAQs for Sheffield",
+  "faqClusterAfter": "Pharmacy First FAQs for Ecclesall",
+  "homepageAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Sheffield City Centre",
+    "Broomhill",
+    "Kelham Island",
+    "Dore",
+    "Hillsborough",
+    "Crookes"
+  ],
+  "hubAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Sheffield City Centre",
+    "Broomhill",
+    "Kelham Island",
+    "Dore",
+    "Hillsborough",
+    "Crookes"
+  ],
+  "clusterAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Sheffield City Centre",
+    "Broomhill",
+    "Kelham Island",
+    "Dore",
+    "Hillsborough",
+    "Crookes"
+  ],
+  "areaUnchanged": true,
+  "browserOut": {
+    "hubDesktop": {
+      "pass": true,
+      "faq": "Pharmacy First FAQs for Sheffield",
+      "locComponent": true,
+      "accessCount": 1,
+      "links": {
+        "tested": 7,
+        "passed": 7,
+        "broken": []
+      },
+      "consoleErrors": []
+    },
+    "hubMobile": {
+      "pass": true,
+      "faq": "Pharmacy First FAQs for Sheffield",
+      "locComponent": true,
+      "accessCount": 1,
+      "links": {
+        "tested": 7,
+        "passed": 7,
+        "broken": []
+      },
+      "consoleErrors": []
+    },
+    "eccDesktop": {
+      "pass": true,
+      "faq": "Pharmacy First FAQs for Ecclesall",
+      "locComponent": true,
+      "accessCount": 1,
+      "links": {
+        "tested": 8,
+        "passed": 8,
+        "broken": []
+      },
+      "consoleErrors": []
+    },
+    "eccMobile": {
+      "pass": true,
+      "faq": "Pharmacy First FAQs for Ecclesall",
+      "locComponent": true,
+      "accessCount": 1,
+      "links": {
+        "tested": 8,
+        "passed": 8,
+        "broken": []
+      },
+      "consoleErrors": []
+    },
+    "fulDesktop": {
+      "pass": true,
+      "faq": "Pharmacy First FAQs for Fulwood",
+      "locComponent": true,
+      "accessCount": 1,
+      "links": {
+        "tested": 8,
+        "passed": 8,
+        "broken": []
+      },
+      "consoleErrors": []
+    },
+    "fulMobile": {
+      "pass": true,
+      "faq": "Pharmacy First FAQs for Fulwood",
+      "locComponent": true,
+      "accessCount": 1,
+      "links": {
+        "tested": 8,
+        "passed": 8,
+        "broken": []
+      },
+      "consoleErrors": []
+    }
+  },
+  "urls": {
+    "hub": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy",
+    "ecc": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy",
+    "ful": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-fulwood/?slug=banner-cross-pharmacy"
+  },
+  "components": {
+    "HOMEPAGE_AREAS_WE_SUPPORT_COMPONENT_ID": "homepage-areas-we-support",
+    "HOMEPAGE_LOCATION_COMPONENT_ID": "homepage-location-map-access"
+  }
+}

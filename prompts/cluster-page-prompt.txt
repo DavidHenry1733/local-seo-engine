@@ -253,12 +253,12 @@ KEYWORD RULES:
 ──────────────────────────────────────────────────────
 INTERNAL LINK RULES:
 
-- split1.body: exactly 1 inline link — hub page ({{HUB_URL}} with {{HUB_ANCHOR}} as anchor)
-- split2.body: exactly 1 inline link — related cluster page from {{RELATED_PAGES}} — EXACT URL
-- competitionSection.body: exactly 1 inline link — nearby area from {{RELATED_PAGES}} — EXACT URL
-- All inline links must feel natural — placed inside a sentence, not as a standalone line
-- Use varied anchor text across the 3 links — no two should use the same phrase
-- For any link to a related page: use the URL EXACTLY as given in parentheses — do not guess or construct URLs
+- Do NOT insert inline HTML links inside split1.body, split2.body, competitionSection.body or any normal body copy.
+- Do NOT link to "/" inside body copy.
+- Do NOT invent hub phrases such as "digital hub", "web strategy page", "cluster", "resource", "examples", "learn more" or "building local authority".
+- Money page links, service links and CTA links are handled by the renderer/navigation/CTA system.
+- Body copy must be plain text only unless a JSON field explicitly requires a URL.
+- If a link label is required by the JSON schema, use customer-facing service/location labels only, for example "{{SERVICE_NAME}} {{LOCATION}}".
 
 ──────────────────────────────────────────────────────
 LOCAL RELEVANCE RULES:
@@ -270,12 +270,12 @@ LOCAL RELEVANCE RULES:
 ──────────────────────────────────────────────────────
 RELATED RESOURCES RULES:
 
-- First card: use the Hub Page URL and Hub Page Anchor EXACTLY as given in INPUTS
-- Generate 2 additional cards using EXACT URLs from Related Pages (as shown in parentheses)
-- Do NOT use placeholder values — replace with real URLs from the Related Pages input
-- If Related Pages is empty, use the hub URL for all 3 cards with different anchor texts
-- Varied anchor text — no identical phrases across cards
-- description is REQUIRED for every card — non-empty 1-sentence description
+- Related resource cards are handled by the renderer.
+- Do NOT insert inline HTML links inside body text.
+- Do NOT create anchor text such as "cluster", "resource", "examples", "learn more", or "building local authority".
+- Do NOT mention cluster pages, resource pages, examples, or related resources in normal section body copy.
+- If relatedResources JSON is required by the schema, use only plain customer-facing labels such as "{{SERVICE_NAME}} {{LOCATION}}" and nearby area service labels.
+- Body copy must read naturally without directing the reader to artificial resource/cluster pages.
 
 ──────────────────────────────────────────────────────
 IMAGE IMAGE RULES (MANDATORY):

@@ -1,0 +1,28 @@
+{
+  "taskId": "yorkshire-pharmacy-and-health-clinic:pharmacy-first:v8:one-local-page:grimethorpe",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.0037940000000000005,
+  "events": [
+    {
+      "at": "2026-09-09T15:35:16.233Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-09T15:35:16.375Z",
+      "kind": "reserve",
+      "reservationId": "r-1788968116375-1"
+    },
+    {
+      "at": "2026-09-09T15:35:37.242Z",
+      "kind": "consumed",
+      "reservationId": "r-1788968116375-1",
+      "detail": "cost=0.0037940000000000005"
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "slug": "brook-pharmacy",
+  "serviceId": "pharmacy-first",
+  "serviceName": "Pharmacy First",
+  "generatedAt": "2026-08-04T09:01:53.325Z",
+  "generationStamp": {
+    "tenantSlug": "brook-pharmacy",
+    "campaignId": "pharmacy-first",
+    "generatedAt": "2026-08-04T09:01:53.325Z",
+    "sourceContext": "customer-imported-profile"
+  },
+  "generatorVersion": "content-engine-lockdown-v1",
+  "profileUpdatedAt": "2026-07-31T12:18:18.003Z",
+  "selectedAreas": [
+    "Wickersley",
+    "Bramley",
+    "Maltby",
+    "Aston",
+    "Rawmarsh",
+    "Parkgate",
+    "Dinnington",
+    "Thurcroft"
+  ],
+  "assets": [
+    {
+      "type": "service-page",
+      "title": "Pharmacy First service page",
+      "status": "included",
+      "previewUrl": "/api/pharmacy-visual-experience/pharmacy-first/?slug=brook-pharmacy",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/brook-pharmacy/pharmacy-first/index.html",
+      "required": true,
+      "included": true,
+      "count": 1,
+      "notes": "Image alt remnants: Leeds Pharmacy"
+    },
+    {
+      "type": "local-area-pages",
+      "title": "Pharmacy First local page",
+      "status": "error",
+      "previewUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/?slug=brook-pharmacy",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local",
+      "required": false,
+      "included": false,
+      "count": 17,
+      "notes": "Expected 8 local pages, generated 17; Image alt remnants: Leeds Pharmacy"
+    },
+    {
+      "type": "faq",
+      "title": "Pharmacy First FAQs",
+      "status": "error",
+      "previewUrl": null,
+      "outputPath": null,
+      "required": false,
+      "included": false,
+      "count": 0,
+      "notes": "Tenant validation failed"
+    },
+    {
+      "type": "guides",
+      "title": "Pharmacy First patient guide",
+      "status": "error",
+      "previewUrl": null,
+      "outputPath": null,
+      "required": false,
+      "included": false,
+      "count": 0,
+      "notes": "Tenant validation failed"
+    },
+    {
+      "type": "blog",
+      "title": "Pharmacy First blog articles",
+      "status": "error",
+      "previewUrl": null,
+      "outputPath": null,
+      "required": false,
+      "included": false,
+      "count": 0,
+      "notes": "Tenant validation failed"
+    },
+    {
+      "type": "gbp",
+      "title": "Pharmacy First Google posts",
+      "status": "error",
+      "previewUrl": null,
+      "outputPath": null,
+      "required": false,
+      "included": false,
+      "count": 0,
+      "notes": "Tenant validation failed"
+    },
+    {
+      "type": "social",
+      "title": "Pharmacy First social posts",
+      "status": "error",
+      "previewUrl": null,
+      "outputPath": null,
+      "required": false,
+      "included": false,
+      "count": 0,
+      "notes": "Tenant validation failed"
+    },
+    {
+      "type": "email",
+      "title": "Pharmacy First email sequence",
+      "status": "error",
+      "previewUrl": null,
+      "outputPath": null,
+      "required": false,
+      "included": false,
+      "count": 0,
+      "notes": "Tenant validation failed"
+    },
+    {
+      "type": "images",
+      "title": "Pharmacy First images",
+      "status": "included",
+      "previewUrl": "/api/pharmacy-image-library?slug=brook-pharmacy&service=pharmacy-first",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-image-assignments/brook-pharmacy.json",
+      "required": true,
+      "included": true,
+      "count": 8,
+      "notes": ""
+    },
+    {
+      "type": "review-trust",
+      "title": "Review & Trust",
+      "status": "planned",
+      "previewUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy",
+      "outputPath": null,
+      "required": true,
+      "included": false,
+      "count": 0,
+      "notes": "Review & Trust pack not generated"
+    },
+    {
+      "type": "publishing-readiness",
+      "title": "Publishing Readiness",
+      "status": "included",
+      "previewUrl": "/api/pharmacy-publishing-settings?slug=brook-pharmacy&service=pharmacy-first",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publishing-settings/brook-pharmacy.json",
+      "required": false,
+      "included": true,
+      "count": 1,
+      "notes": "Draft preview settings ready"
+    },
+    {
+      "type": "internal-linking",
+      "title": "Internal Linking Plan",
+      "status": "included",
+      "previewUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/?slug=brook-pharmacy",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/_internal-link-map.json",
+      "required": false,
+      "included": true,
+      "count": 17,
+      "notes": "8 local pages mapped; legacy cluster references: 0"
+    }
+  ],
+  "previewUrls": [
+    "/api/pharmacy-visual-experience/pharmacy-first/?slug=brook-pharmacy",
+    "/api/pharmacy-content-ecosystem-preview/pharmacy-first/?slug=brook-pharmacy",
+    "/api/pharmacy-image-library?slug=brook-pharmacy&service=pharmacy-first",
+    "/api/pharmacy-profile-dashboard?slug=brook-pharmacy",
+    "/api/pharmacy-publishing-settings?slug=brook-pharmacy&service=pharmacy-first",
+    "/api/pharmacy-content-ecosystem-preview/pharmacy-first/?slug=brook-pharmacy"
+  ],
+  "outputPaths": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/brook-pharmacy/pharmacy-first/index.html",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/local",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-image-assignments/brook-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publishing-settings/brook-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/_internal-link-map.json"
+  ],
+  "status": "error",
+  "reviewedAt": null,
+  "approvedAt": null,
+  "approvedBy": null,
+  "approvalStatus": "pending",
+  "generationError": "Local cluster: Expected 8 local cluster pages, generated 17",
+  "adminDiagnostics": [
+    "scope:service-page-only"
+  ],
+  "generationReportPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-generation-reports/brook-pharmacy/pharmacy-first.json",
+  "packageValidation": {
+    "ok": false,
+    "detail": "Design/map: design/map validation failed; Local map: local page missing; Header/footer: header/footer mismatch; Brand parity: default blue/demo branding detected; Local cluster quality: failed: wickersley: nearby-links-0, no-main-service-link, no-money-links; bramley: nearby-links-0, no-main-service-link, no-money-links; maltby: nearby-links-0, no-main-service-link, no-money-links; aston: nearby-links-0, no-main-service-link, no-money-links; rawmarsh: nearby-links-0, no-main-service-link, no-money-links; Duplicate copy: wickersley~bramley:0.97, wickersley~maltby:0.93, wickersley~aston:0.84, wickersley~rawmarsh:0.86, wickersley~parkgate:0.91, wickersley~dinnington:0.90, wickersley~thurcroft:0.85, bramley~maltby:0.92, bramley~aston:0.83, bramley~rawmarsh:0.85, bramley~parkgate:0.92, bramley~dinnington:0.92, bramley~thurcroft:0.85, maltby~aston:0.90, maltby~rawmarsh:0.90, maltby~parkgate:0.97, maltby~dinnington:0.86, maltby~thurcroft:0.91, aston~rawmarsh:0.92, aston~parkgate:0.88, aston~dinnington:0.90, aston~thurcroft:0.98, rawmarsh~parkgate:0.90, rawmarsh~dinnington:0.88, rawmarsh~thurcroft:0.92, parkgate~dinnington:0.86, parkgate~thurcroft:0.90, dinnington~thurcroft:0.91; Long-form quality: failed: supporting-service-page:tenant name missing from middle body,tenant mentions 0 < 3; patient-guide:tenant name missing from middle body,tenant mentions 0 < 3; what-is:tenant name missing from middle body,tenant mentions 0 < 3; who-should:tenant name missing from middle body,tenant mentions 0 < 3; need-to-know:tenant name missing from middle body,tenant mentions 0 < 3; Ecosystem tenant: foreign assets: pharmacy-first, pharmacy-first-content-ecosystem, pharmacy-first-faqs, pharmacy-first-guide, pharmacy-first-what-you-need-to-know, what-is-pharmacy-first, who-should-consider-pharmacy-first, rotherham, social-posts.json, gbp-posts.json, email-sequence.json; Failed assets: /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/pages/pharmacy-first/index.html, /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/pages/pharmacy-first-content-ecosystem/index.html, /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/pages/pharmacy-first-faqs/index.html, /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/pages/pharmacy-first-guide/index.html, /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/brook-pharmacy/pharmacy-first/pages/pharmacy-first-what-you-need-to-know/index.html; Local cluster: Expected 8 local cluster pages, generated 17"
+  },
+  "serviceValidation": {
+    "ok": true,
+    "detail": "service content ok"
+  },
+  "tenantValidation": {
+    "ok": true,
+    "detail": "tenant ok"
+  }
+}

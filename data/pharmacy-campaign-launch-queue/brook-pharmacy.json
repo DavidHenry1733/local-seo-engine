@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "slug": "brook-pharmacy",
+  "updatedAt": "2026-07-31T12:18:17.697Z",
+  "campaigns": [
+    {
+      "campaignId": "cr02-brook-pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 5,
+      "blockedTasks": 6,
+      "inProgressTasks": 0,
+      "pendingTasks": 2,
+      "progressPct": 38,
+      "nextLaunchTask": {
+        "id": "cr02-brook-pharmacy-first-confirm-profile",
+        "campaignId": "cr02-brook-pharmacy-first",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy",
+        "evidence": [
+          "Profile completeness: 63%"
+        ],
+        "createdAt": "2026-07-31T12:18:17.696Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "cr02-brook-pharmacy-first-confirm-profile",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=brook-pharmacy",
+          "evidence": [
+            "Profile completeness: 63%"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-confirm-images",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "0/4 image slots assigned — review library assignments"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-confirm-service-page",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "Service page exists for Pharmacy First"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm image assignments before service page review"
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-confirm-ecosystem",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Content ecosystem available for Pharmacy First"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "complete",
+          "completedAt": "2026-07-31T12:18:17.697Z",
+          "blockedReason": null
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-authority-readiness-approved",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=brook-pharmacy&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 75/100",
+            "Publish gate: FAIL",
+            "Critical: Visible image placeholder on page",
+            "Missing: Human Expertise: Named pharmacist / reviewer",
+            "Missing: Human Expertise: Superintendent pharmacist",
+            "Missing: Human Expertise: Next review date",
+            "Audit: /api/pharmacy-authority-readiness?slug=brook-pharmacy&service=pharmacy-first"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visible image placeholder on page · Human Expertise: Named pharmacist / reviewer · Human Expertise: Superintendent pharmacist"
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-publish-page",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=brook-pharmacy",
+          "evidence": [
+            "8 published pages for Pharmacy First"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-update-sitemap",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=brook-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-submit-indexing",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=brook-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-refresh-visibility",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=brook-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-prepare-gbp-posts",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack available in content ecosystem"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "complete",
+          "completedAt": "2026-07-31T12:18:17.697Z",
+          "blockedReason": null
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-prepare-social-posts",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack available in content ecosystem"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "complete",
+          "completedAt": "2026-07-31T12:18:17.697Z",
+          "blockedReason": null
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-prepare-email-sequence",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence pack available in content ecosystem"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "complete",
+          "completedAt": "2026-07-31T12:18:17.697Z",
+          "blockedReason": null
+        },
+        {
+          "id": "cr02-brook-pharmacy-first-review-growth-actions",
+          "campaignId": "cr02-brook-pharmacy-first",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=brook-pharmacy",
+          "evidence": [
+            "8 growth actions available"
+          ],
+          "createdAt": "2026-07-31T12:18:17.696Z",
+          "status": "complete",
+          "completedAt": "2026-07-31T12:18:17.697Z",
+          "blockedReason": null
+        }
+      ]
+    }
+  ]
+}

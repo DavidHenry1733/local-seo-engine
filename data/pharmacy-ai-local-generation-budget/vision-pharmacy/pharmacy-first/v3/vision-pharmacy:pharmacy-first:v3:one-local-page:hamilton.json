@@ -1,0 +1,28 @@
+{
+  "taskId": "vision-pharmacy:pharmacy-first:v3:one-local-page:hamilton",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.0035840000000000004,
+  "events": [
+    {
+      "at": "2026-09-14T08:25:40.265Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-14T08:25:40.403Z",
+      "kind": "reserve",
+      "reservationId": "r-1789374340403-1"
+    },
+    {
+      "at": "2026-09-14T08:26:05.853Z",
+      "kind": "consumed",
+      "reservationId": "r-1789374340403-1",
+      "detail": "cost=0.0035840000000000004"
+    }
+  ]
+}

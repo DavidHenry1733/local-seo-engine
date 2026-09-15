@@ -1,0 +1,88 @@
+{
+  "savedAt": "2026-09-08T16:59:09.505Z",
+  "areaSlug": "borrowash",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Write as an experienced British healthcare copywriter.\n\nUsing only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.\n\nHERO INTRODUCTION:\nWrite 35–55 words introducing Pharmacy First for people in the selected area and naming Brook Pharmacy as the provider.\n\nLOCAL INTRODUCTION:\nWrite 170–230 words in three fluent British-English paragraphs.\n\nParagraph 1:\nIntroduce the area, its location and its character using verified facts.\n\nParagraph 2:\nDescribe meaningful verified landmarks, green spaces, shopping, community facilities and healthcare references. Select the most useful facts and connect them naturally. Do not list every evidence record.\n\nParagraph 3:\nMove naturally from the area and its local healthcare needs into Brook Pharmacy’s Pharmacy First service. Name Brook Pharmacy and Pharmacy First, and explain that eligible patients can receive a pharmacist consultation for certain common conditions. Do not reproduce a fixed clinical closing sentence. The transition must feel like part of the article—not a disclaimer pasted onto the end.\n\nYou may express only this Pharmacy First meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment.\n\nDo not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.\n\nDo not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.\n\nUse neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.\n\nDo not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.\n\nDo not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.\n\nReturn exactly this layout:\nHERO INTRODUCTION:\n<one paragraph>\n\nLOCAL INTRODUCTION:\n<paragraph 1>\n\n<paragraph 2>\n\n<paragraph 3>\nSelected area: Borrowash\nConfirmed pharmacy name: Brook Pharmacy Demo Derby\nConfirmed pharmacy premises locality: Derby\nSaved straight-line distance: approximately 7.3 km in a straight line\nVerified history where available:\n- Elvaston Castle is a landmark in Borrowash.\n- Crown Arch is a landmark in Borrowash.\nVerified landmarks, parks, shopping, civic and community facilities:\n- Borrowash has a public library.\n- Borrowash Library is a community facility in Borrowash.\n- Ashbrook Community Centre is a community facility in Borrowash.\nVerified GP practices or healthcare facilities:\n- NHS general practice services in Borrowash are provided from Overdale Medical Practice.\n- NHS general practice services in Borrowash are provided from Park Medical Practice.\nApproved Pharmacy First service meaning:\n- Brook Pharmacy provides Pharmacy First consultations for eligible people from the selected area.\n- Pharmacy First covers certain common health conditions.\n- The pharmacist assesses symptoms, relevant medicines and medical history.\n- The outcome may include advice, suitable treatment or referral to another healthcare professional.\n- Eligibility and treatment depend on the individual clinical assessment."
+  },
+  "rawResponse": "HERO INTRODUCTION:\nThrough the NHS Pharmacy First service, Brook Pharmacy offers professional consultations for residents in Borrowash experiencing certain common health conditions. Local patients can access expert clinical advice and appropriate treatment options directly from a pharmacist, supporting the healthcare needs of the surrounding community.\n\nLOCAL INTRODUCTION:\nBorrowash is a distinct local area where historic character and established community features come together. Among the recognised landmarks in Borrowash are Elvaston Castle and Crown Arch, both of which contribute to the local identity of the neighbourhood. The area serves as a home for residents who rely on its surrounding services and civic facilities for their day-to-day requirements.\n\nCivic and public resources play a central role in everyday life across the area. Borrowash has a public library, with Borrowash Library serving as an important community facility alongside Ashbrook Community Centre. For primary medical care, local health needs are met through NHS general practice services provided from Overdale Medical Practice as well as NHS general practice services provided from Park Medical Practice.\n\nAlongside these local GP practices, Brook Pharmacy provides Pharmacy First consultations for eligible people from Borrowash. Designed to address certain common health conditions, Pharmacy First enables patients to discuss their health directly with a qualified healthcare professional. During a consultation, the pharmacist assesses symptoms, relevant medicines and medical history to evaluate the situation thoroughly. The resulting outcome may include general self-care advice, the supply of suitable treatment, or a referral to another healthcare professional. Both eligibility and any potential treatment depend on this individual clinical assessment.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localIntroduction | sentence=Among the recognised landmarks in Borrowash are Elvaston Castle and Crown Arch, both of which contribute to the local identity of the neighbourhood. | rule=empty-local-claim | defect=identity wording is not a supplied fact"
+    ],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Borrowash is a distinct local area where historic character and established community features come together. | rule=uncertain-paraphrase | defect=Borrowash is a distinct local area where historic character and established community features come together. — uncertain paraphrase: unmatched wording (distinct, local, historic, character, established, features, come) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Among the recognised landmarks in Borrowash are Elvaston Castle and Crown Arch, both of which contribute to the local identity of the neighbourhood. | rule=uncertain-paraphrase | defect=Among the recognised landmarks in Borrowash are Elvaston Castle and Crown Arch, both of which contribute to the local identity of the neighbourhood. — uncertain paraphrase: unmatched wording (recognised, landmarks, which, contribute, local, identity, neighbourhood) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Borrowash has a public library, with Borrowash Library serving as an important community facility alongside Ashbrook Community Centre. | rule=uncertain-paraphrase | defect=Borrowash has a public library, with Borrowash Library serving as an important community facility alongside Ashbrook Community Centre. — uncertain paraphrase: unmatched wording (serving, important) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=For primary medical care, local health needs are met through NHS general practice services provided from Overdale Medical Practice as well as NHS general practice services provided from Park Medical Practice. | rule=uncertain-paraphrase | defect=For primary medical care, local health needs are met through NHS general practice services provided from Overdale Medical Practice as well as NHS general practice services provided from Park Medical Practice. — uncertain paraphrase: unmatched wording (primary, local, health, needs, met) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The resulting outcome may include general self-care advice, the supply of suitable treatment, or a referral to another healthcare professional. | rule=uncertain-paraphrase | defect=The resulting outcome may include general self-care advice, the supply of suitable treatment, or a referral to another healthcare professional. — uncertain paraphrase: unmatched wording (resulting, outcome, supply, another, healthcare, professional) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Borrowash",
+    "heroHeading": "Pharmacy First in Borrowash",
+    "heroIntroduction": "Through the NHS Pharmacy First service, Brook Pharmacy offers professional consultations for residents in Borrowash experiencing certain common health conditions. Local patients can access expert clinical advice and appropriate treatment options directly from a pharmacist, supporting the healthcare needs of the surrounding community.",
+    "localIntroduction": "Borrowash is a distinct local area where historic character and established community features come together. Among the recognised landmarks in Borrowash are Elvaston Castle and Crown Arch, both of which contribute to the local identity of the neighbourhood. The area serves as a home for residents who rely on its surrounding services and civic facilities for their day-to-day requirements.\n\nCivic and public resources play a central role in everyday life across the area. Borrowash has a public library, with Borrowash Library serving as an important community facility alongside Ashbrook Community Centre. For primary medical care, local health needs are met through NHS general practice services provided from Overdale Medical Practice as well as NHS general practice services provided from Park Medical Practice.\n\nAlongside these local GP practices, Brook Pharmacy provides Pharmacy First consultations for eligible people from Borrowash. Designed to address certain common health conditions, Pharmacy First enables patients to discuss their health directly with a qualified healthcare professional. During a consultation, the pharmacist assesses symptoms, relevant medicines and medical history to evaluate the situation thoroughly. The resulting outcome may include general self-care advice, the supply of suitable treatment, or a referral to another healthcare professional. Both eligibility and any potential treatment depend on this individual clinical assessment. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Borrowash",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Among the recognised landmarks in Borrowash are Elvaston Castle and Crown Arch, both of which contribute to the local identity of the neighbourhood.",
+        "editorialFactId": "borrowash:heritage:elvaston-castle-is-listed-as-a-landmark-in-borro"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Among the recognised landmarks in Borrowash are Elvaston Castle and Crown Arch, both of which contribute to the local identity of the neighbourhood.",
+        "editorialFactId": "borrowash:heritage:crown-arch-is-listed-as-a-landmark-in-borrowash"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Borrowash has a public library, with Borrowash Library serving as an important community facility alongside Ashbrook Community Centre.",
+        "editorialFactId": "borrowash:community:borrowash-has-a-public-library"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Borrowash has a public library, with Borrowash Library serving as an important community facility alongside Ashbrook Community Centre.",
+        "editorialFactId": "borrowash:community:borrowash-library-is-listed-as-a-community-facil"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Borrowash has a public library, with Borrowash Library serving as an important community facility alongside Ashbrook Community Centre.",
+        "editorialFactId": "borrowash:community:ashbrook-community-centre-is-listed-as-a-communi"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "For primary medical care, local health needs are met through NHS general practice services provided from Overdale Medical Practice as well as NHS general practice services provided from Park Medical Practice.",
+        "editorialFactId": "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash.",
+        "editorialFactId": "borrowash:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "borrowash:heritage:elvaston-castle-is-listed-as-a-landmark-in-borro",
+      "borrowash:heritage:crown-arch-is-listed-as-a-landmark-in-borrowash",
+      "borrowash:community:borrowash-has-a-public-library",
+      "borrowash:community:borrowash-library-is-listed-as-a-community-facil",
+      "borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+      "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p",
+      "borrowash:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

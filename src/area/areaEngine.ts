@@ -418,3 +418,12 @@ export function getRankedAreas(
   const cityData = loadCityData(cityName, cityDataPath);
   return rankAreas(cityData.areas, maxPriority, maxSecondary);
 }
+
+/** Rank areas from pre-loaded city data (supports config/areas simple format). */
+export function rankAreasFromCityData(
+  cityData: CityAreaData,
+  maxPriority = 5,
+  maxSecondary = 5,
+): AreaScore[] {
+  return rankAreas(cityData.areas, maxPriority, maxSecondary);
+}

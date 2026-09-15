@@ -1,0 +1,2165 @@
+{
+  "version": 1,
+  "serviceId": "pharmacy-first",
+  "masterFile": "docs/pharmacy-master-library/pharmacy-first-master-v2.md",
+  "slug": "yorkshire-pharmacy-and-health-clinic",
+  "localArea": "Darfield",
+  "selectedAreas": [
+    "Darfield",
+    "Wombwell",
+    "Worsbrough",
+    "Thurnscoe",
+    "Grimethorpe",
+    "Goldthorpe",
+    "Hoyland",
+    "Cudworth",
+    "Royston",
+    "Chapeltown"
+  ],
+  "localClusterPagesGenerated": 10,
+  "localLocationHubGenerated": true,
+  "localLocationClustersGenerated": 10,
+  "localLocationAreasGenerated": 0,
+  "localLocationHierarchy": {
+    "ok": true,
+    "primaryLocality": "Barnsley",
+    "primaryLocalitySlug": "barnsley",
+    "hub": {
+      "areaId": "hub:barnsley",
+      "name": "Barnsley",
+      "slug": "hub",
+      "type": "city-town-hub",
+      "parentAreaId": null,
+      "source": "business-profile:primaryTown",
+      "evidence": [
+        "Primary town/city hub for service coverage"
+      ],
+      "serviceIds": [
+        "pharmacy-first"
+      ],
+      "generationEligible": true,
+      "generationReason": "primary locality hub",
+      "approved": true
+    },
+    "clusters": [
+      {
+        "areaId": "cluster:darfield",
+        "name": "Darfield",
+        "slug": "darfield",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-address-locality",
+          "profile.areaType:primary locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "distanceLabel": "0.5 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:wombwell",
+        "name": "Wombwell",
+        "slug": "wombwell",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "distanceLabel": "1.7 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:worsbrough",
+        "name": "Worsbrough",
+        "slug": "worsbrough",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "distanceLabel": "5.3 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:thurnscoe",
+        "name": "Thurnscoe",
+        "slug": "thurnscoe",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "distanceLabel": "4.6 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:grimethorpe",
+        "name": "Grimethorpe",
+        "slug": "grimethorpe",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "distanceLabel": "4.8 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:goldthorpe",
+        "name": "Goldthorpe",
+        "slug": "goldthorpe",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "distanceLabel": "4.9 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:hoyland",
+        "name": "Hoyland",
+        "slug": "hoyland",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "distanceLabel": "5.4 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 7,
+        "order": 7
+      },
+      {
+        "areaId": "cluster:cudworth",
+        "name": "Cudworth",
+        "slug": "cudworth",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 8 for approved area",
+        "approved": true,
+        "distanceLabel": "5.5 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 8,
+        "order": 8
+      },
+      {
+        "areaId": "cluster:royston",
+        "name": "Royston",
+        "slug": "royston",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 9 for approved area",
+        "approved": true,
+        "distanceLabel": "8.9 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 9,
+        "order": 9
+      },
+      {
+        "areaId": "cluster:chapeltown",
+        "name": "Chapeltown",
+        "slug": "chapeltown",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 10 for approved area",
+        "approved": true,
+        "distanceLabel": "9.8 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 10,
+        "order": 10
+      }
+    ],
+    "areas": [],
+    "generationAreas": [
+      {
+        "areaId": "cluster:darfield",
+        "name": "Darfield",
+        "slug": "darfield",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-address-locality",
+          "profile.areaType:primary locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "distanceLabel": "0.5 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:wombwell",
+        "name": "Wombwell",
+        "slug": "wombwell",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "distanceLabel": "1.7 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:worsbrough",
+        "name": "Worsbrough",
+        "slug": "worsbrough",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "distanceLabel": "5.3 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:thurnscoe",
+        "name": "Thurnscoe",
+        "slug": "thurnscoe",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "distanceLabel": "4.6 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:grimethorpe",
+        "name": "Grimethorpe",
+        "slug": "grimethorpe",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "distanceLabel": "4.8 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:goldthorpe",
+        "name": "Goldthorpe",
+        "slug": "goldthorpe",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "distanceLabel": "4.9 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:hoyland",
+        "name": "Hoyland",
+        "slug": "hoyland",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "distanceLabel": "5.4 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 7,
+        "order": 7
+      },
+      {
+        "areaId": "cluster:cudworth",
+        "name": "Cudworth",
+        "slug": "cudworth",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:priority"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 8 for approved area",
+        "approved": true,
+        "distanceLabel": "5.5 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 8,
+        "order": 8
+      },
+      {
+        "areaId": "cluster:royston",
+        "name": "Royston",
+        "slug": "royston",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 9 for approved area",
+        "approved": true,
+        "distanceLabel": "8.9 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 9,
+        "order": 9
+      },
+      {
+        "areaId": "cluster:chapeltown",
+        "name": "Chapeltown",
+        "slug": "chapeltown",
+        "type": "district-cluster",
+        "parentAreaId": "hub:barnsley",
+        "source": "campaign-builder:saved-target-areas",
+        "evidence": [
+          "profile.source:google-places-geocode",
+          "profile.areaType:nearby locality",
+          "profile.confidence:90",
+          "profile.tier:secondary"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 10 for approved area",
+        "approved": true,
+        "distanceLabel": "9.8 km",
+        "relationship": "local guidance for patients around Barnsley",
+        "priority": 10,
+        "order": 10
+      }
+    ],
+    "trace": {
+      "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+      "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+      "primaryLocation": "Barnsley",
+      "postcode": "S739LR",
+      "townCity": "Barnsley",
+      "storedServiceAreas": [
+        "Darfield",
+        "Wombwell",
+        "Thurnscoe",
+        "Grimethorpe",
+        "Goldthorpe",
+        "Worsbrough",
+        "Hoyland",
+        "Cudworth"
+      ],
+      "storedNeighbourhoods": [
+        "Darfield",
+        "Wombwell",
+        "Thurnscoe",
+        "Grimethorpe",
+        "Goldthorpe",
+        "Worsbrough",
+        "Hoyland",
+        "Cudworth",
+        "Mexborough",
+        "Royston",
+        "Dodworth",
+        "Chapeltown",
+        "Mapplewell",
+        "Darton",
+        "Penistone",
+        "Wath-upon-Dearne"
+      ],
+      "importedLocationEvidence": [],
+      "googleLocationEvidence": [
+        "googlePlaceId:ChIJN2xIfulxeUgRK4ReROu8W6U",
+        "displayAddress:91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK",
+        "competitorsSnapshot:91 Snape Hill Rd, Barnsley, S739LR"
+      ],
+      "localIntelligenceAreas": [],
+      "selectedAreasSource": "frozen-campaign:pharmacy-first",
+      "selectedAreasFilters": [
+        "benchmarkServiceEcosystemBuilder filters pharmacy-first areas against PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane manifest)"
+      ],
+      "rejectedAreas": [],
+      "rejectionReasons": [],
+      "firstEmptySelectionDecision": "All operator-selected areas removed by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS allow-list in buildBenchmarkServiceEcosystem",
+      "responsibleFile": "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+      "responsibleFunction": "buildBenchmarkServiceEcosystem",
+      "responsibleLine": 647,
+      "areasConsidered": [
+        "Barnsley",
+        "Darfield",
+        "Wombwell",
+        "Worsbrough",
+        "Thurnscoe",
+        "Grimethorpe",
+        "Goldthorpe",
+        "Hoyland",
+        "Cudworth",
+        "Royston",
+        "Chapeltown"
+      ]
+    }
+  },
+  "generatedAt": "2026-08-30T15:12:23.913Z",
+  "generationStamp": {
+    "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+    "campaignId": "pharmacy-first",
+    "generatedAt": "2026-08-30T14:05:55.607Z",
+    "sourceContext": "customer-imported-profile",
+    "runId": "e0d5837b-4baf-421a-a98a-731af255460c"
+  },
+  "contentEngineContract": "1.0.0",
+  "longFormQualityValidation": {
+    "ok": false,
+    "detail": "failed: supporting-service-page:tenant name missing from middle body; patient-guide:tenant name missing from middle body,tenant mentions 0 < 3; what-is:tenant name missing from middle body,tenant mentions 0 < 3; who-should:tenant name missing from middle body,tenant mentions 0 < 3; need-to-know:tenant name missing from middle body,tenant mentions 0 < 3",
+    "longFormTenantDepthValidation": {
+      "ok": false,
+      "detail": "thin tenant depth in body"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 3,
+      "patient-guide": 0,
+      "what-is": 0,
+      "who-should": 0,
+      "need-to-know": 0,
+      "faq-page": 0
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 27,
+      "patient-guide": 33,
+      "what-is": 11,
+      "who-should": 5,
+      "need-to-know": 11,
+      "faq-page": 8
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [
+      "supporting-service-page: tenant only in intro/footer",
+      "supporting-service-page: tenant name missing from middle body",
+      "patient-guide: tenant only in intro/footer",
+      "patient-guide: tenant name missing from middle body",
+      "patient-guide: tenant mentions 0 < 3",
+      "what-is: tenant only in intro/footer",
+      "what-is: tenant name missing from middle body",
+      "what-is: tenant mentions 0 < 3",
+      "who-should: tenant only in intro/footer",
+      "who-should: tenant name missing from middle body",
+      "who-should: tenant mentions 0 < 3",
+      "need-to-know: tenant only in intro/footer",
+      "need-to-know: tenant name missing from middle body",
+      "need-to-know: tenant mentions 0 < 3",
+      "faq-page: tenant only in intro/footer",
+      "faq-page: tenant name missing from middle body",
+      "faq-page: tenant mentions 0 < 3"
+    ],
+    "failedLongFormAssets": [
+      "supporting-service-page:tenant name missing from middle body",
+      "patient-guide:tenant name missing from middle body,tenant mentions 0 < 3",
+      "what-is:tenant name missing from middle body,tenant mentions 0 < 3",
+      "who-should:tenant name missing from middle body,tenant mentions 0 < 3",
+      "need-to-know:tenant name missing from middle body,tenant mentions 0 < 3",
+      "faq-page:tenant name missing from middle body,tenant mentions 0 < 3"
+    ],
+    "supportingTemplateValidation": {
+      "ok": false,
+      "detail": "template issues: faq-page:missing PharmaConnect demo-banner shell,missing top-trust-bar",
+      "failedPages": [
+        "faq-page:missing PharmaConnect demo-banner shell,missing top-trust-bar"
+      ]
+    }
+  },
+  "assets": [
+    {
+      "id": "root-service-page",
+      "type": "Supporting service page",
+      "urlPath": "/pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/pages/pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§10",
+        "tenant overview",
+        "CTA"
+      ],
+      "wordCount": 740
+    },
+    {
+      "id": "patient-guide",
+      "type": "Patient guide article",
+      "urlPath": "/pharmacy-first-guide/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/pages/pharmacy-first-guide/index.html",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 1554
+    },
+    {
+      "id": "faq-page",
+      "type": "FAQ page",
+      "urlPath": "/pharmacy-first-faqs/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/pages/pharmacy-first-faqs/index.html",
+      "sourceSections": [
+        "§7",
+        "tenant FAQs",
+        "evidence-safe-faq"
+      ],
+      "wordCount": 156
+    },
+    {
+      "id": "what-is-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/what-is-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/pages/what-is-pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§10"
+      ],
+      "wordCount": 694
+    },
+    {
+      "id": "who-should-consider-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/who-should-consider-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/pages/who-should-consider-pharmacy-first/index.html",
+      "sourceSections": [
+        "§2"
+      ],
+      "wordCount": 283
+    },
+    {
+      "id": "pharmacy-first-what-you-need-to-know",
+      "type": "Blog post",
+      "urlPath": "/pharmacy-first-what-you-need-to-know/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/pages/pharmacy-first-what-you-need-to-know/index.html",
+      "sourceSections": [
+        "§3",
+        "§6",
+        "§9"
+      ],
+      "wordCount": 459
+    },
+    {
+      "id": "social-pack",
+      "type": "Social post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/packs/social-posts.json",
+      "sourceSections": [
+        "§8",
+        "§7",
+        "§2",
+        "§10",
+        "§13"
+      ],
+      "wordCount": 384
+    },
+    {
+      "id": "gbp-pack",
+      "type": "GBP post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/packs/gbp-posts.json",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§7",
+        "§13"
+      ],
+      "wordCount": 307
+    },
+    {
+      "id": "email-sequence",
+      "type": "Email sequence",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/packs/email-sequence.json",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 435
+    },
+    {
+      "id": "video-script",
+      "type": "YouTube / video script",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/packs/video-script.md",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§13"
+      ],
+      "wordCount": 141
+    },
+    {
+      "id": "review-trust",
+      "type": "Review & Trust pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/packs/review-trust.json",
+      "sourceSections": [
+        "profile",
+        "confirmed trust evidence"
+      ],
+      "wordCount": 0
+    },
+    {
+      "id": "ecosystem-summary",
+      "type": "Content ecosystem summary",
+      "urlPath": "/pharmacy-first-content-ecosystem/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/pages/pharmacy-first-content-ecosystem/index.html",
+      "sourceSections": [
+        "Meta index"
+      ],
+      "wordCount": 6
+    },
+    {
+      "id": "local-cluster-darfield",
+      "type": "Cluster page",
+      "urlPath": "/local/darfield/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/darfield/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Darfield",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3184
+    },
+    {
+      "id": "local-cluster-wombwell",
+      "type": "Cluster page",
+      "urlPath": "/local/wombwell/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/wombwell/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Wombwell",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3164
+    },
+    {
+      "id": "local-cluster-worsbrough",
+      "type": "Cluster page",
+      "urlPath": "/local/worsbrough/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/worsbrough/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Worsbrough",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3180
+    },
+    {
+      "id": "local-cluster-thurnscoe",
+      "type": "Cluster page",
+      "urlPath": "/local/thurnscoe/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/thurnscoe/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Thurnscoe",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3129
+    },
+    {
+      "id": "local-cluster-grimethorpe",
+      "type": "Cluster page",
+      "urlPath": "/local/grimethorpe/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/grimethorpe/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Grimethorpe",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3157
+    },
+    {
+      "id": "local-cluster-goldthorpe",
+      "type": "Cluster page",
+      "urlPath": "/local/goldthorpe/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/goldthorpe/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Goldthorpe",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3155
+    },
+    {
+      "id": "local-cluster-hoyland",
+      "type": "Cluster page",
+      "urlPath": "/local/hoyland/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/hoyland/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Hoyland",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3159
+    },
+    {
+      "id": "local-cluster-cudworth",
+      "type": "Cluster page",
+      "urlPath": "/local/cudworth/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/cudworth/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Cudworth",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3152
+    },
+    {
+      "id": "local-cluster-royston",
+      "type": "Cluster page",
+      "urlPath": "/local/royston/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/royston/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Royston",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3441
+    },
+    {
+      "id": "local-cluster-chapeltown",
+      "type": "Cluster page",
+      "urlPath": "/local/chapeltown/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/pharmacy-first/local/chapeltown/index.html",
+      "sourceSections": [
+        "local-location-cluster",
+        "Chapeltown",
+        "rc1-cluster-page",
+        "strategy"
+      ],
+      "wordCount": 3466
+    }
+  ],
+  "internalLinkMap": {
+    "slug": "yorkshire-pharmacy-and-health-clinic",
+    "serviceId": "pharmacy-first",
+    "mainServiceUrlPath": "/pharmacy-first/",
+    "serviceHubUrlPath": "/pharmacy-first/",
+    "localClusterPages": [
+      {
+        "areaName": "Darfield",
+        "areaSlug": "darfield",
+        "urlPath": "/local/darfield/",
+        "outputPath": "local/darfield/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Wombwell",
+        "areaSlug": "wombwell",
+        "urlPath": "/local/wombwell/",
+        "outputPath": "local/wombwell/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Worsbrough",
+        "areaSlug": "worsbrough",
+        "urlPath": "/local/worsbrough/",
+        "outputPath": "local/worsbrough/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Thurnscoe",
+        "areaSlug": "thurnscoe",
+        "urlPath": "/local/thurnscoe/",
+        "outputPath": "local/thurnscoe/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Grimethorpe",
+        "areaSlug": "grimethorpe",
+        "urlPath": "/local/grimethorpe/",
+        "outputPath": "local/grimethorpe/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Goldthorpe",
+        "areaSlug": "goldthorpe",
+        "urlPath": "/local/goldthorpe/",
+        "outputPath": "local/goldthorpe/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Hoyland",
+        "areaSlug": "hoyland",
+        "urlPath": "/local/hoyland/",
+        "outputPath": "local/hoyland/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Cudworth",
+        "areaSlug": "cudworth",
+        "urlPath": "/local/cudworth/",
+        "outputPath": "local/cudworth/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Royston",
+        "areaSlug": "royston",
+        "urlPath": "/local/royston/",
+        "outputPath": "local/royston/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Chapeltown",
+            "areaSlug": "chapeltown",
+            "urlPath": "/local/chapeltown/"
+          }
+        ]
+      },
+      {
+        "areaName": "Chapeltown",
+        "areaSlug": "chapeltown",
+        "urlPath": "/local/chapeltown/",
+        "outputPath": "local/chapeltown/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Darfield",
+            "areaSlug": "darfield",
+            "urlPath": "/local/darfield/"
+          },
+          {
+            "areaName": "Wombwell",
+            "areaSlug": "wombwell",
+            "urlPath": "/local/wombwell/"
+          },
+          {
+            "areaName": "Worsbrough",
+            "areaSlug": "worsbrough",
+            "urlPath": "/local/worsbrough/"
+          },
+          {
+            "areaName": "Thurnscoe",
+            "areaSlug": "thurnscoe",
+            "urlPath": "/local/thurnscoe/"
+          },
+          {
+            "areaName": "Grimethorpe",
+            "areaSlug": "grimethorpe",
+            "urlPath": "/local/grimethorpe/"
+          },
+          {
+            "areaName": "Goldthorpe",
+            "areaSlug": "goldthorpe",
+            "urlPath": "/local/goldthorpe/"
+          },
+          {
+            "areaName": "Hoyland",
+            "areaSlug": "hoyland",
+            "urlPath": "/local/hoyland/"
+          },
+          {
+            "areaName": "Cudworth",
+            "areaSlug": "cudworth",
+            "urlPath": "/local/cudworth/"
+          },
+          {
+            "areaName": "Royston",
+            "areaSlug": "royston",
+            "urlPath": "/local/royston/"
+          }
+        ]
+      }
+    ],
+    "localLocationClusters": [
+      {
+        "areaName": "Darfield",
+        "areaSlug": "darfield",
+        "urlPath": "/local/darfield/",
+        "outputPath": "local/darfield/index.html"
+      },
+      {
+        "areaName": "Wombwell",
+        "areaSlug": "wombwell",
+        "urlPath": "/local/wombwell/",
+        "outputPath": "local/wombwell/index.html"
+      },
+      {
+        "areaName": "Worsbrough",
+        "areaSlug": "worsbrough",
+        "urlPath": "/local/worsbrough/",
+        "outputPath": "local/worsbrough/index.html"
+      },
+      {
+        "areaName": "Thurnscoe",
+        "areaSlug": "thurnscoe",
+        "urlPath": "/local/thurnscoe/",
+        "outputPath": "local/thurnscoe/index.html"
+      },
+      {
+        "areaName": "Grimethorpe",
+        "areaSlug": "grimethorpe",
+        "urlPath": "/local/grimethorpe/",
+        "outputPath": "local/grimethorpe/index.html"
+      },
+      {
+        "areaName": "Goldthorpe",
+        "areaSlug": "goldthorpe",
+        "urlPath": "/local/goldthorpe/",
+        "outputPath": "local/goldthorpe/index.html"
+      },
+      {
+        "areaName": "Hoyland",
+        "areaSlug": "hoyland",
+        "urlPath": "/local/hoyland/",
+        "outputPath": "local/hoyland/index.html"
+      },
+      {
+        "areaName": "Cudworth",
+        "areaSlug": "cudworth",
+        "urlPath": "/local/cudworth/",
+        "outputPath": "local/cudworth/index.html"
+      },
+      {
+        "areaName": "Royston",
+        "areaSlug": "royston",
+        "urlPath": "/local/royston/",
+        "outputPath": "local/royston/index.html"
+      },
+      {
+        "areaName": "Chapeltown",
+        "areaSlug": "chapeltown",
+        "urlPath": "/local/chapeltown/",
+        "outputPath": "local/chapeltown/index.html"
+      }
+    ],
+    "localLocationHierarchy": {
+      "ok": true,
+      "primaryLocality": "Barnsley",
+      "primaryLocalitySlug": "barnsley",
+      "hub": {
+        "areaId": "hub:barnsley",
+        "name": "Barnsley",
+        "slug": "hub",
+        "type": "city-town-hub",
+        "parentAreaId": null,
+        "source": "business-profile:primaryTown",
+        "evidence": [
+          "Primary town/city hub for service coverage"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "primary locality hub",
+        "approved": true
+      },
+      "clusters": [
+        {
+          "areaId": "cluster:darfield",
+          "name": "Darfield",
+          "slug": "darfield",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-address-locality",
+            "profile.areaType:primary locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 1 for approved area",
+          "approved": true,
+          "distanceLabel": "0.5 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 1,
+          "order": 1
+        },
+        {
+          "areaId": "cluster:wombwell",
+          "name": "Wombwell",
+          "slug": "wombwell",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 2 for approved area",
+          "approved": true,
+          "distanceLabel": "1.7 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 2,
+          "order": 2
+        },
+        {
+          "areaId": "cluster:worsbrough",
+          "name": "Worsbrough",
+          "slug": "worsbrough",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 3 for approved area",
+          "approved": true,
+          "distanceLabel": "5.3 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 3,
+          "order": 3
+        },
+        {
+          "areaId": "cluster:thurnscoe",
+          "name": "Thurnscoe",
+          "slug": "thurnscoe",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 4 for approved area",
+          "approved": true,
+          "distanceLabel": "4.6 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 4,
+          "order": 4
+        },
+        {
+          "areaId": "cluster:grimethorpe",
+          "name": "Grimethorpe",
+          "slug": "grimethorpe",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 5 for approved area",
+          "approved": true,
+          "distanceLabel": "4.8 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 5,
+          "order": 5
+        },
+        {
+          "areaId": "cluster:goldthorpe",
+          "name": "Goldthorpe",
+          "slug": "goldthorpe",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 6 for approved area",
+          "approved": true,
+          "distanceLabel": "4.9 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 6,
+          "order": 6
+        },
+        {
+          "areaId": "cluster:hoyland",
+          "name": "Hoyland",
+          "slug": "hoyland",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 7 for approved area",
+          "approved": true,
+          "distanceLabel": "5.4 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 7,
+          "order": 7
+        },
+        {
+          "areaId": "cluster:cudworth",
+          "name": "Cudworth",
+          "slug": "cudworth",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 8 for approved area",
+          "approved": true,
+          "distanceLabel": "5.5 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 8,
+          "order": 8
+        },
+        {
+          "areaId": "cluster:royston",
+          "name": "Royston",
+          "slug": "royston",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 9 for approved area",
+          "approved": true,
+          "distanceLabel": "8.9 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 9,
+          "order": 9
+        },
+        {
+          "areaId": "cluster:chapeltown",
+          "name": "Chapeltown",
+          "slug": "chapeltown",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 10 for approved area",
+          "approved": true,
+          "distanceLabel": "9.8 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 10,
+          "order": 10
+        }
+      ],
+      "areas": [],
+      "generationAreas": [
+        {
+          "areaId": "cluster:darfield",
+          "name": "Darfield",
+          "slug": "darfield",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-address-locality",
+            "profile.areaType:primary locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 1 for approved area",
+          "approved": true,
+          "distanceLabel": "0.5 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 1,
+          "order": 1
+        },
+        {
+          "areaId": "cluster:wombwell",
+          "name": "Wombwell",
+          "slug": "wombwell",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 2 for approved area",
+          "approved": true,
+          "distanceLabel": "1.7 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 2,
+          "order": 2
+        },
+        {
+          "areaId": "cluster:worsbrough",
+          "name": "Worsbrough",
+          "slug": "worsbrough",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 3 for approved area",
+          "approved": true,
+          "distanceLabel": "5.3 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 3,
+          "order": 3
+        },
+        {
+          "areaId": "cluster:thurnscoe",
+          "name": "Thurnscoe",
+          "slug": "thurnscoe",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 4 for approved area",
+          "approved": true,
+          "distanceLabel": "4.6 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 4,
+          "order": 4
+        },
+        {
+          "areaId": "cluster:grimethorpe",
+          "name": "Grimethorpe",
+          "slug": "grimethorpe",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 5 for approved area",
+          "approved": true,
+          "distanceLabel": "4.8 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 5,
+          "order": 5
+        },
+        {
+          "areaId": "cluster:goldthorpe",
+          "name": "Goldthorpe",
+          "slug": "goldthorpe",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 6 for approved area",
+          "approved": true,
+          "distanceLabel": "4.9 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 6,
+          "order": 6
+        },
+        {
+          "areaId": "cluster:hoyland",
+          "name": "Hoyland",
+          "slug": "hoyland",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 7 for approved area",
+          "approved": true,
+          "distanceLabel": "5.4 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 7,
+          "order": 7
+        },
+        {
+          "areaId": "cluster:cudworth",
+          "name": "Cudworth",
+          "slug": "cudworth",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:priority"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 8 for approved area",
+          "approved": true,
+          "distanceLabel": "5.5 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 8,
+          "order": 8
+        },
+        {
+          "areaId": "cluster:royston",
+          "name": "Royston",
+          "slug": "royston",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 9 for approved area",
+          "approved": true,
+          "distanceLabel": "8.9 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 9,
+          "order": 9
+        },
+        {
+          "areaId": "cluster:chapeltown",
+          "name": "Chapeltown",
+          "slug": "chapeltown",
+          "type": "district-cluster",
+          "parentAreaId": "hub:barnsley",
+          "source": "campaign-builder:saved-target-areas",
+          "evidence": [
+            "profile.source:google-places-geocode",
+            "profile.areaType:nearby locality",
+            "profile.confidence:90",
+            "profile.tier:secondary"
+          ],
+          "serviceIds": [
+            "pharmacy-first"
+          ],
+          "generationEligible": true,
+          "generationReason": "RC1 cluster page 10 for approved area",
+          "approved": true,
+          "distanceLabel": "9.8 km",
+          "relationship": "local guidance for patients around Barnsley",
+          "priority": 10,
+          "order": 10
+        }
+      ],
+      "trace": {
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+        "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+        "primaryLocation": "Barnsley",
+        "postcode": "S739LR",
+        "townCity": "Barnsley",
+        "storedServiceAreas": [
+          "Darfield",
+          "Wombwell",
+          "Thurnscoe",
+          "Grimethorpe",
+          "Goldthorpe",
+          "Worsbrough",
+          "Hoyland",
+          "Cudworth"
+        ],
+        "storedNeighbourhoods": [
+          "Darfield",
+          "Wombwell",
+          "Thurnscoe",
+          "Grimethorpe",
+          "Goldthorpe",
+          "Worsbrough",
+          "Hoyland",
+          "Cudworth",
+          "Mexborough",
+          "Royston",
+          "Dodworth",
+          "Chapeltown",
+          "Mapplewell",
+          "Darton",
+          "Penistone",
+          "Wath-upon-Dearne"
+        ],
+        "importedLocationEvidence": [],
+        "googleLocationEvidence": [
+          "googlePlaceId:ChIJN2xIfulxeUgRK4ReROu8W6U",
+          "displayAddress:91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK",
+          "competitorsSnapshot:91 Snape Hill Rd, Barnsley, S739LR"
+        ],
+        "localIntelligenceAreas": [],
+        "selectedAreasSource": "frozen-campaign:pharmacy-first",
+        "selectedAreasFilters": [
+          "benchmarkServiceEcosystemBuilder filters pharmacy-first areas against PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane manifest)"
+        ],
+        "rejectedAreas": [],
+        "rejectionReasons": [],
+        "firstEmptySelectionDecision": "All operator-selected areas removed by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS allow-list in buildBenchmarkServiceEcosystem",
+        "responsibleFile": "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+        "responsibleFunction": "buildBenchmarkServiceEcosystem",
+        "responsibleLine": 647,
+        "areasConsidered": [
+          "Barnsley",
+          "Darfield",
+          "Wombwell",
+          "Worsbrough",
+          "Thurnscoe",
+          "Grimethorpe",
+          "Goldthorpe",
+          "Hoyland",
+          "Cudworth",
+          "Royston",
+          "Chapeltown"
+        ]
+      }
+    },
+    "architecture": "rc1-cluster-page-v1",
+    "generatedAt": "2026-08-30T14:05:55.607Z",
+    "generationStamp": {
+      "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+      "campaignId": "pharmacy-first",
+      "generatedAt": "2026-08-30T14:05:55.607Z",
+      "sourceContext": "customer-imported-profile",
+      "runId": "e0d5837b-4baf-421a-a98a-731af255460c",
+      "approvedBankHash": "46de67243945c2bc572cba35aa9ac0fdd5806fb8813fbf89506bdfabdd517cdb"
+    }
+  },
+  "generatorReport": {
+    "generatorId": "benchmark-service-ecosystem",
+    "receivedContext": true,
+    "contextVersion": "1.0.0",
+    "slug": "yorkshire-pharmacy-and-health-clinic",
+    "serviceId": "pharmacy-first",
+    "missingFields": [],
+    "unusedFields": [],
+    "tokensReplaced": [],
+    "tokensUnresolved": [],
+    "tenantValidation": {
+      "ok": true,
+      "detail": "tenant ok"
+    },
+    "serviceValidation": {
+      "ok": true,
+      "detail": "pharmacy-first: 15 sections"
+    },
+    "brandValidation": {
+      "ok": true,
+      "detail": "brand present"
+    },
+    "linksValidation": {
+      "ok": true,
+      "detail": "/api/pharmacy-visual-experience/pharmacy-first/?slug=yorkshire-pharmacy-and-health-clinic"
+    },
+    "imageValidation": {
+      "ok": true,
+      "detail": "assignments loaded"
+    }
+  }
+}

@@ -61,9 +61,43 @@ function hasSectionId(html: string, id: string): boolean {
   return html.includes(`id="${id}"`) || html.includes(`id='${id}'`);
 }
 
+/** Match a class token inside a class attribute (supports multi-class values). */
+function hasClassMarker(html: string, className: string): boolean {
+  const re = new RegExp(`class=(["'])[^"']*\\b${className}\\b[^"']*\\1`);
+  return re.test(html);
+}
+
+function hasRelatedServicesMarker(html: string): boolean {
+  return (
+    hasSectionId(html, "related-services-section") ||
+    hasClassMarker(html, "related-services")
+  );
+}
+
+function hasAreasWeCoverMarker(html: string): boolean {
+  return (
+    hasSectionId(html, "areas-we-cover-section") ||
+    hasClassMarker(html, "areas-we-cover")
+  );
+}
+
+type SmokeTemplateProfile = "cluster" | "web-hosting" | "email-marketing";
+
+function detectSmokeTemplateProfile(html: string): SmokeTemplateProfile {
+  if (hasSectionId(html, "hosting-features")) return "web-hosting";
+  if (
+    hasSectionId(html, "email-why-works") ||
+    hasSectionId(html, "email-retention") ||
+    hasSectionId(html, "email-review-cta")
+  ) {
+    return "email-marketing";
+  }
+  return "cluster";
+}
+
 // ── Required section IDs ───────────────────────────────────────────────────────
 
-const REQUIRED_SECTION_IDS: readonly string[] = [
+const CLUSTER_REQUIRED_SECTION_IDS: readonly string[] = [
   "hero-section",
   "ai-summary-section",
   "split-section-one",
@@ -74,6 +108,54 @@ const REQUIRED_SECTION_IDS: readonly string[] = [
   "trust-strip",
   "site-footer",
 ] as const;
+
+const WEB_HOSTING_REQUIRED_SECTION_IDS: readonly string[] = [
+  "hero-section",
+  "hosting-features",
+  "whats-included",
+  "hosting-security",
+  "hosting-comparison",
+  "hosting-migration",
+  "hosting-review-cta",
+  "faq-section",
+  "site-footer",
+] as const;
+
+const EMAIL_MARKETING_REQUIRED_SECTION_IDS: readonly string[] = [
+  "hero-section",
+  "email-why-works",
+  "email-retention",
+  "email-automation",
+  "email-deliverability",
+  "email-reporting",
+  "email-review-cta",
+  "faq-section",
+  "site-footer",
+] as const;
+
+function requiredSectionsForProfile(profile: SmokeTemplateProfile): readonly string[] {
+  switch (profile) {
+    case "web-hosting":
+      return WEB_HOSTING_REQUIRED_SECTION_IDS;
+    case "email-marketing":
+      return EMAIL_MARKETING_REQUIRED_SECTION_IDS;
+    default:
+      return CLUSTER_REQUIRED_SECTION_IDS;
+  }
+}
+
+function missingRequiredSections(html: string, profile: SmokeTemplateProfile): string[] {
+  const missing = requiredSectionsForProfile(profile).filter(
+    (id) => !hasSectionId(html, id)
+  );
+
+  if (profile === "web-hosting" || profile === "email-marketing") {
+    if (!hasRelatedServicesMarker(html)) missing.push("related-services");
+    if (!hasAreasWeCoverMarker(html)) missing.push("areas-we-cover");
+  }
+
+  return missing;
+}
 
 // ── Token patterns that must not survive template rendering ───────────────────
 
@@ -119,16 +201,15 @@ export function runPostRenderCheck(
   ));
 
   // ── C. required_sections_present ───────────────────────────────────────────
-  const missingSections = REQUIRED_SECTION_IDS.filter(
-    (id) => !hasSectionId(html, id)
-  );
+  const templateProfile = detectSmokeTemplateProfile(html);
+  const missingSections = missingRequiredSections(html, templateProfile);
   const sectionsOk = missingSections.length === 0;
   checks.push(item(
     "required_sections_present",
     sectionsOk,
     sectionsOk
-      ? `All ${REQUIRED_SECTION_IDS.length} sections present`
-      : `Missing section IDs: ${missingSections.join(", ")}`
+      ? `All required sections present (${templateProfile} template)`
+      : `Missing section IDs (${templateProfile} template): ${missingSections.join(", ")}`
   ));
 
   // ── D. has_title ────────────────────────────────────────────────────────────
@@ -192,12 +273,11 @@ export function runPostRenderCheck(
     ));
   }
 
-  // ── H. local_relevance_centred ───────────────────────────────────────────────
+  // ── H. local_relevance_has_heading ───────────────────────────────────────────
   const localRelPresent = html.includes("local-relevance-section");
   if (localRelPresent) {
-    // Check the section heading is present and contains location-specific text
     const lrSectionMatch = html.match(
-      /class="local-relevance-section"[\s\S]{0,2000}?<\/section>/
+      /class=(["'])[^"']*\blocal-relevance-section\b[^"']*\1[\s\S]{0,4000}?<\/section>/
     );
     const lrHasHeading = lrSectionMatch
       ? /<h2[^>]*>[\s\S]+?<\/h2>/.test(lrSectionMatch[0])
@@ -206,8 +286,8 @@ export function runPostRenderCheck(
       "local_relevance_has_heading",
       lrHasHeading,
       lrHasHeading
-        ? "Local Relevance section has h2 heading"
-        : "Local Relevance section missing h2 heading — REVIEW_REQUIRED"
+        ? `Local Relevance section has h2 heading (${templateProfile} template)`
+        : `Local Relevance section missing h2 heading (${templateProfile} template) — REVIEW_REQUIRED`
     ));
   }
 

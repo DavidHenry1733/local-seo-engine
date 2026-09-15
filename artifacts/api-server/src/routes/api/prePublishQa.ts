@@ -44,6 +44,7 @@ import { scoreAiReadiness }   from "../../../../../src/generator/aiReadinessScor
 import type { ProjectConfig } from "./types";
 import type { SelectedAreaPageDef } from "../../../../../src/generator/buildClusterConfigs";
 import { loadProviderProfile } from "./providerProfiles";
+import { resolveServiceIntent } from "../../../../../src/serviceIntent.js";
 
 const __filename    = fileURLToPath(import.meta.url);
 const __dirname     = path.dirname(__filename);
@@ -192,10 +193,31 @@ router.get("/pre-publish-qa/:slug/page/:areaDir", (req, res) => {
   const sitemapUrls  = loadSitemapUrls(clientDir);
   const html         = fs.readFileSync(htmlPath, "utf8");
   const def          = findDef(areaDir, allDefs);
-  const area         = def?.area ?? areaDir;
-  const serviceName  = ((project as unknown as Record<string, unknown>)?.mainService as string) ?? "Service";
-  const domain       = project?.domain?.replace(/\/+$/, "") ?? "";
-  const primaryKw = cleanQaPrimaryKeyword(def?.primaryKeyword ?? "", h1, areaDir) || `${serviceName} ${area}`;
+  const pageDataPath = path.join(clientDir, areaDir, "page-data.json");
+  let pageData: Record<string, unknown> | null = null;
+  try {
+    if (fs.existsSync(pageDataPath)) {
+      pageData = JSON.parse(fs.readFileSync(pageDataPath, "utf8")) as Record<string, unknown>;
+    }
+  } catch { /* non-fatal */ }
+
+  const projectService = ((project as unknown as Record<string, unknown>)?.mainService as string) ?? "Service";
+  const pageIntent = resolveServiceIntent({
+    pageSlug: areaDir,
+    pageData,
+    def: def ? {
+      primaryKeyword: def.primaryKeyword,
+      area: def.area,
+      service: (def as unknown as Record<string, unknown>).service as string | undefined,
+    } : null,
+    html,
+    fallbackService: projectService,
+  });
+
+  const area        = pageIntent.location;
+  const serviceName = pageIntent.serviceName;
+  const domain      = project?.domain?.replace(/\/+$/, "") ?? "";
+  const primaryKw   = pageIntent.primaryKeyword;
   const isHub        = def?.tier === "hub";
   const pageType     = isHub ? "hub" : "cluster" as "hub" | "cluster";
   const imageMode    = (project as unknown as Record<string, unknown>)?.imageMode as string ?? "";

@@ -1,0 +1,17 @@
+Focused tests: 119/120 PASS.
+Pre-existing fail only: preview-revision-comparison-saved-drafts (2026-09-01T14-21Z catalog still expects old live Wombwell excerpt). Not changed.
+
+New checks passed:
+- preview-strategy-variant-isolated-restore
+- preview-strategy-variant-section-roles-differ
+- preview-strategy-variant-facts-and-clinical
+- preview-strategy-variant-does-not-overwrite-accepted
+- preview-strategy-variant-protected-hashes-unchanged
+- 17-preview-never-makes-external-calls (includes strategy-variant module)
+- 18/19/20 protected snapshots unchanged during the test run
+
+git diff --check: clean
+API build: rebuilt (Preview routing lives in bundled Growth Engine)
+Growth Engine: restarted; GET /health {"status":"ok"}
+Unauthenticated comparison Previews: HTTP 302 to /api/login
+Authenticated Playwright: desktop 1280 and mobile 390, no empty/hash links, no horizontal overflow, distinct heading sequences, accepted v3 Wombwell Preview still patient-journey-led

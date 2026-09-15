@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "slug": "sprint-6c-workflow-validation-pharmacy",
+  "updatedAt": "2026-07-19T08:23:38.172Z",
+  "currentStage": "generate_growth_intelligence",
+  "transitions": [
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-07-19T08:23:38.172Z",
+      "operator": "system",
+      "durationMs": 110,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Stage advanced to Generate Growth Intelligence"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-07-19T08:23:38.062Z",
+      "operator": "system",
+      "durationMs": 13,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Stage advanced to Approve Business Profile"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-19T08:23:38.048Z",
+      "operator": "system",
+      "durationMs": null,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Stage advanced to Website Import"
+    }
+  ]
+}

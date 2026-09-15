@@ -33,6 +33,20 @@ import {
 } from "./masterAdminWorkflowStageExecutor.ts";
 import { handleWorkflowStageFailure } from "./masterAdminWorkflowFailureService.ts";
 import { finalizeCompletedWorkflowJob } from "./masterAdminWorkflowJobFinalisationService.ts";
+import {
+  isCoreProductRecoveryMode,
+  isCprClusterGenerationEligible,
+  isServicePageEvidenceReviewApproved,
+  isServicePageReviewApproved,
+  isCprLocalClusterGenerationComplete,
+  readCoreProductRecoveryContract,
+} from "./masterAdminCoreProductRecoveryService.ts";
+import {
+  findActiveLocalClusterJob,
+  LOCAL_CLUSTER_JOB_ACTION,
+  queueLocalClusterPagesJob,
+} from "./masterAdminLocalClusterJobService.ts";
+import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
 import { finalizeCommercialOnboardingCompletion } from "./masterAdminCommercialOnboardingService.ts";
 import { isBusinessProfileReviewApproved } from "./masterAdminBusinessProfileReviewService.ts";
 import { ensureComponentDnaPersisted } from "./masterAdminComponentDnaPersistenceService.ts";
@@ -97,6 +111,18 @@ function previousStageIndex(stageId: WorkflowStageId): WorkflowStageId | null {
   return WORKFLOW_STAGE_ORDER[idx - 1]!;
 }
 
+/** CPR cluster phase uses service-page review (quality_review), not legacy commercial_intelligence ordering. */
+function resolvePreflightPreviousStage(ctx: MasterAdminCustomerContext, stageId: WorkflowStageId): WorkflowStageId | null {
+  if (isCoreProductRecoveryMode(ctx.slug) && stageId === "generate_ecosystem") {
+    const contract = readCoreProductRecoveryContract(ctx.slug);
+    if (contract?.servicePageGenerated) {
+      return "quality_review";
+    }
+    return "commercial_intelligence";
+  }
+  return previousStageIndex(stageId);
+}
+
 export function runWorkflowPreflight(slug: string): PreflightResult {
   const ctx = loadMasterAdminCustomerContext(slug);
   if (!ctx) return { ok: false, reason: "Customer not found", stageId: "create_customer", actionId: null };
@@ -124,7 +150,7 @@ export function runWorkflowPreflight(slug: string): PreflightResult {
   }
 
   const stageId = resolveWorkflowStage(ctx);
-  const intakeValidation = validateStoredOnboardingIntake(ctx.data);
+  const intakeValidation = validateStoredOnboardingIntake(ctx.data, slug);
   if (!intakeValidation.ok) {
     return {
       ok: false,
@@ -148,7 +174,7 @@ export function runWorkflowPreflight(slug: string): PreflightResult {
     return { ok: false, reason: "Customer is already Live", stageId, actionId: null };
   }
 
-  const prev = previousStageIndex(stageId);
+  const prev = resolvePreflightPreviousStage(ctx, stageId);
   if (prev && !verifyStageCompletion(prev, ctx)) {
     return { ok: false, reason: `Previous stage incomplete: ${WORKFLOW_STAGE_DEFINITIONS[prev].label}`, stageId, actionId: null };
   }
@@ -168,6 +194,42 @@ export function runWorkflowPreflight(slug: string): PreflightResult {
     return { ok: true, stageId, actionId: null };
   }
   if (stageId === "monitoring") {
+    return { ok: true, stageId, actionId: null };
+  }
+  if (stageId === "generate_ecosystem" && isCoreProductRecoveryMode(slug)) {
+    const contract = readCoreProductRecoveryContract(slug);
+    if (!contract?.servicePageGenerated) {
+      return {
+        ok: false,
+        reason: !isServicePageEvidenceReviewApproved(slug)
+          ? "Open Evidence Review and approve evidence before generating the service page"
+          : "Open Service Page Generation and confirm generation",
+        stageId,
+        actionId: null,
+      };
+    }
+    if (!isServicePageReviewApproved(slug)) {
+      return {
+        ok: false,
+        reason: "Open Service Page Review and approve the service page before cluster generation",
+        stageId: "quality_review",
+        actionId: null,
+      };
+    }
+    if (!isCprLocalClusterGenerationComplete(slug)) {
+      return { ok: true, stageId, actionId: LOCAL_CLUSTER_JOB_ACTION };
+    }
+    return { ok: true, stageId, actionId: null };
+  }
+  if (stageId === "quality_review" && isCoreProductRecoveryMode(slug)) {
+    if (!isServicePageReviewApproved(slug)) {
+      return {
+        ok: false,
+        reason: "Open Service Page Review and approve the service page before continuing",
+        stageId,
+        actionId: null,
+      };
+    }
     return { ok: true, stageId, actionId: null };
   }
   if (MANUAL_REVIEW_STAGE_MESSAGES[stageId]) {
@@ -223,7 +285,16 @@ export function runWorkflowPreflight(slug: string): PreflightResult {
   }
 
   if (stageId === "quality_review") {
-    if (!isAuthorisedEcosystemQualityReviewReady(slug)) {
+    if (isCoreProductRecoveryMode(slug)) {
+      if (!isServicePageReviewApproved(slug)) {
+        return {
+          ok: false,
+          reason: "Open Service Page Review and approve the service page before continuing",
+          stageId,
+          actionId: null,
+        };
+      }
+    } else if (!isAuthorisedEcosystemQualityReviewReady(slug)) {
       return {
         ok: false,
         reason: "Generate Approved Ecosystem must complete against the canonical plan before Quality Review",
@@ -243,7 +314,7 @@ export function runWorkflowPreflight(slug: string): PreflightResult {
       };
     }
     const setup = buildGenerationSetupState(slug);
-    if (!setup.areasConfirmed) {
+    if (!isCoreProductRecoveryMode(slug) && !setup.areasConfirmed) {
       return {
         ok: false,
         reason: "Confirm local coverage — choose and save at least 3 local areas before continuing",
@@ -424,8 +495,97 @@ export async function continueCustomerWorkflow(
     };
   }
 
-  const actionId = preflight.actionId!;
+  const requestedActionId =
+    typeof body.actionId === "string" && body.actionId.trim() ? body.actionId.trim() : null;
+  if (requestedActionId && preflight.actionId && requestedActionId !== preflight.actionId) {
+    return {
+      ok: false,
+      blocked: true,
+      preflight,
+      stageBefore,
+      stageAfter: stageBefore,
+      actionId: preflight.actionId,
+      error: `Requested action ${requestedActionId} does not match workflow action ${preflight.actionId}`,
+      evidence: "Action mismatch",
+      warnings: [],
+      errors: [`Requested action ${requestedActionId} does not match workflow action ${preflight.actionId}`],
+      workflow: buildCustomerWorkflowState(slug, operator),
+    };
+  }
+
+  const actionId = requestedActionId || preflight.actionId;
+  if (!actionId) {
+    return {
+      ok: false,
+      blocked: true,
+      preflight,
+      stageBefore,
+      stageAfter: stageBefore,
+      actionId: null,
+      error: "No workflow action available for current stage",
+      evidence: "No workflow action available for current stage",
+      warnings: [],
+      errors: ["No workflow action available for current stage"],
+      workflow: buildCustomerWorkflowState(slug, operator),
+    };
+  }
   const validationMode = Boolean(body.validationMode);
+
+  if (actionId === LOCAL_CLUSTER_JOB_ACTION && !validationMode) {
+    if (!isCprClusterGenerationEligible(slug)) {
+      return {
+        ok: false,
+        blocked: true,
+        stageBefore,
+        stageAfter: stageBefore,
+        actionId,
+        error: "Cluster generation is not eligible",
+        evidence: "Cluster generation is not eligible",
+        warnings: [],
+        errors: ["Cluster generation is not eligible"],
+        workflow: buildCustomerWorkflowState(slug, operator),
+      };
+    }
+    const activeCluster = findActiveLocalClusterJob(slug);
+    if (activeCluster) {
+      if (activeCluster.status === "queued") {
+        runMasterAdminJobAsync(activeCluster.id, activeCluster.executionPayload || {}, {
+          workflowStage: stageId,
+        });
+      }
+      return advanceAfterExecution(slug, operator, stageId, actionId, {
+        ok: true,
+        evidence: `Cluster generation job already ${activeCluster.status}`,
+        warnings: [],
+        errors: [],
+        jobId: activeCluster.id,
+      });
+    }
+    // Campaign-scoped identity — never fall back to another service's cluster record.
+    const activeCampaign = readActiveServiceCampaignSelection(slug);
+    const serviceId = activeCampaign?.serviceId || undefined;
+    const campaignId = activeCampaign?.campaignId || undefined;
+    const job = queueLocalClusterPagesJob({
+      slug,
+      operator,
+      serviceId,
+      campaignId,
+      workflowStage: stageId,
+      executionPayload: {
+        operatorConfirmed: body.operatorConfirmed === true || requestedActionId === LOCAL_CLUSTER_JOB_ACTION,
+        requestedActionId: actionId,
+        serviceId,
+        campaignId,
+      },
+    });
+    return advanceAfterExecution(slug, operator, stageId, actionId, {
+      ok: true,
+      evidence: `${WORKFLOW_ACTION_LABELS[actionId] || actionId} queued`,
+      warnings: [],
+      errors: [],
+      jobId: job.id,
+    });
+  }
 
   if (actionId === "orchestrate_growth_intelligence" && !validationMode) {
     const activeGiJob = findActiveGrowthIntelligenceJob(slug);

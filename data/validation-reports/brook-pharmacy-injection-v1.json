@@ -1,0 +1,94 @@
+{
+  "pass": true,
+  "slug": "pharmaconnect",
+  "pharmacyName": "Brook Pharmacy",
+  "beforeAudits": "No before snapshot — run once before fix to capture",
+  "afterAudits": [
+    {
+      "serviceId": "pharmacy-first",
+      "brookPharmacy": 27,
+      "rotherham": 21,
+      "phone": 8,
+      "address": 13,
+      "consultationRoom": 7,
+      "openingHours": 16,
+      "localAccess": true,
+      "mapIframe": true,
+      "footerPharmacy": true,
+      "genericHero": false,
+      "forbiddenLabels": false,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "brookPharmacy": 28,
+      "rotherham": 23,
+      "phone": 9,
+      "address": 13,
+      "consultationRoom": 9,
+      "openingHours": 16,
+      "localAccess": true,
+      "mapIframe": true,
+      "footerPharmacy": true,
+      "genericHero": false,
+      "forbiddenLabels": false,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "brookPharmacy": 28,
+      "rotherham": 23,
+      "phone": 9,
+      "address": 13,
+      "consultationRoom": 7,
+      "openingHours": 16,
+      "localAccess": true,
+      "mapIframe": true,
+      "footerPharmacy": true,
+      "genericHero": false,
+      "forbiddenLabels": false,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "brookPharmacy": 28,
+      "rotherham": 23,
+      "phone": 10,
+      "address": 13,
+      "consultationRoom": 7,
+      "openingHours": 16,
+      "localAccess": true,
+      "mapIframe": true,
+      "footerPharmacy": true,
+      "genericHero": false,
+      "forbiddenLabels": false,
+      "pass": true,
+      "failures": []
+    }
+  ],
+  "templateChecks": {
+    "pharmacyFirstRecovery": true,
+    "layoutV3_blood-pressure-checks": true,
+    "layoutV3_travel-vaccinations": true,
+    "layoutV3_emergency-contraception": true
+  },
+  "failedPages": [],
+  "previewUrls": [
+    "/api/pharmacy-visual-experience/pharmacy-first/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/travel-vaccinations/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/emergency-contraception/?slug=pharmaconnect"
+  ],
+  "rootCause": "Layout V3 used master-publish hero H1 and generic trust cards without profile injection; local section used map placeholder instead of profile-driven Google Maps embed.",
+  "filesModified": [
+    "src/pharmacy/pharmacyServicePageTrustInjection.ts (new)",
+    "src/pharmacy/pharmacyVisualExperienceLayoutV3.ts",
+    "src/pharmacy/pharmacyFirstPageSections.ts",
+    "src/pharmacy/pharmacyServicePageDesignSystem.ts",
+    "src/pharmacy/pharmacyFirstPageRecovery.ts"
+  ],
+  "masterContentChanged": false
+}

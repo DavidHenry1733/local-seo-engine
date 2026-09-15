@@ -1,0 +1,236 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T07:30:55.594Z",
+  "tokenUsage": {
+    "promptTokens": 6727,
+    "completionTokens": 506,
+    "totalTokens": 7233
+  },
+  "estimatedCostUsd": 0.017502,
+  "inputEvidencePackHash": "b84a610b60b01eabaa69999650dc857857dfc614a5568673cd314a16992cdf06",
+  "editorialEvidencePackHash": "5008dc259f69a33c12c33c454e894c7129a5ea160d05c1683aadd9ac348fdbb6",
+  "areaSlug": "littleover",
+  "areaName": "Littleover",
+  "editorialFactIdsUsed": [
+    "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+    "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+    "littleover:community:blagreaves-library-is-listed-as-a-community-faci",
+    "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+    "littleover:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Littleover",
+    "heroHeading": "Pharmacy First in Littleover",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Littleover.",
+    "localIntroduction": "Pharmacy First for people in Littleover is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Littleover is a neighbourhood ward in Derby. NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre. Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.",
+      "Pharmacy First can help with eligible common conditions."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Littleover is a neighbourhood ward in Derby.",
+        "editorialFactId": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.",
+        "editorialFactId": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.",
+        "editorialFactId": "littleover:community:blagreaves-library-is-listed-as-a-community-faci"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.",
+        "editorialFactId": "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Pharmacy First can help with eligible common conditions."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+        "editorialFactId": "littleover:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "littleover:community:blagreaves-library-is-listed-as-a-community-faci",
+      "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+      "littleover:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Littleover",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Littleover.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Littleover is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Littleover is a neighbourhood ward in Derby.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-, littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "providerSource": "NHS, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.",
+      "supportingCanonicalFieldOrEntity": "littleover:community:blagreaves-library-is-listed-as-a-community-faci, littleover:community:bramblebrook-community-centre-is-listed-as-a-com, littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3, clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Pharmacy First can help with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby, littleover:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Littleover",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Littleover.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Littleover is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Littleover is a neighbourhood ward in Derby.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-, littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "littleover:community:blagreaves-library-is-listed-as-a-community-faci, littleover:community:bramblebrook-community-centre-is-listed-as-a-com, littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Pharmacy First can help with eligible common conditions.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby, littleover:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Littleover is a neighbourhood ward in Derby. NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre. Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.\",\n    \"Pharmacy First can help with eligible common conditions.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Littleover is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.\",\n      \"editorialFactId\": \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.\",\n      \"editorialFactId\": \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.\",\n      \"editorialFactId\": \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Pharmacy First can help with eligible common conditions.\",\n      \"editorialFactId\": \"\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\",\n    \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\",\n    \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\",\n    \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Littleover is a neighbourhood ward in Derby. NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre. Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.\",\n    \"Pharmacy First can help with eligible common conditions.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Littleover is a neighbourhood ward in Derby.\",\n      \"editorialFactId\": \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.\",\n      \"editorialFactId\": \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.\",\n      \"editorialFactId\": \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Blagreaves Library is listed as a community facility in Littleover, and Clemson’s Park is listed as a landmark in the area.\",\n      \"editorialFactId\": \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Pharmacy First can help with eligible common conditions.\",\n      \"editorialFactId\": \"\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\",\n    \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\",\n    \"littleover:community:blagreaves-library-is-listed-as-a-community-faci\",\n    \"littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little\"\n  ]\n}"
+  ]
+}

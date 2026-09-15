@@ -18,6 +18,11 @@ import * as ftp from "basic-ftp";
 import { ProjectConfig, DeployConfig } from "./types";
 import { generateClusterContent, ClusterPageInputs } from "./generateClusterContent";
 import { refineClusterContent }                      from "./refineContent";
+import {
+  applyWebDesignNarrativePackage,
+  type NarrativeClusterPageContent,
+} from "../narratives/applyWebDesignNarrativePackage";
+import { applyLocalSeoNarrativePackage } from "../narratives/applyLocalSeoNarrativePackage";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -42,6 +47,7 @@ interface ExtendedProjectConfig extends ProjectConfig {
 interface ClusterConfig {
   service:             string;
   location:            string;
+  parentCity?:         string;
   primaryKeyword:      string;
   supportingKeywords:  string[];
   hubUrl:              string;
@@ -186,7 +192,21 @@ async function main(): Promise<void> {
 
   // ── Generate AI content ──────────────────────────────────────────────────
   const rawAi = await generateClusterContent(inputs);
-  const ai    = await refineClusterContent(rawAi);
+  // TEMP TEST: refinement disabled
+  let ai: NarrativeClusterPageContent = applyWebDesignNarrativePackage({
+    content: rawAi,
+    area: cluster.location,
+    city: cluster.parentCity,
+    serviceName: cluster.service,
+    narrativeEngine: project.narrativeEngine,
+  });
+  ai = applyLocalSeoNarrativePackage({
+    content: ai,
+    area: cluster.location,
+    city: cluster.parentCity,
+    serviceName: cluster.service,
+    narrativeEngine: project.narrativeEngine,
+  });
 
   // ── Read cluster template ────────────────────────────────────────────────
   const templatePath = path.join(process.cwd(), "templates", "cluster.html");
@@ -304,6 +324,9 @@ async function main(): Promise<void> {
 
   const metaTitle       = `${cluster.primaryKeyword} | ${project.businessName}`;
   const metaDescription = ai.aiSummaryIntro.slice(0, 155);
+  const narrativeOverrides = (ai as NarrativeClusterPageContent).narrativeOverrides;
+  const effectiveHeroHeading = narrativeOverrides?.heroHeading ?? cluster.primaryKeyword;
+  const effectiveHeroIntro = narrativeOverrides?.heroIntro ?? ai.aiSummaryIntro;
 
   // ── Replace all placeholders ─────────────────────────────────────────────
   const replacements: Record<string, string> = {
@@ -324,8 +347,8 @@ async function main(): Promise<void> {
     "{{NAV_ITEMS}}":               navItemsHtml,
 
     // Hero
-    "{{H1}}":                      cluster.primaryKeyword,
-    "{{INTRO}}":                   ai.aiSummaryIntro,
+    "{{H1}}":                      effectiveHeroHeading,
+    "{{INTRO}}":                   effectiveHeroIntro,
     "{{CTA_URL}}":                 project.primaryCtaUrl,
     "{{CTA_TEXT}}":                project.primaryCtaText,
     "{{HERO_IMAGE}}":        heroImage,
@@ -399,8 +422,8 @@ async function main(): Promise<void> {
     "{{FAQ_ITEMS}}":               faqHtml,
 
     // CTA
-    "{{CTA_HEADING}}":             ai.cta.heading,
-    "{{CTA_BODY}}":                ai.cta.body,
+    "{{CTA_HEADING}}":             narrativeOverrides?.ctaHeading ?? ai.cta.heading,
+    "{{CTA_BODY}}":                narrativeOverrides?.ctaBody ?? ai.cta.body,
 
     "{{MONEY_PAGE_LINK_SECTION}}": project.isHub
       ? buildMoneyPageSection(project.moneyPageUrl, project.moneyPageKeyword)

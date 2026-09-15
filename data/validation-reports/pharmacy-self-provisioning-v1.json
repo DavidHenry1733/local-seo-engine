@@ -1,0 +1,195 @@
+{
+  "pass": true,
+  "selfProvisioningScore": 100,
+  "workspaceRoot": "/home/inboxingproweb/pharmaconnect-growth-engine",
+  "checks": [
+    {
+      "id": "1-new-pharmacy-created",
+      "pass": true,
+      "detail": "Self Provision Demo Pharmacy V2 verified=true",
+      "category": "create"
+    },
+    {
+      "id": "2-canonical-root",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine",
+      "category": "paths"
+    },
+    {
+      "id": "3-all-files-on-canonical-root",
+      "pass": true,
+      "detail": "14 files",
+      "category": "paths"
+    },
+    {
+      "id": "4-no-slug-placeholders-in-errors",
+      "pass": true,
+      "detail": "Resolved slug paths only",
+      "category": "verify"
+    },
+    {
+      "id": "5-post-provision-verification",
+      "pass": true,
+      "detail": "6/6 checks",
+      "category": "verify"
+    },
+    {
+      "id": "6-profile-loader",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "7-project-config-file",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "8-campaign-store-loader",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "9-launch-queue-file",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaign-launch-queue/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "10-growth-actions-file",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-growth-actions/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "11-publishing-loader",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publishing-settings/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "12-visibility-file",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-visibility/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "13-growth-journey-file",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-growth-journey/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "14-required-files",
+      "pass": true,
+      "detail": "14 files",
+      "category": "verify"
+    },
+    {
+      "id": "15-required-dirs",
+      "pass": true,
+      "detail": "5 dirs",
+      "category": "verify"
+    },
+    {
+      "id": "16-not-under-artifacts",
+      "pass": true,
+      "detail": "Profile not wrongly written under artifacts/",
+      "category": "paths"
+    },
+    {
+      "id": "17-registry-after-verify",
+      "pass": true,
+      "detail": "Registered after verification",
+      "category": "verify"
+    },
+    {
+      "id": "18-portfolio-lists-verified",
+      "pass": true,
+      "detail": "In portfolio",
+      "category": "portfolio"
+    },
+    {
+      "id": "19-growth-programme-route",
+      "pass": true,
+      "detail": "Dashboard HTML renders",
+      "category": "routes"
+    },
+    {
+      "id": "20-campaign-os",
+      "pass": true,
+      "detail": "2 campaigns",
+      "category": "routes"
+    },
+    {
+      "id": "21-content-review",
+      "pass": true,
+      "detail": "4 services",
+      "category": "routes"
+    },
+    {
+      "id": "22-authority-loader",
+      "pass": true,
+      "detail": "Authority via loader",
+      "category": "loaders"
+    },
+    {
+      "id": "23-image-store",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-image-assignments/self-provision-demo-v2.json",
+      "category": "loaders"
+    },
+    {
+      "id": "24-tier-starter",
+      "pass": true,
+      "detail": "starter tier",
+      "category": "tiers"
+    },
+    {
+      "id": "24-tier-professional",
+      "pass": true,
+      "detail": "professional tier",
+      "category": "tiers"
+    },
+    {
+      "id": "24-tier-complete",
+      "pass": true,
+      "detail": "complete tier",
+      "category": "tiers"
+    },
+    {
+      "id": "25-delete-recreate-slug",
+      "pass": true,
+      "detail": "Recreate after cleanup",
+      "category": "lifecycle"
+    },
+    {
+      "id": "26-partial-not-in-portfolio",
+      "pass": true,
+      "detail": "Excluded",
+      "category": "rollback"
+    },
+    {
+      "id": "27-provision-interrupted-rollback",
+      "pass": true,
+      "detail": "profileExists=false inRegistry=false",
+      "category": "rollback"
+    },
+    {
+      "id": "28-regression-pharmaconnect",
+      "pass": true,
+      "detail": "pharmaconnect unchanged",
+      "category": "regression"
+    },
+    {
+      "id": "29-regression-existing-dashboard",
+      "pass": true,
+      "detail": "pharmaconnect loads",
+      "category": "regression"
+    }
+  ],
+  "issuesDiscovered": [],
+  "generatedAt": "2026-06-28T16:47:38.407Z"
+}

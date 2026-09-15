@@ -1,0 +1,18 @@
+
+=== UK local-page content contract v1 (no paid calls) ===
+
+PASS  contract-artifact-discoverable — data/pharmacy-uk-local-page-content-contracts/v1/uk-local-page-content-contract.json
+PASS  tenant-area-independence — allestreeCalls=7 mickleoverCalls=7 wombwellPaid=0
+PASS  ambiguous-place-names-disambiguated — NHS GP surgery medical practice in Allestree, Derby, Derbyshire, UK
+PASS  missing-optional-does-not-force-volume-searches — optionalUsd=0 ids=places-gp-practices,places-area-reference,dataforseo-official-gp-practices,dataforseo-descriptive-locality,page-body-gp-official,page-body-locality,distance-haversine
+PASS  yorkshire-cache-reuse-no-paid-calls — local=true editorial=true usd=0
+PASS  yorkshire-editorial-queries-unchanged — official-community,official-transport,official-healthcare
+PASS  previous-allestree-plan-preserved — previousUsd=0.198 previousCalls=12
+PASS  writer-receives-contract-and-canonical-identity — v3 entry point carries the UK local-page contract
+PASS  unsupported-gp-referrals-fail-both-pharmacies — brook=FAIL | field=page | sentence=The local GP practice refers patients to Brook Pharmacy Demo Derby. | rule=implied-affiliation | defect=the copy implies partnership, referral or endorsement york=FAIL | field=page | sentence=The local GP practice refers patients to Yorkshire Pharmacy & Health Clinic. | rule=implied-affiliation | defect=the copy implies partnership, referral or endorsement
+PASS  unsupported-nearest-claims-fail-both-areas — brook=FAIL | field=page | sentence=Where is the nearest GP? | rule=unsupported-nearest-claim | defect=the copy claims nearest or closest without support york=FAIL | field=page | sentence=Where is the nearest Pharmacy First location to Wombwell? | rule=unsupported-nearest-claim | defect=the copy claims nearest or closest without support
+PASS  qualified-distance-does-not-fail-unlabelled-rule — no unlabelled-distance failure
+PASS  genuine-repetition-fails — repeated distance guidance | premises locality repeated across local context and access fields
+PASS  unchanged-clinical-content-boundary — restated=restates renderer-owned clinical copy cleanHasClinicalRestate=false
+
+13/13 passed

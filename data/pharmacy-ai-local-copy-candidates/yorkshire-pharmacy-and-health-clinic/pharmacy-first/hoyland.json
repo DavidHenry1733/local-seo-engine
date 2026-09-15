@@ -1,0 +1,216 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v1",
+  "promptContractVersion": "v1",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T16:21:30.949Z",
+  "tokenUsage": {
+    "promptTokens": 2482,
+    "completionTokens": 697,
+    "totalTokens": 3179
+  },
+  "estimatedCostUsd": 0.01054,
+  "inputEvidencePackHash": "25a4dcf4f3f070632843e29d796904551cbf9470de7a48b6159ca750aaeb038f",
+  "areaSlug": "hoyland",
+  "areaName": "Hoyland",
+  "outputCopy": {
+    "area": "Hoyland",
+    "heroHeading": "Pharmacy First in Hoyland",
+    "heroIntroduction": "Pharmacy First offers convenient care for common conditions to people in Hoyland. Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+    "localIntroduction": "Hoyland is located 5.4 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "localContextHeading": "Accessing Pharmacy First from Hoyland",
+    "localContextParagraphs": [
+      "Residents of Hoyland can use the Pharmacy First service for assessment and advice on a range of common conditions. The pharmacy team will review your symptoms and advise on the most suitable next steps.",
+      "You do not need to be registered locally to use Pharmacy First. Eligibility and treatment options are based on your symptoms and NHS criteria, not your home address."
+    ],
+    "relationshipToPharmacy": "People in Hoyland can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK for Pharmacy First consultations.",
+    "localAccessIntroduction": "You may wish to phone 01226 210477 or visit the pharmacy website before travelling, to check current consultation arrangements.",
+    "localFaqs": [
+      {
+        "question": "How far is the pharmacy from Hoyland?",
+        "answer": "Yorkshire Pharmacy & Health Clinic is 5.4 km from Hoyland."
+      },
+      {
+        "question": "Can I use Pharmacy First if I live in Hoyland?",
+        "answer": "Yes, people living in Hoyland can use the Pharmacy First service at Yorkshire Pharmacy & Health Clinic."
+      },
+      {
+        "question": "Should I contact the pharmacy before visiting?",
+        "answer": "It is recommended to contact the pharmacy in advance to confirm how consultations are currently being arranged."
+      },
+      {
+        "question": "What if Pharmacy First is not suitable for my symptoms?",
+        "answer": "If Pharmacy First is not suitable, the pharmacist will advise you on the most appropriate next steps, which may include referral or self-care advice."
+      },
+      {
+        "question": "Do I need to be registered with a local GP to use Pharmacy First?",
+        "answer": "No, registration with a local GP is not required to use Pharmacy First at this pharmacy."
+      }
+    ],
+    "localCtaBridge": "To discuss your symptoms or request an appointment, please get in touch with the pharmacy.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Hoyland is located 5.4 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "People in Hoyland can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK for Pharmacy First consultations."
+      },
+      {
+        "field": "localFaqs",
+        "sentence": "Yorkshire Pharmacy & Health Clinic is 5.4 km from Hoyland."
+      }
+    ],
+    "evidenceEntityIdsUsed": []
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Hoyland",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First offers convenient care for common conditions to people in Hoyland.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Hoyland is located 5.4 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Accessing Pharmacy First from Hoyland",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Residents of Hoyland can use the Pharmacy First service for assessment and advice on a range of common conditions.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The pharmacy team will review your symptoms and advise on the most suitable next steps.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "You do not need to be registered locally to use Pharmacy First.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Eligibility and treatment options are based on your symptoms and NHS criteria, not your home address.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "People in Hoyland can use Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK for Pharmacy First consultations.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "You may wish to phone 01226 210477 or visit the pharmacy website before travelling, to check current consultation arrangements.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is 5.4 km from Hoyland.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].question",
+      "exactSentence": "Can I use Pharmacy First if I live in Hoyland?",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "Yes, people living in Hoyland can use the Pharmacy First service at Yorkshire Pharmacy & Health Clinic.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "It is recommended to contact the pharmacy in advance to confirm how consultations are currently being arranged.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].question",
+      "exactSentence": "What if Pharmacy First is not suitable for my symptoms?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "If Pharmacy First is not suitable, the pharmacist will advise you on the most appropriate next steps, which may include referral or self-care advice.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].question",
+      "exactSentence": "Do I need to be registered with a local GP to use Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].answer",
+      "exactSentence": "No, registration with a local GP is not required to use Pharmacy First at this pharmacy.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "To discuss your symptoms or request an appointment, please get in touch with the pharmacy.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    }
+  ],
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

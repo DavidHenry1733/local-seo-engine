@@ -1,0 +1,91 @@
+{
+  "pass": true,
+  "generatedAt": "2026-08-20T13:33:54.260Z",
+  "checks": [
+    {
+      "id": "shared-haversine",
+      "pass": true,
+      "detail": "Shared service calculates haversine from pharmacy and locality coordinates"
+    },
+    {
+      "id": "no-index-distance",
+      "pass": true,
+      "detail": "Recommendation engine does not use list index as distance"
+    },
+    {
+      "id": "unavailable-label",
+      "pass": true,
+      "detail": "Missing coordinates display Distance unavailable"
+    },
+    {
+      "id": "no-dataforseo-geo",
+      "pass": true,
+      "detail": "Local coverage geography does not call DataForSEO"
+    },
+    {
+      "id": "no-yorkshire-production",
+      "pass": true,
+      "detail": "No Yorkshire tenant or area names in production local-coverage code"
+    },
+    {
+      "id": "haversine-real-distance",
+      "pass": true,
+      "detail": "London–Paris 343.6 km"
+    },
+    {
+      "id": "address-locality-parse",
+      "pass": true,
+      "detail": "Darfield"
+    },
+    {
+      "id": "darfield-from-google-evidence",
+      "pass": true,
+      "detail": "present=true km=0 recommended=true"
+    },
+    {
+      "id": "penistone-not-approx-2km",
+      "pass": true,
+      "detail": "km=16.4 expected=16.4"
+    },
+    {
+      "id": "order-not-distance",
+      "pass": true,
+      "detail": "Darfield → Wombwell → Worsbrough → Royston → Penistone"
+    },
+    {
+      "id": "provenance-stored",
+      "pass": true,
+      "detail": "\"google-import-snapshot\""
+    },
+    {
+      "id": "platform-wide-branch-locality",
+      "pass": true,
+      "detail": "branch=Wombwell"
+    },
+    {
+      "id": "missing-coords-no-invented-distance",
+      "pass": true,
+      "detail": "areas=0 limitation=true"
+    },
+    {
+      "id": "manual-selection-preserved",
+      "pass": true,
+      "detail": "selected=true recommended=false"
+    },
+    {
+      "id": "existing-tenant-compatible",
+      "pass": true,
+      "detail": "manualSelected=true darfield=true"
+    },
+    {
+      "id": "save-is-explicit",
+      "pass": true,
+      "detail": "Explicit save keeps operator selection"
+    },
+    {
+      "id": "google-calls-stubbed",
+      "pass": true,
+      "detail": "fetchCalls=0"
+    }
+  ]
+}

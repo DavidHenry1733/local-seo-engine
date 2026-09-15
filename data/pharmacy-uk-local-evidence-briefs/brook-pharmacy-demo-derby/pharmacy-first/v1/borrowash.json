@@ -1,0 +1,113 @@
+{
+  "kind": "pharmacy-uk-local-evidence-brief-v1",
+  "version": "v1",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaName": "Borrowash",
+  "areaSlug": "borrowash",
+  "savedAt": "2026-09-08T16:59:32.796Z",
+  "introductionStructureId": "heritage-then-present",
+  "identity": {
+    "verifiedName": "Borrowash",
+    "statements": []
+  },
+  "geography": {
+    "parentTown": "Derby",
+    "county": "Derbyshire",
+    "country": "United Kingdom",
+    "queryPlaceLabel": "Borrowash, Derbyshire, UK",
+    "statements": []
+  },
+  "healthcare": [
+    {
+      "name": "Overdale Medical Practice",
+      "category": "healthcare",
+      "address": "207 Victoria Ave, Borrowash, Derby DE72 3HG"
+    },
+    {
+      "name": "Park Medical Practice",
+      "category": "healthcare",
+      "address": "46 Derby Rd, Borrowash, Derby DE72 3HA"
+    },
+    {
+      "name": "NHS general practice services in Borrowash are provided from Overdale Medical Practice.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Borrowash are provided from Overdale Medical Practice.",
+      "factId": "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p"
+    },
+    {
+      "name": "NHS general practice services in Borrowash are provided from Park Medical Practice.",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Borrowash are provided from Park Medical Practice.",
+      "factId": "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p"
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Elvaston Castle",
+      "category": "landmarks",
+      "address": "Borrowash Road, Elvaston, Derby DE72 3EP"
+    },
+    {
+      "name": "Elvaston Castle is listed as a landmark in Borrowash.",
+      "category": "heritage",
+      "statement": "Elvaston Castle is listed as a landmark in Borrowash.",
+      "factId": "borrowash:heritage:elvaston-castle-is-listed-as-a-landmark-in-borro"
+    },
+    {
+      "name": "Crown Arch is listed as a landmark in Borrowash.",
+      "category": "heritage",
+      "statement": "Crown Arch is listed as a landmark in Borrowash.",
+      "factId": "borrowash:heritage:crown-arch-is-listed-as-a-landmark-in-borrowash"
+    }
+  ],
+  "parks": [],
+  "shopping": [],
+  "civic": [
+    {
+      "name": "Borrowash Library",
+      "category": "community",
+      "address": "Victoria Ave, Borrowash, Derby DE72 3HE"
+    }
+  ],
+  "community": [
+    {
+      "name": "Ashbrook Community Centre",
+      "category": "community",
+      "address": "Harrington Ave, Borrowash, Derby DE72 3JE"
+    },
+    {
+      "name": "Borrowash has a public library.",
+      "category": "community",
+      "statement": "Borrowash has a public library.",
+      "factId": "borrowash:community:borrowash-has-a-public-library"
+    },
+    {
+      "name": "Borrowash Library is listed as a community facility in Borrowash.",
+      "category": "community",
+      "statement": "Borrowash Library is listed as a community facility in Borrowash.",
+      "factId": "borrowash:community:borrowash-library-is-listed-as-a-community-facil"
+    },
+    {
+      "name": "Ashbrook Community Centre is listed as a community facility in Borrowash.",
+      "category": "community",
+      "statement": "Ashbrook Community Centre is listed as a community facility in Borrowash.",
+      "factId": "borrowash:community:ashbrook-community-centre-is-listed-as-a-communi"
+    }
+  ],
+  "distance": {
+    "km": 7.3,
+    "label": "approximately 7.3 km straight-line",
+    "method": "haversine-straight-line"
+  },
+  "factIds": [
+    "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p",
+    "borrowash:community:borrowash-has-a-public-library",
+    "borrowash:healthcare:nhs-general-practice-services-in-borrowash-are-p",
+    "borrowash:community:borrowash-library-is-listed-as-a-community-facil",
+    "borrowash:community:ashbrook-community-centre-is-listed-as-a-communi",
+    "borrowash:heritage:elvaston-castle-is-listed-as-a-landmark-in-borro",
+    "borrowash:heritage:crown-arch-is-listed-as-a-landmark-in-borrowash",
+    "borrowash:pharmacy-relationship:distance"
+  ]
+}

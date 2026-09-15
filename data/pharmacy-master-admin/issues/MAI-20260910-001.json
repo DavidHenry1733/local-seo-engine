@@ -1,0 +1,346 @@
+{
+  "issueId": "MAI-20260910-001",
+  "createdAt": "2026-09-10T10:58:21.974Z",
+  "createdBy": "admin",
+  "updatedAt": "2026-09-10T10:58:21.974Z",
+  "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+  "campaignId": "",
+  "serviceId": "",
+  "affectedPageOrModule": "Commercial Publish",
+  "category": "Publishing",
+  "severity": "High",
+  "title": "Commercial publish failed",
+  "description": "getConnection: All configured authentication methods failed",
+  "expectedBehaviour": "Publish completes with live URL verification",
+  "actualBehaviour": "getConnection: All configured authentication methods failed",
+  "reproductionSteps": "Approve and Publish from Publish Review",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-09-10T10:58:22.077Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "yorkshire-pharmacy-and-health-clinic",
+      "businessName": "Welcome to Yorkshire Pharmacy and Health Clinic",
+      "website": "https://yorkshirepharmacyhealthclinic.co.uk",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-08-29T14:41:40.862Z",
+      "platformClientStatus": "profile_approved"
+    },
+    "campaign": {
+      "campaignId": "blood-pressure-checks",
+      "serviceId": "blood-pressure-checks",
+      "generationStatus": "complete",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-generation-context-blood-pressure-checks.json",
+        "exists": true,
+        "modifiedAt": "2026-08-24T14:29:46.537Z",
+        "size": 235306
+      },
+      "generationTimestamp": "2026-08-30T14:06:01.765Z",
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks.json",
+        "exists": true,
+        "modifiedAt": "2026-08-28T08:11:18.293Z",
+        "size": 13159
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/yorkshire-pharmacy-and-health-clinic/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/yorkshire-pharmacy-and-health-clinic.json",
+        "exists": true,
+        "modifiedAt": "2026-08-20T11:01:55.278Z",
+        "size": 6597
+      },
+      "pageType": "Commercial Publish",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-09-10T10:53:40.981Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-09-10T10:53:40.981Z",
+        "size": 15497541
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 355624,
+        "pmId": 1,
+        "status": "online",
+        "startTime": "2026-09-10T10:53:41.541Z",
+        "restartCount": 503
+      },
+      "nodeEnv": "production"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "snapshot_present",
+      "businessProfileStatus": "profile_approved",
+      "generationStatus": "complete",
+      "publishingStatus": "ready",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "7ce91dd5-9f9b-464c-ab34-39e5f51b7719",
+        "action": "publish",
+        "status": "running",
+        "progressLabel": "Uploading files",
+        "updatedAt": "2026-09-10T10:58:16.963Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "57cd3d1d-5f14-4e45-b3f4-dffcd83e2ff1",
+          "timestamp": "2026-08-24T10:41:06.347Z",
+          "action": "admin_customer_dashboard_access",
+          "status": "success",
+          "evidence": "Master Admin opened customer dashboard for Yorkshire Pharmacy & Health Clinic"
+        },
+        {
+          "id": "ab639f8c-a691-41a6-ade8-3c4612499b70",
+          "timestamp": "2026-08-24T10:40:45.651Z",
+          "action": "admin_customer_dashboard_access",
+          "status": "success",
+          "evidence": "Master Admin opened customer dashboard for Yorkshire Pharmacy & Health Clinic"
+        },
+        {
+          "id": "62d9ec9b-6d17-4997-bfe9-a40b11c92f35",
+          "timestamp": "2026-08-21T13:42:06.554Z",
+          "action": "orchestrate_competitor_analysis",
+          "status": "success",
+          "evidence": "Competitor Analysis completed — Google/local 10, DataForSEO organic 10"
+        },
+        {
+          "id": "81776eb5-fffc-46f9-be35-03d915b7ca30",
+          "timestamp": "2026-08-21T13:42:06.412Z",
+          "action": "orchestrate_competitor_analysis",
+          "status": "success",
+          "evidence": "Competitor Analysis completed — Google/local 10, DataForSEO organic 10"
+        },
+        {
+          "id": "0d5be2ac-b959-4a73-809c-dca3093453e8",
+          "timestamp": "2026-08-21T12:38:14.947Z",
+          "action": "orchestrate_competitor_analysis",
+          "status": "success",
+          "evidence": "Competitor Analysis partial — Google/local 0, DataForSEO organic 10 — Places API (New) is not enabled for this Google Cloud project."
+        },
+        {
+          "id": "8adb624c-fa48-4f39-8d0c-0c9dc0104239",
+          "timestamp": "2026-08-21T12:38:14.774Z",
+          "action": "orchestrate_competitor_analysis",
+          "status": "success",
+          "evidence": "Competitor Analysis partial — Google/local 0, DataForSEO organic 10 — Places API (New) is not enabled for this Google Cloud project."
+        },
+        {
+          "id": "2cc06035-ef05-4cde-aa38-e84a5fb0ef6e",
+          "timestamp": "2026-08-21T12:19:23.887Z",
+          "action": "orchestrate_competitor_analysis",
+          "status": "success",
+          "evidence": "Competitor Analysis job already running"
+        },
+        {
+          "id": "5ebf2649-29c3-4e7b-bdd9-ed56dc5c222f",
+          "timestamp": "2026-08-21T08:16:14.814Z",
+          "action": "save_onboarding_intake",
+          "status": "success",
+          "evidence": "MarketScope=local_regional; PrimaryMarket=Barnsley; Google state=configured; address=set"
+        },
+        {
+          "id": "43a77b74-b624-4279-ac92-d68c6d3a05aa",
+          "timestamp": "2026-08-20T15:42:28.885Z",
+          "action": "continue_workflow",
+          "status": "error",
+          "evidence": "Cluster generation is not eligible for this customer"
+        },
+        {
+          "id": "979f5a69-bcb5-4615-acac-afb7c668aaa5",
+          "timestamp": "2026-08-20T15:42:28.801Z",
+          "action": "workflow_failure_ticket",
+          "status": "error",
+          "evidence": "Issue MAI-20260820-008 created for failed Generate Ecosystem"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T15:42:27.708Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:55:24.592Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:54:44.211Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:54:27.298Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:48:41.049Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:39:57.921Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:55.999Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_local_cluster_pages",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:38:27.654Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T15:42:28.885Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T15:42:28.801Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:55:26.057Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:55:25.910Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:54:45.614Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:54:45.484Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:54:28.604Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:54:28.526Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "continue_workflow",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:48:42.699Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "workflow_failure_ticket",
+        "error": "Cluster generation is not eligible for this customer",
+        "timestamp": "2026-08-20T13:48:42.558Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-generation-context-blood-pressure-checks.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/yorkshire-pharmacy-and-health-clinic.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publish-status/yorkshire-pharmacy-and-health-clinic.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/yorkshire-pharmacy-and-health-clinic.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-builder.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-09-10T10:58:21.974Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-generation-context-blood-pressure-checks.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/yorkshire-pharmacy-and-health-clinic.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publish-status/yorkshire-pharmacy-and-health-clinic.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/yorkshire-pharmacy-and-health-clinic.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/yorkshire-pharmacy-and-health-clinic-campaign-builder.json"
+  ],
+  "linkedAuditEventIds": [
+    "28675a0b-b4a3-4b5e-a785-5cfa3db40b39"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-09-10T10:58:21.974Z",
+      "user": "admin",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": null,
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

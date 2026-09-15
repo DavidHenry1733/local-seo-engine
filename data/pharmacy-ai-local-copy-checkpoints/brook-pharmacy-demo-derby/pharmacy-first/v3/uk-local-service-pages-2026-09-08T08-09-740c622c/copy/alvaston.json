@@ -1,0 +1,204 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:32:43.451Z",
+  "tokenUsage": {
+    "promptTokens": 6837,
+    "completionTokens": 380,
+    "totalTokens": 7217
+  },
+  "estimatedCostUsd": 0.016714,
+  "inputEvidencePackHash": "691baf418dfc8f5f7566819417d79b7db13346c76186b1455ecc4e7aa958e628",
+  "editorialEvidencePackHash": "b203fb51116e3534ff30e7c8bf9d24242674b687c8de1be5427c014152e948ee",
+  "areaSlug": "alvaston",
+  "areaName": "Alvaston",
+  "editorialFactIdsUsed": [
+    "alvaston:community:alvaston-library-and-learning-centre-is-listed-a",
+    "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+    "alvaston:community:field-lane-alvaston-community-association-is-lis"
+  ],
+  "outputCopy": {
+    "area": "Alvaston",
+    "heroHeading": "Pharmacy First in Alvaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+    "localIntroduction": "Pharmacy First for people in Alvaston is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Alvaston Library and Learning Centre is listed as a community facility in Alvaston.",
+      "Alvaston Park is listed as a landmark in Alvaston.",
+      "Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Alvaston Library and Learning Centre is listed as a community facility in Alvaston.",
+        "editorialFactId": "alvaston:community:alvaston-library-and-learning-centre-is-listed-a"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Alvaston Park is listed as a landmark in Alvaston.",
+        "editorialFactId": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston.",
+        "editorialFactId": "alvaston:community:field-lane-alvaston-community-association-is-lis"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "alvaston:community:alvaston-library-and-learning-centre-is-listed-a",
+      "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto",
+      "alvaston:community:field-lane-alvaston-community-association-is-lis"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Alvaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Alvaston is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Alvaston Library and Learning Centre is listed as a community facility in Alvaston.",
+      "supportingCanonicalFieldOrEntity": "alvaston:community:alvaston-has-a-public-library, alvaston:community:alvaston-library-and-learning-centre-is-listed-a, alvaston:community:boulton-lane-park-community-centre-is-listed-as-, alvaston:community:field-lane-alvaston-community-association-is-lis, alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in",
+      "providerSource": "derby.gov.uk, Google Places, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Alvaston Park is listed as a landmark in Alvaston.",
+      "supportingCanonicalFieldOrEntity": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in, alvaston:heritage:elvaston-castle-is-listed-as-a-landmark-in-alvas",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[2]",
+      "exactSentence": "Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston.",
+      "supportingCanonicalFieldOrEntity": "alvaston:community:alvaston-library-and-learning-centre-is-listed-a, alvaston:community:boulton-lane-park-community-centre-is-listed-as-, alvaston:community:field-lane-alvaston-community-association-is-lis, alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "supportingCanonicalFieldOrEntity": "alvaston:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Alvaston",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Alvaston.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Alvaston is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "business.address",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Alvaston Library and Learning Centre is listed as a community facility in Alvaston.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "alvaston:community:alvaston-has-a-public-library, alvaston:community:alvaston-library-and-learning-centre-is-listed-a, alvaston:community:boulton-lane-park-community-centre-is-listed-as-, alvaston:community:field-lane-alvaston-community-association-is-lis, alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Alvaston Park is listed as a landmark in Alvaston.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in, alvaston:heritage:elvaston-castle-is-listed-as-a-landmark-in-alvas",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[2]",
+      "sentence": "Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "alvaston:community:alvaston-library-and-learning-centre-is-listed-a, alvaston:community:boulton-lane-park-community-centre-is-listed-as-, alvaston:community:field-lane-alvaston-community-association-is-lis, alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto, alvaston:heritage:alvaston-nature-trail-is-listed-as-a-landmark-in",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 4.4 km in a straight line from Alvaston.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "alvaston:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"Alvaston Library and Learning Centre is listed as a community facility in Alvaston.\",\n    \"Alvaston Park is listed as a landmark in Alvaston.\",\n    \"Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Alvaston Library and Learning Centre is listed as a community facility in Alvaston.\",\n      \"editorialFactId\": \"alvaston:community:alvaston-library-and-learning-centre-is-listed-a\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Alvaston Park is listed as a landmark in Alvaston.\",\n      \"editorialFactId\": \"alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston.\",\n      \"editorialFactId\": \"alvaston:community:field-lane-alvaston-community-association-is-lis\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"alvaston:community:alvaston-library-and-learning-centre-is-listed-a\",\n    \"alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto\",\n    \"alvaston:community:field-lane-alvaston-community-association-is-lis\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"Alvaston Library and Learning Centre is listed as a community facility in Alvaston.\",\n    \"Alvaston Park is listed as a landmark in Alvaston.\",\n    \"Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Alvaston Library and Learning Centre is listed as a community facility in Alvaston.\",\n      \"editorialFactId\": \"alvaston:community:alvaston-library-and-learning-centre-is-listed-a\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Alvaston Park is listed as a landmark in Alvaston.\",\n      \"editorialFactId\": \"alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Field Lane (Alvaston) Community Association is listed as a community facility in Alvaston.\",\n      \"editorialFactId\": \"alvaston:community:field-lane-alvaston-community-association-is-lis\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"alvaston:community:alvaston-library-and-learning-centre-is-listed-a\",\n    \"alvaston:heritage:alvaston-park-is-listed-as-a-landmark-in-alvasto\",\n    \"alvaston:community:field-lane-alvaston-community-association-is-lis\"\n  ]\n}"
+  ]
+}

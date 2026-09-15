@@ -1,0 +1,184 @@
+{
+  "defect": "NT-E2E-20",
+  "target": "reliable-direct-pharmacy",
+  "pass": true,
+  "rootCause": "Category breakdown and Expected Total Pages were stored as independent coreEcosystem fields without a reconciled page inventory; dashboard, scheduler, and totals could diverge from the actual planned page list.",
+  "planId": "f6a3f37dab1f2b22",
+  "planRevision": "2026-07-25T08:01:16.861Z",
+  "inventoryRecords": [
+    {
+      "inventoryId": "page-001:homepage:index",
+      "pageType": "homepage",
+      "title": "Homepage",
+      "url": "/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-002:service-hub:pharmacy-first",
+      "pageType": "service-hub",
+      "title": "Reliable Direct Pharmacy",
+      "url": "/pharmacy-first/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-003:cluster-page:cluster-ecclesall",
+      "pageType": "cluster-page",
+      "title": "Ecclesall",
+      "url": "/local/cluster-ecclesall/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-004:cluster-page:cluster-fulwood",
+      "pageType": "cluster-page",
+      "title": "Fulwood",
+      "url": "/local/cluster-fulwood/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-005:cluster-page:cluster-sheffield-city-centre",
+      "pageType": "cluster-page",
+      "title": "Sheffield City Centre",
+      "url": "/local/cluster-sheffield-city-centre/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-006:cluster-page:cluster-broomhill",
+      "pageType": "cluster-page",
+      "title": "Broomhill",
+      "url": "/local/cluster-broomhill/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-007:cluster-page:cluster-kelham-island",
+      "pageType": "cluster-page",
+      "title": "Kelham Island",
+      "url": "/local/cluster-kelham-island/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-008:cluster-page:cluster-dore",
+      "pageType": "cluster-page",
+      "title": "Dore",
+      "url": "/local/cluster-dore/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-009:cluster-page:cluster-hillsborough",
+      "pageType": "cluster-page",
+      "title": "Hillsborough",
+      "url": "/local/cluster-hillsborough/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-010:cluster-page:cluster-crookes",
+      "pageType": "cluster-page",
+      "title": "Crookes",
+      "url": "/local/cluster-crookes/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-011:guide:pharmacy-first-guide",
+      "pageType": "guide",
+      "title": "Reliable Direct Pharmacy patient guide",
+      "url": "/pharmacy-first-guide/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-012:blog:what-is-pharmacy-first",
+      "pageType": "blog",
+      "title": "what-is-pharmacy-first",
+      "url": "/what-is-pharmacy-first/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-013:blog:who-should-consider-pharmacy-first",
+      "pageType": "blog",
+      "title": "who-should-consider-pharmacy-first",
+      "url": "/who-should-consider-pharmacy-first/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-014:blog:pharmacy-first-what-you-need-to-know",
+      "pageType": "blog",
+      "title": "pharmacy-first-what-you-need-to-know",
+      "url": "/pharmacy-first-what-you-need-to-know/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-015:faq:pharmacy-first-faqs",
+      "pageType": "faq",
+      "title": "Reliable Direct Pharmacy FAQs",
+      "url": "/pharmacy-first-faqs/",
+      "included": true,
+      "countedInTotal": "YES"
+    },
+    {
+      "inventoryId": "page-016:supporting:pharmacy-first-content-ecosystem",
+      "pageType": "supporting",
+      "title": "Content ecosystem summary",
+      "url": "/pharmacy-first-content-ecosystem/",
+      "included": true,
+      "countedInTotal": "YES"
+    }
+  ],
+  "inventoryTotal": 16,
+  "schedulerTotal": 16,
+  "dashboardTotal": 16,
+  "totalsReconciled": true,
+  "totalCalculation": "homepage(1) + serviceHubs(1) + clusterPages(8) + blogs(3) + guides(1) + faqs(1) + supportingPages(1) = 16",
+  "steps": [
+    {
+      "name": "Every planned page has inventory id",
+      "ok": true
+    },
+    {
+      "name": "Every included page counted consistently",
+      "ok": true
+    },
+    {
+      "name": "No duplicate inventory entries",
+      "ok": true
+    },
+    {
+      "name": "Category counts match inventory reconciliation",
+      "ok": true,
+      "detail": "{\"homepage\":true,\"serviceHubs\":true,\"clusterPages\":true,\"blogs\":true,\"guides\":true,\"faqs\":true,\"supportingPages\":true}"
+    },
+    {
+      "name": "Inventory Total = Scheduler Total = Dashboard Total",
+      "ok": true,
+      "detail": "inventory=16 scheduler=16 dashboard=16 categorySum=16"
+    },
+    {
+      "name": "Dashboard derives total from inventory (no separate arithmetic)",
+      "ok": true
+    },
+    {
+      "name": "Plan persisted with inventory reconciliation",
+      "ok": true
+    },
+    {
+      "name": "Authorised job preserved (no regeneration)",
+      "ok": true
+    },
+    {
+      "name": "No regeneration triggered",
+      "ok": true,
+      "detail": "jobId=79327576-5cc8-4c23-81a6-cd36defa62ca completeness=SUPERSEDED_INCOMPLETE_RC1"
+    }
+  ]
+}

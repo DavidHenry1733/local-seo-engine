@@ -1,0 +1,28 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:chaddesden",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.012284,
+  "events": [
+    {
+      "at": "2026-09-06T07:49:09.599Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-06T07:49:09.673Z",
+      "kind": "reserve",
+      "reservationId": "r-1788680949673-1"
+    },
+    {
+      "at": "2026-09-06T07:49:11.739Z",
+      "kind": "consumed",
+      "reservationId": "r-1788680949673-1",
+      "detail": "cost=0.012284"
+    }
+  ]
+}

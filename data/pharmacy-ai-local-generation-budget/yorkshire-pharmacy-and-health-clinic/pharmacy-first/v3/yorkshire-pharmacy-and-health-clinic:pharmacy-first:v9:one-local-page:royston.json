@@ -1,0 +1,28 @@
+{
+  "taskId": "yorkshire-pharmacy-and-health-clinic:pharmacy-first:v9:one-local-page:royston",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.003728,
+  "events": [
+    {
+      "at": "2026-09-09T16:07:02.282Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-09T16:07:02.482Z",
+      "kind": "reserve",
+      "reservationId": "r-1788970022482-1"
+    },
+    {
+      "at": "2026-09-09T16:07:20.542Z",
+      "kind": "consumed",
+      "reservationId": "r-1788970022482-1",
+      "detail": "cost=0.003728"
+    }
+  ]
+}

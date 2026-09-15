@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "serviceId": "pharmacy-first",
+  "masterFile": "docs/pharmacy-master-library/pharmacy-first-master-v2.md",
+  "slug": "sprint-6d-orchestration-validation",
+  "localArea": "Sheffield",
+  "selectedAreas": [],
+  "localClusterPagesGenerated": 0,
+  "generatedAt": "2026-07-19T08:41:37.791Z",
+  "generationStamp": {
+    "tenantSlug": "sprint-6d-orchestration-validation",
+    "campaignId": "pharmacy-first",
+    "generatedAt": "2026-07-19T08:41:37.791Z",
+    "sourceContext": "customer-imported-profile"
+  },
+  "contentEngineContract": "1.0.0",
+  "longFormQualityValidation": {
+    "ok": false,
+    "detail": "failed: who-should:tenant name missing from middle body",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 16,
+      "patient-guide": 24,
+      "what-is": 8,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 11
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 22,
+      "patient-guide": 28,
+      "what-is": 11,
+      "who-should": 5,
+      "need-to-know": 11,
+      "faq-page": 7
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [
+      "who-should: tenant only in intro/footer",
+      "who-should: tenant name missing from middle body"
+    ],
+    "failedLongFormAssets": [
+      "who-should:tenant name missing from middle body"
+    ],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "assets": [
+    {
+      "id": "root-service-page",
+      "type": "Supporting service page",
+      "urlPath": "/pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/pages/pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§10",
+        "tenant overview",
+        "CTA"
+      ],
+      "wordCount": 708
+    },
+    {
+      "id": "patient-guide",
+      "type": "Patient guide article",
+      "urlPath": "/pharmacy-first-guide/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/pages/pharmacy-first-guide/index.html",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 1499
+    },
+    {
+      "id": "faq-page",
+      "type": "FAQ page",
+      "urlPath": "/pharmacy-first-faqs/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/pages/pharmacy-first-faqs/index.html",
+      "sourceSections": [
+        "§7",
+        "tenant FAQs"
+      ],
+      "wordCount": 202
+    },
+    {
+      "id": "what-is-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/what-is-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/pages/what-is-pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§10"
+      ],
+      "wordCount": 689
+    },
+    {
+      "id": "who-should-consider-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/who-should-consider-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/pages/who-should-consider-pharmacy-first/index.html",
+      "sourceSections": [
+        "§2"
+      ],
+      "wordCount": 281
+    },
+    {
+      "id": "pharmacy-first-what-you-need-to-know",
+      "type": "Blog post",
+      "urlPath": "/pharmacy-first-what-you-need-to-know/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/pages/pharmacy-first-what-you-need-to-know/index.html",
+      "sourceSections": [
+        "§3",
+        "§6",
+        "§9"
+      ],
+      "wordCount": 454
+    },
+    {
+      "id": "social-pack",
+      "type": "Social post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/packs/social-posts.json",
+      "sourceSections": [
+        "§8",
+        "§7",
+        "§2",
+        "§10",
+        "§13"
+      ],
+      "wordCount": 439
+    },
+    {
+      "id": "gbp-pack",
+      "type": "GBP post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/packs/gbp-posts.json",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§7",
+        "§13"
+      ],
+      "wordCount": 288
+    },
+    {
+      "id": "email-sequence",
+      "type": "Email sequence",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/packs/email-sequence.json",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 407
+    },
+    {
+      "id": "video-script",
+      "type": "YouTube / video script",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/packs/video-script.md",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§13"
+      ],
+      "wordCount": 141
+    },
+    {
+      "id": "ecosystem-summary",
+      "type": "Content ecosystem summary",
+      "urlPath": "/pharmacy-first-content-ecosystem/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/sprint-6d-orchestration-validation/pharmacy-first/pages/pharmacy-first-content-ecosystem/index.html",
+      "sourceSections": [
+        "Meta index"
+      ],
+      "wordCount": 6
+    }
+  ],
+  "internalLinkMap": {
+    "slug": "sprint-6d-orchestration-validation",
+    "serviceId": "pharmacy-first",
+    "mainServiceUrlPath": "/pharmacy-first/",
+    "localClusterPages": [],
+    "generatedAt": "2026-07-19T08:41:37.791Z",
+    "generationStamp": {
+      "tenantSlug": "sprint-6d-orchestration-validation",
+      "campaignId": "pharmacy-first",
+      "generatedAt": "2026-07-19T08:41:37.791Z",
+      "sourceContext": "customer-imported-profile"
+    },
+    "inactiveLocalPages": [
+      {
+        "areaSlug": "rotherham",
+        "reason": "Legacy local page outside frozen eight-area Pharmacy First campaign manifest"
+      }
+    ]
+  },
+  "generatorReport": {
+    "generatorId": "benchmark-service-ecosystem",
+    "receivedContext": true,
+    "contextVersion": "1.0.0",
+    "slug": "sprint-6d-orchestration-validation",
+    "serviceId": "pharmacy-first",
+    "missingFields": [],
+    "unusedFields": [],
+    "tokensReplaced": [],
+    "tokensUnresolved": [],
+    "tenantValidation": {
+      "ok": true,
+      "detail": "tenant ok"
+    },
+    "serviceValidation": {
+      "ok": true,
+      "detail": "pharmacy-first: 15 sections"
+    },
+    "brandValidation": {
+      "ok": true,
+      "detail": "brand present"
+    },
+    "linksValidation": {
+      "ok": true,
+      "detail": "/api/pharmacy-visual-experience/pharmacy-first/?slug=sprint-6d-orchestration-validation"
+    },
+    "imageValidation": {
+      "ok": true,
+      "detail": "assignments loaded"
+    }
+  }
+}

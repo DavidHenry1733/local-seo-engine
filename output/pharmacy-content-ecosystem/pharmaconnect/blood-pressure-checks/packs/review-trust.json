@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "type": "review-trust",
+  "slug": "pharmaconnect",
+  "serviceId": "blood-pressure-checks",
+  "serviceName": "Blood Pressure Checks",
+  "generatedAt": "2026-08-25T12:40:42.696Z",
+  "pharmacy": {
+    "name": "PharmaConnect",
+    "tradingName": "PharmaConnect",
+    "addressLine1": "Moorgate Crofts Business Centre",
+    "town": "Rotherham",
+    "county": "South Yorkshire",
+    "postcode": "S60 2DH",
+    "fullAddress": "Moorgate Crofts Business Centre, South Grove, S60 2DH",
+    "phone": "01709 210731",
+    "email": "support@pharmaconnect.uk",
+    "website": "https://pharmaconnect.uk",
+    "openingHours": null
+  },
+  "regulatory": {
+    "gphcNumber": null,
+    "gphcPremisesUrl": null,
+    "nhsProfileUrl": null,
+    "superintendentPharmacistName": null
+  },
+  "reviewer": null,
+  "service": {
+    "serviceId": "blood-pressure-checks",
+    "serviceName": "Blood Pressure Checks",
+    "confirmedOnProfile": false,
+    "fundingModel": null
+  },
+  "brandAndCta": {
+    "primaryColor": "#005eb8",
+    "headerCtaText": "Book An Appointment",
+    "headerCtaUrl": "https://pharmaconnect.uk/",
+    "primaryCta": "Book An Appointment"
+  },
+  "trustSignals": [
+    {
+      "id": "pharmacy-name",
+      "label": "Pharmacy name",
+      "value": "PharmaConnect",
+      "status": "confirmed"
+    },
+    {
+      "id": "address",
+      "label": "Address",
+      "value": "Moorgate Crofts Business Centre, South Grove, S60 2DH",
+      "status": "confirmed"
+    },
+    {
+      "id": "phone",
+      "label": "Phone",
+      "value": "01709 210731",
+      "status": "confirmed"
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "value": "support@pharmaconnect.uk",
+      "status": "confirmed"
+    },
+    {
+      "id": "website",
+      "label": "Website",
+      "value": "https://pharmaconnect.uk",
+      "status": "confirmed"
+    }
+  ],
+  "importedTrustEvidence": [
+    {
+      "kind": "about_description",
+      "value": "PharmaConnect provides pharmacy-specific websites, hosting, local SEO and patient communication systems designed for UK community pharmacies.",
+      "sourceUrl": "https://pharmaconnect.uk/about-pharmaconnect"
+    },
+    {
+      "kind": "founder",
+      "value": "Founder Partner Expertise Rooted",
+      "sourceUrl": "https://pharmaconnect.uk/about-pharmaconnect"
+    },
+    {
+      "kind": "experience",
+      "value": "over 20 years",
+      "sourceUrl": "https://pharmaconnect.uk/about-pharmaconnect"
+    }
+  ],
+  "evidenceStatus": {
+    "pharmacyIdentity": "confirmed",
+    "reviewer": "unavailable",
+    "gphc": "unavailable",
+    "superintendent": "unavailable"
+  },
+  "generationStamp": {
+    "tenantSlug": "pharmaconnect",
+    "campaignId": "blood-pressure-checks",
+    "generatedAt": "2026-08-25T12:40:42.696Z",
+    "sourceContext": "customer-imported-profile"
+  }
+}

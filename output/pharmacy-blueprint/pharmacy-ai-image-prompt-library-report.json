@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-ai-image-prompt-library",
+  "generatedAt": "2026-06-11T06:59:51.974Z",
+  "verdict": "PASS",
+  "message": "PASS: Pharmacy AI Image Prompt Library Complete",
+  "deployed": false,
+  "registryModified": false,
+  "sitemapModified": false,
+  "imagesGenerated": false,
+  "ideogramCalled": false,
+  "imagePacksCreated": [
+    {
+      "packKey": "core-pharmacy",
+      "packName": "Core Pharmacy",
+      "templateFamily": "*",
+      "promptCount": 8,
+      "slotMappings": {
+        "hero": "hero",
+        "support": "support",
+        "trust": "trust",
+        "conversion": "conversion"
+      }
+    },
+    {
+      "packKey": "clinical-nhs-services",
+      "packName": "Clinical NHS Services",
+      "templateFamily": "clinical-nhs-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "pharmacy-first-consultation",
+        "support": "minor-illness-advice",
+        "trust": "blood-pressure-check",
+        "conversion": "nhs-service-support"
+      }
+    },
+    {
+      "packKey": "vaccination-services",
+      "packName": "Vaccination Services",
+      "templateFamily": "vaccination-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "flu-vaccination",
+        "support": "vaccination-consultation",
+        "trust": "vaccination-record-review",
+        "conversion": "vaccine-availability"
+      }
+    },
+    {
+      "packKey": "travel-health-services",
+      "packName": "Travel Health Services",
+      "templateFamily": "travel-health-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "travel-consultation",
+        "support": "destination-advice",
+        "trust": "travel-vaccination",
+        "conversion": "travel-medicine-planning"
+      }
+    },
+    {
+      "packKey": "private-healthcare-services",
+      "packName": "Private Healthcare Services",
+      "templateFamily": "private-healthcare-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "ear-wax-removal",
+        "support": "private-consultation",
+        "trust": "health-screening",
+        "conversion": "aftercare-guidance"
+      }
+    },
+    {
+      "packKey": "weight-management-services",
+      "packName": "Weight Management Services",
+      "templateFamily": "weight-management-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "weight-consultation",
+        "support": "bmi-review",
+        "trust": "progress-monitoring",
+        "conversion": "private-weight-support"
+      }
+    }
+  ],
+  "totalPrompts": 38,
+  "templateFamilyCoverage": {
+    "clinical-nhs-services": {
+      "imagePack": "clinical-nhs-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "pharmacy-first-consultation",
+        "support": "minor-illness-advice",
+        "trust": "blood-pressure-check",
+        "conversion": "nhs-service-support"
+      }
+    },
+    "vaccination-services": {
+      "imagePack": "vaccination-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "flu-vaccination",
+        "support": "vaccination-consultation",
+        "trust": "vaccination-record-review",
+        "conversion": "vaccine-availability"
+      }
+    },
+    "travel-health-services": {
+      "imagePack": "travel-health-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "travel-consultation",
+        "support": "destination-advice",
+        "trust": "travel-vaccination",
+        "conversion": "travel-medicine-planning"
+      }
+    },
+    "private-healthcare-services": {
+      "imagePack": "private-healthcare-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "ear-wax-removal",
+        "support": "private-consultation",
+        "trust": "health-screening",
+        "conversion": "aftercare-guidance"
+      }
+    },
+    "weight-management-services": {
+      "imagePack": "weight-management-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "weight-consultation",
+        "support": "bmi-review",
+        "trust": "progress-monitoring",
+        "conversion": "private-weight-support"
+      }
+    },
+    "all-families-fallback": {
+      "imagePack": "core-pharmacy",
+      "promptCount": 8,
+      "slotMappings": {
+        "hero": "hero",
+        "support": "support",
+        "trust": "trust",
+        "conversion": "conversion"
+      }
+    }
+  },
+  "safetyComplianceStatus": {
+    "noUnsafeMedicalTerms": true,
+    "noFakeNhsLogoRequests": true,
+    "noPatientData": true,
+    "noPomBranding": true,
+    "noBeforeAfterClaims": true,
+    "uploadTargetPathPresent": true,
+    "fallbackImageKeyPresent": true
+  },
+  "uploadPathStrategy": {
+    "assetRoot": "assets/pharmacy-image-library",
+    "pattern": "assets/pharmacy-image-library/{imagePack}/{imageKey}.webp",
+    "alignsWithImageLibrary": true,
+    "note": "Upload WebP files to uploadTargetPath; pharmacyImageLibrary.ts auto-detects assets"
+  },
+  "readyForIdeogramGeneration": true,
+  "validation": {
+    "sixImagePacks": true,
+    "corePharmacyPackExists": true,
+    "fiveTemplateFamiliesCovered": true,
+    "allSlotMappingsPresent": true,
+    "issues": []
+  },
+  "libraryPath": "output/pharmacy-blueprint/pharmacy-ai-image-prompt-library.json",
+  "generatorScript": "scripts/build-pharmacy-ai-image-prompts.mjs"
+}

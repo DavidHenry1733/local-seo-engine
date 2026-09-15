@@ -1,0 +1,255 @@
+{
+  "issueId": "MAI-20260808-002",
+  "createdAt": "2026-08-08T19:06:45.565Z",
+  "createdBy": "admin",
+  "updatedAt": "2026-08-08T19:06:46.719Z",
+  "tenantSlug": "leeds-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "",
+  "category": "Customer onboarding",
+  "severity": "high",
+  "title": "Workflow failed: Publish",
+  "description": "getConnection: Connection lost before handshake",
+  "expectedBehaviour": "Continue Workflow completes Publish without error",
+  "actualBehaviour": "getConnection: Connection lost before handshake",
+  "reproductionSteps": "1. Open Master Admin customer record\n2. Customer slug: leeds-pharmacy\n3. Click Continue Workflow at stage: Publish\n4. Action: publish",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-08-08T19:06:46.123Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "leeds-pharmacy",
+      "businessName": "Leeds Pharmacy",
+      "website": "https://leedspharmacy.co.uk",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-08-04T05:12:50.543Z",
+      "platformClientStatus": "profile_approved"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "package_exists",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/leeds-pharmacy-campaign-generation-context-pharmacy-first.json",
+        "exists": true,
+        "modifiedAt": "2026-08-03T10:59:12.139Z",
+        "size": 315906
+      },
+      "generationTimestamp": "2026-08-04T10:04:24.787Z",
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/leeds-pharmacy/pharmacy-first.json",
+        "exists": true,
+        "modifiedAt": "2026-08-04T10:04:24.788Z",
+        "size": 6722
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/leeds-pharmacy/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/leeds-pharmacy.json",
+        "exists": true,
+        "modifiedAt": "2026-08-02T09:01:46.371Z",
+        "size": 6597
+      },
+      "pageType": "unknown",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-08-08T17:49:20.541Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-08-08T17:49:20.541Z",
+        "size": 13515157
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 2232324,
+        "pmId": 1,
+        "status": "online",
+        "startTime": "2026-08-08T17:49:34.743Z",
+        "restartCount": 159
+      },
+      "nodeEnv": "production"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "none",
+      "businessProfileStatus": "profile_approved",
+      "generationStatus": "idle",
+      "publishingStatus": "published",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "22516f8b-d1a6-438f-88c3-5bd5a0ebdf84",
+        "action": "publish",
+        "status": "failed",
+        "progressLabel": "Failed",
+        "updatedAt": "2026-08-08T19:06:45.522Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "b5f33a94-3262-4ad4-9b43-ced1bda5c4d0",
+          "timestamp": "2026-08-08T19:06:45.902Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260808-002 created: Workflow failed: Publish"
+        },
+        {
+          "id": "7a0e6e41-759a-4cee-af18-d17b10d1d2a9",
+          "timestamp": "2026-08-08T19:06:45.395Z",
+          "action": "commercial_publish",
+          "status": "error",
+          "evidence": "getConnection: Connection lost before handshake"
+        },
+        {
+          "id": "99f53a25-4e00-439a-b5aa-ce7c8ee91732",
+          "timestamp": "2026-08-08T19:06:45.195Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260808-001 created: Commercial publish failed"
+        },
+        {
+          "id": "ddf25e9d-2674-4499-b03f-aabe64de4740",
+          "timestamp": "2026-08-08T09:26:58.321Z",
+          "action": "commercial_publish",
+          "status": "success",
+          "evidence": "Published leeds-pharmacy — live verification passed"
+        },
+        {
+          "id": "e0cea43c-fa10-4f5a-a138-dbfa11c540fd",
+          "timestamp": "2026-08-08T09:26:58.048Z",
+          "action": "record_managed_publish_release",
+          "status": "success",
+          "evidence": "v2 verified"
+        },
+        {
+          "id": "877018ef-7ba5-4527-acb3-6ce8636a8678",
+          "timestamp": "2026-08-08T08:18:48.624Z",
+          "action": "continue_workflow",
+          "status": "success",
+          "evidence": "Job edb4a804-1a69-43fe-8639-742d98aabcc2 completed — publish"
+        },
+        {
+          "id": "4cb93303-0c6b-41c0-abc6-255964111064",
+          "timestamp": "2026-08-08T08:18:48.294Z",
+          "action": "commercial_publish",
+          "status": "success",
+          "evidence": "Published leeds-pharmacy — live verification passed"
+        },
+        {
+          "id": "8c4a99b5-ee48-4246-8735-1d75b6ba8bc6",
+          "timestamp": "2026-08-08T08:18:47.675Z",
+          "action": "record_managed_publish_release",
+          "status": "success",
+          "evidence": "v1 verified"
+        },
+        {
+          "id": "2bc7cda1-dda4-4352-9d66-b256a1de936e",
+          "timestamp": "2026-08-06T12:51:57.217Z",
+          "action": "continue_workflow",
+          "status": "success",
+          "evidence": "Job dcc54424-a2fe-4f39-b8d4-4112d43321f6 completed — generate_local_cluster_pages"
+        },
+        {
+          "id": "46b3658a-a41e-4567-a000-cce8e7e79c0c",
+          "timestamp": "2026-08-06T07:46:55.288Z",
+          "action": "continue_workflow",
+          "status": "success",
+          "evidence": "Job ae89897a-fd59-4668-983c-24917a8e7fa9 completed — generate_local_cluster_pages"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "background_job",
+        "action": "publish",
+        "error": "getConnection: Connection lost before handshake",
+        "timestamp": "2026-08-08T19:06:45.522Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_service_page",
+        "error": "Error: We could not create this content package because the selected service content is missing.",
+        "timestamp": "2026-08-06T16:30:45.056Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_service_page",
+        "error": "Error: We could not create this content package because the selected service content is missing.",
+        "timestamp": "2026-08-06T15:20:12.422Z",
+        "retries": 0
+      },
+      {
+        "source": "background_job",
+        "action": "generate_service_page",
+        "error": "ContentGenerationContext: master library not found: /home/inboxingproweb/pharmaconnect-growth-engine/docs/pharmacy-master-library/prescription-dispensing-master-v1.md",
+        "timestamp": "2026-08-06T15:17:20.730Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "commercial_publish",
+        "error": "getConnection: Connection lost before handshake",
+        "timestamp": "2026-08-08T19:06:45.395Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/leeds-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/leeds-pharmacy/pharmacy-first.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/leeds-pharmacy-campaign-generation-context-pharmacy-first.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/leeds-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publish-status/leeds-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/leeds-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/leeds-pharmacy-campaign-builder.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-08-08T19:06:46.513Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/leeds-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/leeds-pharmacy/pharmacy-first.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/leeds-pharmacy-campaign-generation-context-pharmacy-first.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/leeds-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publish-status/leeds-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/leeds-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/leeds-pharmacy-campaign-builder.json"
+  ],
+  "linkedAuditEventIds": [
+    "b5f33a94-3262-4ad4-9b43-ced1bda5c4d0"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-08-08T19:06:45.565Z",
+      "user": "admin",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": "COMMERCIAL RELEASE PROGRAMME V1\nRELEASE DEFECT\nONE ISSUE POLICY\n\nConfirmed browser-visible defect:\ngetConnection: Connection lost before handshake\n\nTarget tenant:\nleeds-pharmacy (Leeds Pharmacy)\n\nTarget campaign:\npharmacy-first\n\nTarget URL:\nNot specified in issue record\n\nLocked systems (do not modify):\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nObjective:\nResolve the reported Customer onboarding issue for tenant leeds-pharmacy: Workflow failed: Publish\n\nTrace requirements:\n- Reproduce using: 1. Open Master Admin customer record\n2. Customer slug: leeds-pharmacy\n3. Click Continue Workflow at stage: Publish\n4. Action: publish\n- Expected behaviour: Continue Workflow completes Publish without error\n- Actual behaviour: getConnection: Connection lost before handshake\n- Page type (from diagnostics): unknown\n- Lifecycle at report time: awaiting_review\n- Root cause to be traced.\n\nFix scope:\n- Operational/support fix only unless Product Owner approves engine changes\n- Do not modify locked rendering, generation, publishing, SEO, indexing, or ranking engines\n\nDo not modify:\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nValidation:\n- Confirm defect reproduced in browser\n- Apply fix within approved scope\n- Build and PM2 reload\n- WAIT FOR PRODUCT OWNER TEST\n- STOP.\n\nIssue ID: MAI-20260808-002\nSeverity: high\nCategory: Customer onboarding\nDiagnostic collected: 2026-08-08T19:06:46.513Z\n",
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-06-11T12:23:55.900Z",
+  "result": "PASS: Image Prompt Dashboard Upload Fixed",
+  "uploadEndpointStatus": {
+    "httpStatus": 200,
+    "ok": true,
+    "uploadPath": "assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp",
+    "pngRejected": true
+  },
+  "multipartHandlingStatus": {
+    "multerSingleFile": true,
+    "uploadMiddleware": true,
+    "webpOnlyFilter": true,
+    "fieldAliases": true,
+    "okResponse": true
+  },
+  "dashboardHandlerStatus": {
+    "ipdSubmitUpload": true,
+    "ipdApiPathUpload": true,
+    "noManualContentType": true,
+    "uploadStatusElement": true,
+    "ipdShowUploadStatus": true,
+    "webpAcceptOnly": true,
+    "uploadButtonTypeButton": true,
+    "readsVisibleSelects": true
+  },
+  "uploadPathWritten": {
+    "expected": "assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp",
+    "exists": true,
+    "match": true
+  },
+  "approvalStateUpdated": {
+    "updated": true,
+    "record": {
+      "status": "uploaded",
+      "approvalStatus": "uploaded",
+      "uploadPath": "assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp",
+      "uploadedAt": "2026-06-11T12:23:55.323Z"
+    }
+  },
+  "coverageUpdateStatus": {
+    "reportGenerated": true,
+    "pharmacyFirstUploadedSlots": [],
+    "hasUploadedSlot": true
+  },
+  "uploadOptionsStable": true,
+  "distBuildTimestamp": "2026-06-11T12:23:45.951Z",
+  "pm2RestartTimestamp": "2026-06-11T12:23:51.682Z",
+  "remainingIssues": []
+}

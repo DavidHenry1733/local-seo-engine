@@ -1,0 +1,32 @@
+=== Review Centre ===
+review-centre code=200 bytes=43016 title=Review Centre — Pharmacy First 
+reviewable-heading True
+demo-ref True
+checks-passed-count 10
+missing-areas none
+can-publish-true False
+approve-publish-buttons False
+has-_t-in-reported-sense False
+=== Service Preview ===
+service code=200 bytes=67325 title=Pharmacy First Derby | Brook Pharmacy 
+pharmacy-first True
+brook True
+schema True
+=== Ten local Previews ===
+preview allestree code=200 bytes=76463 True schema=False
+preview mickleover code=200 bytes=76336 True schema=False
+preview littleover code=200 bytes=76284 True schema=False
+preview chellaston code=200 bytes=76063 True schema=False
+preview duffield code=200 bytes=76536 True schema=False
+preview alvaston code=200 bytes=76631 True schema=False
+preview mackworth code=200 bytes=76555 True schema=False
+preview chaddesden code=200 bytes=76574 True schema=False
+preview spondon code=200 bytes=76616 True schema=False
+preview borrowash code=200 bytes=76555 True schema=False
+=== Unauthenticated token-free Review Centre (expect login) ===
+unauth-review-centre 302 redirect=https://app.pharmaconnect.uk/api/login?next=%2Fapi%2Fgrowth-engine%2Freview-centre%3Fslug%3Dbrook-pharmacy-demo-derby%26campaign%3Dpharmacy-first
+=== Post-read hashes ===
+ff51fddbc20078f4622e95f7a40a5bfc4f2011f1fdd1914915e7a6586403a52a  data/pharmacy-local-page-campaign-runs/brook-pharmacy-demo-derby/pharmacy-first/v1/remaining-local-pages.json
+b0b802374239e0c3d6f8e4a20e4c5cb47bad7b3697e90052da131d4955234dbc  data/pharmacy-ai-local-copy-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/allestree.json
+53f1567e66d6c90be23c8298c9d4a334e31c7dc3619f231886494275d5434f41  data/pharmacy-ai-local-copy-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/duffield.json
+cd6e47251528b427d04df52831870d2b0eb42dd46aa188a84a89c34e3c14f618  data/pharmacy-ai-local-generation-budget/brook-pharmacy-demo-derby/pharmacy-first/v3/brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:chellaston.json

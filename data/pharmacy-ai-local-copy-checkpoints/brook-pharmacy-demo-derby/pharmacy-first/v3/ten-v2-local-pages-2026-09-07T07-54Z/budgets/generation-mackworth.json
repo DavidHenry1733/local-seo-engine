@@ -1,0 +1,28 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:mackworth",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.016662,
+  "events": [
+    {
+      "at": "2026-09-06T07:49:01.472Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-07T07:53:00.402Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767580402-1"
+    },
+    {
+      "at": "2026-09-07T07:53:02.592Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767580402-1",
+      "detail": "cost=0.016662"
+    }
+  ]
+}

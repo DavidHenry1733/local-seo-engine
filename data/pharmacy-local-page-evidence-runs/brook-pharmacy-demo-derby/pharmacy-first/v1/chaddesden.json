@@ -1,0 +1,1716 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "1cb45344-86c9-4590-b25a-fc0b5190aaae",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "chaddesden",
+  "areaName": "Chaddesden",
+  "planFingerprint": "e119fe0c3b5090d99eb4c64e971fe8c30359e2bacd1cd904e7d8f6332e15e29c",
+  "spendingCapUsd": 0.17,
+  "status": "completed",
+  "startedAt": "2026-09-06T07:49:01.918Z",
+  "updatedAt": "2026-09-07T07:53:25.519Z",
+  "completedAt": "2026-09-07T07:53:25.519Z",
+  "spentUsd": 0.168,
+  "reservedUsd": 0,
+  "paidCallsMade": 9,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Chaddesden, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "6ed8cb47-d3b4-41b0-aba8-2eb4208faec3",
+      "detail": "5 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:03.288Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Chaddesden locality, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "ff8b971e-c772-4bb2-8e8c-58b6d9ade9cf",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:03.574Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Chaddesden, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "e1de68fd-a2be-4bd8-9e28-333967ff4103",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:05.941Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Chaddesden, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "224313d4-78c7-4b68-8261-2213da746c38",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:07.052Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "344613be-7f5c-482d-89a8-2adc895340ef",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/the-park-medical-practice/C81051",
+      "capturedAt": "2026-09-06T07:49:07.716Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "bb83be18-8967-4a79-92b2-9ef8184260e2",
+      "detail": "Retrieved https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/chaddesden-neighbourhood-ward/",
+      "capturedAt": "2026-09-06T07:49:09.301Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 2.9 km from Brook Pharmacy Demo Derby to Chaddesden. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-06T07:49:09.391Z"
+    },
+    {
+      "id": "places-hospitals",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS hospital health centre in Chaddesden, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "45fc8fa3-dc60-4801-8742-3c47d7829f3e",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:06.028Z"
+    },
+    {
+      "id": "places-landmarks",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "parks landmarks memorial in Chaddesden, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "ba8883bf-af00-414e-a02c-b2890551edaf",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:06.346Z"
+    },
+    {
+      "id": "places-community",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "libraries community centres leisure centres in Chaddesden, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "4f2014c7-f412-4e87-93e4-729a57347228",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:06.780Z"
+    },
+    {
+      "id": "dataforseo-official-community",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council park library leisure community in Chaddesden, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "a5aa8fe6-9d79-4070-9ae7-72bbbe33fca1",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:19.955Z"
+    },
+    {
+      "id": "dataforseo-official-healthcare",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS hospital health centre official in Chaddesden, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "63e70349-ef53-48f1-b84e-8477470137fb",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:24.138Z"
+    },
+    {
+      "id": "page-body-community",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "bfe97ad5-6a49-41bc-a48e-89b0b2d22bf1",
+      "detail": "Retrieved https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "capturedAt": "2026-09-07T07:53:24.284Z"
+    },
+    {
+      "id": "page-body-healthcare",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "e588ded3-1889-422f-9a37-7291f7dbc4d2",
+      "detail": "Retrieved https://dchs.nhs.uk/",
+      "capturedAt": "2026-09-07T07:53:25.287Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Park Medical Practice Chaddesden",
+        "address": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9289796,
+          "longitude": -1.4340448
+        },
+        "placeId": "ChIJT3cnyr_xeUgRBA955GRsILA",
+        "locality": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "addressComponents": [
+          {
+            "longText": "Maine Drive",
+            "shortText": "Maine Dr",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6LA",
+            "shortText": "DE21 6LA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12691262930515726084&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Horizon Healthcare | NHS GP Practice Derby",
+        "address": "3-5 Burton Rd, Derby DE1 1TH",
+        "types": [
+          "doctor",
+          "medical_center",
+          "hospital",
+          "medical_clinic",
+          "physiotherapist",
+          "health",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.917034099999995,
+          "longitude": -1.4788980999999999
+        },
+        "placeId": "ChIJp1IadEPxeUgRw6xSpLUhGu4",
+        "locality": "3-5 Burton Rd, Derby DE1 1TH",
+        "addressComponents": [
+          {
+            "longText": "3-5",
+            "shortText": "3-5",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Burton Road",
+            "shortText": "Burton Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1TH",
+            "shortText": "DE1 1TH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17157062794451004611&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Derwent Valley Medical Practice",
+        "address": "20 St Mark's Rd, Chaddesden, Derby DE21 6AT",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9267107,
+          "longitude": -1.457739
+        },
+        "placeId": "ChIJo6xkgQvxeUgRt1bOFnySBGI",
+        "locality": "20 St Mark's Rd, Chaddesden, Derby DE21 6AT",
+        "addressComponents": [
+          {
+            "longText": "20",
+            "shortText": "20",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Saint Mark's Road",
+            "shortText": "St Mark's Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6AT",
+            "shortText": "DE21 6AT",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=7062931177280001719&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "The Vernon Street Medical Centre",
+        "address": "13 Vernon St, Derby DE1 1FW",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.924054999999996,
+          "longitude": -1.490475
+        },
+        "placeId": "ChIJibdZVDfxeUgR3s_joA9bvdM",
+        "locality": "13 Vernon St, Derby DE1 1FW",
+        "addressComponents": [
+          {
+            "longText": "13",
+            "shortText": "13",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Vernon Street",
+            "shortText": "Vernon St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1FW",
+            "shortText": "DE1 1FW",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15257451235283029982&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Village Surgery Medical Centre",
+        "address": "Browning St, Sunny Hill, Derby DE23 8AL",
+        "types": [
+          "medical_center",
+          "hospital",
+          "medical_clinic",
+          "doctor",
+          "health",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8963672,
+          "longitude": -1.4846924
+        },
+        "placeId": "ChIJgbw_2MTweUgRzSTEGNx-nFc",
+        "locality": "Browning St, Sunny Hill, Derby DE23 8AL",
+        "addressComponents": [
+          {
+            "longText": "Browning Street",
+            "shortText": "Browning St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Sunny Hill",
+            "shortText": "Sunny Hill",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE23 8AL",
+            "shortText": "DE23 8AL",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=6313060261440005325&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Chaddesden",
+        "address": "Chaddesden, Derby",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.927081199999996,
+          "longitude": -1.4426520999999999
+        },
+        "placeId": "ChIJHatvCHbxeUgR0o1vLNkevDg",
+        "locality": "Chaddesden, Derby",
+        "addressComponents": [
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=4088176479847812562&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-hospitals": [
+      {
+        "name": "Florence Nightingale Community Hospital",
+        "address": "London Rd, Derby DE1 2QY",
+        "types": [
+          "hospital",
+          "general_hospital",
+          "health",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9141634,
+          "longitude": -1.4681851
+        },
+        "placeId": "ChIJ-TzowxvxeUgRVEnveGW9oJ8",
+        "locality": "London Rd, Derby DE1 2QY",
+        "addressComponents": [
+          {
+            "longText": "London Road",
+            "shortText": "London Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 2QY",
+            "shortText": "DE1 2QY",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=11502401691822541140&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Park Medical Practice Chaddesden",
+        "address": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9289796,
+          "longitude": -1.4340448
+        },
+        "placeId": "ChIJT3cnyr_xeUgRBA955GRsILA",
+        "locality": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "addressComponents": [
+          {
+            "longText": "Maine Drive",
+            "shortText": "Maine Dr",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6LA",
+            "shortText": "DE21 6LA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12691262930515726084&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "DHU Healthcare Derby Urgent Treatment Centre",
+        "address": "Entrance C, Urgent Care Centre, Osmaston Rd, Derby DE1 2GD",
+        "types": [
+          "medical_clinic",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9143678,
+          "longitude": -1.4708583
+        },
+        "placeId": "ChIJR84dNxjxeUgRE_wh6MsnUZM",
+        "locality": "Entrance C, Urgent Care Centre, Osmaston Rd, Derby DE1 2GD",
+        "addressComponents": [
+          {
+            "longText": "Entrance C",
+            "shortText": "Entrance C",
+            "types": [
+              "subpremise"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Urgent Care Centre",
+            "shortText": "Urgent Care Centre",
+            "types": [
+              "point_of_interest",
+              "establishment"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Osmaston Road",
+            "shortText": "Osmaston Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 2GD",
+            "shortText": "DE1 2GD",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10615309553415355411&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-landmarks": [
+      {
+        "name": "Chaddesden Park",
+        "address": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "types": [
+          "park",
+          "tourist_attraction",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9255144,
+          "longitude": -1.4322397
+        },
+        "placeId": "ChIJlVqW6r7xeUgR-JjH6eMnT24",
+        "locality": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "addressComponents": [
+          {
+            "longText": "Maine Drive",
+            "shortText": "Maine Dr",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6LA",
+            "shortText": "DE21 6LA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=7948615727165446392&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Chaddesden Wood Local Nature Reserve",
+        "address": "2SB, Chaddesden, Derby DE21 2SB",
+        "types": [
+          "nature_preserve",
+          "tourist_attraction",
+          "park",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9470891,
+          "longitude": -1.4318164
+        },
+        "placeId": "ChIJn7Ngl4vxeUgRjwP7Ej4mNq4",
+        "locality": "2SB, Chaddesden, Derby DE21 2SB",
+        "addressComponents": [
+          {
+            "longText": "2SB",
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 2SB",
+            "shortText": "DE21 2SB",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12553263059390104463&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Derby War Memorial",
+        "address": "8A Market Pl, Derby DE1 3QE",
+        "types": [
+          "historical_landmark",
+          "historical_place",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.923176899999994,
+          "longitude": -1.4764652
+        },
+        "placeId": "ChIJ33MJERbxeUgRdo0MMJzAW9c",
+        "locality": "8A Market Pl, Derby DE1 3QE",
+        "addressComponents": [
+          {
+            "longText": "8A",
+            "shortText": "8A",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Market Place",
+            "shortText": "Market Pl",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 3QE",
+            "shortText": "DE1 3QE",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15518208718088736118&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-community": [
+      {
+        "name": "Derwent Community Library",
+        "address": "Revive Healthy Living Centre, Roe Farm Ln, Chaddesden, Derby DE21 6ET",
+        "types": [
+          "library",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9309204,
+          "longitude": -1.4483479
+        },
+        "placeId": "ChIJsY7eDJ_xeUgRH1p80GKQWIQ",
+        "locality": "Revive Healthy Living Centre, Roe Farm Ln, Chaddesden, Derby DE21 6ET",
+        "addressComponents": [
+          {
+            "longText": "Revive Healthy Living Centre",
+            "shortText": "Revive Healthy Living Centre",
+            "types": [
+              "point_of_interest",
+              "establishment"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Roe Farm Lane",
+            "shortText": "Roe Farm Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6ET",
+            "shortText": "DE21 6ET",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=9536530965036030495&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "The Phillip Whitehead Memorial Library Chaddesden Park",
+        "address": "Chaddesden Ln, Chaddesden, Derby DE21 6LN",
+        "types": [
+          "library",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9272083,
+          "longitude": -1.4328895000000001
+        },
+        "placeId": "ChIJh5lstb3xeUgRyMVX3peMO28",
+        "locality": "Chaddesden Ln, Chaddesden, Derby DE21 6LN",
+        "addressComponents": [
+          {
+            "longText": "Chaddesden Lane",
+            "shortText": "Chaddesden Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6LN",
+            "shortText": "DE21 6LN",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=8015154545734174152&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Derwent Family Hub",
+        "address": "Monmouth St, Chaddesden, Derby DE21 6BD",
+        "types": [
+          "community_center",
+          "event_venue",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9277638,
+          "longitude": -1.457399
+        },
+        "placeId": "ChIJ9ae8HwvxeUgRjnNwYwEn-W4",
+        "locality": "Monmouth St, Chaddesden, Derby DE21 6BD",
+        "addressComponents": [
+          {
+            "longText": "Monmouth Street",
+            "shortText": "Monmouth St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6BD",
+            "shortText": "DE21 6BD",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=7996465500289790862&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Chaddesden, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:03.578Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.parkmedical.org.uk/",
+          "title": "The Park Medical Practice Derby - Tel: 01332 667 911 ...",
+          "description": "available 24 hours a day, 365 days a year. The Park Medical Practice Chaddesden, Maine Drive, Chaddesden, Derby, DE21 6LA Get Directions 01332 667911 reception ..."
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/the-park-medical-practice/C81051",
+          "title": "The Park Medical Practice - NHS",
+          "description": "The Park Medical Practice. Maine Drive, Chaddesden, Derby, Derbyshire, DE21 6LA. Information: This GP surgery is currently accepting new patients. Read more"
+        },
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/",
+          "title": "Chapel Street Medical Centre – NHS GP Surgeries in Derby",
+          "description": "Chapel Street Medical Centre · Appointments. Find out how to make, change or cancel an appointment · Prescriptions. Get a repeat prescription, help with medicines ... Read more"
+        },
+        {
+          "url": "https://derbygp.co.uk/",
+          "title": "Find an NHS GP in Derby | Choose From 33 Practices",
+          "description": "Derby City Centre GP Practices ; Taddington Road Surgery, Taddington Road, Chaddesden, Derby, Derbyshire, DE21 4JU, 01332332628 ; Derwent Medical Centre, 26 North ... Read more"
+        },
+        {
+          "url": "https://vernonstreetandthelanes.co.uk/",
+          "title": "Vernon Street Medical Centre – NHS GP Surgery in Derby",
+          "description": "Vernon Street Medical Centre – NHS GP Surgery in Derby … 13 Vernon Street Derby DE1 1FW Get directions 01332 332812. Derbyshire DE23 6LF"
+        },
+        {
+          "url": "https://derwentvalleymedicalpractice.co.uk/",
+          "title": "Derwent Valley Medical Practice – NHS GP Surgery in Derby",
+          "description": "Derwent Valley Medical Practice – NHS GP Surgery in Derby. Find out how to make, change or cancel an appointment."
+        },
+        {
+          "url": "https://www.parkmedical.org.uk/contact/",
+          "title": "Contact details",
+          "description": "Chaddesden Surgery. The Park Medical Practice Chaddesden, Maine Drive, Chaddesden, Derby, DE21 6LA · 01332 667911 ; Borrowash Surgery. The Park Medical Practice, Read more"
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+          "title": "List of GP practices in Derby and Derbyshire - May 2025",
+          "description": "20 May 2025 — View a full list of GP practices across Derby and Derbyshire, including practice codes, addresses and contact information."
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration and how to contact the ..."
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Chaddesden, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:05.945Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/chaddesden-neighbourhood-ward/",
+          "title": "Chaddesden neighbourhood ward - Derby ...",
+          "description": "Chaddesden North, East and West Neighbourhood team ; Donna Brady, Local Area Coordinator, Chaddesden North, 07812 300126, donna.brady@derby.gov.uk ; Dave Oliffe ... Read more"
+        },
+        {
+          "url": "https://www.southderbyshire.gov.uk/about-us/councillors-and-meetings/parish-councils",
+          "title": "Parish councils",
+          "description": "There are 31 Parish Councils in South Derbyshire. A full breakdown of chairmen and clerks is available should you wish to get in touch or attend meetings. Read more"
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://www.facebook.com/ChaddesdenTeam/?locale=en_GB",
+          "title": "Chaddesden East Conservative Team (@ChaddesdenTeam)",
+          "description": "New Era, Same Community Spirit As you maybe aware, recently the ward boundaries for Chaddesden and Derwent changed to 3 newly named wards for the next May ... Read more"
+        },
+        {
+          "url": "https://south-derbys.cmis.uk.com/Southderbyshire/Document.ashx?czJKcaeAi5tUFL1DTL2UE4zNRBcoShgo=a8d1QAuvlSqsVa7fq6HMM%2F9Y2vxymz5YxFJRt2h5bb%2FJuG0jsTcCGg%3D%3D&rUzwRPf%2BZ3zd4E7Ikn8Lyw%3D%3D=pwRE6AGJFLDNlh225F5QMaQWCtPHwdhUfCZ%2FLUQzgA2uL5jNRG4jdQ%3D%3D&mCTIbCubSFfXsDGW9IXnlg%3D%3D=hFflUdN3100%3D&kCx1AnS9%2FpWZQ40DXFvdEw%3D%3D=hFflUdN3100%3D&uJovDxwdjMPoYv%2BAJvYtyA%3D%3D=ctNJFf55vVA%3D&FgPlIEJYlotS%2BYGoBi5olA%3D%3D=NHdURQburHA%3D&d9Qjj0ag1Pd993jsyOJqFvmyB7X0CSQK=ctNJFf55vVA%3D&WGewmoAfeNR9xqBux0r1Q8Za60lavYmz=ctNJFf55vVA%3D&WGewmoAfeNQ16B2MHuCpMRKZMwaG1PaO=ctNJFf55vVA%3D",
+          "title": "Appendix 5",
+          "description": "Whether a parish council should be warded or whether existing parish wards should be altered to reflect changes in the local community? Parish warding is the ... Read more"
+        },
+        {
+          "url": "https://democracy.highpeak.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Judith Ward - Parish Clerk Lower Shaw Walls Foxt Stoke-on-Trent Staffordshire ST10 2HS. Work phone: 07973522861. Email: clerk@bradnopparishcouncil.gov.uk ... Read more"
+        },
+        {
+          "url": "https://www.hattonparish.gov.uk/",
+          "title": "Home I Hatton Parish Council | Welcome to Our Home Page",
+          "description": "Welcome to Hatton Parish Council. Providing information about the Parish Council, the locality and general community information. Read more"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chaddesden",
+          "title": "Chaddesden",
+          "description": "The area is covered by the Chaddesden ward of Derby City Council. The ward ... Chaddesden was formerly a civil parish within Shardlow Rural District ... Read more"
+        },
+        {
+          "url": "https://www.calverparishcouncil.org.uk/community",
+          "title": "Community",
+          "description": "Societies and Clubs and other useful contacts providing services within the Parish. If you wish to add your community group or business to our directory, click ... Read more"
+        }
+      ]
+    },
+    "dataforseo-official-community": {
+      "query": "official council park library leisure community in Chaddesden, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:53:06.808Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.inderby.org.uk/libraries/our-libraries/chaddesden-library/",
+          "title": "The Phillip Whitehead Memorial Library, Chaddesden Park",
+          "description": "This library opened in March 2013, replacing an earlier building situated nearby on the park. It is named in memory of the journalist, broadcaster and ... Read more"
+        },
+        {
+          "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+          "title": "Derby libraries",
+          "description": "Council's Leisure, Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Chaddesden Park Library. Parks Sports and ..."
+        },
+        {
+          "url": "https://www.facebook.com/groups/1535605710000772/posts/4275729279321721/",
+          "title": "Friends of Chaddesden Library, Chaddesden Park",
+          "description": "Here's Chadderton Library, where you can collect or browse for books, access computers and photocopy, scan and fax, aided by the inimitable ... Read more"
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/leisure/libraries/libraries.aspx",
+          "title": "Libraries",
+          "description": "Visit our library website to join the library, make a reservation, find your nearest branch, and more. can email: ask.library@derbyshire.gov.uk or phone us on ..."
+        },
+        {
+          "url": "https://www.communitydirectoryderbyshire.org.uk/view/7179/the-phillip-whitehead-memorial-library-chaddesden-park",
+          "title": "The Phillip Whitehead Memorial Library, Chaddesden Park",
+          "description": ": The Phillip Whitehead Memorial Library, Chaddesden Park. Telephone 01332 672352 Address 92 Chaddesden Lane Chaddesden Derby DE21 6LN. Leisure and recreation ..."
+        },
+        {
+          "url": "https://libraryon.org/libraries/derby/phillip-whitehead-memorial-library?page=5",
+          "title": "Phillip Whitehead Memorial Library, Chaddesden Park",
+          "description": "21 Jul 2026 — Get in touch. Chaddesden Lane, Derby, Derbyshire, Derby, DE21 6LN. 01332 640062 · libraries@derby.gov.uk. Accessibility. Accessible parking. Read more"
+        },
+        {
+          "url": "https://www.bbc.co.uk/news/articles/c5y48l71qe6o",
+          "title": "Trust appointed to run 10 'at risk' city libraries",
+          "description": "5 Dec 2024 — The running of 10 of Derby's libraries is being passed to a “not-for-profit” organisation, the city council has said. Read more"
+        },
+        {
+          "url": "https://librarytechnology.org/library/27394",
+          "title": "Chaddesden Library - Derby, UK",
+          "description": "Chaddesden Park; Chaddesden Derby, DE21 6LN Derbyshire County United Kingdom Phone: 01332672352"
+        },
+        {
+          "url": "https://libraries.derbyshire.gov.uk/our-libraries",
+          "title": "Our Libraries - Derbyshire County Council",
+          "description": "StreetKenning Park, Holmgate Road, Clay Cross · ZipChesterfield, Derbyshire S45 9PH · Phone01629 537 084 · Emailclaycross.library@derbyshire.gov.uk. Read more"
+        }
+      ]
+    },
+    "dataforseo-official-healthcare": {
+      "query": "NHS hospital health centre official in Chaddesden, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:53:20.077Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://dchs.nhs.uk/",
+          "title": "Derbyshire Community Health Services: Home",
+          "description": "new health centre in Belper. are open 8am to 8pm. Walk-in (no appointment needed): 8am–4pm Appointment only (via NHS 111): 4pm–8pm"
+        },
+        {
+          "url": "https://www.parkmedical.org.uk/",
+          "title": "The Park Medical Practice Derby - Tel: 01332 667 911 ...",
+          "description": "For appointments at the Chaddesden and Borrowash. NHS healthcare services. NHS 111 is available 24 hours a day, 365 days a year."
+        },
+        {
+          "url": "https://www.derbyshirehealthcareft.nhs.uk/contact-us/getting-to-us",
+          "title": "Getting to us: our locations",
+          "description": "Derbyshire Healthcare NHS Foundation Trust. Derby Walton Hospital, Call 111 when it's less urgent than 999 Choose"
+        },
+        {
+          "url": "https://www.facebook.com/dchstrust/?locale=en_GB",
+          "title": "Derbyshire Community Health Services NHS Foundation ...",
+          "description": "Derbyshire Community Health Services NHS Foundation Trust, Contact info +44 1246 565000 dchst.communications@nhs.net … open seven days a week, between 8am and ..."
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/the-park-medical-practice/C81051",
+          "title": "The Park Medical Practice - NHS",
+          "description": "The Park Medical Practice. Maine Drive, Chaddesden, Derby, Derbyshire, DE21 6LA. Information: This GP surgery is currently accepting new patients. Read more"
+        },
+        {
+          "url": "https://www.parkmedical.org.uk/contact/",
+          "title": "Contact details",
+          "description": "Chaddesden Surgery. The Park Medical Practice Chaddesden, Maine Drive, Chaddesden, Derby, DE21 6LA · 01332 667911 ; Borrowash Surgery. The Park Medical Practice, Read more"
+        },
+        {
+          "url": "https://www.cqc.org.uk/location/RY8DE/contact",
+          "title": "Contact: Babington Hospital",
+          "description": "Babington Hospital Derby Road, Belper, Derby, Derbyshire, DE56 1WH. Website https://www.derbyshirecountypct.nhs.uk"
+        },
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/",
+          "title": "Chapel Street Medical Centre – NHS GP Surgeries in Derby",
+          "description": "Chapel Street Medical Centre 10 Chapel Street Spondon Derby DE21 7RJ Get directions · 01332 680520. Mayfield Medical Centre 6 Mayfield Road Chaddesden Derby Read more"
+        },
+        {
+          "url": "https://www.england.nhs.uk/midlands/ics-and-acute-trusts/derby-and-derbyshire-ics-and-nhs-trusts/",
+          "title": "Midlands » Derby and Derbyshire ICS and NHS Trusts",
+          "description": "Derby and Derbyshire ICS and NHS Trusts · Ash Green Learning Disability Centre · Babington Hospital · Buxton Hospital · Cavendish Hospital · Clay Cross Hospital ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/the-park-medical-practice/C81051",
+      "title": "The Park Medical Practice - NHS",
+      "status": 200,
+      "textSample": "The Park Medical Practice - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care The Park Medical Practice Maine Drive, Chaddesden, Derby, Derbyshire, DE21 6LA Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-06T07:49:07.716Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/chaddesden-neighbourhood-ward/",
+      "title": "Chaddesden neighbourhood ward - Derby City Council",
+      "status": 200,
+      "textSample": "Chaddesden neighbourhood ward - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Council and democracy Neighbourhood partnerships Wards A to C Chaddesden neighbourhood ward Chaddesden neighbourhood ward Chaddesden North, East and West Neighbourhood team If you would like to get involved in your neighbourhood, you have any ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Lorraine Dryden Neighbourhood Manager 07812 301828 lorraine.dryden@derby.gov.uk Jamie Robinson Neighbourhood Officer 07812 301829 jamie.robinson2@derby.gov.uk Roger Teague Local Area Coordinator, Chaddesden West 07812 300755 roger.teague@derby.gov.uk Donna Brady Local Area Coordinator, Chaddesden North 07812 300126 donna.brady@derby.gov.uk Dave Oliffe Local Area Coordinator, Spondon and Chaddesden East (South of Nottingham Road) 07812 300106 david.oliffe@derby.gov.uk Mark Jensen Local Area Coordinator, Oakwood and Chaddesden East (North of Nottingham Road) 07385 401067 mark.jensen@derby.gov.uk Chaddesden Neighbourhood Board Your local Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public service The board: leads on behalf of the whole neighbourhood agrees the priorities for the neighbourhood monitors performance influences decisions that reflect the views of local residents decides on the vision for your neighbourhood The Neighbourhood Board received a budget from October 2019 and will receive a further budget from April 2020. This budget is to enable voluntary and community groups (Non Commercial) to apply for funding for projects/events, that will both benefit and enable the community and its residents. If you would be interested in putting together a funding application for consideration of the board, &zwnj;please read the guidance and complete the form: Board Funding Application 2022/23 Neighbourhood board devolved budget funding guidance Members of Chaddesden Neighbourhood Board 2019/20 Advisors: Sharon Sewell, Neighbourhood Partnership Manager Jamie Robinson, Neighbourhood Partnership Officer Emma Tidbury, Patch Manager, Derby Homes Donna Brady, Local Area Coordinator Natasha Thrower, Local Area Coordinator David Winslow, Parks Eddie Fisher, Youth Service Councillors: Chair - Councillor Cooper Councillor Pearce Councillor Smale Residents and Partners: Joy Bond, Resident John Ollerenshaw, Resident Liz Dane, Resident Linda Winter, Hon Member/Vol Louise Nicols, Resident Di Cliff, Age UK Sharron Davies, Out of the Box Events David Walsh, Sporting Communities Sarah Hadwin, Lees Brook Community School Rev. Dr Jason Ward, St Mary's Church Sgt Rachel Fowkes, Derbyshire Police Sarah Wigley, Derbyshire Fire and Rescue How can I join the Chaddesden Neighbourhood Board? If you are interested in joining you local Neighbourhood Board, or your community group is interested in nominating a representative, download an Board membership application form . Chaddesden Neighbourhood Forum Neighbourhood forums take place in the ward if there is an issue that needs a meeting. When a Neighbourhood Forum is required it will be advertised. Previous Next More in this section Abbey neighbourhood ward Allestree neighbourhood ward Alvaston neighbourhood ward Arboretum neighbourhood ward Blagreaves neighbourhood ward Chaddesden neighbourhood ward Chellaston and Shelton Lock ward Contact details Email: neighbourhoods@derby.gov.uk Department: --> Phone: - --> --> Relay UK: --> SignVideo: Signing service Address: Community Safety and Integration Service Public Protection and Streetpride The Council House Corporation Street Derby DE1 2FS Document downloads Useful links --> Derbyshire Police --> Derby Homes --> Derby and Derbyshire Integrated Care Board --> Derbyshire Fire and Rescue Service Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-06T07:49:09.301Z"
+    },
+    "page-body-community": {
+      "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "title": "Derby libraries - Derby City Council",
+      "status": 200,
+      "textSample": "Derby libraries - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Leisure and culture Derby libraries Derby libraries All information about Libraries has been moved to the In Derby website - a separate website covering services managed by the Council's Leisure, Culture and Tourism department. Amongst other services, you can find a library , join a library , browse the library catalogue and manage your library books and ebooks . Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Allenton Library Allestree Library Alvaston Library Blagreaves Library Chaddesden Park Library Chellaston Library Derwent Community Library Local Studies Library Mackworth Library Mickleover Library Normanton Library Riverside Library Sinfin Library Spondon Library Springwood Library More information is available on In Derby: Derby Libraries Previous Next More in this section Arts and entertainment Derby libraries Derby Museums Parks Sports and leisure Tourism and travel Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-07T07:53:24.283Z"
+    },
+    "page-body-healthcare": {
+      "url": "https://dchs.nhs.uk/",
+      "title": "Home :: Derbyshire Community Health Services",
+      "status": 200,
+      "textSample": "Home :: Derbyshire Community Health Services --> Skip to main content Skip to navigation Accessibility tools Accessibility tools Log in to MyDCHS Search this website Home About us About us Return to previous menu About us Who are we and what do we do? Who are we and what do we do? Return to previous menu Who are we and what do we do? Mission, vision and values Working the DCHS Way Our Board Our Board Return to previous menu Our Board Executive team Non-executive team Our Council of Governors Our Council of Governors Return to previous menu Our Council of Governors Meet our governors Become a member Quality at the heart of our care Quality at the heart of our care Return to previous menu Quality at the heart of our care Quality Always Quality Assurance Quality Conversations Training Patient Safety Clinical Effectiveness & Improvement Team Patient Experience Infection prevention & control Derbyshire Alliance end-of-life care Equality, diversity & inclusion Equality, diversity & inclusion Return to previous menu Equality, diversity & inclusion Staff networks for equality diversity and inclusion Accessible information standards Interpreting & translation Supporting colleagues and patients with deafness Trust reports, strategies and plans Freedom of Information DCHS Publication Scheme Information Governance Information Governance Return to previous menu Information Governance Records management Online Access to Records Cyber Security Our Partners Counter Fraud, bribery & corruption Counter Fraud, bribery & corruption Return to previous menu Counter Fraud, bribery & corruption Chief Executive statement on the Failure to Prevent Fraud offence DCHS Charitable Trust Share your experience Our services & locations Our services & locations Return to previous menu Our services & locations A-Z list of services Our Services About Airmid Our locations Our locations Return to previous menu Our locations Community Hospitals General Practices (GPs) Clinics/Health Centres Urgent Treatment Centres Community Support Bedded Units Resources Resources Return to previous menu Resources DCHS Policies DCHS Document Library Marsden Manual Patient Group Directions (PGDs) Derbyshire NHS Library Join us Join us Return to previous menu Join us Work for us Work for us Return to previous menu Work for us Join our team Students Wider Workforce Help our research Do business with us Become a member Volunteer with us Help us raise money for our Charitable Trust Contact and find us Charitable Trust Doors open at the new Babington Health Centre! Babington Health Centre is now open! We're delighted to welcome patients to our new health centre in Belper. You can read more on the development here Save the date - Improving Lives Through Community Healthcare* You&rsquo;re invited to join us at this year&rsquo;s DCHS Improving Lives Through Community Healthcare virtual meeting via MS Teams. When : Thursday 10 September 2026, 2pm - 4pm Please join us on MS Teams. * Incorporating our Annual Members&rsquo; Meeting subject to parliamentary approval of the accounts and annual report You can find more information here. Vacancies Click here for more information on our current vacancies and how to join the DCHS family. Work for us Urgent Treatment Centres Our Urgent Treatment Centres are open 8am to 8pm. At busy times, if we reach full capacity before 8pm, we may need to stop taking new patients so everyone already waiting can be treated safely. Ilkeston, Ripley and Whitworth UTCs Walk-in (no appointment needed): 8am–5pm Appointment only (via NHS 111): 5pm–8pm Buxton UTC Walk-in (no appointment needed): 8am–4pm Appointment only (via NHS 111): 4pm–8pm Our UTCs DCHS News Click here to catch-up with all of the latest projects, campaigns and celebrations for DCHS News Recognition Of Staff Excellence (ROSE) Awards Has a member of our staff made a difference or delivered extraordinary care? As a member of the public, you can nominate a healthcare worker for a ROSE award to say thank you for making a difference or delivering an extraordinary level of care. Click here for more information on nominations, and our past winners. ROSE Awards Working here Why choose us? Join our team Visitor information Our Services About us Our Vision and Values Derbyshire Shared Care Record Find out more here Open 7 days a week 8am-8pm Urgent treatment centres Social Media Follow us on social media: Facebook Instagram X Latest news View all 4th September 2026 Farming community invited back to Bakewell Agricultural Centre for health MOT Day this winter! Read more Popular Pages DCHS Document Library Outpatient Physiotherapy, Occupational Therapy and MSK Triage service DCHS Policies View our current vacancies News Useful Links NHS website Looking after your information Glossary Vacancie s Derbyshire Shared Care Record Resource scheduler (use your NHS mail credentials to access this platform) Smartcards and ID badges (DCHS staff only) Accessibility statement Datix incident reporting form* Estates fault reporting * Medical devices report * Unit4* Occupational Health (DCHS staff only) Links marked with an * indicate you need to be on an NHS network or connected via your smartcard for access getPageWrapperClass() -->",
+      "retrievedAt": "2026-09-07T07:53:25.287Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.927081199999996,
+    "longitude": -1.4426520999999999,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 2.9,
+  "verifiedGpPracticeCount": 2,
+  "findings": [
+    "2 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "substantive editorial evidence supports intro, context and access",
+    "Actual evidence spend $0.168 of cap $0.170. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/chaddesden.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/chaddesden.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 2 verified GP practice(s). Spend $0.168.",
+  "reprocessedAt": null
+}

@@ -1,0 +1,39 @@
+{
+  "issueId": "MAI-20260721-007",
+  "createdAt": "2026-07-21T11:25:00.000Z",
+  "createdBy": "rc1-c07-full-fidelity-import-validation",
+  "updatedAt": "2026-07-21T11:25:00.000Z",
+  "tenantSlug": "banner-cross-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "Website Import design capture → Website Intelligence → Brand DNA → Component DNA → Canonical Render",
+  "category": "Design",
+  "severity": "Critical",
+  "title": "RC1-C07 — Full-Fidelity Website Design Import",
+  "description": "Banner Cross render contained partial imported colours and logo but not complete source website design identity — placeholders, generic template markers, missing real imagery and fonts",
+  "expectedBehaviour": "Playwright design capture imports complete visual identity (assets, typography, colours, header/footer structure) and flows deterministically through Brand DNA, Component DNA and Canonical Render for every tenant",
+  "actualBehaviour": "HTML-only import captured partial tokens; hero used library placeholders; header/footer/fonts/spacing did not match source website",
+  "reproductionSteps": "Compare https://banner-cross-pharmacy.sites.pharmaconnect.uk/ against https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield/",
+  "affectedUrl": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/",
+  "screenshotReference": "data/pharmacy-master-admin/commercial-publish/banner-cross-pharmacy/rc1-c07-evidence/",
+  "status": "Awaiting Product Owner Test",
+  "assignee": "Unassigned",
+  "resolutionNotes": "Added Playwright design evidence capture, local asset vault, design pipeline for Brand/Component DNA and website-import image assignments; reran Banner Cross import; rebuilt and deployed canonical package.",
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-21T11:25:00.000Z",
+      "user": "rc1-c07-full-fidelity-import-validation",
+      "status": "Awaiting Product Owner Test",
+      "notes": "27 assets imported; hero/support use website-import images; revision chain PASS; live parity PASS; overall identity fidelity 95%"
+    }
+  ],
+  "relatedFiles": [
+    "src/pharmacy/growthEngineWebsiteDesignEvidenceModel.ts",
+    "src/pharmacy/pharmacyWebsiteDesignCaptureService.ts",
+    "src/pharmacy/pharmacyWebsiteDesignAssetImporter.ts",
+    "src/pharmacy/pharmacyDesignEvidenceApplication.ts",
+    "src/pharmacy/pharmacyWebsiteImportDesignPipeline.ts",
+    "src/pharmacy/growthEngineWebsiteIntelligenceImportV2Service.ts",
+    "scripts/rc1-c07-full-fidelity-import-validation.ts"
+  ]
+}

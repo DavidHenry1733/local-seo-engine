@@ -1,0 +1,254 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gemini-3.6-flash",
+  "generatedAt": "2026-09-08T15:17:32.777Z",
+  "tokenUsage": {
+    "promptTokens": 840,
+    "completionTokens": 284,
+    "totalTokens": 1124
+  },
+  "estimatedCostUsd": 0.003952000000000001,
+  "inputEvidencePackHash": "74d50e35fe0a40bc69859c5f18f0822a74e08e0229bccacf231439c178913c72",
+  "editorialEvidencePackHash": "339609bcc7a775249df7a89ba6f7b8057291c14c91bb1c6557fcf9e58686676b",
+  "areaSlug": "allestree",
+  "areaName": "Allestree",
+  "editorialFactIdsUsed": [
+    "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou",
+    "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+    "allestree:community:allestree-carnival-is-listed-as-a-community-orga",
+    "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+    "allestree:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Allestree",
+    "heroHeading": "Pharmacy First in Allestree",
+    "heroIntroduction": "For residents in Allestree seeking support for common health conditions, Brook Pharmacy provides the NHS Pharmacy First service. This local service allows eligible individuals to receive clinical consultations directly from a pharmacist, helping you access appropriate healthcare advice, treatment options, or onward referral when necessary.",
+    "localIntroduction": "Allestree is an established neighbourhood ward in Derby, combining a welcoming residential character with active civic representation. Local governance and community priorities are supported by a dedicated Neighbourhood Board, which brings together local councillors, residents, public services, and local community organisations.\n\nThe area offers valued local facilities and green spaces, including expansive grounds at Allestree Park, supported by the Friends of Allestree Park group. Community connection is further enhanced by landmarks such as the War Memorial - Allestree, Allestree Memorial Hall, the public library, and annual events like the Allestree Carnival. Primary healthcare services across the neighbourhood are delivered through Park Lane Surgery and Park Farm Medical Centre.\n\nTo complement these local healthcare providers, Brook Pharmacy delivers Pharmacy First consultations for eligible residents in the neighbourhood. The service covers a selection of common health conditions, allowing patients to discuss their concerns directly with a qualified healthcare professional. During a consultation, the pharmacist evaluates symptoms, medical history, and any relevant medicines. Depending on this clinical assessment, the outcome may include expert advice, suitable treatment, or onward referral to another healthcare professional.",
+    "localContextHeading": "Pharmacy First in Allestree",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Local governance and community priorities are supported by a dedicated Neighbourhood Board, which brings together local councillors, residents, public services, and local community organisations.",
+        "editorialFactId": "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The area offers valued local facilities and green spaces, including expansive grounds at Allestree Park, supported by the Friends of Allestree Park group.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Community connection is further enhanced by landmarks such as the War Memorial - Allestree, Allestree Memorial Hall, the public library, and annual events like the Allestree Carnival.",
+        "editorialFactId": "allestree:community:allestree-carnival-is-listed-as-a-community-orga"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Primary healthcare services across the neighbourhood are delivered through Park Lane Surgery and Park Farm Medical Centre.",
+        "editorialFactId": "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+        "editorialFactId": "allestree:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou",
+      "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+      "allestree:community:allestree-carnival-is-listed-as-a-community-orga",
+      "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+      "allestree:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Allestree",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "This local service allows eligible individuals to receive clinical consultations directly from a pharmacist, helping you access appropriate healthcare advice, treatment options, or onward referral when necessary.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Allestree is an established neighbourhood ward in Derby, combining a welcoming residential character with active civic representation.",
+      "supportingCanonicalFieldOrEntity": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (established, combining, welcoming, residential, character, active, representation) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Local governance and community priorities are supported by a dedicated Neighbourhood Board, which brings together local councillors, residents, public services, and local community organisations.",
+      "supportingCanonicalFieldOrEntity": "allestree:community:allestree-has-a-neighbourhood-board-of-local-cou",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (governance, priorities, supported, dedicated, which, brings) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The area offers valued local facilities and green spaces, including expansive grounds at Allestree Park, supported by the Friends of Allestree Park group.",
+      "supportingCanonicalFieldOrEntity": "allestree:community:allestree-park-is-named-on-the-local-authority-n, allestree:heritage:allestree-park-is-listed-as-a-landmark-in-allest",
+      "providerSource": "derby.gov.uk, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (valued, facilities, green, spaces, expansive, grounds, supported) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Community connection is further enhanced by landmarks such as the War Memorial - Allestree, Allestree Memorial Hall, the public library, and annual events like the Allestree Carnival.",
+      "supportingCanonicalFieldOrEntity": "allestree:community:allestree-carnival-is-listed-as-a-community-orga, allestree:community:allestree-has-a-public-library, allestree:heritage:war-memorial-allestree-is-listed-as-a-landmark-i, allestree:heritage:allestree-memorial-hall-is-listed-as-a-landmark-",
+      "providerSource": "derby.gov.uk, derby.gov.uk, Google Places, Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (connection, enhanced, landmarks, annual, events, like) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Primary healthcare services across the neighbourhood are delivered through Park Lane Surgery and Park Farm Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+      "providerSource": "Google Places",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (primary, healthcare, delivered) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "The service covers a selection of common health conditions, allowing patients to discuss their concerns directly with a qualified healthcare professional.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "During a consultation, the pharmacist evaluates symptoms, medical history, and any relevant medicines.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "review",
+      "detail": "uncertain-paraphrase: uncertain paraphrase: unmatched wording (evaluates, history, relevant) is not proof of a new fact, and is not established as supported"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Depending on this clinical assessment, the outcome may include expert advice, suitable treatment, or onward referral to another healthcare professional.",
+      "supportingCanonicalFieldOrEntity": "non-claim-structure",
+      "providerSource": "none-required",
+      "validationResult": "pass",
+      "detail": "non-claim-structure"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Pharmacy First in Allestree",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+      "supportingCanonicalFieldOrEntity": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Allestree",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "This local service allows eligible individuals to receive clinical consultations directly from a pharmacist, helping you access appropriate healthcare advice, treatment options, or onward referral when necessary.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "The service covers a selection of common health conditions, allowing patients to discuss their concerns directly with a qualified healthcare professional.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Depending on this clinical assessment, the outcome may include expert advice, suitable treatment, or onward referral to another healthcare professional.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "non-claim-structure",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Pharmacy First in Allestree",
+      "purpose": "section orientation",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "signals the local-context passage"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby, allestree:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Allestree is an established neighbourhood ward in Derby, combining a welcoming residential character with active civic representation. | rule=uncertain-paraphrase | defect=Allestree is an established neighbourhood ward in Derby, combining a welcoming residential character with active civic representation. — uncertain paraphrase: unmatched wording (established, combining, welcoming, residential, character, active, representation) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Local governance and community priorities are supported by a dedicated Neighbourhood Board, which brings together local councillors, residents, public services, and local community organisations. | rule=uncertain-paraphrase | defect=Local governance and community priorities are supported by a dedicated Neighbourhood Board, which brings together local councillors, residents, public services, and local community organisations. — uncertain paraphrase: unmatched wording (governance, priorities, supported, dedicated, which, brings) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The area offers valued local facilities and green spaces, including expansive grounds at Allestree Park, supported by the Friends of Allestree Park group. | rule=uncertain-paraphrase | defect=The area offers valued local facilities and green spaces, including expansive grounds at Allestree Park, supported by the Friends of Allestree Park group. — uncertain paraphrase: unmatched wording (valued, facilities, green, spaces, expansive, grounds, supported) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Community connection is further enhanced by landmarks such as the War Memorial - Allestree, Allestree Memorial Hall, the public library, and annual events like the Allestree Carnival. | rule=uncertain-paraphrase | defect=Community connection is further enhanced by landmarks such as the War Memorial - Allestree, Allestree Memorial Hall, the public library, and annual events like the Allestree Carnival. — uncertain paraphrase: unmatched wording (connection, enhanced, landmarks, annual, events, like) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Primary healthcare services across the neighbourhood are delivered through Park Lane Surgery and Park Farm Medical Centre. | rule=uncertain-paraphrase | defect=Primary healthcare services across the neighbourhood are delivered through Park Lane Surgery and Park Farm Medical Centre. — uncertain paraphrase: unmatched wording (primary, healthcare, delivered) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=During a consultation, the pharmacist evaluates symptoms, medical history, and any relevant medicines. | rule=uncertain-paraphrase | defect=During a consultation, the pharmacist evaluates symptoms, medical history, and any relevant medicines. — uncertain paraphrase: unmatched wording (evaluates, history, relevant) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "HERO INTRODUCTION:\nFor residents in Allestree seeking support for common health conditions, Brook Pharmacy provides the NHS Pharmacy First service. This local service allows eligible individuals to receive clinical consultations directly from a pharmacist, helping you access appropriate healthcare advice, treatment options, or onward referral when necessary.\n\nLOCAL INTRODUCTION:\nAllestree is an established neighbourhood ward in Derby, combining a welcoming residential character with active civic representation. Local governance and community priorities are supported by a dedicated Neighbourhood Board, which brings together local councillors, residents, public services, and local community organisations.\n\nThe area offers valued local facilities and green spaces, including expansive grounds at Allestree Park, supported by the Friends of Allestree Park group. Community connection is further enhanced by landmarks such as the War Memorial - Allestree, Allestree Memorial Hall, the public library, and annual events like the Allestree Carnival. Primary healthcare services across the neighbourhood are delivered through Park Lane Surgery and Park Farm Medical Centre.\n\nTo complement these local healthcare providers, Brook Pharmacy delivers Pharmacy First consultations for eligible residents in the neighbourhood. The service covers a selection of common health conditions, allowing patients to discuss their concerns directly with a qualified healthcare professional. During a consultation, the pharmacist evaluates symptoms, medical history, and any relevant medicines. Depending on this clinical assessment, the outcome may include expert advice, suitable treatment, or onward referral to another healthcare professional.",
+  "rawOpenAiResponses": [
+    "HERO INTRODUCTION:\nFor residents in Allestree seeking support for common health conditions, Brook Pharmacy provides the NHS Pharmacy First service. This local service allows eligible individuals to receive clinical consultations directly from a pharmacist, helping you access appropriate healthcare advice, treatment options, or onward referral when necessary.\n\nLOCAL INTRODUCTION:\nAllestree is an established neighbourhood ward in Derby, combining a welcoming residential character with active civic representation. Local governance and community priorities are supported by a dedicated Neighbourhood Board, which brings together local councillors, residents, public services, and local community organisations.\n\nThe area offers valued local facilities and green spaces, including expansive grounds at Allestree Park, supported by the Friends of Allestree Park group. Community connection is further enhanced by landmarks such as the War Memorial - Allestree, Allestree Memorial Hall, the public library, and annual events like the Allestree Carnival. Primary healthcare services across the neighbourhood are delivered through Park Lane Surgery and Park Farm Medical Centre.\n\nTo complement these local healthcare providers, Brook Pharmacy delivers Pharmacy First consultations for eligible residents in the neighbourhood. The service covers a selection of common health conditions, allowing patients to discuss their concerns directly with a qualified healthcare professional. During a consultation, the pharmacist evaluates symptoms, medical history, and any relevant medicines. Depending on this clinical assessment, the outcome may include expert advice, suitable treatment, or onward referral to another healthcare professional."
+  ]
+}

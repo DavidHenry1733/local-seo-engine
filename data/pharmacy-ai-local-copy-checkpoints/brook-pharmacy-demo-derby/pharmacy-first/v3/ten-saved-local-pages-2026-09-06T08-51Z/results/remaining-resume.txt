@@ -1,0 +1,18 @@
+
+=== Brook Derby remaining local pages Resume (fixtures, no live resume) ===
+
+FAIL  live-stopped-run-identity — runId=e23b2020-b520-453c-a7a5-45d301316229 status=completed failed=null/null
+FAIL  live-mickleover-ready-recalculated-remaining-max — ready=0 collect=0 blocked=0 openai=0 total=$0.000
+FAIL  ui-resume-present-disabled-until-confirmation — Resume is present, disabled until confirmation; Create remaining stays disabled
+PASS  tenant-isolation-ui — Yorkshire UI does not show the Brook stopped run
+PASS  campaign-isolation-plan — otherCampaignRun=none complete=none
+PASS  legacy-allestree-compatibility — valid=true skip=true stage=save
+Error: Pharmacy Profile not found for "campaign-run-resume-ready". Complete Profile setup first.
+    at loadPharmacyProfile (/home/inboxingproweb/pharmaconnect-growth-engine/src/pharmacy/pharmacyContentBlueprintService.ts:177:11)
+    at assessSavedLocalPageGenerationReadiness (/home/inboxingproweb/pharmaconnect-growth-engine/src/pharmacy/contentEngine/pharmacyLocalPageGenerationReadinessV1.ts:152:19)
+    at planOneArea (/home/inboxingproweb/pharmaconnect-growth-engine/src/pharmacy/growthEngineLocalPageCampaignRunService.ts:273:21)
+    at <anonymous> (/home/inboxingproweb/pharmaconnect-growth-engine/src/pharmacy/growthEngineLocalPageCampaignRunService.ts:315:42)
+    at Array.map (<anonymous>)
+    at planRemainingLocalPagesCampaign (/home/inboxingproweb/pharmaconnect-growth-engine/src/pharmacy/growthEngineLocalPageCampaignRunService.ts:315:28)
+    at confirmRemainingLocalPagesCampaign (/home/inboxingproweb/pharmaconnect-growth-engine/src/pharmacy/growthEngineLocalPageCampaignRunService.ts:742:16)
+    at main (/home/inboxingproweb/pharmaconnect-growth-engine/scripts/validate-brook-derby-remaining-local-pages-resume-v1.ts:240:24)

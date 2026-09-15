@@ -1,0 +1,1671 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "2948472e-97f3-499f-a504-10286c2801a6",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "mackworth",
+  "areaName": "Mackworth",
+  "planFingerprint": "e43265828d5270d757142aaa97d2c6c40d2291aa5e6fd68aa9bcb8c788c8ffc9",
+  "spendingCapUsd": 0.17,
+  "status": "completed",
+  "startedAt": "2026-09-06T07:48:49.695Z",
+  "updatedAt": "2026-09-07T07:52:59.940Z",
+  "completedAt": "2026-09-07T07:52:59.940Z",
+  "spentUsd": 0.168,
+  "reservedUsd": 0,
+  "paidCallsMade": 9,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Mackworth, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "c2570c30-ab5c-47f0-9ea9-cdf646fd662b",
+      "detail": "5 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:50.332Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Mackworth locality, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "3a796b84-833b-42b4-97a4-b7a0fb51f555",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:50.571Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Mackworth, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "4e45f782-f9e5-4386-9b4c-1ea4cdb45911",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:56.378Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Mackworth, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "b8ff13f4-987b-49d5-b436-0e0d11978c9b",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:59.712Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "522d61c7-4f98-4f57-9b4c-8ea1cc3298ac",
+      "detail": "Retrieved https://horizonhealthcare.nhs.uk/",
+      "capturedAt": "2026-09-06T07:49:00.414Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "8771a4bf-8998-4e1a-97e6-341525f64a94",
+      "detail": "Retrieved https://www.mackworthparishcouncil.gov.uk/",
+      "capturedAt": "2026-09-06T07:49:01.035Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 4.1 km from Brook Pharmacy Demo Derby to Mackworth. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-06T07:49:01.109Z"
+    },
+    {
+      "id": "places-hospitals",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS hospital health centre in Mackworth, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "7eaabc84-06b9-49ee-b25d-751383e29a1a",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:52:50.702Z"
+    },
+    {
+      "id": "places-landmarks",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "parks landmarks memorial in Mackworth, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "dbe8f512-0028-48f2-877a-6fd368ed4868",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:52:51.392Z"
+    },
+    {
+      "id": "places-community",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "libraries community centres leisure centres in Mackworth, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "6b8f1949-c888-4008-a746-8de8a5d3b028",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:52:51.909Z"
+    },
+    {
+      "id": "dataforseo-official-community",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council park library leisure community in Mackworth, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "5b3cc628-ebd3-4021-996e-c014ac0b8880",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:52:55.642Z"
+    },
+    {
+      "id": "dataforseo-official-healthcare",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS hospital health centre official in Mackworth, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "923f6112-098a-42e6-be28-ef571546d104",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:52:57.860Z"
+    },
+    {
+      "id": "page-body-community",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "5edda0a6-aa75-48e8-8f5a-882d4953e225",
+      "detail": "Retrieved https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "capturedAt": "2026-09-07T07:52:58.643Z"
+    },
+    {
+      "id": "page-body-healthcare",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "be6cb2af-ec1e-427c-ad36-8268b27184cf",
+      "detail": "Retrieved https://dchs.nhs.uk/",
+      "capturedAt": "2026-09-07T07:52:59.760Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Horizon Healthcare - Mackworth - Humbleton Drive",
+        "address": "31 Humbleton Dr, Derby DE22 4AU",
+        "types": [
+          "doctor",
+          "medical_center",
+          "hospital",
+          "point_of_interest",
+          "health",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9236126,
+          "longitude": -1.5191639
+        },
+        "placeId": "ChIJ__-0g8b2eUgRk97INVld_xU",
+        "locality": "31 Humbleton Dr, Derby DE22 4AU",
+        "addressComponents": [
+          {
+            "longText": "31",
+            "shortText": "31",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Humbleton Drive",
+            "shortText": "Humbleton Dr",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 4AU",
+            "shortText": "DE22 4AU",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1585088231593533075&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Brook Medical Centre",
+        "address": "183 Kedleston Rd, Derby DE22 1FT",
+        "types": [
+          "medical_center",
+          "hospital",
+          "medical_clinic",
+          "doctor",
+          "point_of_interest",
+          "health",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.93240050000001,
+          "longitude": -1.4943362
+        },
+        "placeId": "ChIJp-E5zQH0eUgReUux5mvHnDo",
+        "locality": "183 Kedleston Rd, Derby DE22 1FT",
+        "addressComponents": [
+          {
+            "longText": "183",
+            "shortText": "183",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Kedleston Road",
+            "shortText": "Kedleston Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 1FT",
+            "shortText": "DE22 1FT",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=4223469816812489593&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Macklin Street Surgery",
+        "address": "Doctors Surgery, 90 Macklin St, Derby DE1 1JX",
+        "types": [
+          "doctor",
+          "point_of_interest",
+          "health",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.921129099999995,
+          "longitude": -1.4817072
+        },
+        "placeId": "ChIJEWNN9DzxeUgR1kKuPo87bb4",
+        "locality": "Doctors Surgery, 90 Macklin St, Derby DE1 1JX",
+        "addressComponents": [
+          {
+            "longText": "Doctors Surgery",
+            "shortText": "Doctors Surgery",
+            "types": [
+              "premise"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "90",
+            "shortText": "90",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Macklin Street",
+            "shortText": "Macklin St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1JX",
+            "shortText": "DE1 1JX",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=13721689126085739222&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Horizon Healthcare | NHS GP Practice Derby",
+        "address": "3-5 Burton Rd, Derby DE1 1TH",
+        "types": [
+          "doctor",
+          "medical_center",
+          "physiotherapist",
+          "hospital",
+          "medical_clinic",
+          "point_of_interest",
+          "health",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.917034099999995,
+          "longitude": -1.4788980999999999
+        },
+        "placeId": "ChIJp1IadEPxeUgRw6xSpLUhGu4",
+        "locality": "3-5 Burton Rd, Derby DE1 1TH",
+        "addressComponents": [
+          {
+            "longText": "3-5",
+            "shortText": "3-5",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Burton Road",
+            "shortText": "Burton Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1TH",
+            "shortText": "DE1 1TH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17157062794451004611&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "The Vernon Street Medical Centre",
+        "address": "13 Vernon St, Derby DE1 1FW",
+        "types": [
+          "doctor",
+          "point_of_interest",
+          "health",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.924054999999996,
+          "longitude": -1.490475
+        },
+        "placeId": "ChIJibdZVDfxeUgR3s_joA9bvdM",
+        "locality": "13 Vernon St, Derby DE1 1FW",
+        "addressComponents": [
+          {
+            "longText": "13",
+            "shortText": "13",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Vernon Street",
+            "shortText": "Vernon St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1FW",
+            "shortText": "DE1 1FW",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15257451235283029982&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Mackworth",
+        "address": "Mackworth, Derby",
+        "types": [
+          "locality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.935210399999995,
+          "longitude": -1.5347827
+        },
+        "placeId": "ChIJrXecXZD2eUgR7xrYfdz0HRg",
+        "locality": "Mackworth, Derby",
+        "addressComponents": [
+          {
+            "longText": "Mackworth",
+            "shortText": "Mackworth",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1737814259076176623&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-hospitals": [
+      {
+        "name": "Royal Derby Hospital",
+        "address": "Uttoxeter Rd, Derby DE22 3NE",
+        "types": [
+          "general_hospital",
+          "medical_clinic",
+          "hospital",
+          "health",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9109983,
+          "longitude": -1.5128643
+        },
+        "placeId": "ChIJ125I7Nn2eUgRkYtgZ6kRexE",
+        "locality": "Uttoxeter Rd, Derby DE22 3NE",
+        "addressComponents": [
+          {
+            "longText": "Uttoxeter Road",
+            "shortText": "Uttoxeter Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 3NE",
+            "shortText": "DE22 3NE",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1259619940061711249&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Florence Nightingale Community Hospital",
+        "address": "London Rd, Derby DE1 2QY",
+        "types": [
+          "hospital",
+          "general_hospital",
+          "health",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9141634,
+          "longitude": -1.4681851
+        },
+        "placeId": "ChIJ-TzowxvxeUgRVEnveGW9oJ8",
+        "locality": "London Rd, Derby DE1 2QY",
+        "addressComponents": [
+          {
+            "longText": "London Road",
+            "shortText": "London Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 2QY",
+            "shortText": "DE1 2QY",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=11502401691822541140&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Horizon Healthcare - Mackworth - Humbleton Drive",
+        "address": "31 Humbleton Dr, Derby DE22 4AU",
+        "types": [
+          "doctor",
+          "medical_center",
+          "hospital",
+          "health",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9236126,
+          "longitude": -1.5191639
+        },
+        "placeId": "ChIJ__-0g8b2eUgRk97INVld_xU",
+        "locality": "31 Humbleton Dr, Derby DE22 4AU",
+        "addressComponents": [
+          {
+            "longText": "31",
+            "shortText": "31",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Humbleton Drive",
+            "shortText": "Humbleton Dr",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 4AU",
+            "shortText": "DE22 4AU",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1585088231593533075&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-landmarks": [
+      {
+        "name": "Mackworth park",
+        "address": "Greenwich Dr S, Derby DE22 4AH",
+        "types": [
+          "park",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9200246,
+          "longitude": -1.5188354
+        },
+        "placeId": "ChIJU7FJDiX3eUgR4PGARtuG3tw",
+        "locality": "Greenwich Dr S, Derby DE22 4AH",
+        "addressComponents": [
+          {
+            "longText": "Greenwich Drive South",
+            "shortText": "Greenwich Dr S",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 4AH",
+            "shortText": "DE22 4AH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15915306409512727008&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Mackworth Castle",
+        "address": "59 Lower Rd, Mackworth, Derby DE22 4NF",
+        "types": [
+          "castle",
+          "tourist_attraction",
+          "historical_place",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9369101,
+          "longitude": -1.5351247
+        },
+        "placeId": "ChIJ09dBK5f2eUgRZgueo5U3j8I",
+        "locality": "59 Lower Rd, Mackworth, Derby DE22 4NF",
+        "addressComponents": [
+          {
+            "longText": "59",
+            "shortText": "59",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Lower Road",
+            "shortText": "Lower Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mackworth",
+            "shortText": "Mackworth",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 4NF",
+            "shortText": "DE22 4NF",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=14019485280862341990&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Markeaton Park",
+        "address": "Markeaton Ln, Derby DE22 4AA",
+        "types": [
+          "park",
+          "tourist_attraction",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9328836,
+          "longitude": -1.5049230999999998
+        },
+        "placeId": "ChIJUSasebP2eUgR7HiJKEuW1bI",
+        "locality": "Markeaton Ln, Derby DE22 4AA",
+        "addressComponents": [
+          {
+            "longText": "Markeaton Lane",
+            "shortText": "Markeaton Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 4AA",
+            "shortText": "DE22 4AA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12886371158337353964&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-community": [
+      {
+        "name": "Mickleover Community Centre",
+        "address": "8 Uttoxeter Rd, Mickleover, Derby DE3 0DA",
+        "types": [
+          "community_center",
+          "cafe",
+          "event_venue",
+          "service",
+          "food",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.904533199999996,
+          "longitude": -1.5444430999999998
+        },
+        "placeId": "ChIJh6Ct-OH2eUgRZqI_vXqLIJM",
+        "locality": "8 Uttoxeter Rd, Mickleover, Derby DE3 0DA",
+        "addressComponents": [
+          {
+            "longText": "8",
+            "shortText": "8",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Uttoxeter Road",
+            "shortText": "Uttoxeter Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Mickleover",
+            "shortText": "Mickleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE3 0DA",
+            "shortText": "DE3 0DA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10601626882107482726&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Mackworth Estate Community Hall",
+        "address": "Prince Charles Ave, Derby DE22 4FN",
+        "types": [
+          "community_center",
+          "event_venue",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9247407,
+          "longitude": -1.5235762
+        },
+        "placeId": "ChIJz24AKjL3eUgRVsgHZRVtbI8",
+        "locality": "Prince Charles Ave, Derby DE22 4FN",
+        "addressComponents": [
+          {
+            "longText": "Prince Charles Avenue",
+            "shortText": "Prince Charles Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 4FN",
+            "shortText": "DE22 4FN",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10334755183565195350&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "West End Community Centre",
+        "address": "Mackworth Rd, Derby DE22 3BL",
+        "types": [
+          "community_center",
+          "event_venue",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9284873,
+          "longitude": -1.4934452999999999
+        },
+        "placeId": "ChIJgXHK2DfxeUgRKndsAiDXTcI",
+        "locality": "Mackworth Rd, Derby DE22 3BL",
+        "addressComponents": [
+          {
+            "longText": "Mackworth Road",
+            "shortText": "Mackworth Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 3BL",
+            "shortText": "DE22 3BL",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=14001083349044328234&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Mackworth, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:48:50.574Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find s, prescriptions, services, 31 Humbleton Drive Mackworth Derby DE22 4AU Get directions 01332"
+        },
+        {
+          "url": "https://macklinstreetsurgery.co.uk/",
+          "title": "Macklin Street Surgery – NHS GP Surgeries in Derbyshire",
+          "description": "Macklin Street Surgery – NHS GP Surgeries in Derbyshire … 90 Macklin Street Derby DE1 1JX Get directions 01332 340381"
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/mackworth-surgery/K4K9G",
+          "title": "Mackworth Surgery",
+          "description": "Official information from NHS about Mackworth Surgery … 31 Humbleton Drive, Derby, DE22 4AU Information: This GP surgery is currently accepting new patients."
+        },
+        {
+          "url": "https://derbygp.co.uk/",
+          "title": "Find an NHS GP in Derby | Choose From 33 Practices",
+          "description": "There are 33 GP practices within 3 miles of Derby City Centre. Macklin Street Surgery 90 Macklin Street, Derby, Derbyshire, DE1. An NHS GP in Derby provides ..."
+        },
+        {
+          "url": "https://dchs.nhs.uk/our-services-and-locations/a-z-list-of-services/general-practitioner-services-gps",
+          "title": "Derbyshire Community Health Services NHS FT GP practices",
+          "description": "Derbyshire Community Health Services NHS FT (DCHS) run GP practices. : Castle Street Medical Centre T: 01246 822983. Derbyshire S42 5LH T: 01246 851029"
+        },
+        {
+          "url": "https://www.cqc.org.uk/location/1-569754090/inspection-summary",
+          "title": "Latest inspection summary - Horizon Healthcare",
+          "description": "GP practice. Horizon Healthcare. Overall: Good read more about inspection ratings. The Charnwood Surgery, 5 Burton Road, Derby, Derbyshire, DE1 1TH (01332) ... Read more"
+        },
+        {
+          "url": "https://www.derbyroadgrouppractice.co.uk/",
+          "title": "Derby Road Group Practice",
+          "description": "Derby Road Surgery, 27/29 Derby Road, North End, Portsmouth 023 9200 9265 ・ call the Practice on 023 92 009265 ・ open at 8am Monday"
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/your-services/gps/",
+          "title": "You and Your General Practice",
+          "description": "13 Oct 2025 — Your general practice is open from 8.00am to 6.30pm, Monday to Friday. Some appointments are also available on Saturdays and Sundays. online to ..."
+        },
+        {
+          "url": "https://derwentvalleymedicalpractice.co.uk/",
+          "title": "Derwent Valley Medical Practice – NHS GP Surgery in Derby",
+          "description": "Find out how to make, change or cancel an appointment. Visit our online forms. Prescriptions. Get a repeat prescription, help with medicines or find a pharmacy ... Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Mackworth, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:48:56.451Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.mackworthparishcouncil.gov.uk/",
+          "title": "Mackworth Parish Council",
+          "description": "Mackworth Parish Council provides your local services. We strive to make Mackworth a better place to live, work and play."
+        },
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/mackworth-neighbourhood-ward/",
+          "title": "Mackworth neighbourhood ward - Derby ...",
+          "description": "Rachael Clark, Neighbourhood Manager, 07386 698840, rachael.clark@derby.gov.uk ; Rebecca Hudson, Neighbourhood Officer, 07812 300153, rebecca.hudson@derby.gov.uk. Read more"
+        },
+        {
+          "url": "https://www.mackworthparishcouncil.gov.uk/councillors",
+          "title": "Councillors",
+          "description": "A list of our councillors along with contact information and which committees they are on."
+        },
+        {
+          "url": "https://www.facebook.com/p/Mackworth-Parish-Council-100069273996765/",
+          "title": "Mackworth Parish Council",
+          "description": "Community News from Derbyshire County Council – Decision on homes for older people,, free second-hand office furniture for community groups, Public Involvement ..."
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/council/news-events/news-updates/news/north-or-south-check-which-new-unitary-council-will-provide-your-services.aspx",
+          "title": "North or south? Check which new unitary council will ...",
+          "description": "17 Jul 2026 — An online postcode look-up tool has been launched for residents in Derbyshire and Derby to check which new unitary council will serve the ..."
+        },
+        {
+          "url": "https://www.facebook.com/61561768247947/posts/elections-2027-big-changes-coming-next-year-if-local-government-organisation-goe/122204810498392274/",
+          "title": "Elections 2027- big changes coming next year if local ...",
+          "description": "Residents most likely will vote for Derbyshire South Council and it will be only 2 councillors for Mackworth and New Zealand ward."
+        },
+        {
+          "url": "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5266367/full-print",
+          "title": "THE PAROCHIAL CHURCH COUNCIL OF THE ...",
+          "description": "We are a local church on the Mackworth estate in Derby. Our main activities are Worshipping God, Growing community and Serving the estate. Phone: 01332504680 ..."
+        },
+        {
+          "url": "https://www.southderbyshire.gov.uk/about-us/councillors-and-meetings/parish-councils",
+          "title": "Parish councils",
+          "description": "There are 31 Parish Councils in South Derbyshire. A full breakdown of chairmen and clerks is available should you wish to get in touch or attend meetings. Read more"
+        },
+        {
+          "url": "https://www.genuki.org.uk/big/eng/DBY/Mackworth",
+          "title": "Mackworth, Derbyshire",
+          "description": "22 Dec 2025 — \"MACKWORTH, a parish, with a small village, in the hundred of Morleston and Litchurch, is situate on the road from Derby to Ashbourn, two miles ... Read more"
+        }
+      ]
+    },
+    "dataforseo-official-community": {
+      "query": "official council park library leisure community in Mackworth, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:52:51.939Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.inderby.org.uk/libraries/our-libraries/mackworth-library/",
+          "title": "Mackworth Library",
+          "description": "Mackworth Library is closed for essential roof repairs and reopen later this year. Improvements include a new children's area, upgraded computers, ... Read more"
+        },
+        {
+          "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+          "title": "Derby libraries",
+          "description": "Council's Leisure, Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Parks Sports and leisure Tourism and ..."
+        },
+        {
+          "url": "https://www.communitydirectoryderbyshire.org.uk/view/7178/mackworth-library",
+          "title": "Mackworth Library",
+          "description": "Telephone 01332 642410 Address Prince Charles Avenue Mackworth Derby DE22 4BG … voluntary and community groups active in Derbyshire"
+        },
+        {
+          "url": "https://libraryon.org/libraries/derby/mackworth",
+          "title": "Mackworth Library",
+          "description": "21 Jul 2026 — Opens Thursday at 10.00am Partially staffed Monday 10.00am - 5.00pm Tuesday 10.00am - 4.30pm Wednesday"
+        },
+        {
+          "url": "https://www.facebook.com/VolunteerCentreDerby/posts/are-you-interested-in-being-a-library-volunteer-mackworth-community-library-is-s/2343839382341069/",
+          "title": "Are you interested in being a library volunteer? Mackworth ...",
+          "description": "Mackworth Community Library is set to open soon and they need volunteers. contact Kate Richardson on 01332 227739"
+        },
+        {
+          "url": "https://www.artsderbyshire.org.uk/news/arts-funding-resources-news/award-winning-charity-to-manage-derbys-community-libraries/",
+          "title": "Award-winning charity to manage Derby's community ...",
+          "description": "11 Dec 2024 — A multi award-winning social enterprise has been appointed to run Derby's community libraries. Sporting Communities, a community development ..."
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/leisure/libraries/libraries.aspx",
+          "title": "Libraries",
+          "description": "Visit our library website to join the library, make a reservation, find your nearest branch, and more. email: ask.library@derbyshire.gov.uk or phone us on ..."
+        },
+        {
+          "url": "https://www.bbc.co.uk/news/articles/cx23jp2l521o",
+          "title": "Mackworth Library to close for essential repairs to roof",
+          "description": "18 Jun 2026 — Derby City Council said Mackworth Library would close from 30 July, with the site scheduled to reopen later in the year."
+        },
+        {
+          "url": "https://www.leicestershire.gov.uk/leisure-and-community/libraries/find-a-library/coalville-library",
+          "title": "Coalville Library",
+          "description": "A large, busy library close to the town centre. The library has a ramp to the entrance and is on one level with wide aisles. Read more"
+        }
+      ]
+    },
+    "dataforseo-official-healthcare": {
+      "query": "NHS hospital health centre official in Mackworth, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:52:55.695Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://dchs.nhs.uk/",
+          "title": "Derbyshire Community Health Services: Home",
+          "description": "Doors open at the new Babington Health Centre! · Save the date - Improving Lives Through Community Healthcare* · Vacancies · Urgent Treatment Centres · DCHS News. Read more"
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Mackworth Surgery Humbleton Drive Branch 31 Humbleton Drive Mackworth Derby DE22 4AU Get directions · 01332 737777 · New to Horizon Healthcare? Home · Register ... Read more"
+        },
+        {
+          "url": "https://www.facebook.com/100064938990100/posts/-update-on-mackworth-health-centre-following-cabinets-approval-earlier-in-may-de/1456242739883679/",
+          "title": "Mackworth Health Centre development update and public ...",
+          "description": "Our mailing address is: SOS NHS Derbyshire 18 Lime Avenue Derby, DE1 1TU United Kingdom Add us to your address book Want to change how you ... Read more"
+        },
+        {
+          "url": "https://www.derbyshirehealthcareft.nhs.uk/contact-us/getting-to-us/royal-derby-hospital",
+          "title": "Royal Derby Hospital",
+          "description": "The following services are provided by Derbyshire Healthcare NHS Foundation Trust at the Royal Derby Hospital: CAMHS RISE. Tel: 0300 123 3124. Find out more ... Read more"
+        },
+        {
+          "url": "https://dhuhealthcare.com/services/our-sites/Derbyshire-Nottinghamshire-South-Yorkshire-and-Staffordshire/Derby-Urgent-Treatment-Centre",
+          "title": "Derby NHS Urgent Treatment Centre",
+          "description": "For Appointments Telephone: 111 or use https://111.nhs.uk. Opening Times. Monday to Sunday Including Bank Holidays – 08:00 – 20:00. Parking. Parking is limited ... Read more"
+        },
+        {
+          "url": "https://www.uhdb.nhs.uk/",
+          "title": "Home | University Hospitals of Derby and Burton (UHDB ...",
+          "description": "The aim at University Hospitals of Derby and Burton (UHDB) is to deliver outstanding healthcare for local people in Southern Derbyshire and South-East ..."
+        },
+        {
+          "url": "https://www.cqc.org.uk/location/RY8DE/contact",
+          "title": "Contact: Babington Hospital",
+          "description": "Archived: Babington Hospital. Derby Road, Belper, Derby, Derbyshire, DE56 1WH. Provided and run by: Derbyshire Community Health ... Read more"
+        },
+        {
+          "url": "https://derbyshirefamilyhealthservice.nhs.uk/breastfeeding-welcome-here/mackworth-community-library",
+          "title": "Mackworth Community Library",
+          "description": "Mackworth Community Library. Please visit our \"What's on\" calendar. How to find us. Mackworth Community Library address is: Prince Charles Avenue Mackworth Read more"
+        },
+        {
+          "url": "https://www.england.nhs.uk/midlands/ics-and-acute-trusts/derby-and-derbyshire-ics-and-nhs-trusts/",
+          "title": "Midlands » Derby and Derbyshire ICS and NHS Trusts",
+          "description": "Derby and Derbyshire ICS and NHS Trusts · Florence Nightingale Community Hospital · Queens Hospital · Royal Derby Hospital · Samuel Johnson Community Hospital · Sir ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://horizonhealthcare.nhs.uk/",
+      "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+      "status": 200,
+      "textSample": "Horizon Healthcare | NHS GP Surgery in Derby Tell us whether you accept cookies We've put some small files called cookies on your device to make our site work. We would also like to use analytical cookies to understand how our site is used and improve user experience. Analytical cookies send information to Google Analytics. Let us know your preference. We will use a cookie to save your choice. Before you make your choice you can read more about our cookie policy . I'm OK with cookies Set my cookie preferences Skip to main content Horizon Healthcare NHS GP Surgery in Derby Search the Horizon Healthcare website Search Register with the surgery Appointments Online Forms Services About the surgery Contact us Health, Wellbeing & support Home Browse More Need medical help or advice? Choose the best way to contact our team. Call the practice For urgent problems or if you cannot use online services. Call us Get help online Request help for symptoms, illness or new concerns. Get help online Routine appointments Request nurse appointments, reviews and blood tests. Appointments Horizon Healthcare Quick Links & Popular Services Register with us Register with Horizon Healthcare Prescriptions Order repeat medication and prescription queries Request a PSA test Request a PSA blood test if eligible Sick notes Request a new or repeat fit note online Contact us Opening times, contact details and locations Online services register to access your records online Update details Update your address and contact details Align medication Organise your medicines so they are due together Test Results Find out how to access your test results Local and NHS services Find the service and help you need. Find a pharmacy Find a dentist Find urgent and emergency care NHS 111 online Find out about the NHS App Find your NHS number Health A to Z Medicines A to Z Find other patient services Latest Surgery News Title: Research Opportunity for Women Aged 60 and Over – A-PATH Study 4th September 2026 a-path-research-study-older-women Supporting More Than 29,000 Patients Across Derby 4th September 2026 Supporting more than 29,000 patients across Derby, Horizon Healthcare provides services through a large multidisciplinary team including GPs, nurses, pharmacists,… Blood Pressure Checks at Your Local Pharmacy 3rd September 2026 You may be able to have a free NHS blood pressure check at your local community pharmacy, helping you get… Go to news Follow us on social media Keep up to date on our social media for surgery announcements, advice and news. Facebook Instagram WhatsApp NHS Friends and Family Test We want you to have the best possible experience of care. Provide feedback and you can help us improve our services. Take part in the NHS Friends and Family Test Burton Road Horizon Healthcare City Site 3-5 Burton Road Derby DE1 1TH Get directions 01332 737777 Humbleton Drive Mackworth Surgery Humbleton Drive Branch 31 Humbleton Drive Mackworth Derby DE22 4AU Get directions 01332 737777 New to Horizon Healthcare? Home Register with the surgery About the surgery You and your general practice Services Feedback Complaints Zero Tolerance Policy Appointments Prescriptions Contact us Wellbeing Opening times © Silicon Practice Accessibility statement Website policies",
+      "retrievedAt": "2026-09-06T07:49:00.414Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.mackworthparishcouncil.gov.uk/",
+      "title": "Security Challenge",
+      "status": 401,
+      "textSample": "Security Challenge Security Check We just need to quickly confirm you're a real visitor before you continue. Slide the button all the way to the right using your mouse or keyboard. Slide to verify &rarr; Can't use the slider? Type the characters in an image instead Enter the characters shown in the image below, then select Submit to continue. Characters shown in the image Submit Use the slider instead Why am I seeing this page? This quick step is part of our routine security process to verify that you are human and not a robot. We often display this challenge when we detect traffic coming from networks or services that are commonly used by bots, such as data centers, certain cloud services (e.g., AWS, Azure), or VPNs/proxy services. Completing the challenge confirms your intent and allows you immediate access to the site. Thank you for helping us maintain a secure environment!",
+      "retrievedAt": "2026-09-06T07:49:01.035Z"
+    },
+    "page-body-community": {
+      "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "title": "Derby libraries - Derby City Council",
+      "status": 200,
+      "textSample": "Derby libraries - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Leisure and culture Derby libraries Derby libraries All information about Libraries has been moved to the In Derby website - a separate website covering services managed by the Council's Leisure, Culture and Tourism department. Amongst other services, you can find a library , join a library , browse the library catalogue and manage your library books and ebooks . Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Allenton Library Allestree Library Alvaston Library Blagreaves Library Chaddesden Park Library Chellaston Library Derwent Community Library Local Studies Library Mackworth Library Mickleover Library Normanton Library Riverside Library Sinfin Library Spondon Library Springwood Library More information is available on In Derby: Derby Libraries Previous Next More in this section Arts and entertainment Derby libraries Derby Museums Parks Sports and leisure Tourism and travel Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-07T07:52:58.643Z"
+    },
+    "page-body-healthcare": {
+      "url": "https://dchs.nhs.uk/",
+      "title": "Home :: Derbyshire Community Health Services",
+      "status": 200,
+      "textSample": "Home :: Derbyshire Community Health Services --> Skip to main content Skip to navigation Accessibility tools Accessibility tools Log in to MyDCHS Search this website Home About us About us Return to previous menu About us Who are we and what do we do? Who are we and what do we do? Return to previous menu Who are we and what do we do? Mission, vision and values Working the DCHS Way Our Board Our Board Return to previous menu Our Board Executive team Non-executive team Our Council of Governors Our Council of Governors Return to previous menu Our Council of Governors Meet our governors Become a member Quality at the heart of our care Quality at the heart of our care Return to previous menu Quality at the heart of our care Quality Always Quality Assurance Quality Conversations Training Patient Safety Clinical Effectiveness & Improvement Team Patient Experience Infection prevention & control Derbyshire Alliance end-of-life care Equality, diversity & inclusion Equality, diversity & inclusion Return to previous menu Equality, diversity & inclusion Staff networks for equality diversity and inclusion Accessible information standards Interpreting & translation Supporting colleagues and patients with deafness Trust reports, strategies and plans Freedom of Information DCHS Publication Scheme Information Governance Information Governance Return to previous menu Information Governance Records management Online Access to Records Cyber Security Our Partners Counter Fraud, bribery & corruption Counter Fraud, bribery & corruption Return to previous menu Counter Fraud, bribery & corruption Chief Executive statement on the Failure to Prevent Fraud offence DCHS Charitable Trust Share your experience Our services & locations Our services & locations Return to previous menu Our services & locations A-Z list of services Our Services About Airmid Our locations Our locations Return to previous menu Our locations Community Hospitals General Practices (GPs) Clinics/Health Centres Urgent Treatment Centres Community Support Bedded Units Resources Resources Return to previous menu Resources DCHS Policies DCHS Document Library Marsden Manual Patient Group Directions (PGDs) Derbyshire NHS Library Join us Join us Return to previous menu Join us Work for us Work for us Return to previous menu Work for us Join our team Students Wider Workforce Help our research Do business with us Become a member Volunteer with us Help us raise money for our Charitable Trust Contact and find us Charitable Trust Doors open at the new Babington Health Centre! Babington Health Centre is now open! We're delighted to welcome patients to our new health centre in Belper. You can read more on the development here Save the date - Improving Lives Through Community Healthcare* You&rsquo;re invited to join us at this year&rsquo;s DCHS Improving Lives Through Community Healthcare virtual meeting via MS Teams. When : Thursday 10 September 2026, 2pm - 4pm Please join us on MS Teams. * Incorporating our Annual Members&rsquo; Meeting subject to parliamentary approval of the accounts and annual report You can find more information here. Vacancies Click here for more information on our current vacancies and how to join the DCHS family. Work for us Urgent Treatment Centres Our Urgent Treatment Centres are open 8am to 8pm. At busy times, if we reach full capacity before 8pm, we may need to stop taking new patients so everyone already waiting can be treated safely. Ilkeston, Ripley and Whitworth UTCs Walk-in (no appointment needed): 8am–5pm Appointment only (via NHS 111): 5pm–8pm Buxton UTC Walk-in (no appointment needed): 8am–4pm Appointment only (via NHS 111): 4pm–8pm Our UTCs DCHS News Click here to catch-up with all of the latest projects, campaigns and celebrations for DCHS News Recognition Of Staff Excellence (ROSE) Awards Has a member of our staff made a difference or delivered extraordinary care? As a member of the public, you can nominate a healthcare worker for a ROSE award to say thank you for making a difference or delivering an extraordinary level of care. Click here for more information on nominations, and our past winners. ROSE Awards Working here Why choose us? Join our team Visitor information Our Services About us Our Vision and Values Derbyshire Shared Care Record Find out more here Open 7 days a week 8am-8pm Urgent treatment centres Social Media Follow us on social media: Facebook Instagram X Latest news View all 4th September 2026 Farming community invited back to Bakewell Agricultural Centre for health MOT Day this winter! Read more Popular Pages DCHS Document Library Outpatient Physiotherapy, Occupational Therapy and MSK Triage service DCHS Policies View our current vacancies News Useful Links NHS website Looking after your information Glossary Vacancie s Derbyshire Shared Care Record Resource scheduler (use your NHS mail credentials to access this platform) Smartcards and ID badges (DCHS staff only) Accessibility statement Datix incident reporting form* Estates fault reporting * Medical devices report * Unit4* Occupational Health (DCHS staff only) Links marked with an * indicate you need to be on an NHS network or connected via your smartcard for access getPageWrapperClass() -->",
+      "retrievedAt": "2026-09-07T07:52:59.759Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.935210399999995,
+    "longitude": -1.5347827,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 4.1,
+  "verifiedGpPracticeCount": 0,
+  "findings": [
+    "0 verified GP practice(s) after official-source checks.",
+    "Zero verified GP practices is a recorded research outcome, not an automatic retry.",
+    "required locality and access evidence is present; zero verified GP practices is a valid research outcome",
+    "Actual evidence spend $0.168 of cap $0.170. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/mackworth.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/mackworth.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 0 verified GP practice(s). Spend $0.168.",
+  "reprocessedAt": null
+}

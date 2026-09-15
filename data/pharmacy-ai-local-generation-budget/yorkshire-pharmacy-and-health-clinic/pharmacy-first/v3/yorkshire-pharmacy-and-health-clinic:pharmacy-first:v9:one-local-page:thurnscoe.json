@@ -1,0 +1,28 @@
+{
+  "taskId": "yorkshire-pharmacy-and-health-clinic:pharmacy-first:v9:one-local-page:thurnscoe",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.003962,
+  "events": [
+    {
+      "at": "2026-09-09T16:05:28.934Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-09T16:05:29.110Z",
+      "kind": "reserve",
+      "reservationId": "r-1788969929110-1"
+    },
+    {
+      "at": "2026-09-09T16:05:49.879Z",
+      "kind": "consumed",
+      "reservationId": "r-1788969929110-1",
+      "detail": "cost=0.003962"
+    }
+  ]
+}

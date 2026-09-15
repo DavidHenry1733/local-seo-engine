@@ -1,0 +1,90 @@
+{
+  "kind": "wombwell-v3-local-editorial-copy-blocked",
+  "accepted": false,
+  "candidateWritten": false,
+  "originalPackUnchanged": true,
+  "hashes": {
+    "originalPack": {
+      "exists": true,
+      "rel": "data/pharmacy-local-editorial-evidence-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell.json",
+      "sha256": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+      "bytes": 9077
+    },
+    "wombwellCopy": {
+      "exists": true,
+      "rel": "data/pharmacy-ai-local-copy-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell.json",
+      "sha256": "e1d09e786992245e2d991a7fa4b74c15d32f997124a9e567223d8f0b0116807f",
+      "bytes": 8674
+    },
+    "wombwellHtml": {
+      "exists": true,
+      "rel": "output/pharmacy-ai-local-page-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/local/wombwell/index.html",
+      "sha256": "80c219a9be363d816f6d5d6951967f28fc68b0a1b6359a8c872c8dea5a6cf281",
+      "bytes": 65877
+    },
+    "darfieldCopy": {
+      "exists": true,
+      "rel": "data/pharmacy-ai-local-copy-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/darfield.json",
+      "sha256": "7069e5d86f5519d5557c46acac7727d125a9e564aeeac5773114dd68aed55834",
+      "bytes": 14533
+    },
+    "darfieldHtml": {
+      "exists": true,
+      "rel": "output/pharmacy-ai-local-page-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/local/darfield/index.html",
+      "sha256": "fb6d1c6052eaf197e9c6d34892edf14a5a7d3e40101d18a045b2bbe58b8ca422",
+      "bytes": 64424
+    },
+    "supplement": {
+      "exists": true,
+      "rel": "data/pharmacy-local-editorial-research-supplements/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01-local-editorial-copy-research.json",
+      "sha256": "35faa5c417a6f7f63af882bd494af49893d75095a6159f056668d6a0d4bb4998",
+      "bytes": 53148
+    },
+    "attempt1": {
+      "exists": true,
+      "rel": "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T12-20-57-381Z-attempt-1.json",
+      "sha256": "85358caa63af9cbf7ee0697d3f2363594151e60695658ad3a31d880b819cb6c3",
+      "bytes": 29739
+    },
+    "attempt2": {
+      "exists": true,
+      "rel": "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T12-21-04-289Z-attempt-2.json",
+      "sha256": "ce6bf1eafcb7daf76b1f682376ad41b7b83ae1d03cf42713da4483e563e6aab1",
+      "bytes": 30972
+    },
+    "expected": {
+      "originalPack": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+      "wombwellCopy": "e1d09e786992245e2d991a7fa4b74c15d32f997124a9e567223d8f0b0116807f",
+      "wombwellHtml": "80c219a9be363d816f6d5d6951967f28fc68b0a1b6359a8c872c8dea5a6cf281",
+      "darfieldCopy": "7069e5d86f5519d5557c46acac7727d125a9e564aeeac5773114dd68aed55834",
+      "darfieldHtml": "fb6d1c6052eaf197e9c6d34892edf14a5a7d3e40101d18a045b2bbe58b8ca422"
+    }
+  },
+  "ledger": {
+    "kind": "wombwell-v3-local-editorial-copy-cost-ledger",
+    "task": "WOMBWELL — DELIVER THE AGREED LOCAL EDITORIAL COPY",
+    "date": "2026-09-01",
+    "taskBudgetUsd": 1,
+    "dataForSeoSearches": 3,
+    "dataForSeoCostUsd": 0.006,
+    "newPageRetrievals": 6,
+    "pageRetrievalUsd": 0,
+    "historicEnglandRestoreNotCountedAsNewRetrieval": true,
+    "openaiModel": "gpt-4.1",
+    "openaiAttempts": 2,
+    "openaiDrafts": 1,
+    "openaiCorrectiveRetries": 1,
+    "promptTokens": 8944,
+    "completionTokens": 2008,
+    "openaiUsd": 0.033952,
+    "totalThisTaskUsd": 0.039952,
+    "remainingUsd": 0.960048,
+    "furtherAiCallsAllowedByCap": false,
+    "candidateWritten": false,
+    "accepted": false,
+    "attemptLogPaths": [
+      "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T12-20-57-381Z-attempt-1.json",
+      "data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T12-21-04-289Z-attempt-2.json"
+    ]
+  }
+}

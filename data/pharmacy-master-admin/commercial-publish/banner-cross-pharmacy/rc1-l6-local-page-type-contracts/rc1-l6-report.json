@@ -1,0 +1,298 @@
+{
+  "contracts": {
+    "hub": "local-hub-v1",
+    "cluster": "local-cluster-v1",
+    "area": "local-area-v1"
+  },
+  "homepageAreasComponentId": "homepage-areas-we-support",
+  "hub": {
+    "words": 816,
+    "h1": 1,
+    "sections": 9,
+    "substantive": 7,
+    "faq": 1,
+    "imgs": 4,
+    "contract": "local-hub-v1",
+    "ds": "local-hub-v1",
+    "areasComponent": 1,
+    "sha": "58fbc1ae0b5fa78eb5cbe1c9738946545036b0446b088b0a814449650724748f"
+  },
+  "ecclesall": {
+    "words": 798,
+    "h1": 1,
+    "sections": 10,
+    "substantive": 8,
+    "faq": 1,
+    "imgs": 4,
+    "contract": "local-cluster-v1",
+    "ds": "local-cluster-v1",
+    "areasComponent": 0,
+    "sha": "f71936da341f41a22eee411b238c043021cd792497d4047456df9a788c7144a1"
+  },
+  "fulwood": {
+    "words": 786,
+    "h1": 1,
+    "sections": 10,
+    "substantive": 8,
+    "faq": 1,
+    "imgs": 4,
+    "contract": "local-cluster-v1",
+    "ds": "local-cluster-v1",
+    "areasComponent": 0,
+    "sha": "700ee0215debd863b8adf6b71ca94f5d8319438197bafb652bbed98188788753"
+  },
+  "hubValidation": {
+    "ok": true,
+    "imageSlots": {
+      "hero": 1,
+      "supporting": 1,
+      "trust": 1,
+      "conversion": 1
+    },
+    "duplicateAccessSections": 0,
+    "sectionIdsFound": [
+      "breadcrumbs",
+      "hero-section",
+      "hub-service-coverage",
+      "areas-we-support",
+      "local-relevance",
+      "hub-trust",
+      "local-access",
+      "faq-section",
+      "conversion-image",
+      "contact"
+    ]
+  },
+  "eccValidation": {
+    "ok": true,
+    "imageSlots": {
+      "hero": 1,
+      "supporting": 1,
+      "trust": 1,
+      "conversion": 1
+    },
+    "duplicateAccessSections": 0,
+    "sectionIdsFound": [
+      "breadcrumbs",
+      "hero-section",
+      "cluster-context",
+      "child-areas",
+      "cluster-relevance",
+      "cluster-trust",
+      "local-access",
+      "cluster-links",
+      "faq-section",
+      "conversion-image",
+      "contact"
+    ]
+  },
+  "imageSlotsHub": {
+    "hero": 1,
+    "supporting": 1,
+    "trust": 1,
+    "conversion": 1
+  },
+  "duplicateAccessHub": 0,
+  "areaUnchanged": true,
+  "dryRun": {
+    "hubContract": "local-hub-v1",
+    "clusterContract": "local-cluster-v1",
+    "hubGenerator": "renderLocalHubPageHtml",
+    "clusterGenerator": "renderLocalClusterLocationPageHtml",
+    "dryHubBytes": 74998,
+    "dryClusterBytes": 75137
+  },
+  "crossTenant": "PASS",
+  "browserOut": {
+    "hubDesktop": {
+      "pass": true,
+      "dom": {
+        "words": 830,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": true,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "hubTablet": {
+      "pass": true,
+      "dom": {
+        "words": 830,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": true,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "hubMobile": {
+      "pass": true,
+      "dom": {
+        "words": 830,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": true,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "eccDesktop": {
+      "pass": true,
+      "dom": {
+        "words": 811,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": false,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "eccTablet": {
+      "pass": true,
+      "dom": {
+        "words": 811,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": false,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "eccMobile": {
+      "pass": true,
+      "dom": {
+        "words": 811,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": false,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "fulDesktop": {
+      "pass": true,
+      "dom": {
+        "words": 799,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": false,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-fulwood/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "fulTablet": {
+      "pass": true,
+      "dom": {
+        "words": 799,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": false,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-fulwood/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    },
+    "fulMobile": {
+      "pass": true,
+      "dom": {
+        "words": 799,
+        "h1": true,
+        "imgs": 4,
+        "conversionFull": true,
+        "conversionInCta": false,
+        "areasSupport": false,
+        "accessCount": 1,
+        "bodySize": 17,
+        "uppercaseH2": 0,
+        "overflow": 0,
+        "faq": true,
+        "cta": true,
+        "breadcrumb": true
+      },
+      "url": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-fulwood/?slug=banner-cross-pharmacy",
+      "consoleErrors": []
+    }
+  },
+  "urls": {
+    "hub": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-hub/?slug=banner-cross-pharmacy",
+    "ecclesall": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=banner-cross-pharmacy",
+    "fulwood": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-fulwood/?slug=banner-cross-pharmacy"
+  },
+  "contractSelection": {
+    "hub": "local-hub-v1",
+    "cluster": "local-cluster-v1",
+    "area": "local-area-v1"
+  }
+}

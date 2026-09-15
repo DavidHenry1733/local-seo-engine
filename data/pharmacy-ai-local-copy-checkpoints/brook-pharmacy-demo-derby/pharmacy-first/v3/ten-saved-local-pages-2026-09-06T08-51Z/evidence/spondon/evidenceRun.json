@@ -1,0 +1,772 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "be554263-7d98-44b1-bb8a-6375a025af1e",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "spondon",
+  "areaName": "Spondon",
+  "planFingerprint": "3c59d6d0d48a6e8bd367f49c1279e7da325ca3cf3b79adcef7b9079ca0c86b3b",
+  "spendingCapUsd": 0.069,
+  "status": "completed",
+  "startedAt": "2026-09-06T07:49:11.951Z",
+  "updatedAt": "2026-09-06T07:49:18.076Z",
+  "completedAt": "2026-09-06T07:49:18.076Z",
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "paidCallsMade": 4,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Spondon, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "9dfdd5fd-e561-4da7-8ed9-577f3cbd5e47",
+      "detail": "5 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:12.567Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Spondon locality, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "eb11614d-1de6-4b37-bbae-8210ff5ced49",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:12.812Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Spondon, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "ca9482c4-12ca-44c3-a422-9ed27fbd299a",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:14.986Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Spondon, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "ec813a72-572e-4576-9bbb-4a97710ab89b",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:16.309Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "5ed59dda-0cc6-47d7-8ca4-8f3f20504b72",
+      "detail": "Retrieved https://chapelstreetmcderby.nhs.uk/",
+      "capturedAt": "2026-09-06T07:49:17.014Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "6f8d46e6-5bdb-47a2-bcb8-74740e360eef",
+      "detail": "Retrieved https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/spondon-neighbourhood-ward/",
+      "capturedAt": "2026-09-06T07:49:17.993Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 5.1 km from Brook Pharmacy Demo Derby to Spondon. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-06T07:49:18.022Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Spondon Derwent Valley Medical Practice",
+        "address": "81 Sitwell St, Spondon, Derby DE21 7FH",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9201852,
+          "longitude": -1.4039234
+        },
+        "placeId": "ChIJDc50MtjxeUgRsZkYin8K3DQ",
+        "locality": "81 Sitwell St, Spondon, Derby DE21 7FH",
+        "addressComponents": [
+          {
+            "longText": "81",
+            "shortText": "81",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Sitwell Street",
+            "shortText": "Sitwell St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Spondon",
+            "shortText": "Spondon",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 7FH",
+            "shortText": "DE21 7FH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=3808930927742589361&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Chapel Street Medical Centre",
+        "address": "10 Chapel St, Spondon, Derby DE21 7RJ",
+        "types": [
+          "medical_clinic",
+          "government_office",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.921100599999995,
+          "longitude": -1.4042713
+        },
+        "placeId": "ChIJF43LtNnxeUgRiIoNTlQacEE",
+        "locality": "10 Chapel St, Spondon, Derby DE21 7RJ",
+        "addressComponents": [
+          {
+            "longText": "10",
+            "shortText": "10",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Chapel Street",
+            "shortText": "Chapel St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Spondon",
+            "shortText": "Spondon",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 7RJ",
+            "shortText": "DE21 7RJ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=4715297759245994632&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Park Medical Practice Chaddesden",
+        "address": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9289796,
+          "longitude": -1.4340448
+        },
+        "placeId": "ChIJT3cnyr_xeUgRBA955GRsILA",
+        "locality": "Maine Dr, Chaddesden, Derby DE21 6LA",
+        "addressComponents": [
+          {
+            "longText": "Maine Drive",
+            "shortText": "Maine Dr",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6LA",
+            "shortText": "DE21 6LA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12691262930515726084&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Derwent Valley Medical Practice",
+        "address": "20 St Mark's Rd, Chaddesden, Derby DE21 6AT",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9267107,
+          "longitude": -1.457739
+        },
+        "placeId": "ChIJo6xkgQvxeUgRt1bOFnySBGI",
+        "locality": "20 St Mark's Rd, Chaddesden, Derby DE21 6AT",
+        "addressComponents": [
+          {
+            "longText": "20",
+            "shortText": "20",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Saint Mark's Road",
+            "shortText": "St Mark's Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Chaddesden",
+            "shortText": "Chaddesden",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 6AT",
+            "shortText": "DE21 6AT",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=7062931177280001719&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Overdale Medical Practice",
+        "address": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.912257999999994,
+          "longitude": -1.37843
+        },
+        "placeId": "ChIJs3gorTXueUgRdfBX4LX-NwA",
+        "locality": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "addressComponents": [
+          {
+            "longText": "207",
+            "shortText": "207",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Victoria Avenue",
+            "shortText": "Victoria Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HG",
+            "shortText": "DE72 3HG",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15761180825481333&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Spondon",
+        "address": "Spondon, Derby",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.92481730000001,
+          "longitude": -1.4076397999999999
+        },
+        "placeId": "ChIJ-XevBwXueUgRYwnprnoceAM",
+        "locality": "Spondon, Derby",
+        "addressComponents": [
+          {
+            "longText": "Spondon",
+            "shortText": "Spondon",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=249981092565158243&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Spondon, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:12.885Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/",
+          "title": "Chapel Street Medical Centre – NHS GP Surgeries in Derby",
+          "description": "NHS GP Surgeries in Derby. GP practice Chapel Street Medical Centre 10 Chapel Street Spondon Derby DE21 7RJ Get directions 01332 680520"
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/derwent-valley-medical-practice-branch-site/C81014001",
+          "title": "Derwent Valley Medical Practice (Branch Site)",
+          "description": "This GP surgery is currently closed. 81 Sitwell Street, Spondon, Derby, Derbyshire, DE21 7FH : This GP surgery is currently accepting new patients."
+        },
+        {
+          "url": "https://derwentvalleymedicalpractice.co.uk/",
+          "title": "Derwent Valley Medical Practice – NHS GP Surgery in Derby",
+          "description": "Spondon Derby DE21 7FH Get directions · 01332 673905 · Home · Appointments · Prescriptions · Services · About the surgery · Register with the surgery · Login to ... Read more"
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration"
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+          "title": "List of GP practices in Derby and Derbyshire - May 2025",
+          "description": "20 May 2025 — View a full list of GP practices across Derby and Derbyshire, including practice codes, addresses and contact information."
+        },
+        {
+          "url": "https://parkfarm-medical.co.uk/",
+          "title": "Park Farm Medical Centre & Vernon Street Surgery – NHS GP ...",
+          "description": "Book an appointment online · Request a fit note · Request medication · Request other administrative support such as updating your personal details. Read more"
+        },
+        {
+          "url": "https://derbygp.co.uk/",
+          "title": "Find an NHS GP in Derby | Choose From 33 Practices",
+          "description": "Finding an NHS GP in the heart of Derby is now easier than ever. There are 33 GP practices within 3 miles of Derby City Centre that are currently accepting ..."
+        },
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/contact-us/",
+          "title": "Contact us – Chapel Street Medical Centre",
+          "description": "5 May 2023 — NHS GP Surgeries in Derby … 10 Chapel Street Spondon Derby DE21 7RJ. Opening times Day Opening hours Monday 8am to 6:30pm Tuesday. Saturday 8: ..."
+        },
+        {
+          "url": "https://dchs.nhs.uk/our-services-and-locations/a-z-list-of-services/general-practitioner-services-gps",
+          "title": "Derbyshire Community Health Services NHS FT GP practices",
+          "description": "To find out more information on the relevant GP practice or Medical Centre, please click the link below to visit their website. Castle St Medical Centre. Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Spondon, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:14.995Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/spondon-neighbourhood-ward/",
+          "title": "Spondon neighbourhood ward - Derby ...",
+          "description": "Spondon Neighbourhood team ; Lorraine Dryden, Neighbourhood Manager, 07812 301828 ; Jamie Robinson, Neighbourhood Officer, 07812 301829 ; David Oliffe, Local Area ... Read more"
+        },
+        {
+          "url": "https://www.facebook.com/SpondonCouncillors/mentions/",
+          "title": "Spondon Councillors (@SpondonCouncillors) - Mentions",
+          "description": "Spondon Councillors, Derby. This page is for those interested in finding out what your locally elected... Find us here: https://maps.app.goo.gl/p2qJgZwM4aWDB4Eg9"
+        },
+        {
+          "url": "https://www.southderbyshire.gov.uk/about-us/councillors-and-meetings/parish-councils",
+          "title": "Parish councils",
+          "description": "There are 31 Parish Councils in South Derbyshire. A full breakdown of chairmen and clerks is available should you wish to get in touch or attend meetings. Read more"
+        },
+        {
+          "url": "https://www.spondononline.co.uk/spondon-groups-orgs/spondon-neighbourhood-board",
+          "title": "Spondon Neighbourhood Board",
+          "description": "Spondon Neighbourhood Board is a group of people working together to improve the local area and to maintain strong community connections within Spondon."
+        },
+        {
+          "url": "https://www.westpark.derby.sch.uk/documents/community/Spondon%20Community%20Guide%20April%202026%20final.pdf",
+          "title": "Locality 1: Spondon Community Guide",
+          "description": "Working across Spondon, connect people, community groups, local councillors. Team email: neighbourhoods@derby.gov.uk. Derby City Council works in partnership ..."
+        },
+        {
+          "url": "https://www.fostonandscroptonparishcouncil.gov.uk/",
+          "title": "Foston and Scropton Parish Council | Parish Council based in ...",
+          "description": "Foston and Scropton Parish Council is made up of councillors in Derbyshire County Council, overseeing local governance, finance and improving the quality of ..."
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire County Councillors. Work phone: 01246 863018 Email: parishclerk@ashover-pc.gov.uk. Derbyshire DE5 3TB Work phone: 01773409524 / 07713496608 … ..."
+        },
+        {
+          "url": "https://www.andrewteale.me.uk/leap/ward/1537/",
+          "title": "Spondon Ward — Derby",
+          "description": "This ward was abolished or subjected to boundary changes in 2023. Andrew Parnall LD"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Spondon",
+          "title": "Spondon",
+          "description": "Spondon is a ward of the city of Derby, in the ceremonial county of Derbyshire, England. Originally a small village, Spondon dates back to the Domesday Book ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://chapelstreetmcderby.nhs.uk/",
+      "title": "Chapel Street Medical Centre – NHS GP Surgeries in Derby",
+      "status": 200,
+      "textSample": "Chapel Street Medical Centre – NHS GP Surgeries in Derby Tell us whether you accept cookies We've put some small files called cookies on your device to make our site work. We would also like to use analytical cookies to understand how our site is used and improve user experience. Analytical cookies send information to Google Analytics. Let us know your preference. We will use a cookie to save your choice. Before you make your choice you can read more about our cookie policy . I'm OK with cookies Set my cookie preferences Skip to main content Chapel Street Medical Centre NHS GP Surgeries in Derby Search the Chapel Street Medical Centre website Search Appointments Prescriptions Services About the surgery Register with the surgery Contact us Home Browse More Our appointments system is now live To find out more information on our appointment system, please click on the link: Rapid Health online Quick Access Guide to the Rapid Health Video Chapel Street Medical Centre Appointments Find out how to make, change or cancel an appointment Prescriptions Get a repeat prescription, help with medicines or find a pharmacy Sick notes Get a sick (fit) note for work or find out about self-certification Test results Get your recent test results and find out what to do next Register with us Check our catchment area and register with the surgery Contact us Find and contact the surgery or what to do when we are closed You and your general practice What to expect from your general practice (GP) and how you can help them, so you get the best from the National Health Service (NHS) Local and NHS services Find the service and help you need. Find a pharmacy Find a dentist Find urgent and emergency care NHS 111 online Find out about the NHS App Find your NHS number Health A to Z Medicines A to Z Find other patient services Latest surgery news Call ahead 8th April 2026 Call Ahead poster (PDF) If you think you or your child have measles, call your GP surgery or NHS 111… Meningitis vaccination guidance 23rd March 2026 We are aware of recent reports of a meningitis B outbreak and understand that this may be concerning for patients…. ALERT- Formula Milk 17th February 2026 For the attention of: Parents/Carers As you might have seen in media coverage and on social media, The Food Standards… Go to news NHS Friends and Family Test We want you to have the best possible experience of care. Provide feedback and you can help us improve our services. Take part in the NHS Friends and Family Test Armed Forces veteran friendly accredited GP practice Chapel Street Medical Centre 10 Chapel Street Spondon Derby DE21 7RJ Get directions 01332 680520 Mayfield Medical Centre 6 Mayfield Road Chaddesden Derby DE21 6FW Get directions 01332 680530 Home Appointments Prescriptions Services About the surgery Register with the surgery Contact us Opening times Sick (fit) notes Test results Feedback and complaints Wellbeing You and your general practice © Silicon Practice Accessibility statement Website policies",
+      "retrievedAt": "2026-09-06T07:49:17.014Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/spondon-neighbourhood-ward/",
+      "title": "Spondon neighbourhood ward - Derby City Council",
+      "status": 200,
+      "textSample": "Spondon neighbourhood ward - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Council and democracy Neighbourhood partnerships Wards D to S Spondon neighbourhood ward Spondon neighbourhood ward Spondon Neighbourhood team If you would like to get involved in your neighbourhood, you have any ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Lorraine Dryden Neighbourhood Manager 07812 301828 lorraine.dryden@derby.gov.uk Jamie Robinson Neighbourhood Officer 07812 301829 jamie.robinson2@derby.gov.uk David Oliffe Local Area Coordinator, Spondon and Chaddesden East (South of Nottingham Road) 07812 300106 david.oliffe@derby.gov.uk Anti-social behaviour and crime If you have concerns about your neighbourhood, wish to complain about anti-social behaviour you can contact the Spondon Safer Neighbourhood Team, by: telephone: 101 email: north.neighbourhoods@derbyshire.pnn.police.co.uk Your Safer Neighbourhood Team is committed to making your community a safer and better place to live and work. Find out more about Safer Neighbourhoods on the Derbyshire Police website . You can also view their Spondon Safer Neighbourhood Team page . Spondon Neighbourhood Board Your local Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. The board: leads on behalf of the whole neighbourhood agrees the priorities for the neighbourhood decides where delegated Council budgets are to be spent monitors performance influences decisions that reflect the views of local residents decides on the vision for your neighbourhood The Neighbourhood Board received a budget from April 2021. This budget is to enable voluntary and community groups (non-commercial) to apply for funding for projects/events, that will both benefit and enable the community and its residents. If you would be interested in putting together a funding application for consideration of the board, &zwnj;please read the guidance and complete the form: &zwnj; Board Funding Application 2022/23 Neighbourhood board devolved budget funding guidance Find out how to become a member of your Neighbourhood Board. Members of Spondon Neighbourhood Board 2023/24 Derby City Council's councillor representatives Chair - Councillor Smale Councillor Roulstone Councillor Poulter Partner services Sarah Wigley - Derbyshire Fire & Rescue Residents Jean Martin Community organisations' representatives Mark Davis - Spondon Village Partnership Ruth Barlett - Spondon Traders Association Spondon Neighbourhood Board council advisors Sarah Dosunmu - Neighbourhood Partnership Manager Tim Banton - North Area Traffic Management Manager David Winslow - Derby Parks Graeme Walton - Derby Homes David Oliffe - LAC Spondon Neighbourhood Board dates 2022/23 1st August 2022 7th November 2022 23rd January 2023 How can I join the Spondon Neighbourhood Board? If you are interested in joining your local Neighbourhood Board, or your community group is interested in nominating a representative, download, complete and return an Board membership application form or contact us . Spondon Neighbourhood Forum These meetings take place within the Ward only if there is an identified issue that requires a meeting. When a Neighbourhood Forum is required it will be advertised, but for further information please contact Lorraine Dryden, email: lorraine.dryden@derby.gov.uk For more information about neighbourhood forums, visit our Neighbourhood working page. Ward walkabouts Ward walkabouts is an initiative to strengthen community spirit and build safer communities. This involves Councillors, Neighbourhoods, Public Protection Officers, Derby Homes and the Police, together with local residents leading a high profile and visible patrol including a litter pick. The idea behind this is to get back to traditional community values of local people looking out for each other and identifying any problems raised in the area. The next dates for the ward walkabouts are: 7th February 2023 at 10am, meeting point outside Spondon Library, Sitwell Street News and events Spondon Neighbourhood Board, working in partnership with Spondon Online, provides a free monthly electronic Spondon Neighbourhood Newsletter to keep you in touch with all the latest community news, projects and events happening in and around Spondon. If want to subscribe visit the Spondon Online website and sign up now&zwnj;. Previous Next More in this section Darley neighbourhood ward Littleover neighbourhood ward Mackworth neighbourhood ward Mickleover neighbourhood ward Oakwood neighbourhood ward Normanton neighbourhood ward Sinfin and Osmaston neighbourhood ward Spondon neighbourhood ward Contact details Email: neighbourhoods@derby.gov.uk Department: --> Phone: - --> --> Relay UK: --> SignVideo: Signing service Address: Community Safety and Integration Service Public Protection and Streetpride The Council House Corporation Street Derby DE1 2FS Document downloads Useful links --> Derbyshire Police --> Derby Homes --> Derby and Derbyshire Integrated Care Board --> Derby and Sandiacre Canal Society --> Derbyshire Fire and Rescue Service --> Spondon Community Association --> Spondon Flyer bus timetable --> Spondon Online --> Spondon Twitter Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-06T07:49:17.993Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.92481730000001,
+    "longitude": -1.4076397999999999,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 5.1,
+  "verifiedGpPracticeCount": 1,
+  "findings": [
+    "1 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "substantive editorial evidence supports intro, context and access",
+    "Actual evidence spend $0.068 of cap $0.069. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/spondon.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/spondon.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 1 verified GP practice(s). Spend $0.068.",
+  "reprocessedAt": null
+}

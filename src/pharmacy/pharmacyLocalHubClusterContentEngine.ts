@@ -12,6 +12,8 @@ import {
 } from "./pharmacyLocalClusterContentEngine.ts";
 import { scrubPublicLocalEngineTerms } from "./pharmacyLocalClusterCompositionDedupe.ts";
 import { resolveCommercialSectionPlanV1 } from "./contentEngine/pharmacyCommercialSectionPlannerV1.ts";
+import { usesApprovedBankLocalityDirectPath } from "./pharmacyApprovedBankLocalityDirectRender.ts";
+import { usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
 
 export interface LocalHubPageContent {
   contractId: "local-hub-v1";
@@ -119,6 +121,50 @@ export function buildLocalClusterHubPageContent(
     scopedCtx,
   );
   const pharmacyName = ctx.profile.pharmacyName;
+  if (usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId)) {
+    const authoredParagraphs = /\n\s*\n/.test(String(base.whyChecksBody || ""));
+    if (authoredParagraphs) {
+      return {
+        contractId: "local-cluster-v1",
+        clusterName: cluster.name,
+        clusterContextHeading: base.whyChecksHeading,
+        clusterContextIntro: "",
+        clusterContextBody: base.whyChecksBody,
+        childAreasIntro: base.processIntro,
+        relevanceHeading: base.localRelevanceHeading,
+        base,
+      };
+    }
+    const whySentences = String(base.whyChecksBody || "")
+      .split(/(?<=[.!?])\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    return {
+      contractId: "local-cluster-v1",
+      clusterName: cluster.name,
+      clusterContextHeading: base.whyChecksHeading,
+      clusterContextIntro: whySentences[0] || "",
+      clusterContextBody: whySentences.slice(1).join(" "),
+      childAreasIntro: base.processIntro,
+      relevanceHeading: base.localRelevanceHeading,
+      base,
+    };
+  }
+  if (
+    usesApprovedBankLocalityDirectPath(ctx.serviceId) &&
+    !usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId)
+  ) {
+    return {
+      contractId: "local-cluster-v1",
+      clusterName: cluster.name,
+      clusterContextHeading: base.whyChecksHeading,
+      clusterContextIntro: "",
+      clusterContextBody: base.whyChecksBody,
+      childAreasIntro: base.processIntro,
+      relevanceHeading: base.localRelevanceHeading,
+      base,
+    };
+  }
   const whySentences = String(base.whyChecksBody || "")
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
@@ -134,9 +180,11 @@ export function buildLocalClusterHubPageContent(
     clusterContextHeading: scrubPublicLocalEngineTerms(base.whyChecksHeading || ""),
     clusterContextIntro: scrubPublicLocalEngineTerms(whyIntro),
     clusterContextBody: scrubPublicLocalEngineTerms(whyBody),
-    // How + consultation/travel markers for commercial polish split (renderer-neutral).
-    // processIntro carries %%CONSULTATION%% / %%TRAVEL%% / %%NEARBY_INTRO%% payloads.
-    childAreasIntro: scrubPublicLocalEngineTerms(base.processIntro || base.supportingIntro || ""),
+    // Process heading intro only — never pack commercial polish markers into visible copy.
+    childAreasIntro: scrubPublicLocalEngineTerms(
+      String(base.processIntro || "")
+        .split(/(?<=[.!?])\s+/)[0] || "",
+    ),
     relevanceHeading: scrubPublicLocalEngineTerms(base.localRelevanceHeading || ""),
     base: {
       ...base,
@@ -153,7 +201,14 @@ export function buildLocalClusterHubPageContent(
       })),
       accessHeading: scrubPublicLocalEngineTerms(base.accessHeading || `Travelling from ${cluster.name}`),
       accessBody: scrubPublicLocalEngineTerms(base.accessBody),
+      clinicalEnvironmentHeading: scrubPublicLocalEngineTerms(base.clinicalEnvironmentHeading),
       clinicalEnvironmentBody: scrubPublicLocalEngineTerms(base.clinicalEnvironmentBody),
+      preparationBullets: (base.preparationBullets || []).map(scrubPublicLocalEngineTerms),
+      eligibilityHeading: base.eligibilityHeading
+        ? scrubPublicLocalEngineTerms(base.eligibilityHeading)
+        : undefined,
+      eligibilityBody: base.eligibilityBody ? scrubPublicLocalEngineTerms(base.eligibilityBody) : undefined,
+      eligibilityBullets: (base.eligibilityBullets || []).map(scrubPublicLocalEngineTerms),
       trustHeading: scrubPublicLocalEngineTerms(
         base.trustHeading || `When patients in ${cluster.name} should see a GP instead`,
       ),
@@ -213,6 +268,17 @@ export function buildLocalAreaPageContent(
     scopedCtx,
   );
   const clusterLabel = parentCluster?.name || hierarchy.primaryLocality;
+  if (usesApprovedBankLocalityDirectPath(ctx.serviceId)) {
+    return {
+      contractId: "local-area-v1",
+      areaName: area.name,
+      clusterContextHeading: base.whyChecksHeading,
+      clusterContextBody: base.whyChecksBody,
+      childAreasIntro: base.processIntro,
+      relevanceHeading: base.localRelevanceHeading,
+      base,
+    };
+  }
   return {
     contractId: "local-area-v1",
     areaName: area.name,

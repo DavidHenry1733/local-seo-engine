@@ -1,0 +1,204 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-07T10:32:49.567Z",
+  "tokenUsage": {
+    "promptTokens": 6962,
+    "completionTokens": 388,
+    "totalTokens": 7350
+  },
+  "estimatedCostUsd": 0.017028,
+  "inputEvidencePackHash": "6411669a48d2ca92b0989a2d3a3ac48198fe6d1c49d2a7fc350431506b749d77",
+  "editorialEvidencePackHash": "7b6168b3d4b25ee9ed18fd842b7e82e350b911d255d5b0bb4ff3eb62d540897b",
+  "areaSlug": "chaddesden",
+  "areaName": "Chaddesden",
+  "editorialFactIdsUsed": [
+    "chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde",
+    "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd",
+    "chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a"
+  ],
+  "outputCopy": {
+    "area": "Chaddesden",
+    "heroHeading": "Pharmacy First in Chaddesden",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Chaddesden.",
+    "localIntroduction": "Pharmacy First for people in Chaddesden is provided by Brook Pharmacy Demo Derby.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.",
+      "Chaddesden Park is listed as a landmark in Chaddesden.",
+      "Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.",
+        "editorialFactId": "chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Chaddesden Park is listed as a landmark in Chaddesden.",
+        "editorialFactId": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden.",
+        "editorialFactId": "chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde",
+      "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd",
+      "chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Chaddesden",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Chaddesden.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Pharmacy First for people in Chaddesden is provided by Brook Pharmacy Demo Derby.",
+      "supportingCanonicalFieldOrEntity": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.",
+      "supportingCanonicalFieldOrEntity": "chaddesden:community:derwent-community-library-is-listed-as-a-communi, chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde, chaddesden:community:derwent-family-hub-is-listed-as-a-community-faci, chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd, chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch",
+      "providerSource": "Google Places, Google Places, Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Chaddesden Park is listed as a landmark in Chaddesden.",
+      "supportingCanonicalFieldOrEntity": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd, chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a, chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[2]",
+      "exactSentence": "Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden.",
+      "supportingCanonicalFieldOrEntity": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd, chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a, chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch",
+      "providerSource": "Google Places, Google Places, Google Places",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+      "supportingCanonicalFieldOrEntity": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby, chaddesden:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Chaddesden",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Chaddesden.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Pharmacy First for people in Chaddesden is provided by Brook Pharmacy Demo Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chaddesden:community:derwent-community-library-is-listed-as-a-communi, chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde, chaddesden:community:derwent-family-hub-is-listed-as-a-community-faci, chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd, chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[1]",
+      "sentence": "Chaddesden Park is listed as a landmark in Chaddesden.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd, chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a, chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "localContextParagraphs[2]",
+      "sentence": "Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd, chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a, chaddesden:heritage:derby-war-memorial-is-listed-as-a-landmark-in-ch",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 2.9 km in a straight line from Chaddesden.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "chaddesden:area-identity:chaddesden-is-a-neighbourhood-ward-in-derby, chaddesden:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"localContextParagraphs\": [\n    \"The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.\",\n    \"Chaddesden Park is listed as a landmark in Chaddesden.\",\n    \"Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.\",\n      \"editorialFactId\": \"chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chaddesden Park is listed as a landmark in Chaddesden.\",\n      \"editorialFactId\": \"chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden.\",\n      \"editorialFactId\": \"chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde\",\n    \"chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd\",\n    \"chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"localContextParagraphs\": [\n    \"The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.\",\n    \"Chaddesden Park is listed as a landmark in Chaddesden.\",\n    \"Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden.\"\n  ],\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"The Phillip Whitehead Memorial Library Chaddesden Park is listed as a community facility in Chaddesden.\",\n      \"editorialFactId\": \"chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chaddesden Park is listed as a landmark in Chaddesden.\",\n      \"editorialFactId\": \"chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Chaddesden Wood Local Nature Reserve is listed as a landmark in Chaddesden.\",\n      \"editorialFactId\": \"chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chaddesden:community:the-phillip-whitehead-memorial-library-chaddesde\",\n    \"chaddesden:heritage:chaddesden-park-is-listed-as-a-landmark-in-chadd\",\n    \"chaddesden:heritage:chaddesden-wood-local-nature-reserve-is-listed-a\"\n  ]\n}"
+  ]
+}

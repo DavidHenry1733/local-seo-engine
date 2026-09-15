@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "universal-image-intelligence",
+  "generatedAt": "2026-06-11T07:10:12.822Z",
+  "verdict": "PASS",
+  "message": "PASS: Image Intelligence Architecture Complete",
+  "manifestPath": "output/universal-image-intelligence/image-intelligence.json",
+  "promptComponentLibrary": {
+    "totalComponents": 23,
+    "categories": [
+      "style",
+      "scene",
+      "brand",
+      "composition",
+      "lighting",
+      "compliance",
+      "slot-intent",
+      "negative"
+    ],
+    "industryPresets": 9
+  },
+  "universalSlotMapping": {
+    "slots": [
+      "hero",
+      "support",
+      "trust",
+      "conversion"
+    ],
+    "industries": [
+      "pharmacy",
+      "digital-services"
+    ]
+  },
+  "imagePackAssignmentEngine": {
+    "rules": 6,
+    "templateFamilies": 5,
+    "coreFallbackPack": "core-pharmacy"
+  },
+  "businessOnboardingWorkflow": {
+    "stages": 11
+  },
+  "imageApprovalWorkflow": {
+    "stages": 8,
+    "roles": 4
+  },
+  "imageQualityScoringFramework": {
+    "dimensions": 6,
+    "thresholds": {
+      "autoApprove": 85,
+      "manualReview": 70,
+      "autoReject": 55,
+      "description": "normalisedScore: ≥85 fast-track to compliance-review, 70-84 manual review, <55 auto-reject"
+    },
+    "autoRejectRules": 6
+  },
+  "runtimeModules": {
+    "loader": "src/image-intelligence/loadImageIntelligence.ts",
+    "promptComponents": "src/image-intelligence/promptComponentLibrary.ts",
+    "packAssignment": "src/image-intelligence/imagePackAssignmentEngine.ts",
+    "approval": "src/image-intelligence/imageApprovalWorkflow.ts",
+    "qualityScoring": "src/image-intelligence/imageQualityScoring.ts",
+    "universalResolver": "src/image-intelligence/universalImageIntelligenceEngine.ts"
+  },
+  "validation": {
+    "pass": true,
+    "issues": []
+  }
+}

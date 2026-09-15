@@ -1,0 +1,27 @@
+{
+  "checkpointId": "allestree-evidence-quality-2026-09-03T12-00Z",
+  "generatePressed": false,
+  "published": false,
+  "committed": false,
+  "freshPaidRetrieval": false,
+  "runId": "c7a7c587-22f0-474a-a59a-745a5bbe34a3",
+  "spentUsd": 0.068,
+  "paidCallsMade": 4,
+  "verifiedGpPracticeCount": 3,
+  "editorialSufficiency": "READY",
+  "identityFact": "Allestree is a neighbourhood ward in Derby.",
+  "uiOutcome": "Collection finished. Evidence is READY. 3 verified GP practice(s). Spend $0.068.",
+  "tests": {
+    "validate-allestree-evidence-quality-from-saved-run-v1.ts": "15/15",
+    "validate-local-page-evidence-authorised-collection-v1.ts": "14/14",
+    "validate-brook-derby-allestree-local-page-ui-v1.ts": "35/35",
+    "validateLocalEvidenceGeographicDisambiguationV1.ts": "19/19"
+  },
+  "browser": {
+    "route": "Target Areas, Brook Derby / pharmacy-first / Allestree",
+    "generateClicked": false,
+    "startPaidCollection": "disabled",
+    "noRequestAccepted": true,
+    "noStaleNotExecuted": true
+  }
+}

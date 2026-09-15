@@ -1,0 +1,301 @@
+{
+  "sprint": "RC1-L11",
+  "tenant": "banner-cross-pharmacy",
+  "service": "pharmacy-first",
+  "legacyRendererRemoved": true,
+  "checks": [
+    {
+      "id": "legacy-file-deleted",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/src/pharmacy/pharmacyLocalClusterPageRenderer.ts"
+    },
+    {
+      "id": "area-count",
+      "pass": true,
+      "detail": "4 areas"
+    },
+    {
+      "id": "cluster-reference",
+      "pass": true,
+      "detail": "ecclesall cluster canonical"
+    },
+    {
+      "id": "areas-regenerated",
+      "pass": true,
+      "detail": "4 area pages"
+    },
+    {
+      "id": "area-renderer-parity",
+      "pass": true,
+      "detail": "unique block trees: 1"
+    },
+    {
+      "id": "area-section-parity",
+      "pass": true,
+      "detail": "unique section id trees: 1"
+    },
+    {
+      "id": "cluster-area-block-parity",
+      "pass": true,
+      "detail": "area template blocks match cluster v1"
+    },
+    {
+      "id": "image-parity",
+      "pass": true,
+      "detail": "hero/supporting/trust/conversion slots"
+    },
+    {
+      "id": "typography-parity",
+      "pass": true,
+      "detail": "local-area-v1 publish source + shared page CSS"
+    },
+    {
+      "id": "component-parity",
+      "pass": true,
+      "detail": "no legacy design-system marker"
+    },
+    {
+      "id": "cluster-contract-reference",
+      "pass": true,
+      "detail": "cluster v1 contract ok"
+    }
+  ],
+  "areaReport": [
+    {
+      "slug": "sheffield-city-centre",
+      "ok": true,
+      "publishSource": "local-area-v1",
+      "contractAttr": "local-area-v1",
+      "legacyDesign": false,
+      "contract": {
+        "ok": true,
+        "imageSlots": {
+          "hero": 1,
+          "supporting": 1,
+          "trust": 1,
+          "conversion": 1
+        },
+        "duplicateAccessSections": 0,
+        "sectionIdsFound": [
+          "breadcrumbs",
+          "hero-section",
+          "cluster-context",
+          "child-areas",
+          "cluster-relevance",
+          "cluster-trust",
+          "local-access",
+          "cluster-links",
+          "faq-section",
+          "conversion-image",
+          "contact"
+        ]
+      },
+      "templateBlocks": [
+        "breadcrumbs",
+        "hero",
+        "service-definition",
+        "child-areas",
+        "local-relevance",
+        "trust-split",
+        "local",
+        "parent-child-links",
+        "faq",
+        "conversion-image",
+        "final-cta"
+      ],
+      "sectionIds": [
+        "hero-section",
+        "cluster-context",
+        "child-areas",
+        "cluster-relevance",
+        "cluster-trust",
+        "local-access",
+        "cluster-links",
+        "faq-section",
+        "contact"
+      ],
+      "parityBlocks": true
+    },
+    {
+      "slug": "broomhill",
+      "ok": true,
+      "publishSource": "local-area-v1",
+      "contractAttr": "local-area-v1",
+      "legacyDesign": false,
+      "contract": {
+        "ok": true,
+        "imageSlots": {
+          "hero": 1,
+          "supporting": 1,
+          "trust": 1,
+          "conversion": 1
+        },
+        "duplicateAccessSections": 0,
+        "sectionIdsFound": [
+          "breadcrumbs",
+          "hero-section",
+          "cluster-context",
+          "child-areas",
+          "cluster-relevance",
+          "cluster-trust",
+          "local-access",
+          "cluster-links",
+          "faq-section",
+          "conversion-image",
+          "contact"
+        ]
+      },
+      "templateBlocks": [
+        "breadcrumbs",
+        "hero",
+        "service-definition",
+        "child-areas",
+        "local-relevance",
+        "trust-split",
+        "local",
+        "parent-child-links",
+        "faq",
+        "conversion-image",
+        "final-cta"
+      ],
+      "sectionIds": [
+        "hero-section",
+        "cluster-context",
+        "child-areas",
+        "cluster-relevance",
+        "cluster-trust",
+        "local-access",
+        "cluster-links",
+        "faq-section",
+        "contact"
+      ],
+      "parityBlocks": true
+    },
+    {
+      "slug": "kelham-island",
+      "ok": true,
+      "publishSource": "local-area-v1",
+      "contractAttr": "local-area-v1",
+      "legacyDesign": false,
+      "contract": {
+        "ok": true,
+        "imageSlots": {
+          "hero": 1,
+          "supporting": 1,
+          "trust": 1,
+          "conversion": 1
+        },
+        "duplicateAccessSections": 0,
+        "sectionIdsFound": [
+          "breadcrumbs",
+          "hero-section",
+          "cluster-context",
+          "child-areas",
+          "cluster-relevance",
+          "cluster-trust",
+          "local-access",
+          "cluster-links",
+          "faq-section",
+          "conversion-image",
+          "contact"
+        ]
+      },
+      "templateBlocks": [
+        "breadcrumbs",
+        "hero",
+        "service-definition",
+        "child-areas",
+        "local-relevance",
+        "trust-split",
+        "local",
+        "parent-child-links",
+        "faq",
+        "conversion-image",
+        "final-cta"
+      ],
+      "sectionIds": [
+        "hero-section",
+        "cluster-context",
+        "child-areas",
+        "cluster-relevance",
+        "cluster-trust",
+        "local-access",
+        "cluster-links",
+        "faq-section",
+        "contact"
+      ],
+      "parityBlocks": true
+    },
+    {
+      "slug": "dore",
+      "ok": true,
+      "publishSource": "local-area-v1",
+      "contractAttr": "local-area-v1",
+      "legacyDesign": false,
+      "contract": {
+        "ok": true,
+        "imageSlots": {
+          "hero": 1,
+          "supporting": 1,
+          "trust": 1,
+          "conversion": 1
+        },
+        "duplicateAccessSections": 0,
+        "sectionIdsFound": [
+          "breadcrumbs",
+          "hero-section",
+          "cluster-context",
+          "child-areas",
+          "cluster-relevance",
+          "cluster-trust",
+          "local-access",
+          "cluster-links",
+          "faq-section",
+          "conversion-image",
+          "contact"
+        ]
+      },
+      "templateBlocks": [
+        "breadcrumbs",
+        "hero",
+        "service-definition",
+        "child-areas",
+        "local-relevance",
+        "trust-split",
+        "local",
+        "parent-child-links",
+        "faq",
+        "conversion-image",
+        "final-cta"
+      ],
+      "sectionIds": [
+        "hero-section",
+        "cluster-context",
+        "child-areas",
+        "cluster-relevance",
+        "cluster-trust",
+        "local-access",
+        "cluster-links",
+        "faq-section",
+        "contact"
+      ],
+      "parityBlocks": true
+    }
+  ],
+  "clusterTemplateBlocks": [
+    "breadcrumbs",
+    "hero",
+    "service-definition",
+    "child-areas",
+    "local-relevance",
+    "trust-split",
+    "local",
+    "parent-child-links",
+    "faq",
+    "conversion-image",
+    "final-cta"
+  ],
+  "uniqueAreaBlockSignatures": [
+    "breadcrumbs|hero|service-definition|child-areas|local-relevance|trust-split|local|parent-child-links|faq|conversion-image|final-cta"
+  ]
+}

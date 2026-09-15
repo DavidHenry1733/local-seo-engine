@@ -1,0 +1,71 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Borrowash",
+  "areaSlug": "borrowash",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-06T07:49:25.196Z",
+  "sourceStatus": "google-places-authorised-collection-pharmacy-relationship",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [],
+  "researchCandidates": [
+    {
+      "name": "Park Medical Practice",
+      "address": "46 Derby Rd, Borrowash, Derby DE72 3HA",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9078795,
+        "longitude": -1.3846239999999999
+      },
+      "placeId": "ChIJSUdYHQDveUgR2QzABhPhynA",
+      "rejectionReason": "awaiting-official-source-check"
+    },
+    {
+      "name": "Overdale Medical Practice",
+      "address": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.912257999999994,
+        "longitude": -1.37843
+      },
+      "placeId": "ChIJs3gorTXueUgRdfBX4LX-NwA",
+      "rejectionReason": "awaiting-official-source-check"
+    }
+  ],
+  "pharmacyRelationship": {
+    "from": "Brook Pharmacy Demo Derby",
+    "to": "Borrowash",
+    "distanceKm": 7.3,
+    "method": "haversine-straight-line",
+    "areaReferenceSource": "places-area-reference"
+  },
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 1,
+    "rejectedCount": 0,
+    "categoriesPresent": [],
+    "minimumMet": true
+  }
+}

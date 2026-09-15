@@ -1,0 +1,266 @@
+{
+  "version": 1,
+  "slug": "yorkshire-pharmacy-and-health-clinic",
+  "updatedAt": "2026-09-10T10:23:59.488Z",
+  "campaigns": [
+    {
+      "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 6,
+      "blockedTasks": 4,
+      "inProgressTasks": 1,
+      "pendingTasks": 2,
+      "progressPct": 46,
+      "nextLaunchTask": {
+        "id": "f0792269-9f9e-4221-b851-495db93cf6a6-authority-readiness-approved",
+        "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+        "title": "Authority & AI Readiness approved",
+        "category": "Publishing",
+        "priority": "Critical",
+        "linkedModule": "Authority Audit",
+        "linkedUrl": "/api/pharmacy-authority-readiness?slug=yorkshire-pharmacy-and-health-clinic&service=pharmacy-first",
+        "evidence": [
+          "Authority score: 79/100",
+          "Publish gate: PASS WITH RECOMMENDATIONS",
+          "Missing: Human Expertise: Named pharmacist / reviewer",
+          "Missing: Human Expertise: Superintendent pharmacist",
+          "Missing: Human Expertise: GPhC registration details",
+          "Audit: /api/pharmacy-authority-readiness?slug=yorkshire-pharmacy-and-health-clinic&service=pharmacy-first"
+        ],
+        "createdAt": "2026-09-10T10:23:59.488Z",
+        "status": "in_progress",
+        "completedAt": null,
+        "blockedReason": "Address recommendations before final authority sign-off"
+      },
+      "tasks": [
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-confirm-profile",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=yorkshire-pharmacy-and-health-clinic",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-confirm-images",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-confirm-service-page",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "Approved v9 service-page candidate",
+            "11 of 11 approved candidates ready to publish"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "complete",
+          "completedAt": "2026-09-10T10:23:59.488Z",
+          "blockedReason": null
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-confirm-ecosystem",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "11 of 11 approved v9 candidates are the publish authority",
+            "Ecosystem package is not required for current-run candidate publication"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "complete",
+          "completedAt": "2026-09-10T10:23:59.488Z",
+          "blockedReason": null
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-authority-readiness-approved",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=yorkshire-pharmacy-and-health-clinic&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 79/100",
+            "Publish gate: PASS WITH RECOMMENDATIONS",
+            "Missing: Human Expertise: Named pharmacist / reviewer",
+            "Missing: Human Expertise: Superintendent pharmacist",
+            "Missing: Human Expertise: GPhC registration details",
+            "Audit: /api/pharmacy-authority-readiness?slug=yorkshire-pharmacy-and-health-clinic&service=pharmacy-first"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "in_progress",
+          "completedAt": null,
+          "blockedReason": "Address recommendations before final authority sign-off"
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-publish-page",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/admin/master?customer=yorkshire-pharmacy-and-health-clinic&panel=commercial-publish-review",
+          "evidence": [
+            "11 of 11 approved v9 candidates ready to publish",
+            "First publication does not require a live page to already exist"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-update-sitemap",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=yorkshire-pharmacy-and-health-clinic#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-submit-indexing",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=yorkshire-pharmacy-and-health-clinic#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Sitemap must be updated before indexing submission"
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-refresh-visibility",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=yorkshire-pharmacy-and-health-clinic#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-prepare-gbp-posts",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack available in content ecosystem"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "complete",
+          "completedAt": "2026-09-10T10:23:59.488Z",
+          "blockedReason": null
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-prepare-social-posts",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack available in content ecosystem"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "complete",
+          "completedAt": "2026-09-10T10:23:59.488Z",
+          "blockedReason": null
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-prepare-email-sequence",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence pack available in content ecosystem"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "complete",
+          "completedAt": "2026-09-10T10:23:59.488Z",
+          "blockedReason": null
+        },
+        {
+          "id": "f0792269-9f9e-4221-b851-495db93cf6a6-review-growth-actions",
+          "campaignId": "f0792269-9f9e-4221-b851-495db93cf6a6",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=yorkshire-pharmacy-and-health-clinic",
+          "evidence": [
+            "23 growth actions available"
+          ],
+          "createdAt": "2026-09-10T10:23:59.488Z",
+          "status": "complete",
+          "completedAt": "2026-09-10T10:23:59.488Z",
+          "blockedReason": null
+        }
+      ],
+      "candidatePublish": {
+        "ready": true,
+        "approvedCount": 11,
+        "expectedCount": 11,
+        "candidateVersion": "v9",
+        "published": false,
+        "indexed": false,
+        "publishUrl": "/api/admin/master?customer=yorkshire-pharmacy-and-health-clinic&panel=commercial-publish-review"
+      }
+    }
+  ]
+}

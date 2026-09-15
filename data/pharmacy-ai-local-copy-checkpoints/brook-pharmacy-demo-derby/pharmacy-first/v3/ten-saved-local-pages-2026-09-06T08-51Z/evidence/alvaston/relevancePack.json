@@ -1,0 +1,99 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Alvaston",
+  "areaSlug": "alvaston",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-06T07:48:43.627Z",
+  "sourceStatus": "google-places-authorised-collection",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [
+    {
+      "name": "Alvaston Medical Centre",
+      "address": "14 Boulton Ln, Alvaston, Derby DE24 0GE",
+      "category": "healthcare",
+      "types": [
+        "medical_clinic",
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.894616,
+        "longitude": -1.4290926
+      },
+      "placeId": "ChIJZYv16kbweUgRIYf1X52X1rA",
+      "source": "google-places",
+      "provider": "googlePlaces",
+      "retrievedAt": "2026-09-06T07:48:43.627Z",
+      "sourceRef": "https://maps.google.com/?cid=12742538897866983201&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+      "confidence": 92,
+      "relationship": "name-in-address",
+      "areaName": "Alvaston"
+    }
+  ],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [],
+  "researchCandidates": [
+    {
+      "name": "Coleman Health Centre",
+      "address": "Coleman St, Alvaston, Derby DE24 8NH",
+      "category": "healthcare",
+      "types": [
+        "medical_clinic",
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.89492250000001,
+        "longitude": -1.445276
+      },
+      "placeId": "ChIJ27euf1nweUgRyCmNeBfuzZM",
+      "rejectionReason": "no-retrieved-official-source"
+    },
+    {
+      "name": "Aspiro Healthcare - Parkfields Surgery",
+      "address": "1217 London Rd, Alvaston, Derby DE24 8QJ",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.8983141,
+        "longitude": -1.4323924
+      },
+      "placeId": "ChIJU0RUV0_weUgR7IsUdPyzWOQ",
+      "rejectionReason": "no-retrieved-official-source"
+    }
+  ],
+  "pharmacyRelationship": {
+    "from": "Brook Pharmacy Demo Derby",
+    "to": "Alvaston",
+    "distanceKm": 4.4,
+    "method": "haversine-straight-line",
+    "areaReferenceSource": "places-area-reference"
+  },
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 2,
+    "rejectedCount": 0,
+    "categoriesPresent": [
+      "healthcare"
+    ],
+    "minimumMet": true
+  }
+}

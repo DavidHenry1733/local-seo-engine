@@ -1,0 +1,199 @@
+{
+  "kind": "evidence-only",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "chellaston",
+  "runId": "f945b02d-2985-4fb3-827b-34c83fb1a7b8",
+  "spendingCapUsd": 0.17,
+  "spentUsd": 0.168,
+  "reservedUsd": 0,
+  "events": [
+    {
+      "at": "2026-09-05T19:41:13.488Z",
+      "kind": "created",
+      "detail": "cap=0.069"
+    },
+    {
+      "at": "2026-09-05T19:41:13.498Z",
+      "kind": "reserved",
+      "callId": "places-gp-practices",
+      "detail": "bound=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-05T19:41:14.122Z",
+      "kind": "consumed",
+      "callId": "places-gp-practices",
+      "detail": "actual=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-05T19:41:14.123Z",
+      "kind": "reserved",
+      "callId": "places-area-reference",
+      "detail": "bound=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-05T19:41:14.340Z",
+      "kind": "consumed",
+      "callId": "places-area-reference",
+      "detail": "actual=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-05T19:41:14.341Z",
+      "kind": "reserved",
+      "callId": "dataforseo-official-gp-practices",
+      "detail": "bound=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-05T19:41:16.476Z",
+      "kind": "consumed",
+      "callId": "dataforseo-official-gp-practices",
+      "detail": "actual=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-05T19:41:16.477Z",
+      "kind": "reserved",
+      "callId": "dataforseo-descriptive-locality",
+      "detail": "bound=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-05T19:41:27.928Z",
+      "kind": "consumed",
+      "callId": "dataforseo-descriptive-locality",
+      "detail": "actual=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-05T19:41:27.929Z",
+      "kind": "reserved",
+      "callId": "page-body-gp-official",
+      "detail": "bound=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-05T19:41:28.300Z",
+      "kind": "consumed",
+      "callId": "page-body-gp-official",
+      "detail": "actual=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-05T19:41:28.318Z",
+      "kind": "reserved",
+      "callId": "page-body-locality",
+      "detail": "bound=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-05T19:41:29.208Z",
+      "kind": "consumed",
+      "callId": "page-body-locality",
+      "detail": "actual=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-07T07:30:56.166Z",
+      "kind": "reserved",
+      "callId": "places-hospitals",
+      "detail": "bound=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-07T07:30:56.681Z",
+      "kind": "consumed",
+      "callId": "places-hospitals",
+      "detail": "actual=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-07T07:30:56.682Z",
+      "kind": "reserved",
+      "callId": "places-landmarks",
+      "detail": "bound=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-07T07:30:56.982Z",
+      "kind": "consumed",
+      "callId": "places-landmarks",
+      "detail": "actual=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-07T07:30:56.984Z",
+      "kind": "reserved",
+      "callId": "places-community",
+      "detail": "bound=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-07T07:30:57.366Z",
+      "kind": "consumed",
+      "callId": "places-community",
+      "detail": "actual=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-07T07:30:57.368Z",
+      "kind": "reserved",
+      "callId": "dataforseo-official-community",
+      "detail": "bound=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-07T07:31:01.485Z",
+      "kind": "consumed",
+      "callId": "dataforseo-official-community",
+      "detail": "actual=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-07T07:31:01.486Z",
+      "kind": "reserved",
+      "callId": "dataforseo-official-healthcare",
+      "detail": "bound=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-07T07:31:03.077Z",
+      "kind": "consumed",
+      "callId": "dataforseo-official-healthcare",
+      "detail": "actual=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-07T07:31:03.083Z",
+      "kind": "reserved",
+      "callId": "page-body-community",
+      "detail": "bound=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-07T07:31:03.662Z",
+      "kind": "consumed",
+      "callId": "page-body-community",
+      "detail": "actual=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-07T07:31:03.665Z",
+      "kind": "reserved",
+      "callId": "page-body-healthcare",
+      "detail": "bound=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-07T07:31:04.269Z",
+      "kind": "consumed",
+      "callId": "page-body-healthcare",
+      "detail": "actual=0",
+      "usd": 0
+    }
+  ]
+}

@@ -42,6 +42,18 @@ import {
   buildCanonicalEcosystemGenerationPlan,
   readCanonicalEcosystemGenerationPlan,
 } from "./masterAdminCanonicalEcosystemGenerationPlanService.ts";
+import { rebuildPharmacyProductionImageAssignments } from "./imagePlatform/pharmacyImagePlatformProductionAssignmentService.ts";
+import { persistCanonicalImageInventory } from "./pharmacyCanonicalImageInventoryService.ts";
+import { runImageParityGate } from "./pharmacyImageParityGateService.ts";
+import { buildCanonicalFinalRender } from "./pharmacyCanonicalFinalRenderService.ts";
+import { markServicePageGenerationComplete } from "./masterAdminCoreProductRecoveryService.ts";
+import { validateServicePageOutputScope } from "./masterAdminCoreProductRecoveryOutputScopeService.ts";
+import {
+  SERVICE_PAGE_GENERATION_SCOPE,
+  validateServicePageTenantContextGate,
+} from "./pharmacyServicePageTenantContextService.ts";
+import type { VisualExperienceServiceId } from "./pharmacyVisualExperienceConfig.ts";
+import { readAuthorisedEcosystemGenerationRecord } from "./masterAdminAuthorisedEcosystemGenerationService.ts";
 import {
   deployPharmacyPublishOutput,
   getPharmacyLivePublishStatus,
@@ -91,6 +103,15 @@ import {
   reconcileExistingTenantOnboardingBatch,
   retryFailedOnboardingSource,
 } from "./masterAdminOnboardingBatchService.ts";
+import { mergeCustomerOperationalSummary } from "./masterAdminWebsiteImportWorkflowStateService.ts";
+import { resolveWebsiteIntelligenceReimportState } from "./masterAdminWebsiteIntelligenceReimportState.ts";
+import { resolveWorkflowIssueBlockers } from "./masterAdminWorkflowIssueBlockerService.ts";
+import {
+  buildPublishedReleaseVerification,
+  readLatestCommercialPublishSnapshot,
+  resolvePublishReviewProgressJob,
+} from "./masterAdminCommercialPublishReviewService.ts";
+import type { WorkflowStageId } from "./masterAdminWorkflowModel.ts";
 import {
   buildWebsiteSourceSummary,
   queueRerunWebsiteImport,
@@ -101,6 +122,7 @@ import {
   assertGoogleImportAllowed,
   buildGoogleSourceSummary,
   confirmGoogleBusinessProfileIdentity,
+  reconcileConfirmedGoogleImportPersistence,
   persistGoogleIntelligenceFromImport,
   queueRerunGoogleImport,
   readGoogleIntelligenceRecord,
@@ -115,10 +137,15 @@ import {
   saveBusinessProfileReview,
 } from "./masterAdminBusinessProfileReviewService.ts";
 import type { BusinessProfileReviewPayload } from "./masterAdminBusinessProfileReviewModel.ts";
+import { resolveActiveServiceIdsForTenant } from "./growthEngineWebsiteDiscoveredServiceReconciliation.ts";
 import { buildCommercialDeploymentReview, isCommercialDeploymentApproved } from "./masterAdminCommercialDeploymentService.ts";
-import { buildManagedPublishingReview } from "./masterAdminManagedPublishingService.ts";
+import {
+  buildManagedPublishingReview,
+  readManagedPublishingProfile,
+} from "./masterAdminManagedPublishingService.ts";
 import { ensureComponentDnaPersisted } from "./masterAdminComponentDnaPersistenceService.ts";
 import { buildGenerationSetupState } from "./masterAdminGenerationSetupService.ts";
+import { buildMarketScopeSummary } from "./masterAdminMarketScopeService.ts";
 
 export type CustomerLifecycleStage =
   | "new"
@@ -235,6 +262,8 @@ export interface MasterAdminCustomerRecord {
   websiteSource: ReturnType<typeof buildWebsiteSourceSummary>;
   googleSource: ReturnType<typeof buildGoogleSourceSummary>;
   onboardingSources: ReturnType<typeof buildOnboardingSourcesSummary>;
+  /** When set, Product Owner should deliberately re-run website import (existing rerun_website_import). */
+  websiteIntelligenceReimport: ReturnType<typeof resolveWebsiteIntelligenceReimportState>;
   businessProfileReview: BusinessProfileReviewPayload | null;
   deploymentConfiguration: {
     summary: ReturnType<typeof buildCommercialDeploymentReview>["summary"];
@@ -289,6 +318,52 @@ export interface MasterAdminCustomerRecord {
     legacyDeploymentConfiguration: string;
   };
   generationSetup: ReturnType<typeof buildGenerationSetupState>;
+  marketScope: ReturnType<typeof buildMarketScopeSummary>;
+  serviceCampaigns?: Array<{
+    campaignId: string;
+    serviceId: string;
+    serviceName: string;
+    campaignName: string;
+    campaignGoal: string;
+    status: string;
+    statusLabel: string;
+    currentStage: string;
+    nextAction: string;
+    nextActionPanel: string | null;
+    servicePageStatus: string;
+    localPageStatus: string;
+    publishStatus: string;
+    rankingsStatus: string;
+    openUrl: string;
+    detailUrl: string;
+    selected: boolean;
+  }>;
+  selectedServiceCampaign?: {
+    campaignId: string;
+    serviceId: string;
+    serviceName: string;
+    campaignName: string;
+    campaignGoal: string;
+    status: string;
+    statusLabel: string;
+    currentStage: string;
+    nextAction: string;
+    nextActionPanel: string | null;
+    servicePageStatus: string;
+    localPageStatus: string;
+    publishStatus: string;
+    rankingsStatus: string;
+    openUrl: string;
+    detailUrl: string;
+    selected: boolean;
+  } | null;
+  selectedCampaignId?: string | null;
+  growthPlatform?: "local" | "national";
+  tenantServiceCatalogue?: {
+    platform: "local" | "national";
+    source: "project-commercial" | "pharmacy-patient-catalogue";
+    services: Array<{ serviceId: string; serviceName: string; href?: string }>;
+  };
 }
 
 export interface MasterAdminActionDef {
@@ -364,10 +439,18 @@ function readProfileDoc(slug: string) {
 }
 
 function resolvePrimaryServiceId(slug: string, data: ReturnType<typeof normalizeProfileData>): string {
-  const selected = data.selectedServices || [];
-  if (selected.length) return String(selected[0]);
+  // Campaign Manager selection wins so a newly created service campaign (e.g. Travel Clinic)
+  // starts at Service Evidence without re-running website import / business profile.
   const session = loadCampaignBuilderSession(slug);
   if (session.selectedServiceId) return session.selectedServiceId;
+  try {
+    const active = resolveActiveServiceIdsForTenant(slug);
+    if (active.length) return active[0];
+  } catch {
+    /* fall through */
+  }
+  const selected = data.selectedServices || [];
+  if (selected.length) return String(selected[0]);
   return "pharmacy-first";
 }
 
@@ -576,6 +659,7 @@ export function buildMasterAdminCustomerRecord(slug: string): MasterAdminCustome
   const framework = buildGrowthEngineFramework(safe);
   const packageManifest = loadContentPackage(safe, serviceId);
   const completeness = computeProfileCompleteness(data);
+  const marketScopeSummary = buildMarketScopeSummary(safe, data);
   let blockers: string[] = [];
   try {
     blockers = buildPharmacyPlatformDashboard(safe).blockers;
@@ -591,17 +675,41 @@ export function buildMasterAdminCustomerRecord(slug: string): MasterAdminCustome
   const customerAccount = getCustomerAccountDetail(safe);
   const customerJobs = listMasterAdminJobs({ slug: safe, limit: 10 });
   const latestExecution = workflow?.executions?.[0];
-  const operationalSummary = {
-    latestEvidence: latestExecution?.evidence || workflow?.history?.[0]?.evidence || null,
-    blockingIssues: issueSummary.openCount > 0
-      ? [`${issueSummary.openCount} open issue(s) — ${issueSummary.healthImpact} impact`]
+  const stageId = (workflow?.currentStage || "create_customer") as WorkflowStageId;
+  const workflowIssueBlockers = resolveWorkflowIssueBlockers(safe, stageId);
+  let fallbackLatestEvidence =
+    latestExecution?.evidence || workflow?.history?.[0]?.evidence || null;
+  try {
+    const managed = readManagedPublishingProfile(safe);
+    const snapshot = readLatestCommercialPublishSnapshot(safe) as {
+      serviceId?: string;
+      currentRelease?: string;
+    } | null;
+    const progressJob = resolvePublishReviewProgressJob(safe, managed?.currentRelease || null);
+    const verification = buildPublishedReleaseVerification({
+      slug: safe,
+      serviceId: String(snapshot?.serviceId || "").trim(),
+      currentRelease: managed?.currentRelease || snapshot?.currentRelease || null,
+      completedPublishJobId: progressJob?.status === "completed" ? progressJob.id : null,
+    });
+    if (verification.status === "PASS") {
+      fallbackLatestEvidence = `${verification.label} · ${verification.publishedRelease} · ${verification.campaignPages.total} published URL(s)`;
+    }
+  } catch {
+    /* keep prior evidence */
+  }
+  const operationalSummary = mergeCustomerOperationalSummary({
+    slug: safe,
+    fallbackLatestEvidence,
+    fallbackBlockingIssues: workflowIssueBlockers.blocked
+      ? [workflowIssueBlockers.reason || `${workflowIssueBlockers.blockingIssues.length} blocking issue(s)`]
       : orchestration?.blockingReason && !orchestration?.canContinue
         ? [orchestration.blockingReason]
         : [],
     customerReady: workflow?.currentStage === "live_customer",
     welcomeDraftAvailable: Boolean(customerAccount.welcomeEmailDraft),
     jobs: customerJobs,
-  };
+  });
 
   const brandPath = path.join(WORKSPACE_ROOT, "config", "projects", safe, "brand", "brand-profile.json");
   let brandDna: Record<string, unknown> = {};
@@ -656,6 +764,7 @@ export function buildMasterAdminCustomerRecord(slug: string): MasterAdminCustome
     websiteSource: buildWebsiteSourceSummary(safe),
     googleSource: buildGoogleSourceSummary(safe),
     onboardingSources: buildOnboardingSourcesSummary(safe),
+    websiteIntelligenceReimport: resolveWebsiteIntelligenceReimportState(safe),
     businessProfileReview: buildBusinessProfileReview(safe),
     deploymentConfiguration: (() => {
       const deploymentReview = buildCommercialDeploymentReview(safe);
@@ -688,6 +797,9 @@ export function buildMasterAdminCustomerRecord(slug: string): MasterAdminCustome
         email: data.businessEmail || data.email,
         town: data.primaryTown,
         postcode: data.postcode,
+        country: data.country,
+        marketScope: marketScopeSummary.marketScope,
+        primaryMarket: marketScopeSummary.primaryMarket,
         platformClientStatus: data.platformClientStatus,
         completenessPct: completeness.score,
       },
@@ -726,6 +838,7 @@ export function buildMasterAdminCustomerRecord(slug: string): MasterAdminCustome
       legacyDeploymentConfiguration: `/api/admin/master?customer=${encodeURIComponent(safe)}&panel=legacy-deployment-configuration`,
     },
     generationSetup: buildGenerationSetupState(safe),
+    marketScope: marketScopeSummary,
   };
 }
 
@@ -849,16 +962,17 @@ export async function executeMasterAdminAction(
         result = await runSetupGoogleImport(safe, {
           googleBusinessUrl: String(
             body.googleBusinessUrl ||
-              identity?.resolvedUrl ||
               identity?.originalUrl ||
+              identity?.resolvedUrl ||
               data.googleBusinessProfileUrl ||
               "",
           ),
           pharmacyName: String(body.pharmacyName || data.pharmacyName || ""),
           town: String(body.town || data.primaryTown || ""),
           postcode: String(body.postcode || data.postcode || ""),
+          placeId: String(body.placeId || identity?.placeId || data.googlePlaceId || ""),
         });
-        persistGoogleIntelligenceFromImport(safe);
+        reconcileConfirmedGoogleImportPersistence(safe);
         evidence = `Google import completed for ${safe} in ${Math.round((Date.now() - importStartedAt) / 1000)}s`;
         break;
       }
@@ -927,22 +1041,181 @@ export async function executeMasterAdminAction(
           commercialAuthorised: true,
         });
         freezeCustomerCampaignGenerationContext(customerContext);
-        result = await generateContentPackage(safe, serviceId, { customerContext });
-        evidence = `Ecosystem generation completed for ${serviceId}`;
+        const contentResult = await generateContentPackage(safe, serviceId, { customerContext });
+        if (!contentResult.ok) {
+          status = "error";
+          errors.push(contentResult.error || "Content package generation failed");
+          result = contentResult;
+          evidence = `Ecosystem generation failed for ${serviceId}`;
+          break;
+        }
+        const authorised = readAuthorisedEcosystemGenerationRecord(safe);
+        const imageAssignment = rebuildPharmacyProductionImageAssignments({
+          slug: safe,
+          serviceId,
+          canonicalPlanId: canonicalPlan.planId,
+          canonicalPlanChecksum: canonicalPlan.checksum,
+          authorisedGenerationJobId: authorised?.jobId || null,
+          canonicalPlan,
+        });
+        persistCanonicalImageInventory(safe, serviceId, canonicalPlan);
+        const finalRender = await buildCanonicalFinalRender(safe, serviceId);
+        const imageParity = runImageParityGate(safe, serviceId, canonicalPlan);
+        result = {
+          ...contentResult,
+          imageAssignmentRevision: imageAssignment.revision,
+          imageParityOk: imageParity.ok,
+          finalRenderRoot: finalRender.renderRoot,
+        };
+        evidence = `Ecosystem generation completed for ${serviceId} with production image assignments`;
+        break;
+      }
+      case "generate_service_page": {
+        ensureComponentDnaPersisted(safe);
+        const data = readSetupProfile(safe);
+        const serviceId = resolvePrimaryServiceId(safe, data);
+        selectCampaignBuilderService(safe, serviceId);
+        rebuildPharmacyProductionImageAssignments({
+          slug: safe,
+          serviceId,
+          assignmentScope: "service-page-only",
+          persist: true,
+        });
+        const customerContext = buildCustomerCampaignGenerationContext(safe, serviceId, undefined, {
+          commercialAuthorised: true,
+        });
+        freezeCustomerCampaignGenerationContext(customerContext);
+        const contentResult = await generateContentPackage(safe, serviceId, {
+          customerContext,
+          scope: "service-page-only",
+        });
+        const imageAssignment = rebuildPharmacyProductionImageAssignments({
+          slug: safe,
+          serviceId,
+          assignmentScope: "service-page-only",
+          persist: true,
+        });
+        const visualPath = path.join(
+          WORKSPACE_ROOT,
+          "output/pharmacy-visual-experience",
+          safe,
+          serviceId,
+          "index.html",
+        );
+        const previewUrl = `/api/pharmacy-visual-experience/${encodeURIComponent(serviceId)}/?slug=${encodeURIComponent(safe)}`;
+        if (!fs.existsSync(visualPath)) {
+          status = "error";
+          errors.push(contentResult.error || "Service page generation failed");
+          result = contentResult;
+          markServicePageGenerationComplete(safe, {
+            status: "failed",
+            serviceId,
+            completedAt: new Date().toISOString(),
+            errors: [contentResult.error || "Service page generation failed"],
+          });
+          evidence = `Service page generation failed for ${serviceId}`;
+          break;
+        }
+        const { repairServicePagePostGenerationIdentity } = await import(
+          "./masterAdminServicePagePostGenerationIdentityService.ts"
+        );
+        repairServicePagePostGenerationIdentity({
+          slug: safe,
+          serviceId,
+          jobId: typeof body.masterAdminJobId === "string" ? body.masterAdminJobId : null,
+          previewUrl,
+          outputPath: visualPath,
+          scope: "service-page-only",
+        });
+        let wordCount: number | null = null;
+        const text = fs.readFileSync(visualPath, "utf8").replace(/<[^>]+>/g, " ");
+        wordCount = text.split(/\s+/).filter(Boolean).length;
+        const scopeCheck = validateServicePageOutputScope(safe, serviceId);
+        if (!scopeCheck.ok) {
+          status = "error";
+          const scopeErrors = scopeCheck.forbidden.map((f) => `FAILED_SCOPE: ${f.kind} — ${f.path}`);
+          errors.push(...scopeErrors);
+          markServicePageGenerationComplete(safe, {
+            status: "failed",
+            completedAt: new Date().toISOString(),
+            errors: scopeErrors,
+          });
+          result = { ok: false, scope: scopeCheck, errors: scopeErrors };
+          evidence = `Service page generation failed scope validation for ${serviceId}`;
+          break;
+        }
+        const visualHtml = fs.existsSync(visualPath) ? fs.readFileSync(visualPath, "utf8") : "";
+        const tenantGate = validateServicePageTenantContextGate(safe, serviceId as VisualExperienceServiceId, visualHtml, {
+          requestedSlug: safe,
+          scope: SERVICE_PAGE_GENERATION_SCOPE.SERVICE_PAGE_ONLY,
+          generationJobId: typeof body.masterAdminJobId === "string" ? body.masterAdminJobId : null,
+          contentContext: customerContext.generationContext,
+        });
+        if (!tenantGate.ok) {
+          status = "error";
+          const tenantErrors = tenantGate.blockers.map((b) => `FAILED_TENANT_CONTEXT: ${b}`);
+          errors.push(...tenantErrors);
+          markServicePageGenerationComplete(safe, {
+            status: "failed",
+            completedAt: new Date().toISOString(),
+            errors: tenantErrors,
+          });
+          result = { ok: false, tenantContextGate: tenantGate, errors: tenantErrors };
+          evidence = `Service page generation failed tenant-context validation for ${serviceId}`;
+          break;
+        }
+        const { assertCommercialChecklistForGeneration } = await import(
+          "./masterAdminCoreProductRecoveryCommercialChecklistService.ts"
+        );
+        try {
+          assertCommercialChecklistForGeneration(safe, serviceId, visualHtml);
+        } catch (gateErr) {
+          const msg = gateErr instanceof Error ? gateErr.message : String(gateErr);
+          status = "error";
+          errors.push(msg);
+          markServicePageGenerationComplete(safe, {
+            status: "failed",
+            completedAt: new Date().toISOString(),
+            errors: [msg],
+          });
+          result = { ok: false, errors: [msg] };
+          evidence = `Commercial Page Contract / Checklist blocked generation for ${serviceId}`;
+          break;
+        }
+        markServicePageGenerationComplete(safe, {
+          status: "completed",
+          completedAt: new Date().toISOString(),
+          jobId: typeof body.masterAdminJobId === "string" ? body.masterAdminJobId : undefined,
+          outputPath: visualPath,
+          previewUrl,
+          wordCount,
+          imageAssignmentRevision: imageAssignment.revision,
+          manifestPath: path.join(WORKSPACE_ROOT, "data/pharmacy-content-packages", safe, `${serviceId}.json`),
+          warnings: contentResult.manifest?.adminDiagnostics || [],
+          errors: [],
+        });
+        result = {
+          ...contentResult,
+          scope: "service-page-only",
+          imageAssignmentRevision: imageAssignment.revision,
+          previewUrl,
+          wordCount,
+        };
+        evidence = `CPR-01 service page generated for ${serviceId}`;
         break;
       }
       case "publish": {
         const data = readSetupProfile(safe);
         const serviceId = resolvePrimaryServiceId(safe, data);
         await preparePharmacyPublishOutput(safe, serviceId);
-        result = await deployPharmacyPublishOutput(safe, serviceId, { confirm: true });
+        result = await deployPharmacyPublishOutput(safe, { serviceId, confirm: true });
         evidence = `Published ${safe}`;
         break;
       }
       case "request_indexing": {
-        registerPharmacyPages(safe);
-        result = submitReadyPharmacyPages(safe);
-        evidence = `Indexing requested for ${safe}`;
+        const registerResult = await registerPharmacyPages(safe);
+        result = await submitReadyPharmacyPages(safe, { mode: "dry-run", confirmExternal: false });
+        evidence = `Indexing pre-flight for ${safe} (${registerResult.registered} registered internally, ${(result as { submitted: number }).submitted} submitted)`;
         break;
       }
       case "init_rank_tracking": {
@@ -1097,7 +1370,8 @@ export async function executeMasterAdminAction(
           const { runCompetitorAnalysisWorkflowAction } = await import(
             "./masterAdminCommercialIntelligenceWorkflowService.ts"
           );
-          const out = await runCompetitorAnalysisWorkflowAction(safe, user);
+          const executingJobId = typeof body.masterAdminJobId === "string" ? body.masterAdminJobId : null;
+          const out = await runCompetitorAnalysisWorkflowAction(safe, user, executingJobId);
           result = out;
           if (!out.ok) {
             status = "error";

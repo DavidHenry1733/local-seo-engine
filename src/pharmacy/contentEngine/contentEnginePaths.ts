@@ -15,3 +15,7 @@ export function getVisualExperienceRoot(slug: string, serviceId: string): string
 export function getMasterPublishRoot(slug: string, serviceId: string): string {
   return path.join(PHARMACY_WORKSPACE_ROOT, "output/pharmacy-master-publish", slug, serviceId);
 }
+
+export function getLocalPageCandidateRoot(slug: string, serviceId: string): string {
+  return path.join(PHARMACY_WORKSPACE_ROOT, "output/pharmacy-local-page-candidates", slug, serviceId);
+}

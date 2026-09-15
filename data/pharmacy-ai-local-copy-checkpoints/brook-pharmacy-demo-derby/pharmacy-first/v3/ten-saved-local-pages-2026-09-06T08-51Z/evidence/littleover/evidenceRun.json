@@ -1,0 +1,768 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "4c6d7dca-9023-45ad-b442-c4f35721ab42",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "littleover",
+  "areaName": "Littleover",
+  "planFingerprint": "76bc28433e2c02b428252f929b6a8772d1707cc0b356cb751905e5335288a43b",
+  "spendingCapUsd": 0.069,
+  "status": "completed",
+  "startedAt": "2026-09-05T19:41:02.208Z",
+  "updatedAt": "2026-09-05T19:41:08.760Z",
+  "completedAt": "2026-09-05T19:41:08.760Z",
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "paidCallsMade": 4,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Littleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "a70b8dad-4969-4bae-83c3-2a6ed579d576",
+      "detail": "5 Places result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:02.640Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Littleover locality, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "d50a39b5-3f93-4e50-9000-b255e2bdcec9",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:03.255Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Littleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "cfbb0db6-054b-4e3e-b89e-0a5ed74d3ca2",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:05.108Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Littleover, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "d07610b3-4f08-4805-9c6f-097e41541085",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-05T19:41:07.216Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "71934893-00bd-4091-bd4b-f0f3624c86a7",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/the-lanes-medical-centre/C81007002",
+      "capturedAt": "2026-09-05T19:41:07.892Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "687e5aaf-1248-46c0-826d-92f4b10b8a96",
+      "detail": "Retrieved https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/littleover-neighbourhood-ward/",
+      "capturedAt": "2026-09-05T19:41:08.688Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 3 km from Brook Pharmacy Demo Derby to Littleover. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-05T19:41:08.698Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Aspiro Healthcare - Hollybrook Medical Centre",
+        "address": "Hollybrook Way, Littleover, Derby DE23 3TX",
+        "types": [
+          "medical_center",
+          "hospital",
+          "doctor",
+          "health",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8918125,
+          "longitude": -1.5316355
+        },
+        "placeId": "ChIJc1xSwBb3eUgR7rEUz7QRXF0",
+        "locality": "Hollybrook Way, Littleover, Derby DE23 3TX",
+        "addressComponents": [
+          {
+            "longText": "Hollybrook Way",
+            "shortText": "Hollybrook Way",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Littleover",
+            "shortText": "Littleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE23 3TX",
+            "shortText": "DE23 3TX",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=6727271411650703854&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Horizon Healthcare | NHS GP Practice Derby",
+        "address": "3-5 Burton Rd, Derby DE1 1TH",
+        "types": [
+          "doctor",
+          "medical_center",
+          "physiotherapist",
+          "hospital",
+          "medical_clinic",
+          "health",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.917034099999995,
+          "longitude": -1.4788980999999999
+        },
+        "placeId": "ChIJp1IadEPxeUgRw6xSpLUhGu4",
+        "locality": "3-5 Burton Rd, Derby DE1 1TH",
+        "addressComponents": [
+          {
+            "longText": "3-5",
+            "shortText": "3-5",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Burton Road",
+            "shortText": "Burton Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE1 1TH",
+            "shortText": "DE1 1TH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17157062794451004611&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Private Medical Clinic Derby | Private GP",
+        "address": "79 Rykneld Rd, Littleover, Derby DE23 4DJ",
+        "types": [
+          "skin_care_clinic",
+          "doctor",
+          "medical_clinic",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8940956,
+          "longitude": -1.53195
+        },
+        "placeId": "ChIJubBYS1j3eUgRZxqihfnnJdA",
+        "locality": "79 Rykneld Rd, Littleover, Derby DE23 4DJ",
+        "addressComponents": [
+          {
+            "longText": "79",
+            "shortText": "79",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Rykneld Road",
+            "shortText": "Rykneld Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Littleover",
+            "shortText": "Littleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE23 4DJ",
+            "shortText": "DE23 4DJ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=14998649192902171239&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Village Surgery Medical Centre",
+        "address": "Browning St, Sunny Hill, Derby DE23 8AL",
+        "types": [
+          "medical_center",
+          "hospital",
+          "doctor",
+          "medical_clinic",
+          "health",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8963672,
+          "longitude": -1.4846924
+        },
+        "placeId": "ChIJgbw_2MTweUgRzSTEGNx-nFc",
+        "locality": "Browning St, Sunny Hill, Derby DE23 8AL",
+        "addressComponents": [
+          {
+            "longText": "Browning Street",
+            "shortText": "Browning St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Sunny Hill",
+            "shortText": "Sunny Hill",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE23 8AL",
+            "shortText": "DE23 8AL",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=6313060261440005325&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "The Lanes",
+        "address": "147 Normanton Ln, Littleover, Derby DE23 6LF",
+        "types": [
+          "consultant",
+          "health",
+          "service",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9017549,
+          "longitude": -1.5003081
+        },
+        "placeId": "ChIJZb32qdTweUgRfU7LvlPeSds",
+        "locality": "147 Normanton Ln, Littleover, Derby DE23 6LF",
+        "addressComponents": [
+          {
+            "longText": "147",
+            "shortText": "147",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Normanton Lane",
+            "shortText": "Normanton Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Littleover",
+            "shortText": "Littleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE23 6LF",
+            "shortText": "DE23 6LF",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15801405218870742653&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Littleover",
+        "address": "Littleover, Derby",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.9019677,
+          "longitude": -1.5206629
+        },
+        "placeId": "ChIJ1ymJFrXweUgRoTsgFZm4R34",
+        "locality": "Littleover, Derby",
+        "addressComponents": [
+          {
+            "longText": "Littleover",
+            "shortText": "Littleover",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=9099444539749317537&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Littleover, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-05T19:41:03.286Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://vernonstreetandthelanes.co.uk/",
+          "title": "Vernon Street Medical Centre – NHS GP Surgery in Derby",
+          "description": "Medical Centre 147 Normanton Lane Littleover Derby Derbyshire DE23 6LF Get directions 01332 332812"
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/the-lanes-medical-centre/C81007002",
+          "title": "The Lanes Medical Centre",
+          "description": "The Lanes Medical Centre. 147 Normanton Lane, Littleover, Derby, Derbyshire, DE23 6LF. Information: This GP surgery is currently accepting new patients. Read more"
+        },
+        {
+          "url": "https://mickleovermedicalcentre.co.uk/",
+          "title": "Mickleover Medical Centre – NHS GP Surgery in Derby",
+          "description": "Mickleover Medical Centre. News. Read the latest practice and NHS news. Appointments. Find out how to make, change or cancel an appointment. Rapid Health. Find ... Read more"
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, 01332 737777 Humbleton"
+        },
+        {
+          "url": "https://mickleoversurgery.co.uk/",
+          "title": "Mickleover Surgery – NHS GP Surgery in Derby",
+          "description": "10 Cavendish Way Mickleover Derby Derbyshire DE3 9BJ Get directions 01332 519160 Appointments Prescriptions Services About the surgery"
+        },
+        {
+          "url": "https://derbyfamilymedicalcentre.co.uk/",
+          "title": "Derby Family Medical Centre – NHS GP Surgery in Normanton",
+          "description": "Hastings Street Derby DE23 6QQ Get directions 01332 773 243 Home Appointments"
+        },
+        {
+          "url": "https://derbygp.co.uk/",
+          "title": "Find an NHS GP in Derby | Choose From 33 Practices",
+          "description": "Finding an NHS GP in the heart of Derby is now easier than ever. There are 33 GP practices within 3 miles of Derby City Centre that are currently accepting ..."
+        },
+        {
+          "url": "https://chapelstreetmcderby.nhs.uk/surgery-information/about-us/",
+          "title": "About us",
+          "description": "20 Dec 2024 — NHS GP Surgeries in Derby … 10 Chapel Street Spondon Derby DE21 7RJ Get directions 01332 680520"
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+          "title": "List of GP practices in Derby and Derbyshire - May 2025",
+          "description": "20 May 2025 — View a full list of GP practices across Derby and Derbyshire, including practice codes, addresses and contact information."
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Littleover, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-05T19:41:05.112Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/littleover-neighbourhood-ward/",
+          "title": "Littleover neighbourhood ward - Derby ...",
+          "description": "Littleover Neighbourhood team ; Kelsey Mumford, Neighbourhood Officer, 07920 387463, kelsey.mumford@derby.gov.uk ; Cheryl Ward, Local Area Coordinator, Littleover ... Read more"
+        },
+        {
+          "url": "https://members.derbyshirealert.co.uk/AlertMessage/Attachment/3AF50085BE5CF72D1DC982A0520D0D1D",
+          "title": "Locality 4 Littleover ward Community Care Guide",
+          "description": "The Community Nursing team can be contacted by calling the Community Access Point: 01332 564900. For equipment to support activities of daily living please ... Read more"
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/council/news-events/news-updates/news/north-or-south-check-which-new-unitary-council-will-provide-your-services.aspx",
+          "title": "North or south? Check which new unitary council will ...",
+          "description": "17 Jul 2026 — An online postcode look-up tool has been launched for residents in Derbyshire and Derby to check which new unitary council will serve the ..."
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://www.facebook.com/mickleovercouncillors/photos/as-our-community-grows-there-are-an-increasing-amount-of-local-residents-who-liv/3646752645421547/",
+          "title": "Mickleover",
+          "description": "Mackworth and Littleover wards are. Mickleover Pavilion, off Vicarage Road - 5pm to 6:30pm. 📨 You can also email us, email@ ..."
+        },
+        {
+          "url": "https://littleeatonparishcouncil.gov.uk/news/proposed-changes-to-councils-in-derby-and-derbyshire-have-your-say/",
+          "title": "Proposed changes to councils in Derby and Derbyshire ...",
+          "description": "14 Jul 2025 — Derbyshire's eight district and borough councils and Derby City Council are working together to propose a new structure that best meets the ... Read more"
+        },
+        {
+          "url": "https://democracy.highpeak.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Parish councils contact information. Email: clerk@bamfordwiththornhill-pc.gov.uk. Work phone: 01663 750139. Contact Work phone: 07503 203266 Email: clerk@ ..."
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Littleover",
+          "title": "Littleover",
+          "description": "Littleover is a village and suburb in the city of Derby, in Derbyshire, England, between Rose Hill, Normanton, Sunny Hill and Mickleover, Dialling code 01332"
+        },
+        {
+          "url": "https://www.southderbyshire.gov.uk/about-us/councillors-and-meetings/parish-councils",
+          "title": "Parish councils",
+          "description": "There are 31 Parish Councils in South Derbyshire. A full breakdown of chairmen and clerks is available should you wish to get in touch or attend meetings. Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/the-lanes-medical-centre/C81007002",
+      "title": "The Lanes Medical Centre - NHS",
+      "status": 200,
+      "textSample": "The Lanes Medical Centre - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care The Lanes Medical Centre 147 Normanton Lane, Littleover, Derby, Derbyshire, DE23 6LF Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-05T19:41:07.892Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-d-s/littleover-neighbourhood-ward/",
+      "title": "Littleover neighbourhood ward - Derby City Council",
+      "status": 200,
+      "textSample": "Littleover neighbourhood ward - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Council and democracy Neighbourhood partnerships Wards D to S Littleover neighbourhood ward Littleover neighbourhood ward Littleover Neighbourhood team If you would like to get involved in your neighbourhood or you have ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Daniel Giles Neighbourhood Manager 07342 078202 daniel.giles@derby.gov.uk Kelsey Mumford Neighbourhood Officer 07920 387463 kelsey.mumford@derby.gov.uk Cheryl Ward Local Area Coordinator, Littleover 07766 602565 cheryl.ward@derby.gov.uk Rajeev Nath Local Area Coordinator, Royal Derby Hospital (Discharge Unit) 07812 301045 rajeev.nath@derby.gov.uk Anti-social behaviour and crime If you wish to complain about antisocial behaviour or report a crime, you can contact the Littleover Safer Neighbourhood Team by: telephone: 101 email: peartree.neighbourhoods@derbyshire.pnn.police.co.uk Your Safer Neighbourhood Team is committed to making your community a safer and better place to live and work. Find out more about the Littleover and Blagreaves Safer Neighbourhood Team on Derbyshire Constabulary's website. Littleover Neighbourhood Board The forum/board: leads on behalf of the whole neighbourhood agrees on the priorities for the neighbourhood decides where delegated Council budgets are to be spent monitors performance influences decisions that reflect the views of local residents decides on the vision for your neighbourhood The Neighbourhood Board received a budget from October 2019 and will receive a further budget from April 2020. This budget is to enable voluntary and community groups (non-commercial) to apply for funding for projects or events, that will both benefit and enable the community and its residents. If you would be interested in putting together a funding application for consideration by the board, &zwnj;please read the guidance and complete the form: &zwnj;Board Funding Application 2022/23 Neighbourhood board devolved budget funding guidance Members of Littleover Neighbourhood Board Chair - Councillor Care Councillor Atwal Councillor Lonsdale Littleover Neighbourhood Forum If you would like to raise an issue or require more information, contact one of your local Councillors: Chair - Councillor Care Councillor Atwal Councillor Lonsdale Next forum meeting Heatherton Community Centre, Hollybrook Way, 7pm, 7 December 2022 Ward Walkabouts Ward walkabouts is an initiative to strengthen community spirit and build safer communities. This involves councillors, Neighbourhoods, Derby Homes and the Police, together with local residents leading a high profile and visible patrol. The idea behind this is to get back to traditional community values of local people looking out for each other and identifying any problems raised in the area. We will litter pick, greet and listen so come along and join us. For further information please telephone Jonathan Till on 01332 888725 . Previous Next More in this section Darley neighbourhood ward Littleover neighbourhood ward Mackworth neighbourhood ward Mickleover neighbourhood ward Oakwood neighbourhood ward Normanton neighbourhood ward Sinfin and Osmaston neighbourhood ward Spondon neighbourhood ward Contact details Email: neighbourhoods@derby.gov.uk Department: --> Phone: - --> --> Relay UK: --> SignVideo: Signing service Address: Community Safety and Integration Service Public Protection and Streetpride The Council House Corporation Street Derby DE1 2FS Document downloads Useful links --> Derbyshire Police --> Derby Homes --> Derby and Derbyshire Integrated Care Board --> Derbyshire Fire and Rescue Service Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-05T19:41:08.688Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.9019677,
+    "longitude": -1.5206629,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 3,
+  "verifiedGpPracticeCount": 1,
+  "findings": [
+    "1 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "substantive editorial evidence supports intro, context and access",
+    "Actual evidence spend $0.068 of cap $0.069. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/littleover.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/littleover.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 1 verified GP practice(s). Spend $0.068.",
+  "reprocessedAt": null
+}

@@ -1,0 +1,212 @@
+{
+  "version": "1.0",
+  "purpose": "Service-specific clinical and marketing expertise for Content Quality Layer V1.",
+  "categoryDefaults": {
+    "core-pharmacy": {
+      "clinicalConcepts": ["Medicines supply", "Dispensing accuracy", "Patient counselling", "Medication adherence"],
+      "patientConcerns": ["How long will my prescription take?", "Can someone else collect?", "Will the pharmacist check my medicines?"],
+      "riskFactors": ["Polypharmacy", "Missed doses", "Medication interactions", "Mobility barriers to collection"],
+      "consultationTopics": ["Prescription validation", "Medicines use review", "Supply timelines", "Safety-netting"],
+      "commonMistakes": ["Running out before reordering", "Not updating GP with medicine changes", "Mixing OTC without advice"],
+      "serviceTerminology": ["Dispensing", "Clinical check", "Patient counselling", "EPS nomination"],
+      "serviceExplanations": ["Community pharmacies provide regulated medicines supply with pharmacist oversight on every prescription."],
+      "authorityStatements": ["Pharmacists perform clinical checks before supply to support safe medicines use."],
+      "contentDo": ["Explain dispensing steps clearly", "Mention EPS where relevant", "Highlight pharmacist checks"],
+      "contentAvoid": ["Do not guarantee supply times without caveats", "Do not provide individual prescribing advice online"]
+    },
+    "nhs-clinical": {
+      "clinicalConcepts": ["NHS clinical pathways", "PGD governance", "Pharmacist assessment", "Referral criteria"],
+      "patientConcerns": ["Is this free on the NHS?", "Do I need an appointment?", "Can a pharmacy treat this instead of my GP?"],
+      "riskFactors": ["Delayed GP access", "Minor illness worsening", "Uncertainty about urgent care", "Work-hour conflicts"],
+      "consultationTopics": ["Clinical assessment", "Supply where eligible", "Safety-netting", "GP or 111 referral"],
+      "commonMistakes": ["Assuming every pharmacy offers every NHS service", "Delaying care when symptoms worsen", "Expecting treatment outside PGD scope"],
+      "serviceTerminology": ["NHS commissioned service", "Pharmacy consultation", "PGD", "Clinical pathway"],
+      "serviceExplanations": ["NHS pharmacy clinical services offer convenient access for selected conditions without always needing a GP appointment."],
+      "authorityStatements": ["Participating pharmacies follow NHS service specifications and PGDs where applicable."],
+      "contentDo": ["State NHS eligibility caveats", "List referral triggers", "Use pathway language accurately"],
+      "contentAvoid": ["Do not claim universal NHS availability", "Do not replace GP or emergency care", "Do not diagnose online"]
+    },
+    "private-clinical": {
+      "clinicalConcepts": ["Private consultation", "Self-pay healthcare", "Clinical assessment", "Treatment suitability"],
+      "patientConcerns": ["How much does it cost?", "Do I need a GP referral?", "How soon can I be seen?"],
+      "riskFactors": ["GP waiting lists", "Self-pay preference", "Preventive health motivation", "Occupational requirements"],
+      "consultationTopics": ["Initial assessment", "Fee transparency", "Treatment options", "Follow-up planning"],
+      "commonMistakes": ["Assuming NHS covers private services", "Not disclosing medical history", "Expecting instant treatment without assessment"],
+      "serviceTerminology": ["Private consultation", "Clinical assessment", "Pharmacy-led care", "Treatment pathway"],
+      "serviceExplanations": ["Private pharmacy services offer faster access where clinically appropriate, with fees explained before treatment."],
+      "authorityStatements": ["Qualified pharmacists assess suitability before any private supply or treatment."],
+      "contentDo": ["Be transparent about private fees", "Explain assessment process", "Signpost to GP when needed"],
+      "contentAvoid": ["Do not guarantee outcomes", "Do not overstate treatment success", "Do not imply NHS funding"]
+    },
+    "specialist": {
+      "clinicalConcepts": ["Advanced pharmacy practice", "Independent prescribing", "Occupational health", "Corporate programmes"],
+      "patientConcerns": ["Am I eligible for pharmacist prescribing?", "Can my employer arrange this?", "What conditions are in scope?"],
+      "riskFactors": ["Complex medicines needs", "Workforce health exposure", "Referral delays from primary care"],
+      "consultationTopics": ["Scope of practice", "Structured assessment", "Prescribing or supply", "Monitoring plan"],
+      "commonMistakes": ["Assuming all conditions can be treated in pharmacy", "Not bringing medicines list", "Skipping follow-up appointments"],
+      "serviceTerminology": ["Independent prescriber", "Clinical scope", "Occupational health", "Structured review"],
+      "serviceExplanations": ["Specialist pharmacy services extend access to advanced clinical care within pharmacist scope."],
+      "authorityStatements": ["Advanced services are delivered by appropriately qualified pharmacy professionals."],
+      "contentDo": ["Clarify scope boundaries", "Explain qualifications", "Describe employer options where relevant"],
+      "contentAvoid": ["Do not claim GP replacement", "Do not guarantee prescribing", "Do not exceed scope of practice in copy"]
+    }
+  },
+  "services": {
+    "travel-vaccinations": {
+      "clinicalConcepts": ["Hepatitis A", "Typhoid", "Rabies", "Yellow Fever", "Japanese Encephalitis", "Malaria prevention", "Destination-specific risk"],
+      "patientConcerns": ["Which vaccines do I need?", "How soon before travel should I book?", "Are vaccines required for my destination?", "Is it safe for children?", "What if I am travelling at short notice?"],
+      "riskFactors": ["Destination", "Length of stay", "Planned activities", "Rural travel", "Backpacking", "Visiting friends and relatives overseas", "Medical history"],
+      "consultationTopics": ["Destination review", "Vaccination schedule", "Travel risk assessment", "Malaria advice", "Travel health precautions", "Documentation where required"],
+      "commonMistakes": ["Booking too close to departure", "Assuming all vaccines are available on the NHS", "Not checking destination-specific requirements", "Forgetting booster schedules"],
+      "serviceTerminology": ["Travel risk assessment", "Destination advice", "Vaccination schedule", "Malaria prevention", "Yellow fever certificate", "Travel health consultation"],
+      "serviceExplanations": ["Travel vaccinations help protect against diseases that may be more common in certain countries.", "The vaccines needed depend on destination, medical history, previous vaccinations and planned activities.", "Some vaccines need to be given several weeks before travel."],
+      "authorityStatements": ["A pharmacy travel consultation can help patients understand which vaccines may be recommended before departure.", "Professional advice helps reduce avoidable travel health risks."],
+      "contentDo": ["Mention destination-specific planning", "Explain booking lead times", "Reference common travel vaccines by name"],
+      "contentAvoid": ["Do not claim every vaccine is available.", "Do not claim NHS funding unless explicitly stated.", "Do not guarantee protection.", "Do not provide destination-specific medical advice without consultation."]
+    },
+    "blood-pressure-checks": {
+      "clinicalConcepts": ["Hypertension", "Cardiovascular risk", "Stroke", "Heart disease", "Kidney disease", "Ambulatory blood pressure monitoring"],
+      "patientConcerns": ["Is my blood pressure too high?", "What do the numbers mean?", "Do I need to see a GP?", "Can lifestyle changes help?", "How often should I be checked?"],
+      "riskFactors": ["Age over 40", "Family history", "Smoking", "High salt intake", "Diabetes", "Being overweight", "Low physical activity"],
+      "consultationTopics": ["Blood pressure measurement", "Lifestyle advice", "Referral pathways", "Ambulatory monitoring", "Cardiovascular risk awareness"],
+      "commonMistakes": ["Ignoring high readings", "Only checking once", "Not following up with GP when advised", "Assuming high blood pressure always causes symptoms"],
+      "serviceTerminology": ["Hypertension", "Systolic", "Diastolic", "Cardiovascular risk", "Ambulatory monitoring", "NHS Hypertension Case-Finding Service"],
+      "serviceExplanations": ["High blood pressure often has no symptoms but can increase the risk of stroke, heart disease and kidney problems.", "A pharmacy blood pressure check can help identify raised readings and guide patients toward appropriate follow-up.", "Some patients may be offered ambulatory monitoring or referred to their GP depending on the result."],
+      "authorityStatements": ["Community pharmacies can provide convenient access to blood pressure checks without needing to wait for a routine GP appointment.", "Early detection of raised blood pressure can support better long-term health outcomes."],
+      "contentDo": ["Explain systolic and diastolic simply", "Mention ABPM where relevant", "State referral to GP clearly"],
+      "contentAvoid": ["Do not diagnose hypertension from one reading.", "Do not replace GP or emergency care.", "Do not guarantee treatment.", "Do not give individual medical advice without assessment."]
+    },
+    "repeat-prescriptions": {
+      "clinicalConcepts": ["Repeat dispensing", "EPS nomination", "Medication continuity", "Prescription ordering", "Synchronisation with GP surgery"],
+      "patientConcerns": ["How do I order my repeat medication?", "Can you remind me when my repeat is due?", "Can I nominate this pharmacy for EPS?", "What if my surgery is slow to authorise?"],
+      "riskFactors": ["Missed medication doses", "Carer-managed medicines", "Multiple repeat items", "Housebound patients", "Work-hour collection conflicts"],
+      "consultationTopics": ["Repeat ordering process", "EPS nomination", "Collection arrangements", "Medication continuity planning", "Surgery liaison"],
+      "commonMistakes": ["Running out before reordering", "Not checking repeat interval changes", "Assuming all items renew automatically", "Forgetting to update nomination after moving pharmacy"],
+      "serviceTerminology": ["Repeat prescription", "EPS nomination", "Electronic Prescription Service", "Nominated pharmacy", "Medication continuity"],
+      "serviceExplanations": ["Repeat prescription services help patients stay on regular medicines without unnecessary gaps in supply.", "EPS nomination sends prescriptions electronically to your chosen pharmacy, reducing collection delays.", "Pharmacy teams can coordinate with GP surgeries when authorisation is delayed."],
+      "authorityStatements": ["A reliable repeat prescription process supports adherence and reduces avoidable medicines gaps.", "Pharmacists can advise on reorder timing and EPS setup."],
+      "contentDo": ["Explain EPS clearly", "Mention reorder lead times", "Address carer and housebound scenarios"],
+      "contentAvoid": ["Do not guarantee surgery authorisation times", "Do not imply pharmacists can authorise repeats without GP", "Do not promise same-day supply without clinical check"]
+    },
+    "prescription-delivery": {
+      "clinicalConcepts": ["Domiciliary supply", "Medication continuity", "Safe delivery chain", "Patient consent", "Care home supply"],
+      "patientConcerns": ["Do you deliver to my address?", "How often can medicines be delivered?", "Is delivery free?", "Can a carer receive on my behalf?"],
+      "riskFactors": ["Mobility limitations", "Elderly living alone", "Rural addresses", "Long-term conditions", "Post-discharge recovery"],
+      "consultationTopics": ["Delivery eligibility", "Delivery scheduling", "Safe handover", "Repeat integration", "Coverage area review"],
+      "commonMistakes": ["Not informing the pharmacy of address changes", "Assuming all medicines can be posted", "Missing delivery windows", "Not arranging a safe receipt point"],
+      "serviceTerminology": ["Prescription delivery", "Domiciliary supply", "Home delivery", "Medication continuity", "Delivery route"],
+      "serviceExplanations": ["Prescription delivery supports patients who cannot easily collect medicines in person.", "Delivery is coordinated with dispensing checks so medicines arrive safely and with appropriate counselling where needed.", "Coverage depends on local delivery routes and clinical suitability of supply by post or courier."],
+      "authorityStatements": ["Home delivery helps maintain medication continuity for housebound and mobility-limited patients.", "Pharmacy teams apply the same dispensing standards to delivered medicines."],
+      "contentDo": ["Explain who delivery helps", "Clarify area coverage honestly", "Link to repeat prescription support"],
+      "contentAvoid": ["Do not promise universal free delivery", "Do not guarantee next-day delivery everywhere", "Do not deliver controlled drugs without proper process"]
+    },
+    "pharmacy-first": {
+      "clinicalConcepts": ["NHS Pharmacy First", "Minor illness consultation", "PGD pathways", "Sore throat assessment", "UTI pathway", "Shingles", "Impetigo", "Sinusitis", "Earache"],
+      "patientConcerns": ["Can the pharmacy treat my sore throat?", "Is Pharmacy First free?", "Do I need an appointment?", "What if the pharmacist cannot help?"],
+      "riskFactors": ["GP access delays", "Symptoms worsening while waiting", "Uncertainty about A&E", "Children with minor illness"],
+      "consultationTopics": ["Condition assessment", "Supply where eligible", "Self-care advice", "GP referral", "111 or urgent care signposting"],
+      "commonMistakes": ["Expecting treatment for out-of-scope conditions", "Delaying GP care when red flags present", "Assuming every pharmacy offers every pathway"],
+      "serviceTerminology": ["Pharmacy First", "NHS minor illness service", "Clinical pathway", "PGD", "Pharmacist consultation"],
+      "serviceExplanations": ["Pharmacy First allows participating pharmacies to assess and treat selected common conditions without a GP appointment first.", "Pathways include sore throat, earache, sinusitis, impetigo, infected insect bites, shingles and uncomplicated UTIs in women — subject to assessment.", "Pharmacists refer to GP or urgent care when symptoms fall outside the service scope."],
+      "authorityStatements": ["Pharmacy First can reduce pressure on GP appointments for suitable minor illness cases.", "Pharmacist-led assessment ensures patients receive appropriate care or clear referral."],
+      "contentDo": ["Name conditions accurately", "Explain referral triggers", "State NHS commissioning caveats"],
+      "contentAvoid": ["Do not list conditions not locally commissioned", "Do not replace emergency care", "Do not guarantee supply for every presentation"]
+    },
+    "weight-management": {
+      "clinicalConcepts": ["Obesity management", "BMI assessment", "Cardiovascular risk", "GLP-1 eligibility", "Lifestyle modification", "Behaviour change"],
+      "patientConcerns": ["Am I eligible for pharmacy weight support?", "Will I lose a specific amount of weight?", "Are there side effects?", "How often are follow-ups?"],
+      "riskFactors": ["High BMI", "Type 2 diabetes risk", "Hypertension", "Previous failed diets", "Medicines affecting weight"],
+      "consultationTopics": ["Initial assessment", "BMI and lifestyle review", "Treatment suitability", "Monitoring plan", "Realistic goal setting"],
+      "commonMistakes": ["Expecting rapid guaranteed weight loss", "Not disclosing medical history", "Skipping follow-up appointments", "Ignoring lifestyle component"],
+      "serviceTerminology": ["Weight management consultation", "BMI review", "Treatment eligibility", "Structured support", "Lifestyle counselling"],
+      "serviceExplanations": ["Weight management in pharmacy focuses on structured assessment, lifestyle support and eligible treatment pathways.", "Outcomes vary by individual — goals should be realistic and clinically appropriate.", "Ongoing monitoring helps track progress and safety."],
+      "authorityStatements": ["Pharmacy weight management combines clinical assessment with practical lifestyle support.", "Eligibility for certain treatments depends on individual assessment and current guidance."],
+      "contentDo": ["Emphasise realistic outcomes", "Explain assessment steps", "Mention monitoring"],
+      "contentAvoid": ["Do not guarantee weight loss", "Do not promise specific results", "Do not advertise outside legal supply frameworks"]
+    },
+    "ear-wax-removal": {
+      "clinicalConcepts": ["Cerumen impaction", "Microsuction", "Ear irrigation", "Hearing aid clearance", "Otoscopic examination"],
+      "patientConcerns": ["Is microsuction safe?", "Will my hearing improve?", "How long does removal take?", "Do I need GP referral first?"],
+      "riskFactors": ["Cotton bud use", "Hearing aid use", "Previous ear surgery", "Perforated eardrum history", "Recurrent blockages"],
+      "consultationTopics": ["Ear examination", "Removal method selection", "Aftercare advice", "Referral for ear pathology"],
+      "commonMistakes": ["Using cotton buds regularly", "Attempting home removal with objects", "Ignoring pain or discharge", "Delaying review when hearing suddenly changes"],
+      "serviceTerminology": ["Microsuction", "Ear wax removal", "Cerumen management", "Ear examination", "Hearing canal clearance"],
+      "serviceExplanations": ["Professional ear wax removal reduces the risk of canal injury compared with home methods.", "Microsuction or irrigation may be used depending on examination findings and suitability.", "Referral is recommended if infection, perforation or other pathology is suspected."],
+      "authorityStatements": ["Trained pharmacy teams assess the ear before any removal procedure.", "Safe technique and aftercare advice support clearer hearing and comfort."],
+      "contentDo": ["Explain examination first", "Mention microsuction where available", "State referral criteria"],
+      "contentAvoid": ["Do not claim suitability without examination", "Do not treat suspected infection as wax alone", "Do not guarantee permanent clearance"]
+    },
+    "vitamin-b12-injections": {
+      "clinicalConcepts": ["Vitamin B12 deficiency", "Pernicious anaemia maintenance", "Hydroxocobalamin", "Injection scheduling", "Fatigue assessment"],
+      "patientConcerns": ["Do I need a B12 injection?", "How often will I need injections?", "Can the pharmacy inject if my GP prescribes?", "Could tiredness be something else?"],
+      "riskFactors": ["Vegetarian or vegan diet", "Metformin use", "Malabsorption", "Previous deficiency diagnosis", "Uninvestigated fatigue"],
+      "consultationTopics": ["Prescription verification", "Injection administration", "Maintenance scheduling", "GP blood monitoring coordination"],
+      "commonMistakes": ["Self-diagnosing deficiency without blood tests", "Missing maintenance doses", "Ignoring new symptoms needing GP review", "Expecting instant energy improvement"],
+      "serviceTerminology": ["B12 injection", "Hydroxocobalamin", "Deficiency maintenance", "Intramuscular injection", "Prescription-led supply"],
+      "serviceExplanations": ["B12 injections support patients with confirmed deficiency when prescribed appropriately.", "Maintenance schedules depend on diagnosis and GP monitoring plans.", "Tiredness has many causes — suitability requires appropriate prescription and assessment."],
+      "authorityStatements": ["Pharmacy injection services provide convenient access for prescribed B12 maintenance.", "Patients with unexplained symptoms should be signposted to GP investigation."],
+      "contentDo": ["Require prescription context", "Explain maintenance nature", "Signpost unexplained fatigue to GP"],
+      "contentAvoid": ["Do not diagnose deficiency in marketing copy", "Do not promise energy boosts", "Do not inject without valid prescription"]
+    },
+    "smoking-cessation": {
+      "clinicalConcepts": ["Nicotine dependence", "Nicotine replacement therapy", "Quit planning", "Withdrawal support", "Carbon monoxide monitoring"],
+      "patientConcerns": ["Can the pharmacy help me quit?", "Is stop smoking support free on the NHS?", "What products can you supply?", "How long does support last?"],
+      "riskFactors": ["Heavy smoking history", "Previous quit attempts", "Pregnancy", "Mental health conditions", "Social smoking triggers"],
+      "consultationTopics": ["Quit date planning", "NRT options", "Behavioural support", "Follow-up reviews", "Relapse prevention"],
+      "commonMistakes": ["Trying to quit without support", "Stopping NRT too early", "Not tracking triggers", "Missing follow-up sessions"],
+      "serviceTerminology": ["Smoking cessation", "Nicotine replacement therapy", "Quit plan", "NRT", "Stop smoking service"],
+      "serviceExplanations": ["Pharmacy stop smoking services combine behavioural support with licensed nicotine replacement where eligible.", "Regular reviews improve quit rates compared with going alone.", "NHS pathways may cover support and certain products for eligible patients."],
+      "authorityStatements": ["Pharmacists are well placed to support quit attempts with practical, non-judgemental advice.", "Structured quit planning improves long-term success rates."],
+      "contentDo": ["Mention NHS eligibility caveats", "Explain NRT options generally", "Encourage follow-up"],
+      "contentAvoid": ["Do not guarantee quit success", "Do not dismiss medical need for nicotine", "Do not replace specialist mental health care"]
+    },
+    "pharmacy-contraception-service": {
+      "clinicalConcepts": ["Oral contraception", "Progestogen-only pill", "Blood pressure monitoring", "Contraindication screening", "NHS Pharmacy Contraception Service"],
+      "patientConcerns": ["Can I get my pill from the pharmacy?", "Do I need a blood pressure check?", "Can I switch contraceptive pill?", "What if I missed pills?"],
+      "riskFactors": ["Age over 35 with smoking", "Migraine with aura", "Hypertension", "Previous VTE", "New starters without assessment"],
+      "consultationTopics": ["Contraception review", "Blood pressure check", "Supply where commissioned", "Missed pill advice", "GP referral"],
+      "commonMistakes": ["Not declaring medical history", "Missing blood pressure checks", "Assuming all pills are pharmacy-supplied", "Ignoring missed pill guidance"],
+      "serviceTerminology": ["Pharmacy Contraception Service", "Oral contraception supply", "Contraception consultation", "Blood pressure screening"],
+      "serviceExplanations": ["The NHS Pharmacy Contraception Service allows commissioned pharmacies to supply selected oral contraception after assessment.", "Blood pressure and medical history review help ensure safe supply.", "Some cases require GP or specialist referral rather than pharmacy supply."],
+      "authorityStatements": ["Pharmacy contraception consultations provide convenient repeat supply where clinically appropriate.", "Pharmacists follow commissioning and PGD requirements for safe supply."],
+      "contentDo": ["State commissioning variability", "Mention BP checks", "Explain referral boundaries"],
+      "contentAvoid": ["Do not claim all pills are in scope", "Do not supply without assessment", "Do not replace sexual health clinic for complex cases"]
+    },
+    "prescription-dispensing": {
+      "clinicalConcepts": ["Clinical accuracy check", "Dispensing governance", "Medicines safety", "Label counselling", "Drug interactions"],
+      "patientConcerns": ["How long until my prescription is ready?", "Will you check my medicines are safe together?", "Can I get advice when collecting?"],
+      "riskFactors": ["New medicines", "Multiple prescribers", "Elderly patients", "Complex regimens"],
+      "consultationTopics": ["Prescription intake", "Clinical screening", "Labelling and counselling", "Handover checks"],
+      "commonMistakes": ["Not declaring OTC medicines", "Collecting without understanding dosage changes", "Rushing counselling at handover"],
+      "serviceTerminology": ["Dispensing", "Clinical check", "Medicines counselling", "NHS prescription supply"],
+      "serviceExplanations": ["Every prescription is screened by a pharmacist before supply to support safe use.", "Counselling at collection helps patients understand changes to therapy."],
+      "authorityStatements": ["Regulated dispensing is the foundation of safe community pharmacy care."],
+      "contentDo": ["Highlight pharmacist checks", "Mention counselling at collection"],
+      "contentAvoid": ["Do not quote fixed turnaround times universally", "Do not replace prescriber advice for complex changes"]
+    },
+    "new-medicine-service": {
+      "clinicalConcepts": ["New Medicine Service", "NMS", "Medication adherence", "Side effect monitoring", "Asthma inhalers", "Antihypertensives"],
+      "patientConcerns": ["Why am I being invited for NMS?", "Is NMS mandatory?", "What happens at the follow-up?", "What if I get side effects?"],
+      "riskFactors": ["First time on medicine", "Complex inhaler technique", "Silent side effects", "Low adherence"],
+      "consultationTopics": ["Initial medicines discussion", "Follow-up appointment", "Adherence review", "Side effect check", "GP referral if needed"],
+      "commonMistakes": ["Skipping the follow-up call", "Stopping new medicine without advice", "Not asking about inhaler technique", "Ignoring mild side effects"],
+      "serviceTerminology": ["New Medicine Service", "NMS", "Structured follow-up", "Medication adherence support"],
+      "serviceExplanations": ["NMS supports patients starting selected new medicines with structured follow-up from the pharmacy.", "Follow-up helps identify problems early and improves adherence."],
+      "authorityStatements": ["NMS is an NHS service designed to improve outcomes for new medicine starters."],
+      "contentDo": ["Explain two-step NMS process", "Name eligible medicine groups generally"],
+      "contentAvoid": ["Do not claim NMS for all medicines", "Do not replace prescriber for dose changes"]
+    },
+    "travel-health-consultations": {
+      "clinicalConcepts": ["Travel medicine", "Multi-country itineraries", "Malaria chemoprophylaxis", "Altitude illness", "Travel vaccination planning"],
+      "patientConcerns": ["I am visiting several countries — what do I need?", "Is this more than a vaccination appointment?", "Can you advise on malaria tablets?"],
+      "riskFactors": ["Long-haul travel", "Rural or adventure travel", "Extended stays", "Complex medical history"],
+      "consultationTopics": ["Full itinerary review", "Vaccine and malaria planning", "Travel health record", "Booster scheduling"],
+      "commonMistakes": ["Planning only vaccinations without broader travel health", "Booking too late for multi-course vaccines", "Not bringing itinerary details"],
+      "serviceTerminology": ["Travel health consultation", "Itinerary review", "Malaria prophylaxis advice", "Travel medicine planning"],
+      "serviceExplanations": ["Travel health consultations go beyond single vaccines to review the whole trip and health context.", "Complex itineraries may need longer planning horizons for full protection."],
+      "authorityStatements": ["In-depth travel health planning reduces avoidable risks on complex trips."],
+      "contentDo": ["Differentiate from standard travel vaccinations", "Mention itinerary review"],
+      "contentAvoid": ["Do not give country-specific prescriptions without consultation", "Do not guarantee complete protection"]
+    }
+  }
+}

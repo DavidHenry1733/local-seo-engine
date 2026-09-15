@@ -1,0 +1,287 @@
+{
+  "generatedAt": "2026-06-26T15:36:26.473Z",
+  "slug": "pharmaconnect",
+  "services": [
+    "blood-pressure-checks",
+    "pharmacy-first",
+    "travel-vaccinations",
+    "emergency-contraception"
+  ],
+  "summary": {
+    "passed": 44,
+    "total": 44,
+    "allPass": true
+  },
+  "checks": [
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "service-id-normalised",
+      "pass": true,
+      "detail": "blood-pressure-checks"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "dashboard-selected-service",
+      "pass": true,
+      "detail": "selected=blood-pressure-checks"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "dashboard-loads",
+      "pass": true,
+      "detail": "HTML renders"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "upload-form-serviceId",
+      "pass": true,
+      "detail": "Page embeds selected serviceId"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "no-bare-routes",
+      "pass": true,
+      "detail": "Links use /api/pharmacy-image-library"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "service-select-redirect",
+      "pass": true,
+      "detail": "Service change preserves slug/service/slot under /api path"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "assignment key blood-pressure-checks:hero"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Hero slot assigned after reload"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "live-upload-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "live-assign-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "id": "live-dashboard-skipped",
+      "pass": true,
+      "detail": "Auth-gated (302)"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "service-id-normalised",
+      "pass": true,
+      "detail": "pharmacy-first"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "dashboard-selected-service",
+      "pass": true,
+      "detail": "selected=pharmacy-first"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "dashboard-loads",
+      "pass": true,
+      "detail": "HTML renders"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "upload-form-serviceId",
+      "pass": true,
+      "detail": "Page embeds selected serviceId"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "no-bare-routes",
+      "pass": true,
+      "detail": "Links use /api/pharmacy-image-library"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "service-select-redirect",
+      "pass": true,
+      "detail": "Service change preserves slug/service/slot under /api path"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "assignment key pharmacy-first:hero"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Hero slot assigned after reload"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "live-upload-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "live-assign-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "pharmacy-first",
+      "id": "live-dashboard-skipped",
+      "pass": true,
+      "detail": "Auth-gated (302)"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "service-id-normalised",
+      "pass": true,
+      "detail": "travel-vaccinations"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "dashboard-selected-service",
+      "pass": true,
+      "detail": "selected=travel-vaccinations"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "dashboard-loads",
+      "pass": true,
+      "detail": "HTML renders"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "upload-form-serviceId",
+      "pass": true,
+      "detail": "Page embeds selected serviceId"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "no-bare-routes",
+      "pass": true,
+      "detail": "Links use /api/pharmacy-image-library"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "service-select-redirect",
+      "pass": true,
+      "detail": "Service change preserves slug/service/slot under /api path"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "assignment key travel-vaccinations:hero"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Hero slot assigned after reload"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "live-upload-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "live-assign-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "id": "live-dashboard-skipped",
+      "pass": true,
+      "detail": "Auth-gated (302)"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "service-id-normalised",
+      "pass": true,
+      "detail": "emergency-contraception"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "dashboard-selected-service",
+      "pass": true,
+      "detail": "selected=emergency-contraception"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "dashboard-loads",
+      "pass": true,
+      "detail": "HTML renders"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "upload-form-serviceId",
+      "pass": true,
+      "detail": "Page embeds selected serviceId"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "no-bare-routes",
+      "pass": true,
+      "detail": "Links use /api/pharmacy-image-library"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "service-select-redirect",
+      "pass": true,
+      "detail": "Service change preserves slug/service/slot under /api path"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "assignment-saves",
+      "pass": true,
+      "detail": "assignment key emergency-contraception:hero"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "reload-shows-assignment",
+      "pass": true,
+      "detail": "Hero slot assigned after reload"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "live-upload-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "live-assign-skipped",
+      "pass": true,
+      "detail": "Auth-gated — offline checks used"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "id": "live-dashboard-skipped",
+      "pass": true,
+      "detail": "Auth-gated (302)"
+    }
+  ],
+  "manualTestUrls": [
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=blood-pressure-checks&slot=hero",
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=pharmacy-first&slot=hero",
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=travel-vaccinations&slot=hero",
+    "/api/pharmacy-image-library?slug=pharmaconnect&service=emergency-contraception&slot=hero"
+  ]
+}

@@ -210,32 +210,40 @@ export function buildHtml(projectRoot: string, slug: string) {
     sections.push(`<p>${escapeHtml(content.hero_subtitle)}</p>`);
   }
 
-  if (content.intro) {
-    sections.push(`
+  const coreSections = {
+    intro: content.intro ? `
 <h2>${escapeHtml(headings.introHeading)}</h2>
 ${formatParagraphs(content.intro)}
-`.trim());
-  }
+`.trim() : "",
 
-  if (content.local_section) {
-    sections.push(`
+    local: content.local_section ? `
 <h2>${escapeHtml(headings.localHeading)}</h2>
 ${formatParagraphs(content.local_section)}
-`.trim());
-  }
+`.trim() : "",
 
-  if (benefitsHtml) {
-    sections.push(`
+    benefits: benefitsHtml ? `
 <h2>${escapeHtml(headings.benefitsHeading)}</h2>
 ${benefitsHtml}
-`.trim());
-  }
+`.trim() : "",
 
-  if (content.why_choose_us) {
-    sections.push(`
+    why: content.why_choose_us ? `
 <h2>${escapeHtml(whyChooseHeading)}</h2>
 ${formatParagraphs(content.why_choose_us)}
-`.trim());
+`.trim() : "",
+  };
+
+  const templateStyle = (variation as any).templateStyle || "classic";
+
+  const templateOrder =
+    templateStyle === "problem_solution"
+      ? ["local", "intro", "benefits", "why"]
+      : templateStyle === "authority"
+        ? ["benefits", "why", "local", "intro"]
+        : ["intro", "local", "benefits", "why"];
+
+  for (const key of templateOrder) {
+    const sectionHtml = (coreSections as any)[key];
+    if (sectionHtml) sections.push(sectionHtml);
   }
 
   if (hubLinkHtml) {

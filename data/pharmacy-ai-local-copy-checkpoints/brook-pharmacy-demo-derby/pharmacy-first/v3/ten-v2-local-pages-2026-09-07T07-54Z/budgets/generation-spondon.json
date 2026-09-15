@@ -1,0 +1,39 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:spondon",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 2,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.030704,
+  "events": [
+    {
+      "at": "2026-09-06T07:49:18.204Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-06T07:49:18.276Z",
+      "kind": "reserve",
+      "reservationId": "r-1788680958276-1"
+    },
+    {
+      "at": "2026-09-06T07:49:20.007Z",
+      "kind": "consumed",
+      "reservationId": "r-1788680958276-1",
+      "detail": "cost=0.013616"
+    },
+    {
+      "at": "2026-09-07T07:53:37.956Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767617956-2"
+    },
+    {
+      "at": "2026-09-07T07:53:39.869Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767617956-2",
+      "detail": "cost=0.017088"
+    }
+  ]
+}

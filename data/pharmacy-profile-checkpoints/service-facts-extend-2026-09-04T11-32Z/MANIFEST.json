@@ -1,0 +1,34 @@
+{
+  "id": "service-facts-extend-2026-09-04T11-32Z",
+  "createdAt": "2026-09-04T10:32:00.000Z",
+  "task": "SERVICES PROFILE \u2014 EXTEND EXISTING DETAILS",
+  "schemaVersion": 5,
+  "profileV2FieldsVersion": 2,
+  "noPublication": true,
+  "noCommit": true,
+  "noAcceptedPageEdits": true,
+  "liveTenantProfilesUnchanged": true,
+  "workingUrl": "https://app.pharmaconnect.uk/api/pharmacy-profile-wizard?slug=dhmdigital&step=4",
+  "files": [
+    "src/pharmacy/pharmacyProfileV2Fields.ts",
+    "src/pharmacy/pharmacyProfileWizardPresets.ts",
+    "src/pharmacy/pharmacyProfileServiceFactsForm.ts",
+    "src/pharmacy/pharmacyProfileWizardSections.ts",
+    "src/pharmacy/pharmacyProfileDashboardV2Sections.ts",
+    "src/pharmacy/pharmacyProfileWizardPage.ts",
+    "artifacts/api-server/src/routes/api/pharmacyProfiles.ts",
+    "scripts/validate-pharmacy-profile-service-facts-v1.ts"
+  ],
+  "tests": {
+    "validate-pharmacy-profile-service-facts-v1": "51/51",
+    "validate-pharmacy-profile-wizard-v1": "73/73"
+  },
+  "browser": {
+    "tenant": "dhmdigital",
+    "step": 4,
+    "desktop": "1440x900",
+    "mobile": "390x844",
+    "overflowX": 0,
+    "brookInvention": false
+  }
+}

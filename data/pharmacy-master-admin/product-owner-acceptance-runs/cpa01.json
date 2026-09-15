@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "runId": "CPA-01",
+  "status": "INVALIDATED_BY_BROWSER_DEFECT",
+  "invalidatedAt": "2026-07-26T11:52:00.000Z",
+  "slug": "cpa01-acceptance-pharmacy",
+  "businessName": "CPA01 Acceptance Pharmacy",
+  "preservedForAudit": true,
+  "reuseBlocked": true,
+  "failureStage": "immediately after Create Customer",
+  "defect": "ReferenceError: atCpr is not defined",
+  "developerInterventionRequired": true,
+  "servicePageGenerated": false,
+  "publishingPerformed": false,
+  "indexingPerformed": false,
+  "rankTrackingInitialised": false,
+  "browserAcceptanceHistory": {
+    "startedAt": "2026-07-26T10:19:44.172Z",
+    "invalidatedAt": "2026-07-26T11:52:00.000Z",
+    "phasesCompletedBeforeInvalidation": [
+      "create_customer",
+      "website_import"
+    ],
+    "phasesBlockedByDefect": [
+      "business_profile_review",
+      "evidence_review",
+      "service_page_generation",
+      "service_page_review"
+    ],
+    "notes": "Create Customer succeeded via Master Admin dashboard. Customer detail render threw atCpr is not defined. Cursor intervened before failure contract stop — run marked invalid. Customer, website import, and workflow history preserved for audit only."
+  },
+  "restartContract": {
+    "nextRunId": "CPA-01R",
+    "requiresFreshCustomer": true,
+    "dashboardOnly": true,
+    "noDeveloperIntervention": true
+  }
+}

@@ -27,10 +27,20 @@ import {
   type AuthorisedEcosystemGenerationRecord,
 } from "./masterAdminAuthorisedEcosystemGenerationService.ts";
 import {
+  buildProductOwnerAcceptanceGenerationSummary,
+  isProductOwnerGenerationRequired,
+  type ProductOwnerAcceptanceGenerationSummary,
+} from "./masterAdminProductOwnerAcceptanceGenerationService.ts";
+import {
+  isCoreProductRecoveryMode,
+  resolveServicePageGenerationActionLabel,
+} from "./masterAdminCoreProductRecoveryService.ts";
+import {
   buildCanonicalEcosystemGenerationPlan,
   freezeCanonicalEcosystemGenerationPlan,
   readCanonicalEcosystemGenerationPlan,
   getCanonicalPlanSchedulerPageCount,
+  deriveCanonicalPlanReadinessCounts,
   resolveConfirmedProfileAreas,
   type CanonicalEcosystemGenerationPlan,
   type CanonicalRecommendationEntry,
@@ -65,6 +75,7 @@ export interface CommercialEcosystemGenerationReadiness {
   expectedGuideCount: number;
   expectedBlogCount: number;
   expectedFaqCount: number;
+  expectedSupportingPageCount: number;
   expectedTotalPageCount: number;
   requiredImageCount: number;
   warnings: string[];
@@ -75,6 +86,7 @@ export interface CommercialEcosystemGenerationReadiness {
   canonicalPlanRevision: string | null;
   canonicalPlanChecksum: string | null;
   schedulerPageCount: number;
+  inventoryReconciliation: CanonicalEcosystemGenerationPlan["inventoryReconciliation"] | null;
   coreEcosystemInventory: CanonicalEcosystemGenerationPlan["coreEcosystem"] | null;
   recommendedFutureContent: CanonicalRecommendationEntry[];
   areaClassifications: Array<{
@@ -95,6 +107,17 @@ export interface CommercialEcosystemGenerationProgress {
   warnings: string[];
 }
 
+export interface CommercialEcosystemCanonicalInventorySummary {
+  totalPages: number;
+  homepage: number;
+  serviceHubs: number;
+  clusterPages: number;
+  blogs: number;
+  guides: number;
+  faqs: number;
+  supportingPages: number;
+}
+
 export interface CommercialEcosystemGenerationDashboard {
   version: 2;
   slug: string;
@@ -110,6 +133,8 @@ export interface CommercialEcosystemGenerationDashboard {
   summary: string;
   nextStep: string;
   activeJobId: string | null;
+  productOwnerAcceptance: ProductOwnerAcceptanceGenerationSummary;
+  canonicalInventorySummary: CommercialEcosystemCanonicalInventorySummary;
 }
 
 const ESTIMATED_MINUTES = 30;
@@ -122,6 +147,7 @@ export function buildCommercialEcosystemGenerationDashboard(slug: string): Comme
   const pkg = ctx ? loadContentPackage(slug, serviceId) : null;
   const intelligenceApproved = isCommercialIntelligenceApproved(slug);
   const ciApproval = readCommercialIntelligenceApprovalExtended(slug);
+  const acceptance = buildProductOwnerAcceptanceGenerationSummary(slug);
   const authorisedGenerated = isAuthorisedEcosystemQualityReviewReady(slug);
   const hasCompletedGeneration = isAuthorisedEcosystemGenerated(slug);
   const canonicalPlan = readCanonicalEcosystemGenerationPlan(slug) || buildCanonicalEcosystemGenerationPlan(slug);
@@ -149,6 +175,8 @@ export function buildCommercialEcosystemGenerationDashboard(slug: string): Comme
     .map((a) => (typeof a === "object" && a && "areaName" in a ? a.areaName : String(a)))
     .filter(Boolean);
 
+  const inventoryCounts = deriveCanonicalPlanReadinessCounts(canonicalPlan);
+
   const readiness: CommercialEcosystemGenerationReadiness = {
     pharmacyName: profile.pharmacyName || profile.businessName || ctx?.displayName || slug,
     approvedIntelligenceRevision: ciApproval?.approvedVersion || null,
@@ -169,14 +197,15 @@ export function buildCommercialEcosystemGenerationDashboard(slug: string): Comme
       profileUrl: googleReadiness.profileUrl,
       importStatus: googleReadiness.importStatus,
     },
-    expectedHomepageCount: canonicalPlan.coreEcosystem.homepage,
-    expectedServiceHubCount: canonicalPlan.coreEcosystem.serviceHubs,
-    approvedAreaCount: canonicalPlan.coreEcosystem.approvedAreas,
-    clusterPagesToGenerate: canonicalPlan.coreEcosystem.clusterPages,
-    expectedGuideCount: canonicalPlan.coreEcosystem.guides,
-    expectedBlogCount: canonicalPlan.coreEcosystem.blogs,
-    expectedFaqCount: canonicalPlan.coreEcosystem.faqs,
-    expectedTotalPageCount: canonicalPlan.coreEcosystem.totalPages,
+    expectedHomepageCount: inventoryCounts.expectedHomepageCount,
+    expectedServiceHubCount: inventoryCounts.expectedServiceHubCount,
+    approvedAreaCount: inventoryCounts.approvedAreaCount,
+    clusterPagesToGenerate: inventoryCounts.clusterPagesToGenerate,
+    expectedGuideCount: inventoryCounts.expectedGuideCount,
+    expectedBlogCount: inventoryCounts.expectedBlogCount,
+    expectedFaqCount: inventoryCounts.expectedFaqCount,
+    expectedSupportingPageCount: inventoryCounts.expectedSupportingPageCount,
+    expectedTotalPageCount: inventoryCounts.expectedTotalPageCount,
     requiredImageCount: canonicalPlan.coreEcosystem.requiredImageRoles,
     warnings: [...pre.warnings, ...canonicalPlan.warnings],
     opportunities: pre.opportunities,
@@ -185,8 +214,9 @@ export function buildCommercialEcosystemGenerationDashboard(slug: string): Comme
     canonicalPlanId: canonicalPlan.planId,
     canonicalPlanRevision: canonicalPlan.planRevision,
     canonicalPlanChecksum: canonicalPlan.checksum,
-    schedulerPageCount: getCanonicalPlanSchedulerPageCount(canonicalPlan),
-    coreEcosystemInventory: canonicalPlan.coreEcosystem,
+    schedulerPageCount: inventoryCounts.schedulerPageCount,
+    inventoryReconciliation: inventoryCounts.inventoryReconciliation,
+    coreEcosystemInventory: inventoryCounts.coreEcosystemInventory,
     recommendedFutureContent: canonicalPlan.recommendedFutureContent,
     areaClassifications: canonicalPlan.areaEntries.map((a) => ({
       area: a.areaName,
@@ -211,23 +241,39 @@ export function buildCommercialEcosystemGenerationDashboard(slug: string): Comme
   else activeAction = "generate_approved_ecosystem";
 
   let summary = "Approve Commercial Intelligence to begin the authorised commercial workflow.";
-  if (intelligenceApproved && historicalPackage && !hasCompletedGeneration) {
+  if (acceptance.required) {
+    summary =
+      "Product Owner Generation Required — review the canonical 16-page inventory, acknowledge the preserved previous package, then generate the Product Owner test package from this dashboard.";
+  } else if (intelligenceApproved && historicalPackage && !hasCompletedGeneration) {
     summary =
       "A historical ecosystem package exists from an accidental pre-approval generation. It is preserved for audit and is not the approved release candidate. Generate the first Product Owner-authorised ecosystem when ready.";
   } else if (intelligenceApproved && canGenerate) {
     summary = "Commercial Intelligence is approved. Review readiness, then confirm to generate the first Product Owner-authorised ecosystem.";
   } else if (authorisedGenerated) {
     summary = "Product Owner-authorised ecosystem generated. Open Quality Review to inspect the new release candidate.";
-  } else if (hasCompletedGeneration && authorisedGeneration?.completenessStatus === "INCOMPLETE_AGAINST_CANONICAL_PLAN") {
+  } else if (hasCompletedGeneration && (authorisedGeneration?.completenessStatus === "SUPERSEDED_INCOMPLETE_RC1" || authorisedGeneration?.completenessStatus === "INCOMPLETE_AGAINST_CANONICAL_PLAN")) {
     summary =
-      "The authorised ecosystem package is preserved but incomplete against the canonical generation plan. Review the corrected plan, then confirm a new Product Owner-authorised generation.";
+      "The authorised ecosystem package is preserved but superseded by RC1 Content Architecture V1. Review the canonical plan, then confirm a new Product Owner-authorised generation.";
   } else if (generationInProgress) {
-    summary = "Generating approved ecosystem…";
+    summary = acceptance.required ? "Generating Product Owner Test Package…" : "Generating approved ecosystem…";
   }
 
+  const canonicalInventorySummary: CommercialEcosystemCanonicalInventorySummary = {
+    totalPages: inventoryCounts.expectedTotalPageCount,
+    homepage: inventoryCounts.expectedHomepageCount,
+    serviceHubs: inventoryCounts.expectedServiceHubCount,
+    clusterPages: inventoryCounts.clusterPagesToGenerate,
+    blogs: inventoryCounts.expectedBlogCount,
+    guides: inventoryCounts.expectedGuideCount,
+    faqs: inventoryCounts.expectedFaqCount,
+    supportingPages: inventoryCounts.expectedSupportingPageCount,
+  };
+
   let nextStep = "Approve Intelligence";
-  if (intelligenceApproved && canGenerate) nextStep = "Generate Approved Ecosystem";
-  else if (generationInProgress) nextStep = "Generating Approved Ecosystem…";
+  if (acceptance.required && intelligenceApproved && !authorisedGenerated) {
+    nextStep = acceptance.generateActionLabel;
+  } else if (intelligenceApproved && canGenerate) nextStep = "Generate Approved Ecosystem";
+  else if (generationInProgress) nextStep = acceptance.required ? "Generating Product Owner Test Package…" : "Generating Approved Ecosystem…";
   else if (authorisedGenerated) nextStep = "Review Generated Ecosystem";
 
   let generationProgress: CommercialEcosystemGenerationProgress | null = null;
@@ -256,6 +302,8 @@ export function buildCommercialEcosystemGenerationDashboard(slug: string): Comme
     summary,
     nextStep,
     activeJobId: activeJob?.id || authorisedGeneration?.jobId || null,
+    productOwnerAcceptance: acceptance,
+    canonicalInventorySummary,
   };
 }
 
@@ -267,6 +315,21 @@ export function resolveCommercialWorkflowNextAction(
   slug: string,
   currentStage: string,
 ): string | null {
+  // After publish, CPR generation labels must not keep directing Product Owners to Publish Review.
+  if (currentStage === "request_indexing") {
+    return "Open Search Console & Indexing";
+  }
+  if (
+    currentStage === "initialise_rank_tracking" ||
+    currentStage === "monitoring" ||
+    currentStage === "live_customer"
+  ) {
+    return null;
+  }
+  if (isCoreProductRecoveryMode(slug)) {
+    const cprAction = resolveServicePageGenerationActionLabel(slug);
+    if (cprAction) return cprAction;
+  }
   if (currentStage === "commercial_intelligence") {
     return isCommercialIntelligenceApproved(slug) ? "Generate Approved Ecosystem" : "Approve Intelligence";
   }
@@ -276,9 +339,12 @@ export function resolveCommercialWorkflowNextAction(
         (j) => j.action === "generate_ecosystem" && (j.status === "queued" || j.status === "running"),
       ) || null;
     const authorisedRecord = readAuthorisedEcosystemGenerationRecord(slug);
-    if (activeJob || authorisedRecord?.status === "running") return "Generating Approved Ecosystem…";
+    const acceptance = buildProductOwnerAcceptanceGenerationSummary(slug);
+    if (activeJob || authorisedRecord?.status === "running") {
+      return acceptance.required ? "Generating Product Owner Test Package…" : "Generating Approved Ecosystem…";
+    }
     if (isAuthorisedEcosystemQualityReviewReady(slug)) return "Review Generated Ecosystem";
-    return "Generate Approved Ecosystem";
+    return acceptance.required ? acceptance.generateActionLabel : "Generate Approved Ecosystem";
   }
   if (currentStage === "quality_review" && isAuthorisedEcosystemQualityReviewReady(slug)) {
     return "Review Generated Ecosystem";

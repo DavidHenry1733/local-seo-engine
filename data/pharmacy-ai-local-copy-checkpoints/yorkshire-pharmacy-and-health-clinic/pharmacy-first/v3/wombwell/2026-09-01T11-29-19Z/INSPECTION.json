@@ -1,0 +1,44 @@
+{
+  "kind": "human-inspection",
+  "approved": false,
+  "acceptedDraft": "attempt-1-2026-09-01T11:29:19.669Z",
+  "retryRejected": true,
+  "silentRewrite": false,
+  "copy": {
+    "heroHeading": "Pharmacy First for Wombwell",
+    "heroIntroduction": "Pharmacy First offers support for common conditions to people in Wombwell. Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+    "localContextParagraphs": [
+      "Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council."
+    ],
+    "omitted": [
+      "localIntroduction",
+      "localContextHeading",
+      "relationshipToPharmacy",
+      "localAccessIntroduction",
+      "localFaqs",
+      "localCtaBridge"
+    ]
+  },
+  "claims": [
+    {
+      "sentence": "Pharmacy First offers support for common conditions to people in Wombwell.",
+      "support": "Selected reader area plus approved Pharmacy First service identity. Equivalent to \u201celigible common conditions\u201d without listing the seven conditions."
+    },
+    {
+      "sentence": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "support": "Canonical premises locality Darfield from 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK. Does not invent a route."
+    },
+    {
+      "sentence": "Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.",
+      "support": "Canonical premises in Darfield; official barnsley.gov.uk ward page: \u201cThe South Area Council covers the Darfield, Hoyland Milton, Rockingham and Wombwell wards.\u201d Does not claim adjacency, journey, or affiliation."
+    }
+  ],
+  "unusedVerifiedFacts": [
+    "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+    "Wombwell has a public library.",
+    "Wombwell has a National Rail station.",
+    "NHS general practice services in Wombwell are provided from Wombwell Medical Centre.",
+    "1.7 km approximate straight-line distance"
+  ],
+  "repetitionNote": "Hero already names Darfield as the consultation location. Local context restates that the pharmacy is in Darfield as the grammatical subject of the South Area Council fact. A corrective retry removed that restatement and then failed the premises-locality wording gate. The first draft was kept; it was not rewritten."
+}

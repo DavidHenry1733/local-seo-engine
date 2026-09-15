@@ -22,8 +22,23 @@ import {
   renderLocalLocationHubFullPage,
 } from "./pharmacyLocalHierarchyFullPageRenderer.ts";
 import { scrubPublicLocalEngineHtml } from "./pharmacyLocalClusterCompositionDedupe.ts";
-import { polishCommercialClusterPublicHtml } from "./contentEngine/pharmacyCommercialNarrativePolishV1.ts";
-import { scrubUnconfirmedServiceClaims } from "./pharmacyServicePagePublicationQuality.ts";
+import { polishCommercialClusterPublicHtml, attachLocalityPageJsonLd } from "./contentEngine/pharmacyCommercialNarrativePolishV1.ts";
+import { usesApprovedBankLocalityDirectPath } from "./pharmacyApprovedBankLocalityDirectRender.ts";
+import {
+  attributableEntities,
+  loadLocalEvidencePackForGeneration,
+  pageContainsAttributableEvidence,
+  preflightPharmacyLocalEvidenceForCampaign,
+} from "./contentEngine/pharmacyLocalEvidencePackContractV1.ts";
+import { replaceKeywordStuffedPharmacyListingNames, scrubUnconfirmedServiceClaims } from "./pharmacyServicePagePublicationQuality.ts";
+import { usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
+import {
+  applyLockedPharmacyFirstLocalPageStructure,
+} from "./pharmacyPharmacyFirstLocalPagePreviewOverlay.ts";
+import {
+  ensureProfessionalReviewPanelHtml,
+  renderProfessionalReviewPanelHtml,
+} from "./pharmacyProfessionalReviewPanel.ts";
 import {
   beginLocalityVariationSessionV1,
   endLocalityVariationSessionV1,
@@ -31,8 +46,18 @@ import {
 import { evaluateLocalityHtmlDuplicationGate } from "./pharmacyLocalityPageDuplicationGateV1.ts";
 import {
   evaluateLocalityPatientCopyQualityGate,
+  evaluateLocalitySourceCopyQualityGate,
   localityIntroductionsAreDistinct,
+  scrubUnsafeLocalityPatientCopyHtml,
 } from "./contentEngine/pharmacyLocalityPatientCopyQualityGateV1.ts";
+import {
+  applyCampaignRunStampToHtml,
+  createCampaignRunStamp,
+  existingOutputsMustNotSkipFreshGeneration,
+  isHistoricalOutputPath,
+  type CampaignRunStamp,
+} from "./pharmacyCurrentRunCampaignHandoff.ts";
+import { bindCurrentRegisteredApprovedBank } from "./pharmacyApprovedBankRunProvenance.ts";
 
 export interface LocalLocationGenerationResult {
   ok: boolean;
@@ -43,6 +68,8 @@ export interface LocalLocationGenerationResult {
   hubPath?: string;
   clusterPaths: string[];
   areaPaths: string[];
+  skippedExistingPaths?: string[];
+  createdPaths?: string[];
   duplicationGate?: {
     ok: boolean;
     message: string;
@@ -53,33 +80,84 @@ function countWords(html: string): number {
   return html.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
 }
 
-function escAttr(value: string): string {
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+/** Always apply the current-run stamp. Existing stamped HTML must not skip a fresh run. */
+function stampLocalHtmlOutput(html: string, stamp: CampaignRunStamp): string {
+  return applyCampaignRunStampToHtml(html, stamp);
 }
 
-/** Embed the same generation stamp meta required by content-package handoff / Review Centre. */
-function stampLocalHtmlOutput(html: string, stamp: GenerationStamp): string {
-  const meta = [
-    `<meta name="tenantSlug" content="${escAttr(stamp.tenantSlug)}"/>`,
-    `<meta name="campaignId" content="${escAttr(stamp.campaignId)}"/>`,
-    `<meta name="generatedAt" content="${escAttr(stamp.generatedAt)}"/>`,
-    `<meta name="sourceContext" content="${escAttr(stamp.sourceContext)}"/>`,
-  ].join("\n");
-  if (/name="tenantSlug"/i.test(html) && /name="campaignId"/i.test(html) && /customer-imported-profile/.test(html)) {
-    return html;
+export function generateLocalLocationHierarchyPages(
+  ctxInput: ContentGenerationContext,
+  options?: {
+    generationStamp?: GenerationStamp;
+    skipExistingOutputs?: boolean;
+    clusterPagesOnly?: boolean;
+    onlyClusterSlugs?: string[];
+  },
+): LocalLocationGenerationResult {
+  const ctx = bindCurrentRegisteredApprovedBank(ctxInput);
+  const evidencePreflight = preflightPharmacyLocalEvidenceForCampaign(ctx.resolvedSlug, ctx.serviceId);
+  if (!evidencePreflight.ok) {
+    return {
+      ok: false,
+      blockedReason: evidencePreflight.customerError || "Local pages cannot be generated yet because verified area evidence is missing or insufficient.",
+      hierarchy: {
+        ok: false,
+        blockedReason: evidencePreflight.customerError || undefined,
+        primaryLocality: "",
+        primaryLocalitySlug: "",
+        hub: null,
+        clusters: [],
+        areas: [],
+        generationAreas: [],
+        trace: {
+          profilePath: "",
+          tenantSlug: ctx.resolvedSlug,
+          primaryLocation: "",
+          postcode: "",
+          townCity: "",
+          storedServiceAreas: [],
+          storedNeighbourhoods: [],
+        },
+      } as LocalLocationHierarchy,
+      assets: [],
+      localClusterEntries: [],
+      clusterPaths: [],
+      areaPaths: [],
+    };
   }
-  return html.replace(
-    /<head>/i,
-    `<head>\n${meta}\n<!-- tenantSlug: ${escAttr(stamp.tenantSlug)}; campaignId: ${escAttr(stamp.campaignId)}; generatedAt: ${escAttr(stamp.generatedAt)}; sourceContext: ${escAttr(stamp.sourceContext)} -->`,
-  );
-}
 
-export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContext): LocalLocationGenerationResult {
-  const hierarchy = resolveLocalLocationHierarchy(ctx.resolvedSlug, ctx.serviceId, ctx.rawProfile);
+  let hierarchy = resolveLocalLocationHierarchy(ctx.resolvedSlug, ctx.serviceId, ctx.rawProfile);
+  if (ctx.selectedAreas?.length) {
+    const existingByName = new Map(
+      (hierarchy.clusters || []).map((cluster) => [cluster.name.trim().toLowerCase(), cluster]),
+    );
+    const clusters = ctx.selectedAreas.map((area, idx) => {
+      const existing = existingByName.get(area.areaName.trim().toLowerCase());
+      if (existing) return { ...existing, order: idx + 1, priority: idx + 1 };
+      return {
+        areaId: `cluster:${area.areaSlug}`,
+        name: area.areaName,
+        slug: area.areaSlug,
+        type: "district-cluster" as const,
+        parentAreaId: hierarchy.hub?.areaId || null,
+        source: "campaign-builder:targetAreaNames",
+        evidence: ["Campaign Builder saved target area"],
+        serviceIds: [ctx.serviceId],
+        generationEligible: true,
+        generationReason: "Campaign Builder selected target area",
+        approved: true,
+        order: idx + 1,
+        priority: idx + 1,
+      };
+    });
+    hierarchy = {
+      ...hierarchy,
+      ok: true,
+      blockedReason: undefined,
+      clusters,
+      generationAreas: clusters,
+    };
+  }
   if (!hierarchy.ok) {
     return {
       ok: false,
@@ -92,14 +170,64 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
     };
   }
 
+  const allowedClusterSlugs = options?.onlyClusterSlugs?.length
+    ? new Set(options.onlyClusterSlugs.map((slug) => slug.trim().toLowerCase()))
+    : null;
+  if (allowedClusterSlugs) {
+    hierarchy = {
+      ...hierarchy,
+      clusters: hierarchy.clusters.filter((cluster) =>
+        allowedClusterSlugs.has(resolveClusterPageSlug(cluster.slug).toLowerCase()),
+      ),
+    };
+    if (!hierarchy.clusters.length) {
+      return {
+        ok: false,
+        blockedReason: "No matching selected local-area pages to rerender.",
+        hierarchy,
+        assets: [],
+        localClusterEntries: [],
+        clusterPaths: [],
+        areaPaths: [],
+      };
+    }
+  }
+
+  const sourcePack = ctx.variantPack;
+  if (sourcePack) {
+    const sourceGate = evaluateLocalitySourceCopyQualityGate(sourcePack);
+    if (!sourceGate.ok) {
+      return {
+        ok: false,
+        blockedReason: `Locality source copy quality gate failed: ${sourceGate.failures.slice(0, 8).join(" | ")}`,
+        hierarchy,
+        assets: [],
+        localClusterEntries: [],
+        clusterPaths: [],
+        areaPaths: [],
+      };
+    }
+  }
+
   const ecosystemRoot = ctx.links.ecosystemRoot;
-  const generatedAt = new Date().toISOString();
-  const generationStamp: GenerationStamp = {
-    tenantSlug: ctx.resolvedSlug,
-    campaignId: ctx.serviceId,
-    generatedAt,
-    sourceContext: "customer-imported-profile",
-  };
+  const generatedAt = options?.generationStamp?.generatedAt || new Date().toISOString();
+  const generationStamp: CampaignRunStamp = options?.generationStamp?.runId
+    ? {
+        tenantSlug: options.generationStamp.tenantSlug,
+        campaignId: options.generationStamp.campaignId,
+        generatedAt: options.generationStamp.generatedAt,
+        sourceContext: "customer-imported-profile",
+        runId: options.generationStamp.runId,
+        approvedBankHash:
+          options.generationStamp.approvedBankHash || ctx.approvedBankHash || undefined,
+      }
+    : createCampaignRunStamp(
+        ctx.resolvedSlug,
+        ctx.serviceId,
+        generatedAt,
+        undefined,
+        ctx.approvedBankHash,
+      );
 
   const assets: EcosystemAsset[] = [];
   const localClusterEntries: LocalClusterLinkEntry[] = [];
@@ -108,6 +236,12 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
 
   const writeLocal = (relPath: string, html: string): string => {
     const outPath = path.join(ecosystemRoot, relPath);
+    if (options?.skipExistingOutputs && fs.existsSync(outPath) && !isHistoricalOutputPath(outPath)) {
+      throw new Error(`Refusing to overwrite an existing local page for ${path.basename(path.dirname(outPath))}.`);
+    }
+    if (!options?.skipExistingOutputs) {
+      existingOutputsMustNotSkipFreshGeneration(fs.existsSync(outPath) ? [outPath] : []);
+    }
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.writeFileSync(outPath, stampLocalHtmlOutput(html, generationStamp), "utf8");
     return outPath;
@@ -123,6 +257,21 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
     const siblingNames = hierarchy.clusters
       .filter((c) => c.slug !== cluster.slug)
       .map((c) => c.name);
+    const rendered = rewriteClusterLinksInHtml(
+      renderLocalLocationClusterFullPage(ctx, hierarchy, { ...cluster, slug: pageSlug }),
+      clusterSlugs,
+    );
+    if (
+      usesApprovedBankLocalityDirectPath(ctx.serviceId) &&
+      !usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId)
+    ) {
+      return attachLocalityPageJsonLd(rendered, {
+        areaName: cluster.name,
+        pharmacyName,
+        serviceName: ctx.serviceName,
+        nearbyAreaNames: siblingNames,
+      });
+    }
     const delivery = (
       ctx.rawProfile as {
         serviceDeliveryProfiles?: Record<
@@ -132,12 +281,7 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
       }
     )?.serviceDeliveryProfiles?.[ctx.serviceId];
     const polished = polishCommercialClusterPublicHtml(
-      scrubPublicLocalEngineHtml(
-        rewriteClusterLinksInHtml(
-          renderLocalLocationClusterFullPage(ctx, hierarchy, { ...cluster, slug: pageSlug }),
-          clusterSlugs,
-        ),
-      ),
+      scrubPublicLocalEngineHtml(rendered),
       {
         areaName: cluster.name,
         pharmacyName,
@@ -146,13 +290,22 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
         generationRevision,
       },
     );
-    return scrubUnconfirmedServiceClaims(polished, {
+    const claimed = scrubUnconfirmedServiceClaims(polished, {
       fundingModel: delivery?.fundingModel ?? "unknown",
       walkInAvailable: delivery?.walkInAvailable ?? null,
       appointmentRequired: delivery?.appointmentRequired ?? null,
       abpmConfirmed: false,
       gphcConfirmed: Boolean(ctx.profile.gphcNumber?.trim()),
-    })
+      serviceId: ctx.serviceId,
+    });
+    if (usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId)) {
+      let html = replaceKeywordStuffedPharmacyListingNames(claimed, ctx.rawProfile);
+      html = applyLockedPharmacyFirstLocalPageStructure(html);
+      html = ensureProfessionalReviewPanelHtml(html, renderProfessionalReviewPanelHtml(ctx.profile));
+      html = scrubUnsafeLocalityPatientCopyHtml(html);
+      return html;
+    }
+    return claimed
       .replace(/Welcome to\s+/gi, "")
       .replace(/\bProfessional Insight\b/gi, "Pharmacy guidance")
       .replace(/reduced unnecessary A&amp;E visits/gi, "timely pharmacy advice")
@@ -178,27 +331,38 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
       .replace(/\bprofile\.[a-z0-9._:-]+/gi, "")
       .replace(/<li>Call to ask how [^<]*<\/li>/gi, "")
       .replace(/Call to ask how [^.]+\./gi, "")
-      .replace(
-        /<strong>Opening hours:<\/strong>\s*Contact the pharmacy to confirm current opening hours\./gi,
-        "<strong>Opening hours:</strong> Confirm when you get in touch.",
-      )
-      .replace(
-        /<strong>Opening hours:<\/strong>\s*Hours can vary — confirm when you get in touch\./gi,
-        "<strong>Opening hours:</strong> Confirm when you get in touch.",
-      )
       .replace(/\s{2,}/g, " ")
       .replace(/\.\s*\./g, ".");
   };
 
   const htmlBySlug = new Map<string, string>();
+  const existingHtmlBySlug = new Map<string, string>();
+  const skippedExistingPaths: string[] = [];
+  const createdPaths: string[] = [];
   for (const cluster of hierarchy.clusters) {
     const pageSlug = resolveClusterPageSlug(cluster.slug);
-    htmlBySlug.set(pageSlug, renderClusterHtml(cluster));
+    const rel = resolveClusterPageFilesystemRelativePath(pageSlug);
+    const outPath = path.join(ecosystemRoot, rel);
+    const exists = Boolean(outPath && fs.existsSync(outPath) && !isHistoricalOutputPath(outPath));
+    if (options?.skipExistingOutputs && exists) {
+      const existingHtml = fs.readFileSync(outPath, "utf8");
+      existingHtmlBySlug.set(pageSlug, existingHtml);
+      skippedExistingPaths.push(outPath);
+      htmlBySlug.set(pageSlug, existingHtml);
+    } else {
+      htmlBySlug.set(pageSlug, renderClusterHtml(cluster));
+    }
   }
+  const newSlugs = new Set(
+    hierarchy.clusters
+      .map((cluster) => resolveClusterPageSlug(cluster.slug))
+      .filter((pageSlug) => !existingHtmlBySlug.has(pageSlug)),
+  );
 
   const patientCopyFailures: string[] = [];
   for (const cluster of hierarchy.clusters) {
     const pageSlug = resolveClusterPageSlug(cluster.slug);
+    if (options?.skipExistingOutputs && !newSlugs.has(pageSlug)) continue;
     const html = htmlBySlug.get(pageSlug) || "";
     const gate = evaluateLocalityPatientCopyQualityGate({
       html,
@@ -209,6 +373,17 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
     if (!gate.ok) {
       patientCopyFailures.push(`${pageSlug}: ${gate.failures.join("; ")}`);
     }
+    const packLoaded = loadLocalEvidencePackForGeneration(ctx.resolvedSlug, cluster.name, pageSlug);
+    if (!packLoaded.ok) {
+      patientCopyFailures.push(`${pageSlug}: evidence-pack:${packLoaded.status}`);
+    } else {
+      const names = attributableEntities(packLoaded.pack)
+        .filter((entity) => entity.category === "healthcare" || entity.category === "transport")
+        .map((entity) => entity.name);
+      if (names.length && !pageContainsAttributableEvidence(html, names)) {
+        patientCopyFailures.push(`${pageSlug}: verified local evidence was not consumed in the page body`);
+      }
+    }
   }
   for (let i = 0; i < hierarchy.clusters.length; i++) {
     for (let j = i + 1; j < hierarchy.clusters.length; j++) {
@@ -216,6 +391,7 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
       const b = hierarchy.clusters[j]!;
       const aSlug = resolveClusterPageSlug(a.slug);
       const bSlug = resolveClusterPageSlug(b.slug);
+      if (options?.skipExistingOutputs && !newSlugs.has(aSlug) && !newSlugs.has(bSlug)) continue;
       if (
         !localityIntroductionsAreDistinct(
           htmlBySlug.get(aSlug) || "",
@@ -238,38 +414,49 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
       localClusterEntries: [],
       clusterPaths: [],
       areaPaths: [],
+      skippedExistingPaths,
+      createdPaths,
     };
   }
 
   const duplicationGate = evaluateLocalityHtmlDuplicationGate({
-    pages: hierarchy.clusters.map((cluster) => {
-      const pageSlug = resolveClusterPageSlug(cluster.slug);
-      return {
-        areaSlug: pageSlug,
-        areaName: cluster.name,
-        html: htmlBySlug.get(pageSlug) || "",
-      };
-    }),
-    pharmacyName,
-  });
-  if (!duplicationGate.ok) {
+        pages: hierarchy.clusters.map((cluster) => {
+          const pageSlug = resolveClusterPageSlug(cluster.slug);
+          return {
+            areaSlug: pageSlug,
+            areaName: cluster.name,
+            html: htmlBySlug.get(pageSlug) || "",
+          };
+        }),
+        pharmacyName,
+      });
+  const duplicationFailures = options?.skipExistingOutputs
+    ? duplicationGate.pairs.filter((pair) => pair.blocked && (newSlugs.has(pair.a) || newSlugs.has(pair.b)))
+    : duplicationGate.pairs.filter((pair) => pair.blocked);
+  if (duplicationFailures.length) {
     endLocalityVariationSessionV1();
     return {
       ok: false,
-      blockedReason: `Locality duplication gate failed: ${duplicationGate.message}`,
+      blockedReason: `Locality duplication gate failed: ${duplicationFailures.map((pair) => pair.reason).join(" ")}`,
       hierarchy,
       assets: [],
       localClusterEntries: [],
       clusterPaths: [],
       areaPaths: [],
+      skippedExistingPaths,
+      createdPaths,
     };
   }
 
   for (const cluster of hierarchy.clusters) {
     const pageSlug = resolveClusterPageSlug(cluster.slug);
-    const html = htmlBySlug.get(pageSlug) || renderClusterHtml(cluster);
     const rel = resolveClusterPageFilesystemRelativePath(pageSlug);
-    const out = writeLocal(rel, html);
+    const existingPath = path.join(ecosystemRoot, rel);
+    const html = htmlBySlug.get(pageSlug) || renderClusterHtml(cluster);
+    const out = existingHtmlBySlug.has(pageSlug)
+      ? existingPath
+      : writeLocal(rel, html);
+    if (!existingHtmlBySlug.has(pageSlug)) createdPaths.push(out);
     clusterPaths.push(out);
     const urlPath = resolveClusterPageUrlPath(pageSlug);
     localClusterEntries.push({
@@ -305,29 +492,31 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
 
   endLocalityVariationSessionV1();
 
-  const linkMap = {
-    slug: ctx.resolvedSlug,
-    serviceId: ctx.serviceId,
-    mainServiceUrlPath: ctx.serviceMeta.urlPath,
-    serviceHubUrlPath: ctx.serviceMeta.urlPath,
-    localClusterPages: localClusterEntries,
-    localLocationClusters: hierarchy.clusters.map((c) => {
-      const pageSlug = resolveClusterPageSlug(c.slug);
-      return {
-        areaName: c.name,
-        areaSlug: pageSlug,
-        urlPath: resolveClusterPageUrlPath(pageSlug),
-        outputPath: resolveClusterPageFilesystemRelativePath(pageSlug),
-      };
-    }),
-    localLocationHierarchy: hierarchy,
-    architecture: "rc1-cluster-page-v1",
-    generatedAt,
-    generationStamp,
-  };
+  if (!options?.clusterPagesOnly) {
+    const linkMap = {
+      slug: ctx.resolvedSlug,
+      serviceId: ctx.serviceId,
+      mainServiceUrlPath: ctx.serviceMeta.urlPath,
+      serviceHubUrlPath: ctx.serviceMeta.urlPath,
+      localClusterPages: localClusterEntries,
+      localLocationClusters: hierarchy.clusters.map((c) => {
+        const pageSlug = resolveClusterPageSlug(c.slug);
+        return {
+          areaName: c.name,
+          areaSlug: pageSlug,
+          urlPath: resolveClusterPageUrlPath(pageSlug),
+          outputPath: resolveClusterPageFilesystemRelativePath(pageSlug),
+        };
+      }),
+      localLocationHierarchy: hierarchy,
+      architecture: "rc1-cluster-page-v1",
+      generatedAt,
+      generationStamp,
+    };
 
-  fs.mkdirSync(ecosystemRoot, { recursive: true });
-  fs.writeFileSync(path.join(ecosystemRoot, "_internal-link-map.json"), JSON.stringify(linkMap, null, 2), "utf8");
+    fs.mkdirSync(ecosystemRoot, { recursive: true });
+    fs.writeFileSync(path.join(ecosystemRoot, "_internal-link-map.json"), JSON.stringify(linkMap, null, 2), "utf8");
+  }
 
   return {
     ok: true,
@@ -336,8 +525,10 @@ export function generateLocalLocationHierarchyPages(ctx: ContentGenerationContex
     localClusterEntries,
     clusterPaths,
     areaPaths,
+    skippedExistingPaths,
+    createdPaths,
     duplicationGate: {
-      ok: duplicationGate.ok,
+      ok: duplicationFailures.length === 0,
       message: duplicationGate.message,
     },
   };

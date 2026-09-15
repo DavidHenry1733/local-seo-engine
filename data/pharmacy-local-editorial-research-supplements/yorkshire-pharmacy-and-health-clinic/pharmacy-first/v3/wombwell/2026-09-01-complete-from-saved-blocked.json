@@ -1,0 +1,60 @@
+{
+  "kind": "wombwell-v3-complete-from-saved-blocked",
+  "accepted": false,
+  "candidateWritten": false,
+  "originalPackUnchanged": true,
+  "wombwellCopyUnchanged": true,
+  "hashes": {
+    "originalPack": {
+      "rel": "data/pharmacy-local-editorial-evidence-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell.json",
+      "sha256": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+      "bytes": 9077
+    },
+    "wombwellCopy": {
+      "rel": "data/pharmacy-ai-local-copy-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell.json",
+      "sha256": "e1d09e786992245e2d991a7fa4b74c15d32f997124a9e567223d8f0b0116807f",
+      "bytes": 8674
+    },
+    "wombwellHtml": {
+      "rel": "output/pharmacy-ai-local-page-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/local/wombwell/index.html",
+      "sha256": "80c219a9be363d816f6d5d6951967f28fc68b0a1b6359a8c872c8dea5a6cf281",
+      "bytes": 65877
+    },
+    "darfieldCopy": {
+      "rel": "data/pharmacy-ai-local-copy-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/darfield.json",
+      "sha256": "7069e5d86f5519d5557c46acac7727d125a9e564aeeac5773114dd68aed55834",
+      "bytes": 14533
+    },
+    "darfieldHtml": {
+      "rel": "output/pharmacy-ai-local-page-pilots/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/local/darfield/index.html",
+      "sha256": "fb6d1c6052eaf197e9c6d34892edf14a5a7d3e40101d18a045b2bbe58b8ca422",
+      "bytes": 64424
+    }
+  },
+  "expected": {
+    "originalPack": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+    "wombwellCopy": "e1d09e786992245e2d991a7fa4b74c15d32f997124a9e567223d8f0b0116807f",
+    "wombwellHtml": "80c219a9be363d816f6d5d6951967f28fc68b0a1b6359a8c872c8dea5a6cf281",
+    "darfieldCopy": "7069e5d86f5519d5557c46acac7727d125a9e564aeeac5773114dd68aed55834",
+    "darfieldHtml": "fb6d1c6052eaf197e9c6d34892edf14a5a7d3e40101d18a045b2bbe58b8ca422"
+  },
+  "wardStatVerification": {
+    "sourceUrl": "https://www.barnsley.gov.uk/services/council-and-democracy/research-data-and-statistics/ward-profiles/",
+    "retrievedAt": "2026-09-01T12:07:52.384Z",
+    "restoredAt": "2026-09-01T12:09:10.723Z",
+    "geography": "Wombwell ward, compared with Barnsley borough and national averages",
+    "populationStatement": "11,477 people live in Wombwell, or 5% of Barnsley’s total population",
+    "populationDenominator": "Barnsley total population",
+    "employmentStatement": "Wholesale and retail trades employ the most workers at 19.8%, followed by construction at 13.2%",
+    "employmentDenominator": "workers in the Wombwell ward (source later refers to working adults for a related occupation share)",
+    "referenceYearInSavedBody": null,
+    "censusOrOnsVintageInSavedBody": false,
+    "dashboardNotePresent": true,
+    "omittedFromThisGeneration": true,
+    "reason": "The saved official page does not state a census year, publication date or ONS vintage. It points readers to an interactive dashboard for up-to-date information. Retrieval on 2026-09-01 is not a reference year. The statistics are omitted rather than described as current."
+  },
+  "lastRetryFailures": [
+    "ungrounded factual sentence: With Pharmacy First, you have another option for support with common health concerns."
+  ],
+  "lastRetryFormatted": "heroHeading: Pharmacy First in Wombwell\nheroIntroduction: Pharmacy First offers a way for people in Wombwell to get help for eligible common conditions without waiting for a GP appointment. Wombwell is part of the Metropolitan Borough of Barnsley, giving it a strong sense of place within South Yorkshire.\nlocalIntroduction: Wombwell is a ward within the Metropolitan Borough of Barnsley, South Yorkshire.\nlocalContextParagraphs[0]: The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre. With Pharmacy First, you have another option for support with common health concerns.\nrelationshipToPharmacy: Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield."
+}

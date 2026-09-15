@@ -1,0 +1,758 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "c7a7c587-22f0-474a-a59a-745a5bbe34a3",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "allestree",
+  "areaName": "Allestree",
+  "planFingerprint": "96adf30ed5a4a40e4b93baa829ac4c913158da1ec4d954600211edaaabccc770",
+  "spendingCapUsd": 0.2,
+  "status": "completed",
+  "startedAt": "2026-09-03T11:32:23.186Z",
+  "updatedAt": "2026-09-03T11:32:29.747Z",
+  "completedAt": "2026-09-03T11:32:29.747Z",
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "paidCallsMade": 4,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Allestree, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "e0a0a955-8122-4ccb-9a1a-0225df9ee705",
+      "detail": "5 Places result(s) stored.",
+      "capturedAt": "2026-09-03T11:32:23.709Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Allestree locality in Allestree, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "b0003933-fa22-4974-b955-090383fd00e1",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-03T11:32:24.005Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Allestree, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "0d9d0c87-794b-40bd-aa8d-32832386f6ca",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-03T11:32:26.115Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Allestree, Derby, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "c5d444ca-281e-4d3d-903e-6470cdefb625",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-03T11:32:27.292Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "a5023ea1-c67c-4362-9f5c-6e66d7db9221",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/park-lane-surgery/C81040",
+      "capturedAt": "2026-09-03T11:32:28.922Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "15c35a66-e120-4f2f-946b-3e42f8b3c1da",
+      "detail": "Retrieved https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/allestree-neighbourhood-ward/",
+      "capturedAt": "2026-09-03T11:32:29.654Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 4.1 km. Not a driving time.",
+      "capturedAt": "2026-09-03T11:32:29.657Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Park Farm Medical Centre",
+        "address": "3 Park Farm Centre, Allestree, Derby DE22 2QN",
+        "types": [
+          "medical_clinic",
+          "health",
+          "government_office",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.944466000000006,
+          "longitude": -1.4955134
+        },
+        "placeId": "ChIJfz5jP1HxeUgRd4p-4ba1AJA",
+        "locality": "3 Park Farm Centre, Allestree, Derby DE22 2QN",
+        "addressComponents": [
+          {
+            "longText": "3",
+            "shortText": "3",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Park Farm Centre",
+            "shortText": "Park Farm Centre",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Allestree",
+            "shortText": "Allestree",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 2QN",
+            "shortText": "DE22 2QN",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10376493338533464695&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Park Lane Surgery",
+        "address": "2 Park Ln, Derby DE22 2DS",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9555349,
+          "longitude": -1.4797263999999999
+        },
+        "placeId": "ChIJy7Pur-DzeUgRBB3IIzYvEfE",
+        "locality": "2 Park Ln, Derby DE22 2DS",
+        "addressComponents": [
+          {
+            "longText": "2",
+            "shortText": "2",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Park Lane",
+            "shortText": "Park Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 2DS",
+            "shortText": "DE22 2DS",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17370717147319770372&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Park Farm Surgery",
+        "address": "Park Farm Surgeries, Park Farm Dr, Allestree, Derby DE22 2RP",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9431389,
+          "longitude": -1.4966428999999999
+        },
+        "placeId": "ChIJK777w-LzeUgR2fPiUPw_kH4",
+        "locality": "Park Farm Surgeries, Park Farm Dr, Allestree, Derby DE22 2RP",
+        "addressComponents": [
+          {
+            "longText": "Park Farm Surgeries",
+            "shortText": "Park Farm Surgeries",
+            "types": [
+              "premise"
+            ],
+            "languageCode": "und"
+          },
+          {
+            "longText": "Park Farm Drive",
+            "shortText": "Park Farm Dr",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Allestree",
+            "shortText": "Allestree",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 2RP",
+            "shortText": "DE22 2RP",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=9119859598346613721&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Park Medical Practice University of Derby",
+        "address": "T Block, Derby DE22 1GB",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.93853000000001,
+          "longitude": -1.4966658
+        },
+        "placeId": "ChIJlYbXDE7xeUgRIOQ9PpT93Js",
+        "locality": "T Block, Derby DE22 1GB",
+        "addressComponents": [
+          {
+            "longText": "T Block",
+            "shortText": "T Block",
+            "types": [
+              "point_of_interest",
+              "establishment"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 1GB",
+            "shortText": "DE22 1GB",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=11231130383896405024&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Dr I Parkes",
+        "address": "Park Lane Surgery, 2 Park Ln, Derby DE22 2DS",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.955537,
+          "longitude": -1.4797713
+        },
+        "placeId": "ChIJy7Pur-DzeUgRtGp4MS8Swqk",
+        "locality": "Park Lane Surgery, 2 Park Ln, Derby DE22 2DS",
+        "addressComponents": [
+          {
+            "longText": "Park Lane Surgery",
+            "shortText": "Park Lane Surgery",
+            "types": [
+              "premise"
+            ],
+            "languageCode": "en-GB"
+          },
+          {
+            "longText": "2",
+            "shortText": "2",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Park Lane",
+            "shortText": "Park Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 2DS",
+            "shortText": "DE22 2DS",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12232359531794426548&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Allestree",
+        "address": "Allestree, Derby DE22 2FF",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.952948899999996,
+          "longitude": -1.4925673000000002
+        },
+        "placeId": "ChIJj_AjhU3xeUgRJEdyRbM-uRY",
+        "locality": "Allestree, Derby DE22 2FF",
+        "addressComponents": [
+          {
+            "longText": "Allestree",
+            "shortText": "Allestree",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE22 2FF",
+            "shortText": "DE22 2FF",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1637408879211071268&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Allestree, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-03T11:32:24.017Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://parklanesurgeryallestree.co.uk/",
+          "title": "Park Lane Surgery – NHS GP Surgery in Derby",
+          "description": "Park Lane Surgery 2 Park Lane Allestree Derby DE22 2DS Get directions · 01332 552 461 · Home · Appointments · Prescriptions · Services · About the surgery. Read more"
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/park-lane-surgery/C81040",
+          "title": "Park Lane Surgery - NHS",
+          "description": "Park Lane Surgery. 2 Park Lane, Allestree, Derby, Derbyshire, DE22 2DS. Information: This GP surgery is currently accepting new patients. Read more"
+        },
+        {
+          "url": "https://brookmedical.co.uk/",
+          "title": "The Brook Medical Centre – NHS GP Surgery in Derby",
+          "description": "The Brook Medical Centre – NHS GP Surgery in Derby … 183 Kedleston Road Derby DE22 1FT Get directions 01332 291991 Home Appointments"
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+          "title": "List of GP practices in Derby and Derbyshire - May 2025",
+          "description": "20 May 2025 — View a full list of GP practices across Derby and Derbyshire, including practice codes, addresses and contact information."
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration and how to contact the ..."
+        },
+        {
+          "url": "https://www.southstreetsurgery.nhs.uk/",
+          "title": "South Street Surgery - at Ilkeston Health Centre, South Street ...",
+          "description": "It's fast, easy and free. Call 111 and speak to a highly trained adviser, supported by healthcare professionals. They will ask you a series of questions to ... Read more"
+        },
+        {
+          "url": "https://derbygp.co.uk/",
+          "title": "Find an NHS GP in Derby | Choose From 33 Practices",
+          "description": "Finding an NHS GP in the heart of Derby is now easier than ever. There are 33 GP practices within 3 miles of Derby City Centre that are currently accepting ..."
+        },
+        {
+          "url": "https://www.appletreemedical.co.uk/practice-information/pcn-primary-care-network/",
+          "title": "PCN – Primary Care Network - Duffield",
+          "description": "01773 880099. For more information on PCNs and their provision in Derbyshire see these links: https://www.england.nhs.uk/primary-care/primary-care-networks. Read more"
+        },
+        {
+          "url": "https://parkfarm-medical.co.uk/contact-us/",
+          "title": "Contact us – Park Farm Medical Centre & Vernon Street ...",
+          "description": "5 May 2023 — Address. Park Farm Medical Centre 3 Park Farm Centre Allestree Derby DE22 2QN Get directions. The Vernon Street Surgery 10 Vernon Street Derby Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Allestree, Derby, Derbyshire, UK",
+      "capturedAt": "2026-09-03T11:32:26.119Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/allestree-neighbourhood-ward/",
+          "title": "Allestree neighbourhood ward - Derby ...",
+          "description": "Rachael Clark, Neighbourhood Manager, 07386 698840, rachael.clark@derby.gov.uk ; Rebecca Hudson, Neighbourhood Officer, 07812 300153, rebecca.hudson@derby.gov.uk. Read more"
+        },
+        {
+          "url": "https://www.facebook.com/allestreecouncillors/?locale=en_GB",
+          "title": "Allestree Councillors (@allestreecouncillors)",
+          "description": "The official Facebook page of the Conservative Councillors in Allestree Ward. community safety concerns, highways matters and ongoing issues … 14 parishes from ..."
+        },
+        {
+          "url": "https://calmview.derbyshire.gov.uk/calmview/Record.aspx?src=CalmView.Catalog&id=D4526",
+          "title": "D4526 - Allestree Parish Council - 1894-1968",
+          "description": "Allestree Parish Council was established under the provisions of the local Government Act 1894. It provided local services for the parish, including street ... Read more"
+        },
+        {
+          "url": "https://www.derbyshirewildlifetrust.org.uk/rewilding-allestree-park",
+          "title": "Rewilding Allestree Park",
+          "description": "We are thrilled that our vision for community rewilding at Allestree Park has been agreed by Derby City Council Cabinet."
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Allestree",
+          "title": "Allestree",
+          "description": "Allestree is a suburb and ward of the city of Derby, a unitary authority area, in Derbyshire, England. It is the northernmost ward and is on the A6 road, ... Read more"
+        },
+        {
+          "url": "https://www.hattonparish.gov.uk/",
+          "title": "Home I Hatton Parish Council | Welcome to Our Home Page",
+          "description": "Welcome to Hatton Parish Council. Providing information about the Parish Council, the locality and general community information. A picture of Hatton Bridge ... Read more"
+        },
+        {
+          "url": "https://www.facebook.com/DerbyBBC/posts/derbyshires-political-boundary-is-to-be-split-in-half-but-what-does-it-mean-for-/2133126677496984/",
+          "title": "Derbyshire's political boundary is to be split in half",
+          "description": "For residents of Allestree, this means Derby City Council will eventually cease to exist and Derby will become part of a much larger authority ..."
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire County Councillors. Work phone: 01246 863018 Email: parishclerk@ashover-pc.gov.uk. Derbyshire DE5 3TB Work phone: 01773409524. Work phone: ..."
+        },
+        {
+          "url": "https://www.inderby.org.uk/parks/derbys-parks-and-open-spaces/allestree-park/",
+          "title": "Allestree Park",
+          "description": "At 130 Hectares or 320 Acres, Allestree Park is the largest public open space in Derby. This urban park bridges the gap between the built environment and ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/park-lane-surgery/C81040",
+      "title": "Park Lane Surgery - NHS",
+      "status": 200,
+      "textSample": "Park Lane Surgery - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Park Lane Surgery 2 Park Lane, Allestree, Derby, Derbyshire, DE22 2DS Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-03T11:32:28.922Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/allestree-neighbourhood-ward/",
+      "title": "Allestree neighbourhood ward - Derby City Council",
+      "status": 200,
+      "textSample": "Allestree neighbourhood ward - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Council and democracy Neighbourhood partnerships Wards A to C Allestree neighbourhood ward Allestree neighbourhood ward Allestree Neighbourhood team If you would like to get involved in your neighbourhood, you have ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Rachael Clark Neighbourhood Manager 07386 698840 rachael.clark@derby.gov.uk Rebecca Hudson Neighbourhood Officer 07812 300153 rebecca.hudson@derby.gov.uk Kelly Pockett Local Area Coordinator, Allestree 07766 602569 kelly.pockett@derby.gov.uk Anti-social behaviour and crime If you wish to complain about anti-social behaviour or report a crime you can contact the Allestree Safer Neighbourhood Team by: telephone: 101 email: north.neighbourhoods@derbyshire.pnn.police.uk Your Safer Neighbourhood Team is committed to making your community a safer and better place to live and work. Find out more about the Allestree and Darley Safer Neighbourhood Team on Derbyshire Constabulary's website. Allestree Neighbourhood Board There are no longer forum meetings held for the local area. If you would like to raise an issue or require more information, contact one of your local Councillors: Chair - Councillor Morgan-Mcgeehan Councillor Potter Councillor Hassall Allestree Neighbourhood Board Your local Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. The board: leads on behalf of the whole neighbourhood agrees the priorities for the neighbourhood decides where delegated Council budgets are to be spent monitors performance influences decisions that reflect the views of local residents decides on the vision for your neighbourhood The Neighbourhood Board has a budget of &pound;10,000 from April 2021. The budget is to enable voluntary and community groups (Non Commercial) to apply for funding to support projects/events, that will both benefit the neighbourhood and its residents. To apply for funding, please read the guidance and complete the form: Board Funding Application 2022/23 Neighbourhood board devolved budget funding guidance Resident and Community Group Members Member Group Clare Shelton Trees for Derby Ann Cooke Allestree Women&rsquo;s Institute Abbi Burns Allestree Carnival Anne Morgan Friends of Markeaton Park Mike Bickmore Resident Barrie Fones Allestree Football Club Monica Monticelli Friends of Allestree Park Matthew Willers Bar 189 Dave Anderson Allestree Royal British Legion Stuart Eames Allestree Cricket Club Advisors Advisor Organisation Temporary Sgt Gerrard Collins Derbyshire Police Tim Banton Traffic and Transport, DCC David Winslow Parks Team, DCC Kelly Pockett Local Area Coordination James Sullivan Park Farm Management TBC Derbyshire Fire and Rescue TBC Derby Homes Allestree Neighbourhood Forum There are no longer forum meetings held for the local area. If you would like to raise an issue or require more information, contact one of your local Councillors: Chair - Councillor Morgan-Mcgeehan Councillor Potter Councillor Hassall News and events Local Energy Assessment Fund - successful bid The Neighbourhood Board was successful in bidding for funding from the Local Energy Assessment Fund. The fund from the Department of Energy and Climate Change was set up to encourage and enable communities to take advantage of energy efficiency and renewable energy technologies and support mechanisms. The project aimed to identify energy efficiency opportunities, raise awareness of measures that householders can take to reduce their energy bills and carbon emissions and provide local residents with the skills to be able to advise others on home energy. As part of the project, a Community Energy Assessment was carried out. The findings of this assessment are available in the Allestree Neighbourhood Board Community Energy Project Mackworth Neighbourhood team If you would like to get involved in your neighbourhood, you have any ideas on how to improve your local area or have any questions about the ward, you can contact: Name Job title Phone Email Rachael Clark Neighbourhood Manager 07386 698840 rachael.clark@derby.gov.uk Rebecca Hudson Neighbourhood Officer 07812 300153 rebecca.hudson@derby.gov.uk Sally Robertson Local Area Coordinator, Mackworth 07812 300105 sally.robertson@derby.gov.uk Previous Next More in this section Abbey neighbourhood ward Allestree neighbourhood ward Alvaston neighbourhood ward Arboretum neighbourhood ward Blagreaves neighbourhood ward Chaddesden neighbourhood ward Chellaston and Shelton Lock ward Contact details Email: neighbourhoods@derby.gov.uk Department: --> Phone: - --> --> Relay UK: --> SignVideo: Signing service Address: Community Safety and Integration Service Public Protection and Streetpride The Council House Corporation Street Derby DE1 2FS Document downloads Useful links --> Derbyshire Police --> Derbyshire Fire and Rescue Service --> Derby Homes --> Derby and Derbyshire Integrated Care Board Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-03T11:32:29.654Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.952948899999996,
+    "longitude": -1.4925673000000002,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 4.1,
+  "verifiedGpPracticeCount": 0,
+  "findings": [
+    "0 verified GP practice(s) after official-source checks.",
+    "Zero verified GP practices is a recorded research outcome, not an automatic retry.",
+    "no attributable identity fact from an authoritative web source",
+    "Actual evidence spend $0.068 of cap $0.200. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/allestree.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/allestree.json",
+  "editorialSufficiency": "EVIDENCE LIMITED"
+}

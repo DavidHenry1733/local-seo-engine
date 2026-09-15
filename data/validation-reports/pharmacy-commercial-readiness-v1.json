@@ -1,0 +1,188 @@
+{
+  "slug": "greenfield-pharmacy",
+  "pass": true,
+  "commercialReadinessScore": 100,
+  "checks": [
+    {
+      "id": "1-create-pharmacy",
+      "pass": true,
+      "detail": "Greenfield Pharmacy (greenfield-pharmacy)",
+      "category": "onboarding"
+    },
+    {
+      "id": "2-growth-plan-assigned",
+      "pass": true,
+      "detail": "Professional tier via wizard",
+      "category": "onboarding"
+    },
+    {
+      "id": "3-website-analysis",
+      "pass": true,
+      "detail": "analysed=true",
+      "category": "onboarding"
+    },
+    {
+      "id": "4-brand-import",
+      "pass": true,
+      "detail": "imported=true",
+      "category": "onboarding"
+    },
+    {
+      "id": "5-areas-generated",
+      "pass": true,
+      "detail": "10 areas",
+      "category": "onboarding"
+    },
+    {
+      "id": "6-self-provisioning-files",
+      "pass": true,
+      "detail": "14 files",
+      "category": "provisioning"
+    },
+    {
+      "id": "7-self-provisioning-dirs",
+      "pass": true,
+      "detail": "5 dirs",
+      "category": "provisioning"
+    },
+    {
+      "id": "8-registry-entry",
+      "pass": true,
+      "detail": "Master admin registry",
+      "category": "provisioning"
+    },
+    {
+      "id": "9-campaign-generated",
+      "pass": true,
+      "detail": "2 campaign(s)",
+      "category": "workflow"
+    },
+    {
+      "id": "10-image-store",
+      "pass": true,
+      "detail": "0 assignments (store ready)",
+      "category": "workflow"
+    },
+    {
+      "id": "11-publishing-workflow",
+      "pass": true,
+      "detail": "2 service publishing settings",
+      "category": "workflow"
+    },
+    {
+      "id": "12-growth-programme-dashboard",
+      "pass": true,
+      "detail": "47% progress",
+      "category": "workflow"
+    },
+    {
+      "id": "13-outstanding-tasks",
+      "pass": true,
+      "detail": "4 tasks with Continue links",
+      "category": "workflow"
+    },
+    {
+      "id": "14-advanced-tools",
+      "pass": true,
+      "detail": "Collapsed advanced tools section",
+      "category": "workflow"
+    },
+    {
+      "id": "15-workflow-continuity",
+      "pass": true,
+      "detail": "9 steps with platform routes",
+      "category": "workflow"
+    },
+    {
+      "id": "16-content-review",
+      "pass": true,
+      "detail": "pharmacy-first",
+      "category": "workflow"
+    },
+    {
+      "id": "17-campaign-management",
+      "pass": true,
+      "detail": "2 campaign(s) in OS",
+      "category": "workflow"
+    },
+    {
+      "id": "18-admin-portfolio",
+      "pass": true,
+      "detail": "Needs Attention · 47%",
+      "category": "admin"
+    },
+    {
+      "id": "19-admin-search-filter",
+      "pass": true,
+      "detail": "Search by name",
+      "category": "admin"
+    },
+    {
+      "id": "20-admin-open-client",
+      "pass": true,
+      "detail": "Open Pharmacy link present",
+      "category": "admin"
+    },
+    {
+      "id": "21-admin-archive-demo",
+      "pass": true,
+      "detail": "Archive hides · demo delete cleans tenant",
+      "category": "admin"
+    },
+    {
+      "id": "22-regression-pharmaconnect",
+      "pass": true,
+      "detail": "pharmaconnect profile unchanged",
+      "category": "regression"
+    },
+    {
+      "id": "23-regression-existing-dashboard",
+      "pass": true,
+      "detail": "My WordPress Blog still loads",
+      "category": "regression"
+    },
+    {
+      "id": "24-no-engine-modified",
+      "pass": true,
+      "detail": "Visual templates untouched",
+      "category": "regression"
+    },
+    {
+      "id": "25-ux-guidance",
+      "pass": true,
+      "detail": "Customer-facing next-step guidance",
+      "category": "ux"
+    },
+    {
+      "id": "26-live-route",
+      "pass": true,
+      "detail": "Auth-gated",
+      "category": "live"
+    }
+  ],
+  "journeyScreens": [
+    "Master Admin — Create Pharmacy",
+    "Growth Programme — Welcome",
+    "Outstanding Tasks",
+    "Current Growth Plan",
+    "Progress",
+    "Performance",
+    "OS Step: Business Profile → /api/pharmacy-profile-dashboard?slug=greenfield-pharmacy",
+    "OS Step: Analyse Existing Website → /api/pharmacy-profile-dashboard?slug=greenfield-pharmacy#panel-brand-import",
+    "OS Step: Target Areas → /api/pharmacy-profile-dashboard?slug=greenfield-pharmacy#section-coverage",
+    "OS Step: Create Campaign → /api/pharmacy-campaigns?slug=greenfield-pharmacy",
+    "OS Step: Campaign Assets → /api/pharmacy-image-library?slug=greenfield-pharmacy&service=blood-pressure-checks",
+    "OS Step: Campaign Improvements → /api/pharmacy-enhancement-workspace?slug=greenfield-pharmacy&service=blood-pressure-checks",
+    "OS Step: Ready To Publish → /api/pharmacy-publishing-settings?slug=greenfield-pharmacy&service=blood-pressure-checks",
+    "OS Step: Submit To Google → /api/pharmacy-growth-dashboard?slug=greenfield-pharmacy#indexing",
+    "OS Step: Monitor Results → /api/pharmacy-growth-dashboard?slug=greenfield-pharmacy",
+    "Content Review",
+    "Campaign Management"
+  ],
+  "manualInterventionsRequired": [],
+  "issuesDiscovered": [],
+  "recommendations": [
+    "Proceed to wider commercial rollout and onboarding automation."
+  ],
+  "generatedAt": "2026-06-28T15:24:17.476Z"
+}

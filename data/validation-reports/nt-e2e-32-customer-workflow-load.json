@@ -1,0 +1,16 @@
+{
+  "sprint": "NT-E2E-32",
+  "slug": "reliable-direct-pharmacy",
+  "rootCause": "buildMasterAdminCustomerRecord synchronously invoked buildPharmacyPlatformDashboard on every GET /customers/:slug",
+  "timedOutEndpoint": "GET /api/master-admin-platform/customers/reliable-direct-pharmacy",
+  "responseTimeBeforeMs": ">30000",
+  "firstSlowOperation": "buildPharmacyPlatformDashboard: 118141ms",
+  "responsibleFile": "src/pharmacy/pharmacyPlatformDashboardService.ts (invoked from src/pharmacy/masterAdminPlatformService.ts buildMasterAdminCustomerRecord)",
+  "responsibleFunction": "buildPharmacyPlatformDashboard",
+  "liteWorkflowMs": 122,
+  "profileWorkflowMs": 76,
+  "platformDashboardMs": 118141,
+  "applicationReloaded": true,
+  "pm2": "ONLINE",
+  "port3001": "LISTENING"
+}

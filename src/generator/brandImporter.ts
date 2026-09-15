@@ -62,6 +62,16 @@ export interface BrandProfile {
   };
   warnings: string[];
   approved: boolean;
+  /** Primary call-to-action label detected on the source site. */
+  ctaText?: string;
+  /** Primary call-to-action URL detected on the source site. */
+  ctaUrl?: string;
+  headerBackgroundColour?: string;
+  headerTextColour?: string;
+  footerBackgroundColour?: string;
+  footerTextColour?: string;
+  footerLinkColour?: string;
+  footerAccentColour?: string;
 }
 
 // ── Safe HTTP fetch ───────────────────────────────────────────────────────────
@@ -243,6 +253,12 @@ interface ColourHints {
   bodyTextColour:   string;
   buttonColour:     string;
   buttonTextColour: string;
+  headerBackgroundColour: string;
+  headerTextColour: string;
+  footerBackgroundColour: string;
+  footerTextColour: string;
+  footerLinkColour: string;
+  footerAccentColour: string;
   confidence:       number;
 }
 
@@ -256,6 +272,12 @@ function extractColours(css: string): ColourHints {
     bodyTextColour:   "#334155",
     buttonColour:     "#005EB8",
     buttonTextColour: "#ffffff",
+    headerBackgroundColour: "",
+    headerTextColour: "",
+    footerBackgroundColour: "",
+    footerTextColour: "",
+    footerLinkColour: "",
+    footerAccentColour: "",
     confidence:       0,
   };
 
@@ -263,6 +285,11 @@ function extractColours(css: string): ColourHints {
 
   // Collect candidate colours by context
   const headerBg:  string[] = [];
+  const headerTextCol: string[] = [];
+  const footerBg: string[] = [];
+  const footerTextCol: string[] = [];
+  const footerLinkCol: string[] = [];
+  const footerAccentCol: string[] = [];
   const btnBg:     string[] = [];
   const linkColor: string[] = [];
   const headingColor: string[] = [];
@@ -275,6 +302,7 @@ function extractColours(css: string): ColourHints {
     const col = rule.properties.get("color") || "";
 
     const isHeader = /header|\.nav|^nav\b|\.site-header|\.top-bar|\.navbar/.test(sel);
+    const isFooter = /footer|\.site-footer|#site-footer/.test(sel);
     const isBtn    = /\.btn\b|button\b|a\.btn|\.button\b|input\[type.*submit\]/.test(sel);
     const isLink   = /^a\b|^a:/.test(sel);
     const isH      = /^h[123]\b|\.heading|\.title/.test(sel);
@@ -285,6 +313,11 @@ function extractColours(css: string): ColourHints {
     const colHex = firstHexFrom(col);
 
     if (isHeader && bgHex && !isNeutral(bgHex)) headerBg.push(bgHex);
+    if (isHeader && colHex && !isNeutral(colHex)) headerTextCol.push(colHex);
+    if (isFooter && bgHex && !isNeutral(bgHex)) footerBg.push(bgHex);
+    if (isFooter && colHex) footerTextCol.push(colHex);
+    if (isFooter && isLink && colHex && !isNeutral(colHex)) footerLinkCol.push(colHex);
+    if (isFooter && /\.tagline|\.footer-note|\.footer-bottom|\.muted/.test(sel) && colHex) footerAccentCol.push(colHex);
     if ((isHero || isHeader) && bgHex && !isNeutral(bgHex)) accentCandidates.push(bgHex);
     if (isBtn && bgHex && !isNeutral(bgHex))    btnBg.push(bgHex);
     if (isLink && colHex && !isNeutral(colHex)) linkColor.push(colHex);
@@ -341,8 +374,80 @@ function extractColours(css: string): ColourHints {
     bodyTextColour,
     buttonColour,
     buttonTextColour,
+    headerBackgroundColour: headerBg[0] ?? "",
+    headerTextColour: headerTextCol[0] ?? "",
+    footerBackgroundColour: footerBg[0] ?? "",
+    footerTextColour: footerTextCol[0] ?? "",
+    footerLinkColour: footerLinkCol[0] ?? footerTextCol[0] ?? "",
+    footerAccentColour: footerAccentCol[0] ?? "",
     confidence,
   };
+}
+
+function countHexFrequency(text: string): Map<string, number> {
+  const counts = new Map<string, number>();
+  for (const raw of allHexInText(text)) {
+    const hex = normaliseHex(raw.startsWith("#") ? raw.slice(1) : raw);
+    if (isNeutral(hex)) continue;
+    const key = hex.toUpperCase();
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  return counts;
+}
+
+/** Prefer inline HTML palette (Brook / pharmacy sites) over generic theme CSS. */
+function augmentColoursFromHtml(html: string, hints: ColourHints): ColourHints {
+  const counts = countHexFrequency(html);
+  const pick = (hex: string): string | null => {
+    const key = hex.toUpperCase();
+    return counts.has(key) ? normaliseHex(key.slice(1)) : null;
+  };
+
+  const nhsBlue = pick("#005EB8");
+  const amber = pick("#F59E0B");
+  const teal = pick("#007A7A");
+  const charcoal = pick("#1F2933");
+  const slate = pick("#5F6C7B");
+  const deepBlue = pick("#004A91") ?? pick("#003087");
+
+  if (nhsBlue) {
+    hints.primaryColour = nhsBlue;
+    hints.secondaryColour = deepBlue ?? darken(nhsBlue, 0.22);
+  }
+  if (amber) hints.buttonColour = amber;
+  else if (nhsBlue && !hints.buttonColour) hints.buttonColour = nhsBlue;
+  if (teal) hints.accentColour = teal;
+  if (charcoal) hints.headingColour = charcoal;
+  if (slate) hints.bodyTextColour = slate;
+
+  const paletteHits = [nhsBlue, amber, teal, charcoal, slate].filter(Boolean).length;
+  if (paletteHits >= 2) {
+    hints.confidence = Math.min(100, hints.confidence + paletteHits * 12);
+  }
+
+  return hints;
+}
+
+function extractCtaFromHtml(html: string, baseUrl: string): { text: string; url: string } {
+  const ctaPatterns = [
+    /order\s+prescription/i,
+    /contact\s+the\s+pharmacy/i,
+    /book\s+(?:a\s+)?consultation/i,
+    /speak\s+to\s+a\s+pharmacist/i,
+  ];
+
+  const linkRe = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let m: RegExpExecArray | null;
+  while ((m = linkRe.exec(html)) !== null) {
+    const text = m[2].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    if (!text || text.length > 64) continue;
+    if (ctaPatterns.some((p) => p.test(text))) {
+      const resolved = resolveUrl(m[1].trim(), baseUrl);
+      return { text, url: resolved || m[1].trim() };
+    }
+  }
+
+  return { text: "", url: "" };
 }
 
 // ── Font extraction ───────────────────────────────────────────────────────────
@@ -655,7 +760,7 @@ export async function importBrandFromUrl(url: string): Promise<BrandProfile> {
   const fullCss = cssTexts.join("\n");
 
   // Extract everything
-  const colours     = extractColours(fullCss);
+  const colours     = augmentColoursFromHtml(html, extractColours(fullCss));
   const fonts       = extractFonts(fullCss, html);
   const logo        = extractLogoUrl(html, baseUrl);
   const faviconUrl  = extractFaviconUrl(html, baseUrl);
@@ -667,6 +772,7 @@ export async function importBrandFromUrl(url: string): Promise<BrandProfile> {
   const contactInfo = extractContactInfo(html);
   const tone        = extractToneOfVoice(html);
   const businessName = extractBusinessName(html);
+  const ctaHints     = extractCtaFromHtml(html, baseUrl);
 
   if (!logo.url) warnings.push("Logo could not be detected automatically. Please upload manually.");
   if (colours.confidence < 40) warnings.push("Colour confidence is low. Please review extracted colours.");
@@ -686,6 +792,12 @@ export async function importBrandFromUrl(url: string): Promise<BrandProfile> {
     bodyTextColour:   colours.bodyTextColour,
     buttonColour:     colours.buttonColour,
     buttonTextColour: colours.buttonTextColour,
+    headerBackgroundColour: colours.headerBackgroundColour || undefined,
+    headerTextColour: colours.headerTextColour || undefined,
+    footerBackgroundColour: colours.footerBackgroundColour || undefined,
+    footerTextColour: colours.footerTextColour || undefined,
+    footerLinkColour: colours.footerLinkColour || undefined,
+    footerAccentColour: colours.footerAccentColour || undefined,
     headingFont:      fonts.headingFont,
     bodyFont:         fonts.bodyFont,
     navigationLinks:  navLinks,
@@ -700,6 +812,8 @@ export async function importBrandFromUrl(url: string): Promise<BrandProfile> {
     },
     warnings,
     approved: false,
+    ctaText: ctaHints.text,
+    ctaUrl:  ctaHints.url,
   };
 }
 

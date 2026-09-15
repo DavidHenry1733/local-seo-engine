@@ -1,0 +1,322 @@
+{
+  "version": 1,
+  "slug": "cat-v1-bespoke-avicenna",
+  "generatedAt": "2026-08-01T08:05:23.507Z",
+  "lastUpdated": "2026-08-01T08:05:23.507Z",
+  "totalActions": 5,
+  "pendingActions": 5,
+  "inProgressActions": 0,
+  "completeActions": 0,
+  "deferredActions": 0,
+  "topPriorityActions": [
+    {
+      "id": "profile-add-logo",
+      "title": "Add pharmacy logo to complete profile",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Logo completes branding and improves trust on every published page header.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Profile completeness is at 38% — logo is the remaining branding gap.",
+      "evidence": [],
+      "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna#branding",
+      "dependencyOrder": 10,
+      "urgency": 4,
+      "rankScore": 69
+    },
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "38% profile complete with 11 item(s) still missing.",
+      "evidence": [
+        "Required: Address and town/postcode",
+        "Required: Primary town",
+        "Required: At least one target area",
+        "Required: Reviewer or superintendent name",
+        "Required: Clinical review date"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "60% of local competitors promote Pharmacy First",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=cat-v1-bespoke-avicenna",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for Rotherham — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations Rotherham",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    }
+  ],
+  "actionsByCategory": {
+    "Profile": [
+      {
+        "id": "profile-add-logo",
+        "title": "Add pharmacy logo to complete profile",
+        "category": "Profile",
+        "priority": "High",
+        "impact": "Logo completes branding and improves trust on every published page header.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Profile completeness is at 38% — logo is the remaining branding gap.",
+        "evidence": [],
+        "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna#branding",
+        "dependencyOrder": 10,
+        "urgency": 4,
+        "rankScore": 69
+      },
+      {
+        "id": "profile-complete-missing-fields",
+        "title": "Complete remaining profile fields",
+        "category": "Profile",
+        "priority": "High",
+        "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "38% profile complete with 11 item(s) still missing.",
+        "evidence": [
+          "Required: Address and town/postcode",
+          "Required: Primary town",
+          "Required: At least one target area",
+          "Required: Reviewer or superintendent name",
+          "Required: Clinical review date"
+        ],
+        "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna",
+        "dependencyOrder": 10,
+        "urgency": 3,
+        "rankScore": 65
+      }
+    ],
+    "Trust": [
+      {
+        "id": "trust-add-regulatory-links",
+        "title": "Add real GPhC and NHS profile links before live launch",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Trust credentials should link to your specific premises registration before go-live.",
+        "evidence": [
+          "NHS profile URL not set"
+        ],
+        "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna#trust",
+        "dependencyOrder": 9,
+        "urgency": 4,
+        "rankScore": 67
+      }
+    ],
+    "Competitor Gap": [
+      {
+        "id": "competitor-promote-pharmacy-first",
+        "title": "Promote Pharmacy First as a priority service",
+        "category": "Competitor Gap",
+        "priority": "High",
+        "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+        "evidence": [
+          "60% of local competitors promote Pharmacy First",
+          "Pharmacy First page published and in visibility registry"
+        ],
+        "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+        "linkedModule": "Competitor Intelligence",
+        "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=cat-v1-bespoke-avicenna",
+        "dependencyOrder": 4,
+        "urgency": 4,
+        "rankScore": 56
+      }
+    ],
+    "Content": [
+      {
+        "id": "content-travel-vaccinations-seasonal",
+        "title": "Publish Travel Vaccinations content before peak travel season",
+        "category": "Content",
+        "priority": "Medium",
+        "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Travel Vaccinations page is published for Rotherham — refresh promotion ahead of peak demand.",
+        "evidence": [
+          "travel vaccinations Rotherham",
+          "70% of local competitors promote travel vaccinations"
+        ],
+        "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+        "linkedModule": "Visual Experience",
+        "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+        "dependencyOrder": 3,
+        "urgency": 3,
+        "rankScore": 41
+      }
+    ]
+  },
+  "actions": [
+    {
+      "id": "profile-add-logo",
+      "title": "Add pharmacy logo to complete profile",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Logo completes branding and improves trust on every published page header.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Profile completeness is at 38% — logo is the remaining branding gap.",
+      "evidence": [],
+      "recommendedNextStep": "Upload your pharmacy logo in the Profile Dashboard branding section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna#branding",
+      "dependencyOrder": 10,
+      "urgency": 4,
+      "rankScore": 69
+    },
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "38% profile complete with 11 item(s) still missing.",
+      "evidence": [
+        "Required: Address and town/postcode",
+        "Required: Primary town",
+        "Required: At least one target area",
+        "Required: Reviewer or superintendent name",
+        "Required: Clinical review date"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=cat-v1-bespoke-avicenna",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "60% of local competitors promote Pharmacy First",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=cat-v1-bespoke-avicenna",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for Rotherham — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations Rotherham",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    }
+  ]
+}

@@ -15,7 +15,7 @@ function adminShell(title: string, body: string, currentUser: { name: string; us
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>${esc(title)} — Local SEO Engine</title>
+<title>${esc(title)} — PharmaConnect Growth Engine</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh;}
@@ -57,7 +57,8 @@ tr:last-child td{border-bottom:none;}
 </head>
 <body>
 <div class="topbar">
-  <div class="topbar-logo">Local SEO Engine <span>admin</span></div>
+  <div class="topbar-logo">PharmaConnect Growth Engine <span>admin</span></div>
+  <a href="/api/admin/master" class="topbar-back" style="margin-left:0">Client Portfolio</a>
   <span class="topbar-user">👤 ${esc(currentUser.name || currentUser.username)}</span>
   <a href="/api/dashboard" class="topbar-back">← Back to Dashboard</a>
 </div>
@@ -101,7 +102,7 @@ router.get("/admin/users", requireAdmin, (req: Request, res: Response) => {
 
   const body = `
 <h1>Team Members</h1>
-<p class="subtitle">Manage who can access the Local SEO Engine. ${users.length} member${users.length !== 1 ? "s" : ""} total.</p>
+<p class="subtitle">Manage who can access the PharmaConnect Growth Engine. ${users.length} member${users.length !== 1 ? "s" : ""} total.</p>
 
 <div id="msg"></div>
 

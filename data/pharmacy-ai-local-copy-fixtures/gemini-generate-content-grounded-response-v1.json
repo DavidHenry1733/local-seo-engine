@@ -1,0 +1,75 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "thought": true,
+            "text": "Search the selected area before writing."
+          }
+        ]
+      }
+    },
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "HERO INTRODUCTION:\nPeople in Darfield can use Pharmacy First at Yorkshire Pharmacy & Health Clinic.\n\nLOCAL INTRODUCTION:\nDarfield is a South Yorkshire village in the Metropolitan Borough of Barnsley.\n\nThe Maurice Dobson Museum and Darfield Park are local landmarks.\n\nYorkshire Pharmacy & Health Clinic provides Pharmacy First for people in the neighbourhood."
+          }
+        ]
+      },
+      "finishReason": "STOP",
+      "groundingMetadata": {
+        "webSearchQueries": ["Darfield South Yorkshire landmarks", "Darfield Barnsley local history"],
+        "searchEntryPoint": {
+          "renderedContent": "<div>Google Search suggestions</div>"
+        },
+        "groundingChunks": [
+          {
+            "web": {
+              "uri": "https://en.wikipedia.org/wiki/Darfield,_South_Yorkshire",
+              "title": "Darfield, South Yorkshire"
+            }
+          },
+          {
+            "web": {
+              "uri": "https://www.barnsley.gov.uk/",
+              "title": "Barnsley Council"
+            }
+          }
+        ],
+        "groundingSupports": [
+          {
+            "segment": { "startIndex": 0, "endIndex": 80, "text": "Darfield is a South Yorkshire village" },
+            "groundingChunkIndices": [0]
+          },
+          {
+            "segment": { "startIndex": 81, "endIndex": 160, "text": "The Maurice Dobson Museum and Darfield Park" },
+            "groundingChunkIndices": [0, 1]
+          }
+        ]
+      },
+      "grounding_metadata": {
+        "web_search_queries": ["Darfield library"],
+        "grounding_chunks": [
+          {
+            "web": {
+              "uri": "https://www.barnsley.gov.uk/libraries",
+              "title": "Darfield Library"
+            }
+          }
+        ],
+        "grounding_supports": [
+          {
+            "segment": { "startIndex": 0, "endIndex": 20, "text": "library" },
+            "grounding_chunk_indices": [0]
+          }
+        ]
+      }
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 120,
+    "candidatesTokenCount": 90
+  }
+}

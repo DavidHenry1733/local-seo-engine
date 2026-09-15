@@ -1,0 +1,23 @@
+{
+  "clientSlug": "leeds-pharmacy",
+  "businessName": "Leeds Pharmacy",
+  "domain": "https://leedspharmacy.co.uk",
+  "phone": "0113 275 2103",
+  "email": "support@leedspharmacy.co.uk",
+  "branding": {
+    "primaryColor": "#005EB8",
+    "accentColor": "#1CA9C9"
+  },
+  "services": [
+    "pharmacy-first"
+  ],
+  "locations": [],
+  "deploy": {
+    "enabled": true,
+    "protocol": "sftp",
+    "host": "51.161.86.187",
+    "port": 22,
+    "remoteRoot": "/var/www/pharmaconnect-sites/leeds-pharmacy/current",
+    "username": "root"
+  }
+}

@@ -4,9 +4,9 @@ import path from "path";
 
 const router = express.Router();
 
-const ROOT = "/home/inboxingproweb/local-seo-engine";
+const ROOT = process.env.WORKSPACE_ROOT ?? "/home/inboxingproweb/pharmaconnect-growth-engine";
 const OUTPUT_DIR = path.join(ROOT, "output");
-const PROJECT_DIR = path.join(OUTPUT_DIR, "inboxingproweb");
+const PROJECT_DIR = path.join(OUTPUT_DIR, process.env.DEFAULT_PROJECT_SLUG ?? "pharmaconnect");
 
 function exists(p: string) {
   return fs.existsSync(p);

@@ -1,0 +1,127 @@
+{
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Allestree",
+  "areaSlug": "allestree",
+  "provider": "googlePlaces",
+  "generatedAt": "2026-09-03T16:59:32.631Z",
+  "sourceStatus": "google-places-authorised-collection",
+  "pharmacyCoordinates": {
+    "latitude": 52.91678930677714,
+    "longitude": -1.4825298233725033,
+    "source": "profile:coordinates"
+  },
+  "healthcare": [
+    {
+      "name": "Park Lane Surgery",
+      "address": "2 Park Ln, Derby DE22 2DS",
+      "category": "healthcare",
+      "types": [
+        "medical_clinic",
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9555349,
+        "longitude": -1.4797263999999999
+      },
+      "placeId": "ChIJy7Pur-DzeUgRBB3IIzYvEfE",
+      "source": "google-places",
+      "provider": "googlePlaces",
+      "retrievedAt": "2026-09-03T16:59:32.631Z",
+      "sourceRef": "https://maps.google.com/?cid=17370717147319770372&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+      "confidence": 76,
+      "relationship": "area-centroid-proximity",
+      "areaName": "Allestree"
+    }
+  ],
+  "community": [],
+  "landmarks": [],
+  "transport": [],
+  "schools": [],
+  "retail": [],
+  "rejected": [
+    {
+      "name": "Dr I Parkes",
+      "address": "Park Lane Surgery, 2 Park Ln, Derby DE22 2DS",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.955537,
+        "longitude": -1.4797713
+      },
+      "placeId": "ChIJy7Pur-DzeUgRtGp4MS8Swqk",
+      "rejectionReason": "not-customer-facing-organisation-name"
+    }
+  ],
+  "researchCandidates": [
+    {
+      "name": "Park Farm Medical Centre",
+      "address": "3 Park Farm Centre, Allestree, Derby DE22 2QN",
+      "category": "healthcare",
+      "types": [
+        "medical_clinic",
+        "health",
+        "government_office",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.944466000000006,
+        "longitude": -1.4955134
+      },
+      "placeId": "ChIJfz5jP1HxeUgRd4p-4ba1AJA",
+      "rejectionReason": "no-retrieved-official-source"
+    },
+    {
+      "name": "Park Farm Surgery",
+      "address": "Park Farm Surgeries, Park Farm Dr, Allestree, Derby DE22 2RP",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.9431389,
+        "longitude": -1.4966428999999999
+      },
+      "placeId": "ChIJK777w-LzeUgR2fPiUPw_kH4",
+      "rejectionReason": "no-retrieved-official-source"
+    },
+    {
+      "name": "Park Medical Practice University of Derby",
+      "address": "T Block, Derby DE22 1GB",
+      "category": "healthcare",
+      "types": [
+        "doctor",
+        "health",
+        "point_of_interest",
+        "establishment"
+      ],
+      "location": {
+        "latitude": 52.93853000000001,
+        "longitude": -1.4966658
+      },
+      "placeId": "ChIJlYbXDE7xeUgRIOQ9PpT93Js",
+      "rejectionReason": "no-retrieved-official-source"
+    }
+  ],
+  "evidenceLimited": false,
+  "qualitySummary": {
+    "attributableCount": 1,
+    "rejectedCount": 1,
+    "categoriesPresent": [
+      "healthcare"
+    ],
+    "minimumMet": true
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "pass": true,
+  "slug": "pharmaconnect",
+  "pharmacyName": "Brook Pharmacy",
+  "town": "Rotherham",
+  "phone": "01709 210731",
+  "phraseCatalogue": [
+    {
+      "phrase": "not every pharmacy",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Availability — replace with pharmacy-specific availability"
+    },
+    {
+      "phrase": "local participation may vary",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Availability hedging"
+    },
+    {
+      "phrase": "local participation varies",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Availability hedging"
+    },
+    {
+      "phrase": "your pharmacy provides the service",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Contact/access wording"
+    },
+    {
+      "phrase": "your pharmacy offers",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Contact/access wording"
+    },
+    {
+      "phrase": "what your pharmacy offers",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Contact/access wording"
+    },
+    {
+      "phrase": "call your pharmacy",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Contact wording"
+    },
+    {
+      "phrase": "your local pharmacy",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Local relevance"
+    },
+    {
+      "phrase": "a participating pharmacy",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Service access"
+    },
+    {
+      "phrase": "participating pharmacy",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Service access"
+    },
+    {
+      "phrase": "some pharmacies",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Availability plural"
+    },
+    {
+      "phrase": "ask the pharmacy team",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Team wording"
+    },
+    {
+      "phrase": "the pharmacy team",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Team wording"
+    },
+    {
+      "phrase": "contact the pharmacy",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Contact wording"
+    },
+    {
+      "phrase": "at your pharmacy",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "Location reference"
+    },
+    {
+      "phrase": "speak to a pharmacist",
+      "classification": "NEEDS_PROFILE_LOCALISATION",
+      "note": "CTA/contact when unnamed"
+    },
+    {
+      "phrase": "community pharmacy",
+      "classification": "SAFE_GENERIC",
+      "note": "OK in clinical/NHS definitions"
+    },
+    {
+      "phrase": "gp referral",
+      "classification": "SAFE_GENERIC",
+      "note": "Clinical fact"
+    },
+    {
+      "phrase": "urgent care",
+      "classification": "SAFE_GENERIC",
+      "note": "Clinical fact"
+    }
+  ],
+  "forbiddenPhrases": [
+    "not every pharmacy offers",
+    "local participation may vary",
+    "local participation varies",
+    "your pharmacy provides the service",
+    "confirm your pharmacy provides"
+  ],
+  "audits": [
+    {
+      "serviceId": "pharmacy-first",
+      "forbiddenInBody": [],
+      "brookInBodySections": 9,
+      "rotherhamInBodySections": 1,
+      "phoneInBodySections": 3,
+      "genericAskPharmacyInBody": false,
+      "clinicalAnchorsPresent": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "forbiddenInBody": [],
+      "brookInBodySections": 12,
+      "rotherhamInBodySections": 6,
+      "phoneInBodySections": 1,
+      "genericAskPharmacyInBody": false,
+      "clinicalAnchorsPresent": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "forbiddenInBody": [],
+      "brookInBodySections": 6,
+      "rotherhamInBodySections": 1,
+      "phoneInBodySections": 1,
+      "genericAskPharmacyInBody": false,
+      "clinicalAnchorsPresent": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "forbiddenInBody": [],
+      "brookInBodySections": 5,
+      "rotherhamInBodySections": 3,
+      "phoneInBodySections": 1,
+      "genericAskPharmacyInBody": false,
+      "clinicalAnchorsPresent": true,
+      "pass": true,
+      "failures": []
+    }
+  ],
+  "templateChecks": {
+    "pharmacyFirstRecovery": true,
+    "layoutV3_blood-pressure-checks": true,
+    "layoutV3_travel-vaccinations": true,
+    "layoutV3_emergency-contraception": true
+  },
+  "failedPages": [],
+  "previewUrls": [
+    "/api/pharmacy-visual-experience/pharmacy-first/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/travel-vaccinations/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/emergency-contraception/?slug=pharmaconnect"
+  ],
+  "rootCause": "Master-publish body copy uses national NHS wording (your pharmacy, not every pharmacy). Chrome was profile-injected in V1 trust fix; body sections still rendered master text verbatim.",
+  "filesModified": [
+    "src/pharmacy/pharmacyServicePageBodyLocalisation.ts (new)",
+    "src/pharmacy/pharmacyVisualExperienceLayoutV3.ts",
+    "src/pharmacy/pharmacyFirstPageSections.ts",
+    "src/pharmacy/pharmacyFirstPageRecovery.ts",
+    "src/pharmacy/pharmacyServicePageProfileContext.ts"
+  ],
+  "masterContentChanged": false,
+  "researchFilesChanged": false
+}

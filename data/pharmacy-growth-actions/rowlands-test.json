@@ -1,0 +1,339 @@
+{
+  "version": 1,
+  "slug": "rowlands-test",
+  "generatedAt": "2026-07-03T15:39:32.225Z",
+  "lastUpdated": "2026-07-04T06:15:01.337Z",
+  "totalActions": 5,
+  "pendingActions": 5,
+  "inProgressActions": 0,
+  "completeActions": 0,
+  "deferredActions": 0,
+  "topPriorityActions": [
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=rowlands-test#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "89% profile complete with 7 item(s) still missing.",
+      "evidence": [
+        "Required: Address and town/postcode",
+        "Improve profile: Company name",
+        "Improve profile: Company registration number",
+        "Improve profile: Reviewer photo",
+        "Improve profile: Extended reviewer biography"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=rowlands-test",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "60% of local competitors promote Pharmacy First",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=rowlands-test",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for rotherham — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations rotherham",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    },
+    {
+      "id": "local-coverage-expand-area-pages",
+      "title": "Expand local coverage pages for priority rotherham areas",
+      "category": "Local Coverage",
+      "priority": "Medium",
+      "impact": "Area-specific pages capture service + neighbourhood searches competitors may miss.",
+      "effort": "high",
+      "status": "pending",
+      "reason": "0 pages published including area variants — prioritise high-intent neighbourhoods.",
+      "evidence": [
+        "Priority area: Wickersley",
+        "Priority area: Bramley",
+        "Priority area: Maltby",
+        "Priority area: Aston"
+      ],
+      "recommendedNextStep": "Review area pages for Wickersley, Bramley, Maltby and ensure indexing is submitted.",
+      "linkedModule": "Publishing",
+      "linkedUrl": "/api/pharmacy-executive-dashboard?slug=rowlands-test",
+      "dependencyOrder": 2,
+      "urgency": 2,
+      "rankScore": 33
+    }
+  ],
+  "actionsByCategory": {
+    "Trust": [
+      {
+        "id": "trust-add-regulatory-links",
+        "title": "Add real GPhC and NHS profile links before live launch",
+        "category": "Trust",
+        "priority": "High",
+        "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Trust credentials should link to your specific premises registration before go-live.",
+        "evidence": [
+          "NHS profile URL not set"
+        ],
+        "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=rowlands-test#trust",
+        "dependencyOrder": 9,
+        "urgency": 4,
+        "rankScore": 67
+      }
+    ],
+    "Profile": [
+      {
+        "id": "profile-complete-missing-fields",
+        "title": "Complete remaining profile fields",
+        "category": "Profile",
+        "priority": "High",
+        "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "89% profile complete with 7 item(s) still missing.",
+        "evidence": [
+          "Required: Address and town/postcode",
+          "Improve profile: Company name",
+          "Improve profile: Company registration number",
+          "Improve profile: Reviewer photo",
+          "Improve profile: Extended reviewer biography"
+        ],
+        "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=rowlands-test",
+        "dependencyOrder": 10,
+        "urgency": 3,
+        "rankScore": 65
+      }
+    ],
+    "Competitor Gap": [
+      {
+        "id": "competitor-promote-pharmacy-first",
+        "title": "Promote Pharmacy First as a priority service",
+        "category": "Competitor Gap",
+        "priority": "High",
+        "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+        "effort": "medium",
+        "status": "pending",
+        "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+        "evidence": [
+          "60% of local competitors promote Pharmacy First",
+          "Pharmacy First page published and in visibility registry"
+        ],
+        "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+        "linkedModule": "Competitor Intelligence",
+        "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=rowlands-test",
+        "dependencyOrder": 4,
+        "urgency": 4,
+        "rankScore": 56
+      }
+    ],
+    "Content": [
+      {
+        "id": "content-travel-vaccinations-seasonal",
+        "title": "Publish Travel Vaccinations content before peak travel season",
+        "category": "Content",
+        "priority": "Medium",
+        "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+        "effort": "low",
+        "status": "pending",
+        "reason": "Travel Vaccinations page is published for rotherham — refresh promotion ahead of peak demand.",
+        "evidence": [
+          "travel vaccinations rotherham",
+          "70% of local competitors promote travel vaccinations"
+        ],
+        "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+        "linkedModule": "Visual Experience",
+        "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+        "dependencyOrder": 3,
+        "urgency": 3,
+        "rankScore": 41
+      }
+    ],
+    "Local Coverage": [
+      {
+        "id": "local-coverage-expand-area-pages",
+        "title": "Expand local coverage pages for priority rotherham areas",
+        "category": "Local Coverage",
+        "priority": "Medium",
+        "impact": "Area-specific pages capture service + neighbourhood searches competitors may miss.",
+        "effort": "high",
+        "status": "pending",
+        "reason": "0 pages published including area variants — prioritise high-intent neighbourhoods.",
+        "evidence": [
+          "Priority area: Wickersley",
+          "Priority area: Bramley",
+          "Priority area: Maltby",
+          "Priority area: Aston"
+        ],
+        "recommendedNextStep": "Review area pages for Wickersley, Bramley, Maltby and ensure indexing is submitted.",
+        "linkedModule": "Publishing",
+        "linkedUrl": "/api/pharmacy-executive-dashboard?slug=rowlands-test",
+        "dependencyOrder": 2,
+        "urgency": 2,
+        "rankScore": 33
+      }
+    ]
+  },
+  "actions": [
+    {
+      "id": "trust-add-regulatory-links",
+      "title": "Add real GPhC and NHS profile links before live launch",
+      "category": "Trust",
+      "priority": "High",
+      "impact": "Verified regulatory links strengthen patient trust and E-E-A-T signals.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Trust credentials should link to your specific premises registration before go-live.",
+      "evidence": [
+        "NHS profile URL not set"
+      ],
+      "recommendedNextStep": "Paste your premises-specific GPhC and NHS profile URLs in the profile trust section.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=rowlands-test#trust",
+      "dependencyOrder": 9,
+      "urgency": 4,
+      "rankScore": 67
+    },
+    {
+      "id": "profile-complete-missing-fields",
+      "title": "Complete remaining profile fields",
+      "category": "Profile",
+      "priority": "High",
+      "impact": "Full profile data powers headers, footers, trust blocks and local access sections.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "89% profile complete with 7 item(s) still missing.",
+      "evidence": [
+        "Required: Address and town/postcode",
+        "Improve profile: Company name",
+        "Improve profile: Company registration number",
+        "Improve profile: Reviewer photo",
+        "Improve profile: Extended reviewer biography"
+      ],
+      "recommendedNextStep": "Review the completeness panel and fill any missing business, trust or CTA fields.",
+      "linkedModule": "Profile Dashboard",
+      "linkedUrl": "/api/pharmacy-profile-dashboard?slug=rowlands-test",
+      "dependencyOrder": 10,
+      "urgency": 3,
+      "rankScore": 65
+    },
+    {
+      "id": "competitor-promote-pharmacy-first",
+      "title": "Promote Pharmacy First as a priority service",
+      "category": "Competitor Gap",
+      "priority": "High",
+      "impact": "Pharmacy First is a high-intent NHS service with strong local search demand.",
+      "effort": "medium",
+      "status": "pending",
+      "reason": "Benchmark service page is published — competitors also promote Pharmacy First locally.",
+      "evidence": [
+        "60% of local competitors promote Pharmacy First",
+        "Pharmacy First page published and in visibility registry"
+      ],
+      "recommendedNextStep": "Feature Pharmacy First in GBP posts, review responses and front-of-site navigation.",
+      "linkedModule": "Competitor Intelligence",
+      "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=rowlands-test",
+      "dependencyOrder": 4,
+      "urgency": 4,
+      "rankScore": 56
+    },
+    {
+      "id": "content-travel-vaccinations-seasonal",
+      "title": "Publish Travel Vaccinations content before peak travel season",
+      "category": "Content",
+      "priority": "Medium",
+      "impact": "Travel health searches spike before school holidays — early visibility captures bookings.",
+      "effort": "low",
+      "status": "pending",
+      "reason": "Travel Vaccinations page is published for rotherham — refresh promotion ahead of peak demand.",
+      "evidence": [
+        "travel vaccinations rotherham",
+        "70% of local competitors promote travel vaccinations"
+      ],
+      "recommendedNextStep": "Schedule GBP posts and email reminders highlighting travel clinic availability.",
+      "linkedModule": "Visual Experience",
+      "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+      "dependencyOrder": 3,
+      "urgency": 3,
+      "rankScore": 41
+    },
+    {
+      "id": "local-coverage-expand-area-pages",
+      "title": "Expand local coverage pages for priority rotherham areas",
+      "category": "Local Coverage",
+      "priority": "Medium",
+      "impact": "Area-specific pages capture service + neighbourhood searches competitors may miss.",
+      "effort": "high",
+      "status": "pending",
+      "reason": "0 pages published including area variants — prioritise high-intent neighbourhoods.",
+      "evidence": [
+        "Priority area: Wickersley",
+        "Priority area: Bramley",
+        "Priority area: Maltby",
+        "Priority area: Aston"
+      ],
+      "recommendedNextStep": "Review area pages for Wickersley, Bramley, Maltby and ensure indexing is submitted.",
+      "linkedModule": "Publishing",
+      "linkedUrl": "/api/pharmacy-executive-dashboard?slug=rowlands-test",
+      "dependencyOrder": 2,
+      "urgency": 2,
+      "rankScore": 33
+    }
+  ]
+}

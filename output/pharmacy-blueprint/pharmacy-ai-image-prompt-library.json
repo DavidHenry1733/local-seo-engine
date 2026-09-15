@@ -1,0 +1,1176 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "pharmacy-ai-image-prompt-library",
+  "industry": "pharmacy",
+  "generatedAt": "2026-06-11T06:59:51.959Z",
+  "intelligenceOnly": true,
+  "noImagesGenerated": true,
+  "noIdeogramCalls": true,
+  "sourceFiles": {
+    "businessIntelligence": "output/pharmacy-blueprint/business-intelligence.json",
+    "serviceIntelligence": "output/pharmacy-blueprint/service-intelligence.json",
+    "templateArchitecture": "output/pharmacy-blueprint/template-architecture.json",
+    "referenceCampaignBlueprint": "output/pharmacy-blueprint/campaign-blueprints/pharmacy-first-rotherham.json",
+    "imageLibrary": "output/pharmacy-blueprint/pharmacy-image-library.json"
+  },
+  "brandStyle": {
+    "name": "PharmaConnect Demo Pharmacy",
+    "description": "realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff",
+    "accentColors": [
+      "NHS blue #005eb8",
+      "pharmacy green #007f3b"
+    ],
+    "setting": "modern UK independent community pharmacy"
+  },
+  "genericPromptTemplate": "Create a {style} image for a {businessType} offering {serviceName} in {location}. The image should show {scene}, with {brandStyle}, suitable for the {slot} section of a local service page.",
+  "negativePromptTemplate": "{baseNegative}. Avoid {slotSpecificAvoid}. No {complianceAvoid}.",
+  "ideogramSettings": {
+    "recommendedModel": "Ideogram 2.0 or equivalent realistic model",
+    "styleGuidance": "Realistic photography, natural lighting, professional healthcare editorial",
+    "outputCountPerPrompt": 4,
+    "imageSelectionCriteria": [
+      "Matches recommended aspect ratio for slot",
+      "No readable text, logos or medication labels",
+      "Natural patient-pharmacist interaction",
+      "Warm trustworthy lighting consistent with brand",
+      "No compliance violations in scene",
+      "Diverse representation without stereotyping",
+      "Sharp focus on subjects, clean background"
+    ],
+    "aspectRatioBySlot": {
+      "hero": "16:9",
+      "support": "4:3",
+      "trust": "1:1",
+      "conversion": "16:9"
+    },
+    "stylePresetBySlot": {
+      "hero": "Realistic",
+      "support": "Realistic",
+      "trust": "Realistic",
+      "conversion": "Realistic"
+    }
+  },
+  "onboardingProcess": {
+    "steps": [
+      {
+        "step": 1,
+        "name": "Generate prompts",
+        "description": "Run build-pharmacy-ai-image-prompts.mjs or resolve prompts from library by service, template family and slot",
+        "output": "pharmacy-ai-image-prompt-library.json"
+      },
+      {
+        "step": 2,
+        "name": "Create images in Ideogram",
+        "description": "Paste ideogramPrompt and negativePrompt; apply aspectRatio and stylePreset per entry",
+        "output": "Generated image candidates"
+      },
+      {
+        "step": 3,
+        "name": "Download images",
+        "description": "Export selected images as high-quality WebP or PNG",
+        "output": "Local image files"
+      },
+      {
+        "step": 4,
+        "name": "Upload to image library",
+        "description": "Place files at uploadTargetPath under assets/pharmacy-image-library/",
+        "output": "assets/pharmacy-image-library/{pack}/{imageKey}.webp"
+      },
+      {
+        "step": 5,
+        "name": "Assign to service pack",
+        "description": "Confirm imageKey maps to template family slotResolution in pharmacy-image-library.json",
+        "output": "Updated slot resolution if needed"
+      },
+      {
+        "step": 6,
+        "name": "Validate image URLs",
+        "description": "Confirm assetExists resolution in pharmacyImageLibrary.ts renderer",
+        "output": "Asset validation pass"
+      },
+      {
+        "step": 7,
+        "name": "Render preview",
+        "description": "Re-run pharmacy preview render scripts",
+        "output": "output/pharmacy-preview/ HTML with real images"
+      },
+      {
+        "step": 8,
+        "name": "Approve",
+        "description": "Clinical and brand review of imagery for compliance",
+        "output": "Approval record"
+      },
+      {
+        "step": 9,
+        "name": "Use in live campaign",
+        "description": "Images served via image library in page generation pipeline",
+        "output": "Live campaign pages"
+      }
+    ]
+  },
+  "imagePromptPacks": {
+    "core-pharmacy": {
+      "packKey": "core-pharmacy",
+      "packName": "Core Pharmacy",
+      "templateFamily": "*",
+      "description": "Shared community pharmacy imagery for all template families",
+      "slotMappings": {
+        "hero": "hero",
+        "support": "support",
+        "trust": "trust",
+        "conversion": "conversion"
+      },
+      "prompts": [
+        {
+          "imageKey": "hero",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "Primary hero image introducing a community pharmacy service",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Primary hero image introducing a community pharmacy service. Scene: welcoming independent UK community pharmacy interior with pharmacist greeting a patient at the counter, NHS blue and pharmacy green accent decor, bright and trustworthy. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for hero section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid cluttered backgrounds, extreme close-ups, dark shadows",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "{serviceName} at {pharmacyName} in {location}",
+          "captionPattern": "{pharmacyName} — {location}",
+          "safetyNotes": "No readable prescription labels or brand logos on packs",
+          "complianceNotes": "Generic community pharmacy scene — no NHS logo, no POM branding",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/hero.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "support",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Mid-page support image showing local pharmacy service delivery",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Mid-page support image showing local pharmacy service delivery. Scene: pharmacist explaining service options to a patient beside the dispensary counter, clean modern pharmacy with subtle green and blue accents. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "{serviceName} support at {pharmacyName} in {location}",
+          "captionPattern": "Professional pharmacy support — {pharmacyName}",
+          "safetyNotes": "Patient faces partially angled, no identifiable documents",
+          "complianceNotes": "Supportive consultation tone — no treatment claims in scene",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/support.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "trust",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Trust section image emphasising regulated professional care",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Trust section image emphasising regulated professional care. Scene: qualified pharmacist in white coat with friendly pharmacy team in a tidy dispensary, professional healthcare environment with warm lighting. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Trusted pharmacy team at {pharmacyName} in {location}",
+          "captionPattern": "GPhC-registered pharmacy team",
+          "safetyNotes": "No fake GPhC badges or forged credentials visible",
+          "complianceNotes": "Trust imagery only — no exaggerated outcome claims",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/trust.webp",
+          "fallbackImageKey": "friendly-pharmacy-team"
+        },
+        {
+          "imageKey": "conversion",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "Conversion band image encouraging contact or visit",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Conversion band image encouraging contact or visit. Scene: patient speaking with pharmacist at consultation desk near pharmacy entrance, inviting and accessible community pharmacy atmosphere. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Book or visit {pharmacyName} for {serviceName} in {location}",
+          "captionPattern": "Contact your local pharmacy team",
+          "safetyNotes": "No fake appointment UI or misleading call-to-action text in image",
+          "complianceNotes": "Encourages visit — no guaranteed outcomes",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/conversion.webp",
+          "fallbackImageKey": "prescription-collection"
+        },
+        {
+          "imageKey": "pharmacist-consultation",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Pharmacist-led private consultation in consultation room",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Pharmacist-led private consultation in consultation room. Scene: confidential pharmacy consultation room with pharmacist listening attentively to patient across a small desk, neutral decor, professional and calm. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Pharmacist consultation for {serviceName} at {pharmacyName} in {location}",
+          "captionPattern": "Confidential pharmacist consultation",
+          "safetyNotes": "Closed door implied, no visible patient notes",
+          "complianceNotes": "Consultation setting — not diagnostic imagery",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/pharmacist-consultation.webp",
+          "fallbackImageKey": "friendly-pharmacy-team"
+        },
+        {
+          "imageKey": "prescription-collection",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "Prescription collection and dispensing counter scene",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Prescription collection and dispensing counter scene. Scene: patient collecting a bagged prescription from pharmacy counter staff, organised dispensary background, efficient and friendly service. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Prescription collection at {pharmacyName} in {location}",
+          "captionPattern": "NHS and private prescription support",
+          "safetyNotes": "Prescription bags plain with no readable labels",
+          "complianceNotes": "No POM brand packs visible",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/prescription-collection.webp",
+          "fallbackImageKey": "community-pharmacy"
+        },
+        {
+          "imageKey": "friendly-pharmacy-team",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Friendly pharmacy team welcoming patients",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Friendly pharmacy team welcoming patients. Scene: smiling pharmacy team of two pharmacists and one pharmacy assistant standing in bright dispensary area, approachable and diverse staff. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Pharmacy team at {pharmacyName} in {location}",
+          "captionPattern": "Your local pharmacy team",
+          "safetyNotes": "Natural group pose, no name badges with readable surnames",
+          "complianceNotes": "Team trust image — generic uniforms",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/friendly-pharmacy-team.webp",
+          "fallbackImageKey": "community-pharmacy"
+        },
+        {
+          "imageKey": "community-pharmacy",
+          "imagePack": "core-pharmacy",
+          "templateFamily": "*",
+          "compatibleServices": [
+            "*"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Independent community pharmacy exterior or interior establishing local presence",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Independent community pharmacy exterior or interior establishing local presence. Scene: attractive UK high street community pharmacy storefront or bright interior aisle with dispensary visible, local neighbourhood feel, daytime. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "{pharmacyName} community pharmacy in {location}",
+          "captionPattern": "Independent community pharmacy",
+          "safetyNotes": "Storefront signage generic without real chain branding",
+          "complianceNotes": "Local business imagery — no competitor logos",
+          "uploadTargetPath": "assets/pharmacy-image-library/core-pharmacy/community-pharmacy.webp",
+          "fallbackImageKey": "friendly-pharmacy-team"
+        }
+      ]
+    },
+    "clinical-nhs-services": {
+      "packKey": "clinical-nhs-services",
+      "packName": "Clinical NHS Services",
+      "templateFamily": "clinical-nhs-services",
+      "description": "NHS clinical service imagery for Pharmacy First and commissioned pathways",
+      "slotMappings": {
+        "hero": "pharmacy-first-consultation",
+        "support": "minor-illness-advice",
+        "trust": "blood-pressure-check",
+        "conversion": "nhs-service-support"
+      },
+      "prompts": [
+        {
+          "imageKey": "pharmacy-first-consultation",
+          "imagePack": "clinical-nhs-services",
+          "templateFamily": "clinical-nhs-services",
+          "compatibleServices": [
+            "pharmacy-first",
+            "minor-illness-consultation",
+            "prescription-dispensing",
+            "electronic-prescription-service-eps",
+            "repeat-prescription-service",
+            "prescription-delivery",
+            "blister-packs-and-compliance-aids",
+            "emergency-supply",
+            "prescription-collection-service",
+            "pharmacy-first"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "NHS Pharmacy First consultation for minor illness",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for NHS Pharmacy First consultation for minor illness. Scene: pharmacist conducting a calm private consultation with adult patient in pharmacy consultation room, discussing minor illness symptoms safely, NHS-aware professional setting without NHS logo. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for hero section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid cluttered backgrounds, extreme close-ups, dark shadows",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Pharmacy First consultation at {pharmacyName} in {location}",
+          "captionPattern": "NHS Pharmacy First — pharmacist-led care",
+          "safetyNotes": "No distressing symptoms shown, no fake NHS logo",
+          "complianceNotes": "Pharmacy First pathway imagery — eligibility assessed individually",
+          "uploadTargetPath": "assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "minor-illness-advice",
+          "imagePack": "clinical-nhs-services",
+          "templateFamily": "clinical-nhs-services",
+          "compatibleServices": [
+            "pharmacy-first",
+            "minor-illness-consultation",
+            "skin-condition-assessment"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Minor illness advice and self-care guidance in pharmacy",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Minor illness advice and self-care guidance in pharmacy. Scene: pharmacist providing reassuring advice to patient about minor illness management at pharmacy consultation desk, supportive tone, clean clinical environment. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Minor illness advice at {pharmacyName} in {location}",
+          "captionPattern": "Pharmacist advice for minor illness",
+          "safetyNotes": "No graphic illness imagery",
+          "complianceNotes": "Advice-only scene — refer to GP/A&E when appropriate",
+          "uploadTargetPath": "assets/pharmacy-image-library/clinical-nhs-services/minor-illness-advice.webp",
+          "fallbackImageKey": "pharmacy-first-consultation"
+        },
+        {
+          "imageKey": "blood-pressure-check",
+          "imagePack": "clinical-nhs-services",
+          "templateFamily": "clinical-nhs-services",
+          "compatibleServices": [
+            "nhs-blood-pressure-checks",
+            "blood-pressure-monitoring",
+            "pharmacy-first"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "NHS blood pressure check in pharmacy",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for NHS blood pressure check in pharmacy. Scene: pharmacist taking blood pressure reading with automated cuff on seated patient in quiet pharmacy health check area, professional and routine. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "NHS blood pressure check at {pharmacyName} in {location}",
+          "captionPattern": "NHS hypertension case finding",
+          "safetyNotes": "Standard BP monitor only, no needles",
+          "complianceNotes": "Screening service — results discussed individually",
+          "uploadTargetPath": "assets/pharmacy-image-library/clinical-nhs-services/blood-pressure-check.webp",
+          "fallbackImageKey": "pharmacy-first-consultation"
+        },
+        {
+          "imageKey": "contraception-service",
+          "imagePack": "clinical-nhs-services",
+          "templateFamily": "clinical-nhs-services",
+          "compatibleServices": [
+            "pharmacy-contraception-service"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Pharmacy contraception consultation",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Pharmacy contraception consultation. Scene: female pharmacist in private consultation room discussing contraception options with adult patient, discreet respectful setting, no product branding visible. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Pharmacy contraception service at {pharmacyName} in {location}",
+          "captionPattern": "Confidential contraception advice",
+          "safetyNotes": "Confidential setting, no identifiable personal details",
+          "complianceNotes": "Sensitive healthcare — patient suitability assessed individually",
+          "uploadTargetPath": "assets/pharmacy-image-library/clinical-nhs-services/contraception-service.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "smoking-cessation",
+          "imagePack": "clinical-nhs-services",
+          "templateFamily": "clinical-nhs-services",
+          "compatibleServices": [
+            "nhs-smoking-cessation-support"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "NHS smoking cessation support consultation",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for NHS smoking cessation support consultation. Scene: pharmacist supporting patient with smoking cessation plan in consultation room, motivational supportive conversation, no cigarettes prominently displayed. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "NHS smoking cessation support at {pharmacyName} in {location}",
+          "captionPattern": "Stop smoking pharmacy support",
+          "safetyNotes": "Supportive not punitive tone",
+          "complianceNotes": "Cessation support — no guaranteed quit claims",
+          "uploadTargetPath": "assets/pharmacy-image-library/clinical-nhs-services/smoking-cessation.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "nhs-service-support",
+          "imagePack": "clinical-nhs-services",
+          "templateFamily": "clinical-nhs-services",
+          "compatibleServices": [
+            "prescription-dispensing",
+            "electronic-prescription-service-eps",
+            "repeat-prescription-service",
+            "prescription-delivery",
+            "blister-packs-and-compliance-aids",
+            "emergency-supply",
+            "prescription-collection-service",
+            "pharmacy-first",
+            "nhs-blood-pressure-checks",
+            "nhs-new-medicine-service-nms",
+            "pharmacy-contraception-service",
+            "nhs-smoking-cessation-support",
+            "discharge-medicines-service",
+            "supervised-consumption",
+            "palliative-care-dispensing",
+            "hepatitis-c-testing-and-referral",
+            "blood-pressure-monitoring",
+            "covid-19-lateral-flow-supply",
+            "urinalysis-and-uti-screening",
+            "drug-tariff-and-point-of-care-diagnostics",
+            "medicines-use-review-mur-structured-medication-review",
+            "minor-illness-consultation",
+            "healthy-living-advice",
+            "asthma-and-copd-inhaler-technique-review",
+            "pain-management-consultation",
+            "skin-condition-assessment",
+            "sleep-and-stress-support-consultation",
+            "children-s-health-consultation"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "NHS clinical service access and booking encouragement",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for NHS clinical service access and booking encouragement. Scene: patient approaching pharmacy counter to ask about NHS clinical services, pharmacist ready to help, welcoming accessible community pharmacy. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "NHS pharmacy services at {pharmacyName} in {location}",
+          "captionPattern": "Ask about NHS pharmacy services",
+          "safetyNotes": "No fake NHS branding",
+          "complianceNotes": "Service access imagery — walk-in or appointment where applicable",
+          "uploadTargetPath": "assets/pharmacy-image-library/clinical-nhs-services/nhs-service-support.webp",
+          "fallbackImageKey": "prescription-collection"
+        }
+      ]
+    },
+    "vaccination-services": {
+      "packKey": "vaccination-services",
+      "packName": "Vaccination Services",
+      "templateFamily": "vaccination-services",
+      "description": "Immunisation and vaccination clinic imagery",
+      "slotMappings": {
+        "hero": "flu-vaccination",
+        "support": "vaccination-consultation",
+        "trust": "vaccination-record-review",
+        "conversion": "vaccine-availability"
+      },
+      "prompts": [
+        {
+          "imageKey": "flu-vaccination",
+          "imagePack": "vaccination-services",
+          "templateFamily": "vaccination-services",
+          "compatibleServices": [
+            "nhs-flu-vaccination",
+            "seasonal-flu-vaccination-private",
+            "covid-19-vaccination",
+            "nhs-flu-vaccination",
+            "seasonal-flu-vaccination-private",
+            "shingles-vaccination",
+            "pneumococcal-vaccination"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "Seasonal flu vaccination in pharmacy",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Seasonal flu vaccination in pharmacy. Scene: trained vaccinator pharmacist preparing flu vaccination in clean pharmacy treatment area, patient seated calmly, professional immunisation setting, syringe not in extreme close-up. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for hero section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, extreme needle close-up, blood, distressed patient, Avoid cluttered backgrounds, extreme close-ups, dark shadows",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "NHS flu vaccination at {pharmacyName} in {location}",
+          "captionPattern": "Flu jab pharmacy service",
+          "safetyNotes": "Vaccination context only — no graphic needle close-up",
+          "complianceNotes": "Immunisation imagery — eligibility varies by programme",
+          "uploadTargetPath": "assets/pharmacy-image-library/vaccination-services/flu-vaccination.webp",
+          "fallbackImageKey": "vaccination-consultation"
+        },
+        {
+          "imageKey": "shingles-vaccination",
+          "imagePack": "vaccination-services",
+          "templateFamily": "vaccination-services",
+          "compatibleServices": [
+            "shingles-vaccination",
+            "pneumococcal-vaccination"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Shingles vaccination appointment",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Shingles vaccination appointment. Scene: pharmacist vaccinator confirming patient details before shingles vaccination in private pharmacy clinic room, calm professional atmosphere. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Shingles vaccination at {pharmacyName} in {location}",
+          "captionPattern": "Shingles immunisation",
+          "safetyNotes": "No rash or distressing skin imagery",
+          "complianceNotes": "Private or NHS programme — suitability assessed",
+          "uploadTargetPath": "assets/pharmacy-image-library/vaccination-services/shingles-vaccination.webp",
+          "fallbackImageKey": "flu-vaccination"
+        },
+        {
+          "imageKey": "vaccination-consultation",
+          "imagePack": "vaccination-services",
+          "templateFamily": "vaccination-services",
+          "compatibleServices": [
+            "nhs-flu-vaccination",
+            "seasonal-flu-vaccination-private",
+            "shingles-vaccination",
+            "pneumococcal-vaccination",
+            "meningitis-acwy-vaccination",
+            "chickenpox-vaccination",
+            "hpv-vaccination",
+            "covid-19-vaccination",
+            "whooping-cough-pertussis-vaccination",
+            "rsv-vaccination"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Pre-vaccination consultation with trained vaccinator",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Pre-vaccination consultation with trained vaccinator. Scene: pharmacist reviewing vaccination checklist with patient at consultation desk, travel and seasonal vaccine context, friendly professional. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Vaccination consultation at {pharmacyName} in {location}",
+          "captionPattern": "Vaccination suitability assessment",
+          "safetyNotes": "Checklist papers blank or angled away",
+          "complianceNotes": "Consultation before vaccination — individual assessment",
+          "uploadTargetPath": "assets/pharmacy-image-library/vaccination-services/vaccination-consultation.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "vaccination-record-review",
+          "imagePack": "vaccination-services",
+          "templateFamily": "vaccination-services",
+          "compatibleServices": [
+            "nhs-flu-vaccination",
+            "seasonal-flu-vaccination-private",
+            "shingles-vaccination",
+            "pneumococcal-vaccination",
+            "meningitis-acwy-vaccination",
+            "chickenpox-vaccination",
+            "hpv-vaccination",
+            "covid-19-vaccination",
+            "whooping-cough-pertussis-vaccination",
+            "rsv-vaccination"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Vaccination record and documentation review",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Vaccination record and documentation review. Scene: pharmacist reviewing anonymised vaccination record booklet with patient, organised pharmacy clinic desk, trustworthy documentation handling. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Vaccination records at {pharmacyName} in {location}",
+          "captionPattern": "Travel and NHS vaccination records",
+          "safetyNotes": "No readable personal data on documents",
+          "complianceNotes": "Record-keeping trust — GDPR compliant handling implied",
+          "uploadTargetPath": "assets/pharmacy-image-library/vaccination-services/vaccination-record-review.webp",
+          "fallbackImageKey": "vaccination-consultation"
+        },
+        {
+          "imageKey": "vaccine-availability",
+          "imagePack": "vaccination-services",
+          "templateFamily": "vaccination-services",
+          "compatibleServices": [
+            "nhs-flu-vaccination",
+            "seasonal-flu-vaccination-private",
+            "shingles-vaccination",
+            "pneumococcal-vaccination",
+            "meningitis-acwy-vaccination",
+            "chickenpox-vaccination",
+            "hpv-vaccination",
+            "covid-19-vaccination",
+            "whooping-cough-pertussis-vaccination",
+            "rsv-vaccination"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "Vaccine availability and booking encouragement",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Vaccine availability and booking encouragement. Scene: patient booking vaccination appointment at pharmacy counter with staff member, seasonal vaccination posters generic without NHS logo, welcoming. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Vaccination appointments at {pharmacyName} in {location}",
+          "captionPattern": "Check vaccine availability",
+          "safetyNotes": "Posters without readable brand or NHS logo",
+          "complianceNotes": "Availability varies — stock and eligibility apply",
+          "uploadTargetPath": "assets/pharmacy-image-library/vaccination-services/vaccine-availability.webp",
+          "fallbackImageKey": "vaccination-consultation"
+        },
+        {
+          "imageKey": "aftercare-advice",
+          "imagePack": "vaccination-services",
+          "templateFamily": "vaccination-services",
+          "compatibleServices": [
+            "nhs-flu-vaccination",
+            "seasonal-flu-vaccination-private",
+            "shingles-vaccination",
+            "pneumococcal-vaccination",
+            "meningitis-acwy-vaccination",
+            "chickenpox-vaccination",
+            "hpv-vaccination",
+            "covid-19-vaccination",
+            "whooping-cough-pertussis-vaccination",
+            "rsv-vaccination"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "Post-vaccination aftercare advice",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Post-vaccination aftercare advice. Scene: pharmacist giving brief aftercare advice to patient seated in pharmacy clinic after vaccination, reassuring professional demeanour. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Vaccination aftercare at {pharmacyName} in {location}",
+          "captionPattern": "After your vaccination",
+          "safetyNotes": "No medical complications depicted",
+          "complianceNotes": "Standard aftercare guidance — seek help if concerned",
+          "uploadTargetPath": "assets/pharmacy-image-library/vaccination-services/aftercare-advice.webp",
+          "fallbackImageKey": "vaccination-consultation"
+        }
+      ]
+    },
+    "travel-health-services": {
+      "packKey": "travel-health-services",
+      "packName": "Travel Health Services",
+      "templateFamily": "travel-health-services",
+      "description": "Travel clinic, destination advice and travel medicine imagery",
+      "slotMappings": {
+        "hero": "travel-consultation",
+        "support": "destination-advice",
+        "trust": "travel-vaccination",
+        "conversion": "travel-medicine-planning"
+      },
+      "prompts": [
+        {
+          "imageKey": "travel-consultation",
+          "imagePack": "travel-health-services",
+          "templateFamily": "travel-health-services",
+          "compatibleServices": [
+            "travel-health-consultation",
+            "travel-vaccinations",
+            "travel-health-consultation",
+            "travel-vaccinations",
+            "malaria-prophylaxis",
+            "travel-first-aid-and-kit-supply",
+            "yellow-fever-vaccination-centre",
+            "rabies-vaccination",
+            "altitude-sickness-prevention"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "Travel health consultation with itinerary review",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Travel health consultation with itinerary review. Scene: pharmacist reviewing travel itinerary and world map with patient in travel clinic consultation room, organised travel health desk, advisory tone. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for hero section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid cluttered backgrounds, extreme close-ups, dark shadows",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Travel health consultation at {pharmacyName} in {location}",
+          "captionPattern": "Travel clinic consultation",
+          "safetyNotes": "Map generic, no classified travel documents readable",
+          "complianceNotes": "Destination-specific advice — individual risk assessment",
+          "uploadTargetPath": "assets/pharmacy-image-library/travel-health-services/travel-consultation.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "destination-advice",
+          "imagePack": "travel-health-services",
+          "templateFamily": "travel-health-services",
+          "compatibleServices": [
+            "travel-health-consultation",
+            "travel-vaccinations",
+            "malaria-prophylaxis",
+            "travel-first-aid-and-kit-supply",
+            "yellow-fever-vaccination-centre",
+            "rabies-vaccination",
+            "altitude-sickness-prevention"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Destination-specific travel health advice",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Destination-specific travel health advice. Scene: pharmacist explaining destination health risks using tablet showing generic world regions, patient engaged, modern travel clinic setting. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Destination travel advice at {pharmacyName} in {location}",
+          "captionPattern": "Destination risk guidance",
+          "safetyNotes": "Tablet screen shows generic map graphics only",
+          "complianceNotes": "Advice varies by destination and patient history",
+          "uploadTargetPath": "assets/pharmacy-image-library/travel-health-services/destination-advice.webp",
+          "fallbackImageKey": "travel-consultation"
+        },
+        {
+          "imageKey": "travel-vaccination",
+          "imagePack": "travel-health-services",
+          "templateFamily": "travel-health-services",
+          "compatibleServices": [
+            "travel-vaccinations",
+            "yellow-fever-vaccination-centre",
+            "rabies-vaccination"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Travel vaccination administration",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Travel vaccination administration. Scene: travel clinic pharmacist administering travel vaccine in professional treatment room, patient relaxed, clean clinical travel health environment. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, extreme needle close-up, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Travel vaccinations at {pharmacyName} in {location}",
+          "captionPattern": "Travel vaccines before your trip",
+          "safetyNotes": "Vaccination context — no extreme needle close-up",
+          "complianceNotes": "Vaccine requirements vary by destination",
+          "uploadTargetPath": "assets/pharmacy-image-library/travel-health-services/travel-vaccination.webp",
+          "fallbackImageKey": "vaccination-consultation"
+        },
+        {
+          "imageKey": "malaria-advice",
+          "imagePack": "travel-health-services",
+          "templateFamily": "travel-health-services",
+          "compatibleServices": [
+            "malaria-prophylaxis",
+            "travel-health-consultation"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Malaria prophylaxis and travel medicine advice",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Malaria prophylaxis and travel medicine advice. Scene: pharmacist discussing antimalarial options with traveller at consultation desk, educational materials without readable brand names. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Malaria advice at {pharmacyName} in {location}",
+          "captionPattern": "Antimalarial consultation",
+          "safetyNotes": "No POM packaging with readable labels",
+          "complianceNotes": "Prescription-only antimalarials — suitability assessed",
+          "uploadTargetPath": "assets/pharmacy-image-library/travel-health-services/malaria-advice.webp",
+          "fallbackImageKey": "destination-advice"
+        },
+        {
+          "imageKey": "travel-health-checklist",
+          "imagePack": "travel-health-services",
+          "templateFamily": "travel-health-services",
+          "compatibleServices": [
+            "travel-health-consultation",
+            "travel-vaccinations",
+            "malaria-prophylaxis",
+            "travel-first-aid-and-kit-supply",
+            "yellow-fever-vaccination-centre",
+            "rabies-vaccination",
+            "altitude-sickness-prevention"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Travel health checklist and preparation planning",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Travel health checklist and preparation planning. Scene: pharmacist handing patient a generic travel health checklist in pharmacy travel clinic, organised preparation scene, positive planning mood. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Travel health checklist at {pharmacyName} in {location}",
+          "captionPattern": "Prepare for healthy travel",
+          "safetyNotes": "Checklist text not readable",
+          "complianceNotes": "Planning support — not a guarantee of protection",
+          "uploadTargetPath": "assets/pharmacy-image-library/travel-health-services/travel-health-checklist.webp",
+          "fallbackImageKey": "travel-consultation"
+        },
+        {
+          "imageKey": "travel-medicine-planning",
+          "imagePack": "travel-health-services",
+          "templateFamily": "travel-health-services",
+          "compatibleServices": [
+            "travel-health-consultation",
+            "travel-vaccinations",
+            "malaria-prophylaxis",
+            "travel-first-aid-and-kit-supply",
+            "yellow-fever-vaccination-centre",
+            "rabies-vaccination",
+            "altitude-sickness-prevention"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "Travel medicine planning and appointment booking",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Travel medicine planning and appointment booking. Scene: couple planning travel vaccines with pharmacist at pharmacy travel desk, calendar and passport generic in scene, encouraging booking atmosphere. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Travel medicine planning at {pharmacyName} in {location}",
+          "captionPattern": "Plan travel vaccines in advance",
+          "safetyNotes": "Passport and documents not readable",
+          "complianceNotes": "Book ahead — lead times vary by vaccine",
+          "uploadTargetPath": "assets/pharmacy-image-library/travel-health-services/travel-medicine-planning.webp",
+          "fallbackImageKey": "travel-consultation"
+        }
+      ]
+    },
+    "private-healthcare-services": {
+      "packKey": "private-healthcare-services",
+      "packName": "Private Healthcare Services",
+      "templateFamily": "private-healthcare-services",
+      "description": "Private appointment and screening service imagery",
+      "slotMappings": {
+        "hero": "ear-wax-removal",
+        "support": "private-consultation",
+        "trust": "health-screening",
+        "conversion": "aftercare-guidance"
+      },
+      "prompts": [
+        {
+          "imageKey": "ear-wax-removal",
+          "imagePack": "private-healthcare-services",
+          "templateFamily": "private-healthcare-services",
+          "compatibleServices": [
+            "private-ear-wax-removal"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "Private ear wax removal microsuction procedure",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Private ear wax removal microsuction procedure. Scene: audiology-trained pharmacist preparing professional ear wax removal equipment in clean private treatment room, patient seated comfortably, clinical but calm. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for hero section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid cluttered backgrounds, extreme close-ups, dark shadows",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Private ear wax removal at {pharmacyName} in {location}",
+          "captionPattern": "Professional ear wax removal",
+          "safetyNotes": "No inner ear close-up, no distress",
+          "complianceNotes": "Private fee service — suitability assessed",
+          "uploadTargetPath": "assets/pharmacy-image-library/private-healthcare-services/ear-wax-removal.webp",
+          "fallbackImageKey": "private-consultation"
+        },
+        {
+          "imageKey": "private-consultation",
+          "imagePack": "private-healthcare-services",
+          "templateFamily": "private-healthcare-services",
+          "compatibleServices": [
+            "private-health-consultations",
+            "private-minor-ailment-treatment",
+            "private-prescription-dispensing",
+            "private-health-consultations",
+            "private-ear-wax-removal",
+            "private-blood-testing",
+            "vitamin-b12-injections",
+            "emergency-hormonal-contraception"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Private healthcare consultation in pharmacy",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Private healthcare consultation in pharmacy. Scene: pharmacist conducting private appointment consultation in modern pharmacy clinic room, professional discreet setting, fee-based service atmosphere. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Private consultation at {pharmacyName} in {location}",
+          "captionPattern": "Private appointment consultation",
+          "safetyNotes": "No price lists with specific amounts readable",
+          "complianceNotes": "Private service — fees and eligibility apply",
+          "uploadTargetPath": "assets/pharmacy-image-library/private-healthcare-services/private-consultation.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "health-screening",
+          "imagePack": "private-healthcare-services",
+          "templateFamily": "private-healthcare-services",
+          "compatibleServices": [
+            "diabetes-screening",
+            "cholesterol-testing",
+            "private-blood-testing"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Private health screening and checks",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Private health screening and checks. Scene: pharmacist performing routine health screening check with patient in pharmacy health station, professional monitoring equipment, trustworthy. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Health screening at {pharmacyName} in {location}",
+          "captionPattern": "Private health screening",
+          "safetyNotes": "Screening devices generic, no alarming readings visible",
+          "complianceNotes": "Screening results interpreted individually",
+          "uploadTargetPath": "assets/pharmacy-image-library/private-healthcare-services/health-screening.webp",
+          "fallbackImageKey": "private-consultation"
+        },
+        {
+          "imageKey": "blood-testing",
+          "imagePack": "private-healthcare-services",
+          "templateFamily": "private-healthcare-services",
+          "compatibleServices": [
+            "private-blood-testing"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Private blood testing sample collection",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Private blood testing sample collection. Scene: trained pharmacist preparing private blood test sample collection in clinic room, patient seated, minimal visible needle at respectful distance. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, blood splatter, syringe extreme close-up, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Private blood testing at {pharmacyName} in {location}",
+          "captionPattern": "Private blood tests",
+          "safetyNotes": "No blood close-up, needle not focal point",
+          "complianceNotes": "Private phlebotomy — trained staff only",
+          "uploadTargetPath": "assets/pharmacy-image-library/private-healthcare-services/blood-testing.webp",
+          "fallbackImageKey": "health-screening"
+        },
+        {
+          "imageKey": "b12-consultation",
+          "imagePack": "private-healthcare-services",
+          "templateFamily": "private-healthcare-services",
+          "compatibleServices": [
+            "vitamin-b12-injections"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Vitamin B12 injection consultation",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Vitamin B12 injection consultation. Scene: pharmacist explaining B12 injection service to patient in private consultation room, professional wellness clinic tone, no product branding. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "B12 consultation at {pharmacyName} in {location}",
+          "captionPattern": "Vitamin B12 pharmacy service",
+          "safetyNotes": "Injection supplies out of close-up focus",
+          "complianceNotes": "Private treatment — clinical suitability required",
+          "uploadTargetPath": "assets/pharmacy-image-library/private-healthcare-services/b12-consultation.webp",
+          "fallbackImageKey": "private-consultation"
+        },
+        {
+          "imageKey": "aftercare-guidance",
+          "imagePack": "private-healthcare-services",
+          "templateFamily": "private-healthcare-services",
+          "compatibleServices": [
+            "private-prescription-dispensing",
+            "private-health-consultations",
+            "private-ear-wax-removal",
+            "private-blood-testing",
+            "vitamin-b12-injections",
+            "emergency-hormonal-contraception",
+            "private-minor-ailment-treatment",
+            "compounding-and-specialist-supply",
+            "private-prescription-service-fees",
+            "diabetes-screening",
+            "cholesterol-testing",
+            "pregnancy-testing"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "Private service aftercare guidance",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Private service aftercare guidance. Scene: pharmacist providing aftercare instructions to patient after private treatment, reassuring conversation at pharmacy clinic desk. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Private service aftercare at {pharmacyName} in {location}",
+          "captionPattern": "After your appointment",
+          "safetyNotes": "Written instructions not readable",
+          "complianceNotes": "Aftercare guidance — seek help if symptoms worsen",
+          "uploadTargetPath": "assets/pharmacy-image-library/private-healthcare-services/aftercare-guidance.webp",
+          "fallbackImageKey": "private-consultation"
+        }
+      ]
+    },
+    "weight-management-services": {
+      "packKey": "weight-management-services",
+      "packName": "Weight Management Services",
+      "templateFamily": "weight-management-services",
+      "description": "Medically supervised weight management programme imagery",
+      "slotMappings": {
+        "hero": "weight-consultation",
+        "support": "bmi-review",
+        "trust": "progress-monitoring",
+        "conversion": "private-weight-support"
+      },
+      "prompts": [
+        {
+          "imageKey": "weight-consultation",
+          "imagePack": "weight-management-services",
+          "templateFamily": "weight-management-services",
+          "compatibleServices": [
+            "pharmacy-weight-loss-programme",
+            "weight-management-consultation",
+            "glp-1-weight-management-treatment"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "Medically supervised weight management consultation",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Medically supervised weight management consultation. Scene: pharmacist discussing weight management programme with patient in private consultation room, supportive non-judgemental conversation, professional healthcare setting. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for hero section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, before and after, weight loss transformation, body comparison, slimming claims, Avoid cluttered backgrounds, extreme close-ups, dark shadows",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Weight management consultation at {pharmacyName} in {location}",
+          "captionPattern": "Pharmacy weight management consultation",
+          "safetyNotes": "No body shaming imagery, diverse patient respectfully portrayed",
+          "complianceNotes": "Medically supervised — eligibility and monitoring required, no guaranteed results",
+          "uploadTargetPath": "assets/pharmacy-image-library/weight-management-services/weight-consultation.webp",
+          "fallbackImageKey": "pharmacist-consultation"
+        },
+        {
+          "imageKey": "bmi-review",
+          "imagePack": "weight-management-services",
+          "templateFamily": "weight-management-services",
+          "compatibleServices": [
+            "body-composition-and-bmi-monitoring",
+            "pharmacy-weight-loss-programme"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "BMI and body composition monitoring",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for BMI and body composition monitoring. Scene: pharmacist recording BMI metrics on tablet during weight programme review, patient standing on generic scale, clinical monitoring not dramatic. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, before and after, transformation, dramatic weight change, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "BMI review at {pharmacyName} in {location}",
+          "captionPattern": "Progress and BMI monitoring",
+          "safetyNotes": "Scale display not readable, no before/after",
+          "complianceNotes": "Monitoring tool — individual results vary",
+          "uploadTargetPath": "assets/pharmacy-image-library/weight-management-services/bmi-review.webp",
+          "fallbackImageKey": "weight-consultation"
+        },
+        {
+          "imageKey": "lifestyle-support",
+          "imagePack": "weight-management-services",
+          "templateFamily": "weight-management-services",
+          "compatibleServices": [
+            "nutritional-and-lifestyle-advice",
+            "pharmacy-weight-loss-programme"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "Lifestyle and nutrition support in pharmacy programme",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Lifestyle and nutrition support in pharmacy programme. Scene: pharmacist discussing balanced nutrition and activity goals with patient using simple food portion visual aids, positive supportive coaching tone. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for support section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid busy crowds, confusing medical equipment",
+          "aspectRatio": "4:3",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Lifestyle weight support at {pharmacyName} in {location}",
+          "captionPattern": "Lifestyle and nutrition guidance",
+          "safetyNotes": "No fad diet products or extreme restriction imagery",
+          "complianceNotes": "Lifestyle advice — part of supervised programme",
+          "uploadTargetPath": "assets/pharmacy-image-library/weight-management-services/lifestyle-support.webp",
+          "fallbackImageKey": "weight-consultation"
+        },
+        {
+          "imageKey": "progress-monitoring",
+          "imagePack": "weight-management-services",
+          "templateFamily": "weight-management-services",
+          "compatibleServices": [
+            "pharmacy-weight-loss-programme"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Regular weight management progress monitoring",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Regular weight management progress monitoring. Scene: pharmacist reviewing anonymised progress chart with patient in consultation room, calm check-in appointment, medically supervised programme. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, before and after, transformation photos, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Weight programme monitoring at {pharmacyName} in {location}",
+          "captionPattern": "Medically supervised progress reviews",
+          "safetyNotes": "Chart data not readable, no dramatic transformation",
+          "complianceNotes": "Ongoing monitoring — outcomes vary by individual",
+          "uploadTargetPath": "assets/pharmacy-image-library/weight-management-services/progress-monitoring.webp",
+          "fallbackImageKey": "bmi-review"
+        },
+        {
+          "imageKey": "healthy-goals-discussion",
+          "imagePack": "weight-management-services",
+          "templateFamily": "weight-management-services",
+          "compatibleServices": [
+            "weight-management-consultation",
+            "pharmacy-weight-loss-programme",
+            "glp-1-weight-management-treatment",
+            "body-composition-and-bmi-monitoring",
+            "nutritional-and-lifestyle-advice"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "Healthy goals discussion in weight management programme",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Healthy goals discussion in weight management programme. Scene: pharmacist and patient discussing realistic health goals at consultation desk, encouraging collaborative planning, warm professional lighting. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for trust section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid informal settings, unprofessional attire",
+          "aspectRatio": "1:1",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Healthy goals discussion at {pharmacyName} in {location}",
+          "captionPattern": "Setting realistic health goals",
+          "safetyNotes": "Supportive language implied through body language only",
+          "complianceNotes": "Goal-setting within clinical programme — no miracle claims",
+          "uploadTargetPath": "assets/pharmacy-image-library/weight-management-services/healthy-goals-discussion.webp",
+          "fallbackImageKey": "weight-consultation"
+        },
+        {
+          "imageKey": "private-weight-support",
+          "imagePack": "weight-management-services",
+          "templateFamily": "weight-management-services",
+          "compatibleServices": [
+            "weight-management-consultation",
+            "pharmacy-weight-loss-programme",
+            "glp-1-weight-management-treatment",
+            "body-composition-and-bmi-monitoring",
+            "nutritional-and-lifestyle-advice"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "Private weight management support and booking",
+          "ideogramPrompt": "Photorealistic UK community pharmacy photograph for Private weight management support and booking. Scene: patient booking weight management assessment at pharmacy counter, pharmacist inviting enquiry conversation, accessible community pharmacy. Style: realistic modern UK community pharmacy, friendly pharmacist and patient interaction, clean consultation room or pharmacy counter, NHS blue and pharmacy green accents, professional healthcare setting, warm trustworthy lighting, authentic local pharmacy feel, diverse but natural patients and pharmacy staff. Composition optimised for conversion section of a local pharmacy service page. Natural expressions, professional attire, GPhC-appropriate setting without visible regulator logos. Soft daylight or warm interior lighting, shallow depth of field, high detail.",
+          "negativePrompt": "blurry, distorted, cartoon, illustration, anime, watermark, text overlay, readable medication labels, brand logos, NHS logo, fake NHS branding, patient names, medical records with identifiable data, prescription-only medicine branding, POM packaging, needles close-up unless vaccination context, distressing illness imagery, blood, injury, before and after weight loss, exaggerated medical claims, stock photo watermark, low quality, oversaturated, horror lighting, identifiable celebrity faces, fake credentials, Avoid aggressive sales imagery, countdown timers, fake urgency text",
+          "aspectRatio": "16:9",
+          "stylePreset": "Realistic",
+          "altTextPattern": "Weight management support at {pharmacyName} in {location}",
+          "captionPattern": "Book a weight management assessment",
+          "safetyNotes": "No slimming product advertising",
+          "complianceNotes": "Assessment required — not all patients eligible for treatment",
+          "uploadTargetPath": "assets/pharmacy-image-library/weight-management-services/private-weight-support.webp",
+          "fallbackImageKey": "weight-consultation"
+        }
+      ]
+    }
+  },
+  "templateFamilyCoverage": {
+    "clinical-nhs-services": {
+      "imagePack": "clinical-nhs-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "pharmacy-first-consultation",
+        "support": "minor-illness-advice",
+        "trust": "blood-pressure-check",
+        "conversion": "nhs-service-support"
+      }
+    },
+    "vaccination-services": {
+      "imagePack": "vaccination-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "flu-vaccination",
+        "support": "vaccination-consultation",
+        "trust": "vaccination-record-review",
+        "conversion": "vaccine-availability"
+      }
+    },
+    "travel-health-services": {
+      "imagePack": "travel-health-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "travel-consultation",
+        "support": "destination-advice",
+        "trust": "travel-vaccination",
+        "conversion": "travel-medicine-planning"
+      }
+    },
+    "private-healthcare-services": {
+      "imagePack": "private-healthcare-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "ear-wax-removal",
+        "support": "private-consultation",
+        "trust": "health-screening",
+        "conversion": "aftercare-guidance"
+      }
+    },
+    "weight-management-services": {
+      "imagePack": "weight-management-services",
+      "promptCount": 6,
+      "slotMappings": {
+        "hero": "weight-consultation",
+        "support": "bmi-review",
+        "trust": "progress-monitoring",
+        "conversion": "private-weight-support"
+      }
+    },
+    "all-families-fallback": {
+      "imagePack": "core-pharmacy",
+      "promptCount": 8,
+      "slotMappings": {
+        "hero": "hero",
+        "support": "support",
+        "trust": "trust",
+        "conversion": "conversion"
+      }
+    }
+  },
+  "promptResolutionExample": {
+    "serviceKey": "pharmacy-first",
+    "templateFamily": "clinical-nhs-services",
+    "location": "Rotherham",
+    "pharmacyName": "{pharmacyName}",
+    "serviceName": "Pharmacy First",
+    "slots": {
+      "hero": "clinical-nhs-services/pharmacy-first-consultation",
+      "support": "clinical-nhs-services/minor-illness-advice",
+      "trust": "clinical-nhs-services/blood-pressure-check",
+      "conversion": "clinical-nhs-services/nhs-service-support"
+    }
+  }
+}

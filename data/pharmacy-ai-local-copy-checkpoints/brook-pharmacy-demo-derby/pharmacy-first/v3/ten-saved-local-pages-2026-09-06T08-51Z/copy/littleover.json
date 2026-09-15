@@ -1,0 +1,235 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-05T19:41:13.132Z",
+  "tokenUsage": {
+    "promptTokens": 3890,
+    "completionTokens": 635,
+    "totalTokens": 4525
+  },
+  "estimatedCostUsd": 0.01286,
+  "inputEvidencePackHash": "4827a1ed34a4d9f9ebb6338a8b09e2f8e1091e497b786f2383ab533ba8e92dd4",
+  "editorialEvidencePackHash": "01373333d35757574d4c09d7c84e8172d73b571c9ba0edbfa7bc366e01274629",
+  "areaSlug": "littleover",
+  "areaName": "Littleover",
+  "editorialFactIdsUsed": [
+    "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+    "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+    "littleover:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Littleover",
+    "heroHeading": "Pharmacy First in Littleover",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions. Littleover is a neighbourhood ward in Derby.",
+    "localIntroduction": "Littleover is a neighbourhood ward in Derby. NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "NHS general practice services in Littleover are provided from The Lanes Medical Centre. Pharmacy First can help with eligible common conditions."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "heroIntroduction",
+        "sentence": "Littleover is a neighbourhood ward in Derby.",
+        "entityId": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Littleover is a neighbourhood ward in Derby.",
+        "entityId": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+        "entityId": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+        "entityId": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+        "entityId": "littleover:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [
+      "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "littleover:pharmacy-relationship:distance"
+    ],
+    "editorialFactIdsUsed": [
+      "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "littleover:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Littleover",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Littleover is a neighbourhood ward in Derby.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Littleover is a neighbourhood ward in Derby.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "providerSource": "derby.gov.uk",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Pharmacy First can help with eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+      "supportingCanonicalFieldOrEntity": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby, littleover:pharmacy-relationship:distance",
+      "providerSource": "derby.gov.uk, verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Littleover",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Littleover is a neighbourhood ward in Derby.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "Littleover is a neighbourhood ward in Derby.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+      "purpose": "where the pharmacy is in relation to the area",
+      "supportingSource": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "readerValue": "gives the verified location relationship"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Littleover are provided from The Lanes Medical Centre.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Pharmacy First can help with eligible common conditions.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "orients the reader using a verified local fact"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby, littleover:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 6,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"area\": \"Littleover\",\n  \"heroHeading\": \"Pharmacy First in Littleover\",\n  \"heroIntroduction\": \"Pharmacy First can help with eligible common conditions. Littleover is a neighbourhood ward in Derby.\",\n  \"localIntroduction\": \"Littleover is a neighbourhood ward in Derby. NHS general practice services in Littleover are provided from The Lanes Medical Centre.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": \"NHS general practice services in Littleover are provided from The Lanes Medical Centre. Pharmacy First can help with eligible common conditions.\",\n  \"relationshipToPharmacy\": \"Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"heroIntroduction\",\n      \"sentence\": \"Littleover is a neighbourhood ward in Derby.\",\n      \"entityId\": \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Littleover is a neighbourhood ward in Derby.\",\n      \"entityId\": \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"NHS general practice services in Littleover are provided from The Lanes Medical Centre.\",\n      \"entityId\": \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Littleover are provided from The Lanes Medical Centre.\",\n      \"entityId\": \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Consultations take place at Brook Pharmacy Demo Derby in Derby.\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.\",\n      \"entityId\": \"littleover:pharmacy-relationship:distance\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [\n    \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\",\n    \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\",\n    \"littleover:pharmacy-relationship:distance\"\n  ],\n  \"editorialFactIdsUsed\": [\n    \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\",\n    \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\",\n    \"littleover:pharmacy-relationship:distance\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"area\": \"Littleover\",\n  \"heroHeading\": \"Pharmacy First in Littleover\",\n  \"heroIntroduction\": \"Pharmacy First can help with eligible common conditions. Littleover is a neighbourhood ward in Derby.\",\n  \"localIntroduction\": \"Littleover is a neighbourhood ward in Derby. NHS general practice services in Littleover are provided from The Lanes Medical Centre.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": \"NHS general practice services in Littleover are provided from The Lanes Medical Centre. Pharmacy First can help with eligible common conditions.\",\n  \"relationshipToPharmacy\": \"Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"heroIntroduction\",\n      \"sentence\": \"Littleover is a neighbourhood ward in Derby.\",\n      \"entityId\": \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Littleover is a neighbourhood ward in Derby.\",\n      \"entityId\": \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"NHS general practice services in Littleover are provided from The Lanes Medical Centre.\",\n      \"entityId\": \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Littleover are provided from The Lanes Medical Centre.\",\n      \"entityId\": \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Consultations take place at Brook Pharmacy Demo Derby in Derby.\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.\",\n      \"entityId\": \"littleover:pharmacy-relationship:distance\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [\n    \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\",\n    \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\",\n    \"littleover:pharmacy-relationship:distance\"\n  ],\n  \"editorialFactIdsUsed\": [\n    \"littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby\",\n    \"littleover:healthcare:nhs-general-practice-services-in-littleover-are-\",\n    \"littleover:pharmacy-relationship:distance\"\n  ]\n}"
+  ]
+}

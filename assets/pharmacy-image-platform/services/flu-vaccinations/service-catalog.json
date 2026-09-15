@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0",
+  "serviceId": "flu-vaccinations",
+  "serviceName": "Flu Vaccinations",
+  "roles": {
+    "hero": {
+      "minApprovedAssets": 2,
+      "minWidth": 1200,
+      "minHeight": 675,
+      "preferredOrientation": "landscape",
+      "preferredAspectRatio": "16:9",
+      "subjectHint": "Primary service hero — photographic, patient-safe, UK community pharmacy context"
+    },
+    "support": {
+      "minApprovedAssets": 1,
+      "minWidth": 800,
+      "minHeight": 600,
+      "preferredOrientation": "any",
+      "preferredAspectRatio": "3:2",
+      "subjectHint": "Supporting editorial or care scene — photographic or approved illustration"
+    },
+    "trust": {
+      "minApprovedAssets": 1,
+      "minWidth": 800,
+      "minHeight": 600,
+      "preferredOrientation": "any",
+      "preferredAspectRatio": "4:3",
+      "subjectHint": "Trusted pharmacy team or professional care — photographic"
+    },
+    "conversion": {
+      "minApprovedAssets": 1,
+      "minWidth": 800,
+      "minHeight": 600,
+      "preferredOrientation": "landscape",
+      "preferredAspectRatio": "16:9",
+      "subjectHint": "Booking, next steps, or consultation room — photographic"
+    }
+  }
+}

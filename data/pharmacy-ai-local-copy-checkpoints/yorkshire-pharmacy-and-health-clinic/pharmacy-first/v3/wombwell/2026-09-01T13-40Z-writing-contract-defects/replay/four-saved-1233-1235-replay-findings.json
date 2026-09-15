@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-09-01T13:34:53.348Z",
+  "rows": [
+    {
+      "file": "2026-09-01T12-33-31-060Z-attempt-1.json",
+      "originalFailures": [
+        "grammar: sentence missing a clear verb: Wombwell sits within the Metropolitan Borough of Barnsley, giving the area a dis"
+      ],
+      "copyUnchanged": true,
+      "stillRejected": true,
+      "afterFailures": [
+        "FAIL | field=heroIntroduction | sentence=Wombwell sits within the Metropolitan Borough of Barnsley, giving the area a distinct South Yorkshire character. | rule=ungrounded-clause | defect=giving the area a distinct South Yorkshire character. — local character or resident value is asserted without a supplied fact",
+        "FAIL | field=localIntroduction | sentence=The area is home to a public library, which is a familiar spot for many residents. | rule=ungrounded-clause | defect=which is a familiar spot for many residents. — local character or resident value is asserted without a supplied fact",
+        "FAIL | field=localContextParagraphs[0] | sentence=If you need advice or treatment for eligible common conditions, Pharmacy First is available for consultations and support. | rule=ungrounded-clause | defect=If you need advice or treatment for eligible common conditions, Pharmacy First is available for consultations and support. — unsupported assertion: support"
+      ],
+      "reviews": []
+    },
+    {
+      "file": "2026-09-01T12-33-35-374Z-attempt-2.json",
+      "originalFailures": [
+        "grammar: sentence missing a clear verb: The area also benefits from community resources such as a public library.",
+        "generic filler"
+      ],
+      "copyUnchanged": true,
+      "stillRejected": true,
+      "afterFailures": [
+        "FAIL | field=heroIntroduction | sentence=Wombwell is part of the Metropolitan Borough of Barnsley, giving the area a distinctive South Yorkshire character. | rule=ungrounded-clause | defect=giving the area a distinctive South Yorkshire character. — local character or resident value is asserted without a supplied fact",
+        "FAIL | field=localIntroduction | sentence=Wombwell is recognised for its place within the Metropolitan Borough of Barnsley, South Yorkshire. | rule=ungrounded-clause | defect=Wombwell is recognised for its place within the Metropolitan Borough of Barnsley, South Yorkshire. — local character or resident value is asserted without a supplied fact",
+        "FAIL | field=localIntroduction | sentence=The area also benefits from community resources such as a public library. | rule=ungrounded-clause | defect=The area also benefits from community resources such as a public library. — empty local claim is not a supplied fact",
+        "FAIL | field=localContextParagraphs[0] | sentence=If you need advice or treatment for eligible common conditions, Pharmacy First offers consultations without needing a GP appointment. | rule=ungrounded-clause | defect=If you need advice or treatment for eligible common conditions, Pharmacy First offers consultations without needing a GP appointment. — unsupported assertion: without, needing",
+        "FAIL | field=localIntroduction | sentence=The area also benefits from community resources such as a public library. | rule=empty-local-claim | defect=“community resources” is an empty local claim, not a supplied fact"
+      ],
+      "reviews": []
+    },
+    {
+      "file": "2026-09-01T12-35-39-845Z-attempt-1.json",
+      "originalFailures": [
+        "generic filler"
+      ],
+      "copyUnchanged": true,
+      "stillRejected": true,
+      "afterFailures": [
+        "FAIL | field=heroIntroduction | sentence=Pharmacy First offers a way for people in Wombwell to seek help for eligible common conditions without waiting for a GP appointment. | rule=ungrounded-clause | defect=Pharmacy First offers a way for people in Wombwell to seek help for eligible common conditions without waiting for a GP appointment. — the clause broadens approved clinical copy (waiting, another option, or a condition set that is not supplied)",
+        "FAIL | field=heroIntroduction | sentence=Wombwell is a ward within the Metropolitan Borough of Barnsley, giving residents access to a range of local services. | rule=ungrounded-clause | defect=giving residents access to a range of local services. — empty local claim is not a supplied fact",
+        "FAIL | field=localIntroduction | sentence=Wombwell is part of South Yorkshire and is known for its strong community links. | rule=ungrounded-clause | defect=Wombwell is part of South Yorkshire and is known for its strong community links. — local character or resident value is asserted without a supplied fact",
+        "FAIL | field=localIntroduction | sentence=The area benefits from facilities such as a public library, which is a valued resource for many. | rule=ungrounded-clause | defect=The area benefits from facilities such as a public library — unsupported assertion: benefits, facilities",
+        "FAIL | field=localIntroduction | sentence=The area benefits from facilities such as a public library, which is a valued resource for many. | rule=ungrounded-clause | defect=which is a valued resource for many. — local character or resident value is asserted without a supplied fact",
+        "FAIL | field=localContextParagraphs[0] | sentence=NHS general practice services in Wombwell are provided from Wombwell Medical Centre, supporting local health needs. | rule=ungrounded-clause | defect=supporting local health needs. — unsupported assertion: supporting, needs",
+        "FAIL | field=localContextParagraphs[0] | sentence=Pharmacy First can help with eligible common conditions, offering another option for advice and treatment. | rule=ungrounded-clause | defect=offering another option for advice and treatment. — the clause broadens approved clinical copy (waiting, another option, or a condition set that is not supplied)",
+        "FAIL | field=localIntroduction | sentence=Wombwell is part of South Yorkshire and is known for its strong community links. | rule=empty-local-claim | defect=“known for” asserts character that is not a supplied fact"
+      ],
+      "reviews": []
+    },
+    {
+      "file": "2026-09-01T12-35-43-358Z-attempt-2.json",
+      "originalFailures": [
+        "ungrounded factual sentence: With Pharmacy First, you have another option for support with common health concerns."
+      ],
+      "copyUnchanged": true,
+      "stillRejected": true,
+      "afterFailures": [
+        "FAIL | field=heroIntroduction | sentence=Pharmacy First offers a way for people in Wombwell to get help for eligible common conditions without waiting for a GP appointment. | rule=ungrounded-clause | defect=Pharmacy First offers a way for people in Wombwell to get help for eligible common conditions without waiting for a GP appointment. — the clause broadens approved clinical copy (waiting, another option, or a condition set that is not supplied)",
+        "FAIL | field=heroIntroduction | sentence=Wombwell is part of the Metropolitan Borough of Barnsley, giving it a strong sense of place within South Yorkshire. | rule=ungrounded-clause | defect=giving it a strong sense of place within South Yorkshire. — local character or resident value is asserted without a supplied fact",
+        "FAIL | field=localContextParagraphs[0] | sentence=With Pharmacy First, you have another option for support with common health concerns. | rule=ungrounded-clause | defect=With Pharmacy First, you have another option for support with common health concerns. — the clause broadens approved clinical copy (waiting, another option, or a condition set that is not supplied)"
+      ],
+      "reviews": []
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "slug": "brook-pharmacy-demo-derby",
+  "updatedAt": "2026-09-02T09:04:01.476Z",
+  "currentStage": "business_profile_intelligence",
+  "transitions": [
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-09-02T09:04:01.476Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-09-02T09:03:27.467Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-09-02T09:04:01.434Z",
+      "finishedAt": "2026-09-02T09:04:01.434Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "967f0e71-55ad-4a7a-8b15-b611bae571c2"
+    }
+  ]
+}

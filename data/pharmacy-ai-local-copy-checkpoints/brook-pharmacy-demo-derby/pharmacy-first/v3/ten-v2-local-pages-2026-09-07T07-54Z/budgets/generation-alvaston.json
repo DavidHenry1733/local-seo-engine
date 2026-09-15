@@ -1,0 +1,71 @@
+{
+  "taskId": "brook-pharmacy-demo-derby:pharmacy-first:v3:one-local-page:alvaston",
+  "maxProviderCalls": 4,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 4,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.068084,
+  "events": [
+    {
+      "at": "2026-09-06T07:48:43.913Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-06T07:48:44.060Z",
+      "kind": "reserve",
+      "reservationId": "r-1788680924059-1"
+    },
+    {
+      "at": "2026-09-06T07:48:49.399Z",
+      "kind": "consumed",
+      "reservationId": "r-1788680924059-1",
+      "detail": "cost=0.012368"
+    },
+    {
+      "at": "2026-09-07T07:44:20.567Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767060567-2"
+    },
+    {
+      "at": "2026-09-07T07:44:26.090Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767060567-2",
+      "detail": "cost=0.021783999999999998"
+    },
+    {
+      "at": "2026-09-07T07:50:21.634Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=3 remainingCostUsd=1.965848"
+    },
+    {
+      "at": "2026-09-07T07:50:21.917Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767421917-3"
+    },
+    {
+      "at": "2026-09-07T07:50:25.979Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767421917-3",
+      "detail": "cost=0.016982"
+    },
+    {
+      "at": "2026-09-07T07:52:46.717Z",
+      "kind": "generate-call-granted",
+      "detail": "additionalCalls=1 maxProviderCalls=4 remainingCostUsd=1.948866"
+    },
+    {
+      "at": "2026-09-07T07:52:46.866Z",
+      "kind": "reserve",
+      "reservationId": "r-1788767566866-4"
+    },
+    {
+      "at": "2026-09-07T07:52:49.687Z",
+      "kind": "consumed",
+      "reservationId": "r-1788767566866-4",
+      "detail": "cost=0.01695"
+    }
+  ]
+}

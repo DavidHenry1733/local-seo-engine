@@ -1,0 +1,73 @@
+{
+  "slug": "pharmaconnect",
+  "pass": false,
+  "checks": [
+    {
+      "id": "1-launch-queue-authority-task",
+      "pass": true,
+      "detail": "Authority & AI Readiness approved"
+    },
+    {
+      "id": "2-task-blocked-when-gate-fail",
+      "pass": true,
+      "detail": "complete (gate: PASS)"
+    },
+    {
+      "id": "3-task-evidence-complete",
+      "pass": true,
+      "detail": "6 evidence lines"
+    },
+    {
+      "id": "4-campaign-os-not-ready-label",
+      "pass": true,
+      "detail": "Ready To Launch"
+    },
+    {
+      "id": "5-publishing-workflow-blocker",
+      "pass": true,
+      "detail": "Gate not FAIL — skip blocker UI check"
+    },
+    {
+      "id": "6-growth-actions-authority",
+      "pass": false,
+      "detail": "0 authority-related growth actions"
+    },
+    {
+      "id": "7-audit-link-present",
+      "pass": true,
+      "detail": "/api/pharmacy-authority-readiness?slug=pharmaconnect&service=pharmacy-first"
+    },
+    {
+      "id": "8-campaign-os-authority-panel",
+      "pass": true,
+      "detail": "Campaign OS authority section rendered"
+    },
+    {
+      "id": "9-indexing-blocked-in-queue",
+      "pass": true,
+      "detail": "Gate not FAIL"
+    },
+    {
+      "id": "10-no-template-redesign",
+      "pass": true,
+      "detail": "Visual template unchanged"
+    },
+    {
+      "id": "11-no-content-files-modified",
+      "pass": true,
+      "detail": "Validation run did not write content or master files"
+    },
+    {
+      "id": "12-live-audit-link",
+      "pass": true,
+      "detail": "Auth-gated — offline validation used"
+    }
+  ],
+  "snapshot": {
+    "publishGate": "PASS",
+    "authorityTaskStatus": "complete",
+    "readinessLabel": "Ready To Launch",
+    "authorityGrowthActions": 0
+  },
+  "generatedAt": "2026-07-01T06:05:30.292Z"
+}

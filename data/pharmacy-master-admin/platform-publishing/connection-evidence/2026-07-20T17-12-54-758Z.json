@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "id": "host",
+      "label": "DNS/host reachable",
+      "status": "FAIL",
+      "detail": "530 Login authentication failed"
+    },
+    {
+      "id": "connection",
+      "label": "Connection established",
+      "status": "FAIL",
+      "detail": "530 Login authentication failed"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication successful",
+      "status": "FAIL",
+      "detail": "530 Login authentication failed"
+    },
+    {
+      "id": "protocol",
+      "label": "Protocol supported",
+      "status": "FAIL",
+      "detail": "FTPS connection failed"
+    },
+    {
+      "id": "response-time",
+      "label": "Response time",
+      "status": "FAIL",
+      "detail": "Not completed"
+    },
+    {
+      "id": "session",
+      "label": "Session closed cleanly",
+      "status": "PASS",
+      "detail": "No active session"
+    }
+  ],
+  "evidence": "530 Login authentication failed",
+  "failureReason": "Authentication failed — check username and password",
+  "operator": "admin",
+  "stamp": "2026-07-20T17:12:54.758Z",
+  "responseMs": 4594
+}

@@ -1,0 +1,48 @@
+{
+  "savedAt": "2026-09-09T13:01:04.848Z",
+  "areaSlug": "darfield",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Write as an experienced British healthcare copywriter.\n\nUse Google Search grounding in this same request to research the selected area. Return finished copy only. Do not list sources, citations, URLs, search queries or grounding IDs in the copy.\n\nReturn two clearly separated plain-text fields and nothing else.\n\nHERO INTRODUCTION:\nWrite 35–55 words of natural British English introducing Pharmacy First for people in the selected area and naming Yorkshire Pharmacy & Health Clinic as the provider.\n\nLOCAL INTRODUCTION:\nWrite 170–230 words in three fluent British-English paragraphs.\n\nParagraph 1:\nIntroduce the selected area, its location and its character.\n\nParagraph 2:\nDescribe local history, landmarks, parks, community facilities, shopping and healthcare where available. Connect the most useful places naturally. Do not write a list of sources or records.\n\nParagraph 3:\nTransition naturally into Yorkshire Pharmacy & Health Clinic as the selected-service provider. Name Yorkshire Pharmacy & Health Clinic and Pharmacy First. Do not reproduce a fixed clinical closing sentence. Do not write credentials, governance, disclaimers, eligibility, process, safety or condition-list wording. The transition must feel like part of the article—not a disclaimer pasted onto the end.\n\nApproved local-writing contract:\n- Name Yorkshire Pharmacy & Health Clinic as the Pharmacy First provider for people in the selected area.\n- Do not invent facts, opinions, access claims, travel-time claims, convenience claims, availability claims or clinical outcomes.\n- Do not mention evidence sources, IDs, listings or provider records.\n- Do not write credentials, governance, disclaimers, schema, approval state, publication state or indexing content.\n\nDo not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.\n\nDo not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.\n\nUse neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that character is a well-established public description of the place. Describe places, facilities and organisations naturally without inventing an opinion about the area.\n\nDo not use: “orient yourself”; “Orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.\n\nDo not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.\n\nReturn exactly this layout:\nHERO INTRODUCTION:\n<one paragraph>\n\nLOCAL INTRODUCTION:\n<paragraph 1>\n\n<paragraph 2>\n\n<paragraph 3>\nTenant identifier: yorkshire-pharmacy-and-health-clinic\nCampaign/service identifier: pharmacy-first\nSelected area: Darfield\nPrimary town or city: Barnsley\nConfirmed pharmacy name: Yorkshire Pharmacy & Health Clinic\nConfirmed pharmacy premises locality: Darfield\nDeterministic pharmacy-to-area straight-line distance: approximately 0.4 km in a straight line\nCall inputs above are the only supplied facts. Use Google Search grounding to research the selected area in this same request.\nDo not write the distance, kilometres, sources or citations into the copy.",
+    "tools": [
+      {
+        "google_search": {}
+      }
+    ]
+  },
+  "geminiGrounding": {
+    "webSearchQueries": [],
+    "groundingChunks": [],
+    "groundingSupportCount": 0
+  },
+  "rawResponse": "HERO INTRODUCTION:\nFor residents in Darfield and the surrounding Barnsley area, Yorkshire Pharmacy & Health Clinic provides access to the NHS Pharmacy First service. This initiative enables local individuals to consult trained healthcare professionals for advice and treatment on several common minor health conditions directly within the community.\n\nLOCAL INTRODUCTION:\nDarfield is a historic South Yorkshire village situated approximately five miles east of Barnsley town centre, set on elevated ground overlooking the valley of the River Dearne and the River Dove. The area combines a long-standing agricultural heritage with a prominent industrial history that was defined by local coal mining throughout the nineteenth and twentieth centuries.\n\nThe neighbourhood contains notable historical features, including the ancient All Saints Church, which traces its origins back to early Saxon times, and the Maurice Dobson Museum, located within a restored Georgian yeoman residence. Local community life is supported by everyday shopping options along Snape Hill Road, recreational facilities at Darfield Park, and nearby green spaces alongside the Dearne Valley walking routes. Residents across the township also rely on primary medical services and local health centres situated throughout the wider Barnsley area.\n\nWithin this active community environment, Yorkshire Pharmacy & Health Clinic contributes to local care provision as a key provider of the NHS Pharmacy First service. By offering consultations and professional clinical support directly to the community, Yorkshire Pharmacy & Health Clinic helps ensure local residents can address common, non-emergency health concerns close to home.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "Gemini grounding metadata missing"
+    ],
+    "automatedReviews": []
+  },
+  "parsedCopy": {
+    "area": "Darfield",
+    "heroHeading": "Pharmacy First in Darfield",
+    "heroIntroduction": "For residents in Darfield and the surrounding Barnsley area, Yorkshire Pharmacy & Health Clinic provides access to the NHS Pharmacy First service. This initiative enables local individuals to consult trained healthcare professionals for advice and treatment on several common minor health conditions directly within the community.",
+    "localIntroduction": "Darfield is a historic South Yorkshire village situated approximately five miles east of Barnsley town centre, set on elevated ground overlooking the valley of the River Dearne and the River Dove. The area combines a long-standing agricultural heritage with a prominent industrial history that was defined by local coal mining throughout the nineteenth and twentieth centuries.\n\nThe neighbourhood contains notable historical features, including the ancient All Saints Church, which traces its origins back to early Saxon times, and the Maurice Dobson Museum, located within a restored Georgian yeoman residence. Local community life is supported by everyday shopping options along Snape Hill Road, recreational facilities at Darfield Park, and nearby green spaces alongside the Dearne Valley walking routes. Residents across the township also rely on primary medical services and local health centres situated throughout the wider Barnsley area.\n\nWithin this active community environment, Yorkshire Pharmacy & Health Clinic contributes to local care provision as a key provider of the NHS Pharmacy First service. By offering consultations and professional clinical support directly to the community, Yorkshire Pharmacy & Health Clinic helps ensure local residents can address common, non-emergency health concerns close to home.",
+    "localContextHeading": "Pharmacy First in Darfield",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield. Yorkshire Pharmacy & Health Clinic is approximately 0.4 km in a straight line from Darfield.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": []
+  },
+  "candidateRecordWritten": false
+}

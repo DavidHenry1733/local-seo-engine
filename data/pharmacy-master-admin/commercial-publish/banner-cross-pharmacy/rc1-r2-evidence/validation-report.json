@@ -1,0 +1,38 @@
+{
+  "slug": "banner-cross-pharmacy",
+  "base": "http://127.0.0.1:3001",
+  "pageResults": {
+    "homepage": {
+      "pass": true,
+      "checksumMatch": true,
+      "status": 200
+    },
+    "service": {
+      "pass": true,
+      "checksumMatch": true,
+      "status": 200
+    },
+    "guide": {
+      "pass": true,
+      "checksumMatch": true,
+      "status": 200
+    },
+    "blog": {
+      "pass": true,
+      "checksumMatch": true,
+      "status": 200
+    }
+  },
+  "parityPass": true,
+  "imagesPass": true,
+  "fontsPass": true,
+  "assetCount": 11,
+  "failedResources": [],
+  "previewApiRefs": false,
+  "productOwnerUrls": {
+    "homepage": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/?slug=banner-cross-pharmacy",
+    "service": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first/?slug=banner-cross-pharmacy",
+    "guide": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-guide/?slug=banner-cross-pharmacy",
+    "blog": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/what-is-pharmacy-first/?slug=banner-cross-pharmacy"
+  }
+}

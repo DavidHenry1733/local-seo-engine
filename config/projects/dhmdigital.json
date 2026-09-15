@@ -1,0 +1,32 @@
+{
+  "clientSlug": "dhmdigital",
+  "businessName": "dhmdigital",
+  "domain": "https://dhmdigital.net",
+  "phone": "01709210731",
+  "email": "support@dhmdigital.net",
+  "branding": {
+    "primaryColor": "#005EB8",
+    "accentColor": "#1CA9C9"
+  },
+  "services": [
+    "pharmacy-first",
+    "blood-pressure-checks",
+    "travel-vaccinations",
+    "prescription-dispensing",
+    "emergency-contraception",
+    "repeat-prescriptions",
+    "pharmacy-contraception-service"
+  ],
+  "locations": [
+    {
+      "name": "sheffield"
+    }
+  ],
+  "deploy": {
+    "enabled": true,
+    "protocol": "ftp",
+    "host": "ftp.dhmdigital.net",
+    "port": 21,
+    "remoteRoot": "/"
+  }
+}

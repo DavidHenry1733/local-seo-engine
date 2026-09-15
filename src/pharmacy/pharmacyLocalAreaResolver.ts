@@ -156,8 +156,27 @@ function collectCandidates(input: {
   const profileSelected = (profile.selectedAreas || []).filter((a) => a.selected !== false);
   let selectedSource = "profile.selectedAreas";
   const hasExplicitSavedSelection = profileSelected.length > 0 || frozenSelected.length > 0;
+  const profileByKey = new Map((profile.selectedAreas || []).map((entry) => [areaKey(entry.areaName), entry]));
 
-  if (profileSelected.length) {
+  if (frozenSelected.length) {
+    selectedSource = `frozen-campaign:${serviceId}`;
+    for (const area of frozenSelected) {
+      const entry = profileByKey.get(areaKey(area.areaName));
+      add({
+        name: area.areaName,
+        slug: area.areaSlug,
+        source: "campaign-builder:saved-target-areas",
+        evidence: entry
+          ? entryEvidence(entry, discovery)
+          : ["frozen-campaign-generation-context", `areaSlug:${area.areaSlug}`],
+        priority: area.priority ?? entry?.priority ?? 50,
+        order: area.order ?? entry?.order ?? 99,
+        areaType: entry?.areaType || "operator-confirmed",
+        approved: true,
+        distanceLabel: entry?.distanceLabel,
+      });
+    }
+  } else if (profileSelected.length) {
     selectedSource = "profile.selectedAreas";
     for (const entry of profileSelected) {
       add({
@@ -170,20 +189,6 @@ function collectCandidates(input: {
         areaType: entry.areaType || "neighbourhood",
         approved: true,
         distanceLabel: entry.distanceLabel,
-      });
-    }
-  } else if (frozenSelected.length) {
-    selectedSource = `frozen-campaign:${serviceId}`;
-    for (const a of frozenSelected) {
-      add({
-        name: a.areaName,
-        slug: a.areaSlug,
-        source: selectedSource,
-        evidence: [`frozen-campaign-generation-context`, `areaSlug:${a.areaSlug}`],
-        priority: a.priority ?? 50,
-        order: a.order ?? 99,
-        areaType: "operator-confirmed",
-        approved: true,
       });
     }
   }

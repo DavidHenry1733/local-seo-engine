@@ -53,7 +53,7 @@ function summariseResults(results: any[]) {
 }
 
 const ROOT = process.cwd();
-const OUTPUT_DIR = "/home/inboxingproweb/local-seo-engine/output";
+const OUTPUT_DIR = path.join(process.env.WORKSPACE_ROOT ?? "/home/inboxingproweb/pharmaconnect-growth-engine", "output");
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -246,7 +246,17 @@ function readUrls(slug: string): string[] {
   }
 
   if (fs.existsSync(sitemapFile)) {
-    const data = JSON.parse(fs.readFileSync(sitemapFile, "utf8"));
+    const raw = fs.readFileSync(sitemapFile, "utf8").trim();
+
+    // sitemap.xml is XML, not JSON. Parse <loc> entries safely.
+    if (raw.startsWith("<")) {
+      return Array.from(raw.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/gi))
+        .map((m) => String(m[1] ?? "").trim())
+        .filter((u) => u.startsWith("http"));
+    }
+
+    // Legacy support: some older files may contain JSON URL lists.
+    const data = JSON.parse(raw);
 
     if (Array.isArray(data.urls)) return data.urls;
 

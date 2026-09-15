@@ -1,0 +1,20 @@
+
+=== Chellaston renderer-owned hero/relationship preflight (no provider) ===
+
+PASS  last-failed-attempt-still-parses — data/pharmacy-ai-local-copy-attempt-logs/brook-pharmacy-demo-derby/pharmacy-first/v3/chellaston/2026-09-06T05-55-55-049Z-attempt-1.json
+PASS  failed-attempt-still-fails-area-in-hero — FAIL | field=heroIntroduction | sentence=Pharmacy First can help with eligible common conditions. | rule=area-in-hero | defect=copy does not explain Pharmacy First for readers in the selected area
+PASS  failed-attempt-still-fails-premises-locality — FAIL | field=relationshipToPharmacy | sentence=Brook Pharmacy Demo Derby is located in Derby. The pharmacy is approximately 5.8 km in a straight line from Chellaston. | rule=premises-locality | defect=copy does not explain that the pharmacy is in the premises locality
+PASS  renderer-overwrites-model-hero-and-relationship — Pharmacy First can help with eligible common conditions for people in Chellaston.
+PASS  relationship-uses-confirmed-structured-values — Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.
+PASS  hero-passes-area-in-hero — area-in-hero clear
+PASS  relationship-passes-premises-locality — premises-locality clear
+PASS  straight-line-5-8km-remains-supported — Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.
+PASS  no-unsupported-local-claims — no unsupported local claims
+PASS  full-candidate-validation-passes — ok
+PASS  customer-facing-output-has-no-evidence-ids — overlay omits identifiers
+PASS  model-may-omit-renderer-owned-fields — omitted then filled
+PASS  prompt-does-not-ask-openai-to-compose-those-fields — heroIntroduction and relationshipToPharmacy are renderer-owned in the prompt
+PASS  validator-files-unchanged — area-in-hero and premises-locality rules not weakened
+PASS  existing-candidates-and-attempt-unchanged — Allestree, Mickleover and Littleover unchanged; saved Chellaston candidate and rejected attempt preserved
+
+15/15 passed

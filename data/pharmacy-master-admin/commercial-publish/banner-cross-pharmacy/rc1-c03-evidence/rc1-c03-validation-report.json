@@ -1,0 +1,116 @@
+{
+  "slug": "banner-cross-pharmacy",
+  "generatedAt": "2026-07-21T08:56:39.009Z",
+  "rootCause": "Managed publishing URL architecture corrected — customer-facing canonical URL is local.<customer-domain>; internal managed hostname is infrastructure/fallback only",
+  "resolvedCustomerRootDomain": "pharmacyhealthhub.co.uk",
+  "rootDomainEvidenceSource": "canonical_branch_website",
+  "customerDomainConfirmationRequired": "YES",
+  "customerSubdomainLabel": "local",
+  "canonicalEcosystemHostname": "local.pharmacyhealthhub.co.uk",
+  "managedCnameTarget": "banner-cross-pharmacy.sites.pharmaconnect.uk",
+  "rootDomainPublishingBlocked": "YES",
+  "existingCustomerWebsiteModified": "NO",
+  "perCustomerCredentialsRequired": "NO",
+  "internalManagedHostnameRetained": "YES",
+  "checks": [
+    {
+      "id": "customer-domain-resolution",
+      "status": "PASS",
+      "detail": "pharmacyhealthhub.co.uk (canonical_branch_website)"
+    },
+    {
+      "id": "domain-confirmation-required",
+      "status": "PASS",
+      "detail": "Evidence URL https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield appears to be a branch page on parent/group domain pharmacyhealthhub.co.uk, not a confirmed pharmacy-owned root domain"
+    },
+    {
+      "id": "root-domain-protection",
+      "status": "PASS",
+      "detail": "Root-domain publication blocked"
+    },
+    {
+      "id": "subdomain-allowed",
+      "status": "PASS",
+      "detail": "local.<domain> passes root-domain guard"
+    },
+    {
+      "id": "internal-managed-hostname",
+      "status": "PASS",
+      "detail": "https://banner-cross-pharmacy.sites.pharmaconnect.uk/"
+    },
+    {
+      "id": "cname-instructions",
+      "status": "PENDING",
+      "detail": "Awaiting domain confirmation"
+    },
+    {
+      "id": "active-publish-base-internal",
+      "status": "PASS",
+      "detail": "https://banner-cross-pharmacy.sites.pharmaconnect.uk (internal_managed)"
+    },
+    {
+      "id": "managed-release",
+      "status": "PASS",
+      "detail": "v1"
+    },
+    {
+      "id": "customer-host-mapping",
+      "status": "PENDING",
+      "detail": "0 verified mapping(s)"
+    },
+    {
+      "id": "unknown-host-isolation",
+      "status": "PASS",
+      "detail": "nginx map defaults to empty tenant"
+    },
+    {
+      "id": "dns-verification",
+      "status": "PENDING",
+      "detail": "not_configured"
+    },
+    {
+      "id": "ssl-provisioning",
+      "status": "PENDING",
+      "detail": "managed_preview_active"
+    },
+    {
+      "id": "manifest-managed-base",
+      "status": "PASS",
+      "detail": "https://banner-cross-pharmacy.sites.pharmaconnect.uk"
+    },
+    {
+      "id": "manifest-active-base",
+      "status": "PASS",
+      "detail": "https://banner-cross-pharmacy.sites.pharmaconnect.uk (internal_managed)"
+    },
+    {
+      "id": "sitemap-urls",
+      "status": "PASS",
+      "detail": "https://banner-cross-pharmacy.sites.pharmaconnect.uk"
+    },
+    {
+      "id": "registry-urls",
+      "status": "PASS",
+      "detail": "Live sitemap uses internal managed base (customer base after DNS+SSL verify)"
+    },
+    {
+      "id": "canonical-tags",
+      "status": "PASS",
+      "detail": "https://banner-cross-pharmacy.sites.pharmaconnect.uk (internal_managed)"
+    },
+    {
+      "id": "publish-review-destination",
+      "status": "PASS",
+      "detail": "PharmaConnect Managed Infrastructure"
+    },
+    {
+      "id": "no-customer-credentials",
+      "status": "PASS",
+      "detail": "Managed publishing uses global platform credentials only"
+    }
+  ],
+  "managedPublishingUrl": "/master-admin-platform?customer=banner-cross-pharmacy&panel=managed-publishing",
+  "proposedLocalSubdomain": "https://local.pharmacyhealthhub.co.uk/",
+  "cnameRecord": "local CNAME banner-cross-pharmacy.sites.pharmaconnect.uk",
+  "status": "READY FOR PRODUCT OWNER TEST"
+}

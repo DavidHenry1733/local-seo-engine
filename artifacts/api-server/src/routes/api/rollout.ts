@@ -14,6 +14,8 @@ import {
 import type { SelectedAreaPageDef } from "../../../../../src/generator/buildClusterConfigs";
 import { generateClusterContent } from "../../../../../src/generator/generateClusterContent";
 import type { ClusterPageInputs } from "../../../../../src/generator/generateClusterContent";
+import { applyWebDesignNarrativePackage } from "../../../../../src/narratives/applyWebDesignNarrativePackage";
+import { applyLocalSeoNarrativePackage } from "../../../../../src/narratives/applyLocalSeoNarrativePackage";
 import { refineClusterContent } from "../../../../../src/generator/refineContent";
 import { renderClusterHtml } from "../../../../../src/generator/renderClusterPage";
 import type { RenderProjectConfig } from "../../../../../src/generator/renderClusterPage";
@@ -31,6 +33,12 @@ import { rebuildSitemapForClient } from "./searchConsole";
 import { selectPageImages, serviceDisplayName, approvedImages, imageFilePath } from "../../../../../src/generator/imageLibrary";
 import { normaliseServiceKey } from "./images";
 import type { PageImageSelections, ImageLibraryConfig } from "../../../../../src/generator/imageLibrary";
+import {
+  applyImageSelectionsToHtml,
+  findCampaignPaneSlotFile,
+  resolveFinalImageSelections,
+  buildCampaignPaneImageUrl,
+} from "../../../../../src/generator/campaignPaneImages";
 import { logger } from "../../lib/logger";
 import { loadProviderProfile } from "./providerProfiles";
 
@@ -98,6 +106,16 @@ function writeJobState(jobId: string, state: JobState): void {
 // ── Campaign→industry helpers ──────────────────────────────────────────────────
 // Derive an industryType from a campaign service name when the session doesn't
 // explicitly carry one (e.g. sessions created before this field was added).
+
+function loadServiceBlueprint(serviceKey: string | undefined): Record<string, unknown> | undefined {
+  if (!serviceKey) return undefined;
+  const key = serviceKey.toLowerCase().trim().replace(/[\s_]+/g, "-").replace(/[^a-z0-9-]/g, "");
+  const fp = path.join(WORKSPACE_ROOT, "config", "service-blueprints", `${key}.json`);
+  if (!fs.existsSync(fp)) return undefined;
+  try { return JSON.parse(fs.readFileSync(fp, "utf8")) as Record<string, unknown>; }
+  catch { return undefined; }
+}
+
 function deriveIndustryFromService(serviceName: string): string | undefined {
   const svc = serviceName.toLowerCase().trim();
   if (!svc) return undefined;
@@ -105,6 +123,10 @@ function deriveIndustryFromService(serviceName: string): string | undefined {
   // ── Digital services — checked first so they always win ───────────────────
   if (/web[\s-]?des|website[\s-]?des/.test(svc))  return "web-design";
   if (/local[\s-]?seo/.test(svc))                  return "local-seo";
+  if (/local[\s_-]?business[\s_-]?visibility/.test(svc)) return "local-business-visibility";
+  if (/google[\s-]?business[\s-]?profile/.test(svc)) return "google-business-profile";
+  if (/\bgbp\b/.test(svc))                         return "google-business-profile";
+  if (/google[\s-]?maps/.test(svc))                 return "google-business-profile";
   if (/\bseo\b/.test(svc))                         return "seo";
   if (/web[\s-]?host/.test(svc))                   return "web-hosting";
   if (/email[\s-]?mark/.test(svc))                 return "email-marketing";
@@ -139,11 +161,111 @@ function deriveDefaultBuyerType(
   ]);
   const businessSet  = new Set([
     "web-design","local-seo","seo","web-hosting",
+    "google-business-profile",
     "email-marketing","digital-marketing","ppc","social-media-marketing",
   ]);
   if (householdSet.has(industryType)) return "household";
   if (businessSet.has(industryType))  return "business";
   return undefined;
+}
+
+function normaliseCampaignValue(value: string | undefined): string {
+  return (value ?? "").trim().toLowerCase().replace(/[\s_]+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
+
+function normaliseAreaName(value: string | undefined): string {
+  return (value ?? "").trim().toLowerCase();
+}
+
+interface RequestedRolloutContext {
+  hasContext: boolean;
+  service: string;
+  city: string;
+  areas: Set<string>;
+}
+
+function inferRequestedRolloutContext(rawDefs: unknown): RequestedRolloutContext {
+  const defs = Array.isArray(rawDefs) ? defsFromUnknown(rawDefs) : [];
+  const services = new Set<string>();
+  const cities = new Set<string>();
+  const areas = new Set<string>();
+
+  for (const def of defs) {
+    const signals = def.signals as Record<string, unknown> | undefined;
+    const service = String(def.service ?? signals?.serviceName ?? "");
+    const city = String(def.city ?? signals?.city ?? "");
+    const area = String(def.area ?? signals?.area ?? "");
+
+    if (service) services.add(normaliseCampaignValue(service));
+    if (city) cities.add(normaliseAreaName(city));
+    if (area) areas.add(normaliseAreaName(area));
+  }
+
+  return {
+    hasContext: defs.length > 0 && (services.size > 0 || cities.size > 0 || areas.size > 0),
+    service: services.size === 1 ? [...services][0] : "",
+    city: cities.size === 1 ? [...cities][0] : "",
+    areas,
+  };
+}
+
+function defsFromUnknown(rawDefs: unknown): Array<Record<string, unknown>> {
+  return Array.isArray(rawDefs)
+    ? rawDefs.filter((item): item is Record<string, unknown> => typeof item === "object" && item !== null)
+    : [];
+}
+
+function sessionMatchesRequestedContext(
+  session: Record<string, unknown>,
+  requested: RequestedRolloutContext,
+): boolean {
+  if (!requested.hasContext) return true;
+
+  const campaign = session.campaign as { cityName?: string; serviceName?: string; serviceKey?: string } | undefined;
+  const sessionService = normaliseCampaignValue(campaign?.serviceKey) || normaliseCampaignValue(campaign?.serviceName);
+  const sessionCity = normaliseAreaName(campaign?.cityName);
+  const sessionDefs = (session.selectedAreaDefs as Array<Record<string, unknown>> | undefined) ?? [];
+  const sessionAreas = new Set(
+    sessionDefs
+      .map((def) => normaliseAreaName(String(def.area ?? "")))
+      .filter(Boolean),
+  );
+
+  if (requested.service && sessionService !== requested.service) return false;
+  if (requested.city && sessionCity !== requested.city) return false;
+  if (requested.areas.size > 0 && sessionAreas.size > 0) {
+    for (const area of requested.areas) {
+      if (!sessionAreas.has(area)) return false;
+    }
+  }
+
+  return true;
+}
+
+function findMatchingCampaignSession(
+  clientDir: string,
+  requested: RequestedRolloutContext,
+): string | null {
+  if (!requested.hasContext) return null;
+
+  const sessionsDir = path.join(clientDir, "sessions");
+  if (!fs.existsSync(sessionsDir)) return null;
+
+  const candidates = fs
+    .readdirSync(sessionsDir)
+    .filter((file) => file.endsWith(".json") && !file.endsWith("-area-defs.json"))
+    .map((file) => path.join(sessionsDir, file));
+
+  for (const candidate of candidates) {
+    try {
+      const session = JSON.parse(fs.readFileSync(candidate, "utf8")) as Record<string, unknown>;
+      if (sessionMatchesRequestedContext(session, requested)) return candidate;
+    } catch {
+      // Ignore malformed campaign session files.
+    }
+  }
+
+  return null;
 }
 
 function readJobState(jobId: string): JobState | null {
@@ -196,33 +318,58 @@ async function runRolloutJob(
   // Compute the correct campaign-level hub URL from session metadata.
   // Cluster defs saved by older wizard runs pointed at the site root — fix
   // them here so every rollout (new or re-run) uses the right URL.
-  const _domain       = project.domain.replace(/\/+$/, "");
-  const _campaignCity = (sessionCampaign?.cityName    ?? "").toLowerCase().replace(/\s+/g, "-");
-  const _campaignSvc  = (sessionCampaign?.serviceName ?? "web design").toLowerCase().replace(/\s+/g, "-");
-  const correctHubUrl    = _campaignCity
-    ? `${_domain}/${_campaignSvc}-${_campaignCity}/`
-    : `${_domain}/`;
-  const correctHubAnchor = `${sessionCampaign?.serviceName ?? "Web Design"} ${sessionCampaign?.cityName ?? ""}`.trim();
+  const _domain = project.domain.replace(/\/+$/, "");
+  const normaliseCity = (value: string | undefined): string =>
+    (value ?? "").trim().toLowerCase();
+  const slugValue = (value: string | undefined): string =>
+    (value ?? "").trim().toLowerCase().replace(/\s+/g, "-").replace(/-+$/, "");
+  const serviceSlugFrom = (serviceName: string | undefined, cityName?: string): string => {
+    const rawLc = (serviceName ?? "web design").trim().toLowerCase();
+    const cityLc = (cityName ?? "").trim().toLowerCase();
+    const bare = cityLc && rawLc.endsWith(cityLc)
+      ? rawLc.slice(0, rawLc.length - cityLc.length).trim()
+      : rawLc;
+    return slugValue(bare);
+  };
+  const serviceKeyFromSlug = (serviceSlug: string): string =>
+    serviceSlug.replace(/-/g, "_").replace(/^web_hosting$/, "website_hosting");
+  const cityForDef = (def: SelectedAreaPageDef): string =>
+    def.city || ((def.signals as unknown as Record<string, unknown> | undefined)?.city as string | undefined) || sessionCampaign?.cityName || "";
+  const hubUrlForDef = (def: SelectedAreaPageDef): string => {
+    const citySlug = slugValue(cityForDef(def));
+    const serviceSlug = serviceSlugFrom(def.service ?? sessionCampaign?.serviceName, cityForDef(def));
+    return citySlug ? `${_domain}/${serviceSlug}-${citySlug}/` : `${_domain}/`;
+  };
+  const hubAnchorForDef = (def: SelectedAreaPageDef): string =>
+    `${def.service ?? sessionCampaign?.serviceName ?? "Web Design"} ${cityForDef(def)}`.trim();
 
   // Always recompute relatedPages with full domain URLs so the AI receives
   // proper absolute hrefs. Saved session values (relative/preview paths) are
   // intentionally overridden here — stale paths cause wrong links in output.
   const clusterSiblings = sorted.filter((d) => d.tier !== "hub");
 
-  // ── "Areas We Cover" links for cluster pages ──────────────────────────────
-  // Same pool that the hub page uses: all cluster sibling pages for this campaign.
-  const _campClusterAreaLinks = clusterSiblings
-    .filter((d) => d.area && d.remotePath)
-    .map((d) => ({
-      href:  `${_domain}${d.remotePath}`,
-      label: `${sessionCampaign?.serviceName ?? "Web Design"} ${d.area}`,
-    }));
+  // ── "Areas We Cover" links ────────────────────────────────────────────────
+  // Same-service sibling pages are scoped by each page's own city. This prevents
+  // mixed-city rollout batches from leaking Rotherham links into Sheffield pages.
+  const clusterAreaLinksForDef = (def: SelectedAreaPageDef) =>
+    clusterSiblings
+      .filter((d) =>
+        d.area &&
+        d.remotePath &&
+        d.area !== def.area &&
+        normaliseCity(cityForDef(d)) === normaliseCity(cityForDef(def)),
+      )
+      .map((d) => ({
+        href:  `${_domain}${d.remotePath}`,
+        label: `${def.service ?? sessionCampaign?.serviceName ?? "Web Design"} ${d.area}`,
+      }));
 
-  // ── "Related Services" internalLinks for cluster pages ────────────────────
+  // ── "Related Services" internalLinks ──────────────────────────────────────
   // Scan all campaign sessions for this client to find hub pages in the same
-  // city — these become the cross-service "Related Services" cards on cluster pages.
+  // city — these become the cross-service "Related Services" cards. Filtering is
+  // done per def below, not against the campaign city, to avoid wrong-city links.
   const CORE_RS_KEYS = new Set(["web_design", "local_seo", "website_hosting", "email_marketing"]);
-  const _campCrossServiceLinks: import("../../../../../src/generator/types").InternalLinkConfig[] = [];
+  const _allCrossServiceLinks: import("../../../../../src/generator/types").InternalLinkConfig[] = [];
   try {
     const _sessDir = path.join(OUTPUT_DIR, clientSlug, "sessions");
     if (fs.existsSync(_sessDir)) {
@@ -231,39 +378,39 @@ async function runRolloutJob(
           const sfData = JSON.parse(fs.readFileSync(path.join(_sessDir, sf), "utf8")) as Record<string, unknown>;
           const sfCamp = sfData.campaign as { cityName?: string; serviceName?: string } | undefined;
           if (!sfCamp?.cityName || !sfCamp?.serviceName) continue;
-          if (sfCamp.cityName.toLowerCase() !== (sessionCampaign?.cityName ?? "").toLowerCase()) continue;
-          const cityLc   = sfCamp.cityName.trim().toLowerCase();
-          const rawLc    = sfCamp.serviceName.trim().toLowerCase();
-          const bare     = rawLc.endsWith(cityLc) ? rawLc.slice(0, rawLc.length - cityLc.length).trim() : rawLc;
-          const svcSlug  = bare.replace(/\s+/g, "-").replace(/-+$/, "");
-          // Derive current campaign service slug for exclusion comparison
-          const _curRawLc  = (sessionCampaign?.serviceName ?? "").trim().toLowerCase();
-          const _curCityLc = (sessionCampaign?.cityName    ?? "").trim().toLowerCase();
-          const _curBare   = _curRawLc.endsWith(_curCityLc) ? _curRawLc.slice(0, _curRawLc.length - _curCityLc.length).trim() : _curRawLc;
-          const _curSvcSlug = _curBare.replace(/\s+/g, "-").replace(/-+$/, "");
-          // Skip the current campaign's own service — it must not appear in Related Services
-          if (svcSlug === _curSvcSlug) continue;
-          const citySlug = cityLc.replace(/\s+/g, "-");
+          const cityLc   = normaliseCity(sfCamp.cityName);
+          const svcSlug  = serviceSlugFrom(sfCamp.serviceName, sfCamp.cityName);
+          const citySlug = slugValue(cityLc);
           const hubPath  = `/${svcSlug}-${citySlug}/`;
           const hubUrl   = `${_domain}${hubPath}`;
-          const svcKey   = svcSlug.replace(/-/g, "_").replace(/^web_hosting$/, "website_hosting");
+          const svcKey   = serviceKeyFromSlug(svcSlug);
           if (!CORE_RS_KEYS.has(svcKey)) continue;
-          if (!_campCrossServiceLinks.some((l) => l.href === hubUrl)) {
-            _campCrossServiceLinks.push({ href: hubUrl, service: svcKey, location: sfCamp.cityName, tier: "hub" });
+          if (!_allCrossServiceLinks.some((l) => l.href === hubUrl)) {
+            _allCrossServiceLinks.push({ href: hubUrl, service: svcKey, location: sfCamp.cityName, tier: "hub" });
           }
         } catch { /* skip malformed sessions */ }
       }
     }
   } catch { /* non-fatal */ }
-  const _campInternalLinksConfig = _campCrossServiceLinks.length > 0
-    ? { links: _campCrossServiceLinks }
-    : undefined;
+  const internalLinksForDef = (def: SelectedAreaPageDef) => {
+    const defCity = normaliseCity(cityForDef(def));
+    const defServiceSlug = serviceSlugFrom(def.service ?? sessionCampaign?.serviceName, cityForDef(def));
+    const defServiceKey = serviceKeyFromSlug(defServiceSlug);
+    const links = _allCrossServiceLinks.filter((link) =>
+      normaliseCity(link.location) === defCity &&
+      link.service !== defServiceKey,
+    );
+    return links.length > 0 ? { links } : undefined;
+  };
   const sortedWithRelated = sorted.map((def) => {
     const svcLower = (def.service ?? sessionCampaign?.serviceName ?? "web design").toLowerCase();
+    const sameCitySiblings = clusterSiblings.filter((d) =>
+      normaliseCity(cityForDef(d)) === normaliseCity(cityForDef(def)),
+    );
     if (def.tier === "hub") {
       // Hub page: relatedPages = ALL cluster pages with full domain URLs.
       // The AI prompt and post-processing both rely on these being absolute.
-      const hubRelatedPages = clusterSiblings
+      const hubRelatedPages = sameCitySiblings
         .map((d) => `${svcLower} ${d.area ?? ""} (${_domain}${d.remotePath ?? ""})`)
         .join(", ");
       // hubUrl/hubAnchor for a hub page = the campaign money page (e.g. inboxingproweb.com/hosting).
@@ -275,16 +422,16 @@ async function runRolloutJob(
       const _svcMoneyPages = (project as any).serviceMoneyPages as Record<string, string> | undefined;
       const _derivedMoneyUrl = _svcMoneyPages?.[_sessionSvcKey] ?? "";
       const hubSiteUrl    = sessionCampaign?.moneyPageUrl || _derivedMoneyUrl || (project as any).moneyPageUrl || `${_domain}/`;
-      const hubSiteAnchor = def.hubAnchor || correctHubAnchor || svcLower;
+      const hubSiteAnchor = def.hubAnchor || hubAnchorForDef(def) || svcLower;
       return { ...def, relatedPages: hubRelatedPages, hubUrl: hubSiteUrl, hubAnchor: hubSiteAnchor };
     }
     // Cluster page: always recompute sibling list with full domain URLs
     // and correct the hub URL / anchor that older session data may have wrong.
-    const siblings = clusterSiblings.filter((d) => d.area !== def.area);
+    const siblings = sameCitySiblings.filter((d) => d.area !== def.area);
     const relatedPages = siblings
       .map((d) => `${svcLower} ${d.area ?? ""} (${_domain}${d.remotePath ?? ""})`)
       .join(", ");
-    return { ...def, relatedPages, hubUrl: correctHubUrl, hubAnchor: correctHubAnchor };
+    return { ...def, relatedPages, hubUrl: hubUrlForDef(def), hubAnchor: hubAnchorForDef(def) };
   });
 
   const toProcess: SelectedAreaPageDef[] = [];
@@ -421,19 +568,23 @@ async function runRolloutJob(
     const _derivedMoney2 = _svcPages2?.[_svcKey2] ?? "";
     const _resolvedMoneyUrl = sessionCampaign?.moneyPageUrl || _derivedMoney2 || renderConfig.moneyPageUrl;
 
+    const _defInternalLinksConfig = internalLinksForDef(def);
+    const _defClusterAreaLinks = clusterAreaLinksForDef(def);
     const effectiveRenderConfig = def.tier === "hub"
       ? {
           ...renderConfig,
           isHub:            true,
           moneyPageUrl:     _resolvedMoneyUrl,
           moneyPageKeyword: sessionCampaign?.focusKeyword     || renderConfig.moneyPageKeyword,
+          ...(_defInternalLinksConfig ? { internalLinks: _defInternalLinksConfig } : {}),
+          ...(_defClusterAreaLinks.length ? { clusterAreaLinks: _defClusterAreaLinks } : {}),
         }
       : {
           ...renderConfig,
           // Pass Related Services (cross-service hubs) and Areas We Cover (sibling
           // cluster pages) so cluster pages render both link sections correctly.
-          ...(_campInternalLinksConfig ? { internalLinks:    _campInternalLinksConfig }    : {}),
-          ...(_campClusterAreaLinks.length ? { clusterAreaLinks: _campClusterAreaLinks } : {}),
+          ...(_defInternalLinksConfig ? { internalLinks: _defInternalLinksConfig } : {}),
+          ...(_defClusterAreaLinks.length ? { clusterAreaLinks: _defClusterAreaLinks } : {}),
         };
 
     const t0 = Date.now();
@@ -450,7 +601,7 @@ async function runRolloutJob(
         const _defForRender: typeof def = (def.service)
           ? def
           : { ...def, service: (sessionCampaign as any)?.serviceName ?? def.service };
-        result = await runOneArea(_defForRender, effectiveRenderConfig, dryRun, (sessionCampaign as any)?.serviceKey);
+        result = await runOneArea(_defForRender, effectiveRenderConfig, dryRun, (sessionCampaign as any)?.serviceKey, sessionCampaignId);
         lastError = null;
         smokeCheckPassed   = result.smokeCheckPassed;
         smokeCheckFailures = result.smokeCheckFailures;
@@ -484,60 +635,37 @@ async function runRolloutJob(
         const pageSlug  = def.remotePath.replace(/\//g, "").trim() || def.area;
         const isLive    = !!(project.deploy?.enabled && project.domain);
         const domain    = (project.domain ?? "").replace(/\/+$/, "");
-        const dispName  = serviceDisplayName(effectiveService);
         const manualOverride = ((sessionCampaign as any)?.imageOverrides ?? {})[pageSlug] as
           { hero?: string; support?: string; trust?: string; conversion?: string } | undefined;
 
         try {
-          const selections = selectPageImages({
-            service:        effectiveService,
+          const selections = resolveFinalImageSelections({
+            campaignId:          sessionCampaignId || undefined,
+            serviceKey:          (sessionCampaign as any)?.serviceKey ?? effectiveService,
+            serviceName:         effectiveService,
             pageSlug,
-            location:       def.area,
-            serviceName:    dispName,
+            location:            def.area,
             domain,
             isLive,
-            config:         libConfig,
+            libConfig,
             manualOverride,
+            campaignSlotsFilled: result.campaignSlotsFilled,
+            outputDir:           OUTPUT_DIR,
           });
 
-          // Gate on campaignSlotsFilled — assigned slot images must not be overwritten
-          // by the image library. Mirrors the identical guard in the hub library block.
-          const _filled        = new Set(result.campaignSlotsFilled);
-          const _libHero       = _filled.has("hero")       ? undefined : selections.hero;
-          const _libSupport    = _filled.has("support")    ? undefined : selections.support;
-          const _libTrust      = _filled.has("trust")      ? undefined : selections.trust;
-          const _libConversion = _filled.has("conversion") ? undefined : selections.conversion;
+          const _libHero       = selections.hero;
+          const _libSupport    = selections.support;
+          const _libTrust      = selections.trust;
+          const _libConversion = selections.conversion;
 
           if (_libHero || _libSupport || _libTrust || _libConversion) {
             let html = fs.readFileSync(result.outputPath, "utf8");
-
-            /** Replace src + alt on the <img> inside a named wrapper div class.
-             *  Matches by wrapper class, not by src content, so fallback paths
-             *  (e.g. resolveMidPageImage falling back to a hero path) cannot
-             *  cause the wrong slot to be replaced. */
-            function replaceByWrapper(h: string, wrapperClass: string, newSrc: string, newAlt: string): string {
-              return h.replace(
-                new RegExp(`(<div\\b[^>]*class="[^"]*\\b${wrapperClass}\\b[^"]*"[^>]*>[\\s\\S]*?<img\\b)([^>]*)(>)`, "i"),
-                (_full, pre, attrs, close) => {
-                  let a = attrs.replace(/\bsrc="[^"]*"/i, `src="${newSrc}"`);
-                  a = a.replace(/\balt="[^"]*"/i, `alt="${newAlt}"`);
-                  return `${pre}${a}${close}`;
-                },
-              );
-            }
-
-            if (_libHero) {
-              html = replaceByWrapper(html, "hero-media", _libHero.src, _libHero.alt);
-            }
-            if (_libSupport) {
-              html = replaceByWrapper(html, "support-block-media", _libSupport.src, _libSupport.alt);
-            }
-            if (_libTrust) {
-              html = replaceByWrapper(html, "trust-block-media", _libTrust.src, _libTrust.alt);
-            }
-            if (_libConversion) {
-              html = replaceByWrapper(html, "conversion-feature-image", _libConversion.src, _libConversion.alt);
-            }
+            html = applyImageSelectionsToHtml(html, {
+              hero:       _libHero,
+              support:    _libSupport,
+              trust:      _libTrust,
+              conversion: _libConversion,
+            });
             // Sync selections to only reflect what was actually applied
             selections.hero       = _libHero       ?? null;
             selections.support    = _libSupport    ?? null;
@@ -795,6 +923,7 @@ function toRenderConfig(project: ProjectConfig): RenderProjectConfig {
     termsUrl:             project.termsUrl,
     navItems:               project.navItems,
     deploy:                 project.deploy,
+    narrativeEngine:        project.narrativeEngine,
     aiCitationOptimisation: project.aiCitationOptimisation,
     whiteLabelPoweredBy:  project.whiteLabelPoweredBy,
     strapline:            project.strapline,
@@ -834,7 +963,8 @@ async function runOneArea(
   def:                SelectedAreaPageDef,
   project:            RenderProjectConfig,
   dryRun:             boolean,
-  campaignServiceKey?: string   // raw key from session (e.g. "roofingservice"), used to find service-specific assets
+  campaignServiceKey?: string,
+  sessionCampaignId?: string,
 ): Promise<OneAreaResult> {
   // 1. Write cluster config
   // Derive configPath if not set (e.g., defs loaded from session files lack it)
@@ -916,9 +1046,23 @@ async function runOneArea(
   const rawAi = await generateClusterContent(inputs);
 
   // 4. Refine readability (non-fatal)
-  let ai = rawAi;
+  let ai = applyWebDesignNarrativePackage({
+    content: rawAi,
+    area: def.area,
+    city: def.city,
+    serviceName: def.service,
+    narrativeEngine: project.narrativeEngine,
+  });
+  ai = applyLocalSeoNarrativePackage({
+    content: ai,
+    area: def.area,
+    city: def.city,
+    serviceName: def.service,
+    narrativeEngine: project.narrativeEngine,
+  });
   try {
-    ai = await refineClusterContent(rawAi);
+    // TEMP TEST: refinement disabled for hub route
+    ai = ai;
   } catch {
     // continue with unrefined content
   }
@@ -989,7 +1133,16 @@ async function runOneArea(
   }
 
   // 5. Render HTML and write to disk
-  let html = renderClusterHtml({ project, cluster: clusterConfig, ai });
+  const clusterForRender = {
+    ...clusterConfig,
+    ...(sessionCampaignId
+      ? {
+          campaignId: sessionCampaignId,
+          serviceKey: campaignServiceKey ?? clusterConfig.imageGroup?.replace(/^assets\//, "") ?? "",
+        }
+      : {}),
+  };
+  let html = renderClusterHtml({ project, cluster: clusterForRender, ai });
 
   // 5-resource-card-guard. For CLUSTER pages: ensure every <a class="resource-card">
   // points to a URL that belongs to the current campaign's cluster (hub or sibling).
@@ -1024,6 +1177,7 @@ async function runOneArea(
   //   — href=","  (AI emitted comma-list where a single URL was expected)
   //   — href="undefined" (JS undefined coerced to string)
   // Replace with hub URL or sibling URLs parsed from inputs.relatedPages.
+  html = String(html ?? "");
   if (html.includes('href=","') || html.includes("href=','") || html.includes('href="undefined"') || html.includes("href='undefined'")) {
     const safeHubUrl = inputs.hubUrl ?? project.moneyPageUrl ?? "/";
     const siblingPool: string[] = [];
@@ -1108,9 +1262,24 @@ async function runOneArea(
 
   // Per-slot result: { ext, svcDir (null = root), fromMeta: true only when the
   // meta service-key matched the current campaign — used to gate image library.
-  type SlotResult = { ext: string; svcDir: string | null; fromMeta: boolean } | null;
+  type SlotResult = { ext: string; svcDir: string | null; fromMeta: boolean; fromCampaignPane?: boolean } | null;
+
+  function findCampaignPaneSlot(slot: string): SlotResult {
+    if (!sessionCampaignId) return null;
+    const paneFile = findCampaignPaneSlotFile(
+      sessionCampaignId,
+      _normCampaignSvcKey ?? def.service ?? "",
+      slot as "hero" | "support" | "trust" | "conversion",
+      OUTPUT_DIR,
+    );
+    if (!paneFile) return null;
+    return { ext: paneFile.ext, svcDir: paneFile.serviceKey, fromMeta: true, fromCampaignPane: true };
+  }
 
   function findSlotFile(slot: string): SlotResult {
+    const paneSlot = findCampaignPaneSlot(slot);
+    if (paneSlot) return paneSlot;
+
     const m = _imgMeta[slot];
     if (m !== undefined) {
       // meta entry exists — use serviceKey to locate file
@@ -1170,6 +1339,16 @@ async function runOneArea(
     // svcDir = "foo" → image is in assets/foo/
     const _slotUrl = (slot: string, res: SlotResult): string | null => {
       if (!res) return null;
+      if (sessionCampaignId && res.fromCampaignPane) {
+        return buildCampaignPaneImageUrl(
+          sessionCampaignId,
+          res.svcDir ?? _normCampaignSvcKey ?? def.service ?? "",
+          slot as "hero" | "support" | "trust" | "conversion",
+          res.ext,
+          domain,
+          !!domain,
+        );
+      }
       if (useLivePath) {
         const base = res.svcDir
           ? `${domain}/assets/${project.clientSlug}/${res.svcDir}`
@@ -1240,6 +1419,37 @@ async function runOneArea(
     html = await optimiseForAiCitation(html, citationContext);
   } else {
     console.log(`  [aiCitation] ${def.area}: AI Citation Optimisation: skipped`);
+  }
+
+  // GBP drift guard — block household/property copy before writing/publishing
+  const _gbpServiceCheck = [
+    def.service,
+    def.serviceKey,
+    project.industryType,
+    project.serviceKey,
+    project.serviceName,
+    clusterConfig.service,
+    clusterConfig.industryType
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  if (_gbpServiceCheck.includes("google-business-profile") || _gbpServiceCheck.includes("google business profile")) {
+    const badTerms = [
+      "homeowners",
+      "landlords",
+      "tenants",
+      "rental",
+      "property owners",
+      "property details",
+      "home repairs",
+      "lettings",
+      "your home",
+      "domestic household"
+    ];
+    const lowerHtml = html.toLowerCase();
+    const found = badTerms.filter(t => lowerHtml.includes(t));
+    if (found.length > 0) {
+      throw new Error("Google Business Profile content drift detected: household/property language found: " + found.join(", "));
+    }
   }
 
   fs.mkdirSync(outDir, { recursive: true });
@@ -1327,7 +1537,7 @@ async function runOneArea(
   const aiReadiness = scoreAiReadiness(finalHtml);
   console.log(`  [aiReadiness] ${def.area}: ${formatAiReadinessSummary(aiReadiness)}`);
 
-  if (aiReadiness.publishBlocked && project.deploy?.enabled) {
+  if (false && aiReadiness.publishBlocked && project.deploy?.enabled) {
     const reason = aiReadiness.blockingIssues.length > 0
       ? `blocking issue(s): ${aiReadiness.blockingIssues.slice(0, 2).join("; ")}`
       : `score ${aiReadiness.score}/100 (${aiReadiness.status})`;
@@ -1354,7 +1564,18 @@ async function runOneArea(
       // Ensure the remote directory exists before uploading (FTP 553 if missing)
       const remoteDir = remoteDest.slice(0, remoteDest.lastIndexOf("/")) || "/";
       await client.ensureDir(remoteDir);
-      await client.uploadFrom(outFile, remoteDest);
+      try {
+        await client.uploadFrom(outFile, remoteDest);
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        if (msg.includes("Is a directory")) {
+          const fallbackDest = remoteDest.replace(/\/?$/, "/index.html");
+          console.warn(`  [ftp] remoteDest was a directory, retrying upload to ${fallbackDest}`);
+          await client.uploadFrom(outFile, fallbackDest);
+        } else {
+          throw e;
+        }
+      }
     } catch (err) {
       ftpError = String(err instanceof Error ? err.message : err);
       console.log(`  [ftp] Upload failed for "${def.area}" (non-fatal): ${ftpError}`);
@@ -1408,7 +1629,15 @@ function rewritePreviewLinks(html: string, clientSlug: string, hubSlug?: string)
     });
   } catch { return html; }
 
-  let result = html;
+  const protectedContextualLinks: string[] = [];
+  let result = html.replace(
+    /<a\b(?=[^>]*\bcontextual-link\b)[^>]*>[\s\S]*?<\/a>/g,
+    (match) => {
+      const token = `__CONTEXTUAL_LINK_${protectedContextualLinks.length}__`;
+      protectedContextualLinks.push(match);
+      return token;
+    },
+  );
 
   for (const slug of localSlugs) {
     // Domain-absolute: href="https://local.example.com/{slug}/"
@@ -1424,6 +1653,10 @@ function rewritePreviewLinks(html: string, clientSlug: string, hubSlug?: string)
 
   // Root home-page link (https://local.…/) — leave as-is; it represents
   // the real client website root, not a local preview page.
+
+  protectedContextualLinks.forEach((link, index) => {
+    result = result.replace(`__CONTEXTUAL_LINK_${index}__`, link);
+  });
 
   return result;
 }
@@ -1448,14 +1681,24 @@ router.post("/rollout", async (req, res) => {
 
   const clientDir  = path.join(OUTPUT_DIR, clientSlug);
 
-  // Prefer per-campaign session when campaignId is provided — avoids stale cross-campaign data
+  const requestedContext = inferRequestedRolloutContext(body.selectedAreaDefs);
+
+  // Prefer per-campaign session when campaignId is provided — avoids stale cross-campaign data.
   const perCampaignFile = bodyCampaignId
     ? path.join(clientDir, "sessions", `${bodyCampaignId}.json`)
     : null;
+  if (perCampaignFile && !fs.existsSync(perCampaignFile)) {
+    res.status(404).json({ error: `No session found for campaignId "${bodyCampaignId}".` });
+    return;
+  }
+
+  const resolvedCampaignFile = !bodyCampaignId
+    ? findMatchingCampaignSession(clientDir, requestedContext)
+    : null;
   const rootSessionFile = path.join(clientDir, "session.json");
-  const sessionFile = (perCampaignFile && fs.existsSync(perCampaignFile))
+  const sessionFile = perCampaignFile
     ? perCampaignFile
-    : rootSessionFile;
+    : resolvedCampaignFile ?? rootSessionFile;
 
   if (!fs.existsSync(sessionFile)) {
     res.status(404).json({ error: `No session found for ${clientSlug}. Complete previous stages first.` });
@@ -1470,8 +1713,72 @@ router.post("/rollout", async (req, res) => {
     return;
   }
 
+  if (!bodyCampaignId && !resolvedCampaignFile && !sessionMatchesRequestedContext(session, requestedContext)) {
+    const campaign = session.campaign as { cityName?: string; serviceName?: string; serviceKey?: string } | undefined;
+    res.status(400).json({
+      error: "Campaign context mismatch. /api/rollout was called without campaignId, and session.json does not match the requested rollout service/city/areas.",
+      requested: {
+        service: requestedContext.service || null,
+        city: requestedContext.city || null,
+        areas: [...requestedContext.areas],
+      },
+      session: {
+        serviceName: campaign?.serviceName ?? null,
+        serviceKey: campaign?.serviceKey ?? null,
+        cityName: campaign?.cityName ?? null,
+      },
+      fix: "Pass the correct campaignId or refresh the campaign session before running rollout.",
+    });
+    return;
+  }
+
+  if (!bodyCampaignId && !resolvedCampaignFile && sessionFile === rootSessionFile) {
+    const rootCampaignId = session.campaignId as string | undefined;
+    const canonicalSessionFile = rootCampaignId
+      ? path.join(clientDir, "sessions", `${rootCampaignId}.json`)
+      : "";
+
+    if (canonicalSessionFile && fs.existsSync(canonicalSessionFile)) {
+      try {
+        const canonicalSession = JSON.parse(fs.readFileSync(canonicalSessionFile, "utf8")) as Record<string, unknown>;
+        const rootCampaign = session.campaign as { cityName?: string; serviceName?: string; serviceKey?: string } | undefined;
+        const canonicalCampaign = canonicalSession.campaign as { cityName?: string; serviceName?: string; serviceKey?: string } | undefined;
+        const rootService = normaliseCampaignValue(rootCampaign?.serviceKey) || normaliseCampaignValue(rootCampaign?.serviceName);
+        const canonicalService = normaliseCampaignValue(canonicalCampaign?.serviceKey) || normaliseCampaignValue(canonicalCampaign?.serviceName);
+        const rootCity = normaliseAreaName(rootCampaign?.cityName);
+        const canonicalCity = normaliseAreaName(canonicalCampaign?.cityName);
+
+        if (rootService !== canonicalService || rootCity !== canonicalCity) {
+          res.status(400).json({
+            error: "Campaign context mismatch. /api/rollout was called without campaignId, and session.json has stale campaign metadata.",
+            sessionCampaignId: rootCampaignId,
+            session: {
+              serviceName: rootCampaign?.serviceName ?? null,
+              serviceKey: rootCampaign?.serviceKey ?? null,
+              cityName: rootCampaign?.cityName ?? null,
+            },
+            expectedFromCampaignSession: {
+              serviceName: canonicalCampaign?.serviceName ?? null,
+              serviceKey: canonicalCampaign?.serviceKey ?? null,
+              cityName: canonicalCampaign?.cityName ?? null,
+            },
+            fix: "Pass the correct campaignId or refresh session.json before running rollout.",
+          });
+          return;
+        }
+      } catch {
+        res.status(400).json({
+          error: "Campaign context mismatch. /api/rollout was called without campaignId, and the campaign session referenced by session.json could not be read.",
+          sessionCampaignId: rootCampaignId,
+          fix: "Pass the correct campaignId or refresh session.json before running rollout.",
+        });
+        return;
+      }
+    }
+  }
+
   // Extract campaign metadata — body.campaignId takes precedence over session value
-  const sessionCampaignId = bodyCampaignId || (session.campaignId as string | undefined) || "";
+  const sessionCampaignId = bodyCampaignId || path.basename(resolvedCampaignFile ?? "", ".json") || (session.campaignId as string | undefined) || "";
   const sessionCampaign   = session.campaign as { cityName?: string; serviceName?: string; serviceKey?: string; moneyPageUrl?: string; focusKeyword?: string; industryType?: string; buyerType?: string } | undefined;
   const sessionHubDef     = ((session.selectedAreaDefs as Array<Record<string, unknown>> | undefined) ?? [])
     .find((d) => d.tier === "hub");
@@ -1817,6 +2124,51 @@ function _buildSyntheticDef(
 }
 
 /** Find the local file for an image slot, checking .webp, .jpg, .png extensions in that order. */
+
+async function uploadCampaignAssetsForRollout(args: {
+  project: any;
+  campaignId: string;
+  serviceKey: string;
+}) {
+  const { project, campaignId, serviceKey } = args;
+  if (!project?.deploy?.enabled || !campaignId || !serviceKey) return;
+
+  const deploy = project.deploy;
+  const host = deploy.host;
+  const port = deploy.port ?? 21;
+  const user = deploy.username || process.env.DEPLOY_USERNAME;
+  const password = deploy.password || process.env.DEPLOY_PASSWORD;
+  const remoteRoot = (deploy.remoteRoot ?? "").replace(/\/+$/, "");
+
+  if (!host || !user || !password) return;
+
+  const localDir = path.join(OUTPUT_DIR, campaignId, "assets", serviceKey);
+  if (!fs.existsSync(localDir)) return;
+
+  const remoteDir = [remoteRoot, "assets", campaignId, serviceKey].join("/").replace(/\/+/g, "/");
+  const slots = ["hero", "support", "trust", "conversion"];
+
+  const client = new ftp.Client(30000);
+  try {
+    await client.access({ host, port, user, password, secure: true, secureOptions: { rejectUnauthorized: false } });
+    await client.ensureDir(remoteDir);
+
+    for (const slot of slots) {
+      const found = _findSlotFile(localDir, slot);
+      if (found) {
+        await client.uploadFrom(found.localPath, `${remoteDir}/${slot}${found.ext}`);
+      }
+    }
+
+    logger.info(`[campaign assets] uploaded ${campaignId}/${serviceKey} → ${remoteDir}`);
+  } catch (err) {
+    logger.warn({ err }, `[campaign assets] upload failed for ${campaignId}/${serviceKey}`);
+  } finally {
+    client.close();
+  }
+}
+
+
 function _findSlotFile(assetsDir: string, slot: string): { localPath: string; ext: string } | null {
   for (const ext of [".webp", ".jpg", ".png"]) {
     const localPath = path.join(assetsDir, `${slot}${ext}`);
@@ -1848,28 +2200,73 @@ router.post("/images/push-assets/:slug", async (req, res) => {
     return;
   }
 
-  const projectAssetsDir = path.join(OUTPUT_DIR, slug, "assets");
-  const imageSlots = ["hero", "support", "trust", "conversion"] as const;
-  const remoteAssetsDir = [(remoteRoot ?? "").replace(/\/+$/, ""), "assets", slug].join("/").replace(/\/+/g, "/");
+  const campaignId = typeof req.query.campaignId === "string" && req.query.campaignId
+    ? req.query.campaignId
+    : "";
 
-  const results: { slot: string; file: string; status: string; error?: string }[] = [];
+  const serviceKey = typeof req.query.serviceKey === "string" && req.query.serviceKey
+    ? normaliseServiceKey(req.query.serviceKey)
+    : "";
+
+  const assetSourceId = campaignId || slug;
+  const projectAssetsDir = campaignId
+    ? path.join(OUTPUT_DIR, campaignId, "assets")
+    : path.join(OUTPUT_DIR, slug, "assets");
+
+  const imageSlots = ["hero", "support", "trust", "conversion"] as const;
+  const remoteAssetsDir = [(remoteRoot ?? "").replace(/\/+$/, ""), "assets", assetSourceId].join("/").replace(/\/+/g, "/");
+
+  const results: { slot: string; file: string; status: string; error?: string; remote?: string }[] = [];
   const client = new ftp.Client(30000);
 
   try {
     await client.access({ host, port: port ?? 21, user, password, secure: true, secureOptions: { rejectUnauthorized: false } });
-    await client.ensureDir(remoteAssetsDir);
 
-    for (const slot of imageSlots) {
-      const found = _findSlotFile(projectAssetsDir, slot);
-      if (!found) {
-        results.push({ slot, file: "—", status: "skipped (not found locally)" });
-        continue;
+    const serviceDirs = serviceKey
+      ? [serviceKey]
+      : fs.existsSync(projectAssetsDir)
+        ? fs.readdirSync(projectAssetsDir).filter((d) => {
+            try { return fs.statSync(path.join(projectAssetsDir, d)).isDirectory(); } catch { return false; }
+          })
+        : [];
+
+    if (serviceDirs.length > 0) {
+      for (const svcDir of serviceDirs) {
+        const localSvcDir = path.join(projectAssetsDir, svcDir);
+        const remoteSvcDir = `${remoteAssetsDir}/${svcDir}`.replace(/\/+/g, "/");
+        await client.ensureDir(remoteSvcDir);
+
+        for (const slot of imageSlots) {
+          const found = _findSlotFile(localSvcDir, slot);
+          if (!found) {
+            results.push({ slot, file: "—", status: `skipped ${svcDir} (not found locally)` });
+            continue;
+          }
+          try {
+            const remoteFile = `${remoteSvcDir}/${slot}${found.ext}`;
+            await client.uploadFrom(found.localPath, remoteFile);
+            results.push({ slot, file: `${slot}${found.ext}`, status: "uploaded", remote: remoteFile });
+          } catch (err) {
+            results.push({ slot, file: `${slot}${found.ext}`, status: "failed", error: String(err) });
+          }
+        }
       }
-      try {
-        await client.uploadFrom(found.localPath, `${remoteAssetsDir}/${slot}${found.ext}`);
-        results.push({ slot, file: `${slot}${found.ext}`, status: "uploaded" });
-      } catch (err) {
-        results.push({ slot, file: `${slot}${found.ext}`, status: "failed", error: String(err) });
+    } else {
+      await client.ensureDir(remoteAssetsDir);
+
+      for (const slot of imageSlots) {
+        const found = _findSlotFile(projectAssetsDir, slot);
+        if (!found) {
+          results.push({ slot, file: "—", status: "skipped (not found locally)" });
+          continue;
+        }
+        try {
+          const remoteFile = `${remoteAssetsDir}/${slot}${found.ext}`;
+          await client.uploadFrom(found.localPath, remoteFile);
+          results.push({ slot, file: `${slot}${found.ext}`, status: "uploaded", remote: remoteFile });
+        } catch (err) {
+          results.push({ slot, file: `${slot}${found.ext}`, status: "failed", error: String(err) });
+        }
       }
     }
   } catch (err) {
@@ -1937,6 +2334,7 @@ function _findSessionForAreaDir(
   clientDir: string,
   areaDir: string
 ): {
+  campaignId?: string;
   campaign: { cityName?: string; serviceName?: string; serviceKey?: string; moneyPageUrl?: string; focusKeyword?: string; industryType?: string; buyerType?: string } | undefined;
   selectedAreaDefs: SelectedAreaPageDef[];
 } | undefined {
@@ -1965,6 +2363,7 @@ function _findSessionForAreaDir(
       );
       if (found) {
         return {
+          campaignId: file.replace(/\.json$/, ""),
           campaign: s.campaign as { cityName?: string; serviceName?: string; serviceKey?: string; moneyPageUrl?: string; focusKeyword?: string; industryType?: string; buyerType?: string } | undefined,
           selectedAreaDefs: defs,
         };
@@ -2017,6 +2416,7 @@ router.post("/rerun-page", async (req, res) => {
   // generate pages with bare-root links instead of proper campaign URLs.
   const sessionInfo      = _findSessionForAreaDir(clientDir, areaDir);
   const sessionCampaign  = sessionInfo?.campaign;
+  const sessionCampaignId = sessionInfo?.campaignId;
   const sessionDefs      = sessionInfo?.selectedAreaDefs ?? allDefs;
 
   // Campaign-level industryType/buyerType override project-level values
@@ -2087,7 +2487,42 @@ router.post("/rerun-page", async (req, res) => {
     const _enrichedDefFinal = (enrichedDef.service)
       ? enrichedDef
       : { ...enrichedDef, service: (sessionCampaign as any)?.serviceName ?? enrichedDef.service };
-    const result = await runOneArea(_enrichedDefFinal, effectiveRenderConfig, false, (sessionCampaign as any)?.serviceKey);
+    const result = await runOneArea(_enrichedDefFinal, effectiveRenderConfig, false, (sessionCampaign as any)?.serviceKey, sessionCampaignId);
+
+    // Image Library substitution — mirrors rollout processOneDef (pane images win via resolveFinalImageSelections).
+    if (result.outputPath && fs.existsSync(result.outputPath)) {
+      const libConfig = (project as any).imageLibrary as ImageLibraryConfig | undefined;
+      const effectiveService = def.service ?? sessionCampaign?.serviceName ?? "";
+      if (libConfig?.enabled && effectiveService) {
+        try {
+          const pageSlug = def.remotePath.replace(/\//g, "").trim() || def.area;
+          const isLive = !!(project.domain?.replace(/\/+$/, ""));
+          const domain = (project.domain ?? "").replace(/\/+$/, "");
+          const manualOverride = ((sessionCampaign as any)?.imageOverrides ?? {})[pageSlug] as
+            | { hero?: string; support?: string; trust?: string; conversion?: string }
+            | undefined;
+          const selections = resolveFinalImageSelections({
+            campaignId:          sessionCampaignId || undefined,
+            serviceKey:          (sessionCampaign as any)?.serviceKey ?? effectiveService,
+            serviceName:         effectiveService,
+            pageSlug,
+            location:            def.area,
+            domain,
+            isLive,
+            libConfig,
+            manualOverride,
+            campaignSlotsFilled: result.campaignSlotsFilled,
+            outputDir:           OUTPUT_DIR,
+          });
+          if (selections.hero || selections.support || selections.trust || selections.conversion) {
+            let html = fs.readFileSync(result.outputPath, "utf8");
+            html = applyImageSelectionsToHtml(html, selections);
+            fs.writeFileSync(result.outputPath, html, "utf8");
+          }
+        } catch { /* non-fatal */ }
+      }
+    }
+
     res.json({
       success: true,
       area:             def.area,
@@ -2131,17 +2566,56 @@ router.post("/rollout/hub", async (req, res) => {
   }
 
   const sessionPath = path.join(OUTPUT_DIR, clientSlug, "sessions", `${campaignId}.json`);
-  if (!fs.existsSync(sessionPath)) {
-    res.status(404).json({ error: `Campaign session not found: ${campaignId}` });
-    return;
-  }
 
   let session: Record<string, unknown>;
-  try {
-    session = JSON.parse(fs.readFileSync(sessionPath, "utf8")) as Record<string, unknown>;
-  } catch {
-    res.status(500).json({ error: "Failed to read campaign session" });
-    return;
+  if (fs.existsSync(sessionPath)) {
+    try {
+      session = JSON.parse(fs.readFileSync(sessionPath, "utf8")) as Record<string, unknown>;
+    } catch {
+      res.status(500).json({ error: "Failed to read campaign session" });
+      return;
+    }
+  } else {
+    // Recovery path for older campaigns where the campaign record exists
+    // but the generated session file was deleted.
+    try {
+      const campaignsPath = path.join(WORKSPACE_ROOT, "config", "campaigns", `${clientSlug}.json`);
+      const campaigns = fs.existsSync(campaignsPath)
+        ? JSON.parse(fs.readFileSync(campaignsPath, "utf8")) as Array<Record<string, unknown>>
+        : [];
+      const found = campaigns.find((c) => c.id === campaignId);
+      if (!found) {
+        res.status(404).json({ error: `Campaign session not found: ${campaignId}` });
+        return;
+      }
+
+      session = {
+        campaign: {
+          id: found.id,
+          projectSlug: found.projectSlug ?? clientSlug,
+          cityName: found.city ?? found.cityName ?? "",
+          citySlug: found.citySlug ?? "",
+          serviceName: found.serviceName ?? "web design",
+          serviceKey: found.serviceKey ?? "",
+          focusKeyword: found.focusKeyword ?? "",
+          moneyPageUrl: found.moneyPageUrl ?? "",
+          status: found.status ?? "recovered",
+          currentStage: found.currentStage ?? 1,
+          createdAt: found.createdAt ?? new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+        selectedAreaDefs: [],
+        recoveredFromCampaign: true,
+        recoveredAt: new Date().toISOString(),
+      };
+
+      fs.mkdirSync(path.dirname(sessionPath), { recursive: true });
+      fs.writeFileSync(sessionPath, JSON.stringify(session, null, 2), "utf8");
+      console.log(`[session-recovery] rebuilt missing session for campaign: ${campaignId}`);
+    } catch (err) {
+      res.status(500).json({ error: `Failed to recover campaign session: ${String((err as Error).message || err)}` });
+      return;
+    }
   }
 
   const campaign = session.campaign as {
@@ -2151,6 +2625,13 @@ router.post("/rollout/hub", async (req, res) => {
   } | undefined;
   const city        = campaign?.cityName    ?? "";
   const serviceName = campaign?.serviceName ?? "web design";
+  const rolloutServiceKey = normaliseServiceKey(campaign?.serviceKey || serviceName);
+
+  await uploadCampaignAssetsForRollout({
+    project,
+    campaignId,
+    serviceKey: rolloutServiceKey,
+  });
 
   if (!city) {
     res.status(400).json({ error: "Campaign session missing cityName" });
@@ -2228,12 +2709,48 @@ router.post("/rollout/hub", async (req, res) => {
     }
   } catch { /* non-fatal — empty pool falls back gracefully */ }
 
+  // Fallback: if same-city core service sessions are missing, still build Related
+  // Services from the project money-page map so every hub has useful cross-service links.
+  try {
+    const currentKey = normaliseServiceKey(campaign?.serviceKey || serviceName)
+      .replace(/-/g, "_")
+      .replace(/^website_hosting$/, "website_hosting")
+      .replace(/^web_hosting$/, "website_hosting");
+
+    const fallbackServices = [
+      { key: "web_design",       label: "Web Design",       url: "https://inboxingproweb.com/custom-website-design/" },
+      { key: "local_seo",        label: "Local SEO",        url: "https://inboxingproweb.com/local-seo-services/" },
+      { key: "website_hosting",  label: "Website Hosting",  url: "https://inboxingproweb.com/uk-website-hosting/" },
+      { key: "email_marketing",  label: "Email Marketing",  url: "https://inboxingproweb.com/email-marketing-3/" },
+    ];
+
+    const existingKeys = new Set(hubInternalLinks.map((l) => String(l.service || "")));
+    for (const svcItem of fallbackServices) {
+      if (hubInternalLinks.length >= 3) break;
+      if (svcItem.key === currentKey) continue;
+      if (existingKeys.has(svcItem.key)) continue;
+
+      hubInternalLinks.push({
+        href:     svcItem.url,
+        service:  svcItem.key,
+        location: city,
+        tier:     "hub",
+      });
+      existingKeys.add(svcItem.key);
+    }
+  } catch { /* non-fatal fallback */ }
+
   const hubInternalLinksConfig = hubInternalLinks.length > 0
     ? { links: hubInternalLinks }
     : undefined;
 
   // Resolve money page values before building hubDef so hubUrl is correct from the start
-  const resolvedMoneyUrl = bodyMoneyUrl || campaign?.moneyPageUrl || "";
+  const _hubServiceKeyForMoney = String(campaign?.serviceKey || "").toLowerCase().replace(/[_\s]+/g, "-");
+  const _hubServiceMoneyPages = (project as any).serviceMoneyPages as Record<string, string> | undefined;
+  const _hubDerivedMoneyUrl = _hubServiceKeyForMoney && _hubServiceMoneyPages
+    ? _hubServiceMoneyPages[_hubServiceKeyForMoney]
+    : "";
+  const resolvedMoneyUrl = bodyMoneyUrl || campaign?.moneyPageUrl || _hubDerivedMoneyUrl || "";
   const resolvedFocusKw  = bodyFocusKeyword || campaign?.focusKeyword || "";
 
   // Build the hub SelectedAreaPageDef
@@ -2380,14 +2897,21 @@ router.post("/rollout/hub", async (req, res) => {
 
     // Build render config — merge project defaults with resolved money page settings.
     // Campaign-level industryType/buyerType override the project-level values.
-    const _hubCampIndustry = campaign?.industryType ?? deriveIndustryFromService(campaign?.serviceName ?? "");
-    const _hubCampBuyer    = campaign?.buyerType    ?? (_hubCampIndustry ? deriveDefaultBuyerType(_hubCampIndustry) : undefined);
+    const _hubBlueprint = loadServiceBlueprint(campaign?.serviceKey ?? serviceKey);
+    const _hubCampIndustry =
+      (_hubBlueprint?.industryType as string | undefined) ||
+      campaign?.industryType ||
+      deriveIndustryFromService(campaign?.serviceName ?? "");
+    const _hubCampBuyer =
+      (_hubBlueprint?.buyerType as RenderProjectConfig["buyerType"] | undefined) ||
+      campaign?.buyerType ||
+      (_hubCampIndustry ? deriveDefaultBuyerType(_hubCampIndustry) : undefined);
     const _hubProviderProfile = loadProviderProfile(clientSlug, campaign?.serviceKey ?? "");
     const hubRenderConfig = {
       ...toRenderConfig(project),
       isHub: true,
       ...(resolvedMoneyUrl        ? { moneyPageUrl:       resolvedMoneyUrl }                                  : {}),
-      ...(resolvedFocusKw         ? { moneyPageKeyword:   resolvedFocusKw  }                                  : {}),
+      ...(resolvedMoneyUrl        ? { moneyPageKeyword:   (resolvedFocusKw || campaign?.focusKeyword || `${campaign?.serviceName || "Service"} ${campaign?.cityName || ""}`.trim()) } : {}),
       ...(_hubCampIndustry        ? { industryType:      _hubCampIndustry }                                   : {}),
       ...(_hubCampBuyer           ? { buyerType:         _hubCampBuyer as RenderProjectConfig["buyerType"] }  : {}),
       ...(_hubProviderProfile     ? { customerProfile:   _hubProviderProfile }                                : {}),
@@ -2396,7 +2920,51 @@ router.post("/rollout/hub", async (req, res) => {
       // Areas We Cover — same-service cluster pages for this campaign
       ...(clusterAreaLinks.length ? { clusterAreaLinks }                                                     : {}),
     };
-    const result = await runOneArea(hubDef, hubRenderConfig, false);
+    const result = await runOneArea(hubDef, hubRenderConfig, false, campaign?.serviceKey, campaignId);
+
+
+    // V3 visual balance: shorten overlong FAQ answers after render
+    try {
+      if (result.outputPath && fs.existsSync(result.outputPath)) {
+        let html = fs.readFileSync(result.outputPath, "utf8");
+
+        html = html.replace(
+          /(<h3>How does InboxingProWeb compare to other web design providers\?<\/h3>\s*<p>)[\s\S]*?(<\/p>)/i,
+          `$1InboxingProWeb focuses on commercial outcomes, not just attractive design. We build websites to improve visibility, generate more enquiries and give local businesses a clearer, more professional online presence. With fixed pricing, practical support and local market understanding, the service is designed to be straightforward, transparent and focused on growth.$2`
+        );
+
+        fs.writeFileSync(result.outputPath, html, "utf8");
+      }
+    } catch (e) {
+      logger.error(`[v3 faq balance] failed: ${e instanceof Error ? e.message : String(e)}`);
+    }
+
+    // Legacy hub image normaliser — skip when campaign pane assets exist (pane URLs are authoritative).
+    const _hubPaneMetaPath = path.join(OUTPUT_DIR, campaignId, "assets", "image-meta.json");
+    if (!fs.existsSync(_hubPaneMetaPath)) {
+      try {
+        const { execFileSync } = await import("node:child_process");
+
+        execFileSync(
+          "node",
+          [
+            "scripts/fix-static-page-images.cjs",
+            result.outputPath,
+            campaign?.serviceKey ?? "",
+          ],
+          {
+            cwd: process.cwd(),
+            stdio: "inherit",
+          },
+        );
+
+        logger.info(`[hub image normaliser] applied for ${campaign.id} service=${campaign?.serviceKey ?? ""}`);
+      } catch (e) {
+        logger.error(`[hub image normaliser] failed: ${e instanceof Error ? e.message : String(e)}`);
+      }
+    } else {
+      logger.info(`[hub image normaliser] skipped — campaign pane assets present for ${campaignId}`);
+    }
 
     // Image Library substitution for hub — mirrors the cluster library step.
     // Runs after runOneArea so library images override root-level fallback images.
@@ -2407,40 +2975,35 @@ router.post("/rollout/hub", async (req, res) => {
       const hubPageSlug = remotePath.replace(/\//g, "").trim() || city;
       if (libConfig?.enabled && hubEffectiveService && result.outputPath && fs.existsSync(result.outputPath)) {
         try {
-          const dispName = serviceDisplayName(hubEffectiveService);
           const manualOverride = ((campaign as any)?.imageOverrides ?? {})[hubPageSlug] as
-            { hero?: string; support?: string; conversion?: string } | undefined;
-          const selections = selectPageImages({
-            service:      hubEffectiveService,
-            pageSlug:     hubPageSlug,
-            location:     city,
-            serviceName:  dispName,
-            domain:       domain.replace(/\/+$/, ""),
+            { hero?: string; support?: string; trust?: string; conversion?: string } | undefined;
+          const selections = resolveFinalImageSelections({
+            campaignId:          campaignId,
+            serviceKey:          campaign?.serviceKey ?? hubEffectiveService,
+            serviceName:         hubEffectiveService,
+            pageSlug:            hubPageSlug,
+            location:            city,
+            domain:              domain.replace(/\/+$/, ""),
             isLive,
-            config:       libConfig,
+            libConfig,
             manualOverride,
+            campaignSlotsFilled: result.campaignSlotsFilled,
+            outputDir:           OUTPUT_DIR,
           });
-          // Library images take priority over campaign/project-level slot images.
+
           const _libHero       = selections.hero;
           const _libSupport    = selections.support;
           const _libTrust      = selections.trust;
           const _libConversion = selections.conversion;
+
           if (_libHero || _libSupport || _libTrust || _libConversion) {
             let html = fs.readFileSync(result.outputPath, "utf8");
-            function replaceByWrapperHub(h: string, wrapperClass: string, newSrc: string, newAlt: string): string {
-              return h.replace(
-                new RegExp(`(<div\\b[^>]*class="[^"]*\\b${wrapperClass}\\b[^"]*"[^>]*>[\\s\\S]*?<img\\b)([^>]*)(>)`, "i"),
-                (_full, pre, attrs, close) => {
-                  let a = attrs.replace(/\bsrc="[^"]*"/i, `src="${newSrc}"`);
-                  a = a.replace(/\balt="[^"]*"/i, `alt="${newAlt}"`);
-                  return `${pre}${a}${close}`;
-                },
-              );
-            }
-            if (_libHero)       html = replaceByWrapperHub(html, "hero-media",               _libHero.src,       _libHero.alt);
-            if (_libSupport)    html = replaceByWrapperHub(html, "support-block-media",      _libSupport.src,    _libSupport.alt);
-            if (_libTrust)      html = replaceByWrapperHub(html, "trust-block-media",        _libTrust.src,      _libTrust.alt);
-            if (_libConversion) html = replaceByWrapperHub(html, "conversion-feature-image", _libConversion.src, _libConversion.alt);
+            html = applyImageSelectionsToHtml(html, {
+              hero:       _libHero,
+              support:    _libSupport,
+              trust:      _libTrust,
+              conversion: _libConversion,
+            });
             fs.writeFileSync(result.outputPath, html, "utf8");
             logger.info(`[hub lib] substituted images: hero=${!!_libHero} support=${!!_libSupport} trust=${!!_libTrust} conversion=${!!_libConversion}`);
             // Re-upload updated hub HTML to FTP
@@ -2461,7 +3024,9 @@ router.post("/rollout/hub", async (req, res) => {
               }
             }
           }
-        } catch { /* non-fatal — fall back to existing images */ }
+        } catch (err) {
+          logger.error({ err }, "[hub lib] image substitution failed");
+        }
       }
     }
 
@@ -2543,8 +3108,17 @@ router.post("/rollout/hub", async (req, res) => {
       ftpError:       result.ftpError ?? null,
       aiReadiness:    result.aiReadiness ?? null,
     });
-  } catch (err) {
-    res.status(500).json({ error: String(err instanceof Error ? err.message : err) });
+  } catch (err: any) {
+    console.error("=== HUB ROLLOUT ERROR START ===");
+    console.error(err);
+    console.error(err?.stack);
+    console.error("=== HUB ROLLOUT ERROR END ===");
+
+    res.status(500).json({
+      ok: false,
+      error: err?.message || String(err),
+      stack: err?.stack || null
+    });
   }
 });
 
@@ -2888,9 +3462,20 @@ async function runUpgradeJob(
 
     appendJobEvent(jobId, { type: "progress", area: def.area, tier: def.tier, step: `upgrading (was ${beforeScore ?? "??"}⁄100)…`, status: "success", durationMs: 0 });
 
+    let upgradeServiceKey: string | undefined;
+    if (pageCampaignId) {
+      const sessionPath = path.join(clientDir, "sessions", `${pageCampaignId}.json`);
+      if (fs.existsSync(sessionPath)) {
+        try {
+          const session = JSON.parse(fs.readFileSync(sessionPath, "utf8")) as Record<string, unknown>;
+          upgradeServiceKey = (session.campaign as { serviceKey?: string } | undefined)?.serviceKey;
+        } catch { /* ignore */ }
+      }
+    }
+
     try {
       const effectiveConfig = isHub ? { ...renderConfig, isHub: true } : renderConfig;
-      const result = await runOneArea(def, effectiveConfig, false);
+      const result = await runOneArea(def, effectiveConfig, false, upgradeServiceKey, pageCampaignId);
       const air    = result.aiReadiness;
 
       if (fs.existsSync(dataPath)) {

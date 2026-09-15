@@ -1,0 +1,1461 @@
+{
+  "version": 1,
+  "slug": "leeds-pharmacy",
+  "updatedAt": "2026-08-06T13:58:31.555Z",
+  "campaigns": [
+    {
+      "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 2,
+      "blockedTasks": 5,
+      "inProgressTasks": 1,
+      "pendingTasks": 5,
+      "progressPct": 15,
+      "nextLaunchTask": {
+        "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-authority-readiness-approved",
+        "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+        "title": "Authority & AI Readiness approved",
+        "category": "Publishing",
+        "priority": "Critical",
+        "linkedModule": "Authority Audit",
+        "linkedUrl": "/api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=pharmacy-first",
+        "evidence": [
+          "Authority score: 77/100",
+          "Publish gate: PASS WITH RECOMMENDATIONS",
+          "Missing: Human Expertise: Named pharmacist / reviewer",
+          "Missing: Human Expertise: Superintendent pharmacist",
+          "Missing: Human Expertise: Next review date",
+          "Audit: /api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=pharmacy-first"
+        ],
+        "createdAt": "2026-08-06T13:58:27.089Z",
+        "status": "in_progress",
+        "completedAt": null,
+        "blockedReason": "Address recommendations before final authority sign-off"
+      },
+      "tasks": [
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-confirm-profile",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-confirm-images",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-confirm-service-page",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "No published service page found for pharmacy-first"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-confirm-ecosystem",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Content ecosystem available for Pharmacy First"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:27.089Z",
+          "blockedReason": null
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-authority-readiness-approved",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 77/100",
+            "Publish gate: PASS WITH RECOMMENDATIONS",
+            "Missing: Human Expertise: Named pharmacist / reviewer",
+            "Missing: Human Expertise: Superintendent pharmacist",
+            "Missing: Human Expertise: Next review date",
+            "Audit: /api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=pharmacy-first"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "in_progress",
+          "completedAt": null,
+          "blockedReason": "Address recommendations before final authority sign-off"
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-publish-page",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Service page must exist before publishing"
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-update-sitemap",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-submit-indexing",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Sitemap must be updated before indexing submission"
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-refresh-visibility",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-prepare-gbp-posts",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-prepare-social-posts",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-prepare-email-sequence",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8-review-growth-actions",
+          "campaignId": "71b30b61-ef4e-4f60-911c-b0f0b1424ee8",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=leeds-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-08-06T13:58:27.089Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:27.089Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "totalTasks": 13,
+      "completeTasks": 2,
+      "blockedTasks": 6,
+      "inProgressTasks": 0,
+      "pendingTasks": 5,
+      "progressPct": 15,
+      "nextLaunchTask": {
+        "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-confirm-profile",
+        "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+        "evidence": [
+          "Profile completeness: 75%"
+        ],
+        "createdAt": "2026-08-06T13:58:28.175Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-confirm-profile",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-confirm-images",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-confirm-service-page",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/",
+          "evidence": [
+            "No published service page found for travel-vaccinations"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-confirm-ecosystem",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "Content ecosystem available for Travel Vaccinations"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:28.176Z",
+          "blockedReason": null
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-authority-readiness-approved",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=travel-vaccinations",
+          "evidence": [
+            "Authority score: 72/100",
+            "Publish gate: FAIL",
+            "Critical: Page marked noindex — remove before live publish",
+            "Missing: Human Expertise: Named pharmacist / reviewer",
+            "Missing: Human Expertise: Superintendent pharmacist",
+            "Missing: Human Expertise: Next review date",
+            "Audit: /api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=travel-vaccinations"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Page marked noindex — remove before live publish · Human Expertise: Named pharmacist / reviewer · Human Expertise: Superintendent pharmacist"
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-publish-page",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-update-sitemap",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-submit-indexing",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-refresh-visibility",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-prepare-gbp-posts",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-prepare-social-posts",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-prepare-email-sequence",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/travel-vaccinations/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "76778db0-3a0a-49a8-ae15-f9883d4d7380-review-growth-actions",
+          "campaignId": "76778db0-3a0a-49a8-ae15-f9883d4d7380",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=leeds-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-08-06T13:58:28.175Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:28.176Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "totalTasks": 13,
+      "completeTasks": 2,
+      "blockedTasks": 6,
+      "inProgressTasks": 0,
+      "pendingTasks": 5,
+      "progressPct": 15,
+      "nextLaunchTask": {
+        "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-confirm-profile",
+        "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+        "evidence": [
+          "Profile completeness: 75%"
+        ],
+        "createdAt": "2026-08-06T13:58:29.110Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-confirm-profile",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-confirm-images",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-confirm-service-page",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/",
+          "evidence": [
+            "No published service page found for blood-pressure-checks"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-confirm-ecosystem",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "Content ecosystem available for Blood Pressure Checks"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:29.110Z",
+          "blockedReason": null
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-authority-readiness-approved",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=blood-pressure-checks",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=blood-pressure-checks"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-publish-page",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-update-sitemap",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-submit-indexing",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-refresh-visibility",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-prepare-gbp-posts",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-prepare-social-posts",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-prepare-email-sequence",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "37398838-75a9-4dc6-83ff-e7f942911bb1-review-growth-actions",
+          "campaignId": "37398838-75a9-4dc6-83ff-e7f942911bb1",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=leeds-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-08-06T13:58:29.110Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:29.110Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+      "serviceId": "flu-vaccinations",
+      "serviceName": "Flu Vaccinations",
+      "totalTasks": 13,
+      "completeTasks": 2,
+      "blockedTasks": 6,
+      "inProgressTasks": 0,
+      "pendingTasks": 5,
+      "progressPct": 15,
+      "nextLaunchTask": {
+        "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-confirm-profile",
+        "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+        "evidence": [
+          "Profile completeness: 75%"
+        ],
+        "createdAt": "2026-08-06T13:58:29.975Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-confirm-profile",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-confirm-images",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/flu-vaccinations/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-confirm-service-page",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/flu-vaccinations/",
+          "evidence": [
+            "No published service page found for flu-vaccinations"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-confirm-ecosystem",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/flu-vaccinations/",
+          "evidence": [
+            "Content ecosystem available for Flu Vaccinations"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:29.975Z",
+          "blockedReason": null
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-authority-readiness-approved",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=flu-vaccinations",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Authority audit not run",
+            "Missing: Authority audit not run",
+            "Audit: /api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=flu-vaccinations"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority audit not run"
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-publish-page",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-update-sitemap",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-submit-indexing",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-refresh-visibility",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: unknown"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-prepare-gbp-posts",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/flu-vaccinations/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-prepare-social-posts",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/flu-vaccinations/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-prepare-email-sequence",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/flu-vaccinations/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca-review-growth-actions",
+          "campaignId": "e793dfb1-4fb3-4e4a-bbdd-73f70828f5ca",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=leeds-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-08-06T13:58:29.975Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:29.976Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+      "serviceId": "prescription-dispensing",
+      "serviceName": "Prescription Dispensing",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "6c10a939-f826-4af4-8b11-9678bb71b340-confirm-profile",
+        "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+        "evidence": [
+          "Profile completeness: 75%"
+        ],
+        "createdAt": "2026-08-06T13:58:30.779Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-confirm-profile",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-confirm-images",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/prescription-dispensing/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-confirm-service-page",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/prescription-dispensing/",
+          "evidence": [
+            "No published service page found for prescription-dispensing"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-confirm-ecosystem",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "No ecosystem generated for prescription-dispensing"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-authority-readiness-approved",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=prescription-dispensing",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Authority audit not run",
+            "Missing: Authority audit not run",
+            "Audit: /api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=prescription-dispensing"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority audit not run"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-publish-page",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-update-sitemap",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-submit-indexing",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-refresh-visibility",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-prepare-gbp-posts",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-prepare-social-posts",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-prepare-email-sequence",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/prescription-dispensing/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "6c10a939-f826-4af4-8b11-9678bb71b340-review-growth-actions",
+          "campaignId": "6c10a939-f826-4af4-8b11-9678bb71b340",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=leeds-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-08-06T13:58:30.779Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:30.779Z",
+          "blockedReason": null
+        }
+      ]
+    },
+    {
+      "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "totalTasks": 13,
+      "completeTasks": 1,
+      "blockedTasks": 9,
+      "inProgressTasks": 0,
+      "pendingTasks": 3,
+      "progressPct": 8,
+      "nextLaunchTask": {
+        "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-confirm-profile",
+        "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+        "title": "Confirm profile",
+        "category": "Profile",
+        "priority": "Critical",
+        "linkedModule": "Profile Dashboard",
+        "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+        "evidence": [
+          "Profile completeness: 75%"
+        ],
+        "createdAt": "2026-08-06T13:58:31.555Z",
+        "status": "pending",
+        "completedAt": null,
+        "blockedReason": null
+      },
+      "tasks": [
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-confirm-profile",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-confirm-images",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/emergency-contraception/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-confirm-service-page",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/emergency-contraception/",
+          "evidence": [
+            "No published service page found for emergency-contraception"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-confirm-ecosystem",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "No ecosystem generated for emergency-contraception"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-authority-readiness-approved",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=emergency-contraception",
+          "evidence": [
+            "Authority score: 0/100",
+            "Publish gate: FAIL",
+            "Critical: Visual service page HTML missing — run visual build pipeline",
+            "Missing: Visual service page not built",
+            "Audit: /api/pharmacy-authority-readiness?slug=leeds-pharmacy&service=emergency-contraception"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Visual service page HTML missing — run visual build pipeline · Visual service page not built"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-publish-page",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-executive-dashboard?slug=leeds-pharmacy",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness blockers must be resolved before live publish"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-update-sitemap",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-submit-indexing",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Authority & AI Readiness has unresolved blockers — indexing submission blocked"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-refresh-visibility",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=leeds-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-prepare-gbp-posts",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for GBP posts"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-prepare-social-posts",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for social posts"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-prepare-email-sequence",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/emergency-contraception/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Content ecosystem required for email sequence"
+        },
+        {
+          "id": "718a7ec5-415a-48aa-8390-f2e42a64d43f-review-growth-actions",
+          "campaignId": "718a7ec5-415a-48aa-8390-f2e42a64d43f",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=leeds-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-08-06T13:58:31.555Z",
+          "status": "complete",
+          "completedAt": "2026-08-06T13:58:31.555Z",
+          "blockedReason": null
+        }
+      ]
+    }
+  ]
+}

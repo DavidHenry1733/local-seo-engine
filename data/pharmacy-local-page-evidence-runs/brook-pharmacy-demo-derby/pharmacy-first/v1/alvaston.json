@@ -1,0 +1,1557 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "d80b5741-8eac-40f2-99b7-e93bdeaef69f",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "alvaston",
+  "areaName": "Alvaston",
+  "planFingerprint": "942592995d5b0f75de5923f7259dc555c094f8a9bfe5979178d2aca467f6ecfd",
+  "spendingCapUsd": 0.17,
+  "status": "completed",
+  "startedAt": "2026-09-06T07:48:34.022Z",
+  "updatedAt": "2026-09-07T07:44:20.161Z",
+  "completedAt": "2026-09-07T07:44:20.161Z",
+  "spentUsd": 0.168,
+  "reservedUsd": 0,
+  "paidCallsMade": 9,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Alvaston, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "21fb442e-cbc6-4612-bd34-b5b3db854055",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:35.867Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Alvaston locality, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "b52248eb-e529-4d78-9f46-c31676e17aee",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:36.116Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Alvaston, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "821bed37-14ea-4d07-bf69-340d816ac5dc",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:39.212Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Alvaston, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "c477149b-2bac-4fbf-8b8e-3a43342c1998",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:48:40.696Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "3322d28d-3145-4d8b-b4c4-ae5c9ad206d4",
+      "detail": "Retrieved https://www.alvastonmedicalcentre.nhs.uk/",
+      "capturedAt": "2026-09-06T07:48:42.850Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "ff5e23b9-3c2e-436e-a313-a1569276d4fd",
+      "detail": "Retrieved https://www.elvaston-pc.gov.uk/the-council",
+      "capturedAt": "2026-09-06T07:48:43.544Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 4.4 km from Brook Pharmacy Demo Derby to Alvaston. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-06T07:48:43.562Z"
+    },
+    {
+      "id": "places-hospitals",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS hospital health centre in Alvaston, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "bb57e986-5288-47e2-a8b8-ccb9430dee5c",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:44:12.648Z"
+    },
+    {
+      "id": "places-landmarks",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "parks landmarks memorial in Alvaston, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "4094af40-1a72-4d91-8746-0a66a09eecff",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:44:12.983Z"
+    },
+    {
+      "id": "places-community",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "libraries community centres leisure centres in Alvaston, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "f3648e4e-859e-4a5c-915e-2a229d6281fd",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:44:13.374Z"
+    },
+    {
+      "id": "dataforseo-official-community",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council park library leisure community in Alvaston, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "43124901-24cf-44bf-ba0d-a85f5d8abd86",
+      "detail": "10 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:44:17.461Z"
+    },
+    {
+      "id": "dataforseo-official-healthcare",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS hospital health centre official in Alvaston, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "611e4d9e-d5ba-474e-a1d9-12f071e2b777",
+      "detail": "10 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:44:18.959Z"
+    },
+    {
+      "id": "page-body-community",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "fd3ef45f-c761-4b11-a17a-47764e1115ee",
+      "detail": "Retrieved https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "capturedAt": "2026-09-07T07:44:19.041Z"
+    },
+    {
+      "id": "page-body-healthcare",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "34be825f-bff6-4d81-a985-216da7956bfd",
+      "detail": "Retrieved https://www.alvastonmedicalcentre.nhs.uk/",
+      "capturedAt": "2026-09-07T07:44:19.930Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Alvaston Medical Centre",
+        "address": "14 Boulton Ln, Alvaston, Derby DE24 0GE",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.894616,
+          "longitude": -1.4290926
+        },
+        "placeId": "ChIJZYv16kbweUgRIYf1X52X1rA",
+        "locality": "14 Boulton Ln, Alvaston, Derby DE24 0GE",
+        "addressComponents": [
+          {
+            "longText": "14",
+            "shortText": "14",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Boulton Lane",
+            "shortText": "Boulton Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 0GE",
+            "shortText": "DE24 0GE",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12742538897866983201&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Coleman Health Centre",
+        "address": "Coleman St, Alvaston, Derby DE24 8NH",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.89492250000001,
+          "longitude": -1.445276
+        },
+        "placeId": "ChIJ27euf1nweUgRyCmNeBfuzZM",
+        "locality": "Coleman St, Alvaston, Derby DE24 8NH",
+        "addressComponents": [
+          {
+            "longText": "Coleman Street",
+            "shortText": "Coleman St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8NH",
+            "shortText": "DE24 8NH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10650430478375266760&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Aspiro Healthcare - Parkfields Surgery",
+        "address": "1217 London Rd, Alvaston, Derby DE24 8QJ",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8983141,
+          "longitude": -1.4323924
+        },
+        "placeId": "ChIJU0RUV0_weUgR7IsUdPyzWOQ",
+        "locality": "1217 London Rd, Alvaston, Derby DE24 8QJ",
+        "addressComponents": [
+          {
+            "longText": "1217",
+            "shortText": "1217",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "London Road",
+            "shortText": "London Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8QJ",
+            "shortText": "DE24 8QJ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=16454099135458741228&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Alvaston",
+        "address": "Alvaston, Derby",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.892347699999995,
+          "longitude": -1.4313273
+        },
+        "placeId": "ChIJ2ecKDBXweUgR8V28bYKyIkk",
+        "locality": "Alvaston, Derby",
+        "addressComponents": [
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=5269970787233455601&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-hospitals": [
+      {
+        "name": "Coleman Health Centre",
+        "address": "Coleman St, Alvaston, Derby DE24 8NH",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.89492250000001,
+          "longitude": -1.445276
+        },
+        "placeId": "ChIJ27euf1nweUgRyCmNeBfuzZM",
+        "locality": "Coleman St, Alvaston, Derby DE24 8NH",
+        "addressComponents": [
+          {
+            "longText": "Coleman Street",
+            "shortText": "Coleman St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8NH",
+            "shortText": "DE24 8NH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10650430478375266760&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Alvaston Medical Centre",
+        "address": "14 Boulton Ln, Alvaston, Derby DE24 0GE",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.894616,
+          "longitude": -1.4290926
+        },
+        "placeId": "ChIJZYv16kbweUgRIYf1X52X1rA",
+        "locality": "14 Boulton Ln, Alvaston, Derby DE24 0GE",
+        "addressComponents": [
+          {
+            "longText": "14",
+            "shortText": "14",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Boulton Lane",
+            "shortText": "Boulton Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 0GE",
+            "shortText": "DE24 0GE",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12742538897866983201&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Lister House at Coleman Street",
+        "address": "Coleman St, Alvaston, Derby DE24 8NH",
+        "types": [
+          "medical_center",
+          "hospital",
+          "health",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.895004899999996,
+          "longitude": -1.445362
+        },
+        "placeId": "ChIJ8XKKX1nweUgRiXHM4LZxfZM",
+        "locality": "Coleman St, Alvaston, Derby DE24 8NH",
+        "addressComponents": [
+          {
+            "longText": "Coleman Street",
+            "shortText": "Coleman St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8NH",
+            "shortText": "DE24 8NH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10627775725933719945&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-landmarks": [
+      {
+        "name": "Alvaston Park",
+        "address": "Meadow Ln, Alvaston, Derby DE24 8QQ",
+        "types": [
+          "park",
+          "tourist_attraction",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9051127,
+          "longitude": -1.4383584
+        },
+        "placeId": "ChIJYe17k1LweUgRdhCkTX7_fT0",
+        "locality": "Meadow Ln, Alvaston, Derby DE24 8QQ",
+        "addressComponents": [
+          {
+            "longText": "Meadow Lane",
+            "shortText": "Meadow Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8QQ",
+            "shortText": "DE24 8QQ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=4430978526335996022&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Alvaston Nature Trail",
+        "address": "Alvaston, Derby DE24 0NX",
+        "types": [
+          "park",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8996363,
+          "longitude": -1.4207204999999998
+        },
+        "placeId": "ChIJK8RHFjfweUgR-03d43Bp95Y",
+        "locality": "Alvaston, Derby DE24 0NX",
+        "addressComponents": [
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 0NX",
+            "shortText": "DE24 0NX",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10878279358516907515&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Elvaston Castle",
+        "address": "Borrowash Road, Elvaston, Derby DE72 3EP",
+        "types": [
+          "park",
+          "tourist_attraction",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8923104,
+          "longitude": -1.3949231
+        },
+        "placeId": "ChIJY0pM7tvveUgRKNjjfEQYvhE",
+        "locality": "Borrowash Road, Elvaston, Derby DE72 3EP",
+        "addressComponents": [
+          {
+            "longText": "Borrowash Road",
+            "shortText": "Borrowash Road",
+            "types": [
+              "route"
+            ],
+            "languageCode": "und"
+          },
+          {
+            "longText": "Elvaston",
+            "shortText": "Elvaston",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3EP",
+            "shortText": "DE72 3EP",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1278486026651949096&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-community": [
+      {
+        "name": "Alvaston Library and Learning Centre",
+        "address": "1252 London Rd, Alvaston, Derby DE24 8QP",
+        "types": [
+          "library",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.897213099999995,
+          "longitude": -1.4299426
+        },
+        "placeId": "ChIJKSh7IkbweUgRj_kXT2mv30Q",
+        "locality": "1252 London Rd, Alvaston, Derby DE24 8QP",
+        "addressComponents": [
+          {
+            "longText": "1252",
+            "shortText": "1252",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "London Road",
+            "shortText": "London Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8QP",
+            "shortText": "DE24 8QP",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=4962878181218974095&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Boulton Lane Park Community Centre",
+        "address": "Boulton Ln, Alvaston, Derby DE24 0BD",
+        "types": [
+          "community_center",
+          "event_venue",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8852359,
+          "longitude": -1.4443055
+        },
+        "placeId": "ChIJ_UjCFQDxeUgRmiXQot4XAnw",
+        "locality": "Boulton Ln, Alvaston, Derby DE24 0BD",
+        "addressComponents": [
+          {
+            "longText": "Boulton Lane",
+            "shortText": "Boulton Ln",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 0BD",
+            "shortText": "DE24 0BD",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=8935730855638214042&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Field Lane (Alvaston) Community Association",
+        "address": "Derby DE24 0GW, UK",
+        "types": [
+          "community_center",
+          "event_venue",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8836059,
+          "longitude": -1.4257919
+        },
+        "placeId": "ChIJDyQaSkDweUgRqk-vmao6T_c",
+        "locality": "Derby DE24 0GW, UK",
+        "addressComponents": [
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 0GW",
+            "shortText": "DE24 0GW",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=17820526754925596586&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Alvaston, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:48:36.123Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.alvastonmedicalcentre.nhs.uk/",
+          "title": "Alvaston Medical Centre: Homepage",
+          "description": "21 May 2024 — Alvaston Medical Centre is training practice for both undergraduate and postgraduate doctors. All our GPs have a keen interest in training and ... Read more"
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/alvaston-medical-centre/C81047",
+          "title": "Alvaston Medical Centre",
+          "description": "This GP surgery is currently closed. 14 Boulton Lane, Alvaston, Derby, Derbyshire, DE24 currently accepting new patients."
+        },
+        {
+          "url": "https://www.facebook.com/alvaston.medicalcentre/?locale=en_GB",
+          "title": "Alvaston Medical Centre | Derby",
+          "description": "Welcome to Alvaston Medical Centre a dedicated GP practice serving the local community of Alvaston, includes both Alvaston Surgery"
+        },
+        {
+          "url": "https://www.alvastonmedicalcentre.nhs.uk/contact-us",
+          "title": "Contact Us",
+          "description": "Alvaston Medical Centre 01332 755 990 0115 855 0260 ・ 14 Boulton Lane Alvaston, Derby Derbyshire DE24 ・ 8am to 6:30pm. Monday 8:30am to 12pm. NHS 111 online ..."
+        },
+        {
+          "url": "https://beta.jobs.nhs.uk/candidate/jobadvert/A4773-26-0000",
+          "title": "GP Practice Manager - Job Advert",
+          "description": "16 Apr 2026 — Employer details ; Employer name. Alvaston Medical Centre ; Address. Alvaston Medical Centre. 14 Boulton Lane. Derby. DE24 0GE ; Employer's website. Read more"
+        },
+        {
+          "url": "https://vernonstreetandthelanes.co.uk/",
+          "title": "Vernon Street Medical Centre – NHS GP Surgery in Derby",
+          "description": "Vernon Street Medical Centre – NHS GP Surgery in Derby … 13 Vernon Street Derby DE1 1FW Get directions 01332 332812. Derbyshire DE23"
+        },
+        {
+          "url": "https://economicsbydesign.com/tools/place-based-value/england/gp/c81047/",
+          "title": "Alvaston Medical Centre · Derby City South | GP Practice",
+          "description": "Alvaston Medical Centre. DE24 0GE. DERBY CITY SOUTH PCN. 12759 patients. GP practice profile on EBD Place Based Value."
+        },
+        {
+          "url": "https://www.findmygp.org.uk/practice/alvaston-medical-centre-derby-c81047",
+          "title": "Alvaston Medical Centre Reviews & Ratings | FindMyGP",
+          "description": "Alvaston Medical Centre is an NHS GP surgery located at 14 Boulton Lane, Derby, DE24 0GE. The practice is rated Good by the Care Quality Commission. GE ..."
+        },
+        {
+          "url": "https://www.derbyshirehealthcareft.nhs.uk/download_file/view/5019/3064",
+          "title": "Our neighbourhoods",
+          "description": "www.derbyshirehealthcareft.nhs.uk. Our neighbourhoods by GP surgery. Amber Valley (S). Appletree Medical Practice. Arthur Medical Centre. Crich Medical Practice. Read more"
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Alvaston, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:48:39.228Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.elvaston-pc.gov.uk/the-council",
+          "title": "The Council",
+          "description": "Who we are & what we do. Elvaston Parish Council comprises four areas within the district of South Derbyshire, approximately 5 miles southeast of Derby. Read more"
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://www.facebook.com/groups/403664803167721/posts/2931893917011451/",
+          "title": "Who is the local councillor for alvaston area please",
+          "description": "North or South. North is Alan Graves Kirk kus and Jon evans. South is Tim prosser. Alan Lindsey and Steve fowke|Alan graves is the local ..."
+        },
+        {
+          "url": "https://www.derby.gov.uk/council-and-democracy/neighbourhood-partnerships/wards-a-c/alvaston-neighbourhood-ward/",
+          "title": "Alvaston neighbourhood ward - Derby ...",
+          "description": "Alvaston North and South Neighbourhood team ; Steph Holt, Neighbourhood Manager, 07812 301330, stephanie.holt@derby.gov.uk ; Jonathan Till, Neighbourhood Officer ... Read more"
+        },
+        {
+          "url": "https://www.communitydirectoryderbyshire.org.uk/view/6994/amnesty-international-derby-district-group",
+          "title": "Alvaston PCC",
+          "description": "The voluntary groups, organisations, social clubs, charities, social enterprises in this directory are all based in - or work within - Derby and Derbyshire. The ... Read more"
+        },
+        {
+          "url": "https://www.fostonandscroptonparishcouncil.gov.uk/useful-contacts/",
+          "title": "Useful Contacts",
+          "description": "Email: contact.centre@derbyshire.gov.uk. Telephone: 01629 533190. Apply for a job - Apply for free school meals - Sign up to Derbyshire Now - Renew or ... Read more"
+        },
+        {
+          "url": "https://democracy.highpeak.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Judith Ward - Parish Clerk Lower Shaw Walls Foxt Stoke-on-Trent Staffordshire ST10 2HS. Work phone: 07973522861. Email: clerk@bradnopparishcouncil.gov.uk ... Read more"
+        },
+        {
+          "url": "https://www.repton-pc.gov.uk/derbyshire-county-council-community-news/",
+          "title": "Derbyshire County Council Community News",
+          "description": "Derbyshire County Council Community News. 11 January 2024 Clerk. Menu. Repton Parish Council · Home · News · The Parish · Meetings · Planning ... Read more"
+        },
+        {
+          "url": "https://www.facebook.com/derbyshirecc/videos/-weve-drawn-up-a-new-plan-to-help-us-meet-our-environmental-responsibilities-whi/27713114925012591/",
+          "title": "We've drawn up a new plan to help us meet our environmental ...",
+          "description": "We've drawn up a new plan to help us meet our environmental responsibilities while also bringing about benefits for residents and the local ..."
+        }
+      ]
+    },
+    "dataforseo-official-community": {
+      "query": "official council park library leisure community in Alvaston, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:44:13.381Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.inderby.org.uk/libraries/our-libraries/alvaston-library/",
+          "title": "Alvaston Library",
+          "description": "Address. Alvaston Library 1252-1254 London Road Alvaston Derby DE24 8QP what3words: ///trips.range.ducks. Get directions or parking information ; Telephone. Read more"
+        },
+        {
+          "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+          "title": "Derby libraries",
+          "description": "Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Allenton Library Opens in new tab · Allestree Library Opens ... Read more"
+        },
+        {
+          "url": "https://communitydirectoryderbyshire.org.uk/view/7170/amnesty-international-buxton-group",
+          "title": "Alvaston Library",
+          "description": "We are a public library service provided by Derby City Council for the people of Derby. Email, alvaston.library@derby.gov.uk. Website, http://www.inderby.org ... Read more"
+        },
+        {
+          "url": "https://www.communityactionderby.org.uk/download_file/view/660a914b-af1e-4cd2-9eab-5533f6d48453/481",
+          "title": "computers for public use in derby",
+          "description": "Alvaston Library. 1252 London Road. Alvaston, Derby DE24 8QP. Eleven public PCs. Users need be library members and accept the terms and conditions. Sessions ... Read more"
+        },
+        {
+          "url": "https://libraries.derbyshire.gov.uk/our-libraries",
+          "title": "Our Libraries - Derbyshire County Council",
+          "description": "StreetKenning Park, Holmgate Road, Clay Cross · ZipChesterfield, Derbyshire S45 9PH · Phone01629 537 084 · Emailclaycross.library@derbyshire.gov.uk. Read more"
+        },
+        {
+          "url": "https://www.facebook.com/derbyshirecc/posts/library-system-update-the-new-online-library-catalogue-is-now-up-and-running-its/1055061309985172/",
+          "title": "Derbyshire County Council",
+          "description": "Derbyshire County Council libraries service is open 24/7 online and there is a wealth of titles to choose from. There's something for everyone. Read more"
+        },
+        {
+          "url": "https://www.mapquest.com/gb/england/alvaston-library-798176119",
+          "title": "Alvaston Library - Derby, England, DE24 8UT",
+          "description": "Alvaston Library is a key community resource located in Derby, which aims to enhance public access to information and learning opportunities. Read more"
+        },
+        {
+          "url": "http://www.alvastonparkfriends.org.uk/Pages/History.htm",
+          "title": "History of Alvaston Park",
+          "description": "In 1957 part of the library was used by Wilmorton Junior School as overflow classrooms. It was closed to the public in 1971 and finally demolished in 1980. Also ... Read more"
+        },
+        {
+          "url": "https://libraryon.org/libraries/derby/alvaston",
+          "title": "Alvaston Library",
+          "description": "21 Jul 2026 — It's free to join Alvaston Library. Get opening times, directions & contact details. Free digital e-books & audiobooks, free children's ..."
+        },
+        {
+          "url": "https://www.facebook.com/derbyshirecc/videos/were-opening-the-doors-to-our-new-staveley-library-on-monday-our-cabinet-member-/3070676089933039/",
+          "title": "We're opening the doors to our new Staveley Library on ...",
+          "description": "We're opening the doors to our new Staveley Library on Monday. Our Cabinet Member for Environment Cllr Carol Wood had a sneak peek behind ..."
+        }
+      ]
+    },
+    "dataforseo-official-healthcare": {
+      "query": "NHS hospital health centre official in Alvaston, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:44:17.492Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.alvastonmedicalcentre.nhs.uk/",
+          "title": "Alvaston Medical Centre: Homepage",
+          "description": "21 May 2024 — Alvaston Medical Centre is training practice for both undergraduate and postgraduate doctors. . We support in improving primary care in the UK"
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/alvaston-medical-centre/C81047",
+          "title": "Alvaston Medical Centre",
+          "description": "Official information from NHS about Alvaston Medical Centre including contact details, directions, opening hours and service/treatment details."
+        },
+        {
+          "url": "https://dchs.nhs.uk/our-services-and-locations/our-locations/clinics-health-centres/coleman-health-centre",
+          "title": "Coleman Health Centre services",
+          "description": "Coleman Health Centre Coleman Street Alvaston Derby DE24 8NH. Telephone 01332 287059 · Patient Experience Team. Popular Pages. Read more"
+        },
+        {
+          "url": "https://www.facebook.com/alvaston.medicalcentre/?locale=en_GB",
+          "title": "Alvaston Medical Centre | Derby",
+          "description": "Welcome to Alvaston Medical Centre a dedicated GP practice serving the local community of Alvaston, Aston and surrounding areas. We provide high‑quality, ... Read more"
+        },
+        {
+          "url": "https://www.alvastonmedicalcentre.nhs.uk/contact-us",
+          "title": "Contact Us",
+          "description": "14 Boulton Lane Alvaston, Derby Derbyshire DE24. Monday 7 September 8am to 6:30pm. NHS 111 online or Call 111."
+        },
+        {
+          "url": "https://www.dsptoolkit.nhs.uk/OrganisationSearch/C81047",
+          "title": "Alvaston Medical Centre (C81047)",
+          "description": "Alvaston Medical Centre (C81047) Address: 14 BOULTON LANE, ALVASTON, DERBY, DERBYSHIRE, ENGLAND, DE24 0GE Primary sector: General Practice (GP)"
+        },
+        {
+          "url": "https://www.derbyshire-lift.co.uk/projects/coleman-hc/",
+          "title": "Coleman Health Centre - DE24 8NL - Derbyshire Lift",
+          "description": "8 Mar 2019 — Coleman Health Centre is situated within the Alvaston area of Derby a GP Practice serving approximately 14,000 patients, NHS dental services, ..."
+        },
+        {
+          "url": "https://www.derbyshirehealthcareft.nhs.uk/",
+          "title": "Derbyshire Healthcare NHS Foundation Trust: Home",
+          "description": ": Home :: Derbyshire Healthcare NHS Foundation. We are now offering video consultations to some patients, as a different way to receive care. Find out more or ..."
+        },
+        {
+          "url": "https://www.england.nhs.uk/midlands/ics-and-acute-trusts/derby-and-derbyshire-ics-and-nhs-trusts/",
+          "title": "Midlands » Derby and Derbyshire ICS and NHS Trusts",
+          "description": "Derby and Derbyshire ICS and NHS Trusts · Ash Green Learning Disability Centre · Babington Hospital · Buxton Hospital · Cavendish Hospital · Clay Cross Hospital ... Read more"
+        },
+        {
+          "url": "https://www.whatclinic.com/doctors/uk/derbyshire/derby/alvaston-medical-centre",
+          "title": "Alvaston Medical Centre in Derby",
+          "description": "General medical care under the NHS is offered at all the clinics run by this primary healthcare group. The clinics are located at Alvaston, Aston-on Trent ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.alvastonmedicalcentre.nhs.uk/",
+      "title": "Homepage - Alvaston Medical Centre",
+      "status": 200,
+      "textSample": "Homepage - Alvaston Medical Centre Cookies on the Alvaston Medical Centre website We've put some small files called cookies on your device to make our site work. We would also like to use google translate cookies and analytical cookies to understand how our site is used and improve user experience. Analytical cookies send information to Google Analytics. Let us know your preference. We will use a cookie to save your choice. Before you make your choice you can read more about our cookie policy . I'm OK with cookies Do not use cookies You can change your cookie settings at any time using our cookie policy . Alvaston Medical Centre Alvaston Medical Centre DE24 0GE 01332 755 990 CQC Rating: Good Language Search Search Aston Branch Surgery, DE72 2BE, 01332 755 990 Home Opening Times Surgery information Prescriptions Services Meet The Team! Self Referrals About the surgery Contact Us IPC Annual Statement You and Your GP Practice Browse More Alvaston Medical Centre ONLINE REQUESTS Non-urgent advice:  PATIENT NOTICE: Important Information - Our AI Reception Assistant Trial start date has commenced. To help improve patient access and reduce telephone waiting times, our practice is introducing Jackie, an AI-powered reception assistant, which will work alongside Systmconnect. Importantly: Jackie does not replace our reception staff or clinicians. Clinical decisions are always reviewed by an appropriate healthcare professional where required. Patients can still contact and speak with our reception team when needed. We understand that some patients may prefer traditional methods of contact, and we remain committed to providing accessible support for all patients. We hope this service will help improve access, reduce waiting times, and make contacting the practice easier for everyone. NHS Friends and Family Take the full questionnaire × Thank you for completing our Friends and Family Test. There is a problem Thinking about your GP practice overall, how was your experience of our service? Error: Please select... Very Good Good Neither Good Nor Poor Poor Very Poor Don't Know Can you tell us why you gave that response? (optional) Error: Error: Tick this box if you consent to us publishing your comment anonymously on our website. Submit This form is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply. RSV Vaccination If you're at least 28 weeks pregnant or aged 75 to 79, you can get your free respiratory syncytial virus (RSV) vaccination here. Click the image to find out more. Pharmacy First Think Pharmacy first Medpoint Medpoint is availiable at Alvaston Medical Centre for patients to collect medication at a time that suits you. Please ask reception or dispensary for details Choose the right service Register Online Previous Next Get a repeat prescription online Join the surgery Health information The NHS APP Patient Participation Group Get test results Non-urgent advice: We are a Training Practice Alvaston Medical Centre Training Practice Alvaston Medical Centre is training practice for both undergraduate and postgraduate doctors. All our GPs have a keen interest in training and education. We support in improving primary care in the UK through education and training new GPs. Junior doctors and GPs in training make up an increasing number of doctors in primary care nationally . These doctors are well supported by qualified GPs in practice and are always able to get advice from a qualified GP if needed. Please don&rsquo;t be alarmed if a training doctor asks for advice from a senior GP during your consultation, we are committed to providing the best clinical care possible to our patients. You may see the following doctors at Alvaston Medical Centre and Aston Surgery: Student Doctor. A student training to become a doctor before they have qualified. You will also be seen by a qualified GP if you see a student doctor. Foundation doctors F1 and F2 . These are qualified doctors that are in their first 2 years following qualification as a doctor. They have often worked as doctors in hospitals and A&E before coming to Alvaston Medical Centre . They can always access support from a qualified GP. GP Specialist Trainees (Registrars), GP ST . These are doctors undergoing specialist training to become a GP. They are fully qualified doctors who have worked for several years in hospital specialties before starting specialist training to be a GP. GP ST1 doctors are in their first years of specialist GP training, GP ST2 are in year 2 and GP ST3 are in their final year of training to become a GP. They always have access to support from a fully qualified GP. Student Nurses The practice will soon have Student Nurses on placement with us . You may meet these Student Nurses as they shadow our clinician&rsquo;s consultations. Why? We need to future proof the Nursing workforce and encourage student to take the path of General Practice Nursing. We are able to provide training in 3 areas a Nurse needs to study in to qualify so we are an ideal site to train these Nurses; &middot; Children &middot; Elderly &middot; Mental Health Page last reviewed: 14 August 2026 Page created: 21 May 2024 Support links You and Your General Practice Patient participation group Complaints and feedback GP earnings Surgery policies and procedures Privacy policy Accessibility Cookie policy Your data Site map Connect With Us Add Footer Link Sign in 2026 Built by My Surgery Website Translate this website with google",
+      "retrievedAt": "2026-09-06T07:48:42.850Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.elvaston-pc.gov.uk/the-council",
+      "title": "Security Challenge",
+      "status": 401,
+      "textSample": "Security Challenge Security Check We just need to quickly confirm you're a real visitor before you continue. Slide the button all the way to the right using your mouse or keyboard. Slide to verify &rarr; Can't use the slider? Type the characters in an image instead Enter the characters shown in the image below, then select Submit to continue. Characters shown in the image Submit Use the slider instead Why am I seeing this page? This quick step is part of our routine security process to verify that you are human and not a robot. We often display this challenge when we detect traffic coming from networks or services that are commonly used by bots, such as data centers, certain cloud services (e.g., AWS, Azure), or VPNs/proxy services. Completing the challenge confirms your intent and allows you immediate access to the site. Thank you for helping us maintain a secure environment!",
+      "retrievedAt": "2026-09-06T07:48:43.544Z"
+    },
+    "page-body-community": {
+      "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+      "title": "Derby libraries - Derby City Council",
+      "status": 200,
+      "textSample": "Derby libraries - Derby City Council Skip to content About cookies on this site This website uses cookies to improve your experience and analyse information on site performance and usage. Learn more about how we use cookies . Allow all cookies Cookie settings myAccount Search Derby City Council logo myAccount Services Services Menu Close Advice and benefits Business Community and living Council and democracy Education and learning Environment and planning Health and social care Housing Leisure and culture Licensing Maps Trading Standards and environmental health Transport and streets Jobs and careers News Search Apply Book Pay Report Apply Book Pay Report Home Leisure and culture Derby libraries Derby libraries All information about Libraries has been moved to the In Derby website - a separate website covering services managed by the Council's Leisure, Culture and Tourism department. Amongst other services, you can find a library , join a library , browse the library catalogue and manage your library books and ebooks . Derby has 15 libraries, including 5 statutory libraries, and 10 non-statutory community libraries: Allenton Library Allestree Library Alvaston Library Blagreaves Library Chaddesden Park Library Chellaston Library Derwent Community Library Local Studies Library Mackworth Library Mickleover Library Normanton Library Riverside Library Sinfin Library Spondon Library Springwood Library More information is available on In Derby: Derby Libraries Previous Next More in this section Arts and entertainment Derby libraries Derby Museums Parks Sports and leisure Tourism and travel Sign up for news and updates Sign up for news and updates Derby City Council logo Accessibility Terms Contact Cookies Privacy Language Jobs Maps Staff Access X account Facebook account YouTube account Instagram account &copy; Derby City Council Designed by Jadu Close What are you looking for? Search Hit Enter to search or ESC to close --> Cookies used on the site are categorized into 'necessary' and 'analytical'. You can read about each category and allow or deny some or all of them. You can see a list of cookies assigned to each category and detailed information on the cookies page. Necessary cookies Some cookies are required to provide core functionality. The website won't function properly without these cookies and they are enabled by default and cannot be disabled. Analytical cookies Analytical cookies help us improve our website by collecting and reporting information on its usage. Analytical cookies Save preferences Allow all cookies",
+      "retrievedAt": "2026-09-07T07:44:19.041Z"
+    },
+    "page-body-healthcare": {
+      "url": "https://www.alvastonmedicalcentre.nhs.uk/",
+      "title": "Homepage - Alvaston Medical Centre",
+      "status": 200,
+      "textSample": "Homepage - Alvaston Medical Centre Cookies on the Alvaston Medical Centre website We've put some small files called cookies on your device to make our site work. We would also like to use google translate cookies and analytical cookies to understand how our site is used and improve user experience. Analytical cookies send information to Google Analytics. Let us know your preference. We will use a cookie to save your choice. Before you make your choice you can read more about our cookie policy . I'm OK with cookies Do not use cookies You can change your cookie settings at any time using our cookie policy . Alvaston Medical Centre Alvaston Medical Centre DE24 0GE 01332 755 990 CQC Rating: Good Language Search Search Aston Branch Surgery, DE72 2BE, 01332 755 990 Home Opening Times Surgery information Prescriptions Services Meet The Team! Self Referrals About the surgery Contact Us IPC Annual Statement You and Your GP Practice Browse More Alvaston Medical Centre ONLINE REQUESTS Non-urgent advice:  PATIENT NOTICE: Important Information - Our AI Reception Assistant Trial start date has commenced. To help improve patient access and reduce telephone waiting times, our practice is introducing Jackie, an AI-powered reception assistant, which will work alongside Systmconnect. Importantly: Jackie does not replace our reception staff or clinicians. Clinical decisions are always reviewed by an appropriate healthcare professional where required. Patients can still contact and speak with our reception team when needed. We understand that some patients may prefer traditional methods of contact, and we remain committed to providing accessible support for all patients. We hope this service will help improve access, reduce waiting times, and make contacting the practice easier for everyone. NHS Friends and Family Take the full questionnaire × Thank you for completing our Friends and Family Test. There is a problem Thinking about your GP practice overall, how was your experience of our service? Error: Please select... Very Good Good Neither Good Nor Poor Poor Very Poor Don't Know Can you tell us why you gave that response? (optional) Error: Error: Tick this box if you consent to us publishing your comment anonymously on our website. Submit This form is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply. RSV Vaccination If you're at least 28 weeks pregnant or aged 75 to 79, you can get your free respiratory syncytial virus (RSV) vaccination here. Click the image to find out more. Pharmacy First Think Pharmacy first Medpoint Medpoint is availiable at Alvaston Medical Centre for patients to collect medication at a time that suits you. Please ask reception or dispensary for details Choose the right service Register Online Previous Next Get a repeat prescription online Join the surgery Health information The NHS APP Patient Participation Group Get test results Non-urgent advice: We are a Training Practice Alvaston Medical Centre Training Practice Alvaston Medical Centre is training practice for both undergraduate and postgraduate doctors. All our GPs have a keen interest in training and education. We support in improving primary care in the UK through education and training new GPs. Junior doctors and GPs in training make up an increasing number of doctors in primary care nationally . These doctors are well supported by qualified GPs in practice and are always able to get advice from a qualified GP if needed. Please don&rsquo;t be alarmed if a training doctor asks for advice from a senior GP during your consultation, we are committed to providing the best clinical care possible to our patients. You may see the following doctors at Alvaston Medical Centre and Aston Surgery: Student Doctor. A student training to become a doctor before they have qualified. You will also be seen by a qualified GP if you see a student doctor. Foundation doctors F1 and F2 . These are qualified doctors that are in their first 2 years following qualification as a doctor. They have often worked as doctors in hospitals and A&E before coming to Alvaston Medical Centre . They can always access support from a qualified GP. GP Specialist Trainees (Registrars), GP ST . These are doctors undergoing specialist training to become a GP. They are fully qualified doctors who have worked for several years in hospital specialties before starting specialist training to be a GP. GP ST1 doctors are in their first years of specialist GP training, GP ST2 are in year 2 and GP ST3 are in their final year of training to become a GP. They always have access to support from a fully qualified GP. Student Nurses The practice will soon have Student Nurses on placement with us . You may meet these Student Nurses as they shadow our clinician&rsquo;s consultations. Why? We need to future proof the Nursing workforce and encourage student to take the path of General Practice Nursing. We are able to provide training in 3 areas a Nurse needs to study in to qualify so we are an ideal site to train these Nurses; &middot; Children &middot; Elderly &middot; Mental Health Page last reviewed: 14 August 2026 Page created: 21 May 2024 Support links You and Your General Practice Patient participation group Complaints and feedback GP earnings Surgery policies and procedures Privacy policy Accessibility Cookie policy Your data Site map Connect With Us Add Footer Link Sign in 2026 Built by My Surgery Website Translate this website with google",
+      "retrievedAt": "2026-09-07T07:44:19.930Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.892347699999995,
+    "longitude": -1.4313273,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 4.4,
+  "verifiedGpPracticeCount": 2,
+  "findings": [
+    "2 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "substantive editorial evidence supports intro, context and access",
+    "Actual evidence spend $0.168 of cap $0.170. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/alvaston.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/alvaston.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 2 verified GP practice(s). Spend $0.168.",
+  "reprocessedAt": null
+}

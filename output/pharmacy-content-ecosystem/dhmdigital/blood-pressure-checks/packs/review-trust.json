@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "type": "review-trust",
+  "slug": "dhmdigital",
+  "serviceId": "blood-pressure-checks",
+  "serviceName": "Blood Pressure Checks",
+  "generatedAt": "2026-08-25T12:40:41.820Z",
+  "pharmacy": {
+    "name": "DHM Digital",
+    "tradingName": "DHM Digital",
+    "addressLine1": "Moorgate Crofts Business Centre",
+    "town": "Rotherham",
+    "county": null,
+    "postcode": "S60 2DH",
+    "fullAddress": "Moorgate Crofts Business Centre, South Grove, S60 2DH",
+    "phone": "059) 0 0 60",
+    "email": "support@dhmdigital.net",
+    "website": "https://dhmdigital.net",
+    "openingHours": "Monday: 9-5; Tuesday: 9-5; Wednesday: 9-5; Thursday: 9-5; Friday: 9-5; Saturday: 9-1; Sunday: closed"
+  },
+  "regulatory": {
+    "gphcNumber": "132456",
+    "gphcPremisesUrl": "https://dhmdigital.net/contact-dhm-digital/",
+    "nhsProfileUrl": "https://dhmdigital.net/contact-dhm-digital/",
+    "superintendentPharmacistName": "Bob Ross"
+  },
+  "reviewer": {
+    "name": "Bob Ross",
+    "role": "Superintendent Pharmacist",
+    "qualifications": "HHE. GGGS, BDFGRE3",
+    "gphcNumber": null,
+    "bio": "Our superintendent pharmacist has led clinical governance at this pharmacy for over 12 years, supporting patients with NHS Pharmacy First, medicines reviews and everyday health advice in the local community."
+  },
+  "service": {
+    "serviceId": "blood-pressure-checks",
+    "serviceName": "Blood Pressure Checks",
+    "confirmedOnProfile": true,
+    "fundingModel": null
+  },
+  "brandAndCta": {
+    "primaryColor": "#005eb8",
+    "headerCtaText": "Book An Appointment",
+    "headerCtaUrl": "#contact",
+    "primaryCta": "Book An Appointment"
+  },
+  "trustSignals": [
+    {
+      "id": "pharmacy-name",
+      "label": "Pharmacy name",
+      "value": "DHM Digital",
+      "status": "confirmed"
+    },
+    {
+      "id": "address",
+      "label": "Address",
+      "value": "Moorgate Crofts Business Centre, South Grove, S60 2DH",
+      "status": "confirmed"
+    },
+    {
+      "id": "phone",
+      "label": "Phone",
+      "value": "059) 0 0 60",
+      "status": "confirmed"
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "value": "support@dhmdigital.net",
+      "status": "confirmed"
+    },
+    {
+      "id": "website",
+      "label": "Website",
+      "value": "https://dhmdigital.net",
+      "status": "confirmed"
+    },
+    {
+      "id": "opening-hours",
+      "label": "Opening hours",
+      "value": "Monday: 9-5; Tuesday: 9-5; Wednesday: 9-5; Thursday: 9-5; Friday: 9-5; Saturday: 9-1; Sunday: closed",
+      "status": "confirmed"
+    },
+    {
+      "id": "gphc",
+      "label": "GPhC premises number",
+      "value": "132456",
+      "status": "confirmed"
+    },
+    {
+      "id": "superintendent",
+      "label": "Superintendent pharmacist",
+      "value": "Bob Ross",
+      "status": "confirmed"
+    },
+    {
+      "id": "reviewer",
+      "label": "Clinical reviewer",
+      "value": "Bob Ross — Superintendent Pharmacist",
+      "status": "confirmed"
+    },
+    {
+      "id": "consultation-room",
+      "label": "Consultation room",
+      "value": "Confirmed available on pharmacy profile",
+      "status": "confirmed"
+    }
+  ],
+  "importedTrustEvidence": [],
+  "evidenceStatus": {
+    "pharmacyIdentity": "confirmed",
+    "reviewer": "confirmed",
+    "gphc": "confirmed",
+    "superintendent": "confirmed"
+  },
+  "generationStamp": {
+    "tenantSlug": "dhmdigital",
+    "campaignId": "blood-pressure-checks",
+    "generatedAt": "2026-08-25T12:40:41.820Z",
+    "sourceContext": "customer-imported-profile"
+  }
+}

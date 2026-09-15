@@ -1,0 +1,2738 @@
+{
+  "slug": "broom-lane-pharmacy",
+  "pharmacyName": "Broom Lane Pharmacy",
+  "version": 1,
+  "updatedAt": "2026-07-19T07:33:40.166Z",
+  "summary": {
+    "averageCurrentScore": 19,
+    "averagePotentialScore": 24,
+    "totalRecommendations": 42,
+    "easyWins": 3,
+    "highImpactImprovements": 6,
+    "estimatedOverallImprovement": 5,
+    "servicesAnalysed": 4
+  },
+  "services": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "pageUrl": "/api/pharmacy-visual-experience/pharmacy-first/?slug=broom-lane-pharmacy",
+      "currentAuthorityScore": 75,
+      "potentialAuthorityScore": 94,
+      "estimatedOverallImprovement": 19,
+      "totalRecommendations": 42,
+      "easyWins": 3,
+      "highImpactImprovements": 6,
+      "categoryScores": [
+        {
+          "category": "humanExpertise",
+          "label": "Human Expertise",
+          "signalCount": 16,
+          "presentCount": 9,
+          "currentScore": 56,
+          "potentialScore": 100,
+          "improvementPotential": 44,
+          "opportunityScore": 44,
+          "estimatedAuthorityGain": 15,
+          "estimatedAiCitationGain": 9,
+          "estimatedLocalVisibilityGain": 11
+        },
+        {
+          "category": "localAuthority",
+          "label": "Local Authority",
+          "signalCount": 19,
+          "presentCount": 11,
+          "currentScore": 58,
+          "potentialScore": 100,
+          "improvementPotential": 42,
+          "opportunityScore": 42,
+          "estimatedAuthorityGain": 15,
+          "estimatedAiCitationGain": 8,
+          "estimatedLocalVisibilityGain": 11
+        },
+        {
+          "category": "informationGain",
+          "label": "Information Gain",
+          "signalCount": 15,
+          "presentCount": 11,
+          "currentScore": 73,
+          "potentialScore": 100,
+          "improvementPotential": 27,
+          "opportunityScore": 27,
+          "estimatedAuthorityGain": 9,
+          "estimatedAiCitationGain": 5,
+          "estimatedLocalVisibilityGain": 7
+        },
+        {
+          "category": "aiCitation",
+          "label": "AI Citation",
+          "signalCount": 15,
+          "presentCount": 14,
+          "currentScore": 93,
+          "potentialScore": 100,
+          "improvementPotential": 7,
+          "opportunityScore": 7,
+          "estimatedAuthorityGain": 2,
+          "estimatedAiCitationGain": 1,
+          "estimatedLocalVisibilityGain": 2
+        },
+        {
+          "category": "clinicalTrust",
+          "label": "Clinical Trust",
+          "signalCount": 15,
+          "presentCount": 9,
+          "currentScore": 60,
+          "potentialScore": 100,
+          "improvementPotential": 40,
+          "opportunityScore": 40,
+          "estimatedAuthorityGain": 14,
+          "estimatedAiCitationGain": 8,
+          "estimatedLocalVisibilityGain": 10
+        },
+        {
+          "category": "contentDepth",
+          "label": "Content Depth",
+          "signalCount": 15,
+          "presentCount": 14,
+          "currentScore": 93,
+          "potentialScore": 100,
+          "improvementPotential": 7,
+          "opportunityScore": 7,
+          "estimatedAuthorityGain": 2,
+          "estimatedAiCitationGain": 1,
+          "estimatedLocalVisibilityGain": 2
+        },
+        {
+          "category": "contentEcosystem",
+          "label": "Content Ecosystem",
+          "signalCount": 15,
+          "presentCount": 14,
+          "currentScore": 93,
+          "potentialScore": 100,
+          "improvementPotential": 7,
+          "opportunityScore": 7,
+          "estimatedAuthorityGain": 2,
+          "estimatedAiCitationGain": 1,
+          "estimatedLocalVisibilityGain": 2
+        },
+        {
+          "category": "technicalQuality",
+          "label": "Technical Quality",
+          "signalCount": 15,
+          "presentCount": 10,
+          "currentScore": 67,
+          "potentialScore": 100,
+          "improvementPotential": 33,
+          "opportunityScore": 33,
+          "estimatedAuthorityGain": 12,
+          "estimatedAiCitationGain": 7,
+          "estimatedLocalVisibilityGain": 8
+        },
+        {
+          "category": "competitorDifferentiation",
+          "label": "Competitor Differentiation",
+          "signalCount": 15,
+          "presentCount": 7,
+          "currentScore": 47,
+          "potentialScore": 100,
+          "improvementPotential": 53,
+          "opportunityScore": 53,
+          "estimatedAuthorityGain": 19,
+          "estimatedAiCitationGain": 11,
+          "estimatedLocalVisibilityGain": 13
+        },
+        {
+          "category": "patientExperience",
+          "label": "Patient Experience",
+          "signalCount": 15,
+          "presentCount": 14,
+          "currentScore": 93,
+          "potentialScore": 100,
+          "improvementPotential": 7,
+          "opportunityScore": 7,
+          "estimatedAuthorityGain": 2,
+          "estimatedAiCitationGain": 1,
+          "estimatedLocalVisibilityGain": 2
+        }
+      ],
+      "signals": [
+        {
+          "id": "he-reviewer-bio",
+          "label": "Reviewer biography",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Professional biography for named reviewer"
+        },
+        {
+          "id": "he-years-experience",
+          "label": "Years experience stated",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Years of experience not stated"
+        },
+        {
+          "id": "he-professional-interests",
+          "label": "Professional interests",
+          "category": "humanExpertise",
+          "present": false,
+          "detail": "Clinical or professional interests mentioned"
+        },
+        {
+          "id": "he-specialist-services",
+          "label": "Specialist services expertise",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Specialist service expertise referenced"
+        },
+        {
+          "id": "he-independent-prescriber",
+          "label": "Independent prescriber",
+          "category": "humanExpertise",
+          "present": false,
+          "detail": "Independent prescriber status"
+        },
+        {
+          "id": "he-languages-spoken",
+          "label": "Languages spoken",
+          "category": "humanExpertise",
+          "present": false,
+          "detail": "Languages not listed"
+        },
+        {
+          "id": "he-community-involvement",
+          "label": "Community involvement",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Community involvement referenced"
+        },
+        {
+          "id": "he-clinical-interests",
+          "label": "Clinical interests",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Specific clinical interest areas"
+        },
+        {
+          "id": "he-professional-memberships",
+          "label": "Professional memberships",
+          "category": "humanExpertise",
+          "present": false,
+          "detail": "No memberships listed"
+        },
+        {
+          "id": "he-professional-photo",
+          "label": "Professional photo",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Professional reviewer photo on page"
+        },
+        {
+          "id": "he-review-frequency",
+          "label": "Review frequency stated",
+          "category": "humanExpertise",
+          "present": false,
+          "detail": "Content review frequency"
+        },
+        {
+          "id": "he-clinical-review-workflow",
+          "label": "Clinical review workflow",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Clinical review workflow described"
+        },
+        {
+          "id": "he-named-accountability",
+          "label": "Named accountability",
+          "category": "humanExpertise",
+          "present": false,
+          "detail": "No named accountable pharmacist"
+        },
+        {
+          "id": "he-reviewer-schema",
+          "label": "Reviewer schema opportunity",
+          "category": "humanExpertise",
+          "present": false,
+          "detail": "Person / reviewedBy schema missing"
+        },
+        {
+          "id": "he-patient-trust-wording",
+          "label": "Patient trust wording",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Patient-facing trust wording"
+        },
+        {
+          "id": "he-professional-review-panel",
+          "label": "Professional review panel",
+          "category": "humanExpertise",
+          "present": true,
+          "detail": "Dedicated professional review panel"
+        },
+        {
+          "id": "la-coverage-areas",
+          "label": "Coverage areas",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "Coverage areas not on page"
+        },
+        {
+          "id": "la-neighbourhood-mentions",
+          "label": "Neighbourhood mentions",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "No neighbourhood mentions"
+        },
+        {
+          "id": "la-directions",
+          "label": "Directions guidance",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Practical directions"
+        },
+        {
+          "id": "la-parking",
+          "label": "Parking information",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "Parking information"
+        },
+        {
+          "id": "la-public-transport",
+          "label": "Public transport",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Public transport access"
+        },
+        {
+          "id": "la-disabled-access",
+          "label": "Disabled access",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "Accessibility information"
+        },
+        {
+          "id": "la-opening-hours-detail",
+          "label": "Opening hours detail",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Detailed opening hours"
+        },
+        {
+          "id": "la-collection-options",
+          "label": "Collection options",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "Prescription collection options"
+        },
+        {
+          "id": "la-delivery",
+          "label": "Delivery service",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Delivery availability"
+        },
+        {
+          "id": "la-local-landmarks",
+          "label": "Local landmarks",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Local landmark references"
+        },
+        {
+          "id": "la-nearby-surgeries",
+          "label": "Nearby surgeries",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Nearby GP / surgery references"
+        },
+        {
+          "id": "la-nearby-hospitals",
+          "label": "Nearby hospitals",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "Hospital proximity context"
+        },
+        {
+          "id": "la-emergency-services",
+          "label": "Emergency services guidance",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Emergency services guidance"
+        },
+        {
+          "id": "la-out-of-hours",
+          "label": "Out-of-hours advice",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "Out-of-hours patient advice"
+        },
+        {
+          "id": "la-nhs-integration",
+          "label": "Local NHS integration",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "NHS integration referenced"
+        },
+        {
+          "id": "la-patient-journey",
+          "label": "Local patient journey",
+          "category": "localAuthority",
+          "present": false,
+          "detail": "Local visit journey described"
+        },
+        {
+          "id": "la-town-faqs",
+          "label": "Town-specific FAQs",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Town mentioned in FAQs"
+        },
+        {
+          "id": "la-community-references",
+          "label": "Community references",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "Community-focused language"
+        },
+        {
+          "id": "la-gbp-consistency",
+          "label": "GBP consistency",
+          "category": "localAuthority",
+          "present": true,
+          "detail": "GBP URL in profile"
+        },
+        {
+          "id": "ig-arrival",
+          "label": "What happens when you arrive",
+          "category": "informationGain",
+          "present": false,
+          "detail": "Arrival process not described"
+        },
+        {
+          "id": "ig-consultation-time",
+          "label": "Average consultation time",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Consultation duration not stated"
+        },
+        {
+          "id": "ig-documents-bring",
+          "label": "Documents to bring",
+          "category": "informationGain",
+          "present": false,
+          "detail": "Patient preparation list missing"
+        },
+        {
+          "id": "ig-prescription-collection",
+          "label": "Prescription collection",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Present in page copy"
+        },
+        {
+          "id": "ig-private-alternatives",
+          "label": "Private alternatives",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Present in page copy"
+        },
+        {
+          "id": "ig-seasonal-advice",
+          "label": "Seasonal advice",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Seasonal context missing"
+        },
+        {
+          "id": "ig-busy-periods",
+          "label": "Busy periods",
+          "category": "informationGain",
+          "present": false,
+          "detail": "Peak times not mentioned"
+        },
+        {
+          "id": "ig-walk-in",
+          "label": "Walk-in expectations",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Present in page copy"
+        },
+        {
+          "id": "ig-appointment-expect",
+          "label": "Appointment expectations",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Present in page copy"
+        },
+        {
+          "id": "ig-aftercare",
+          "label": "Aftercare guidance",
+          "category": "informationGain",
+          "present": false,
+          "detail": "Aftercare not covered"
+        },
+        {
+          "id": "ig-referral-pathway",
+          "label": "Referral pathway",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Present in page copy"
+        },
+        {
+          "id": "ig-patient-prep",
+          "label": "Patient preparation",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Present in page copy"
+        },
+        {
+          "id": "ig-practical-advice",
+          "label": "Practical advice",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Practical tips missing"
+        },
+        {
+          "id": "ig-misconceptions",
+          "label": "Common misconceptions",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Present in page copy"
+        },
+        {
+          "id": "ig-typical-questions",
+          "label": "Typical patient questions",
+          "category": "informationGain",
+          "present": true,
+          "detail": "Common questions not surfaced"
+        },
+        {
+          "id": "ai-definition-blocks",
+          "label": "Definition blocks",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Clear service definition"
+        },
+        {
+          "id": "ai-short-answers",
+          "label": "Short factual answers",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Concise answer paragraphs"
+        },
+        {
+          "id": "ai-faq-quality",
+          "label": "FAQ quality",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "17 FAQ items"
+        },
+        {
+          "id": "ai-entity-clarity",
+          "label": "Entity clarity",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Pharmacy and location entities clear"
+        },
+        {
+          "id": "ai-service-summary",
+          "label": "Service summaries",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Meta service summary"
+        },
+        {
+          "id": "ai-bullet-explanations",
+          "label": "Bullet explanations",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Bullet point explanations"
+        },
+        {
+          "id": "ai-evidence-backed",
+          "label": "Evidence-backed statements",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Evidence-backed claims"
+        },
+        {
+          "id": "ai-clear-terminology",
+          "label": "Clear terminology",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Terminology explained"
+        },
+        {
+          "id": "ai-direct-answers",
+          "label": "Direct answers",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Direct Q&A answer format"
+        },
+        {
+          "id": "ai-context-blocks",
+          "label": "Context blocks",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Contextual framing blocks"
+        },
+        {
+          "id": "ai-myth-fact",
+          "label": "Myth vs fact",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Myth vs fact content"
+        },
+        {
+          "id": "ai-quick-reference",
+          "label": "Quick reference tables",
+          "category": "aiCitation",
+          "present": false,
+          "detail": "Quick reference format"
+        },
+        {
+          "id": "ai-h2-structure",
+          "label": "Structured H2 sections",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "10 H2 sections"
+        },
+        {
+          "id": "ai-local-answers",
+          "label": "Local service answers",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Localised FAQ answers"
+        },
+        {
+          "id": "ai-attribution",
+          "label": "Expert attribution",
+          "category": "aiCitation",
+          "present": true,
+          "detail": "Expert attribution for citations"
+        },
+        {
+          "id": "ct-safety-wording",
+          "label": "Safety wording",
+          "category": "clinicalTrust",
+          "present": false,
+          "detail": "Safety wording not detected"
+        },
+        {
+          "id": "ct-escalation",
+          "label": "Escalation pathways",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-eligibility",
+          "label": "Eligibility criteria",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-exclusions",
+          "label": "Exclusions stated",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-red-flags",
+          "label": "Red flags",
+          "category": "clinicalTrust",
+          "present": false,
+          "detail": "Red flags not detected"
+        },
+        {
+          "id": "ct-what-next",
+          "label": "What happens next",
+          "category": "clinicalTrust",
+          "present": false,
+          "detail": "What happens next not detected"
+        },
+        {
+          "id": "ct-clinical-review",
+          "label": "Clinical review noted",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-review-schedule",
+          "label": "Review schedule",
+          "category": "clinicalTrust",
+          "present": false,
+          "detail": "Review schedule not detected"
+        },
+        {
+          "id": "ct-reassurance",
+          "label": "Patient reassurance",
+          "category": "clinicalTrust",
+          "present": false,
+          "detail": "Patient reassurance not detected"
+        },
+        {
+          "id": "ct-outcomes",
+          "label": "Expected outcomes",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-limitations",
+          "label": "Service limitations",
+          "category": "clinicalTrust",
+          "present": false,
+          "detail": "Service limitations not detected"
+        },
+        {
+          "id": "ct-consultation-process",
+          "label": "Consultation process",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-follow-up",
+          "label": "Follow-up guidance",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-medication-safety",
+          "label": "Medication safety",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "ct-child-eligibility",
+          "label": "Paediatric eligibility",
+          "category": "clinicalTrust",
+          "present": true,
+          "detail": "Present"
+        },
+        {
+          "id": "cd-topic-coverage",
+          "label": "Topic coverage",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "~1690 words"
+        },
+        {
+          "id": "cd-topic-completeness",
+          "label": "Topic completeness",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Section completeness"
+        },
+        {
+          "id": "cd-section-balance",
+          "label": "Section balance",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Balanced sections"
+        },
+        {
+          "id": "cd-readability",
+          "label": "Readability",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Paragraph structure"
+        },
+        {
+          "id": "cd-examples",
+          "label": "Supporting examples",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Examples present"
+        },
+        {
+          "id": "cd-images-present",
+          "label": "Images present",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Images on page"
+        },
+        {
+          "id": "cd-captions",
+          "label": "Image captions",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Image captions"
+        },
+        {
+          "id": "cd-internal-links",
+          "label": "Internal links",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Internal cross-links"
+        },
+        {
+          "id": "cd-supporting-assets",
+          "label": "Supporting assets linked",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "19 ecosystem assets"
+        },
+        {
+          "id": "cd-local-page",
+          "label": "Local page depth",
+          "category": "contentDepth",
+          "present": false,
+          "detail": "Local page in ecosystem"
+        },
+        {
+          "id": "cd-faq-depth",
+          "label": "FAQ depth",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Dedicated FAQ asset"
+        },
+        {
+          "id": "cd-guide-depth",
+          "label": "Patient guide depth",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Patient guide asset"
+        },
+        {
+          "id": "cd-unique-sections",
+          "label": "Unique sections",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Pharmacy-branded depth"
+        },
+        {
+          "id": "cd-heading-hierarchy",
+          "label": "Heading hierarchy",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "H1 + H2 hierarchy"
+        },
+        {
+          "id": "cd-content-freshness",
+          "label": "Content freshness signals",
+          "category": "contentDepth",
+          "present": true,
+          "detail": "Freshness indicators"
+        },
+        {
+          "id": "ce-blogs",
+          "label": "Supporting blogs",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-guides",
+          "label": "Patient guides",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-gbp-posts",
+          "label": "GBP posts",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-email",
+          "label": "Email sequence",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-video",
+          "label": "Video script",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-patient-guide",
+          "label": "Patient guide page",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-faqs",
+          "label": "FAQ page",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-social",
+          "label": "Social posts",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-local-page",
+          "label": "Local service page",
+          "category": "contentEcosystem",
+          "present": false,
+          "detail": "Asset missing"
+        },
+        {
+          "id": "ce-service-page",
+          "label": "Root service page",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Asset available"
+        },
+        {
+          "id": "ce-cross-links",
+          "label": "Cross-links between assets",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Cross-links present"
+        },
+        {
+          "id": "ce-asset-count",
+          "label": "Ecosystem asset count",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "19 assets"
+        },
+        {
+          "id": "ce-promotion-ready",
+          "label": "Promotion-ready packs",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Social + GBP packs"
+        },
+        {
+          "id": "ce-email-nurture",
+          "label": "Email nurture sequence",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Email sequence"
+        },
+        {
+          "id": "ce-video-support",
+          "label": "Video script support",
+          "category": "contentEcosystem",
+          "present": true,
+          "detail": "Video script"
+        },
+        {
+          "id": "tq-schema-localbusiness",
+          "label": "LocalBusiness schema",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "LocalBusiness schema"
+        },
+        {
+          "id": "tq-schema-faq",
+          "label": "FAQPage schema",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "FAQPage schema"
+        },
+        {
+          "id": "tq-schema-breadcrumb",
+          "label": "BreadcrumbList schema",
+          "category": "technicalQuality",
+          "present": false,
+          "detail": "Breadcrumb schema"
+        },
+        {
+          "id": "tq-canonical",
+          "label": "Canonical URL",
+          "category": "technicalQuality",
+          "present": false,
+          "detail": "Canonical tag"
+        },
+        {
+          "id": "tq-meta-quality",
+          "label": "Meta description quality",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "Meta description length"
+        },
+        {
+          "id": "tq-title-quality",
+          "label": "Title tag quality",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "Title tag"
+        },
+        {
+          "id": "tq-images-assigned",
+          "label": "Images assigned",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "4/4 slots assigned"
+        },
+        {
+          "id": "tq-alt-text",
+          "label": "Image alt text",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "7/7 with alt"
+        },
+        {
+          "id": "tq-headings-semantic",
+          "label": "Structured headings",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "Semantic headings"
+        },
+        {
+          "id": "tq-accessibility",
+          "label": "Accessibility basics",
+          "category": "technicalQuality",
+          "present": false,
+          "detail": "Basic accessibility"
+        },
+        {
+          "id": "tq-internal-nav",
+          "label": "Internal navigation links",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "Internal nav"
+        },
+        {
+          "id": "tq-no-noindex",
+          "label": "Indexable for live",
+          "category": "technicalQuality",
+          "present": false,
+          "detail": "noindex detected"
+        },
+        {
+          "id": "tq-no-demo",
+          "label": "No demo wording",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "Demo wording check"
+        },
+        {
+          "id": "tq-cta-present",
+          "label": "CTA present",
+          "category": "technicalQuality",
+          "present": true,
+          "detail": "Call-to-action"
+        },
+        {
+          "id": "tq-page-speed-hints",
+          "label": "Page speed opportunities",
+          "category": "technicalQuality",
+          "present": false,
+          "detail": "No broken placeholders"
+        },
+        {
+          "id": "comp-unique-sections",
+          "label": "Unique sections vs competitors",
+          "category": "competitorDifferentiation",
+          "present": true,
+          "detail": "Pharmacy-branded unique content"
+        },
+        {
+          "id": "comp-unique-faqs",
+          "label": "Unique FAQs",
+          "category": "competitorDifferentiation",
+          "present": true,
+          "detail": "Local unique FAQs"
+        },
+        {
+          "id": "comp-local-diff",
+          "label": "Local differentiators",
+          "category": "competitorDifferentiation",
+          "present": true,
+          "detail": "No USPs"
+        },
+        {
+          "id": "comp-trust-opportunity",
+          "label": "Trust opportunities",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "Trust credentials vs competitors"
+        },
+        {
+          "id": "comp-service-diff",
+          "label": "Service differentiation",
+          "category": "competitorDifferentiation",
+          "present": true,
+          "detail": "Service differentiation wording"
+        },
+        {
+          "id": "comp-gap-high",
+          "label": "High gap opportunity",
+          "category": "competitorDifferentiation",
+          "present": true,
+          "detail": "No gap data"
+        },
+        {
+          "id": "comp-coverage-gap",
+          "label": "Coverage gap closure",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "0% competitor coverage"
+        },
+        {
+          "id": "comp-opportunity-actions",
+          "label": "Opportunity engine alignment",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "0 opportunities tracked"
+        },
+        {
+          "id": "comp-growth-actions",
+          "label": "Growth action alignment",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "0 growth actions"
+        },
+        {
+          "id": "comp-visibility-status",
+          "label": "Visibility building",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "Visibility: unknown"
+        },
+        {
+          "id": "comp-indexing-status",
+          "label": "Indexing progress",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "Indexing: not_registered"
+        },
+        {
+          "id": "comp-patient-questions",
+          "label": "Patient questions addressed",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "No patient questions in profile"
+        },
+        {
+          "id": "comp-usp-surface",
+          "label": "USPs on page",
+          "category": "competitorDifferentiation",
+          "present": false,
+          "detail": "USPs surfaced on page"
+        },
+        {
+          "id": "comp-local-keywords",
+          "label": "Local keyword integration",
+          "category": "competitorDifferentiation",
+          "present": true,
+          "detail": "Town + service in copy"
+        },
+        {
+          "id": "comp-content-depth-vs-comp",
+          "label": "Content depth vs competitors",
+          "category": "competitorDifferentiation",
+          "present": true,
+          "detail": "~1690 words"
+        },
+        {
+          "id": "px-ease-understanding",
+          "label": "Ease of understanding",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Readable copy"
+        },
+        {
+          "id": "px-readability",
+          "label": "Readability score",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Paragraph structure"
+        },
+        {
+          "id": "px-accessibility",
+          "label": "Accessibility",
+          "category": "patientExperience",
+          "present": false,
+          "detail": "Language attribute"
+        },
+        {
+          "id": "px-action-clarity",
+          "label": "Action clarity",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Clear actions"
+        },
+        {
+          "id": "px-booking-clarity",
+          "label": "Booking clarity",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Booking method"
+        },
+        {
+          "id": "px-confidence",
+          "label": "Patient confidence",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Confidence-building language"
+        },
+        {
+          "id": "px-reassurance",
+          "label": "Reassurance content",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Reassurance present"
+        },
+        {
+          "id": "px-cta-quality",
+          "label": "CTA quality",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "CTA"
+        },
+        {
+          "id": "px-phone-visible",
+          "label": "Phone number visible",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "+441709361398"
+        },
+        {
+          "id": "px-hours-visible",
+          "label": "Hours visible",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Opening hours visible"
+        },
+        {
+          "id": "px-map-visible",
+          "label": "Map visible",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Map section"
+        },
+        {
+          "id": "px-contact-options",
+          "label": "Multiple contact options",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Contact options"
+        },
+        {
+          "id": "px-expectations-set",
+          "label": "Expectations set",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Expectations managed"
+        },
+        {
+          "id": "px-mobile-friendly",
+          "label": "Mobile-friendly structure",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Viewport meta"
+        },
+        {
+          "id": "px-trust-near-cta",
+          "label": "Trust near CTA",
+          "category": "patientExperience",
+          "present": true,
+          "detail": "Trust signals near action"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-pharmacy-first-tq-canonical",
+          "title": "Enhance: Canonical URL",
+          "category": "technicalQuality",
+          "reason": "Canonical prevents duplicate content issues.",
+          "evidence": [
+            "Canonical tag",
+            "Category: Technical Quality"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 5,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Publishing Settings",
+          "linkedUrl": "/api/pharmacy-publishing-settings?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add canonical URL in Publishing Settings.",
+          "signalId": "tq-canonical"
+        },
+        {
+          "id": "rec-pharmacy-first-tq-no-noindex",
+          "title": "Enhance: Indexable for live",
+          "category": "technicalQuality",
+          "reason": "noindex blocks all visibility gains.",
+          "evidence": [
+            "noindex detected",
+            "Category: Technical Quality"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 5,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 5,
+          "linkedModule": "Publishing Settings",
+          "linkedUrl": "/api/pharmacy-publishing-settings?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Set noindex to false in Publishing Settings.",
+          "signalId": "tq-no-noindex"
+        },
+        {
+          "id": "rec-pharmacy-first-he-named-accountability",
+          "title": "Enhance: Named accountability",
+          "category": "humanExpertise",
+          "reason": "Named accountability is required for strong human expertise signals.",
+          "evidence": [
+            "No named accountable pharmacist",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 5,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy#section-professional-review",
+          "recommendedNextAction": "Complete reviewer profile in Profile Dashboard.",
+          "signalId": "he-named-accountability"
+        },
+        {
+          "id": "rec-pharmacy-first-he-independent-prescriber",
+          "title": "Enhance: Independent prescriber",
+          "category": "humanExpertise",
+          "reason": "Independent prescriber status is a strong clinical authority signal.",
+          "evidence": [
+            "Independent prescriber status",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "State IP qualification if applicable in trust layer.",
+          "signalId": "he-independent-prescriber"
+        },
+        {
+          "id": "rec-pharmacy-first-ct-red-flags",
+          "title": "Enhance: Red flags",
+          "category": "clinicalTrust",
+          "reason": "Red flags is essential YMYL clinical trust content.",
+          "evidence": [
+            "Red flags not detected",
+            "Category: Clinical Trust"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add or strengthen red flags in clinical sections.",
+          "signalId": "ct-red-flags"
+        },
+        {
+          "id": "rec-pharmacy-first-he-reviewer-schema",
+          "title": "Enhance: Reviewer schema opportunity",
+          "category": "humanExpertise",
+          "reason": "Person schema helps search engines attribute clinical expertise.",
+          "evidence": [
+            "Person / reviewedBy schema missing",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Advanced",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 4,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add Person schema with reviewer credentials.",
+          "signalId": "he-reviewer-schema"
+        },
+        {
+          "id": "rec-pharmacy-first-la-coverage-areas",
+          "title": "Enhance: Coverage areas",
+          "category": "localAuthority",
+          "reason": "Named coverage areas strengthen local relevance signals.",
+          "evidence": [
+            "Coverage areas not on page",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Easy",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 5,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy#section-coverage",
+          "recommendedNextAction": "Surface rankingAreas in local access section.",
+          "signalId": "la-coverage-areas"
+        },
+        {
+          "id": "rec-pharmacy-first-he-professional-memberships",
+          "title": "Enhance: Professional memberships",
+          "category": "humanExpertise",
+          "reason": "Professional body membership validates ongoing clinical standards.",
+          "evidence": [
+            "No memberships listed",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Easy",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Add accreditations in profile.",
+          "signalId": "he-professional-memberships"
+        },
+        {
+          "id": "rec-pharmacy-first-he-languages-spoken",
+          "title": "Enhance: Languages spoken",
+          "category": "humanExpertise",
+          "reason": "Multilingual support improves local accessibility and trust.",
+          "evidence": [
+            "Languages not listed",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Easy",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 2,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Add languagesSpoken in profile and surface on service page.",
+          "signalId": "he-languages-spoken"
+        },
+        {
+          "id": "rec-pharmacy-first-ig-aftercare",
+          "title": "Enhance: Aftercare guidance",
+          "category": "informationGain",
+          "reason": "Aftercare guidance adds unique pharmacy-specific value unlikely on generic AI pages.",
+          "evidence": [
+            "Aftercare not covered",
+            "Category: Information Gain"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 2,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add a short section covering: aftercare guidance.",
+          "signalId": "ig-aftercare"
+        },
+        {
+          "id": "rec-pharmacy-first-ig-busy-periods",
+          "title": "Enhance: Busy periods",
+          "category": "informationGain",
+          "reason": "Busy periods adds unique pharmacy-specific value unlikely on generic AI pages.",
+          "evidence": [
+            "Peak times not mentioned",
+            "Category: Information Gain"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 2,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add a short section covering: busy periods.",
+          "signalId": "ig-busy-periods"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-coverage-gap",
+          "title": "Enhance: Coverage gap closure",
+          "category": "competitorDifferentiation",
+          "reason": "Closing coverage gaps captures competitor traffic.",
+          "evidence": [
+            "0% competitor coverage",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 4,
+          "linkedModule": "Competitor Dashboard",
+          "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Review competitor coverage report for this service.",
+          "signalId": "comp-coverage-gap"
+        },
+        {
+          "id": "rec-pharmacy-first-ig-documents-bring",
+          "title": "Enhance: Documents to bring",
+          "category": "informationGain",
+          "reason": "Documents to bring adds unique pharmacy-specific value unlikely on generic AI pages.",
+          "evidence": [
+            "Patient preparation list missing",
+            "Category: Information Gain"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 2,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add a short section covering: documents to bring.",
+          "signalId": "ig-documents-bring"
+        },
+        {
+          "id": "rec-pharmacy-first-cd-local-page",
+          "title": "Enhance: Local page depth",
+          "category": "contentDepth",
+          "reason": "Local page adds geographic content depth.",
+          "evidence": [
+            "Local page in ecosystem",
+            "Category: Content Depth"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 4,
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "recommendedNextAction": "Generate and link local service page.",
+          "signalId": "cd-local-page"
+        },
+        {
+          "id": "rec-pharmacy-first-la-patient-journey",
+          "title": "Enhance: Local patient journey",
+          "category": "localAuthority",
+          "reason": "Local patient journey content adds information gain.",
+          "evidence": [
+            "Local visit journey described",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 2,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Describe step-by-step visit experience.",
+          "signalId": "la-patient-journey"
+        },
+        {
+          "id": "rec-pharmacy-first-ce-local-page",
+          "title": "Enhance: Local service page",
+          "category": "contentEcosystem",
+          "reason": "Local service page extend reach and topical authority without new page generation.",
+          "evidence": [
+            "Asset missing",
+            "Category: Content Ecosystem"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "recommendedNextAction": "Ensure local service page exists and is cross-linked.",
+          "signalId": "ce-local-page"
+        },
+        {
+          "id": "rec-pharmacy-first-la-neighbourhood-mentions",
+          "title": "Enhance: Neighbourhood mentions",
+          "category": "localAuthority",
+          "reason": "Neighbourhood names differentiate from generic national content.",
+          "evidence": [
+            "No neighbourhood mentions",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 4,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add nearbyAreas references in local section.",
+          "signalId": "la-neighbourhood-mentions"
+        },
+        {
+          "id": "rec-pharmacy-first-la-out-of-hours",
+          "title": "Enhance: Out-of-hours advice",
+          "category": "localAuthority",
+          "reason": "Out-of-hours guidance reduces patient uncertainty.",
+          "evidence": [
+            "Out-of-hours patient advice",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 3,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add what to do when pharmacy is closed.",
+          "signalId": "la-out-of-hours"
+        },
+        {
+          "id": "rec-pharmacy-first-tq-page-speed-hints",
+          "title": "Enhance: Page speed opportunities",
+          "category": "technicalQuality",
+          "reason": "Missing assets hurt perceived quality and speed.",
+          "evidence": [
+            "No broken placeholders",
+            "Category: Technical Quality"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Resolve image placeholders and missing assets.",
+          "signalId": "tq-page-speed-hints"
+        },
+        {
+          "id": "rec-pharmacy-first-la-parking",
+          "title": "Enhance: Parking information",
+          "category": "localAuthority",
+          "reason": "Parking is a top local patient question unlikely on AI summaries.",
+          "evidence": [
+            "Parking information",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 4,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add parking availability near local access.",
+          "signalId": "la-parking"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-patient-questions",
+          "title": "Enhance: Patient questions addressed",
+          "category": "competitorDifferentiation",
+          "reason": "Answering real patient questions beats generic competitor copy.",
+          "evidence": [
+            "No patient questions in profile",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 3,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Convert profile patientQuestions into FAQs.",
+          "signalId": "comp-patient-questions"
+        },
+        {
+          "id": "rec-pharmacy-first-ct-reassurance",
+          "title": "Enhance: Patient reassurance",
+          "category": "clinicalTrust",
+          "reason": "Patient reassurance is essential YMYL clinical trust content.",
+          "evidence": [
+            "Patient reassurance not detected",
+            "Category: Clinical Trust"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add or strengthen patient reassurance in clinical sections.",
+          "signalId": "ct-reassurance"
+        },
+        {
+          "id": "rec-pharmacy-first-ai-quick-reference",
+          "title": "Enhance: Quick reference tables",
+          "category": "aiCitation",
+          "reason": "Reference tables provide structured citable data.",
+          "evidence": [
+            "Quick reference format",
+            "Category: AI Citation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 4,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add a quick-reference table (e.g. eligibility, times, costs).",
+          "signalId": "ai-quick-reference"
+        },
+        {
+          "id": "rec-pharmacy-first-ct-review-schedule",
+          "title": "Enhance: Review schedule",
+          "category": "clinicalTrust",
+          "reason": "Review schedule is essential YMYL clinical trust content.",
+          "evidence": [
+            "Review schedule not detected",
+            "Category: Clinical Trust"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add or strengthen review schedule in clinical sections.",
+          "signalId": "ct-review-schedule"
+        },
+        {
+          "id": "rec-pharmacy-first-ct-safety-wording",
+          "title": "Enhance: Safety wording",
+          "category": "clinicalTrust",
+          "reason": "Safety wording is essential YMYL clinical trust content.",
+          "evidence": [
+            "Safety wording not detected",
+            "Category: Clinical Trust"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add or strengthen safety wording in clinical sections.",
+          "signalId": "ct-safety-wording"
+        },
+        {
+          "id": "rec-pharmacy-first-ct-limitations",
+          "title": "Enhance: Service limitations",
+          "category": "clinicalTrust",
+          "reason": "Service limitations is essential YMYL clinical trust content.",
+          "evidence": [
+            "Service limitations not detected",
+            "Category: Clinical Trust"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add or strengthen service limitations in clinical sections.",
+          "signalId": "ct-limitations"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-trust-opportunity",
+          "title": "Enhance: Trust opportunities",
+          "category": "competitorDifferentiation",
+          "reason": "Stronger trust than competitors supports conversion.",
+          "evidence": [
+            "Trust credentials vs competitors",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Competitor Dashboard",
+          "linkedUrl": "/api/pharmacy-competitor-dashboard?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Compare trust block vs competitor dashboard.",
+          "signalId": "comp-trust-opportunity"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-usp-surface",
+          "title": "Enhance: USPs on page",
+          "category": "competitorDifferentiation",
+          "reason": "USPs must appear on page to differentiate.",
+          "evidence": [
+            "USPs surfaced on page",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 3,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add unique selling points to service introduction.",
+          "signalId": "comp-usp-surface"
+        },
+        {
+          "id": "rec-pharmacy-first-ct-what-next",
+          "title": "Enhance: What happens next",
+          "category": "clinicalTrust",
+          "reason": "What happens next is essential YMYL clinical trust content.",
+          "evidence": [
+            "What happens next not detected",
+            "Category: Clinical Trust"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add or strengthen what happens next in clinical sections.",
+          "signalId": "ct-what-next"
+        },
+        {
+          "id": "rec-pharmacy-first-ig-arrival",
+          "title": "Enhance: What happens when you arrive",
+          "category": "informationGain",
+          "reason": "What happens when you arrive adds unique pharmacy-specific value unlikely on generic AI pages.",
+          "evidence": [
+            "Arrival process not described",
+            "Category: Information Gain"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 2,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add a short section covering: what happens when you arrive.",
+          "signalId": "ig-arrival"
+        },
+        {
+          "id": "rec-pharmacy-first-px-accessibility",
+          "title": "Enhance: Accessibility",
+          "category": "patientExperience",
+          "reason": "Accessibility supports all patients.",
+          "evidence": [
+            "Language attribute",
+            "Category: Patient Experience"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Verify lang attribute and contrast.",
+          "signalId": "px-accessibility"
+        },
+        {
+          "id": "rec-pharmacy-first-tq-accessibility",
+          "title": "Enhance: Accessibility basics",
+          "category": "technicalQuality",
+          "reason": "Accessibility supports quality and compliance.",
+          "evidence": [
+            "Basic accessibility",
+            "Category: Technical Quality"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Verify lang attribute and alt text coverage.",
+          "signalId": "tq-accessibility"
+        },
+        {
+          "id": "rec-pharmacy-first-la-collection-options",
+          "title": "Enhance: Collection options",
+          "category": "localAuthority",
+          "reason": "Collection workflow is pharmacy-specific local utility.",
+          "evidence": [
+            "Prescription collection options",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 3,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Describe prescription collection process.",
+          "signalId": "la-collection-options"
+        },
+        {
+          "id": "rec-pharmacy-first-la-disabled-access",
+          "title": "Enhance: Disabled access",
+          "category": "localAuthority",
+          "reason": "Accessibility information improves inclusivity and local usefulness.",
+          "evidence": [
+            "Accessibility information",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 3,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "State step-free access if available.",
+          "signalId": "la-disabled-access"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-growth-actions",
+          "title": "Enhance: Growth action alignment",
+          "category": "competitorDifferentiation",
+          "reason": "Enhancement should align with existing growth actions.",
+          "evidence": [
+            "0 growth actions",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Cross-reference growth action plan.",
+          "signalId": "comp-growth-actions"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-indexing-status",
+          "title": "Enhance: Indexing progress",
+          "category": "competitorDifferentiation",
+          "reason": "Indexed pages compete for visibility.",
+          "evidence": [
+            "Indexing: not_registered",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=broom-lane-pharmacy#indexing",
+          "recommendedNextAction": "Submit for indexing after authority gate passes.",
+          "signalId": "comp-indexing-status"
+        },
+        {
+          "id": "rec-pharmacy-first-la-nearby-hospitals",
+          "title": "Enhance: Nearby hospitals",
+          "category": "localAuthority",
+          "reason": "Hospital context helps escalation and local health journey.",
+          "evidence": [
+            "Hospital proximity context",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 3,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Reference nearest hospital for urgent care context.",
+          "signalId": "la-nearby-hospitals"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-opportunity-actions",
+          "title": "Enhance: Opportunity engine alignment",
+          "category": "competitorDifferentiation",
+          "reason": "Align enhancements with opportunity engine priorities.",
+          "evidence": [
+            "0 opportunities tracked",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Opportunity Engine",
+          "linkedUrl": "/api/pharmacy-campaigns?slug=broom-lane-pharmacy#opportunity-engine",
+          "recommendedNextAction": "Review opportunity engine for this service.",
+          "signalId": "comp-opportunity-actions"
+        },
+        {
+          "id": "rec-pharmacy-first-he-professional-interests",
+          "title": "Enhance: Professional interests",
+          "category": "humanExpertise",
+          "reason": "Professional interests humanise expertise beyond generic pharmacy copy.",
+          "evidence": [
+            "Clinical or professional interests mentioned",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add 2–3 clinical interests for the superintendent pharmacist.",
+          "signalId": "he-professional-interests"
+        },
+        {
+          "id": "rec-pharmacy-first-he-review-frequency",
+          "title": "Enhance: Review frequency stated",
+          "category": "humanExpertise",
+          "reason": "Review frequency demonstrates ongoing clinical governance.",
+          "evidence": [
+            "Content review frequency",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy#section-professional-review",
+          "recommendedNextAction": "Set clinicalReviewDate in Profile Dashboard.",
+          "signalId": "he-review-frequency"
+        },
+        {
+          "id": "rec-pharmacy-first-comp-visibility-status",
+          "title": "Enhance: Visibility building",
+          "category": "competitorDifferentiation",
+          "reason": "Visibility tracking validates competitive progress.",
+          "evidence": [
+            "Visibility: unknown",
+            "Category: Competitor Differentiation"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 3,
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=broom-lane-pharmacy#visibility",
+          "recommendedNextAction": "Refresh visibility after enhancements.",
+          "signalId": "comp-visibility-status"
+        },
+        {
+          "id": "rec-pharmacy-first-tq-schema-breadcrumb",
+          "title": "Enhance: BreadcrumbList schema",
+          "category": "technicalQuality",
+          "reason": "Breadcrumbs improve navigation signals.",
+          "evidence": [
+            "Breadcrumb schema",
+            "Category: Technical Quality"
+          ],
+          "difficulty": "Advanced",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add BreadcrumbList JSON-LD.",
+          "signalId": "tq-schema-breadcrumb"
+        }
+      ],
+      "topRecommendations": [
+        {
+          "id": "rec-pharmacy-first-tq-canonical",
+          "title": "Enhance: Canonical URL",
+          "category": "technicalQuality",
+          "reason": "Canonical prevents duplicate content issues.",
+          "evidence": [
+            "Canonical tag",
+            "Category: Technical Quality"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 5,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Publishing Settings",
+          "linkedUrl": "/api/pharmacy-publishing-settings?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add canonical URL in Publishing Settings.",
+          "signalId": "tq-canonical"
+        },
+        {
+          "id": "rec-pharmacy-first-tq-no-noindex",
+          "title": "Enhance: Indexable for live",
+          "category": "technicalQuality",
+          "reason": "noindex blocks all visibility gains.",
+          "evidence": [
+            "noindex detected",
+            "Category: Technical Quality"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 5,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 5,
+          "linkedModule": "Publishing Settings",
+          "linkedUrl": "/api/pharmacy-publishing-settings?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Set noindex to false in Publishing Settings.",
+          "signalId": "tq-no-noindex"
+        },
+        {
+          "id": "rec-pharmacy-first-he-named-accountability",
+          "title": "Enhance: Named accountability",
+          "category": "humanExpertise",
+          "reason": "Named accountability is required for strong human expertise signals.",
+          "evidence": [
+            "No named accountable pharmacist",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 5,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy#section-professional-review",
+          "recommendedNextAction": "Complete reviewer profile in Profile Dashboard.",
+          "signalId": "he-named-accountability"
+        },
+        {
+          "id": "rec-pharmacy-first-he-independent-prescriber",
+          "title": "Enhance: Independent prescriber",
+          "category": "humanExpertise",
+          "reason": "Independent prescriber status is a strong clinical authority signal.",
+          "evidence": [
+            "Independent prescriber status",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "State IP qualification if applicable in trust layer.",
+          "signalId": "he-independent-prescriber"
+        },
+        {
+          "id": "rec-pharmacy-first-ct-red-flags",
+          "title": "Enhance: Red flags",
+          "category": "clinicalTrust",
+          "reason": "Red flags is essential YMYL clinical trust content.",
+          "evidence": [
+            "Red flags not detected",
+            "Category: Clinical Trust"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add or strengthen red flags in clinical sections.",
+          "signalId": "ct-red-flags"
+        },
+        {
+          "id": "rec-pharmacy-first-he-reviewer-schema",
+          "title": "Enhance: Reviewer schema opportunity",
+          "category": "humanExpertise",
+          "reason": "Person schema helps search engines attribute clinical expertise.",
+          "evidence": [
+            "Person / reviewedBy schema missing",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Advanced",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 4,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add Person schema with reviewer credentials.",
+          "signalId": "he-reviewer-schema"
+        },
+        {
+          "id": "rec-pharmacy-first-la-coverage-areas",
+          "title": "Enhance: Coverage areas",
+          "category": "localAuthority",
+          "reason": "Named coverage areas strengthen local relevance signals.",
+          "evidence": [
+            "Coverage areas not on page",
+            "Category: Local Authority"
+          ],
+          "difficulty": "Easy",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 4,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 5,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy#section-coverage",
+          "recommendedNextAction": "Surface rankingAreas in local access section.",
+          "signalId": "la-coverage-areas"
+        },
+        {
+          "id": "rec-pharmacy-first-he-professional-memberships",
+          "title": "Enhance: Professional memberships",
+          "category": "humanExpertise",
+          "reason": "Professional body membership validates ongoing clinical standards.",
+          "evidence": [
+            "No memberships listed",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Easy",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Add accreditations in profile.",
+          "signalId": "he-professional-memberships"
+        },
+        {
+          "id": "rec-pharmacy-first-he-languages-spoken",
+          "title": "Enhance: Languages spoken",
+          "category": "humanExpertise",
+          "reason": "Multilingual support improves local accessibility and trust.",
+          "evidence": [
+            "Languages not listed",
+            "Category: Human Expertise"
+          ],
+          "difficulty": "Easy",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 2,
+          "estimatedAiGain": 1,
+          "estimatedVisibilityGain": 2,
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Add languagesSpoken in profile and surface on service page.",
+          "signalId": "he-languages-spoken"
+        },
+        {
+          "id": "rec-pharmacy-first-ig-aftercare",
+          "title": "Enhance: Aftercare guidance",
+          "category": "informationGain",
+          "reason": "Aftercare guidance adds unique pharmacy-specific value unlikely on generic AI pages.",
+          "evidence": [
+            "Aftercare not covered",
+            "Category: Information Gain"
+          ],
+          "difficulty": "Medium",
+          "estimatedImpact": "Medium",
+          "estimatedScoreGain": 3,
+          "estimatedAiGain": 2,
+          "estimatedVisibilityGain": 1,
+          "linkedModule": "Authority Enhancement",
+          "linkedUrl": "/api/pharmacy-authority-enhancements?slug=broom-lane-pharmacy&service=pharmacy-first",
+          "recommendedNextAction": "Add a short section covering: aftercare guidance.",
+          "signalId": "ig-aftercare"
+        }
+      ],
+      "lastAnalysedAt": "2026-07-19T07:33:40.165Z"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "pageUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=broom-lane-pharmacy",
+      "currentAuthorityScore": 0,
+      "potentialAuthorityScore": 0,
+      "estimatedOverallImprovement": 0,
+      "totalRecommendations": 0,
+      "easyWins": 0,
+      "highImpactImprovements": 0,
+      "categoryScores": [
+        {
+          "category": "humanExpertise",
+          "label": "Human Expertise",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "localAuthority",
+          "label": "Local Authority",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "informationGain",
+          "label": "Information Gain",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "aiCitation",
+          "label": "AI Citation",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "clinicalTrust",
+          "label": "Clinical Trust",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "contentDepth",
+          "label": "Content Depth",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "contentEcosystem",
+          "label": "Content Ecosystem",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "technicalQuality",
+          "label": "Technical Quality",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "competitorDifferentiation",
+          "label": "Competitor Differentiation",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "patientExperience",
+          "label": "Patient Experience",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        }
+      ],
+      "signals": [],
+      "recommendations": [
+        {
+          "id": "rec-blood-pressure-checks-build-page",
+          "title": "Build visual service page first",
+          "category": "technicalQuality",
+          "reason": "Enhancement analysis requires a built visual page.",
+          "evidence": [
+            "Visual page HTML not found"
+          ],
+          "difficulty": "Advanced",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 50,
+          "estimatedAiGain": 10,
+          "estimatedVisibilityGain": 20,
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Run pharmacy visual build pipeline.",
+          "signalId": "build-page"
+        }
+      ],
+      "topRecommendations": [],
+      "lastAnalysedAt": "2026-07-19T07:33:40.166Z"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "pageUrl": "/api/pharmacy-visual-experience/travel-vaccinations/?slug=broom-lane-pharmacy",
+      "currentAuthorityScore": 0,
+      "potentialAuthorityScore": 0,
+      "estimatedOverallImprovement": 0,
+      "totalRecommendations": 0,
+      "easyWins": 0,
+      "highImpactImprovements": 0,
+      "categoryScores": [
+        {
+          "category": "humanExpertise",
+          "label": "Human Expertise",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "localAuthority",
+          "label": "Local Authority",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "informationGain",
+          "label": "Information Gain",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "aiCitation",
+          "label": "AI Citation",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "clinicalTrust",
+          "label": "Clinical Trust",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "contentDepth",
+          "label": "Content Depth",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "contentEcosystem",
+          "label": "Content Ecosystem",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "technicalQuality",
+          "label": "Technical Quality",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "competitorDifferentiation",
+          "label": "Competitor Differentiation",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "patientExperience",
+          "label": "Patient Experience",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        }
+      ],
+      "signals": [],
+      "recommendations": [
+        {
+          "id": "rec-travel-vaccinations-build-page",
+          "title": "Build visual service page first",
+          "category": "technicalQuality",
+          "reason": "Enhancement analysis requires a built visual page.",
+          "evidence": [
+            "Visual page HTML not found"
+          ],
+          "difficulty": "Advanced",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 50,
+          "estimatedAiGain": 10,
+          "estimatedVisibilityGain": 20,
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/travel-vaccinations/?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Run pharmacy visual build pipeline.",
+          "signalId": "build-page"
+        }
+      ],
+      "topRecommendations": [],
+      "lastAnalysedAt": "2026-07-19T07:33:40.166Z"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "pageUrl": "/api/pharmacy-visual-experience/emergency-contraception/?slug=broom-lane-pharmacy",
+      "currentAuthorityScore": 0,
+      "potentialAuthorityScore": 0,
+      "estimatedOverallImprovement": 0,
+      "totalRecommendations": 0,
+      "easyWins": 0,
+      "highImpactImprovements": 0,
+      "categoryScores": [
+        {
+          "category": "humanExpertise",
+          "label": "Human Expertise",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "localAuthority",
+          "label": "Local Authority",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "informationGain",
+          "label": "Information Gain",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "aiCitation",
+          "label": "AI Citation",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "clinicalTrust",
+          "label": "Clinical Trust",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "contentDepth",
+          "label": "Content Depth",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "contentEcosystem",
+          "label": "Content Ecosystem",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "technicalQuality",
+          "label": "Technical Quality",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "competitorDifferentiation",
+          "label": "Competitor Differentiation",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        },
+        {
+          "category": "patientExperience",
+          "label": "Patient Experience",
+          "signalCount": 0,
+          "presentCount": 0,
+          "currentScore": 0,
+          "potentialScore": 100,
+          "improvementPotential": 100,
+          "opportunityScore": 100,
+          "estimatedAuthorityGain": 35,
+          "estimatedAiCitationGain": 20,
+          "estimatedLocalVisibilityGain": 25
+        }
+      ],
+      "signals": [],
+      "recommendations": [
+        {
+          "id": "rec-emergency-contraception-build-page",
+          "title": "Build visual service page first",
+          "category": "technicalQuality",
+          "reason": "Enhancement analysis requires a built visual page.",
+          "evidence": [
+            "Visual page HTML not found"
+          ],
+          "difficulty": "Advanced",
+          "estimatedImpact": "High",
+          "estimatedScoreGain": 50,
+          "estimatedAiGain": 10,
+          "estimatedVisibilityGain": 20,
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/emergency-contraception/?slug=broom-lane-pharmacy",
+          "recommendedNextAction": "Run pharmacy visual build pipeline.",
+          "signalId": "build-page"
+        }
+      ],
+      "topRecommendations": [],
+      "lastAnalysedAt": "2026-07-19T07:33:40.166Z"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-06T06:16:09.662Z",
+  "tokenUsage": {
+    "promptTokens": 5167,
+    "completionTokens": 206,
+    "totalTokens": 5373
+  },
+  "estimatedCostUsd": 0.011982,
+  "inputEvidencePackHash": "c5f0698de1e0833369e67617c6c6e7db6606ef6fd004c689adc5722b24548edc",
+  "editorialEvidencePackHash": "c74103e611d88f68daf96a5915d495fcf9a8ce455e93acae8520f9646d9b8d8c",
+  "areaSlug": "chellaston",
+  "areaName": "Chellaston",
+  "editorialFactIdsUsed": [
+    "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+    "chellaston:pharmacy-relationship:distance"
+  ],
+  "outputCopy": {
+    "area": "Chellaston",
+    "heroHeading": "Pharmacy First in Chellaston",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+    "localIntroduction": "",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "NHS general practice services in Chellaston are provided from Chellaston Medical Centre."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localContextParagraphs",
+        "sentence": "NHS general practice services in Chellaston are provided from Chellaston Medical Centre.",
+        "editorialFactId": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+        "editorialFactId": "chellaston:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "chellaston:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Chellaston",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "NHS general practice services in Chellaston are provided from Chellaston Medical Centre.",
+      "supportingCanonicalFieldOrEntity": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "providerSource": "NHS",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "supportingCanonicalFieldOrEntity": "business.address",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass",
+      "detail": "canonical-or-clinical-support"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+      "supportingCanonicalFieldOrEntity": "chellaston:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass",
+      "detail": "clauseCoveredByFactV3"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First in Chellaston",
+      "purpose": "identify the local edition",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First can help with eligible common conditions for people in Chellaston.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "offer.lockedClinicalFacts",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "NHS general practice services in Chellaston are provided from Chellaston Medical Centre.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-",
+      "readerValue": "describes the local healthcare landscape without implying affiliation"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Consultations take place at Brook Pharmacy Demo Derby in Derby.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "business.address",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Brook Pharmacy Demo Derby is approximately 5.8 km in a straight line from Chellaston.",
+      "purpose": "relationship between the area and the pharmacy",
+      "supportingSource": "chellaston:pharmacy-relationship:distance",
+      "readerValue": "states whether the pharmacy is in the area or how the area relates to the premises"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 3,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"area\": \"Chellaston\",\n  \"heroHeading\": \"Pharmacy First in Chellaston\",\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\",\n      \"editorialFactId\": \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"area\": \"Chellaston\",\n  \"heroHeading\": \"Pharmacy First in Chellaston\",\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\"\n  ],\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"NHS general practice services in Chellaston are provided from Chellaston Medical Centre.\",\n      \"editorialFactId\": \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"chellaston:healthcare:nhs-general-practice-services-in-chellaston-are-\"\n  ]\n}"
+  ]
+}

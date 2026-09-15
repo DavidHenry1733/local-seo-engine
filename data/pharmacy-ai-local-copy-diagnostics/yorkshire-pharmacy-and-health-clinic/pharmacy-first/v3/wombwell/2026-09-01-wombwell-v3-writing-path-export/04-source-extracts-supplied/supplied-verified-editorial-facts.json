@@ -1,0 +1,41 @@
+{
+  "note": "These five facts were the verifiedEditorialFacts object in all four 12:33/12:35 sanitized user prompts. Undated ward statistics were not included.",
+  "identicalAcrossAllFourAttempts": true,
+  "facts": [
+    {
+      "factId": "wombwell:access-transport:wombwell-has-a-national-rail-station",
+      "category": "access-transport",
+      "statement": "Wombwell has a National Rail station.",
+      "useAs": "access-context",
+      "doNotInfer": "A station in the area does not prove a route, walking connection, timetable, or journey time to the pharmacy."
+    },
+    {
+      "factId": "wombwell:pharmacy-relationship:distance",
+      "category": "pharmacy-relationship",
+      "statement": "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell, at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+      "useAs": "access-context",
+      "doNotInfer": "Distance is not a route, timetable, or travel-time claim. Do not force this figure into the copy. If used, identify it as an approximate straight-line distance, not travel, driving, walking or journey distance, and not a town-centre measurement."
+    },
+    {
+      "factId": "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+      "category": "healthcare",
+      "statement": "NHS general practice services in Wombwell are provided from Wombwell Medical Centre.",
+      "useAs": "healthcare-context",
+      "doNotInfer": "A healthcare provider’s presence does not prove a relationship with the pharmacy, registration, waiting times, or eligibility."
+    },
+    {
+      "factId": "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+      "category": "area-identity",
+      "statement": "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+      "useAs": "area-introduction",
+      "doNotInfer": "Does not imply travel time, routes, or service eligibility."
+    },
+    {
+      "factId": "wombwell:community:wombwell-has-a-public-library",
+      "category": "community",
+      "statement": "Wombwell has a public library.",
+      "useAs": "neutral-community-context",
+      "doNotInfer": "Does not imply the pharmacy is next to the library or that readers use it."
+    }
+  ]
+}

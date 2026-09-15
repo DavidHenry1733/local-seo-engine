@@ -1,0 +1,83 @@
+{
+  "slug": "pharmaconnect",
+  "pass": true,
+  "checks": [
+    {
+      "id": "1-workspace-loads",
+      "pass": true,
+      "detail": "HTML workspace renders"
+    },
+    {
+      "id": "2-recommendations-grouped",
+      "pass": true,
+      "detail": "ready=163 in_progress=0 completed=0"
+    },
+    {
+      "id": "3-action-link-resolves",
+      "pass": true,
+      "detail": "Open Publishing Settings → /api/pharmacy-publishing-settings?slug=pharmaconnect&service=pharmacy-first"
+    },
+    {
+      "id": "4-status-updates",
+      "pass": true,
+      "detail": "Task marked completed"
+    },
+    {
+      "id": "5-completion-log-created",
+      "pass": true,
+      "detail": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-enhancement-workspace/pharmaconnect.json"
+    },
+    {
+      "id": "6-authority-refresh-executes",
+      "pass": true,
+      "detail": "2026-06-26T11:21:05.540Z"
+    },
+    {
+      "id": "7-remaining-reduced",
+      "pass": true,
+      "detail": "163 → 162 remaining"
+    },
+    {
+      "id": "8-completed-increased",
+      "pass": true,
+      "detail": "1 completed"
+    },
+    {
+      "id": "9-campaign-os-updates",
+      "pass": true,
+      "detail": "remaining=0 completed=0 projected=89"
+    },
+    {
+      "id": "10-campaign-os-section",
+      "pass": true,
+      "detail": "Campaign OS section rendered"
+    },
+    {
+      "id": "11-no-template-modified",
+      "pass": true,
+      "detail": "Template unchanged"
+    },
+    {
+      "id": "12-no-master-modified",
+      "pass": true,
+      "detail": "Masters read-only"
+    },
+    {
+      "id": "13-live-workspace",
+      "pass": true,
+      "detail": "Auth-gated"
+    },
+    {
+      "id": "14-test-mode-flag",
+      "pass": true,
+      "detail": "Test mode enabled"
+    }
+  ],
+  "workspace": {
+    "remainingBefore": 163,
+    "remainingAfter": 162,
+    "completed": 1,
+    "projectedScore": 90
+  },
+  "generatedAt": "2026-06-26T11:21:06.609Z"
+}

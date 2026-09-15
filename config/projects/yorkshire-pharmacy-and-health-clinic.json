@@ -1,0 +1,23 @@
+{
+  "clientSlug": "yorkshire-pharmacy-and-health-clinic",
+  "businessName": "Yorkshire Pharmacy and Health Clinic",
+  "domain": "https://yorkshirepharmacyhealthclinic.co.uk",
+  "phone": "01224 210477",
+  "email": "support@yorkshirepharmacyhealthclinic.co.uk/",
+  "branding": {
+    "primaryColor": "#005EB8",
+    "accentColor": "#1CA9C9"
+  },
+  "services": [
+    "pharmacy-first"
+  ],
+  "locations": [],
+  "deploy": {
+    "enabled": true,
+    "protocol": "sftp",
+    "host": "51.161.86.187",
+    "port": 2126,
+    "remoteRoot": "/var/www/pharmaconnect-sites/yorkshire-pharmacy-and-health-clinic/current",
+    "username": "root"
+  }
+}

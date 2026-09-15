@@ -108,8 +108,8 @@ async function main(): Promise<void> {
   steps.push(
     step(
       "Current package marked incomplete against canonical plan",
-      auth?.completenessStatus === "INCOMPLETE_AGAINST_CANONICAL_PLAN" &&
-        auth?.completenessLabel === "Authorised Generation — Incomplete Against Canonical Plan",
+      auth?.completenessStatus === "SUPERSEDED_INCOMPLETE_RC1" &&
+        auth?.completenessLabel === "Superseded — Incomplete Against RC1 Content Architecture V1",
     ),
   );
   steps.push(step("Plan/output comparison service exists", typeof compareCanonicalPlanOutputParity === "function"));
@@ -144,8 +144,8 @@ async function main(): Promise<void> {
   const hierarchy = validateTenant(TARGET);
   steps.push(
     step(
-      "Hierarchy resolver no longer caps at 2 clusters / 4 areas",
-      hierarchy.hierarchyClusters === plan.coreEcosystem.clusters && hierarchy.hierarchyAreas === plan.coreEcosystem.areaPages,
+      "Hierarchy resolver schedules cluster pages only",
+      hierarchy.hierarchyClusters === plan.coreEcosystem.clusterPages && hierarchy.hierarchyAreas === 0,
       `hierarchy clusters=${hierarchy.hierarchyClusters} areas=${hierarchy.hierarchyAreas}`,
     ),
   );

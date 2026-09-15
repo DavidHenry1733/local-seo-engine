@@ -1,0 +1,203 @@
+{
+  "slug": "pharmaconnect",
+  "resolvedSlug": "pharmaconnect",
+  "serviceId": "blood-pressure-checks",
+  "serviceName": "Blood Pressure Checks",
+  "generatedAt": "2026-08-25T12:40:42.192Z",
+  "generatorVersion": "long-form-supporting-content-lockdown-v1",
+  "selectedAreas": [],
+  "profileLoaded": true,
+  "profileName": "PharmaConnect",
+  "campaignLoaded": true,
+  "campaignServiceId": null,
+  "brandLoaded": true,
+  "imageAssignmentsLoaded": false,
+  "selectedServiceConfigPath": "pharmacyMasterPublishConfig:blood-pressure-checks",
+  "serviceMasterPath": "docs/pharmacy-master-library/blood-pressure-checks-master-v1.md",
+  "masterPublishPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-master-publish/pharmaconnect/blood-pressure-checks/index.html",
+  "clinicalReferencePath": null,
+  "visualOutputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/pharmaconnect/blood-pressure-checks/index.html",
+  "contentEcosystemPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/pharmaconnect/blood-pressure-checks",
+  "localClusterOutputPaths": [],
+  "assetsGenerated": [
+    "visual-service-page",
+    "content-ecosystem",
+    "review-trust"
+  ],
+  "sectionsExpected": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "professional-review",
+    "local-access",
+    "cta"
+  ],
+  "sectionsFound": [
+    "hero",
+    "service-definition",
+    "process",
+    "safety",
+    "faq",
+    "local-access",
+    "cta"
+  ],
+  "sectionsMissing": [
+    "professional-review"
+  ],
+  "foreignServiceContentDetected": [],
+  "tenantValidation": {
+    "ok": true,
+    "detail": "demo tenant"
+  },
+  "serviceValidation": {
+    "ok": true,
+    "detail": "service content ok"
+  },
+  "packageValidation": {
+    "ok": false,
+    "detail": "Legacy generatePharmacyServiceAreaPages quarantined — Content Engine V1 uses local location hierarchy only; Layout checks: serviceDefinitionSplit, professionalReviewPanel, profileFooter"
+  },
+  "ecosystemTenantValidation": {
+    "ok": true,
+    "detail": "ecosystem tenant ok",
+    "foreignTenantAssetsDetected": [],
+    "foreignTenantAssetPaths": [],
+    "fallbackToDefaultSlugDetected": false
+  },
+  "localClusterValidation": {
+    "ok": true,
+    "detail": "0/0 local cluster pages",
+    "selectedAreasExpected": 0,
+    "localClusterPagesGenerated": 0
+  },
+  "selectedAreasExpected": 0,
+  "localClusterPagesGenerated": 0,
+  "foreignTenantAssetsDetected": [],
+  "foreignTenantAssetPaths": [],
+  "fallbackToDefaultSlugDetected": false,
+  "internalLinkValidation": {
+    "ok": true,
+    "detail": "0 local pages mapped; legacy cluster references: 0",
+    "legacyClusterReferences": 0,
+    "brokenLinks": 0
+  },
+  "manifestAccuracyValidation": {
+    "ok": true,
+    "detail": "manifest matches tenant ecosystem"
+  },
+  "designMapValidation": {
+    "ok": true,
+    "detail": "design and map lockdown ok",
+    "servicePageMapValidation": {
+      "ok": true,
+      "detail": "map iframe present"
+    },
+    "localPageMapValidation": {
+      "ok": true,
+      "detail": "local page not in scope"
+    },
+    "localPageDesignValidation": {
+      "ok": true,
+      "detail": "local design system"
+    },
+    "headerFooterParity": {
+      "ok": true,
+      "detail": "header/footer parity"
+    },
+    "brandParity": {
+      "ok": true,
+      "detail": "brand variables present"
+    },
+    "nearbyAreaLinksCount": 0,
+    "mapValidation": {
+      "ok": true,
+      "detail": "maps valid"
+    },
+    "moneyLinksCount": 9,
+    "internalLinksCount": 7
+  },
+  "localClusterQualityValidation": {
+    "ok": true,
+    "detail": "local cluster quality ok",
+    "localPagesExpected": 0,
+    "localPagesGenerated": 0,
+    "localPagesWithImages": 0,
+    "localPagesWithBusinessMap": 0,
+    "localPagesWithAreaSpecificCopy": 0,
+    "localPagesWithInternalLinks": 0,
+    "localPagesWithMoneyLinks": 0,
+    "duplicateCopyWarnings": [],
+    "emptySectionsDetected": [],
+    "localIntelligenceUsed": 0,
+    "failedLocalPages": [],
+    "servicePageLinksAllLocalAreas": true,
+    "localCopyDepthValidation": {
+      "ok": true,
+      "detail": "word counts ok",
+      "minWordCount": 350,
+      "pagesBelowMin": []
+    },
+    "localSimilarityScores": [],
+    "localityDuplicationGate": {
+      "ok": true,
+      "message": "No locality pages to compare."
+    },
+    "areaPrefixDetected": [],
+    "mapUsesBusinessLocation": true,
+    "servicePageLocalLinksCount": 0,
+    "localNearbyLinksCount": 0,
+    "irrelevantSectionsDetected": [],
+    "localPageWordCounts": {},
+    "localPageImageCounts": {},
+    "failedLocalQualityReasons": []
+  },
+  "longFormQualityValidation": {
+    "ok": true,
+    "detail": "long-form quality ok",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 19,
+      "patient-guide": 30,
+      "what-is": 8,
+      "who-should": 4,
+      "need-to-know": 8,
+      "faq-page": 14
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 20,
+      "patient-guide": 14,
+      "what-is": 12,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 7
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [],
+    "failedLongFormAssets": [],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "errors": [
+    "Missing sections: professional-review"
+  ],
+  "warnings": [
+    "Legacy generatePharmacyServiceAreaPages quarantined — Content Engine V1 uses local location hierarchy only",
+    "Layout checks: serviceDefinitionSplit, professionalReviewPanel, profileFooter"
+  ]
+}

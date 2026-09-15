@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  <meta property="og:title" content="{{META_TITLE}}">
+  <meta property="og:description" content="{{META_DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+
+  <script type="application/ld+json">{{SCHEMA_WEBPAGE}}</script>
+  <script type="application/ld+json">{{SCHEMA_SERVICE}}</script>
+  <script type="application/ld+json">{{SCHEMA_LOCAL_BUSINESS}}</script>
+  {{SCHEMA_FAQ}}
+  <script type="application/ld+json">{{SCHEMA_BREADCRUMB}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#07111f;--navy:#071a3d;--blue:#0969ff;--cyan:#35c5ff;
+      --soft:#f6f9fc;--soft2:#eef6ff;--line:#dce7f3;--text:#142033;--muted:#5d6b7f;
+      --white:#fff;--green:#0f9f6e;--shadow:0 22px 55px rgba(7,17,31,.11);
+      --shadow2:0 10px 26px rgba(7,17,31,.08);--radius:26px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Raleway',Arial,Helvetica,sans-serif;color:var(--text);background:white;line-height:1.65}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+    section{padding:84px 0}
+    h1,h2,h3,.nav-links a,.btn,.stat strong,.tag,.trust-item{font-family:'Montserrat',Arial,Helvetica,sans-serif}h1,h2,h3{margin:0 0 16px;line-height:1.08;color:var(--ink)}
+    h1{font-size:62px;letter-spacing:-2.2px}
+    h2{font-size:42px;letter-spacing:-1.3px}
+    h3{font-size:22px;letter-spacing:-.3px}
+    p{font-size:17px;margin:0 0 18px;color:var(--muted)}
+    a{color:inherit}
+    .site-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+    .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900;color:var(--ink)}
+    .brand img{max-height:48px;width:auto}
+    .nav-links{display:flex;gap:24px;align-items:center;flex-wrap:nowrap;white-space:nowrap}
+    .nav-links a{text-decoration:none;color:#243247;font-weight:600;font-size:14px}
+    .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 84% 18%,rgba(53,197,255,.42),transparent 32%),radial-gradient(circle at 12% 72%,rgba(9,105,255,.36),transparent 30%),linear-gradient(135deg,#020617 0%,#071a3d 56%,#053b7a 100%);color:white;padding:96px 0 88px}
+    .hero h1{color:white}
+    .hero p{color:#dcecff;font-size:21px;max-width:720px}
+    .hero-grid,.grid-2{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;background:rgba(53,197,255,.12);color:#bcecff;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:12px;margin-bottom:18px}
+    .btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 23px;border-radius:14px;background:var(--blue);color:white;text-decoration:none;font-weight:900;box-shadow:0 12px 30px rgba(9,105,255,.28)}
+    .btn.secondary{background:white;color:var(--ink);box-shadow:none}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px;max-width:650px}
+    .stat{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);border-radius:18px;padding:16px}
+    .stat strong{display:block;color:white;font-size:20px;line-height:1.1}
+    .stat span{font-size:13px;color:#cbdcff}
+    .image-panel,.hero-image-wrap{border-radius:32px;background:linear-gradient(135deg,#eaf6ff,#fff);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero-image-wrap{aspect-ratio:16/10;min-height:420px}
+    .image-panel{aspect-ratio:4/3;min-height:360px}
+    .local .image-panel{aspect-ratio:4/3;min-height:390px}
+    .final .image-panel{aspect-ratio:4/3;min-height:390px}
+    .image-panel img,.hero-image-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+    .v3-placeholder{background:linear-gradient(135deg,#eef6ff,#ffffff);border:2px dashed #b9d7f5;color:#071a3d;text-align:center}
+    .v3-placeholder div{padding:28px}
+    .v3-placeholder strong{display:block;font-family:'Montserrat',Arial,sans-serif;font-size:24px;margin-bottom:8px;color:#071a3d}
+    .v3-placeholder span{display:block;font-size:15px;color:#5d6b7f}
+    .section-head{max-width:800px;margin-bottom:34px}
+    .section-head.center{text-align:center;margin-left:auto;margin-right:auto}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow2);height:100%;display:flex;flex-direction:column}
+    .card h3{min-height:52px;display:flex;align-items:flex-start}
+    .card p{flex:1}
+    .card p{font-size:16px}
+    .icon{width:44px;height:44px;border-radius:14px;background:var(--soft2);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:16px}
+    .soft{background:var(--soft)}
+    .blue-band{background:linear-gradient(180deg,#f2f8ff,#fff)}
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .compare-box{border-radius:28px;padding:30px;border:1px solid var(--line);background:white;box-shadow:var(--shadow2);height:100%}
+    .compare-box.dark{background:var(--navy);border-color:rgba(255,255,255,.08)}
+    .compare-box.dark h3,.compare-box.dark li{color:white}
+    ul.clean{list-style:none;padding:0;margin:18px 0 0}
+    ul.clean li{padding:12px 0;border-bottom:1px solid rgba(148,163,184,.22);font-weight:750}
+    .tag{display:inline-block;padding:7px 11px;border-radius:999px;background:#e7f3ff;color:var(--blue);font-size:12px;font-weight:900;text-transform:uppercase;margin-bottom:14px}
+    .impact{background:radial-gradient(circle at 18% 18%,rgba(53,197,255,.25),transparent 28%),linear-gradient(135deg,#06152f,#020617);color:white}
+    .impact h2,.impact h3{color:white}.impact p{color:#d8e8ff}
+    .impact .card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.13);box-shadow:none}
+    .impact .card p{color:#d8e8ff}
+    .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .local{background:linear-gradient(135deg,#fff 0%,#f3f9ff 100%)} .local .section-head{max-width:980px}.local .section-head h2,.local .section-head h3{font-size:42px;line-height:1.12}.local .section-head p{font-size:18px}.local .image-panel{max-width:820px;margin:42px auto 0}
+    .about{background:#f7fbff}
+    .about-card{background:white;border-radius:32px;padding:38px;border:1px solid var(--line);box-shadow:var(--shadow)}
+    .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+    .trust-item{padding:18px;border-radius:18px;background:#f5f9ff;border:1px solid var(--line);font-weight:850;color:var(--ink)}
+    .proof-band{background:var(--ink);color:white;padding:34px 0}
+    .proof-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center}
+    .proof-row strong{display:block;font-size:24px;color:white}.proof-row span{font-size:14px;color:#cbd5e1}
+    .money-page-band{background:linear-gradient(135deg,#082f49,#0b4f7a);color:white;padding:44px 0}
+    .money-page-band p{color:#e1f4ff;font-size:19px;text-align:center;margin:0}
+    .money-page-band a{color:white;font-weight:950}
+    .question{border-left:5px solid var(--blue)}
+    .final{background:radial-gradient(circle at 82% 12%,rgba(53,197,255,.38),transparent 30%),linear-gradient(135deg,#020617,#071a3d);color:white}
+    .final h2{color:white}.final p{color:#dbeafe}
+    .site-footer{background:#020617;color:white;padding:54px 0 28px}.site-footer h3{color:#ffffff}.site-footer p,.site-footer a{color:#ffffff}
+    
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
+    {{BRAND_CSS}}
+    @media(max-width:980px){
+      h1{font-size:42px}h2{font-size:32px}section{padding:58px 0}
+      .hero-grid,.grid-2,.grid-3,.grid-4,.compare,.timeline,.proof-row,.trust-grid,.footer-grid{grid-template-columns:1fr}
+      .nav{height:auto;padding:18px 0;align-items:flex-start;flex-direction:column}
+      .nav-links{gap:14px}
+      .hero-stats{grid-template-columns:1fr}
+    }
+  
+    .related-services,
+    .areas-we-cover{
+      background:#fff;
+    }
+
+    .related-services .wrap > p,
+    .areas-we-cover .wrap > p{
+      max-width:860px;
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:30px;
+    }
+
+    .related-services h2,
+    .areas-we-cover h2{
+      font-size:42px;
+      letter-spacing:-1.2px;
+      margin-bottom:18px;
+    }
+
+    .related-services h3{
+      font-size:22px;
+      min-height:58px;
+      margin:0 0 12px;
+    }
+
+    .related-services .service-card-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+      margin-top:26px;
+    }
+
+    .related-services .service-card{
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:26px;
+      box-shadow:var(--shadow2);
+      background:#fff;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .related-services .service-card p{
+      flex:1;
+      margin:0 0 18px;
+    }
+
+    .related-services .service-card a{
+      font-family:'Montserrat',Arial,sans-serif;
+      font-weight:700;
+      color:var(--blue);
+      text-decoration:none;
+    }
+
+    .area-link-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .area-link-grid a{
+      display:block;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      background:#f8fbff;
+      color:var(--ink);
+      font-family:'Montserrat',Arial,sans-serif;
+      font-weight:700;
+      text-decoration:none;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(7,17,31,.05);
+    }
+
+    .area-link-grid a:hover{
+      border-color:#9cc9ff;
+      background:#eef6ff;
+    }
+
+    @media(max-width:900px){
+      .related-services .service-card-grid{grid-template-columns:1fr}
+      .area-link-grid{grid-template-columns:repeat(2,1fr)}
+    }
+
+  
+    /* V3 related services + areas */
+    .section-band{
+      padding:78px 0;
+      background:#fff;
+    }
+
+    .rsl-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+      margin-top:30px;
+    }
+
+    .rsl-item{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:28px;
+      box-shadow:var(--shadow2);
+      height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .rsl-title{
+      font-size:22px;
+      min-height:56px;
+      margin:0 0 14px;
+    }
+
+    .rsl-desc{
+      flex:1;
+      margin:0 0 20px;
+      color:var(--muted);
+    }
+
+    .rsl-cta{
+      font-family:'Montserrat',Arial,sans-serif;
+      font-weight:700;
+      color:var(--blue);
+      text-decoration:none;
+    }
+
+    .resource-card-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-top:30px;
+    }
+
+    .resource-card{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:78px;
+      padding:16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#f8fbff;
+      box-shadow:0 8px 20px rgba(7,17,31,.05);
+      text-align:center;
+      text-decoration:none;
+    }
+
+    .resource-card h3{
+      font-size:17px;
+      line-height:1.2;
+      margin:0;
+      color:var(--ink);
+    }
+
+    .resource-card:hover{
+      background:#eef6ff;
+      border-color:#9cc9ff;
+    }
+
+    @media(max-width:900px){
+      .rsl-grid{grid-template-columns:1fr}
+      .resource-card-grid{grid-template-columns:repeat(2,1fr)}
+    }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="{{CANONICAL_URL}}">
+      <img src="{{LOGO_URL}}" alt="{{BUSINESS_NAME}}">
+    </a>
+    <nav class="nav-links">{{NAV_ITEMS}}</nav>
+  </div>
+</header>
+
+<section class="hero" id="hero-section">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">{{BUSINESS_NAME}}</div>
+      <h1>{{H1}}</h1>
+      <div>{{INTRO}}</div>
+      <div class="btns">
+        <a class="btn" href="{{CTA_URL}}">{{CTA_TEXT}}</a>
+        <a class="btn secondary" href="#included">What's Included</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>2013</strong><span>Established Business</span></div>
+        <div class="stat"><strong>Local</strong><span>South Yorkshire support</span></div>
+        <div class="stat"><strong>Growth</strong><span>Built around enquiries</span></div>
+      </div>
+    </div>
+    <div class="hero-image-wrap hero-media v3-placeholder"><div><strong>Hero Image</strong><span>16:10 service image slot</span></div></div>
+  </div>
+</section>
+
+{{MONEY_PAGE_LINK_SECTION}}
+
+<section class="blue-band" id="ai-summary-section">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>Why Businesses Invest In {{H1}}</h2>
+      <p>Most businesses do not invest because they want pages, plugins or technical features. They invest because they want better business outcomes.</p>
+    </div>
+    <div class="compare">
+      <div class="compare-box">
+        <span class="tag">What they think they need</span>
+        <h3>A better online presence</h3>
+        <ul class="clean">
+          <li>A modern website</li>
+          <li>A stronger Google presence</li>
+          <li>A better-looking business profile</li>
+          <li>A clearer way to explain services</li>
+          <li>A better foundation for growth</li>
+        </ul>
+      </div>
+      <div class="compare-box dark">
+        <span class="tag">What they actually want</span>
+        <h3>More business opportunities</h3>
+        <ul class="clean">
+          <li>More enquiries</li>
+          <li>More customers</li>
+          <li>More credibility</li>
+          <li>More visibility</li>
+          <li>More confidence from buyers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="split-section-one">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Common Website Problems We Solve</h2>
+      <p>A better website should solve real commercial problems. These are the issues that often stop local businesses from generating consistent enquiries online.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><div class="icon">01</div><h3>No Website</h3><p>Customers cannot easily check your services, trust signals or contact details before making a decision.</p></div>
+      <div class="card"><div class="icon">02</div><h3>Underperforming Website</h3><p>A dated design can reduce trust and make competitors appear more professional before you have even spoken to the customer.</p></div>
+      <div class="card"><div class="icon">03</div><h3>Not Generating Enquiries</h3><p>Some websites receive visitors but fail to convert because the messaging, layout and calls to action are weak.</p></div>
+      <div class="card"><div class="icon">04</div><h3>Competitors Look Better</h3><p>If competitors appear more credible online, customers may contact them first even when your service is stronger.</p></div>
+      <div class="card"><div class="icon">05</div><h3>Poor Mobile Experience</h3><p>Many local searches happen on phones. A poor mobile experience can lose customers quickly.</p></div>
+      <div class="card"><div class="icon">06</div><h3>Difficult To Update</h3><p>If updates are difficult, your website quickly becomes stale and no longer reflects your current business.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="impact" id="split-section-two">
+  <div class="wrap grid-2">
+    <div>
+      <span class="tag">The cost of delay</span>
+      <h2>What Happens If You Do Nothing?</h2>
+      <p>Every month without a modern, conversion-focused website creates missed opportunities. While your website remains outdated or underperforming, competitors continue improving their visibility, building trust and attracting customers.</p>
+      <p>The longer the delay, the wider the gap becomes. A weak website does not usually fail loudly. It quietly loses enquiries, weakens confidence and makes your business easier to ignore.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card"><h3>Lost Enquiries</h3><p>Potential customers leave before taking action.</p></div>
+      <div class="card"><h3>Reduced Trust</h3><p>A poor website weakens the first impression.</p></div>
+      <div class="card"><h3>Competitors Gain</h3><p>Other businesses build visibility while you wait.</p></div>
+      <div class="card"><h3>Higher Catch-Up Cost</h3><p>Delaying often makes recovery harder later.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>Outcomes A Better Website Should Support</h2>
+      <p>The strongest websites support immediate trust, medium-term enquiry growth and long-term business visibility.</p>
+    </div>
+    <div class="timeline">
+      <div class="card"><span class="tag">Immediate</span><h3>Better First Impressions</h3><p>A clearer, more professional presentation helps visitors feel confident faster.</p></div>
+      <div class="card"><span class="tag">Medium term</span><h3>More Enquiries</h3><p>Clear service pages, calls to action and trust signals help turn more visitors into calls, forms and quote requests.</p></div>
+      <div class="card"><span class="tag">Long term</span><h3>Business Growth</h3><p>A stronger website becomes a platform for SEO, content, local visibility and future marketing campaigns.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="included">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What's Included With {{H1}}</h2>
+      <p>Each part of the website should support visibility, trust and enquiries. The goal is not just to create a design — it is to create a working business asset.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><h3>Professional Website Design</h3><p>A modern design that helps your business look credible, clear and trustworthy.</p></div>
+      <div class="card"><h3>Mobile Responsive Layout</h3><p>Your website works properly on phones, tablets and desktops.</p></div>
+      <div class="card"><h3>SEO Foundations</h3><p>Pages are structured to help search engines understand your services and location.</p></div>
+      <div class="card"><h3>Conversion-Focused Layout</h3><p>Visitors are guided towards calling, requesting a quote or booking a review.</p></div>
+      <div class="card"><h3>WordPress CMS</h3><p>Your website can be updated, expanded and managed over time.</p></div>
+      <div class="card"><h3>Hosting & Support</h3><p>Reliable UK hosting options and practical support are available after launch.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blue-band">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>How The Web Design Process Works</h2>
+      <p>A clear process removes uncertainty and keeps the project focused on the outcome your business needs.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card"><div class="icon">1</div><h3>Audit</h3><p>We review your current website, goals, services and customer journey.</p></div>
+      <div class="card"><div class="icon">2</div><h3>Plan</h3><p>We define the structure, pages, calls to action and content requirements.</p></div>
+      <div class="card"><div class="icon">3</div><h3>Build</h3><p>Your website is designed around trust, visibility and enquiries.</p></div>
+      <div class="card"><div class="icon">4</div><h3>Launch & Support</h3><p>The site is tested, launched and supported with hosting and marketing options.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="local">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="tag">Local market insight</span>
+      {{LOCAL_RELEVANCE}}
+    </div>
+
+    <div class="image-panel support-block-media v3-placeholder"><div><strong>Support Image</strong><span>4:3 service support image slot</span></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Who {{H1}} Is Best For</h2>
+      <p>This service is best suited to businesses that rely on trust, local visibility and customer enquiries.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><h3>Trades Businesses</h3><p>Builders, electricians, plumbers and roofers that need more quote requests.</p></div>
+      <div class="card"><h3>Professional Services</h3><p>Accountants, consultants and advisers that need to build trust quickly.</p></div>
+      <div class="card"><h3>Retail Businesses</h3><p>Shops and local retailers that customers check online before visiting.</p></div>
+      <div class="card"><h3>Hospitality Businesses</h3><p>Restaurants, cafes and venues that need to show credibility and availability.</p></div>
+      <div class="card"><h3>Healthcare Providers</h3><p>Clinics and practitioners that need a clear, reassuring online presence.</p></div>
+      <div class="card"><h3>Local Service Businesses</h3><p>Businesses that rely on phone calls, quote requests and local enquiries.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about-section">
+  <div class="wrap">
+    <div class="about-card">
+      <div class="grid-2">
+        <div>
+          <span class="tag">About {{BUSINESS_NAME}}</span>
+          <h2>South Yorkshire Web Design, Hosting & Local Marketing Support</h2>
+          <p>Founded in South Yorkshire in 2013, {{BUSINESS_NAME}} helps local businesses generate more enquiries through website design, local SEO, hosting and digital marketing services.</p>
+          <p>Our focus is practical: build websites and marketing assets that support visibility, credibility and business growth.</p>
+        </div>
+        <div>
+          <h3>Why businesses choose us</h3>
+          <div class="trust-grid">
+            <div class="trust-item">Fixed Pricing</div>
+            <div class="trust-item">Fast Turnaround</div>
+            <div class="trust-item">UK Premium Hosting</div>
+            <div class="trust-item">SEO Ready Websites</div>
+            <div class="trust-item">Local Expertise</div>
+            <div class="trust-item">Ongoing Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof-band" id="trust-strip">
+  <div class="wrap proof-row">
+    <div><strong>2013</strong><span>Established</span></div>
+    <div><strong>South Yorkshire</strong><span>Local business support</span></div>
+    <div><strong>UK Premium Hosting</strong><span>Performance focused</span></div>
+    <div><strong>Growth</strong><span>Built around enquiries</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Common Web Design Mistakes That Cost Businesses Enquiries</h2>
+      <p>These mistakes often reduce trust, visibility and enquiry rates.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><h3>Choosing On Price Alone</h3><p>The cheapest website can become expensive if it fails to generate enquiries or support growth.</p></div>
+      <div class="card"><h3>No Clear CTA</h3><p>Visitors need to know exactly what action to take next.</p></div>
+      <div class="card"><h3>Ignoring Mobile Users</h3><p>A poor mobile experience can lose customers before they read the page.</p></div>
+      <div class="card"><h3>Weak Trust Signals</h3><p>Without reviews, examples or clear information, customers hesitate.</p></div>
+      <div class="card"><h3>No SEO Foundation</h3><p>A website should be built with search visibility in mind from day one.</p></div>
+      <div class="card"><h3>Online Brochure Thinking</h3><p>A strong website should guide visitors towards contact, not just list services.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blue-band">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>Questions Business Owners Ask Before Investing</h2>
+      <p>These are the concerns many businesses want answered before they take the next step.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card question"><h3>Will a new website generate enquiries?</h3><p>A website cannot guarantee enquiries, but the right structure, messaging and calls to action create a stronger foundation for lead generation.</p></div>
+      <div class="card question"><h3>Can I update it myself?</h3><p>Yes. WordPress websites can be built so your business can update and expand content over time.</p></div>
+      <div class="card question"><h3>Do I need SEO as well?</h3><p>If visibility matters, local SEO should be considered alongside web design so the site is built with search in mind.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq-section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    {{FAQ_ITEMS}}
+  </div>
+</section>
+
+<div class="related-services">{{INTERNAL_LINK_SECTION}}</div>
+<div class="areas-we-cover">{{AREAS_WE_COVER}}</div>
+
+<section class="final">
+  <div class="wrap grid-2">
+    <div>
+      <span class="eyebrow">Free website audit</span>
+      <h2>Find Out If Your Website Is Helping Or Costing Your Business Enquiries</h2>
+      <p>Request a free website audit and discover practical opportunities to improve visibility, trust and enquiry generation.</p>
+      <div class="btns">
+        <a class="btn" href="{{CTA_URL}}">{{CTA_TEXT}}</a>
+        <a class="btn secondary" href="tel:01709210731">Call 01709 210731</a>
+      </div>
+    </div>
+    <div class="image-panel conversion-feature-image v3-placeholder"><div><strong>Conversion Image</strong><span>4:3 conversion image slot</span></div></div>
+  </div>
+</section>
+
+{{CTA_SECTION}}
+
+<footer class="site-footer" id="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h3>{{FOOTER_COMPANY_NAME}}</h3>
+      <p>{{FOOTER_ABOUT_TEXT}}</p>
+    </div>
+    <div>
+      <h3>Services</h3>
+      <p><a href="https://inboxingproweb.com/custom-website-design/">Web Design</a></p>
+      <p><a href="https://inboxingproweb.com/local-seo-services/">Local SEO</a></p>
+      <p><a href="https://inboxingproweb.com/uk-website-hosting/">Website Hosting</a></p>
+      <p><a href="https://inboxingproweb.com/email-marketing-3/">Email Marketing</a></p>
+    </div>
+    <div>
+      <h3>Links</h3>
+      {{FOOTER_LINKS_HTML}}
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p><a href="tel:01709210731">{{FOOTER_PHONE}}</a></p>
+      <p><a href="mailto:{{FOOTER_EMAIL}}">{{FOOTER_EMAIL}}</a></p>
+      <p>Moorgate Crofts Business Centre,<br>South Grove, Rotherham,<br>S60 2DH</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <p>@2026 DHM Digital Limited – Company Number 16953956 – All Rights Reserved</p>
+
+  </div>
+</footer>
+
+</body>
+</html>

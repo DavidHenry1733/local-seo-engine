@@ -1,0 +1,39 @@
+{
+  "taskId": "darfield-v3-demo-standard-2026-09-01",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 1,
+  "reserved": 0,
+  "consumed": 2,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.023452,
+  "events": [
+    {
+      "at": "2026-09-01T16:45:34.323Z",
+      "kind": "created",
+      "detail": "calls=2 cost=1"
+    },
+    {
+      "at": "2026-09-01T16:45:34.456Z",
+      "kind": "reserve",
+      "reservationId": "r-1788281134456-1"
+    },
+    {
+      "at": "2026-09-01T16:45:41.153Z",
+      "kind": "consumed",
+      "reservationId": "r-1788281134456-1",
+      "detail": "cost=0.011269999999999999"
+    },
+    {
+      "at": "2026-09-01T16:45:41.225Z",
+      "kind": "reserve",
+      "reservationId": "r-1788281141225-2"
+    },
+    {
+      "at": "2026-09-01T16:45:47.282Z",
+      "kind": "consumed",
+      "reservationId": "r-1788281141225-2",
+      "detail": "cost=0.012182"
+    }
+  ]
+}

@@ -1,0 +1,1758 @@
+{
+  "version": 1,
+  "tenantSlug": "pharmaconnect",
+  "businessName": "PharmaConnect",
+  "subjectDomain": "pharmaconnect.uk",
+  "primaryMarket": "United Kingdom",
+  "country": "United Kingdom",
+  "growthPlatform": "national",
+  "capturedAt": "2026-08-18T13:02:53.532Z",
+  "liveExecution": true,
+  "status": "collected",
+  "lastError": null,
+  "reusedExistingSnapshot": false,
+  "serpLocation": {
+    "country": "United Kingdom",
+    "locationCode": 2826
+  },
+  "limits": {
+    "customerKeywordUniverse": 500,
+    "competitorDiscoveryCandidates": 20,
+    "qualifiedCompetitorsAnalysed": 5,
+    "competitorRankedKeywords": 300,
+    "sparseCustomerKeywordThreshold": 10
+  },
+  "collectionPlan": {
+    "customerKeywordTasks": 1,
+    "competitorDiscoveryTasks": 1,
+    "competitorKeywordTasks": 5,
+    "maximumPaidRequests": 7,
+    "limits": {
+      "customerKeywordUniverse": 500,
+      "competitorDiscoveryCandidates": 20,
+      "qualifiedCompetitorsAnalysed": 5,
+      "competitorRankedKeywords": 300,
+      "sparseCustomerKeywordThreshold": 10
+    },
+    "endpoints": [
+      "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+      "https://api.dataforseo.com/v3/dataforseo_labs/google/competitors_domain/live"
+    ]
+  },
+  "customerOrganicFootprint": {
+    "keywordCount": 1,
+    "sparse": true,
+    "threshold": 10,
+    "sufficientForHighConfidenceCommercialDiscovery": false,
+    "note": "Customer organic footprint is sparse. Competitors Domain overlap is retained as SERP evidence and is not commercial competitor proof."
+  },
+  "endpoints": [
+    {
+      "endpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+      "requests": 1,
+      "tasks": 1,
+      "cost": 0.01212
+    },
+    {
+      "endpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/competitors_domain/live",
+      "requests": 1,
+      "tasks": 1,
+      "cost": 0.0144
+    }
+  ],
+  "costs": {
+    "requests": 2,
+    "tasks": 2,
+    "totalCost": 0.026520000000000002
+  },
+  "costLedger": {
+    "tenantSlug": "pharmaconnect",
+    "snapshotId": "search-intelligence-v1:pharmaconnect",
+    "capturedAt": "2026-08-18T13:02:53.532Z",
+    "totalCost": 0.026520000000000002,
+    "requestCount": 2,
+    "taskCount": 2,
+    "evidenceSource": "DATAFORSEO_LIVE",
+    "entries": [
+      {
+        "tenantSlug": "pharmaconnect",
+        "snapshotId": "search-intelligence-v1:pharmaconnect",
+        "endpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+        "requestCount": 1,
+        "taskCount": 1,
+        "cost": 0.01212,
+        "capturedAt": "2026-08-18T13:02:53.532Z",
+        "sourceSnapshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/national-growth-engine/pharmaconnect-search-intelligence-v1.json",
+        "evidenceSource": "DATAFORSEO_LIVE"
+      },
+      {
+        "tenantSlug": "pharmaconnect",
+        "snapshotId": "search-intelligence-v1:pharmaconnect",
+        "endpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/competitors_domain/live",
+        "requestCount": 1,
+        "taskCount": 1,
+        "cost": 0.0144,
+        "capturedAt": "2026-08-18T13:02:53.532Z",
+        "sourceSnapshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/national-growth-engine/pharmaconnect-search-intelligence-v1.json",
+        "evidenceSource": "DATAFORSEO_LIVE"
+      }
+    ]
+  },
+  "provenance": {
+    "tenantSlug": "pharmaconnect",
+    "subjectDomain": "pharmaconnect.uk",
+    "capturedAt": "2026-08-18T13:02:53.532Z",
+    "evidenceSource": "DATAFORSEO_LIVE",
+    "sourceSystem": "national-search-intelligence-v1",
+    "sourceEndpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+    "sourceSnapshot": "/home/inboxingproweb/pharmaconnect-growth-engine/data/national-growth-engine/pharmaconnect-search-intelligence-v1.json",
+    "liveExecution": true,
+    "calculated": false,
+    "calculationMethod": null,
+    "confidenceBasis": "explicit-dataforseo-collection",
+    "costContribution": 0.026520000000000002
+  },
+  "authority": "PERSISTED_PROVEN",
+  "customerKeywords": [
+    {
+      "keyword": "what is the pharmacy communication form used for",
+      "position": 57,
+      "rankingUrl": "https://pharmaconnect.uk/2026/03/12/the-role-of-digital-communication-in-modern-pharmacy-care/",
+      "searchVolume": 90,
+      "cpc": null,
+      "competition": 0,
+      "estimatedTraffic": 0.1889999955892563,
+      "searchIntent": "informational",
+      "serpType": "organic",
+      "rankGroup": 51,
+      "seResultsCount": 107,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "sourceEndpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "calculated": false
+    }
+  ],
+  "organicCompetitors": [
+    {
+      "domain": "nymopmr.co.uk",
+      "name": "nymopmr.co.uk",
+      "websiteUrl": "https://nymopmr.co.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 68.94699811935425 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 24.",
+        "This business targets the same customers but does not overlap the tenant's commercial services.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing, pharmacy growth audits.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: pmr, dispensing software.",
+        "commercial provider evidence present.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 24,
+      "organicEtv": 68.94699811935425,
+      "organicKeywordCount": 22,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 24,
+      "role": "adjacent_commercial_provider",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "adjacent_commercial_provider",
+      "evidenceUrls": [
+        "https://www.nymopmr.co.uk/",
+        "https://www.nymopmr.co.uk/pharmacy-automation-pmr-uk/"
+      ],
+      "exclusionReasons": [],
+      "qualificationScore": 80,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing, pharmacy growth audits.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: pmr, dispensing software.",
+        "commercial provider evidence present.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Targets the same customer market as a commercial supplier, but website evidence does not show material overlap with the tenant's configured commercial services.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": true,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "pmr",
+          "dispensing software"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "pmr",
+          "dispensing software"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "digitalpharmacist.com",
+      "name": "digitalpharmacist.com",
+      "websiteUrl": "https://digitalpharmacist.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 50.26884015649557 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 35.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "relevant digital-service evidence: marketing.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy website design, pharmacy email marketing, pharmacy website hosting, pharmacy growth audits.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: digital marketing, pharmacy software.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 35,
+      "organicEtv": 50.26884015649557,
+      "organicKeywordCount": 41,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 35,
+      "role": "generic_informational",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "generic_informational",
+      "evidenceUrls": [
+        "https://www.digitalpharmacist.com/"
+      ],
+      "exclusionReasons": [
+        "classified as generic informational from website evidence."
+      ],
+      "qualificationScore": 75,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "relevant digital-service evidence: marketing.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy website design, pharmacy email marketing, pharmacy website hosting, pharmacy growth audits.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: digital marketing, pharmacy software.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (generic informational).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "digital marketing",
+          "pharmacy software"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "digital marketing",
+          "pharmacy software"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "surveyfocus.co.uk",
+      "name": "surveyfocus.co.uk",
+      "websiteUrl": "https://surveyfocus.co.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 1.0080000013113022 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 56.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: cppq, community pharmacy patient questionnaire.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 56,
+      "organicEtv": 1.0080000013113022,
+      "organicKeywordCount": 2,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 56,
+      "role": "serp_content_competitor",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "serp_content_competitor",
+      "evidenceUrls": [
+        "https://surveyfocus.co.uk/"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation."
+      ],
+      "qualificationScore": 70,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: cppq, community pharmacy patient questionnaire.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Customer organic footprint is sparse. Organic overlap alone is not commercial competitor proof, so this domain was not selected for paid keyword expansion.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "cppq",
+          "community pharmacy patient questionnaire"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "cppq",
+          "community pharmacy patient questionnaire"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "pharmaceutical-journal.com",
+      "name": "pharmaceutical-journal.com",
+      "websiteUrl": "https://pharmaceutical-journal.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 73159.29204270244 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 17.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 17,
+      "organicEtv": 73159.29204270244,
+      "organicKeywordCount": 11107,
+      "sharedKeywordEtv": 0.3869999945163727,
+      "bestSerpPosition": 17,
+      "role": "publisher",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "publisher",
+      "evidenceUrls": [
+        "https://pharmaceutical-journal.com/",
+        "https://pharmaceutical-journal.com/article/news/pharmacies-able-to-apply-for-environmentally-sustainable-awards"
+      ],
+      "exclusionReasons": [
+        "publisher, regulator, social platform, directory or non-commercial evidence source.",
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as publisher from website evidence."
+      ],
+      "qualificationScore": 65,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (publisher).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "news"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "news"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "communitypharmacy.org.uk",
+      "name": "communitypharmacy.org.uk",
+      "websiteUrl": "https://communitypharmacy.org.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 51613.85214196332 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 2.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy website design, pharmacy email marketing, pharmacy website hosting.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 2,
+      "organicEtv": 51613.85214196332,
+      "organicKeywordCount": 5168,
+      "sharedKeywordEtv": 14.579999923706055,
+      "bestSerpPosition": 2,
+      "role": "generic_informational",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "generic_informational",
+      "evidenceUrls": [
+        "https://communitypharmacy.org.uk/"
+      ],
+      "exclusionReasons": [
+        "publisher, regulator, social platform, directory or non-commercial evidence source.",
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as generic informational from website evidence."
+      ],
+      "qualificationScore": 65,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy website design, pharmacy email marketing, pharmacy website hosting.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (generic informational).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "rcpharm.org",
+      "name": "rcpharm.org",
+      "websiteUrl": "https://rcpharm.org",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 24873.484840815887 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 47.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy website design, pharmacy website hosting.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training, news, professional body.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 47,
+      "organicEtv": 24873.484840815887,
+      "organicKeywordCount": 1357,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 47,
+      "role": "publisher",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "publisher",
+      "evidenceUrls": [
+        "https://www.rcpharm.org/",
+        "https://www.rcpharm.org/policies/pharmacy-2030-a-professional-vision/",
+        "https://www.rcpharm.org/about-the-college/"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as publisher from website evidence."
+      ],
+      "qualificationScore": 65,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy website design, pharmacy website hosting.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training, news, professional body.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (publisher).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "training",
+          "news",
+          "professional body"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "training",
+          "news",
+          "professional body"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "westquaymedicalcentre.co.uk",
+      "name": "westquaymedicalcentre.co.uk",
+      "websiteUrl": "https://westquaymedicalcentre.co.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 6085.966099753976 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 34.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 34,
+      "organicEtv": 6085.966099753976,
+      "organicKeywordCount": 245,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 34,
+      "role": "serp_content_competitor",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "serp_content_competitor",
+      "evidenceUrls": [
+        "https://www.westquaymedicalcentre.co.uk/"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation."
+      ],
+      "qualificationScore": 65,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Customer organic footprint is sparse. Organic overlap alone is not commercial competitor proof, so this domain was not selected for paid keyword expansion.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "news"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "news"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "puripharmacy.co.uk",
+      "name": "puripharmacy.co.uk",
+      "websiteUrl": "https://puripharmacy.co.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 4018.547007864341 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 39.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 39,
+      "organicEtv": 4018.547007864341,
+      "organicKeywordCount": 616,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 39,
+      "role": "customer_market",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "customer_market",
+      "evidenceUrls": [
+        "https://puripharmacy.co.uk/?v=7885444af42e",
+        "https://puripharmacy.co.uk/services/?v=7885444af42e"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as customer market from website evidence."
+      ],
+      "qualificationScore": 65,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (customer market).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "rxrelief.com",
+      "name": "rxrelief.com",
+      "websiteUrl": "https://rxrelief.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 729.0979962050915 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 37.",
+        "This business targets the same customers but does not overlap the tenant's commercial services.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "commercial provider evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 37,
+      "organicEtv": 729.0979962050915,
+      "organicKeywordCount": 257,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 37,
+      "role": "adjacent_commercial_provider",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "adjacent_commercial_provider",
+      "evidenceUrls": [
+        "https://www.rxrelief.com/"
+      ],
+      "exclusionReasons": [],
+      "qualificationScore": 60,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "commercial provider evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Targets the same customer market as a commercial supplier, but website evidence does not show material overlap with the tenant's configured commercial services.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": true,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "safetyiq.academy",
+      "name": "safetyiq.academy",
+      "websiteUrl": "https://safetyiq.academy",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 1.5330000072717667 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 43.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 43,
+      "organicEtv": 1.5330000072717667,
+      "organicKeywordCount": 7,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 43,
+      "role": "serp_content_competitor",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "serp_content_competitor",
+      "evidenceUrls": [
+        "https://safetyiq.academy/",
+        "https://safetyiq.academy/pharmacy-workflow-improvements/workflow-design/",
+        "https://safetyiq.academy/about/"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation."
+      ],
+      "qualificationScore": 60,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Customer organic footprint is sparse. Organic overlap alone is not commercial competitor proof, so this domain was not selected for paid keyword expansion.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "training"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "training"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "perigonpharmacy.org",
+      "name": "perigonpharmacy.org",
+      "websiteUrl": "https://perigonpharmacy.org",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 0.1889999955892563 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 45.",
+        "This business targets the same customers but does not overlap the tenant's commercial services.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "commercial provider evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 45,
+      "organicEtv": 0.1889999955892563,
+      "organicKeywordCount": 1,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 45,
+      "role": "adjacent_commercial_provider",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "adjacent_commercial_provider",
+      "evidenceUrls": [
+        "https://perigonpharmacy.org/",
+        "https://perigonpharmacy.org/careers/pharmacy-technician/",
+        "https://perigonpharmacy.org/about-us-2/"
+      ],
+      "exclusionReasons": [],
+      "qualificationScore": 60,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "commercial provider evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Targets the same customer market as a commercial supplier, but website evidence does not show material overlap with the tenant's configured commercial services.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": true,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "emishealth.com",
+      "name": "emishealth.com",
+      "websiteUrl": "https://emishealth.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 14789.97314398177 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 20.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 20,
+      "organicEtv": 14789.97314398177,
+      "organicKeywordCount": 542,
+      "sharedKeywordEtv": 0.2160000056028366,
+      "bestSerpPosition": 20,
+      "role": "education_academic",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "education_academic",
+      "evidenceUrls": [
+        "https://www.emishealth.com/",
+        "https://www.emishealth.com/products"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as education academic from website evidence."
+      ],
+      "qualificationScore": 55,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (education academic).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "news"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "news"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "uspharmacist.com",
+      "name": "uspharmacist.com",
+      "websiteUrl": "https://uspharmacist.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 7360.474531752989 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 54.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: publication, news.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 54,
+      "organicEtv": 7360.474531752989,
+      "organicKeywordCount": 5733,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 54,
+      "role": "education_academic",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "education_academic",
+      "evidenceUrls": [
+        "https://www.uspharmacist.com/",
+        "https://www.uspharmacist.com/about/"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as education academic from website evidence."
+      ],
+      "qualificationScore": 55,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: publication, news.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (education academic).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "publication",
+          "news"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "publication",
+          "news"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "cervey.com",
+      "name": "cervey.com",
+      "websiteUrl": "https://cervey.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 11.420999862253666 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 15.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 15,
+      "organicEtv": 11.420999862253666,
+      "organicKeywordCount": 34,
+      "sharedKeywordEtv": 0.45899999141693115,
+      "bestSerpPosition": 15,
+      "role": "serp_content_competitor",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "serp_content_competitor",
+      "evidenceUrls": [
+        "https://cervey.com/"
+      ],
+      "exclusionReasons": [],
+      "qualificationScore": 55,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Customer organic footprint is sparse. Organic overlap alone is not commercial competitor proof, so this domain was not selected for paid keyword expansion.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "pharmacymagazine.co.uk",
+      "name": "pharmacymagazine.co.uk",
+      "websiteUrl": "https://pharmacymagazine.co.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 21296.240387802944 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 13.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training, news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 13,
+      "organicEtv": 21296.240387802944,
+      "organicKeywordCount": 5300,
+      "sharedKeywordEtv": 0.531000018119812,
+      "bestSerpPosition": 13,
+      "role": "publisher",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "publisher",
+      "evidenceUrls": [
+        "https://www.pharmacymagazine.co.uk/",
+        "https://www.pharmacymagazine.co.uk/services",
+        "https://www.pharmacymagazine.co.uk/about"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as publisher from website evidence."
+      ],
+      "qualificationScore": 40,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "uk commercial-market evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "commercial service overlap detected: pharmacy email marketing.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training, news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (publisher).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "training",
+          "news"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "training",
+          "news"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "sciencedirect.com",
+      "name": "sciencedirect.com",
+      "websiteUrl": "https://sciencedirect.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 8899399.964227622 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 33.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "relevant digital-service evidence: seo.",
+        "commercial service overlap detected: pharmacy website design, pharmacy local seo, pharmacy website hosting.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 33,
+      "organicEtv": 8899399.964227622,
+      "organicKeywordCount": 683470,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 33,
+      "role": "education_academic",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "education_academic",
+      "evidenceUrls": [
+        "https://sciencedirect.com"
+      ],
+      "exclusionReasons": [
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as education academic from website evidence."
+      ],
+      "qualificationScore": 20,
+      "qualificationEvidence": [
+        "relevant digital-service evidence: seo.",
+        "commercial service overlap detected: pharmacy website design, pharmacy local seo, pharmacy website hosting.",
+        "website contains commercial digital-service evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: training.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "This domain competes in search. It is not a commercial competitor (education academic).",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "training"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "training"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "cpwales.org.uk",
+      "name": "cpwales.org.uk",
+      "websiteUrl": "https://cpwales.org.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 3633.5349711850286 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 6.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "uk commercial-market evidence.",
+        "no material tenant-service overlap evidenced.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 6,
+      "organicEtv": 3633.5349711850286,
+      "organicKeywordCount": 357,
+      "sharedKeywordEtv": 3.0420000553131104,
+      "bestSerpPosition": 6,
+      "role": "serp_content_competitor",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "serp_content_competitor",
+      "evidenceUrls": [
+        "https://cpwales.org.uk"
+      ],
+      "exclusionReasons": [],
+      "qualificationScore": 10,
+      "qualificationEvidence": [
+        "uk commercial-market evidence.",
+        "no material tenant-service overlap evidenced.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Customer organic footprint is sparse. Organic overlap alone is not commercial competitor proof, so this domain was not selected for paid keyword expansion.",
+      "commercialGate": {
+        "targetMarketRelevance": false,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "boots.com",
+      "name": "boots.com",
+      "websiteUrl": "https://boots.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 34693656.78122265 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 8.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "no material tenant-service overlap evidenced.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 8,
+      "organicEtv": 34693656.78122265,
+      "organicKeywordCount": 645379,
+      "sharedKeywordEtv": 1.7730000019073486,
+      "bestSerpPosition": 8,
+      "role": "serp_content_competitor",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "serp_content_competitor",
+      "evidenceUrls": [
+        "https://www.boots.com/",
+        "https://www.boots.com/services/",
+        "https://www.boots.com/pharmacy/"
+      ],
+      "exclusionReasons": [],
+      "qualificationScore": 0,
+      "qualificationEvidence": [
+        "no material tenant-service overlap evidenced.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Customer organic footprint is sparse. Organic overlap alone is not commercial competitor proof, so this domain was not selected for paid keyword expansion.",
+      "commercialGate": {
+        "targetMarketRelevance": false,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    },
+    {
+      "domain": "brainly.com",
+      "name": "brainly.com",
+      "websiteUrl": "https://brainly.com",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 1516867.7301874664 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 1.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "no material tenant-service overlap evidenced.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 1,
+      "organicEtv": 1516867.7301874664,
+      "organicKeywordCount": 87075,
+      "sharedKeywordEtv": 27.360000610351562,
+      "bestSerpPosition": 1,
+      "role": "serp_content_competitor",
+      "classification": "insufficient_evidence",
+      "qualification": "candidate",
+      "evidenceStatus": "serp_content_competitor",
+      "evidenceUrls": [
+        "https://brainly.com"
+      ],
+      "exclusionReasons": [],
+      "qualificationScore": 0,
+      "qualificationEvidence": [
+        "no material tenant-service overlap evidenced.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "Customer organic footprint is sparse. Organic overlap alone is not commercial competitor proof, so this domain was not selected for paid keyword expansion.",
+      "commercialGate": {
+        "targetMarketRelevance": false,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": false,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [],
+        "overlappingServices": [],
+        "nonOverlappingServices": [],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    }
+  ],
+  "excludedCompetitors": [
+    {
+      "domain": "letstalkaboutit.nhs.uk",
+      "name": "letstalkaboutit.nhs.uk",
+      "websiteUrl": "https://letstalkaboutit.nhs.uk",
+      "whyIdentified": [
+        "Shares 1 ranking keywords in organic search (DataForSEO intersections; SERP overlap only).",
+        "Estimated organic traffic 53670.3891678527 is full-domain metrics, not proof of commercial competition.",
+        "Average overlapping position 59.",
+        "This domain competes in search. Organic overlap is not commercial competitor proof.",
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "sourceQueries": [
+        "dataforseo_labs_competitors_domain"
+      ],
+      "discoverySource": "dataforseo_labs_competitors_domain",
+      "sharedKeywordCount": 1,
+      "averagePosition": 59,
+      "organicEtv": 53670.3891678527,
+      "organicKeywordCount": 2090,
+      "sharedKeywordEtv": 0.1889999955892563,
+      "bestSerpPosition": 59,
+      "role": "irrelevant",
+      "classification": "excluded",
+      "qualification": "rejected",
+      "evidenceStatus": "excluded",
+      "evidenceUrls": [
+        "https://www.letstalkaboutit.nhs.uk/"
+      ],
+      "exclusionReasons": [
+        "publisher, regulator, social platform, directory or non-commercial evidence source.",
+        "evidence describes a publisher, regulator, directory, data provider, professional body or other non-competing organisation.",
+        "classified as generic informational from website evidence."
+      ],
+      "qualificationScore": 55,
+      "qualificationEvidence": [
+        "explicit pharmacy-sector market evidence.",
+        "commercial service-provider evidence.",
+        "website contains explicit pharmacy-sector customer-market evidence.",
+        "tenant target-market terms appear in website evidence.",
+        "no material tenant-service overlap evidenced.",
+        "non-overlapping services detected: news.",
+        "geographic/commercial market evidence present.",
+        "dataforseo intersections=1 is organic keyword overlap (serp evidence only), not commercial equivalence."
+      ],
+      "eligibleForKeywordExpansion": false,
+      "nonSelectionReason": "publisher, regulator, social platform, directory or non-commercial evidence source.",
+      "commercialGate": {
+        "targetMarketRelevance": true,
+        "commercialProvider": false,
+        "serviceOverlap": false,
+        "marketRelevance": true,
+        "matchedServices": [],
+        "tenantServices": [
+          "pharmacy website design",
+          "pharmacy local seo",
+          "pharmacy email marketing",
+          "pharmacy website hosting",
+          "pharmacy growth audits"
+        ],
+        "candidateServicesDetected": [
+          "news"
+        ],
+        "overlappingServices": [],
+        "nonOverlappingServices": [
+          "news"
+        ],
+        "organicOverlapSupportingOnly": true
+      },
+      "analysed": false,
+      "capturedAt": "2026-08-18T13:02:53.532Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    }
+  ],
+  "competitorKeywordUniverses": [],
+  "labsAttempts": [
+    {
+      "role": "customer_ranked_keywords",
+      "domain": "pharmaconnect.uk",
+      "endpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+      "taskId": "08181302-2291-0381-0000-01038a226b2d",
+      "taskStatusCode": 20000,
+      "taskStatusMessage": "Ok.",
+      "cost": 0.01212,
+      "successful": true,
+      "timedOut": false,
+      "attemptNumber": 1,
+      "capturedAt": "2026-08-18T13:02:53.534Z"
+    },
+    {
+      "role": "competitors_domain",
+      "domain": "pharmaconnect.uk",
+      "endpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/competitors_domain/live",
+      "taskId": "08181302-2291-0386-0000-4338bfa5b9c3",
+      "taskStatusCode": 20000,
+      "taskStatusMessage": "Ok.",
+      "cost": 0.0144,
+      "successful": true,
+      "timedOut": false,
+      "attemptNumber": 1,
+      "capturedAt": "2026-08-18T13:02:54.477Z"
+    }
+  ],
+  "serpAttempts": [],
+  "summary": {
+    "rankingKeywordCount": 1,
+    "top3Count": 0,
+    "top10Count": 0,
+    "top20Count": 0,
+    "top100Count": 1,
+    "rankingPageCount": 1,
+    "availableSearchDemand": 90,
+    "organicCompetitorCount": 19,
+    "commercialCompetitorCount": 0,
+    "serpCompetitorCount": 19,
+    "analysedCompetitorCount": 0,
+    "excludedCompetitorCount": 1,
+    "competitorKeywordCount": 0,
+    "directCompetitorCount": 0,
+    "adjacentCompetitorCount": 0,
+    "strongestRankingPages": [
+      {
+        "url": "https://pharmaconnect.uk/2026/03/12/the-role-of-digital-communication-in-modern-pharmacy-care/",
+        "keywordCount": 1,
+        "searchDemand": 90,
+        "bestPosition": 57
+      }
+    ],
+    "top3CountCalculated": true,
+    "top10CountCalculated": true,
+    "top20CountCalculated": true,
+    "top100CountCalculated": true,
+    "rankingPageCountCalculated": true,
+    "availableSearchDemandCalculated": true
+  },
+  "nextStage": {
+    "title": "Compare competitor keyword universes",
+    "detail": "Next: compare competitor keyword universes and identify commercial search gaps. That work is not part of this screen.",
+    "implemented": false
+  }
+}

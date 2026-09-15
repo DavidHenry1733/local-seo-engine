@@ -1,0 +1,130 @@
+{
+  "version": "6e-v1",
+  "generatedAt": "2026-07-19T09:39:34.957Z",
+  "score": 88,
+  "readyForNewPharmacyTest": true,
+  "dashboardLoadMs": 530,
+  "placeholderStatusesRemaining": 0,
+  "terminalOnlyActionsRemaining": 0,
+  "criticalMissingCapabilities": 0,
+  "systemHealthSemanticsCorrected": true,
+  "categories": [
+    {
+      "id": "customer_management",
+      "label": "Customer Management",
+      "level": "Partial",
+      "evidence": "Registry + platform actions + restore archived",
+      "requiredAction": null
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication",
+      "level": "Complete",
+      "evidence": "users.json bcrypt + client-meta account flags",
+      "requiredAction": null
+    },
+    {
+      "id": "onboarding",
+      "label": "Onboarding",
+      "level": "Complete",
+      "evidence": "Workflow orchestration + canonical import snapshots",
+      "requiredAction": null
+    },
+    {
+      "id": "workflow",
+      "label": "Workflow",
+      "level": "Complete",
+      "evidence": "14-stage Continue Workflow engine",
+      "requiredAction": null
+    },
+    {
+      "id": "generation_control",
+      "label": "Generation Control",
+      "level": "Complete",
+      "evidence": "Background job + content package manifest",
+      "requiredAction": null
+    },
+    {
+      "id": "review_control",
+      "label": "Review Control",
+      "level": "Complete",
+      "evidence": "orchestrate_quality_review + reviewedAt",
+      "requiredAction": null
+    },
+    {
+      "id": "publishing_control",
+      "label": "Publishing Control",
+      "level": "Complete",
+      "evidence": "pharmacy-publish-status + deploy action",
+      "requiredAction": null
+    },
+    {
+      "id": "indexing_control",
+      "label": "Indexing Control",
+      "level": "Complete",
+      "evidence": "pharmacy-indexing bridge registry",
+      "requiredAction": null
+    },
+    {
+      "id": "rank_tracking_control",
+      "label": "Rank Tracking Control",
+      "level": "Complete",
+      "evidence": "rank-tracking.json project file",
+      "requiredAction": null
+    },
+    {
+      "id": "monitoring",
+      "label": "Monitoring",
+      "level": "Partial",
+      "evidence": "Customer dashboard + workflow monitoring stage",
+      "requiredAction": "Automated monitoring alerts not in scope"
+    },
+    {
+      "id": "background_jobs",
+      "label": "Background Jobs",
+      "level": "Complete",
+      "evidence": "jobs.json with retry/cancel",
+      "requiredAction": null
+    },
+    {
+      "id": "diagnostics",
+      "label": "Diagnostics",
+      "level": "Complete",
+      "evidence": "Issue Centre diagnostics — locked integration",
+      "requiredAction": null
+    },
+    {
+      "id": "issue_management",
+      "label": "Issue Management",
+      "level": "Complete",
+      "evidence": "Issue Centre routes admin-only",
+      "requiredAction": null
+    },
+    {
+      "id": "auditability",
+      "label": "Auditability",
+      "level": "Complete",
+      "evidence": "All privileged actions record audit-log.json",
+      "requiredAction": null
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "level": "Complete",
+      "evidence": "requireAdmin + read-only admin view banner",
+      "requiredAction": null
+    },
+    {
+      "id": "performance",
+      "label": "Performance",
+      "level": "Complete",
+      "evidence": "Dashboard lite load 530ms",
+      "requiredAction": null
+    }
+  ],
+  "capabilitySummary": {
+    "pass": 36,
+    "partial": 2,
+    "fail": 0
+  }
+}

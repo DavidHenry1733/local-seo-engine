@@ -1,0 +1,1482 @@
+{
+  "kind": "local-page-evidence-run-v1",
+  "runId": "06ef2eb7-0421-402b-b3a6-c075701210b9",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "borrowash",
+  "areaName": "Borrowash",
+  "planFingerprint": "9dd0c748b75fe4a8081676a8be47c9f357f799fca61691ba6447d01f05ecd060",
+  "spendingCapUsd": 0.17,
+  "status": "completed",
+  "startedAt": "2026-09-06T07:49:20.333Z",
+  "updatedAt": "2026-09-07T07:53:49.752Z",
+  "completedAt": "2026-09-07T07:53:49.752Z",
+  "spentUsd": 0.168,
+  "reservedUsd": 0,
+  "paidCallsMade": 9,
+  "stopReason": null,
+  "calls": [
+    {
+      "id": "places-gp-practices",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS GP surgery medical practice in Borrowash, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "d60bff2e-7bf7-4386-8eb0-97449d1a7548",
+      "detail": "2 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:21.677Z"
+    },
+    {
+      "id": "places-area-reference",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "Borrowash locality, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "6e7da7d9-178b-4871-af23-b818a25c252d",
+      "detail": "1 Places result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:21.892Z"
+    },
+    {
+      "id": "dataforseo-official-gp-practices",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS GP surgery practice official in Borrowash, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "fcdda7dc-f04e-4abe-82dd-c86398b99971",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:23.226Z"
+    },
+    {
+      "id": "dataforseo-descriptive-locality",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council parish ward community information in Borrowash, Derbyshire, UK",
+      "required": true,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "b55ba7a0-b251-4342-bdf3-2ddbd494f9e5",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-06T07:49:24.261Z"
+    },
+    {
+      "id": "page-body-gp-official",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "8bcfc494-24c5-482c-8cf8-fa08c0bec897",
+      "detail": "Retrieved https://www.nhs.uk/services/gp-surgery/overdale-medical-practice/C81066",
+      "capturedAt": "2026-09-06T07:49:24.636Z"
+    },
+    {
+      "id": "page-body-locality",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "571fc5f4-1dbe-4740-b2df-753fb6e59c8b",
+      "detail": "Retrieved https://www.ockbrookandborrowashparishcouncil.gov.uk/",
+      "capturedAt": "2026-09-06T07:49:25.144Z"
+    },
+    {
+      "id": "distance-haversine",
+      "provider": "local-computation",
+      "kind": "straight-line-distance",
+      "required": true,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": null,
+      "detail": "Approximate straight-line distance 7.3 km from Brook Pharmacy Demo Derby to Borrowash. Method: haversine straight-line. Not a driving time.",
+      "capturedAt": "2026-09-06T07:49:25.155Z"
+    },
+    {
+      "id": "places-hospitals",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "NHS hospital health centre in Borrowash, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "bcb6dad4-666d-4f29-a441-b9f61a505a3d",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:41.082Z"
+    },
+    {
+      "id": "places-landmarks",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "parks landmarks memorial in Borrowash, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "46039c6b-c522-4a92-851e-eb35a1199aa4",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:41.400Z"
+    },
+    {
+      "id": "places-community",
+      "provider": "google-places",
+      "kind": "places-text-search",
+      "query": "libraries community centres leisure centres in Borrowash, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.032,
+      "costBoundKind": "public-list",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.032,
+      "reservationId": "7b465c34-f6b4-4895-ac76-f74cdb9605b2",
+      "detail": "3 Places result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:41.816Z"
+    },
+    {
+      "id": "dataforseo-official-community",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "official council park library leisure community in Borrowash, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "784f17e9-7130-43ca-b8c7-8e1acf0b23dc",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:43.521Z"
+    },
+    {
+      "id": "dataforseo-official-healthcare",
+      "provider": "dataforseo",
+      "kind": "google-organic-live",
+      "query": "NHS hospital health centre official in Borrowash, Derbyshire, UK",
+      "required": false,
+      "safeCostBoundUsd": 0.002,
+      "costBoundKind": "recorded-live",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0.002,
+      "reservationId": "acc759bc-53b6-4abb-8a86-2a25e44a5cd4",
+      "detail": "9 organic result(s) stored.",
+      "capturedAt": "2026-09-07T07:53:44.542Z"
+    },
+    {
+      "id": "page-body-community",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "138d4d0d-8fc0-4c73-a12f-d865a32433de",
+      "detail": "Retrieved https://libraries.derbyshire.gov.uk/our-libraries",
+      "capturedAt": "2026-09-07T07:53:46.714Z"
+    },
+    {
+      "id": "page-body-healthcare",
+      "provider": "safe-html-fetch",
+      "kind": "authoritative-page-body",
+      "required": false,
+      "safeCostBoundUsd": 0,
+      "costBoundKind": "zero",
+      "status": "consumed",
+      "reservedUsd": 0,
+      "actualCostUsd": 0,
+      "reservationId": "4453d349-17cc-4247-938b-e3289d80791e",
+      "detail": "Retrieved https://dchs.nhs.uk/",
+      "capturedAt": "2026-09-07T07:53:49.660Z"
+    }
+  ],
+  "placesHitsByCall": {
+    "places-gp-practices": [
+      {
+        "name": "Park Medical Practice",
+        "address": "46 Derby Rd, Borrowash, Derby DE72 3HA",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9078795,
+          "longitude": -1.3846239999999999
+        },
+        "placeId": "ChIJSUdYHQDveUgR2QzABhPhynA",
+        "locality": "46 Derby Rd, Borrowash, Derby DE72 3HA",
+        "addressComponents": [
+          {
+            "longText": "46",
+            "shortText": "46",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Derby Road",
+            "shortText": "Derby Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HA",
+            "shortText": "DE72 3HA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=8127555949377359065&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Overdale Medical Practice",
+        "address": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.912257999999994,
+          "longitude": -1.37843
+        },
+        "placeId": "ChIJs3gorTXueUgRdfBX4LX-NwA",
+        "locality": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "addressComponents": [
+          {
+            "longText": "207",
+            "shortText": "207",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Victoria Avenue",
+            "shortText": "Victoria Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HG",
+            "shortText": "DE72 3HG",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15761180825481333&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-area-reference": [
+      {
+        "name": "Borrowash",
+        "address": "Borrowash, Derby",
+        "types": [
+          "locality",
+          "political"
+        ],
+        "location": {
+          "latitude": 52.904858,
+          "longitude": -1.3754722
+        },
+        "placeId": "ChIJj9reQ8nveUgRxuvV9bWnM48",
+        "locality": "Borrowash, Derby",
+        "addressComponents": [
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10318775571191294918&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-hospitals": [
+      {
+        "name": "Park Medical Practice",
+        "address": "46 Derby Rd, Borrowash, Derby DE72 3HA",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9078795,
+          "longitude": -1.3846239999999999
+        },
+        "placeId": "ChIJSUdYHQDveUgR2QzABhPhynA",
+        "locality": "46 Derby Rd, Borrowash, Derby DE72 3HA",
+        "addressComponents": [
+          {
+            "longText": "46",
+            "shortText": "46",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Derby Road",
+            "shortText": "Derby Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HA",
+            "shortText": "DE72 3HA",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=8127555949377359065&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Overdale Medical Practice",
+        "address": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "types": [
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.912257999999994,
+          "longitude": -1.37843
+        },
+        "placeId": "ChIJs3gorTXueUgRdfBX4LX-NwA",
+        "locality": "207 Victoria Ave, Borrowash, Derby DE72 3HG",
+        "addressComponents": [
+          {
+            "longText": "207",
+            "shortText": "207",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Victoria Avenue",
+            "shortText": "Victoria Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HG",
+            "shortText": "DE72 3HG",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=15761180825481333&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Coleman Health Centre",
+        "address": "Coleman St, Alvaston, Derby DE24 8NH",
+        "types": [
+          "medical_clinic",
+          "doctor",
+          "health",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.89492250000001,
+          "longitude": -1.445276
+        },
+        "placeId": "ChIJ27euf1nweUgRyCmNeBfuzZM",
+        "locality": "Coleman St, Alvaston, Derby DE24 8NH",
+        "addressComponents": [
+          {
+            "longText": "Coleman Street",
+            "shortText": "Coleman St",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8NH",
+            "shortText": "DE24 8NH",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=10650430478375266760&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-landmarks": [
+      {
+        "name": "Elvaston Castle",
+        "address": "Borrowash Road, Elvaston, Derby DE72 3EP",
+        "types": [
+          "park",
+          "tourist_attraction",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8923104,
+          "longitude": -1.3949231
+        },
+        "placeId": "ChIJY0pM7tvveUgRKNjjfEQYvhE",
+        "locality": "Borrowash Road, Elvaston, Derby DE72 3EP",
+        "addressComponents": [
+          {
+            "longText": "Borrowash Road",
+            "shortText": "Borrowash Road",
+            "types": [
+              "route"
+            ],
+            "languageCode": "und"
+          },
+          {
+            "longText": "Elvaston",
+            "shortText": "Elvaston",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3EP",
+            "shortText": "DE72 3EP",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=1278486026651949096&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Horobin Memorials",
+        "address": "5 Poplar Ave, Spondon, Derby DE21 7FJ",
+        "types": [
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.920643399999996,
+          "longitude": -1.4051479
+        },
+        "placeId": "ChIJkff_t9nxeUgRHUYAeIgcV7w",
+        "locality": "5 Poplar Ave, Spondon, Derby DE21 7FJ",
+        "addressComponents": [
+          {
+            "longText": "5",
+            "shortText": "5",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Poplar Avenue",
+            "shortText": "Poplar Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Spondon",
+            "shortText": "Spondon",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE21 7FJ",
+            "shortText": "DE21 7FJ",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=13571347374558692893&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Crown Arch",
+        "address": "VJR3+PQ, Derby DE72 3EP",
+        "types": [
+          "park",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.8918587,
+          "longitude": -1.3955936
+        },
+        "placeId": "ChIJz107r73veUgR1V4Re5cqdbI",
+        "locality": "VJR3+PQ, Derby DE72 3EP",
+        "addressComponents": [
+          {
+            "longText": "VJR3+PQ",
+            "shortText": "VJR3+PQ",
+            "types": [
+              "plus_code"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3EP",
+            "shortText": "DE72 3EP",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=12859231141119483605&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ],
+    "places-community": [
+      {
+        "name": "Borrowash Library",
+        "address": "Victoria Ave, Borrowash, Derby DE72 3HE",
+        "types": [
+          "library",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.9080204,
+          "longitude": -1.3810755
+        },
+        "placeId": "ChIJkcoNp8zveUgRNA4S8rcOmGk",
+        "locality": "Victoria Ave, Borrowash, Derby DE72 3HE",
+        "addressComponents": [
+          {
+            "longText": "Victoria Avenue",
+            "shortText": "Victoria Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3HE",
+            "shortText": "DE72 3HE",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=7608847753645526580&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Ashbrook Community Centre",
+        "address": "Harrington Ave, Borrowash, Derby DE72 3JE",
+        "types": [
+          "community_center",
+          "event_venue",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.907639499999995,
+          "longitude": -1.3746747
+        },
+        "placeId": "ChIJyVK31rjveUgRT_RnGqSMHZs",
+        "locality": "Harrington Ave, Borrowash, Derby DE72 3JE",
+        "addressComponents": [
+          {
+            "longText": "Harrington Avenue",
+            "shortText": "Harrington Ave",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Borrowash",
+            "shortText": "Borrowash",
+            "types": [
+              "locality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derbyshire",
+            "shortText": "Derbyshire",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE72 3JE",
+            "shortText": "DE72 3JE",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=11177244486648984655&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      },
+      {
+        "name": "Alvaston Library and Learning Centre",
+        "address": "1252 London Rd, Alvaston, Derby DE24 8QP",
+        "types": [
+          "library",
+          "point_of_interest",
+          "service",
+          "establishment"
+        ],
+        "location": {
+          "latitude": 52.897213099999995,
+          "longitude": -1.4299426
+        },
+        "placeId": "ChIJKSh7IkbweUgRj_kXT2mv30Q",
+        "locality": "1252 London Rd, Alvaston, Derby DE24 8QP",
+        "addressComponents": [
+          {
+            "longText": "1252",
+            "shortText": "1252",
+            "types": [
+              "street_number"
+            ],
+            "languageCode": "en-US"
+          },
+          {
+            "longText": "London Road",
+            "shortText": "London Rd",
+            "types": [
+              "route"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Alvaston",
+            "shortText": "Alvaston",
+            "types": [
+              "sublocality_level_1",
+              "sublocality",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "postal_town"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "Derby",
+            "shortText": "Derby",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "England",
+            "shortText": "England",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "United Kingdom",
+            "shortText": "GB",
+            "types": [
+              "country",
+              "political"
+            ],
+            "languageCode": "en"
+          },
+          {
+            "longText": "DE24 8QP",
+            "shortText": "DE24 8QP",
+            "types": [
+              "postal_code"
+            ],
+            "languageCode": "en-US"
+          }
+        ],
+        "sourceRef": "https://maps.google.com/?cid=4962878181218974095&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+        "requestedCategory": "community"
+      }
+    ]
+  },
+  "organicByCall": {
+    "dataforseo-official-gp-practices": {
+      "query": "NHS GP surgery practice official in Borrowash, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:21.894Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.parkmedical.org.uk/",
+          "title": "The Park Medical Practice Derby - Tel: 01332 667 911 ...",
+          "description": "NHS 111 is available 24 hours a day, 365 days a year. Borrowash Surgery The Park Medical Practice, 46 Derby Road, Borrowash, Derby, DE72 3HA Get Directions ..."
+        },
+        {
+          "url": "https://www.nhs.uk/services/gp-surgery/overdale-medical-practice/C81066",
+          "title": "Overdale Medical Practice",
+          "description": "This GP surgery is currently closed. 207 Victoria Avenue, Borrowash, Derby, Derbyshire, DE72 3HG is currently accepting new patients."
+        },
+        {
+          "url": "https://overdalepractice.com/",
+          "title": "Overdale Medical Practice – NHS Medical Practice in ...",
+          "description": "The Practice has two sites based in Borrowash and Breaston. Our phone lines are open Monday – Friday: Borrowash Surgery 8:30am – 18.30pm 8.30am – 18.00pm. ..."
+        },
+        {
+          "url": "https://www.parkmedical.org.uk/location/borrowash-surgery/",
+          "title": "Borrowash Surgery",
+          "description": "Borrowash Surgery. The Park Medical Practice, 46 Derby Road, Borrowash, Derby, DE72 3HA. Get Directions · 01332 667911 · SDERCCG.C81051-Reception@nhs.net. Read more"
+        },
+        {
+          "url": "https://vernonstreetandthelanes.co.uk/",
+          "title": "Vernon Street Medical Centre – NHS GP Surgery in Derby",
+          "description": "Vernon Street Medical Centre – NHS GP Surgery in Derby … 13 Vernon Street Derby DE1 1FW Get directions 01332 332812. Derbyshire DE23"
+        },
+        {
+          "url": "https://allhealthandcare.co.uk/providers/DE72-3HG/overdale-medical-practice-C81066",
+          "title": "OVERDALE MEDICAL PRACTICE - Borrowash",
+          "description": "OVERDALE MEDICAL PRACTICE — NHS GP practice. Postcode: DE72 3HG. Town/City: Borrowash. Address: 207 VICTORIA AVENUE."
+        },
+        {
+          "url": "https://horizonhealthcare.nhs.uk/",
+          "title": "Horizon Healthcare | NHS GP Surgery in Derby",
+          "description": "Horizon Healthcare is an NHS GP surgery in Derby. Find information about appointments, prescriptions, services, registration"
+        },
+        {
+          "url": "https://www.ht1.uk/gp-surgery/derby-overdale-medical-practice-c81066",
+          "title": "Overdale Medical Practice | Derby, Derbyshire, de72 3hg",
+          "description": "9 Jun 2015 — Overdale Medical Practice is a GP practice in Derby, Derbyshire. 207 Victoria Avenue, Borrowash, Derby, Derbyshire, De72 3hg, England. Opening ..."
+        },
+        {
+          "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+          "title": "List of GP practices in Derby and Derbyshire - May 2025",
+          "description": "20 May 2025 — View a full list of GP practices across Derby and Derbyshire, including practice codes, addresses and contact information."
+        }
+      ]
+    },
+    "dataforseo-descriptive-locality": {
+      "query": "official council parish ward community information in Borrowash, Derbyshire, UK",
+      "capturedAt": "2026-09-06T07:49:23.244Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://www.ockbrookandborrowashparishcouncil.gov.uk/",
+          "title": "Ockbrook and Borrowash Parish Council",
+          "description": "Ockbrook & Borrowash Parish Council provides your local services. We strive to make Ockbrook & Borrowash a better place to live, work and visit. Our website ... Read more"
+        },
+        {
+          "url": "https://www.facebook.com/erewashbc/posts/elections-for-ockbrook-and-borrowash-parish-council-took-place-in-three-wardsele/477813729039713/",
+          "title": "Elections for Ockbrook and Borrowash Parish Council took ...",
+          "description": "Elections for Ockbrook and Borrowash Parish Council took place in three wards. Elected in Borrowash East ward are Terry Holbrook, Amanda ... Read more"
+        },
+        {
+          "url": "https://democracy.ne-derbyshire.gov.uk/mgParishCouncilDetailsList.aspx",
+          "title": "Parish councils contact information",
+          "description": "Derbyshire DE5 3TB. Work phone: 01773409524 / 07713496608. Email: clerk@brackenfieldparishcouncil.org.uk. Brampton Parish Council. Contact. Clerk: Sue Barnston Read more"
+        },
+        {
+          "url": "https://www.ashbrookcentre.uk/",
+          "title": "Borrowash Community Centre | Ashbrook Centre",
+          "description": "The Ashbrook Community Centre is where residents of Ockbrook & Borrowash can meet & use the facilities for a wide range of activities."
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/leisure/local-studies/local-studies-libraries/local-libraries/borrowash/local-studies-at-borrowash-library.aspx",
+          "title": "Local studies at Borrowash Library",
+          "description": "Resources include histories and photographic books, parish council minutes and magazines, press cuttings, maps and a collection of over 250 local ..."
+        },
+        {
+          "url": "https://www.ockbrookandborrowashparishcouncil.gov.uk/news/2026/07/dcc-community-news-20th-july-2026",
+          "title": "DCC Community News - 20th July 2026",
+          "description": "20 Jul 2026 — The latest news from Ockbrook & Borrowash Parish Council."
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Borrowash",
+          "title": "Borrowash",
+          "description": "Borrowash /ˈbɒroʊwɒʃ/ is a village in the Erewash district of Derbyshire, England, situated immediately east of the Derby city boundary. Read more"
+        },
+        {
+          "url": "https://www.erewash.gov.uk/",
+          "title": "Erewash Borough Council: Homepage",
+          "description": "Erewash Borough is a great place to live and work. We want all our communities to share in the benefits of our area's success."
+        },
+        {
+          "url": "https://discover-derby.co.uk/borrowash/",
+          "title": "Borrowash | Derby Canal | St Stephen's Church",
+          "description": "Borrowash is a large, busy commuter centre for Nottingham and Derby and lies on the old road between the two cities."
+        }
+      ]
+    },
+    "dataforseo-official-community": {
+      "query": "official council park library leisure community in Borrowash, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:53:41.839Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://libraries.derbyshire.gov.uk/our-libraries",
+          "title": "Our Libraries - Derbyshire County Council",
+          "description": "Borrowash Library · StreetVictoria Avenue, Borrowash · ZipDerbyshire DE72 3HE · Phone01629 533 448 · Emailborrowash.library@derbyshire.gov.uk. Read more"
+        },
+        {
+          "url": "https://www.facebook.com/61573386338790/posts/users-of-derbyshire-county-councils-mobile-library-service-are-being-advised-of-/122205156548779544/",
+          "title": "Users of Derbyshire County Council's mobile library ...",
+          "description": "Users of Derbyshire County Council's mobile library service are being advised of new timetables from Monday 3 August. The county council is ..."
+        },
+        {
+          "url": "https://libraryon.org/libraries/derbyshire/borrowash?page=2",
+          "title": "Borrowash",
+          "description": "23 Jan 2026 — It's free to join Borrowash. Get opening times, directions & contact details. Free digital e-books & audiobooks, free children's activities ..."
+        },
+        {
+          "url": "https://www.derby.gov.uk/leisure-and-culture/derby-libraries/",
+          "title": "Derby libraries",
+          "description": "All information about Libraries has been moved to the In Derby website Opens in new tab - a separate website covering services managed by the Council's ... Read more"
+        },
+        {
+          "url": "https://www.duffieldparishcouncil.gov.uk/news/2020/11/duffield-library-book-and-borrow-service-information-for-residents",
+          "title": "Duffield Library 'Book and Borrow' service",
+          "description": "17 Nov 2020 — Duffield Library 'Book and Borrow' service - information for residents · ring or email the library (01629 533919 or duffield.library@derbyshire. Read more"
+        },
+        {
+          "url": "https://www.inderby.org.uk/libraries/how-to-join/derbyfaqs/",
+          "title": "Derby & Derbyshire Borrowing FAQs",
+          "description": "Library provision in Derby and Derbyshire is changing. Both authorities are transforming the way they deliver their services and both plan to hand some of ... Read more"
+        },
+        {
+          "url": "https://www.facebook.com/derbyshirecc/videos/were-opening-the-doors-to-our-new-staveley-library-on-monday-our-cabinet-member-/3070676089933039/",
+          "title": "We're opening the doors to our new Staveley Library on ...",
+          "description": "We're opening the doors to our new Staveley Library on Monday. Our Cabinet Member for Environment Cllr Carol Wood had a sneak peek behind ..."
+        },
+        {
+          "url": "https://www.leicestershire.gov.uk/leisure-and-community/libraries/find-a-library",
+          "title": "Find a library",
+          "description": "Find a library · Anstey Library · Ashby de la Zouch Library · Barrow upon Soar Library · Birstall Library · Blaby Library · Bottesford Library · Braunstone Town ... Read more"
+        },
+        {
+          "url": "https://englandlibraries.saltcorn.com/view/LibraryShow?id=9580",
+          "title": "LibraryShow",
+          "description": "Library service. Derbyshire ; Library name. Borrowash ; Address. Victoria Avenue, Borrowash, Derbyshire ; Postcode. DE72 3HE ; Type. LAL. Read more"
+        }
+      ]
+    },
+    "dataforseo-official-healthcare": {
+      "query": "NHS hospital health centre official in Borrowash, Derbyshire, UK",
+      "capturedAt": "2026-09-07T07:53:43.556Z",
+      "costUsd": 0.002,
+      "uncertain": false,
+      "results": [
+        {
+          "url": "https://dchs.nhs.uk/",
+          "title": "Derbyshire Community Health Services: Home",
+          "description": "new health centre in Belper. open 8am to 8pm. Walk-in (no appointment needed): 8am–4pm Appointment only (via NHS 111): 4pm–8pm"
+        },
+        {
+          "url": "https://www.derbyshirehealthcareft.nhs.uk/contact-us/getting-to-us",
+          "title": "Getting to us: our locations",
+          "description": "Derbyshire Healthcare NHS Foundation Trust. Derby Walton Hospital, Call 111 when it's less urgent than 999 Choose"
+        },
+        {
+          "url": "https://www.parkmedical.org.uk/",
+          "title": "The Park Medical Practice Derby - Tel: 01332 667 911 ...",
+          "description": "For appointments at the Chaddesden and Borrowash sites, NHS 111 is available 24 hours a day, 365 days a year."
+        },
+        {
+          "url": "https://www.facebook.com/dchstrust/?locale=en_GB",
+          "title": "Derbyshire Community Health Services NHS Foundation ...",
+          "description": "Derbyshire Community Health Services NHS Foundation Trust, Contact info +44 1246 565000 dchst.communications@nhs.net … open seven days a week, between 8am and ..."
+        },
+        {
+          "url": "https://www.uhdb.nhs.uk/",
+          "title": "Home | University Hospitals of Derby and Burton (UHDB ...",
+          "description": "The aim at University Hospitals of Derby and Burton (UHDB) is to deliver outstanding healthcare for local people in Southern Derbyshire and South-East ..."
+        },
+        {
+          "url": "https://www.cqc.org.uk/provider/RY8/services",
+          "title": "Derbyshire Community Health Services NHS Foundation ...",
+          "description": "Health Centre Ilkeston Road, Heanor, Derbyshire, DE75 7EA (01773) 599410"
+        },
+        {
+          "url": "https://www.england.nhs.uk/midlands/ics-and-acute-trusts/derby-and-derbyshire-ics-and-nhs-trusts/",
+          "title": "Midlands » Derby and Derbyshire ICS and NHS Trusts",
+          "description": "NHS England — Midlands » Derby and Derbyshire ICS and NHS Trusts. Our work Information for professionals Contact us. Derby and Derbyshire ICS"
+        },
+        {
+          "url": "https://overdalepractice.com/",
+          "title": "Overdale Medical Practice – NHS Medical Practice in ...",
+          "description": "The Practice has two sites based in Borrowash and Breaston. Our phone lines are open Monday – Friday: Borrowash Surgery 8:30am – 18.30pm. Breaston Surgery 8.30 ... Read more"
+        },
+        {
+          "url": "https://www.derbyshire.gov.uk/social-health/adult-care-and-wellbeing/hospital-stays-and-hospice-care/hospital-stays/leaving-hospital.aspx",
+          "title": "Leaving hospital",
+          "description": "You can self-refer, or have a referral made on your behalf by a carer or family member, by contacting Call Derbyshire, telephone: 01629 533190. All referrals ... Read more"
+        }
+      ]
+    }
+  },
+  "pagesByCall": {
+    "page-body-gp-official": {
+      "url": "https://www.nhs.uk/services/gp-surgery/overdale-medical-practice/C81066",
+      "title": "Overdale Medical Practice - NHS",
+      "status": 200,
+      "textSample": "Overdale Medical Practice - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care Overdale Medical Practice 207 Victoria Avenue, Borrowash, Derby, Derbyshire, DE72 3HG Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright",
+      "retrievedAt": "2026-09-06T07:49:24.636Z"
+    },
+    "page-body-locality": {
+      "url": "https://www.ockbrookandborrowashparishcouncil.gov.uk/",
+      "title": "Security Challenge",
+      "status": 401,
+      "textSample": "Security Challenge Security Check We just need to quickly confirm you're a real visitor before you continue. Slide the button all the way to the right using your mouse or keyboard. Slide to verify &rarr; Can't use the slider? Type the characters in an image instead Enter the characters shown in the image below, then select Submit to continue. Characters shown in the image Submit Use the slider instead Why am I seeing this page? This quick step is part of our routine security process to verify that you are human and not a robot. We often display this challenge when we detect traffic coming from networks or services that are commonly used by bots, such as data centers, certain cloud services (e.g., AWS, Azure), or VPNs/proxy services. Completing the challenge confirms your intent and allows you immediate access to the site. Thank you for helping us maintain a secure environment!",
+      "retrievedAt": "2026-09-06T07:49:25.144Z"
+    },
+    "page-body-community": {
+      "url": "https://libraries.derbyshire.gov.uk/our-libraries",
+      "title": "Our Libraries - Derbyshire",
+      "status": 200,
+      "textSample": "Our Libraries - Derbyshire Skip to Content Sign In Home Our Services Our Libraries What's on Search the catalogue Search Sign in My pages Menu Home Our Services Our Libraries What's on Search the catalogue Close Breadcrumb Arena Our Libraries Our Libraries Alfreton Library Street Severn Square Zip Alfreton, DE55 7BQ. Phone 01629 531 481 Email alfreton.library@derbyshire.gov.uk Ashbourne Library Street Compton, Ashbourne Zip Derbyshire DE6 1DA Phone 01629 533 950 Email ashbourne.library@derbyshire.gov.uk Bakewell Library Street Granby Road Zip Bakewell Derbyshire DE45 1ES Phone 01629 533 964 Email bakewell.library@derbyshire.gov.uk Belper Library Street Derwent Street, Belper Zip Derbyshire, DE56 1UQ Phone 01629 533 192 Email belper.library@derbyshire.gov.uk Bolsover Library Street Church Street Zip Bolsover, Derbyshire, S44 6HB Phone 01629 537 800 Email bolsover.library@derbyshire.gov.uk Borrowash Library Street Victoria Avenue, Borrowash Zip Derbyshire DE72 3HE Phone 01629 533 448 Email borrowash.library@derbyshire.gov.uk Brimington Library Street Church Street, Brimington Zip Chesterfield, Derbyshire S43 1JG Phone 01629 537 773 Email brimington.library@derbyshire.gov.uk Buxton Library Street Kents Bank Road, Buxton Zip Derbyshire, SK17 9HW Phone 01629 533 460 Email buxton.library@derbyshire.gov.uk Chapel-en-le-Frith Library Street Town Hall, Market Square Zip Chapel-en-le-Frith, High Peak, Derbyshire SK23 0HP Phone 01629 533 962 Email chapel.library@derbyshire.gov.uk Chesterfield Library Street New Beetwell Street, Chesterfield Zip Derbyshire, S40 1QN Phone 01629 533 400 Email chesterfield.library@derbyshire.gov.uk Clay Cross Library Street Kenning Park, Holmgate Road, Clay Cross Zip Chesterfield, Derbyshire S45 9PH Phone 01629 537 084 Email claycross.library@derbyshire.gov.uk Clowne Library Street Recreation Close, Clowne Zip Chesterfield, Derbyshire S43 4PL Phone 01629 537 248 Email clowne.library@derbyshire.gov.uk Creswell Library Street Elmton Road, Creswell Zip Derbyshire S80 4EY Phone 01629 537 422 Email creswell.library@derbyshire.gov.uk Dronfield Library Street Manor House, High Street Zip Dronfield, Derbyshire S18 1PY Phone 01629 533 450 Email dronfield.library@derbyshire.gov.uk Duffield Library Street Wirksworth Road, Duffield Zip Belper, Derbyshire DE56 4GH Phone 01629 533 919 Email duffield.library@derbyshire.gov.uk Eckington Library Street Market Street, Eckington Zip Derbyshire S21 4JG Phone 01629 533 748 Email eckington.library@derbyshire.gov.uk Etwall Library Street Eggington Road, Etwall Zip Derbyshire DE65 6NB Phone 01629 532 633 Email etwall.library@derbyshire.gov.uk Gamesley Library Street Gamesley Primary School, Grindleford Grove Zip Gamesley, Glossop, Derbyshire SK13 6HW Phone 01629 533 649 Email gamesley.library@derbyshire.gov.uk Glossop Library Street Talbot Street, Glossop Zip Derbyshire SK13 7DG Phone 01629 531 199 Email glossop.library@derbyshire.gov.uk Hadfield Library Street Station Road, Hadfield Zip Glossop, Derbyshire SK13 1AA Phone 01629 533 445 Email hadfield.library@derbyshire.gov.uk Hayfield Library Street Kinder Road, Hayfield Zip High Peak, Derbyshire SK22 2HS Phone 01629 533 438 Email hayfield.library@derbyshire.gov.uk Heanor Library Street Ilkeston Road, Heanor Zip Derbyshire, DE75 7DX Phone 01629 533 795 Email heanor.library@derbyshire.gov.uk Holmewood Library Street Heath Road, Holmewood Zip Chesterfield, Derbyshire, S42 5RB Phone 01629 533 355 Email holmewood.library@derbyshire.gov.uk Ilkeston Library Street Market Place, Ilkeston Zip Derbyshire, DE7 5RN Phone 01629 533 275 Email ilkeston.library@derbyshire.gov.uk Killamarsh Library Street Killamarsh Active, Stanley Street Zip Killamarsh, Derbyshire S21 1EL Phone 01629 537 426 Email killamarsh.library@derbyshire.gov.uk Long Eaton Library Street Tamworth Road, Long Eaton Zip Derbyshire NG10 1JG Phone 01629 531 470 Email longeaton.library@derbyshire.gov.uk Matlock Library Street Steep Turnpike Zip Matlock, DE4 3DP Phone 01629 533 837 Email matlock.library@derbyshire.gov.uk Melbourne Library Street Melbourne Assembly Rooms, High Street Zip Melbourne, Derbyshire DE73 8GF Phone 01629 533 363 Email melbourne.library@derbyshire.gov.uk New Mills Library Street Hall Street, New Mills Zip High Peak, Derbyshire SK22 4AR Phone 01629 533 195 Email newmills.library@derbyshire.gov.uk Newbold Library Street Windermere Road, Newbold Zip Chesterfield, Derbyshire, S41 8DU Phone 01629 537 570 Email newbold.library@derbyshire.gov.uk Old Whittington Library Street Swanwick Memorial Hall, High Street Zip Old Whittington, Derbyshire S41 9JZ Phone 01629 533 028 Email oldwhittington.library@derbyshire.gov.uk Pinxton Library Street Pinxton Library, Kirkstead Road Zip Pinxton NG16 6NA Phone 01629 535 815 Email pinxton.library@derbyshire.gov.uk Ripley Library Street Grosvenor Road Zip Ripley, Derbyshire DE5 3JE Phone 01629 532 982 Email ripley.library@derbyshire.gov.uk Sandiacre Library Street Doncaster Avenue Zip Sandiacre, Derbyshire NG10 5FJ Phone 01629 533 359 Email sandiacre.library@derbyshire.gov.uk Shirebrook Library Street 19 Patchwork Row Zip Shirebrook, Derbyshire NG20 8AL Phone 01629 537 960 Email shirebrook.library@derbyshire.gov.uk Somercotes Library Street Somerlea Park Junior School, Bank Street, Somercotes Zip Alfreton, Derbyshire DE55 4JE Phone 01629 533 970 Email somercotes.library@derbyshire.gov.uk South Normanton Library Street Library and Information Centre, The Hub, Shiners Way Zip South Normanton, Derbyshire DE55 2AA Phone 01629 535 000 Email southnormanton.library@derbyshire.gov.uk Staveley Library Street The Pavilion, Market Place, Staveley Zip Chesterfield, Derbyshire S43 3UR Phone 01629 533 629 Email staveley.library@derbyshire.gov.uk Swadlincote Library Street Civic Way, Swadlincote Zip Derbyshire, DE11 0AD Phone 01629 533 013 Email swadlincote.library@derbyshire.gov.uk Tideswell Community Managed Library Street St John's Institute, St John's Road, Tideswell Zip Buxton, Derbyshire SK17 8NE Phone 01629 533 393 Email cml.tideswell@cml.derbyshire.gov.uk Whaley Bridge Library Street Mechanic's Institute, 21 Market Street Zip Whaley Bridge, High Peak, Derbyshire SK23 7AA Phone 01629 533 354 Email whaleybridge.library@derbyshire.gov.uk Whitwell Library Street Community Centre, Portland Street Zip Whitwell, Derbyshire S80 4NN Phone 01629 533 988 Email whitwell.library@derbyshire.gov.uk Wingerworth Library Street Parish Rooms, New Road, Wingerworth Zip Chesterfield, Derbyshire S42 6TB Phone 01629 531 811 Email wingerworth.library@derbyshire.gov.uk Wirksworth Library Street Town Hall, Wirksworth Zip Matlock, DE4 4EU Phone 01629 533 730 Email wirksworth.library@derbyshire.gov.uk Woodville Community Managed Library Street 1 Hartshorne Road, Woodville Zip Swadlincote DE11 7JB Phone 01629 531 397 Email cml.woodville@cml.derbyshire.gov.uk Audio Books 11884 139855720X The unbelieved Author: Petraitis, Vikki, 1965- author. 1804957941 The finest hotel in Kabul : a people's history of Afghanistan Author: Doucet, Lyse, 1958- author. 0750553197 Mrs Hudson and the Samarkand conspiracy Author: Davies, Martin, 1965- author. 0750557699 The Yorkshire Ladies Football Club Author: Hart, Gracie, author. 0750558776 The madman Author: Mankell, Henning, 1948-2015, author. 1038058678 The starlet and the killer gossip column Author: Hall, Lisa. 1038057574 Murder-on-sea Author: Wassmer, Julie. 103805866X Eight tastes of treachery Author: Rose, Ryan. 0008837368 Beginning middle end Author: Luiselli, Valeria. 1038059070 Black milk : on motherhood and writing Author: Shafak, Elif, 1971-. 1038058759 A killer plot Author: Nevin, E.C. 1038058686 Lucien Author: Thornton, J.R. 1038058775 The summer girl Author: Blackhurst, Jenny. 1037406370 And the corpse wore tartan Author: MacBride, Stuart. 1037408047 Seek the traitor's son Author: Roth, Veronica. 1037416287 On Mystic Lake Author: Hannah, Kristin. 1038057280 Never to be found Author: Spain, Jo. 1038058694 The residency Author: Major, C.D. 1038058708 The country road murders Author: Patterson, James, 1947-. 1038058716 Cool machine Author: Whitehead, Colson. Childrens books 2318 Sort by: Relevance Author Title Publication year Print Save search 1524876798 Battle for the dragon Author: Sourcil, Pirate, author. Add to wish list Recommend title 1953424449 Rebel Girls rock : 25 tales of women in music Add to wish list Recommend title 2408042534 Do You Know?: Music Author: Delas, Julie, author. Add to wish list Recommend title 1788453247 Tyger Author: Said, S. F. Add to wish list Recommend title More editions/formats: Paperback Paperback Show all versions 1915588162 Why does plastic hurt the planet? Author: Gifford, Clive, author. Add to wish list Recommend title 0711289166 The planets : press the note to hear Holst's music Author: Courtney-Tickle, Jessica, author, artist. Add to wish list Recommend title 1803707771 That's not my Christmas tree... Author: Watt, Fiona, author. Add to wish list Recommend title 0008640742 The wreck of the Zanzibar Author: Morpurgo, Michael, author. Add to wish list Recommend title 1761210521 Christmas Train Author: Lucas, Mike Add to wish list Recommend title 1908489685 What Can You Spot in the Garden? Author: Pinnington, Andrea, author. Add to wish list Recommend title Categories Navigation Target Audience Adult Children Youth Tag Cloud adult bibliotek 3 glossop library heanor library map read to the beat summer reading challenge Sign in Library Card Number PIN Forgot your PIN code? Language en-gb Search query Advanced search Contact Derbyshire Libraries 01629 533444 ask.library@derbyshire.gov.uk Good to know Privacy Policy Accessibility Statement More from us Facebook Derbyshire Libraries on X Derbyshire Record Office Derbyshire County Council website",
+      "retrievedAt": "2026-09-07T07:53:46.714Z"
+    },
+    "page-body-healthcare": {
+      "url": "https://dchs.nhs.uk/",
+      "title": "Home :: Derbyshire Community Health Services",
+      "status": 200,
+      "textSample": "Home :: Derbyshire Community Health Services --> Skip to main content Skip to navigation Accessibility tools Accessibility tools Log in to MyDCHS Search this website Home About us About us Return to previous menu About us Who are we and what do we do? Who are we and what do we do? Return to previous menu Who are we and what do we do? Mission, vision and values Working the DCHS Way Our Board Our Board Return to previous menu Our Board Executive team Non-executive team Our Council of Governors Our Council of Governors Return to previous menu Our Council of Governors Meet our governors Become a member Quality at the heart of our care Quality at the heart of our care Return to previous menu Quality at the heart of our care Quality Always Quality Assurance Quality Conversations Training Patient Safety Clinical Effectiveness & Improvement Team Patient Experience Infection prevention & control Derbyshire Alliance end-of-life care Equality, diversity & inclusion Equality, diversity & inclusion Return to previous menu Equality, diversity & inclusion Staff networks for equality diversity and inclusion Accessible information standards Interpreting & translation Supporting colleagues and patients with deafness Trust reports, strategies and plans Freedom of Information DCHS Publication Scheme Information Governance Information Governance Return to previous menu Information Governance Records management Online Access to Records Cyber Security Our Partners Counter Fraud, bribery & corruption Counter Fraud, bribery & corruption Return to previous menu Counter Fraud, bribery & corruption Chief Executive statement on the Failure to Prevent Fraud offence DCHS Charitable Trust Share your experience Our services & locations Our services & locations Return to previous menu Our services & locations A-Z list of services Our Services About Airmid Our locations Our locations Return to previous menu Our locations Community Hospitals General Practices (GPs) Clinics/Health Centres Urgent Treatment Centres Community Support Bedded Units Resources Resources Return to previous menu Resources DCHS Policies DCHS Document Library Marsden Manual Patient Group Directions (PGDs) Derbyshire NHS Library Join us Join us Return to previous menu Join us Work for us Work for us Return to previous menu Work for us Join our team Students Wider Workforce Help our research Do business with us Become a member Volunteer with us Help us raise money for our Charitable Trust Contact and find us Charitable Trust Doors open at the new Babington Health Centre! Babington Health Centre is now open! We're delighted to welcome patients to our new health centre in Belper. You can read more on the development here Save the date - Improving Lives Through Community Healthcare* You&rsquo;re invited to join us at this year&rsquo;s DCHS Improving Lives Through Community Healthcare virtual meeting via MS Teams. When : Thursday 10 September 2026, 2pm - 4pm Please join us on MS Teams. * Incorporating our Annual Members&rsquo; Meeting subject to parliamentary approval of the accounts and annual report You can find more information here. Vacancies Click here for more information on our current vacancies and how to join the DCHS family. Work for us Urgent Treatment Centres Our Urgent Treatment Centres are open 8am to 8pm. At busy times, if we reach full capacity before 8pm, we may need to stop taking new patients so everyone already waiting can be treated safely. Ilkeston, Ripley and Whitworth UTCs Walk-in (no appointment needed): 8am–5pm Appointment only (via NHS 111): 5pm–8pm Buxton UTC Walk-in (no appointment needed): 8am–4pm Appointment only (via NHS 111): 4pm–8pm Our UTCs DCHS News Click here to catch-up with all of the latest projects, campaigns and celebrations for DCHS News Recognition Of Staff Excellence (ROSE) Awards Has a member of our staff made a difference or delivered extraordinary care? As a member of the public, you can nominate a healthcare worker for a ROSE award to say thank you for making a difference or delivering an extraordinary level of care. Click here for more information on nominations, and our past winners. ROSE Awards Working here Why choose us? Join our team Visitor information Our Services About us Our Vision and Values Derbyshire Shared Care Record Find out more here Open 7 days a week 8am-8pm Urgent treatment centres Social Media Follow us on social media: Facebook Instagram X Latest news View all 4th September 2026 Farming community invited back to Bakewell Agricultural Centre for health MOT Day this winter! Read more Popular Pages DCHS Document Library Outpatient Physiotherapy, Occupational Therapy and MSK Triage service DCHS Policies View our current vacancies News Useful Links NHS website Looking after your information Glossary Vacancie s Derbyshire Shared Care Record Resource scheduler (use your NHS mail credentials to access this platform) Smartcards and ID badges (DCHS staff only) Accessibility statement Datix incident reporting form* Estates fault reporting * Medical devices report * Unit4* Occupational Health (DCHS staff only) Links marked with an * indicate you need to be on an NHS network or connected via your smartcard for access getPageWrapperClass() -->",
+      "retrievedAt": "2026-09-07T07:53:49.660Z"
+    }
+  },
+  "areaReferencePoint": {
+    "latitude": 52.904858,
+    "longitude": -1.3754722,
+    "source": "places-area-reference"
+  },
+  "distanceKm": 7.3,
+  "verifiedGpPracticeCount": 2,
+  "findings": [
+    "2 verified GP practice(s) after official-source checks.",
+    "Verified GP practices were stored from Places and checked against official sources.",
+    "substantive editorial evidence supports intro, context and access",
+    "Actual evidence spend $0.168 of cap $0.170. OpenAI generation was not charged."
+  ],
+  "localPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/borrowash.json",
+  "editorialPackPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-editorial-evidence-pilots/brook-pharmacy-demo-derby/pharmacy-first/v3/borrowash.json",
+  "editorialSufficiency": "READY",
+  "outcomeSummary": "Collection finished. Evidence is READY. 2 verified GP practice(s). Spend $0.168.",
+  "reprocessedAt": null
+}

@@ -1,0 +1,332 @@
+{
+  "version": "design-intelligence-v1",
+  "tenant": "cat-v1-legacy-lloyds-sample",
+  "sourceRevision": "59b7daf74b22cc7d",
+  "capturedAt": "2026-08-01T08:08:13.009Z",
+  "primaryUrl": "https://www.lloydspharmacy.com",
+  "navigation": {
+    "tree": [
+      {
+        "id": "nav-1",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 1,
+        "selector": "header nav a",
+        "href": "https://forms-prod3.sprinklr.com/guided-workflows/6901df8b9fb9e23c43b436a4?gwId=144327&viewType=FULL_PAGE",
+        "text": "Contact us",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-2",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 2,
+        "selector": "header nav a",
+        "href": "https://lloydspharmacy.com/pages/customer-services",
+        "text": "Customer services",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-3",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 3,
+        "selector": "header nav a",
+        "href": "https://lloydspharmacy.com/pages/media-enquiries",
+        "text": "Media enquiries",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-4",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 4,
+        "selector": "header nav a",
+        "href": "https://onlinedoctor.lloydspharmacy.com/?utm_source=LP_&utm_medium=Referral&utm_campaign=Footer&utm_content=Footer",
+        "text": "Online Doctor",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-5",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 5,
+        "selector": "header nav a",
+        "href": "https://lloydspharmacy.com/pages/about-lloydspharmacy",
+        "text": "About us",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-6",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 6,
+        "selector": "header nav a",
+        "href": "https://lloydspharmacy.com/pages/delivery-information",
+        "text": "Delivery",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-7",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 7,
+        "selector": "header nav a",
+        "href": "https://lloydspharmacy.com/pages/returns-policy",
+        "text": "Returns",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      }
+    ],
+    "hierarchyDepth": 1,
+    "rootId": "nav-1"
+  },
+  "header": {
+    "rowCount": 1,
+    "announcementBar": null,
+    "logoBlock": {
+      "selector": "header .logo img",
+      "backgroundColour": "#ffffff",
+      "textColour": "#094db1",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "left",
+      "sticky": false,
+      "logoUrl": "http://lloydspharmacy.com/cdn/shopifycloud/storefront/assets/no-image-2048-a2addb12.gif",
+      "logoMaxHeight": "48px",
+      "logoPosition": "left"
+    },
+    "navigationBlock": {
+      "selector": "header nav",
+      "backgroundColour": "#ffffff",
+      "textColour": "#094db1",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "end",
+      "sticky": false,
+      "navPlacement": "horizontal-multi-link",
+      "mobileMenuBehaviour": "stacked-nav"
+    },
+    "ctaBlock": {
+      "selector": "header .btn, header .theme-btn",
+      "backgroundColour": "#01540a",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "right",
+      "sticky": false,
+      "labels": [
+        "Book An Appointment"
+      ],
+      "hrefs": [
+        "https://www.lloydspharmacy.com"
+      ]
+    },
+    "spacing": {
+      "paddingY": "",
+      "paddingX": "",
+      "gap": "16px"
+    },
+    "alignment": {
+      "logo": "left",
+      "nav": "center",
+      "cta": "right"
+    },
+    "sticky": true,
+    "responsive": {
+      "desktopBreakpoint": "980px",
+      "mobileMenuBehaviour": "stacked-nav"
+    }
+  },
+  "footer": {
+    "upperLayer": {
+      "selector": "footer",
+      "backgroundColour": "#094db1",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "56px",
+      "paddingBottom": "0"
+    },
+    "lowerLayer": {
+      "selector": "footer .footer-bottom",
+      "backgroundColour": "#094db1",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "18px"
+    },
+    "groups": [
+      {
+        "id": "footer-primary",
+        "role": "company",
+        "selector": "footer",
+        "heading": "Footer",
+        "links": [
+          {
+            "text": "Contact us",
+            "href": "https://forms-prod3.sprinklr.com/guided-workflows/6901df8b9fb9e23c43b436a4?gwId=144327&viewType=FULL_PAGE",
+            "selector": "footer a"
+          },
+          {
+            "text": "Customer services",
+            "href": "https://lloydspharmacy.com/pages/customer-services",
+            "selector": "footer a"
+          },
+          {
+            "text": "Media enquiries",
+            "href": "https://lloydspharmacy.com/pages/media-enquiries",
+            "selector": "footer a"
+          },
+          {
+            "text": "Online Doctor",
+            "href": "https://onlinedoctor.lloydspharmacy.com/?utm_source=LP_&utm_medium=Referral&utm_campaign=Footer&utm_content=Footer",
+            "selector": "footer a"
+          },
+          {
+            "text": "About us",
+            "href": "https://lloydspharmacy.com/pages/about-lloydspharmacy",
+            "selector": "footer a"
+          },
+          {
+            "text": "Delivery",
+            "href": "https://lloydspharmacy.com/pages/delivery-information",
+            "selector": "footer a"
+          },
+          {
+            "text": "Returns",
+            "href": "https://lloydspharmacy.com/pages/returns-policy",
+            "selector": "footer a"
+          }
+        ],
+        "backgroundColour": "#094db1",
+        "textColour": "#ffffff"
+      }
+    ],
+    "mobileStackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ]
+  },
+  "colours": [
+    {
+      "role": "primary",
+      "selector": ":root",
+      "computedColour": "#0d6efd",
+      "hex": "#0d6efd",
+      "layer": "body"
+    },
+    {
+      "role": "secondary",
+      "selector": ":root",
+      "computedColour": "#0a53be",
+      "hex": "#0a53be",
+      "layer": "body"
+    },
+    {
+      "role": "accent",
+      "selector": ":root",
+      "computedColour": "#0a53be",
+      "hex": "#0a53be",
+      "layer": "body"
+    },
+    {
+      "role": "header-background",
+      "selector": ":root",
+      "computedColour": "#ffffff",
+      "hex": "#ffffff",
+      "layer": "footer-upper"
+    },
+    {
+      "role": "footer-background",
+      "selector": ":root",
+      "computedColour": "#094db1",
+      "hex": "#094db1",
+      "layer": "footer-upper"
+    }
+  ],
+  "images": [
+    {
+      "id": "logo-primary",
+      "role": "logo",
+      "selector": "header .logo img",
+      "asset": "http://lloydspharmacy.com/cdn/shopifycloud/storefront/assets/no-image-2048-a2addb12.gif",
+      "width": 0,
+      "height": 0,
+      "aspectRatio": "",
+      "alt": "LloydsPharmacy",
+      "lazyLoad": false,
+      "backgroundImage": "",
+      "visibility": "visible"
+    }
+  ],
+  "validation": {
+    "navigationTreeComplete": true,
+    "headerHierarchyComplete": true,
+    "footerHierarchyComplete": true,
+    "colourRolesComplete": true,
+    "imageRolesComplete": true,
+    "navigationFlatteningRemoved": true,
+    "footerLayerMergeRemoved": true
+  },
+  "summary": {
+    "layoutClassification": "with-top-bar",
+    "headerStyle": "horizontal-multi-link",
+    "footerStyle": "four-column-contact",
+    "navigationStyle": "horizontal-multi-link",
+    "typographySystem": "Open Sans / Open Sans",
+    "buttonStyle": "filled-only · 10px · filled",
+    "colourSystem": "#0d6efd, #0a53be, #0a53be",
+    "logoPlacement": "left",
+    "evidenceCompleteness": 100,
+    "fallbackReason": null
+  }
+}

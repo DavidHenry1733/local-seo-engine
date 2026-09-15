@@ -1,0 +1,72 @@
+{
+  "savedAt": "2026-09-08T13:48:39.330Z",
+  "areaSlug": "spondon",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write two useful natural paragraphs in fluent British English, totalling 110–170 words. Introduce the area, then describe meaningful local features and healthcare references. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Do not describe Pharmacy First, healthcare outcomes, access, convenience, availability or eligibility. Return only the two finished local paragraphs.\n\n- NHS general practice services in Spondon are provided from Chapel Street Medical Centre.\n- Spondon is a neighbourhood ward in Derby.\n- Spondon has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Spondon has a public library.\n- NHS general practice services in Spondon are provided from Central Health Network.\n- NHS general practice services in Spondon are provided from Central Occupational Health.\n- Spondon Library is a community facility in Spondon.\n- Borrow Wood Park is a landmark in Spondon.\n- Dale Road Park is a landmark in Spondon.\n- West Park Meadow Nature Reserve is a landmark in Spondon."
+  },
+  "rawResponse": "Spondon is a neighbourhood ward located within Derby. Community matters and local improvements are overseen by a Neighbourhood Board, which comprises local councillors, residents, and representatives from public services and community organisations. The ward boasts several popular local landmarks and open spaces, such as Borrow Wood Park, Dale Road Park, and the scenic West Park Meadow Nature Reserve. In addition, Spondon Library serves as a vital public community facility for local residents.\n\nHealthcare provision within the area is centered around key medical facilities delivering essential NHS services. NHS general practice services in Spondon are provided from Chapel Street Medical Centre. Additionally, general practice services are delivered from Central Health Network and Central Occupational Health, forming an integral part of the primary medical care network available across the ward.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Community matters and local improvements are overseen by a Neighbourhood Board, which comprises local councillors, residents, and representatives from public services and community organisations. | rule=uncertain-paraphrase | defect=Community matters and local improvements are overseen by a Neighbourhood Board, which comprises local councillors, residents, and representatives from public services and community organisations. — uncertain paraphrase: unmatched wording (matters, improvements, overseen, which, comprises) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The ward boasts several popular local landmarks and open spaces, such as Borrow Wood Park, Dale Road Park, and the scenic West Park Meadow Nature Reserve. | rule=uncertain-paraphrase | defect=The ward boasts several popular local landmarks and open spaces, such as Borrow Wood Park, Dale Road Park, and the scenic West Park Meadow Nature Reserve. — uncertain paraphrase: unmatched wording (boasts, popular, landmarks, open, spaces, scenic) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=In addition, Spondon Library serves as a vital public community facility for local residents. | rule=uncertain-paraphrase | defect=In addition, Spondon Library serves as a vital public community facility for local residents. — uncertain paraphrase: unmatched wording (addition, serves, vital) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Additionally, general practice services are delivered from Central Health Network and Central Occupational Health, forming an integral part of the primary medical care network available across the ward. | rule=uncertain-paraphrase | defect=Additionally, general practice services are delivered from Central Health Network and Central Occupational Health, forming an integral part of the primary medical care network available across the ward. — uncertain paraphrase: unmatched wording (additionally, delivered, forming, integral, primary) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Spondon",
+    "heroHeading": "Pharmacy First in Spondon",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Spondon.",
+    "localIntroduction": "Spondon is a neighbourhood ward located within Derby. Community matters and local improvements are overseen by a Neighbourhood Board, which comprises local councillors, residents, and representatives from public services and community organisations. The ward boasts several popular local landmarks and open spaces, such as Borrow Wood Park, Dale Road Park, and the scenic West Park Meadow Nature Reserve. In addition, Spondon Library serves as a vital public community facility for local residents.\n\nHealthcare provision within the area is centered around key medical facilities delivering essential NHS services. NHS general practice services in Spondon are provided from Chapel Street Medical Centre. Additionally, general practice services are delivered from Central Health Network and Central Occupational Health, forming an integral part of the primary medical care network available across the ward.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Community matters and local improvements are overseen by a Neighbourhood Board, which comprises local councillors, residents, and representatives from public services and community organisations.",
+        "editorialFactId": "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The ward boasts several popular local landmarks and open spaces, such as Borrow Wood Park, Dale Road Park, and the scenic West Park Meadow Nature Reserve.",
+        "editorialFactId": "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Spondon are provided from Chapel Street Medical Centre.",
+        "editorialFactId": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Additionally, general practice services are delivered from Central Health Network and Central Occupational Health, forming an integral part of the primary medical care network available across the ward.",
+        "editorialFactId": "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 5.1 km in a straight line from Spondon.",
+        "editorialFactId": "spondon:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "spondon:community:spondon-has-a-neighbourhood-board-of-local-counc",
+      "spondon:heritage:borrow-wood-park-is-listed-as-a-landmark-in-spon",
+      "spondon:healthcare:nhs-general-practice-services-in-spondon-are-pro",
+      "spondon:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "tenantSlug": "ni03b-national-b",
+  "businessName": "National Search Tenant B",
+  "subjectDomain": "example-national-search-b.co.uk",
+  "primaryMarket": "United Kingdom",
+  "country": "United Kingdom",
+  "growthPlatform": "national",
+  "capturedAt": "2026-01-01T00:00:00.000Z",
+  "liveExecution": true,
+  "status": "collected",
+  "lastError": null,
+  "reusedExistingSnapshot": false,
+  "limits": {
+    "customerRankedKeywords": 500,
+    "serpQueries": 0,
+    "serpDepth": 10,
+    "competitorCandidates": 20
+  },
+  "endpoints": [],
+  "costs": {
+    "requests": 1,
+    "tasks": 1,
+    "totalCost": 0.01
+  },
+  "costLedger": {
+    "totalCost": 0.01
+  },
+  "provenance": {
+    "tenantSlug": "ni03b-national-b",
+    "subjectDomain": "example-national-search-b.co.uk",
+    "capturedAt": "2026-01-01T00:00:00.000Z",
+    "evidenceSource": "DATAFORSEO_LIVE",
+    "sourceSystem": "fixture",
+    "sourceEndpoint": null,
+    "sourceSnapshot": "/home/inboxingproweb/pharmaconnect-growth-engine/fixtures/national-growth-engine/ni03b-national-b-search-intelligence-v1.json",
+    "liveExecution": true,
+    "calculated": false,
+    "calculationMethod": null,
+    "confidenceBasis": "fixture",
+    "costContribution": 0.01
+  },
+  "authority": "LIVE_PROVEN",
+  "customerKeywords": [
+    {
+      "keyword": "pharmacy website design",
+      "position": 4,
+      "rankingUrl": "https://example-national-search-b.co.uk/websites",
+      "searchVolume": 320,
+      "cpc": 3.1,
+      "competition": 0.44,
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "sourceEndpoint": "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "calculated": false
+    }
+  ],
+  "organicCompetitors": [
+    {
+      "domain": "example-search-competitor.co.uk",
+      "name": "Example Search Competitor",
+      "websiteUrl": "https://example-search-competitor.co.uk",
+      "whyIdentified": [
+        "Appeared in organic Google results for pharmacy website design United Kingdom."
+      ],
+      "sourceQueries": [
+        "pharmacy website design United Kingdom"
+      ],
+      "bestSerpPosition": 3,
+      "classification": "direct_competitor",
+      "qualification": "qualified",
+      "evidenceStatus": "direct_competitor",
+      "evidenceUrls": [
+        "https://example-search-competitor.co.uk"
+      ],
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "evidenceSource": "DATAFORSEO_LIVE",
+      "verified": false
+    }
+  ],
+  "summary": {
+    "rankingKeywordCount": 1,
+    "top10Count": 1,
+    "top20Count": 1,
+    "rankingPageCount": 1,
+    "availableSearchDemand": 320,
+    "organicCompetitorCount": 1,
+    "directCompetitorCount": 1,
+    "adjacentCompetitorCount": 0,
+    "top10CountCalculated": true,
+    "top20CountCalculated": true,
+    "rankingPageCountCalculated": true,
+    "availableSearchDemandCalculated": true
+  },
+  "nextStage": {
+    "title": "Compare competitor keyword universes",
+    "detail": "Next: compare competitor keyword universes and identify commercial search gaps. That work is not part of this screen.",
+    "implemented": false
+  }
+}

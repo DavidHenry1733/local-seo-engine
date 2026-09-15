@@ -1,0 +1,650 @@
+{
+  "authorisedJobAudited": true,
+  "canonicalPlanId": "7034e0b3683a5f62",
+  "generationRevision": "2026-07-25T08:16:32.761Z",
+  "packageChecksum": "ba6298d2158ec7fbdbc48b8deb21a5aaca59addfec9676f3bff96efdd3b4b806",
+  "inventoryCount": 16,
+  "generatedCount": 16,
+  "completenessStatus": "COMPLETE",
+  "qualityReviewApprovalStatus": "pending",
+  "pagesAudited": 16,
+  "pagesPassed": 0,
+  "pagesWithWarnings": 2,
+  "pagesFailed": 14,
+  "overallQualityScore": 59,
+  "brandScore": 0,
+  "localisationScore": 80,
+  "contentScore": 52,
+  "clinicalScore": 100,
+  "imageScore": 100,
+  "seoScore": 0,
+  "internalLinkScore": 100,
+  "uxScore": 0,
+  "technicalScore": 100,
+  "criticalIssues": 15,
+  "majorIssues": 35,
+  "minorIssues": 48,
+  "crossTenantReferences": 0,
+  "rotherhamReferences": 1,
+  "placeholderContent": 0,
+  "duplicateParagraphs": 6,
+  "brokenAssets": 0,
+  "brokenInternalLinks": 0,
+  "orphanPages": 0,
+  "missingMetadata": 6,
+  "missingSchema": 6,
+  "responsiveFailures": 10,
+  "consoleErrors": [
+    "Access to font at 'https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2' from origin 'https://app.pharmaconnect.uk' has been blocked by CORS policy: Request header field authorization is not allowed by Access-Control-Allow-Headers in preflight response.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to font at 'https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2' from origin 'https://app.pharmaconnect.uk' has been blocked by CORS policy: Request header field authorization is not allowed by Access-Control-Allow-Headers in preflight response.",
+    "Access to font at 'https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2' from origin 'https://app.pharmaconnect.uk' has been blocked by CORS policy: Request header field authorization is not allowed by Access-Control-Allow-Headers in preflight response.",
+    "Access to font at 'https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2' from origin 'https://app.pharmaconnect.uk' has been blocked by CORS policy: Request header field authorization is not allowed by Access-Control-Allow-Headers in preflight response."
+  ],
+  "failedRequests": [
+    "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+    "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2",
+    "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2",
+    "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2"
+  ],
+  "qualityReviewApprovalEnabled": false,
+  "previewUrls": {
+    "homepage": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/?slug=reliable-direct-pharmacy",
+    "serviceHub": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first/?slug=reliable-direct-pharmacy",
+    "ecclesall": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=reliable-direct-pharmacy",
+    "fulwood": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-fulwood/?slug=reliable-direct-pharmacy",
+    "sheffieldCityCentre": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-sheffield-city-centre/?slug=reliable-direct-pharmacy",
+    "broomhill": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-broomhill/?slug=reliable-direct-pharmacy",
+    "kelhamIsland": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-kelham-island/?slug=reliable-direct-pharmacy",
+    "dore": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-dore/?slug=reliable-direct-pharmacy",
+    "hillsborough": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-hillsborough/?slug=reliable-direct-pharmacy",
+    "crookes": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-crookes/?slug=reliable-direct-pharmacy",
+    "blogWhatIs": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/what-is-pharmacy-first/?slug=reliable-direct-pharmacy",
+    "blogWhoShould": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/who-should-consider-pharmacy-first/?slug=reliable-direct-pharmacy",
+    "blogNeedToKnow": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-what-you-need-to-know/?slug=reliable-direct-pharmacy",
+    "guide": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-guide/?slug=reliable-direct-pharmacy",
+    "faq": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-faqs/?slug=reliable-direct-pharmacy",
+    "supporting": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-content-ecosystem/?slug=reliable-direct-pharmacy"
+  },
+  "pageResults": [
+    {
+      "slug": "index",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "pharmacy-first",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-ecclesall",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-fulwood",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-sheffield-city-centre",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-broomhill",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-kelham-island",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-dore",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-hillsborough",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "local-cluster-crookes",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "what-is-pharmacy-first",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "who-should-consider-pharmacy-first",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "pharmacy-first-what-you-need-to-know",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "pharmacy-first-guide",
+      "status": 200,
+      "verdict": "FAIL"
+    },
+    {
+      "slug": "pharmacy-first-faqs",
+      "status": 200,
+      "verdict": "WARNING"
+    },
+    {
+      "slug": "pharmacy-first-content-ecosystem",
+      "status": 200,
+      "verdict": "WARNING"
+    }
+  ],
+  "findings": {
+    "critical": [
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "index",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "pharmacy-first",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-ecclesall",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-fulwood",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-sheffield-city-centre",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-broomhill",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-kelham-island",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-dore",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-hillsborough",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "local-cluster-crookes",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "what-is-pharmacy-first",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "localisation",
+        "pageSlug": "what-is-pharmacy-first",
+        "message": "Rotherham reference",
+        "evidence": " Why choose Reliable Direct Pharmacy (Rotherham) 1"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "who-should-consider-pharmacy-first",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "pharmacy-first-what-you-need-to-know",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      },
+      {
+        "severity": "critical",
+        "category": "brand",
+        "pageSlug": "pharmacy-first-guide",
+        "message": "Corrupt opening hours displayed",
+        "evidence": "Opening hours: monospace,monospace;font-size:1em}.x-el-button…"
+      }
+    ],
+    "major": [
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "index",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "index",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "pharmacy-first",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      },
+      {
+        "severity": "major",
+        "category": "content",
+        "pageSlug": "local-cluster-sheffield-city-centre",
+        "message": "Duplicated generic Sheffield intro",
+        "evidence": "Reliable Direct Pharmacy is located at 251 Broomhall Street, S3 7SP. Patients in Sheffield can access NHS Pharmacy First"
+      },
+      {
+        "severity": "major",
+        "category": "content",
+        "pageSlug": "local-cluster-broomhill",
+        "message": "Duplicated generic Sheffield intro",
+        "evidence": "Reliable Direct Pharmacy is located at 251 Broomhall Street, S3 7SP. Patients in Sheffield can access NHS Pharmacy First"
+      },
+      {
+        "severity": "major",
+        "category": "content",
+        "pageSlug": "local-cluster-kelham-island",
+        "message": "Duplicated generic Sheffield intro",
+        "evidence": "Reliable Direct Pharmacy is located at 251 Broomhall Street, S3 7SP. Patients in Sheffield can access NHS Pharmacy First"
+      },
+      {
+        "severity": "major",
+        "category": "content",
+        "pageSlug": "local-cluster-dore",
+        "message": "Duplicated generic Sheffield intro",
+        "evidence": "Reliable Direct Pharmacy is located at 251 Broomhall Street, S3 7SP. Patients in Sheffield can access NHS Pharmacy First"
+      },
+      {
+        "severity": "major",
+        "category": "content",
+        "pageSlug": "local-cluster-hillsborough",
+        "message": "Duplicated generic Sheffield intro",
+        "evidence": "Reliable Direct Pharmacy is located at 251 Broomhall Street, S3 7SP. Patients in Sheffield can access NHS Pharmacy First"
+      },
+      {
+        "severity": "major",
+        "category": "content",
+        "pageSlug": "local-cluster-crookes",
+        "message": "Duplicated generic Sheffield intro",
+        "evidence": "Reliable Direct Pharmacy is located at 251 Broomhall Street, S3 7SP. Patients in Sheffield can access NHS Pharmacy First"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "what-is-pharmacy-first",
+        "message": "Missing meta description",
+        "evidence": "meta[name=\"description\"] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "what-is-pharmacy-first",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "what-is-pharmacy-first",
+        "message": "Missing schema",
+        "evidence": "No application/ld+json block"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "what-is-pharmacy-first",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "who-should-consider-pharmacy-first",
+        "message": "Missing meta description",
+        "evidence": "meta[name=\"description\"] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "who-should-consider-pharmacy-first",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "who-should-consider-pharmacy-first",
+        "message": "Missing schema",
+        "evidence": "No application/ld+json block"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "who-should-consider-pharmacy-first",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-what-you-need-to-know",
+        "message": "Missing meta description",
+        "evidence": "meta[name=\"description\"] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-what-you-need-to-know",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-what-you-need-to-know",
+        "message": "Missing schema",
+        "evidence": "No application/ld+json block"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "pharmacy-first-what-you-need-to-know",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-guide",
+        "message": "Missing meta description",
+        "evidence": "meta[name=\"description\"] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-guide",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-guide",
+        "message": "Missing schema",
+        "evidence": "No application/ld+json block"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "pharmacy-first-guide",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-faqs",
+        "message": "Missing meta description",
+        "evidence": "meta[name=\"description\"] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-faqs",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-faqs",
+        "message": "Missing schema",
+        "evidence": "No application/ld+json block"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "pharmacy-first-faqs",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      },
+      {
+        "severity": "major",
+        "category": "brand",
+        "pageSlug": "pharmacy-first-content-ecosystem",
+        "message": "Telephone not visible",
+        "evidence": "Expected 01142760150 / 01142 760150"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-content-ecosystem",
+        "message": "Missing meta description",
+        "evidence": "meta[name=\"description\"] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-content-ecosystem",
+        "message": "Missing canonical",
+        "evidence": "link[rel=canonical] absent"
+      },
+      {
+        "severity": "major",
+        "category": "seo",
+        "pageSlug": "pharmacy-first-content-ecosystem",
+        "message": "Missing schema",
+        "evidence": "No application/ld+json block"
+      },
+      {
+        "severity": "major",
+        "category": "ux",
+        "pageSlug": "pharmacy-first-content-ecosystem",
+        "message": "Horizontal overflow",
+        "evidence": "mobile 390px"
+      }
+    ],
+    "minor": [
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "index",
+        "message": "Missing OpenGraph",
+        "evidence": "og:title absent"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "index",
+        "message": "Missing Twitter card",
+        "evidence": "twitter:card absent"
+      },
+      {
+        "severity": "minor",
+        "category": "ux",
+        "pageSlug": "index",
+        "message": "Phone not tel: linked",
+        "evidence": "Phone displayed but no tel: href"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "pharmacy-first",
+        "message": "Missing OpenGraph",
+        "evidence": "og:title absent"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "pharmacy-first",
+        "message": "Missing Twitter card",
+        "evidence": "twitter:card absent"
+      },
+      {
+        "severity": "minor",
+        "category": "ux",
+        "pageSlug": "pharmacy-first",
+        "message": "Phone not tel: linked",
+        "evidence": "Phone displayed but no tel: href"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-ecclesall",
+        "message": "Missing OpenGraph",
+        "evidence": "og:title absent"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-ecclesall",
+        "message": "Missing Twitter card",
+        "evidence": "twitter:card absent"
+      },
+      {
+        "severity": "minor",
+        "category": "ux",
+        "pageSlug": "local-cluster-ecclesall",
+        "message": "Phone not tel: linked",
+        "evidence": "Phone displayed but no tel: href"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-fulwood",
+        "message": "Missing OpenGraph",
+        "evidence": "og:title absent"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-fulwood",
+        "message": "Missing Twitter card",
+        "evidence": "twitter:card absent"
+      },
+      {
+        "severity": "minor",
+        "category": "ux",
+        "pageSlug": "local-cluster-fulwood",
+        "message": "Phone not tel: linked",
+        "evidence": "Phone displayed but no tel: href"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-sheffield-city-centre",
+        "message": "Missing OpenGraph",
+        "evidence": "og:title absent"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-sheffield-city-centre",
+        "message": "Missing Twitter card",
+        "evidence": "twitter:card absent"
+      },
+      {
+        "severity": "minor",
+        "category": "ux",
+        "pageSlug": "local-cluster-sheffield-city-centre",
+        "message": "Phone not tel: linked",
+        "evidence": "Phone displayed but no tel: href"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-broomhill",
+        "message": "Missing OpenGraph",
+        "evidence": "og:title absent"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-broomhill",
+        "message": "Missing Twitter card",
+        "evidence": "twitter:card absent"
+      },
+      {
+        "severity": "minor",
+        "category": "ux",
+        "pageSlug": "local-cluster-broomhill",
+        "message": "Phone not tel: linked",
+        "evidence": "Phone displayed but no tel: href"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-kelham-island",
+        "message": "Missing OpenGraph",
+        "evidence": "og:title absent"
+      },
+      {
+        "severity": "minor",
+        "category": "seo",
+        "pageSlug": "local-cluster-kelham-island",
+        "message": "Missing Twitter card",
+        "evidence": "twitter:card absent"
+      }
+    ]
+  },
+  "status": "READY FOR PRODUCT OWNER PAGE REVIEW"
+}

@@ -602,6 +602,8 @@ export async function rebuildSitemapForClient(clientSlug: string): Promise<Sitem
             ? page.priority
             : page.type === "hub"
               ? 1.0
+              : page.type === "supporting"
+                ? 0.6
               : 0.8;
 
         if (
@@ -947,7 +949,7 @@ function scanLocalPages(clientDir: string): Array<{ slug: string; htmlPath: stri
 function patchImageSrcs(html: string, clientSlug: string, domain: string): string {
   const domainClean = domain.replace(/\/+$/, "");
   const base = `${domainClean}/assets/${clientSlug}`;
-  for (const slot of ["hero", "support", "conversion"]) {
+  for (const slot of ["hero", "support", "trust", "conversion"]) {
     const liveUrl = `${base}/${slot}.jpg`;
     // Pattern 1: root-relative API serve route
     const apiPattern = `/api/images/serve/${clientSlug}/${slot}`;
@@ -1173,7 +1175,7 @@ router.get("/assets/legacy-check", async (req, res) => {
   const domain = (project.domain ?? "").replace(/\/+$/, "");
   if (!domain) { res.status(400).json({ error: "Project has no domain configured" }); return; }
 
-  const LEGACY_SLOTS = ["hero", "support", "conversion"] as const;
+  const LEGACY_SLOTS = ["hero", "support", "trust", "conversion"] as const;
   const TIMEOUT_MS = 8000;
 
   // ── Step 1: probe each old generic file for existence on the live server ──

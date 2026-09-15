@@ -1,0 +1,292 @@
+{
+  "version": 2,
+  "slug": "cpa01r-clean-journey-pharmacy",
+  "updatedAt": "2026-07-28T06:48:50.106Z",
+  "currentStage": "quality_review",
+  "transitions": [
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-28T06:48:50.106Z",
+      "operator": "admin",
+      "durationMs": 111325,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-28T06:46:58.753Z",
+      "operator": "admin",
+      "durationMs": 56960770,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-27T14:57:37.966Z",
+      "operator": "admin",
+      "durationMs": 71938,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-27T14:56:26.013Z",
+      "operator": "admin",
+      "durationMs": 387500,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-27T14:49:58.498Z",
+      "operator": "admin",
+      "durationMs": 172403,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-27T14:47:06.080Z",
+      "operator": "admin",
+      "durationMs": 1622044,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-27T14:20:04.021Z",
+      "operator": "admin",
+      "durationMs": 933918,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-27T14:04:30.074Z",
+      "operator": "admin",
+      "durationMs": 4072786,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job f302f097-2e8f-4c78-9125-46586ff6326e completed — generate_service_page"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-27T12:56:37.269Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: generate_service_page",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-27T12:56:02.815Z",
+      "operator": "cpr-08-test",
+      "durationMs": 8462125,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Job 42e459c1-70d3-4272-b280-a512aed2d175 completed — generate_service_page"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-07-27T10:35:00.677Z",
+      "operator": "cpr-08-test",
+      "durationMs": null,
+      "reason": "Background job completed: generate_service_page",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-07-26T14:51:36.353Z",
+      "operator": "admin",
+      "durationMs": 778,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-07-26T14:51:35.557Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-07-26T14:51:35.554Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-07-26T14:51:35.536Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-26T13:07:15.707Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-26T13:06:58.182Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_service_page",
+      "startedAt": "2026-07-27T12:56:35.085Z",
+      "finishedAt": "2026-07-27T12:56:37.263Z",
+      "durationMs": 2178,
+      "operator": "admin",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 4,
+      "status": "completed",
+      "jobId": "f302f097-2e8f-4c78-9125-46586ff6326e"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_service_page",
+      "startedAt": "2026-07-27T10:03:19.162Z",
+      "finishedAt": "2026-07-27T10:03:21.007Z",
+      "durationMs": 1845,
+      "operator": "admin",
+      "evidence": "Campaign output handoff failed: ecosystem index missing: /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/cpa01r-clean-journey-pharmacy/pharmacy-first/_ecosystem-index.json",
+      "warnings": [],
+      "errors": [
+        "Campaign output handoff failed: ecosystem index missing: /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/cpa01r-clean-journey-pharmacy/pharmacy-first/_ecosystem-index.json"
+      ],
+      "retryCount": 3,
+      "status": "failed",
+      "jobId": "a92fcb51-5d74-4058-81ad-261c17aba12d"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_service_page",
+      "startedAt": "2026-07-27T10:00:46.265Z",
+      "finishedAt": "2026-07-27T10:00:48.572Z",
+      "durationMs": 2307,
+      "operator": "admin",
+      "evidence": "Campaign output handoff failed: ecosystem index missing: /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/cpa01r-clean-journey-pharmacy/pharmacy-first/_ecosystem-index.json",
+      "warnings": [],
+      "errors": [
+        "Campaign output handoff failed: ecosystem index missing: /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/cpa01r-clean-journey-pharmacy/pharmacy-first/_ecosystem-index.json"
+      ],
+      "retryCount": 2,
+      "status": "failed",
+      "jobId": "0ca0d5e4-e2e8-485d-bee2-192c4c433fc2"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_service_page",
+      "startedAt": "2026-07-27T09:58:31.543Z",
+      "finishedAt": "2026-07-27T10:35:00.632Z",
+      "durationMs": 2189089,
+      "operator": "cpr-08-test",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 1,
+      "status": "completed",
+      "jobId": "42e459c1-70d3-4272-b280-a512aed2d175"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_service_page",
+      "startedAt": "2026-07-27T08:48:37.688Z",
+      "finishedAt": "2026-07-27T08:48:39.206Z",
+      "durationMs": 1518,
+      "operator": "admin",
+      "evidence": "Campaign output handoff failed: ecosystem index missing: /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/cpa01r-clean-journey-pharmacy/pharmacy-first/_ecosystem-index.json",
+      "warnings": [],
+      "errors": [
+        "Campaign output handoff failed: ecosystem index missing: /home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/cpa01r-clean-journey-pharmacy/pharmacy-first/_ecosystem-index.json"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "87f53ec9-658f-4a30-806d-6f08e52515e0"
+    },
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-26T14:51:35.555Z",
+      "finishedAt": "2026-07-26T14:51:35.556Z",
+      "durationMs": 1,
+      "operator": "admin",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-26T14:51:35.552Z",
+      "finishedAt": "2026-07-26T14:51:35.553Z",
+      "durationMs": 1,
+      "operator": "admin",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-07-26T14:51:35.435Z",
+      "finishedAt": "2026-07-26T14:51:35.535Z",
+      "durationMs": 100,
+      "operator": "admin",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-26T13:07:15.671Z",
+      "finishedAt": "2026-07-26T13:07:15.671Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "9f6423ea-f9bc-4fc2-93ac-bac65a362783"
+    }
+  ]
+}

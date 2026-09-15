@@ -7,8 +7,10 @@
   "generationStamp": {
     "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
     "campaignId": "blood-pressure-checks",
-    "generatedAt": "2026-08-25T13:17:21.222Z",
-    "sourceContext": "customer-imported-profile"
+    "generatedAt": "2026-08-28T07:37:19.155Z",
+    "sourceContext": "customer-imported-profile",
+    "runId": "51b00d72-d32a-48c0-9bd2-95c620eb6d37",
+    "approvedBankHash": "523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c"
   },
   "generatorVersion": "content-engine-lockdown-v1",
   "profileUpdatedAt": "2026-08-24T12:05:05.436Z",
@@ -38,7 +40,7 @@
       "type": "local-area-pages",
       "title": "Blood Pressure Checks local page",
       "status": "included",
-      "previewUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/local/darfield/?slug=yorkshire-pharmacy-and-health-clinic",
+      "previewUrl": "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/local/darfield/?slug=yorkshire-pharmacy-and-health-clinic&run=51b00d72-d32a-48c0-9bd2-95c620eb6d37&bank=523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c",
       "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local",
       "required": false,
       "included": true,
@@ -158,7 +160,7 @@
   ],
   "previewUrls": [
     "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=yorkshire-pharmacy-and-health-clinic",
-    "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/local/darfield/?slug=yorkshire-pharmacy-and-health-clinic",
+    "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/local/darfield/?slug=yorkshire-pharmacy-and-health-clinic&run=51b00d72-d32a-48c0-9bd2-95c620eb6d37&bank=523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c",
     "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/packs/gbp-pack/?slug=yorkshire-pharmacy-and-health-clinic",
     "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/packs/social-pack/?slug=yorkshire-pharmacy-and-health-clinic",
     "/api/pharmacy-content-ecosystem-preview/blood-pressure-checks/packs/email-sequence/?slug=yorkshire-pharmacy-and-health-clinic",
@@ -178,14 +180,16 @@
     "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-publishing-settings/yorkshire-pharmacy-and-health-clinic.json",
     "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/_internal-link-map.json"
   ],
-  "status": "generated",
-  "reviewedAt": null,
-  "approvedAt": null,
-  "approvedBy": null,
-  "approvalStatus": "pending",
+  "status": "approved-locked",
+  "reviewedAt": "2026-08-28T08:11:18.292Z",
+  "approvedAt": "2026-08-28T08:11:18.292Z",
+  "approvedBy": "product-owner",
+  "approvalStatus": "approved-locked",
   "generationError": null,
   "adminDiagnostics": [
-    "scope:service-page-only"
+    "scope:service-page-only",
+    "locality-improvements:regenerated:8",
+    "locality-improvements:bank:523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c"
   ],
   "generationReportPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-generation-reports/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks.json",
   "packageValidation": {
@@ -199,5 +203,49 @@
   "tenantValidation": {
     "ok": true,
     "detail": "tenant ok"
+  },
+  "approvedBankHash": "523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c",
+  "currentRunInventory": {
+    "runId": "51b00d72-d32a-48c0-9bd2-95c620eb6d37",
+    "generationStamp": {
+      "tenantSlug": "yorkshire-pharmacy-and-health-clinic",
+      "campaignId": "blood-pressure-checks",
+      "generatedAt": "2026-08-28T07:37:19.155Z",
+      "sourceContext": "customer-imported-profile",
+      "runId": "51b00d72-d32a-48c0-9bd2-95c620eb6d37",
+      "approvedBankHash": "523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c"
+    },
+    "servicePagePath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-visual-experience/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/index.html",
+    "localityPagePaths": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/darfield/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/wombwell/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/thurnscoe/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/grimethorpe/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/goldthorpe/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/worsbrough/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/hoyland/index.html",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/local/cudworth/index.html"
+    ],
+    "reviewRecordPaths": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks/_internal-link-map.json"
+    ],
+    "approvedBankHash": "523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c"
+  },
+  "campaignLock": {
+    "task": "DASHBOARD-CAMPAIGN-APPROVAL-ACTION-36",
+    "lockedAt": "2026-08-28T08:11:18.292Z",
+    "lockedBankHash": "523230c01178b219e9ac0ff84cfa7bfa8737029c6610f8f58e19c489792c859c",
+    "lockedLocalityInventory": [
+      "darfield",
+      "wombwell",
+      "thurnscoe",
+      "grimethorpe",
+      "goldthorpe",
+      "worsbrough",
+      "hoyland",
+      "cudworth"
+    ],
+    "lockedPageCount": 9,
+    "approvalRecordPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/campaign-approvals/yorkshire-pharmacy-and-health-clinic/blood-pressure-checks.json"
   }
 }

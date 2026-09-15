@@ -1,0 +1,456 @@
+/**
+ * Isolated sales-demo Preview: Yorkshire Pharmacy First service layout/clinical
+ * content, overlaid with Brook demo identity from pharmacy.inboxingproweb.com.
+ * Request-time only. Does not write profiles, visual HTML, candidates, or
+ * authoritative pages.
+ */
+import fs from "node:fs";
+import { resolveVisualExperienceHtmlPath } from "./pharmacyVisualExperience.ts";
+import { renderBenchmarkPagePreviewHtml } from "./pharmacyContentEcosystemPreviewRoute.ts";
+import { loadSalesDemoBrookDerbyAreaSelection } from "./pharmacySalesDemoBrookDerbyAreaSelection.ts";
+
+export const SALES_DEMO_BROOK_SERVICE_PAGE_ASSET = "sales-demo-brook-service-page";
+export const SALES_DEMO_BROOK_NOTICE = "Demonstration website — for presentation purposes only.";
+export const SALES_DEMO_BROOK_SOURCE_URL = "https://pharmacy.inboxingproweb.com/";
+
+/** Verified from the live Brook demo site. Not the Rotherham brook-pharmacy profile. */
+export const BROOK_SALES_DEMO_IDENTITY = {
+  pharmacyName: "Brook Pharmacy",
+  address: "56 West Burton Road, Derby, DA5 4NR",
+  town: "Derby",
+  phoneDisplay: "01332 445 076",
+  logoUrl:
+    "https://pharmacy.inboxingproweb.com/wp-content/uploads/2026/01/freepik__create-logo-for-a-pharmacy-brook-pharmacy-with-sty__54711-scaled-e1768071326843.png",
+  mapEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2405.7576969104966!2d-1.4825298233725033!3d52.91678930677714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879f122e3b24b99%3A0x183300050bae3a8c!2sThe%20Durham%20Ox%2C%2056%20Burton%20Rd%2C%20Derby%20DE1%201TG%2C%20UK!5e0!3m2!1sen!2slk!4v1768128088494!5m2!1sen!2slk",
+} as const;
+
+/** Computed from https://pharmacy.inboxingproweb.com/ (desktop, 2026-09-02). */
+export const BROOK_SALES_DEMO_BRAND = {
+  primary: "#005EB8",
+  primaryHover: "#004a91",
+  cta: "#F59E0B",
+  ctaShadow: "rgba(245, 158, 11, 0.4)",
+  accent: "#007A7A",
+  charcoal: "#1F2933",
+  slate: "#5F6C7B",
+  footerBg: "#F5F7FA",
+  headingFont: "'Montserrat', Helvetica, Arial, sans-serif",
+  bodyFont: "'Open Sans', Arial, sans-serif",
+  buttonRadius: "12px",
+  headerCtaRadius: "9999px",
+  fontsHref:
+    "https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap",
+} as const;
+
+const YORKSHIRE_NAMES = [
+  "Yorkshire Pharmacy &amp; Health Clinic",
+  "Yorkshire Pharmacy & Health Clinic",
+  "Yorkshire Pharmacy and Health Clinic",
+] as const;
+
+const LOCATION_DEPENDENT_FLAGS = [
+  "hero eyebrow/lead — premises town in identity chrome",
+  "trust card heading/body — Local {town} Pharmacy / nearby communities",
+  "trust split copy — serving patients in the premises town",
+  "visit/local-access — Yorkshire premises address, coverage tags, map, directions",
+  "image alt text — premises-town identity in platform image alts (image files unchanged)",
+  "page title, meta description, JSON-LD — areaServed and provider",
+  "header/footer/CTA contact targets — previous tenant tel, mailto, website, maps dir",
+] as const;
+
+function escAttr(value: string): string {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;");
+}
+
+function escHtml(value: string): string {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function replaceAll(source: string, from: string, to: string): string {
+  if (!from) return source;
+  return source.split(from).join(to);
+}
+
+function flag(section: string): string {
+  return `<!-- SALES-DEMO-LOCATION-FLAG: ${section} -->`;
+}
+
+function applyBrookIdentityTokens(html: string): string {
+  const id = BROOK_SALES_DEMO_IDENTITY;
+  let out = html;
+
+  out = replaceAll(
+    out,
+    "91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK",
+    id.address,
+  );
+  out = replaceAll(out, "91 Snape Hill Rd, Darfield, Barnsley S73 9LR", id.address);
+  out = replaceAll(
+    out,
+    "91%20Snape%20Hill%20Rd%2C%20Darfield%2C%20Barnsley%20S73%209LR%2C%20UK",
+    encodeURIComponent(id.address),
+  );
+  out = replaceAll(out, "91 Snape Hill Rd", id.address);
+
+  for (const name of YORKSHIRE_NAMES) {
+    out = replaceAll(out, name, id.pharmacyName);
+  }
+
+  out = replaceAll(out, "01226 210477", id.phoneDisplay);
+  out = replaceAll(out, "01226210477", "01332445076");
+  out = replaceAll(out, "Local Barnsley Pharmacy", `Local ${id.town} Pharmacy`);
+  out = replaceAll(out, "Pharmacy First Barnsley", `Pharmacy First ${id.town}`);
+  out = replaceAll(out, "Areas served around Barnsley", `Areas served around ${id.town}`);
+  out = replaceAll(out, "patients in Barnsley and nearby communities", `patients in ${id.town}`);
+  out = replaceAll(out, "in Barnsley", `in ${id.town}`);
+  out = replaceAll(out, "patients in Barnsley", `patients in ${id.town}`);
+  out = replaceAll(out, "Patients in Barnsley", `Patients in ${id.town}`);
+  out = replaceAll(out, ", Barnsley", `, ${id.town}`);
+  out = replaceAll(out, " Barnsley", ` ${id.town}`);
+  out = replaceAll(out, '"Barnsley"', `"${id.town}"`);
+
+  return out;
+}
+
+function renderDemoLocalityLabels(): string {
+  const selection = loadSalesDemoBrookDerbyAreaSelection();
+  const labels = selection.areas
+    .map((row) => `<span class="coverage-tag" role="listitem">${escAttr(row.areaName)}</span>`)
+    .join("");
+  const origin = selection.demoLocation;
+  return `${flag("locality section — Yorkshire cluster replaced with saved Derby demonstration labels; no local pages")}
+<div data-sales-demo-localities="true"><strong>Areas served around Derby</strong><p class="sales-demo-locality-note">${escAttr(origin.label)}. Map origin: ${escAttr(origin.mapAddress)}.</p><div class="coverage-tags" role="list">${labels}</div></div>`;
+}
+
+function replaceYorkshireLocalClusterWithDemoLabels(html: string): string {
+  const block = renderDemoLocalityLabels();
+  const replaced = html.replace(
+    /<div><strong>Areas served around [^<]*<\/strong><div class="coverage-tags"[\s\S]*?<\/div><\/div>/,
+    block,
+  );
+  if (replaced !== html) return replaced;
+  return html.replace(
+    /<!-- SALES-DEMO-LOCATION-FLAG: coverage tags[\s\S]*?-->/,
+    block,
+  );
+}
+
+function replaceLogos(html: string): string {
+  const logo = BROOK_SALES_DEMO_IDENTITY.logoUrl;
+  let out = html.replace(
+    /https:\/\/yorkshirepharmacyhealthclinic\.co\.uk\/img\/[^"'\s>]+/gi,
+    logo,
+  );
+  out = out.replace(
+    /(<a class="brand"[^>]*>\s*<img\b[^>]*src=")[^"]*(")/i,
+    `$1${escAttr(logo)}$2`,
+  );
+  out = out.replace(
+    /(<img\b[^>]*alt="Brook Pharmacy"[^>]*src=")[^"]*(")/i,
+    `$1${escAttr(logo)}$2`,
+  );
+  out = out.replace(
+    /(<footer[\s\S]*?<img\b[^>]*src=")[^"]*("[^>]*>)/i,
+    `$1${escAttr(logo)}$2`,
+  );
+  return out;
+}
+
+function replaceMap(html: string): string {
+  const src = BROOK_SALES_DEMO_IDENTITY.mapEmbedUrl;
+  const title = `Map showing ${BROOK_SALES_DEMO_IDENTITY.pharmacyName} in ${BROOK_SALES_DEMO_IDENTITY.town}`;
+  return html.replace(
+    /<iframe\b([^>]*?)src="[^"]*"([^>]*?)title="[^"]*"/i,
+    `<iframe$1src="${escAttr(src)}"$2title="${escAttr(title)}"`,
+  );
+}
+
+function neutralizeContactActions(html: string): string {
+  let out = html;
+  out = out.replace(
+    /href="tel:[^"]*"/gi,
+    'href="#contact" data-demo-inert="tel"',
+  );
+  out = out.replace(
+    /<p><a href="mailto:[^"]*">[^<]*<\/a><\/p>/gi,
+    `${flag("footer email omitted — Brook demo site has no published email")}`,
+  );
+  out = out.replace(/href="mailto:[^"]*"/gi, 'href="#contact" data-demo-inert="mailto"');
+  out = out.replace(
+    /href="https:\/\/www\.google\.com\/maps\/dir\/[^"]*"/gi,
+    'href="#local-access"',
+  );
+  out = out.replace(
+    /(<a class="btn secondary" href="#local-access")[^>]*(>Get directions<\/a>)/i,
+    "$1$2",
+  );
+  out = out.replace(
+    /href="https?:\/\/[^"]*yorkshirepharmacyhealthclinic[^"]*"/gi,
+    'href="#contact" data-demo-inert="website"',
+  );
+  out = out.replace(
+    /href="https?:\/\/[^"]*broomlanepharmacy[^"]*"/gi,
+    'href="#contact" data-demo-inert="website"',
+  );
+  out = out.replace(
+    /href="\/api\/pharmacy-content-ecosystem-preview\/[^"]*"/gi,
+    'href="#local-access" data-demo-inert="local-cluster"',
+  );
+  const brandOpen = out.match(/<a class="brand"[^>]*>/i)?.[0] || "";
+  if (brandOpen && /href="https?:\/\//i.test(brandOpen)) {
+    out = out.replace(
+      /<a class="brand" href="[^"]*"/i,
+      '<a class="brand" href="#main-content" data-demo-inert="brand"',
+    );
+  }
+  return out;
+}
+
+function stripLeftoverYorkshireLocation(html: string): string {
+  let out = html;
+  out = out.replace(/\bWombwell\b/g, "");
+  out = out.replace(/\bDarfield\b/g, "");
+  out = out.replace(/\bThurnscoe\b/g, "");
+  out = out.replace(/\bGrimethorpe\b/g, "");
+  out = out.replace(/\bGoldthorpe\b/g, "");
+  out = out.replace(/\bWorsbrough\b/g, "");
+  out = out.replace(/\bHoyland\b/g, "");
+  out = out.replace(/\bCudworth\b/g, "");
+  out = out.replace(/\bRoyston\b/g, "");
+  out = out.replace(/\bChapeltown\b/g, "");
+  out = out.replace(/1\.7\s*km/gi, "");
+  return out;
+}
+
+function applyBrookHomepageBrand(html: string): string {
+  const b = BROOK_SALES_DEMO_BRAND;
+  if (/data-sales-demo-brook="brand"/i.test(html)) return html;
+  const fonts = `<link rel="stylesheet" href="${escAttr(b.fontsHref)}" data-sales-demo-brook="fonts"/>`;
+  const css = `<style data-sales-demo-brook="brand">
+:root{
+  --brand-primary:${b.primary} !important;
+  --brand-secondary:${b.primaryHover} !important;
+  --brand-cta:${b.cta} !important;
+  --brand-action:${b.cta} !important;
+  --pharmacy-cta:${b.cta} !important;
+  --brand-button-text:#ffffff !important;
+  --brand-accent:${b.accent} !important;
+  --brand-heading:${b.primary} !important;
+  --brand-heading-primary:${b.primary} !important;
+  --brand-heading-secondary:${b.accent} !important;
+  --header-text:${b.charcoal} !important;
+  --brand-nav-text:${b.charcoal} !important;
+  --header-bg:#ffffff !important;
+  --footer-bg:${b.footerBg} !important;
+  --brand-footer-bg:${b.footerBg} !important;
+  --brand-footer-bottom-bg:${b.footerBg} !important;
+  --footer-text:${b.charcoal} !important;
+  --brand-footer-text:${b.charcoal} !important;
+  --footer-link:${b.primary} !important;
+  --brand-footer-link:${b.primary} !important;
+  --footer-accent:${b.accent} !important;
+  --brand-footer-accent:${b.accent} !important;
+  --brand-top-bar-bg:${b.primary} !important;
+  --brand-font-heading:${b.headingFont} !important;
+  --brand-font-body:${b.bodyFont} !important;
+  --font-heading:${b.headingFont} !important;
+  --font-body:${b.bodyFont} !important;
+  --heading-font:${b.headingFont} !important;
+  --body-font:${b.bodyFont} !important;
+  --brand-radius-button:${b.buttonRadius} !important;
+  --btn-radius:${b.buttonRadius} !important;
+  --brand-muted:${b.slate} !important;
+  --brand-text:${b.charcoal} !important;
+  --navy:${b.primary} !important;
+}
+.btn{box-shadow:0 4px 14px 0 ${b.ctaShadow}}
+.btn.secondary{background:#fff;color:${b.primary};border:2px solid ${b.primary};box-shadow:none}
+.pc-v1-header .nav-cta.btn{border-radius:${b.headerCtaRadius};font-weight:700}
+</style>`;
+  let out = html;
+  out = out.includes("</head>")
+    ? out.replace(/<\/head>/i, `${fonts}\n${css}\n</head>`)
+    : `${fonts}${css}${out}`;
+  return out;
+}
+
+function renderBrookHomepageHeader(): string {
+  const id = BROOK_SALES_DEMO_IDENTITY;
+  const b = BROOK_SALES_DEMO_BRAND;
+  const phoneIcon = `<svg class="brook-demo-phone-icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="${b.primary}" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>`;
+  return `<header class="site-header brook-demo-header" data-sales-demo-brook="header">
+<div class="brook-demo-header-inner">
+<div class="brook-demo-header-left">
+<a class="brook-demo-logo" href="#main-content" data-demo-inert="brand"><img src="${escAttr(id.logoUrl)}" alt="${escAttr(id.pharmacyName)}" width="250" height="52"/></a>
+<nav class="brook-demo-nav" aria-label="Primary">
+<a href="#main-content" data-demo-inert="nav">Home</a>
+<a href="#service-definition" data-demo-inert="nav">Services</a>
+<a href="#prescriptions" data-demo-inert="nav">Prescriptions</a>
+<a href="#about-section" data-demo-inert="nav">About</a>
+<a href="#contact" data-demo-inert="nav">Contact</a>
+</nav>
+</div>
+<button type="button" class="brook-demo-nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="var h=this.closest('.brook-demo-header'); h.classList.toggle('is-open'); this.setAttribute('aria-expanded', h.classList.contains('is-open') ? 'true' : 'false');">☰</button>
+<div class="brook-demo-header-actions">
+<a class="brook-demo-phone" href="#contact" data-demo-inert="tel">${phoneIcon}<span>${escHtml(id.phoneDisplay)}</span></a>
+<a class="brook-demo-pill" href="#contact" data-demo-inert="cta">Order Prescription</a>
+</div>
+</div>
+</header>`;
+}
+
+function renderBrookHomepageFooter(): string {
+  const id = BROOK_SALES_DEMO_IDENTITY;
+  return `<footer class="site-footer brook-demo-footer" data-sales-demo-brook="footer">
+<div class="brook-demo-footer-inner">
+<div class="brook-demo-footer-brand">
+<img src="${escAttr(id.logoUrl)}" alt="${escAttr(id.pharmacyName)}" width="300" height="63"/>
+<p class="brook-demo-footer-quote">“Independent Community Pharmacy — Providing reliable NHS services with a focus on patient wellbeing and continuity of care.”</p>
+</div>
+<div class="brook-demo-footer-col">
+<h3>Compliance</h3>
+<p>GPhC Registered: 1109432<br/>Superintendent: 453756<br/>Authorized EPS Provider</p>
+</div>
+<div class="brook-demo-footer-col">
+<h3>Information</h3>
+<p>Privacy Policy<br/>Terms &amp; Conditions<br/>Accessibility Statement</p>
+</div>
+</div>
+</footer>`;
+}
+
+function brookHomepageChromeCss(): string {
+  const b = BROOK_SALES_DEMO_BRAND;
+  return `<style data-sales-demo-brook="chrome">
+.brook-demo-header.site-header{position:static;top:auto;z-index:20;background:#fff;border-bottom:0;color:${b.charcoal};font:400 14px/1.7 ${b.bodyFont}}
+.pharmacy-review-preview-toolbar~.brook-demo-header.site-header{top:auto}
+.brook-demo-header-inner{width:90%;max-width:1400px;margin:0 auto;padding:20px 0 27px;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);align-items:center;column-gap:24px;box-sizing:border-box}
+.brook-demo-header-left{display:flex;align-items:center;min-width:0}
+.brook-demo-logo{display:flex;align-items:center;flex:0 0 auto;width:280px;max-width:280px;margin-right:0;text-decoration:none}
+.brook-demo-logo img{display:block;width:250px;height:auto;max-width:250px;max-height:none;object-fit:contain}
+.brook-demo-nav{display:flex;align-items:center;flex:1 1 auto;min-width:0}
+.brook-demo-nav a{display:flex;align-items:center;padding:31px 0;margin:0 11px;font:600 16px/14px ${b.bodyFont};color:${b.charcoal};text-decoration:none}
+.brook-demo-nav a:hover{color:${b.primary}}
+.brook-demo-header-actions{display:flex;align-items:center;justify-content:center;gap:16px}
+.brook-demo-phone{display:flex;align-items:center;gap:8px;color:${b.charcoal}!important;font:700 14px/1.7 ${b.bodyFont};text-decoration:none}
+.brook-demo-phone:hover{color:${b.accent}!important}
+.brook-demo-phone-icon{flex:0 0 auto}
+.brook-demo-pill{display:inline-flex;align-items:center;justify-content:center;background:${b.cta};color:#fff;padding:10px 24px;border-radius:9999px;font:700 12px/24px ${b.bodyFont};text-transform:uppercase;letter-spacing:.6px;text-decoration:none;box-shadow:0 4px 14px 0 ${b.ctaShadow};white-space:nowrap}
+.brook-demo-nav-toggle{display:none;background:transparent;border:0;font-size:28px;line-height:1;padding:8px;color:#7EBEC5;cursor:pointer;justify-self:end}
+.brook-demo-footer.site-footer{background:${b.footerBg};color:${b.charcoal};padding:0;border-top:1.6px solid ${b.accent};font-family:${b.bodyFont}}
+.brook-demo-footer-inner{width:90%;max-width:1400px;margin:0 auto;padding:60px 0;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:48px;box-sizing:border-box;align-items:start}
+.brook-demo-footer-brand img{display:block;width:300px;max-width:100%;height:auto;margin:0 0 20px}
+.brook-demo-footer.site-footer .brook-demo-footer-quote{margin:0;padding:0 0 0 30px;max-width:450px;color:${b.charcoal}!important;font:500 18px/1.5 ${b.bodyFont}}
+.brook-demo-footer.site-footer .brook-demo-footer-col h3{margin:20px 0 0;color:${b.accent}!important;font:700 22px/1.4 ${b.bodyFont};letter-spacing:normal}
+.brook-demo-footer.site-footer .brook-demo-footer-col p{margin:0;color:${b.charcoal}!important;font:600 16px/2 ${b.bodyFont}}
+@media (max-width:980px){
+  .brook-demo-header-inner{grid-template-columns:1fr auto;padding:10px 0}
+  .brook-demo-nav,.brook-demo-header-actions{display:none}
+  .brook-demo-nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  .brook-demo-header.is-open .brook-demo-nav{display:flex;flex-direction:column;align-items:stretch;width:100%;grid-column:1/-1;border-top:1px solid #e5e7eb}
+  .brook-demo-header.is-open .brook-demo-header-actions{display:flex;width:100%;grid-column:1/-1;padding:12px 0 8px;justify-content:flex-start;flex-wrap:wrap}
+  .brook-demo-nav a{padding:12px 0;margin:0}
+  .brook-demo-footer-inner{grid-template-columns:1fr;gap:8px;padding:30px 0}
+  .brook-demo-footer.site-footer .brook-demo-footer-quote{font-size:16px}
+}
+@media (max-width:639px){
+  .brook-demo-phone{display:none}
+  .brook-demo-header.is-open .brook-demo-phone{display:none}
+}
+</style>`;
+}
+
+function applyBrookHomepageChrome(html: string): string {
+  if (/data-sales-demo-brook="header"/i.test(html)) return html;
+  let out = html.replace(/<header\b[^>]*>[\s\S]*?<\/header>/i, renderBrookHomepageHeader());
+  out = out.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/i, renderBrookHomepageFooter());
+  const css = brookHomepageChromeCss();
+  out = out.includes("</head>") ? out.replace(/<\/head>/i, `${css}\n</head>`) : `${css}${out}`;
+  return out;
+}
+
+function applyDemoNotice(html: string): string {
+  const extraCss = `<style data-sales-demo-brook="notice">.pharmacy-sales-demo-notice{display:block;margin-top:2px;font:600 12px/1.4 Inter,system-ui,sans-serif;color:#1e3a8a}.pharmacy-review-preview-toolbar{min-height:0}.pharmacy-review-preview-toolbar~.site-header{top:58px}html{scroll-padding-top:148px}section[id]{scroll-margin-top:148px}[data-demo-inert]{cursor:pointer}.sales-demo-locality-note{margin:8px 0 0;font:600 13px/1.45 Inter,system-ui,sans-serif;color:#1e3a8a}[data-sales-demo-localities] .coverage-tags{flex-wrap:wrap;overflow:visible}[data-sales-demo-localities] .coverage-tag{pointer-events:none;cursor:default;text-decoration:none}</style>`;
+  let out = html;
+  if (!out.includes('data-sales-demo-brook="notice"')) {
+    out = out.includes("</head>")
+      ? out.replace(/<\/head>/i, `${extraCss}\n</head>`)
+      : `${extraCss}${out}`;
+  }
+  out = out.replace(
+    /(<div class="pharmacy-review-preview-toolbar"[^>]*>)([\s\S]*?)(<\/div>)/i,
+    `$1$2<span class="pharmacy-sales-demo-notice">${SALES_DEMO_BROOK_NOTICE}</span>$3`,
+  );
+  out = out.replace(
+    /<body\b([^>]*)>/i,
+    `<body data-sales-demo="brook-inboxingproweb" data-sales-demo-source="${escAttr(SALES_DEMO_BROOK_SOURCE_URL)}"$1>`,
+  );
+  return out;
+}
+
+function stampPreviewSource(html: string): string {
+  if (/PREVIEW_SOURCE:\s*sales-demo-brook-service-page/i.test(html)) return html;
+  return html.replace(
+    /PREVIEW_SOURCE:\s*service-page-preview/i,
+    "PREVIEW_SOURCE: sales-demo-brook-service-page",
+  );
+}
+
+export function applyBrookSalesDemoIdentity(html: string): string {
+  const flags = LOCATION_DEPENDENT_FLAGS.map(flag).join("\n");
+  let out = String(html || "");
+  out = out.replace(/<head\b[^>]*>/i, (open) => `${open}\n${flags}`);
+  out = stampPreviewSource(out);
+  out = applyBrookIdentityTokens(out);
+  out = replaceYorkshireLocalClusterWithDemoLabels(out);
+  out = replaceLogos(out);
+  out = replaceMap(out);
+  out = neutralizeContactActions(out);
+  out = replaceAll(out, "https://yorkshirepharmacyhealthclinic.co.uk/", SALES_DEMO_BROOK_SOURCE_URL);
+  out = replaceAll(out, "https://yorkshirepharmacyhealthclinic.co.uk", SALES_DEMO_BROOK_SOURCE_URL.replace(/\/$/, ""));
+  out = replaceAll(out, "support@yorkshirepharmacyhealthclinic.co.uk/", "");
+  out = replaceAll(out, "support@yorkshirepharmacyhealthclinic.co.uk", "");
+  out = stripLeftoverYorkshireLocation(out);
+  out = applyDemoNotice(out);
+  out = applyBrookHomepageBrand(out);
+  out = applyBrookHomepageChrome(out);
+  return out;
+}
+
+export function renderBrookSalesDemoServicePreview(slug: string, campaignId: string): {
+  html: string;
+  sourcePath: string | null;
+  sourceRoute: string;
+} {
+  const allowed =
+    slug === "yorkshire-pharmacy-and-health-clinic" && campaignId === "pharmacy-first";
+  if (!allowed) {
+    return {
+      html: `<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"/><meta name="robots" content="noindex, nofollow"/><title>Sales demo unavailable</title></head><body><p>This sales-demo Preview is not available.</p></body></html>`,
+      sourcePath: null,
+      sourceRoute: "sales-demo-brook-service-page-unavailable",
+    };
+  }
+  const file = resolveVisualExperienceHtmlPath(campaignId as never, slug);
+  if (!file || !fs.existsSync(file)) {
+    return {
+      html: `<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"/><meta name="robots" content="noindex, nofollow"/><title>Sales demo unavailable</title></head><body><p>This sales-demo Preview is not available.</p></body></html>`,
+      sourcePath: null,
+      sourceRoute: "sales-demo-brook-service-page-unavailable",
+    };
+  }
+  const base = renderBenchmarkPagePreviewHtml(file, campaignId, slug, "service-page");
+  return {
+    html: applyBrookSalesDemoIdentity(base),
+    sourcePath: file,
+    sourceRoute: "sales-demo-brook-service-page",
+  };
+}

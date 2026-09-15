@@ -1,0 +1,79 @@
+{
+  "savedAt": "2026-09-08T13:40:23.844Z",
+  "areaSlug": "littleover",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 8192,
+    "prompt": "Using the verified information supplied for this area, write two useful natural paragraphs in fluent British English, totalling 110–170 words. Introduce the area, then describe meaningful local features and healthcare references. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Do not describe Pharmacy First, healthcare outcomes, access, convenience, availability or eligibility. Return only the two finished local paragraphs.\n\n- NHS general practice services in Littleover are provided from The Lanes Medical Centre.\n- Littleover is a neighbourhood ward in Derby.\n- NHS general practice services in Littleover are provided from Aspiro Healthcare - Hollybrook Medical Centre.\n- Royal Derby Hospital is a hospital in Littleover.\n- Blagreaves Library is a community facility in Littleover.\n- Bramblebrook Community Centre is a community facility in Littleover.\n- Clemson’s Park is a landmark in Littleover."
+  },
+  "rawResponse": "Littleover is a neighbourhood ward located in Derby, offering a welcoming environment supported by a strong network of local features. For leisure and outdoor recreation, residents have use of Clemson’s Park, which stands as a prominent landmark in the area. The district also benefits from valuable civic facilities, including Blagreaves Library and Bramblebrook Community Centre, both of which serve the wider local population.\n\nIn terms of medical provision, Littleover contains significant health infrastructure, including Royal Derby Hospital, which is situated directly within the ward. Primary care is similarly well represented across the district, with NHS general practice services in Littleover provided from both The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre.",
+  "validationResult": {
+    "ok": true,
+    "failures": [],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Littleover is a neighbourhood ward located in Derby, offering a welcoming environment supported by a strong network of local features. | rule=uncertain-paraphrase | defect=Littleover is a neighbourhood ward located in Derby, offering a welcoming environment supported by a strong network of local features. — uncertain paraphrase: unmatched wording (welcoming, environment, supported, strong, network, local, features) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=For leisure and outdoor recreation, residents have use of Clemson’s Park, which stands as a prominent landmark in the area. | rule=uncertain-paraphrase | defect=For leisure and outdoor recreation, residents have use of Clemson’s Park, which stands as a prominent landmark in the area. — uncertain paraphrase: unmatched wording (leisure, outdoor, recreation, residents, use, which, stands, prominent) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The district also benefits from valuable civic facilities, including Blagreaves Library and Bramblebrook Community Centre, both of which serve the wider local population. | rule=uncertain-paraphrase | defect=The district also benefits from valuable civic facilities, including Blagreaves Library and Bramblebrook Community Centre, both of which serve the wider local population. — uncertain paraphrase: unmatched wording (district, benefits, valuable, facilities, which, serve, wider, local, population) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=In terms of medical provision, Littleover contains significant health infrastructure, including Royal Derby Hospital, which is situated directly within the ward. | rule=uncertain-paraphrase | defect=In terms of medical provision, Littleover contains significant health infrastructure, including Royal Derby Hospital, which is situated directly within the ward. — uncertain paraphrase: unmatched wording (terms, provision, contains, significant, health, infrastructure, which, situated, directly) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Primary care is similarly well represented across the district, with NHS general practice services in Littleover provided from both The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre. | rule=uncertain-paraphrase | defect=Primary care is similarly well represented across the district, with NHS general practice services in Littleover provided from both The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre. — uncertain paraphrase: unmatched wording (primary, similarly, represented, district) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Littleover",
+    "heroHeading": "Pharmacy First in Littleover",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Littleover.",
+    "localIntroduction": "Littleover is a neighbourhood ward located in Derby, offering a welcoming environment supported by a strong network of local features. For leisure and outdoor recreation, residents have use of Clemson’s Park, which stands as a prominent landmark in the area. The district also benefits from valuable civic facilities, including Blagreaves Library and Bramblebrook Community Centre, both of which serve the wider local population.\n\nIn terms of medical provision, Littleover contains significant health infrastructure, including Royal Derby Hospital, which is situated directly within the ward. Primary care is similarly well represented across the district, with NHS general practice services in Littleover provided from both The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre.\n\nPharmacy First provides another way for eligible patients to seek help for certain common health conditions. A pharmacist can assess symptoms, consider relevant medicines and medical history, and explain the most appropriate next step. Depending on the clinical assessment, this may include advice, suitable treatment or referral to another healthcare professional.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Littleover is a neighbourhood ward located in Derby, offering a welcoming environment supported by a strong network of local features.",
+        "editorialFactId": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "For leisure and outdoor recreation, residents have use of Clemson’s Park, which stands as a prominent landmark in the area.",
+        "editorialFactId": "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The district also benefits from valuable civic facilities, including Blagreaves Library and Bramblebrook Community Centre, both of which serve the wider local population.",
+        "editorialFactId": "littleover:community:blagreaves-library-is-listed-as-a-community-faci"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "In terms of medical provision, Littleover contains significant health infrastructure, including Royal Derby Hospital, which is situated directly within the ward.",
+        "editorialFactId": "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Primary care is similarly well represented across the district, with NHS general practice services in Littleover provided from both The Lanes Medical Centre and Aspiro Healthcare - Hollybrook Medical Centre.",
+        "editorialFactId": "littleover:healthcare:nhs-general-practice-services-in-littleover-are-"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 3 km in a straight line from Littleover.",
+        "editorialFactId": "littleover:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "littleover:area-identity:littleover-is-a-neighbourhood-ward-in-derby",
+      "littleover:heritage:clemson-s-park-is-listed-as-a-landmark-in-little",
+      "littleover:community:blagreaves-library-is-listed-as-a-community-faci",
+      "littleover:healthcare:nhs-general-practice-services-in-littleover-are-",
+      "littleover:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

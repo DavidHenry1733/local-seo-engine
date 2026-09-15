@@ -50,6 +50,7 @@ export function scrubPublicLocalEngineTerms(text: string): string {
 
 /** Scrub public HTML attributes/paths that leak internal routing terms. */
 export function scrubPublicLocalEngineHtml(html: string): string {
+  if (/data-approved-bank-locality-contract=/i.test(html)) return html;
   return String(html || "")
     .replace(/\bdata-local-page-kind="location-cluster"/gi, 'data-local-page-kind="location-area"')
     .replace(/\bdata-publish-source="local-cluster-v1"/gi, 'data-publish-source="local-area-v1"')

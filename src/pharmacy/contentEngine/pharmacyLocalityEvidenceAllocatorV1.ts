@@ -69,7 +69,7 @@ function claimFocusEvidence(
   gp: string;
   localContext: string;
 } {
-  const roads = focus.includes("roads") ? memory.claim(pack.roads, 2) : [];
+  const roads = focus.includes("roads") && pack.roads.length ? memory.claim(pack.roads, 2) : [];
   const landmarks = focus.includes("landmarks") ? memory.claim([...pack.landmarks, ...pack.parks], 2) : [];
   const shopping = focus.includes("shopping") ? memory.claimOne(pack.shopping) : "";
   const school = focus.includes("schools") ? memory.claimOne(pack.schools) : "";

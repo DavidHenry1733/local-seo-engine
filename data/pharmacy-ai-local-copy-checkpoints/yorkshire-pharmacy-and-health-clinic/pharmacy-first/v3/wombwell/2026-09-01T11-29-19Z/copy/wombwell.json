@@ -1,0 +1,130 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-09-01T11:29:19.669Z",
+  "tokenUsage": {
+    "promptTokens": 4076,
+    "completionTokens": 355,
+    "totalTokens": 4431
+  },
+  "estimatedCostUsd": 0.010992,
+  "inputEvidencePackHash": "8771e11338855366eb7ea7a82d43e12a6f16eeec18af6ef74c8ab9a2b8d44d55",
+  "editorialEvidencePackHash": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+  "areaSlug": "wombwell",
+  "areaName": "Wombwell",
+  "editorialFactIdsUsed": [
+    "wombwell:pharmacy-relationship:distance",
+    "wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley"
+  ],
+  "outputCopy": {
+    "area": "Wombwell",
+    "heroHeading": "Pharmacy First for Wombwell",
+    "heroIntroduction": "Pharmacy First offers support for common conditions to people in Wombwell. Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+    "localIntroduction": "",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council."
+    ],
+    "relationshipToPharmacy": "",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "heroIntroduction",
+        "sentence": "Pharmacy First offers support for common conditions to people in Wombwell. Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+        "entityId": "wombwell:pharmacy-relationship:distance"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.",
+        "entityId": "wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "wombwell:pharmacy-relationship:distance",
+      "wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley"
+    ]
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First for Wombwell",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First offers support for common conditions to people in Wombwell.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "supportingCanonicalFieldOrEntity": "wombwell:pharmacy-relationship:distance",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.",
+      "supportingCanonicalFieldOrEntity": "wombwell:pharmacy-relationship:distance, wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns, wombwell:area-identity:wombwell-is-a-ward-in-barnsley-s-south-area-coun, wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley",
+      "providerSource": "verified-locality-evidence, barnsley.gov.uk, barnsley.gov.uk, barnsley.gov.uk",
+      "validationResult": "pass"
+    }
+  ],
+  "sentencePurposes": [
+    {
+      "field": "heroHeading",
+      "sentence": "Pharmacy First for Wombwell",
+      "purpose": "identify the local edition",
+      "supportingSource": "locality.areaName",
+      "readerValue": "tells the reader which area and service this page is for"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Pharmacy First offers support for common conditions to people in Wombwell.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "locality.areaName",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "heroIntroduction",
+      "sentence": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "purpose": "why this page is relevant",
+      "supportingSource": "wombwell:pharmacy-relationship:distance",
+      "readerValue": "explains why someone in this area should read this Pharmacy First page"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.",
+      "purpose": "verified local facts that help the reader",
+      "supportingSource": "wombwell:pharmacy-relationship:distance, wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns, wombwell:area-identity:wombwell-is-a-ward-in-barnsley-s-south-area-coun, wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley",
+      "readerValue": "orients the reader using a verified local fact"
+    }
+  ],
+  "repetitionAnalysis": {
+    "addressMentions": 1,
+    "telephoneMentions": 1,
+    "callAheadMentions": 0,
+    "areaNameMentions": 2,
+    "failures": []
+  },
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false,
+  "rawOpenAiResponse": "{\n  \"area\": \"Wombwell\",\n  \"heroHeading\": \"Pharmacy First for Wombwell\",\n  \"heroIntroduction\": \"Pharmacy First offers support for common conditions to people in Wombwell. Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.\"\n  ],\n  \"relationshipToPharmacy\": \"\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"heroIntroduction\",\n      \"sentence\": \"Pharmacy First offers support for common conditions to people in Wombwell. Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n      \"entityId\": \"wombwell:pharmacy-relationship:distance\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.\",\n      \"entityId\": \"wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"wombwell:pharmacy-relationship:distance\",\n    \"wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley\"\n  ]\n}",
+  "rawOpenAiResponses": [
+    "{\n  \"area\": \"Wombwell\",\n  \"heroHeading\": \"Pharmacy First for Wombwell\",\n  \"heroIntroduction\": \"Pharmacy First offers support for common conditions to people in Wombwell. Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localIntroduction\": \"\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": [\n    \"Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.\"\n  ],\n  \"relationshipToPharmacy\": \"\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"heroIntroduction\",\n      \"sentence\": \"Pharmacy First offers support for common conditions to people in Wombwell. Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n      \"entityId\": \"wombwell:pharmacy-relationship:distance\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"Yorkshire Pharmacy & Health Clinic is in Darfield, which, like Wombwell, is a ward in Barnsley's South Area Council.\",\n      \"entityId\": \"wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"wombwell:pharmacy-relationship:distance\",\n    \"wombwell:area-identity:wombwell-and-darfield-are-both-wards-in-barnsley\"\n  ]\n}"
+  ]
+}

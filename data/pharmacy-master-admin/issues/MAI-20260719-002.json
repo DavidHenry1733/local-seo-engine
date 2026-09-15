@@ -1,0 +1,196 @@
+{
+  "issueId": "MAI-20260719-002",
+  "createdAt": "2026-07-19T11:08:51.123Z",
+  "createdBy": "admin",
+  "updatedAt": "2026-07-19T11:08:51.638Z",
+  "tenantSlug": "banner-cross-pharmacy",
+  "campaignId": "pharmacy-first",
+  "serviceId": "pharmacy-first",
+  "affectedPageOrModule": "",
+  "category": "Customer onboarding",
+  "severity": "high",
+  "title": "Workflow failed: Google Import",
+  "description": "Add a Google Maps link, or enter pharmacy name, town and postcode.",
+  "expectedBehaviour": "Continue Workflow completes Google Import without error",
+  "actualBehaviour": "Add a Google Maps link, or enter pharmacy name, town and postcode.",
+  "reproductionSteps": "1. Open Master Admin customer record\n2. Customer slug: banner-cross-pharmacy\n3. Click Continue Workflow at stage: Google Import\n4. Action: import_google",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-07-19T11:08:51.403Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "banner-cross-pharmacy",
+      "businessName": "Banner Cross Pharmacy",
+      "website": "https://pharmacyhealthhub.co.uk/",
+      "lifecycleStatus": "awaiting_review",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-07-19T10:19:59.066Z",
+      "platformClientStatus": "setup_required"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "not_started",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/banner-cross-pharmacy-campaign-generation-context-pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "generationTimestamp": null,
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/banner-cross-pharmacy/pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/banner-cross-pharmacy/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/banner-cross-pharmacy.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "pageType": "unknown",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-07-19T11:04:15.194Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-07-19T11:04:15.194Z",
+        "size": 11596410
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 2782098,
+        "pmId": 3,
+        "status": "online",
+        "startTime": "2026-07-19T11:04:24.432Z",
+        "restartCount": 2834
+      },
+      "nodeEnv": "production"
+    },
+    "systemState": {
+      "websiteImportStatus": "snapshot_present",
+      "googleImportStatus": "none",
+      "businessProfileStatus": "setup_required",
+      "generationStatus": "idle",
+      "publishingStatus": "not_started",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "ab406a54-e5cb-473b-be4c-4bdc8b89db2d",
+        "action": "import_google",
+        "status": "failed",
+        "progressLabel": "Failed",
+        "updatedAt": "2026-07-19T11:08:51.121Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "b39ca96c-a030-4e38-99a0-461e76ce8df1",
+          "timestamp": "2026-07-19T11:08:51.367Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260719-002 created: Workflow failed: Google Import"
+        },
+        {
+          "id": "74852ca8-786e-4e1f-89bc-dd8177d6ce72",
+          "timestamp": "2026-07-19T11:08:51.075Z",
+          "action": "import_google",
+          "status": "error",
+          "evidence": ""
+        },
+        {
+          "id": "2802a91b-d738-48fd-98ab-ee0e6e467d2b",
+          "timestamp": "2026-07-19T10:19:59.145Z",
+          "action": "continue_workflow",
+          "status": "success",
+          "evidence": "Job 9a8e1730-44c0-4ca8-9fa0-b3d403582bb9 completed — import_website"
+        },
+        {
+          "id": "7d9b9ffa-e2cf-4f35-ab4e-769f0bf9249c",
+          "timestamp": "2026-07-19T10:19:59.085Z",
+          "action": "import_website",
+          "status": "success",
+          "evidence": "Website import completed for banner-cross-pharmacy"
+        },
+        {
+          "id": "5d83c5d2-ae2d-4d7b-8019-c3d3d718f857",
+          "timestamp": "2026-07-19T10:04:14.272Z",
+          "action": "create_customer_account",
+          "status": "success",
+          "evidence": "Customer account created for banner-cross-pharmacy@pharmaconnect.uk"
+        },
+        {
+          "id": "825beb1f-3874-4129-b5d0-c1ce8c99ab2a",
+          "timestamp": "2026-07-19T10:04:13.803Z",
+          "action": "create_customer",
+          "status": "success",
+          "evidence": "Commercial customer Banner Cross Pharmacy (banner-cross-pharmacy) created with workspace provisioning"
+        }
+      ]
+    },
+    "errors": [
+      {
+        "source": "background_job",
+        "action": "import_google",
+        "error": "Add a Google Maps link, or enter pharmacy name, town and postcode.",
+        "timestamp": "2026-07-19T11:08:51.121Z",
+        "retries": 0
+      },
+      {
+        "source": "audit_log",
+        "action": "import_google",
+        "error": "Add a Google Maps link, or enter pharmacy name, town and postcode.",
+        "timestamp": "2026-07-19T11:08:51.075Z",
+        "retries": 0
+      }
+    ],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/banner-cross-pharmacy.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-07-19T11:08:51.633Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/banner-cross-pharmacy.json"
+  ],
+  "linkedAuditEventIds": [
+    "b39ca96c-a030-4e38-99a0-461e76ce8df1"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-19T11:08:51.123Z",
+      "user": "admin",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": "COMMERCIAL RELEASE PROGRAMME V1\nRELEASE DEFECT\nONE ISSUE POLICY\n\nConfirmed browser-visible defect:\nAdd a Google Maps link, or enter pharmacy name, town and postcode.\n\nTarget tenant:\nbanner-cross-pharmacy (Banner Cross Pharmacy)\n\nTarget campaign:\npharmacy-first\n\nTarget URL:\nNot specified in issue record\n\nLocked systems (do not modify):\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nObjective:\nResolve the reported Customer onboarding issue for tenant banner-cross-pharmacy: Workflow failed: Google Import\n\nTrace requirements:\n- Reproduce using: 1. Open Master Admin customer record\n2. Customer slug: banner-cross-pharmacy\n3. Click Continue Workflow at stage: Google Import\n4. Action: import_google\n- Expected behaviour: Continue Workflow completes Google Import without error\n- Actual behaviour: Add a Google Maps link, or enter pharmacy name, town and postcode.\n- Page type (from diagnostics): unknown\n- Lifecycle at report time: awaiting_review\n- Root cause to be traced.\n\nFix scope:\n- Operational/support fix only unless Product Owner approves engine changes\n- Do not modify locked rendering, generation, publishing, SEO, indexing, or ranking engines\n\nDo not modify:\n- Service Page renderer\n- Local Page renderer\n- Brand DNA\n- Component DNA\n- Generation engines\n- Clinical content\n- Publishing engines\n- SEO engines\n- Indexing engines\n- Ranking engines\n\nValidation:\n- Confirm defect reproduced in browser\n- Apply fix within approved scope\n- Build and PM2 reload\n- WAIT FOR PRODUCT OWNER TEST\n- STOP.\n\nIssue ID: MAI-20260719-002\nSeverity: high\nCategory: Customer onboarding\nDiagnostic collected: 2026-07-19T11:08:51.633Z\n",
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

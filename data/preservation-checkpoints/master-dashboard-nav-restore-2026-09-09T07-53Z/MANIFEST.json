@@ -1,0 +1,1163 @@
+{
+  "kind": "master-dashboard-nav-restore-preservation-checkpoint",
+  "id": "master-dashboard-nav-restore-2026-09-09T07-53Z",
+  "checkpointAt": "2026-09-09T07:53:50.618573+00:00",
+  "purpose": "Record existing SEO Engine templates, pharmacy/client records and storage locations before restoring navigation only. No data moved, renamed, deleted or rewritten.",
+  "noMigration": true,
+  "noDeletion": true,
+  "noContentChanges": true,
+  "pharmacyClientDashboardUrl": "/api/admin/master",
+  "seoEngineDashboardUrl": "/api/dashboard",
+  "templates": {
+    "names": [
+      "InboxingProWeb Default",
+      "Trades & Home Services",
+      "Beauty & Clinic",
+      "Professional Services",
+      "Retail & Local Shop",
+      "Local Plumber \u2014 Service/Location Page"
+    ],
+    "ids": [
+      "inboxingproweb_default",
+      "trades_home_services",
+      "beauty_clinic",
+      "professional_services",
+      "retail_local_shop",
+      "plumber_local_service"
+    ],
+    "registry": {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/src/templates/templateRegistry.ts",
+      "sha256": "8ff0e7861ce486d056b3c217e34e3653313371e122e41e8f181fa9e36c3d71fe",
+      "templateIds": [
+        "inboxingproweb_default",
+        "trades_home_services",
+        "beauty_clinic",
+        "professional_services",
+        "retail_local_shop",
+        "plumber_local_service"
+      ],
+      "templateNames": [
+        "InboxingProWeb Default",
+        "Trades & Home Services",
+        "Beauty & Clinic",
+        "Professional Services",
+        "Retail & Local Shop",
+        "Local Plumber \u2014 Service/Location Page"
+      ]
+    },
+    "htmlFiles": {
+      "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates",
+      "exists": true,
+      "count": 9,
+      "entries": [
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.html",
+          "name": "cluster.html",
+          "bytes": 41315,
+          "mtime": "2026-08-25T14:40:30.509778+00:00",
+          "sha256": "8b50f98cfd4868de3114052ebf7aa91d259b4245ebd3b09205a4b135391c012a"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.old-before-v3.html",
+          "name": "cluster.old-before-v3.html",
+          "bytes": 41375,
+          "mtime": "2026-06-04T16:52:06.785197+00:00",
+          "sha256": "474d245162df5d7d04cbb5e339be0d24ae006e3bd7a695143c32d4657d188290"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.restore-point.html",
+          "name": "cluster.restore-point.html",
+          "bytes": 41375,
+          "mtime": "2026-06-04T17:54:53.687996+00:00",
+          "sha256": "474d245162df5d7d04cbb5e339be0d24ae006e3bd7a695143c32d4657d188290"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.v3-hybrid-broken.html",
+          "name": "cluster.v3-hybrid-broken.html",
+          "bytes": 15460,
+          "mtime": "2026-06-04T17:54:53.685996+00:00",
+          "sha256": "05d62dc9de7860e0d41c085c16a249fd0f1690527a7c381d10dd8788dddf0237"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.v3.brand-locked.html",
+          "name": "cluster.v3.brand-locked.html",
+          "bytes": 22857,
+          "mtime": "2026-06-05T08:23:33.020207+00:00",
+          "sha256": "c841271b9a7fbde1fbfb2f81742a08cbbc505e2647f4bc8b212ac74d25bf92fa"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.v3.locked.html",
+          "name": "cluster.v3.locked.html",
+          "bytes": 22958,
+          "mtime": "2026-06-05T07:32:51.851831+00:00",
+          "sha256": "401015506855901a30aef0d7b6dbdb1219b38f34e5be53ff5716533b633973f4"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.v3.master.html",
+          "name": "cluster.v3.master.html",
+          "bytes": 22958,
+          "mtime": "2026-06-05T07:33:08.832543+00:00",
+          "sha256": "401015506855901a30aef0d7b6dbdb1219b38f34e5be53ff5716533b633973f4"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/cluster.v3.web-design-locked.html",
+          "name": "cluster.v3.web-design-locked.html",
+          "bytes": 27453,
+          "mtime": "2026-06-05T14:41:56.387022+00:00",
+          "sha256": "90c6cc38eb5f5a28a7236a9c2d22c0b171400a9ce39c5df6dfb5900fbf5bd374"
+        },
+        {
+          "path": "/home/inboxingproweb/pharmaconnect-growth-engine/templates/index.html",
+          "name": "index.html",
+          "bytes": 29981,
+          "mtime": "2026-05-12T11:22:45.851304+00:00",
+          "sha256": "3636e72285c6ee43dd650b65b4fb36be7a6e340bd7fa1b0d9265cb4ecb936e81"
+        }
+      ]
+    },
+    "projectTemplateAssignments": [
+      {
+        "file": "banner-cross-pharmacy.json",
+        "clientSlug": "banner-cross-pharmacy",
+        "businessName": "Banner Cross Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "brook-pharmacy-demo-derby.json",
+        "clientSlug": "brook-pharmacy-demo-derby",
+        "businessName": "Brook Pharmacy Demo Derby",
+        "templateId": null
+      },
+      {
+        "file": "brook-pharmacy.json",
+        "clientSlug": "brook-pharmacy",
+        "businessName": "Brook Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-bespoke-avicenna.json",
+        "clientSlug": "cat-v1-bespoke-avicenna",
+        "businessName": "CAT V1 Bespoke Avicenna",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-ecommerce-chemist-direct.json",
+        "clientSlug": "cat-v1-ecommerce-chemist-direct",
+        "businessName": "CAT V1 Ecommerce Chemist Direct",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-gbp-connected-sample.json",
+        "clientSlug": "cat-v1-gbp-connected-sample",
+        "businessName": "CAT V1 GBP Connected Sample",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-gbp-unavailable-sample.json",
+        "clientSlug": "cat-v1-gbp-unavailable-sample",
+        "businessName": "CAT V1 GBP Unavailable Sample",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-independent-holloway.json",
+        "clientSlug": "cat-v1-independent-holloway",
+        "businessName": "CAT V1 Independent Holloway",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-legacy-lloyds-sample.json",
+        "clientSlug": "cat-v1-legacy-lloyds-sample",
+        "businessName": "CAT V1 Legacy Lloyds Sample",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-modern-pillsorted.json",
+        "clientSlug": "cat-v1-modern-pillsorted",
+        "businessName": "CAT V1 Modern Pillsorted",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-multi-service-day-lewis.json",
+        "clientSlug": "cat-v1-multi-service-day-lewis",
+        "businessName": "CAT V1 Multi Service Day Lewis",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-small-group-knights.json",
+        "clientSlug": "cat-v1-small-group-knights",
+        "businessName": "CAT V1 Small Group Knights",
+        "templateId": null
+      },
+      {
+        "file": "cat-v1-wordpress-peak.json",
+        "clientSlug": "cat-v1-wordpress-peak",
+        "businessName": "CAT V1 WordPress Peak",
+        "templateId": null
+      },
+      {
+        "file": "commercial-validation-pharmacy.json",
+        "clientSlug": "commercial-validation-pharmacy",
+        "businessName": "Commercial Validation Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "cpa01-acceptance-pharmacy.json",
+        "clientSlug": "cpa01-acceptance-pharmacy",
+        "businessName": "CPA01 Acceptance Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "cpa01r-clean-journey-pharmacy.json",
+        "clientSlug": "cpa01r-clean-journey-pharmacy",
+        "businessName": "CPA01R Clean Journey Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "dhmdigital.json",
+        "clientSlug": "dhmdigital",
+        "businessName": "dhmdigital",
+        "templateId": null
+      },
+      {
+        "file": "doncaster-pharmacy.json",
+        "clientSlug": "doncaster-pharmacy",
+        "businessName": "Doncaster Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "greenfield-pharmacy.json",
+        "clientSlug": "greenfield-pharmacy",
+        "businessName": "Greenfield Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "leeds-pharmacy.json",
+        "clientSlug": "leeds-pharmacy",
+        "businessName": "Leeds Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "patient-first-pharmacies-2.json",
+        "clientSlug": "patient-first-pharmacies-2",
+        "businessName": "Patient First Pharmacies",
+        "templateId": null
+      },
+      {
+        "file": "patient-first-pharmacies-3.json",
+        "clientSlug": "patient-first-pharmacies-3",
+        "businessName": "Patient First Pharmacies",
+        "templateId": null
+      },
+      {
+        "file": "patient-first-pharmacies.json",
+        "clientSlug": "patient-first-pharmacies",
+        "businessName": "Patient First Pharmacies",
+        "templateId": null
+      },
+      {
+        "file": "pharmaconnect.json",
+        "clientSlug": "pharmaconnect",
+        "businessName": "PharmaConnect",
+        "templateId": "pharmaconnect_default"
+      },
+      {
+        "file": "rc1-import-queue-test-pharmacy.json",
+        "clientSlug": "rc1-import-queue-test-pharmacy",
+        "businessName": "RC1 Import Queue Test Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "rc1-import-reliability-test.json",
+        "clientSlug": "rc1-import-reliability-test",
+        "businessName": "RC1 Import Reliability Test",
+        "templateId": null
+      },
+      {
+        "file": "reliable-direct-pharmacy.json",
+        "clientSlug": "reliable-direct-pharmacy",
+        "businessName": "Reliable Direct Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "self-provision-demo-v2.json",
+        "clientSlug": "self-provision-demo-v2",
+        "businessName": "Self Provision Demo Pharmacy V2",
+        "templateId": null
+      },
+      {
+        "file": "sprint-7a-commercial-onboarding-validation.json",
+        "clientSlug": "sprint-7a-commercial-onboarding-validation",
+        "businessName": "Sprint 7A Commercial Onboarding Validation",
+        "templateId": null
+      },
+      {
+        "file": "sprint-7a-defect-036-account-validation.json",
+        "clientSlug": "sprint-7a-defect-036-account-validation",
+        "businessName": "Sprint 7A Defect 036 Account Validation",
+        "templateId": null
+      },
+      {
+        "file": "welfare-pharmacy.json",
+        "clientSlug": "welfare-pharmacy",
+        "businessName": "Welfare Pharmacy",
+        "templateId": null
+      },
+      {
+        "file": "yorkshire-pharmacy-and-health-clinic.json",
+        "clientSlug": "yorkshire-pharmacy-and-health-clinic",
+        "businessName": "Yorkshire Pharmacy and Health Clinic",
+        "templateId": null
+      }
+    ]
+  },
+  "pharmacyRecords": {
+    "registryPath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-master-admin/registry.json",
+    "registrySha256": "f50dc4441bc80b7775e36fb52c8bce8f4cb24b3c55018be8821c109a9edfe65a",
+    "registryClientCount": 38,
+    "profileFileCount": 42,
+    "clients": [
+      {
+        "slug": "pharmaconnect.before-profile-cleanup",
+        "pharmacyName": "brook",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-06-15T15:11:03.737Z",
+        "updatedAt": "2026-07-31T07:09:17.994Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmaconnect.before-profile-cleanup.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/pharmaconnect.before-profile-cleanup.json",
+        "campaignStoreExists": false,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/pharmaconnect.before-profile-cleanup.json",
+        "projectConfigExists": false
+      },
+      {
+        "slug": "pharmaconnect",
+        "pharmacyName": "PharmaConnect",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-06-28T07:37:30.268Z",
+        "updatedAt": "2026-08-10T06:09:31.167Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmaconnect.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/pharmaconnect.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/pharmaconnect.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "dhmdigital",
+        "pharmacyName": "dhmdigital",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-06-28T16:57:47.953Z",
+        "updatedAt": "2026-07-31T07:09:17.967Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/dhmdigital.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/dhmdigital.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/dhmdigital.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "broom-lane-pharmacy",
+        "pharmacyName": "Broom Lane Pharmacy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-15T07:42:04.065Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/broom-lane-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/broom-lane-pharmacy.json",
+        "campaignStoreExists": false,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/broom-lane-pharmacy.json",
+        "projectConfigExists": false
+      },
+      {
+        "slug": "archway-pharmcy",
+        "pharmacyName": "Archway Pharmcy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-15T09:18:06.800Z",
+        "updatedAt": "2026-07-31T07:09:17.967Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/archway-pharmcy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/archway-pharmcy.json",
+        "campaignStoreExists": false,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/archway-pharmcy.json",
+        "projectConfigExists": false
+      },
+      {
+        "slug": "sprint-6a-validation-pharmacy",
+        "pharmacyName": "Sprint 6A Validation Pharmacy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-19T07:00:01.632Z",
+        "updatedAt": "2026-07-31T07:09:17.968Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-6a-validation-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/sprint-6a-validation-pharmacy.json",
+        "campaignStoreExists": false,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/sprint-6a-validation-pharmacy.json",
+        "projectConfigExists": false
+      },
+      {
+        "slug": "sprint-6c-workflow-validation-pharmacy",
+        "pharmacyName": "Sprint 6C Workflow Validation Pharmacy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-19T08:22:12.671Z",
+        "updatedAt": "2026-07-31T07:09:17.988Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-6c-workflow-validation-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/sprint-6c-workflow-validation-pharmacy.json",
+        "campaignStoreExists": false,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/sprint-6c-workflow-validation-pharmacy.json",
+        "projectConfigExists": false
+      },
+      {
+        "slug": "sprint-6d-orchestration-validation",
+        "pharmacyName": "Sprint 6D Orchestration Validation",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-19T08:32:54.012Z",
+        "updatedAt": "2026-07-31T07:09:17.989Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-6d-orchestration-validation.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/sprint-6d-orchestration-validation.json",
+        "campaignStoreExists": false,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/sprint-6d-orchestration-validation.json",
+        "projectConfigExists": false
+      },
+      {
+        "slug": "sprint-7a-commercial-onboarding-validation",
+        "pharmacyName": "Sprint 7A Commercial Onboarding Validation",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-19T09:54:36.988Z",
+        "updatedAt": "2026-07-31T07:09:17.989Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-7a-commercial-onboarding-validation.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/sprint-7a-commercial-onboarding-validation.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/sprint-7a-commercial-onboarding-validation.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "banner-cross-pharmacy",
+        "pharmacyName": "Banner Cross Pharmacy",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-07-19T10:04:12.480Z",
+        "updatedAt": "2026-07-19T10:04:12.480Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/banner-cross-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/banner-cross-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "sprint-7a-defect-036-account-validation",
+        "pharmacyName": "Sprint 7A Defect 036 Account Validation",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-19T10:14:06.033Z",
+        "updatedAt": "2026-07-31T07:09:17.991Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-7a-defect-036-account-validation.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/sprint-7a-defect-036-account-validation.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/sprint-7a-defect-036-account-validation.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "reliable-direct-pharmacy",
+        "pharmacyName": "Reliable Direct Pharmacy",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-07-23T14:41:36.391Z",
+        "updatedAt": "2026-07-23T14:41:36.391Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/reliable-direct-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/reliable-direct-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/reliable-direct-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cpa01-acceptance-pharmacy",
+        "pharmacyName": "CPA01 Acceptance Pharmacy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-26T10:19:41.041Z",
+        "updatedAt": "2026-07-31T07:09:17.991Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cpa01-acceptance-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cpa01-acceptance-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cpa01-acceptance-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cpa01r-clean-journey-pharmacy",
+        "pharmacyName": "CPA01R Clean Journey Pharmacy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-26T13:06:55.190Z",
+        "updatedAt": "2026-07-31T07:09:17.992Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cpa01r-clean-journey-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cpa01r-clean-journey-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cpa01r-clean-journey-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "patient-first-pharmacies",
+        "pharmacyName": "Patient First Pharmacies",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-28T08:04:00.668Z",
+        "updatedAt": "2026-07-31T07:09:17.992Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/patient-first-pharmacies.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/patient-first-pharmacies.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/patient-first-pharmacies.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "patient-first-pharmacies-2",
+        "pharmacyName": "Patient First Pharmacies",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-28T08:04:59.354Z",
+        "updatedAt": "2026-07-31T07:09:17.993Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/patient-first-pharmacies-2.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/patient-first-pharmacies-2.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/patient-first-pharmacies-2.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "patient-first-pharmacies-3",
+        "pharmacyName": "Patient First Pharmacies",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-28T08:11:49.873Z",
+        "updatedAt": "2026-07-31T07:09:17.993Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/patient-first-pharmacies-3.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/patient-first-pharmacies-3.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/patient-first-pharmacies-3.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "welfare-pharmacy",
+        "pharmacyName": "Welfare Pharmacy",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-07-28T10:21:22.700Z",
+        "updatedAt": "2026-07-28T10:21:22.700Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/welfare-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/welfare-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/welfare-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "self-provision-demo-v2",
+        "pharmacyName": "Self Provision Demo Pharmacy V2",
+        "archived": true,
+        "isDemo": true,
+        "createdAt": "2026-07-30T07:43:08.990Z",
+        "updatedAt": "2026-07-31T07:09:17.993Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/self-provision-demo-v2.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/self-provision-demo-v2.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/self-provision-demo-v2.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "greenfield-pharmacy",
+        "pharmacyName": "Greenfield Pharmacy",
+        "archived": true,
+        "isDemo": true,
+        "createdAt": "2026-07-30T07:46:05.610Z",
+        "updatedAt": "2026-07-31T07:09:17.994Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/greenfield-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/greenfield-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/greenfield-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "brook-pharmacy",
+        "pharmacyName": "Brook Pharmacy",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-07-31T12:18:17.201Z",
+        "updatedAt": "2026-07-31T12:18:17.201Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/brook-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/brook-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/brook-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "commercial-validation-pharmacy",
+        "pharmacyName": "Commercial Validation Pharmacy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-31T14:03:31.502Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/commercial-validation-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/commercial-validation-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/commercial-validation-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "rc1-import-queue-test-pharmacy",
+        "pharmacyName": "RC1 Import Queue Test Pharmacy",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-31T14:29:43.274Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/rc1-import-queue-test-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/rc1-import-queue-test-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/rc1-import-queue-test-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "rc1-import-reliability-test",
+        "pharmacyName": "RC1 Import Reliability Test",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-07-31T14:42:52.658Z",
+        "updatedAt": "2026-07-31T14:43:13.538Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/rc1-import-reliability-test.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/rc1-import-reliability-test.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/rc1-import-reliability-test.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-independent-holloway",
+        "pharmacyName": "CAT V1 Independent Holloway",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:03:49.998Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-independent-holloway.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-independent-holloway.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-independent-holloway.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-small-group-knights",
+        "pharmacyName": "CAT V1 Small Group Knights",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:04:13.522Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-small-group-knights.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-small-group-knights.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-small-group-knights.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-ecommerce-chemist-direct",
+        "pharmacyName": "CAT V1 Ecommerce Chemist Direct",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:04:34.981Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-ecommerce-chemist-direct.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-ecommerce-chemist-direct.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-ecommerce-chemist-direct.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-wordpress-peak",
+        "pharmacyName": "CAT V1 WordPress Peak",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:04:56.450Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-wordpress-peak.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-wordpress-peak.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-wordpress-peak.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-bespoke-avicenna",
+        "pharmacyName": "CAT V1 Bespoke Avicenna",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:05:23.396Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-bespoke-avicenna.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-bespoke-avicenna.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-bespoke-avicenna.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-modern-pillsorted",
+        "pharmacyName": "CAT V1 Modern Pillsorted",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:05:46.477Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-modern-pillsorted.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-modern-pillsorted.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-modern-pillsorted.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-legacy-lloyds-sample",
+        "pharmacyName": "CAT V1 Legacy Lloyds Sample",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:07:02.104Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-legacy-lloyds-sample.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-legacy-lloyds-sample.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-legacy-lloyds-sample.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-gbp-connected-sample",
+        "pharmacyName": "CAT V1 GBP Connected Sample",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:08:40.838Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-gbp-connected-sample.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-gbp-connected-sample.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-gbp-connected-sample.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-gbp-unavailable-sample",
+        "pharmacyName": "CAT V1 GBP Unavailable Sample",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:09:17.317Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-gbp-unavailable-sample.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-gbp-unavailable-sample.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-gbp-unavailable-sample.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "cat-v1-multi-service-day-lewis",
+        "pharmacyName": "CAT V1 Multi Service Day Lewis",
+        "archived": true,
+        "isDemo": false,
+        "createdAt": "2026-08-01T08:10:29.413Z",
+        "updatedAt": "2026-08-01T09:59:00.000Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-multi-service-day-lewis.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/cat-v1-multi-service-day-lewis.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/cat-v1-multi-service-day-lewis.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "leeds-pharmacy",
+        "pharmacyName": "Leeds Pharmacy",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-08-02T08:37:38.425Z",
+        "updatedAt": "2026-08-02T08:37:38.425Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/leeds-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/leeds-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/leeds-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "doncaster-pharmacy",
+        "pharmacyName": "Doncaster Pharmacy",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-08-20T09:25:44.061Z",
+        "updatedAt": "2026-08-20T09:25:44.061Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/doncaster-pharmacy.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/doncaster-pharmacy.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/doncaster-pharmacy.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "yorkshire-pharmacy-and-health-clinic",
+        "pharmacyName": "Yorkshire Pharmacy and Health Clinic",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-08-20T11:01:19.526Z",
+        "updatedAt": "2026-08-20T11:01:19.526Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/yorkshire-pharmacy-and-health-clinic.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/yorkshire-pharmacy-and-health-clinic.json",
+        "projectConfigExists": true
+      },
+      {
+        "slug": "brook-pharmacy-demo-derby",
+        "pharmacyName": "Brook Pharmacy Demo Derby",
+        "archived": false,
+        "isDemo": false,
+        "createdAt": "2026-09-02T09:03:21.231Z",
+        "updatedAt": "2026-09-02T09:03:21.231Z",
+        "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/brook-pharmacy-demo-derby.json",
+        "profileExists": true,
+        "campaignStorePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-campaigns/brook-pharmacy-demo-derby.json",
+        "campaignStoreExists": true,
+        "projectConfigPath": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/brook-pharmacy-demo-derby.json",
+        "projectConfigExists": true
+      }
+    ],
+    "profileFiles": [
+      {
+        "name": "archway-pharmcy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/archway-pharmcy.json",
+        "sha256": "56aea45fc3a1008582ed40eea686f5ae53cd48599294c2370878735bb114cd1a",
+        "bytes": 64093
+      },
+      {
+        "name": "banner-cross-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/banner-cross-pharmacy.json",
+        "sha256": "fa226414cf99d4d92eb2396d32a2d55dfa646ebfd43d20740e30e4220e5e8deb",
+        "bytes": 126422
+      },
+      {
+        "name": "brook-pharmacy-demo-derby.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/brook-pharmacy-demo-derby.json",
+        "sha256": "7a88122404e191b33f0b3531b66381d1bf75f06c700f219bb4aa6d79fd8ead6a",
+        "bytes": 62079
+      },
+      {
+        "name": "brook-pharmacy.before-cpr-recovery-02.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/brook-pharmacy.before-cpr-recovery-02.json",
+        "sha256": "90d456c4aa0292649ce974a43e9fa62d931ba8827a2c672035ad2f794afa3938",
+        "bytes": 70666
+      },
+      {
+        "name": "brook-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/brook-pharmacy.json",
+        "sha256": "8ca9151abf92d3b187c6397a33276a48d72ab8891e697d62637a03e82250b169",
+        "bytes": 74084
+      },
+      {
+        "name": "broom-lane-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/broom-lane-pharmacy.json",
+        "sha256": "975e0aa0c990ea66836435bab277927a789b5fe6a52e10cdf7d724d85703563f",
+        "bytes": 70279
+      },
+      {
+        "name": "cat-v1-bespoke-avicenna.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-bespoke-avicenna.json",
+        "sha256": "ed6e4da24637aaf92dc36e85a333a1c2fa6a5dccf384ff2923c0531b47234f10",
+        "bytes": 14975
+      },
+      {
+        "name": "cat-v1-ecommerce-chemist-direct.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-ecommerce-chemist-direct.json",
+        "sha256": "49dd819e481e32213a1ecd63c910a59d0348f2f4dcef13bc94b37942200fba42",
+        "bytes": 14781
+      },
+      {
+        "name": "cat-v1-gbp-connected-sample.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-gbp-connected-sample.json",
+        "sha256": "109b7925be00bc533ce7057bc78447b138c6def158876a7e489bf1323cc9a09f",
+        "bytes": 39005
+      },
+      {
+        "name": "cat-v1-gbp-unavailable-sample.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-gbp-unavailable-sample.json",
+        "sha256": "75afe2791e42d575526b83ceb2dcb9e8afa31d49c151a01ca7d6c8e3d2ed4db0",
+        "bytes": 77499
+      },
+      {
+        "name": "cat-v1-independent-holloway.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-independent-holloway.json",
+        "sha256": "5cd143f024079f2047745035318db615f9b54eca5f766e1be7c958478d50c0a7",
+        "bytes": 14795
+      },
+      {
+        "name": "cat-v1-legacy-lloyds-sample.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-legacy-lloyds-sample.json",
+        "sha256": "e5206cbaabd4face122c30bcdadbad842dcf9ecfaf9712e74dad3b7ca0794f54",
+        "bytes": 71546
+      },
+      {
+        "name": "cat-v1-modern-pillsorted.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-modern-pillsorted.json",
+        "sha256": "7452c022e65f655a2a81545be089833ec8e7d05e9725a97e742ae4e6dc3a9d5b",
+        "bytes": 66837
+      },
+      {
+        "name": "cat-v1-multi-service-day-lewis.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-multi-service-day-lewis.json",
+        "sha256": "262e876f1550c311422c3d9e88230ff28f78614081350e2b453c19524a58cfe1",
+        "bytes": 14745
+      },
+      {
+        "name": "cat-v1-small-group-knights.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-small-group-knights.json",
+        "sha256": "6c094c7497b60ac5091ebeffdfaae9d1dca58aa376f64bdf14b7455cca58f4b9",
+        "bytes": 14839
+      },
+      {
+        "name": "cat-v1-wordpress-peak.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cat-v1-wordpress-peak.json",
+        "sha256": "7c15430cfefdd6ec3c4c10756eeff5477d7c3074ad877ff3d23a2d2fcdcf51b9",
+        "bytes": 14733
+      },
+      {
+        "name": "commercial-validation-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/commercial-validation-pharmacy.json",
+        "sha256": "9195a69129e359866fa29e66f232207d39800257c2a5994baabc7e616b9a8a3d",
+        "bytes": 39099
+      },
+      {
+        "name": "cpa01-acceptance-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cpa01-acceptance-pharmacy.json",
+        "sha256": "9d204060ca1b05faa4120a94d6fcc6e93d34c576804a7f5f35376449387db2bb",
+        "bytes": 50078
+      },
+      {
+        "name": "cpa01r-clean-journey-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/cpa01r-clean-journey-pharmacy.json",
+        "sha256": "016e459217182861cb2023dfdface9ebc2a41b2d306f14339af0c896ab076219",
+        "bytes": 60724
+      },
+      {
+        "name": "dhmdigital.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/dhmdigital.json",
+        "sha256": "24dfa0c7c8f15c6a786397403e4a11efe07f6811a3d6728e0bbfa7db2c37d262",
+        "bytes": 17387
+      },
+      {
+        "name": "doncaster-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/doncaster-pharmacy.json",
+        "sha256": "50d4f5c398de8fbb6215bfb78b83a9fbc74b22144f8cde79640c6adb1cc19d9b",
+        "bytes": 104572
+      },
+      {
+        "name": "greenfield-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/greenfield-pharmacy.json",
+        "sha256": "7b2c6e24ba442441ee91e9bb9ced413970924ecfa8c95f26fdacd6332a30b965",
+        "bytes": 12416
+      },
+      {
+        "name": "leeds-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/leeds-pharmacy.json",
+        "sha256": "b5163f5088b6cbfbf0cc4d2c8f4d02a7314c361090f7d71f93c0673b4844a9e0",
+        "bytes": 66238
+      },
+      {
+        "name": "patient-first-pharmacies-2.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/patient-first-pharmacies-2.json",
+        "sha256": "a415d1bef89d0f2313284b51e8eac728e8387d73bb92bb5441133a909fd2fd19",
+        "bytes": 15653
+      },
+      {
+        "name": "patient-first-pharmacies-3.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/patient-first-pharmacies-3.json",
+        "sha256": "a06dd0318b5563c73b0c246282928a36d811e4386427126b7127e2d189ccf44f",
+        "bytes": 55701
+      },
+      {
+        "name": "patient-first-pharmacies.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/patient-first-pharmacies.json",
+        "sha256": "ce463c6d1b95d73ec26c20464b122274957c7206c6ccd5fc9cb608175f9dfbee",
+        "bytes": 15651
+      },
+      {
+        "name": "pharmaconnect.before-brook-restore-v1.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmaconnect.before-brook-restore-v1.json",
+        "sha256": "41d9af009e5627fcebe4c370d300942fc23f0fd90b2b93334badcb5953a8f0e1",
+        "bytes": 12798
+      },
+      {
+        "name": "pharmaconnect.before-profile-cleanup.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmaconnect.before-profile-cleanup.json",
+        "sha256": "52176f483ace637ec06e2d1246423469f52b105577e0fe26f744d6ab6782d333",
+        "bytes": 1594
+      },
+      {
+        "name": "pharmaconnect.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmaconnect.json",
+        "sha256": "d76360020e9e2ea44f625931e57ee487273be06c5ed7ee281ce3cfe51ecede43",
+        "bytes": 73116
+      },
+      {
+        "name": "pharmacy-delivered-4u-test.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/pharmacy-delivered-4u-test.json",
+        "sha256": "f10dcb4f9f44e0ce43afdf382e65db72d65b0f216bb296b1acb131ad05eb5e1d",
+        "bytes": 68848
+      },
+      {
+        "name": "rc1-import-queue-test-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/rc1-import-queue-test-pharmacy.json",
+        "sha256": "e0a2b8ac815716e58daa50b306e8879674dad632a04e7ba8e4a69df7713c00f3",
+        "bytes": 38805
+      },
+      {
+        "name": "rc1-import-reliability-test.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/rc1-import-reliability-test.json",
+        "sha256": "75bd532a2e5ae881359cb3c9c5788afb9ef306524312a0e64938c02bf0fa9f54",
+        "bytes": 38906
+      },
+      {
+        "name": "reliable-direct-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/reliable-direct-pharmacy.json",
+        "sha256": "f3c0ed596f87d5db75b9d8308406a2cec880bf0e375ce376b477172985bafa7e",
+        "bytes": 43736
+      },
+      {
+        "name": "rowlands-test.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/rowlands-test.json",
+        "sha256": "95580be60ab39e1dcbb6d4453c1bcfb0e035f4780951f3e55f2b83d763f6625f",
+        "bytes": 16474
+      },
+      {
+        "name": "self-provision-demo-v2.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/self-provision-demo-v2.json",
+        "sha256": "6d80c497db0054e0c76abbf9a07e914dd055b609bcb517d700574d77b61bb072",
+        "bytes": 12715
+      },
+      {
+        "name": "sprint-6a-validation-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-6a-validation-pharmacy.json",
+        "sha256": "7f60f0b32ff119b9bd59d1f8742bd8ad25247b25beef6cc3c429cc00a1729cef",
+        "bytes": 8108
+      },
+      {
+        "name": "sprint-6c-workflow-validation-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-6c-workflow-validation-pharmacy.json",
+        "sha256": "120f25b4d595517eecc612c4f422d93a754147c9a8e1fed4aadc16e965190ac4",
+        "bytes": 9702
+      },
+      {
+        "name": "sprint-6d-orchestration-validation.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-6d-orchestration-validation.json",
+        "sha256": "14260071e293163261dae11b78784277d00fc1a093ddca9452482b2e068a990b",
+        "bytes": 10321
+      },
+      {
+        "name": "sprint-7a-commercial-onboarding-validation.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-7a-commercial-onboarding-validation.json",
+        "sha256": "1292d63e3dfbb6ffcfab432957bbb0b96880500e2f8e9034d994d45d150d27ab",
+        "bytes": 10285
+      },
+      {
+        "name": "sprint-7a-defect-036-account-validation.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/sprint-7a-defect-036-account-validation.json",
+        "sha256": "abdd586f71410406cb8d4ebc1cd81848680155b41f1ed51be5cbce5312384000",
+        "bytes": 8657
+      },
+      {
+        "name": "welfare-pharmacy.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/welfare-pharmacy.json",
+        "sha256": "98f2fe12ce279ddf1632bfb2df3d96ee8b259db0d7cabe248a3fd82c6ac6f90e",
+        "bytes": 62840
+      },
+      {
+        "name": "yorkshire-pharmacy-and-health-clinic.json",
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/yorkshire-pharmacy-and-health-clinic.json",
+        "sha256": "c9b83e07a2bfd8494071f81c8dcfc93e195a718ee96e8ad99ed807287387d35b",
+        "bytes": 98066
+      }
+    ]
+  },
+  "storageLocations": {
+    "seoEngineTemplatesRegistry": "src/templates/templateRegistry.ts",
+    "seoEngineTemplateHtml": "templates/",
+    "seoEngineTemplateApi": "artifacts/api-server/src/routes/api/templates.ts",
+    "seoEngineDashboard": "/api/dashboard",
+    "seoEngineRootRedirect": "/ -> /api/dashboard",
+    "pharmacyProfiles": "data/pharmacy-profiles/{slug}.json",
+    "pharmacyCampaigns": "data/pharmacy-campaigns/{slug}.json",
+    "pharmacyMasterAdminRegistry": "data/pharmacy-master-admin/registry.json",
+    "pharmacyMasterAdminMeta": "data/pharmacy-master-admin/client-meta.json",
+    "projectConfigs": "config/projects/{slug}.json",
+    "pharmacyClientListUrl": "/api/admin/master",
+    "legacyPharmaciesRedirect": "/api/admin/pharmacies -> /api/admin/master",
+    "growthEngine": "src/pharmacy/growthEngine*",
+    "pharmacyFirst": "src/pharmacy/pharmacyFirst*",
+    "publishing": "data/pharmacy-master-admin/managed-publishing/",
+    "indexing": "data/pharmacy-indexing / pharmacy growth dashboard indexing"
+  },
+  "projectConfigs": {
+    "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects",
+    "count": 32,
+    "files": [
+      "banner-cross-pharmacy.json",
+      "brook-pharmacy-demo-derby.json",
+      "brook-pharmacy.json",
+      "cat-v1-bespoke-avicenna.json",
+      "cat-v1-ecommerce-chemist-direct.json",
+      "cat-v1-gbp-connected-sample.json",
+      "cat-v1-gbp-unavailable-sample.json",
+      "cat-v1-independent-holloway.json",
+      "cat-v1-legacy-lloyds-sample.json",
+      "cat-v1-modern-pillsorted.json",
+      "cat-v1-multi-service-day-lewis.json",
+      "cat-v1-small-group-knights.json",
+      "cat-v1-wordpress-peak.json",
+      "commercial-validation-pharmacy.json",
+      "cpa01-acceptance-pharmacy.json",
+      "cpa01r-clean-journey-pharmacy.json",
+      "dhmdigital.json",
+      "doncaster-pharmacy.json",
+      "greenfield-pharmacy.json",
+      "leeds-pharmacy.json",
+      "patient-first-pharmacies-2.json",
+      "patient-first-pharmacies-3.json",
+      "patient-first-pharmacies.json",
+      "pharmaconnect.json",
+      "rc1-import-queue-test-pharmacy.json",
+      "rc1-import-reliability-test.json",
+      "reliable-direct-pharmacy.json",
+      "self-provision-demo-v2.json",
+      "sprint-7a-commercial-onboarding-validation.json",
+      "sprint-7a-defect-036-account-validation.json",
+      "welfare-pharmacy.json",
+      "yorkshire-pharmacy-and-health-clinic.json"
+    ]
+  }
+}

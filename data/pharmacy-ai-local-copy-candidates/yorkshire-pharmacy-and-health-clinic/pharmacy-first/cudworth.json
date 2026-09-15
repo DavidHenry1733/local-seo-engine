@@ -1,0 +1,202 @@
+{
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v1",
+  "promptContractVersion": "v1",
+  "promptContractPath": "src/pharmacy/contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts",
+  "provider": "openai",
+  "model": "gpt-4.1-2025-04-14",
+  "generatedAt": "2026-08-31T16:19:28.540Z",
+  "tokenUsage": {
+    "promptTokens": 2163,
+    "completionTokens": 680,
+    "totalTokens": 2843
+  },
+  "estimatedCostUsd": 0.009766,
+  "inputEvidencePackHash": "c5c728c6caef255bd2642bfc9d521ab7dea67de22beb96c1f081434c32ac3181",
+  "areaSlug": "cudworth",
+  "areaName": "Cudworth",
+  "outputCopy": {
+    "area": "Cudworth",
+    "heroHeading": "Pharmacy First in Cudworth",
+    "heroIntroduction": "Pharmacy First offers convenient help for common conditions if you live in Cudworth. Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+    "localIntroduction": "Cudworth is approximately 5.5 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+    "localContextHeading": "Accessing Pharmacy First from Cudworth",
+    "localContextParagraphs": [
+      "Residents of Cudworth can use Pharmacy First for assessment and advice on eligible common conditions. The pharmacy team is available to support you with professional guidance and treatment where appropriate.",
+      "Travelling the 5.5 km to the pharmacy allows you to speak directly with a pharmacist, who will review your symptoms and discuss the best next steps for your care."
+    ],
+    "relationshipToPharmacy": "People in Cudworth attend Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR for Pharmacy First services.",
+    "localAccessIntroduction": "You can phone 01226 210477 to check service details or ask about arranging a consultation before coming in.",
+    "localFaqs": [
+      {
+        "question": "How far is the pharmacy from Cudworth?",
+        "answer": "The pharmacy is about 5.5 km from Cudworth."
+      },
+      {
+        "question": "Can I call ahead to discuss my symptoms?",
+        "answer": "Yes, you can call the pharmacy to discuss your symptoms and find out how to arrange a consultation."
+      },
+      {
+        "question": "What if Pharmacy First is not suitable for my condition?",
+        "answer": "If Pharmacy First is not suitable, the pharmacist will advise you on the next steps or recommend further care."
+      },
+      {
+        "question": "Do I need an appointment to use Pharmacy First?",
+        "answer": "You should contact the pharmacy to check if you need to book an appointment or if walk-in consultations are available."
+      },
+      {
+        "question": "What should I bring with me to the pharmacy?",
+        "answer": "Bring any relevant information about your symptoms and current medicines to help the pharmacist assess your needs."
+      }
+    ],
+    "localCtaBridge": "Contact the pharmacy to discuss your needs or arrange your Pharmacy First consultation.",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Cudworth is approximately 5.5 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR."
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "People in Cudworth attend Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR for Pharmacy First services."
+      },
+      {
+        "field": "localFaqs",
+        "sentence": "The pharmacy is about 5.5 km from Cudworth."
+      }
+    ],
+    "evidenceEntityIdsUsed": []
+  },
+  "claimMap": [
+    {
+      "generatedField": "heroHeading",
+      "exactSentence": "Pharmacy First in Cudworth",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Pharmacy First offers convenient help for common conditions if you live in Cudworth.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "heroIntroduction",
+      "exactSentence": "Contact Yorkshire Pharmacy & Health Clinic to discuss your needs or arrange a consultation.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localIntroduction",
+      "exactSentence": "Cudworth is approximately 5.5 km from Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextHeading",
+      "exactSentence": "Accessing Pharmacy First from Cudworth",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "Residents of Cudworth can use Pharmacy First for assessment and advice on eligible common conditions.",
+      "supportingCanonicalFieldOrEntity": "locality.areaName",
+      "providerSource": "campaign-builder-selected-area",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[0]",
+      "exactSentence": "The pharmacy team is available to support you with professional guidance and treatment where appropriate.",
+      "supportingCanonicalFieldOrEntity": "non-factual-prose",
+      "providerSource": "none-required",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localContextParagraphs[1]",
+      "exactSentence": "Travelling the 5.5 km to the pharmacy allows you to speak directly with a pharmacist, who will review your symptoms and discuss the best next steps for your care.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "relationshipToPharmacy",
+      "exactSentence": "People in Cudworth attend Yorkshire Pharmacy & Health Clinic at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR for Pharmacy First services.",
+      "supportingCanonicalFieldOrEntity": "business.name",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localAccessIntroduction",
+      "exactSentence": "You can phone 01226 210477 to check service details or ask about arranging a consultation before coming in.",
+      "supportingCanonicalFieldOrEntity": "business.telephone",
+      "providerSource": "canonical-pharmacy-profile",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[0].answer",
+      "exactSentence": "The pharmacy is about 5.5 km from Cudworth.",
+      "supportingCanonicalFieldOrEntity": "locality.distanceLabel",
+      "providerSource": "verified-locality-evidence",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[1].answer",
+      "exactSentence": "Yes, you can call the pharmacy to discuss your symptoms and find out how to arrange a consultation.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].question",
+      "exactSentence": "What if Pharmacy First is not suitable for my condition?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[2].answer",
+      "exactSentence": "If Pharmacy First is not suitable, the pharmacist will advise you on the next steps or recommend further care.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].question",
+      "exactSentence": "Do I need an appointment to use Pharmacy First?",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[3].answer",
+      "exactSentence": "You should contact the pharmacy to check if you need to book an appointment or if walk-in consultations are available.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localFaqs[4].answer",
+      "exactSentence": "Bring any relevant information about your symptoms and current medicines to help the pharmacist assess your needs.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    },
+    {
+      "generatedField": "localCtaBridge",
+      "exactSentence": "Contact the pharmacy to discuss your needs or arrange your Pharmacy First consultation.",
+      "supportingCanonicalFieldOrEntity": "offer.lockedClinicalFacts",
+      "providerSource": "approved-clinical-copy",
+      "validationResult": "pass"
+    }
+  ],
+  "validationResult": {
+    "ok": true,
+    "failures": []
+  },
+  "reviewStatus": "candidate",
+  "approved": false
+}

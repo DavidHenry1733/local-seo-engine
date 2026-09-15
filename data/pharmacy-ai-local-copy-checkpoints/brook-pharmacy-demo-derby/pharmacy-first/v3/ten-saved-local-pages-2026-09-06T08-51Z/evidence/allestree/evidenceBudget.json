@@ -1,0 +1,101 @@
+{
+  "kind": "evidence-only",
+  "slug": "brook-pharmacy-demo-derby",
+  "serviceId": "pharmacy-first",
+  "areaSlug": "allestree",
+  "runId": "c7a7c587-22f0-474a-a59a-745a5bbe34a3",
+  "spendingCapUsd": 0.2,
+  "spentUsd": 0.068,
+  "reservedUsd": 0,
+  "events": [
+    {
+      "at": "2026-09-03T11:32:23.185Z",
+      "kind": "created",
+      "detail": "cap=0.2"
+    },
+    {
+      "at": "2026-09-03T11:32:23.199Z",
+      "kind": "reserved",
+      "callId": "places-gp-practices",
+      "detail": "bound=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-03T11:32:23.709Z",
+      "kind": "consumed",
+      "callId": "places-gp-practices",
+      "detail": "actual=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-03T11:32:23.714Z",
+      "kind": "reserved",
+      "callId": "places-area-reference",
+      "detail": "bound=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-03T11:32:24.005Z",
+      "kind": "consumed",
+      "callId": "places-area-reference",
+      "detail": "actual=0.032",
+      "usd": 0.032
+    },
+    {
+      "at": "2026-09-03T11:32:24.008Z",
+      "kind": "reserved",
+      "callId": "dataforseo-official-gp-practices",
+      "detail": "bound=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-03T11:32:26.115Z",
+      "kind": "consumed",
+      "callId": "dataforseo-official-gp-practices",
+      "detail": "actual=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-03T11:32:26.116Z",
+      "kind": "reserved",
+      "callId": "dataforseo-descriptive-locality",
+      "detail": "bound=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-03T11:32:27.292Z",
+      "kind": "consumed",
+      "callId": "dataforseo-descriptive-locality",
+      "detail": "actual=0.002",
+      "usd": 0.002
+    },
+    {
+      "at": "2026-09-03T11:32:27.297Z",
+      "kind": "reserved",
+      "callId": "page-body-gp-official",
+      "detail": "bound=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-03T11:32:28.922Z",
+      "kind": "consumed",
+      "callId": "page-body-gp-official",
+      "detail": "actual=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-03T11:32:28.923Z",
+      "kind": "reserved",
+      "callId": "page-body-locality",
+      "detail": "bound=0",
+      "usd": 0
+    },
+    {
+      "at": "2026-09-03T11:32:29.654Z",
+      "kind": "consumed",
+      "callId": "page-body-locality",
+      "detail": "actual=0",
+      "usd": 0
+    }
+  ]
+}

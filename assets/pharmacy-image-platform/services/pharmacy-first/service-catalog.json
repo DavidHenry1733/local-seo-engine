@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.1",
+  "serviceId": "pharmacy-first",
+  "serviceName": "Pharmacy First",
+  "roles": {
+    "hero": {
+      "minApprovedAssets": 2,
+      "minWidth": 1200,
+      "minHeight": 675,
+      "preferredOrientation": "landscape",
+      "preferredAspectRatio": "16:9",
+      "subjectHint": "Primary service hero — photographic, patient-safe, UK community pharmacy context"
+    },
+    "support": {
+      "minApprovedAssets": 1,
+      "minWidth": 800,
+      "minHeight": 600,
+      "preferredOrientation": "any",
+      "preferredAspectRatio": "3:2",
+      "subjectHint": "Supporting editorial or care scene — photographic or approved illustration"
+    },
+    "trust": {
+      "minApprovedAssets": 1,
+      "minWidth": 800,
+      "minHeight": 600,
+      "preferredOrientation": "any",
+      "preferredAspectRatio": "4:3",
+      "subjectHint": "Trusted pharmacy team or professional care — photographic"
+    },
+    "conversion": {
+      "minApprovedAssets": 1,
+      "minWidth": 800,
+      "minHeight": 600,
+      "preferredOrientation": "landscape",
+      "preferredAspectRatio": "16:9",
+      "subjectHint": "Booking, next steps, or consultation room — photographic"
+    }
+  },
+  "productionManifest": {
+    "schemaVersion": "1.1",
+    "serviceId": "pharmacy-first",
+    "serviceRevision": "bcb46b21ef6292fc",
+    "generatedAt": "2026-07-22T16:49:20.672Z",
+    "totalAssets": 20,
+    "approvedAssets": 20,
+    "pendingAssets": 0,
+    "rejectedAssets": 0,
+    "assetsByRole": {
+      "hero": 4,
+      "support": 8,
+      "trust": 4,
+      "conversion": 4
+    },
+    "assetsByOrientation": {
+      "landscape": 20
+    },
+    "assetsByClassification": {
+      "approved_photograph": 20
+    },
+    "guideEditorialAssets": 2,
+    "blogEditorialAssets": 2,
+    "roleCoverage": {
+      "hero": {
+        "required": 4,
+        "approved": 4,
+        "complete": true
+      },
+      "support": {
+        "required": 4,
+        "approved": 4,
+        "complete": true
+      },
+      "trust": {
+        "required": 4,
+        "approved": 4,
+        "complete": true
+      },
+      "conversion": {
+        "required": 4,
+        "approved": 4,
+        "complete": true
+      },
+      "guideEditorial": {
+        "required": 2,
+        "approved": 2,
+        "complete": true
+      },
+      "blogEditorial": {
+        "required": 2,
+        "approved": 2,
+        "complete": true
+      }
+    },
+    "variantCoverage": {
+      "assetsWithVariants": 20,
+      "totalVariants": 60
+    },
+    "metadataCompleteness": 100,
+    "licenceCompleteness": 100,
+    "accessibilityCompleteness": 100,
+    "duplicateCount": 0,
+    "healthStatus": "READY"
+  }
+}

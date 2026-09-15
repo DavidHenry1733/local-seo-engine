@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-06-11T12:00:30.639Z",
+  "result": "PASS: Pharmacy Image Upload Dropdown Complete",
+  "packsAvailable": [
+    "core-pharmacy",
+    "clinical-nhs-services",
+    "vaccination-services",
+    "private-healthcare-services",
+    "travel-health-services",
+    "weight-management-services"
+  ],
+  "packCount": 6,
+  "imageKeysAvailable": {
+    "clinical-nhs-services": [
+      "pharmacy-first-consultation",
+      "minor-illness-advice",
+      "blood-pressure-check",
+      "nhs-service-support",
+      "contraception-service",
+      "smoking-cessation",
+      "new-medicine-service",
+      "inhaler-technique-review"
+    ],
+    "vaccination-services": [
+      "flu-vaccination",
+      "vaccination-consultation",
+      "vaccination-record-review",
+      "vaccine-availability",
+      "shingles-vaccination",
+      "aftercare-advice",
+      "covid-vaccination",
+      "immunisation-clinic"
+    ],
+    "private-healthcare-services": [
+      "ear-wax-removal",
+      "private-consultation",
+      "health-screening",
+      "blood-testing",
+      "b12-consultation",
+      "aftercare-guidance",
+      "diabetes-screening",
+      "cholesterol-testing"
+    ]
+  },
+  "uploadPathValidation": {
+    "expected": "assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp",
+    "resolved": "assets/pharmacy-image-library/clinical-nhs-services/pharmacy-first-consultation.webp",
+    "match": true
+  },
+  "approvalStateValidation": {
+    "stateFileExists": true,
+    "uploadPathResolverMatches": true,
+    "saveUploadedImageUsesResolver": true
+  },
+  "dashboardUploadDropdownStatus": {
+    "visibleSelectors": true,
+    "packSelectId": "ipd-upload-pack-select",
+    "imageSelectId": "ipd-upload-imageKey-select",
+    "slotSelectId": "ipd-upload-slot-select",
+    "htmlFallbackPreseeded": true
+  },
+  "apiStatus": {
+    "endpoint": "/api/image-prompt-dashboard/upload-options",
+    "httpStatus": 200,
+    "ok": true
+  },
+  "distBuildTimestamp": "2026-06-11T11:59:33.734Z",
+  "pm2RestartTimestamp": "2026-06-11T12:00:14.054Z",
+  "validationNotes": {
+    "issues": []
+  }
+}

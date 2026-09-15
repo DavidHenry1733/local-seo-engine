@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "slug": "broom-lane-pharmacy",
+  "updatedAt": "2026-07-26T10:56:27.499Z",
+  "currentStage": "business_profile_intelligence",
+  "transitions": [
+    {
+      "fromStage": "create_customer",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-26T10:56:27.498Z",
+      "operator": "validation-admin",
+      "durationMs": null,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "MAI-20260719-001 → Closed"
+    }
+  ],
+  "executions": []
+}

@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "slug": "brook-pharmacy",
+  "updatedAt": "2026-08-04T05:10:58.364Z",
+  "currentStage": "quality_review",
+  "transitions": [
+    {
+      "fromStage": "create_customer",
+      "toStage": "quality_review",
+      "timestamp": "2026-08-04T05:10:58.364Z",
+      "operator": "system",
+      "durationMs": null,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Stage advanced to Quality Review"
+    }
+  ],
+  "executions": []
+}

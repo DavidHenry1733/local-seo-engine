@@ -1,0 +1,353 @@
+{
+  "version": "design-intelligence-v1",
+  "tenant": "pharmaconnect",
+  "sourceRevision": "e721d87bc078c3e6",
+  "capturedAt": "2026-08-11T08:32:41.196Z",
+  "primaryUrl": "https://pharmaconnect.uk",
+  "navigation": {
+    "tree": [
+      {
+        "id": "nav-1",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 1,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/",
+        "text": "Home",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-2",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 2,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/about-pharmaconnect/",
+        "text": "About Us",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-3",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 3,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/contact-us/",
+        "text": "Contact Us",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-4",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 4,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/blog/",
+        "text": "Blog",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-5",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 5,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/frequently-asked-questions/",
+        "text": "FAQ",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-6",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 6,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/pharmacy-website-design/",
+        "text": "Website Design",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-7",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 7,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/local-seo-for-pharmacies/",
+        "text": "Local SEO",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-8",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 8,
+        "selector": "header nav a",
+        "href": "https://pharmaconnect.uk/pharmacy-email-marketing/",
+        "text": "Email Support",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      }
+    ],
+    "hierarchyDepth": 1,
+    "rootId": "nav-1"
+  },
+  "header": {
+    "rowCount": 1,
+    "announcementBar": null,
+    "logoBlock": {
+      "selector": "header .logo img",
+      "backgroundColour": "#ffffff",
+      "textColour": "#333333",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "left",
+      "sticky": false,
+      "logoUrl": "https://pharmaconnect.uk/wp-content/uploads/2026/02/PharmaUK-Logo-1.png",
+      "logoMaxHeight": "48px",
+      "logoPosition": "left"
+    },
+    "navigationBlock": {
+      "selector": "header nav",
+      "backgroundColour": "#ffffff",
+      "textColour": "#333333",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "end",
+      "sticky": false,
+      "navPlacement": "horizontal-multi-link",
+      "mobileMenuBehaviour": "stacked-nav"
+    },
+    "ctaBlock": {
+      "selector": "header .btn, header .theme-btn",
+      "backgroundColour": "#374fd4",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "right",
+      "sticky": false,
+      "labels": [
+        "Book An Appointment"
+      ],
+      "hrefs": [
+        "https://pharmaconnect.uk/"
+      ]
+    },
+    "spacing": {
+      "paddingY": "",
+      "paddingX": "",
+      "gap": "16px"
+    },
+    "alignment": {
+      "logo": "left",
+      "nav": "center",
+      "cta": "right"
+    },
+    "sticky": true,
+    "responsive": {
+      "desktopBreakpoint": "980px",
+      "mobileMenuBehaviour": "stacked-nav"
+    }
+  },
+  "footer": {
+    "upperLayer": {
+      "selector": "footer",
+      "backgroundColour": "#002f5f",
+      "textColour": "#005eb8",
+      "linkColour": "#005eb8",
+      "paddingTop": "56px",
+      "paddingBottom": "0"
+    },
+    "lowerLayer": {
+      "selector": "footer .footer-bottom",
+      "backgroundColour": "#002f5f",
+      "textColour": "#005eb8",
+      "linkColour": "#005eb8",
+      "paddingTop": "",
+      "paddingBottom": "18px"
+    },
+    "groups": [
+      {
+        "id": "footer-primary",
+        "role": "company",
+        "selector": "footer",
+        "heading": "Footer",
+        "links": [
+          {
+            "text": "Home",
+            "href": "https://pharmaconnect.uk/",
+            "selector": "footer a"
+          },
+          {
+            "text": "About Us",
+            "href": "https://pharmaconnect.uk/about-pharmaconnect/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Contact Us",
+            "href": "https://pharmaconnect.uk/contact-us/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Blog",
+            "href": "https://pharmaconnect.uk/blog/",
+            "selector": "footer a"
+          },
+          {
+            "text": "FAQ",
+            "href": "https://pharmaconnect.uk/frequently-asked-questions/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Website Design",
+            "href": "https://pharmaconnect.uk/pharmacy-website-design/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Local SEO",
+            "href": "https://pharmaconnect.uk/local-seo-for-pharmacies/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Email Support",
+            "href": "https://pharmaconnect.uk/pharmacy-email-marketing/",
+            "selector": "footer a"
+          }
+        ],
+        "backgroundColour": "#002f5f",
+        "textColour": "#005eb8"
+      }
+    ],
+    "mobileStackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ]
+  },
+  "colours": [
+    {
+      "role": "primary",
+      "selector": ":root",
+      "computedColour": "#005eb8",
+      "hex": "#005eb8",
+      "layer": "body"
+    },
+    {
+      "role": "secondary",
+      "selector": ":root",
+      "computedColour": "#004990",
+      "hex": "#004990",
+      "layer": "body"
+    },
+    {
+      "role": "accent",
+      "selector": ":root",
+      "computedColour": "#004990",
+      "hex": "#004990",
+      "layer": "body"
+    },
+    {
+      "role": "header-background",
+      "selector": ":root",
+      "computedColour": "#ffffff",
+      "hex": "#ffffff",
+      "layer": "footer-upper"
+    },
+    {
+      "role": "footer-background",
+      "selector": ":root",
+      "computedColour": "#002f5f",
+      "hex": "#002f5f",
+      "layer": "footer-upper"
+    }
+  ],
+  "images": [
+    {
+      "id": "logo-primary",
+      "role": "logo",
+      "selector": "header .logo img",
+      "asset": "https://pharmaconnect.uk/wp-content/uploads/2026/02/PharmaUK-Logo-1.png",
+      "width": 0,
+      "height": 0,
+      "aspectRatio": "",
+      "alt": "Pharmacy Growth Partner",
+      "lazyLoad": false,
+      "backgroundImage": "",
+      "visibility": "visible"
+    }
+  ],
+  "validation": {
+    "navigationTreeComplete": true,
+    "headerHierarchyComplete": true,
+    "footerHierarchyComplete": true,
+    "colourRolesComplete": true,
+    "imageRolesComplete": true,
+    "navigationFlatteningRemoved": true,
+    "footerLayerMergeRemoved": true
+  },
+  "summary": {
+    "layoutClassification": "with-top-bar",
+    "headerStyle": "horizontal-multi-link",
+    "footerStyle": "four-column-contact",
+    "navigationStyle": "horizontal-multi-link",
+    "typographySystem": "Montserrat / Raleway",
+    "buttonStyle": "filled-only · 10px · filled",
+    "colourSystem": "#005eb8, #004990, #004990",
+    "logoPlacement": "left",
+    "evidenceCompleteness": 100,
+    "fallbackReason": null
+  }
+}

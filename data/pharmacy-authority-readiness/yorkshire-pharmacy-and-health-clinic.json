@@ -1,0 +1,1973 @@
+{
+  "slug": "yorkshire-pharmacy-and-health-clinic",
+  "pharmacyName": "Yorkshire Pharmacy & Health Clinic",
+  "updatedAt": "2026-09-10T10:04:24.273Z",
+  "version": 1,
+  "services": [
+    {
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "pageUrl": "/api/pharmacy-visual-experience/pharmacy-first/?slug=yorkshire-pharmacy-and-health-clinic",
+      "overallScore": 79,
+      "label": "Strong",
+      "publishGate": "PASS_WITH_RECOMMENDATIONS",
+      "categoryScores": {
+        "humanExpertise": 38,
+        "pharmacyLocalAuthority": 73,
+        "clinicalTrust": 89,
+        "informationGain": 90,
+        "aiCitationReadiness": 100,
+        "structuredDataReadiness": 50,
+        "contentEcosystemSupport": 90,
+        "technicalPublishReadiness": 100
+      },
+      "missingSignals": [
+        "Human Expertise: Named pharmacist / reviewer",
+        "Human Expertise: Superintendent pharmacist",
+        "Human Expertise: GPhC registration details",
+        "Human Expertise: Review date",
+        "Human Expertise: Next review date",
+        "Pharmacy Local Authority: Pharmacy name",
+        "Pharmacy Local Authority: Address",
+        "Pharmacy Local Authority: Private service availability",
+        "Clinical Trust: Service limitations",
+        "Information Gain: Pharmacy-specific service notes",
+        "Structured Data Readiness: LocalBusiness",
+        "Structured Data Readiness: Pharmacy",
+        "Structured Data Readiness: Organization",
+        "Structured Data Readiness: Person / reviewer",
+        "Structured Data Readiness: reviewedBy / author equivalent",
+        "Content Ecosystem Support: Local page"
+      ],
+      "criticalIssues": [],
+      "recommendedEnhancements": [
+        "Human Expertise: add named pharmacist / reviewer",
+        "Human Expertise: add superintendent pharmacist",
+        "Pharmacy Local Authority: add pharmacy name",
+        "Pharmacy Local Authority: add address",
+        "Structured Data Readiness: add localbusiness",
+        "Structured Data Readiness: add pharmacy"
+      ],
+      "evidence": {
+        "humanExpertise": [
+          {
+            "signal": "Named pharmacist / reviewer",
+            "present": false,
+            "detail": "No reviewer in profile"
+          },
+          {
+            "signal": "Superintendent pharmacist",
+            "present": false,
+            "detail": "Missing superintendent name"
+          },
+          {
+            "signal": "Professional role stated",
+            "present": true,
+            "detail": "Pharmacist professional role in page copy"
+          },
+          {
+            "signal": "GPhC registration details",
+            "present": false,
+            "detail": "GPhC not confirmed"
+          },
+          {
+            "signal": "Years experience",
+            "present": true,
+            "detail": "Years serving community not stated"
+          },
+          {
+            "signal": "Review date",
+            "present": false,
+            "detail": "Formal clinical review date on page"
+          },
+          {
+            "signal": "Next review date",
+            "present": false,
+            "detail": "Scheduled next review date"
+          },
+          {
+            "signal": "Professional accountability statement",
+            "present": true,
+            "detail": "Accountability / registration statement"
+          }
+        ],
+        "pharmacyLocalAuthority": [
+          {
+            "signal": "Pharmacy name",
+            "present": false,
+            "detail": "Yorkshire Pharmacy & Health Clinic"
+          },
+          {
+            "signal": "Town / city",
+            "present": true,
+            "detail": "Barnsley"
+          },
+          {
+            "signal": "Address",
+            "present": false,
+            "detail": "91 Snape Hill Rd, S739LR"
+          },
+          {
+            "signal": "Phone",
+            "present": true,
+            "detail": "0250511165738"
+          },
+          {
+            "signal": "Opening hours",
+            "present": true,
+            "detail": "Opening hours or hours section"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map or local access section"
+          },
+          {
+            "signal": "Coverage areas",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe, Grimethorpe, Goldthorpe, Worsbrough, Hoyland, Cudworth"
+          },
+          {
+            "signal": "Consultation room",
+            "present": true,
+            "detail": "Consultation room availability"
+          },
+          {
+            "signal": "NHS service availability",
+            "present": true,
+            "detail": "NHS services referenced"
+          },
+          {
+            "signal": "Private service availability",
+            "present": false,
+            "detail": "Private services referenced"
+          },
+          {
+            "signal": "Local access wording",
+            "present": true,
+            "detail": "Local access section"
+          }
+        ],
+        "clinicalTrust": [
+          {
+            "signal": "Eligibility",
+            "present": true,
+            "detail": "Eligibility criteria"
+          },
+          {
+            "signal": "Exclusions",
+            "present": true,
+            "detail": "Exclusion criteria"
+          },
+          {
+            "signal": "When to seek urgent help",
+            "present": true,
+            "detail": "Urgent care escalation"
+          },
+          {
+            "signal": "Safety warnings",
+            "present": true,
+            "detail": "Safety warnings"
+          },
+          {
+            "signal": "During consultation",
+            "present": true,
+            "detail": "Consultation process"
+          },
+          {
+            "signal": "After consultation",
+            "present": true,
+            "detail": "Post-consultation guidance"
+          },
+          {
+            "signal": "Escalation advice",
+            "present": true,
+            "detail": "Escalation pathways"
+          },
+          {
+            "signal": "Patient expectations",
+            "present": true,
+            "detail": "Patient expectations"
+          },
+          {
+            "signal": "Service limitations",
+            "present": false,
+            "detail": "Service scope limits"
+          }
+        ],
+        "informationGain": [
+          {
+            "signal": "Local booking process",
+            "present": true,
+            "detail": "Booking process"
+          },
+          {
+            "signal": "What patients should bring",
+            "present": true,
+            "detail": "Patient preparation items"
+          },
+          {
+            "signal": "Appointment / walk-in options",
+            "present": true,
+            "detail": "Access options"
+          },
+          {
+            "signal": "Local service availability",
+            "present": true,
+            "detail": "Local availability wording"
+          },
+          {
+            "signal": "Local contact process",
+            "present": true,
+            "detail": "Contact process"
+          },
+          {
+            "signal": "Nearby area relevance",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe"
+          },
+          {
+            "signal": "Pharmacy-specific service notes",
+            "present": false,
+            "detail": "Pharmacy-branded service notes"
+          },
+          {
+            "signal": "Consultation room access",
+            "present": true,
+            "detail": "Consultation room access"
+          },
+          {
+            "signal": "Practical next steps",
+            "present": true,
+            "detail": "Actionable next steps"
+          },
+          {
+            "signal": "Service-specific patient preparation",
+            "present": true,
+            "detail": "Pre-appointment preparation"
+          }
+        ],
+        "aiCitationReadiness": [
+          {
+            "signal": "Clear short-answer blocks",
+            "present": true,
+            "detail": "Concise service definition"
+          },
+          {
+            "signal": "FAQs",
+            "present": true,
+            "detail": "21 FAQ items detected"
+          },
+          {
+            "signal": "Concise definitions",
+            "present": true,
+            "detail": "Definition section"
+          },
+          {
+            "signal": "Factual statements",
+            "present": true,
+            "detail": "~1534 words of factual copy"
+          },
+          {
+            "signal": "Structured headings",
+            "present": true,
+            "detail": "Multiple H2 sections"
+          },
+          {
+            "signal": "Service-specific questions",
+            "present": true,
+            "detail": "Service FAQs"
+          },
+          {
+            "signal": "Local service answers",
+            "present": true,
+            "detail": "Localised answers"
+          },
+          {
+            "signal": "Page summary",
+            "present": true,
+            "detail": "Meta description summary"
+          },
+          {
+            "signal": "Schema candidates",
+            "present": true,
+            "detail": "BreadcrumbList, ListItem, Service, Place, MedicalBusiness"
+          },
+          {
+            "signal": "Reviewer attribution",
+            "present": true,
+            "detail": "Expert attribution"
+          }
+        ],
+        "structuredDataReadiness": [
+          {
+            "signal": "LocalBusiness",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Pharmacy",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "MedicalBusiness",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "WebPage",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "FAQPage",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "BreadcrumbList",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "ImageObject",
+            "present": true,
+            "detail": "ImageObject or img alt"
+          },
+          {
+            "signal": "Organization",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "Person / reviewer",
+            "present": false,
+            "detail": "Missing superintendent Person"
+          },
+          {
+            "signal": "reviewedBy / author equivalent",
+            "present": false,
+            "detail": "Reviewer schema or equivalent"
+          }
+        ],
+        "contentEcosystemSupport": [
+          {
+            "signal": "Service page",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Local page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Guide",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "FAQ page",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Blogs",
+            "present": true,
+            "detail": "Blog assets found"
+          },
+          {
+            "signal": "Social posts",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "GBP posts",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Email sequence",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Video script",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Internal support assets",
+            "present": true,
+            "detail": "22 ecosystem assets"
+          }
+        ],
+        "technicalPublishReadiness": [
+          {
+            "signal": "Page title",
+            "present": true,
+            "detail": "Title tag present"
+          },
+          {
+            "signal": "Meta description",
+            "present": true,
+            "detail": "Meta description"
+          },
+          {
+            "signal": "H1",
+            "present": true,
+            "detail": "Primary H1"
+          },
+          {
+            "signal": "Canonical",
+            "present": true,
+            "detail": "https://yorkshirepharmacyhealthclinic.co.uk/pharmacy-first/"
+          },
+          {
+            "signal": "Indexable (no noindex)",
+            "present": true,
+            "detail": "Indexable for live publish"
+          },
+          {
+            "signal": "Images assigned",
+            "present": true,
+            "detail": "4/4 page slots assigned"
+          },
+          {
+            "signal": "Alt text",
+            "present": true,
+            "detail": "6/6 images with alt"
+          },
+          {
+            "signal": "CTA",
+            "present": true,
+            "detail": "Call-to-action"
+          },
+          {
+            "signal": "Footer",
+            "present": true,
+            "detail": "Site footer"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map section"
+          },
+          {
+            "signal": "No placeholder text",
+            "present": true,
+            "detail": "No visible placeholders"
+          },
+          {
+            "signal": "No demo/mock wording",
+            "present": true,
+            "detail": "Clean copy"
+          },
+          {
+            "signal": "No broken image placeholders",
+            "present": true,
+            "detail": "Images resolve on page"
+          }
+        ]
+      },
+      "lastAuditedAt": "2026-09-10T10:04:23.022Z"
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "serviceName": "Blood Pressure Checks",
+      "pageUrl": "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=yorkshire-pharmacy-and-health-clinic",
+      "overallScore": 75,
+      "label": "Strong",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 25,
+        "pharmacyLocalAuthority": 73,
+        "clinicalTrust": 89,
+        "informationGain": 90,
+        "aiCitationReadiness": 90,
+        "structuredDataReadiness": 60,
+        "contentEcosystemSupport": 90,
+        "technicalPublishReadiness": 85
+      },
+      "missingSignals": [
+        "Human Expertise: Named pharmacist / reviewer",
+        "Human Expertise: Superintendent pharmacist",
+        "Human Expertise: GPhC registration details",
+        "Human Expertise: Review date",
+        "Human Expertise: Next review date",
+        "Human Expertise: Professional accountability statement",
+        "Pharmacy Local Authority: Pharmacy name",
+        "Pharmacy Local Authority: NHS service availability",
+        "Pharmacy Local Authority: Private service availability",
+        "Clinical Trust: Eligibility",
+        "Information Gain: Pharmacy-specific service notes",
+        "AI Citation Readiness: Clear short-answer blocks",
+        "Structured Data Readiness: WebPage",
+        "Structured Data Readiness: Organization",
+        "Structured Data Readiness: Person / reviewer",
+        "Structured Data Readiness: reviewedBy / author equivalent",
+        "Content Ecosystem Support: Local page",
+        "Technical Publish Readiness: Canonical",
+        "Technical Publish Readiness: Indexable (no noindex)"
+      ],
+      "criticalIssues": [
+        "Page marked noindex — remove before live publish"
+      ],
+      "recommendedEnhancements": [
+        "Human Expertise: add named pharmacist / reviewer",
+        "Human Expertise: add superintendent pharmacist",
+        "Pharmacy Local Authority: add pharmacy name",
+        "Pharmacy Local Authority: add nhs service availability",
+        "Structured Data Readiness: add webpage",
+        "Structured Data Readiness: add organization"
+      ],
+      "evidence": {
+        "humanExpertise": [
+          {
+            "signal": "Named pharmacist / reviewer",
+            "present": false,
+            "detail": "No reviewer in profile"
+          },
+          {
+            "signal": "Superintendent pharmacist",
+            "present": false,
+            "detail": "Missing superintendent name"
+          },
+          {
+            "signal": "Professional role stated",
+            "present": true,
+            "detail": "Pharmacist professional role in page copy"
+          },
+          {
+            "signal": "GPhC registration details",
+            "present": false,
+            "detail": "GPhC not confirmed"
+          },
+          {
+            "signal": "Years experience",
+            "present": true,
+            "detail": "Years serving community not stated"
+          },
+          {
+            "signal": "Review date",
+            "present": false,
+            "detail": "Formal clinical review date on page"
+          },
+          {
+            "signal": "Next review date",
+            "present": false,
+            "detail": "Scheduled next review date"
+          },
+          {
+            "signal": "Professional accountability statement",
+            "present": false,
+            "detail": "Accountability / registration statement"
+          }
+        ],
+        "pharmacyLocalAuthority": [
+          {
+            "signal": "Pharmacy name",
+            "present": false,
+            "detail": "Yorkshire Pharmacy & Health Clinic"
+          },
+          {
+            "signal": "Town / city",
+            "present": true,
+            "detail": "Barnsley"
+          },
+          {
+            "signal": "Address",
+            "present": true,
+            "detail": "91 Snape Hill Rd, S739LR"
+          },
+          {
+            "signal": "Phone",
+            "present": true,
+            "detail": "0250511165738"
+          },
+          {
+            "signal": "Opening hours",
+            "present": true,
+            "detail": "Opening hours or hours section"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map or local access section"
+          },
+          {
+            "signal": "Coverage areas",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe, Grimethorpe, Goldthorpe, Worsbrough, Hoyland, Cudworth"
+          },
+          {
+            "signal": "Consultation room",
+            "present": true,
+            "detail": "Consultation room availability"
+          },
+          {
+            "signal": "NHS service availability",
+            "present": false,
+            "detail": "NHS services referenced"
+          },
+          {
+            "signal": "Private service availability",
+            "present": false,
+            "detail": "Private services referenced"
+          },
+          {
+            "signal": "Local access wording",
+            "present": true,
+            "detail": "Local access section"
+          }
+        ],
+        "clinicalTrust": [
+          {
+            "signal": "Eligibility",
+            "present": false,
+            "detail": "Eligibility criteria"
+          },
+          {
+            "signal": "Exclusions",
+            "present": true,
+            "detail": "Exclusion criteria"
+          },
+          {
+            "signal": "When to seek urgent help",
+            "present": true,
+            "detail": "Urgent care escalation"
+          },
+          {
+            "signal": "Safety warnings",
+            "present": true,
+            "detail": "Safety warnings"
+          },
+          {
+            "signal": "During consultation",
+            "present": true,
+            "detail": "Consultation process"
+          },
+          {
+            "signal": "After consultation",
+            "present": true,
+            "detail": "Post-consultation guidance"
+          },
+          {
+            "signal": "Escalation advice",
+            "present": true,
+            "detail": "Escalation pathways"
+          },
+          {
+            "signal": "Patient expectations",
+            "present": true,
+            "detail": "Patient expectations"
+          },
+          {
+            "signal": "Service limitations",
+            "present": true,
+            "detail": "Service scope limits"
+          }
+        ],
+        "informationGain": [
+          {
+            "signal": "Local booking process",
+            "present": true,
+            "detail": "Booking process"
+          },
+          {
+            "signal": "What patients should bring",
+            "present": true,
+            "detail": "Patient preparation items"
+          },
+          {
+            "signal": "Appointment / walk-in options",
+            "present": true,
+            "detail": "Access options"
+          },
+          {
+            "signal": "Local service availability",
+            "present": true,
+            "detail": "Local availability wording"
+          },
+          {
+            "signal": "Local contact process",
+            "present": true,
+            "detail": "Contact process"
+          },
+          {
+            "signal": "Nearby area relevance",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe"
+          },
+          {
+            "signal": "Pharmacy-specific service notes",
+            "present": false,
+            "detail": "Pharmacy-branded service notes"
+          },
+          {
+            "signal": "Consultation room access",
+            "present": true,
+            "detail": "Consultation room access"
+          },
+          {
+            "signal": "Practical next steps",
+            "present": true,
+            "detail": "Actionable next steps"
+          },
+          {
+            "signal": "Service-specific patient preparation",
+            "present": true,
+            "detail": "Pre-appointment preparation"
+          }
+        ],
+        "aiCitationReadiness": [
+          {
+            "signal": "Clear short-answer blocks",
+            "present": false,
+            "detail": "Concise service definition"
+          },
+          {
+            "signal": "FAQs",
+            "present": true,
+            "detail": "13 FAQ items detected"
+          },
+          {
+            "signal": "Concise definitions",
+            "present": true,
+            "detail": "Definition section"
+          },
+          {
+            "signal": "Factual statements",
+            "present": true,
+            "detail": "~1315 words of factual copy"
+          },
+          {
+            "signal": "Structured headings",
+            "present": true,
+            "detail": "Multiple H2 sections"
+          },
+          {
+            "signal": "Service-specific questions",
+            "present": true,
+            "detail": "Service FAQs"
+          },
+          {
+            "signal": "Local service answers",
+            "present": true,
+            "detail": "Localised answers"
+          },
+          {
+            "signal": "Page summary",
+            "present": true,
+            "detail": "Meta description summary"
+          },
+          {
+            "signal": "Schema candidates",
+            "present": true,
+            "detail": "Pharmacy, MedicalBusiness, LocalBusiness, PostalAddress, FAQPage"
+          },
+          {
+            "signal": "Reviewer attribution",
+            "present": true,
+            "detail": "Expert attribution"
+          }
+        ],
+        "structuredDataReadiness": [
+          {
+            "signal": "LocalBusiness",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Pharmacy",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "MedicalBusiness",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "WebPage",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "FAQPage",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "BreadcrumbList",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "ImageObject",
+            "present": true,
+            "detail": "ImageObject or img alt"
+          },
+          {
+            "signal": "Organization",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "Person / reviewer",
+            "present": false,
+            "detail": "Missing superintendent Person"
+          },
+          {
+            "signal": "reviewedBy / author equivalent",
+            "present": false,
+            "detail": "Reviewer schema or equivalent"
+          }
+        ],
+        "contentEcosystemSupport": [
+          {
+            "signal": "Service page",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Local page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Guide",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "FAQ page",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Blogs",
+            "present": true,
+            "detail": "Blog assets found"
+          },
+          {
+            "signal": "Social posts",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "GBP posts",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Email sequence",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Video script",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "Internal support assets",
+            "present": true,
+            "detail": "20 ecosystem assets"
+          }
+        ],
+        "technicalPublishReadiness": [
+          {
+            "signal": "Page title",
+            "present": true,
+            "detail": "Title tag present"
+          },
+          {
+            "signal": "Meta description",
+            "present": true,
+            "detail": "Meta description"
+          },
+          {
+            "signal": "H1",
+            "present": true,
+            "detail": "Primary H1"
+          },
+          {
+            "signal": "Canonical",
+            "present": false,
+            "detail": "Canonical URL"
+          },
+          {
+            "signal": "Indexable (no noindex)",
+            "present": false,
+            "detail": "noindex detected"
+          },
+          {
+            "signal": "Images assigned",
+            "present": true,
+            "detail": "4/4 page slots assigned"
+          },
+          {
+            "signal": "Alt text",
+            "present": true,
+            "detail": "4/4 images with alt"
+          },
+          {
+            "signal": "CTA",
+            "present": true,
+            "detail": "Call-to-action"
+          },
+          {
+            "signal": "Footer",
+            "present": true,
+            "detail": "Site footer"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map section"
+          },
+          {
+            "signal": "No placeholder text",
+            "present": true,
+            "detail": "No visible placeholders"
+          },
+          {
+            "signal": "No demo/mock wording",
+            "present": true,
+            "detail": "Clean copy"
+          },
+          {
+            "signal": "No broken image placeholders",
+            "present": true,
+            "detail": "Images resolve on page"
+          }
+        ]
+      },
+      "lastAuditedAt": "2026-09-10T10:04:23.437Z"
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "serviceName": "Travel Vaccinations",
+      "pageUrl": "/api/pharmacy-visual-experience/travel-vaccinations/?slug=yorkshire-pharmacy-and-health-clinic",
+      "overallScore": 64,
+      "label": "Needs Enhancement",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 25,
+        "pharmacyLocalAuthority": 73,
+        "clinicalTrust": 89,
+        "informationGain": 90,
+        "aiCitationReadiness": 90,
+        "structuredDataReadiness": 50,
+        "contentEcosystemSupport": 10,
+        "technicalPublishReadiness": 85
+      },
+      "missingSignals": [
+        "Human Expertise: Named pharmacist / reviewer",
+        "Human Expertise: Superintendent pharmacist",
+        "Human Expertise: GPhC registration details",
+        "Human Expertise: Years experience",
+        "Human Expertise: Review date",
+        "Human Expertise: Next review date",
+        "Pharmacy Local Authority: Pharmacy name",
+        "Pharmacy Local Authority: NHS service availability",
+        "Pharmacy Local Authority: Private service availability",
+        "Clinical Trust: Exclusions",
+        "Information Gain: Pharmacy-specific service notes",
+        "AI Citation Readiness: Clear short-answer blocks",
+        "Structured Data Readiness: LocalBusiness",
+        "Structured Data Readiness: Pharmacy",
+        "Structured Data Readiness: Organization",
+        "Structured Data Readiness: Person / reviewer",
+        "Structured Data Readiness: reviewedBy / author equivalent",
+        "Content Ecosystem Support: Service page",
+        "Content Ecosystem Support: Local page",
+        "Content Ecosystem Support: Guide",
+        "Content Ecosystem Support: FAQ page",
+        "Content Ecosystem Support: Blogs",
+        "Content Ecosystem Support: Social posts",
+        "Content Ecosystem Support: GBP posts",
+        "Content Ecosystem Support: Email sequence",
+        "Content Ecosystem Support: Video script",
+        "Technical Publish Readiness: Canonical",
+        "Technical Publish Readiness: Indexable (no noindex)"
+      ],
+      "criticalIssues": [
+        "Page marked noindex — remove before live publish"
+      ],
+      "recommendedEnhancements": [
+        "Human Expertise: add named pharmacist / reviewer",
+        "Human Expertise: add superintendent pharmacist",
+        "Pharmacy Local Authority: add pharmacy name",
+        "Pharmacy Local Authority: add nhs service availability",
+        "Structured Data Readiness: add localbusiness",
+        "Structured Data Readiness: add pharmacy",
+        "Content Ecosystem Support: add service page",
+        "Content Ecosystem Support: add local page"
+      ],
+      "evidence": {
+        "humanExpertise": [
+          {
+            "signal": "Named pharmacist / reviewer",
+            "present": false,
+            "detail": "No reviewer in profile"
+          },
+          {
+            "signal": "Superintendent pharmacist",
+            "present": false,
+            "detail": "Missing superintendent name"
+          },
+          {
+            "signal": "Professional role stated",
+            "present": true,
+            "detail": "Pharmacist professional role in page copy"
+          },
+          {
+            "signal": "GPhC registration details",
+            "present": false,
+            "detail": "GPhC not confirmed"
+          },
+          {
+            "signal": "Years experience",
+            "present": false,
+            "detail": "Years serving community not stated"
+          },
+          {
+            "signal": "Review date",
+            "present": false,
+            "detail": "Formal clinical review date on page"
+          },
+          {
+            "signal": "Next review date",
+            "present": false,
+            "detail": "Scheduled next review date"
+          },
+          {
+            "signal": "Professional accountability statement",
+            "present": true,
+            "detail": "Accountability / registration statement"
+          }
+        ],
+        "pharmacyLocalAuthority": [
+          {
+            "signal": "Pharmacy name",
+            "present": false,
+            "detail": "Yorkshire Pharmacy & Health Clinic"
+          },
+          {
+            "signal": "Town / city",
+            "present": true,
+            "detail": "Barnsley"
+          },
+          {
+            "signal": "Address",
+            "present": true,
+            "detail": "91 Snape Hill Rd, S739LR"
+          },
+          {
+            "signal": "Phone",
+            "present": true,
+            "detail": "0250511165738"
+          },
+          {
+            "signal": "Opening hours",
+            "present": true,
+            "detail": "Opening hours or hours section"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map or local access section"
+          },
+          {
+            "signal": "Coverage areas",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe, Grimethorpe, Goldthorpe, Worsbrough, Hoyland, Cudworth"
+          },
+          {
+            "signal": "Consultation room",
+            "present": true,
+            "detail": "Consultation room availability"
+          },
+          {
+            "signal": "NHS service availability",
+            "present": false,
+            "detail": "NHS services referenced"
+          },
+          {
+            "signal": "Private service availability",
+            "present": false,
+            "detail": "Private services referenced"
+          },
+          {
+            "signal": "Local access wording",
+            "present": true,
+            "detail": "Local access section"
+          }
+        ],
+        "clinicalTrust": [
+          {
+            "signal": "Eligibility",
+            "present": true,
+            "detail": "Eligibility criteria"
+          },
+          {
+            "signal": "Exclusions",
+            "present": false,
+            "detail": "Exclusion criteria"
+          },
+          {
+            "signal": "When to seek urgent help",
+            "present": true,
+            "detail": "Urgent care escalation"
+          },
+          {
+            "signal": "Safety warnings",
+            "present": true,
+            "detail": "Safety warnings"
+          },
+          {
+            "signal": "During consultation",
+            "present": true,
+            "detail": "Consultation process"
+          },
+          {
+            "signal": "After consultation",
+            "present": true,
+            "detail": "Post-consultation guidance"
+          },
+          {
+            "signal": "Escalation advice",
+            "present": true,
+            "detail": "Escalation pathways"
+          },
+          {
+            "signal": "Patient expectations",
+            "present": true,
+            "detail": "Patient expectations"
+          },
+          {
+            "signal": "Service limitations",
+            "present": true,
+            "detail": "Service scope limits"
+          }
+        ],
+        "informationGain": [
+          {
+            "signal": "Local booking process",
+            "present": true,
+            "detail": "Booking process"
+          },
+          {
+            "signal": "What patients should bring",
+            "present": true,
+            "detail": "Patient preparation items"
+          },
+          {
+            "signal": "Appointment / walk-in options",
+            "present": true,
+            "detail": "Access options"
+          },
+          {
+            "signal": "Local service availability",
+            "present": true,
+            "detail": "Local availability wording"
+          },
+          {
+            "signal": "Local contact process",
+            "present": true,
+            "detail": "Contact process"
+          },
+          {
+            "signal": "Nearby area relevance",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe"
+          },
+          {
+            "signal": "Pharmacy-specific service notes",
+            "present": false,
+            "detail": "Pharmacy-branded service notes"
+          },
+          {
+            "signal": "Consultation room access",
+            "present": true,
+            "detail": "Consultation room access"
+          },
+          {
+            "signal": "Practical next steps",
+            "present": true,
+            "detail": "Actionable next steps"
+          },
+          {
+            "signal": "Service-specific patient preparation",
+            "present": true,
+            "detail": "Pre-appointment preparation"
+          }
+        ],
+        "aiCitationReadiness": [
+          {
+            "signal": "Clear short-answer blocks",
+            "present": false,
+            "detail": "Concise service definition"
+          },
+          {
+            "signal": "FAQs",
+            "present": true,
+            "detail": "17 FAQ items detected"
+          },
+          {
+            "signal": "Concise definitions",
+            "present": true,
+            "detail": "Definition section"
+          },
+          {
+            "signal": "Factual statements",
+            "present": true,
+            "detail": "~1291 words of factual copy"
+          },
+          {
+            "signal": "Structured headings",
+            "present": true,
+            "detail": "Multiple H2 sections"
+          },
+          {
+            "signal": "Service-specific questions",
+            "present": true,
+            "detail": "Service FAQs"
+          },
+          {
+            "signal": "Local service answers",
+            "present": true,
+            "detail": "Localised answers"
+          },
+          {
+            "signal": "Page summary",
+            "present": true,
+            "detail": "Meta description summary"
+          },
+          {
+            "signal": "Schema candidates",
+            "present": true,
+            "detail": "BreadcrumbList, ListItem, Service, Place, MedicalBusiness"
+          },
+          {
+            "signal": "Reviewer attribution",
+            "present": true,
+            "detail": "Expert attribution"
+          }
+        ],
+        "structuredDataReadiness": [
+          {
+            "signal": "LocalBusiness",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Pharmacy",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "MedicalBusiness",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "WebPage",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "FAQPage",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "BreadcrumbList",
+            "present": true,
+            "detail": "Present"
+          },
+          {
+            "signal": "ImageObject",
+            "present": true,
+            "detail": "ImageObject or img alt"
+          },
+          {
+            "signal": "Organization",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "Person / reviewer",
+            "present": false,
+            "detail": "Missing superintendent Person"
+          },
+          {
+            "signal": "reviewedBy / author equivalent",
+            "present": false,
+            "detail": "Reviewer schema or equivalent"
+          }
+        ],
+        "contentEcosystemSupport": [
+          {
+            "signal": "Service page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Local page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Guide",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "FAQ page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Blogs",
+            "present": false,
+            "detail": "No blog posts"
+          },
+          {
+            "signal": "Social posts",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "GBP posts",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Email sequence",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Video script",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Internal support assets",
+            "present": true,
+            "detail": "9 ecosystem assets"
+          }
+        ],
+        "technicalPublishReadiness": [
+          {
+            "signal": "Page title",
+            "present": true,
+            "detail": "Title tag present"
+          },
+          {
+            "signal": "Meta description",
+            "present": true,
+            "detail": "Meta description"
+          },
+          {
+            "signal": "H1",
+            "present": true,
+            "detail": "Primary H1"
+          },
+          {
+            "signal": "Canonical",
+            "present": false,
+            "detail": "Canonical URL"
+          },
+          {
+            "signal": "Indexable (no noindex)",
+            "present": false,
+            "detail": "noindex detected"
+          },
+          {
+            "signal": "Images assigned",
+            "present": true,
+            "detail": "4/4 page slots assigned"
+          },
+          {
+            "signal": "Alt text",
+            "present": true,
+            "detail": "4/4 images with alt"
+          },
+          {
+            "signal": "CTA",
+            "present": true,
+            "detail": "Call-to-action"
+          },
+          {
+            "signal": "Footer",
+            "present": true,
+            "detail": "Site footer"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map section"
+          },
+          {
+            "signal": "No placeholder text",
+            "present": true,
+            "detail": "No visible placeholders"
+          },
+          {
+            "signal": "No demo/mock wording",
+            "present": true,
+            "detail": "Clean copy"
+          },
+          {
+            "signal": "No broken image placeholders",
+            "present": true,
+            "detail": "Images resolve on page"
+          }
+        ]
+      },
+      "lastAuditedAt": "2026-09-10T10:04:23.848Z"
+    },
+    {
+      "serviceId": "flu-vaccinations",
+      "serviceName": "Flu Vaccinations",
+      "pageUrl": "/api/pharmacy-visual-experience/flu-vaccinations/?slug=yorkshire-pharmacy-and-health-clinic",
+      "overallScore": 56,
+      "label": "Not Ready",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 13,
+        "pharmacyLocalAuthority": 73,
+        "clinicalTrust": 100,
+        "informationGain": 90,
+        "aiCitationReadiness": 70,
+        "structuredDataReadiness": 10,
+        "contentEcosystemSupport": 10,
+        "technicalPublishReadiness": 85
+      },
+      "missingSignals": [
+        "Human Expertise: Named pharmacist / reviewer",
+        "Human Expertise: Superintendent pharmacist",
+        "Human Expertise: Professional role stated",
+        "Human Expertise: GPhC registration details",
+        "Human Expertise: Years experience",
+        "Human Expertise: Next review date",
+        "Human Expertise: Professional accountability statement",
+        "Pharmacy Local Authority: Pharmacy name",
+        "Pharmacy Local Authority: NHS service availability",
+        "Pharmacy Local Authority: Private service availability",
+        "Information Gain: Pharmacy-specific service notes",
+        "AI Citation Readiness: Clear short-answer blocks",
+        "AI Citation Readiness: Schema candidates",
+        "AI Citation Readiness: Reviewer attribution",
+        "Structured Data Readiness: LocalBusiness",
+        "Structured Data Readiness: Pharmacy",
+        "Structured Data Readiness: MedicalBusiness",
+        "Structured Data Readiness: WebPage",
+        "Structured Data Readiness: FAQPage",
+        "Structured Data Readiness: BreadcrumbList",
+        "Structured Data Readiness: Organization",
+        "Structured Data Readiness: Person / reviewer",
+        "Structured Data Readiness: reviewedBy / author equivalent",
+        "Content Ecosystem Support: Service page",
+        "Content Ecosystem Support: Local page",
+        "Content Ecosystem Support: Guide",
+        "Content Ecosystem Support: FAQ page",
+        "Content Ecosystem Support: Blogs",
+        "Content Ecosystem Support: Social posts",
+        "Content Ecosystem Support: GBP posts",
+        "Content Ecosystem Support: Email sequence",
+        "Content Ecosystem Support: Video script",
+        "Technical Publish Readiness: Canonical",
+        "Technical Publish Readiness: Indexable (no noindex)"
+      ],
+      "criticalIssues": [
+        "Page marked noindex — remove before live publish"
+      ],
+      "recommendedEnhancements": [
+        "Human Expertise: add named pharmacist / reviewer",
+        "Human Expertise: add superintendent pharmacist",
+        "Pharmacy Local Authority: add pharmacy name",
+        "Pharmacy Local Authority: add nhs service availability",
+        "AI Citation Readiness: add clear short-answer blocks",
+        "AI Citation Readiness: add schema candidates",
+        "Structured Data Readiness: add localbusiness",
+        "Structured Data Readiness: add pharmacy",
+        "Content Ecosystem Support: add service page",
+        "Content Ecosystem Support: add local page"
+      ],
+      "evidence": {
+        "humanExpertise": [
+          {
+            "signal": "Named pharmacist / reviewer",
+            "present": false,
+            "detail": "No reviewer in profile"
+          },
+          {
+            "signal": "Superintendent pharmacist",
+            "present": false,
+            "detail": "Missing superintendent name"
+          },
+          {
+            "signal": "Professional role stated",
+            "present": false,
+            "detail": "Pharmacist professional role in page copy"
+          },
+          {
+            "signal": "GPhC registration details",
+            "present": false,
+            "detail": "GPhC not confirmed"
+          },
+          {
+            "signal": "Years experience",
+            "present": false,
+            "detail": "Years serving community not stated"
+          },
+          {
+            "signal": "Review date",
+            "present": true,
+            "detail": "Formal clinical review date on page"
+          },
+          {
+            "signal": "Next review date",
+            "present": false,
+            "detail": "Scheduled next review date"
+          },
+          {
+            "signal": "Professional accountability statement",
+            "present": false,
+            "detail": "Accountability / registration statement"
+          }
+        ],
+        "pharmacyLocalAuthority": [
+          {
+            "signal": "Pharmacy name",
+            "present": false,
+            "detail": "Yorkshire Pharmacy & Health Clinic"
+          },
+          {
+            "signal": "Town / city",
+            "present": true,
+            "detail": "Barnsley"
+          },
+          {
+            "signal": "Address",
+            "present": true,
+            "detail": "91 Snape Hill Rd, S739LR"
+          },
+          {
+            "signal": "Phone",
+            "present": true,
+            "detail": "0250511165738"
+          },
+          {
+            "signal": "Opening hours",
+            "present": true,
+            "detail": "Opening hours or hours section"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map or local access section"
+          },
+          {
+            "signal": "Coverage areas",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe, Grimethorpe, Goldthorpe, Worsbrough, Hoyland, Cudworth"
+          },
+          {
+            "signal": "Consultation room",
+            "present": true,
+            "detail": "Consultation room availability"
+          },
+          {
+            "signal": "NHS service availability",
+            "present": false,
+            "detail": "NHS services referenced"
+          },
+          {
+            "signal": "Private service availability",
+            "present": false,
+            "detail": "Private services referenced"
+          },
+          {
+            "signal": "Local access wording",
+            "present": true,
+            "detail": "Local access section"
+          }
+        ],
+        "clinicalTrust": [
+          {
+            "signal": "Eligibility",
+            "present": true,
+            "detail": "Eligibility criteria"
+          },
+          {
+            "signal": "Exclusions",
+            "present": true,
+            "detail": "Exclusion criteria"
+          },
+          {
+            "signal": "When to seek urgent help",
+            "present": true,
+            "detail": "Urgent care escalation"
+          },
+          {
+            "signal": "Safety warnings",
+            "present": true,
+            "detail": "Safety warnings"
+          },
+          {
+            "signal": "During consultation",
+            "present": true,
+            "detail": "Consultation process"
+          },
+          {
+            "signal": "After consultation",
+            "present": true,
+            "detail": "Post-consultation guidance"
+          },
+          {
+            "signal": "Escalation advice",
+            "present": true,
+            "detail": "Escalation pathways"
+          },
+          {
+            "signal": "Patient expectations",
+            "present": true,
+            "detail": "Patient expectations"
+          },
+          {
+            "signal": "Service limitations",
+            "present": true,
+            "detail": "Service scope limits"
+          }
+        ],
+        "informationGain": [
+          {
+            "signal": "Local booking process",
+            "present": true,
+            "detail": "Booking process"
+          },
+          {
+            "signal": "What patients should bring",
+            "present": true,
+            "detail": "Patient preparation items"
+          },
+          {
+            "signal": "Appointment / walk-in options",
+            "present": true,
+            "detail": "Access options"
+          },
+          {
+            "signal": "Local service availability",
+            "present": true,
+            "detail": "Local availability wording"
+          },
+          {
+            "signal": "Local contact process",
+            "present": true,
+            "detail": "Contact process"
+          },
+          {
+            "signal": "Nearby area relevance",
+            "present": true,
+            "detail": "Darfield, Wombwell, Thurnscoe"
+          },
+          {
+            "signal": "Pharmacy-specific service notes",
+            "present": false,
+            "detail": "Pharmacy-branded service notes"
+          },
+          {
+            "signal": "Consultation room access",
+            "present": true,
+            "detail": "Consultation room access"
+          },
+          {
+            "signal": "Practical next steps",
+            "present": true,
+            "detail": "Actionable next steps"
+          },
+          {
+            "signal": "Service-specific patient preparation",
+            "present": true,
+            "detail": "Pre-appointment preparation"
+          }
+        ],
+        "aiCitationReadiness": [
+          {
+            "signal": "Clear short-answer blocks",
+            "present": false,
+            "detail": "Concise service definition"
+          },
+          {
+            "signal": "FAQs",
+            "present": true,
+            "detail": "17 FAQ items detected"
+          },
+          {
+            "signal": "Concise definitions",
+            "present": true,
+            "detail": "Definition section"
+          },
+          {
+            "signal": "Factual statements",
+            "present": true,
+            "detail": "~1050 words of factual copy"
+          },
+          {
+            "signal": "Structured headings",
+            "present": true,
+            "detail": "Multiple H2 sections"
+          },
+          {
+            "signal": "Service-specific questions",
+            "present": true,
+            "detail": "Service FAQs"
+          },
+          {
+            "signal": "Local service answers",
+            "present": true,
+            "detail": "Localised answers"
+          },
+          {
+            "signal": "Page summary",
+            "present": true,
+            "detail": "Meta description summary"
+          },
+          {
+            "signal": "Schema candidates",
+            "present": false,
+            "detail": ""
+          },
+          {
+            "signal": "Reviewer attribution",
+            "present": false,
+            "detail": "Expert attribution"
+          }
+        ],
+        "structuredDataReadiness": [
+          {
+            "signal": "LocalBusiness",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Pharmacy",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "MedicalBusiness",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "WebPage",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "FAQPage",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "BreadcrumbList",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "ImageObject",
+            "present": true,
+            "detail": "ImageObject or img alt"
+          },
+          {
+            "signal": "Organization",
+            "present": false,
+            "detail": "Opportunity"
+          },
+          {
+            "signal": "Person / reviewer",
+            "present": false,
+            "detail": "Missing superintendent Person"
+          },
+          {
+            "signal": "reviewedBy / author equivalent",
+            "present": false,
+            "detail": "Reviewer schema or equivalent"
+          }
+        ],
+        "contentEcosystemSupport": [
+          {
+            "signal": "Service page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Local page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Guide",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "FAQ page",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Blogs",
+            "present": false,
+            "detail": "No blog posts"
+          },
+          {
+            "signal": "Social posts",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "GBP posts",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Email sequence",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Video script",
+            "present": false,
+            "detail": "Missing"
+          },
+          {
+            "signal": "Internal support assets",
+            "present": true,
+            "detail": "9 ecosystem assets"
+          }
+        ],
+        "technicalPublishReadiness": [
+          {
+            "signal": "Page title",
+            "present": true,
+            "detail": "Title tag present"
+          },
+          {
+            "signal": "Meta description",
+            "present": true,
+            "detail": "Meta description"
+          },
+          {
+            "signal": "H1",
+            "present": true,
+            "detail": "Primary H1"
+          },
+          {
+            "signal": "Canonical",
+            "present": false,
+            "detail": "Canonical URL"
+          },
+          {
+            "signal": "Indexable (no noindex)",
+            "present": false,
+            "detail": "noindex detected"
+          },
+          {
+            "signal": "Images assigned",
+            "present": true,
+            "detail": "4/4 page slots assigned"
+          },
+          {
+            "signal": "Alt text",
+            "present": true,
+            "detail": "4/4 images with alt"
+          },
+          {
+            "signal": "CTA",
+            "present": true,
+            "detail": "Call-to-action"
+          },
+          {
+            "signal": "Footer",
+            "present": true,
+            "detail": "Site footer"
+          },
+          {
+            "signal": "Map",
+            "present": true,
+            "detail": "Map section"
+          },
+          {
+            "signal": "No placeholder text",
+            "present": true,
+            "detail": "No visible placeholders"
+          },
+          {
+            "signal": "No demo/mock wording",
+            "present": true,
+            "detail": "Clean copy"
+          },
+          {
+            "signal": "No broken image placeholders",
+            "present": true,
+            "detail": "Images resolve on page"
+          }
+        ]
+      },
+      "lastAuditedAt": "2026-09-10T10:04:24.273Z"
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "serviceName": "Emergency Contraception",
+      "pageUrl": "/api/pharmacy-visual-experience/emergency-contraception/?slug=yorkshire-pharmacy-and-health-clinic",
+      "overallScore": 0,
+      "label": "Not Ready",
+      "publishGate": "FAIL",
+      "categoryScores": {
+        "humanExpertise": 0,
+        "pharmacyLocalAuthority": 0,
+        "clinicalTrust": 0,
+        "informationGain": 0,
+        "aiCitationReadiness": 0,
+        "structuredDataReadiness": 0,
+        "contentEcosystemSupport": 0,
+        "technicalPublishReadiness": 0
+      },
+      "missingSignals": [
+        "Visual service page not built"
+      ],
+      "criticalIssues": [
+        "Visual service page HTML missing — run visual build pipeline"
+      ],
+      "recommendedEnhancements": [
+        "Build visual experience page before publish audit"
+      ],
+      "evidence": {
+        "humanExpertise": [],
+        "pharmacyLocalAuthority": [],
+        "clinicalTrust": [],
+        "informationGain": [],
+        "aiCitationReadiness": [],
+        "structuredDataReadiness": [],
+        "contentEcosystemSupport": [],
+        "technicalPublishReadiness": []
+      },
+      "lastAuditedAt": "2026-09-10T10:04:24.273Z"
+    }
+  ],
+  "summary": {
+    "averageScore": 55,
+    "label": "Not Ready",
+    "publishGate": "FAIL",
+    "servicesAudited": 5
+  }
+}

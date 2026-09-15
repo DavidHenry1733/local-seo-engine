@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "slug": "vision-pharmacy",
+  "updatedAt": "2026-09-14T12:25:39.010Z",
+  "campaigns": [
+    {
+      "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+      "serviceId": "pharmacy-first",
+      "serviceName": "Pharmacy First",
+      "totalTasks": 13,
+      "completeTasks": 3,
+      "blockedTasks": 4,
+      "inProgressTasks": 1,
+      "pendingTasks": 5,
+      "progressPct": 23,
+      "nextLaunchTask": {
+        "id": "c6b16251-291c-4879-b143-ced92de37312-authority-readiness-approved",
+        "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+        "title": "Authority & AI Readiness approved",
+        "category": "Publishing",
+        "priority": "Critical",
+        "linkedModule": "Authority Audit",
+        "linkedUrl": "/api/pharmacy-authority-readiness?slug=vision-pharmacy&service=pharmacy-first",
+        "evidence": [
+          "Authority score: 74/100",
+          "Publish gate: PASS WITH RECOMMENDATIONS",
+          "Missing: Human Expertise: Named pharmacist / reviewer",
+          "Missing: Human Expertise: Superintendent pharmacist",
+          "Missing: Human Expertise: GPhC registration details",
+          "Audit: /api/pharmacy-authority-readiness?slug=vision-pharmacy&service=pharmacy-first"
+        ],
+        "createdAt": "2026-09-14T12:25:39.009Z",
+        "status": "in_progress",
+        "completedAt": null,
+        "blockedReason": "Address recommendations before final authority sign-off"
+      },
+      "tasks": [
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-confirm-profile",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Confirm profile",
+          "category": "Profile",
+          "priority": "Critical",
+          "linkedModule": "Profile Dashboard",
+          "linkedUrl": "/api/pharmacy-profile-dashboard?slug=vision-pharmacy",
+          "evidence": [
+            "Profile completeness: 75%"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-confirm-images",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Confirm images",
+          "category": "Images",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "All 4 image slots assigned (Hero, Support, Trust, Conversion)"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Confirm profile before assigning images"
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-confirm-service-page",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Confirm service page",
+          "category": "Content",
+          "priority": "Critical",
+          "linkedModule": "Visual Experience",
+          "linkedUrl": "/api/pharmacy-visual-experience/pharmacy-first/",
+          "evidence": [
+            "Service page exists for Pharmacy First"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "complete",
+          "completedAt": "2026-09-14T12:25:39.010Z",
+          "blockedReason": null
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-confirm-ecosystem",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Confirm ecosystem",
+          "category": "Content",
+          "priority": "High",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Content ecosystem available for Pharmacy First"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "complete",
+          "completedAt": "2026-09-14T12:25:39.010Z",
+          "blockedReason": null
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-authority-readiness-approved",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Authority & AI Readiness approved",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Authority Audit",
+          "linkedUrl": "/api/pharmacy-authority-readiness?slug=vision-pharmacy&service=pharmacy-first",
+          "evidence": [
+            "Authority score: 74/100",
+            "Publish gate: PASS WITH RECOMMENDATIONS",
+            "Missing: Human Expertise: Named pharmacist / reviewer",
+            "Missing: Human Expertise: Superintendent pharmacist",
+            "Missing: Human Expertise: GPhC registration details",
+            "Audit: /api/pharmacy-authority-readiness?slug=vision-pharmacy&service=pharmacy-first"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "in_progress",
+          "completedAt": null,
+          "blockedReason": "Address recommendations before final authority sign-off"
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-publish-page",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Publish page",
+          "category": "Publishing",
+          "priority": "Critical",
+          "linkedModule": "Publishing",
+          "linkedUrl": "/api/pharmacy-publishing-settings?slug=vision-pharmacy&service=pharmacy-first",
+          "evidence": [
+            "Service page not yet published"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-update-sitemap",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Update sitemap",
+          "category": "Publishing",
+          "priority": "High",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=vision-pharmacy#indexing",
+          "evidence": [
+            "Sitemap not registered"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Pages must be published before sitemap update"
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-submit-indexing",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Submit indexing",
+          "category": "Indexing",
+          "priority": "Critical",
+          "linkedModule": "Indexing Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=vision-pharmacy#indexing",
+          "evidence": [
+            "Indexing status: not_registered — submit required"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Sitemap must be updated before indexing submission"
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-refresh-visibility",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Refresh visibility",
+          "category": "Visibility",
+          "priority": "High",
+          "linkedModule": "Visibility Bridge",
+          "linkedUrl": "/api/pharmacy-growth-dashboard?slug=vision-pharmacy#visibility",
+          "evidence": [
+            "Visibility status: awaiting_index"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "blocked",
+          "completedAt": null,
+          "blockedReason": "Submit pages for indexing before visibility tracking"
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-prepare-gbp-posts",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Prepare GBP posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "GBP post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-prepare-social-posts",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Prepare social posts",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Social post pack not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-prepare-email-sequence",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Prepare email sequence",
+          "category": "Promotion",
+          "priority": "Medium",
+          "linkedModule": "Content Ecosystem",
+          "linkedUrl": "/api/pharmacy-content-ecosystem-preview/pharmacy-first/",
+          "evidence": [
+            "Email sequence not available — generate ecosystem first"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "pending",
+          "completedAt": null,
+          "blockedReason": null
+        },
+        {
+          "id": "c6b16251-291c-4879-b143-ced92de37312-review-growth-actions",
+          "campaignId": "c6b16251-291c-4879-b143-ced92de37312",
+          "title": "Review growth actions",
+          "category": "Growth",
+          "priority": "High",
+          "linkedModule": "Growth Actions",
+          "linkedUrl": "/api/pharmacy-growth-actions?slug=vision-pharmacy",
+          "evidence": [
+            "5 growth actions available"
+          ],
+          "createdAt": "2026-09-14T12:25:39.009Z",
+          "status": "complete",
+          "completedAt": "2026-09-14T12:25:39.010Z",
+          "blockedReason": null
+        }
+      ],
+      "candidatePublish": null
+    }
+  ]
+}

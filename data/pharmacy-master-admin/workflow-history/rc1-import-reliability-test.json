@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "slug": "rc1-import-reliability-test",
+  "updatedAt": "2026-07-31T14:42:58.569Z",
+  "currentStage": "business_profile_intelligence",
+  "transitions": [
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-07-31T14:42:58.569Z",
+      "operator": "cpr-rc1-blockers-v1",
+      "durationMs": null,
+      "reason": "Background job completed: import_website",
+      "evidence": "Completed"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-07-31T14:42:54.133Z",
+      "operator": "cpr-rc1-blockers-v1",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-07-31T14:42:58.542Z",
+      "finishedAt": "2026-07-31T14:42:58.542Z",
+      "durationMs": 0,
+      "operator": "cpr-rc1-blockers-v1",
+      "evidence": "Website Intelligence imported.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "17654530-53f0-4da2-a6b6-42048793bca4"
+    }
+  ]
+}

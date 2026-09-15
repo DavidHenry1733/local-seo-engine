@@ -1,0 +1,119 @@
+{
+  "kind": "product-owner-selected-demo-source-check",
+  "revisionId": "2026-09-01T14-52-50-988Z",
+  "selectedCopyUnchanged": true,
+  "newResearch": false,
+  "newGeneration": false,
+  "encoding": {
+    "htmlContainsNumericSpaceEntity": false,
+    "htmlContainsDoubleEscapedSpaceEntity": false,
+    "displayDefect": false,
+    "conclusion": "&#x20; is not present in the selected rendered HTML. It is not visible on the page and does not appear in the HTML source. Encoding left unchanged."
+  },
+  "suppliedFactsUsedForCheck": [
+    {
+      "factId": "wombwell:access-transport:wombwell-has-a-national-rail-station",
+      "statement": "Wombwell has a National Rail station."
+    },
+    {
+      "factId": "wombwell:pharmacy-relationship:distance",
+      "statement": "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell, at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK."
+    },
+    {
+      "factId": "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+      "statement": "NHS general practice services in Wombwell are provided from Wombwell Medical Centre."
+    },
+    {
+      "factId": "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+      "statement": "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire."
+    },
+    {
+      "factId": "wombwell:community:wombwell-has-a-public-library",
+      "statement": "Wombwell has a public library."
+    },
+    {
+      "factId": "wombwell:heritage:wombwell-library-hosts-local-history-sessions-ru",
+      "statement": "Wombwell Library hosts local history sessions run by Wombwell Heritage Group."
+    },
+    {
+      "factId": "wombwell:community:citizens-advice-runs-advice-and-welfare-rights-d",
+      "statement": "Citizens Advice runs advice and welfare rights drop-in sessions at Wombwell Library."
+    },
+    {
+      "factId": "wombwell:community:artwork-at-wombwell-station-was-unveiled-followi",
+      "statement": "Artwork at Wombwell station was unveiled following a collaboration between SYMCA, Barnsley Council and the town's community."
+    },
+    {
+      "factId": "wombwell:community:artwork-at-wombwell-station-refers-to-the-roly-p",
+      "statement": "Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park."
+    },
+    {
+      "factId": "wombwell:community:the-artwork-at-wombwell-station-features-the-wom",
+      "statement": "The artwork at Wombwell station features the Wombwell unicorn emblem."
+    }
+  ],
+  "phrases": [
+    {
+      "phrase": "active community spaces",
+      "field": "localContextParagraphs[0]",
+      "selectedSentence": "Wombwell’s public library and station artwork highlight the area’s active community spaces and local heritage.",
+      "supported": false,
+      "savedSources": [
+        "Wombwell has a public library.",
+        "Wombwell Library hosts local history sessions run by Wombwell Heritage Group.",
+        "Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park.",
+        "The artwork at Wombwell station features the Wombwell unicorn emblem."
+      ],
+      "unsupportedWording": [
+        "highlight",
+        "active community spaces",
+        "local heritage as a present-day character claim"
+      ],
+      "smallestProposedCorrection": "Omit the sentence. The library and station artwork are already stated in localIntroduction. Do not replace it with another character claim."
+    },
+    {
+      "phrase": "residents have established routes to healthcare support",
+      "field": "localContextParagraphs[0]",
+      "selectedSentence": "With NHS general practice services provided from Wombwell Medical Centre, residents have established routes to healthcare support.",
+      "supported": false,
+      "savedSources": [
+        "NHS general practice services in Wombwell are provided from Wombwell Medical Centre.",
+        "Prohibited inference: presence does not prove a relationship with the pharmacy, registration, waiting times, or eligibility."
+      ],
+      "unsupportedWording": [
+        "residents have established routes to healthcare support"
+      ],
+      "smallestProposedCorrection": "NHS general practice services in Wombwell are provided from Wombwell Medical Centre."
+    },
+    {
+      "phrase": "station artwork description",
+      "field": "localIntroduction",
+      "selectedSentence": "Wombwell station, part of the National Rail network, displays community artwork including the Wombwell unicorn emblem and references to local landmarks such as Roly Poly Hill and the Wishing Tree at Wombwell Park.",
+      "supported": "partial",
+      "savedSources": [
+        "Wombwell has a National Rail station.",
+        "Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park.",
+        "The artwork at Wombwell station features the Wombwell unicorn emblem.",
+        "Travel South Yorkshire saved wording: Featuring the distinctive Wombwell “unicorn” emblem and references to the Roly Poly Hill and Wishing Tree at Wombwell Park."
+      ],
+      "supportedWording": [
+        "Wombwell station",
+        "Wombwell unicorn emblem",
+        "references to",
+        "Roly Poly Hill",
+        "Wishing Tree at Wombwell Park"
+      ],
+      "unsupportedWording": [
+        "part of the National Rail network",
+        "displays community artwork",
+        "local landmarks such as"
+      ],
+      "smallestProposedCorrection": "Wombwell has a National Rail station. Artwork at Wombwell station refers to the Roly Poly Hill and Wishing Tree at Wombwell Park, and features the Wombwell unicorn emblem."
+    }
+  ],
+  "otherSavedBlockerNotRewritten": {
+    "finding": "premises locality repeated across local context and access fields",
+    "note": "Darfield is named in hero, local context and relationshipToPharmacy. Left unresolved. Copy not rewritten."
+  },
+  "appliedToSelectedCopy": false
+}

@@ -1,0 +1,39 @@
+{
+  "taskId": "wombwell-v3-live-page-2026-09-01",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 0.996,
+  "reserved": 0,
+  "consumed": 2,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.02599,
+  "events": [
+    {
+      "at": "2026-09-01T14:21:09.029Z",
+      "kind": "created",
+      "detail": "calls=2 cost=0.996"
+    },
+    {
+      "at": "2026-09-01T14:21:09.177Z",
+      "kind": "reserve",
+      "reservationId": "r-1788272469177-1"
+    },
+    {
+      "at": "2026-09-01T14:21:14.304Z",
+      "kind": "consumed",
+      "reservationId": "r-1788272469177-1",
+      "detail": "cost=0.012012"
+    },
+    {
+      "at": "2026-09-01T14:21:14.377Z",
+      "kind": "reserve",
+      "reservationId": "r-1788272474377-2"
+    },
+    {
+      "at": "2026-09-01T14:21:19.107Z",
+      "kind": "consumed",
+      "reservationId": "r-1788272474377-2",
+      "detail": "cost=0.013978"
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "issueId": "MAI-20260731-005",
+  "createdAt": "2026-07-31T14:03:37.409Z",
+  "createdBy": "cpr-greenfield-v1",
+  "updatedAt": "2026-07-31T14:03:37.409Z",
+  "tenantSlug": "commercial-validation-pharmacy",
+  "campaignId": "",
+  "serviceId": "",
+  "affectedPageOrModule": "Business Profile Review",
+  "category": "Onboarding",
+  "severity": "High",
+  "title": "Business Profile Review missing source evidence",
+  "description": "Missing source evidence: Website Intelligence",
+  "expectedBehaviour": "Website intelligence available for review; Google intelligence only when connected.",
+  "actualBehaviour": "Missing source evidence: Website Intelligence",
+  "reproductionSteps": "Open Business Profile Review.",
+  "affectedUrl": "",
+  "screenshotReference": "",
+  "diagnosticSnapshot": {
+    "collectedAt": "2026-07-31T14:03:37.437Z",
+    "collectionMode": "stored_evidence_only",
+    "tenant": {
+      "slug": "commercial-validation-pharmacy",
+      "businessName": "Commercial Validation Pharmacy",
+      "website": "https://www.jhootspharmacy.co.uk",
+      "lifecycleStatus": "new",
+      "profileVersion": 5,
+      "profileModifiedAt": "2026-07-31T14:03:33.969Z",
+      "platformClientStatus": "setup_required"
+    },
+    "campaign": {
+      "campaignId": "pharmacy-first",
+      "serviceId": "pharmacy-first",
+      "generationStatus": "not_started",
+      "frozenContextPath": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/growth-engine/commercial-validation-pharmacy-campaign-generation-context-pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "generationTimestamp": null,
+      "activePageManifest": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-content-packages/commercial-validation-pharmacy/pharmacy-first.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      }
+    },
+    "page": {
+      "requestedUrl": "",
+      "outputFilePath": {
+        "path": "",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "rendererMarker": "LOCKED — do not modify renderers",
+      "brandDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/config/projects/commercial-validation-pharmacy/brand/brand-profile.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "componentDnaMarker": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-component-dna/commercial-validation-pharmacy.json",
+        "exists": false,
+        "modifiedAt": null,
+        "size": 0
+      },
+      "pageType": "Business Profile Review",
+      "httpStatus": null
+    },
+    "deployment": {
+      "sourceBuildTimestamp": "2026-07-31T11:16:32.783Z",
+      "apiDist": {
+        "path": "/home/inboxingproweb/pharmaconnect-growth-engine/artifacts/api-server/dist/index.mjs",
+        "exists": true,
+        "modifiedAt": "2026-07-31T11:16:32.783Z",
+        "size": 13240156
+      },
+      "port": "3001",
+      "pm2": {
+        "available": true,
+        "process": "pharmaconnect-growth-engine",
+        "pid": 2414858,
+        "pmId": 1,
+        "status": "online",
+        "startTime": "2026-07-31T11:16:55.409Z",
+        "restartCount": 55
+      },
+      "nodeEnv": "unknown"
+    },
+    "systemState": {
+      "websiteImportStatus": "none",
+      "googleImportStatus": "none",
+      "businessProfileStatus": "setup_required",
+      "generationStatus": "idle",
+      "publishingStatus": "not_started",
+      "indexingStatus": "0 indexed / 0 submitted / 0 registered",
+      "rankTrackingStatus": "none",
+      "latestRelevantJob": {
+        "id": "d9de3847-d44b-45b0-ae31-9b49970904f4",
+        "action": "import_website",
+        "status": "claimed",
+        "progressLabel": "Claimed",
+        "updatedAt": "2026-07-31T14:03:34.070Z"
+      },
+      "latestRelevantAuditEvents": [
+        {
+          "id": "b48c601d-bef6-4c4d-a892-43dd707aa8e9",
+          "timestamp": "2026-07-31T14:03:37.289Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 30 review decisions"
+        },
+        {
+          "id": "190cbf53-d6fc-4172-abda-539f0537a32d",
+          "timestamp": "2026-07-31T14:03:37.147Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260731-004 created: Business Profile Review missing source evidence"
+        },
+        {
+          "id": "d5875924-ab74-4afe-bc1d-723baaa015e2",
+          "timestamp": "2026-07-31T14:03:36.764Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 30 review decisions"
+        },
+        {
+          "id": "da32ad57-59a2-477f-b4c0-ce1d6f332abc",
+          "timestamp": "2026-07-31T14:03:36.613Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260731-003 created: Business Profile Review missing source evidence"
+        },
+        {
+          "id": "5633c6f7-2990-4e63-9406-fb5bd281bf0c",
+          "timestamp": "2026-07-31T14:03:36.236Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 30 review decisions"
+        },
+        {
+          "id": "a9bb589b-1560-418a-97af-6d0cc5a1597c",
+          "timestamp": "2026-07-31T14:03:36.070Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260731-002 created: Business Profile Review missing source evidence"
+        },
+        {
+          "id": "6bb5c38f-7c7f-434b-9604-51617dfd724a",
+          "timestamp": "2026-07-31T14:03:35.693Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 30 review decisions"
+        },
+        {
+          "id": "6fdd9c0c-5fd3-499b-875d-33d1c26a1ea1",
+          "timestamp": "2026-07-31T14:03:35.449Z",
+          "action": "issue_created",
+          "status": "success",
+          "evidence": "Issue MAI-20260731-001 created: Business Profile Review missing source evidence"
+        },
+        {
+          "id": "622d75a6-47f9-4947-a56e-646a8c1a896b",
+          "timestamp": "2026-07-31T14:03:35.016Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 30 review decisions"
+        },
+        {
+          "id": "0d603b10-9786-4174-875c-e6c8f83519d4",
+          "timestamp": "2026-07-31T14:03:34.892Z",
+          "action": "save_business_profile_review",
+          "status": "success",
+          "evidence": "Saved 29 review decisions"
+        }
+      ]
+    },
+    "errors": [],
+    "relatedStoredFiles": [
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/commercial-validation-pharmacy.json",
+      "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/commercial-validation-pharmacy.json"
+    ]
+  },
+  "diagnosticCollectedAt": "2026-07-31T14:03:37.409Z",
+  "status": "Open",
+  "assignee": "Unassigned",
+  "resolutionNotes": "",
+  "relatedFiles": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/commercial-validation-pharmacy.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-indexing/commercial-validation-pharmacy.json"
+  ],
+  "linkedAuditEventIds": [
+    "11fd18ed-a339-4ec1-9ed7-73bf73cc3f2b"
+  ],
+  "resolutionHistory": [
+    {
+      "timestamp": "2026-07-31T14:03:37.409Z",
+      "user": "cpr-greenfield-v1",
+      "status": "Open",
+      "notes": "Issue created"
+    }
+  ],
+  "cursorPrompt": null,
+  "productOwnerTestResult": "",
+  "closedAt": null
+}

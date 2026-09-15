@@ -1,0 +1,345 @@
+{
+  "version": 2,
+  "slug": "yorkshire-pharmacy-and-health-clinic",
+  "updatedAt": "2026-09-10T11:44:34.563Z",
+  "currentStage": "quality_review",
+  "transitions": [
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-08-20T15:42:22.629Z",
+      "operator": "admin",
+      "durationMs": 390,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Cluster generation is not eligible for this customer"
+    },
+    {
+      "fromStage": "quality_review",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-08-20T15:42:22.171Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Service Page Review approved — cluster generation stage",
+      "evidence": "Service page review decision 2026-08-20T15:42:22.126Z"
+    },
+    {
+      "fromStage": "generate_ecosystem",
+      "toStage": "quality_review",
+      "timestamp": "2026-08-20T12:44:22.496Z",
+      "operator": "admin",
+      "durationMs": 1513895,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "generate_growth_intelligence",
+      "toStage": "generate_ecosystem",
+      "timestamp": "2026-08-20T12:19:08.563Z",
+      "operator": "admin",
+      "durationMs": 944,
+      "reason": "Workflow stage derived from stored tenant signals",
+      "evidence": "Business Profile approved revision 1"
+    },
+    {
+      "fromStage": "approve_business_profile",
+      "toStage": "generate_growth_intelligence",
+      "timestamp": "2026-08-20T12:19:07.582Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Canonical Business Profile approved"
+    },
+    {
+      "fromStage": "resolve_import_conflicts",
+      "toStage": "approve_business_profile",
+      "timestamp": "2026-08-20T12:19:07.580Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Import conflicts resolved via review"
+    },
+    {
+      "fromStage": "business_profile_intelligence",
+      "toStage": "resolve_import_conflicts",
+      "timestamp": "2026-08-20T12:19:07.564Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Business Profile Review approved",
+      "evidence": "Business Profile Review approved"
+    },
+    {
+      "fromStage": "website_import",
+      "toStage": "business_profile_intelligence",
+      "timestamp": "2026-08-20T11:08:40.869Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Website import complete after branch selection",
+      "evidence": "Branch confirmed — website import stage complete"
+    },
+    {
+      "fromStage": "create_customer",
+      "toStage": "website_import",
+      "timestamp": "2026-08-20T11:01:25.659Z",
+      "operator": "admin",
+      "durationMs": null,
+      "reason": "Commercial customer created",
+      "evidence": "Profile, workspace, and pharmacy-first campaign provisioned"
+    }
+  ],
+  "executions": [
+    {
+      "stageId": "publish",
+      "actionId": "publish",
+      "startedAt": "2026-09-10T11:44:34.562Z",
+      "finishedAt": "2026-09-10T11:44:34.562Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Completed",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "74d02a98-c5c0-42b8-bc13-17d17fd76f18"
+    },
+    {
+      "stageId": "publish",
+      "actionId": "publish",
+      "startedAt": "2026-09-10T11:09:59.518Z",
+      "finishedAt": "2026-09-10T11:09:59.518Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "getConnection: All configured authentication methods failed",
+      "warnings": [],
+      "errors": [
+        "getConnection: All configured authentication methods failed"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "b15c5e4d-9037-4353-87c7-20f657126c64"
+    },
+    {
+      "stageId": "publish",
+      "actionId": "publish",
+      "startedAt": "2026-09-10T10:58:22.976Z",
+      "finishedAt": "2026-09-10T10:58:22.976Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "getConnection: All configured authentication methods failed",
+      "warnings": [],
+      "errors": [
+        "getConnection: All configured authentication methods failed"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "7ce91dd5-9f9b-464c-ab34-39e5f51b7719"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T15:42:27.741Z",
+      "finishedAt": "2026-08-20T15:42:27.741Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "bcdf4f0e-d3fb-4a0c-aa41-69558afa5163"
+    },
+    {
+      "stageId": "quality_review",
+      "actionId": "approve_service_page_review",
+      "startedAt": "2026-08-20T15:42:22.128Z",
+      "finishedAt": "2026-08-20T15:42:22.164Z",
+      "durationMs": 36,
+      "operator": "admin",
+      "evidence": "Service Page Review approved for CPR acceptance",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T13:55:24.603Z",
+      "finishedAt": "2026-08-20T13:55:24.603Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "42716860-6bf1-459c-8b3b-3d6713b41faa"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T13:54:44.218Z",
+      "finishedAt": "2026-08-20T13:54:44.218Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "1f11d99d-e091-4618-9b2e-3d64b81b4e91"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T13:54:27.329Z",
+      "finishedAt": "2026-08-20T13:54:27.329Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "d9ae56b2-ebf5-45f7-b946-e08f174ccaa1"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T13:48:41.074Z",
+      "finishedAt": "2026-08-20T13:48:41.074Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "3001b5bb-24f1-4066-b0aa-0cf5d3488f8f"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T13:39:57.967Z",
+      "finishedAt": "2026-08-20T13:39:57.967Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "b61f546b-835a-43f1-8970-d38bc95b1e3c"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T13:38:56.009Z",
+      "finishedAt": "2026-08-20T13:38:56.009Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "107eb60d-2e77-4809-89b3-d12adb959ffd"
+    },
+    {
+      "stageId": "generate_ecosystem",
+      "actionId": "generate_local_cluster_pages",
+      "startedAt": "2026-08-20T13:38:27.664Z",
+      "finishedAt": "2026-08-20T13:38:27.664Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Cluster generation is not eligible for this customer",
+      "warnings": [],
+      "errors": [
+        "Cluster generation is not eligible for this customer"
+      ],
+      "retryCount": 0,
+      "status": "failed",
+      "jobId": "77981233-ad19-402f-bde4-a61aafbaa8b5"
+    },
+    {
+      "stageId": "approve_business_profile",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-20T12:19:07.581Z",
+      "finishedAt": "2026-08-20T12:19:07.581Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Canonical Business Profile approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "resolve_import_conflicts",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-20T12:19:07.572Z",
+      "finishedAt": "2026-08-20T12:19:07.578Z",
+      "durationMs": 6,
+      "operator": "admin",
+      "evidence": "Import conflicts resolved via review",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "business_profile_intelligence",
+      "actionId": "approve_business_profile_review",
+      "startedAt": "2026-08-20T12:19:07.469Z",
+      "finishedAt": "2026-08-20T12:19:07.559Z",
+      "durationMs": 90,
+      "operator": "admin",
+      "evidence": "Business Profile Review approved",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed"
+    },
+    {
+      "stageId": "website_import",
+      "actionId": "import_website",
+      "startedAt": "2026-08-20T11:01:55.528Z",
+      "finishedAt": "2026-08-20T11:01:55.528Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "Multiple pharmacy branches detected — select the branch being onboarded.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "ed99a4a4-b0b5-4001-88c4-1c5a693f2241"
+    },
+    {
+      "stageId": "google_import",
+      "actionId": "import_google",
+      "startedAt": "2026-08-20T11:01:31.552Z",
+      "finishedAt": "2026-08-20T11:01:31.552Z",
+      "durationMs": 0,
+      "operator": "admin",
+      "evidence": "No Google Business Profile found. You can continue with website import only.",
+      "warnings": [],
+      "errors": [],
+      "retryCount": 0,
+      "status": "completed",
+      "jobId": "6a2557be-19d3-4961-afd8-d4beb1ba6a64"
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "version": "design-intelligence-v1",
+  "tenant": "doncaster-pharmacy",
+  "sourceRevision": "447ece5e8160905c",
+  "capturedAt": "2026-08-20T09:28:12.513Z",
+  "primaryUrl": "https://donchemist.co.uk",
+  "navigation": {
+    "tree": [
+      {
+        "id": "nav-1",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 1,
+        "selector": "header nav a",
+        "href": "https://donchemist.co.uk/health-promotion-zone/",
+        "text": "Health Promotion Zone",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-2",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 2,
+        "selector": "header nav a",
+        "href": "https://donchemist.co.uk/contact-us/",
+        "text": "Contact Us",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-3",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 3,
+        "selector": "header nav a",
+        "href": "https://donchemist.co.uk/complaints/",
+        "text": "Complaints",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-4",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 4,
+        "selector": "header nav a",
+        "href": "https://donchemist.co.uk/delivery-and-returns/",
+        "text": "Delivery and Returns",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-5",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 5,
+        "selector": "header nav a",
+        "href": "https://donchemist.co.uk/prescription-costs-and-exemptions/",
+        "text": "Prescription Costs and Exemptions",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-6",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 6,
+        "selector": "header nav a",
+        "href": "https://www.pharmacyregulation.org/registers/pharmacy",
+        "text": "here",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-7",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 7,
+        "selector": "header nav a",
+        "href": "https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/9012203",
+        "text": "9012203",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      },
+      {
+        "id": "nav-8",
+        "parentId": null,
+        "depth": 0,
+        "role": "primary-navigation",
+        "order": 8,
+        "selector": "header nav a",
+        "href": "https://donchemist.co.uk/about-us/",
+        "text": "About Us",
+        "visibility": "visible",
+        "breakpointVisibility": {
+          "desktop": true,
+          "tablet": true,
+          "mobile": true
+        }
+      }
+    ],
+    "hierarchyDepth": 1,
+    "rootId": "nav-1"
+  },
+  "header": {
+    "rowCount": 1,
+    "announcementBar": null,
+    "logoBlock": {
+      "selector": "header .logo img",
+      "backgroundColour": "#ffffff",
+      "textColour": "#408027",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "left",
+      "sticky": false,
+      "logoUrl": "https://donchemist.co.uk/wp-content/uploads/2023/07/cropped-new-design-cropped.png",
+      "logoMaxHeight": "48px",
+      "logoPosition": "left"
+    },
+    "navigationBlock": {
+      "selector": "header nav",
+      "backgroundColour": "#ffffff",
+      "textColour": "#408027",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "end",
+      "sticky": false,
+      "navPlacement": "horizontal-multi-link",
+      "mobileMenuBehaviour": "stacked-nav"
+    },
+    "ctaBlock": {
+      "selector": "header .btn, header .theme-btn",
+      "backgroundColour": "#32373c",
+      "textColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "",
+      "paddingLeft": "",
+      "paddingRight": "",
+      "alignment": "right",
+      "sticky": false,
+      "labels": [
+        "Book An Appointment"
+      ],
+      "hrefs": [
+        "https://donchemist.co.uk"
+      ]
+    },
+    "spacing": {
+      "paddingY": "",
+      "paddingX": "",
+      "gap": "16px"
+    },
+    "alignment": {
+      "logo": "left",
+      "nav": "center",
+      "cta": "right"
+    },
+    "sticky": true,
+    "responsive": {
+      "desktopBreakpoint": "980px",
+      "mobileMenuBehaviour": "stacked-nav"
+    }
+  },
+  "footer": {
+    "upperLayer": {
+      "selector": "footer",
+      "backgroundColour": "#408027",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "56px",
+      "paddingBottom": "0"
+    },
+    "lowerLayer": {
+      "selector": "footer .footer-bottom",
+      "backgroundColour": "#408027",
+      "textColour": "#ffffff",
+      "linkColour": "#ffffff",
+      "paddingTop": "",
+      "paddingBottom": "18px"
+    },
+    "groups": [
+      {
+        "id": "footer-primary",
+        "role": "company",
+        "selector": "footer",
+        "heading": "Footer",
+        "links": [
+          {
+            "text": "Health Promotion Zone",
+            "href": "https://donchemist.co.uk/health-promotion-zone/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Contact Us",
+            "href": "https://donchemist.co.uk/contact-us/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Complaints",
+            "href": "https://donchemist.co.uk/complaints/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Delivery and Returns",
+            "href": "https://donchemist.co.uk/delivery-and-returns/",
+            "selector": "footer a"
+          },
+          {
+            "text": "Prescription Costs and Exemptions",
+            "href": "https://donchemist.co.uk/prescription-costs-and-exemptions/",
+            "selector": "footer a"
+          },
+          {
+            "text": "here",
+            "href": "https://www.pharmacyregulation.org/registers/pharmacy",
+            "selector": "footer a"
+          },
+          {
+            "text": "9012203",
+            "href": "https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/9012203",
+            "selector": "footer a"
+          }
+        ],
+        "backgroundColour": "#408027",
+        "textColour": "#ffffff"
+      }
+    ],
+    "mobileStackOrder": [
+      "about",
+      "quickLinks",
+      "openingHours",
+      "contact"
+    ]
+  },
+  "colours": [
+    {
+      "role": "primary",
+      "selector": ":root",
+      "computedColour": "#5cb738",
+      "hex": "#5cb738",
+      "layer": "body"
+    },
+    {
+      "role": "secondary",
+      "selector": ":root",
+      "computedColour": "#46b053",
+      "hex": "#46b053",
+      "layer": "body"
+    },
+    {
+      "role": "accent",
+      "selector": ":root",
+      "computedColour": "#46b053",
+      "hex": "#46b053",
+      "layer": "body"
+    },
+    {
+      "role": "header-background",
+      "selector": ":root",
+      "computedColour": "#ffffff",
+      "hex": "#ffffff",
+      "layer": "footer-upper"
+    },
+    {
+      "role": "footer-background",
+      "selector": ":root",
+      "computedColour": "#408027",
+      "hex": "#408027",
+      "layer": "footer-upper"
+    }
+  ],
+  "images": [
+    {
+      "id": "logo-primary",
+      "role": "logo",
+      "selector": "header .logo img",
+      "asset": "https://donchemist.co.uk/wp-content/uploads/2023/07/cropped-new-design-cropped.png",
+      "width": 0,
+      "height": 0,
+      "aspectRatio": "",
+      "alt": "Doncaster Chemist",
+      "lazyLoad": false,
+      "backgroundImage": "",
+      "visibility": "visible"
+    }
+  ],
+  "validation": {
+    "navigationTreeComplete": true,
+    "headerHierarchyComplete": true,
+    "footerHierarchyComplete": true,
+    "colourRolesComplete": true,
+    "imageRolesComplete": true,
+    "navigationFlatteningRemoved": true,
+    "footerLayerMergeRemoved": true
+  },
+  "summary": {
+    "layoutClassification": "with-top-bar",
+    "headerStyle": "horizontal-multi-link",
+    "footerStyle": "four-column-contact",
+    "navigationStyle": "horizontal-multi-link",
+    "typographySystem": "Roboto / Roboto",
+    "buttonStyle": "filled-only · 10px · filled",
+    "colourSystem": "#5cb738, #46b053, #46b053",
+    "logoPlacement": "left",
+    "evidenceCompleteness": 100,
+    "fallbackReason": null
+  }
+}

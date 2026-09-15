@@ -1,0 +1,71 @@
+{
+  "validatedAt": "2026-06-19T08:03:41.606Z",
+  "checks": [
+    {
+      "label": "LOCAL_INTEL_GROUPS has no majorEmployers",
+      "pass": true,
+      "value": "setup UI clean"
+    },
+    {
+      "label": "ENTITY_GROUP_KEYS excludes majorEmployers",
+      "pass": true,
+      "value": "gpSurgeries, hospitals, healthCentres, careHomes, schools, landmarks, communityFacilities, transportLinks, retailCentres, residentialAreas"
+    },
+    {
+      "label": "Generation excludes employer Google query",
+      "pass": true,
+      "value": "query removed"
+    },
+    {
+      "label": "Generation excludes employer categorization",
+      "pass": true,
+      "value": "categorizer removed"
+    },
+    {
+      "label": "Demo fallback excludes localEmployers",
+      "pass": true,
+      "value": "demo mapping removed"
+    },
+    {
+      "label": "Generated groups have no majorEmployers key",
+      "pass": true,
+      "value": "gpSurgeries, hospitals, healthCentres, careHomes, schools, landmarks, communityFacilities, transportLinks, retailCentres, residentialAreas"
+    },
+    {
+      "label": "Active groups still generate entities",
+      "pass": true,
+      "value": "10 total"
+    },
+    {
+      "label": "Saved profile majorEmployers preserved if present",
+      "pass": true,
+      "value": "none saved"
+    }
+  ],
+  "passCount": 8,
+  "failCount": 0,
+  "activeGroups": [
+    "gpSurgeries",
+    "hospitals",
+    "healthCentres",
+    "careHomes",
+    "schools",
+    "landmarks",
+    "communityFacilities",
+    "transportLinks",
+    "retailCentres",
+    "residentialAreas"
+  ],
+  "generatedTotals": {
+    "gpSurgeries": 1,
+    "hospitals": 1,
+    "healthCentres": 1,
+    "careHomes": 1,
+    "schools": 3,
+    "landmarks": 1,
+    "communityFacilities": 1,
+    "transportLinks": 1,
+    "retailCentres": 0,
+    "residentialAreas": 0
+  }
+}

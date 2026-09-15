@@ -10,8 +10,11 @@ import { copySimilarityScore } from "./pharmacyLocalClusterVariantFamilies.ts";
 import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
 import { PHARMACY_WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 
+import { LOCALITY_IDENTITY_STRIPPED_BODY_THRESHOLD } from "./contentEngine/pharmacyLocalEvidencePackContractV1.ts";
+
 export const LOCALITY_NEAR_DUPLICATE_THRESHOLD = 0.92;
 export const LOCALITY_NAME_SUBSTITUTION_THRESHOLD = 0.97;
+export { LOCALITY_IDENTITY_STRIPPED_BODY_THRESHOLD };
 
 export type LocalitySubstantiveSectionId =
   | "seo-title"
@@ -146,8 +149,27 @@ export function normalizeLocalitySectionForGate(
     .replace(/\+44[\d\s]{8,}/g, "{phone}")
     .replace(/https?:\/\/\S+/g, "{url}")
     .replace(/\b[a-z]{1,2}\d{1,2}[a-z]?\s*\d[a-z]{2}\b/gi, "{postcode}")
+    .replace(/\babout\s+\d+(?:\.\d+)?\s*km\b/g, "{distance}")
+    .replace(/\bless than 1 km\b/g, "{distance}")
+    .replace(/\b\d+(?:\.\d+)?\s*km\b/g, "{distance}")
     .replace(/\s+/g, " ")
     .trim();
+  return out;
+}
+
+export function identityStrippedLocalityBody(
+  html: string,
+  areaName: string,
+  pharmacyName: string,
+  siblingAreaNames: string[] = [],
+): string {
+  const main = html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || html;
+  const withoutLinks = main.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, " ");
+  let out = normalizeLocalitySectionForGate(stripHtml(withoutLinks), areaName, pharmacyName);
+  for (const sibling of siblingAreaNames) {
+    if (!sibling || sibling.toLowerCase() === areaName.toLowerCase()) continue;
+    out = out.replace(new RegExp(escapeRe(sibling.toLowerCase()), "g"), "{area}");
+  }
   return out;
 }
 
@@ -223,18 +245,29 @@ function comparePair(
   const core = ["h1-intro", "access"] as LocalitySubstantiveSectionId[];
   const coreNear = core.every((id) => sections.find((s) => s.section === id)?.nearDuplicate);
   const coreNameOnly = core.every((id) => sections.find((s) => s.section === id)?.nameSubstitution);
+  const bodyA = identityStrippedLocalityBody(aHtml, aName, pharmacyName, areaNames);
+  const bodyB = identityStrippedLocalityBody(bHtml, bName, pharmacyName, areaNames);
+  const bodyScore = !bodyA || !bodyB ? 0 : bodyA === bodyB ? 1 : copySimilarityScore(bodyA, bodyB);
+  const distinctiveBody = hasDistinctiveDifference(bodyA, bodyB);
+  const identityStrippedDuplicate =
+    Boolean(bodyA && bodyB) &&
+    !distinctiveBody &&
+    bodyScore >= LOCALITY_IDENTITY_STRIPPED_BODY_THRESHOLD;
   const blocked =
     exactHits.length >= 2 ||
     nearHits.length >= 3 ||
     nameHits.length >= 3 ||
     coreNear ||
-    coreNameOnly;
+    coreNameOnly ||
+    identityStrippedDuplicate;
 
   let reason = "";
   if (blocked) {
     const pair = `${aSlug} / ${bSlug}`;
     if (coreNameOnly || (coreNear && nameHits.includes("h1-intro"))) {
       reason = `Locality pages ${pair} have near-duplicate intro/access after locality-name normalisation.`;
+    } else if (identityStrippedDuplicate) {
+      reason = `Locality pages ${pair} have identity-stripped body similarity ${bodyScore.toFixed(2)} at or above the conservative ${LOCALITY_IDENTITY_STRIPPED_BODY_THRESHOLD} threshold. Titles, distances, area names, link labels and URLs are not sufficient uniqueness.`;
     } else if (nameHits.length >= 3) {
       reason = `Locality pages ${pair} differ primarily by locality-name substitution in ${nameHits.join(", ")}.`;
     } else if (coreNear) {

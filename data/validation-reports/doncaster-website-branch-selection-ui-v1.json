@@ -1,0 +1,136 @@
+{
+  "pass": true,
+  "generatedAt": "2026-08-20T10:30:13.502Z",
+  "checks": [
+    {
+      "id": "row-button-label",
+      "pass": true,
+      "detail": "IER branch rows render Use This Pharmacy"
+    },
+    {
+      "id": "action-first-column",
+      "pass": true,
+      "detail": "Action column is first and table is scroll-wrapped"
+    },
+    {
+      "id": "click-uses-existing-select",
+      "pass": true,
+      "detail": "Row click posts existing website-branches/select"
+    },
+    {
+      "id": "no-second-selector",
+      "pass": true,
+      "detail": "No second branch-selection system"
+    },
+    {
+      "id": "google-select-ui-blocked",
+      "pass": true,
+      "detail": "Google Select disabled while website branch selection is required"
+    },
+    {
+      "id": "api-error-message-helper",
+      "pass": true,
+      "detail": "409 surfaces apiErrorMessage instead of undefined property access"
+    },
+    {
+      "id": "google-select-route-gate",
+      "pass": true,
+      "detail": "Google select route 409s until website branch selection completes"
+    },
+    {
+      "id": "reused-route",
+      "pass": true,
+      "detail": "POST .../website-branches/select still calls selectWebsiteBranch"
+    },
+    {
+      "id": "persist-website-and-place",
+      "pass": true,
+      "detail": "Selected branch website and Google Place ID persist on the setup profile"
+    },
+    {
+      "id": "leeds-same-route",
+      "pass": true,
+      "detail": "Leeds continues to use the same unscoped selectWebsiteBranch route"
+    },
+    {
+      "id": "before-requires-selection",
+      "pass": true,
+      "detail": "requiresSelection=true blocking=true"
+    },
+    {
+      "id": "before-isolation-blocked",
+      "pass": true,
+      "detail": "Website branch selection required — evidence not yet accepted"
+    },
+    {
+      "id": "before-google-blocked",
+      "pass": true,
+      "detail": "Google candidate selection remains blocked until website branch is chosen"
+    },
+    {
+      "id": "before-two-branches",
+      "pass": true,
+      "detail": "2"
+    },
+    {
+      "id": "select-succeeds",
+      "pass": true,
+      "detail": "doncaster-chemist-dn1-2qp"
+    },
+    {
+      "id": "persisted-name",
+      "pass": true,
+      "detail": "Doncaster Chemist"
+    },
+    {
+      "id": "persisted-address",
+      "pass": true,
+      "detail": "Office 2, 83 Copley Road, Doncaster"
+    },
+    {
+      "id": "persisted-postcode",
+      "pass": true,
+      "detail": "DN1 2QP"
+    },
+    {
+      "id": "persisted-phone",
+      "pass": true,
+      "detail": "01302 965997"
+    },
+    {
+      "id": "persisted-website",
+      "pass": true,
+      "detail": "https://www.donchemist.co.uk/"
+    },
+    {
+      "id": "persisted-place-id",
+      "pass": true,
+      "detail": "ChIJDoncasterChemistDN12QP"
+    },
+    {
+      "id": "requires-selection-cleared",
+      "pass": true,
+      "detail": "false"
+    },
+    {
+      "id": "isolation-passed",
+      "pass": true,
+      "detail": "passed"
+    },
+    {
+      "id": "website-imported",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "id": "google-unblocked-after",
+      "pass": true,
+      "detail": "Google matching can proceed after website branch selection"
+    },
+    {
+      "id": "sibling-not-merged",
+      "pass": true,
+      "detail": "selected=Doncaster Chemist postcode=DN1 2QP siblingRetained=yes"
+    }
+  ]
+}

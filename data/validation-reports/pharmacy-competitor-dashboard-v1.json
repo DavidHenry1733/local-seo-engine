@@ -1,0 +1,82 @@
+{
+  "validation": {
+    "slug": "pharmaconnect",
+    "validatedAt": "2026-06-19T10:54:36.645Z",
+    "dashboardRoute": "/api/pharmacy-competitor-dashboard",
+    "apiEndpoints": {
+      "status": "GET /api/pharmacy-competitor-intelligence/:slug/status",
+      "build": "POST /api/pharmacy-competitor-intelligence/:slug/build",
+      "dashboardJson": "GET /api/pharmacy-competitor-intelligence/:slug/dashboard"
+    },
+    "dashboard": {
+      "competitorCount": 10,
+      "serviceComparisons": 20,
+      "opportunities": 10,
+      "recommendedActions": 10
+    },
+    "checks": [
+      {
+        "label": "Dashboard route registered",
+        "pass": true,
+        "value": "/api/pharmacy-competitor-dashboard"
+      },
+      {
+        "label": "Status API exists",
+        "pass": true,
+        "value": "GET /api/pharmacy-competitor-intelligence/:slug/status"
+      },
+      {
+        "label": "Build API exists",
+        "pass": true,
+        "value": "POST /api/pharmacy-competitor-intelligence/:slug/build"
+      },
+      {
+        "label": "Dashboard JSON available",
+        "pass": true,
+        "value": "found"
+      },
+      {
+        "label": "Competitor summary renders",
+        "pass": true,
+        "value": "PASS"
+      },
+      {
+        "label": "Competitor table renders",
+        "pass": true,
+        "value": "PASS"
+      },
+      {
+        "label": "Review gap renders",
+        "pass": true,
+        "value": "PASS"
+      },
+      {
+        "label": "Service coverage renders",
+        "pass": true,
+        "value": "PASS"
+      },
+      {
+        "label": "Opportunities render",
+        "pass": true,
+        "value": "10 opportunities"
+      },
+      {
+        "label": "Recommended actions render",
+        "pass": true,
+        "value": "10 actions"
+      },
+      {
+        "label": "Run Competitor Intelligence button",
+        "pass": true,
+        "value": "button + POST build"
+      },
+      {
+        "label": "Demo fallback data works",
+        "pass": true,
+        "value": "10 demo/live competitors"
+      }
+    ],
+    "passCount": 12,
+    "totalChecks": 12
+  }
+}

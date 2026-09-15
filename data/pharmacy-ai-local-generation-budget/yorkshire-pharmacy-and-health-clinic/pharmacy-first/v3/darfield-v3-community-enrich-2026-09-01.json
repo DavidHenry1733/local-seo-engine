@@ -1,0 +1,39 @@
+{
+  "taskId": "darfield-v3-community-enrich-2026-09-01",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 0.996,
+  "reserved": 0,
+  "consumed": 2,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.025820000000000003,
+  "events": [
+    {
+      "at": "2026-09-01T17:42:57.311Z",
+      "kind": "created",
+      "detail": "calls=2 cost=0.996"
+    },
+    {
+      "at": "2026-09-01T17:42:57.455Z",
+      "kind": "reserve",
+      "reservationId": "r-1788284577455-1"
+    },
+    {
+      "at": "2026-09-01T17:43:04.376Z",
+      "kind": "consumed",
+      "reservationId": "r-1788284577455-1",
+      "detail": "cost=0.012694"
+    },
+    {
+      "at": "2026-09-01T17:43:04.465Z",
+      "kind": "reserve",
+      "reservationId": "r-1788284584465-2"
+    },
+    {
+      "at": "2026-09-01T17:43:10.261Z",
+      "kind": "consumed",
+      "reservationId": "r-1788284584465-2",
+      "detail": "cost=0.013126"
+    }
+  ]
+}

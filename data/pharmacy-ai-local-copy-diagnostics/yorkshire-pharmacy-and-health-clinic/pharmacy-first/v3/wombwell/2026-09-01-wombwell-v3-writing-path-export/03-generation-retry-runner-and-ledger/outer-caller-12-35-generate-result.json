@@ -1,0 +1,112 @@
+{
+  "ok": false,
+  "originalPackHash": "9d7d4cf2cfa5841ffcb2587c1116bb16d4c91c7a8db67e5d3b34e0808c10f48d",
+  "originalPackUnchanged": true,
+  "wardStatVerification": {
+    "sourceUrl": "https://www.barnsley.gov.uk/services/council-and-democracy/research-data-and-statistics/ward-profiles/",
+    "retrievedAt": "2026-09-01T12:07:52.384Z",
+    "restoredAt": "2026-09-01T12:09:10.723Z",
+    "geography": "Wombwell ward, compared with Barnsley borough and national averages",
+    "populationStatement": "11,477 people live in Wombwell, or 5% of Barnsley’s total population",
+    "populationDenominator": "Barnsley total population",
+    "employmentStatement": "Wholesale and retail trades employ the most workers at 19.8%, followed by construction at 13.2%",
+    "employmentDenominator": "workers in the Wombwell ward (source later refers to working adults for a related occupation share)",
+    "referenceYearInSavedBody": null,
+    "censusOrOnsVintageInSavedBody": false,
+    "dashboardNotePresent": true,
+    "omittedFromThisGeneration": true,
+    "reason": "The saved official page does not state a census year, publication date or ONS vintage. It points readers to an interactive dashboard for up-to-date information. Retrieval on 2026-09-01 is not a reference year. The statistics are omitted rather than described as current."
+  },
+  "newFactStatements": [
+    "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+    "Wombwell has a public library."
+  ],
+  "mergedFactStatements": [
+    "Wombwell has a National Rail station.",
+    "Yorkshire Pharmacy & Health Clinic is 1.7 km from Wombwell, at 91 Snape Hill Rd, Darfield, Barnsley S73 9LR, UK.",
+    "NHS general practice services in Wombwell are provided from Wombwell Medical Centre.",
+    "Wombwell is in the Metropolitan Borough of Barnsley, South Yorkshire.",
+    "Wombwell has a public library."
+  ],
+  "ledger": {
+    "attempted": 2,
+    "successful": 0,
+    "failed": 1,
+    "retried": 1,
+    "promptTokens": 8225,
+    "completionTokens": 1281,
+    "estimatedCostUsd": 0.053644,
+    "failures": [
+      {
+        "areaSlug": "wombwell",
+        "detail": "ungrounded factual sentence: With Pharmacy First, you have another option for support with common health concerns."
+      }
+    ]
+  },
+  "remainingUsd": 0.146356,
+  "attemptLogPaths": [
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T12-35-39-845Z-attempt-1.json",
+    "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-ai-local-copy-attempt-logs/yorkshire-pharmacy-and-health-clinic/pharmacy-first/v3/wombwell/2026-09-01T12-35-43-358Z-attempt-2.json"
+  ],
+  "detail": "ungrounded factual sentence: With Pharmacy First, you have another option for support with common health concerns.",
+  "failures": [
+    "ungrounded factual sentence: With Pharmacy First, you have another option for support with common health concerns."
+  ],
+  "formatted": "heroHeading: Pharmacy First in Wombwell\nheroIntroduction: Pharmacy First offers a way for people in Wombwell to get help for eligible common conditions without waiting for a GP appointment. Wombwell is part of the Metropolitan Borough of Barnsley, giving it a strong sense of place within South Yorkshire.\nlocalIntroduction: Wombwell is a ward within the Metropolitan Borough of Barnsley, South Yorkshire.\nlocalContextParagraphs[0]: The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre. With Pharmacy First, you have another option for support with common health concerns.\nrelationshipToPharmacy: Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+  "copy": {
+    "area": "Wombwell",
+    "heroHeading": "Pharmacy First in Wombwell",
+    "heroIntroduction": "Pharmacy First offers a way for people in Wombwell to get help for eligible common conditions without waiting for a GP appointment. Wombwell is part of the Metropolitan Borough of Barnsley, giving it a strong sense of place within South Yorkshire.",
+    "localIntroduction": "Wombwell is a ward within the Metropolitan Borough of Barnsley, South Yorkshire.",
+    "localContextHeading": "",
+    "localContextParagraphs": [
+      "The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre. With Pharmacy First, you have another option for support with common health concerns."
+    ],
+    "relationshipToPharmacy": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "heroIntroduction",
+        "sentence": "Wombwell is part of the Metropolitan Borough of Barnsley, giving it a strong sense of place within South Yorkshire.",
+        "entityId": "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Wombwell is a ward within the Metropolitan Borough of Barnsley, South Yorkshire.",
+        "entityId": "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre.",
+        "entityId": "wombwell:community:wombwell-has-a-public-library"
+      },
+      {
+        "field": "localContextParagraphs",
+        "sentence": "The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre.",
+        "entityId": "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.",
+        "entityId": "wombwell:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns",
+      "wombwell:community:wombwell-has-a-public-library",
+      "wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr",
+      "wombwell:pharmacy-relationship:distance"
+    ]
+  },
+  "claimMap": [],
+  "sentencePurposes": [],
+  "repetitionAnalysis": null,
+  "generatedAt": null,
+  "tokenUsage": null,
+  "estimatedCostUsd": null,
+  "raw": "{\n  \"area\": \"Wombwell\",\n  \"heroHeading\": \"Pharmacy First in Wombwell\",\n  \"heroIntroduction\": \"Pharmacy First offers a way for people in Wombwell to get help for eligible common conditions without waiting for a GP appointment. Wombwell is part of the Metropolitan Borough of Barnsley, giving it a strong sense of place within South Yorkshire.\",\n  \"localIntroduction\": \"Wombwell is a ward within the Metropolitan Borough of Barnsley, South Yorkshire.\",\n  \"localContextHeading\": \"\",\n  \"localContextParagraphs\": \"The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre. With Pharmacy First, you have another option for support with common health concerns.\",\n  \"relationshipToPharmacy\": \"Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n  \"localAccessIntroduction\": \"\",\n  \"localFaqs\": [],\n  \"localCtaBridge\": \"\",\n  \"evidenceClaims\": [\n    {\n      \"field\": \"heroIntroduction\",\n      \"sentence\": \"Wombwell is part of the Metropolitan Borough of Barnsley, giving it a strong sense of place within South Yorkshire.\",\n      \"entityId\": \"wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns\"\n    },\n    {\n      \"field\": \"localIntroduction\",\n      \"sentence\": \"Wombwell is a ward within the Metropolitan Borough of Barnsley, South Yorkshire.\",\n      \"entityId\": \"wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre.\",\n      \"entityId\": \"wombwell:community:wombwell-has-a-public-library\"\n    },\n    {\n      \"field\": \"localContextParagraphs\",\n      \"sentence\": \"The area is home to a public library and NHS general practice services are provided from Wombwell Medical Centre.\",\n      \"entityId\": \"wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr\"\n    },\n    {\n      \"field\": \"relationshipToPharmacy\",\n      \"sentence\": \"Consultations take place at Yorkshire Pharmacy & Health Clinic in Darfield.\",\n      \"entityId\": \"wombwell:pharmacy-relationship:distance\"\n    }\n  ],\n  \"evidenceEntityIdsUsed\": [],\n  \"editorialFactIdsUsed\": [\n    \"wombwell:area-identity:wombwell-is-in-the-metropolitan-borough-of-barns\",\n    \"wombwell:community:wombwell-has-a-public-library\",\n    \"wombwell:healthcare:nhs-general-practice-services-in-wombwell-are-pr\",\n    \"wombwell:pharmacy-relationship:distance\"\n  ]\n}",
+  "record": null
+}

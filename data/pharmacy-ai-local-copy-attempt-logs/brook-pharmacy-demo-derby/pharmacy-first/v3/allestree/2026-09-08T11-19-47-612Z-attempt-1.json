@@ -1,0 +1,24 @@
+{
+  "savedAt": "2026-09-08T11:19:47.612Z",
+  "areaSlug": "allestree",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "temperature": 0.4,
+    "maxOutputTokens": 1200,
+    "prompt": "Using the verified information supplied for this area, write a useful 150–250-word introduction in fluent British English. Use three natural paragraphs: introduce the area, describe meaningful local features and healthcare references, then lead naturally into Pharmacy First. Select and synthesise the most useful facts. Do not invent facts, mention evidence sources or reuse wording from another area. Return only the finished introduction.\n\n- NHS general practice services in Allestree are provided from Park Lane Surgery.\n- Allestree is a neighbourhood ward in Derby.\n- Allestree has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Allestree Park has a Friends of Allestree Park group.\n- Allestree Carnival is a community organisation on the council neighbourhood page.\n- Allestree has a public library.\n- NHS general practice services in Allestree are provided from Park Farm Medical Centre.\n- Allestree Park is a landmark in Allestree.\n- War Memorial - Allestree is a landmark in Allestree.\n- Allestree Memorial Hall is a landmark in Allestree."
+  },
+  "rawResponse": "Allestree is a welcoming neighbourhood ward situated in the city of Derby. The area benefits from a close-knit civic structure supported by a Neighbourhood Board made up of local councillors, residents, and representatives from local public services",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "uncertain-provider-call"
+    ],
+    "automatedReviews": []
+  },
+  "parsedCopy": null,
+  "candidateRecordWritten": false
+}

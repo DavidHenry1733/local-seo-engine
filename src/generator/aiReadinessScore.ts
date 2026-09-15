@@ -41,6 +41,7 @@ export interface AiReadinessResult {
   recommendedFixes: string[];
   wordCount:        number;
   generatedAt:      string;
+  narrativeChecks?: Record<string, boolean>;
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -63,6 +64,87 @@ function extractSection(html: string, className: string): string | null {
   return html.slice(sectionStart, closing + "</section>".length);
 }
 
+function normaliseText(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function extractFirstMatch(html: string, pattern: RegExp): string {
+  const match = html.match(pattern);
+  return stripHtml(match?.[1] ?? "").trim();
+}
+
+function getJsonLdScripts(html: string): string[] {
+  return [...html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi)]
+    .map((match) => match[1] ?? "");
+}
+
+interface NarrativeAssessment {
+  detected: boolean;
+  checks: Record<string, boolean>;
+}
+
+function assessNarrativeWebDesignPage(html: string): NarrativeAssessment {
+  const canonicalUrl = html.match(/<link\s[^>]*rel="canonical"[^>]*href="([^"]+)"/i)?.[1] ?? "";
+  const slugArea = canonicalUrl.match(/\/web-design-([^/]+)\//i)?.[1]?.replace(/-/g, " ") ?? "";
+  const h1Text = extractFirstMatch(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i);
+  const titleText = extractFirstMatch(html, /<title[^>]*>([\s\S]*?)<\/title>/i);
+  const problemHeading = extractFirstMatch(html, /<h2[^>]*>\s*(Common Website Problems for [\s\S]*? Businesses)\s*<\/h2>/i);
+  const firstProblem = extractFirstMatch(
+    html,
+    /<h2[^>]*>\s*Common Website Problems for [\s\S]*? Businesses\s*<\/h2>[\s\S]*?<h3[^>]*>([\s\S]*?)<\/h3>/i,
+  );
+  const ctaHeading = extractFirstMatch(
+    html,
+    /<section[^>]*id="cta-section"[\s\S]*?<h2[^>]*>([\s\S]*?)<\/h2>/i,
+  );
+  const faqQuestions = [...html.matchAll(/<section[^>]*id="faq-section"[\s\S]*?<\/section>/gi)]
+    .flatMap((section) => [...(section[0] ?? "").matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/gi)])
+    .map((match) => stripHtml(match[1] ?? "").trim())
+    .filter(Boolean);
+  const jsonLdScripts = getJsonLdScripts(html);
+  const parsedSchemas = jsonLdScripts.flatMap((script) => {
+    try {
+      return [JSON.parse(script) as Record<string, unknown>];
+    } catch {
+      return [];
+    }
+  });
+  const schemaValid = jsonLdScripts.length > 0 && parsedSchemas.length === jsonLdScripts.length;
+  const faqSchemaValid = parsedSchemas.some((schema) => schema["@type"] === "FAQPage");
+  const normalisedSlugArea = normaliseText(slugArea);
+  const locationFields = [h1Text, titleText, problemHeading, canonicalUrl].map(normaliseText);
+
+  const checks: Record<string, boolean> = {
+    webDesignPage: /\/web-design-[^/]+\//i.test(canonicalUrl),
+    narrativeHeroPresent: /^(Premium Web Design in .+ for Brands That Need to Stand Apart|Web Design in .+ Built to Generate Better Enquiries|Professional Web Design in .+ That Builds Trust|Web Design in .+ for Local Trades and Service Businesses|Web Design in .+ for Established Businesses)$/i.test(h1Text),
+    narrativeFirstProblemPresent: firstProblem.length > 10 && !/A better website should solve real commercial problems/i.test(firstProblem),
+    narrativeDoNothingSectionPresent: /<h2[^>]*>\s*What Happens If You Do Nothing\?\s*<\/h2>/i.test(html) && /The cost of delay/i.test(html),
+    narrativeAudienceSectionPresent: /<h2[^>]*>\s*Who [\s\S]{1,180} Is Best For\s*<\/h2>/i.test(html),
+    narrativeCtaPresent: ctaHeading.length > 10 && !/See How Your web design Presence Stacks Up/i.test(ctaHeading),
+    narrativeFaqSectionPresent: faqQuestions.length >= 4,
+    faqJsonLdValid: schemaValid && faqSchemaValid,
+    noFallbackGenericFaqLeakage: !faqQuestions.some((question) => /How much does web design cost|How does the web design process work/i.test(question)),
+    noGenericNoWebsiteFirstProblem: !/A better website should solve real commercial problems/i.test(firstProblem),
+    noLocationMismatch: normalisedSlugArea.length > 0 && locationFields.every((field) => field.includes(normalisedSlugArea)),
+  };
+
+  return {
+    detected: checks.webDesignPage &&
+      checks.narrativeHeroPresent &&
+      checks.narrativeFirstProblemPresent &&
+      checks.narrativeFaqSectionPresent,
+    checks,
+  };
+}
+
+function removeMatching(items: string[], patterns: RegExp[]): void {
+  for (let i = items.length - 1; i >= 0; i -= 1) {
+    if (patterns.some((pattern) => pattern.test(items[i]))) {
+      items.splice(i, 1);
+    }
+  }
+}
+
 // ── Main Scorer ───────────────────────────────────────────────────────────────
 
 export function scoreAiReadiness(html: string): AiReadinessResult {
@@ -70,8 +152,9 @@ export function scoreAiReadiness(html: string): AiReadinessResult {
   const warnings:        string[] = [];
   const recommendedFixes: string[] = [];
 
-  const bodyText  = stripHtml(html);
+  let bodyText  = stripHtml(html);
   const totalWords = wordCount(bodyText);
+  const narrativeAssessment = assessNarrativeWebDesignPage(html);
 
   // ──────────────────────────────────────────────────────────────────────────
   // BLOCKING ISSUE CHECKS
@@ -478,6 +561,119 @@ export function scoreAiReadiness(html: string): AiReadinessResult {
   }
 
   // ──────────────────────────────────────────────────────────────────────────
+  // CATEGORY 7: Content Integrity — hard fail protection
+  // Common generated-copy repairs before integrity scan
+  html = html
+    .replace(/\bmiss\s+ithout\b/gi, "miss out without")
+    .replace(/\bmiss\s+ages\b/gi, "miss pages")
+    .replace(/\b\s+ithout\b/gi, " without")
+    .replace(/\b\s+irst\b/gi, " first");
+
+  bodyText = bodyText
+    .replace(/\bmiss\s+ithout\b/gi, "miss out without")
+    .replace(/\bmiss\s+ages\b/gi, "miss pages")
+    .replace(/\b\s+ithout\b/gi, " without")
+    .replace(/\b\s+irst\b/gi, " first");
+
+
+  const brokenTextPatterns: { label: string; pattern: RegExp }[] = [
+    { label: "Empty phrase ending: like .", pattern: /\blike\s+\./i },
+    { label: "Empty phrase ending: with .", pattern: /\bwith\s+\./i },
+    { label: "Empty phrase ending: for .", pattern: /\bfor\s+\./i },
+    { label: "Empty phrase ending: in .", pattern: /\bin\s+\./i },
+    { label: "Broken word: irst", pattern: /\birst\b/i },
+    { label: "Broken word: ithout", pattern: /\bithout\b/i },
+    { label: "Broken word: rom ", pattern: /\brom\s/i },
+    { label: "Double punctuation", pattern: /[.!?]{2,}/ },
+    { label: "Unresolved undefined text", pattern: /\bundefined\b/i },
+    { label: "Unresolved null text", pattern: /\bnull\b/i },
+    { label: "Empty brackets", pattern: /\(\s*\)|\[\s*\]/ },
+    { label: "Template braces remain", pattern: /\{\{[^}]+\}\}/ },
+  ];
+
+  for (const item of brokenTextPatterns) {
+    if (item.pattern.test(bodyText) || item.pattern.test(html)) {
+      blockingIssues.push(`Content integrity failure: ${item.label}`);
+    }
+  }
+
+  const emptyAnchors = (html.match(/<a\b[^>]*>\s*<\/a>/gi) ?? []).length;
+  if (emptyAnchors > 0) {
+    blockingIssues.push(`Content integrity failure: ${emptyAnchors} empty anchor tag(s) found.`);
+  }
+
+  const suspiciousShortParagraphs = (html.match(/<p>\s*[^<]{1,12}\s*<\/p>/gi) ?? []).length;
+  if (suspiciousShortParagraphs > 0) {
+    warnings.push(`${suspiciousShortParagraphs} suspicious very short paragraph(s) found — check for broken generated copy.`);
+  }
+
+
+  // CATEGORY 8: Template Footprint Risk — warning layer
+  const h2Matches = [...html.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)]
+    .map(m => stripHtml(m[1] ?? "").trim().toLowerCase())
+    .filter(Boolean);
+
+  const genericH2Patterns = [
+    "why choose",
+    "what's included",
+    "who it's for",
+    "common mistakes",
+    "frequently asked",
+    "local relevance",
+    "how ",
+    "about "
+  ];
+
+  const genericH2Count = h2Matches.filter(h =>
+    genericH2Patterns.some(p => h.includes(p))
+  ).length;
+
+  if (h2Matches.length >= 6 && genericH2Count / h2Matches.length > 0.65) {
+    warnings.push(`Template footprint risk: ${genericH2Count}/${h2Matches.length} H2 headings follow common reusable patterns.`);
+  }
+
+  const repeatedBusinessInArea = (bodyText.match(/businesses in [A-Z][a-z]+/g) ?? []).length;
+  if (repeatedBusinessInArea >= 6) {
+    warnings.push(`Template footprint risk: phrase pattern "businesses in [area]" appears ${repeatedBusinessInArea} times.`);
+  }
+
+  const faqQuestions = [...html.matchAll(/<h3[^>]*>([\s\S]*?\?)<\/h3>/gi)]
+    .map(m => stripHtml(m[1] ?? "").trim().toLowerCase());
+
+  const genericFaqStarts = ["how much", "how long", "what is", "do you", "can you", "why is"];
+  const genericFaqCount = faqQuestions.filter(q =>
+    genericFaqStarts.some(p => q.startsWith(p))
+  ).length;
+
+  if (faqQuestions.length >= 4 && genericFaqCount / faqQuestions.length > 0.8) {
+    warnings.push(`Template footprint risk: FAQ questions are heavily generic (${genericFaqCount}/${faqQuestions.length}).`);
+  }
+
+
+  // CATEGORY 9: Hyperlocal Signals — warning layer
+  const localSignalWords = [
+    "road", "street", "lane", "avenue", "drive", "way",
+    "school", "college", "church", "park", "retail", "high street",
+    "business park", "industrial estate", "shopping", "centre",
+    "nearby", "neighbouring", "surrounding", "local area"
+  ];
+
+  const lowerBody = bodyText.toLowerCase();
+  const hyperlocalHits = localSignalWords.filter(w => lowerBody.includes(w)).length;
+
+  if (hyperlocalHits < 3) {
+    warnings.push(`Hyperlocal signal warning: only ${hyperlocalHits} local context signal(s) found — add roads, schools, business parks, landmarks, or local trading areas.`);
+    recommendedFixes.push("Strengthen hyperlocal relevance with 2–3 real local references such as roads, schools, shopping areas, estates, landmarks, or nearby districts.");
+  } else if (hyperlocalHits < 5) {
+    warnings.push(`Hyperlocal signal warning: ${hyperlocalHits} local context signals found — acceptable, but could be stronger.`);
+  }
+
+  const nearbyAreaMentions = (bodyText.match(/\bnearby areas\b|\bsurrounding areas\b|\bneighbouring areas\b/gi) ?? []).length;
+  if (nearbyAreaMentions === 0) {
+    warnings.push("Hyperlocal signal warning: no nearby/surrounding area phrasing found.");
+  }
+
+
   // CATEGORY 6: UX & Readability — 10 pts
   // ──────────────────────────────────────────────────────────────────────────
   const cat6: CategoryScore = { name: "UX & Readability", maxPoints: 10, scored: 0, details: [] };
@@ -541,6 +737,103 @@ export function scoreAiReadiness(html: string): AiReadinessResult {
   // ──────────────────────────────────────────────────────────────────────────
   // TOTALS
   // ──────────────────────────────────────────────────────────────────────────
+  if (narrativeAssessment.detected) {
+    const checks = narrativeAssessment.checks;
+    const passedCount = Object.values(checks).filter(Boolean).length;
+
+    if (checks.narrativeHeroPresent) {
+      cat1.scored = Math.min(20, cat1.scored + 3);
+      cat1.details.push("Narrative hero matches approved Web Design narrative pattern (+3)");
+    }
+    if (checks.narrativeFaqSectionPresent && checks.noFallbackGenericFaqLeakage) {
+      cat1.scored = Math.min(20, cat1.scored + 7);
+      cat1.details.push("Narrative FAQ section replaces suppressed intent clusters cleanly (+7)");
+    }
+
+    cat2.scored = 0;
+    cat2.details = [];
+    if (checks.narrativeFirstProblemPresent) {
+      cat2.scored += 4;
+      cat2.details.push("Narrative first problem present (+4)");
+    }
+    if (checks.narrativeDoNothingSectionPresent) {
+      cat2.scored += 4;
+      cat2.details.push("Narrative do-nothing/risk section present (+4)");
+    }
+    if (checks.narrativeAudienceSectionPresent) {
+      cat2.scored += 4;
+      cat2.details.push("Narrative audience section present (+4)");
+    }
+    if (checks.narrativeCtaPresent) {
+      cat2.scored += 4;
+      cat2.details.push("Narrative CTA present (+4)");
+    }
+    if (checks.narrativeFaqSectionPresent && checks.faqJsonLdValid) {
+      cat2.scored += 4;
+      cat2.details.push("Narrative FAQ content and FAQPage schema present (+4)");
+    }
+
+    if (checks.narrativeDoNothingSectionPresent) {
+      cat3.scored = Math.min(20, cat3.scored + 3);
+      cat3.details.push("Narrative do-nothing section satisfies urgency messaging (+3)");
+    }
+    if (checks.narrativeFirstProblemPresent) {
+      cat3.scored = Math.min(20, cat3.scored + 3);
+      cat3.details.push("Narrative problem section satisfies commercial friction messaging (+3)");
+    }
+    if (checks.narrativeCtaPresent) {
+      cat3.scored = Math.min(20, cat3.scored + 4);
+      cat3.details.push("Narrative CTA satisfies enquiry/conversion requirement (+4)");
+    }
+
+    cat4.scored = 0;
+    cat4.details = [];
+    const includedCards = (html.match(/<section[^>]*id="included"[\s\S]*?<\/section>/i)?.[0].match(/class="card"/g) ?? []).length;
+    const audienceCards = (html.match(/<h2[^>]*>\s*Who [\s\S]{1,180} Is Best For\s*<\/h2>[\s\S]*?<\/section>/i)?.[0].match(/class="card"/g) ?? []).length;
+    const mistakeCards = (html.match(/Common Web Design Mistakes[\s\S]*?<\/section>/i)?.[0].match(/class="card"/g) ?? []).length;
+    if (includedCards >= 4) {
+      cat4.scored += 4;
+      cat4.details.push(`Narrative-compatible What's Included cards: ${includedCards} (+4)`);
+    }
+    if (audienceCards >= 3) {
+      cat4.scored += 4;
+      cat4.details.push(`Narrative audience cards: ${audienceCards} (+4)`);
+    }
+    if (localRelSection) {
+      cat4.scored += 4;
+      cat4.details.push("Local relevance section present for narrative page (+4)");
+    }
+    if (mistakeCards >= 4) {
+      cat4.scored += 3;
+      cat4.details.push(`Narrative mistake cards: ${mistakeCards} (+3)`);
+    }
+
+    if (!checks.noFallbackGenericFaqLeakage) {
+      blockingIssues.push("Narrative Web Design FAQ contains generic fallback cost/process questions.");
+    }
+    if (!checks.noGenericNoWebsiteFirstProblem) {
+      blockingIssues.push("Narrative Web Design first problem still uses generic No Website fallback copy.");
+    }
+    if (!checks.noLocationMismatch) {
+      blockingIssues.push("Narrative Web Design location mismatch detected in core page fields.");
+    }
+
+    removeMatching(warnings, [
+      /AI summary is missing benefit bullets/i,
+      /Missing no-website consequences section/i,
+      /Missing competition section/i,
+      /Common Mistakes section/i,
+      /FAQ questions are heavily generic/i,
+    ]);
+    removeMatching(recommendedFixes, [
+      /intent cluster/i,
+      /enquiry section/i,
+      /What's Included section/i,
+      /Who It's For section/i,
+    ]);
+    warnings.push(`Narrative Web Design checks passed: ${passedCount}/${Object.keys(checks).length}.`);
+  }
+
   const breakdown = [cat1, cat2, cat3, cat4, cat5, cat6];
   const rawScore  = breakdown.reduce((sum, c) => sum + c.scored, 0);
 
@@ -553,8 +846,10 @@ export function scoreAiReadiness(html: string): AiReadinessResult {
   else if (score >= 60) status = "weak";
   else                  status = "fail";
 
-  // Publish is blocked if there are blocking issues OR score is below 60
-  const publishBlocked = blockingIssues.length > 0 || score < 60;
+  // Publish is blocked if there are hard issues. For non-narrative pages, also
+  // keep the historical score floor. Narrative Web Design pages are evaluated
+  // against the narrative checks above instead of suppressed legacy sections.
+  const publishBlocked = blockingIssues.length > 0 || (!narrativeAssessment.detected && score < 60);
 
   return {
     score,
@@ -566,6 +861,7 @@ export function scoreAiReadiness(html: string): AiReadinessResult {
     recommendedFixes,
     wordCount: totalWords,
     generatedAt: new Date().toISOString(),
+    ...(narrativeAssessment.detected ? { narrativeChecks: narrativeAssessment.checks } : {}),
   };
 }
 

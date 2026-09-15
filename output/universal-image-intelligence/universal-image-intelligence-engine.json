@@ -1,0 +1,901 @@
+{
+  "schemaVersion": "1.0",
+  "phase": "universal-image-intelligence-engine",
+  "generatedAt": "2026-06-11T07:08:07.007Z",
+  "intelligenceOnly": true,
+  "noImagesGenerated": true,
+  "noIdeogramCalls": true,
+  "standardSlots": [
+    "hero",
+    "support",
+    "trust",
+    "conversion"
+  ],
+  "slotDefinitions": {
+    "hero": {
+      "purpose": "Primary above-the-fold visual — service introduction and trust",
+      "aspectRatio": "16:9",
+      "schemaProperty": "MedicalWebPage.primaryImageOfPage / WebPage.primaryImageOfPage"
+    },
+    "support": {
+      "purpose": "Mid-page supporting imagery — service detail, process, local relevance",
+      "aspectRatio": "4:3",
+      "schemaProperty": "ImageObject"
+    },
+    "trust": {
+      "purpose": "Trust and credibility — team, credentials, evidence, reassurance",
+      "aspectRatio": "1:1",
+      "schemaProperty": "LocalBusiness.image / ImageObject"
+    },
+    "conversion": {
+      "purpose": "Conversion band — booking, enquiry, contact encouragement",
+      "aspectRatio": "16:9",
+      "schemaProperty": "ImageObject"
+    }
+  },
+  "genericPromptTemplate": "Create a {style} image for a {businessType} offering {serviceName} in {location}. The image should show {scene}, with {brandStyle}, suitable for the {slot} section of a local service page.",
+  "negativePromptTemplate": "{baseNegative}. Avoid {slotSpecificAvoid}. No text overlays, logos, watermarks, or readable labels.",
+  "resolutionPipeline": [
+    {
+      "step": 1,
+      "name": "Industry detection",
+      "description": "Resolve industryType to adapter (pharmacy | digital-services)"
+    },
+    {
+      "step": 2,
+      "name": "Service context",
+      "description": "Load serviceKey, serviceName, businessName, location from campaign or intelligence"
+    },
+    {
+      "step": 3,
+      "name": "Template family",
+      "description": "For pharmacy: map service to template family via template-architecture"
+    },
+    {
+      "step": 4,
+      "name": "Slot resolution",
+      "description": "Map page slot (hero/support/trust/conversion) to imageKey via family slotResolution"
+    },
+    {
+      "step": 5,
+      "name": "Asset lookup",
+      "description": "Check asset path in industry library manifest or pharmacy image library"
+    },
+    {
+      "step": 6,
+      "name": "Prompt resolution",
+      "description": "Load AI prompt metadata from industry prompt pack when generation needed"
+    },
+    {
+      "step": 7,
+      "name": "Unified output",
+      "description": "Return ResolvedUniversalImageIntelligence with alt, caption, assetPath, prompt"
+    }
+  ],
+  "ideogramDefaults": {
+    "recommendedModel": "Ideogram 2.0 or Ideogram 3",
+    "outputCountPerPrompt": 4,
+    "styleGuidance": "Match industry adapter — realistic photography for pharmacy, vector/UI mockup for digital services",
+    "aspectRatioBySlot": {
+      "hero": "16:9",
+      "support": "4:3",
+      "trust": "1:1",
+      "conversion": "16:9"
+    },
+    "imageSelectionCriteria": [
+      "Matches recommended aspect ratio for slot",
+      "No readable text, logos or medication labels",
+      "Natural patient-pharmacist interaction",
+      "Warm trustworthy lighting consistent with brand",
+      "No compliance violations in scene",
+      "Diverse representation without stereotyping",
+      "Sharp focus on subjects, clean background"
+    ]
+  },
+  "onboardingProcess": {
+    "steps": [
+      {
+        "step": 1,
+        "name": "Detect industry",
+        "description": "Campaign or blueprint provides industryType",
+        "output": "adapterKey"
+      },
+      {
+        "step": 2,
+        "name": "Resolve service context",
+        "description": "serviceKey, templateFamily, location from intelligence layers",
+        "output": "UniversalImageContext"
+      },
+      {
+        "step": 3,
+        "name": "Resolve slot",
+        "description": "hero/support/trust/conversion mapped to imageKey",
+        "output": "imageKey + imagePack"
+      },
+      {
+        "step": 4,
+        "name": "Generate or load prompt",
+        "description": "AI prompt from industry prompt pack if asset missing",
+        "output": "ideogramPrompt + negativePrompt"
+      },
+      {
+        "step": 5,
+        "name": "Create images",
+        "description": "Manual Ideogram generation — not automated in this phase",
+        "output": "Image files"
+      },
+      {
+        "step": 6,
+        "name": "Upload to library",
+        "description": "Place at uploadTargetPath for industry adapter",
+        "output": "Asset file on disk"
+      },
+      {
+        "step": 7,
+        "name": "Validate assets",
+        "description": "assetExists check via universalImageIntelligenceEngine.ts",
+        "output": "assetExists: true"
+      },
+      {
+        "step": 8,
+        "name": "Render preview",
+        "description": "Industry renderer uses resolved asset or metadata placeholder",
+        "output": "Preview HTML"
+      },
+      {
+        "step": 9,
+        "name": "Approve and deploy",
+        "description": "Clinical/brand review then live campaign wiring",
+        "output": "Live pages"
+      }
+    ]
+  },
+  "industryAdapters": {
+    "pharmacy": {
+      "adapterKey": "pharmacy",
+      "industryType": "pharmacy",
+      "displayName": "UK Community Pharmacy",
+      "assetRoot": "assets/pharmacy-image-library",
+      "libraryPaths": {
+        "imageLibrary": "output/pharmacy-blueprint/pharmacy-image-library.json",
+        "aiPromptLibrary": "output/pharmacy-blueprint/pharmacy-ai-image-prompt-library.json",
+        "templateArchitecture": "output/pharmacy-blueprint/template-architecture.json",
+        "serviceIntelligence": "output/pharmacy-blueprint/service-intelligence.json"
+      },
+      "supportedSlots": [
+        "hero",
+        "support",
+        "trust",
+        "conversion"
+      ],
+      "services": [
+        "prescription-dispensing",
+        "electronic-prescription-service-eps",
+        "repeat-prescription-service",
+        "prescription-delivery",
+        "blister-packs-and-compliance-aids",
+        "emergency-supply",
+        "prescription-collection-service",
+        "private-prescription-dispensing",
+        "pharmacy-first",
+        "nhs-blood-pressure-checks",
+        "nhs-new-medicine-service-nms",
+        "pharmacy-contraception-service",
+        "nhs-flu-vaccination",
+        "nhs-smoking-cessation-support",
+        "discharge-medicines-service",
+        "supervised-consumption",
+        "palliative-care-dispensing",
+        "hepatitis-c-testing-and-referral",
+        "private-health-consultations",
+        "private-ear-wax-removal",
+        "private-blood-testing",
+        "vitamin-b12-injections",
+        "emergency-hormonal-contraception",
+        "private-minor-ailment-treatment",
+        "compounding-and-specialist-supply",
+        "private-prescription-service-fees",
+        "travel-health-consultation",
+        "travel-vaccinations",
+        "malaria-prophylaxis",
+        "travel-first-aid-and-kit-supply",
+        "yellow-fever-vaccination-centre",
+        "rabies-vaccination",
+        "altitude-sickness-prevention",
+        "seasonal-flu-vaccination-private",
+        "shingles-vaccination",
+        "pneumococcal-vaccination",
+        "meningitis-acwy-vaccination",
+        "chickenpox-vaccination",
+        "hpv-vaccination",
+        "covid-19-vaccination",
+        "whooping-cough-pertussis-vaccination",
+        "rsv-vaccination",
+        "weight-management-consultation",
+        "pharmacy-weight-loss-programme",
+        "glp-1-weight-management-treatment",
+        "body-composition-and-bmi-monitoring",
+        "nutritional-and-lifestyle-advice",
+        "blood-pressure-monitoring",
+        "diabetes-screening",
+        "cholesterol-testing",
+        "covid-19-lateral-flow-supply",
+        "urinalysis-and-uti-screening",
+        "pregnancy-testing",
+        "drug-tariff-and-point-of-care-diagnostics",
+        "medicines-use-review-mur-structured-medication-review",
+        "minor-illness-consultation",
+        "healthy-living-advice",
+        "asthma-and-copd-inhaler-technique-review",
+        "pain-management-consultation",
+        "skin-condition-assessment",
+        "sleep-and-stress-support-consultation",
+        "children-s-health-consultation"
+      ],
+      "templateFamilies": [
+        "clinical-nhs-services",
+        "private-healthcare-services",
+        "travel-health-services",
+        "weight-management-services",
+        "vaccination-services"
+      ],
+      "imagePacks": [
+        "core-pharmacy",
+        "clinical-nhs-services",
+        "vaccination-services",
+        "travel-health-services",
+        "private-healthcare-services",
+        "weight-management-services"
+      ],
+      "pharmacySlotMappings": {
+        "clinical-nhs-services": {
+          "hero": "pharmacy-first",
+          "support": "blood-pressure-check",
+          "trust": "community-pharmacy",
+          "conversion": "prescription-collection"
+        },
+        "vaccination-services": {
+          "hero": "flu-vaccination",
+          "support": "vaccination-consultation",
+          "trust": "vaccination-record-review",
+          "conversion": "vaccination-consultation"
+        },
+        "private-healthcare-services": {
+          "hero": "ear-wax-removal",
+          "support": "private-consultation",
+          "trust": "health-screening",
+          "conversion": "private-consultation"
+        },
+        "travel-health-services": {
+          "hero": "travel-consultation",
+          "support": "destination-advice",
+          "trust": "travel-vaccination",
+          "conversion": "malaria-advice"
+        },
+        "weight-management-services": {
+          "hero": "weight-consultation",
+          "support": "bmi-review",
+          "trust": "progress-monitoring",
+          "conversion": "lifestyle-support"
+        }
+      },
+      "templateFamilyPackMap": {
+        "clinical-nhs-services": "clinical-nhs-services",
+        "vaccination-services": "vaccination-services",
+        "private-healthcare-services": "private-healthcare-services",
+        "travel-health-services": "travel-health-services",
+        "weight-management-services": "weight-management-services"
+      },
+      "resolverModule": "src/pharmacy/templates/pharmacyImageLibrary.ts",
+      "totalImagesDefined": 28,
+      "totalPromptsDefined": 38
+    },
+    "digital-services": {
+      "adapterKey": "digital-services",
+      "industryType": "digital-services",
+      "displayName": "Digital Services (Web Design, SEO, Hosting, Email)",
+      "assetRoot": "assets/image-library",
+      "libraryPaths": {
+        "manifest": "assets/image-library/image-library.json",
+        "promptBlueprints": "config/imagePromptBlueprints.json",
+        "imageConfig": "input/image-config.json"
+      },
+      "supportedSlots": [
+        "hero",
+        "support",
+        "trust",
+        "conversion"
+      ],
+      "services": [
+        "web-hosting",
+        "web-design",
+        "local-seo",
+        "email-marketing",
+        "google-business-profile",
+        "local-business-visibility"
+      ],
+      "manifestServicesPresent": [
+        "web-hosting",
+        "web-design",
+        "local-seo",
+        "email-marketing",
+        "local-business-visibility"
+      ],
+      "approvedImagesInManifest": 27,
+      "slotMappings": {
+        "web-hosting": {
+          "hero": "web-hosting-hero",
+          "support": "web-hosting-support",
+          "trust": "web-hosting-trust",
+          "conversion": "web-hosting-conversion"
+        },
+        "web-design": {
+          "hero": "web-design-hero",
+          "support": "web-design-support",
+          "trust": "web-design-trust",
+          "conversion": "web-design-conversion"
+        },
+        "local-seo": {
+          "hero": "local-seo-hero",
+          "support": "local-seo-support",
+          "trust": "local-seo-trust",
+          "conversion": "local-seo-conversion"
+        },
+        "email-marketing": {
+          "hero": "email-marketing-hero",
+          "support": "email-marketing-support",
+          "trust": "email-marketing-trust",
+          "conversion": "email-marketing-conversion"
+        },
+        "google-business-profile": {
+          "hero": "google-business-profile-hero",
+          "support": "google-business-profile-support",
+          "trust": "google-business-profile-trust",
+          "conversion": "google-business-profile-conversion"
+        },
+        "local-business-visibility": {
+          "hero": "local-business-visibility-hero",
+          "support": "local-business-visibility-support",
+          "trust": "local-business-visibility-trust",
+          "conversion": "local-business-visibility-conversion"
+        }
+      },
+      "resolverModule": "src/generator/imageLibrary.ts",
+      "promptResolverModule": "src/local-seo/generateImagePrompt.ts"
+    }
+  },
+  "promptPacks": {
+    "digital-services": {
+      "packKey": "digital-services",
+      "packName": "Digital Services",
+      "prompts": {
+        "web-hosting-hero": {
+          "imageKey": "web-hosting-hero",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-hosting"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "main visual impact above the fold",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Hosting. Scene: premium website hosting dashboard with uptime metrics and server reliability visual. Context: reliable website hosting, server uptime, WordPress support, fast loading websites. Composition: wide professional hero image, clear subject, clean modern business setting, strong sense of local digital growth. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for hero section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-hosting/hero/{filename}.webp",
+          "fallbackImageKey": "web-hosting-hero"
+        },
+        "web-hosting-support": {
+          "imageKey": "web-hosting-support",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-hosting"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "supporting explanation image",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Hosting. Scene: technical support specialist helping a business owner with website hosting setup. Context: reliable website hosting, server uptime, WordPress support, fast loading websites. Composition: consultative scene showing the service being planned, reviewed or improved. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for support section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "4:3",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-hosting/support/{filename}.webp",
+          "fallbackImageKey": "web-hosting-hero"
+        },
+        "web-hosting-trust": {
+          "imageKey": "web-hosting-trust",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-hosting"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "credibility and authority image",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Hosting. Scene: secure hosting infrastructure with SSL padlock and performance monitoring charts. Context: reliable website hosting, server uptime, WordPress support, fast loading websites. Composition: evidence, results, reviews, analytics, trust signals, professional reassurance. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for trust section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "1:1",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-hosting/trust/{filename}.webp",
+          "fallbackImageKey": "web-hosting-hero"
+        },
+        "web-hosting-conversion": {
+          "imageKey": "web-hosting-conversion",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-hosting"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "action and enquiry image",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Hosting. Scene: business owner launching a fast reliable website with hosting support. Context: reliable website hosting, server uptime, WordPress support, fast loading websites. Composition: business owner taking action, enquiry growth, customer contact, measurable outcomes. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for conversion section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-hosting/conversion/{filename}.webp",
+          "fallbackImageKey": "web-hosting-hero"
+        },
+        "web-design-hero": {
+          "imageKey": "web-design-hero",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-design"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "main visual impact above the fold",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Design. Scene: premium UI mockup of a modern local business website on desktop and mobile. Context: professional website design, premium UI mockups, local business websites. Composition: wide professional hero image, clear subject, clean modern business setting, strong sense of local digital growth. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for hero section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "Design",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-design/hero/{filename}.webp",
+          "fallbackImageKey": "web-design-hero"
+        },
+        "web-design-support": {
+          "imageKey": "web-design-support",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-design"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "supporting explanation image",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Design. Scene: web designer reviewing website layout with a local business owner. Context: professional website design, premium UI mockups, local business websites. Composition: consultative scene showing the service being planned, reviewed or improved. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for support section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "4:3",
+          "stylePreset": "Design",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-design/support/{filename}.webp",
+          "fallbackImageKey": "web-design-hero"
+        },
+        "web-design-trust": {
+          "imageKey": "web-design-trust",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-design"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "credibility and authority image",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Design. Scene: polished website design portfolio showing professional local business sites. Context: professional website design, premium UI mockups, local business websites. Composition: evidence, results, reviews, analytics, trust signals, professional reassurance. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for trust section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "1:1",
+          "stylePreset": "Design",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-design/trust/{filename}.webp",
+          "fallbackImageKey": "web-design-hero"
+        },
+        "web-design-conversion": {
+          "imageKey": "web-design-conversion",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "web-design"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "action and enquiry image",
+          "ideogramPrompt": "Clean professional digital service illustration for Web Design. Scene: business owner approving a new website design ready to launch. Context: professional website design, premium UI mockups, local business websites. Composition: business owner taking action, enquiry growth, customer contact, measurable outcomes. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for conversion section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "Design",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/web-design/conversion/{filename}.webp",
+          "fallbackImageKey": "web-design-hero"
+        },
+        "local-seo-hero": {
+          "imageKey": "local-seo-hero",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-seo"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "main visual impact above the fold",
+          "ideogramPrompt": "Clean professional digital service illustration for Local SEO. Scene: local business ranking prominently on Google Maps search results visualization. Context: Google Maps rankings, local search visibility, GBP optimisation, local enquiries. Composition: wide professional hero image, clear subject, clean modern business setting, strong sense of local digital growth. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for hero section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-seo/hero/{filename}.webp",
+          "fallbackImageKey": "local-seo-hero"
+        },
+        "local-seo-support": {
+          "imageKey": "local-seo-support",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-seo"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "supporting explanation image",
+          "ideogramPrompt": "Clean professional digital service illustration for Local SEO. Scene: SEO specialist reviewing local search analytics with a business owner. Context: Google Maps rankings, local search visibility, GBP optimisation, local enquiries. Composition: consultative scene showing the service being planned, reviewed or improved. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for support section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "4:3",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-seo/support/{filename}.webp",
+          "fallbackImageKey": "local-seo-hero"
+        },
+        "local-seo-trust": {
+          "imageKey": "local-seo-trust",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-seo"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "credibility and authority image",
+          "ideogramPrompt": "Clean professional digital service illustration for Local SEO. Scene: local search ranking improvement chart and Google Business Profile optimisation. Context: Google Maps rankings, local search visibility, GBP optimisation, local enquiries. Composition: evidence, results, reviews, analytics, trust signals, professional reassurance. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for trust section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "1:1",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-seo/trust/{filename}.webp",
+          "fallbackImageKey": "local-seo-hero"
+        },
+        "local-seo-conversion": {
+          "imageKey": "local-seo-conversion",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-seo"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "action and enquiry image",
+          "ideogramPrompt": "Clean professional digital service illustration for Local SEO. Scene: local business owner receiving more enquiries from improved local SEO. Context: Google Maps rankings, local search visibility, GBP optimisation, local enquiries. Composition: business owner taking action, enquiry growth, customer contact, measurable outcomes. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for conversion section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-seo/conversion/{filename}.webp",
+          "fallbackImageKey": "local-seo-hero"
+        },
+        "email-marketing-hero": {
+          "imageKey": "email-marketing-hero",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "email-marketing"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "main visual impact above the fold",
+          "ideogramPrompt": "Clean professional digital service illustration for Email Marketing. Scene: professional email marketing campaign layout with engaging newsletter design. Context: email campaigns, newsletter design, customer engagement, conversion emails. Composition: wide professional hero image, clear subject, clean modern business setting, strong sense of local digital growth. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for hero section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/email-marketing/hero/{filename}.webp",
+          "fallbackImageKey": "email-marketing-hero"
+        },
+        "email-marketing-support": {
+          "imageKey": "email-marketing-support",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "email-marketing"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "supporting explanation image",
+          "ideogramPrompt": "Clean professional digital service illustration for Email Marketing. Scene: marketer planning email campaign strategy with a local business client. Context: email campaigns, newsletter design, customer engagement, conversion emails. Composition: consultative scene showing the service being planned, reviewed or improved. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for support section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "4:3",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/email-marketing/support/{filename}.webp",
+          "fallbackImageKey": "email-marketing-hero"
+        },
+        "email-marketing-trust": {
+          "imageKey": "email-marketing-trust",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "email-marketing"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "credibility and authority image",
+          "ideogramPrompt": "Clean professional digital service illustration for Email Marketing. Scene: email analytics dashboard showing open rates and customer engagement growth. Context: email campaigns, newsletter design, customer engagement, conversion emails. Composition: evidence, results, reviews, analytics, trust signals, professional reassurance. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for trust section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "1:1",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/email-marketing/trust/{filename}.webp",
+          "fallbackImageKey": "email-marketing-hero"
+        },
+        "email-marketing-conversion": {
+          "imageKey": "email-marketing-conversion",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "email-marketing"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "action and enquiry image",
+          "ideogramPrompt": "Clean professional digital service illustration for Email Marketing. Scene: business owner sending a successful email campaign to customers. Context: email campaigns, newsletter design, customer engagement, conversion emails. Composition: business owner taking action, enquiry growth, customer contact, measurable outcomes. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for conversion section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/email-marketing/conversion/{filename}.webp",
+          "fallbackImageKey": "email-marketing-hero"
+        },
+        "google-business-profile-hero": {
+          "imageKey": "google-business-profile-hero",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "google-business-profile"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "main visual impact above the fold",
+          "ideogramPrompt": "Clean professional digital service illustration for Google Business Profile. Scene: optimised Google Business Profile listing with reviews and local map presence. Context: Google Maps profile, reviews, local visibility, GBP management. Composition: wide professional hero image, clear subject, clean modern business setting, strong sense of local digital growth. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for hero section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/google-business-profile/hero/{filename}.webp",
+          "fallbackImageKey": "google-business-profile-hero"
+        },
+        "google-business-profile-support": {
+          "imageKey": "google-business-profile-support",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "google-business-profile"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "supporting explanation image",
+          "ideogramPrompt": "Clean professional digital service illustration for Google Business Profile. Scene: consultant improving a local business Google profile with photos and categories. Context: Google Maps profile, reviews, local visibility, GBP management. Composition: consultative scene showing the service being planned, reviewed or improved. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for support section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "4:3",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/google-business-profile/support/{filename}.webp",
+          "fallbackImageKey": "google-business-profile-hero"
+        },
+        "google-business-profile-trust": {
+          "imageKey": "google-business-profile-trust",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "google-business-profile"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "credibility and authority image",
+          "ideogramPrompt": "Clean professional digital service illustration for Google Business Profile. Scene: five-star review growth and verified Google Business Profile management. Context: Google Maps profile, reviews, local visibility, GBP management. Composition: evidence, results, reviews, analytics, trust signals, professional reassurance. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for trust section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "1:1",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/google-business-profile/trust/{filename}.webp",
+          "fallbackImageKey": "google-business-profile-hero"
+        },
+        "google-business-profile-conversion": {
+          "imageKey": "google-business-profile-conversion",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "google-business-profile"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "action and enquiry image",
+          "ideogramPrompt": "Clean professional digital service illustration for Google Business Profile. Scene: local business receiving calls and directions from Google Maps profile. Context: Google Maps profile, reviews, local visibility, GBP management. Composition: business owner taking action, enquiry growth, customer contact, measurable outcomes. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for conversion section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/google-business-profile/conversion/{filename}.webp",
+          "fallbackImageKey": "google-business-profile-hero"
+        },
+        "local-business-visibility-hero": {
+          "imageKey": "local-business-visibility-hero",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-business-visibility"
+          ],
+          "recommendedSlot": "hero",
+          "purpose": "main visual impact above the fold",
+          "ideogramPrompt": "Clean professional digital service illustration for Local Business Visibility. Scene: local business gaining visibility across search maps and online directories. Context: multi-channel local visibility, search, maps, directories, online presence. Composition: wide professional hero image, clear subject, clean modern business setting, strong sense of local digital growth. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for hero section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-business-visibility/hero/{filename}.webp",
+          "fallbackImageKey": "local-business-visibility-hero"
+        },
+        "local-business-visibility-support": {
+          "imageKey": "local-business-visibility-support",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-business-visibility"
+          ],
+          "recommendedSlot": "support",
+          "purpose": "supporting explanation image",
+          "ideogramPrompt": "Clean professional digital service illustration for Local Business Visibility. Scene: visibility consultant auditing a local business online presence. Context: multi-channel local visibility, search, maps, directories, online presence. Composition: consultative scene showing the service being planned, reviewed or improved. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for support section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "4:3",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-business-visibility/support/{filename}.webp",
+          "fallbackImageKey": "local-business-visibility-hero"
+        },
+        "local-business-visibility-trust": {
+          "imageKey": "local-business-visibility-trust",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-business-visibility"
+          ],
+          "recommendedSlot": "trust",
+          "purpose": "credibility and authority image",
+          "ideogramPrompt": "Clean professional digital service illustration for Local Business Visibility. Scene: consistent NAP citations and strong local search footprint evidence. Context: multi-channel local visibility, search, maps, directories, online presence. Composition: evidence, results, reviews, analytics, trust signals, professional reassurance. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for trust section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "1:1",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-business-visibility/trust/{filename}.webp",
+          "fallbackImageKey": "local-business-visibility-hero"
+        },
+        "local-business-visibility-conversion": {
+          "imageKey": "local-business-visibility-conversion",
+          "imagePack": "digital-services",
+          "templateFamily": "digital-services",
+          "compatibleServices": [
+            "local-business-visibility"
+          ],
+          "recommendedSlot": "conversion",
+          "purpose": "action and enquiry image",
+          "ideogramPrompt": "Clean professional digital service illustration for Local Business Visibility. Scene: business owner seeing increased local enquiries from visibility improvements. Context: multi-channel local visibility, search, maps, directories, online presence. Composition: business owner taking action, enquiry growth, customer contact, measurable outcomes. Modern flat vector or premium UI mockup style as appropriate. Brand colours #005EB8 #1CA9C9 #003A6D where used. No text, no logos, no watermarks, transparent or light neutral background. Optimised for conversion section of a local service page. 16:9 or 4:3 as appropriate.",
+          "negativePrompt": "blurry, distorted, cartoon unless specified, watermark, text overlay, readable UI text, brand logos, stock photo watermark, low quality, oversaturated, generic office stock photo, meaningless abstract charts, meaningless office stock photos, random bright backgrounds, photorealistic people unless specified",
+          "aspectRatio": "16:9",
+          "stylePreset": "General",
+          "altTextPattern": "{serviceName} {location} — professional {slot} image",
+          "captionPattern": "{serviceName} — {location}",
+          "safetyNotes": "No readable UI text or fake brand logos",
+          "complianceNotes": "Generic digital service imagery — no guaranteed ranking claims in visual",
+          "uploadTargetPath": "assets/image-library/local-business-visibility/conversion/{filename}.webp",
+          "fallbackImageKey": "local-business-visibility-hero"
+        }
+      }
+    },
+    "pharmacy": {
+      "packKey": "pharmacy",
+      "packName": "Pharmacy (imported)",
+      "source": "output/pharmacy-blueprint/pharmacy-ai-image-prompt-library.json",
+      "packCount": 6,
+      "totalPrompts": 38
+    }
+  },
+  "crossIndustrySlotMapping": {
+    "description": "All industries use hero/support/trust/conversion page slots",
+    "slots": [
+      "hero",
+      "support",
+      "trust",
+      "conversion"
+    ],
+    "pharmacyMapsVia": "templateFamilyMappings.slotResolution",
+    "digitalMapsVia": "service + slot manifest lookup with prompt pack fallback"
+  },
+  "runtimeModule": "src/image-intelligence/universalImageIntelligenceEngine.ts",
+  "resolutionExamples": [
+    {
+      "industryType": "pharmacy",
+      "serviceKey": "pharmacy-first",
+      "templateFamilyKey": "clinical-nhs-services",
+      "location": "Rotherham",
+      "businessName": "Brook Pharmacy",
+      "slots": {
+        "hero": "pharmacy-first",
+        "support": "blood-pressure-check",
+        "trust": "community-pharmacy",
+        "conversion": "prescription-collection"
+      }
+    },
+    {
+      "industryType": "digital-services",
+      "serviceKey": "web-hosting",
+      "location": "Rotherham",
+      "businessName": "InboxingProWeb",
+      "slots": {
+        "hero": "web-hosting-hero",
+        "support": "web-hosting-support",
+        "trust": "web-hosting-trust",
+        "conversion": "web-hosting-conversion"
+      }
+    }
+  ]
+}

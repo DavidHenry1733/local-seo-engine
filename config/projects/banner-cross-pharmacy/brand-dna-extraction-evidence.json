@@ -1,0 +1,712 @@
+{
+  "version": "brand-dna-extraction-v1",
+  "slug": "banner-cross-pharmacy",
+  "sourceUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+  "extractedAt": "2026-07-21T10:19:00.000Z",
+  "fields": {
+    "colours.primary": {
+      "value": "#015e69",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 100,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "primaryColour"
+    },
+    "colours.secondary": {
+      "value": "#01474f",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "secondaryColour",
+      "confidence": 100,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "secondaryColour"
+    },
+    "colours.accent": {
+      "value": "#1CA9C9",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "accentColour",
+      "confidence": 100,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "colours.background": {
+      "value": "#ffffff",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "css-variable",
+      "confidence": 40,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "--bg-color"
+    },
+    "colours.heading": {
+      "value": "#01424a",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 40,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "--heading-color"
+    },
+    "colours.body": {
+      "value": "#334155",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 40,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "--text-color"
+    },
+    "colours.muted": {
+      "value": "#5d6b7f",
+      "source": "website-intelligence",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "--text-color"
+    },
+    "colours.button": {
+      "value": "#d9534f",
+      "source": "website-import",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "theme-btn.style-one",
+      "confidence": 40,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "colours.buttonText": {
+      "value": "#ffffff",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 70,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.headerBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.headerText": {
+      "value": "#01424a",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.topBarBackground": {
+      "value": "#1CA9C9",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.topBarText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "colours.footerBackground": {
+      "value": "#01424a",
+      "source": "website-css",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "footer-widget background",
+      "confidence": 35,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": ".footer-widget"
+    },
+    "colours.footerText": {
+      "value": "#ffffff",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "colours.footerLink": {
+      "value": "#ffffff",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 50,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "colours.footerAccent": {
+      "value": "#cbd5e1",
+      "source": "platform-default",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 40,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "colours.sectionBackground": {
+      "value": "#f8fafc",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "--bg-color",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.pageBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.surface": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.headingPrimary": {
+      "value": "#01424a",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.headingSecondary": {
+      "value": "#01474f",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.bodyText": {
+      "value": "#334155",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.mutedText": {
+      "value": "#334155",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.primaryAction": {
+      "value": "#1CA9C9",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.primaryActionText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.secondaryAction": {
+      "value": "#01474f",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.secondaryActionText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.link": {
+      "value": "#01474f",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.iconPrimary": {
+      "value": "#1CA9C9",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.iconSecondary": {
+      "value": "#01474f",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.border": {
+      "value": "color-mix(in srgb, var(--brand-text) 12%, white)",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.footerBackground": {
+      "value": "#01424a",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.footerText": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.footerLink": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.footerBottomBarBackground": {
+      "value": "#01424a",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.trustBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.cardBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "semanticColours.mapPanelBackground": {
+      "value": "#ffffff",
+      "source": "website-css",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "semantic-role-resolution",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "typography.headingFont": {
+      "value": "Raleway",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 70,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "--heading-font"
+    },
+    "typography.bodyFont": {
+      "value": "Roboto",
+      "source": "website-import",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "css-variable",
+      "confidence": 70,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": "--body-font"
+    },
+    "typography.headingWeight": {
+      "value": "800",
+      "source": "website-intelligence",
+      "evidenceSource": "pharmacy-profile.json",
+      "extractionMethod": "stored-profile",
+      "confidence": 60,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "typography.bodyWeight": {
+      "value": "400",
+      "source": "website-intelligence",
+      "evidenceSource": "pharmacy-profile.json",
+      "extractionMethod": "stored-profile",
+      "confidence": 60,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "typography.h1Scale": {
+      "value": "clamp(2.5rem,5vw,5.3125rem)",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "h1 font-size 85px scaled",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "typography.h2Scale": {
+      "value": "clamp(1.75rem,3vw,3rem)",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "h2 font-size 48px scaled",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "typography.bodySize": {
+      "value": "18px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": "body font-size",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "layout.headerLayout": {
+      "value": "with-top-bar",
+      "source": "website-html",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "top-header detected",
+      "confidence": 90,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "layout.heroLayout": {
+      "value": "split",
+      "source": "website-import",
+      "evidenceSource": "assets/css/pages/home-one.css",
+      "extractionMethod": "medolia split hero template",
+      "confidence": 75,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "layout.logoMaxHeight": {
+      "value": "48px",
+      "source": "platform-default",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "brand-logo img width",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "surfaces.buttonRadius": {
+      "value": "10px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "theme-btn / medolia border-radius",
+      "confidence": 72,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "surfaces.cardRadius": {
+      "value": "10px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/style.css",
+      "extractionMethod": "medolia-choose-item border-radius",
+      "confidence": 70,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "spacing.sectionY": {
+      "value": "72px",
+      "source": "platform-default",
+      "evidenceSource": "pharmaconnect-defaults",
+      "extractionMethod": "platform-spacing",
+      "confidence": 0,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "identity.logoUrl": {
+      "value": "http://pharmacyhealthhub.co.uk/wp-content/uploads/2023/10/PHH-LOGO.png",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "stored-import",
+      "confidence": 90,
+      "importedAt": "2026-07-21T10:19:00.000Z",
+      "selectorOrProperty": ".brand-logo img"
+    },
+    "identity.faviconUrl": {
+      "value": "https://pharmacyhealthhub.co.uk/wp-content/uploads/2023/11/cropped-PHH-LOGO-32x32.png",
+      "source": "website-import",
+      "evidenceSource": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "extractionMethod": "link rel=icon",
+      "confidence": 85,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "spacing.containerMax": {
+      "value": "1314px",
+      "source": "platform-default",
+      "evidenceSource": "assets/css/common-style.css",
+      "extractionMethod": ".container max-width",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    "layout.topInfoBarText": {
+      "value": "Monday: 8:30 AM – 6:00 PM; Tuesday: 8:30 AM – 6:00 PM; Wednesday: 8:30 AM – 6:00 PM; Thursday: 8:30 AM – 6:00 PM; Friday: 8:30 AM – 6:00 PM; Saturday: 9:00 AM – 5:30 PM; Sunday: 10:00 AM – 3:00 PM | 0827595866-300 | pharmacy.FVD07@nhs.net",
+      "source": "website-import",
+      "evidenceSource": "brand-profile.json",
+      "extractionMethod": "contact + hours",
+      "confidence": 85,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    }
+  },
+  "populatedFromWebsite": [
+    "colours.primary",
+    "colours.secondary",
+    "colours.accent",
+    "colours.background",
+    "colours.heading",
+    "colours.body",
+    "colours.muted",
+    "colours.button",
+    "colours.buttonText",
+    "semanticColours.headerText",
+    "semanticColours.topBarBackground",
+    "semanticColours.topBarText",
+    "colours.footerBackground",
+    "semanticColours.pageBackground",
+    "semanticColours.surface",
+    "semanticColours.headingPrimary",
+    "semanticColours.headingSecondary",
+    "semanticColours.bodyText",
+    "semanticColours.mutedText",
+    "semanticColours.primaryAction",
+    "semanticColours.primaryActionText",
+    "semanticColours.secondaryAction",
+    "semanticColours.secondaryActionText",
+    "semanticColours.link",
+    "semanticColours.iconPrimary",
+    "semanticColours.iconSecondary",
+    "semanticColours.border",
+    "semanticColours.headerBackground",
+    "semanticColours.footerBackground",
+    "semanticColours.footerText",
+    "semanticColours.footerLink",
+    "semanticColours.footerBottomBarBackground",
+    "semanticColours.trustBackground",
+    "semanticColours.cardBackground",
+    "semanticColours.mapPanelBackground",
+    "typography.headingFont",
+    "typography.bodyFont",
+    "typography.headingWeight",
+    "typography.bodyWeight",
+    "layout.headerLayout",
+    "layout.heroLayout",
+    "identity.logoUrl",
+    "identity.faviconUrl",
+    "layout.topInfoBarText"
+  ],
+  "usingDefaults": [
+    "semanticColours.headerBackground",
+    "colours.footerText",
+    "colours.footerLink",
+    "colours.footerAccent",
+    "colours.sectionBackground",
+    "typography.h1Scale",
+    "typography.h2Scale",
+    "typography.bodySize",
+    "layout.logoMaxHeight",
+    "surfaces.buttonRadius",
+    "surfaces.cardRadius",
+    "spacing.sectionY",
+    "spacing.containerMax"
+  ],
+  "styleEvidence": [
+    {
+      "role": "primary-button-text",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".theme-btn.style-one",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "top-bar-text",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".top-header",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 80,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "main-header",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".header-upper / .main-header",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 75,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "hero",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".banner-section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 55,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "service-card",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".choose-item, .service-card",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "content-section",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": "section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 50,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "footer-heading",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".footer-widget h3",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "footer-link",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".footer-widget a",
+      "property": "color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-rule",
+      "confidence": 60,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "map-contact",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".contact-section",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 45,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    },
+    {
+      "role": "mobile-navigation",
+      "pageUrl": "https://pharmacyhealthhub.co.uk/bannercross-pharmacy-sheffield",
+      "selectorOrSignature": ".mobile-menu",
+      "property": "background-color",
+      "computedValue": "#ffffff",
+      "extractionMethod": "css-inferred",
+      "confidence": 40,
+      "importedAt": "2026-07-21T10:19:00.000Z"
+    }
+  ],
+  "conflicts": [
+    {
+      "field": "phone",
+      "businessProfileValue": "0114 266 2208",
+      "websiteEvidenceValue": "0827595866-300",
+      "resolution": "business-profile-wins",
+      "requiresCustomerConfirmation": true
+    },
+    {
+      "field": "pharmacyName",
+      "businessProfileValue": "Banner Cross Pharmacy + Travel Vaccinations & Weight Loss Clinic",
+      "websiteEvidenceValue": "Service Input Field",
+      "resolution": "business-profile-wins",
+      "requiresCustomerConfirmation": false
+    }
+  ],
+  "completeness": {
+    "overall": 66,
+    "categories": [
+      {
+        "category": "identity",
+        "status": "extracted",
+        "score": 100
+      },
+      {
+        "category": "semantic colours",
+        "status": "extracted",
+        "score": 95
+      },
+      {
+        "category": "typography",
+        "status": "extracted",
+        "score": 90
+      },
+      {
+        "category": "header/navigation",
+        "status": "extracted",
+        "score": 95
+      },
+      {
+        "category": "CTAs",
+        "status": "partial",
+        "score": 50
+      },
+      {
+        "category": "hero",
+        "status": "partial",
+        "score": 65
+      },
+      {
+        "category": "section rhythm",
+        "status": "default-fallback",
+        "score": 30
+      },
+      {
+        "category": "cards",
+        "status": "default-fallback",
+        "score": 25
+      },
+      {
+        "category": "imagery",
+        "status": "default-fallback",
+        "score": 30
+      },
+      {
+        "category": "footer",
+        "status": "extracted",
+        "score": 88
+      },
+      {
+        "category": "responsive behaviour",
+        "status": "partial",
+        "score": 55
+      },
+      {
+        "category": "conflicts",
+        "status": "customer-confirmation-required",
+        "score": 70,
+        "notes": "2 field conflict(s) require customer confirmation"
+      }
+    ],
+    "computedAt": "2026-07-21T10:19:01.376Z"
+  }
+}

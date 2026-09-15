@@ -1,0 +1,204 @@
+{
+  "generatedAt": "2026-07-20T19:09:47.084Z",
+  "tenant": "banner-cross-pharmacy",
+  "workflow": {
+    "recorded": "request_indexing",
+    "resolved": "request_indexing"
+  },
+  "stageChecks": [
+    {
+      "stage": "create_customer",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "website_import",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "google_import",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "business_profile_intelligence",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "resolve_import_conflicts",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "approve_business_profile",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "generate_growth_intelligence",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "generate_ecosystem",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "quality_review",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "publish",
+      "pass": true,
+      "detail": "complete"
+    },
+    {
+      "stage": "request_indexing",
+      "pass": false,
+      "detail": "incomplete"
+    },
+    {
+      "stage": "initialise_rank_tracking",
+      "pass": false,
+      "detail": "incomplete"
+    },
+    {
+      "stage": "monitoring",
+      "pass": false,
+      "detail": "incomplete"
+    },
+    {
+      "stage": "live_customer",
+      "pass": false,
+      "detail": "incomplete"
+    }
+  ],
+  "api": {
+    "averageMs": 5.95866588888887,
+    "failures": 9
+  },
+  "defects": [
+    {
+      "id": "RC1-001",
+      "severity": "High",
+      "phase": "Phase 1",
+      "title": "Request Indexing stage active but no indexing submissions recorded",
+      "detail": "submitted=0, registered=0",
+      "recommendedFix": "Execute Request Indexing workflow action or register pages from publish index"
+    },
+    {
+      "id": "RC1-002",
+      "severity": "High",
+      "phase": "Phase 7",
+      "title": "Open Critical Issue Centre tickets for test tenant",
+      "detail": "MAI-20260720-001",
+      "recommendedFix": "Close or resolve stale publish failure diagnostics after successful v1 publish"
+    },
+    {
+      "id": "RC1-003",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/dashboard",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-004",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/customers/banner-cross-pharmacy",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-005",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/customers/banner-cross-pharmacy/workflow",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-006",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/customers/banner-cross-pharmacy/commercial-publish-review",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-007",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/customers/banner-cross-pharmacy/managed-publishing",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-008",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/platform-infrastructure",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-009",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/system-health",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-010",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/jobs?limit=20",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-011",
+      "severity": "High",
+      "phase": "Phase 3",
+      "title": "API endpoint failed: /api/master-admin-platform/issues/meta",
+      "detail": "HTTP 401",
+      "recommendedFix": "Fix endpoint auth or handler error"
+    },
+    {
+      "id": "RC1-012",
+      "severity": "Critical",
+      "phase": "Phase 6",
+      "title": "Managed hostname not HTTP-accessible after publish",
+      "detail": "All live URL checks failed; SFTP-only verification used",
+      "recommendedFix": "Configure nginx/vhost for sites.pharmaconnect.uk tenant paths before commercial release"
+    },
+    {
+      "id": "RC1-013",
+      "severity": "High",
+      "phase": "Phase 7",
+      "title": "Stale open issue after successful publish: MAI-20260720-003",
+      "detail": "Commercial publish failed",
+      "recommendedFix": "Auto-close Publishing issues when subsequent publish succeeds"
+    },
+    {
+      "id": "RC1-014",
+      "severity": "High",
+      "phase": "Phase 7",
+      "title": "Stale open issue after successful publish: MAI-20260720-001",
+      "detail": "Commercial publish failed",
+      "recommendedFix": "Auto-close Publishing issues when subsequent publish succeeds"
+    }
+  ],
+  "counts": {
+    "critical": 1,
+    "high": 13,
+    "medium": 0,
+    "low": 0
+  }
+}

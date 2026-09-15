@@ -1,0 +1,18 @@
+{
+  "kind": "brook-derby-uk-local-page-content-contract-verification",
+  "checkpointId": "uk-local-page-content-contract-2026-09-03T10-21Z",
+  "focusedTests": {
+    "contentContract": "13/13 passed",
+    "ui": "33/33 passed",
+    "gitDiffCheck": "clean"
+  },
+  "browser": {
+    "url": "https://app.pharmaconnect.uk/api/growth-engine/campaign-builder?slug=brook-pharmacy-demo-derby&step=areas&campaign=pharmacy-first",
+    "authenticated": true,
+    "targetAreas": "Evidence preparation panel for Allestree; content contract v1; targeted GP/locality/distance calls; proposed cost about $0.068; Start paid collection disabled; Generate disabled; demo-location warning present; Save preparation plan clicked; Generate and Start paid collection not pressed"
+  },
+  "proposedCostUsd": 0.068,
+  "previousProposedCostUsd": 0.198,
+  "paidCalls": 0,
+  "generatePressed": false
+}

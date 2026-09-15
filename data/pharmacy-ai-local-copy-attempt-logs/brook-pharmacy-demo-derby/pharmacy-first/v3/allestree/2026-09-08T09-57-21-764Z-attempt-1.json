@@ -1,0 +1,101 @@
+{
+  "savedAt": "2026-09-08T09:57:21.764Z",
+  "areaSlug": "allestree",
+  "attemptNumber": 1,
+  "promptContractId": "pharmacy-ai-local-narrative-prompt-v3",
+  "promptContractVersion": "v3",
+  "sanitizedRequest": {
+    "model": "gpt-4.1",
+    "temperature": 0.4,
+    "max_tokens": 1200,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You write one local introduction in British English from verified facts supplied for a single area. Return plain prose only."
+      },
+      {
+        "role": "user",
+        "content": "Write one local introduction for Allestree only.\nPrimary town or city: Derby.\nSelected service: Pharmacy First.\nConfirmed pharmacy: Brook Pharmacy Demo Derby.\nConfirmed premises locality: Derby.\nSaved straight-line distance is already printed by the page. Do not write kilometres, routes or travel time.\nAssigned writing structure: Open with a named landmark, park or outdoor place from this area’s brief. Then place that setting in the verified geography and civic life of the area. Close by connecting the selected service to people in this area, without clinical paraphrase.\n\nVerified facts for this area only. Use these facts. Do not add names, history, parks, shops or organisations that are not listed:\n- NHS general practice services in Allestree are provided from Park Lane Surgery.\n- Allestree is a neighbourhood ward in Derby.\n- Allestree has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services.\n- Allestree Park has a Friends of Allestree Park group.\n- Allestree Carnival is a community organisation on the council neighbourhood page.\n- Allestree has a public library.\n- NHS general practice services in Allestree are provided from Park Farm Medical Centre.\n- Allestree Park is a landmark in Allestree.\n- War Memorial - Allestree is a landmark in Allestree.\n- Allestree Memorial Hall is a landmark in Allestree.\n\nQuality and tone example (Mickleover). Copy the paragraphing, length and plain British English. Do not copy Mickleover names, places or facts into this introduction:\nMickleover is a neighbourhood ward in Derby. It has a Neighbourhood Board of local councillors, residents and representatives from community organisations and public services. Mickleover also has a public library. Mickleover Library is a community facility in Mickleover. Mickleover Community Centre is a community facility in Mickleover, and Mickleover Community Pavilion is a community facility in Mickleover.\n\nMickleover Meadows is a landmark in Mickleover. Homerton Vale is a landmark in Mickleover. War Memorial - Mickleover is a landmark in Mickleover. NHS general practice services in Mickleover are provided from Mickleover Medical Centre. NHS general practice services in Mickleover are also provided from Mickleover Surgery. Mickleover Medical Centre and Mickleover Surgery are the verified general practice settings named for Mickleover.\n\nPharmacy First is available for people in Mickleover. Brook Pharmacy Demo Derby provides Pharmacy First from its confirmed premises. People in Mickleover can use Pharmacy First when they need the selected service.\n\nReturn only the introduction as plain text.\nWrite exactly three paragraphs separated by a blank line.\nWrite 150 to 250 words. Aim for 180 to 220 words.\nFluent, grammatical British English. Useful description of the selected area. Natural transition into Pharmacy First in the final paragraph.\nEvery sentence except the Pharmacy First close must name at least one supplied organisation, landmark, library, board, park or healthcare setting from the list above.\nReach the word count by connecting those named facts in full sentences. Do not add atmosphere, belonging, identity, gatherings, local provision, landscape, character or generic facilities.\nDo not write JSON. Do not write HTML. Do not write clinical eligibility, process, safety, credentials, governance, disclaimer, schema or publication wording.\nDo not write “orient yourself”, “listed as”, “recorded as”, “named on the provider page”, “neighbourhood page”, or “recorded healthcare setting”.\nDo not write recognised for, known for, community spirit, landscape, character, convenience, travel time, routes, kilometres, this page names, or sense of belonging."
+      }
+    ]
+  },
+  "rawResponse": "Allestree Park is a landmark in Allestree. The Friends of Allestree Park group is connected to Allestree Park, supporting this outdoor space in the area. War Memorial - Allestree is a landmark in Allestree, and Allestree Memorial Hall is another landmark in the neighbourhood. Allestree Carnival is a community organisation on the council neighbourhood page, and Allestree has a public library.\n\nAllestree is a neighbourhood ward in Derby. The Allestree Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. NHS general practice services in Allestree are provided from Park Lane Surgery and Park Farm Medical Centre. These general practice settings are part of the healthcare options available to people in Allestree.\n\nPharmacy First is available for people in Allestree. Brook Pharmacy Demo Derby provides Pharmacy First from its confirmed premises. People in Allestree can use Pharmacy First when they need the selected service.",
+  "validationResult": {
+    "ok": false,
+    "failures": [
+      "FAIL | field=localIntroduction | sentence=The Friends of Allestree Park group is connected to Allestree Park, supporting this outdoor space in the area. | rule=ungrounded-clause | defect=supporting this outdoor space in the area. — no supplied fact, canonical field or approved clinical text covers this clause",
+      "FAIL | field=localIntroduction | sentence=These general practice settings are part of the healthcare options available to people in Allestree. | rule=ungrounded-clause | defect=These general practice settings are part of the healthcare options available to people in Allestree. — no supplied fact, canonical field or approved clinical text covers this clause",
+      "area name repeated as SEO stuffing",
+      "premises locality repeated across local context and access fields",
+      "FAIL | field=localIntroduction | sentence=These general practice settings are part of the healthcare options available to people in Allestree. | rule=missing-editorial-fact-id | defect=local factual sentence has no internal evidenceClaims.editorialFactId from this area’s supplied facts"
+    ],
+    "automatedReviews": [
+      "REVIEW REQUIRED | field=localIntroduction | sentence=War Memorial - Allestree is a landmark in Allestree, and Allestree Memorial Hall is another landmark in the neighbourhood. | rule=uncertain-paraphrase | defect=Allestree Memorial Hall is another landmark in the neighbourhood. — uncertain paraphrase: unmatched wording (another) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=The Allestree Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. | rule=uncertain-paraphrase | defect=The Allestree Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. — uncertain paraphrase: unmatched wording (made) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=Brook Pharmacy Demo Derby provides Pharmacy First from its confirmed premises. | rule=uncertain-paraphrase | defect=Brook Pharmacy Demo Derby provides Pharmacy First from its confirmed premises. — uncertain paraphrase: unmatched wording (provides, confirmed) is not proof of a new fact, and is not established as supported",
+      "REVIEW REQUIRED | field=localIntroduction | sentence=People in Allestree can use Pharmacy First when they need the selected service. | rule=uncertain-paraphrase | defect=People in Allestree can use Pharmacy First when they need the selected service. — uncertain paraphrase: unmatched wording (use, selected, service) is not proof of a new fact, and is not established as supported"
+    ]
+  },
+  "parsedCopy": {
+    "area": "Allestree",
+    "heroHeading": "Pharmacy First in Allestree",
+    "heroIntroduction": "Pharmacy First can help with eligible common conditions for people in Allestree.",
+    "localIntroduction": "Allestree Park is a landmark in Allestree. The Friends of Allestree Park group is connected to Allestree Park, supporting this outdoor space in the area. War Memorial - Allestree is a landmark in Allestree, and Allestree Memorial Hall is another landmark in the neighbourhood. Allestree Carnival is a community organisation on the council neighbourhood page, and Allestree has a public library.\n\nAllestree is a neighbourhood ward in Derby. The Allestree Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services. NHS general practice services in Allestree are provided from Park Lane Surgery and Park Farm Medical Centre. These general practice settings are part of the healthcare options available to people in Allestree.\n\nPharmacy First is available for people in Allestree. Brook Pharmacy Demo Derby provides Pharmacy First from its confirmed premises. People in Allestree can use Pharmacy First when they need the selected service.",
+    "localContextHeading": "",
+    "localContextParagraphs": [],
+    "relationshipToPharmacy": "Consultations take place at Brook Pharmacy Demo Derby in Derby. Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+    "localAccessIntroduction": "",
+    "localFaqs": [],
+    "localCtaBridge": "",
+    "evidenceClaims": [
+      {
+        "field": "localIntroduction",
+        "sentence": "Allestree Park is a landmark in Allestree.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The Friends of Allestree Park group is connected to Allestree Park, supporting this outdoor space in the area.",
+        "editorialFactId": "allestree:community:allestree-park-is-named-on-the-local-authority-n"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "War Memorial - Allestree is a landmark in Allestree, and Allestree Memorial Hall is another landmark in the neighbourhood.",
+        "editorialFactId": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Allestree Carnival is a community organisation on the council neighbourhood page, and Allestree has a public library.",
+        "editorialFactId": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "Allestree is a neighbourhood ward in Derby.",
+        "editorialFactId": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "The Allestree Neighbourhood Board is made up of local councillors, residents and representatives from community organisations and public services.",
+        "editorialFactId": "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby"
+      },
+      {
+        "field": "localIntroduction",
+        "sentence": "NHS general practice services in Allestree are provided from Park Lane Surgery and Park Farm Medical Centre.",
+        "editorialFactId": "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p"
+      },
+      {
+        "field": "relationshipToPharmacy",
+        "sentence": "Brook Pharmacy Demo Derby is approximately 4.1 km in a straight line from Allestree.",
+        "editorialFactId": "allestree:pharmacy-relationship:distance"
+      }
+    ],
+    "evidenceEntityIdsUsed": [],
+    "editorialFactIdsUsed": [
+      "allestree:community:allestree-park-is-named-on-the-local-authority-n",
+      "allestree:area-identity:allestree-is-a-neighbourhood-ward-in-derby",
+      "allestree:healthcare:nhs-general-practice-services-in-allestree-are-p",
+      "allestree:pharmacy-relationship:distance"
+    ]
+  },
+  "candidateRecordWritten": false
+}

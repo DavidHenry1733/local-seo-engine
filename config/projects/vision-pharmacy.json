@@ -1,0 +1,22 @@
+{
+  "clientSlug": "vision-pharmacy",
+  "businessName": "Vision Pharmacy",
+  "domain": "https://www.visionpharmacy.com",
+  "phone": "44 116 482 7359",
+  "email": "hub@visionpharmacy.org.uk",
+  "branding": {
+    "primaryColor": "#005EB8",
+    "accentColor": "#1CA9C9"
+  },
+  "services": [
+    "pharmacy-first"
+  ],
+  "locations": [],
+  "deploy": {
+    "enabled": true,
+    "protocol": "sftp",
+    "host": "51.161.86.187",
+    "port": 2126,
+    "remoteRoot": "/var/www/pharmaconnect-sites/vision-pharmacy/current"
+  }
+}

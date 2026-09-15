@@ -1,4 +1,13 @@
+
 import type { Request, Response, NextFunction } from "express";
+import {
+  campaignBuilderActionGetRedirect,
+  matchCampaignBuilderActionPath,
+  preserveAuthHandoffQuery,
+  safeCampaignBuilderLoginDestination,
+  sanitizeCampaignBuilderLoginNext,
+} from "../../../../src/pharmacy/growthEngineCampaignBuilderRoutingService.ts";
+import { isPublicAcceptedPharmacyFirstPreviewGet } from "../../../../src/pharmacy/pharmacyAcceptedPageRouteResolverV1.ts";
 
 const SESSION_SECRET = process.env.SESSION_SECRET ?? "dev-fallback-secret-change-in-prod";
 
@@ -15,8 +24,44 @@ export function hasValidInternalToken(req: Request): boolean {
 }
 
 export function requireAuth(req: Request, res: Response, next: NextFunction): void {
+  // Allow internal/system JSON endpoints used by dashboard refresh jobs and terminal checks.
+  // These routes still rely on server-side env/OAuth credentials where required.
+  if (
+    req.originalUrl.startsWith("/api/gsc-summary") ||
+    req.originalUrl.startsWith("/api/gsc-index")
+  ) {
+    return next();
+  }
+
+  if (
+    isPublicAcceptedPharmacyFirstPreviewGet({
+      method: req.method,
+      path: req.path,
+      originalUrl: req.originalUrl,
+      url: req.url,
+      query: req.query as Record<string, unknown>,
+    })
+  ) {
+    return next();
+  }
+
   if (req.session?.userId || hasValidInternalToken(req)) {
     next();
+    return;
+  }
+
+  const builderAction = matchCampaignBuilderActionPath(req.path);
+  if (builderAction && req.method === "GET") {
+    const pageUrl =
+      campaignBuilderActionGetRedirect(req.path, req.query as Record<string, unknown>) ||
+      safeCampaignBuilderLoginDestination(builderAction.slug);
+    res.redirect(302, preserveAuthHandoffQuery(req.query as Record<string, unknown>, pageUrl));
+    return;
+  }
+
+  if (builderAction && req.method === "POST") {
+    const pageUrl = safeCampaignBuilderLoginDestination(builderAction.slug);
+    res.redirect(`/api/login?next=${encodeURIComponent(pageUrl)}`);
     return;
   }
 
@@ -24,10 +69,12 @@ export function requireAuth(req: Request, res: Response, next: NextFunction): vo
   // dashboard can detect session expiry and show a human-readable message.
   const wantsJson = req.headers["accept"]?.includes("application/json")
     || req.headers["x-requested-with"] === "XMLHttpRequest"
-    || req.headers["content-type"]?.includes("application/json");
+    || req.headers["content-type"]?.includes("application/json")
+    || req.path.startsWith("/api/");
 
   if (!wantsJson && req.accepts("html") && !req.path.startsWith("/api/auth")) {
-    res.redirect(`/api/login?next=${encodeURIComponent(req.originalUrl)}`);
+    const nextUrl = sanitizeCampaignBuilderLoginNext(req.originalUrl);
+    res.redirect(`/api/login?next=${encodeURIComponent(nextUrl)}`);
     return;
   }
 

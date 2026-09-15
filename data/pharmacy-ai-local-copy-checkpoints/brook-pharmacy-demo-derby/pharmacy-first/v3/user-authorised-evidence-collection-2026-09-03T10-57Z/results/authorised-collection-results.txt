@@ -1,0 +1,19 @@
+
+=== Authorised evidence collection (fixtures, no live APIs) ===
+
+PASS  blanket-execution-flag-stays-off — flag=false
+PASS  start-disabled-without-authorisation — authorised=false start=false
+PASS  authorise-requires-explicit-confirm — Explicit authorisation is required for this exact plan. No provider calls were made.
+PASS  authorise-success — cap=1
+PASS  authorise-enables-start — server authorisation matches fingerprint
+PASS  collect-success — status=completed paid=4 gps=1 spent=0.068
+PASS  collect-saves-bodies-and-distance — pages=page-body-gp-official,page-body-locality km=6.1
+PASS  duplicate-submission-does-not-recall — duplicate=true places=2
+PASS  insufficient-budget-stops-before-paid-call — status=stopped paid=0 places=0 places-gp-practices needs a $0.032 cost bound, but only $0.010 remains on the evidence-only cap of $0.010. The call was not made.
+PASS  interrupted-collection-persists — status=interrupted paid=1
+PASS  resume-does-not-repeat-consumed-call — status=completed resumePlaces=1 paid=4
+PASS  zero-verified-gp-is-valid-outcome — gps=0 sufficiency=READY km=6.1
+PASS  cross-tenant-collection-denied — 403 Cross-tenant or non-candidate collection is not authorised.
+PASS  did-not-write-live-allestree-pack — /home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-local-relevance-packs/brook-pharmacy-demo-derby/allestree.json
+
+14/14 passed

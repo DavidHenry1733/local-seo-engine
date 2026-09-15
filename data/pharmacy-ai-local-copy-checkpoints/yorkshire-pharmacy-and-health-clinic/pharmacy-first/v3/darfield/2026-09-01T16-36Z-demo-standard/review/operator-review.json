@@ -1,0 +1,38 @@
+{
+  "kind": "darfield-v3-demo-standard-source-review",
+  "copyRewritten": false,
+  "production": "provider-generated-with-operator-source-review-of-review-required-findings",
+  "productOwnerAccepted": false,
+  "findings": [
+    {
+      "field": "heroIntroduction",
+      "sentence": "Yorkshire Pharmacy & Health Clinic provides this service to people living in Darfield and the surrounding Barnsley area.",
+      "resolution": "Supported as in-area premises plus borough identity. Parallel to the accepted Wombwell hero second sentence. Not rewritten.",
+      "source": "canonical pharmacy profile; Darfield is in the Metropolitan Borough of Barnsley."
+    },
+    {
+      "field": "localIntroduction",
+      "sentence": "The area is home to a public library and the Darfield History Society, which runs local history group sessions.",
+      "resolution": "Library fact and History Society sessions are on the saved Barnsley Council Darfield Library body. Connector 'which' is grammar, not a new fact. Not rewritten.",
+      "source": "https://www.barnsley.gov.uk/services/libraries/find-a-library/darfield-library/"
+    },
+    {
+      "field": "localContextHeading",
+      "sentence": "Why Darfield patients start with the pharmacist",
+      "resolution": "This is the existing template section role from the v3 writing brief, not a local fact. Not rewritten.",
+      "source": "buildAiLocalNarrativeWritingBriefV3"
+    },
+    {
+      "field": "localContextParagraphs[0]",
+      "sentence": "Pharmacy First can help with eligible common conditions, and the pharmacist will confirm what can be assessed on the day according to NHS pathway criteria.",
+      "resolution": "Restates locked clinical facts. The same sentence was in the accepted Wombwell source-corrected demo. Not rewritten.",
+      "source": "PHARMACY_FIRST_LOCKED_CLINICAL_FACTS_V1"
+    },
+    {
+      "field": "relationshipToPharmacy",
+      "sentence": "Pharmacy First consultations for Darfield residents are provided at Yorkshire Pharmacy & Health Clinic in Darfield.",
+      "resolution": "Correct in-area premises statement. 'residents' is the same wording the Product Owner accepted for Wombwell. Not rewritten.",
+      "source": "canonical pharmacy profile — premises in Darfield"
+    }
+  ]
+}

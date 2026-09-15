@@ -1,0 +1,1022 @@
+{
+  "version": 1,
+  "serviceId": "pharmacy-first",
+  "masterFile": "docs/pharmacy-master-library/pharmacy-first-master-v2.md",
+  "slug": "reliable-direct-pharmacy",
+  "localArea": "Ecclesall",
+  "selectedAreas": [
+    "Ecclesall",
+    "Fulwood",
+    "Sheffield City Centre",
+    "Broomhill",
+    "Kelham Island",
+    "Dore",
+    "Hillsborough",
+    "Crookes"
+  ],
+  "localClusterPagesGenerated": 0,
+  "localLocationHubGenerated": true,
+  "localLocationClustersGenerated": 8,
+  "localLocationAreasGenerated": 0,
+  "localLocationHierarchy": {
+    "ok": true,
+    "primaryLocality": "Sheffield",
+    "primaryLocalitySlug": "sheffield",
+    "hub": {
+      "areaId": "hub:sheffield",
+      "name": "Sheffield",
+      "slug": "hub",
+      "type": "city-town-hub",
+      "parentAreaId": null,
+      "source": "business-profile:primaryTown",
+      "evidence": [
+        "Primary town/city hub for service coverage"
+      ],
+      "serviceIds": [
+        "pharmacy-first"
+      ],
+      "generationEligible": true,
+      "generationReason": "primary locality hub",
+      "approved": true
+    },
+    "clusters": [
+      {
+        "areaId": "cluster:cluster-ecclesall",
+        "name": "Ecclesall",
+        "slug": "cluster-ecclesall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-ecclesall"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:cluster-fulwood",
+        "name": "Fulwood",
+        "slug": "cluster-fulwood",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-fulwood"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:cluster-sheffield-city-centre",
+        "name": "Sheffield City Centre",
+        "slug": "cluster-sheffield-city-centre",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-sheffield-city-centre"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:cluster-broomhill",
+        "name": "Broomhill",
+        "slug": "cluster-broomhill",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-broomhill"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:cluster-kelham-island",
+        "name": "Kelham Island",
+        "slug": "cluster-kelham-island",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-kelham-island"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:cluster-dore",
+        "name": "Dore",
+        "slug": "cluster-dore",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-dore"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:cluster-hillsborough",
+        "name": "Hillsborough",
+        "slug": "cluster-hillsborough",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-hillsborough"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 7,
+        "order": 7
+      },
+      {
+        "areaId": "cluster:cluster-crookes",
+        "name": "Crookes",
+        "slug": "cluster-crookes",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-crookes"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 8 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 8,
+        "order": 8
+      }
+    ],
+    "areas": [],
+    "generationAreas": [
+      {
+        "areaId": "cluster:cluster-ecclesall",
+        "name": "Ecclesall",
+        "slug": "cluster-ecclesall",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-ecclesall"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 1 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 1,
+        "order": 1
+      },
+      {
+        "areaId": "cluster:cluster-fulwood",
+        "name": "Fulwood",
+        "slug": "cluster-fulwood",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-fulwood"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 2 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 2,
+        "order": 2
+      },
+      {
+        "areaId": "cluster:cluster-sheffield-city-centre",
+        "name": "Sheffield City Centre",
+        "slug": "cluster-sheffield-city-centre",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-sheffield-city-centre"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 3 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 3,
+        "order": 3
+      },
+      {
+        "areaId": "cluster:cluster-broomhill",
+        "name": "Broomhill",
+        "slug": "cluster-broomhill",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-broomhill"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 4 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 4,
+        "order": 4
+      },
+      {
+        "areaId": "cluster:cluster-kelham-island",
+        "name": "Kelham Island",
+        "slug": "cluster-kelham-island",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-kelham-island"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 5 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 5,
+        "order": 5
+      },
+      {
+        "areaId": "cluster:cluster-dore",
+        "name": "Dore",
+        "slug": "cluster-dore",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-dore"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 6 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 6,
+        "order": 6
+      },
+      {
+        "areaId": "cluster:cluster-hillsborough",
+        "name": "Hillsborough",
+        "slug": "cluster-hillsborough",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-hillsborough"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 7 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 7,
+        "order": 7
+      },
+      {
+        "areaId": "cluster:cluster-crookes",
+        "name": "Crookes",
+        "slug": "cluster-crookes",
+        "type": "district-cluster",
+        "parentAreaId": "hub:sheffield",
+        "source": "frozen-campaign:pharmacy-first",
+        "evidence": [
+          "frozen-campaign-generation-context",
+          "areaSlug:cluster-crookes"
+        ],
+        "serviceIds": [
+          "pharmacy-first"
+        ],
+        "generationEligible": true,
+        "generationReason": "RC1 cluster page 8 for approved area",
+        "approved": true,
+        "relationship": "cluster page under service hub for Sheffield",
+        "priority": 8,
+        "order": 8
+      }
+    ],
+    "trace": {
+      "profilePath": "/home/inboxingproweb/pharmaconnect-growth-engine/data/pharmacy-profiles/reliable-direct-pharmacy.json",
+      "tenantSlug": "reliable-direct-pharmacy",
+      "primaryLocation": "Sheffield",
+      "postcode": "S3 7SP",
+      "townCity": "Sheffield",
+      "storedServiceAreas": [
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes"
+      ],
+      "storedNeighbourhoods": [
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes",
+        "Nether Edge",
+        "Woodseats",
+        "Chapeltown",
+        "Walkley"
+      ],
+      "importedLocationEvidence": [],
+      "googleLocationEvidence": [
+        "displayAddress:251 Broomhall Street, Sheffield, S3 7SP"
+      ],
+      "localIntelligenceAreas": [],
+      "selectedAreasSource": "frozen-campaign:pharmacy-first",
+      "selectedAreasFilters": [
+        "benchmarkServiceEcosystemBuilder filters pharmacy-first areas against PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS (Broom Lane manifest)"
+      ],
+      "rejectedAreas": [],
+      "rejectionReasons": [],
+      "firstEmptySelectionDecision": "All operator-selected areas removed by PHARMACY_FIRST_ACTIVE_LOCAL_SLUGS allow-list in buildBenchmarkServiceEcosystem",
+      "responsibleFile": "src/pharmacy/benchmarkServiceEcosystemBuilder.ts",
+      "responsibleFunction": "buildBenchmarkServiceEcosystem",
+      "responsibleLine": 647,
+      "areasConsidered": [
+        "Sheffield",
+        "Ecclesall",
+        "Fulwood",
+        "Sheffield City Centre",
+        "Broomhill",
+        "Kelham Island",
+        "Dore",
+        "Hillsborough",
+        "Crookes"
+      ]
+    }
+  },
+  "generatedAt": "2026-07-25T13:19:06.965Z",
+  "generationStamp": {
+    "tenantSlug": "reliable-direct-pharmacy",
+    "campaignId": "pharmacy-first",
+    "generatedAt": "2026-07-25T13:19:06.965Z",
+    "sourceContext": "customer-imported-profile"
+  },
+  "contentEngineContract": "1.0.0",
+  "longFormQualityValidation": {
+    "ok": false,
+    "detail": "failed: who-should:tenant name missing from middle body",
+    "longFormTenantDepthValidation": {
+      "ok": true,
+      "detail": "tenant mentions throughout"
+    },
+    "forbiddenHedgingDetected": [],
+    "tenantMentionsBySection": {
+      "supporting-service-page": 16,
+      "patient-guide": 27,
+      "what-is": 8,
+      "who-should": 4,
+      "need-to-know": 7,
+      "faq-page": 10
+    },
+    "serviceMentionsBySection": {
+      "supporting-service-page": 27,
+      "patient-guide": 34,
+      "what-is": 11,
+      "who-should": 5,
+      "need-to-know": 11,
+      "faq-page": 7
+    },
+    "ctaPlacementValidation": {
+      "ok": true,
+      "detail": "CTA present near end"
+    },
+    "reviewerPlacementValidation": {
+      "ok": true,
+      "detail": "reviewer present"
+    },
+    "genericLongFormWarnings": [
+      "who-should: tenant only in intro/footer",
+      "who-should: tenant name missing from middle body"
+    ],
+    "failedLongFormAssets": [
+      "who-should:tenant name missing from middle body"
+    ],
+    "supportingTemplateValidation": {
+      "ok": true,
+      "detail": "supporting pages use current long-form shell",
+      "failedPages": []
+    }
+  },
+  "assets": [
+    {
+      "id": "root-service-page",
+      "type": "Supporting service page",
+      "urlPath": "/pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§10",
+        "tenant overview",
+        "CTA"
+      ],
+      "wordCount": 718
+    },
+    {
+      "id": "patient-guide",
+      "type": "Patient guide article",
+      "urlPath": "/pharmacy-first-guide/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/pharmacy-first-guide/index.html",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 1532
+    },
+    {
+      "id": "faq-page",
+      "type": "FAQ page",
+      "urlPath": "/pharmacy-first-faqs/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/pharmacy-first-faqs/index.html",
+      "sourceSections": [
+        "§7",
+        "tenant FAQs"
+      ],
+      "wordCount": 175
+    },
+    {
+      "id": "what-is-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/what-is-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/what-is-pharmacy-first/index.html",
+      "sourceSections": [
+        "§1",
+        "§10"
+      ],
+      "wordCount": 678
+    },
+    {
+      "id": "who-should-consider-pharmacy-first",
+      "type": "Blog post",
+      "urlPath": "/who-should-consider-pharmacy-first/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/who-should-consider-pharmacy-first/index.html",
+      "sourceSections": [
+        "§2"
+      ],
+      "wordCount": 276
+    },
+    {
+      "id": "pharmacy-first-what-you-need-to-know",
+      "type": "Blog post",
+      "urlPath": "/pharmacy-first-what-you-need-to-know/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/pharmacy-first-what-you-need-to-know/index.html",
+      "sourceSections": [
+        "§3",
+        "§6",
+        "§9"
+      ],
+      "wordCount": 451
+    },
+    {
+      "id": "social-pack",
+      "type": "Social post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/packs/social-posts.json",
+      "sourceSections": [
+        "§8",
+        "§7",
+        "§2",
+        "§10",
+        "§13"
+      ],
+      "wordCount": 386
+    },
+    {
+      "id": "gbp-pack",
+      "type": "GBP post pack",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/packs/gbp-posts.json",
+      "sourceSections": [
+        "§1",
+        "§2",
+        "§4",
+        "§7",
+        "§13"
+      ],
+      "wordCount": 258
+    },
+    {
+      "id": "email-sequence",
+      "type": "Email sequence",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/packs/email-sequence.json",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§5",
+        "§6",
+        "§13"
+      ],
+      "wordCount": 382
+    },
+    {
+      "id": "video-script",
+      "type": "YouTube / video script",
+      "urlPath": "(pack)",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/packs/video-script.md",
+      "sourceSections": [
+        "§1",
+        "§4",
+        "§13"
+      ],
+      "wordCount": 137
+    },
+    {
+      "id": "ecosystem-summary",
+      "type": "Content ecosystem summary",
+      "urlPath": "/pharmacy-first-content-ecosystem/",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-content-ecosystem/reliable-direct-pharmacy/pharmacy-first/pages/pharmacy-first-content-ecosystem/index.html",
+      "sourceSections": [
+        "Meta index"
+      ],
+      "wordCount": 6
+    }
+  ],
+  "internalLinkMap": {
+    "slug": "reliable-direct-pharmacy",
+    "serviceId": "pharmacy-first",
+    "mainServiceUrlPath": "/pharmacy-first/",
+    "localClusterPages": [
+      {
+        "areaName": "Ecclesall",
+        "areaSlug": "cluster-ecclesall",
+        "urlPath": "/local/cluster-ecclesall/",
+        "outputPath": "local/cluster-ecclesall/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "cluster-fulwood",
+            "urlPath": "/local/cluster-fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "cluster-sheffield-city-centre",
+            "urlPath": "/local/cluster-sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "cluster-broomhill",
+            "urlPath": "/local/cluster-broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "cluster-kelham-island",
+            "urlPath": "/local/cluster-kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "cluster-dore",
+            "urlPath": "/local/cluster-dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "cluster-hillsborough",
+            "urlPath": "/local/cluster-hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "cluster-crookes",
+            "urlPath": "/local/cluster-crookes/"
+          }
+        ]
+      },
+      {
+        "areaName": "Fulwood",
+        "areaSlug": "cluster-fulwood",
+        "urlPath": "/local/cluster-fulwood/",
+        "outputPath": "local/cluster-fulwood/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "cluster-ecclesall",
+            "urlPath": "/local/cluster-ecclesall/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "cluster-sheffield-city-centre",
+            "urlPath": "/local/cluster-sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "cluster-broomhill",
+            "urlPath": "/local/cluster-broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "cluster-kelham-island",
+            "urlPath": "/local/cluster-kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "cluster-dore",
+            "urlPath": "/local/cluster-dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "cluster-hillsborough",
+            "urlPath": "/local/cluster-hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "cluster-crookes",
+            "urlPath": "/local/cluster-crookes/"
+          }
+        ]
+      },
+      {
+        "areaName": "Sheffield City Centre",
+        "areaSlug": "cluster-sheffield-city-centre",
+        "urlPath": "/local/cluster-sheffield-city-centre/",
+        "outputPath": "local/cluster-sheffield-city-centre/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "cluster-ecclesall",
+            "urlPath": "/local/cluster-ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "cluster-fulwood",
+            "urlPath": "/local/cluster-fulwood/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "cluster-broomhill",
+            "urlPath": "/local/cluster-broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "cluster-kelham-island",
+            "urlPath": "/local/cluster-kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "cluster-dore",
+            "urlPath": "/local/cluster-dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "cluster-hillsborough",
+            "urlPath": "/local/cluster-hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "cluster-crookes",
+            "urlPath": "/local/cluster-crookes/"
+          }
+        ]
+      },
+      {
+        "areaName": "Broomhill",
+        "areaSlug": "cluster-broomhill",
+        "urlPath": "/local/cluster-broomhill/",
+        "outputPath": "local/cluster-broomhill/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "cluster-ecclesall",
+            "urlPath": "/local/cluster-ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "cluster-fulwood",
+            "urlPath": "/local/cluster-fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "cluster-sheffield-city-centre",
+            "urlPath": "/local/cluster-sheffield-city-centre/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "cluster-kelham-island",
+            "urlPath": "/local/cluster-kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "cluster-dore",
+            "urlPath": "/local/cluster-dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "cluster-hillsborough",
+            "urlPath": "/local/cluster-hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "cluster-crookes",
+            "urlPath": "/local/cluster-crookes/"
+          }
+        ]
+      },
+      {
+        "areaName": "Kelham Island",
+        "areaSlug": "cluster-kelham-island",
+        "urlPath": "/local/cluster-kelham-island/",
+        "outputPath": "local/cluster-kelham-island/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "cluster-ecclesall",
+            "urlPath": "/local/cluster-ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "cluster-fulwood",
+            "urlPath": "/local/cluster-fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "cluster-sheffield-city-centre",
+            "urlPath": "/local/cluster-sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "cluster-broomhill",
+            "urlPath": "/local/cluster-broomhill/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "cluster-dore",
+            "urlPath": "/local/cluster-dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "cluster-hillsborough",
+            "urlPath": "/local/cluster-hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "cluster-crookes",
+            "urlPath": "/local/cluster-crookes/"
+          }
+        ]
+      },
+      {
+        "areaName": "Dore",
+        "areaSlug": "cluster-dore",
+        "urlPath": "/local/cluster-dore/",
+        "outputPath": "local/cluster-dore/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "cluster-ecclesall",
+            "urlPath": "/local/cluster-ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "cluster-fulwood",
+            "urlPath": "/local/cluster-fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "cluster-sheffield-city-centre",
+            "urlPath": "/local/cluster-sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "cluster-broomhill",
+            "urlPath": "/local/cluster-broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "cluster-kelham-island",
+            "urlPath": "/local/cluster-kelham-island/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "cluster-hillsborough",
+            "urlPath": "/local/cluster-hillsborough/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "cluster-crookes",
+            "urlPath": "/local/cluster-crookes/"
+          }
+        ]
+      },
+      {
+        "areaName": "Hillsborough",
+        "areaSlug": "cluster-hillsborough",
+        "urlPath": "/local/cluster-hillsborough/",
+        "outputPath": "local/cluster-hillsborough/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "cluster-ecclesall",
+            "urlPath": "/local/cluster-ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "cluster-fulwood",
+            "urlPath": "/local/cluster-fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "cluster-sheffield-city-centre",
+            "urlPath": "/local/cluster-sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "cluster-broomhill",
+            "urlPath": "/local/cluster-broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "cluster-kelham-island",
+            "urlPath": "/local/cluster-kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "cluster-dore",
+            "urlPath": "/local/cluster-dore/"
+          },
+          {
+            "areaName": "Crookes",
+            "areaSlug": "cluster-crookes",
+            "urlPath": "/local/cluster-crookes/"
+          }
+        ]
+      },
+      {
+        "areaName": "Crookes",
+        "areaSlug": "cluster-crookes",
+        "urlPath": "/local/cluster-crookes/",
+        "outputPath": "local/cluster-crookes/index.html",
+        "nearbyAreas": [
+          {
+            "areaName": "Ecclesall",
+            "areaSlug": "cluster-ecclesall",
+            "urlPath": "/local/cluster-ecclesall/"
+          },
+          {
+            "areaName": "Fulwood",
+            "areaSlug": "cluster-fulwood",
+            "urlPath": "/local/cluster-fulwood/"
+          },
+          {
+            "areaName": "Sheffield City Centre",
+            "areaSlug": "cluster-sheffield-city-centre",
+            "urlPath": "/local/cluster-sheffield-city-centre/"
+          },
+          {
+            "areaName": "Broomhill",
+            "areaSlug": "cluster-broomhill",
+            "urlPath": "/local/cluster-broomhill/"
+          },
+          {
+            "areaName": "Kelham Island",
+            "areaSlug": "cluster-kelham-island",
+            "urlPath": "/local/cluster-kelham-island/"
+          },
+          {
+            "areaName": "Dore",
+            "areaSlug": "cluster-dore",
+            "urlPath": "/local/cluster-dore/"
+          },
+          {
+            "areaName": "Hillsborough",
+            "areaSlug": "cluster-hillsborough",
+            "urlPath": "/local/cluster-hillsborough/"
+          }
+        ]
+      }
+    ],
+    "generatedAt": "2026-07-25T13:19:06.965Z",
+    "generationStamp": {
+      "tenantSlug": "reliable-direct-pharmacy",
+      "campaignId": "pharmacy-first",
+      "generatedAt": "2026-07-25T13:19:06.965Z",
+      "sourceContext": "customer-imported-profile"
+    }
+  },
+  "generatorReport": {
+    "generatorId": "benchmark-service-ecosystem",
+    "receivedContext": true,
+    "contextVersion": "1.0.0",
+    "slug": "reliable-direct-pharmacy",
+    "serviceId": "pharmacy-first",
+    "missingFields": [],
+    "unusedFields": [],
+    "tokensReplaced": [],
+    "tokensUnresolved": [],
+    "tenantValidation": {
+      "ok": true,
+      "detail": "tenant ok"
+    },
+    "serviceValidation": {
+      "ok": true,
+      "detail": "pharmacy-first: 15 sections"
+    },
+    "brandValidation": {
+      "ok": true,
+      "detail": "brand present"
+    },
+    "linksValidation": {
+      "ok": true,
+      "detail": "/api/pharmacy-visual-experience/pharmacy-first/?slug=reliable-direct-pharmacy"
+    },
+    "imageValidation": {
+      "ok": true,
+      "detail": "assignments loaded"
+    }
+  }
+}

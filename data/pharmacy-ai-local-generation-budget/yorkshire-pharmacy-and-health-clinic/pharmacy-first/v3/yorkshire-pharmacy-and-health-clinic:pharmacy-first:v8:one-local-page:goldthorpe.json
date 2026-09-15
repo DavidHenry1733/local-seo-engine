@@ -1,0 +1,28 @@
+{
+  "taskId": "yorkshire-pharmacy-and-health-clinic:pharmacy-first:v8:one-local-page:goldthorpe",
+  "maxProviderCalls": 2,
+  "maxCostUsd": 2,
+  "reserved": 0,
+  "consumed": 1,
+  "failed": 0,
+  "uncertain": 0,
+  "estimatedCostUsd": 0.0038780000000000004,
+  "events": [
+    {
+      "at": "2026-09-09T15:35:38.059Z",
+      "kind": "created",
+      "detail": "calls=2 cost=2"
+    },
+    {
+      "at": "2026-09-09T15:35:38.166Z",
+      "kind": "reserve",
+      "reservationId": "r-1788968138166-1"
+    },
+    {
+      "at": "2026-09-09T15:36:00.157Z",
+      "kind": "consumed",
+      "reservationId": "r-1788968138166-1",
+      "detail": "cost=0.0038780000000000004"
+    }
+  ]
+}

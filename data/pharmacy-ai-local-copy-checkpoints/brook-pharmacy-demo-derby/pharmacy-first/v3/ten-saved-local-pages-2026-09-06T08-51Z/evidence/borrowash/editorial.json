@@ -1,0 +1,136 @@
+{
+  "contractId": "pharmacy-local-editorial-evidence-v3",
+  "version": "v3",
+  "slug": "brook-pharmacy-demo-derby",
+  "area": "Borrowash",
+  "areaSlug": "borrowash",
+  "collectedAt": "2026-09-06T07:49:25.209Z",
+  "geographicContext": {
+    "areaName": "Borrowash",
+    "parentTown": "Derby",
+    "county": "Derbyshire",
+    "country": "United Kingdom",
+    "queryPlaceLabel": "Borrowash, Derbyshire, UK"
+  },
+  "searches": [
+    {
+      "topic": "official-gp-practices",
+      "query": "NHS GP surgery practice official in Borrowash, Derbyshire, UK",
+      "disambiguated": true,
+      "costUsd": 0.002,
+      "resultCount": 9,
+      "capturedAt": "2026-09-06T07:49:21.894Z",
+      "provider": "dataforseo"
+    },
+    {
+      "topic": "descriptive-locality",
+      "query": "official council parish ward community information in Borrowash, Derbyshire, UK",
+      "disambiguated": true,
+      "costUsd": 0.002,
+      "resultCount": 9,
+      "capturedAt": "2026-09-06T07:49:23.244Z",
+      "provider": "dataforseo"
+    }
+  ],
+  "retrievedPages": [
+    {
+      "url": "https://www.nhs.uk/services/gp-surgery/overdale-medical-practice/C81066",
+      "title": "Overdale Medical Practice - NHS",
+      "publisher": "NHS",
+      "sourceClass": "primary",
+      "status": 200,
+      "retrievedAt": "2026-09-06T07:49:24.636Z",
+      "textSample": "Overdale Medical Practice - NHS Skip to main content NHS Search the NHS website Search Health A to Z NHS services Healthy living Mental health Care and support Browse More Home NHS services Find a GP Back Important: This GP surgery is currently closed. You can: check opening times go to NHS 111 online or call 111, for urgent care Overdale Medical Practice 207 Victoria Avenue, Borrowash, Derby, Derbyshire, DE72 3HG Information: This GP surgery is currently accepting new patients. About this GP surgery Contact details and opening times Facilities How to register with this GP surgery Find another GP surgery Report an issue with information on this NHS profile Home Health A to Z NHS services Healthy living Mental health Care and support COVID-19 NHS App Find my NHS number View your test results About the NHS Healthcare abroad Manage NHS profiles Other NHS websites About us Report an issue with the NHS website Accessibility statement Our policies Cookies © Crown copyright"
+    },
+    {
+      "url": "https://www.ockbrookandborrowashparishcouncil.gov.uk/",
+      "title": "Security Challenge",
+      "publisher": "ockbrookandborrowashparishcouncil.gov.uk",
+      "sourceClass": "primary",
+      "status": 401,
+      "retrievedAt": "2026-09-06T07:49:25.144Z",
+      "textSample": "Security Challenge Security Check We just need to quickly confirm you're a real visitor before you continue. Slide the button all the way to the right using your mouse or keyboard. Slide to verify &rarr; Can't use the slider? Type the characters in an image instead Enter the characters shown in the image below, then select Submit to continue. Characters shown in the image Submit Use the slider instead Why am I seeing this page? This quick step is part of our routine security process to verify that you are human and not a robot. We often display this challenge when we detect traffic coming from networks or services that are commonly used by bots, such as data centers, certain cloud services (e.g., AWS, Azure), or VPNs/proxy services. Completing the challenge confirms your intent and allows you immediate access to the site. Thank you for helping us maintain a secure environment!"
+    }
+  ],
+  "rejectedSources": [
+    {
+      "url": "https://www.parkmedical.org.uk/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://overdalepractice.com/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://www.parkmedical.org.uk/location/borrowash-surgery/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://vernonstreetandthelanes.co.uk/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://allhealthandcare.co.uk/providers/DE72-3HG/overdale-medical-practice-C81066",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://www.ht1.uk/gp-surgery/derby-overdale-medical-practice-c81066",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://joinedupcarederbyshire.co.uk/download/list-of-gp-practices-in-derby-and-derbyshire/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://www.facebook.com/erewashbc/posts/elections-for-ockbrook-and-borrowash-parish-council-took-place-in-three-wardsele/477813729039713/",
+      "reason": "disallowed-host"
+    },
+    {
+      "url": "https://www.ashbrookcentre.uk/",
+      "reason": "not-authoritative-primary"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Borrowash",
+      "reason": "disallowed-host"
+    },
+    {
+      "url": "https://discover-derby.co.uk/borrowash/",
+      "reason": "not-authoritative-primary"
+    }
+  ],
+  "facts": [
+    {
+      "factId": "borrowash:pharmacy-relationship:distance",
+      "area": "Borrowash",
+      "areaSlug": "borrowash",
+      "category": "pharmacy-relationship",
+      "normalizedStatement": "Brook Pharmacy Demo Derby is approximately 7.3 km in a straight line from Borrowash, measured from the recorded area reference 52.90486, -1.37547 (places-area-reference) to canonical pharmacy coordinates, source profile:coordinates.",
+      "sourceTitle": "Verified locality evidence",
+      "sourceUrl": "canonical://verified-locality",
+      "publisher": "verified-locality-evidence",
+      "retrievedAt": "2026-09-06T07:49:25.209Z",
+      "sourceClass": "primary",
+      "corroboratingSource": null,
+      "confidence": "high",
+      "usefulnessToPharmacyFirstReader": "Gives the approximate straight-line distance without inventing a route or journey time.",
+      "permittedCopyRole": "access-context",
+      "prohibitedInference": "Approximate straight-line only. Not a route, timetable, travel-time claim, or verified postal origin.",
+      "validationStatus": "accepted"
+    }
+  ],
+  "sufficiency": {
+    "status": "EVIDENCE LIMITED",
+    "intro": false,
+    "localContext": false,
+    "relationshipAccess": true,
+    "faq": true,
+    "reasons": [
+      "no attributable identity fact from an authoritative web source",
+      "no useful locality fact from an authoritative web source",
+      "GP research returned zero verified practices — recorded, not a retry"
+    ],
+    "acceptedFactCount": 1,
+    "placesEntityCount": 0
+  },
+  "costUsd": 0.068
+}

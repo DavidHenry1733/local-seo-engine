@@ -1,0 +1,190 @@
+{
+  "tenantWebsiteUrls": [
+    "https://www.fixture-town.example/",
+    "http://fixture-town.example/services"
+  ],
+  "verifiedGoogleCompetitorWebsites": [
+    {
+      "name": "Well Pharmacy",
+      "website": "https://finder.well.co.uk/store/darfield-snape-hill-road",
+      "placeId": "ChIJ-fixture-well",
+      "source": "google-places"
+    },
+    {
+      "name": "Barnsley Pharmacy & Clinic",
+      "website": "https://barnsleychemist.co.uk/",
+      "placeId": "ChIJ-fixture-barnsley",
+      "source": "google-places"
+    },
+    {
+      "name": "Demo Chemist",
+      "website": "https://demo-should-not-match.example/",
+      "placeId": "demo-chemist-1",
+      "source": "google-places"
+    },
+    {
+      "name": "No Website Chemist",
+      "website": "",
+      "placeId": "ChIJ-fixture-noweb",
+      "source": "google-places"
+    }
+  ],
+  "rows": [
+    {
+      "domain": "fixture-town.example",
+      "host": "www.fixture-town.example",
+      "url": "https://www.fixture-town.example/pharmacy-first",
+      "position": 1,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "Fixture Town Pharmacy — Pharmacy First",
+      "description": "Your local pharmacy first service.",
+      "overlapEvidence": "Stored DataForSEO row for the tenant domain",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:01.000Z",
+      "taskId": "task-tenant"
+    },
+    {
+      "domain": "finder.well.co.uk",
+      "host": "finder.well.co.uk",
+      "url": "https://finder.well.co.uk/store/smithies",
+      "position": 4,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "Well Pharmacy Fixture Town",
+      "description": "Well Pharmacy store locator page.",
+      "overlapEvidence": "Stored DataForSEO row matching a Google Places website",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:02.000Z",
+      "taskId": "task-well"
+    },
+    {
+      "domain": "barnsleychemist.co.uk",
+      "host": "barnsleychemist.co.uk",
+      "url": "https://barnsleychemist.co.uk/pharmacy-first",
+      "position": 4,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "Pharmacy First",
+      "description": "Advice and treatment from Barnsley Pharmacy & Clinic.",
+      "overlapEvidence": "Stored DataForSEO row matching a Google Places website",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:03.000Z",
+      "taskId": "task-barnsley"
+    },
+    {
+      "domain": "allhealthandcare.co.uk",
+      "host": "allhealthandcare.co.uk",
+      "url": "https://allhealthandcare.co.uk/pharmacies/FLH50",
+      "position": 3,
+      "matchedQuery": "Fixture Town Pharmacy",
+      "title": "FIXTURE TOWN PHARMACY",
+      "description": "Directory listing for Fixture Town Pharmacy.",
+      "overlapEvidence": "Directory listing of the tenant, not the tenant website",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:04.000Z",
+      "taskId": "task-directory"
+    },
+    {
+      "domain": "inspections.pharmacyregulation.org",
+      "host": "inspections.pharmacyregulation.org",
+      "url": "https://inspections.pharmacyregulation.org/pharmacy/detail/fixture-town-pharmacy",
+      "position": 2,
+      "matchedQuery": "Fixture Town Pharmacy",
+      "title": "Fixture Town Pharmacy inspection",
+      "description": "GPhC inspection record.",
+      "overlapEvidence": "Regulator evidence",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:05.000Z",
+      "taskId": "task-regulator"
+    },
+    {
+      "domain": "instagram.com",
+      "host": "instagram.com",
+      "url": "https://www.instagram.com/p/fixture-town/",
+      "position": 5,
+      "matchedQuery": "Fixture Town Pharmacy",
+      "title": "Fixture Town Pharmacy on Instagram",
+      "description": "Social profile post.",
+      "overlapEvidence": "Social evidence",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:06.000Z",
+      "taskId": "task-social"
+    },
+    {
+      "domain": "england.nhs.uk",
+      "host": "england.nhs.uk",
+      "url": "https://www.england.nhs.uk/primary-care/pharmacy/pharmacy-services/pharmacy-first/",
+      "position": 6,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "Pharmacy First",
+      "description": "NHS England Pharmacy First service page.",
+      "overlapEvidence": "NHS evidence",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:07.000Z",
+      "taskId": "task-nhs"
+    },
+    {
+      "domain": "healthwatchfixture.org.uk",
+      "host": "healthwatchfixture.org.uk",
+      "url": "https://www.healthwatchfixture.org.uk/advice/pharmacy-first",
+      "position": 2,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "What can Pharmacy First do for me?",
+      "description": "Local Healthwatch advice page.",
+      "overlapEvidence": "Community evidence",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:08.000Z",
+      "taskId": "task-healthwatch"
+    },
+    {
+      "domain": "southyorkshire.communitypharmacy.org.uk",
+      "host": "southyorkshire.communitypharmacy.org.uk",
+      "url": "https://southyorkshire.communitypharmacy.org.uk/pharmacyfirst-minor-ailments-service/",
+      "position": 5,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "PharmacyFirst Minor Ailments Service",
+      "description": "LPC community pharmacy page.",
+      "overlapEvidence": "Community pharmacy body evidence",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:09.000Z",
+      "taskId": "task-lpc"
+    },
+    {
+      "domain": "pharmaceutical-journal.com",
+      "host": "pharmaceutical-journal.com",
+      "url": "https://pharmaceutical-journal.com/article/pharmacy-first",
+      "position": 8,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "Pharmacy First explained",
+      "description": "Publisher article.",
+      "overlapEvidence": "Publisher evidence",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:10.000Z",
+      "taskId": "task-publisher"
+    },
+    {
+      "domain": "poolpharmacy.co.uk",
+      "host": "poolpharmacy.co.uk",
+      "url": "https://poolpharmacy.co.uk/pharmacy-first-service-yorkshire/",
+      "position": 3,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "Your local NHS Pharmacy First Service",
+      "description": "Unmatched pharmacy website.",
+      "overlapEvidence": "Unmatched organic domain",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:11.000Z",
+      "taskId": "task-unmatched"
+    },
+    {
+      "domain": "demo-should-not-match.example",
+      "host": "demo-should-not-match.example",
+      "url": "https://demo-should-not-match.example/page",
+      "position": 9,
+      "matchedQuery": "Pharmacy First Fixture Town",
+      "title": "Demo Chemist page",
+      "description": "Should not match a demo Google competitor.",
+      "overlapEvidence": "Demo Google row must not create a verified match",
+      "provider": "dataforseo-google-organic-live",
+      "capturedAt": "2026-08-21T12:00:12.000Z",
+      "taskId": "task-demo"
+    }
+  ]
+}

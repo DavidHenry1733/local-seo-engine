@@ -1,0 +1,53 @@
+{
+  "pass": true,
+  "slug": "pharmaconnect",
+  "totalCardsChecked": 146,
+  "totalIssues": 0,
+  "audits": [
+    {
+      "serviceId": "pharmacy-first",
+      "cardsChecked": 25,
+      "issues": [],
+      "pass": true
+    },
+    {
+      "serviceId": "blood-pressure-checks",
+      "cardsChecked": 40,
+      "issues": [],
+      "pass": true
+    },
+    {
+      "serviceId": "travel-vaccinations",
+      "cardsChecked": 41,
+      "issues": [],
+      "pass": true
+    },
+    {
+      "serviceId": "emergency-contraception",
+      "cardsChecked": 40,
+      "issues": [],
+      "pass": true
+    }
+  ],
+  "templateChecks": {
+    "pharmacyFirstRecovery": true,
+    "layoutV3_blood-pressure-checks": true,
+    "layoutV3_travel-vaccinations": true,
+    "layoutV3_emergency-contraception": true
+  },
+  "failedPages": [],
+  "previewUrls": [
+    "/api/pharmacy-visual-experience/pharmacy-first/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/blood-pressure-checks/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/travel-vaccinations/?slug=pharmaconnect",
+    "/api/pharmacy-visual-experience/emergency-contraception/?slug=pharmaconnect"
+  ],
+  "rootCause": "balanceBodyText() truncated card copy by word count (truncateWords), leaving dangling conjunctions and ellipsis endings.",
+  "filesModified": [
+    "src/pharmacy/pharmacyServicePageBalance.ts",
+    "src/pharmacy/pharmacyFirstPageSections.ts",
+    "src/pharmacy/pharmacyFirstPageRecovery.ts",
+    "src/pharmacy/pharmacyVisualExperienceLayoutV3.ts"
+  ],
+  "masterContentChanged": false
+}

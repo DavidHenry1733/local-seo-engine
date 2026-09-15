@@ -1,0 +1,1493 @@
+{
+  "version": 1,
+  "slug": "reliable-direct-pharmacy",
+  "serviceId": "pharmacy-first",
+  "auditedAt": "2026-07-26T12:18:32.466Z",
+  "pagesAudited": 16,
+  "overallQualityScore": 90,
+  "categoryScores": {
+    "brand": 100,
+    "commercial": 88,
+    "clinical": 100,
+    "seo": 74,
+    "localisation": 100,
+    "ux": 96,
+    "technical": 69
+  },
+  "criticalIssueCount": 14,
+  "majorIssueCount": 29,
+  "minorIssueCount": 10,
+  "criticalIssues": [
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "index",
+      "pageLabel": "Homepage",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "pharmacy-first",
+      "pageLabel": "Service Hub",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-ecclesall",
+      "pageLabel": "Cluster — Ecclesall",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-fulwood",
+      "pageLabel": "Cluster — Fulwood",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-sheffield-city-centre",
+      "pageLabel": "Cluster — Sheffield City Centre",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-broomhill",
+      "pageLabel": "Cluster — Broomhill",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-kelham-island",
+      "pageLabel": "Cluster — Kelham Island",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-dore",
+      "pageLabel": "Cluster — Dore",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-hillsborough",
+      "pageLabel": "Cluster — Hillsborough",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "local-cluster-crookes",
+      "pageLabel": "Cluster — Crookes",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "pharmacy-first-guide",
+      "pageLabel": "Guide",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "what-is-pharmacy-first",
+      "pageLabel": "Blog — What Is Pharmacy First",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "who-should-consider-pharmacy-first",
+      "pageLabel": "Blog — Who Should Consider",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    },
+    {
+      "severity": "critical",
+      "code": "corrupt-opening-hours",
+      "pageSlug": "pharmacy-first-what-you-need-to-know",
+      "pageLabel": "Supporting Page",
+      "category": "technical",
+      "message": "Corrupt opening hours displayed to patients",
+      "evidence": "Footer/local access shows imported CSS garbage instead of hours",
+      "recommendedFix": "Repair opening hours in business profile before approval"
+    }
+  ],
+  "majorIssues": [
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-ecclesall",
+      "pageLabel": "Cluster — Ecclesall",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-fulwood",
+      "pageLabel": "Cluster — Fulwood",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-sheffield-city-centre",
+      "pageLabel": "Cluster — Sheffield City Centre",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-broomhill",
+      "pageLabel": "Cluster — Broomhill",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-kelham-island",
+      "pageLabel": "Cluster — Kelham Island",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-dore",
+      "pageLabel": "Cluster — Dore",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-hillsborough",
+      "pageLabel": "Cluster — Hillsborough",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "local-cluster-crookes",
+      "pageLabel": "Cluster — Crookes",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-meta-description",
+      "pageSlug": "pharmacy-first-guide",
+      "pageLabel": "Guide",
+      "category": "seo",
+      "message": "Missing meta description",
+      "evidence": "meta[name=\"description\"] absent",
+      "recommendedFix": "Add unique meta description for this page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "pharmacy-first-guide",
+      "pageLabel": "Guide",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-meta-description",
+      "pageSlug": "pharmacy-first-faqs",
+      "pageLabel": "FAQ",
+      "category": "seo",
+      "message": "Missing meta description",
+      "evidence": "meta[name=\"description\"] absent",
+      "recommendedFix": "Add unique meta description for this page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "pharmacy-first-faqs",
+      "pageLabel": "FAQ",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-internal-links",
+      "pageSlug": "pharmacy-first-faqs",
+      "pageLabel": "FAQ",
+      "category": "ux",
+      "message": "Missing internal links",
+      "evidence": "0 internal href(s) found",
+      "recommendedFix": "Link to service hub, related clusters and contact sections"
+    },
+    {
+      "severity": "major",
+      "code": "missing-meta-description",
+      "pageSlug": "what-is-pharmacy-first",
+      "pageLabel": "Blog — What Is Pharmacy First",
+      "category": "seo",
+      "message": "Missing meta description",
+      "evidence": "meta[name=\"description\"] absent",
+      "recommendedFix": "Add unique meta description for this page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "what-is-pharmacy-first",
+      "pageLabel": "Blog — What Is Pharmacy First",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-meta-description",
+      "pageSlug": "who-should-consider-pharmacy-first",
+      "pageLabel": "Blog — Who Should Consider",
+      "category": "seo",
+      "message": "Missing meta description",
+      "evidence": "meta[name=\"description\"] absent",
+      "recommendedFix": "Add unique meta description for this page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "who-should-consider-pharmacy-first",
+      "pageLabel": "Blog — Who Should Consider",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-meta-description",
+      "pageSlug": "pharmacy-first-what-you-need-to-know",
+      "pageLabel": "Supporting Page",
+      "category": "seo",
+      "message": "Missing meta description",
+      "evidence": "meta[name=\"description\"] absent",
+      "recommendedFix": "Add unique meta description for this page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-schema",
+      "pageSlug": "pharmacy-first-what-you-need-to-know",
+      "pageLabel": "Supporting Page",
+      "category": "seo",
+      "message": "Missing structured data",
+      "evidence": "No application/ld+json block",
+      "recommendedFix": "Add WebPage or FAQ schema appropriate to page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-meta-description",
+      "pageSlug": "pharmacy-first-content-ecosystem",
+      "pageLabel": "Content Ecosystem Hub",
+      "category": "seo",
+      "message": "Missing meta description",
+      "evidence": "meta[name=\"description\"] absent",
+      "recommendedFix": "Add unique meta description for this page type"
+    },
+    {
+      "severity": "major",
+      "code": "missing-internal-links",
+      "pageSlug": "pharmacy-first-content-ecosystem",
+      "pageLabel": "Content Ecosystem Hub",
+      "category": "ux",
+      "message": "Missing internal links",
+      "evidence": "0 internal href(s) found",
+      "recommendedFix": "Link to service hub, related clusters and contact sections"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-ecclesall",
+      "pageLabel": "Cluster — Ecclesall",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-fulwood",
+      "pageLabel": "Cluster — Fulwood",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-sheffield-city-centre",
+      "pageLabel": "Cluster — Sheffield City Centre",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-broomhill",
+      "pageLabel": "Cluster — Broomhill",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-kelham-island",
+      "pageLabel": "Cluster — Kelham Island",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-dore",
+      "pageLabel": "Cluster — Dore",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-hillsborough",
+      "pageLabel": "Cluster — Hillsborough",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    },
+    {
+      "severity": "major",
+      "code": "duplicate-cluster-copy",
+      "pageSlug": "local-cluster-crookes",
+      "pageLabel": "Cluster — Crookes",
+      "category": "ux",
+      "message": "Duplicate cluster intro copy across multiple areas",
+      "evidence": "Shared intro across 8 cluster pages",
+      "recommendedFix": "Differentiate locality-specific intro copy per approved cluster area"
+    }
+  ],
+  "minorImprovements": [
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "index",
+      "pageLabel": "Homepage",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "pharmacy-first",
+      "pageLabel": "Service Hub",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-ecclesall",
+      "pageLabel": "Cluster — Ecclesall",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-fulwood",
+      "pageLabel": "Cluster — Fulwood",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-sheffield-city-centre",
+      "pageLabel": "Cluster — Sheffield City Centre",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-broomhill",
+      "pageLabel": "Cluster — Broomhill",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-kelham-island",
+      "pageLabel": "Cluster — Kelham Island",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-dore",
+      "pageLabel": "Cluster — Dore",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-hillsborough",
+      "pageLabel": "Cluster — Hillsborough",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    },
+    {
+      "severity": "minor",
+      "code": "phone-not-clickable",
+      "pageSlug": "local-cluster-crookes",
+      "pageLabel": "Cluster — Crookes",
+      "category": "commercial",
+      "message": "Phone number not wired as tel: link",
+      "evidence": "Display-only phone without href=\"tel:\"",
+      "recommendedFix": "Wrap displayed phone numbers in tel: links"
+    }
+  ],
+  "recommendedFixes": [
+    "Wrap displayed phone numbers in tel: links",
+    "Repair opening hours in business profile before approval",
+    "Add WebPage or FAQ schema appropriate to page type",
+    "Add unique meta description for this page type",
+    "Link to service hub, related clusters and contact sections",
+    "Differentiate locality-specific intro copy per approved cluster area"
+  ],
+  "pages": [
+    {
+      "pageLabel": "Homepage",
+      "pageSlug": "index",
+      "pageType": "homepage",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 92,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Service Hub",
+      "pageSlug": "pharmacy-first",
+      "pageType": "service",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/pharmacy-first/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 92,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Ecclesall",
+      "pageSlug": "local-cluster-ecclesall",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-ecclesall/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-ecclesall/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Fulwood",
+      "pageSlug": "local-cluster-fulwood",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-fulwood/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-fulwood/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Sheffield City Centre",
+      "pageSlug": "local-cluster-sheffield-city-centre",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-sheffield-city-centre/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-sheffield-city-centre/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Broomhill",
+      "pageSlug": "local-cluster-broomhill",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-broomhill/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-broomhill/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Kelham Island",
+      "pageSlug": "local-cluster-kelham-island",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-kelham-island/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-kelham-island/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Dore",
+      "pageSlug": "local-cluster-dore",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-dore/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-dore/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Hillsborough",
+      "pageSlug": "local-cluster-hillsborough",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-hillsborough/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-hillsborough/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Cluster — Crookes",
+      "pageSlug": "local-cluster-crookes",
+      "pageType": "location-cluster",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/local-cluster-crookes/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/local-cluster-crookes/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Phone visible but not linked as tel: CTA"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 80,
+          "verdict": "WARNING",
+          "evidence": "Core SEO metadata present"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[minor] Phone number not wired as tel: link",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Guide",
+      "pageSlug": "pharmacy-first-guide",
+      "pageType": "guide",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/pharmacy-first-guide/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-guide/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Commercial CTAs present"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 55,
+          "verdict": "FAIL",
+          "evidence": "Missing meta description"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Localisation not required for this page type"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[major] Missing meta description",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "FAQ",
+      "pageSlug": "pharmacy-first-faqs",
+      "pageType": "faq",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/pharmacy-first-faqs/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-faqs/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Commercial CTAs present"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 55,
+          "verdict": "FAIL",
+          "evidence": "Missing meta description"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Localisation not required for this page type"
+        },
+        {
+          "category": "ux",
+          "score": 70,
+          "verdict": "WARNING",
+          "evidence": "Sparse internal navigation"
+        },
+        {
+          "category": "technical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Page structure valid"
+        }
+      ],
+      "findings": [
+        "[major] Missing meta description",
+        "[major] Missing structured data",
+        "[major] Missing internal links"
+      ]
+    },
+    {
+      "pageLabel": "Blog — What Is Pharmacy First",
+      "pageSlug": "what-is-pharmacy-first",
+      "pageType": "blog",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/what-is-pharmacy-first/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/what-is-pharmacy-first/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Commercial CTAs present"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 55,
+          "verdict": "FAIL",
+          "evidence": "Missing meta description"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Localisation not required for this page type"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[major] Missing meta description",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Blog — Who Should Consider",
+      "pageSlug": "who-should-consider-pharmacy-first",
+      "pageType": "blog",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/who-should-consider-pharmacy-first/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/who-should-consider-pharmacy-first/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Commercial CTAs present"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 55,
+          "verdict": "FAIL",
+          "evidence": "Missing meta description"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Localisation not required for this page type"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[major] Missing meta description",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Supporting Page",
+      "pageSlug": "pharmacy-first-what-you-need-to-know",
+      "pageType": "support",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/pharmacy-first-what-you-need-to-know/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-what-you-need-to-know/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 89,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Commercial CTAs present"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 55,
+          "verdict": "FAIL",
+          "evidence": "Missing meta description"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Localisation not required for this page type"
+        },
+        {
+          "category": "ux",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Navigation and internal links adequate"
+        },
+        {
+          "category": "technical",
+          "score": 65,
+          "verdict": "WARNING",
+          "evidence": "Corrupt opening hours value rendered"
+        }
+      ],
+      "findings": [
+        "[major] Missing meta description",
+        "[major] Missing structured data",
+        "[critical] Corrupt opening hours displayed to patients"
+      ]
+    },
+    {
+      "pageLabel": "Content Ecosystem Hub",
+      "pageSlug": "pharmacy-first-content-ecosystem",
+      "pageType": "hub",
+      "outputPath": "/home/inboxingproweb/pharmaconnect-growth-engine/output/pharmacy-final-render/reliable-direct-pharmacy/pharmacy-first-content-ecosystem/index.html",
+      "previewUrl": "https://app.pharmaconnect.uk/api/pharmacy-visual-experience/pharmacy-first-content-ecosystem/?slug=reliable-direct-pharmacy",
+      "overallVerdict": "PASS",
+      "overallScore": 92,
+      "categories": [
+        {
+          "category": "brand",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Tenant branding present"
+        },
+        {
+          "category": "commercial",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Commercial CTAs present"
+        },
+        {
+          "category": "clinical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "No unsafe clinical claims detected"
+        },
+        {
+          "category": "seo",
+          "score": 75,
+          "verdict": "WARNING",
+          "evidence": "Missing meta description"
+        },
+        {
+          "category": "localisation",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Town and locality signals present"
+        },
+        {
+          "category": "ux",
+          "score": 70,
+          "verdict": "WARNING",
+          "evidence": "Sparse internal navigation"
+        },
+        {
+          "category": "technical",
+          "score": 100,
+          "verdict": "PASS",
+          "evidence": "Page structure valid"
+        }
+      ],
+      "findings": [
+        "[major] Missing meta description",
+        "[major] Missing internal links"
+      ]
+    }
+  ],
+  "readyForQualityReviewApproval": false,
+  "status": "READY FOR PRODUCT OWNER PAGE REVIEW"
+}
