@@ -6,11 +6,12 @@ This file is completed after the checkpoint commit; the SHA, tag, timestamp, and
 ## Coordinates
 
 - Checkpoint / tag: `PHARMACONNECT-CORE-E2E-V1`
-- Commit SHA: `REPLACE_AFTER_COMMIT`
+- Platform lock commit SHA: `bfee18584d903f1c9b77a118387ffae1a0a72bd8`
+- Recovery object: `git rev-parse PHARMACONNECT-CORE-E2E-V1`
 - Branch: `fix/image-library-stabilisation-20260520-101828`
 - Repository remote: `https://github.com/DavidHenry1733/local-seo-engine.git`
 - Workspace: `/home/inboxingproweb/pharmaconnect-growth-engine`
-- Timestamp (UTC): `REPLACE_AFTER_COMMIT`
+- Timestamp (UTC): `2026-09-15T17:23:16Z`
 
 Vision Pharmacy is a **TEST/DEMO tenant**. Its real Shopify domain `www.visionpharmacy.com` and DNS must not be touched.
 
