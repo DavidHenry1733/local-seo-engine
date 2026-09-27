@@ -460,21 +460,21 @@ export async function executeCommercialPublishJob(
 
   try {
     const activeSelection = readActiveServiceCampaignSelection(slug);
-    let jobCampaignId = String(meta.campaignId || activeSelection?.campaignId || "").trim();
-    if (!jobCampaignId) {
-      jobCampaignId = resolveCanonicalCampaignIdForService(slug, serviceId, null) || "";
+    let canonicalCampaignId = String(meta.campaignId || activeSelection?.campaignId || "").trim();
+    if (!canonicalCampaignId) {
+      canonicalCampaignId = resolveCanonicalCampaignIdForService(slug, serviceId, null) || "";
     }
-    if (!jobCampaignId) throw new Error("Campaign identity is unresolved");
-    const canonical = publishCanonicalCampaign({ tenantSlug: slug, campaignId: jobCampaignId });
+    if (!canonicalCampaignId) throw new Error("Campaign identity is unresolved");
+    const canonical = publishCanonicalCampaign({ tenantSlug: slug, campaignId: canonicalCampaignId });
     if (!canonical.ok) {
       throw new Error(canonical.blockers.join("; ") || "Canonical publication blocked");
     }
-    const completedAt = new Date().toISOString();
+    const canonicalCompletedAt = new Date().toISOString();
     return updateMasterAdminJob(jobId, {
       status: "completed",
       progress: 100,
       progressLabel: canonical.idempotent ? "Already published" : "Completed",
-      completedAt,
+      completedAt: canonicalCompletedAt,
       evidence: `Canonical publication ${canonical.publication?.current?.pages.length || 0} page(s)`,
       result: { canonicalPublication: canonical.publication, idempotent: canonical.idempotent },
       leaseExpiresAt: undefined,
