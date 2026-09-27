@@ -28,6 +28,7 @@ import {
   recordWorkflowTransition,
   startWorkflowExecution,
 } from "./masterAdminWorkflowHistoryService.ts";
+import { ensureGrowthPlanFromApprovedIntelligence } from "./masterAdminGrowthPlanConnectionService.ts";
 import { readSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
 import { resolveTenantLocality } from "./masterAdminPrimaryLocalityService.ts";
 
@@ -378,6 +379,7 @@ export function approveCommercialIntelligence(
     };
   }
   if (isCommercialIntelligenceApproved(slug)) {
+    ensureGrowthPlanFromApprovedIntelligence(slug);
     return {
       ok: true,
       evidence: "Commercial Intelligence already approved",
@@ -420,6 +422,8 @@ export function approveCommercialIntelligence(
       evidence: `approvedVersion=${approval.approvedVersion}`,
     });
   }
+
+  ensureGrowthPlanFromApprovedIntelligence(slug);
 
   recordMasterAdminAudit({
     user: operator,
