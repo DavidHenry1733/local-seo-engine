@@ -7244,7 +7244,7 @@ async function requestCommercialIndexing(){
   const btn=document.getElementById('idxRequestBtn');
   btn.disabled=true;
   try{
-    const data=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-indexing-review/request',{method:'POST',body:JSON.stringify({operatorConfirmed:true,initiationSource:'product_owner_dashboard'})});
+    const data=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-indexing-review/request',{method:'POST',body:JSON.stringify({operatorConfirmed:true,initiationSource:'product_owner_dashboard',campaignId:activeCustomer.selectedCampaignId||''})});
     toast('Indexing requested');
     if(data.dashboard)renderCommercialIndexingReview(data.dashboard);
     if(data.customer){activeCustomer=data.customer;renderCustomerDetail(data.customer)}
@@ -7265,6 +7265,13 @@ function renderCommercialPerformanceDashboard(dashboard){
   const btn=document.getElementById('perfCompleteBtn');
   if(btn){btn.disabled=!dashboard.canComplete;btn.textContent=dashboard.completed?'Workflow Complete':'Complete Commercial Workflow'}
   document.getElementById('perfMsg').textContent=dashboard.completed?'You can continue monitoring from the customer dashboard.':'';
+  const canonical=dashboard.canonicalResults;
+  if(canonical&&canonical.classification==='CANONICAL'){
+    const lines=(canonical.pages||[]).map(function(page){
+      return esc(page.identity.canonicalUrl)+' · '+esc(page.submissionStatus)+' · '+esc(page.indexingStatus)+' · '+esc(page.dataFreshness);
+    });
+    document.getElementById('perfMsg').textContent='Canonical campaign results: '+canonical.publishedPageCount+' published, '+canonical.submittedPageCount+' submitted, '+canonical.indexedPageCount+' indexed. '+(lines.join(' | ')||'');
+  }
 }
 async function openCommercialPerformanceDashboard(force){
   if(!activeCustomer)return;
@@ -7275,7 +7282,8 @@ async function openCommercialPerformanceDashboard(force){
   document.getElementById('perfError').style.display='none';
   const p=new URLSearchParams(location.search);p.set('customer',activeCustomer.slug);p.set('panel','performance-dashboard');history.replaceState(null,'',location.pathname+'?'+p.toString());
   try{
-    const data=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-performance-dashboard');
+    const campaignQuery=activeCustomer.selectedCampaignId?('?campaignId='+encodeURIComponent(activeCustomer.selectedCampaignId)):'';
+    const data=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-performance-dashboard'+campaignQuery);
     renderCommercialPerformanceDashboard(data.dashboard);
     if(data.customer)activeCustomer=data.customer;
     document.getElementById('perfLoading').style.display='none';

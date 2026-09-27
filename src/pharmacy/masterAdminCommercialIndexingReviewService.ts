@@ -15,6 +15,7 @@ import {
 import { readLatestCommercialQualityApproval } from "./masterAdminCommercialQualityReviewService.ts";
 import { resolveCampaignPublishingContentApproval } from "./masterAdminCampaignPublishingApprovalResolver.ts";
 import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
+import { submitCanonicalCampaignSearch } from "./canonicalCampaignSearchResultsService.ts";
 import {
   buildPublishedReleaseVerification,
   resolvePublishReviewProgressJob,
@@ -430,7 +431,7 @@ export function buildCommercialIndexingReviewDashboard(slug: string): Commercial
 export async function requestCommercialIndexing(
   slug: string,
   operator: string,
-  input: { operatorConfirmed?: boolean },
+  input: { operatorConfirmed?: boolean; campaignId?: string },
 ): {
   ok: boolean;
   errors: string[];
@@ -440,6 +441,18 @@ export async function requestCommercialIndexing(
   const dashboard = buildCommercialIndexingReviewDashboard(slug);
   if (!input.operatorConfirmed) {
     return { ok: false, errors: ["Confirm indexing submission before continuing."], dashboard, snapshot: null };
+  }
+  const campaignId = String(input.campaignId || readActiveServiceCampaignSelection(slug)?.campaignId || "").trim();
+  if (campaignId) {
+    const canonical = await submitCanonicalCampaignSearch({ tenantSlug: slug, campaignId });
+    if (canonical.handled) {
+      return {
+        ok: canonical.ok,
+        errors: canonical.blockers,
+        dashboard: buildCommercialIndexingReviewDashboard(slug),
+        snapshot: null,
+      };
+    }
   }
   if (!dashboard.published || !dashboard.publicationVerified) {
     return { ok: false, errors: ["Publish and verify the website before requesting indexing."], dashboard, snapshot: null };

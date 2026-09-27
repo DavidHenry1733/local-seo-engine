@@ -9,6 +9,11 @@ import path from "node:path";
  * Master Admin Platform V1 — JSON API for commercial control centre.
  */
 import { publishCanonicalCampaign } from "../../../../../src/pharmacy/canonicalCampaignPublishingService.ts";
+import {
+  checkCanonicalCampaignIndexing,
+  resolveCanonicalCampaignResults,
+  submitCanonicalCampaignSearch,
+} from "../../../../../src/pharmacy/canonicalCampaignSearchResultsService.ts";
 import { Router } from "express";
 import { requireAdmin } from "../../middlewares/requireAuth.js";
 import {
@@ -1135,6 +1140,32 @@ router.post("/master-admin-platform/customers/:slug/campaigns/:campaignId/canoni
   res.json({ ok: true, idempotent: result.idempotent, publication: result.publication, uiState: result.uiState });
 });
 
+router.get("/master-admin-platform/customers/:slug/campaigns/:campaignId/canonical-results", (req, res) => {
+  const slug = safeAdminSlug(req.params.slug);
+  const campaignId = String(req.params.campaignId || "").trim();
+  res.json({ ok: true, results: resolveCanonicalCampaignResults({ tenantSlug: slug, campaignId }) });
+});
+
+router.post("/master-admin-platform/customers/:slug/campaigns/:campaignId/canonical-search/submit", async (req, res) => {
+  const slug = safeAdminSlug(req.params.slug);
+  const campaignId = String(req.params.campaignId || "").trim();
+  const result = await submitCanonicalCampaignSearch({ tenantSlug: slug, campaignId });
+  if (!result.ok) {
+    return res.status(409).json({ ok: false, error: result.blockers.join("; ") || "Canonical search submission blocked", blockers: result.blockers });
+  }
+  res.json({ ok: true, submittedUrls: result.submittedUrls, results: resolveCanonicalCampaignResults({ tenantSlug: slug, campaignId }) });
+});
+
+router.post("/master-admin-platform/customers/:slug/campaigns/:campaignId/canonical-search/indexing-check", async (req, res) => {
+  const slug = safeAdminSlug(req.params.slug);
+  const campaignId = String(req.params.campaignId || "").trim();
+  const result = await checkCanonicalCampaignIndexing({ tenantSlug: slug, campaignId });
+  if (!result.ok) {
+    return res.status(409).json({ ok: false, error: result.blockers.join("; ") || "Indexing check was not executed", blockers: result.blockers });
+  }
+  res.json({ ok: true, results: resolveCanonicalCampaignResults({ tenantSlug: slug, campaignId }) });
+});
+
 router.post("/master-admin-platform/customers/:slug/commercial-publish-review/approve", (req, res) => {
   const slug = safeAdminSlug(req.params.slug);
   const user = resolveUser(req);
@@ -1629,7 +1660,10 @@ router.get("/master-admin-platform/customers/:slug/growth-dashboard", (req, res)
 router.post("/master-admin-platform/customers/:slug/commercial-indexing-review/request", async (req, res) => {
   const slug = safeAdminSlug(req.params.slug);
   const user = resolveUser(req);
-  const outcome = await requestCommercialIndexing(slug, user, { operatorConfirmed: Boolean(req.body?.operatorConfirmed) });
+  const outcome = await requestCommercialIndexing(slug, user, {
+    operatorConfirmed: Boolean(req.body?.operatorConfirmed),
+    campaignId: String(req.body?.campaignId || ""),
+  });
   if (!outcome.ok) {
     return res.status(409).json({
       ok: false,
@@ -1645,10 +1679,12 @@ router.post("/master-admin-platform/customers/:slug/commercial-indexing-review/r
 router.get("/master-admin-platform/customers/:slug/commercial-performance-dashboard", (req, res) => {
   const slug = safeAdminSlug(req.params.slug);
   const dashboard = buildCommercialPerformanceDashboard(slug);
+  const campaignId = String(req.query.campaignId || "").trim();
+  const canonicalResults = campaignId ? resolveCanonicalCampaignResults({ tenantSlug: slug, campaignId }) : null;
   const searchConsoleIntegration = buildPharmacySearchConsoleDashboard(slug);
   res.json({
     ok: true,
-    dashboard: { ...dashboard, searchConsoleIntegration },
+    dashboard: { ...dashboard, searchConsoleIntegration, canonicalResults },
     customer: buildMasterAdminCustomerRecordLite(slug),
   });
 });
