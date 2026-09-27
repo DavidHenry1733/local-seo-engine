@@ -9,6 +9,11 @@ import {
   loadPharmacyDiscoveryInput,
   type DiscoveredCompetitor,
 } from "./pharmacyCompetitorDiscovery.ts";
+import {
+  loadCompetitorIntelligence,
+  type EnrichedCompetitor,
+} from "./pharmacyCompetitorIntelligence.ts";
+import { resolveGoogleProfileOnboardingState } from "./masterAdminGoogleProfileOnboardingService.ts";
 import { WORKSPACE_ROOT } from "./pharmacyCompetitorDiscovery.ts";
 import {
   emptyFutureMetrics,
@@ -22,6 +27,7 @@ import {
   discoverHealthcareProviders,
   reclassifyHealthcareProviders,
 } from "./growthEngineHealthcareDiscovery.ts";
+import type { HealthcareProviderEntity } from "./growthEngineHealthcareModel.ts";
 import { buildHealthcareAnalysis } from "./growthEngineHealthcareAnalysis.ts";
 import { buildHealthcareMapModel } from "./growthEngineHealthcareMapModel.ts";
 import {
@@ -436,6 +442,113 @@ function preserveExistingLiveSnapshot(
   };
   writeCompetitorSnapshot(preserved);
   return preserved;
+}
+
+function isStoredGooglePlaceId(placeId: string): boolean {
+  const value = String(placeId || "").trim();
+  if (!value || value.startsWith("demo-")) return false;
+  if (/^(deferred|no_profile|unknown|none|null)$/i.test(value)) return false;
+  return true;
+}
+
+function mapStoredCompetitorToLocalMarket(competitor: EnrichedCompetitor): GrowthEngineCompetitor | null {
+  if (competitor.source !== "google-places" || !isStoredGooglePlaceId(competitor.placeId)) return null;
+  const photoCount = evidenceBackedPhotoCount(competitor.photoCount, competitor.photos, competitor.photosCaptured);
+  const categories = (competitor.categories || []).map((category) => String(category || "").trim()).filter(Boolean);
+  const primaryCategory = String(competitor.primaryType || categories[0] || "").trim();
+  const placeId = competitor.placeId;
+  return {
+    placeId,
+    businessName: competitor.name,
+    distanceKm: competitor.distanceKm,
+    distanceLabel: competitor.distanceLabel,
+    latitude: competitor.latitude,
+    longitude: competitor.longitude,
+    address: competitor.address,
+    phone: competitor.phone || competitor.internationalPhone || "",
+    website: competitor.website,
+    primaryCategory,
+    secondaryCategories: categories.filter((category) => category !== primaryCategory),
+    rating: competitor.gbpRating ?? competitor.rating,
+    reviewCount: competitor.gbpReviewCount ?? competitor.reviewCount,
+    photoCount: photoCount == null ? -1 : photoCount,
+    businessStatus: competitor.businessStatus || "UNKNOWN",
+    openingStatus: "",
+    openingHours: competitor.openingHours?.weekdayDescriptions || [],
+    attributes: [],
+    businessDescription: "",
+    directionsUrl: competitor.mapsUrl || `https://www.google.com/maps/search/?api=1&query_place_id=${encodeURIComponent(placeId)}`,
+    googleMapsUrl: competitor.mapsUrl || "",
+    notes: "",
+    source: "google-places",
+    future: emptyFutureMetrics(),
+  };
+}
+
+/**
+ * Build the Local Market snapshot from competitor analysis that has already completed.
+ * Does not call Google Places or DataForSEO.
+ */
+export function deriveLocalMarketSnapshotFromStoredCompetitorAnalysis(
+  slug: string,
+): GrowthEngineCompetitorSnapshot | null {
+  const existing = loadCompetitorSnapshot(slug);
+  if (existing?.generatedAt && (existing.competitors.length > 0 || existing.analysis)) return existing;
+
+  const intel = loadCompetitorIntelligence(slug);
+  if (!intel || intel.source !== "google-places-live") return null;
+  const competitors = intel.competitors
+    .map(mapStoredCompetitorToLocalMarket)
+    .filter((row): row is GrowthEngineCompetitor => Boolean(row));
+  if (!competitors.length) return null;
+
+  const profileData = loadProfileDataForLocalMarket(slug);
+  const googleState = resolveGoogleProfileOnboardingState(profileData);
+  const yourPharmacy =
+    googleState === "configured" || googleState === "selected"
+      ? buildYourPharmacyFromCanonicalProfile(profileData)
+      : null;
+  const verifiedYourPharmacy =
+    yourPharmacy && isStoredGooglePlaceId(yourPharmacy.placeId) ? yourPharmacy : null;
+
+  const analysis = buildLocalMarketAnalysis(verifiedYourPharmacy, competitors, "google-places-live");
+  const healthcareProviders: HealthcareProviderEntity[] = [];
+  const healthcareAnalysis = buildHealthcareAnalysis(
+    healthcareProviders,
+    competitors,
+    verifiedYourPharmacy,
+    "google-places-live",
+  );
+  const mapModel = buildHealthcareMapModel(verifiedYourPharmacy, healthcareProviders, competitors);
+  const snapshot: GrowthEngineCompetitorSnapshot = {
+    version: LOCAL_MARKET_SNAPSHOT_VERSION,
+    slug,
+    generatedAt: new Date().toISOString(),
+    source: "google-places-live",
+    targetCount: TARGET,
+    pharmacy: intel.pharmacy,
+    yourPharmacy: verifiedYourPharmacy,
+    competitors,
+    analysis: {
+      competitorCount: analysis.competitorCount,
+      dataSource: analysis.dataSource,
+      comparisons: analysis.comparisons,
+      summaryParagraphs: analysis.summaryParagraphs,
+      opportunities: analysis.opportunities,
+      yourPharmacyComplete: analysis.yourPharmacyComplete,
+    },
+    healthcare: {
+      version: 1,
+      generatedAt: new Date().toISOString(),
+      providers: healthcareProviders,
+      analysis: healthcareAnalysis,
+      mapModel,
+    },
+    placesError: null,
+    lastDiscoverAttemptAt: intel.generatedAt,
+  };
+  writeCompetitorSnapshot(snapshot);
+  return snapshot;
 }
 
 export async function discoverLocalMarketCompetitors(slug: string): Promise<GrowthEngineCompetitorSnapshot> {

@@ -166,6 +166,8 @@ function cleanupSlug(slug: string) {
     path.join(COMPETITOR_INTEL_DIR, `${slug}.json`),
     path.join(COMPETITOR_INTEL_DIR, `${slug}-intelligence.json`),
     nationalCompetitorDiscoveryPath(slug),
+    path.join(ROOT, "data/growth-engine", `${slug}-competitors.json`),
+    path.join(ROOT, "data/growth-engine", `${slug}-opportunities.json`),
   ];
   for (const file of files) {
     if (fs.existsSync(file)) fs.unlinkSync(file);

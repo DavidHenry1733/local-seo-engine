@@ -19,6 +19,7 @@ import { readPharmacyVisibilityReport } from "./pharmacyVisibilityBridgeService.
 import { listMasterAdminIssueSummaries } from "./masterAdminIssueService.ts";
 import { listMasterAdminJobs } from "./masterAdminJobService.ts";
 import { getWorkflowHistory, getWorkflowExecutions } from "./masterAdminWorkflowHistoryService.ts";
+import { buildBrookGoldenDemoIntelligenceDashboard } from "./brookPharmacyGoldenDemoV1.ts";
 import {
   isCommercialIntelligenceApproved,
   isCommercialIntelligenceGenerated,
@@ -26,6 +27,7 @@ import {
   isLocalMarketIntelligenceGenerated,
   isGrowthIntelligenceGenerated,
   findActiveCommercialIntelligenceJob,
+  ensureCommercialIntelligenceDerivedFromStoredCompetitors,
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
 import {
   buildGoogleLocalProfileMetrics,
@@ -768,18 +770,48 @@ function buildLocalMarketSections(
     },
     {
       title: "Missing Areas",
-      items: visibility?.topKeywordOpportunities?.slice(0, 5).map((k) => `${k.keyword} — ${k.opportunity}`) || ["Local keyword opportunities will expand once pages are indexed."],
+      items: localMarketMissingAreaItems(visibility, analysis),
     },
     {
       title: "Recommended Locations",
       narrative: "Location pages help you appear when patients search by neighbourhood — not just by pharmacy name.",
-      items: areas.slice(0, 8).map((a) => String(typeof a === "object" && a && "areaName" in a ? a.areaName : a)) || ["Confirm local areas during ecosystem setup."],
+      items: localMarketRecommendedLocationItems(areas, Boolean(analysis)),
     },
     {
       title: "Local Visibility Comparison",
       items: visibility?.services?.slice(0, 4).map((s) => `${s.primaryKeyword}: ${s.visibilityStatus.replace(/_/g, " ")}`) || [`Visibility score: ${visibility?.estimatedVisibilityScore ?? "Unknown"}/100`],
     },
   ].map((section) => ({ ...section, evidence: section.evidence || lmEvidence }));
+}
+
+function localMarketMissingAreaItems(
+  visibility: ReturnType<typeof readPharmacyVisibilityReport>,
+  analysis: { opportunities?: string[] } | null | undefined,
+): string[] {
+  const visibilityItems =
+    visibility?.topKeywordOpportunities?.slice(0, 5).map((k) => `${k.keyword} — ${k.opportunity}`) || [];
+  const stalePlaceholder = visibilityItems.length > 0 && visibilityItems.every((item) => /not yet analysed/i.test(item));
+  if (analysis && (stalePlaceholder || visibilityItems.length === 0)) {
+    if (analysis.opportunities?.length) return analysis.opportunities;
+    return ["Keyword demand is unavailable. Stored competitor evidence does not include search-volume data."];
+  }
+  return visibilityItems.length
+    ? visibilityItems
+    : ["Local keyword opportunities will expand once pages are indexed."];
+}
+
+function localMarketRecommendedLocationItems(
+  areas: Array<string | { areaName?: string }>,
+  localMarketReady: boolean,
+): string[] {
+  const names = areas
+    .map((area) => String(typeof area === "object" && area && "areaName" in area ? area.areaName : area).trim())
+    .filter(Boolean);
+  if (names.length) return names.slice(0, 8);
+  if (localMarketReady) {
+    return ["No local areas are selected. Location recommendations stay unavailable until areas are chosen."];
+  }
+  return ["Confirm local areas during ecosystem setup."];
 }
 
 function buildLocalMarketComparisonSection(
@@ -1204,6 +1236,8 @@ function buildTechnicalLog(slug: string, locality: TenantLocalityResolution): Co
 }
 
 export function buildCommercialIntelligenceDashboard(slug: string): CommercialIntelligenceDashboard {
+  const golden = buildBrookGoldenDemoIntelligenceDashboard(slug);
+  if (golden) return golden;
   const nationalGrowthPlatform = (() => {
     try {
       return buildNationalGrowthPlatformDashboard(slug);
@@ -1212,6 +1246,11 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
     }
   })();
 
+  try {
+    ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug);
+  } catch {
+    /* A derivation failure leaves the missing stage visible. It must not invent completion. */
+  }
   const profile = readSetupProfile(slug);
   const locality = resolveTenantLocality(profile);
   const report = loadGrowthOpportunityReport(slug);

@@ -241,7 +241,15 @@ async function main() {
     const snapPath = path.join(GROWTH_DIR, `${snapSlug}-competitors.json`);
     fs.writeFileSync(intelPath, JSON.stringify(intel, null, 2));
     fs.writeFileSync(snapPath, JSON.stringify(snapshotRaw, null, 2));
-    created.push(intelPath, snapPath, writeProfile(intelSlug, ownProfile()), writeProfile(snapSlug, otherProfile));
+    created.push(
+      intelPath,
+      snapPath,
+      path.join(GROWTH_DIR, `${intelSlug}-competitors.json`),
+      path.join(GROWTH_DIR, `${intelSlug}-opportunities.json`),
+      path.join(GROWTH_DIR, `${snapSlug}-opportunities.json`),
+      writeProfile(intelSlug, ownProfile()),
+      writeProfile(snapSlug, otherProfile),
+    );
 
     const loadedIntel = loadCanonicalGoogleLocalCompetitorArtifact(intelSlug);
     const loadedSnap = loadCanonicalGoogleLocalCompetitorArtifact(snapSlug);

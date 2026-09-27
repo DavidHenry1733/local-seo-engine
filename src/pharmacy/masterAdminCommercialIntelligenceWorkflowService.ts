@@ -5,10 +5,15 @@ import { isNationalGrowthPlatform } from "./growthPlatformResolverService.ts";
 import { runCompetitorIntelligencePipeline, isCombinedCompetitorAnalysisStored } from "./pharmacyCompetitorIntelligenceService.ts";
 import { loadCompetitorIntelligence } from "./pharmacyCompetitorIntelligence.ts";
 import {
+  deriveLocalMarketSnapshotFromStoredCompetitorAnalysis,
   discoverLocalMarketCompetitors,
   loadCompetitorSnapshot,
 } from "./growthEngineLocalMarketService.ts";
-import { loadGrowthOpportunityReport } from "./growthEngineOpportunityEngine.ts";
+import {
+  buildGrowthOpportunityReport,
+  loadGrowthOpportunityReport,
+  saveGrowthOpportunityReport,
+} from "./growthEngineOpportunityEngine.ts";
 import { listMasterAdminJobs, type MasterAdminJob } from "./masterAdminJobService.ts";
 import { recordMasterAdminAudit } from "./masterAdminAuditService.ts";
 import {
@@ -53,6 +58,49 @@ export function isGrowthIntelligenceGenerated(slug: string): boolean {
 
 export function isGrowthIntelligenceJobOutputComplete(slug: string): boolean {
   return isGrowthIntelligenceGenerated(slug);
+}
+
+/**
+ * Persist Local Market Intelligence and Growth Intelligence from competitor
+ * analysis that is already stored. Does not collect Google Places or DataForSEO again.
+ */
+export function ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug: string, operator = "system"): {
+  localMarketDerived: boolean;
+  growthDerived: boolean;
+} {
+  if (isNationalGrowthPlatform(slug)) return { localMarketDerived: false, growthDerived: false };
+  if (!isCompetitorAnalysisGenerated(slug)) return { localMarketDerived: false, growthDerived: false };
+
+  let localMarketDerived = false;
+  if (!isLocalMarketIntelligenceGenerated(slug)) {
+    const snap = deriveLocalMarketSnapshotFromStoredCompetitorAnalysis(slug);
+    if (snap) {
+      localMarketDerived = true;
+      recordMasterAdminAudit({
+        user: operator,
+        slug,
+        action: "orchestrate_local_market_intelligence",
+        status: "success",
+        evidence: `Local Market Intelligence derived from stored competitor analysis — ${snap.competitors.length} competitors`,
+      });
+    }
+  }
+
+  let growthDerived = false;
+  if (isLocalMarketIntelligenceGenerated(slug) && !isGrowthIntelligenceGenerated(slug)) {
+    const report = buildGrowthOpportunityReport(slug);
+    saveGrowthOpportunityReport(report);
+    growthDerived = true;
+    recordMasterAdminAudit({
+      user: operator,
+      slug,
+      action: "orchestrate_growth_intelligence",
+      status: "success",
+      evidence: `Growth Intelligence derived from stored local market evidence — ${report.opportunities.length} opportunities`,
+    });
+  }
+
+  return { localMarketDerived, growthDerived };
 }
 
 export function isCommercialIntelligenceGenerated(slug: string): boolean {
@@ -179,9 +227,14 @@ export async function runCompetitorAnalysisWorkflowAction(
   }
   if (isCombinedCompetitorAnalysisStored(slug)) {
     const intel = loadCompetitorIntelligence(slug);
+    const derived = ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug, operator);
+    const derivedNote = [
+      derived.localMarketDerived ? "Local Market Intelligence derived" : "",
+      derived.growthDerived ? "Growth Intelligence derived" : "",
+    ].filter(Boolean).join("; ");
     return {
       ok: true,
-      evidence: `Competitor Analysis already complete — ${intel?.competitors.length || 0} Google/local competitors`,
+      evidence: `Competitor Analysis already complete — ${intel?.competitors.length || 0} Google/local competitors${derivedNote ? ` — ${derivedNote}` : ""}`,
       errors: [],
       idempotent: true,
     };
@@ -201,6 +254,7 @@ export async function runCompetitorAnalysisWorkflowAction(
       evidence: `Competitor Analysis ${result.combinedStatus} — Google/local ${googleCount}, DataForSEO organic ${organicCount}${errors.length ? ` — ${errors.join(" | ")}` : ""}`,
       errors: failed || partial ? errors : [],
     });
+    if (!failed) ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug, operator);
     return {
       ok: !failed,
       evidence: `Competitor Analysis ${result.combinedStatus} — Google/local ${googleCount}, DataForSEO organic ${organicCount}${errors.length ? ` — ${errors.join(" | ")}` : ""}`,
@@ -246,11 +300,21 @@ export async function runLocalMarketIntelligenceWorkflowAction(
   }
   if (isLocalMarketIntelligenceGenerated(slug)) {
     const snap = loadCompetitorSnapshot(slug)!;
+    ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug, operator);
     return {
       ok: true,
       evidence: `Local Market Intelligence already complete — ${snap.competitors.length} competitors analysed`,
       errors: [],
       idempotent: true,
+    };
+  }
+  const derived = deriveLocalMarketSnapshotFromStoredCompetitorAnalysis(slug);
+  if (derived) {
+    ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug, operator);
+    return {
+      ok: true,
+      evidence: `Local Market Intelligence derived from stored competitor analysis — ${derived.competitors.length} competitors`,
+      errors: [],
     };
   }
   try {
