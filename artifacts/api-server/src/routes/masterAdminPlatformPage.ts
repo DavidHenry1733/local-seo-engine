@@ -441,7 +441,7 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
     <label>Postcode *<input id="createPostcode" required placeholder="S11 8TP"/></label>
     <label>County<input id="createCounty"/></label>
     <label>Country *<input id="createCountry" required value="United Kingdom"/></label>
-    <label>Primary service *<select id="createPrimaryService">${renderLockedServiceOptions()}</select></label>
+    <label>Primary service *<select id="createPrimaryService"><option value="">Select a service…</option>${renderLockedServiceOptions()}</select></label>
     <label>Primary email *<input id="createEmail" type="email" required/></label>
     <label>Phone<input id="createPhone"/></label>
   </div>
@@ -643,7 +643,7 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
       <label>Postcode *<input id="intakePostcode" required/></label>
       <label>County<input id="intakeCounty"/></label>
       <label>Country *<input id="intakeCountry" required value="United Kingdom"/></label>
-      <label>Primary service *<select id="intakePrimaryService"><option value="pharmacy-first">Pharmacy First</option></select></label>
+      <label>Primary service *<select id="intakePrimaryService"><option value="">Select a service…</option>${renderLockedServiceOptions()}</select></label>
       <label>Primary email *<input id="intakeEmail" type="email" required/></label>
       <label>Phone<input id="intakePhone"/></label>
       <label>Google profile URL<input id="intakeGoogle"/></label>
@@ -2459,7 +2459,7 @@ async function openOnboardingIntakeModal(){
     document.getElementById('intakePostcode').value=i.postcode||'';
     document.getElementById('intakeCounty').value=i.county||'';
     document.getElementById('intakeCountry').value=i.country||'United Kingdom';
-    document.getElementById('intakePrimaryService').value=i.primaryServiceId||'pharmacy-first';
+    document.getElementById('intakePrimaryService').value=i.primaryServiceId||'';
     document.getElementById('intakeEmail').value=i.contactEmail||'';
     document.getElementById('intakePhone').value=i.phone||'';
     document.getElementById('intakeGoogle').value=i.googleBusinessProfileUrl||'';

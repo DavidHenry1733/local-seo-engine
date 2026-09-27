@@ -24,8 +24,6 @@ import { WORKSPACE_ROOT } from "./pharmacyExecutiveDashboardService.ts";
 import { randomBytes } from "node:crypto";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 
-export const DEFAULT_COMMERCIAL_SERVICE_ID = "pharmacy-first";
-
 const META_PATH = path.join(WORKSPACE_ROOT, "data", "pharmacy-master-admin", "client-meta.json");
 
 interface ClientMetaSlice {
@@ -95,6 +93,7 @@ function ensureDir(dir: string): void {
 function writeProjectConfigStub(
   slug: string,
   input: CommercialPharmacyCreateInput,
+  serviceId: string,
 ): string {
   const file = getPharmacyProjectConfigPath(slug);
   ensureDir(path.dirname(file));
@@ -109,7 +108,7 @@ function writeProjectConfigStub(
         phone: input.phone || "",
         email: input.contactEmail,
         branding: { primaryColor: "#005EB8", accentColor: "#1CA9C9" },
-        services: [DEFAULT_COMMERCIAL_SERVICE_ID],
+        services: [serviceId],
         locations: [],
       },
       null,
@@ -119,10 +118,10 @@ function writeProjectConfigStub(
   return file;
 }
 
-function seedPlaceholderCampaign(slug: string): void {
+function seedPlaceholderCampaign(slug: string, serviceId: string): void {
   try {
     createPharmacyCampaign(slug, {
-      serviceId: DEFAULT_COMMERCIAL_SERVICE_ID,
+      serviceId,
       campaignGoal: "Pharmacy Growth",
     });
   } catch {
@@ -147,6 +146,8 @@ export async function createCommercialPharmacyCustomer(
   const { validateOnboardingIntake, persistOnboardingIntake } = await import("./masterAdminOnboardingIntakeService.ts");
   const validation = validateOnboardingIntake(intake);
   if (!validation.ok) throw new Error(validation.errors.join("; "));
+  const serviceId = String(intake.primaryServiceId || "").trim();
+  if (!serviceId) throw new Error("Primary service is required");
   validateCommercialCreateInput(input);
 
   const pharmacyName = String(input.pharmacyName).trim();
@@ -183,7 +184,8 @@ export async function createCommercialPharmacyCustomer(
     adminNotes: notes,
     platformClientStatus: "setup_required",
     country: "United Kingdom",
-    selectedServices: [DEFAULT_COMMERCIAL_SERVICE_ID],
+    selectedServices: [serviceId],
+    priorityServices: [serviceId],
   });
 
   ensureDir(path.dirname(file));
@@ -194,9 +196,9 @@ export async function createCommercialPharmacyCustomer(
 
   registerMasterAdminClient(slug, pharmacyName);
 
-  writeProjectConfigStub(slug, { ...input, pharmacyName, website, contactEmail: email, phone });
-  seedPlaceholderCampaign(slug);
-  finalizePharmacyWorkspaceProvisioning(slug, [DEFAULT_COMMERCIAL_SERVICE_ID], website);
+  writeProjectConfigStub(slug, { ...input, pharmacyName, website, contactEmail: email, phone }, serviceId);
+  seedPlaceholderCampaign(slug, serviceId);
+  finalizePharmacyWorkspaceProvisioning(slug, [serviceId], website);
 
   const meta = getMetaSlice(slug);
   meta.accountManager = accountManager;
@@ -208,7 +210,7 @@ export async function createCommercialPharmacyCustomer(
     toStage: "website_import",
     operator,
     reason: "Commercial customer created",
-    evidence: `Profile, workspace, and ${DEFAULT_COMMERCIAL_SERVICE_ID} campaign provisioned`,
+    evidence: `Profile, workspace, and ${serviceId} campaign provisioned`,
   });
 
   recordMasterAdminAudit({

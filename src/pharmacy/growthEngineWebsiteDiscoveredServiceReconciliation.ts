@@ -533,6 +533,7 @@ function loadConfiguredServices(slug: string, profile: ReturnType<typeof readSet
     for (const svc of lib.services) {
       if (!svc.selected && !(lib.selectedServices || []).includes(svc.id)) continue;
       const id = normalizeServiceId(svc.id);
+      if (!id) continue;
       out.set(id, {
         serviceId: id,
         serviceName: svc.serviceName || displayNameForId(id),
@@ -540,28 +541,16 @@ function loadConfiguredServices(slug: string, profile: ReturnType<typeof readSet
       });
     }
   }
-  for (const idRaw of profile.priorityServices || []) {
+  // Explicit tenant selection is the only other configured source.
+  // priorityServices, delivery profiles, catalogue defaults, and placeholder
+  // campaigns do not add a service this pharmacy has not selected.
+  for (const idRaw of profile.selectedServices || []) {
     const id = normalizeServiceId(String(idRaw));
     if (!id || out.has(id)) continue;
     out.set(id, {
       serviceId: id,
       serviceName: displayNameForId(id),
-      source: "priorityServices",
-    });
-  }
-  const delivery = profile.serviceDeliveryProfiles || {};
-  const prioritySet = new Set((profile.priorityServices || []).map((id) => normalizeServiceId(String(id))));
-  for (const idRaw of Object.keys(delivery)) {
-    const id = normalizeServiceId(idRaw);
-    if (!id || out.has(id)) continue;
-    // Delivery profiles may retain historical clinical residue — only extend configured set from
-    // priorityServices / service-library, never from selectedServices alone.
-    if (!prioritySet.has(id)) continue;
-    const name = delivery[idRaw]?.serviceName;
-    out.set(id, {
-      serviceId: id,
-      serviceName: displayNameForId(id, name),
-      source: "serviceDeliveryProfiles",
+      source: "selectedServices",
     });
   }
   return [...out.values()];

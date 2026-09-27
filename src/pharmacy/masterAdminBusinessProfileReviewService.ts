@@ -67,6 +67,7 @@ import {
 import {
   buildServiceReconciliationProposal,
   formatServiceMatchStateLabel,
+  resolveDeterministicServiceIdFromName,
   type ServiceReconciliationProposal,
 } from "./growthEngineWebsiteDiscoveredServiceReconciliation.ts";
 import {
@@ -1064,11 +1065,23 @@ function buildApplicabilityContext(
   ctx: EvidenceContext,
   proposal: ServiceReconciliationProposal,
 ): BprApplicabilityContext {
+  const websiteDiscoveredServiceIds = [
+    ...new Set(
+      proposal.websiteDiscoveredServices
+        .map((row) => {
+          const raw = String(row.serviceId || "").trim().toLowerCase().replace(/_/g, "-");
+          return raw || resolveDeterministicServiceIdFromName(row.serviceName) || "";
+        })
+        .filter(Boolean),
+    ),
+  ];
   return {
     clinicalCatalogueEligible: proposal.clinicalCatalogueEligible,
     businessClassificationClass: proposal.businessClassificationClass,
     clinicalServiceDetectionEnabled: proposal.clinicalServiceDetectionEnabled,
     marketScope: ctx.profile.marketScope || null,
+    explicitServiceIds: proposal.configuredServices.map((row) => row.serviceId),
+    websiteDiscoveredServiceIds,
   };
 }
 

@@ -2,7 +2,6 @@
  * First-screen commercial onboarding intake — validation and persistence.
  */
 import type { CommercialPharmacyCreateInput } from "./masterAdminCommercialOnboardingService.ts";
-import { DEFAULT_COMMERCIAL_SERVICE_ID } from "./masterAdminCommercialOnboardingService.ts";
 import { readSetupProfile, writeSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 import { persistPrimaryLocality } from "./masterAdminPrimaryLocalityService.ts";
@@ -67,7 +66,7 @@ export function validateOnboardingIntake(input: OnboardingIntakeInput): Onboardi
   if (!isNational && !String(input.townOrCity || "").trim()) errors.push("Town or City is required");
   if (!String(input.postcode || "").trim()) errors.push("Postcode is required");
   if (!String(input.country || "").trim()) errors.push("Country is required");
-  const service = String(input.primaryServiceId || DEFAULT_COMMERCIAL_SERVICE_ID).trim();
+  const service = String(input.primaryServiceId || "").trim();
   if (!service) errors.push("Primary service is required");
 
   const googleUrl = String(input.googleBusinessProfileUrl || "").trim();
@@ -155,7 +154,8 @@ export function persistOnboardingIntake(
   const isNational = resolvedScope === MARKET_SCOPE_NATIONAL;
   const town = String(input.townOrCity || "").trim();
   const now = new Date().toISOString();
-  const serviceId = String(input.primaryServiceId || DEFAULT_COMMERCIAL_SERVICE_ID).trim();
+  const serviceId = String(input.primaryServiceId || "").trim();
+  if (!serviceId) throw new Error("Primary service is required");
   const country = String(input.country || "United Kingdom").trim() || "United Kingdom";
   const primaryMarket = isNational
     ? String(input.primaryMarket || "").trim() || resolvePrimaryMarket(safe, {
@@ -194,6 +194,7 @@ export function persistOnboardingIntake(
     googleProfileOnboardingState: googleState,
     onboardingIntakeCompletedAt: now,
     selectedServices: [serviceId],
+    priorityServices: [serviceId],
     pendingOnboardingOpportunities: syncPendingOnboardingOpportunities(googleState),
   });
 
@@ -260,7 +261,7 @@ export function buildOnboardingIntakeForProfile(
     townOrCity: data.primaryTown || data.townCity,
     county: data.county,
     country: data.country,
-    primaryServiceId: data.selectedServices?.[0] || DEFAULT_COMMERCIAL_SERVICE_ID,
+    primaryServiceId: data.selectedServices?.[0] || "",
     googleBusinessProfileUrl: data.googleBusinessProfileUrl,
     googlePlaceId: data.googlePlaceId,
     googleProfileState: googleState,

@@ -42,11 +42,15 @@ export function saveAuthoritativeCampaignPriority(
   return { ok: true, serviceId: id };
 }
 
-/** Customer-selected campaign priority from the pharmacy profile. Empty until the pharmacy confirms one. */
+/** Campaign priority only when it is one of this pharmacy's explicit services. */
 export function resolveAuthoritativeCampaignPriority(slug: string): string | null {
-  const selected = (readSetupProfile(slug).priorityServices || [])
+  const profile = readSetupProfile(slug);
+  const explicit = new Set(
+    (profile.selectedServices || []).map((id) => String(id || "").trim()).filter(Boolean),
+  );
+  const selected = (profile.priorityServices || [])
     .map((id) => String(id || "").trim())
-    .filter(Boolean);
+    .filter((id) => explicit.has(id));
   return selected[0] || null;
 }
 

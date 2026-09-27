@@ -12,6 +12,10 @@ export interface BprApplicabilityContext {
   businessClassificationClass?: string | null;
   clinicalServiceDetectionEnabled?: boolean;
   marketScope?: string | null;
+  /** Explicit tenant configured services. Omit only for helper checks that are not tenant-scoped. */
+  explicitServiceIds?: string[];
+  /** Catalogue services found in website evidence, not treated as configured. */
+  websiteDiscoveredServiceIds?: string[];
 }
 
 /** Clinical / dispensing access fields — required only when clinical catalogue applies. */
@@ -42,6 +46,15 @@ export function resolveBprFieldApplicability(
   ctx: BprApplicabilityContext,
 ): BprFieldApplicability | null {
   const clinical = ctx.clinicalCatalogueEligible === true;
+
+  if (fieldId === "pharmacyFirstAvailability") {
+    if (!clinical) return "not_applicable";
+    if (!ctx.explicitServiceIds && !ctx.websiteDiscoveredServiceIds) return "required";
+    const explicit = ctx.explicitServiceIds || [];
+    const discovered = ctx.websiteDiscoveredServiceIds || [];
+    if (explicit.includes("pharmacy-first") || discovered.includes("pharmacy-first")) return "required";
+    return "not_applicable";
+  }
 
   if (CLINICAL_ACCESS_FIELD_IDS.has(fieldId)) {
     return clinical ? "required" : "not_applicable";
@@ -117,7 +130,10 @@ export function bprApplicabilityReason(
       return `Not applicable — appointment/walk-in fulfilment is a pharmacy access model; business classification (${cls}) is non-clinical.`;
     }
     if (fieldId === "pharmacyFirstAvailability") {
-      return `Not applicable — Pharmacy First is incompatible with non-clinical business classification (${cls}).`;
+      if (!ctx.clinicalCatalogueEligible) {
+        return `Not applicable — Pharmacy First is incompatible with non-clinical business classification (${cls}).`;
+      }
+      return "Not applicable — Pharmacy First is not a configured or website-discovered service for this pharmacy.";
     }
     return `Not applicable for business classification (${cls}).`;
   }
