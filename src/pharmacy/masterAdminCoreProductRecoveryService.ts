@@ -48,6 +48,8 @@ import {
   type ServicePageGenerationIdentity,
 } from "./masterAdminServicePageGenerationIdentity.ts";
 import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
+import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
+import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
 import { readPharmacyCampaignStore } from "./pharmacyCampaignService.ts";
 import { buildContentEcosystemLocalPreviewUrl } from "./pharmacyClusterPageUrlResolver.ts";
 import {
@@ -385,7 +387,16 @@ export function decideLocalityPageReview(
     .toLowerCase();
   if (!area) return null;
 
-  const pages = listCprClusterPagePreviews(slug, identity);
+  const membership = resolveCanonicalCampaignMembership({
+    tenantSlug: slug,
+    campaignId: identity.campaignId,
+  });
+  if (!membership.resolved || membership.serviceId !== identity.serviceId || !membership.areaSlugs.includes(area)) {
+    return null;
+  }
+  const pages = listCprClusterPagePreviews(slug, identity).filter((page) =>
+    membership.areaSlugs.includes(page.areaSlug),
+  );
   if (!pages.some((p) => p.areaSlug === area)) return null;
 
   if (decision === "approved") {
@@ -494,21 +505,30 @@ export function buildCprClusterReviewDashboard(
   const identity = resolveLocalityReviewIdentity(slug, scope);
   if (!identity) return null;
 
+  const membership = resolveCanonicalCampaignMembership({
+    tenantSlug: slug,
+    campaignId: identity.campaignId,
+  });
+  const canonicalAreas =
+    membership.resolved && membership.serviceId === identity.serviceId ? membership.areaSlugs : null;
   const candidates = resolveApprovedCurrentRunCandidatePublishReadiness(slug, identity.serviceId);
-  if (candidates?.active && candidates.expectedLocalCount > 0) {
-    const pages = candidates.pages
-      .filter((page) => page.pageType === "local" && page.areaSlug)
-      .map((page) => {
-        const areaSlug = String(page.areaSlug);
-        return {
-          areaSlug,
-          label: areaSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-          previewUrl: `/api/growth-engine/${encodeURIComponent(slug)}/review-preview?campaign=${encodeURIComponent(identity.serviceId)}&asset=${encodeURIComponent(page.previewAsset)}&area=${encodeURIComponent(areaSlug)}`,
-          outputPath: "",
-          decision: (page.approved ? "approved" : "pending") as LocalityPageReviewDecision,
-          decidedAt: page.approved ? candidates.candidateVersion : null,
-        };
-      });
+  if (candidates?.active && canonicalAreas) {
+    const pages = canonicalAreas.map((areaSlug) => {
+      const approved = candidates.pages.some(
+        (page) => page.pageType === "local" && page.areaSlug === areaSlug && page.approved,
+      );
+      const previewAsset =
+        candidates.pages.find((page) => page.pageType === "local" && page.areaSlug === areaSlug)?.previewAsset ||
+        "ai-local-area-page-pilot-v3";
+      return {
+        areaSlug,
+        label: areaSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+        previewUrl: `/api/growth-engine/${encodeURIComponent(slug)}/review-preview?campaign=${encodeURIComponent(identity.serviceId)}&asset=${encodeURIComponent(previewAsset)}&area=${encodeURIComponent(areaSlug)}`,
+        outputPath: "",
+        decision: (approved ? "approved" : "pending") as LocalityPageReviewDecision,
+        decidedAt: approved ? candidates.candidateVersion : null,
+      };
+    });
     const approvedLocalityCount = pages.filter((page) => page.decision === "approved").length;
     const remainingLocalityCount = pages.length - approvedLocalityCount;
     const allLocalitiesApproved = pages.length > 0 && remainingLocalityCount === 0;
@@ -535,18 +555,24 @@ export function buildCprClusterReviewDashboard(
     };
   }
 
-  const previews = listCprClusterPagePreviews(slug, identity);
   const completed = findCompletedLocalClusterGenerationJob(slug, identity);
   const active = findActiveLocalClusterGenerationJob(slug, identity);
-  if (previews.length === 0 && !active) return null;
+  if (!canonicalAreas && !active) return null;
+  const reviewAreas = canonicalAreas || [];
+  if (reviewAreas.length === 0 && !active) return null;
 
   const localityStore = readLocalityPageDecisionStore(slug, identity);
-  const pages = previews.map((p) => {
-    const rec = localityStore?.decisions?.[p.areaSlug];
+  const rendered = new Map(listCprClusterPagePreviews(slug, identity).map((page) => [page.areaSlug, page]));
+  const pages = reviewAreas.map((areaSlug) => {
+    const preview = rendered.get(areaSlug);
+    const rec = localityStore?.decisions?.[areaSlug];
     const decision: LocalityPageReviewDecision =
       rec?.decision === "approved" || rec?.decision === "rejected" ? rec.decision : "pending";
     return {
-      ...p,
+      areaSlug,
+      label: preview?.label || areaSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+      previewUrl: preview?.previewUrl || "",
+      outputPath: preview?.outputPath || "",
       decision,
       decidedAt: rec?.decidedAt || null,
     };

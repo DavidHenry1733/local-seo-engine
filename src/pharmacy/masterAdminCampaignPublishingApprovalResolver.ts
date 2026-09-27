@@ -13,12 +13,9 @@ import {
   readServicePageGenerationRecord,
 } from "./masterAdminCoreProductRecoveryService.ts";
 import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
-import {
-  resolveApprovedCurrentRunCandidatePublishReadiness,
-  resolveCurrentRunCandidateServiceId,
-} from "./pharmacyCurrentRunApprovedCandidatePublishAdapter.ts";
+import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
+import { resolveApprovedCurrentRunCandidatePublishReadiness } from "./pharmacyCurrentRunApprovedCandidatePublishAdapter.ts";
 import { readLatestCommercialQualityApproval } from "./masterAdminCommercialQualityReviewService.ts";
-import { readPharmacyCampaignStore } from "./pharmacyCampaignService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 
 export type CampaignPublishingApprovalMode =
@@ -41,14 +38,6 @@ export interface CampaignPublishingContentApproval {
   detail: string;
 }
 
-function toAreaSlug(areaName: string): string {
-  return String(areaName || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
 function resolveCampaignScopedProductOwnerApproval(
   slug: string,
   campaignId: string,
@@ -63,11 +52,9 @@ function resolveCampaignScopedProductOwnerApproval(
     serviceGenerated &&
     isCampaignServicePageReviewApproved(slug, campaignId, serviceId, generationRevision);
 
-  const campaign = readPharmacyCampaignStore(slug)?.campaigns.find((c) => c.id === campaignId);
-  const selectedAreaSlugs = (campaign?.campaignAreas || [])
-    .filter((a) => a.selected !== false)
-    .map((a) => toAreaSlug(a.areaName))
-    .filter(Boolean);
+  const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
+  const selectedAreaSlugs =
+    membership.resolved && membership.serviceId === serviceId ? membership.areaSlugs : [];
   const localityStore = readLocalityPageDecisionStore(slug, { campaignId, serviceId });
   const localityExpectedCount = selectedAreaSlugs.length;
   const localityApprovedCount = selectedAreaSlugs.filter(
@@ -76,12 +63,18 @@ function resolveCampaignScopedProductOwnerApproval(
   const selectedUnapproved = selectedAreaSlugs.filter(
     (a) => localityStore?.decisions?.[a]?.decision !== "approved",
   );
+  const missingCanonical = membership.localityStates
+    .filter((area) => area.contentState !== "PRESENT")
+    .map((area) => area.areaSlug);
   const allSelectedLocalitiesApproved =
     localityExpectedCount > 0 && selectedUnapproved.length === 0;
 
   const blockers: string[] = [];
-  if (campaign && campaign.serviceId && campaign.serviceId !== serviceId) {
-    blockers.push("Campaign service identity mismatch");
+  if (!membership.resolved || membership.serviceId !== serviceId) {
+    blockers.push("Campaign membership is unresolved");
+  }
+  if (missingCanonical.length) {
+    blockers.push(`Missing canonical locality pages: ${missingCanonical.join(", ")}`);
   }
   if (!serviceGenerated) blockers.push("Service page is not generated");
   else if (!servicePageApproved) {
@@ -130,35 +123,56 @@ export function resolveCampaignPublishingContentApproval(
   const selection = readActiveServiceCampaignSelection(slug);
   const campaignId = String(identity?.campaignId || selection?.campaignId || "").trim();
   const serviceId = String(identity?.serviceId || selection?.serviceId || "").trim();
-  const currentRunServiceId = resolveCurrentRunCandidateServiceId(slug, serviceId);
-  const candidates = currentRunServiceId
-    ? resolveApprovedCurrentRunCandidatePublishReadiness(slug, currentRunServiceId)
+  const candidates = serviceId
+    ? resolveApprovedCurrentRunCandidatePublishReadiness(slug, serviceId)
     : null;
-  if (candidates?.active) {
+  if (candidates?.active && campaignId) {
+    const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
+    const expected = membership.resolved && membership.serviceId === serviceId ? membership.areaSlugs : [];
+    const approvedAreas = new Set(
+      candidates.pages
+        .filter((page) => page.pageType === "local" && page.approved && page.areaSlug)
+        .map((page) => String(page.areaSlug)),
+    );
+    const localityApprovedCount = expected.filter((area) => approvedAreas.has(area)).length;
+    const missingCanonical = membership.localityStates
+      .filter((area) => area.contentState !== "PRESENT")
+      .map((area) => area.areaSlug);
+    const blockers: string[] = [];
+    if (!membership.resolved || membership.serviceId !== serviceId) {
+      blockers.push("Campaign membership is unresolved");
+    }
+    if (!candidates.approvedServicePage) {
+      blockers.push("Approved current-run service-page candidate is missing");
+    }
+    if (expected.length === 0) {
+      blockers.push("No locality pages are selected for this campaign");
+    } else if (localityApprovedCount !== expected.length) {
+      blockers.push(
+        `Approve remaining current-run local candidates (${localityApprovedCount}/${expected.length})`,
+      );
+    }
+    if (missingCanonical.length) {
+      blockers.push(`Missing canonical locality pages: ${missingCanonical.join(", ")}`);
+    }
+    const ready = blockers.length === 0;
     return {
       mode: "campaign-scoped-product-owner",
-      approved: candidates.ready,
+      approved: ready,
       servicePageApproved: candidates.approvedServicePage,
-      localityApprovedCount: candidates.approvedLocalCount,
-      localityExpectedCount: candidates.expectedLocalCount,
-      allSelectedLocalitiesApproved:
-        candidates.expectedLocalCount > 0 && candidates.approvedLocalCount === candidates.expectedLocalCount,
+      localityApprovedCount,
+      localityExpectedCount: expected.length,
+      allSelectedLocalitiesApproved: expected.length > 0 && localityApprovedCount === expected.length,
       serviceRevision: candidates.candidateVersion,
-      campaignId: candidates.serviceId,
-      serviceId: candidates.serviceId,
-      approvalReference: candidates.ready
-        ? `${candidates.candidateVersion || "current"}:${candidates.runId || "run"}:${candidates.approvedCount}`
+      campaignId,
+      serviceId,
+      approvalReference: ready
+        ? `${candidates.candidateVersion || "current"}:${candidates.runId || "run"}:${localityApprovedCount}`
         : null,
-      blockers: candidates.ready
-        ? []
-        : [
-            candidates.approvedServicePage
-              ? `Approve remaining current-run local candidates (${candidates.approvedLocalCount}/${candidates.expectedLocalCount})`
-              : "Approved current-run service-page candidate is missing",
-          ],
-      detail: candidates.ready
-        ? `Current-run Product Owner approvals (${candidates.serviceId}; ${candidates.candidateVersion}; ${candidates.approvedCount}/${candidates.expectedCount} candidates)`
-        : `Current-run Product Owner approvals incomplete (${candidates.approvedCount}/${candidates.expectedCount})`,
+      blockers,
+      detail: ready
+        ? `Current-run Product Owner approvals (${serviceId}; ${candidates.candidateVersion}; ${localityApprovedCount}/${expected.length} canonical localities)`
+        : blockers[0] || "Current-run Product Owner approvals incomplete",
     };
   }
 

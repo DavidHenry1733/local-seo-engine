@@ -3,20 +3,16 @@
  * Reads existing tenantSlug + campaignId + serviceId artefacts only.
  * Does not change workflow progression, generation, or approval persistence.
  */
-import fs from "node:fs";
-import path from "node:path";
-import { WORKSPACE_ROOT } from "./pharmacyExecutiveDashboardService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 import {
   isCampaignServicePageReviewApproved,
   isServicePageGeneratedForIdentity,
-  readLocalityPageDecisionStore,
   readServicePageGenerationRecord,
 } from "./masterAdminCoreProductRecoveryService.ts";
 import { resolveCampaignPublishingContentApproval } from "./masterAdminCampaignPublishingApprovalResolver.ts";
+import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
 import { resolveApprovedCurrentRunCandidatePublishReadiness } from "./pharmacyCurrentRunApprovedCandidatePublishAdapter.ts";
 import { listMasterAdminJobs } from "./masterAdminJobService.ts";
-import { readPharmacyCampaignStore } from "./pharmacyCampaignService.ts";
 
 export type ServiceContentStatus = "Not Generated" | "Generated" | "Approved";
 export type LocalityContentStatus =
@@ -46,38 +42,6 @@ export interface ProductOwnerCampaignContentPresentation {
   publishing: ProductOwnerCampaignPublishingReadiness;
 }
 
-function toAreaSlug(areaName: string): string {
-  return String(areaName || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-function listGeneratedLocalityAreaSlugs(slug: string, serviceId: string): string[] {
-  const localDir = path.join(
-    WORKSPACE_ROOT,
-    "output/pharmacy-content-ecosystem",
-    safeAdminSlug(slug),
-    serviceId,
-    "local",
-  );
-  if (!fs.existsSync(localDir)) return [];
-  try {
-    return fs
-      .readdirSync(localDir)
-      .filter(
-        (name) =>
-          name !== "locations" &&
-          name !== "revisions" &&
-          fs.existsSync(path.join(localDir, name, "index.html")),
-      )
-      .sort();
-  } catch {
-    return [];
-  }
-}
-
 const ACTIVE_JOB_STATUSES = new Set(["queued", "claimed", "running"]);
 const GENERATION_JOB_ACTIONS = new Set(["generate_service_page", "generate_local_cluster_pages"]);
 const REGENERATION_JOB_ACTIONS = new Set([
@@ -105,9 +69,11 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
   const candidates = resolveApprovedCurrentRunCandidatePublishReadiness(slug, serviceId);
 
   if (candidates?.active) {
+    const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
     const serviceApproved = candidates.approvedServicePage;
-    const localityApprovedCount = candidates.approvedLocalCount;
-    const localityGeneratedCount = candidates.expectedLocalCount;
+    const contentApproval = resolveCampaignPublishingContentApproval(slug, { campaignId, serviceId });
+    const localityApprovedCount = contentApproval.localityApprovedCount;
+    const localityGeneratedCount = membership.resolved ? membership.areaSlugs.length : 0;
     const localityRemainingCount = Math.max(0, localityGeneratedCount - localityApprovedCount);
     const serviceStatus: ServiceContentStatus = serviceApproved
       ? "Approved"
@@ -123,11 +89,10 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
             ? "Partially Approved"
             : "Generated";
     }
-    const contentApproval = resolveCampaignPublishingContentApproval(slug, { campaignId, serviceId });
     const blockers: string[] = [];
     if (!campaignId || !serviceId) blockers.push("Campaign identity is incomplete");
     for (const b of contentApproval.blockers) blockers.push(b);
-    const ready = blockers.length === 0 && Boolean(candidates.ready);
+    const ready = blockers.length === 0;
     return {
       serviceStatus,
       serviceRevision: candidates.candidateVersion,
@@ -171,41 +136,28 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
       `/api/pharmacy-visual-experience/${encodeURIComponent(serviceId)}/?slug=${encodeURIComponent(slug)}`
     : null;
 
-  const areaSlugs = listGeneratedLocalityAreaSlugs(slug, serviceId);
-  const localityStore = readLocalityPageDecisionStore(slug, { campaignId, serviceId });
-  const localityApprovedCount = areaSlugs.filter(
-    (area) => localityStore?.decisions?.[area]?.decision === "approved",
-  ).length;
-  const localityGeneratedCount = areaSlugs.length;
+  const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
+  const contentApproval = resolveCampaignPublishingContentApproval(slug, { campaignId, serviceId });
+  const localityGeneratedCount = membership.resolved && membership.serviceId === serviceId ? membership.areaSlugs.length : 0;
+  const localityApprovedCount = contentApproval.localityApprovedCount;
   const localityRemainingCount = Math.max(0, localityGeneratedCount - localityApprovedCount);
-  const localitiesGenerated = serviceGenerated && localityGeneratedCount > 0;
+  const localitiesGenerated =
+    localityGeneratedCount > 0 && membership.localityStates.every((area) => area.contentState === "PRESENT");
 
   let localityStatus: LocalityContentStatus = "Not Generated";
-  if (localitiesGenerated) {
+  if (localityGeneratedCount > 0 && localitiesGenerated) {
     if (localityRemainingCount === 0) localityStatus = "Approved";
     else if (localityApprovedCount > 0) localityStatus = "Partially Approved";
     else localityStatus = "Generated";
   }
 
-  const campaign = readPharmacyCampaignStore(slug)?.campaigns.find((c) => c.id === campaignId);
-  const selectedAreaSlugs = (campaign?.campaignAreas || [])
-    .filter((a) => a.selected !== false)
-    .map((a) => toAreaSlug(a.areaName))
-    .filter(Boolean);
-  const generatedSet = new Set(areaSlugs);
-  const selectedMissing = selectedAreaSlugs.filter((a) => !generatedSet.has(a));
   const activeJobs = findActiveCampaignJobs(slug, campaignId, serviceId);
   const activeGeneration = activeJobs.filter((j) => GENERATION_JOB_ACTIONS.has(j.action));
   const activeRegeneration = activeJobs.filter((j) => REGENERATION_JOB_ACTIONS.has(j.action));
 
-  // Shared approval source of truth with Publish Review.
-  const contentApproval = resolveCampaignPublishingContentApproval(slug, { campaignId, serviceId });
   const blockers: string[] = [];
   if (!campaignId || !serviceId) blockers.push("Campaign identity is incomplete");
   for (const b of contentApproval.blockers) blockers.push(b);
-  if (selectedAreaSlugs.length > 0 && selectedMissing.length) {
-    blockers.push(`Selected locality pages missing: ${selectedMissing.join(", ")}`);
-  }
   if (activeGeneration.length) blockers.push("A generation job is currently running");
   if (activeRegeneration.length) blockers.push("A regeneration job is currently running");
 

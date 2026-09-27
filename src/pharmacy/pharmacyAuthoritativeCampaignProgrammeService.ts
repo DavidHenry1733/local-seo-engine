@@ -7,6 +7,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 import { loadContentPackage } from "./pharmacyContentPackageService.ts";
+import {
+  resolveCanonicalCampaignIdForService,
+  resolveCanonicalCampaignMembership,
+} from "./canonicalCampaignLifecycleResolver.ts";
 import { getServicePublishMeta } from "./pharmacyMasterPublishConfig.ts";
 import { reviewCentreUrl } from "./growthEngineReviewCentreService.ts";
 import { campaignApproveApiPath } from "./growthEngineCampaignApproveControl.ts";
@@ -207,7 +211,12 @@ export function buildAuthoritativeCampaignCard(slug: string, serviceId: string):
   const pkg = loadContentPackage(slug, serviceId) as PackageLockFields | null;
   const approval = readApprovalRecord(slug, serviceId);
   const locked = isApprovedLocked(pkg, approval);
-  const localityPageCount = countGeneratedLocalityPages(slug, serviceId);
+  const packageCampaignId = String((pkg as { campaignId?: string } | null)?.campaignId || "").trim() || null;
+  const membershipCampaignId = resolveCanonicalCampaignIdForService(slug, serviceId, packageCampaignId);
+  const membership = membershipCampaignId
+    ? resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId: membershipCampaignId })
+    : null;
+  const localityPageCount = membership?.resolved ? membership.areaSlugs.length : 0;
   const serviceExists = hasGeneratedServicePage(slug, serviceId);
   const generated = Boolean(pkg?.generatedAt) || serviceExists || localityPageCount > 0;
   if (!generated && !locked) return null;

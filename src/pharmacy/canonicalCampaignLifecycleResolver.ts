@@ -48,6 +48,103 @@ interface CampaignRecord {
   campaignAreas?: unknown;
 }
 
+export type CanonicalLocalityContentState = "PRESENT" | "MISSING" | "UNRESOLVED";
+
+export interface CanonicalCampaignMembership {
+  resolved: boolean;
+  tenantSlug: string | null;
+  campaignId: string | null;
+  serviceId: string | null;
+  areaSlugs: string[];
+  localityStates: Array<{ areaSlug: string; contentState: CanonicalLocalityContentState }>;
+  unattachedAreaSlugs: string[];
+  packageAreaSlugs: string[] | null;
+  servicePageState: CanonicalLocalityContentState;
+  expectedWebsitePages: number;
+  conflicts: CanonicalCampaignLifecycle["membership"]["conflicts"];
+}
+
+/**
+ * Shared membership read for campaign, review, quality, and publishing screens.
+ * Package areas and rendered directories stay evidence. They do not become membership.
+ */
+export function resolveCanonicalCampaignMembership(
+  input: ResolveCanonicalCampaignLifecycleInput,
+): CanonicalCampaignMembership {
+  const lifecycle = resolveCanonicalCampaignLifecycle(input);
+  const resolved = lifecycle.identity.scope === "CANONICAL";
+  const localityStates = lifecycle.content.localityPages.map((page) => ({
+    areaSlug: page.areaSlug || "",
+    contentState: localityContentState(page),
+  }));
+  return {
+    resolved,
+    tenantSlug: lifecycle.identity.tenantSlug,
+    campaignId: lifecycle.identity.campaignId,
+    serviceId: lifecycle.identity.serviceId,
+    areaSlugs: resolved ? lifecycle.membership.campaignAreaSlugs : [],
+    localityStates: resolved ? localityStates : [],
+    unattachedAreaSlugs: resolved ? lifecycle.membership.unattachedOutputs : [],
+    packageAreaSlugs: resolved ? lifecycle.membership.packageAreaSlugs : null,
+    servicePageState: !resolved
+      ? "UNRESOLVED"
+      : lifecycle.content.servicePage?.observedContentHash
+        ? "PRESENT"
+        : "MISSING",
+    expectedWebsitePages: resolved ? 1 + lifecycle.membership.campaignAreaSlugs.length : 0,
+    conflicts: resolved ? lifecycle.membership.conflicts : [],
+  };
+}
+
+/**
+ * Resolve the campaign UUID for a service without using package areas or HTML.
+ * A package campaign id is accepted only when that campaign belongs to the service.
+ * A missing package campaign id never selects a different campaign's areas.
+ */
+export function resolveCanonicalCampaignIdForService(
+  tenantSlug: string,
+  serviceId: string,
+  packageCampaignId?: string | null,
+): string | null {
+  const slug = strictSlug(tenantSlug);
+  const service = String(serviceId || "").trim();
+  if (!slug || !service) return null;
+  const inspected: string[] = [];
+  const store = readJson(workspacePath("data/pharmacy-campaigns", `${slug}.json`), inspected);
+  const campaigns = (Array.isArray(store?.campaigns) ? store.campaigns : []) as CampaignRecord[];
+  const matching = campaigns.filter(
+    (campaign) => String(campaign.serviceId || "") === service && String(campaign.status || "active") !== "archived",
+  );
+  const packageId = String(packageCampaignId || "").trim();
+  if (packageId && matching.some((campaign) => String(campaign.id || "") === packageId)) return packageId;
+  const active = readActiveCampaignSelection(slug, inspected);
+  if (
+    active &&
+    active.serviceId === service &&
+    matching.some((campaign) => String(campaign.id || "") === active.campaignId)
+  ) {
+    return active.campaignId;
+  }
+  if (matching.length === 1) return String(matching[0]?.id || "") || null;
+  return null;
+}
+
+function localityContentState(page: CanonicalCampaignLifecycle["content"]["localityPages"][number]): CanonicalLocalityContentState {
+  if (!page.areaSlug || !page.sourcePath) return "UNRESOLVED";
+  return page.observedContentHash ? "PRESENT" : "MISSING";
+}
+
+function readActiveCampaignSelection(
+  slug: string,
+  inspected: string[],
+): { campaignId: string; serviceId: string } | null {
+  const doc = readJson(workspacePath("data/pharmacy-master-admin/active-service-campaign", `${slug}.json`), inspected);
+  const campaignId = nonEmptyString(doc?.campaignId);
+  const serviceId = nonEmptyString(doc?.serviceId);
+  if (!campaignId || !serviceId) return null;
+  return { campaignId, serviceId };
+}
+
 export function resolveCanonicalCampaignLifecycle(
   input: ResolveCanonicalCampaignLifecycleInput,
 ): CanonicalCampaignLifecycle {

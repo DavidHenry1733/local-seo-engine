@@ -9,6 +9,10 @@ import path from "node:path";
 import { buildCommercialQualityReview } from "../src/pharmacy/masterAdminCommercialQualityReviewService.ts";
 import { loadContentPackage } from "../src/pharmacy/pharmacyContentPackageService.ts";
 import { resolveExistingCampaignEcosystemAuthority } from "../src/pharmacy/masterAdminQualityReviewCampaignEcosystemAuthority.ts";
+import {
+  resolveCanonicalCampaignIdForService,
+  resolveCanonicalCampaignMembership,
+} from "../src/pharmacy/canonicalCampaignLifecycleResolver.ts";
 import { PHARMACY_WORKSPACE_ROOT } from "../src/pharmacy/pharmacyWorkspacePaths.ts";
 
 const BROOK = "brook-pharmacy-demo-derby";
@@ -146,10 +150,19 @@ function run(): void {
     "Leeds pharmacy-first was treated as an existing uk-local campaign",
   );
   const leeds = buildCommercialQualityReview(LEEDS);
-  const expectedLeedsLocations = indexLocationPages(LEEDS, leeds.serviceId || SERVICE);
+  const leedsPackageCampaignId = String((leedsPackage as { campaignId?: string } | null)?.campaignId || "") || null;
+  const leedsCampaignId = resolveCanonicalCampaignIdForService(LEEDS, leeds.serviceId || SERVICE, leedsPackageCampaignId);
+  const leedsMembership = leedsCampaignId
+    ? resolveCanonicalCampaignMembership({ tenantSlug: LEEDS, campaignId: leedsCampaignId })
+    : null;
+  assert(leedsMembership?.resolved === true, "Leeds Quality Review lost its canonical campaign");
   assert(
-    leeds.contentTotals.locationPages === expectedLeedsLocations,
-    `Leeds location pages ${leeds.contentTotals.locationPages} != index ${expectedLeedsLocations}`,
+    leeds.contentTotals.locationPages === (leedsMembership?.areaSlugs.length || 0),
+    `Leeds location pages ${leeds.contentTotals.locationPages} != canonical membership ${leedsMembership?.areaSlugs.length}`,
+  );
+  assert(
+    leeds.contentTotals.websitePages === (leedsMembership?.expectedWebsitePages || 0),
+    `Leeds website pages ${leeds.contentTotals.websitePages} != canonical total ${leedsMembership?.expectedWebsitePages}`,
   );
   assert(
     leeds.blockers.some((blocker) => /authorised ecosystem generation required/i.test(blocker)),

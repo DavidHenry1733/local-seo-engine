@@ -155,7 +155,7 @@ export function resolveExistingCampaignEcosystemAuthority(
   return {
     campaignId: campaign.id,
     serviceId,
-    areaSlugs: withOutput,
+    areaSlugs: selected,
     missingOutputAreaSlugs,
     registryAgrees,
     registryDetail,

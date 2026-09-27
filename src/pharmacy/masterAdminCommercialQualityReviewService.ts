@@ -44,6 +44,11 @@ import { readCanonicalEcosystemGenerationPlan } from "./masterAdminCanonicalEcos
 import { evaluatePharmacyFirstHealth } from "./imagePlatform/pharmacyImagePlatformPharmacyFirstHealth.ts";
 import { resolveCampaignPublishingContentApproval } from "./masterAdminCampaignPublishingApprovalResolver.ts";
 import {
+  resolveCanonicalCampaignIdForService,
+  resolveCanonicalCampaignMembership,
+} from "./canonicalCampaignLifecycleResolver.ts";
+import { CANONICAL_LIFECYCLE_REASON } from "./canonicalCampaignLifecycleModel.ts";
+import {
   evaluateExistingCampaignEcosystemImages,
   evaluateExistingCampaignEcosystemLinks,
   resolveExistingCampaignEcosystemAuthority,
@@ -692,6 +697,36 @@ export function buildCommercialQualityReview(slug: string): CommercialQualityRev
   const index = readEcosystemIndex(slug, serviceId);
   const totals = buildContentTotals(slug, serviceId, index, authority);
   const { checks, warnings, blockers } = runCommercialChecks(slug, serviceId, manifest, report, authority);
+  const packageCampaignId = String((manifest as { campaignId?: string }).campaignId || "").trim() || null;
+  const membershipCampaignId = resolveCanonicalCampaignIdForService(slug, serviceId, packageCampaignId);
+  const membership = membershipCampaignId
+    ? resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId: membershipCampaignId })
+    : null;
+  if (membership?.resolved) {
+    totals.servicePages = 1;
+    totals.locationPages = membership.areaSlugs.length;
+    totals.websitePages = membership.expectedWebsitePages;
+    if (membership.conflicts.some((conflict) => conflict.code === CANONICAL_LIFECYCLE_REASON.packageAreaSetDiffers)) {
+      warnings.push("Package selectedAreas differ from canonical campaign membership");
+    }
+    if (membership.unattachedAreaSlugs.length) {
+      warnings.push(
+        `Unattached locality outputs are outside campaign membership: ${membership.unattachedAreaSlugs.join(", ")}`,
+      );
+    }
+    if (membership.areaSlugs.length === 0 && ((membership.packageAreaSlugs?.length || 0) > 0 || membership.unattachedAreaSlugs.length > 0)) {
+      warnings.push("Canonical campaign membership has no localities; other area evidence is unattached");
+    }
+    const missingLocalities = membership.localityStates
+      .filter((area) => area.contentState === "MISSING")
+      .map((area) => area.areaSlug);
+    if (missingLocalities.length) {
+      blockers.push(`Missing canonical locality pages: ${missingLocalities.join(", ")}`);
+    }
+    if (membership.servicePageState === "MISSING") {
+      blockers.push("Canonical service page output is missing");
+    }
+  }
   const latest = readLatestCommercialQualityApproval(slug);
   const approved = Boolean(manifest.reviewedAt || latest?.approvedAt);
   const authorised = readAuthorisedEcosystemGenerationRecord(slug);
@@ -745,9 +780,11 @@ export function buildCommercialQualityReview(slug: string): CommercialQualityRev
     authorisedGenerationJobId: authorised?.jobId || null,
     authorisedGenerationRevision: authorised?.generationRevision || null,
     productOwnerAuthorised: authorisedComplete,
-    locationBreakdown: authority
-      ? { hubCount: 0, clusterCount: 0, areaPageCount: authority.areaSlugs.length }
-      : buildLocationBreakdown(slug),
+    locationBreakdown: membership?.resolved
+      ? { hubCount: 0, clusterCount: 0, areaPageCount: membership.areaSlugs.length }
+      : authority
+        ? { hubCount: 0, clusterCount: 0, areaPageCount: authority.areaSlugs.length }
+        : buildLocationBreakdown(slug),
     previewLinks: authorisedComplete ? buildQualityReviewPreviewLinks(slug, serviceId) : [],
     productOwnerQualityAudit,
     pageInspectionWorkspace,
