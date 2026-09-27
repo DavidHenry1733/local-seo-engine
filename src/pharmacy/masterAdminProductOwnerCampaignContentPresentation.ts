@@ -5,7 +5,6 @@
  */
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 import {
-  isCampaignServicePageReviewApproved,
   isServicePageGeneratedForIdentity,
   readServicePageGenerationRecord,
 } from "./masterAdminCoreProductRecoveryService.ts";
@@ -70,8 +69,8 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
 
   if (candidates?.active) {
     const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
-    const serviceApproved = candidates.approvedServicePage;
     const contentApproval = resolveCampaignPublishingContentApproval(slug, { campaignId, serviceId });
+    const serviceApproved = contentApproval.servicePageApproved;
     const localityApprovedCount = contentApproval.localityApprovedCount;
     const localityGeneratedCount = membership.resolved ? membership.areaSlugs.length : 0;
     const localityRemainingCount = Math.max(0, localityGeneratedCount - localityApprovedCount);
@@ -95,7 +94,7 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
     const ready = blockers.length === 0;
     return {
       serviceStatus,
-      serviceRevision: candidates.candidateVersion,
+      serviceRevision: contentApproval.serviceRevision,
       servicePreviewUrl: `/api/growth-engine/${encodeURIComponent(slug)}/review-preview?campaign=${encodeURIComponent(serviceId)}&asset=service-page`,
       serviceApproved,
       serviceGenerated: Boolean(candidates.candidateVersion),
@@ -113,31 +112,25 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
     };
   }
 
-  const serviceGenerated = isServicePageGeneratedForIdentity(slug, serviceId, campaignId);
-  const record = serviceGenerated
+  const contentApproval = resolveCampaignPublishingContentApproval(slug, { campaignId, serviceId });
+  const generationRecorded = isServicePageGeneratedForIdentity(slug, serviceId, campaignId);
+  const record = generationRecorded
     ? readServicePageGenerationRecord(slug, serviceId, campaignId)
     : null;
-  const generationRevision = record?.imageAssignmentRevision || null;
-  const serviceApproved =
-    serviceGenerated &&
-    isCampaignServicePageReviewApproved(slug, campaignId, serviceId, generationRevision);
+  const serviceApproved = contentApproval.servicePageApproved;
+  const serviceGenerated = Boolean(contentApproval.serviceRevision) || generationRecorded;
   const serviceStatus: ServiceContentStatus = !serviceGenerated
     ? "Not Generated"
     : serviceApproved
       ? "Approved"
       : "Generated";
-  const serviceRevision =
-    (record?.imageAssignmentRevision && String(record.imageAssignmentRevision)) ||
-    (record?.completedAt && String(record.completedAt)) ||
-    (record?.jobId && String(record.jobId)) ||
-    null;
+  const serviceRevision = contentApproval.serviceRevision;
   const servicePreviewUrl = serviceGenerated
     ? record?.previewUrl ||
       `/api/pharmacy-visual-experience/${encodeURIComponent(serviceId)}/?slug=${encodeURIComponent(slug)}`
     : null;
 
   const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
-  const contentApproval = resolveCampaignPublishingContentApproval(slug, { campaignId, serviceId });
   const localityGeneratedCount = membership.resolved && membership.serviceId === serviceId ? membership.areaSlugs.length : 0;
   const localityApprovedCount = contentApproval.localityApprovedCount;
   const localityRemainingCount = Math.max(0, localityGeneratedCount - localityApprovedCount);

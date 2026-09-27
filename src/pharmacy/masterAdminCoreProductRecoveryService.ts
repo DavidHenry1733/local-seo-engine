@@ -49,7 +49,10 @@ import {
 } from "./masterAdminServicePageGenerationIdentity.ts";
 import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
 import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
-import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
+import {
+  recordCanonicalCampaignPageDecision,
+  resolveCanonicalPageApproval,
+} from "./canonicalCampaignApprovalService.ts";
 import { readPharmacyCampaignStore } from "./pharmacyCampaignService.ts";
 import { buildContentEcosystemLocalPreviewUrl } from "./pharmacyClusterPageUrlResolver.ts";
 import {
@@ -434,6 +437,17 @@ export function decideLocalityPageReview(
     },
   };
   writeJsonAtomic(localityPageDecisionsPath(slug, identity.campaignId), next);
+  recordCanonicalCampaignPageDecision({
+    tenantSlug: slug,
+    campaignId: identity.campaignId,
+    serviceId: identity.serviceId,
+    pageType: "locality",
+    areaSlug: area,
+    decision,
+    reviewer: operator || null,
+    source: "master-admin",
+    reviewedAt: decidedAt,
+  });
   return buildCprClusterReviewDashboard(slug, identity);
 }
 
@@ -514,9 +528,14 @@ export function buildCprClusterReviewDashboard(
   const candidates = resolveApprovedCurrentRunCandidatePublishReadiness(slug, identity.serviceId);
   if (candidates?.active && canonicalAreas) {
     const pages = canonicalAreas.map((areaSlug) => {
-      const approved = candidates.pages.some(
-        (page) => page.pageType === "local" && page.areaSlug === areaSlug && page.approved,
-      );
+      const canonical = resolveCanonicalPageApproval({
+        tenantSlug: slug,
+        campaignId: identity.campaignId,
+        serviceId: identity.serviceId,
+        pageType: "locality",
+        areaSlug,
+      });
+      const approved = canonical.decision === "APPROVED";
       const previewAsset =
         candidates.pages.find((page) => page.pageType === "local" && page.areaSlug === areaSlug)?.previewAsset ||
         "ai-local-area-page-pilot-v3";
@@ -525,8 +544,8 @@ export function buildCprClusterReviewDashboard(
         label: areaSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
         previewUrl: `/api/growth-engine/${encodeURIComponent(slug)}/review-preview?campaign=${encodeURIComponent(identity.serviceId)}&asset=${encodeURIComponent(previewAsset)}&area=${encodeURIComponent(areaSlug)}`,
         outputPath: "",
-        decision: (approved ? "approved" : "pending") as LocalityPageReviewDecision,
-        decidedAt: approved ? candidates.candidateVersion : null,
+        decision: (canonical.decision === "REJECTED" ? "rejected" : approved ? "approved" : "pending") as LocalityPageReviewDecision,
+        decidedAt: canonical.reviewedAt,
       };
     });
     const approvedLocalityCount = pages.filter((page) => page.decision === "approved").length;
@@ -561,20 +580,25 @@ export function buildCprClusterReviewDashboard(
   const reviewAreas = canonicalAreas || [];
   if (reviewAreas.length === 0 && !active) return null;
 
-  const localityStore = readLocalityPageDecisionStore(slug, identity);
   const rendered = new Map(listCprClusterPagePreviews(slug, identity).map((page) => [page.areaSlug, page]));
   const pages = reviewAreas.map((areaSlug) => {
     const preview = rendered.get(areaSlug);
-    const rec = localityStore?.decisions?.[areaSlug];
+    const canonical = resolveCanonicalPageApproval({
+      tenantSlug: slug,
+      campaignId: identity.campaignId,
+      serviceId: identity.serviceId,
+      pageType: "locality",
+      areaSlug,
+    });
     const decision: LocalityPageReviewDecision =
-      rec?.decision === "approved" || rec?.decision === "rejected" ? rec.decision : "pending";
+      canonical.decision === "APPROVED" ? "approved" : canonical.decision === "REJECTED" ? "rejected" : "pending";
     return {
       areaSlug,
       label: preview?.label || areaSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
       previewUrl: preview?.previewUrl || "",
       outputPath: preview?.outputPath || "",
       decision,
-      decidedAt: rec?.decidedAt || null,
+      decidedAt: canonical.reviewedAt,
     };
   });
   const approvedLocalityCount = pages.filter((p) => p.decision === "approved").length;
@@ -1472,6 +1496,16 @@ export function approveServicePageReview(
     history,
   };
   writeJsonAtomic(campaignServiceReviewDecisionPath(slug, identity.campaignId), campaignDecision);
+  recordCanonicalCampaignPageDecision({
+    tenantSlug: slug,
+    campaignId: identity.campaignId,
+    serviceId: identity.serviceId,
+    pageType: "service",
+    decision: "approved",
+    reviewer: operator || null,
+    source: "master-admin",
+    reviewedAt: decidedAt,
+  });
 
   const recorded = getLastRecordedWorkflowStage(slug);
   if (recorded === "quality_review" || isCoreProductRecoveryMode(slug)) {

@@ -5,17 +5,10 @@
  * campaign-scoped Product Owner approvals (service-page-review + locality pages).
  * Does not create approval records, snapshots, or publish anything.
  */
-import {
-  isCampaignServicePageReviewApproved,
-  isServicePageGeneratedForIdentity,
-  readCampaignServicePageReviewDecision,
-  readLocalityPageDecisionStore,
-  readServicePageGenerationRecord,
-} from "./masterAdminCoreProductRecoveryService.ts";
 import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
 import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
 import { CANONICAL_LIFECYCLE_REASON } from "./canonicalCampaignLifecycleModel.ts";
-import { resolveApprovedCurrentRunCandidatePublishReadiness } from "./pharmacyCurrentRunApprovedCandidatePublishAdapter.ts";
+import { resolveCanonicalCampaignApproval } from "./canonicalCampaignApprovalService.ts";
 import { readLatestCommercialQualityApproval } from "./masterAdminCommercialQualityReviewService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 
@@ -44,31 +37,19 @@ function resolveCampaignScopedProductOwnerApproval(
   campaignId: string,
   serviceId: string,
 ): CampaignPublishingContentApproval {
-  const serviceGenerated = isServicePageGeneratedForIdentity(slug, serviceId, campaignId);
-  const record = serviceGenerated
-    ? readServicePageGenerationRecord(slug, serviceId, campaignId)
-    : null;
-  const generationRevision = record?.imageAssignmentRevision || null;
-  const servicePageApproved =
-    serviceGenerated &&
-    isCampaignServicePageReviewApproved(slug, campaignId, serviceId, generationRevision);
-
   const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
+  const approval = resolveCanonicalCampaignApproval({ tenantSlug: slug, campaignId });
   const selectedAreaSlugs =
     membership.resolved && membership.serviceId === serviceId ? membership.areaSlugs : [];
-  const localityStore = readLocalityPageDecisionStore(slug, { campaignId, serviceId });
   const localityExpectedCount = selectedAreaSlugs.length;
-  const localityApprovedCount = selectedAreaSlugs.filter(
-    (area) => localityStore?.decisions?.[area]?.decision === "approved",
-  ).length;
-  const selectedUnapproved = selectedAreaSlugs.filter(
-    (a) => localityStore?.decisions?.[a]?.decision !== "approved",
-  );
+  const localityApprovedCount = (approval.localities || []).filter((page) => page.decision === "APPROVED").length;
+  const notCurrent = (approval.localities || []).filter((page) => page.decision !== "APPROVED");
+  const stale = (approval.localities || []).filter((page) => page.decision === "STALE").map((page) => page.areaSlug);
   const missingCanonical = membership.localityStates
     .filter((area) => area.contentState !== "PRESENT")
     .map((area) => area.areaSlug);
-  const allSelectedLocalitiesApproved =
-    localityExpectedCount > 0 && selectedUnapproved.length === 0;
+  const servicePageApproved = approval.service?.decision === "APPROVED";
+  const allSelectedLocalitiesApproved = localityExpectedCount > 0 && notCurrent.length === 0;
 
   const blockers: string[] = [];
   if (!membership.resolved || membership.serviceId !== serviceId) {
@@ -77,39 +58,40 @@ function resolveCampaignScopedProductOwnerApproval(
   if (missingCanonical.length) {
     blockers.push(`Missing canonical locality pages: ${missingCanonical.join(", ")}`);
   }
-  if (!serviceGenerated) blockers.push("Service page is not generated");
-  else if (!servicePageApproved) {
+  if (membership.servicePageState === "MISSING") blockers.push("Service page is not generated");
+  else if (approval.service?.decision === "STALE") {
+    blockers.push("Service page approval is stale for the current revision");
+  } else if (!servicePageApproved) {
     blockers.push("Service page is not approved for the current revision");
+  }
+  if (stale.length) {
+    blockers.push(`Stale locality approval is not approval of the current revision: ${stale.join(", ")}`);
   }
   if (membership.conflicts.some((conflict) => conflict.code === CANONICAL_LIFECYCLE_REASON.membershipAreaSlugMissing)) {
     blockers.push("Campaign areas are missing areaSlug and were not added to canonical membership");
   } else if (localityExpectedCount === 0) {
     blockers.push("No locality pages are selected for this campaign");
   } else if (!allSelectedLocalitiesApproved) {
-    blockers.push(`Selected locality pages not approved: ${selectedUnapproved.length} remaining`);
+    blockers.push(`Selected locality pages not approved: ${notCurrent.length} remaining`);
   }
 
   const approved = blockers.length === 0;
-  const serviceDecision = readCampaignServicePageReviewDecision(slug, campaignId);
-  const approvalReference = approved
-    ? String(serviceDecision?.decidedAt || record?.completedAt || generationRevision || campaignId)
-    : null;
-
+  const serviceRevision = approval.service?.contentRevision || null;
   return {
     mode: "campaign-scoped-product-owner",
     approved,
-    servicePageApproved: Boolean(servicePageApproved),
+    servicePageApproved,
     localityApprovedCount,
     localityExpectedCount,
     allSelectedLocalitiesApproved,
-    serviceRevision: generationRevision ? String(generationRevision) : null,
+    serviceRevision,
     campaignId,
     serviceId,
-    approvalReference,
+    approvalReference: approved ? `${serviceRevision}:${localityApprovedCount}` : null,
     blockers,
     detail: approved
-      ? `Campaign-scoped Product Owner approvals (${serviceId}; service revision ${generationRevision}; localities ${localityApprovedCount}/${localityExpectedCount})`
-      : blockers[0] || "Campaign-scoped Product Owner approvals incomplete",
+      ? `Canonical current-revision approvals (${serviceId}; ${serviceRevision}; localities ${localityApprovedCount}/${localityExpectedCount})`
+      : blockers[0] || "Canonical current-revision approvals incomplete",
   };
 }
 
@@ -126,61 +108,6 @@ export function resolveCampaignPublishingContentApproval(
   const selection = readActiveServiceCampaignSelection(slug);
   const campaignId = String(identity?.campaignId || selection?.campaignId || "").trim();
   const serviceId = String(identity?.serviceId || selection?.serviceId || "").trim();
-  const candidates = serviceId
-    ? resolveApprovedCurrentRunCandidatePublishReadiness(slug, serviceId)
-    : null;
-  if (candidates?.active && campaignId) {
-    const membership = resolveCanonicalCampaignMembership({ tenantSlug: slug, campaignId });
-    const expected = membership.resolved && membership.serviceId === serviceId ? membership.areaSlugs : [];
-    const approvedAreas = new Set(
-      candidates.pages
-        .filter((page) => page.pageType === "local" && page.approved && page.areaSlug)
-        .map((page) => String(page.areaSlug)),
-    );
-    const localityApprovedCount = expected.filter((area) => approvedAreas.has(area)).length;
-    const missingCanonical = membership.localityStates
-      .filter((area) => area.contentState !== "PRESENT")
-      .map((area) => area.areaSlug);
-    const blockers: string[] = [];
-    if (!membership.resolved || membership.serviceId !== serviceId) {
-      blockers.push("Campaign membership is unresolved");
-    }
-    if (!candidates.approvedServicePage) {
-      blockers.push("Approved current-run service-page candidate is missing");
-    }
-    if (membership.conflicts.some((conflict) => conflict.code === CANONICAL_LIFECYCLE_REASON.membershipAreaSlugMissing)) {
-      blockers.push("Campaign areas are missing areaSlug and were not added to canonical membership");
-    } else if (expected.length === 0) {
-      blockers.push("No locality pages are selected for this campaign");
-    } else if (localityApprovedCount !== expected.length) {
-      blockers.push(
-        `Approve remaining current-run local candidates (${localityApprovedCount}/${expected.length})`,
-      );
-    }
-    if (missingCanonical.length) {
-      blockers.push(`Missing canonical locality pages: ${missingCanonical.join(", ")}`);
-    }
-    const ready = blockers.length === 0;
-    return {
-      mode: "campaign-scoped-product-owner",
-      approved: ready,
-      servicePageApproved: candidates.approvedServicePage,
-      localityApprovedCount,
-      localityExpectedCount: expected.length,
-      allSelectedLocalitiesApproved: expected.length > 0 && localityApprovedCount === expected.length,
-      serviceRevision: candidates.candidateVersion,
-      campaignId,
-      serviceId,
-      approvalReference: ready
-        ? `${candidates.candidateVersion || "current"}:${candidates.runId || "run"}:${localityApprovedCount}`
-        : null,
-      blockers,
-      detail: ready
-        ? `Current-run Product Owner approvals (${serviceId}; ${candidates.candidateVersion}; ${localityApprovedCount}/${expected.length} canonical localities)`
-        : blockers[0] || "Current-run Product Owner approvals incomplete",
-    };
-  }
-
   if (campaignId && serviceId) {
     return resolveCampaignScopedProductOwnerApproval(slug, campaignId, serviceId);
   }
@@ -189,17 +116,17 @@ export function resolveCampaignPublishingContentApproval(
   if (legacy?.approvedAt) {
     return {
       mode: "legacy-commercial-quality",
-      approved: true,
-      servicePageApproved: true,
+      approved: false,
+      servicePageApproved: false,
       localityApprovedCount: 0,
       localityExpectedCount: 0,
-      allSelectedLocalitiesApproved: true,
+      allSelectedLocalitiesApproved: false,
       serviceRevision: null,
       campaignId: null,
       serviceId: null,
-      approvalReference: String(legacy.approvedAt),
-      blockers: [],
-      detail: `Legacy Commercial Quality Review approved ${legacy.approvedAt}`,
+      approvalReference: null,
+      blockers: ["Legacy quality approval is not approval of the current campaign revision"],
+      detail: `Legacy Commercial Quality Review record ${legacy.approvedAt} is historical evidence`,
     };
   }
 

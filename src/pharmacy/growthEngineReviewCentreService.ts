@@ -62,6 +62,11 @@ import {
   aiLocalCopyPilotPath,
 } from "./contentEngine/pharmacyAiLocalPageCandidatePaths.ts";
 import { loadAiLocalCopyPilotV3 } from "./contentEngine/pharmacyAiLocalNarrativeEngineV3.ts";
+import {
+  recordCanonicalCampaignPageDecision,
+  resolveCanonicalPageApproval,
+  resolveReviewCentreCampaignPage,
+} from "./canonicalCampaignApprovalService.ts";
 import { loadCampaignRegenerationRun } from "./growthEngineCampaignBuilderRegenerationRunService.ts";
 import { loadEditorialEvidencePack } from "./contentEngine/pharmacyLocalEditorialEvidenceCollectorV3.ts";
 import {
@@ -279,6 +284,30 @@ function candidateAssetApprovalState(
   assetKey: string,
   validationOk = true,
 ): { status: ReviewCentreAssetStatus; statusLabel: string } {
+  const canonicalPage = resolveReviewCentreCampaignPage({
+    tenantSlug: slug,
+    campaignOrServiceId: campaignId,
+    assetKey,
+  });
+  if (canonicalPage) {
+    const canonical = resolveCanonicalPageApproval({
+      tenantSlug: slug,
+      campaignId: canonicalPage.campaignId,
+      serviceId: canonicalPage.serviceId,
+      pageType: canonicalPage.pageType,
+      areaSlug: canonicalPage.areaSlug,
+    });
+    if (!validationOk || canonical.decision === "REJECTED" || canonical.decision === "STALE") {
+      return {
+        status: canonical.decision === "APPROVED" ? "approved" : "needs-improvement",
+        statusLabel: reviewCentreStatusLabel(canonical.decision === "APPROVED" ? "approved" : "needs-improvement"),
+      };
+    }
+    if (canonical.decision === "APPROVED") {
+      return { status: "approved", statusLabel: reviewCentreStatusLabel("approved") };
+    }
+    return { status: "ready", statusLabel: reviewCentreStatusLabel("ready") };
+  }
   const builderApproved = Boolean(loadCampaignBuilderSession(slug).approvedAssets[assetKey]);
   const status = assetStatus(builderApproved, isNeedsImprovement(loadReviewCentreSession(slug), campaignId, assetKey));
   if (!validationOk) {
@@ -953,6 +982,27 @@ export function buildReviewCentreView(slug: string, campaignParam: string | null
 }
 
 export function approveReviewCentreAsset(slug: string, campaignId: string, assetKey: string): void {
+  if (assetKey === SERVICE_PAGE_DEMO_REFERENCE_KEY) {
+    throw new Error("This unpublished reference cannot be approved or published.");
+  }
+  const canonicalPage = resolveReviewCentreCampaignPage({
+    tenantSlug: slug,
+    campaignOrServiceId: campaignId,
+    assetKey,
+  });
+  if (canonicalPage) {
+    recordCanonicalCampaignPageDecision({
+      tenantSlug: slug,
+      campaignId: canonicalPage.campaignId,
+      serviceId: canonicalPage.serviceId,
+      pageType: canonicalPage.pageType,
+      areaSlug: canonicalPage.areaSlug,
+      decision: "approved",
+      source: "review-centre",
+      reviewer: "review-centre",
+    });
+    return;
+  }
   if (isNonApprovableReviewAsset(slug, campaignId, assetKey)) {
     throw new Error("This unpublished reference cannot be approved or published.");
   }
