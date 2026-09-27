@@ -36,6 +36,7 @@ import {
   resolvePublishReviewProgressJob,
 } from "./masterAdminCommercialPublishReviewService.ts";
 import { readManagedPublishingProfile } from "./masterAdminManagedPublishingService.ts";
+import { resolveGoogleProfileOnboardingState } from "./masterAdminGoogleProfileOnboardingService.ts";
 
 const LIFECYCLE_LABELS: Record<CustomerLifecycleStage, string> = {
   new: "NEW",
@@ -233,7 +234,11 @@ function buildMasterAdminCustomerRecordLiteInternal(slug: string): MasterAdminCu
     websiteSource: buildWebsiteSourceSummary(safe),
     googleSource: buildGoogleSourceSummary(safe),
     onboardingSources: buildOnboardingSourcesSummary(safe),
-    businessProfileReview: null,
+    businessProfileReview: {
+      summary: {
+        googleProfileState: resolveGoogleProfileOnboardingState(data),
+      },
+    } as MasterAdminCustomerRecord["businessProfileReview"],
     deploymentConfiguration: {
       summary: { overallStatus: "LAZY", publishingReadiness: "Load panel for details" },
       approved: false,
