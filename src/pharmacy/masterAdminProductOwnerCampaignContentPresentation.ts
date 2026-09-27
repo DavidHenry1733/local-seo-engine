@@ -9,6 +9,7 @@ import {
   readServicePageGenerationRecord,
 } from "./masterAdminCoreProductRecoveryService.ts";
 import { resolveCampaignPublishingContentApproval } from "./masterAdminCampaignPublishingApprovalResolver.ts";
+import { resolveCanonicalPublicationState } from "./canonicalCampaignPublishingService.ts";
 import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
 import { resolveApprovedCurrentRunCandidatePublishReadiness } from "./pharmacyCurrentRunApprovedCandidatePublishAdapter.ts";
 import { listMasterAdminJobs } from "./masterAdminJobService.ts";
@@ -22,7 +23,7 @@ export type LocalityContentStatus =
 
 export interface ProductOwnerCampaignPublishingReadiness {
   ready: boolean;
-  label: "Ready to Publish" | "Not Ready to Publish";
+  label: "Ready to Publish" | "Not Ready to Publish" | "Published" | "New revision requires approval";
   blockers: string[];
   publishActionVisible: boolean;
 }
@@ -57,6 +58,13 @@ function findActiveCampaignJobs(slug: string, campaignId: string, serviceId: str
   );
 }
 
+function publicationLabel(state: ReturnType<typeof resolveCanonicalPublicationState>["state"]): ProductOwnerCampaignPublishingReadiness["label"] {
+  if (state === "READY_TO_PUBLISH") return "Ready to Publish";
+  if (state === "PUBLISHED") return "Published";
+  if (state === "NEW_REVISION_REQUIRES_APPROVAL") return "New revision requires approval";
+  return "Not Ready to Publish";
+}
+
 export function resolveProductOwnerCampaignContentPresentation(input: {
   slug: string;
   campaignId: string;
@@ -88,10 +96,11 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
             ? "Partially Approved"
             : "Generated";
     }
-    const blockers: string[] = [];
-    if (!campaignId || !serviceId) blockers.push("Campaign identity is incomplete");
-    for (const b of contentApproval.blockers) blockers.push(b);
-    const ready = blockers.length === 0;
+    const publication = resolveCanonicalPublicationState({ tenantSlug: slug, campaignId });
+    const blockers = publication.blockers.slice();
+    if (!campaignId || !serviceId) blockers.unshift("Campaign identity is incomplete");
+    const ready = publication.ready && blockers.length === 0;
+    const label = publicationLabel(publication.state);
     return {
       serviceStatus,
       serviceRevision: contentApproval.serviceRevision,
@@ -105,7 +114,7 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
       localitiesGenerated: localityGeneratedCount > 0,
       publishing: {
         ready,
-        label: ready ? "Ready to Publish" : "Not Ready to Publish",
+        label,
         blockers,
         publishActionVisible: true,
       },
@@ -148,16 +157,16 @@ export function resolveProductOwnerCampaignContentPresentation(input: {
   const activeGeneration = activeJobs.filter((j) => GENERATION_JOB_ACTIONS.has(j.action));
   const activeRegeneration = activeJobs.filter((j) => REGENERATION_JOB_ACTIONS.has(j.action));
 
-  const blockers: string[] = [];
-  if (!campaignId || !serviceId) blockers.push("Campaign identity is incomplete");
-  for (const b of contentApproval.blockers) blockers.push(b);
+  const publication = resolveCanonicalPublicationState({ tenantSlug: slug, campaignId });
+  const blockers = publication.blockers.slice();
+  if (!campaignId || !serviceId) blockers.unshift("Campaign identity is incomplete");
   if (activeGeneration.length) blockers.push("A generation job is currently running");
   if (activeRegeneration.length) blockers.push("A regeneration job is currently running");
 
-  const ready = blockers.length === 0;
+  const ready = publication.ready && blockers.length === 0;
   const publishing: ProductOwnerCampaignPublishingReadiness = {
     ready,
-    label: ready ? "Ready to Publish" : "Not Ready to Publish",
+    label: publicationLabel(publication.state),
     blockers,
     publishActionVisible: true,
   };

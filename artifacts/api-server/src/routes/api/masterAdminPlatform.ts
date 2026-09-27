@@ -8,6 +8,7 @@ import path from "node:path";
 /**
  * Master Admin Platform V1 — JSON API for commercial control centre.
  */
+import { publishCanonicalCampaign } from "../../../../../src/pharmacy/canonicalCampaignPublishingService.ts";
 import { Router } from "express";
 import { requireAdmin } from "../../middlewares/requireAuth.js";
 import {
@@ -1116,6 +1117,22 @@ router.get("/master-admin-platform/customers/:slug/commercial-publish-review", (
     return res.status(500).json({ ok: false, error: review.loadError, review });
   }
   res.json({ ok: true, review });
+});
+
+router.post("/master-admin-platform/customers/:slug/campaigns/:campaignId/canonical-publish", (req, res) => {
+  const slug = safeAdminSlug(req.params.slug);
+  const campaignId = String(req.params.campaignId || "").trim();
+  const result = publishCanonicalCampaign({ tenantSlug: slug, campaignId });
+  if (!result.ok) {
+    return res.status(409).json({
+      ok: false,
+      error: result.blockers.join("; ") || "Canonical publication blocked",
+      message: result.blockers.join("; ") || "Canonical publication blocked",
+      blockers: result.blockers,
+      publication: result.publication,
+    });
+  }
+  res.json({ ok: true, idempotent: result.idempotent, publication: result.publication, uiState: result.uiState });
 });
 
 router.post("/master-admin-platform/customers/:slug/commercial-publish-review/approve", (req, res) => {

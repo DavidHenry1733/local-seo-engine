@@ -43,6 +43,8 @@ import { PHARMACY_WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 import type { ManagedPublishingProfile } from "./masterAdminManagedPublishingModel.ts";
 import { syncTenantRegistryFromPublishedRelease } from "./pharmacyTenantRegistrySyncService.ts";
 import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
+import { publishCanonicalCampaign } from "./canonicalCampaignPublishingService.ts";
+import { resolveCanonicalCampaignIdForService } from "./canonicalCampaignLifecycleResolver.ts";
 
 const SNAPSHOT_DIR = path.join(WORKSPACE_ROOT, "data/pharmacy-master-admin/commercial-publish");
 const PUBLISH_STATUS_DIR = path.join(PHARMACY_WORKSPACE_ROOT, "data/pharmacy-publish-status");
@@ -417,7 +419,7 @@ export async function executeCommercialPublishJob(
   const slug = job.slug;
   const operator = job.user;
   const startedAt = job.startedAt || new Date().toISOString();
-  const meta = job.sourceRevision ? (JSON.parse(job.sourceRevision) as { serviceId?: string }) : {};
+  const meta = job.sourceRevision ? (JSON.parse(job.sourceRevision) as { serviceId?: string; campaignId?: string }) : {};
   const serviceId = meta.serviceId || "pharmacy-first";
   const previousSnapshot = readLatestCommercialPublishSnapshot(slug);
   const previousReleaseId =
@@ -457,6 +459,26 @@ export async function executeCommercialPublishJob(
   };
 
   try {
+    const activeSelection = readActiveServiceCampaignSelection(slug);
+    let jobCampaignId = String(meta.campaignId || activeSelection?.campaignId || "").trim();
+    if (!jobCampaignId) {
+      jobCampaignId = resolveCanonicalCampaignIdForService(slug, serviceId, null) || "";
+    }
+    if (!jobCampaignId) throw new Error("Campaign identity is unresolved");
+    const canonical = publishCanonicalCampaign({ tenantSlug: slug, campaignId: jobCampaignId });
+    if (!canonical.ok) {
+      throw new Error(canonical.blockers.join("; ") || "Canonical publication blocked");
+    }
+    const completedAt = new Date().toISOString();
+    return updateMasterAdminJob(jobId, {
+      status: "completed",
+      progress: 100,
+      progressLabel: canonical.idempotent ? "Already published" : "Completed",
+      completedAt,
+      evidence: `Canonical publication ${canonical.publication?.current?.pages.length || 0} page(s)`,
+      result: { canonicalPublication: canonical.publication, idempotent: canonical.idempotent },
+      leaseExpiresAt: undefined,
+    });
     touch("preparing_release", 5, "Preparing release", "running");
     const prepared = await preparePharmacyPublishOutput(slug, serviceId);
     totalFiles = prepared.pageCount + 3;

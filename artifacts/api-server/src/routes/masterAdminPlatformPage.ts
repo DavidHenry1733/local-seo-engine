@@ -2619,10 +2619,12 @@ function renderProductOwnerCampaignContentStructure(camp,opts){
   const publishBlockers=Array.isArray(publishing.blockers)?publishing.blockers:[];
   const publishActions=[];
   if(publishReady){
-    publishActions.push('<div style="font-size:.78rem;color:#4ade80;font-weight:800">Ready to Publish</div>');
+    publishActions.push('<div style="font-size:.78rem;color:#4ade80;font-weight:800">'+esc(publishLabel)+'</div>');
     publishActions.push('<button class="btn" type="button" style="'+style+'" onclick="poWorkflowAction(\\''+cid+'\\',\\'publish-campaign\\')">Publish Campaign</button>');
+  }else if(publishLabel==='Published'){
+    publishActions.push('<div style="font-size:.78rem;color:#4ade80;font-weight:800">Published</div>');
   }else{
-    publishActions.push('<div style="font-size:.78rem;color:#f87171;font-weight:800">Not Ready to Publish</div>');
+    publishActions.push('<div style="font-size:.78rem;color:#f87171;font-weight:800">'+esc(publishLabel)+'</div>');
     if(publishBlockers.length){
       publishActions.push('<ul style="margin:6px 0 0 16px;padding:0;font-size:.7rem;color:#fca5a5">'+publishBlockers.map(function(b){return '<li>'+esc(String(b))+'</li>';}).join('')+'</ul>');
     }else{
@@ -2699,7 +2701,13 @@ async function poWorkflowAction(campaignId,action){
     else if(action==='review-locality')await openClusterPageReview();
     else if(action==='approve-remaining-locality')await openClusterPageReview();
     else if(action==='regenerate-all-locality')await regenerateAllCampaignLocalityPages();
-    else if(action==='publish-campaign')await openCommercialPublishReview();
+    else if(action==='publish-campaign'){
+      const published=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/campaigns/'+encodeURIComponent(campaignId)+'/canonical-publish',{method:'POST',body:'{}'});
+      if(!published.ok)throw new Error((published.blockers||[]).join('; ')||published.error||'Publish blocked');
+      const refreshed=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug));
+      if(refreshed.customer){activeCustomer=refreshed.customer;renderCustomerDetail(activeCustomer);}
+      toast(published.idempotent?'Campaign revision is already published':'Campaign published');
+    }
   }catch(e){toast(e.message||String(e),true)}
 }
 function renderServiceCampaignsPanel(c){
