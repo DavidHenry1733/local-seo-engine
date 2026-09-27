@@ -14,6 +14,7 @@ import {
 } from "./masterAdminCoreProductRecoveryService.ts";
 import { readActiveServiceCampaignSelection } from "./masterAdminActiveServiceCampaignStore.ts";
 import { resolveCanonicalCampaignMembership } from "./canonicalCampaignLifecycleResolver.ts";
+import { CANONICAL_LIFECYCLE_REASON } from "./canonicalCampaignLifecycleModel.ts";
 import { resolveApprovedCurrentRunCandidatePublishReadiness } from "./pharmacyCurrentRunApprovedCandidatePublishAdapter.ts";
 import { readLatestCommercialQualityApproval } from "./masterAdminCommercialQualityReviewService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
@@ -80,7 +81,9 @@ function resolveCampaignScopedProductOwnerApproval(
   else if (!servicePageApproved) {
     blockers.push("Service page is not approved for the current revision");
   }
-  if (localityExpectedCount === 0) {
+  if (membership.conflicts.some((conflict) => conflict.code === CANONICAL_LIFECYCLE_REASON.membershipAreaSlugMissing)) {
+    blockers.push("Campaign areas are missing areaSlug and were not added to canonical membership");
+  } else if (localityExpectedCount === 0) {
     blockers.push("No locality pages are selected for this campaign");
   } else if (!allSelectedLocalitiesApproved) {
     blockers.push(`Selected locality pages not approved: ${selectedUnapproved.length} remaining`);
@@ -145,7 +148,9 @@ export function resolveCampaignPublishingContentApproval(
     if (!candidates.approvedServicePage) {
       blockers.push("Approved current-run service-page candidate is missing");
     }
-    if (expected.length === 0) {
+    if (membership.conflicts.some((conflict) => conflict.code === CANONICAL_LIFECYCLE_REASON.membershipAreaSlugMissing)) {
+      blockers.push("Campaign areas are missing areaSlug and were not added to canonical membership");
+    } else if (expected.length === 0) {
       blockers.push("No locality pages are selected for this campaign");
     } else if (localityApprovedCount !== expected.length) {
       blockers.push(
