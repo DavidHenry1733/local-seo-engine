@@ -2,6 +2,8 @@ import app from "./app";
 import { logger } from "./lib/logger";
 import { startMasterAdminJobWorker } from "../../../src/pharmacy/masterAdminJobWorkerService.ts";
 
+export { resolveCanonicalCampaignLifecycle } from "../../../src/pharmacy/canonicalCampaignLifecycleResolver.ts";
+
 const rawPort = process.env["PORT"];
 
 if (!rawPort) {

@@ -42,6 +42,14 @@ import { readCanonicalImageInventory } from "./pharmacyCanonicalImageInventorySe
 import { runImageParityGate } from "./pharmacyImageParityGateService.ts";
 import { readCanonicalEcosystemGenerationPlan } from "./masterAdminCanonicalEcosystemGenerationPlanService.ts";
 import { evaluatePharmacyFirstHealth } from "./imagePlatform/pharmacyImagePlatformPharmacyFirstHealth.ts";
+import { resolveCampaignPublishingContentApproval } from "./masterAdminCampaignPublishingApprovalResolver.ts";
+import {
+  evaluateExistingCampaignEcosystemImages,
+  evaluateExistingCampaignEcosystemLinks,
+  resolveExistingCampaignEcosystemAuthority,
+  SERVICE_PAGE_ONLY_LINK_STAMP,
+  type ExistingCampaignEcosystemAuthority,
+} from "./masterAdminQualityReviewCampaignEcosystemAuthority.ts";
 
 const REVIEW_VERSION = "commercial-quality-review-v1";
 const APPROVAL_DIR = path.join(WORKSPACE_ROOT, "data/pharmacy-master-admin/commercial-quality-review");
@@ -322,16 +330,26 @@ function buildQualityReviewPreviewLinks(slug: string, serviceId: string): Commer
   return links;
 }
 
-function buildContentTotals(slug: string, serviceId: string, index: ReturnType<typeof readEcosystemIndex>): CommercialQualityContentTotals {
-  const htmlPaths = listHtmlPages(slug, serviceId);
+function buildContentTotals(
+  slug: string,
+  serviceId: string,
+  index: ReturnType<typeof readEcosystemIndex>,
+  authority: ExistingCampaignEcosystemAuthority | null = null,
+): CommercialQualityContentTotals {
+  const htmlPaths = authority?.resolvedHtmlPaths || listHtmlPages(slug, serviceId);
   const assets = index?.assets || [];
   const blogPosts = assets.filter((a) => /blog post/i.test(a.type || "")).length;
   const patientGuides = assets.filter((a) => /patient guide/i.test(a.type || "")).length;
   const faqPages = assets.filter((a) => /faq/i.test(a.type || "")).length;
-  const locationPages = assets.filter((a) => /local/i.test(a.type || "")).length;
-  const servicePages = assets.filter((a) => /service page|supporting service/i.test(a.type || "")).length + (fs.existsSync(visualPagePath(slug, serviceId)) ? 1 : 0);
+  const locationPages = authority ? authority.areaSlugs.length : assets.filter((a) => /local/i.test(a.type || "")).length;
+  const servicePages = authority
+    ? authority.servicePageOutputPath ? 1 : 0
+    : assets.filter((a) => /service page|supporting service/i.test(a.type || "")).length + (fs.existsSync(visualPagePath(slug, serviceId)) ? 1 : 0);
   const assignments = loadImageAssignments(slug);
   const imageCount = Object.values(assignments.assignments || {}).filter((a) => a.serviceId === serviceId).length;
+  const linkCount = authority
+    ? evaluateExistingCampaignEcosystemLinks(authority).linkedCount
+    : countInternalLinks(slug, serviceId);
 
   return {
     websitePages: htmlPaths.length,
@@ -342,9 +360,11 @@ function buildContentTotals(slug: string, serviceId: string, index: ReturnType<t
     faqPages,
     images: imageCount,
     schemas: countSchemas(htmlPaths),
-    internalLinks: countInternalLinks(slug, serviceId),
+    internalLinks: linkCount,
     sitemap: sitemapUrlCount(slug),
-    registry: fs.existsSync(path.join(ecosystemRoot(slug, serviceId), "_ecosystem-index.json")) ? 1 : 0,
+    registry: authority
+      ? authority.registryAgrees ? 1 : 0
+      : fs.existsSync(path.join(ecosystemRoot(slug, serviceId), "_ecosystem-index.json")) ? 1 : 0,
     manifest: fs.existsSync(manifestPath(slug, serviceId)) ? 1 : 0,
   };
 }
@@ -354,12 +374,13 @@ function runCommercialChecks(
   serviceId: string,
   manifest: NonNullable<ReturnType<typeof loadContentPackage>>,
   report: ReturnType<typeof loadGenerationReport>,
+  authority: ExistingCampaignEcosystemAuthority | null = null,
 ): { checks: CommercialQualityCheck[]; warnings: string[]; blockers: string[] } {
   const checks: CommercialQualityCheck[] = [];
   const warnings: string[] = [];
   const blockers: string[] = [];
 
-  const htmlPaths = listHtmlPages(slug, serviceId);
+  const htmlPaths = authority?.resolvedHtmlPaths || listHtmlPages(slug, serviceId);
   const index = readEcosystemIndex(slug, serviceId);
   const manifestPathFile = manifestPath(slug, serviceId);
   const registryPath = path.join(ecosystemRoot(slug, serviceId), "_ecosystem-index.json");
@@ -383,16 +404,31 @@ function runCommercialChecks(
     checks.push(check("manifest", "Manifest valid", "PASS", "Content package manifest present"));
   }
 
-  if (!fs.existsSync(registryPath)) {
+  if (authority) {
+    checks.push(
+      authority.registryAgrees
+        ? check("registry", "Registry valid", "PASS", authority.registryDetail)
+        : check("registry", "Registry valid", "FAIL", authority.registryDetail),
+    );
+    if (!authority.registryAgrees) blockers.push("Registry mismatch");
+  } else if (!fs.existsSync(registryPath)) {
     checks.push(check("registry", "Registry valid", "FAIL", "Ecosystem registry index missing"));
     blockers.push("Missing registry");
   } else {
     checks.push(check("registry", "Registry valid", "PASS", "Ecosystem registry present"));
   }
 
-  const requiredPagesOk = fs.existsSync(visualPath) && htmlPaths.length > 0;
+  const missingLocalOutputs = authority?.missingOutputAreaSlugs || [];
+  const requiredPagesOk = authority
+    ? Boolean(authority.servicePageOutputPath) && missingLocalOutputs.length === 0 && authority.areaSlugs.length > 0
+    : fs.existsSync(visualPath) && htmlPaths.length > 0;
   if (!requiredPagesOk) {
-    checks.push(check("required-pages", "Required pages generated", "FAIL", "Service page output missing"));
+    const detail = authority
+      ? missingLocalOutputs.length
+        ? `Selected locality outputs missing: ${missingLocalOutputs.join(", ")}`
+        : "Service page output missing"
+      : "Service page output missing";
+    checks.push(check("required-pages", "Required pages generated", "FAIL", detail));
     blockers.push("Missing pages");
   } else {
     checks.push(check("required-pages", "Required pages generated", "PASS", `${htmlPaths.length} website page(s) on disk`));
@@ -415,11 +451,17 @@ function runCommercialChecks(
     checks.push(check("broken-output", "Required outputs exist", "PASS", "All required included assets present on disk"));
   }
 
-  const plan = readCanonicalEcosystemGenerationPlan(slug);
-  const imageParity = runImageParityGate(slug, serviceId, plan);
+  const imageParity = authority
+    ? evaluateExistingCampaignEcosystemImages(slug, authority)
+    : runImageParityGate(slug, serviceId, readCanonicalEcosystemGenerationPlan(slug));
+  const imageFailureDetail = imageParity.ok
+    ? ""
+    : "missingAssignments" in imageParity
+      ? `${imageParity.missingAssignments} missing production assignment(s)`
+      : imageParity.failures[0] || "Resolved campaign image missing";
   if (!imageParity.ok) {
     checks.push(check("hero-images", "Hero images exist", "FAIL", imageParity.failures[0] || "Production hero image missing"));
-    checks.push(check("required-images", "Images exist", "FAIL", `${imageParity.missingAssignments} missing production assignment(s)`));
+    checks.push(check("required-images", "Images exist", "FAIL", imageFailureDetail));
     blockers.push("Missing required images");
   } else {
     checks.push(check("hero-images", "Hero images exist", "PASS", "Production hero image assigned"));
@@ -446,12 +488,18 @@ function runCommercialChecks(
     checks.push(check("schema", "Schema valid", "PASS", `${schemaCount} page(s) include schema markup`));
   }
 
-  const internalOk = report?.internalLinkValidation?.ok !== false;
+  const linkStamp = Boolean(report?.internalLinkValidation?.detail?.includes(SERVICE_PAGE_ONLY_LINK_STAMP));
+  const reportLinkFailed = report?.internalLinkValidation?.ok === false && !(authority && linkStamp);
+  const pageLinks = authority ? evaluateExistingCampaignEcosystemLinks(authority) : null;
+  const internalOk = !reportLinkFailed && (pageLinks ? pageLinks.ok : true);
+  const internalDetail = reportLinkFailed
+    ? report?.internalLinkValidation?.detail || "Internal link validation failed"
+    : pageLinks?.detail || report?.internalLinkValidation?.detail || "Internal link map present";
   if (!internalOk) {
-    checks.push(check("internal-links", "Internal links valid", "FAIL", report?.internalLinkValidation?.detail || "Internal link validation failed"));
+    checks.push(check("internal-links", "Internal links valid", "FAIL", internalDetail));
     blockers.push("Broken internal links");
   } else {
-    checks.push(check("internal-links", "Internal links valid", "PASS", report?.internalLinkValidation?.detail || "Internal link map present"));
+    checks.push(check("internal-links", "Internal links valid", "PASS", internalDetail));
   }
 
   const seo = seoPagesValid(htmlPaths);
@@ -461,7 +509,9 @@ function runCommercialChecks(
       : check("seo", "SEO Health", "WARNING", `Missing metadata: ${seo.invalid.join(", ")}`),
   );
 
-  const navLinks = countInternalLinks(slug, serviceId);
+  const navLinks = authority
+    ? evaluateExistingCampaignEcosystemLinks(authority).linkedCount
+    : countInternalLinks(slug, serviceId);
   checks.push(
     navLinks > 0
       ? check("navigation", "Navigation", "PASS", `${navLinks} internal navigation link(s) mapped`)
@@ -638,14 +688,20 @@ export function buildCommercialQualityReview(slug: string): CommercialQualityRev
   }
 
   const report = loadGenerationReport(slug, serviceId);
+  const authority = resolveExistingCampaignEcosystemAuthority(slug, serviceId, manifest);
   const index = readEcosystemIndex(slug, serviceId);
-  const totals = buildContentTotals(slug, serviceId, index);
-  const { checks, warnings, blockers } = runCommercialChecks(slug, serviceId, manifest, report);
-  const summary = buildSummary(manifest, totals, checks, blockers);
+  const totals = buildContentTotals(slug, serviceId, index, authority);
+  const { checks, warnings, blockers } = runCommercialChecks(slug, serviceId, manifest, report, authority);
   const latest = readLatestCommercialQualityApproval(slug);
   const approved = Boolean(manifest.reviewedAt || latest?.approvedAt);
   const authorised = readAuthorisedEcosystemGenerationRecord(slug);
   const authorisedComplete = authorised?.status === "completed";
+  const publishingBlockers = authority
+    ? resolveCampaignPublishingContentApproval(slug, {
+        campaignId: authority.campaignId,
+        serviceId,
+      }).blockers
+    : [];
   const productOwnerQualityAudit = authorisedComplete ? buildProductOwnerQualityAudit(slug) : null;
   const pageInspectionWorkspace = authorisedComplete ? buildQualityReviewPageInspectionWorkspace(slug) : null;
   const imagePlatformWorkspace = authorisedComplete ? buildImagePlatformWorkspace(slug, serviceId) : null;
@@ -654,6 +710,12 @@ export function buildCommercialQualityReview(slug: string): CommercialQualityRev
     imagePlatformWorkspace && !imagePlatformWorkspace.assignmentsComplete
       ? [`Image parity failed: ${imagePlatformWorkspace.missingAssignments} missing, ${imagePlatformWorkspace.placeholderFallbacks} SVG fallbacks`]
       : [];
+  const finalBlockers = authority
+    ? [...new Set([...blockers, ...publishingBlockers])]
+    : authorisedComplete
+      ? [...blockers, ...inspectionBlockers, ...imageBlockers]
+      : [...blockers, "Product Owner-authorised ecosystem generation required before Quality Review"];
+  const summary = buildSummary(manifest, totals, checks, finalBlockers);
 
   return {
     version: 1,
@@ -666,12 +728,10 @@ export function buildCommercialQualityReview(slug: string): CommercialQualityRev
     summary,
     contentTotals: totals,
     checks,
-    warnings: authorisedComplete
+    warnings: authority || authorisedComplete
       ? warnings
       : [...warnings, "Historical accidental package is preserved for audit — Quality Review applies to the Product Owner-authorised generation only."],
-    blockers: authorisedComplete
-      ? [...blockers, ...inspectionBlockers, ...imageBlockers]
-      : [...blockers, "Product Owner-authorised ecosystem generation required before Quality Review"],
+    blockers: finalBlockers,
     approvalStatus: approved ? "approved" : "pending",
     approvedAt: manifest.reviewedAt || latest?.approvedAt || null,
     approvedBy: latest?.approvedBy || null,
@@ -685,7 +745,9 @@ export function buildCommercialQualityReview(slug: string): CommercialQualityRev
     authorisedGenerationJobId: authorised?.jobId || null,
     authorisedGenerationRevision: authorised?.generationRevision || null,
     productOwnerAuthorised: authorisedComplete,
-    locationBreakdown: buildLocationBreakdown(slug),
+    locationBreakdown: authority
+      ? { hubCount: 0, clusterCount: 0, areaPageCount: authority.areaSlugs.length }
+      : buildLocationBreakdown(slug),
     previewLinks: authorisedComplete ? buildQualityReviewPreviewLinks(slug, serviceId) : [],
     productOwnerQualityAudit,
     pageInspectionWorkspace,
