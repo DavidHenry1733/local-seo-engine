@@ -130,6 +130,7 @@ import {
 import { hydrateLocalCoverageGoogleLocalities } from "../../../../../src/pharmacy/masterAdminLocalCoverageRecommendationService.ts";
 import { persistComponentDnaFromBrandEvidence } from "../../../../../src/pharmacy/masterAdminComponentDnaPersistenceService.ts";
 import { buildBusinessProfileReview, acceptAllSafeRecommendations, saveBusinessProfileReviewField } from "../../../../../src/pharmacy/masterAdminBusinessProfileReviewService.ts";
+import { confirmManualOnboardingBrandSource } from "../../../../../src/pharmacy/masterAdminGoogleLaterBrandEvidence.ts";
 import { runMasterAdminCapabilityAudit } from "../../../../../src/pharmacy/masterAdminCapabilityAuditService.ts";
 import {
   writeMasterAdminOperationalReadinessReport,
@@ -458,6 +459,19 @@ router.post("/master-admin-platform/customers/:slug/business-profile-review/fiel
       user,
     );
     res.json({ ok: true, review, customer: buildMasterAdminCustomerRecordLite(slug) });
+  } catch (err) {
+    res.status(400).json({ ok: false, error: err instanceof Error ? err.message : String(err) });
+  }
+});
+
+router.post("/master-admin-platform/customers/:slug/business-profile-review/confirm-manual-brand-source", (req, res) => {
+  const slug = safeAdminSlug(req.params.slug);
+  const user = resolveUser(req);
+  try {
+    const confirmed = confirmManualOnboardingBrandSource(slug, user);
+    if (!confirmed.ok) return res.status(409).json({ ok: false, error: confirmed.error });
+    const review = buildBusinessProfileReview(slug);
+    res.json({ ok: true, review, value: confirmed.value, customer: buildMasterAdminCustomerRecordLite(slug) });
   } catch (err) {
     res.status(400).json({ ok: false, error: err instanceof Error ? err.message : String(err) });
   }

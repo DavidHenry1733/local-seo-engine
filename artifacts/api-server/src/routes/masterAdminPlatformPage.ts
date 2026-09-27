@@ -3819,6 +3819,11 @@ async function confirmGenerateEcosystemFromCi(){
 function customerAtBusinessProfileReview(c){
   return c.workflow&&['business_profile_intelligence','resolve_import_conflicts','approve_business_profile'].includes(c.workflow.currentStage);
 }
+function businessProfileReviewOpenAllowed(c){
+  if(customerAtBusinessProfileReview(c))return true;
+  const state=c&&c.businessProfileReview&&c.businessProfileReview.summary&&c.businessProfileReview.summary.googleProfileState;
+  return state==='deferred'||state==='no_profile';
+}
 function customerAtQualityReview(c){
   const stage=c.currentStage||c.workflow?.currentStage||'';
   return stage==='quality_review';
@@ -5386,6 +5391,34 @@ function renderBprGoogleSection(review){
       googleImportActionButtonHtml(gs,canEdit);
   }
   actions.innerHTML=actionHtml;
+  renderManualBrandConfirmation(review);
+}
+function renderManualBrandConfirmation(review){
+  const host=document.getElementById('bprGoogleActions');
+  if(!host)return;
+  const offer=review&&review.manualBrandConfirmation;
+  if(!offer)return;
+  if(offer.confirmed&&offer.value){
+    host.insertAdjacentHTML('beforeend','<div style="flex-basis:100%;font-size:.72rem;color:#4ade80;margin-top:6px">Brand source confirmed from onboarding business information. Google remains '+esc(offer.googleProfileState||'deferred')+'.</div>');
+    return;
+  }
+  if(!offer.available)return;
+  host.insertAdjacentHTML('beforeend','<button class="btn" type="button" id="confirmManualBrandSourceBtn" style="font-size:.72rem" onclick="confirmManualOnboardingBrandSource()">Confirm brand source from business information</button><div style="flex-basis:100%;font-size:.72rem;color:#94a3b8">Uses the pharmacy name and website already captured. Does not connect Google and does not invent website import evidence.</div>');
+}
+async function confirmManualOnboardingBrandSource(){
+  if(!activeCustomer)return;
+  const btn=document.getElementById('confirmManualBrandSourceBtn');
+  if(btn)btn.disabled=true;
+  try{
+    const data=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/business-profile-review/confirm-manual-brand-source',{method:'POST',body:'{}'});
+    if(!data.ok)throw new Error(data.error||'Brand source confirmation failed');
+    if(data.review){activeBprReview=data.review;renderBusinessProfileReview(data.review)}
+    if(data.customer){activeCustomer=data.customer;renderCustomerDetail(data.customer)}
+    toast('Brand source confirmed from onboarding business information. Google remains not connected.');
+  }catch(e){
+    if(btn)btn.disabled=false;
+    toast(e.message||'Brand source confirmation failed',true);
+  }
 }
 let activeImportedEvidenceReview=null;
 function ierEvidenceRowHtml(row){
@@ -5822,7 +5855,7 @@ async function openBusinessProfileReview(opts){
   if(!activeCustomer){toast('Open a customer first',true);return}
   const forceReadinessRecovery=Boolean(opts&&opts.forceReadinessRecovery);
   const bprApproved=(activeCustomer.businessProfileReview&&activeCustomer.businessProfileReview.approvalStatus==='approved')||(activeCustomer.businessProfile&&activeCustomer.businessProfile.approvalStatus==='approved');
-  if(!forceReadinessRecovery&&!customerAtBusinessProfileReview(activeCustomer)){
+  if(!forceReadinessRecovery&&!businessProfileReviewOpenAllowed(activeCustomer)){
     if(bprApproved){
       toast('Business Profile Review is already approved.',false);
     }else{
@@ -6273,7 +6306,7 @@ function spgEvidenceFieldRow(f,dashboard){
   const reviewLocked=Boolean(dashboard&&dashboard.evidenceReviewApproved);
   if(!reviewLocked){
     actions=evidenceFieldDecisionButtons(f,false,'spg');
-    if(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts'))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromSpg()">Return to Business Profile</button></div>';
+    if(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts'))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromSpg()">'+(f.id==='brandSource'?'Confirm brand source in Business Profile':'Return to Business Profile')+'</button></div>';
   }else if(reviewLocked&&f.status==='not_confirmed'){
     actions='<div style="margin-top:4px;color:#fbbf24;font-size:.65rem">Reopen Evidence Review to change this field.</div>';
   }
@@ -6364,7 +6397,7 @@ function speFieldRow(f){
   let actions='';
   if(!activeSpeReview?.approved){
     actions=evidenceFieldDecisionButtons(f,false,'spe');
-    if(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts'))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromEvidence()">Return to Business Profile</button></div>';
+    if(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts'))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromEvidence()">'+(f.id==='brandSource'?'Confirm brand source in Business Profile':'Return to Business Profile')+'</button></div>';
   }
   if(f.decisionInvalidatedReason)actions=(actions||'')+'<div style="margin-top:4px;color:#fbbf24">'+esc(f.decisionInvalidatedReason)+'</div>';
   return '<div style="margin:8px 0;padding:8px;border:1px solid #334155;border-radius:8px;font-size:.72rem"><div style="display:flex;gap:8px;flex-wrap:wrap"><strong style="min-width:160px">'+esc(f.label)+'</strong><span style="color:#94a3b8">Source: '+esc(f.source||'—')+'</span>'+(f.confidence!=null?('<span style="color:#94a3b8">Confidence: '+esc(String(f.confidence))+'%</span>'):'')+(f.capturedAt?('<span style="color:#94a3b8">Captured: '+esc(f.capturedAt)+'</span>'):'')+'<span style="margin-left:auto;color:'+statusColor+'">'+esc(evidenceStatusLabel(f.status))+(f.required?' · Required':'')+'</span></div><div style="margin-top:4px">'+esc(f.value||'—')+'</div>'+actions+'</div>';
@@ -7322,7 +7355,7 @@ document.querySelectorAll('.modal-backdrop').forEach(el=>{el.addEventListener('c
 initSpgGenerateControls();
 initSpeGenerateControls();
 bindIerBranchSelectionControls();
-loadDashboard().then(()=>{const p=new URLSearchParams(location.search);const slug=p.get('customer');const campaignId=p.get('campaignId');if(p.get('panel')==='platform-infrastructure')openPlatformInfrastructure();else if(slug)openCustomer(slug,{campaignId:campaignId||''}).then(()=>{if(p.get('panel')==='business-profile-review'&&customerAtBusinessProfileReview(activeCustomer))openBusinessProfileReview();else if(p.get('panel')==='business-profile-review')clearBprPanelUrlParam();else if(p.get('panel')==='commercial-intelligence')openCommercialIntelligenceReview();else if(p.get('panel')==='quality-review'&&customerAtQualityReview(activeCustomer))openCommercialQualityReview();else if(p.get('panel')==='generate-ecosystem'&&activeCustomer&&(customerAtGenerateEcosystem(activeCustomer)||(activeCustomer.commercialIntelligence&&activeCustomer.commercialIntelligence.canGenerateEcosystem)))openCommercialEcosystemGeneration();else if(p.get('panel')==='imported-evidence-review'&&activeCustomer)openImportedEvidenceReview();else if(p.get('panel')==='service-page-evidence-review'&&activeCustomer)openServicePageEvidenceReview();else if(p.get('panel')==='service-page-generation'&&activeCustomer)openServicePageGeneration();else if(p.get('panel')==='service-page-review'&&activeCustomer)openServicePageReview();else if(p.get('panel')==='cluster-page-review'&&activeCustomer)openClusterPageReview();else if(p.get('panel')==='indexing-review')openCommercialIndexingReview(true);else if(p.get('panel')==='performance-dashboard'||p.get('panel')==='growth-dashboard')openCommercialPerformanceDashboard(true);else if(p.get('panel')==='managed-publishing'&&activeCustomer&&customerAtManagedPublishing(activeCustomer))openManagedPublishing();else if(p.get('panel')==='legacy-deployment-configuration'&&activeCustomer)openCommercialDeploymentConfiguration();else if(p.get('panel')==='publish-review'&&customerAtPublishReview(activeCustomer))openCommercialPublishReview();else if(p.get('panel')==='local-coverage'||p.get('panel')==='generation-setup'){const el=document.getElementById('detailLocalCoverageCollapse');if(el)el.open=true}})});
+loadDashboard().then(()=>{const p=new URLSearchParams(location.search);const slug=p.get('customer');const campaignId=p.get('campaignId');if(p.get('panel')==='platform-infrastructure')openPlatformInfrastructure();else if(slug)openCustomer(slug,{campaignId:campaignId||''}).then(()=>{if(p.get('panel')==='business-profile-review'&&businessProfileReviewOpenAllowed(activeCustomer))openBusinessProfileReview();else if(p.get('panel')==='business-profile-review')clearBprPanelUrlParam();else if(p.get('panel')==='commercial-intelligence')openCommercialIntelligenceReview();else if(p.get('panel')==='quality-review'&&customerAtQualityReview(activeCustomer))openCommercialQualityReview();else if(p.get('panel')==='generate-ecosystem'&&activeCustomer&&(customerAtGenerateEcosystem(activeCustomer)||(activeCustomer.commercialIntelligence&&activeCustomer.commercialIntelligence.canGenerateEcosystem)))openCommercialEcosystemGeneration();else if(p.get('panel')==='imported-evidence-review'&&activeCustomer)openImportedEvidenceReview();else if(p.get('panel')==='service-page-evidence-review'&&activeCustomer)openServicePageEvidenceReview();else if(p.get('panel')==='service-page-generation'&&activeCustomer)openServicePageGeneration();else if(p.get('panel')==='service-page-review'&&activeCustomer)openServicePageReview();else if(p.get('panel')==='cluster-page-review'&&activeCustomer)openClusterPageReview();else if(p.get('panel')==='indexing-review')openCommercialIndexingReview(true);else if(p.get('panel')==='performance-dashboard'||p.get('panel')==='growth-dashboard')openCommercialPerformanceDashboard(true);else if(p.get('panel')==='managed-publishing'&&activeCustomer&&customerAtManagedPublishing(activeCustomer))openManagedPublishing();else if(p.get('panel')==='legacy-deployment-configuration'&&activeCustomer)openCommercialDeploymentConfiguration();else if(p.get('panel')==='publish-review'&&customerAtPublishReview(activeCustomer))openCommercialPublishReview();else if(p.get('panel')==='local-coverage'||p.get('panel')==='generation-setup'){const el=document.getElementById('detailLocalCoverageCollapse');if(el)el.open=true}})});
 
 async function loadVerifiedNationalCompetitorIntelligence(){
   const root=document.getElementById(

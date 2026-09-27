@@ -21,6 +21,10 @@ import { loadWebsiteDesignIntelligence } from "./pharmacyWebsiteDesignCaptureSer
 import fs from "node:fs";
 import type { ServicePageEvidenceField, ServicePageImageSelection } from "./masterAdminCoreProductRecoveryModel.ts";
 import { resolveCustomerFacingPharmacyName } from "./pharmacyServicePageProfileContext.ts";
+import {
+  MANUAL_BRAND_SOURCE_PREFIX,
+  readManualOnboardingBrandSource,
+} from "./masterAdminGoogleLaterBrandEvidence.ts";
 
 const OPTIONAL_PRODUCT_OWNER_EVIDENCE_FIELDS = new Set([
   "fonts",
@@ -188,7 +192,7 @@ function resolveBrandSource(slug: string): string | null {
   if (fs.existsSync(componentPath)) {
     return "website-import-component-dna";
   }
-  return null;
+  return readManualOnboardingBrandSource(slug);
 }
 
 export interface CprBrandEvidenceResolution {
@@ -290,7 +294,13 @@ function resolveCprBrandEvidence(slug: string): {
     },
     brandSource: {
       value: brandSourceValue,
-      source: brandSourceValue?.startsWith("website-import-brand-dna") ? "brand-dna" : brandSourceValue ? "component-dna" : null,
+      source: brandSourceValue?.startsWith(MANUAL_BRAND_SOURCE_PREFIX)
+        ? "onboarding-business-information"
+        : brandSourceValue?.startsWith("website-import-brand-dna")
+          ? "brand-dna"
+          : brandSourceValue
+            ? "component-dna"
+            : null,
       confidence: brandSourceValue ? 90 : null,
       capturedAt,
     },

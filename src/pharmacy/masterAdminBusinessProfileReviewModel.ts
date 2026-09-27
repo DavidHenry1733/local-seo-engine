@@ -221,6 +221,14 @@ export interface BusinessProfileReviewPayload {
   store: BusinessProfileReviewStore | null;
   loadError: string | null;
   missingSources: string[];
+  /** Visible when Google was deferred and website import did not supply brand evidence. */
+  manualBrandConfirmation?: {
+    available: boolean;
+    confirmed: boolean;
+    value: string | null;
+    reason: string | null;
+    googleProfileState: string;
+  };
   /** Shared WI ↔ configured service reconciliation (review only — not auto-approved). */
   serviceReconciliation?: BusinessProfileServiceReconciliation | null;
 }

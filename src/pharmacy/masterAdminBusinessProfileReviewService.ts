@@ -60,6 +60,11 @@ import {
 import { resolveGoogleProfileOnboardingState } from "./masterAdminGoogleProfileOnboardingService.ts";
 import { websiteImportStageComplete } from "./masterAdminWebsiteBranchSelectionService.ts";
 import {
+  isGoogleOnboardingResolvedWithoutImport,
+  manualBrandConfirmationOffer,
+  readManualOnboardingBrandSource,
+} from "./masterAdminGoogleLaterBrandEvidence.ts";
+import {
   buildServiceReconciliationProposal,
   formatServiceMatchStateLabel,
   type ServiceReconciliationProposal,
@@ -200,14 +205,17 @@ function approvalSnapshotPath(slug: string, revision: number): string {
 
 function collectMissingSourceEvidence(ctx: EvidenceContext): string[] {
   const missingSources: string[] = [];
-  const slug = normText(ctx.profile.slug);
+  const slug = normText(ctx.slug) || normText((ctx.profile as { slug?: string }).slug);
   const googleState = resolveGoogleProfileOnboardingState(ctx.profile);
   const googleApproval = canApproveBusinessProfileWithGoogleState(googleState, ctx.profile);
 
   const websiteReady = slug
     ? websiteImportStageComplete(slug) || Boolean(ctx.websiteSummary.websiteImported)
     : Boolean(ctx.websiteSummary.websiteImported);
-  if (!websiteReady) missingSources.push("Website Intelligence");
+  const manualBrandSource = slug ? readManualOnboardingBrandSource(slug) : null;
+  const websiteSatisfiedByManualBrand =
+    Boolean(manualBrandSource) && isGoogleOnboardingResolvedWithoutImport(googleState);
+  if (!websiteReady && !websiteSatisfiedByManualBrand) missingSources.push("Website Intelligence");
 
   if (
     isGoogleIntelligenceRequiredForBusinessProfile(googleState) &&
@@ -1323,7 +1331,7 @@ export function buildBusinessProfileReview(slug: string): BusinessProfileReviewP
       { id: "brand_website" as const, label: "Brand & Website", fieldCount: fields.filter((f) => f.category === "brand_website").length },
     ];
     const serviceReconciliation = toServiceReconciliationPayload(buildServiceReconciliationProposal(slug), store);
-    return applyCanonicalApprovalAuthority({
+    const review = applyCanonicalApprovalAuthority({
       summary,
       fields,
       actionRequired: needsConfirmation,
@@ -1340,6 +1348,8 @@ export function buildBusinessProfileReview(slug: string): BusinessProfileReviewP
       missingSources,
       serviceReconciliation,
     });
+    review.manualBrandConfirmation = manualBrandConfirmationOffer(slug);
+    return review;
   } catch (err) {
     return {
       summary: {
