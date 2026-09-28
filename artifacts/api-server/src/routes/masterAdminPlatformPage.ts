@@ -2244,7 +2244,10 @@ function startJobPolling(){
         if(activeSpgDashboard&&document.getElementById('spgModal').classList.contains('open'))await openServicePageGeneration();
         else if(document.getElementById('cirModal')&&document.getElementById('cirModal').classList.contains('open'))await openCommercialIntelligenceReview();
         else if(customerAtServicePageReview(activeCustomer))openServicePageReview();
-        toast((activeSpgDashboard&&document.getElementById('spgModal').classList.contains('open'))||customerAtServicePageReview(activeCustomer)?'Service page job completed':'Growth Intelligence job completed');
+        const finished=jobs.find(function(j){return j.slug===activeCustomer.slug&&(j.status==='completed'||j.status==='failed'||j.status==='cancelled');});
+        if(finished&&finished.status==='failed') toast(finished.error||finished.evidence||'Workflow job failed', true);
+        else if(finished&&finished.evidence) toast(finished.evidence);
+        else toast('Workflow job completed');
       }
       if(!active)clearInterval(jobPollTimer);
     }catch{}

@@ -27,7 +27,6 @@ import {
   isLocalMarketIntelligenceGenerated,
   isGrowthIntelligenceGenerated,
   findActiveCommercialIntelligenceJob,
-  ensureCommercialIntelligenceDerivedFromStoredCompetitors,
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
 import {
   buildGoogleLocalProfileMetrics,
@@ -1246,11 +1245,6 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
     }
   })();
 
-  try {
-    ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug);
-  } catch {
-    /* A derivation failure leaves the missing stage visible. It must not invent completion. */
-  }
   const profile = readSetupProfile(slug);
   const locality = resolveTenantLocality(profile);
   const report = loadGrowthOpportunityReport(slug);

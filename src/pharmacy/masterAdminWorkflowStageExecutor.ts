@@ -10,7 +10,6 @@ import { isBusinessProfileReviewApproved, readLatestApprovalSnapshot } from "./m
 import { websiteImportStageComplete } from "./masterAdminWebsiteBranchSelectionService.ts";
 import {
   isCommercialIntelligenceApproved,
-  isCompetitorAnalysisGenerated,
   isGrowthIntelligenceGenerated,
   isLocalMarketIntelligenceGenerated,
   approveCommercialIntelligence,
@@ -19,6 +18,7 @@ import {
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
 import { ensureLegacyAutoAdvance, isLegacyAutoAdvance, legacyIntelligenceStagesComplete } from "./masterAdminWorkflowLegacyService.ts";
 import { loadCompetitorSnapshot } from "./growthEngineLocalMarketService.ts";
+import { loadCompetitorIntelligence } from "./pharmacyCompetitorIntelligence.ts";
 import type { MasterAdminCustomerContext } from "./masterAdminCustomerContextService.ts";
 import type { WorkflowStageId } from "./masterAdminWorkflowModel.ts";
 import { readOnboardingBatch } from "./masterAdminOnboardingBatchService.ts";
@@ -42,13 +42,6 @@ import {
 
 /** Single canonical Commercial Intelligence completion signal for timeline, preflight, and stage verification. */
 export function isCommercialIntelligenceWorkflowStageComplete(ctx: MasterAdminCustomerContext): boolean {
-  if (
-    isCoreProductRecoveryMode(ctx.slug) &&
-    isBusinessProfileReviewApproved(ctx.slug) &&
-    isGrowthIntelligenceGenerated(ctx.slug)
-  ) {
-    return true;
-  }
   return isCommercialIntelligenceApproved(ctx.slug);
 }
 
@@ -272,8 +265,11 @@ export function verifyStageCompletion(stageId: WorkflowStageId, ctx: MasterAdmin
     case "resolve_import_conflicts":
     case "approve_business_profile":
       return isBusinessProfileReviewApproved(ctx.slug);
-    case "competitor_analysis":
-      return isCompetitorAnalysisGenerated(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
+    case "competitor_analysis": {
+      const intel = loadCompetitorIntelligence(ctx.slug);
+      const hasCompetitors = Boolean(intel?.generatedAt && (intel.competitors?.length || 0) > 0);
+      return hasCompetitors || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
+    }
     case "local_market_intelligence":
       return isCurrentLocalMarketIntelligence(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
     case "generate_growth_intelligence":
@@ -340,6 +336,7 @@ function resolveCoreProductRecoveryWorkflowStage(ctx: MasterAdminCustomerContext
   }
 
   if (!isGrowthIntelligenceGenerated(ctx.slug)) return null;
+  if (!isCommercialIntelligenceApproved(ctx.slug)) return null;
 
   const contract = readCoreProductRecoveryContract(ctx.slug);
   if (!contract?.servicePageGenerated) {

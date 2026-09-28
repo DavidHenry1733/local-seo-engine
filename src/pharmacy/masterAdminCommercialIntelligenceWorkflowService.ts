@@ -228,14 +228,9 @@ export async function runCompetitorAnalysisWorkflowAction(
   }
   if (isCombinedCompetitorAnalysisStored(slug)) {
     const intel = loadCompetitorIntelligence(slug);
-    const derived = ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug, operator);
-    const derivedNote = [
-      derived.localMarketDerived ? "Local Market Intelligence derived" : "",
-      derived.growthDerived ? "Growth Intelligence derived" : "",
-    ].filter(Boolean).join("; ");
     return {
       ok: true,
-      evidence: `Competitor Analysis already complete — ${intel?.competitors.length || 0} Google/local competitors${derivedNote ? ` — ${derivedNote}` : ""}`,
+      evidence: `Competitor Analysis already complete — ${intel?.competitors.length || 0} Google/local competitors`,
       errors: [],
       idempotent: true,
     };
@@ -251,13 +246,12 @@ export async function runCompetitorAnalysisWorkflowAction(
       user: operator,
       slug,
       action: "orchestrate_competitor_analysis",
-      status: failed ? "error" : "success",
+      status: result.combinedStatus === "completed" ? "success" : "error",
       evidence: `Competitor Analysis ${result.combinedStatus} — Google/local ${googleCount}, DataForSEO organic ${organicCount}${errors.length ? ` — ${errors.join(" | ")}` : ""}`,
       errors: failed || partial ? errors : [],
     });
-    if (!failed) ensureCommercialIntelligenceDerivedFromStoredCompetitors(slug, operator);
     return {
-      ok: !failed,
+      ok: result.combinedStatus === "completed",
       evidence: `Competitor Analysis ${result.combinedStatus} — Google/local ${googleCount}, DataForSEO organic ${organicCount}${errors.length ? ` — ${errors.join(" | ")}` : ""}`,
       errors,
     };
