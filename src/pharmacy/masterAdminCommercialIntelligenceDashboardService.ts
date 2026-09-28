@@ -650,6 +650,8 @@ function buildCompetitorAnalysis(
       name: c.name,
       reviewCount: c.gbpReviewCount ?? null,
       categoryCount: (c.categories || []).length || null,
+      rating: c.gbpRating ?? null,
+      photoCount: typeof c.photoCount === "number" ? c.photoCount : null,
     })));
     const ratings = intel.competitors.map((c) => c.gbpRating).filter((r): r is number => r != null);
     const reviews = intel.competitors.map((c) => c.gbpReviewCount).filter((r): r is number => typeof r === "number" && r > 0);
@@ -688,6 +690,8 @@ function buildCompetitorAnalysis(
       name: c.businessName,
       reviewCount: c.reviewCount ?? null,
       categoryCount: [c.primaryCategory, ...(c.secondaryCategories || [])].filter(Boolean).length || null,
+      rating: c.rating ?? null,
+      photoCount: typeof c.photoCount === "number" ? c.photoCount : null,
     })));
     const ratings = snap.competitors.map((c) => c.rating).filter((r): r is number => r != null);
     const reviews = snap.competitors.map((c) => c.reviewCount).filter((r) => r > 0);

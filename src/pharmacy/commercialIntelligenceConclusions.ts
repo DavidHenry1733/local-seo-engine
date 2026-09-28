@@ -37,6 +37,8 @@ export interface BenchmarkCompetitor {
   name: string;
   reviewCount: number | null;
   categoryCount: number | null;
+  rating?: number | null;
+  photoCount?: number | null;
 }
 
 const SEARCH_DEMAND_UNKNOWN = "Search demand data is not yet available.";
@@ -232,7 +234,13 @@ export function localBenchmarkConclusion(competitors: BenchmarkCompetitor[]): Co
   const categoryLeader = named
     .filter((row) => row.categoryCount != null && row.categoryCount > 0)
     .sort((a, b) => (b.categoryCount || 0) - (a.categoryCount || 0))[0];
-  if (!reviewLeader && !categoryLeader) {
+  const ratingLeader = named
+    .filter((row) => row.rating != null && row.rating > 0)
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))[0];
+  const photoLeader = named
+    .filter((row) => row.photoCount != null && row.photoCount > 0)
+    .sort((a, b) => (b.photoCount || 0) - (a.photoCount || 0))[0];
+  if (!reviewLeader && !categoryLeader && !ratingLeader && !photoLeader) {
     return {
       id: "local-benchmark",
       conclusion: "No local benchmark leader is available.",
@@ -245,8 +253,14 @@ export function localBenchmarkConclusion(competitors: BenchmarkCompetitor[]): Co
   }
   const parts: string[] = [];
   if (reviewLeader) parts.push(`Google review-count leader: ${reviewLeader.name} — ${reviewLeader.reviewCount} reviews`);
-  if (categoryLeader && categoryLeader.name !== reviewLeader?.name) {
+  if (categoryLeader) {
     parts.push(`Category-coverage leader: ${categoryLeader.name} — ${categoryLeader.categoryCount} categories`);
+  }
+  if (ratingLeader && ratingLeader.name !== reviewLeader?.name) {
+    parts.push(`Highest Google rating: ${ratingLeader.name} — ${ratingLeader.rating}`);
+  }
+  if (photoLeader && photoLeader.name !== reviewLeader?.name && photoLeader.name !== categoryLeader?.name) {
+    parts.push(`Photo-count leader: ${photoLeader.name} — ${photoLeader.photoCount} photos`);
   }
   return {
     id: "local-benchmark",
