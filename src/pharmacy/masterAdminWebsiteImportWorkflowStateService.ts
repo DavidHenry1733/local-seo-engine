@@ -25,7 +25,23 @@ function canonicalWebsiteImportEvidenceMessage(slug: string, snapshotMessage: st
     const parts = [b.branchName, b.addressLine1, b.town, b.postcode].filter(Boolean);
     return `Branch confirmed: ${parts.join(", ")}`;
   }
+  const projected = resolution ? projectCanonicalBranchResolution(resolution) : null;
+  if (
+    projected &&
+    projected.status !== "branch_selection_required" &&
+    projected.status !== "none_of_these_branches" &&
+    isStaleBranchSelectionEvidenceMessage(snapshotMessage)
+  ) {
+    return "Website intelligence imported.";
+  }
+  if (!isBranchSelectionBlocking(slug) && isStaleBranchSelectionEvidenceMessage(snapshotMessage)) {
+    return "Website intelligence imported.";
+  }
   return snapshotMessage;
+}
+
+export function readCanonicalWebsiteImportEvidence(slug: string): string {
+  return websiteImportEvidenceMessage(slug);
 }
 
 export type WebsiteImportContractState = "not_started" | "imported" | "partial" | "failed";
@@ -107,7 +123,7 @@ function websiteImportEvidenceMessage(slug: string): string {
   if (websiteImportStageComplete(slug)) {
     return canonicalWebsiteImportEvidenceMessage(slug, fromSnap || "Website intelligence imported.");
   }
-  if (fromSnap) return fromSnap;
+  if (fromSnap) return canonicalWebsiteImportEvidenceMessage(slug, fromSnap);
   const debug = data.lastWebsiteImportDebug;
   if (debug && typeof debug === "object" && debug !== null && "message" in debug) {
     return String((debug as { message?: string }).message || "").trim();

@@ -2,6 +2,7 @@
  * Sprint 7B — Business Profile Review and Approval service.
  * Orchestration layer only — does not modify import engines or generators.
  */
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { WORKSPACE_ROOT } from "./pharmacyExecutiveDashboardService.ts";
@@ -335,9 +336,47 @@ export function readLatestApprovalSnapshot(slug: string): BusinessProfileApprova
   }
 }
 
+function approvalBindingProjection(data: Record<string, unknown>): string {
+  const services = Array.isArray(data.selectedServices) ? data.selectedServices.map((id) => String(id)).sort() : [];
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const hours: Record<string, string> = {};
+  for (const day of days) hours[day] = String(data[`openingHours${day}`] || "");
+  return JSON.stringify({
+    pharmacyName: String(data.pharmacyName || ""),
+    tradingName: String(data.tradingName || ""),
+    gphcNumber: String(data.gphcNumber || ""),
+    phone: String(data.phone || ""),
+    businessEmail: String(data.businessEmail || ""),
+    email: String(data.email || ""),
+    website: String(data.website || ""),
+    googlePlaceId: String(data.googlePlaceId || ""),
+    postcode: String(data.postcode || ""),
+    displayAddress: String(data.displayAddress || ""),
+    addressLine1: String(data.addressLine1 || ""),
+    openingHours: String(data.openingHours || ""),
+    displayOpeningHours: String(data.displayOpeningHours || ""),
+    hours,
+    selectedServices: services,
+  });
+}
+
+/** Identity projection of the profile that an approval is bound to. */
+export function currentBusinessProfileContentHash(slug: string): string | null {
+  const file = profilePath(slug);
+  if (!fs.existsSync(file)) return null;
+  try {
+    const doc = JSON.parse(fs.readFileSync(file, "utf8")) as { data?: Record<string, unknown> };
+    return crypto.createHash("sha256").update(approvalBindingProjection(doc.data || {})).digest("hex");
+  } catch {
+    return null;
+  }
+}
+
 export function isBusinessProfileReviewApproved(slug: string): boolean {
   const latest = readLatestApprovalSnapshot(slug);
-  return Boolean(latest?.approvedAt);
+  if (!latest?.approvedAt) return false;
+  if (!latest.profileContentHash) return true;
+  return latest.profileContentHash === currentBusinessProfileContentHash(slug);
 }
 
 function defaultMeta(fieldId: string) {
@@ -1801,6 +1840,7 @@ export function approveBusinessProfileReview(slug: string, operator: string): {
     const revisionPath = approvalSnapshotPath(slug, profileRevision);
 
     applyFinalValuesToProfile(slug, review.fields);
+    snapshot.profileContentHash = currentBusinessProfileContentHash(slug);
 
     writeJsonAtomic(revisionPath, snapshot);
     writeJsonAtomic(latestApprovalPath(slug), snapshot);

@@ -12,7 +12,7 @@ import {
   createMasterAdminJob,
   runMasterAdminJobAsync,
 } from "./masterAdminJobService.ts";
-import { classifyWebsiteImportContract } from "./masterAdminWebsiteImportWorkflowStateService.ts";
+import { classifyWebsiteImportContract, readCanonicalWebsiteImportEvidence } from "./masterAdminWebsiteImportWorkflowStateService.ts";
 
 const WEBSITE_IMPORT_HISTORY_DIR = path.join(
   WORKSPACE_ROOT,
@@ -179,7 +179,7 @@ export function buildWebsiteSourceSummary(slug: string): WebsiteSourceSummary {
     websiteStatus: contract.websiteStatus,
     websiteImported: contract.websiteImported,
     lastImportAt: snap?.importedAt ? String(snap.importedAt) : null,
-    lastImportMessage: snap?.message ? String(snap.message) : null,
+    lastImportMessage: readCanonicalWebsiteImportEvidence(safe) || (snap?.message ? String(snap.message) : null),
     importEvidenceUrl: contract.state === "failed" ? null : snap?.websiteUrl ? String(snap.websiteUrl) : null,
     importHistoryCount: history.length,
     canEditWebsite: gate.allowed,

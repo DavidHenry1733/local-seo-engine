@@ -8,6 +8,7 @@ import { loadContentPackage } from "./pharmacyContentPackageService.ts";
 import { getPharmacyImageAssignmentsPath } from "./pharmacyWorkspacePaths.ts";
 import {
   isCommercialIntelligenceApproved,
+  isGrowthIntelligenceGenerated,
   readCommercialIntelligenceApprovalExtended,
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
 import { listMasterAdminJobs, createMasterAdminJob, runMasterAdminJobAsync } from "./masterAdminJobService.ts";
@@ -326,7 +327,10 @@ export function resolveCommercialWorkflowNextAction(
   ) {
     return null;
   }
-  if (isCoreProductRecoveryMode(slug)) {
+  if (currentStage === "generate_growth_intelligence" && !isGrowthIntelligenceGenerated(slug)) {
+    return "Generate Growth Intelligence";
+  }
+  if (isCoreProductRecoveryMode(slug) && isGrowthIntelligenceGenerated(slug)) {
     const cprAction = resolveServicePageGenerationActionLabel(slug);
     if (cprAction) return cprAction;
   }

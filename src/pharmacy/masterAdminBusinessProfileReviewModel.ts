@@ -162,6 +162,8 @@ export interface BusinessProfileApprovalSnapshot {
   version: 1;
   slug: string;
   profileRevision: number;
+  /** Sha256 of the approved identity projection. Absent on historical approvals. */
+  profileContentHash?: string | null;
   approvedAt: string;
   approvedBy: string;
   finalValues: Record<string, string>;

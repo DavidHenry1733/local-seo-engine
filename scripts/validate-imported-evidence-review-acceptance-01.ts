@@ -168,8 +168,8 @@ function main(): void {
   assert(buildImportedEvidenceReview("ier-accept-approved").acceptance.accepted === true, "6. the first pharmacy acceptance remains its own");
 
   const gilbert = buildImportedEvidenceReview("gilbert-pharmacy-health-clinic");
-  assert(gilbert.acceptance.ready === true && gilbert.acceptance.actionLabel === "Accept Imported Evidence", "Gilbert approval action is ready");
-  assert(gilbert.acceptance.accepted === false, "Gilbert is not auto-accepted");
+  assert(gilbert.acceptance.accepted === true && gilbert.acceptance.decidedBy === "admin", "Gilbert acceptance remains the recorded Product Owner decision");
+  assert(gilbert.acceptance.actionLabel !== "Accept Imported Evidence", "Gilbert acceptance is not offered again");
   assert(shaFile(gilbertRel) === before, "Gilbert profile bytes are unchanged");
 
   cleanup();

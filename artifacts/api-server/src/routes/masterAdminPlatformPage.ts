@@ -3141,6 +3141,19 @@ function renderCustomerDetail(c){
   const btn=document.getElementById('continueWorkflowBtn');
   btn.style.display=(atCqr||atMp||atPublishReview||atCirReview||atCge||atIdx||atPerf||atCprJourney||customerAtServicePageReview(c))?'none':'block';
   btn.textContent=orch.continueLabel||'Continue Workflow';
+  if(customerStage(c)==='generate_growth_intelligence'){
+    if(cirBanner){
+      cirBanner.style.display='block';
+      cirBanner.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap"><div><div style="font-weight:800;font-size:.88rem;margin-bottom:4px">Growth Intelligence</div><div style="font-size:.72rem;color:#c4b5fd">Business Profile is approved. Generate Growth Intelligence when you confirm. Generation does not start until you use that action.</div></div></div>';
+    }
+    if(cirBtn){
+      cirBtn.style.display='inline-block';
+      cirBtn.textContent='Generate Growth Intelligence';
+      cirBtn.setAttribute('onclick','continueWorkflow("orchestrate_growth_intelligence")');
+    }
+    btn.style.display='block';
+    btn.textContent=(c.nextAction&&c.nextAction!=='—')?c.nextAction:'Generate Growth Intelligence';
+  }
   btn.disabled=!orch.canContinue;
   const editOnboardingBtn=document.getElementById('editOnboardingSetupBtn');
   if(editOnboardingBtn)editOnboardingBtn.style.display='block';
@@ -3275,6 +3288,7 @@ async function syncCustomerAfterProfileApproval(data){
     renderCustomerDetail(activeCustomer);
   }
   await refreshActiveCustomerDetail();
+  if(typeof showUnifiedDashboardSection==='function') showUnifiedDashboardSection('intelligence');
   await loadDashboard();
 }
 function setBprViewState(state){
@@ -3327,6 +3341,8 @@ function customerAtCommercialIntelligence(c){
   return ['competitor_analysis','local_market_intelligence','generate_growth_intelligence','commercial_intelligence'].includes(customerStage(c));
 }
 function customerAtCprServicePageJourney(c){
+  const stage=customerStage(c);
+  if(stage==='competitor_analysis'||stage==='local_market_intelligence'||stage==='generate_growth_intelligence'||stage==='commercial_intelligence')return false;
   return customerAtCoreProductRecovery(c)&&!customerAtBusinessProfileReview(c)&&!c.coreProductRecovery?.servicePageGenerated;
 }
 function customerAtCommercialIntelligenceReview(c){

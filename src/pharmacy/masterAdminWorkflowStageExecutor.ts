@@ -41,7 +41,11 @@ import {
 
 /** Single canonical Commercial Intelligence completion signal for timeline, preflight, and stage verification. */
 export function isCommercialIntelligenceWorkflowStageComplete(ctx: MasterAdminCustomerContext): boolean {
-  if (isCoreProductRecoveryMode(ctx.slug) && isBusinessProfileReviewApproved(ctx.slug)) {
+  if (
+    isCoreProductRecoveryMode(ctx.slug) &&
+    isBusinessProfileReviewApproved(ctx.slug) &&
+    isGrowthIntelligenceGenerated(ctx.slug)
+  ) {
     return true;
   }
   return isCommercialIntelligenceApproved(ctx.slug);
@@ -325,6 +329,8 @@ function resolveCoreProductRecoveryWorkflowStage(ctx: MasterAdminCustomerContext
     if (!verifyStageCompletion(stageId, ctx)) return stageId;
   }
 
+  if (!isGrowthIntelligenceGenerated(ctx.slug)) return null;
+
   const contract = readCoreProductRecoveryContract(ctx.slug);
   if (!contract?.servicePageGenerated) {
     return "generate_ecosystem";
@@ -377,6 +383,13 @@ export function resolveWorkflowStage(ctx: MasterAdminCustomerContext): WorkflowS
       if (!shouldRunGoogleImport(state) && verifyStageCompletion("website_import", ctx)) {
         continue;
       }
+    }
+    if (
+      (stageId === "competitor_analysis" || stageId === "local_market_intelligence") &&
+      isBusinessProfileReviewApproved(ctx.slug) &&
+      !isGrowthIntelligenceGenerated(ctx.slug)
+    ) {
+      continue;
     }
     if (!verifyStageCompletion(stageId, ctx)) return stageId;
   }
