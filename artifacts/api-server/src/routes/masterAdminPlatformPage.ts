@@ -533,7 +533,8 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
         <button class="bpr-btn-review" type="button" id="openBprBtn" onclick="openBusinessProfileReview()" style="margin-top:8px">Open Business Profile Review</button>
         <button class="btn secondary" type="button" id="reviewConfirmedServicesBtn" onclick="openReviewConfirmedServices()" style="margin-top:8px;width:100%;font-size:.78rem">Review Confirmed Services</button>
         <button class="btn secondary" type="button" id="openIerBtn" onclick="openImportedEvidenceReview()" style="margin-top:8px;width:100%;font-size:.78rem">Open Imported Evidence Review</button>
-        <button class="cir-btn-review" type="button" id="openCirBtn" onclick="openCommercialIntelligenceReview()" style="margin-top:8px;display:none">Open Competitor Analysis</button>
+        <div class="ud-action-row" id="udIntelligenceActionRow"><button class="cir-btn-review" type="button" id="openCirBtn" onclick="openCommercialIntelligenceReview()" style="margin-top:8px;display:none">Open Commercial Intelligence</button></div>
+        <p class="ud-section-lead" id="udIntelligenceLead" style="display:none"></p>
         <button class="cqr-btn-review" type="button" id="openCqrBtn" onclick="openCommercialQualityReview()" style="margin-top:8px;display:none">Open Quality Review</button>
         <button class="cqr-btn-review" type="button" id="openClusterReviewBtn" onclick="openClusterPageReview()" style="margin-top:8px;display:none">Review Locality Pages</button>
         <button class="mp-btn-review" type="button" id="openMpBtn" onclick="openManagedPublishing()" style="margin-top:8px;display:none">Open Managed Publishing</button>
@@ -2929,6 +2930,72 @@ function renderWorkflowSummaryPanel(c){
     '<div><span class="label">Workflow Readiness</span><div>'+esc(ws.workflowReadinessStatus||'—')+'</div></div>'+
     '</div>';
 }
+function canonicalIntelligenceWorkflowAction(c){
+  if(!c||c.goldenDemo)return null;
+  const stage=String(c.currentStage||(c.workflow&&c.workflow.currentStage)||'');
+  const actionByStage={
+    competitor_analysis:'orchestrate_competitor_analysis',
+    local_market_intelligence:'orchestrate_local_market_intelligence',
+    generate_growth_intelligence:'orchestrate_growth_intelligence'
+  };
+  const labelByAction={
+    orchestrate_competitor_analysis:'Generate Competitor Analysis',
+    orchestrate_local_market_intelligence:'Generate Local Market Intelligence',
+    orchestrate_growth_intelligence:'Generate Growth Intelligence'
+  };
+  const stageAction=actionByStage[stage]||'';
+  if(!stageAction)return null;
+  const orch=c.orchestration||(c.workflow&&c.workflow.orchestration)||{};
+  const orchAction=String(orch.stageActionId||'');
+  if(orchAction&&orchAction!==stageAction)return null;
+  const actionId=orchAction||stageAction;
+  const next=c.nextAction&&c.nextAction!=='—'&&c.nextAction!=='-'?c.nextAction:'';
+  const label=next||labelByAction[actionId]||actionId;
+  const enabled=orch.canContinue===true&&!orch.blockingReason;
+  return {stage:stage, actionId:actionId, label:label, enabled:enabled};
+}
+function renderCanonicalIntelligenceWorkflowAction(c){
+  if(c&&c.goldenDemo){
+    const hidden=document.getElementById('udIntelligenceRunBtn');
+    if(hidden){hidden.disabled=true;hidden.style.display='none';hidden.onclick=null;}
+    return;
+  }
+  const viewBtn=document.getElementById('openCirBtn');
+  if(viewBtn){
+    viewBtn.textContent='Open Commercial Intelligence';
+    viewBtn.setAttribute('onclick','openCommercialIntelligenceReview()');
+    viewBtn.style.display='inline-block';
+    viewBtn.style.width='auto';
+  }
+  const spec=canonicalIntelligenceWorkflowAction(c);
+  const row=document.getElementById('udIntelligenceActionRow');
+  let runBtn=document.getElementById('udIntelligenceRunBtn');
+  if(!spec){
+    if(runBtn){runBtn.disabled=true;runBtn.style.display='none';runBtn.onclick=null;runBtn.removeAttribute('data-action-id');}
+    return;
+  }
+  if(!runBtn&&row){
+    runBtn=document.createElement('button');
+    runBtn.type='button';
+    runBtn.id='udIntelligenceRunBtn';
+    runBtn.className='btn';
+    row.insertBefore(runBtn, row.firstChild);
+  }
+  if(!runBtn)return;
+  runBtn.style.display='inline-block';
+  runBtn.style.width='auto';
+  runBtn.style.minWidth='240px';
+  runBtn.textContent=spec.label;
+  runBtn.disabled=!spec.enabled;
+  runBtn.setAttribute('data-action-id', spec.actionId);
+  runBtn.onclick=spec.enabled?function(){continueWorkflow(spec.actionId);}:null;
+  const lead=document.getElementById('udIntelligenceLead');
+  if(lead){
+    lead.textContent=spec.stage==='generate_growth_intelligence'
+      ?'Business Profile is approved. Generate Growth Intelligence when you confirm. Generation does not start until you use that action.'
+      :'Business Profile is approved. '+spec.label+' before Growth Intelligence. Generation does not start until you use that action.';
+  }
+}
 function renderCustomerDetail(c){
   document.getElementById('detailTitle').textContent=c.businessName;
   const atBpr=customerAtBusinessProfileReview(c);
@@ -3141,22 +3208,8 @@ function renderCustomerDetail(c){
   const btn=document.getElementById('continueWorkflowBtn');
   btn.style.display=(atCqr||atMp||atPublishReview||atCirReview||atCge||atIdx||atPerf||atCprJourney||customerAtServicePageReview(c))?'none':'block';
   btn.textContent=orch.continueLabel||'Continue Workflow';
-  const intelStage=customerStage(c);
-  if(intelStage==='competitor_analysis'||intelStage==='local_market_intelligence'||intelStage==='generate_growth_intelligence'){
-    const intelAction=orch.stageActionId||'';
-    const intelLabel=(c.nextAction&&c.nextAction!=='—')?c.nextAction:(orch.continueLabel||'Continue Workflow');
-    if(cirBanner){
-      cirBanner.style.display='block';
-      cirBanner.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap"><div><div style="font-weight:800;font-size:.88rem;margin-bottom:4px">'+esc(intelLabel)+'</div><div style="font-size:.72rem;color:#c4b5fd">Business Profile is approved. '+esc(intelLabel)+' before Growth Intelligence. Generation does not start until you use that action.</div></div></div>';
-    }
-    if(cirBtn&&(intelAction==='orchestrate_competitor_analysis'||intelAction==='orchestrate_local_market_intelligence'||intelAction==='orchestrate_growth_intelligence')){
-      cirBtn.style.display='inline-block';
-      cirBtn.textContent=intelLabel;
-      cirBtn.setAttribute('onclick','continueWorkflow("'+intelAction+'")');
-    }
-    btn.style.display='block';
-    btn.textContent=intelLabel;
-  }
+  renderCanonicalIntelligenceWorkflowAction(c);
+
   btn.disabled=!orch.canContinue;
   const editOnboardingBtn=document.getElementById('editOnboardingSetupBtn');
   if(editOnboardingBtn)editOnboardingBtn.style.display='block';
@@ -3177,6 +3230,8 @@ async function continueWorkflow(explicitActionId){
   const actionId=explicitActionId||orch.stageActionId||'';
   const priorLabel=btn?btn.textContent:'';
   if(btn)btn.disabled=true;
+  const runBtn=document.getElementById('udIntelligenceRunBtn');
+  if(runBtn)runBtn.disabled=true;
   if(clusterBtn&&actionId==='generate_local_cluster_pages')clusterBtn.disabled=true;
   if(actionId==='orchestrate_growth_intelligence'||actionId==='orchestrate_competitor_analysis'||actionId==='orchestrate_local_market_intelligence'||actionId==='generate_local_cluster_pages'){
     const label=actionId==='orchestrate_competitor_analysis'?'Generating Competitor Analysis…':actionId==='orchestrate_local_market_intelligence'?'Generating Local Market Intelligence…':actionId==='generate_local_cluster_pages'?'Generating Cluster Pages…':'Generating Growth Intelligence…';
@@ -7884,6 +7939,7 @@ loadGrowthPlanIntelligenceV1();
 }
 
 router.get("/admin/master", requireAdmin, (_req, res) => {
+  res.setHeader("Cache-Control", "no-store");
   res.type("html").send(renderMasterAdminPlatformShell());
 });
 

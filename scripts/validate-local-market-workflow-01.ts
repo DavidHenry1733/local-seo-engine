@@ -277,9 +277,11 @@ async function main() {
   );
   record(
     "12-ui-uses-stage-action",
-    page.includes("intelStage==='competitor_analysis'") &&
-      page.includes("intelStage==='local_market_intelligence'") &&
-      page.includes("orchestrate_local_market_intelligence"),
+    page.includes("function canonicalIntelligenceWorkflowAction") &&
+      page.includes("competitor_analysis:'orchestrate_competitor_analysis'") &&
+      page.includes("local_market_intelligence:'orchestrate_local_market_intelligence'") &&
+      page.includes("continueWorkflow(spec.actionId)") &&
+      page.includes("renderCanonicalIntelligenceWorkflowAction(c)"),
     "intelligence action follows the stage",
   );
 
