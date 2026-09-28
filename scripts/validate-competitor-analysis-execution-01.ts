@@ -55,6 +55,7 @@ async function main() {
   const { resolveWorkflowStage, verifyStageCompletion } = await import("../src/pharmacy/masterAdminWorkflowStageExecutor.ts");
   const { loadMasterAdminCustomerContext } = await import("../src/pharmacy/masterAdminCustomerContextService.ts");
   const { runWorkflowPreflight, continueCustomerWorkflow } = await import("../src/pharmacy/masterAdminWorkflowOrchestrator.ts");
+  const { resolveCommercialWorkflowNextAction } = await import("../src/pharmacy/masterAdminCommercialEcosystemGenerationService.ts");
 
   const slugs = {
     approved: "ca-approved-pharmacy",
@@ -248,10 +249,13 @@ async function main() {
     "panel and failure toast remain",
   );
   const cprPre = runWorkflowPreflight(slugs.cpr);
+  const cprNext = resolveCommercialWorkflowNextAction(slugs.cpr, stage(slugs.cpr));
   record(
     "17-cpr-does-not-jump-to-blocked-ecosystem",
-    stage(slugs.cpr) !== "generate_ecosystem" && cprPre.reason !== "Open Evidence Review and approve evidence before generating the service page",
-    `${stage(slugs.cpr)} / ${cprPre.reason || cprPre.actionId}`,
+    stage(slugs.cpr) !== "generate_ecosystem" &&
+      cprPre.reason !== "Open Evidence Review and approve evidence before generating the service page" &&
+      cprNext !== "Open Evidence Review",
+    `${stage(slugs.cpr)} / ${cprNext} / ${cprPre.reason || cprPre.actionId}`,
   );
   record(
     "18-competitor-action-does-not-derive-later-stages",

@@ -330,7 +330,11 @@ export function resolveCommercialWorkflowNextAction(
   if (currentStage === "generate_growth_intelligence" && !isGrowthIntelligenceGenerated(slug)) {
     return "Generate Growth Intelligence";
   }
-  if (isCoreProductRecoveryMode(slug) && isGrowthIntelligenceGenerated(slug)) {
+  if (
+    isCoreProductRecoveryMode(slug) &&
+    isGrowthIntelligenceGenerated(slug) &&
+    (currentStage === "generate_ecosystem" || currentStage === "quality_review" || currentStage === "publish")
+  ) {
     const cprAction = resolveServicePageGenerationActionLabel(slug);
     if (cprAction) return cprAction;
   }
