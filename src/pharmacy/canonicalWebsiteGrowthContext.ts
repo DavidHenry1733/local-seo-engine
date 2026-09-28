@@ -4,6 +4,7 @@
  * Does not crawl, write, or choose a winner when evidence conflicts.
  */
 import { projectCanonicalWebsiteBrandEvidence, type WebsiteBrandEvidence, type WebsiteBrandValue } from "./canonicalWebsiteBrandEvidence.ts";
+import { resolveCanonicalServiceCoverage, type CanonicalServiceCoverage } from "./canonicalExistingServiceCoverage.ts";
 import { readSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
 import { isBusinessProfileReviewApproved } from "./masterAdminBusinessProfileReviewService.ts";
 import {
@@ -60,6 +61,7 @@ export interface CanonicalWebsiteGrowthContext {
   serviceCoverage: {
     status: CanonicalEvidenceAvailability;
     approvedWithoutImportedPage: string[];
+    services: CanonicalServiceCoverage[];
   };
   navigation: {
     status: CanonicalEvidenceAvailability;
@@ -131,6 +133,7 @@ export function buildCanonicalWebsiteGrowthContext(slug: string): CanonicalWebsi
     intelligence?: {
       services?: Array<{ serviceId?: string; serviceName?: string; exists?: boolean; url?: string }>;
       ctaEvidence?: Array<{ ctaText?: string; sourceUrl?: string }>;
+      structure?: { pages?: Array<{ url?: string; path?: string; title?: string; h1?: string; category?: string; detectedServiceIds?: string[] }> };
     };
   } | null;
   const pages = brand.structure.map((page) => ({
@@ -153,16 +156,14 @@ export function buildCanonicalWebsiteGrowthContext(slug: string): CanonicalWebsi
     }))
     .filter((service) => service.serviceId || service.url);
   const selectedServices = [...new Set((profile.selectedServices || []).map((id) => str(id)).filter(Boolean))];
-  const approvedWithoutImportedPage = pages.length
-    ? selectedServices.filter((serviceId) => {
-        const key = serviceId.toLowerCase();
-        const imported = importedServices.some(
-          (service) => service.serviceId.toLowerCase() === key && service.url,
-        );
-        const page = servicePages.some((item) => item.url.toLowerCase().includes(key));
-        return !imported && !page;
-      })
-    : [];
+  const serviceCoverageRows = resolveCanonicalServiceCoverage({
+    serviceIds: selectedServices,
+    pages: snap?.intelligence?.structure?.pages || [],
+    sourceRevision: brand.sourceRevision,
+  });
+  const approvedWithoutImportedPage = serviceCoverageRows
+    .filter((row) => row.dedicatedServicePage === "NOT_FOUND")
+    .map((row) => row.serviceId);
   const headerDestination = str(brand.headerCta.assetUrl);
   const destinations: CanonicalCtaDestination[] = [];
   if (str(brand.headerCta.value) || headerDestination) {
@@ -231,6 +232,7 @@ export function buildCanonicalWebsiteGrowthContext(slug: string): CanonicalWebsi
     serviceCoverage: {
       status: pages.length ? (servicePages.length || importedServices.length ? "PRESENT" : "MISSING") : "NOT CAPTURED",
       approvedWithoutImportedPage,
+      services: serviceCoverageRows,
     },
     navigation: {
       status: listStatus(brand.headerNavigation),

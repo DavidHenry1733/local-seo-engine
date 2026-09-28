@@ -18,6 +18,7 @@ import {
   loadContentPackage,
 } from "./pharmacyContentPackageService.ts";
 import { PHARMACY_WORKSPACE_ROOT, safePharmacySlug } from "./pharmacyWorkspacePaths.ts";
+import { resolveCanonicalServiceCoverage } from "./canonicalExistingServiceCoverage.ts";
 import { readServiceSearchDemandArtifact } from "./serviceSearchDemandStorage.ts";
 import { buildServiceSearchDemandQuerySpecs } from "./serviceSearchDemandQueryBuilder.ts";
 import type { ServiceSearchDemandQueryRow } from "./serviceSearchDemandModel.ts";
@@ -147,26 +148,6 @@ export type PharmacyWideServiceOpportunityAssessment = {
   evidenceLimitations: string[];
 };
 
-const GENERIC_PAGE_PATH =
-  /\/privacy-policy|\/cookie|\/terms|\/about-us\/?$|\/services\/?$|^\/$|\/book-a-service/i;
-
-const SERVICE_PATH_HINTS: Record<string, RegExp[]> = {
-  "blood-pressure-checks": [/blood-pressure/, /hypertension/, /blood-pressure-check/],
-  "discharge-medicines-service": [/discharge-medicines/, /discharge-medicine/],
-  "flu-vaccinations": [/flu-vaccination/, /flu-jab/, /flu-vacc/],
-  "health-checks": [/health-check/, /health-screen/],
-  "independent-prescriber": [/independent-prescriber/, /private-prescriber/, /prescriber/],
-  "malaria-prevention": [/malaria/, /antimalarial/, /travel-health/],
-  "medication-reviews": [/medication-review/, /medicines-review/],
-  "minor-ailments": [/minor-ailment/, /pharmacy-first/],
-  "new-medicine-service": [/new-medicine/, /nms/],
-  "pharmacy-first": [/pharmacy-first/],
-  "prescription-dispensing": [/prescription-dispensing/, /dispensing/],
-  "repeat-prescriptions": [/repeat-prescription/, /repeat-prescriptions/],
-  "smoking-cessation": [/smoking-cessation/, /stop-smoking/, /healthy-lifestyle/],
-  "weight-management": [/weight-loss/, /weight-management/, /weight-loss-clinic/],
-};
-
 function clean(value: unknown): string {
   return String(value || "").trim();
 }
@@ -294,19 +275,6 @@ function buildDemandSummary(
   };
 }
 
-function pathMatchesService(serviceId: string, url: string): boolean {
-  if (!url) return false;
-  let path = "";
-  try {
-    path = new URL(url).pathname.toLowerCase();
-  } catch {
-    path = url.toLowerCase();
-  }
-  if (GENERIC_PAGE_PATH.test(path)) return false;
-  const hints = SERVICE_PATH_HINTS[serviceId] || [new RegExp(serviceId.replace(/-/g, "[-/]"))];
-  return hints.some((re) => re.test(path));
-}
-
 function buildWebsiteCoverage(slug: string, serviceId: string): ServiceWebsiteCoverageEvidence {
   const profile = readSetupProfile(slug);
   const snap = profile.websiteImportSnapshot as {
@@ -355,8 +323,18 @@ function buildWebsiteCoverage(slug: string, serviceId: string): ServiceWebsiteCo
   );
   const visible = (snap.customerVisibleServices || []).find((s) => clean(s.serviceId) === serviceId);
 
-  const dedicatedUrl = clean(commercial?.sourceUrl || imported?.url);
-  const pageTitle = clean(commercial?.pageTitle || imported?.serviceName);
+  const structurePages = ((snap.intelligence as { structure?: { pages?: Array<{ url?: string; path?: string; title?: string; h1?: string; category?: string }> } } | undefined)?.structure?.pages) || [];
+  const canonical = resolveCanonicalServiceCoverage({
+    serviceIds: [serviceId],
+    pages: structurePages,
+    sourceRevision: "",
+  })[0];
+  const dedicatedUrl = canonical?.dedicatedServicePage === "PRESENT"
+    ? clean(canonical.servicePageUrl)
+    : "";
+  const pageTitle = canonical?.dedicatedServicePage === "PRESENT"
+    ? clean(canonical.servicePageTitle)
+    : clean(commercial?.pageTitle || imported?.serviceName);
   const evidenceText = clean(visible?.matchedSnippet || imported?.evidence?.sourceUrl);
   const storedConfidence =
     num(commercial?.confidence) ??
@@ -369,14 +347,12 @@ function buildWebsiteCoverage(slug: string, serviceId: string): ServiceWebsiteCo
   const servicePageIncluded = Boolean(pkg?.assets?.some((a) => a.type === "service-page" && a.included));
 
   let classification: WebsiteCoverageClassification = "missing-dedicated-page";
-  if (commercial && pathMatchesService(serviceId, dedicatedUrl)) {
+  if (canonical?.dedicatedServicePage === "PRESENT") {
     classification = "adequate-existing-page";
-  } else if (imported?.exists && dedicatedUrl && pathMatchesService(serviceId, dedicatedUrl)) {
-    classification = "adequate-existing-page";
-  } else if (imported?.exists || visible || dedicatedUrl) {
+  } else if (canonical?.dedicatedServicePage === "UNCERTAIN" || canonical?.servicePresence === "PRESENT" || canonical?.servicePresence === "UNCERTAIN" || canonical?.supportingContent.length) {
     classification = "weak-existing-evidence";
-  } else if (imported && imported.exists === false) {
-    classification = "missing-dedicated-page";
+  } else if (!structurePages.length && (imported?.exists || visible)) {
+    classification = "weak-existing-evidence";
   }
 
   const supporting: string[] = [];
