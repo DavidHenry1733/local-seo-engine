@@ -103,4 +103,16 @@ export interface ImportedEvidenceReviewPayload {
   }>;
   branchSelection: import("./masterAdminWebsiteBranchResolutionModel.ts").WebsiteBranchSelectionPayload | null;
   summary: string;
+  acceptance: ImportedEvidenceReviewAcceptance;
+}
+
+export interface ImportedEvidenceReviewAcceptance {
+  ready: boolean;
+  accepted: boolean;
+  businessProfileReviewAvailable: boolean;
+  actionId: "accept_imported_evidence_review" | null;
+  actionLabel: string | null;
+  unavailableReason: string | null;
+  decidedAt: string | null;
+  decidedBy: string | null;
 }

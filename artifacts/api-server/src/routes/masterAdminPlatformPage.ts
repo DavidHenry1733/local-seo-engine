@@ -5548,10 +5548,42 @@ function renderImportedEvidenceReview(review){
     '<div class="bpr-panel-stat"><div class="lbl">Google policy</div><div style="font-weight:700;margin-top:4px">'+esc(review.googleProfileState||'—')+'</div></div>'+
     correctivePanel+
     optionalReimportPanel+
+    (review.acceptance&&review.acceptance.accepted
+      ?'<div style="margin-top:12px;grid-column:1/-1"><div style="font-weight:700;color:#4ade80">Imported evidence accepted</div><button class="btn" type="button" id="ierContinueBusinessProfileBtn" style="width:100%;margin-top:8px" onclick="continueToBusinessProfileReview()">Continue to Business Profile Review</button></div>'
+      :(review.acceptance&&review.acceptance.ready
+        ?'<div style="margin-top:12px;grid-column:1/-1"><button class="btn" type="button" id="ierAcceptEvidenceBtn" style="width:100%" onclick="acceptImportedEvidenceReview()">Accept Imported Evidence</button></div>'
+        :(review.acceptance&&review.acceptance.unavailableReason?'<div style="margin-top:12px;grid-column:1/-1;font-size:.72rem;color:#94a3b8">'+esc(review.acceptance.unavailableReason)+'</div>':'')))+
     (crawl&&crawl.pages&&crawl.pages.length?'<div style="margin-top:10px;grid-column:1/-1;font-size:.68rem"><div class="lbl" style="margin-bottom:4px">Crawl coverage</div><table class="local-coverage-area-table"><thead><tr><th>URL</th><th>Source</th><th>Class</th><th>Title</th></tr></thead><tbody>'+crawl.pages.slice(0,20).map(function(p){return '<tr><td>'+esc(p.url)+'</td><td>'+esc(p.discoverySource)+'</td><td>'+esc(p.category)+'</td><td>'+esc(p.title||p.h1||'—')+'</td></tr>';}).join('')+'</tbody></table></div>':'');
   document.getElementById('ierLoading').style.display='none';
   document.getElementById('ierError').style.display='none';
   document.getElementById('ierContent').style.display='block';
+}
+async function acceptImportedEvidenceReview(){
+  if(!activeCustomer){toast("Open a customer first",true);return}
+  const review=activeImportedEvidenceReview||{};
+  if(!review.acceptance||!review.acceptance.ready||review.acceptance.accepted){
+    toast((review.acceptance&&review.acceptance.unavailableReason)||"Imported evidence is not ready to accept",true);
+    return;
+  }
+  if(!confirm("Accept the reviewed imported evidence for "+(activeCustomer.pharmacyName||activeCustomer.slug)+" and continue to Business Profile Review?"))return;
+  const btn=document.getElementById("ierAcceptEvidenceBtn");
+  if(btn){btn.disabled=true;btn.textContent="Accepting…"}
+  try{
+    const data=await api("/api/master-admin-platform/customers/"+encodeURIComponent(activeCustomer.slug)+"/imported-evidence-review/accept",{method:"POST",body:"{}"});
+    if(data.review)renderImportedEvidenceReview(data.review);
+    if(data.customer){activeCustomer=data.customer;renderCustomerDetail(data.customer)}
+    if(data.workflow){activeCustomer.workflow=data.workflow}
+    toast("Imported evidence accepted");
+    closeImportedEvidenceReview();
+    openBusinessProfileReview();
+  }catch(e){
+    toast(e.message||String(e),true);
+    if(btn){btn.disabled=false;btn.textContent="Accept Imported Evidence"}
+  }
+}
+function continueToBusinessProfileReview(){
+  closeImportedEvidenceReview();
+  openBusinessProfileReview();
 }
 async function reimportWebsiteFromEvidenceReview(){
   if(!activeCustomer){toast("Open a customer first",true);return}

@@ -24,12 +24,20 @@ export interface CommercialIntelligenceApprovalRecord {
   growthIntelligenceRevision?: string;
 }
 
+export interface ImportedEvidenceReviewDecision {
+  decision: "accepted";
+  decidedAt: string;
+  decidedBy: string;
+  sourceRevision: string;
+}
+
 interface WorkflowDoc {
   version: number;
   acknowledgements: Record<string, string>;
   lastOperator?: string;
   commercialIntelligenceApproval?: CommercialIntelligenceApprovalRecord;
   growthPlanDecision?: GrowthPlanDecisionRecord;
+  importedEvidenceReviewDecision?: ImportedEvidenceReviewDecision;
 }
 
 function workflowDocPath(slug: string): string {
@@ -47,6 +55,7 @@ function readDoc(slug: string): WorkflowDoc {
       lastOperator: raw.lastOperator,
       commercialIntelligenceApproval: raw.commercialIntelligenceApproval,
       growthPlanDecision: raw.growthPlanDecision,
+      importedEvidenceReviewDecision: raw.importedEvidenceReviewDecision,
     };
   } catch {
     return { version: 1, acknowledgements: {} };
@@ -56,6 +65,30 @@ function readDoc(slug: string): WorkflowDoc {
 function writeDoc(slug: string, doc: WorkflowDoc): void {
   fs.mkdirSync(path.dirname(workflowDocPath(slug)), { recursive: true });
   fs.writeFileSync(workflowDocPath(slug), JSON.stringify(doc, null, 2));
+}
+
+export function readImportedEvidenceReviewDecision(slug: string): ImportedEvidenceReviewDecision | null {
+  const decision = readDoc(slug).importedEvidenceReviewDecision;
+  if (!decision || decision.decision !== "accepted" || !decision.decidedAt || !decision.sourceRevision) return null;
+  return decision;
+}
+
+export function writeImportedEvidenceReviewDecision(
+  slug: string,
+  operator: string,
+  sourceRevision: string,
+): ImportedEvidenceReviewDecision {
+  const doc = readDoc(slug);
+  const decision: ImportedEvidenceReviewDecision = {
+    decision: "accepted",
+    decidedAt: new Date().toISOString(),
+    decidedBy: operator,
+    sourceRevision,
+  };
+  doc.importedEvidenceReviewDecision = decision;
+  doc.lastOperator = operator;
+  writeDoc(slug, doc);
+  return decision;
 }
 
 export function isWorkflowAcknowledged(slug: string, key: string): boolean {

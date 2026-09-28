@@ -81,7 +81,7 @@ import {
   runMasterAdminJobAsync,
 } from "../../../../../src/pharmacy/masterAdminJobService.ts";
 import { buildServicePageJobContract } from "../../../../../src/pharmacy/masterAdminServicePageJobService.ts";
-import { buildImportedEvidenceReview } from "../../../../../src/pharmacy/masterAdminImportedEvidenceReviewService.ts";
+import { acceptImportedEvidenceReview, buildImportedEvidenceReview } from "../../../../../src/pharmacy/masterAdminImportedEvidenceReviewService.ts";
 import {
   buildWebsiteBranchSelectionPayload,
   confirmManualWebsiteBranch,
@@ -1231,6 +1231,23 @@ router.get("/master-admin-platform/locked-commercial-services", (_req, res) => {
 router.get("/master-admin-platform/customers/:slug/imported-evidence-review", (req, res) => {
   const slug = safeAdminSlug(req.params.slug);
   res.json({ ok: true, review: buildImportedEvidenceReview(slug), customer: buildMasterAdminCustomerRecordLite(slug) });
+});
+
+router.post("/master-admin-platform/customers/:slug/imported-evidence-review/accept", (req, res) => {
+  const slug = safeAdminSlug(req.params.slug);
+  const user = resolveUser(req);
+  try {
+    const acceptance = acceptImportedEvidenceReview(slug, user);
+    res.json({
+      ok: true,
+      acceptance,
+      review: buildImportedEvidenceReview(slug),
+      customer: buildMasterAdminCustomerRecordLite(slug),
+      workflow: buildCustomerWorkflowState(slug, user),
+    });
+  } catch (err) {
+    res.status(409).json({ ok: false, error: err instanceof Error ? err.message : String(err) });
+  }
 });
 
 router.post("/master-admin-platform/customers/:slug/google-candidates/search", async (req, res) => {

@@ -7,11 +7,16 @@ import { buildWebsiteSourceSummary } from "./masterAdminCanonicalWebsiteService.
 import { resolveGoogleProfileOnboardingState } from "./masterAdminGoogleProfileOnboardingService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 import type {
+  ImportedEvidenceReviewAcceptance,
   ImportedEvidenceReviewPayload,
   ImportedEvidenceRow,
   ImportedEvidenceStatus,
   WebsiteGoogleComparisonRow,
 } from "./masterAdminImportedEvidenceReviewModel.ts";
+import {
+  readImportedEvidenceReviewDecision,
+  writeImportedEvidenceReviewDecision,
+} from "./masterAdminWorkflowAckService.ts";
 import { validateImportTenantIsolationGate } from "./masterAdminImportTenantIsolationService.ts";
 import { buildWebsiteBranchSelectionPayload } from "./masterAdminWebsiteBranchSelectionService.ts";
 import type { WebsiteImportFieldValue } from "./growthEngineWebsiteIntelligenceImportV2Model.ts";
@@ -527,6 +532,65 @@ function buildComparisonRows(website: ImportedEvidenceRow[], google: ImportedEvi
   });
 }
 
+export function importedEvidenceSourceRevision(slug: string): string {
+  const data = readSetupProfile(safeAdminSlug(slug));
+  const websiteAt = str(data.websiteImportSnapshot?.importedAt);
+  const googleAt = str(data.googleImportSnapshot?.importedAt);
+  const googleState = resolveGoogleProfileOnboardingState(data);
+  return `${websiteAt}|${googleState}|${googleAt}`;
+}
+
+export function assessImportedEvidenceReviewAcceptance(slug: string): ImportedEvidenceReviewAcceptance {
+  const safe = safeAdminSlug(slug);
+  const review = buildImportedEvidenceReview(safe);
+  return review.acceptance;
+}
+
+function acceptanceForReview(
+  slug: string,
+  input: {
+    websiteImported: boolean;
+    googleImported: boolean;
+    googleProfileState: string;
+    isolationPassed: boolean;
+    safeForReview: boolean;
+    branchSelectionRequired: boolean;
+  },
+): ImportedEvidenceReviewAcceptance {
+  const googleComplete = input.googleImported || input.googleProfileState === "no_profile" || input.googleProfileState === "deferred";
+  let unavailableReason: string | null = null;
+  if (!input.websiteImported) unavailableReason = "Website Import is not complete.";
+  else if (!googleComplete) unavailableReason = "Google evidence is not complete.";
+  else if (!input.isolationPassed) unavailableReason = "Tenant isolation has not passed.";
+  else if (!input.safeForReview) unavailableReason = "Evidence quality is not safe for review.";
+  else if (input.branchSelectionRequired) unavailableReason = "Branch selection is still required.";
+  const ready = unavailableReason == null;
+  const decision = readImportedEvidenceReviewDecision(slug);
+  const accepted = Boolean(ready && decision && decision.sourceRevision === importedEvidenceSourceRevision(slug));
+  return {
+    ready,
+    accepted,
+    businessProfileReviewAvailable: accepted,
+    actionId: ready && !accepted ? "accept_imported_evidence_review" : null,
+    actionLabel: ready && !accepted ? "Accept Imported Evidence" : null,
+    unavailableReason,
+    decidedAt: accepted ? decision?.decidedAt || null : null,
+    decidedBy: accepted ? decision?.decidedBy || null : null,
+  };
+}
+
+export function acceptImportedEvidenceReview(slug: string, operator: string): ImportedEvidenceReviewAcceptance {
+  const safe = safeAdminSlug(slug);
+  const current = assessImportedEvidenceReviewAcceptance(safe);
+  if (!current.ready) {
+    throw new Error(current.unavailableReason || "Imported evidence is not ready for acceptance.");
+  }
+  if (!current.accepted) {
+    writeImportedEvidenceReviewDecision(safe, operator || "master-admin", importedEvidenceSourceRevision(safe));
+  }
+  return assessImportedEvidenceReviewAcceptance(safe);
+}
+
 export function buildImportedEvidenceReview(slug: string): ImportedEvidenceReviewPayload {
   const safe = safeAdminSlug(slug);
   const data = readSetupProfile(safe);
@@ -576,6 +640,14 @@ export function buildImportedEvidenceReview(slug: string): ImportedEvidenceRevie
   }));
 
   const websiteImported = Boolean(ws.websiteImported) && !requiresBranchSelection;
+  const acceptance = acceptanceForReview(safe, {
+    websiteImported,
+    googleImported: googleImportedFlag,
+    googleProfileState: googleState.state,
+    isolationPassed: Boolean(tenantIsolation.passed),
+    safeForReview: Boolean(evidenceQuality?.safeForBusinessProfileReview),
+    branchSelectionRequired: requiresBranchSelection,
+  });
   const googleImported = googleImportedFlag;
   const websiteUrl = str(data.website || ws.canonicalWebsite);
   const reimportState = resolveWebsiteIntelligenceReimportState(safe);
@@ -632,5 +704,6 @@ export function buildImportedEvidenceReview(slug: string): ImportedEvidenceRevie
     googleCandidates: candidates,
     branchSelection,
     summary,
+    acceptance,
   };
 }
