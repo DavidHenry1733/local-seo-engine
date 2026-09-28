@@ -97,6 +97,8 @@ export interface GrowthOpportunityReport {
   dataSources: OpportunityEvidenceSource[];
   /** Pharmacy-wide service opportunity matrix from stored demand, website, organic and content evidence. */
   serviceOpportunityAssessment?: import("./growthEngineServiceOpportunityEvidence.ts").PharmacyWideServiceOpportunityAssessment;
+  /** Canonical Website Import evidence read at generation time. Older reports omit it. */
+  websiteIntelligence?: import("./canonicalWebsiteGrowthContext.ts").CanonicalWebsiteGrowthContext;
 }
 
 const PRIORITY_WEIGHT: Record<OpportunityPriority, number> = {

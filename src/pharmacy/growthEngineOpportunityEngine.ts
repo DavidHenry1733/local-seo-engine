@@ -35,6 +35,7 @@ import {
   type OpportunityPriority,
 } from "./growthEngineOpportunityModel.ts";
 import { readPharmacyIndexingSummary } from "./pharmacyIndexingBridgeService.ts";
+import { buildGrowthIntelligenceInputContext } from "./canonicalWebsiteGrowthContext.ts";
 
 const WEBSITE_ANALYSIS_PLACEHOLDERS = [
   { label: "Pages found by search engines", note: "Available after website scan" },
@@ -414,6 +415,7 @@ export function buildGrowthOpportunityReport(
   slug: string,
   snapshot: GrowthEngineCompetitorSnapshot | null = loadCompetitorSnapshot(slug),
 ): GrowthOpportunityReport {
+  const websiteIntelligence = buildGrowthIntelligenceInputContext(slug);
   const profile = loadProfile(slug);
   const enabledServices = resolveEnabledServices(profile);
   const plan = buildGrowthPlanRecommendation(slug);
@@ -445,6 +447,7 @@ export function buildGrowthOpportunityReport(
     roadmap: buildOpportunityRoadmap(all),
     readyToBuild: buildReadyToBuild(slug, all, plan, topServiceId),
     websiteAnalysisPlaceholders: WEBSITE_ANALYSIS_PLACEHOLDERS,
+    websiteIntelligence,
     dataSources: collectDataSources(all),
     serviceOpportunityAssessment: serviceAssessment,
   };
