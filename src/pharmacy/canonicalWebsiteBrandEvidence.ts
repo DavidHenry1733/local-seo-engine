@@ -138,7 +138,7 @@ export function projectCanonicalWebsiteBrandEvidence(slug: string): WebsiteBrand
       ...meta,
       method: fromDna ? "brand-dna-v1" : fromManifest ? "design-intelligence-v1" : "website-import-snapshot",
       confidence: dna?.confidence?.colours ?? (chosen ? 80 : null),
-      conflict: conflict ? compared.join(" | ") : "",
+      conflict: conflict ? [...new Set(compared)].join(" | ") : "",
     });
   };
 

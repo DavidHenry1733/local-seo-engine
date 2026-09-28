@@ -5524,7 +5524,8 @@ function renderImportedBrandStyle(brand){
   if(!brand){el.innerHTML='<p class="ci-narrative">Brand evidence has not been read.</p>';return}
   const logo=brand.logo||{};
   const logoUrl=String(logo.assetUrl||logo.value||'');
-  const logoHtml=/^https?:\/\//i.test(logoUrl)?'<img src="'+esc(logoUrl)+'" alt="Imported logo" style="max-height:48px;max-width:220px;background:#fff;padding:6px;border-radius:6px"/>':'<span>Not found</span>';
+  const logoIsHttp=logoUrl.indexOf('http://')===0||logoUrl.indexOf('https://')===0;
+  const logoHtml=logoIsHttp?'<img src="'+esc(logoUrl)+'" alt="Imported logo" style="max-height:48px;max-width:220px;background:#fff;padding:6px;border-radius:6px"/>':'<span>Not found</span>';
   const nav=(brand.headerNavigation||[]).slice(0,12).map(esc).join(' · ')||'Not found';
   const footer=(brand.footerLinks||[]).slice(0,12).map(esc).join(' · ')||'Not found';
   const social=(brand.socialLinks||[]).slice(0,6).map(esc).join(' · ')||'Not found';
