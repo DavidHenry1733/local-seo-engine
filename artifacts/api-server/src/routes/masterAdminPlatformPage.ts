@@ -3183,7 +3183,7 @@ async function continueWorkflow(explicitActionId){
   }
   try{
     const payload=actionId?{actionId:actionId,operatorConfirmed:true}:{};
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/continue-workflow',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(payload)});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/continue-workflow'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(payload)});
     const data=await res.json().catch(()=>({}));
     if(!res.ok&&data.confirmationRequired){
       toast('Confirm Google Business Profile before continuing');

@@ -5,7 +5,6 @@ import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import session from "express-session";
-import type { SessionData } from "express-session";
 import router from "./routes";
 import previewRouter from "./routes/preview";
 import pharmacyPreviewRouter from "./routes/pharmacyPreview";
@@ -19,6 +18,7 @@ import authRouter from "./routes/auth";
 import { logger } from "./lib/logger";
 import { ensureAdminExists } from "./lib/users";
 import { requireAuth, requireAdmin, hasValidInternalToken } from "./middlewares/requireAuth";
+import { FileSessionStore } from "./lib/fileSessionStore";
 import healthRouter from "./routes/health";
 import growthEnginePublicAcceptedPreviewRouter from "./routes/growthEnginePublicAcceptedPreview";
 
@@ -119,55 +119,6 @@ if (!process.env.SESSION_SECRET) {
 // File-based session store — survives server restarts without extra packages.
 const SESSION_DIR = path.join(WORKSPACE_ROOT, ".sessions");
 if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
-
-class FileSessionStore extends session.Store {
-  private dir: string;
-  constructor(dir: string) {
-    super();
-    this.dir = dir;
-    // Clean up expired sessions on startup (non-blocking)
-    setImmediate(() => this._prune());
-  }
-  private _file(sid: string): string {
-    return path.join(this.dir, sid.replace(/[^a-zA-Z0-9_-]/g, "_") + ".json");
-  }
-  private _prune(): void {
-    try {
-      const now = Date.now();
-      for (const f of fs.readdirSync(this.dir)) {
-        if (!f.endsWith(".json")) continue;
-        try {
-          const raw = JSON.parse(fs.readFileSync(path.join(this.dir, f), "utf8")) as { expires?: number };
-          if (raw.expires && raw.expires < now) fs.unlinkSync(path.join(this.dir, f));
-        } catch { /* skip corrupt files */ }
-      }
-    } catch { /* non-fatal */ }
-  }
-  get(sid: string, cb: (err: unknown, session?: SessionData | null) => void): void {
-    try {
-      const file = this._file(sid);
-      if (!fs.existsSync(file)) { cb(null, null); return; }
-      const raw = JSON.parse(fs.readFileSync(file, "utf8")) as { expires?: number; data: SessionData };
-      if (raw.expires && raw.expires < Date.now()) { fs.unlinkSync(file); cb(null, null); return; }
-      cb(null, raw.data);
-    } catch (e) { cb(e); }
-  }
-  set(sid: string, sessionData: SessionData, cb?: (err?: unknown) => void): void {
-    try {
-      const maxAge = (sessionData.cookie?.maxAge as number | undefined) ?? 8 * 60 * 60 * 1000;
-      const expires = Date.now() + maxAge;
-      fs.writeFileSync(this._file(sid), JSON.stringify({ expires, data: sessionData }));
-      cb?.();
-    } catch (e) { cb?.(e); }
-  }
-  destroy(sid: string, cb?: (err?: unknown) => void): void {
-    try {
-      const file = this._file(sid);
-      if (fs.existsSync(file)) fs.unlinkSync(file);
-      cb?.();
-    } catch (e) { cb?.(e); }
-  }
-}
 
 app.use(session({
   store:             new FileSessionStore(SESSION_DIR),
