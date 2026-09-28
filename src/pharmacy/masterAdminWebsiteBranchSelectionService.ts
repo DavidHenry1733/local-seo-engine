@@ -874,21 +874,55 @@ export function isBranchSelectionBlocking(slug: string): boolean {
   return resolution.status === "branch_selection_required" || resolution.status === "none_of_these_branches";
 }
 
+function websiteCrawlArtifactProduced(snap: { intelligence?: unknown } | null | undefined): boolean {
+  const intel = snap?.intelligence as { structure?: { pages?: unknown[] }; business?: { addressCandidates?: unknown[] } } | null | undefined;
+  if (!intel || typeof intel !== "object") return false;
+  if (Array.isArray(intel.structure?.pages) && intel.structure.pages.length > 0) return true;
+  return Array.isArray(intel.business?.addressCandidates) && intel.business.addressCandidates.length > 0;
+}
+
+/**
+ * Pure completion rule shared by the import contract and the workflow stage.
+ * A produced crawl artifact is complete even when an individual field is missing.
+ * A stored snapshot is not complete when the fetch failed or a real branch choice is still open.
+ */
+export function isCanonicalWebsiteImportFailed(data: {
+  websiteImportSnapshot?: { status?: string; message?: string } | null;
+}): boolean {
+  const snap = data.websiteImportSnapshot;
+  if (!snap) return false;
+  const status = String(snap.status || "");
+  const message = String(snap.message || "");
+  return status === "not_found" || /could not fetch|request timed out/i.test(message);
+}
+
+export function isCanonicalWebsiteImportComplete(
+  slug: string,
+  data: {
+    websiteImportSnapshot?: { status?: string; message?: string; importedAt?: string; intelligence?: unknown } | null;
+    websiteBranchResolution?: WebsiteBranchResolution | null;
+  },
+): boolean {
+  const snap = data.websiteImportSnapshot;
+  if (!snap) return false;
+  const status = String(snap.status || "");
+  const message = String(snap.message || "");
+  const crawlProduced = websiteCrawlArtifactProduced(snap);
+  const failedFetch = status === "not_found" || /could not fetch|request timed out/i.test(message);
+  if (failedFetch) return false;
+  const projected = data.websiteBranchResolution ? projectCanonicalBranchResolution(data.websiteBranchResolution) : null;
+  if (projected?.status === "branch_selection_required" || projected?.status === "none_of_these_branches") return false;
+  if (isNationalMarketScope(slug, data as never)) {
+    return Boolean(snap.importedAt) && (status === "imported" || status === "needs_review" || crawlProduced);
+  }
+  if (status === "imported") return true;
+  if (crawlProduced && (status === "needs_review" || status === "branch_selection_required")) return true;
+  if (projected?.status === "branch_selected") return status === "imported" || Boolean(snap.importedAt);
+  return false;
+}
+
 export function websiteImportStageComplete(slug: string): boolean {
   const safe = safeAdminSlug(slug);
   reconcileNationalWebsiteBranchResolution(safe);
-  const data = readSetupProfile(safe);
-  if (!data.websiteImportSnapshot) return false;
-  const snap = data.websiteImportSnapshot as WebsiteImportSnapshot;
-  if (isNationalMarketScope(safe, data)) {
-    return Boolean(snap.importedAt) && (snap.status === "imported" || snap.status === "needs_review");
-  }
-  const storedResolution = readWebsiteBranchResolution(safe);
-  const resolution = storedResolution ? projectCanonicalBranchResolution(storedResolution) : null;
-  if (resolution?.status === "branch_selection_required") return false;
-  if (resolution?.status === "none_of_these_branches") return false;
-  if (resolution?.status === "branch_selected") {
-    return snap.status === "imported" || Boolean(snap.importedAt);
-  }
-  return snap.status === "imported";
+  return isCanonicalWebsiteImportComplete(safe, readSetupProfile(safe));
 }

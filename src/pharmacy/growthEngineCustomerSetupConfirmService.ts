@@ -30,6 +30,7 @@ import {
 } from "./pharmacyPresentationRenderBatch.ts";
 import { invalidatePharmacyPresentationProfileCache } from "./pharmacyPresentationProfileResolver.ts";
 import { confirmTenantBrandIdentity } from "./pharmacyTenantBrandIdentityContract.ts";
+import { bestWebsiteAddressCandidate, resolveCanonicalWebsiteBusinessFields } from "./canonicalWebsiteBusinessEvidence.ts";
 
 export type ConfirmImportStatus = "imported" | "needs_review" | "not_found";
 
@@ -277,17 +278,18 @@ function buildWebsiteSection(snap: WebsiteImportSnapshot | null): ConfirmImportS
       visibleCount > 0
         ? String(visibleCount)
         : String(intel.services.filter((s) => s.exists).length);
-    const addressCandidate = intel.business.addressCandidates[0];
+    const addressCandidate = bestWebsiteAddressCandidate(intel.business) || intel.business.addressCandidates[0];
+    const websiteFields = resolveCanonicalWebsiteBusinessFields(intel.business);
     rows.push(
       row("Website URL", intel.identity.websiteUrl),
       row("Resolved URL", intel.identity.resolvedUrl),
       row("Website title", intel.identity.title),
-      row("Business name", intel.business.businessName.selected),
-      row("Phone", intel.business.phone.selected),
-      row("Email", intel.business.email.selected),
-      row("Address", intel.business.address.selected),
-      row("Town", intel.business.town.selected),
-      row("Postcode", intel.business.postcode.selected),
+      row("Business name", websiteFields.businessName?.selected || ""),
+      row("Phone", websiteFields.phone?.selected || ""),
+      row("Email", websiteFields.email?.selected || ""),
+      row("Address", websiteFields.address?.selected || ""),
+      row("Town", websiteFields.town?.selected || ""),
+      row("Postcode", websiteFields.postcode?.selected || ""),
       row("Address source", addressCandidate?.sourceUrl || ""),
       row("Address confidence", addressCandidate ? `${addressCandidate.confidence}% · ${addressCandidate.sourceType}` : ""),
       row("Opening hours", intel.business.openingHours.selected),
@@ -395,7 +397,7 @@ function buildWebsiteBrandSummary(snap: WebsiteImportSnapshot | null): CustomerS
 }
 
 function buildWebsiteAddressEvidence(snap: WebsiteImportSnapshot | null): CustomerSetupWebsiteAddressEvidence {
-  const candidate = snap?.intelligence?.business.addressCandidates?.[0];
+  const candidate = bestWebsiteAddressCandidate(snap?.intelligence?.business);
   if (!candidate) {
     return {
       visible: false,
@@ -443,7 +445,7 @@ function addImportedKey(
 function websiteEvidence(
   snap: WebsiteImportSnapshot | null | undefined,
 ): Pick<ConfirmFieldWithSource, "sourceUrl" | "evidenceLabel" | "matchedSnippet"> {
-  const candidate = snap?.intelligence?.business.addressCandidates?.[0];
+  const candidate = bestWebsiteAddressCandidate(snap?.intelligence?.business);
   if (!candidate) return {};
   return {
     sourceUrl: candidate.sourceUrl,

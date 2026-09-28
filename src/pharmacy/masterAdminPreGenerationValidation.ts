@@ -214,8 +214,8 @@ export function runPreGenerationValidation(slug: string): PreGenerationValidatio
     "website_intelligence",
     "Website",
     "Website Intelligence imported",
-    Boolean(website.importedEvidence?.importedAt || website.websiteImported),
-    String(website.importedEvidence?.importedAt || website.importState || "not imported"),
+    Boolean(website.websiteImported),
+    String(website.websiteStatus || website.importState || "not imported"),
   );
 
   const googleState = resolveGoogleProfileOnboardingState(profile);

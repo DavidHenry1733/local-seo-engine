@@ -17,6 +17,7 @@ import { buildWebsiteBranchSelectionPayload } from "./masterAdminWebsiteBranchSe
 import type { WebsiteImportFieldValue } from "./growthEngineWebsiteIntelligenceImportV2Model.ts";
 import type { WebsiteDesignEvidence } from "./growthEngineWebsiteDesignEvidenceModel.ts";
 import { resolveWebsiteIntelligenceReimportState } from "./masterAdminWebsiteIntelligenceReimportState.ts";
+import { resolveCanonicalWebsiteBusinessFields } from "./canonicalWebsiteBusinessEvidence.ts";
 
 function str(v: unknown): string {
   return String(v ?? "").trim();
@@ -75,23 +76,24 @@ function buildWebsiteEvidenceRows(slug: string): ImportedEvidenceRow[] {
   const snap = ws.importedEvidence as Record<string, unknown> | null;
   const intel = (snap?.intelligence || null) as Record<string, unknown> | null;
   const business = (intel?.business || {}) as Record<string, WebsiteImportFieldValue>;
+  const websiteFields = resolveCanonicalWebsiteBusinessFields(business);
   const identity = (intel?.identity || {}) as Record<string, unknown>;
   const design = (intel?.designEvidence || null) as WebsiteDesignEvidence | null;
   const importedAt = str(snap?.importedAt);
 
   const rows: ImportedEvidenceRow[] = [
-    rowFromField("business-name", "business", "Business name", business.businessName),
+    rowFromField("business-name", "business", "Business name", websiteFields.businessName),
     rowFromScalar("website-url", "business", "Website URL", snap?.websiteUrl || ws.canonicalWebsite, {
       sourceUrl: str(snap?.websiteUrl || ws.canonicalWebsite),
       extractionMethod: "operator-intake",
       capturedAt: importedAt,
       status: snap?.websiteUrl ? "Confirmed" : "Not Found",
     }),
-    rowFromField("address", "business", "Address", business.address),
-    rowFromField("town", "business", "Town or City", business.town),
-    rowFromField("postcode", "business", "Postcode", business.postcode),
-    rowFromField("phone", "business", "Phone", business.phone),
-    rowFromField("email", "business", "Email", business.email),
+    rowFromField("address", "business", "Address", websiteFields.address),
+    rowFromField("town", "business", "Town or City", websiteFields.town),
+    rowFromField("postcode", "business", "Postcode", websiteFields.postcode),
+    rowFromField("phone", "business", "Phone", websiteFields.phone),
+    rowFromField("email", "business", "Email", websiteFields.email),
     rowFromField("opening-hours", "business", "Opening hours", business.openingHours),
     rowFromScalar("logo", "brand", "Logo", identity.logoUrl || snap?.logoUrl, {
       sourceUrl: str(identity.logoUrl || snap?.logoUrl),
@@ -355,6 +357,7 @@ function buildGoogleEvidenceRows(slug: string): ImportedEvidenceRow[] {
   return [
     rowFromScalar("google-business-name", "google", "Business name", pick(snap?.businessName, intel?.businessName), { extractionMethod: "google-places", capturedAt: importedAt }),
     rowFromScalar("google-address", "google", "Address", pick(snap?.address), { extractionMethod: "google-places", capturedAt: importedAt }),
+    rowFromScalar("google-town", "google", "Town or City", pick(snap?.town), { extractionMethod: "google-places", capturedAt: importedAt }),
     rowFromScalar("google-postcode", "google", "Postcode", pick(snap?.postcode), { extractionMethod: "google-places", capturedAt: importedAt }),
     rowFromScalar("google-phone", "google", "Phone", pick(snap?.phone), { extractionMethod: "google-places", capturedAt: importedAt }),
     rowFromScalar("google-website", "google", "Website", pick(snap?.website), { extractionMethod: "google-places", capturedAt: importedAt }),
@@ -449,10 +452,53 @@ function normCompare(v: string): string {
   return v.toLowerCase().replace(/\s+/g, " ").trim();
 }
 
+function hostKey(value: string): string {
+  try {
+    const url = new URL(value.startsWith("http") ? value : `https://${value}`);
+    return url.hostname.replace(/^www\./, "").toLowerCase();
+  } catch {
+    return normCompare(value).replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
+  }
+}
+
+function phoneKey(value: string): string {
+  let digits = value.replace(/\D/g, "");
+  if (digits.startsWith("44")) digits = `0${digits.slice(2)}`;
+  return digits;
+}
+
+function postcodeKey(value: string): string {
+  return value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+}
+
+function streetKey(value: string): string {
+  return normCompare(value)
+    .replace(/[.,]/g, " ")
+    .replace(/\broad\b/g, "rd")
+    .replace(/\bstreet\b/g, "st")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function equivalentEvidence(label: string, website: string, google: string): boolean {
+  if (label === "Website") return hostKey(website) === hostKey(google);
+  if (label === "Postcode") return postcodeKey(website) === postcodeKey(google);
+  if (label === "Phone") return phoneKey(website) === phoneKey(google);
+  if (label === "Address") {
+    const left = streetKey(website);
+    const right = streetKey(google);
+    return left === right || right.startsWith(left) || left.startsWith(right);
+  }
+  const left = normCompare(website);
+  const right = normCompare(google);
+  return left === right || left.startsWith(`${right} `) || right.startsWith(`${left} `);
+}
+
 function buildComparisonRows(website: ImportedEvidenceRow[], google: ImportedEvidenceRow[]): WebsiteGoogleComparisonRow[] {
   const pairs: Array<[string, string, string]> = [
     ["business-name", "google-business-name", "Business name"],
     ["address", "google-address", "Address"],
+    ["town", "google-town", "Town or City"],
     ["postcode", "google-postcode", "Postcode"],
     ["phone", "google-phone", "Phone"],
     ["website-url", "google-website", "Website"],
@@ -467,7 +513,7 @@ function buildComparisonRows(website: ImportedEvidenceRow[], google: ImportedEvi
     const wOk = wv && wv !== "Not Found";
     const gOk = gv && gv !== "Not Found";
     let matchStatus: WebsiteGoogleComparisonRow["matchStatus"] = "both_missing";
-    if (wOk && gOk) matchStatus = normCompare(wv) === normCompare(gv) ? "match" : "difference";
+    if (wOk && gOk) matchStatus = equivalentEvidence(label, wv, gv) ? "match" : "difference";
     else if (wOk) matchStatus = "website_only";
     else if (gOk) matchStatus = "google_only";
     return {

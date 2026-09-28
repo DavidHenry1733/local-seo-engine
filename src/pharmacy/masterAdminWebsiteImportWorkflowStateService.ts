@@ -7,6 +7,9 @@ import {
   websiteImportStageComplete,
   readWebsiteBranchResolution,
   isBranchSelectionBlocking,
+  isCanonicalWebsiteImportComplete,
+  isCanonicalWebsiteImportFailed,
+  projectCanonicalBranchResolution,
 } from "./masterAdminWebsiteBranchSelectionService.ts";
 import type { SourceImportState } from "./masterAdminOnboardingBatchService.ts";
 import { isNationalMarketScope } from "./masterAdminMarketScopeService.ts";
@@ -64,20 +67,14 @@ export function classifyWebsiteImportContract(
   if (!snap) {
     return { state: "not_started", websiteStatus: "NOT CONFIGURED", websiteImported: false, downstreamReady: false };
   }
-  const status = String(snap.status || "");
-  const resolutionStatus = String(data.websiteBranchResolution?.status || "");
-  const national = isNationalMarketScope(slug, data as never);
-  let succeeded = false;
-  if (national) {
-    succeeded = Boolean(snap.importedAt) && (status === "imported" || status === "needs_review");
-  } else if (resolutionStatus === "branch_selection_required" || resolutionStatus === "none_of_these_branches") {
-    succeeded = false;
-  } else if (resolutionStatus === "branch_selected") {
-    succeeded = status === "imported" || Boolean(snap.importedAt);
-  } else {
-    succeeded = status === "imported";
+  const projected = data.websiteBranchResolution
+    ? projectCanonicalBranchResolution(data.websiteBranchResolution as never)
+    : null;
+  const resolutionStatus = projected?.status || String(data.websiteBranchResolution?.status || "");
+  if (isCanonicalWebsiteImportFailed(data as never)) {
+    return { state: "failed", websiteStatus: "FAILED", websiteImported: false, downstreamReady: false };
   }
-  if (succeeded) {
+  if (isCanonicalWebsiteImportComplete(slug, data as never)) {
     return { state: "imported", websiteStatus: "IMPORTED", websiteImported: true, downstreamReady: true };
   }
   if (snapshotHasUsableEvidence(snap, resolutionStatus)) {
