@@ -8,8 +8,7 @@ import { readSetupProfile } from "../src/pharmacy/growthEngineCustomerSetupImpor
 import { resolveGoogleProfileOnboardingState } from "../src/pharmacy/masterAdminGoogleProfileOnboardingService.ts";
 
 const SLUG = "reliable-direct-pharmacy";
-const SEARCH_DEMAND_UNAVAILABLE =
-  "Search demand not yet available. Keyword research can be completed using connected keyword intelligence.";
+const SEARCH_DEMAND_UNAVAILABLE = "Search demand data is not yet available.";
 
 type Step = { name: string; passed: boolean; detail?: string };
 function step(name: string, passed: boolean, detail?: string): Step {
@@ -37,7 +36,7 @@ function main() {
   steps.push(step("UI renders Gap Analysis section", page.includes("Gap Analysis")));
   steps.push(step("UI renders evidence footers", page.includes("ciEvidenceFoot")));
   steps.push(step("UI uses measured competitor summary", page.includes("ciCompSummaryHtml")));
-  steps.push(step("UI traffic section uses provenance", page.includes("Provenance:")));
+  steps.push(step("UI traffic section does not print internal provenance as the commercial line", !page.includes("Provenance:")));
 
   const d = buildCommercialIntelligenceDashboard(SLUG);
   const profile = readSetupProfile(SLUG);
@@ -99,18 +98,18 @@ function main() {
   );
   steps.push(
     step(
-      "Traffic keywords include provenance",
+      "Traffic keywords keep an internal evidence reference",
       d.trafficOpportunity.keywords.length === 0 ||
-        d.trafficOpportunity.keywords.every((k) => k.provenance && k.provenance !== "Unknown"),
+        d.trafficOpportunity.keywords.every((k) => k.provenance === "search-demand-evidence" && k.searchDemand === SEARCH_DEMAND_UNAVAILABLE),
       `keywords=${d.trafficOpportunity.keywords.length}`,
     ),
   );
   steps.push(step("No fabricated enquiry estimates", d.executiveSummary.estimatedEnquiryOpportunity === SEARCH_DEMAND_UNAVAILABLE));
   steps.push(
     step(
-      "Executive summary traffic has provenance or unavailable message",
-      d.executiveSummary.estimatedTrafficOpportunity.includes("Pharmacy Visibility Bridge") ||
-        d.executiveSummary.estimatedTrafficOpportunity === SEARCH_DEMAND_UNAVAILABLE,
+      "Executive summary traffic states unavailable demand without internal bridge text",
+      d.executiveSummary.estimatedTrafficOpportunity.includes(SEARCH_DEMAND_UNAVAILABLE) &&
+        !d.executiveSummary.estimatedTrafficOpportunity.includes("Pharmacy Visibility Bridge"),
       d.executiveSummary.estimatedTrafficOpportunity.slice(0, 120),
     ),
   );

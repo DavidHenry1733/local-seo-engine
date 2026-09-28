@@ -6,6 +6,20 @@ import { loadCompetitorSnapshot } from "./growthEngineLocalMarketService.ts";
 import { loadGrowthOpportunityReport } from "./growthEngineOpportunityEngine.ts";
 import { OPPORTUNITY_CATEGORY_LABELS, type GrowthOpportunity } from "./growthEngineOpportunityModel.ts";
 import { readSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
+import { resolveCanonicalServiceCoverage } from "./canonicalExistingServiceCoverage.ts";
+import { readPharmacyIndexingSummary } from "./pharmacyIndexingBridgeService.ts";
+import {
+  COMMERCIAL_DECISION_COPY,
+  contentTypeGapConclusion,
+  crawlCompletenessConclusion,
+  demandConclusion,
+  indexingConclusion,
+  localityTargetConclusion,
+  localBenchmarkConclusion,
+  organicVisibilityConclusion,
+  servicePageConclusion,
+  type EnabledServiceCoverageInput,
+} from "./commercialIntelligenceConclusions.ts";
 import {
   localityUnavailableLabel,
   resolveTenantLocality,
@@ -101,8 +115,28 @@ export interface CommercialTrafficKeyword {
   searchDemand: string;
 }
 
-const SEARCH_DEMAND_UNAVAILABLE =
-  "Search demand not yet available. Keyword research can be completed using connected keyword intelligence.";
+const SEARCH_DEMAND_UNAVAILABLE = "Search demand data is not yet available.";
+
+export { COMMERCIAL_DECISION_COPY };
+
+function enabledServiceCoverage(profile: ReturnType<typeof readSetupProfile>): EnabledServiceCoverageInput[] {
+  const snap = profile.websiteImportSnapshot as {
+    intelligence?: { structure?: { pages?: Array<{ url?: string; path?: string; title?: string; h1?: string; category?: string }> } };
+  } | null;
+  const pages = snap?.intelligence?.structure?.pages || [];
+  const serviceIds = (profile.selectedServices || []).map((id) => String(id)).filter(Boolean);
+  return resolveCanonicalServiceCoverage({ serviceIds, pages, sourceRevision: "" }).map((row) => ({
+    serviceId: row.serviceId,
+    serviceName: row.canonicalServiceName,
+    dedicatedPage: row.dedicatedServicePage,
+  }));
+}
+
+function indexingMeasurement(slug: string) {
+  const summary = readPharmacyIndexingSummary(slug);
+  if (!summary || summary.totalRegistered <= 0) return { registeredPageCount: 0, indexedPageCount: null };
+  return { registeredPageCount: summary.totalRegistered, indexedPageCount: summary.indexed };
+}
 
 export interface CommercialDashboardCompetitorRow {
   name: string;
@@ -150,6 +184,7 @@ export interface CommercialIntelligenceDashboard {
   generated: boolean;
   approved: boolean;
   canApprove: boolean;
+  commercialDecisionCopy: string;
   canGenerateEcosystem: boolean;
   activeAction: "approve_intelligence" | "generate_approved_ecosystem";
   legacyAutoAdvance: boolean;
@@ -429,7 +464,7 @@ function loadCompetitorPool(slug: string): { rows: CompetitorPoolRow[]; source: 
 }
 
 function buildMeasuredCompetitorSummary(slug: string): CommercialCompetitorSummaryLine[] {
-  const { rows, source, capturedAt } = loadCompetitorPool(slug);
+  const { rows, source } = loadCompetitorPool(slug);
   if (!rows.length) {
     return [{ label: "Competitor evidence", statement: "Competitor Analysis not yet generated." }];
   }
@@ -444,7 +479,7 @@ function buildMeasuredCompetitorSummary(slug: string): CommercialCompetitorSumma
   if (topRating) {
     lines.push({
       label: "Highest rated competitor",
-      statement: `${topRating.name} — ${topRating.rating?.toFixed(1)}★ (${source}${capturedAt ? ` · ${capturedAt}` : ""})`,
+      statement: `${topRating.name} — ${topRating.rating?.toFixed(1)}★ (${source})`,
     });
   }
   if (topReviews) {
@@ -495,23 +530,18 @@ function buildTrafficOpportunitySection(
   locality: TenantLocalityResolution,
   visibility: ReturnType<typeof readPharmacyVisibilityReport>,
 ): CommercialIntelligenceDashboard["trafficOpportunity"] {
-  const keywordOpps = filterLocalityKeywords(visibility?.topKeywordOpportunities || [], locality);
   const evidence = buildSectionEvidence({
-    evidenceSource: visibility ? "Pharmacy Visibility Bridge" : "Unknown",
-    capturedAt: visibility?.lastCheckedAt || null,
-    confidence: visibility ? "Medium" : "Unknown",
+    evidenceSource: "Stored search-demand check",
+    capturedAt: null,
+    confidence: "Unknown",
   });
-
-  if (!keywordOpps.length) {
-    return { summary: SEARCH_DEMAND_UNAVAILABLE, keywords: [], evidence };
-  }
-
+  const services = enabledServiceCoverage(readSetupProfile(slug));
   return {
-    summary: SEARCH_DEMAND_UNAVAILABLE,
-    keywords: keywordOpps.map((k) => ({
-      keyword: k.keyword,
-      provenance: `Pharmacy Visibility Bridge · ${k.serviceId} · ${visibility?.lastCheckedAt || "Unknown"}`,
-      searchDemand: SEARCH_DEMAND_UNAVAILABLE,
+    summary: demandConclusion(null).conclusion,
+    keywords: services.map((service) => ({
+      keyword: service.serviceName,
+      provenance: "search-demand-evidence",
+      searchDemand: demandConclusion(null).conclusion,
     })),
     evidence,
   };
@@ -616,7 +646,11 @@ function buildCompetitorAnalysis(
   if (artifact?.kind === "intelligence") {
     const intel = artifact.intel;
     const rows = intel.competitors.slice(0, 12).map((c) => mapIntelCompetitor(c, intel));
-    const top = [...intel.competitors].sort((a, b) => (b.gbpReviewCount || 0) - (a.gbpReviewCount || 0))[0];
+    const benchmark = localBenchmarkConclusion(intel.competitors.map((c) => ({
+      name: c.name,
+      reviewCount: c.gbpReviewCount ?? null,
+      categoryCount: (c.categories || []).length || null,
+    })));
     const ratings = intel.competitors.map((c) => c.gbpRating).filter((r): r is number => r != null);
     const reviews = intel.competitors.map((c) => c.gbpReviewCount).filter((r): r is number => typeof r === "number" && r > 0);
     const summary = buildMeasuredCompetitorSummary(slug);
@@ -625,7 +659,7 @@ function buildCompetitorAnalysis(
       generated: true,
       narrative: topByReviews?.statement || "",
       competitors: rows,
-      strongestCompetitor: top?.name || "Not available",
+      strongestCompetitor: benchmark.conclusion,
       averageRating:
         ratings.length > 0
           ? `${Math.round((ratings.reduce((a, b) => a + b, 0) / ratings.length) * 10) / 10}★`
@@ -650,7 +684,11 @@ function buildCompetitorAnalysis(
   if (artifact?.kind === "snapshot") {
     const snap = artifact.snap;
     const rows = snap.competitors.slice(0, 12).map((c) => mapSnapshotCompetitor(c, snap));
-    const top = snap.competitors[0];
+    const benchmark = localBenchmarkConclusion(snap.competitors.map((c) => ({
+      name: c.businessName,
+      reviewCount: c.reviewCount ?? null,
+      categoryCount: [c.primaryCategory, ...(c.secondaryCategories || [])].filter(Boolean).length || null,
+    })));
     const ratings = snap.competitors.map((c) => c.rating).filter((r): r is number => r != null);
     const reviews = snap.competitors.map((c) => c.reviewCount).filter((r) => r > 0);
     const summary = buildMeasuredCompetitorSummary(slug);
@@ -659,7 +697,7 @@ function buildCompetitorAnalysis(
       generated: true,
       narrative: topByReviews?.statement || "",
       competitors: rows,
-      strongestCompetitor: top?.businessName || "Not available",
+      strongestCompetitor: benchmark.conclusion,
       averageRating:
         ratings.length > 0
           ? `${Math.round((ratings.reduce((a, b) => a + b, 0) / ratings.length) * 10) / 10}★`
@@ -744,7 +782,7 @@ function buildLocalMarketSections(
     ) ||
     (snap?.competitors.length
       ? [`${snap.competitors.length} local competitors captured from ${snap.source}`]
-      : web?.contentCoverage?.summaryLines?.slice(0, 4) || [`Website completeness estimated at ${web?.contentCoverage?.overallCompletenessPercent ?? "Unknown"}%`]);
+      : web?.contentCoverage?.summaryLines?.slice(0, 4) || [crawlCompletenessConclusion(web?.contentCoverage?.overallCompletenessPercent).explanation]);
 
   return [
     {
@@ -768,7 +806,7 @@ function buildLocalMarketSections(
       narrative: locality.available
         ? `Patients searching for pharmacy services in ${town} compare websites, reviews and service coverage before choosing where to book.`
         : localityUnavailableLabel(),
-      items: analysis?.summaryParagraphs || web?.contentCoverage?.summaryLines || visibility?.recommendedActions?.slice(0, 3) || ["Local market evidence available from website and visibility analysis."],
+      items: analysis?.summaryParagraphs || web?.contentCoverage?.summaryLines || ["Local market evidence available from website and visibility analysis."],
     },
     {
       title: "Coverage",
@@ -776,8 +814,22 @@ function buildLocalMarketSections(
     },
     {
       title: "Coverage Gaps",
-      narrative: "These gaps matter because patients often choose the pharmacy that clearly explains the service they need.",
-      items: web?.customerSummary?.missing?.slice(0, 6) || (web?.contentCoverage?.missingServicePages || []).slice(0, 6).map((s) => `Missing dedicated page for ${s}`) || ["Service page coverage can be expanded after ecosystem generation."],
+      narrative: "Enabled-service page gaps come from the imported website. A competitor service is not added unless that service is enabled for this pharmacy.",
+      items: (() => {
+        const coverage = enabledServiceCoverage(profile);
+        const existing = coverage
+          .filter((service) => service.dedicatedPage === "PRESENT")
+          .map((service) => servicePageConclusion(service).conclusion);
+        const pageGaps = coverage
+          .filter((service) => service.dedicatedPage === "NOT_FOUND")
+          .map((service) => servicePageConclusion(service).conclusion);
+        const contentGaps = (web?.customerSummary?.missing || [])
+          .map((item) => contentTypeGapConclusion(item))
+          .filter((item): item is NonNullable<typeof item> => Boolean(item))
+          .map((item) => item.conclusion);
+        const items = [...existing, ...pageGaps, ...contentGaps];
+        return items.length ? items.slice(0, 8) : ["No enabled-service page gap is recorded."];
+      })(),
     },
     {
       title: "Missing Areas",
@@ -786,11 +838,15 @@ function buildLocalMarketSections(
     {
       title: "Recommended Locations",
       narrative: "Location pages help you appear when patients search by neighbourhood — not just by pharmacy name.",
-      items: localMarketRecommendedLocationItems(areas, Boolean(analysis)),
+      items: [localityTargetConclusion(locality.available ? locality.value : null, areas.map((area) => String(typeof area === "object" && area && "areaName" in area ? area.areaName : area))).conclusion],
     },
     {
       title: "Local Visibility Comparison",
-      items: visibility?.services?.slice(0, 4).map((s) => `${s.primaryKeyword}: ${s.visibilityStatus.replace(/_/g, " ")}`) || [`Visibility score: ${visibility?.estimatedVisibilityScore ?? "Unknown"}/100`],
+      items: [indexingConclusion(indexingMeasurement(slug)).conclusion, (() => {
+        const rows = (report as { serviceAssessments?: Array<{ organicVisibility?: { classification?: string } }> } | null)?.serviceAssessments || [];
+        const measured = rows.map((row) => row.organicVisibility?.classification).find((value) => value && value !== "unavailable");
+        return organicVisibilityConclusion(measured || "unavailable").conclusion;
+      })()],
     },
   ].map((section) => ({ ...section, evidence: section.evidence || lmEvidence }));
 }
@@ -808,21 +864,7 @@ function localMarketMissingAreaItems(
   }
   return visibilityItems.length
     ? visibilityItems
-    : ["Local keyword opportunities will expand once pages are indexed."];
-}
-
-function localMarketRecommendedLocationItems(
-  areas: Array<string | { areaName?: string }>,
-  localMarketReady: boolean,
-): string[] {
-  const names = areas
-    .map((area) => String(typeof area === "object" && area && "areaName" in area ? area.areaName : area).trim())
-    .filter(Boolean);
-  if (names.length) return names.slice(0, 8);
-  if (localMarketReady) {
-    return ["No local areas are selected. Location recommendations stay unavailable until areas are chosen."];
-  }
-  return ["Confirm local areas during ecosystem setup."];
+    : [SEARCH_DEMAND_UNAVAILABLE];
 }
 
 function buildLocalMarketComparisonSection(
@@ -933,36 +975,28 @@ function buildExecutiveSummary(
 
   const trafficDisplay =
     traffic.keywords.length > 0
-      ? traffic.keywords.map((k) => `${k.keyword} (${k.provenance})`).join("; ")
+      ? traffic.keywords.map((k) => `${k.keyword} — ${k.searchDemand}`).join("; ")
       : traffic.summary;
+  const crawl = crawlCompletenessConclusion(web?.contentCoverage?.overallCompletenessPercent);
+  const pageGaps = enabledServiceCoverage(profile).filter((service) => service.dedicatedPage === "NOT_FOUND");
+  const contentGap = (web?.customerSummary?.missing || [])
+    .map((item) => contentTypeGapConclusion(item))
+    .find((item) => item);
+  const indexing = indexingConclusion(indexingMeasurement(slug));
 
   return {
-    overallBusinessHealth:
-      !locality.available
-        ? localityUnavailableLabel()
-        : web?.contentCoverage?.overallCompletenessPercent != null
-          ? `Your pharmacy has a working foundation in ${town}, but online completeness is around ${web.contentCoverage.overallCompletenessPercent}% — there is clear room to win more local patients.`
-          : `Your pharmacy is established in ${town} with meaningful growth potential once service content and local visibility improve.`,
-    biggestOpportunity: topOpp?.title || (locality.available ? `Build a Pharmacy First content ecosystem for ${town}` : localityUnavailableLabel()),
-    biggestCommercialRisk:
-      web?.contentCoverage?.missingServicePages?.length
-        ? `${web.contentCoverage.missingServicePages.length} common pharmacy services are not yet explained on your website — patients may choose a competitor who does.`
-        : "Limited service-page coverage may cause patients to choose pharmacies that explain services more clearly online.",
+    overallBusinessHealth: !locality.available ? localityUnavailableLabel() : `${crawl.conclusion} ${crawl.explanation}`,
+    biggestOpportunity: topOpp?.title || (pageGaps[0] ? servicePageConclusion(pageGaps[0]).recommendedAction || pageGaps[0].serviceName : locality.available ? `Review enabled service pages for ${town}` : localityUnavailableLabel()),
+    biggestCommercialRisk: pageGaps.length
+      ? pageGaps.map((service) => servicePageConclusion(service).conclusion).join(" ")
+      : "No enabled service is missing a dedicated page in the imported website.",
     strongestCompetitor: competitor.generated ? competitor.strongestCompetitor : "Not available — Competitor Analysis not yet generated",
-    biggestLocalVisibilityGap:
-      !locality.available
-        ? localityUnavailableLabel()
-        : visibility?.visibilityStatus === "needs_attention"
-          ? `Local visibility needs attention — ${visibility.indexedPageCount || 0} pages indexed so far in ${town}.`
-          : visibility?.competitorGap || `Patients searching by service and location in ${town} may not yet find your pharmacy first.`,
-    biggestContentGap:
-      web?.customerSummary?.missing?.[0] ||
-      report?.missingContent?.[0]?.title ||
-      "Dedicated patient guides, FAQs and service pages for your highest-demand services.",
+    biggestLocalVisibilityGap: !locality.available ? localityUnavailableLabel() : indexing.conclusion,
+    biggestContentGap: contentGap?.conclusion || "No imported content-type gap is recorded.",
     googleBusinessProfileStatus: ownerGoogleStatus(profile),
     estimatedTrafficOpportunity: trafficDisplay,
     estimatedEnquiryOpportunity: SEARCH_DEMAND_UNAVAILABLE,
-    confidence: competitor.generated ? (competitor.confidence === "High" ? "High" : "Medium") : "Unknown",
+    confidence: indexing.evidenceStatus === "UNKNOWN" ? "Mixed — local competitor evidence can be high while search demand and indexing are not yet measured" : competitor.generated ? competitor.confidence : "Unknown",
   };
 }
 
@@ -1016,10 +1050,11 @@ function classifyIssues(
     });
   }
 
-  for (const action of visibility?.recommendedActions?.slice(0, 4) || []) {
-    if (locality.available && locality.value && !textContainsForeignLocality(action, locality.value)) {
-      recommendations.push({ title: action, detail: "Visibility recommendation" });
-    }
+  for (const service of enabledServiceCoverage(readSetupProfile(slug))) {
+    const conclusion = servicePageConclusion(service);
+    if (!conclusion.recommendedAction) continue;
+    if (/submit .+ for indexing/i.test(conclusion.recommendedAction)) continue;
+    recommendations.push({ title: conclusion.recommendedAction, detail: conclusion.explanation });
   }
 
   if (!ready) {
@@ -1365,6 +1400,7 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
     generated,
     approved,
     canApprove: ready && evidenceComplete && !approved && !qualificationDependency.localMarketStale && !qualificationDependency.growthIntelligenceStale,
+    commercialDecisionCopy: COMMERCIAL_DECISION_COPY,
     canGenerateEcosystem: approved && !isAuthorisedEcosystemQualityReviewReady(slug),
     activeAction: approved ? "generate_approved_ecosystem" : "approve_intelligence",
     legacyAutoAdvance: isLegacyAutoAdvance(slug),

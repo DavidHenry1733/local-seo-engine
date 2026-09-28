@@ -3470,24 +3470,37 @@ function renderGrowthIntelligenceComplete(dashboard){
   const photosUnknown=Boolean(photosMetric)&&!hasPhotosOpp;
 
   function demandLabel(row){
-    if(!row||!row.demand) return 'Not Available';
+    if(!row||!row.demand) return 'Search demand data is not yet available.';
     const d=row.demand;
-    if(d.demandEvidenceStatus==='unknown') return 'Unknown';
+    if(d.demandEvidenceStatus==='unknown') return 'Search demand data is not yet available.';
     const parts=[];
     if(d.canonicalQueryVolume!=null) parts.push('canonical '+d.canonicalQueryVolume.toLocaleString('en-GB'));
     if(d.highestQueryVolume!=null&&d.highestQuery!==d.canonicalQueryVolume) parts.push('peak '+d.highestQueryVolume.toLocaleString('en-GB'));
     if(d.pharmacyIntentVolume!=null) parts.push('pharmacy '+d.pharmacyIntentVolume.toLocaleString('en-GB'));
     if(d.nearMeVolume!=null) parts.push('near-me '+d.nearMeVolume.toLocaleString('en-GB'));
-    return parts.length? parts.join('; '): 'No returned volume';
+    return parts.length? parts.join('; '): 'Search demand data is not yet available.';
   }
   function websiteLabel(row){
-    if(!row||!row.websiteCoverage) return 'Not Available';
+    if(!row||!row.websiteCoverage) return 'Website coverage is not yet measured.';
     const w=row.websiteCoverage;
-    return String(w.classification||'unknown').replace(/-/g,' ')+(w.dedicatedImportedPageUrl? ' — '+w.dedicatedImportedPageUrl:'');
+    const c=String(w.classification||'');
+    if(c==='missing-dedicated-page') return 'No dedicated page';
+    if(c==='adequate-existing-page') return 'Existing dedicated page'+(w.dedicatedImportedPageUrl? ' — '+w.dedicatedImportedPageUrl:'');
+    return (c||'unknown').replace(/-/g,' ')+(w.dedicatedImportedPageUrl? ' — '+w.dedicatedImportedPageUrl:'');
   }
   function organicLabel(row){
-    if(!row||!row.organicVisibility) return 'Not Available';
-    return String(row.organicVisibility.classification||'unavailable').replace(/-/g,' ');
+    if(!row||!row.organicVisibility) return 'Organic visibility is not yet measured.';
+    const c=String(row.organicVisibility.classification||'unavailable');
+    if(!c||c==='unavailable'||c==='unknown') return 'Organic visibility is not yet measured.';
+    return c.replace(/-/g,' ');
+  }
+  function plainEvidence(value, kind){
+    if(value==null||value==='') return kind==='demand' ? 'Search demand data is not yet available.' : 'Not yet measured.';
+    if(typeof value==='string') return value;
+    if(kind==='website') return websiteLabel({websiteCoverage:value});
+    if(kind==='demand') return demandLabel({demand:value});
+    if(kind==='organic') return organicLabel({organicVisibility:value});
+    return 'Stored evidence';
   }
 
   const matrixRows=assessment? assessment.services.map(function(row){
@@ -3499,10 +3512,10 @@ function renderGrowthIntelligenceComplete(dashboard){
   const topRows=assessment? assessment.topPriorityServices.map(function(row,i){
     const why=[
       row.priorityRationale,
-      'Website: '+row.websiteEvidence,
-      'Demand: '+row.demandEvidence,
-      'Organic: '+row.organicVisibility,
-      'Package: '+row.packageStatus
+      'Website: '+plainEvidence(row.websiteEvidence,'website'),
+      'Demand: '+plainEvidence(row.demandEvidence,'demand'),
+      'Organic: '+plainEvidence(row.organicVisibility,'organic'),
+      'Package: '+plainEvidence(row.packageStatus,'package')
     ].join(' · ');
     return '<tr><td>'+esc(String(i+1))+'. '+esc(row.serviceName)+'</td><td>'+esc(ciGiNa(why))+'</td><td>'+esc(ciGiNa(row.recommendedAction))+'</td></tr>';
   }).join(''):'';
@@ -3512,12 +3525,20 @@ function renderGrowthIntelligenceComplete(dashboard){
     return '<tr data-opportunity-id="'+esc(o.id||'')+'" data-scope="pharmacy-wide"><td><span class="pill">pharmacy-wide</span> '+esc(ciGiNa(o.title))+'</td><td>'+esc(ciGiNa(o.evidenceSummary||o.impact||o.evidence))+'</td><td>'+esc(ciGiNa(o.evidenceSource))+'</td><td>'+esc(ciGiNa(o.recommendedAction||o.whyItMatters||o.impact||o.title))+'</td></tr>';
   });
   if(photosUnknown){
-    wideRows.push('<tr data-opportunity-id="photos-unknown" data-scope="pharmacy-wide"><td><span class="pill">pharmacy-wide</span> Google Business photos</td><td>Not Available</td><td>Google Places</td><td>Not Available</td></tr>');
+    wideRows.push('<tr data-opportunity-id="photos-unknown" data-scope="pharmacy-wide"><td><span class="pill">pharmacy-wide</span> Google Business photos</td><td>Photo evidence is not yet measured.</td><td>Google Places</td><td>Do not treat missing photo evidence as a count of zero.</td></tr>');
   }
   const wideTable='<div class="ci-section"><h4>Pharmacy-wide Google Profile Actions</h4><p class="ci-narrative">Google Places evidence applies once to the pharmacy listing — not repeated per service.</p><div class="table-wrap"><table class="audit-table" id="giPharmacyWideTable"><thead><tr><th>Action</th><th>Current evidence</th><th>Evidence source</th><th>Recommended action</th></tr></thead><tbody>'+(wideRows.join('')||'<tr><td colspan="4">Not Available</td></tr>')+'</tbody></table></div></div>';
 
   const limitItems=assessment&&assessment.evidenceLimitations? assessment.evidenceLimitations:[];
-  const limitsHtml='<div class="ci-section"><h4>Evidence Limitations</h4>'+(limitItems.length?('<ul>'+limitItems.map(function(item){return '<li>'+esc(item)+'</li>';}).join('')+'</ul>'):'<p class="ci-narrative">Not Available</p>')+'</div>';
+  function poLimitation(item){
+    const s=String(item||'');
+    if(/search demand artifact|demand metrics unavailable/i.test(s)) return 'Search demand data is not yet available.';
+    if(/organic visibility unavailable/i.test(s)) return 'Organic visibility is not yet measured.';
+    if(/organic-ranking domains/i.test(s)) return 'Organic search results are visibility evidence. They are not local competitors.';
+    if(/paid search cpc/i.test(s)) return 'Paid search cost data is separate from organic visibility.';
+    return s;
+  }
+  const limitsHtml='<div class="ci-section"><h4>Evidence Limitations</h4>'+(limitItems.length?('<ul>'+limitItems.map(function(item){return '<li>'+esc(poLimitation(item))+'</li>';}).join('')+'</ul>'):'<p class="ci-narrative">Not Available</p>')+'</div>';
 
   return matrixTable+topTable+wideTable+limitsHtml;
 }
@@ -3784,8 +3805,8 @@ function renderCommercialIntelligenceDashboard(dashboard){
     '<p class="ci-narrative"><strong>Organic Search Evidence — DataForSEO not yet generated</strong></p><p class="ci-narrative">Organic-search domains are not treated as nearby physical pharmacies unless Google Places separately verifies that relationship.</p>'+(ca.generated||canGenerate?generateBtn:''))+'</div>';
   const compHtml=providerHtml+googleHtml+organicHtml;
   const traffic=dashboard.trafficOpportunity||{};
-  const trafficHtml='<div class="ci-section"><h4>Traffic Opportunity</h4><p class="ci-narrative">'+esc(traffic.summary||'Search demand not yet available.')+'</p>'+
-    ((traffic.keywords||[]).length?'<ul>'+traffic.keywords.map(k=>'<li><strong>'+esc(k.keyword)+'</strong> — '+esc(k.searchDemand)+' · Provenance: '+esc(k.provenance)+'</li>').join('')+'</ul>':'')+
+  const trafficHtml='<div class="ci-section"><h4>Traffic Opportunity</h4><p class="ci-narrative">'+esc(traffic.summary||'Search demand data is not yet available.')+'</p>'+
+    ((traffic.keywords||[]).length?'<ul>'+traffic.keywords.map(k=>'<li><strong>'+esc(k.keyword)+'</strong> — '+esc(k.searchDemand)+'</li>').join('')+'</ul>':'')+
     ciEvidenceFoot(traffic.evidence||dashboard.sectionEvidence?.trafficOpportunity)+'</div>';
   const lm=(dashboard.localMarketIntelligence?.sections||[]).map(s=>ciSection(s.title,s.narrative,s.items,s.evidence)).join('');
   // Growth Intelligence: render the complete stored opportunities list (no section slices / no duplicate Missing Content).
@@ -3803,7 +3824,7 @@ function renderCommercialIntelligenceDashboard(dashboard){
     '<div style="margin-top:12px"><button class="btn secondary" type="button" onclick="closeCommercialIntelligenceReview()">Close Dashboard</button></div>';
   panelEl.innerHTML=
     '<h4>Commercial Decision</h4>'+
-    '<p style="font-size:.76rem;color:#94a3b8;line-height:1.5;margin-bottom:10px">Approval applies to qualified local competitors and classified organic evidence. Raw search results that are irrelevant are not commercial competitors.</p>'+
+    '<p style="font-size:.76rem;color:#94a3b8;line-height:1.5;margin-bottom:10px">'+esc(dashboard.commercialDecisionCopy||'Approve Intelligence accepts these commercial conclusions for the next workflow stage. It does not approve raw search results, unmeasured evidence, services that are not enabled, or an indexing step for a page that does not exist.')+'</p>'+
     (dashboard.approval&&dashboard.approval.approvedAt?'<div class="guidance-box" style="font-size:.72rem">Approved '+fmt(dashboard.approval.approvedAt)+(dashboard.approval.approvedBy?' by '+esc(dashboard.approval.approvedBy):'')+'</div>':'')+
     '<button class="cqr-approve-btn" type="button" id="cirApproveBtn" onclick="approveCommercialIntelligenceReview()" '+(dashboard.canApprove?'':'disabled')+'>Approve Intelligence</button>'+
     (dashboard.approved?'<button class="cqr-publish-btn" type="button" id="cirGenerateBtn" onclick="openCommercialEcosystemGenerationFromCi()">Generate Approved Ecosystem</button>':'')+
