@@ -23,6 +23,7 @@ import type { WebsiteImportFieldValue } from "./growthEngineWebsiteIntelligenceI
 import type { WebsiteDesignEvidence } from "./growthEngineWebsiteDesignEvidenceModel.ts";
 import { resolveWebsiteIntelligenceReimportState } from "./masterAdminWebsiteIntelligenceReimportState.ts";
 import { resolveCanonicalWebsiteBusinessFields } from "./canonicalWebsiteBusinessEvidence.ts";
+import { projectCanonicalWebsiteBrandEvidence } from "./canonicalWebsiteBrandEvidence.ts";
 
 function str(v: unknown): string {
   return String(v ?? "").trim();
@@ -82,8 +83,8 @@ function buildWebsiteEvidenceRows(slug: string): ImportedEvidenceRow[] {
   const intel = (snap?.intelligence || null) as Record<string, unknown> | null;
   const business = (intel?.business || {}) as Record<string, WebsiteImportFieldValue>;
   const websiteFields = resolveCanonicalWebsiteBusinessFields(business);
-  const identity = (intel?.identity || {}) as Record<string, unknown>;
   const design = (intel?.designEvidence || null) as WebsiteDesignEvidence | null;
+  const brand = projectCanonicalWebsiteBrandEvidence(slug);
   const importedAt = str(snap?.importedAt);
 
   const rows: ImportedEvidenceRow[] = [
@@ -100,53 +101,57 @@ function buildWebsiteEvidenceRows(slug: string): ImportedEvidenceRow[] {
     rowFromField("phone", "business", "Phone", websiteFields.phone),
     rowFromField("email", "business", "Email", websiteFields.email),
     rowFromField("opening-hours", "business", "Opening hours", business.openingHours),
-    rowFromScalar("logo", "brand", "Logo", identity.logoUrl || snap?.logoUrl, {
-      sourceUrl: str(identity.logoUrl || snap?.logoUrl),
-      extractionMethod: "website-scrape",
-      capturedAt: importedAt,
+    rowFromScalar("logo", "brand", "Logo", brand.logo.value, {
+      sourceUrl: brand.logo.assetUrl || brand.logo.sourceUrl,
+      extractionMethod: brand.logo.method || "website-import",
+      capturedAt: brand.capturedAt || importedAt,
+      confidence: brand.logo.confidence,
+      status: brand.logo.status === "CONFLICT" ? "Needs Review" : undefined,
     }),
-    rowFromScalar("favicon", "brand", "Favicon", identity.faviconUrl, {
-      sourceUrl: str(identity.faviconUrl),
-      extractionMethod: "website-scrape",
-      capturedAt: importedAt,
+    rowFromScalar("favicon", "brand", "Favicon", brand.favicon.value, {
+      sourceUrl: brand.favicon.assetUrl || brand.favicon.sourceUrl,
+      extractionMethod: brand.favicon.method || "website-import",
+      capturedAt: brand.capturedAt || importedAt,
+      status: brand.favicon.status === "CONFLICT" ? "Needs Review" : undefined,
     }),
-    rowFromScalar("primary-colour", "brand", "Primary colour", identity.brandPrimaryColor || snap?.brandPrimaryColor, {
-      extractionMethod: design?.colours?.[0]?.source || "css-extract",
-      capturedAt: importedAt,
+    rowFromScalar("primary-colour", "brand", "Primary colour", brand.primaryColour.value, {
+      extractionMethod: brand.primaryColour.method || "css-extract",
+      capturedAt: brand.capturedAt || importedAt,
+      status: brand.primaryColour.status === "CONFLICT" ? "Needs Review" : undefined,
     }),
-    rowFromScalar("secondary-colour", "brand", "Secondary colour", identity.brandSecondaryColor || snap?.brandSecondaryColor, {
-      extractionMethod: design?.colours?.[1]?.source || "css-extract",
-      capturedAt: importedAt,
+    rowFromScalar("secondary-colour", "brand", "Secondary colour", brand.secondaryColour.value, {
+      extractionMethod: brand.secondaryColour.method || "css-extract",
+      capturedAt: brand.capturedAt || importedAt,
+      status: brand.secondaryColour.status === "CONFLICT" ? "Needs Review" : undefined,
     }),
-    rowFromScalar("accent-colour", "brand", "Accent colour", identity.brandAccentColor || snap?.brandAccentColor, {
-      extractionMethod: "css-extract",
-      capturedAt: importedAt,
+    rowFromScalar("accent-colour", "brand", "Accent colour", brand.accentColour.value, {
+      extractionMethod: brand.accentColour.method || "css-extract",
+      capturedAt: brand.capturedAt || importedAt,
+      status: brand.accentColour.status === "CONFLICT" ? "Needs Review" : undefined,
     }),
-    rowFromScalar("heading-font", "brand", "Heading font", design?.typography?.heading?.fontFamily, {
-      extractionMethod: "computed-style",
-      capturedAt: design?.typography?.heading?.evidence?.[0]?.capturedAt || importedAt,
+    rowFromScalar("heading-font", "brand", "Heading font", brand.headingFont.value, {
+      extractionMethod: brand.headingFont.method || "brand-dna-v1",
+      capturedAt: brand.capturedAt || importedAt,
     }),
-    rowFromScalar("body-font", "brand", "Body font", design?.typography?.body?.fontFamily, {
-      extractionMethod: "computed-style",
-      capturedAt: design?.typography?.body?.evidence?.[0]?.capturedAt || importedAt,
+    rowFromScalar("body-font", "brand", "Body font", brand.bodyFont.value, {
+      extractionMethod: brand.bodyFont.method || "brand-dna-v1",
+      capturedAt: brand.capturedAt || importedAt,
     }),
-    rowFromScalar("header-design", "brand", "Header design evidence", design?.header?.logoSelector ? "Detected" : "", {
-      extractionMethod: "dom-capture",
-      capturedAt: importedAt,
-      status: design?.header ? "Confirmed" : "Not Found",
+    rowFromScalar("header-design", "brand", "Header design evidence", brand.headerSummary.value, {
+      extractionMethod: brand.headerSummary.method || "design-intelligence-v1",
+      capturedAt: brand.capturedAt || importedAt,
     }),
-    rowFromScalar("navigation-links", "brand", "Navigation links", (design?.header?.navItems || []).map((n) => n.label).join(" · "), {
-      extractionMethod: "dom-capture",
-      capturedAt: importedAt,
+    rowFromScalar("navigation-links", "brand", "Navigation links", brand.headerNavigation.join(" · "), {
+      extractionMethod: brand.method || "design-intelligence-v1",
+      capturedAt: brand.capturedAt || importedAt,
     }),
-    rowFromScalar("footer-design", "brand", "Footer design evidence", design?.footer?.columns?.length ? "Detected" : "", {
-      extractionMethod: "dom-capture",
-      capturedAt: importedAt,
-      status: design?.footer ? "Confirmed" : "Not Found",
+    rowFromScalar("footer-design", "brand", "Footer design evidence", brand.footerSummary.value, {
+      extractionMethod: brand.footerSummary.method || "design-intelligence-v1",
+      capturedAt: brand.capturedAt || importedAt,
     }),
-    rowFromScalar("footer-links", "brand", "Footer links", (snap?.footerLinks as string[] | undefined)?.join(" · ") || (design?.footer?.linkGroups || []).flatMap((g) => g.links.map((l) => l.label)).join(" · "), {
-      extractionMethod: "dom-capture",
-      capturedAt: importedAt,
+    rowFromScalar("footer-links", "brand", "Footer links", brand.footerLinks.join(" · "), {
+      extractionMethod: brand.method || "design-intelligence-v1",
+      capturedAt: brand.capturedAt || importedAt,
     }),
     rowFromScalar("button-style", "brand", "Button style", design?.components?.buttons?.[0]?.backgroundColour, {
       extractionMethod: "computed-style",
@@ -703,6 +708,7 @@ export function buildImportedEvidenceReview(slug: string): ImportedEvidenceRevie
     tenantIsolation,
     googleCandidates: candidates,
     branchSelection,
+    websiteBrand: projectCanonicalWebsiteBrandEvidence(safe),
     summary,
     acceptance,
   };

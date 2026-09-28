@@ -102,6 +102,7 @@ export interface ImportedEvidenceReviewPayload {
     confidence: number;
   }>;
   branchSelection: import("./masterAdminWebsiteBranchResolutionModel.ts").WebsiteBranchSelectionPayload | null;
+  websiteBrand?: import("./canonicalWebsiteBrandEvidence.ts").WebsiteBrandEvidence;
   summary: string;
   acceptance: ImportedEvidenceReviewAcceptance;
 }

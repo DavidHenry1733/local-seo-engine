@@ -987,7 +987,7 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
       <div class="cqr-hero" id="ierHero"></div>
       <div class="cqr-section" id="ierBranchSection" style="display:none"><h4>Branch Selection Required</h4><div id="ierBranchPanel"></div></div>
       <div class="cqr-section" id="ierIsolationSection"><h4>Tenant Isolation Gate</h4><div id="ierIsolation"></div></div>
-      <div class="cqr-section"><h4>Website Import Evidence</h4><div id="ierWebsiteEvidence"></div></div>
+      <div class="cqr-section"><h4>Website Import Evidence</h4><div id="ierWebsiteEvidence"></div></div><div class="cqr-section"><h4>Brand / Website Style</h4><div id="ierBrandStyle"></div></div>
       <div class="cqr-section"><h4>Google Profile Search</h4><div id="ierGoogleSearch"></div><div id="ierGoogleCandidates" style="margin-top:8px"></div></div>
       <div class="cqr-section"><h4>Google Import Evidence</h4><div id="ierGoogleEvidence"></div></div>
       <div class="cqr-section"><h4>Website vs Google Comparison</h4><div id="ierComparison"></div></div>
@@ -5507,6 +5507,53 @@ function renderBranchSelectionPanel(branchSelection){
   }
   panel.innerHTML=html;
 }
+function brandSwatch(value){
+  const hex=String(value||'');
+  if(!/^#[0-9a-fA-F]{3,8}$/.test(hex))return esc(hex||'Not found');
+  return '<span style="display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:middle;margin-right:6px;background:'+hex+'"></span>'+esc(hex);
+}
+function brandLine(label, item){
+  const status=(item&&item.status)||'NOT FOUND';
+  const value=(item&&item.value)||'';
+  const shown=/^#[0-9a-fA-F]{3,8}$/.test(String(value||''))?brandSwatch(value):esc(value||'Not found');
+  return '<div class="bpr-panel-stat"><div class="lbl">'+esc(label)+'</div><div style="font-weight:700;margin-top:4px">'+shown+'</div><div style="font-size:.68rem;color:#94a3b8;margin-top:4px">'+esc(status)+(item&&item.method?(' · '+esc(item.method)):'')+(item&&item.sourceRevision?(' · '+esc(item.sourceRevision)):'')+'</div></div>';
+}
+function renderImportedBrandStyle(brand){
+  const el=document.getElementById('ierBrandStyle');
+  if(!el)return;
+  if(!brand){el.innerHTML='<p class="ci-narrative">Brand evidence has not been read.</p>';return}
+  const logo=brand.logo||{};
+  const logoUrl=String(logo.assetUrl||logo.value||'');
+  const logoHtml=/^https?:\/\//i.test(logoUrl)?'<img src="'+esc(logoUrl)+'" alt="Imported logo" style="max-height:48px;max-width:220px;background:#fff;padding:6px;border-radius:6px"/>':'<span>Not found</span>';
+  const nav=(brand.headerNavigation||[]).slice(0,12).map(esc).join(' · ')||'Not found';
+  const footer=(brand.footerLinks||[]).slice(0,12).map(esc).join(' · ')||'Not found';
+  const social=(brand.socialLinks||[]).slice(0,6).map(esc).join(' · ')||'Not found';
+  const images=(brand.imagery||[]).slice(0,6).map(function(img){return esc(img.role||'asset')+': '+esc(img.url||'');}).join('<br>')||'Not found';
+  const pages=(brand.structure||[]).slice(0,8).map(function(page){return esc(page.category||'page')+' · '+esc(page.title||page.url||'');}).join('<br>')||'Not found';
+  el.innerHTML=
+    '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:10px"><div>'+logoHtml+'</div><div style="font-size:.72rem;color:#94a3b8">'+esc(logo.status||'NOT FOUND')+' · '+esc(logo.method||'')+'</div></div>'+
+    '<div class="bpr-panel-stat" style="margin-bottom:8px"><div class="lbl">Source</div><div style="margin-top:4px">'+esc(brand.primaryUrl||'—')+'</div><div style="font-size:.68rem;color:#94a3b8;margin-top:4px">'+esc(brand.method||'')+' · '+esc(brand.sourceRevision||'')+' · '+esc(brand.capturedAt||'')+'</div></div>'+
+    brandLine('Favicon', brand.favicon)+
+    brandLine('Primary colour', brand.primaryColour)+
+    brandLine('Secondary colour', brand.secondaryColour)+
+    brandLine('Accent colour', brand.accentColour)+
+    '<div class="bpr-panel-stat"><div class="lbl">Palette</div><div style="margin-top:4px">'+((brand.palette||[]).slice(0,12).map(function(item){return brandSwatch(item.value);}).join(' ')||'Not found')+'</div></div>'+
+    brandLine('Heading font', brand.headingFont)+
+    brandLine('Body font', brand.bodyFont)+
+    brandLine('Header', brand.headerSummary)+
+    '<div class="bpr-panel-stat"><div class="lbl">Navigation</div><div style="margin-top:4px">'+nav+'</div></div>'+
+    brandLine('Header CTA', brand.headerCta)+
+    brandLine('Footer', brand.footerSummary)+
+    '<div class="bpr-panel-stat"><div class="lbl">Footer links</div><div style="margin-top:4px">'+footer+'</div></div>'+
+    '<div class="bpr-panel-stat"><div class="lbl">Footer contact</div><div style="margin-top:4px">'+((brand.footerContact||[]).slice(0,6).map(esc).join(' · ')||'Not found')+'</div></div>'+
+    '<div class="bpr-panel-stat"><div class="lbl">Footer legal</div><div style="margin-top:4px">'+((brand.footerLegal||[]).slice(0,6).map(esc).join(' · ')||'Not found')+'</div></div>'+
+    '<div class="bpr-panel-stat"><div class="lbl">Social</div><div style="margin-top:4px">'+social+'</div></div>'+
+    brandLine('Imagery', brand.imagerySummary)+
+    '<div class="bpr-panel-stat"><div class="lbl">Discovered assets</div><div style="margin-top:4px;font-size:.72rem">'+images+'</div></div>'+
+    brandLine('Website structure', brand.structureSummary)+
+    '<div class="bpr-panel-stat"><div class="lbl">Pages</div><div style="margin-top:4px;font-size:.72rem">'+pages+'</div></div>'+
+    brandLine('Visual style', brand.styleSummary);
+}
 function renderImportedEvidenceReview(review){
   activeImportedEvidenceReview=review;
   document.getElementById('ierHero').innerHTML='<h4>'+esc(review.pharmacyName||review.slug)+'</h4><p class="ci-narrative">'+esc(review.summary||'')+'</p><div class="cqr-overall '+(review.tenantIsolation&&review.tenantIsolation.passed?'ready':'blocked')+'">'+(review.tenantIsolation&&review.tenantIsolation.passed?'Tenant isolation: PASS':'Tenant isolation: BLOCKED')+'</div>';
@@ -5515,6 +5562,7 @@ function renderImportedEvidenceReview(review){
   const iso=review.tenantIsolation||{passed:true,blockers:[],checks:[]};
   document.getElementById('ierIsolation').innerHTML=(iso.checks||[]).map(c=>'<div style="margin:4px 0;color:'+(c.passed?'#4ade80':'#f87171')+'">'+(c.passed?'✓':'✗')+' '+esc(c.detail)+'</div>').join('')+(iso.blockers&&iso.blockers.length?'<div class="bpr-error-panel" style="margin-top:8px">'+iso.blockers.map(b=>'<div>'+esc(b)+'</div>').join('')+'</div>':'');
   document.getElementById('ierWebsiteEvidence').innerHTML=ierEvidenceTable(review.websiteEvidence);
+  renderImportedBrandStyle(review.websiteBrand);
   const googleImportHtml=review.googleProfileState==='no_profile'
     ?'<p class="ci-narrative">Product Owner declared: No Google Business Profile.</p>'
     :(!review.googleImported
