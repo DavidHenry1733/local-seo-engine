@@ -541,7 +541,11 @@ export function buildImportedEvidenceReview(slug: string): ImportedEvidenceRevie
 
   let summary = "Awaiting Website Import and Google Profile Import.";
   if (requiresBranchSelection) {
-    summary = `Multiple pharmacy branches detected (${branchSelection.detectedBranchCount}) — select the branch being onboarded before evidence is accepted.`;
+    summary = branchSelection.resolution.googleBranchMatchNotes.some((note) => /ambiguous/i.test(note))
+      ? `Branch evidence is ambiguous (${branchSelection.detectedBranchCount}) — review is required before evidence is accepted.`
+      : `Multiple pharmacy branches detected (${branchSelection.detectedBranchCount}) — select the branch being onboarded before evidence is accepted.`;
+  } else if (branchSelection.detectedBranchCount === 1 && branchSelection.resolution.status === "none") {
+    summary = "One physical pharmacy branch identified from the website evidence. Shared parent branding is preserved separately.";
   } else if (branchSelection.resolution.status === "branch_selected") {
     summary = `Branch selected: ${branchSelection.resolution.selectedBranch?.branchName || "—"} — review website and Google evidence before Business Profile approval.`;
   } else if (websiteReimportRequired) {

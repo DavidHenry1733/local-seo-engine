@@ -229,9 +229,9 @@ async function selectionFixture() {
     `requiresSelection=${String(beforeReview.branchSelection?.requiresSelection)} blocking=${String(isBranchSelectionBlocking(SLUG))}`,
   );
   record(
-    "before-isolation-blocked",
-    beforeIso.passed === false && beforeIso.blockers.some((b) => /branch selection required/i.test(b)),
-    beforeIso.blockers.join(" | ") || "no blockers",
+    "before-isolation-not-branch-gate",
+    !beforeIso.blockers.some((b) => /branch selection required/i.test(b)),
+    beforeIso.blockers.join(" | ") || "branch selection is not a tenant-isolation failure",
   );
   record(
     "before-google-blocked",

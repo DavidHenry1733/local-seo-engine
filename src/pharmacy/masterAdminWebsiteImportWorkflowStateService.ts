@@ -126,7 +126,7 @@ export function resolveCanonicalWebsiteImportWorkflowState(slug: string): Canoni
   const evidence = websiteImportEvidenceMessage(slug);
   const snapshotStatus = snap?.status ? String(snap.status) : null;
 
-  const branchSelectionRequired = snapshotStatus === "branch_selection_required";
+  const branchSelectionRequired = isBranchSelectionBlocking(slug);
 
   let importState: SourceImportState = "not_started";
   if (!snap?.importedAt && !snap) {

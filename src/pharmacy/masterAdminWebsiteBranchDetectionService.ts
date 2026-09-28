@@ -217,10 +217,7 @@ function extractNamePostcodePairs(html: string, sourceUrl: string, parentBrand: 
     const window = text.slice(Math.max(0, idx - 220), idx + match[0].length + 80);
     const phoneMatch = window.match(UK_PHONE_RE);
     const phone = phoneMatch ? normalizePhone(phoneMatch[0]) : "";
-    const nameMatch =
-      window.match(/([A-Z][A-Za-z'\- ]{2,40}\sPharmacy)/)?.[1]
-      || window.match(/(Little Eaton[^,]{0,30})/i)?.[1]
-      || window.match(/(Derwent[^,]{0,30})/i)?.[1];
+    const nameMatch = window.match(/([A-Z][A-Za-z'\- ]{2,40}\sPharmacy)/)?.[1];
     if (!nameMatch && !phone) continue;
     const addressMatch = window.match(/(\d+[A-Za-z]?\s+[A-Za-z][A-Za-z\s'.-]{2,40}(?:Street|St|Road|Rd|Lane|Ln|Close|Cl|Way|Avenue|Ave|Drive|Dr))/i);
     branches.push({
@@ -295,7 +292,10 @@ function extractLocationPageBranches(
   for (const page of intelligence.structure.pages || []) {
     const path = str(page.path).toLowerCase();
     const title = decodeHtmlEntities(str(page.title));
-    if (!/(location|branch|store|pharmacy|find-us|our-pharmacies)/i.test(path) && page.category !== "locations") continue;
+    const dedicatedLocation =
+      page.category === "locations" ||
+      /(?:^|\/)(?:locations?|branches|our-pharmacies|find-us|our-stores|our-branches)(?:\/|$)/i.test(path);
+    if (!dedicatedLocation) continue;
     if (!title || title.length < 4) continue;
     branches.push({
       branchId: "",
@@ -394,9 +394,149 @@ export interface DetectMultiLocationBranchesInput {
 
 export interface DetectMultiLocationBranchesResult {
   requiresSelection: boolean;
+  ambiguous: boolean;
   parentBrand: WebsiteParentBrand;
   detectedBranches: DetectedWebsiteBranch[];
   detectionSignals: string[];
+}
+
+export interface PhysicalWebsiteBranchResolution {
+  branches: DetectedWebsiteBranch[];
+  ambiguous: boolean;
+  requiresSelection: boolean;
+}
+
+function normalizeBranchName(raw: string): string {
+  return decodeHtmlEntities(str(raw)).toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function streetKey(raw: string): string {
+  return decodeHtmlEntities(str(raw))
+    .toLowerCase()
+    .replace(/[.,#]/g, " ")
+    .replace(/\broad\b/g, "rd")
+    .replace(/\bstreet\b/g, "st")
+    .replace(/\blane\b/g, "ln")
+    .replace(/\bavenue\b/g, "ave")
+    .replace(/\bdrive\b/g, "dr")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function looksLikePageTitle(name: string): boolean {
+  const decoded = decodeHtmlEntities(name);
+  if (decoded.length > 80) return true;
+  if (/^what is\b/i.test(decoded)) return true;
+  if (/&#\d+;/.test(name)) return true;
+  if (/\s[-–—|]\s/.test(decoded) && decoded.length > 40) return true;
+  return false;
+}
+
+/** Stable physical identity. Name differences do not create a new branch. */
+export function websiteBranchPhysicalKey(branch: DetectedWebsiteBranch): string | null {
+  const postcode = normalizePostcode(branch.postcode);
+  const street = streetKey(branch.addressLine1 || str(branch.googleAddress).split(",")[0] || "");
+  if (!isValidUkPostcode(postcode) || !street) return null;
+  return `addr:${postcode.replace(/\s/g, "")}|${street}`;
+}
+
+function preferredBranchName(group: DetectedWebsiteBranch[]): string {
+  const google = group.map((b) => str(b.googleBusinessName)).find(Boolean);
+  if (google) return google;
+  const names = group.map((b) => decodeHtmlEntities(b.branchName)).filter((name) => name && !looksLikePageTitle(name));
+  names.sort((a, b) => b.length - a.length);
+  return names[0] || decodeHtmlEntities(group.find((b) => b.branchName)?.branchName || "");
+}
+
+function mergePhysicalGroup(group: DetectedWebsiteBranch[]): DetectedWebsiteBranch {
+  const [first, ...rest] = group;
+  let merged = { ...first, evidenceSources: [...first.evidenceSources], detectionSignals: [...first.detectionSignals] };
+  for (const branch of rest) {
+    const signals = new Set([...merged.detectionSignals, ...branch.detectionSignals, "same-physical-branch"]);
+    const sources = [...merged.evidenceSources];
+    for (const src of branch.evidenceSources) {
+      if (!sources.some((s) => s.sourceUrl === src.sourceUrl && s.detectionMethod === src.detectionMethod)) sources.push(src);
+    }
+    merged = {
+      ...merged,
+      addressLine1: merged.addressLine1 || branch.addressLine1,
+      town: merged.town || branch.town,
+      postcode: merged.postcode || branch.postcode,
+      phone: merged.phone || branch.phone,
+      email: merged.email || branch.email,
+      branchUrl: merged.branchUrl || branch.branchUrl,
+      logoUrl: merged.logoUrl || branch.logoUrl,
+      googlePlaceId: merged.googlePlaceId || branch.googlePlaceId,
+      googleBusinessName: merged.googleBusinessName || branch.googleBusinessName,
+      googleAddress: merged.googleAddress || branch.googleAddress,
+      googleMatchConfidence: Math.max(merged.googleMatchConfidence ?? 0, branch.googleMatchConfidence ?? 0) || null,
+      services: [...new Set([...merged.services, ...branch.services])],
+      detectionSignals: [...signals],
+      evidenceSources: sources,
+    };
+  }
+  const key = websiteBranchPhysicalKey(merged) || preferredBranchName(group);
+  return {
+    ...merged,
+    branchId: first.branchId || branchId(key, merged.postcode, merged.phone),
+    branchName: preferredBranchName(group),
+  };
+}
+
+function attachEvidence(target: DetectedWebsiteBranch, extra: DetectedWebsiteBranch): void {
+  for (const src of extra.evidenceSources) {
+    if (!target.evidenceSources.some((s) => s.sourceUrl === src.sourceUrl && s.detectionMethod === src.detectionMethod)) {
+      target.evidenceSources.push(src);
+    }
+  }
+  target.detectionSignals = [...new Set([...target.detectionSignals, ...extra.detectionSignals, "repeated-evidence"])];
+}
+
+/**
+ * One physical pharmacy per normalised address. Repeated pages, schema, and
+ * name formatting stay as provenance on that branch. Different streets stay separate.
+ * Records that cannot be proved to be the same branch or different branches stay for review.
+ */
+export function resolvePhysicalWebsiteBranches(branches: DetectedWebsiteBranch[]): PhysicalWebsiteBranchResolution {
+  const anchored: DetectedWebsiteBranch[] = [];
+  const loose: DetectedWebsiteBranch[] = [];
+  for (const branch of branches) {
+    if (websiteBranchPhysicalKey(branch)) anchored.push(branch);
+    else loose.push(branch);
+  }
+  const groups = new Map<string, DetectedWebsiteBranch[]>();
+  for (const branch of anchored) {
+    const key = websiteBranchPhysicalKey(branch)!;
+    groups.set(key, [...(groups.get(key) || []), branch]);
+  }
+  const merged = [...groups.values()].map(mergePhysicalGroup);
+  const stillLoose: DetectedWebsiteBranch[] = [];
+  for (const branch of loose) {
+    if (merged.length === 1) {
+      attachEvidence(merged[0], branch);
+      continue;
+    }
+    if (merged.length > 1) {
+      const digits = str(branch.phone).replace(/\D/g, "");
+      const hits = digits
+        ? merged.filter((item) => str(item.phone).replace(/\D/g, "") === digits)
+        : [];
+      if (hits.length === 1) attachEvidence(hits[0], branch);
+      continue;
+    }
+    if (!str(branch.branchName) && !str(branch.phone) && !str(branch.postcode)) continue;
+    stillLoose.push(branch);
+  }
+  if (merged.length > 0 && stillLoose.length === 0) {
+    return { branches: merged, ambiguous: false, requiresSelection: merged.length > 1 };
+  }
+  if (merged.length === 0 && stillLoose.length > 1) {
+    return { branches: stillLoose, ambiguous: true, requiresSelection: true };
+  }
+  if (merged.length > 0 && stillLoose.length > 0) {
+    return { branches: [...merged, ...stillLoose], ambiguous: true, requiresSelection: true };
+  }
+  return { branches: merged.length ? merged : stillLoose, ambiguous: false, requiresSelection: false };
 }
 
 export function detectMultiLocationBranches(input: DetectMultiLocationBranchesInput): DetectMultiLocationBranchesResult {
@@ -467,9 +607,10 @@ export function detectMultiLocationBranches(input: DetectMultiLocationBranchesIn
     const match = (input.googleCandidates || []).find((c) => {
       const cpc = normalizePostcode(str(c.postcode)).replace(/\s/g, "");
       if (pc && cpc && pc === cpc) return true;
-      const cName = str(c.businessName).toLowerCase();
-      const bName = branch.branchName.toLowerCase();
-      return cName && bName && (cName.includes(bName) || bName.includes(cName));
+      const cName = normalizeBranchName(str(c.businessName));
+      const bName = normalizeBranchName(branch.branchName);
+      if (!cName || !bName) return false;
+      return cName === bName || cName.startsWith(`${bName} `) || bName.startsWith(`${cName} `);
     });
     if (match) {
       branch.googlePlaceId = str(match.placeId) || null;
@@ -497,37 +638,15 @@ export function detectMultiLocationBranches(input: DetectMultiLocationBranchesIn
   if (distinctNames.size > 1) signals.push("multiple-branch-names");
   if (combinedNames.length >= 2) signals.push("title-lists-branches");
 
-  const requiresSelection =
-    branches.length > 1 &&
-    (distinctPostcodes.size > 1 ||
-      distinctPhones.size > 1 ||
-      distinctNames.size > 1 ||
-      combinedNames.length >= 2);
-
-  const meaningfulBranches = branches.filter((b) => {
-    const named = /pharmacy|chemist|dispensary|little eaton|derwent/i.test(b.branchName);
-    const googleBacked = Boolean(b.googlePlaceId);
-    return (named && (isValidUkPostcode(b.postcode) || isValidUkPhone(b.phone))) || googleBacked;
-  });
-
-  const googlePrimaryMap = new Map<string, DetectedWebsiteBranch>();
-  for (const b of branches) {
-    if (b.googlePlaceId && isValidUkPostcode(b.postcode)) {
-      googlePrimaryMap.set(b.googlePlaceId, b);
-    }
-  }
-  const googlePrimary = [...googlePrimaryMap.values()];
-  const finalBranches =
-    googlePrimary.length >= 2
-      ? googlePrimary
-      : meaningfulBranches.length >= 2
-        ? uniqueBranches(meaningfulBranches).slice(0, 12)
-        : uniqueBranches(branches.filter((b) => b.googlePlaceId || /pharmacy/i.test(b.branchName))).slice(0, 6);
+  const physical = resolvePhysicalWebsiteBranches(branches);
+  if (physical.ambiguous) signals.push("ambiguous-physical-identity");
+  if (physical.branches.length > 1) signals.push("distinct-physical-branches");
 
   return {
-    requiresSelection: requiresSelection && finalBranches.length > 1,
+    requiresSelection: physical.requiresSelection,
+    ambiguous: physical.ambiguous,
     parentBrand,
-    detectedBranches: finalBranches,
+    detectedBranches: physical.branches,
     detectionSignals: signals,
   };
 }

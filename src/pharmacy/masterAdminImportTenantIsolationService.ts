@@ -5,7 +5,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { readSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
 import { siblingBranchNamesForSlug } from "./masterAdminWebsiteBranchSelectionService.ts";
-import { isNationalMarketScope } from "./masterAdminMarketScopeService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
 import type { ImportTenantIsolationCheck, ImportTenantIsolationGate } from "./masterAdminImportedEvidenceReviewModel.ts";
 
@@ -158,15 +157,6 @@ export function validateImportTenantIsolationGate(slug: string): ImportTenantIso
       });
     }
     scanText("website-import-snapshot", JSON.stringify(snap), checks, siblingNames);
-  }
-
-  const resolution = data.websiteBranchResolution;
-  if (resolution?.status === "branch_selection_required" && !isNationalMarketScope(safe, data)) {
-    checks.push({
-      id: "branch-selection-pending",
-      passed: false,
-      detail: "Website branch selection required — evidence not yet accepted",
-    });
   }
 
   if (siblingNames.length > 1) {

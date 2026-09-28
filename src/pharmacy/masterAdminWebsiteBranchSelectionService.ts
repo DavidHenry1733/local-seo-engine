@@ -8,7 +8,7 @@ import {
   applyWebsiteImportDebugAfterBranchSelection,
   finalizeWebsiteImportAfterBranchSelection,
 } from "./masterAdminWebsiteImportBranchCompletionService.ts";
-import { detectMultiLocationBranches } from "./masterAdminWebsiteBranchDetectionService.ts";
+import { detectMultiLocationBranches, resolvePhysicalWebsiteBranches, websiteBranchPhysicalKey } from "./masterAdminWebsiteBranchDetectionService.ts";
 import { fetchWebsiteHtml } from "./growthEngineWebsiteCrawler.ts";
 import { recordMasterAdminAudit } from "./masterAdminAuditService.ts";
 import { safeAdminSlug } from "./pharmacyMasterAdminService.ts";
@@ -462,12 +462,71 @@ function readGoogleIdentityPlace(data: ReturnType<typeof readSetupProfile>): {
   };
 }
 
+/**
+ * Read-only adapter. Stored candidate rows are translated by the canonical
+ * physical resolver. This does not write the profile and does not keep a
+ * second identity rule.
+ */
+export function projectCanonicalBranchResolution(resolution: WebsiteBranchResolution): WebsiteBranchResolution {
+  if (resolution.status === "none_of_these_branches") return resolution;
+  const physical = resolvePhysicalWebsiteBranches(resolution.detectedBranches || []);
+  if (resolution.status === "branch_selected" && resolution.selectedBranch) {
+    const selectedKey = websiteBranchPhysicalKey(resolution.selectedBranch);
+    const match = selectedKey ? physical.branches.find((branch) => websiteBranchPhysicalKey(branch) === selectedKey) : undefined;
+    if (!match) {
+      return {
+        ...resolution,
+        status: "branch_selection_required",
+        selectedAt: null,
+        selectedBy: null,
+        selectedBranchId: null,
+        selectedBranch: null,
+        detectedBranches: physical.branches.length ? physical.branches : resolution.detectedBranches,
+        googleBranchMatchStatus: "pending",
+        googleBranchMatchNotes: ["Previous branch confirmation does not match the current physical branch evidence. Review is required."],
+      };
+    }
+    const selectedId = resolution.selectedBranchId || match.branchId;
+    return {
+      ...resolution,
+      detectedBranches: physical.branches.map((branch) =>
+        websiteBranchPhysicalKey(branch) === selectedKey ? { ...branch, branchId: selectedId } : branch,
+      ),
+      selectedBranchId: selectedId,
+      selectedBranch: { ...match, branchId: selectedId },
+    };
+  }
+  if (physical.requiresSelection) {
+    return {
+      ...resolution,
+      status: "branch_selection_required",
+      selectedAt: null,
+      selectedBy: null,
+      selectedBranchId: null,
+      selectedBranch: null,
+      detectedBranches: physical.branches,
+      googleBranchMatchStatus: "pending",
+      googleBranchMatchNotes: physical.ambiguous
+        ? ["Branch evidence is ambiguous — review is required before a branch is confirmed."]
+        : ["Branch selection required before Google comparison can be confirmed."],
+    };
+  }
+  return {
+    ...resolution,
+    status: "none",
+    detectedBranches: physical.branches,
+    selectedBranchId: null,
+    selectedBranch: null,
+  };
+}
+
 export function buildWebsiteBranchSelectionPayload(slug: string): WebsiteBranchSelectionPayload {
   const safe = safeAdminSlug(slug);
   // Persist NATIONAL bypass for stale pre-gate imports (no crawl).
   reconcileNationalWebsiteBranchResolution(safe);
   const data = readSetupProfile(safe);
-  const resolution = readWebsiteBranchResolution(safe) || emptyBranchResolution();
+  const stored = readWebsiteBranchResolution(safe) || emptyBranchResolution();
+  const resolution = isNationalMarketScope(safe, data) ? stored : projectCanonicalBranchResolution(stored);
   const national = isNationalMarketScope(safe, data);
   const requiresSelection =
     !national && resolution.status === "branch_selection_required";
@@ -570,7 +629,8 @@ export function selectWebsiteBranch(
 ): WebsiteBranchSelectionPayload {
   const safe = safeAdminSlug(slug);
   const data = readSetupProfile(safe);
-  const resolution = readWebsiteBranchResolution(safe);
+  const storedResolution = readWebsiteBranchResolution(safe);
+  const resolution = storedResolution ? projectCanonicalBranchResolution(storedResolution) : null;
   if (!resolution || resolution.status !== "branch_selection_required") {
     throw new Error("Branch selection is not required for this customer.");
   }
@@ -578,7 +638,12 @@ export function selectWebsiteBranch(
   const branch =
     branchOverride && branchOverride.branchId === branchId
       ? branchOverride
-      : resolution.detectedBranches.find((b) => b.branchId === branchId);
+      : resolution.detectedBranches.find((b) => b.branchId === branchId)
+        || storedResolution.detectedBranches.find((candidate) => {
+          if (candidate.branchId !== branchId) return false;
+          const key = websiteBranchPhysicalKey(candidate);
+          return key ? resolution.detectedBranches.some((item) => websiteBranchPhysicalKey(item) === key) : false;
+        });
   if (!branch) throw new Error("Branch not found.");
 
   const snap = data.websiteImportSnapshot as WebsiteImportSnapshot | null;
@@ -803,8 +868,10 @@ export function isBranchSelectionBlocking(slug: string): boolean {
   const safe = safeAdminSlug(slug);
   const data = readSetupProfile(safe);
   if (isNationalMarketScope(safe, data)) return false;
-  const resolution = readWebsiteBranchResolution(safe);
-  return resolution?.status === "branch_selection_required" || resolution?.status === "none_of_these_branches";
+  const stored = readWebsiteBranchResolution(safe);
+  if (!stored) return false;
+  const resolution = projectCanonicalBranchResolution(stored);
+  return resolution.status === "branch_selection_required" || resolution.status === "none_of_these_branches";
 }
 
 export function websiteImportStageComplete(slug: string): boolean {
@@ -816,7 +883,8 @@ export function websiteImportStageComplete(slug: string): boolean {
   if (isNationalMarketScope(safe, data)) {
     return Boolean(snap.importedAt) && (snap.status === "imported" || snap.status === "needs_review");
   }
-  const resolution = readWebsiteBranchResolution(safe);
+  const storedResolution = readWebsiteBranchResolution(safe);
+  const resolution = storedResolution ? projectCanonicalBranchResolution(storedResolution) : null;
   if (resolution?.status === "branch_selection_required") return false;
   if (resolution?.status === "none_of_these_branches") return false;
   if (resolution?.status === "branch_selected") {
