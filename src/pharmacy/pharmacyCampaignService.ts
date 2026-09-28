@@ -32,6 +32,7 @@ import {
   type VisualExperienceServiceId,
 } from "./pharmacyVisualExperienceConfig.ts";
 import { selectCampaignBuilderService } from "./growthEngineCampaignBuilderService.ts";
+import { resolveGrowthPlanReview } from "./masterAdminGrowthPlanConnectionService.ts";
 
 export type CampaignAreaSource = "profile" | "custom";
 
@@ -119,6 +120,8 @@ export interface PharmacyCampaign {
   areaSource: CampaignAreaSource;
   campaignAreas: CampaignAreaEntry[];
   regeneratedAt?: string;
+  sourceGrowthPlanRevision?: string;
+  sourceApprovedIntelligenceRevision?: string;
 }
 
 export interface PharmacyCampaignStore {
@@ -651,6 +654,14 @@ export function createPharmacyCampaign(
   const meta = getServicePublishMeta(serviceId);
   if (!meta) throw new Error(`Missing publish meta for ${serviceId}`);
 
+  const growthPlanReview = resolveGrowthPlanReview(s);
+  if (growthPlanReview.required && !growthPlanReview.campaignCreationAllowed) {
+    throw new Error("Growth Plan approval is required before a campaign can be created.");
+  }
+  if (growthPlanReview.required && growthPlanReview.priorityServiceId && serviceId !== growthPlanReview.priorityServiceId) {
+    throw new Error("Campaign service must match the approved Growth Plan.");
+  }
+
   const existing = readPharmacyCampaignStore(s);
   const duplicate = (existing?.campaigns || []).find(
     (c) => c.status === "active" && c.serviceId === serviceId,
@@ -687,6 +698,8 @@ export function createPharmacyCampaign(
     links: buildCampaignLinks(s, serviceId),
     areaSource,
     campaignAreas,
+    sourceGrowthPlanRevision: growthPlanReview.required ? growthPlanReview.growthPlanRevision || undefined : undefined,
+    sourceApprovedIntelligenceRevision: growthPlanReview.required ? growthPlanReview.approvedIntelligenceRevision || undefined : undefined,
   };
 
   const store: PharmacyCampaignStore = {

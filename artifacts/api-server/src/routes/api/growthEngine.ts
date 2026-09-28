@@ -17,6 +17,7 @@ import {
   saveGrowthOpportunityReport,
 } from "../../../../../src/pharmacy/growthEngineOpportunityEngine.ts";
 import { resolveGrowthPlan } from "../../../../../src/pharmacy/growthEngineGrowthPlanResolver.ts";
+import { decideGrowthPlan } from "../../../../../src/pharmacy/masterAdminGrowthPlanConnectionService.ts";
 import {
   buildGrowthJourneyView,
   syncGrowthCycles,
@@ -81,6 +82,30 @@ function safeSlug(v: string): string {
 function resolveSlug(raw: string): string | null {
   return resolveTenantProfileSlug(raw) || safeSlug(raw) || null;
 }
+
+router.post("/growth-engine/:slug/growth-plan/decision", (req, res) => {
+  const slug = resolveSlug(req.params.slug);
+  if (!slug) return res.status(400).json({ ok: false, error: "Invalid slug" });
+  const decision = String(req.body?.decision || "").trim();
+  if (decision !== "approved" && decision !== "rejected") {
+    return res.status(400).json({ ok: false, error: "decision must be approved or rejected" });
+  }
+  const session = req.session as { username?: string; name?: string } | undefined;
+  const operator = session?.name || session?.username || "admin";
+  try {
+    const review = decideGrowthPlan(slug, decision, operator);
+    res.json({
+      ok: true,
+      decision: review.state,
+      campaignCreationAllowed: review.campaignCreationAllowed,
+      growthPlanRevision: review.growthPlanRevision,
+      approvedIntelligenceRevision: review.approvedIntelligenceRevision,
+      priorityServiceId: review.priorityServiceId,
+    });
+  } catch (err: unknown) {
+    res.status(409).json({ ok: false, error: err instanceof Error ? err.message : String(err) });
+  }
+});
 
 router.get("/growth-engine/:slug/status", (req, res) => {
   const slug = resolveSlug(req.params.slug);

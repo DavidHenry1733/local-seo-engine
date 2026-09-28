@@ -13,6 +13,9 @@ import { resolveGoogleProfileOnboardingState } from "./masterAdminGoogleProfileO
 import {
   isWorkflowAcknowledged,
   readCommercialIntelligenceApproval,
+  readGrowthPlanDecision,
+  writeGrowthPlanDecision,
+  type GrowthPlanDecisionRecord,
 } from "./masterAdminWorkflowAckService.ts";
 import {
   commercialIntelligenceApprovedVersion,
@@ -145,8 +148,101 @@ export function ensureGrowthPlanFromApprovedIntelligence(slug: string): Approved
   return plan;
 }
 
-export function growthPlanStatusLabel(plan: ApprovedGrowthPlanRecord | null): string {
+export type GrowthPlanReviewState = "unavailable" | "ready_for_review" | "approved" | "rejected" | "stale";
+
+export interface GrowthPlanReview {
+  state: GrowthPlanReviewState;
+  required: boolean;
+  campaignCreationAllowed: boolean;
+  previousDecisionStale: boolean;
+  plan: ApprovedGrowthPlanRecord | null;
+  decision: GrowthPlanDecisionRecord | null;
+  priorityServiceId: string | null;
+  growthPlanRevision: string | null;
+  approvedIntelligenceRevision: string | null;
+}
+
+function decisionMatchesPlan(plan: ApprovedGrowthPlanRecord, decision: GrowthPlanDecisionRecord | null): boolean {
+  return Boolean(
+    decision
+    && decision.growthPlanGeneratedAt === plan.generatedAt
+    && decision.approvedIntelligenceRevision === plan.approvedIntelligenceRevision,
+  );
+}
+
+/** One reader for the Growth Plan screen, overview, and the campaign gate. */
+export function resolveGrowthPlanReview(slug: string, currentPlan?: ApprovedGrowthPlanRecord | null): GrowthPlanReview {
+  const persisted = readPersistedGrowthPlan(slug);
+  const plan = currentPlan === undefined ? readCurrentGrowthPlan(slug) : currentPlan;
+  const decision = readGrowthPlanDecision(slug);
+  if (!persisted) {
+    return {
+      state: "unavailable",
+      required: false,
+      campaignCreationAllowed: true,
+      previousDecisionStale: false,
+      plan: null,
+      decision,
+      priorityServiceId: null,
+      growthPlanRevision: null,
+      approvedIntelligenceRevision: null,
+    };
+  }
+  if (!plan) {
+    return {
+      state: "stale",
+      required: true,
+      campaignCreationAllowed: false,
+      previousDecisionStale: Boolean(decision),
+      plan: null,
+      decision,
+      priorityServiceId: null,
+      growthPlanRevision: persisted.generatedAt,
+      approvedIntelligenceRevision: persisted.approvedIntelligenceRevision,
+    };
+  }
+  const matches = decisionMatchesPlan(plan, decision);
+  const state: GrowthPlanReviewState = !matches
+    ? "ready_for_review"
+    : decision?.decision === "approved"
+      ? "approved"
+      : "rejected";
+  return {
+    state,
+    required: true,
+    campaignCreationAllowed: state === "approved",
+    previousDecisionStale: Boolean(decision) && !matches,
+    plan,
+    decision,
+    priorityServiceId: plan.priorityServiceId,
+    growthPlanRevision: plan.generatedAt,
+    approvedIntelligenceRevision: plan.approvedIntelligenceRevision,
+  };
+}
+
+export function decideGrowthPlan(
+  slug: string,
+  decision: "approved" | "rejected",
+  operator: string,
+): GrowthPlanReview {
+  const plan = readCurrentGrowthPlan(slug);
+  if (!plan) {
+    throw new Error("The current Growth Plan is not available for a decision.");
+  }
+  writeGrowthPlanDecision(slug, operator, {
+    decision,
+    growthPlanGeneratedAt: plan.generatedAt,
+    approvedIntelligenceRevision: plan.approvedIntelligenceRevision,
+    priorityServiceId: plan.priorityServiceId,
+  });
+  return resolveGrowthPlanReview(slug, plan);
+}
+
+export function growthPlanStatusLabel(plan: ApprovedGrowthPlanRecord | null, state: GrowthPlanReviewState = "ready_for_review"): string {
   if (!plan) return "NOT AVAILABLE";
-  if (plan.priorityServiceName) return `READY FOR REVIEW · ${plan.priorityServiceName}`;
-  return "READY FOR REVIEW";
+  const name = plan.priorityServiceName ? ` · ${plan.priorityServiceName}` : "";
+  if (state === "approved") return `APPROVED${name}`;
+  if (state === "rejected") return `REJECTED${name}`;
+  if (state === "stale") return `STALE${name}`;
+  return `READY FOR REVIEW${name}`;
 }

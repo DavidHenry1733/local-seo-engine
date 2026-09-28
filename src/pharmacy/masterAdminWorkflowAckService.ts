@@ -5,6 +5,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { WORKSPACE_ROOT } from "./pharmacyExecutiveDashboardService.ts";
 
+export interface GrowthPlanDecisionRecord {
+  decision: "approved" | "rejected";
+  decidedAt: string;
+  decidedBy: string;
+  growthPlanGeneratedAt: string;
+  approvedIntelligenceRevision: string;
+  priorityServiceId: string | null;
+}
+
 export interface CommercialIntelligenceApprovalRecord {
   approvedAt: string;
   approvedBy: string;
@@ -20,6 +29,7 @@ interface WorkflowDoc {
   acknowledgements: Record<string, string>;
   lastOperator?: string;
   commercialIntelligenceApproval?: CommercialIntelligenceApprovalRecord;
+  growthPlanDecision?: GrowthPlanDecisionRecord;
 }
 
 function workflowDocPath(slug: string): string {
@@ -36,6 +46,7 @@ function readDoc(slug: string): WorkflowDoc {
       acknowledgements: raw.acknowledgements || {},
       lastOperator: raw.lastOperator,
       commercialIntelligenceApproval: raw.commercialIntelligenceApproval,
+      growthPlanDecision: raw.growthPlanDecision,
     };
   } catch {
     return { version: 1, acknowledgements: {} };
@@ -96,6 +107,27 @@ export function writeCommercialIntelligenceApproval(
   };
   doc.acknowledgements["commercial-intelligence-approved"] = approvedAt;
   doc.commercialIntelligenceApproval = record;
+  doc.lastOperator = operator;
+  writeDoc(slug, doc);
+  return record;
+}
+
+export function readGrowthPlanDecision(slug: string): GrowthPlanDecisionRecord | null {
+  return readDoc(slug).growthPlanDecision || null;
+}
+
+export function writeGrowthPlanDecision(
+  slug: string,
+  operator: string,
+  input: Omit<GrowthPlanDecisionRecord, "decidedAt" | "decidedBy">,
+): GrowthPlanDecisionRecord {
+  const doc = readDoc(slug);
+  const record: GrowthPlanDecisionRecord = {
+    ...input,
+    decidedAt: new Date().toISOString(),
+    decidedBy: operator,
+  };
+  doc.growthPlanDecision = record;
   doc.lastOperator = operator;
   writeDoc(slug, doc);
   return record;

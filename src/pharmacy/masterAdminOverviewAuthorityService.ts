@@ -22,7 +22,9 @@ import { readGrowthPlanIntelligenceV1 } from "./growthPlanIntelligenceV1Service.
 import {
   ensureGrowthPlanFromApprovedIntelligence,
   growthPlanStatusLabel,
+  resolveGrowthPlanReview,
   type ApprovedGrowthPlanRecord,
+  type GrowthPlanReviewState,
 } from "./masterAdminGrowthPlanConnectionService.ts";
 import { summariseNationalPublishV1 } from "./nationalContentPublishV1.ts";
 import { summariseNationalClusterDiscoveryV1 } from "./nationalClusterDiscoveryV1.ts";
@@ -58,6 +60,8 @@ export interface OverviewAuthorityV1 {
   growthPlanDetail?: {
     current: true;
     status: ApprovedGrowthPlanRecord["status"];
+    decision: GrowthPlanReviewState;
+    campaignCreationAllowed: boolean;
     generatedAt: string;
     approvedIntelligenceRevision: string;
     priorityServiceId: string | null;
@@ -176,7 +180,12 @@ function buildIntelligenceLabel(slug: string): string {
   return "NOT YET RUN";
 }
 
-function buildGrowthPlanLabel(slug: string, national: boolean, localPlan: ApprovedGrowthPlanRecord | null): string {
+function buildGrowthPlanLabel(
+  slug: string,
+  national: boolean,
+  localPlan: ApprovedGrowthPlanRecord | null,
+  reviewState: GrowthPlanReviewState,
+): string {
   if (national || isNationalGrowthPlatform(slug)) {
     const plan = readGrowthPlanIntelligenceV1(slug);
     if (!plan) return "NOT YET RUN";
@@ -184,14 +193,20 @@ function buildGrowthPlanLabel(slug: string, national: boolean, localPlan: Approv
     if (Number.isFinite(total) && total > 0) return `${total} ACTIONS`;
     return "AVAILABLE";
   }
-  return growthPlanStatusLabel(localPlan);
+  return growthPlanStatusLabel(localPlan, reviewState);
 }
 
-function growthPlanDetail(plan: ApprovedGrowthPlanRecord | null): OverviewAuthorityV1["growthPlanDetail"] {
+function growthPlanDetail(
+  plan: ApprovedGrowthPlanRecord | null,
+  reviewState: GrowthPlanReviewState,
+  campaignCreationAllowed: boolean,
+): OverviewAuthorityV1["growthPlanDetail"] {
   if (!plan) return null;
   return {
     current: true,
     status: plan.status,
+    decision: reviewState,
+    campaignCreationAllowed,
     generatedAt: plan.generatedAt,
     approvedIntelligenceRevision: plan.approvedIntelligenceRevision,
     priorityServiceId: plan.priorityServiceId,
@@ -337,6 +352,7 @@ export function buildOverviewAuthorityV1(slug: string): OverviewAuthorityV1 {
   if (golden) return golden;
   const national = isNationalGrowthPlatform(safe) || resolveGrowthPlatform(safe).platform === "national";
   const localPlan = national ? null : ensureGrowthPlanFromApprovedIntelligence(safe);
+  const localReview = national ? null : resolveGrowthPlanReview(safe, localPlan);
   const searchConsole = readOverviewSearchConsoleClaims(safe);
   return {
     version: 1,
@@ -344,8 +360,8 @@ export function buildOverviewAuthorityV1(slug: string): OverviewAuthorityV1 {
     profile: buildProfileLabel(safe),
     importStatus: buildImportLabel(safe),
     intelligence: buildIntelligenceLabel(safe),
-    growthPlan: buildGrowthPlanLabel(safe, national, localPlan),
-    growthPlanDetail: growthPlanDetail(localPlan),
+    growthPlan: buildGrowthPlanLabel(safe, national, localPlan, localReview?.state || "unavailable"),
+    growthPlanDetail: growthPlanDetail(localPlan, localReview?.state || "ready_for_review", Boolean(localReview?.campaignCreationAllowed)),
     campaigns: buildCampaignsLabel(safe, national),
     review: buildReviewLabel(safe, national),
     publishing: buildPublishingLabel(safe, national),
