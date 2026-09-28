@@ -323,7 +323,7 @@ async function googleSearchNearby(origin: GeoPoint, limit: number): Promise<Reco
         "X-Goog-FieldMask": "places.id,places.displayName,places.formattedAddress,places.location,places.types",
       },
       body: JSON.stringify({
-        includedTypes: ["locality", "sublocality", "neighborhood"],
+        includedTypes: ["locality"],
         maxResultCount: Math.min(Math.max(limit, 1), 20),
         locationRestriction: {
           circle: {

@@ -291,10 +291,12 @@ function recommendationCachePath(slug: string): string {
   return path.join(WORKSPACE_ROOT, "data/pharmacy-local-coverage", `${safePharmacySlug(slug)}-recommendations.json`);
 }
 
+const LOCALITY_DISCOVERY_REVISION = "locality-search-v2";
+
 function localityOriginKey(origin: LocalCoverageOrigin | null, town: string): string {
   const place = town.trim().toLowerCase();
-  if (!origin) return `none|${place}`;
-  return `${origin.latitude.toFixed(5)}|${origin.longitude.toFixed(5)}|${place}|${origin.source}`;
+  if (!origin) return `none|${place}|${LOCALITY_DISCOVERY_REVISION}`;
+  return `${origin.latitude.toFixed(5)}|${origin.longitude.toFixed(5)}|${place}|${origin.source}|${LOCALITY_DISCOVERY_REVISION}`;
 }
 
 function readPersistedLocalityRecommendations(slug: string): PersistedLocalityRecommendation | null {
