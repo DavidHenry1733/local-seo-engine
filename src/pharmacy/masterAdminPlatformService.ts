@@ -27,6 +27,7 @@ import {
   runSetupGoogleImport,
   runSetupWebsiteImport,
 } from "./growthEngineCustomerSetupImportSplitService.ts";
+import { websiteImportSucceeded } from "./masterAdminWebsiteImportWorkflowStateService.ts";
 import { runCustomerSetupConfirm } from "./growthEngineCustomerSetupConfirmService.ts";
 import { buildGrowthEngineFramework } from "./growthEngineFrameworkService.ts";
 import {
@@ -506,7 +507,7 @@ export function deriveCustomerLifecycle(
   const indexing = getPharmacyIndexingBridgeStatus(slug);
   const rank = rankTrackingSummary(slug);
 
-  const hasWebsiteImport = Boolean(data.websiteImportSnapshot);
+  const hasWebsiteImport = websiteImportSucceeded(slug, data);
   const hasGoogleImport = Boolean(data.googleImportSnapshot);
   const importFields = buildWizardImportFields(data);
   const importSummary = countImportSummary(importFields);

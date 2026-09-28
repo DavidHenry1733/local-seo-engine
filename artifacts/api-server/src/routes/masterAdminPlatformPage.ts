@@ -1383,12 +1383,14 @@ function renderWebsiteSourcePanel(c){
     '<div><span class="label">Website Imported</span><div>'+(ws.websiteImported?'Yes':'No')+'</div></div>'+
     '<div><span class="label">Last Import</span><div>'+(ws.lastImportAt?fmt(ws.lastImportAt):'—')+(ws.lastImportMessage?'<div style="color:#64748b;font-size:.72rem">'+esc(ws.lastImportMessage)+'</div>':'')+'</div></div>'+
     '<div><span class="label">Import Evidence</span><div>'+(ws.importEvidenceUrl?esc(ws.importEvidenceUrl):'—')+(ws.importHistoryCount?'<div style="color:#64748b;font-size:.72rem">'+ws.importHistoryCount+' archived import(s)</div>':'')+'</div></div>'+
-    '<div style="margin-top:8px"><span class="label">Canonical Preview Pages</span><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;font-size:.72rem">'+
-    '<a href="'+esc(canonicalPreviewUrl('homepage'))+'" target="_blank" rel="noopener">Homepage</a>'+
-    '<a href="'+esc(canonicalPreviewUrl('service'))+'" target="_blank" rel="noopener">Service</a>'+
-    '<a href="'+esc(canonicalPreviewUrl('guide'))+'" target="_blank" rel="noopener">Guide</a>'+
-    '<a href="'+esc(canonicalPreviewUrl('blog'))+'" target="_blank" rel="noopener">Blog</a>'+
-    '</div></div>';
+    (ws.websiteImported
+      ? '<div style="margin-top:8px"><span class="label">Canonical Preview Pages</span><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;font-size:.72rem">'+
+        '<a href="'+esc(canonicalPreviewUrl('homepage'))+'" target="_blank" rel="noopener">Homepage</a>'+
+        '<a href="'+esc(canonicalPreviewUrl('service'))+'" target="_blank" rel="noopener">Service</a>'+
+        '<a href="'+esc(canonicalPreviewUrl('guide'))+'" target="_blank" rel="noopener">Guide</a>'+
+        '<a href="'+esc(canonicalPreviewUrl('blog'))+'" target="_blank" rel="noopener">Blog</a>'+
+        '</div></div>'
+      : '');
   const actions=document.getElementById('detailWebsiteActions');
   const canEdit=ws.canEditWebsite!==false;
   actions.innerHTML=

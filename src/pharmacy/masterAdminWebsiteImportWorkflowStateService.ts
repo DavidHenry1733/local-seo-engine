@@ -25,6 +25,75 @@ function canonicalWebsiteImportEvidenceMessage(slug: string, snapshotMessage: st
   return snapshotMessage;
 }
 
+export type WebsiteImportContractState = "not_started" | "imported" | "partial" | "failed";
+
+export interface WebsiteImportContract {
+  state: WebsiteImportContractState;
+  websiteStatus: "NOT CONFIGURED" | "IMPORTED" | "PARTIAL" | "FAILED";
+  /** True only for a completed import. A stored snapshot is not success. */
+  websiteImported: boolean;
+  downstreamReady: boolean;
+}
+
+function snapshotRecord(data: { websiteImportSnapshot?: unknown }): Record<string, unknown> | null {
+  const snap = data.websiteImportSnapshot as Record<string, unknown> | null | undefined;
+  if (!snap || typeof snap !== "object") return null;
+  return snap;
+}
+
+function snapshotHasUsableEvidence(snap: Record<string, unknown>, resolutionStatus: string): boolean {
+  const status = String(snap.status || "");
+  if (status === "needs_review" || status === "branch_selection_required") return true;
+  if (resolutionStatus === "branch_selection_required" || resolutionStatus === "none_of_these_branches") return true;
+  if (snap.intelligence) return true;
+  if (Array.isArray(snap.servicesDetected) && snap.servicesDetected.length > 0) return true;
+  const text = [snap.phone, snap.email, snap.address, snap.description].map((v) => String(v || "").trim()).join("");
+  return Boolean(text);
+}
+
+/**
+ * Read-only import contract. Does not reconcile or write the profile.
+ * Success matches the existing stage-completion rules. Anything else that
+ * merely stored a snapshot is partial or failed, never imported.
+ */
+export function classifyWebsiteImportContract(
+  slug: string,
+  data: { websiteImportSnapshot?: unknown; websiteBranchResolution?: { status?: string } | null },
+): WebsiteImportContract {
+  const snap = snapshotRecord(data);
+  if (!snap) {
+    return { state: "not_started", websiteStatus: "NOT CONFIGURED", websiteImported: false, downstreamReady: false };
+  }
+  const status = String(snap.status || "");
+  const resolutionStatus = String(data.websiteBranchResolution?.status || "");
+  const national = isNationalMarketScope(slug, data as never);
+  let succeeded = false;
+  if (national) {
+    succeeded = Boolean(snap.importedAt) && (status === "imported" || status === "needs_review");
+  } else if (resolutionStatus === "branch_selection_required" || resolutionStatus === "none_of_these_branches") {
+    succeeded = false;
+  } else if (resolutionStatus === "branch_selected") {
+    succeeded = status === "imported" || Boolean(snap.importedAt);
+  } else {
+    succeeded = status === "imported";
+  }
+  if (succeeded) {
+    return { state: "imported", websiteStatus: "IMPORTED", websiteImported: true, downstreamReady: true };
+  }
+  if (snapshotHasUsableEvidence(snap, resolutionStatus)) {
+    return { state: "partial", websiteStatus: "PARTIAL", websiteImported: false, downstreamReady: false };
+  }
+  return { state: "failed", websiteStatus: "FAILED", websiteImported: false, downstreamReady: false };
+}
+
+export function websiteImportSucceeded(
+  slug: string,
+  data?: { websiteImportSnapshot?: unknown; websiteBranchResolution?: { status?: string } | null },
+): boolean {
+  const profile = data || readSetupProfile(slug);
+  return classifyWebsiteImportContract(slug, profile).state === "imported";
+}
+
 export interface CanonicalWebsiteImportWorkflowState {
   stageComplete: boolean;
   importState: SourceImportState;
@@ -70,13 +139,16 @@ export function resolveCanonicalWebsiteImportWorkflowState(slug: string): Canoni
     importState = "failed";
   }
 
-  const progressLabel = stageComplete
+  const contract = classifyWebsiteImportContract(slug, readSetupProfile(slug));
+  const progressLabel = contract.state === "imported"
     ? "Completed"
     : branchSelectionRequired
       ? "Branch selection required"
-      : snap?.importedAt
-        ? "Incomplete"
-        : "Not started";
+      : contract.state === "partial"
+        ? "Partial"
+        : contract.state === "failed"
+          ? "Failed"
+          : "Not started";
 
   const latestEvidence = stageComplete
     ? evidence || "Website intelligence imported."

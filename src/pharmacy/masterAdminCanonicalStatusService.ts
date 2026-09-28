@@ -12,6 +12,7 @@ import { getPharmacyPublishOutputStatus } from "./pharmacyPublishOutputService.t
 import { getPharmacyIndexingBridgeStatus } from "./pharmacyIndexingBridgeService.ts";
 import { loadMasterAdminCustomerContext } from "./masterAdminCustomerContextService.ts";
 import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
+import { classifyWebsiteImportContract } from "./masterAdminWebsiteImportWorkflowStateService.ts";
 
 export interface CanonicalStatusRecord {
   key: string;
@@ -57,16 +58,19 @@ export function buildCustomerCanonicalStatuses(slug: string, serviceId = "pharma
   const profileFile = profilePath(slug);
   const profileMeta = readJsonMtime(profileFile);
 
-  if (data.websiteImportSnapshot) {
-    const snap = data.websiteImportSnapshot as { importedAt?: string };
+  const websiteContract = classifyWebsiteImportContract(slug, data);
+  if (websiteContract.state !== "not_started") {
+    const snap = data.websiteImportSnapshot as { importedAt?: string; message?: string };
     records.push({
       key: "website_import",
       label: "Website Import",
-      state: "IMPORTED",
+      state: websiteContract.websiteStatus,
       source: "pharmacy-profiles.websiteImportSnapshot",
       lastUpdated: snap.importedAt || profileMeta.updatedAt || profileMeta.mtime,
       freshness: freshnessFrom(snap.importedAt || profileMeta.updatedAt || profileMeta.mtime),
-      latestError: data.lastWebsiteImportDebug ? String(data.lastWebsiteImportDebug).slice(0, 200) : null,
+      latestError: websiteContract.state === "imported"
+        ? null
+        : String(snap.message || data.lastWebsiteImportDebug || "").slice(0, 200) || null,
     });
   } else {
     records.push({

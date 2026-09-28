@@ -19,6 +19,7 @@ import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
 import { buildCustomerWorkflowSummaryLite } from "./masterAdminWorkflowEngine.ts";
 import { buildMasterAdminCustomerIssueSummary } from "./masterAdminIssueService.ts";
 import { buildCustomerCanonicalStatuses, canonicalStatusLabel } from "./masterAdminCanonicalStatusService.ts";
+import { websiteImportSucceeded } from "./masterAdminWebsiteImportWorkflowStateService.ts";
 
 const LIFECYCLE_LABELS: Record<CustomerLifecycleStage, string> = {
   new: "NEW",
@@ -194,7 +195,7 @@ function deriveLifecycleLite(ctx: LiteCustomerContext): CustomerLifecycleStage {
   if (ctx.suspended) return "suspended";
 
   const data = ctx.data;
-  const hasWebsiteImport = Boolean(data.websiteImportSnapshot);
+  const hasWebsiteImport = websiteImportSucceeded(ctx.slug, data);
   const hasGoogleImport = Boolean(data.googleImportSnapshot);
   const importSummary = countImportSummary(buildWizardImportFields(data));
   const googleMatch = data.customerSetupGoogleMatchStatus || "none";

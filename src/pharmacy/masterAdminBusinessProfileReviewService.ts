@@ -1271,7 +1271,13 @@ function buildSummary(
     canonicalWebsite: ctx.websiteSummary.canonicalWebsite || normText(ctx.profile.website) || null,
     googleBusinessProfile: ctx.googleSummary.businessName || ctx.googleIntel?.businessName || null,
     googlePlaceId: ctx.googleSummary.placeId || ctx.googleIntel?.placeId || null,
-    websiteImportStatus: ctx.websiteSummary.websiteImported ? "Complete" : ctx.websiteSummary.websiteImported === false ? "Missing" : "Failed",
+    websiteImportStatus: ctx.websiteSummary.websiteStatus === "IMPORTED"
+      ? "Complete"
+      : ctx.websiteSummary.websiteStatus === "PARTIAL"
+        ? "Partial"
+        : ctx.websiteSummary.websiteStatus === "FAILED"
+          ? "Failed"
+          : "Missing",
     googleImportStatus: googleSection.importStatus,
     fieldsChecked: fields.length,
     matches: fields.filter((f) => f.classification === "MATCH" || (f.autoResolved && !f.requiresAction)).length,

@@ -83,49 +83,60 @@ interface FetchResult {
   status:      number;
 }
 
-async function safeFetch(
-  url: string,
-  maxBytes  = 1_000_000,
-  timeoutMs = 10_000,
-  depth     = 0,
-): Promise<FetchResult> {
-  if (depth > 5) throw new Error("Too many redirects");
+const IMPORTER_HEADERS = {
+  "User-Agent":      "Mozilla/5.0 (compatible; BrandImporter/1.0)",
+  "Accept":          "text/html,text/css,*/*;q=0.8",
+  "Accept-Language": "en-GB,en;q=0.9",
+};
 
+function importerTimedOut(err: unknown): boolean {
+  const named = err as { name?: string; message?: string; code?: string };
+  const message = String(named?.message || err || "");
+  return named?.name === "TimeoutError"
+    || named?.code === "UND_ERR_CONNECT_TIMEOUT"
+    || named?.code === "UND_ERR_HEADERS_TIMEOUT"
+    || named?.code === "UND_ERR_BODY_TIMEOUT"
+    || message === "Request timed out"
+    || /timed out/i.test(message);
+}
+
+function fetchWithNodeHttps(
+  url: string,
+  maxBytes: number,
+  timeoutMs: number,
+  depth: number,
+  family?: 4,
+): Promise<FetchResult> {
+  if (depth > 5) return Promise.reject(new Error("Too many redirects"));
   const parsed = new URL(url);
   if (!["http:", "https:"].includes(parsed.protocol)) {
-    throw new Error(`Unsupported protocol: ${parsed.protocol}`);
+    return Promise.reject(new Error(`Unsupported protocol: ${parsed.protocol}`));
   }
   const lib = parsed.protocol === "https:" ? https : http;
-
   return new Promise((resolve, reject) => {
     const req = lib.get(
       url,
       {
-        headers: {
-          "User-Agent":      "Mozilla/5.0 (compatible; BrandImporter/1.0)",
-          "Accept":          "text/html,text/css,*/*;q=0.8",
-          "Accept-Language": "en-GB,en;q=0.9",
-        },
+        headers: IMPORTER_HEADERS,
         timeout: timeoutMs,
+        family,
+        agent: family === 4 ? new lib.Agent({ keepAlive: false, family: 4 }) : undefined,
       },
       (res) => {
         const status = res.statusCode ?? 0;
-
         if ([301, 302, 303, 307, 308].includes(status)) {
           const loc = res.headers.location;
-          res.destroy();
+          res.resume();
           if (!loc) { reject(new Error("Redirect with no Location")); return; }
           const next = loc.startsWith("http") ? loc : new URL(loc, url).href;
-          safeFetch(next, maxBytes, timeoutMs, depth + 1).then(resolve, reject);
+          fetchWithNodeHttps(next, maxBytes, timeoutMs, depth + 1, family).then(resolve, reject);
           return;
         }
-
         if (status < 200 || status >= 400) {
-          res.destroy();
+          res.resume();
           reject(new Error(`HTTP ${status} for ${url}`));
           return;
         }
-
         const chunks: Buffer[] = [];
         let total = 0;
         res.on("data", (chunk: Buffer) => {
@@ -147,6 +158,60 @@ async function safeFetch(
     req.on("timeout", () => { req.destroy(); reject(new Error("Request timed out")); });
     req.on("error", reject);
   });
+}
+
+async function fetchWithHttpClient(url: string, maxBytes: number, timeoutMs: number): Promise<FetchResult> {
+  const parsed = new URL(url);
+  if (!["http:", "https:"].includes(parsed.protocol)) {
+    throw new Error(`Unsupported protocol: ${parsed.protocol}`);
+  }
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      headers: IMPORTER_HEADERS,
+      redirect: "follow",
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+  } catch (err) {
+    if (importerTimedOut(err)) throw new Error("Request timed out");
+    throw err;
+  }
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  if (buf.length > maxBytes) throw new Error("Response too large");
+  return {
+    body: buf.toString("utf8"),
+    finalUrl: res.url || url,
+    contentType: res.headers.get("content-type") ?? "",
+    status: res.status,
+  };
+}
+
+/**
+ * Homepage fetch used by the website importer.
+ * The first attempt uses the platform HTTP client (HTTP/2). A single timeout is
+ * retried once on IPv4. The timeout itself is unchanged.
+ */
+export async function fetchBrandSourceDocument(
+  url: string,
+  maxBytes = 1_000_000,
+  timeoutMs = 10_000,
+): Promise<FetchResult> {
+  try {
+    return await fetchWithHttpClient(url, maxBytes, timeoutMs);
+  } catch (err) {
+    if (!importerTimedOut(err)) throw err;
+    return fetchWithNodeHttps(url, maxBytes, timeoutMs, 0, 4);
+  }
+}
+
+async function safeFetch(
+  url: string,
+  maxBytes  = 1_000_000,
+  timeoutMs = 10_000,
+  _depth    = 0,
+): Promise<FetchResult> {
+  return fetchBrandSourceDocument(url, maxBytes, timeoutMs);
 }
 
 // ── Colour utilities ──────────────────────────────────────────────────────────

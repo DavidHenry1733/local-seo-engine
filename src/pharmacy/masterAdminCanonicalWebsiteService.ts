@@ -12,7 +12,7 @@ import {
   createMasterAdminJob,
   runMasterAdminJobAsync,
 } from "./masterAdminJobService.ts";
-import { buildCustomerCanonicalStatuses } from "./masterAdminCanonicalStatusService.ts";
+import { classifyWebsiteImportContract } from "./masterAdminWebsiteImportWorkflowStateService.ts";
 
 const WEBSITE_IMPORT_HISTORY_DIR = path.join(
   WORKSPACE_ROOT,
@@ -172,15 +172,15 @@ export function buildWebsiteSourceSummary(slug: string): WebsiteSourceSummary {
   const snap = data.websiteImportSnapshot as Record<string, unknown> | null | undefined;
   const history = readImportHistory(safe);
   const gate = canEditCanonicalWebsite(safe);
-  const canonical = buildCustomerCanonicalStatuses(safe).find((c) => c.key === "website_import");
+  const contract = classifyWebsiteImportContract(safe, data);
 
   return {
     canonicalWebsite: String(data.website || data.canonicalWebsite || ""),
-    websiteStatus: canonical?.state || (snap ? "IMPORTED" : "NOT CONFIGURED"),
-    websiteImported: Boolean(snap),
+    websiteStatus: contract.websiteStatus,
+    websiteImported: contract.websiteImported,
     lastImportAt: snap?.importedAt ? String(snap.importedAt) : null,
     lastImportMessage: snap?.message ? String(snap.message) : null,
-    importEvidenceUrl: snap?.websiteUrl ? String(snap.websiteUrl) : null,
+    importEvidenceUrl: contract.state === "failed" ? null : snap?.websiteUrl ? String(snap.websiteUrl) : null,
     importHistoryCount: history.length,
     canEditWebsite: gate.allowed,
     editBlockedReason: gate.reason,
