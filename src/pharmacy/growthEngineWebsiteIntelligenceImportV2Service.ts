@@ -10,6 +10,7 @@ import {
   extractWebsiteAddressCandidates,
   selectCanonicalWebsiteAddressCandidate,
 } from "./pharmacyWebsiteAnalysisService.ts";
+import { extractStructuredOpeningHoursText } from "./masterAdminBusinessProfileOpeningHoursService.ts";
 import {
   crawlWebsite,
   extractInternalLinks,
@@ -676,6 +677,23 @@ export async function buildWebsiteIntelligenceImportV2(
   const hoursCandidates: WebsiteImportFieldCandidate[] = [];
   const hoursSummary = str(patch.openingHours || patch.openingHoursMonday);
   if (hoursSummary) hoursCandidates.push({ value: hoursSummary, confidence: 75, sourceUrl: resolved, detectionMethod: "schema.org" });
+  const visibleHoursSource = contactPage?.html
+    ? { html: contactPage.html, url: contactPage.url }
+    : { html: homepageHtml, url: resolved };
+  const visibleHours = extractStructuredOpeningHoursText(visibleHoursSource.html);
+  if (!visibleHours && contactPage?.html) {
+    const homepageHours = extractStructuredOpeningHoursText(homepageHtml);
+    if (homepageHours) {
+      hoursCandidates.push({ value: homepageHours, confidence: 84, sourceUrl: resolved, detectionMethod: "visible-opening-hours" });
+    }
+  } else if (visibleHours) {
+    hoursCandidates.push({
+      value: visibleHours,
+      confidence: 84,
+      sourceUrl: visibleHoursSource.url,
+      detectionMethod: "visible-opening-hours",
+    });
+  }
 
   const mapsCandidates: WebsiteImportFieldCandidate[] = [];
   if (analysis.googleMapsUrl) {

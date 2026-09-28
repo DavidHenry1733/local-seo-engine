@@ -27,7 +27,7 @@ export interface WeeklyOpeningHoursDay {
   hours: string;
 }
 
-export type WeeklyHoursSource = "google" | "website" | "conflict" | "none";
+export type WeeklyHoursSource = "google" | "website" | "corroborated" | "product_owner" | "conflict" | "none";
 
 export interface WeeklyOpeningHoursEvidence {
   source: WeeklyHoursSource;
@@ -111,10 +111,12 @@ function closedToken(raw: string): boolean {
 }
 
 function normalizePeriodText(raw: string): string {
+  const canonical = canonicalizeDayHours(raw);
+  if (canonical) return canonical;
   const text = normText(raw).replace(/\u2013|\u2014|–|—/g, "–");
   if (!text) return "";
   if (closedToken(text)) return "Closed";
-  return text.replace(/\s*–\s*/g, " – ");
+  return text;
 }
 
 function appendPeriod(existing: string, next: string): string {
@@ -137,12 +139,11 @@ function weekFromLines(lines: string[]): Record<WeekdayId, string> {
     const day = DAY_ALIAS[String(match[1] || "").toLowerCase()];
     if (!day) continue;
     let rest = String(match[2] || "");
-    const nextDay = new RegExp(`\\s*,\\s*(?:${DAY_TOKEN_RE})\\b`, "i").exec(rest);
+    const nextDay = new RegExp(`\\s*(?:,|;)\\s*(?:${DAY_TOKEN_RE})\\b`, "i").exec(rest);
     if (nextDay?.index != null) rest = rest.slice(0, nextDay.index);
     rest = rest.replace(/\s*;\s*$/, "").trim();
-    for (const part of rest.split(/\s*;\s*|\s*,\s*(?=\d)/).map((p) => p.trim()).filter(Boolean)) {
-      week[day] = appendPeriod(week[day], part);
-    }
+    const canonical = canonicalizeDayHours(rest);
+    if (canonical && !week[day]) week[day] = canonical;
   }
   return week;
 }
@@ -150,10 +151,50 @@ function weekFromLines(lines: string[]): Record<WeekdayId, string> {
 function clockLabel(hour: unknown, minute: unknown): string {
   const h = Number(hour);
   const m = Number(minute) || 0;
-  if (!Number.isFinite(h) || h < 0 || h > 23) return "";
-  const suffix = h >= 12 ? "PM" : "AM";
-  const h12 = h % 12 || 12;
-  return `${h12}:${String(m).padStart(2, "0")} ${suffix}`;
+  if (!Number.isFinite(h) || h < 0 || h > 23 || m < 0 || m > 59) return "";
+  return `${String(Math.trunc(h)).padStart(2, "0")}:${String(Math.trunc(m)).padStart(2, "0")}`;
+}
+
+function hour24(hour: number, minute: number, mark: string | undefined, inferred: "AM" | "PM" | null): string {
+  if (!Number.isFinite(hour) || !Number.isFinite(minute) || minute < 0 || minute > 59) return "";
+  let h = hour;
+  const ap = (mark || inferred || "").toUpperCase();
+  if (!ap) {
+    if (h < 0 || h > 23) return "";
+    return clockLabel(h, minute);
+  }
+  if (h < 0 || h > 12) return "";
+  if (ap === "PM" && h < 12) h += 12;
+  if (ap === "AM" && h === 12) h = 0;
+  return clockLabel(h, minute);
+}
+
+/** Canonical day text is 24-hour `HH:MM–HH:MM`, with `; ` between periods, or `Closed`. */
+export function canonicalizeDayHours(raw: string): string {
+  const text = normText(raw).replace(/[\u2009\u202f\u00a0]/g, " ");
+  if (!text) return "";
+  if (closedToken(text) || (/\bclosed\b/i.test(text) && !/\d{1,2}[:.]\d{2}/.test(text))) return "Closed";
+  const ranges: string[] = [];
+  const re = /(\d{1,2})[:.](\d{2})\s*(am|pm)?\s*[-–—]\s*(\d{1,2})[:.](\d{2})\s*(am|pm)?/gi;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(text))) {
+    const openMark = match[3];
+    const closeMark = match[6];
+    const openHour = Number(match[1]);
+    const closeHour = Number(match[4]);
+    let inferOpen: "AM" | "PM" | null = null;
+    let inferClose: "AM" | "PM" | null = null;
+    if (!openMark && closeMark) {
+      inferClose = closeMark.toUpperCase() === "AM" ? "AM" : "PM";
+      inferOpen = openHour > closeHour ? "AM" : inferClose;
+    } else if (openMark && !closeMark) {
+      inferClose = openMark.toUpperCase() === "AM" ? "AM" : "PM";
+    }
+    const open = hour24(openHour, Number(match[2]), openMark, inferOpen);
+    const close = hour24(closeHour, Number(match[5]), closeMark, inferClose);
+    if (open && close) ranges.push(`${open}–${close}`);
+  }
+  return ranges.join("; ");
 }
 
 function weekFromPeriods(periods: unknown): Record<WeekdayId, string> {
@@ -171,7 +212,7 @@ function weekFromPeriods(periods: unknown): Record<WeekdayId, string> {
     if (!openLabel) continue;
     sawPeriod = true;
     const closeLabel = close ? clockLabel(close.hour, close.minute) : "";
-    week[day] = appendPeriod(week[day], closeLabel ? `${openLabel} – ${closeLabel}` : openLabel);
+    week[day] = appendPeriod(week[day], closeLabel ? `${openLabel}–${closeLabel}` : openLabel);
   }
   if (!sawPeriod) return emptyWeek();
   for (const day of WEEKDAY_IDS) {
@@ -185,7 +226,7 @@ function populatedCount(week: Record<WeekdayId, string>): number {
 }
 
 function isReliableWeek(week: Record<WeekdayId, string>): boolean {
-  return populatedCount(week) > 0;
+  return populatedCount(week) === WEEKDAY_IDS.length;
 }
 
 function weeksMatch(a: Record<WeekdayId, string>, b: Record<WeekdayId, string>): boolean {
@@ -233,6 +274,43 @@ function asStringList(raw: unknown): string[] {
   return [];
 }
 
+export function hasReliableImportedWeek(raw: unknown): boolean {
+  return isReliableWeek(parseImportedWeeklyHours(raw));
+}
+
+/** Visible weekday table. Returns a seven-day summary only when every day is explicit. */
+export function extractStructuredOpeningHoursText(raw: string): string {
+  const text = normText(String(raw || "").replace(/<[^>]+>/g, " ")).replace(/[\u2009\u202f\u00a0]/g, " ");
+  if (!text) return "";
+  const re = new RegExp(`\\b(${DAY_TOKEN_RE})\\b`, "gi");
+  const hits: Array<{ day: WeekdayId; index: number; length: number }> = [];
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(text))) {
+    const day = DAY_ALIAS[String(match[1] || "").toLowerCase()];
+    if (!day) continue;
+    hits.push({ day, index: match.index, length: String(match[1] || "").length });
+  }
+  if (!hits.length) return "";
+  const week = emptyWeek();
+  const seen = new Set<WeekdayId>();
+  for (let i = 0; i < hits.length; i++) {
+    const hit = hits[i]!;
+    if (seen.has(hit.day)) return "";
+    seen.add(hit.day);
+    const start = hit.index + hit.length;
+    const end = hits[i + 1]?.index ?? Math.min(text.length, start + 180);
+    if (end - start > 180) return "";
+    const canonical = canonicalizeDayHours(text.slice(start, end));
+    if (!canonical) return "";
+    week[hit.day] = canonical;
+  }
+  if (!isReliableWeek(week)) return "";
+  const first = hits[0]!.index;
+  const last = hits[hits.length - 1]!.index;
+  if (last - first > 800) return "";
+  return WEEKDAY_IDS.map((id) => `${DAY_LABEL[id]}: ${week[id]}`).join("\n");
+}
+
 export function parseImportedWeeklyHours(raw: unknown): Record<WeekdayId, string> {
   if (!raw) return emptyWeek();
   if (raw && typeof raw === "object" && !Array.isArray(raw)) {
@@ -245,6 +323,10 @@ export function parseImportedWeeklyHours(raw: unknown): Record<WeekdayId, string
   }
   const fromLines = weekFromLines(asStringList(raw));
   if (isReliableWeek(fromLines)) return fromLines;
+  if (typeof raw === "string") {
+    const structured = weekFromLines(extractStructuredOpeningHoursText(raw).split("\n"));
+    if (isReliableWeek(structured)) return structured;
+  }
   return emptyWeek();
 }
 
@@ -260,18 +342,24 @@ function weekFromProfileDays(days?: Partial<Record<OpeningHourDayKey, string>> |
 export function resolveBusinessProfileWeeklyHours(input: {
   googleIntelOpeningHours?: unknown;
   googleSnapshotOpeningHours?: unknown;
+  supplementalGoogleOpeningHours?: unknown;
   websiteSnapshotOpeningHours?: unknown;
   websiteIntelligenceOpeningHours?: unknown;
   websiteDayHours?: Partial<Record<OpeningHourDayKey, string>> | null;
+  profileDayHours?: Partial<Record<OpeningHourDayKey, string>> | null;
 }): WeeklyOpeningHoursEvidence {
   const googleWeekCandidates = [
     parseImportedWeeklyHours(input.googleSnapshotOpeningHours),
     parseImportedWeeklyHours(input.googleIntelOpeningHours),
   ];
-  const googleWeek = googleWeekCandidates.reduce(
+  let googleWeek = googleWeekCandidates.reduce(
     (best, next) => (populatedCount(next) > populatedCount(best) ? next : best),
     emptyWeek(),
   );
+  if (!isReliableWeek(googleWeek)) {
+    const supplemental = parseImportedWeeklyHours(input.supplementalGoogleOpeningHours);
+    if (isReliableWeek(supplemental)) googleWeek = supplemental;
+  }
   const websiteWeekCandidates = [
     parseImportedWeeklyHours(input.websiteIntelligenceOpeningHours),
     parseImportedWeeklyHours(input.websiteSnapshotOpeningHours),
@@ -289,16 +377,30 @@ export function resolveBusinessProfileWeeklyHours(input: {
   const googleSummary = googleReliable ? formatWeeklyHoursSummary(googleWeek) : null;
   const websiteSummary = websiteReliable ? formatWeeklyHoursSummary(websiteWeek) : null;
 
-  if (googleReliable && websiteReliable && !weeksMatch(googleWeek, websiteWeek)) {
+  if (googleReliable && websiteReliable && weeksMatch(googleWeek, websiteWeek)) {
     return {
-      source: "conflict",
-      sourceBadge: "Imported from Google",
+      source: "corroborated",
+      sourceBadge: "Google and website agree",
       days: toDays(googleWeek),
       googleDays,
       websiteDays,
       googleSummary,
       websiteSummary,
       recommendedSummary: googleSummary,
+      googleReliable,
+      websiteReliable,
+    };
+  }
+  if (googleReliable && websiteReliable && !weeksMatch(googleWeek, websiteWeek)) {
+    return {
+      source: "conflict",
+      sourceBadge: "Google and website differ",
+      days: toDays(emptyWeek()),
+      googleDays,
+      websiteDays,
+      googleSummary,
+      websiteSummary,
+      recommendedSummary: null,
       googleReliable,
       websiteReliable,
     };
@@ -329,6 +431,22 @@ export function resolveBusinessProfileWeeklyHours(input: {
       recommendedSummary: websiteSummary,
       googleReliable,
       websiteReliable,
+    };
+  }
+  const profileWeek = weekFromProfileDays(input.profileDayHours);
+  if (isReliableWeek(profileWeek)) {
+    const summary = formatWeeklyHoursSummary(profileWeek);
+    return {
+      source: "product_owner",
+      sourceBadge: "Entered by Product Owner",
+      days: toDays(profileWeek),
+      googleDays: null,
+      websiteDays: null,
+      googleSummary: null,
+      websiteSummary: null,
+      recommendedSummary: summary,
+      googleReliable: false,
+      websiteReliable: false,
     };
   }
   return {

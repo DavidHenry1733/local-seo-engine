@@ -97,7 +97,7 @@ async function fixtures() {
   record("parse-seven-days", parsedGoogle.monday && parsedGoogle.sunday === "Closed", `Sunday=${parsedGoogle.sunday}`);
   record(
     "parse-split-thursday",
-    parsedGoogle.thursday.includes("8:30 AM – 1:00 PM") && parsedGoogle.thursday.includes("2:00 PM – 6:00 PM"),
+    parsedGoogle.thursday.includes("08:30–13:00") && parsedGoogle.thursday.includes("14:00–18:00"),
     parsedGoogle.thursday,
   );
   record("parse-closed-sunday", parsedGoogle.sunday === "Closed", parsedGoogle.sunday);
@@ -108,7 +108,7 @@ async function fixtures() {
       { open: { day: 1, hour: 18, minute: 0 }, close: { day: 1, hour: 20, minute: 0 } },
     ],
   });
-  record("parse-periods-closed-fill", fromPeriods.sunday === "Closed" && fromPeriods.monday.includes("9:00 AM"), fromPeriods.monday);
+  record("parse-periods-closed-fill", fromPeriods.sunday === "Closed" && fromPeriods.monday.includes("09:00–17:30"), fromPeriods.monday);
 
   const websiteLines = [
     "Monday: 9:00 AM – 5:00 PM",
@@ -220,7 +220,7 @@ async function fixtures() {
     googleField?.reviewTier === "needs_confirmation" && googleField?.commercialActionLabel === "Confirm hours",
     `${String(googleField?.reviewTier)} / ${String(googleField?.commercialActionLabel)}`,
   );
-  record("google-closed-and-split", weekly?.days?.some((d) => d.day === "Sunday" && d.hours === "Closed") && weekly.days.some((d) => d.day === "Thursday" && d.hours.includes("2:00 PM")), "closed+split preserved");
+  record("google-closed-and-split", weekly?.days?.some((d) => d.day === "Sunday" && d.hours === "Closed") && weekly.days.some((d) => d.day === "Thursday" && d.hours.includes("14:00–18:00")), "closed+split preserved");
 
   saveBusinessProfileReviewField(SLUG, "openingHoursSummary", { action: "confirm", finalValue: String(googleField?.recommendedValue || "") }, "validator");
   const afterConfirm = buildBusinessProfileReview(SLUG);
@@ -229,7 +229,7 @@ async function fixtures() {
   record("blocker-cleared", confirmed?.reviewTier === "verified" && confirmed?.requiresAction === false, String(confirmed?.reviewTier));
   record(
     "persisted-after-refresh",
-    persisted.openingHoursSunday === "Closed" && persisted.openingHoursMonday.includes("8:30 AM") && persisted.openingHoursThursday.includes("2:00 PM"),
+    persisted.openingHoursSunday === "Closed" && persisted.openingHoursMonday.includes("08:30") && persisted.openingHoursThursday.includes("14:00"),
     `Sun=${persisted.openingHoursSunday} Thu=${persisted.openingHoursThursday}`,
   );
 

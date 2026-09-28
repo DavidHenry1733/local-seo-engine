@@ -404,8 +404,36 @@ export async function fetchEnrichedGoogleImportCandidate(
 function formatWeekdayDescriptions(hours: Record<string, unknown> | undefined): string[] {
   if (!hours) return [];
   const desc = hours.weekdayDescriptions;
-  if (Array.isArray(desc)) return desc.map(String).filter(Boolean);
-  return [];
+  if (Array.isArray(desc)) {
+    const lines = desc.map(String).filter(Boolean);
+    if (lines.length) return lines;
+  }
+  const periods = hours.periods;
+  if (!Array.isArray(periods)) return [];
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  return periods
+    .map((row) => {
+      const period = row as { open?: { day?: number; hour?: number; minute?: number }; close?: { hour?: number; minute?: number } };
+      if (!period.open) return "";
+      const day = days[Number(period.open.day)] || "";
+      const open = `${String(period.open.hour ?? "").padStart(2, "0")}:${String(period.open.minute ?? 0).padStart(2, "0")}`;
+      if (!period.close) return day ? `${day}: ${open}` : "";
+      const close = `${String(period.close.hour ?? "").padStart(2, "0")}:${String(period.close.minute ?? 0).padStart(2, "0")}`;
+      return day ? `${day}: ${open}–${close}` : "";
+    })
+    .filter(Boolean);
+}
+
+/** Read opening hours for an already confirmed Place ID. Does not write a profile. */
+export async function readPlaceOpeningHours(placeId: string): Promise<Record<string, unknown> | null> {
+  const { place } = await fetchPlaceRecord(placeId);
+  const regular = place?.regularOpeningHours;
+  if (!regular || typeof regular !== "object") return null;
+  const record = regular as Record<string, unknown>;
+  const descriptions = Array.isArray(record.weekdayDescriptions) ? record.weekdayDescriptions.filter(Boolean) : [];
+  const periods = Array.isArray(record.periods) ? record.periods : [];
+  if (!descriptions.length && !periods.length) return null;
+  return record;
 }
 
 function mapPlaceToCandidate(p: Record<string, unknown>): Omit<CustomerSetupGoogleCandidate, "confidence" | "distanceKm" | "distanceLabel"> {

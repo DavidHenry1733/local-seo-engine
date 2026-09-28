@@ -129,7 +129,7 @@ import {
 } from "../../../../../src/pharmacy/masterAdminGenerationSetupService.ts";
 import { hydrateLocalCoverageGoogleLocalities } from "../../../../../src/pharmacy/masterAdminLocalCoverageRecommendationService.ts";
 import { persistComponentDnaFromBrandEvidence } from "../../../../../src/pharmacy/masterAdminComponentDnaPersistenceService.ts";
-import { buildBusinessProfileReview, acceptAllSafeRecommendations, saveBusinessProfileReviewField } from "../../../../../src/pharmacy/masterAdminBusinessProfileReviewService.ts";
+import { buildBusinessProfileReview, acceptAllSafeRecommendations, loadSupplementalGoogleOpeningHours, saveBusinessProfileReviewField } from "../../../../../src/pharmacy/masterAdminBusinessProfileReviewService.ts";
 import { confirmManualOnboardingBrandSource } from "../../../../../src/pharmacy/masterAdminGoogleLaterBrandEvidence.ts";
 import { runMasterAdminCapabilityAudit } from "../../../../../src/pharmacy/masterAdminCapabilityAuditService.ts";
 import {
@@ -420,9 +420,10 @@ router.post("/master-admin-platform/local-coverage/accept-recommended", async (r
   }
 });
 
-router.get("/master-admin-platform/customers/:slug/business-profile-review", (req, res) => {
+router.get("/master-admin-platform/customers/:slug/business-profile-review", async (req, res) => {
   const slug = safeAdminSlug(req.params.slug);
-  const review = buildBusinessProfileReview(slug);
+  const supplementalGoogleOpeningHours = await loadSupplementalGoogleOpeningHours(slug);
+  const review = buildBusinessProfileReview(slug, { supplementalGoogleOpeningHours });
   if (review.loadError) {
     return res.status(500).json({ ok: false, error: review.loadError, review });
   }

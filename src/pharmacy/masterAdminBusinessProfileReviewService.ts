@@ -76,8 +76,10 @@ import {
   resolveBprFieldApplicability,
   type BprApplicabilityContext,
 } from "./masterAdminBusinessProfileReviewApplicability.ts";
+import { readPlaceOpeningHours } from "./growthEngineCustomerSetupGoogleMatchService.ts";
 import {
   chosenWeeklyDays,
+  hasReliableImportedWeek,
   resolveBusinessProfileWeeklyHours,
   weeklyDaysToProfilePatch,
   type WeeklyOpeningHoursEvidence,
@@ -186,6 +188,7 @@ interface EvidenceContext {
   googleIntel: ReturnType<typeof readGoogleIntelligenceRecord>;
   websiteSummary: ReturnType<typeof buildWebsiteSourceSummary>;
   googleSummary: ReturnType<typeof buildGoogleSourceSummary>;
+  supplementalGoogleOpeningHours?: unknown;
 }
 
 function reviewPath(slug: string): string {
@@ -357,9 +360,10 @@ function resolveWeeklyHoursForCtx(ctx: EvidenceContext): WeeklyOpeningHoursEvide
   return resolveBusinessProfileWeeklyHours({
     googleIntelOpeningHours: ctx.googleIntel?.openingHours,
     googleSnapshotOpeningHours: googleSnap?.openingHours,
+    supplementalGoogleOpeningHours: ctx.supplementalGoogleOpeningHours,
     websiteSnapshotOpeningHours: ctx.websiteSnap.openingHours,
     websiteIntelligenceOpeningHours: intel?.business?.openingHours,
-    websiteDayHours: {
+    profileDayHours: {
       openingHoursMonday: ctx.profile.openingHoursMonday,
       openingHoursTuesday: ctx.profile.openingHoursTuesday,
       openingHoursWednesday: ctx.profile.openingHoursWednesday,
@@ -369,6 +373,21 @@ function resolveWeeklyHoursForCtx(ctx: EvidenceContext): WeeklyOpeningHoursEvide
       openingHoursSunday: ctx.profile.openingHoursSunday,
     },
   });
+}
+
+/** Live Google hours when the stored import has no reliable week. Does not write the profile. */
+export async function loadSupplementalGoogleOpeningHours(slug: string): Promise<unknown | null> {
+  const data = readSetupProfile(slug);
+  const snap = data.googleImportSnapshot as { openingHours?: unknown; placeId?: string } | null | undefined;
+  const intel = readGoogleIntelligenceRecord(slug);
+  if (hasReliableImportedWeek(snap?.openingHours) || hasReliableImportedWeek(intel?.openingHours)) return null;
+  const placeId = String(data.googlePlaceId || snap?.placeId || "").trim();
+  if (!placeId) return null;
+  try {
+    return await readPlaceOpeningHours(placeId);
+  } catch {
+    return null;
+  }
 }
 
 function persistConfirmedWeeklyHours(
@@ -388,7 +407,7 @@ function persistConfirmedWeeklyHours(
   });
 }
 
-function buildEvidenceContext(slug: string): EvidenceContext {
+function buildEvidenceContext(slug: string, supplementalGoogleOpeningHours?: unknown): EvidenceContext {
   reconcileConfirmedGoogleImportPersistence(slug);
   const profile = readSetupProfile(slug);
   const websiteSnap = (profile.websiteImportSnapshot || {}) as Record<string, unknown>;
@@ -400,6 +419,7 @@ function buildEvidenceContext(slug: string): EvidenceContext {
     googleIntel,
     websiteSummary: buildWebsiteSourceSummary(slug),
     googleSummary: buildGoogleSourceSummary(slug),
+    supplementalGoogleOpeningHours,
   };
 }
 
@@ -625,7 +645,12 @@ const FIELD_SPECS: FieldSpec[] = [
     regulatory: false,
     website: (c) => resolveWeeklyHoursForCtx(c).websiteSummary,
     google: (c) => resolveWeeklyHoursForCtx(c).googleSummary,
-    canonical: (c) => normText(c.profile.openingHours || c.profile.displayOpeningHours) || null,
+    canonical: (c) => {
+      const summary = normText(c.profile.openingHours || c.profile.displayOpeningHours);
+      if (summary) return summary;
+      const weekly = resolveWeeklyHoursForCtx(c);
+      return weekly.source === "product_owner" ? weekly.recommendedSummary : null;
+    },
     recommend: (c) => {
       const weekly = resolveWeeklyHoursForCtx(c);
       if (weekly.source === "conflict") {
@@ -1314,14 +1339,17 @@ function buildSummary(
   };
 }
 
-export function buildBusinessProfileReview(slug: string): BusinessProfileReviewPayload {
+export function buildBusinessProfileReview(
+  slug: string,
+  options?: { supplementalGoogleOpeningHours?: unknown },
+): BusinessProfileReviewPayload {
   try {
-    let ctx = buildEvidenceContext(slug);
+    let ctx = buildEvidenceContext(slug, options?.supplementalGoogleOpeningHours);
     const store = readReviewStore(slug);
     let fields = buildFields(ctx, store);
     const merged = mergeCanonicalProfileFromImports(slug, fields);
     if (merged) {
-      ctx = buildEvidenceContext(slug);
+      ctx = buildEvidenceContext(slug, options?.supplementalGoogleOpeningHours);
       fields = buildFields(ctx, store);
     }
     const missingSources = collectMissingSourceEvidence(ctx);
