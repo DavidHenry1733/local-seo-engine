@@ -535,6 +535,8 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
         <button class="btn secondary" type="button" id="openIerBtn" onclick="openImportedEvidenceReview()" style="margin-top:8px;width:100%;font-size:.78rem">Open Imported Evidence Review</button>
         <div class="ud-action-row" id="udIntelligenceActionRow"><button class="cir-btn-review" type="button" id="openCirBtn" onclick="openCommercialIntelligenceReview()" style="margin-top:8px;display:none">Open Commercial Intelligence</button></div>
         <p class="ud-section-lead" id="udIntelligenceLead" style="display:none"></p>
+        <button class="btn" type="button" id="udOpenEvidenceReviewBtn" onclick="openServicePageEvidenceReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Evidence Review</button>
+        <div id="udReviewStatus" class="ud-link-list"></div>
         <button class="cqr-btn-review" type="button" id="openCqrBtn" onclick="openCommercialQualityReview()" style="margin-top:8px;display:none">Open Quality Review</button>
         <button class="cqr-btn-review" type="button" id="openClusterReviewBtn" onclick="openClusterPageReview()" style="margin-top:8px;display:none">Review Locality Pages</button>
         <button class="mp-btn-review" type="button" id="openMpBtn" onclick="openManagedPublishing()" style="margin-top:8px;display:none">Open Managed Publishing</button>
@@ -3110,6 +3112,18 @@ function renderCustomerDetail(c){
     cqrBtn.style.display=(atCqr&&!customerAtCoreProductRecovery(c)&&!customerAtCprClusterReview(c))?'block':'none';
     cqrBtn.textContent='Open Quality Review';
   }
+  const canonicalNext=String(c.nextAction||'');
+  const reviewEl=document.getElementById('udReviewStatus');
+  if(reviewEl){
+    if(canonicalNext==='Open Evidence Review'){
+      reviewEl.innerHTML='<div class="ud-static"><strong>Current stage</strong><span class="meta">'+esc(stageDisplayLabel(c)||'Generate Ecosystem')+'</span></div>'+'<div class="ud-static"><strong>Next required action</strong><span class="meta">'+esc(canonicalNext)+'</span></div>'+'<div class="ud-static"><strong>Open issues</strong><span class="meta">'+esc(String(c.outstandingIssues||0))+'</span></div>';
+    }else{
+      reviewEl.innerHTML='';
+    }
+  }
+  const evidenceBtn=document.getElementById('udOpenEvidenceReviewBtn');
+  if(evidenceBtn)evidenceBtn.style.display=canonicalNext==='Open Evidence Review'?'block':'none';
+  if(canonicalNext==='Open Evidence Review'&&cqrBtn)cqrBtn.style.display='none';
   const clusterReviewBtn=document.getElementById('openClusterReviewBtn');
   if(clusterReviewBtn){
     clusterReviewBtn.style.display=customerAtCprClusterReview(c)?'block':'none';
