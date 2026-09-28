@@ -90,6 +90,8 @@ export interface GrowthEngineCompetitorSnapshot {
   /** Set when the latest discovery attempt failed (live data only — no demo fallback). */
   placesError?: GooglePlacesConnectionError | null;
   lastDiscoverAttemptAt?: string;
+  /** Hash of the qualified local competitor set this snapshot was built from. */
+  qualificationRevision?: string;
 }
 
 function str(v: unknown): string {
@@ -235,5 +237,6 @@ export function normalizeCompetitorSnapshot(raw: unknown): GrowthEngineCompetito
         ? (doc.placesError as GooglePlacesConnectionError)
         : null,
     lastDiscoverAttemptAt: str(doc.lastDiscoverAttemptAt) || undefined,
+    qualificationRevision: str(doc.qualificationRevision) || undefined,
   };
 }

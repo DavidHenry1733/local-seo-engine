@@ -11,7 +11,9 @@ import { websiteImportStageComplete } from "./masterAdminWebsiteBranchSelectionS
 import {
   isCommercialIntelligenceApproved,
   isGrowthIntelligenceGenerated,
+  isGrowthIntelligenceQualificationStale,
   isLocalMarketIntelligenceGenerated,
+  isLocalMarketQualificationStale,
   approveCommercialIntelligence,
   runCompetitorAnalysisWorkflowAction,
   runLocalMarketIntelligenceWorkflowAction,
@@ -233,6 +235,7 @@ export async function executeWorkflowStageAction(
 /** Local Market completion follows the stored snapshot, and a snapshot older than the current Business Profile approval is not current. */
 export function isCurrentLocalMarketIntelligence(slug: string): boolean {
   if (!isLocalMarketIntelligenceGenerated(slug)) return false;
+  if (isLocalMarketQualificationStale(slug)) return false;
   const snap = loadCompetitorSnapshot(slug);
   const approval = readLatestApprovalSnapshot(slug);
   if (approval?.approvedAt && snap?.generatedAt && snap.generatedAt < approval.approvedAt) return false;
@@ -273,7 +276,10 @@ export function verifyStageCompletion(stageId: WorkflowStageId, ctx: MasterAdmin
     case "local_market_intelligence":
       return isCurrentLocalMarketIntelligence(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
     case "generate_growth_intelligence":
-      return isGrowthIntelligenceGenerated(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
+      return (
+        (isGrowthIntelligenceGenerated(ctx.slug) && !isGrowthIntelligenceQualificationStale(ctx.slug)) ||
+        legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated)
+      );
     case "commercial_intelligence":
       return isCommercialIntelligenceWorkflowStageComplete(ctx);
     case "generate_ecosystem":

@@ -26,6 +26,9 @@ import {
   isCommercialIntelligenceReadyForReview,
   isLocalMarketIntelligenceGenerated,
   isGrowthIntelligenceGenerated,
+  isLocalMarketQualificationStale,
+  isGrowthIntelligenceQualificationStale,
+  commercialEvidenceQualificationRevision,
   findActiveCommercialIntelligenceJob,
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
 import {
@@ -259,7 +262,16 @@ export interface CommercialIntelligenceDashboard {
     yourPharmacy: ClassifiedOrganicSearchEvidenceRow[];
     verifiedLocalCompetitorMatches: ClassifiedOrganicSearchEvidenceRow[];
     widerOrganicLandscape: ClassifiedOrganicSearchEvidenceRow[];
+    organicCommercialCompetitors: ClassifiedOrganicSearchEvidenceRow[];
+    authoritativeInformational: ClassifiedOrganicSearchEvidenceRow[];
+    irrelevantResults: ClassifiedOrganicSearchEvidenceRow[];
     rows: ClassifiedOrganicSearchEvidenceRow[];
+  };
+  qualificationDependency: {
+    localMarketStale: boolean;
+    growthIntelligenceStale: boolean;
+    revision: string;
+    message: string | null;
   };
   combinedCompetitorAnalysisStatus: "completed" | "partial" | "failed" | "pending";
   staleCompletion: {
@@ -1127,6 +1139,9 @@ function buildOrganicSearchEvidence(
     yourPharmacy: classified.yourPharmacy,
     verifiedLocalCompetitorMatches: classified.verifiedLocalCompetitorMatches,
     widerOrganicLandscape: classified.widerOrganicLandscape,
+    organicCommercialCompetitors: classified.rows.filter((row) => row.evidenceClass === "ORGANIC_COMMERCIAL_COMPETITOR"),
+    authoritativeInformational: classified.rows.filter((row) => row.evidenceClass === "AUTHORITATIVE_INFORMATIONAL"),
+    irrelevantResults: classified.rows.filter((row) => row.evidenceClass === "IRRELEVANT"),
     rows: classified.rows,
   };
 }
@@ -1308,12 +1323,28 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
   const approved = isCommercialIntelligenceApproved(slug);
   const approval = readCommercialIntelligenceApproval(slug);
   const { blockingIssues, recommendations } = classifyIssues(slug, ready, locality, competitor, visibility);
+  const qualificationDependency = {
+    localMarketStale: isLocalMarketQualificationStale(slug),
+    growthIntelligenceStale: isGrowthIntelligenceQualificationStale(slug),
+    revision: commercialEvidenceQualificationRevision(slug),
+    message: null as string | null,
+  };
+  if (qualificationDependency.localMarketStale || qualificationDependency.growthIntelligenceStale) {
+    qualificationDependency.message =
+      "Qualified local competitors changed. Local Market Intelligence and Growth Intelligence require explicit regeneration before approval.";
+    blockingIssues.push({
+      title: "Derived intelligence is stale",
+      detail: qualificationDependency.message,
+    });
+  }
   const evidenceComplete =
     locality.available &&
     competitor.generated &&
     competitor.competitors.length > 0 &&
     isLocalMarketIntelligenceGenerated(slug) &&
     isGrowthIntelligenceGenerated(slug) &&
+    !qualificationDependency.localMarketStale &&
+    !qualificationDependency.growthIntelligenceStale &&
     blockingIssues.every((b) => !/locality|Competitor Analysis|cross-tenant/i.test(b.title));
 
   let status: CommercialIntelligenceDashboard["status"] = "pending_generation";
@@ -1333,7 +1364,7 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
     statusLabel,
     generated,
     approved,
-    canApprove: ready && evidenceComplete && !approved,
+    canApprove: ready && evidenceComplete && !approved && !qualificationDependency.localMarketStale && !qualificationDependency.growthIntelligenceStale,
     canGenerateEcosystem: approved && !isAuthorisedEcosystemQualityReviewReady(slug),
     activeAction: approved ? "generate_approved_ecosystem" : "approve_intelligence",
     legacyAutoAdvance: isLegacyAutoAdvance(slug),
@@ -1349,6 +1380,7 @@ export function buildCommercialIntelligenceDashboard(slug: string): CommercialIn
     analysisProviders,
     organicSearchCompetitors,
     organicSearchEvidence,
+    qualificationDependency,
     combinedCompetitorAnalysisStatus,
     staleCompletion,
     canGenerateCompetitorAnalysis: !isCombinedCompetitorAnalysisStored(slug) || staleCompletion.flagged,

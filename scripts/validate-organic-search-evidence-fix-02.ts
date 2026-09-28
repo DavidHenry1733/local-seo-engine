@@ -111,7 +111,9 @@ async function main() {
     "Required evidence sections are present",
     pageSrc.includes(">Your Pharmacy<") &&
       pageSrc.includes(">Verified Local Competitor Matches<") &&
-      pageSrc.includes(">Wider Organic Landscape<"),
+      pageSrc.includes(">Organic commercial competitors<") &&
+      pageSrc.includes(">Authoritative and informational results<") &&
+      !pageSrc.includes("widerOrganicRows"),
   );
   record(
     "Old organic-search competitors heading is gone",
@@ -119,7 +121,7 @@ async function main() {
   );
   record(
     "Google/local competitor table, Google Profile Metrics and Gap Analysis remain",
-    pageSrc.includes("<h4>Google/local competitors</h4>") &&
+    pageSrc.includes("<h4>Local competitors</h4>") &&
       pageSrc.includes("<h4>Google Profile Metrics</h4>") &&
       pageSrc.includes("<h4>Gap Analysis</h4>") &&
       pageSrc.includes("<th>Competitor</th><th>Rating</th><th>Reviews</th><th>Distance</th>"),
@@ -130,11 +132,11 @@ async function main() {
       dashSrc.includes('label: "Google/local competitors"'),
   );
   record(
-    "Collection, job execution and Google metrics do not import evidence classification",
-    !/organicSearchEvidenceClassification/.test(organicSrc) &&
-      !/organicSearchEvidenceClassification/.test(pipelineSrc) &&
-      !/organicSearchEvidenceClassification/.test(workflowSrc) &&
-      !/organicSearchEvidenceClassification/.test(metricsSrc),
+    "Canonical qualifier is the shared authority for collection, workflow and Google metrics",
+    /qualifyCommercialEvidenceCandidate/.test(organicSrc) &&
+      /qualifyCommercialEvidenceCandidate/.test(workflowSrc) &&
+      /qualifyCommercialEvidenceCandidate/.test(metricsSrc) &&
+      !/searchNationalGoogleOrganic/.test(pipelineSrc + workflowSrc),
   );
   record(
     "Classification is presentation-only and does not call DataForSEO",

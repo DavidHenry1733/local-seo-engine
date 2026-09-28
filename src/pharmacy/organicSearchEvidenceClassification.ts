@@ -1,11 +1,70 @@
 /**
- * FIX-02 — classify stored DataForSEO organic-search rows as supporting evidence.
+ * Canonical commercial-evidence qualification.
  *
- * Presentation only. Does not collect, persist, or rewrite stored rows.
- * Google Places remains the only source of nearby physical competitors.
- * Tenant and verified Google competitors are matched by canonical website domain only.
+ * Google Places remains the authority for nearby physical competitors.
+ * DataForSEO rows stay stored as raw search evidence and are classified
+ * at read time. This module does not collect or rewrite provider artifacts.
  */
+import { isDirectCommunityPharmacyCompetitor } from "./pharmacyCompetitorDiscovery.ts";
+
 export const ORGANIC_SEARCH_EVIDENCE_HEADING = "Organic Search Evidence — DataForSEO" as const;
+
+export const COMMERCIAL_EVIDENCE_CLASSES = [
+  "LOCAL_COMMERCIAL_COMPETITOR",
+  "ORGANIC_COMMERCIAL_COMPETITOR",
+  "AUTHORITATIVE_INFORMATIONAL",
+  "IRRELEVANT",
+] as const;
+
+export type CommercialEvidenceClass = (typeof COMMERCIAL_EVIDENCE_CLASSES)[number];
+export type CommercialEvidenceConfidence = "high" | "medium" | "low";
+
+export interface CommercialEvidenceCandidate {
+  name?: string;
+  domain?: string;
+  host?: string;
+  url?: string;
+  position?: number | null;
+  matchedQuery?: string;
+  title?: string;
+  description?: string;
+  provider?: string;
+  source?: string;
+  capturedAt?: string | null;
+  sourceRevision?: string | null;
+  placeId?: string | null;
+  primaryCategory?: string | null;
+  categories?: string[];
+  distanceKm?: number | null;
+  discoveryAccepted?: boolean;
+  verifiedLocalDomains?: string[];
+}
+
+export interface CommercialEvidenceQualification {
+  evidenceClass: CommercialEvidenceClass;
+  confidence: CommercialEvidenceConfidence;
+  qualificationReason: string;
+  evidenceUsed: string[];
+  domain: string;
+  url: string;
+  query: string;
+  position: number | null;
+  title: string;
+  description: string;
+  provider: string;
+  capturedAt: string | null;
+  sourceRevision: string | null;
+}
+
+const EXCLUDED_NON_PHARMACY = /\b(restaurant|cafe|coffee|bar|pub|school|gym|hotel|museum|hospital|dentist|doctor|supermarket|grocery)\b/i;
+const PHARMACY_IDENTITY = /\b(pharmac(?:y|ies)|chemists?|drugstore)\b/i;
+const DOCUMENT_URL = /\.pdf(?:$|\?)|\/pdf\/|content\/pdf/i;
+const ACADEMIC_DOCUMENT = /\b(cited by|springer nature|doi\.org|journal article)\b/i;
+const UNRELATED_MEDIA = /\b(album|metascore|instrumental remix|practical electronics|radio history)\b/i;
+const DIRECTORY_INTENT = /\/find-a-service\/|\/find-a-pharmacy|search results/i;
+const NEWS_ARTICLE = /\/news\/\d+/i;
+const BLOG_ONLY = /\/blog\//i;
+const COMMERCIAL_SERVICE = /\b(book|appointment|service|branch|clinic)\b/i;
 
 export type OrganicSearchEvidenceSection =
   | "your_pharmacy"
@@ -64,6 +123,10 @@ export interface ClassifiedOrganicSearchEvidenceRow {
   landscapeKind: OrganicSearchLandscapeKind;
   classificationLabel: string;
   matchedCompetitorName: string | null;
+  evidenceClass: CommercialEvidenceClass | null;
+  confidence: CommercialEvidenceConfidence | null;
+  qualificationReason: string;
+  evidenceUsed: string[];
 }
 
 export interface OrganicSearchEvidenceClassification {
@@ -262,6 +325,164 @@ function isTenantDomain(domain: string, tenantDomains: string[], pharmacyName?: 
   return isOwnBusinessDomain(domain, tenantDomains, pharmacyName);
 }
 
+function result(
+  input: CommercialEvidenceCandidate,
+  evidenceClass: CommercialEvidenceClass,
+  confidence: CommercialEvidenceConfidence,
+  qualificationReason: string,
+  evidenceUsed: string[],
+): CommercialEvidenceQualification {
+  const domain = canonicalWebsiteDomain(input.domain || input.host || input.url);
+  return {
+    evidenceClass,
+    confidence,
+    qualificationReason,
+    evidenceUsed,
+    domain,
+    url: clean(input.url),
+    query: clean(input.matchedQuery),
+    position: Number.isFinite(input.position as number) ? (input.position as number) : input.position ?? null,
+    title: clean(input.title || input.name),
+    description: clean(input.description),
+    provider: clean(input.provider || input.source),
+    capturedAt: input.capturedAt || null,
+    sourceRevision: input.sourceRevision || null,
+  };
+}
+
+function pharmacyIdentity(input: CommercialEvidenceCandidate, blob: string): boolean {
+  const categories = (input.categories || []).join(" ");
+  const primary = clean(input.primaryCategory);
+  if (PHARMACY_IDENTITY.test(categories) || PHARMACY_IDENTITY.test(primary)) return true;
+  if (PHARMACY_IDENTITY.test(clean(input.name)) || PHARMACY_IDENTITY.test(clean(input.title)) || /pharmacy|chemist/.test(canonicalWebsiteDomain(input.domain || input.host || input.url))) {
+    return true;
+  }
+  if (!primary) return false;
+  return isDirectCommunityPharmacyCompetitor({
+    name: input.name || input.title,
+    primaryCategory: primary,
+  });
+}
+
+function excludedNonPharmacy(input: CommercialEvidenceCandidate, blob: string): boolean {
+  if (pharmacyIdentity(input, blob)) return false;
+  const primary = clean(input.primaryCategory);
+  return EXCLUDED_NON_PHARMACY.test(blob) || EXCLUDED_NON_PHARMACY.test(primary);
+}
+
+function googlePlacesCandidate(input: CommercialEvidenceCandidate): boolean {
+  return /google-places/i.test(clean(input.source || input.provider));
+}
+
+export function countsTowardLocalBenchmark(evidenceClass: CommercialEvidenceClass | null): boolean {
+  return evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR";
+}
+
+export function countsTowardOrganicAnalysis(evidenceClass: CommercialEvidenceClass | null): boolean {
+  return evidenceClass === "ORGANIC_COMMERCIAL_COMPETITOR";
+}
+
+export function countsTowardCommercialCompetitorTotal(evidenceClass: CommercialEvidenceClass | null): boolean {
+  return evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR" || evidenceClass === "ORGANIC_COMMERCIAL_COMPETITOR";
+}
+
+export function countsTowardOpportunityScoring(evidenceClass: CommercialEvidenceClass | null): boolean {
+  return evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR";
+}
+
+export function qualifyCommercialEvidenceCandidate(
+  input: CommercialEvidenceCandidate,
+): CommercialEvidenceQualification {
+  const domain = canonicalWebsiteDomain(input.domain || input.host || input.url);
+  const blob = [input.name, input.title, input.description, input.url, domain, input.primaryCategory, ...(input.categories || [])]
+    .map((part) => clean(part))
+    .join(" ");
+  const used = [clean(input.provider || input.source) || "stored evidence", clean(input.matchedQuery), clean(input.url), clean(input.title)].filter(Boolean);
+
+  if (googlePlacesCandidate(input)) {
+    const placeId = clean(input.placeId);
+    if (!placeId || placeId.startsWith("demo-")) {
+      return result(input, "IRRELEVANT", "low", "Google Places row has no verified place identity.", [...used, "missing place id"]);
+    }
+    if (excludedNonPharmacy(input, blob)) {
+      return result(input, "IRRELEVANT", "high", "Google Places result is not a pharmacy competitor.", [...used, "excluded non-pharmacy type"]);
+    }
+    if (pharmacyIdentity(input, blob) || input.discoveryAccepted) {
+      const corroborated = pharmacyIdentity(input, blob);
+      return result(
+        input,
+        "LOCAL_COMMERCIAL_COMPETITOR",
+        corroborated ? "high" : "medium",
+        corroborated
+          ? "Google Places pharmacy identity with a physical place."
+          : "Nearby business retained by pharmacy discovery with a physical place.",
+        [...used, corroborated ? "pharmacy identity" : "pharmacy discovery acceptance", input.distanceKm != null ? "distance" : ""].filter(Boolean),
+      );
+    }
+    return result(input, "IRRELEVANT", "medium", "Google Places result is not a local commercial pharmacy competitor.", used);
+  }
+
+  const verified = (input.verifiedLocalDomains || []).some((item) => canonicalWebsiteDomain(item) === domain && domain);
+  if (verified) {
+    return result(
+      input,
+      "LOCAL_COMMERCIAL_COMPETITOR",
+      "high",
+      "Organic result matches a verified Google Places competitor domain.",
+      [...used, "verified local domain"],
+    );
+  }
+
+  if (DOCUMENT_URL.test(clean(input.url)) || ACADEMIC_DOCUMENT.test(blob) || UNRELATED_MEDIA.test(blob)) {
+    return result(input, "IRRELEVANT", "high", "Search result is a document or unrelated media page, not a commercial competitor.", [...used, "document or unrelated media"]);
+  }
+
+  if (matchesAny(domain, SOCIAL_DOMAIN_PATTERNS) && !pharmacyIdentity(input, blob)) {
+    return result(input, "IRRELEVANT", "high", "Social result is not a commercial pharmacy competitor.", [...used, "social result"]);
+  }
+
+  if (
+    matchesAny(domain, REGULATOR_DOMAIN_PATTERNS) ||
+    matchesAny(domain, NHS_COMMUNITY_DOMAIN_PATTERNS) ||
+    matchesAny(domain, DIRECTORY_DOMAIN_PATTERNS) ||
+    matchesAny(domain, PUBLISHER_DOMAIN_PATTERNS) ||
+    DIRECTORY_INTENT.test(blob) ||
+    NEWS_ARTICLE.test(clean(input.url))
+  ) {
+    return result(
+      input,
+      "AUTHORITATIVE_INFORMATIONAL",
+      isReservedLandscapeDomain(domain) ? "high" : "medium",
+      "Search result is authoritative, directory, or informational evidence, not a commercial pharmacy competitor.",
+      [...used, "authority or directory intent"],
+    );
+  }
+
+  if (BLOG_ONLY.test(clean(input.url)) && !COMMERCIAL_SERVICE.test(blob)) {
+    return result(input, "IRRELEVANT", "medium", "Blog-only page is not a local or commercial competitor.", [...used, "blog-only"]);
+  }
+
+  if (pharmacyIdentity(input, blob) || /pharmacy|chemist/.test(domain)) {
+    return result(
+      input,
+      "ORGANIC_COMMERCIAL_COMPETITOR",
+      COMMERCIAL_SERVICE.test(blob) || /pharmacy|chemist/.test(domain) ? "high" : "medium",
+      "Commercial pharmacy or provider website ranking organically, without verified nearby physical evidence.",
+      [...used, "pharmacy commercial identity", "no verified local place"],
+    );
+  }
+
+  return result(input, "IRRELEVANT", "medium", "Query-term overlap is not commercial competitor evidence.", [...used, "query-term coincidence"]);
+}
+
+export function commercialEvidenceClassLabel(evidenceClass: CommercialEvidenceClass | null): string {
+  if (evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR") return "Local commercial competitor";
+  if (evidenceClass === "ORGANIC_COMMERCIAL_COMPETITOR") return "Organic commercial competitor";
+  if (evidenceClass === "AUTHORITATIVE_INFORMATIONAL") return "Authoritative / informational";
+  if (evidenceClass === "IRRELEVANT") return "Irrelevant";
+  return "Own pharmacy";
+}
+
 export function classifyOrganicSearchEvidence(input: {
   tenantWebsiteUrls: Array<string | null | undefined>;
   verifiedGoogleCompetitorWebsites: VerifiedGoogleCompetitorWebsite[];
@@ -293,6 +514,23 @@ export function classifyOrganicSearchEvidence(input: {
       matchedCompetitorName = verified.name;
     }
 
+    const qualification = tenant
+      ? null
+      : qualifyCommercialEvidenceCandidate({
+          name: row.name,
+          domain,
+          host,
+          url: row.url,
+          position: row.position,
+          matchedQuery: row.matchedQuery,
+          title: row.title || row.name,
+          description: row.description,
+          provider: row.provider,
+          source: row.source || row.provider,
+          capturedAt: row.capturedAt,
+          verifiedLocalDomains: verified ? [domain] : [],
+        });
+
     classified.push({
       name: clean(row.title || row.name || row.domain) || "Not available",
       domain,
@@ -310,6 +548,10 @@ export function classifyOrganicSearchEvidence(input: {
       landscapeKind,
       classificationLabel: landscapeLabel(landscapeKind, matchedCompetitorName),
       matchedCompetitorName,
+      evidenceClass: qualification?.evidenceClass || null,
+      confidence: qualification?.confidence || null,
+      qualificationReason: qualification?.qualificationReason || "Own pharmacy search appearance is not a competitor candidate.",
+      evidenceUsed: qualification?.evidenceUsed || ["tenant website"],
     });
   }
 

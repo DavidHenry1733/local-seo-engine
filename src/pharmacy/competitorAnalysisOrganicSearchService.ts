@@ -28,6 +28,7 @@ import {
   readNationalCompetitorDiscovery,
   writeNationalCompetitorDiscovery,
 } from "./nationalCompetitorDiscoveryStorageService.ts";
+import { qualifyCommercialEvidenceCandidate } from "./organicSearchEvidenceClassification.ts";
 
 export const ORGANIC_SEARCH_PROVIDER_ID = "dataforseo-google-organic-live" as const;
 export const ORGANIC_RESULT_LIMIT = 10;
@@ -160,25 +161,77 @@ function persistOrganicRun(
     generatedAt: capturedAt,
     queries,
     candidates: existing?.candidates || [],
-    qualifiedCompetitors: run.competitors.map((c, index): NationalCompetitorDiscoveryCandidate => ({
-      id: `organic-${index + 1}-${c.host || c.domain}`,
-      name: c.title || c.domain,
-      domain: c.domain,
-      websiteUrl: c.url,
-      marketCountry: run.locationName,
-      targetCustomerMarket: "organic-search competitors",
-      source: "search-engine",
-      sourceQuery: c.matchedQuery || null,
-      qualification: "qualified",
-      qualificationReasons: [c.overlapEvidence],
-      rejectionReasons: [],
-      serviceEvidence: [],
-      title: c.title || null,
-      description: c.description || null,
-      evidenceUrls: c.url ? [c.url] : [],
-      capturedAt: c.capturedAt,
-    })),
-    rejectedCandidates: existing?.rejectedCandidates || [],
+    qualifiedCompetitors: run.competitors.flatMap((c, index): NationalCompetitorDiscoveryCandidate[] => {
+      const qualification = qualifyCommercialEvidenceCandidate({
+        name: c.title || c.domain,
+        domain: c.domain,
+        host: c.host,
+        url: c.url,
+        position: c.position,
+        matchedQuery: c.matchedQuery,
+        title: c.title,
+        description: c.description,
+        provider: c.provider,
+        source: "search-engine",
+        capturedAt: c.capturedAt,
+      });
+      if (qualification.evidenceClass !== "ORGANIC_COMMERCIAL_COMPETITOR") return [];
+      return [{
+        id: `organic-${index + 1}-${c.host || c.domain}`,
+        name: c.title || c.domain,
+        domain: c.domain,
+        websiteUrl: c.url,
+        marketCountry: run.locationName,
+        targetCustomerMarket: "organic-search competitors",
+        source: "search-engine",
+        sourceQuery: c.matchedQuery || null,
+        qualification: "qualified",
+        qualificationReasons: [qualification.qualificationReason],
+        rejectionReasons: [],
+        serviceEvidence: [],
+        title: c.title || null,
+        description: c.description || null,
+        evidenceUrls: c.url ? [c.url] : [],
+        capturedAt: c.capturedAt,
+      }];
+    }),
+    rejectedCandidates: [
+      ...(existing?.rejectedCandidates || []).filter((candidate) => !String(candidate.id || "").startsWith("organic-raw-")),
+      ...run.competitors.flatMap((c, index): NationalCompetitorDiscoveryCandidate[] => {
+        const qualification = qualifyCommercialEvidenceCandidate({
+          name: c.title || c.domain,
+          domain: c.domain,
+          host: c.host,
+          url: c.url,
+          position: c.position,
+          matchedQuery: c.matchedQuery,
+          title: c.title,
+          description: c.description,
+          provider: c.provider,
+          source: "search-engine",
+          capturedAt: c.capturedAt,
+        });
+        if (qualification.evidenceClass === "ORGANIC_COMMERCIAL_COMPETITOR") return [];
+        return [{
+          id: `organic-raw-${index + 1}-${c.host || c.domain}`,
+          name: c.title || c.domain,
+          domain: c.domain,
+          websiteUrl: c.url,
+          marketCountry: run.locationName,
+          targetCustomerMarket: "organic-search evidence",
+          source: "search-engine",
+          sourceQuery: c.matchedQuery || null,
+          qualification: "rejected",
+          qualificationReasons: qualification.evidenceUsed,
+          rejectionReasons: [`${qualification.evidenceClass}: ${qualification.qualificationReason}`],
+          serviceEvidence: [],
+          title: c.title || null,
+          description: c.description || null,
+          evidenceUrls: c.url ? [c.url] : [],
+          capturedAt: c.capturedAt,
+        }];
+      }),
+    ],
     status:
       run.status === "completed"
         ? "complete"

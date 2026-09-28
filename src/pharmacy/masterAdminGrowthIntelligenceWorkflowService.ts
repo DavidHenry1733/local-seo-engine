@@ -12,6 +12,7 @@ import {
   isCommercialIntelligenceApproved,
   isGrowthIntelligenceGenerated,
   isGrowthIntelligenceJobOutputComplete,
+  isGrowthIntelligenceQualificationStale,
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
 
 export interface GrowthIntelligenceWorkflowResult {
@@ -53,7 +54,7 @@ export function runGrowthIntelligenceWorkflowAction(
     };
   }
 
-  if (isGrowthIntelligenceGenerated(slug)) {
+  if (isGrowthIntelligenceGenerated(slug) && !isGrowthIntelligenceQualificationStale(slug)) {
     const existing = loadGrowthOpportunityReport(slug);
     return {
       ok: true,

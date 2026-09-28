@@ -6,6 +6,10 @@ import fs from "node:fs";
 import path from "node:path";
 import type { GrowthEngineCompetitorSnapshot } from "./growthEngineCompetitorModel.ts";
 import { realGoogleCompetitors } from "./growthEngineLocalMarketAnalysis.ts";
+import {
+  countsTowardOpportunityScoring,
+  qualifyCommercialEvidenceCandidate,
+} from "./organicSearchEvidenceClassification.ts";
 import { loadCompetitorSnapshot } from "./growthEngineLocalMarketService.ts";
 import {
   buildGrowthPlanRecommendation,
@@ -88,7 +92,21 @@ function buildGooglePlacesOpportunities(snapshot: GrowthEngineCompetitorSnapshot
   if (!snapshot?.analysis || snapshot.analysis.dataSource !== "google-places-live") return [];
 
   const yours = snapshot.yourPharmacy;
-  const pool = realGoogleCompetitors(snapshot.competitors);
+  const pool = realGoogleCompetitors(snapshot.competitors).filter((competitor) =>
+    countsTowardOpportunityScoring(
+      qualifyCommercialEvidenceCandidate({
+        name: competitor.businessName,
+        source: competitor.source || "google-places",
+        provider: "google-places",
+        placeId: competitor.placeId,
+        primaryCategory: competitor.primaryCategory,
+        categories: [competitor.primaryCategory, ...(competitor.secondaryCategories || [])],
+        distanceKm: competitor.distanceKm,
+        url: competitor.website,
+        discoveryAccepted: /google-places/i.test(competitor.source || ""),
+      }).evidenceClass,
+    ),
+  );
   if (!yours || !pool.length) return [];
 
   const confidence = googleConfidence(pool.length);

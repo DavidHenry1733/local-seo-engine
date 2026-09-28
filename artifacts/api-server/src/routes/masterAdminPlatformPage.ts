@@ -3746,7 +3746,9 @@ function renderCommercialIntelligenceDashboard(dashboard){
   const organicEvidence=dashboard.organicSearchEvidence||{};
   const yourPharmacyRows=organicEvidence.yourPharmacy||[];
   const verifiedOrganicRows=organicEvidence.verifiedLocalCompetitorMatches||[];
-  const widerOrganicRows=organicEvidence.widerOrganicLandscape||[];
+  const organicCommercialRows=organicEvidence.organicCommercialCompetitors||[];
+  const authoritativeRows=organicEvidence.authoritativeInformational||[];
+  const qualificationDependency=dashboard.qualificationDependency||{};
   const stale=dashboard.staleCompletion||{};
   const canGenerate=Boolean(dashboard.canGenerateCompetitorAnalysis);
   const generateDisabled=Boolean(dashboard.activeCompetitorAnalysisJobId);
@@ -3756,7 +3758,7 @@ function renderCommercialIntelligenceDashboard(dashboard){
     (providers.length?providers.map(function(p){return '<p class="ci-narrative"><strong>'+esc(p.label)+':</strong> '+esc(p.statusLabel)+(p.capturedAt?' · '+fmt(p.capturedAt):'')+' · '+esc(p.source||'')+(p.error?'<br><span style="color:#fca5a5">'+esc(p.error)+'</span>':'')+'</p>';}).join(''):'<p class="ci-narrative">Provider status unavailable.</p>')+
     '<p class="ci-narrative" style="font-size:.72rem;color:#94a3b8">Opening this dashboard does not start analysis. Generate queues one orchestrate_competitor_analysis job that runs Google Places local discovery and the existing DataForSEO organic-search adapter.</p></div>';
   const staleHtml=stale.flagged?'<div class="guidance-box" style="margin-bottom:10px">'+esc(stale.message||'Commercial Intelligence is marked complete, but Competitor Analysis evidence is missing.')+'</div>':'';
-  const googleHtml='<div class="ci-section"><h4>Google/local competitors</h4>'+staleHtml+
+  const googleHtml='<div class="ci-section"><h4>Local competitors</h4><p class="ci-narrative">Qualified local commercial competitors from Google Places. Organic search results are not included in these counts, ratings, or review benchmarks.</p>'+staleHtml+
     '<p class="ci-narrative"><strong>Analysis status:</strong> '+(ca.generated?'Generated':'Not generated')+(ca.evidenceTimestamp?' · '+fmt(ca.evidenceTimestamp):'')+' · '+esc(ca.discoverySource||'Google Places')+'</p>'+
     (dashboard.locality?.provenanceLabel?'<p class="ci-narrative" style="font-size:.72rem;color:#94a3b8">Locality: '+esc(dashboard.locality.provenanceLabel)+'</p>':'')+
     (ca.generated?'<h5 style="font-size:.78rem;color:#cbd5e1;margin:8px 0 4px">Competitor Summary</h5>'+compSummary:'')+
@@ -3766,17 +3768,19 @@ function renderCommercialIntelligenceDashboard(dashboard){
   function organicEvidenceTable(rows){
     if(!rows.length) return '';
     return '<table class="audit-table"><thead><tr><th>Domain</th><th>URL</th><th>Position</th><th>Matched query</th><th>Title</th><th>Description</th><th>Evidence</th><th>Source</th><th>Captured</th><th>Classification</th></tr></thead><tbody>'+
-      rows.map(c=>'<tr><td>'+esc(c.domain||c.host||'')+'</td><td>'+esc(c.url||'')+'</td><td>'+esc(c.position==null?'':String(c.position))+'</td><td>'+esc(c.matchedQuery||'')+'</td><td>'+esc(c.title||c.name||'')+'</td><td>'+esc(c.description||'')+'</td><td>'+esc(c.evidence||'')+'</td><td>'+esc(c.source||'')+'</td><td>'+esc(c.capturedAt?fmt(c.capturedAt):'')+'</td><td>'+esc(c.classificationLabel||'')+'</td></tr>').join('')+'</tbody></table>';
+      rows.map(c=>'<tr><td>'+esc(c.domain||c.host||'')+'</td><td>'+esc(c.url||'')+'</td><td>'+esc(c.position==null?'':String(c.position))+'</td><td>'+esc(c.matchedQuery||'')+'</td><td>'+esc(c.title||c.name||'')+'</td><td>'+esc(c.description||'')+'</td><td>'+esc(c.evidence||'')+'</td><td>'+esc(c.source||'')+'</td><td>'+esc(c.capturedAt?fmt(c.capturedAt):'')+'</td><td>'+esc(c.evidenceClass==='LOCAL_COMMERCIAL_COMPETITOR'?'Local commercial competitor':c.evidenceClass==='ORGANIC_COMMERCIAL_COMPETITOR'?'Organic commercial competitor':c.evidenceClass==='AUTHORITATIVE_INFORMATIONAL'?'Authoritative / informational':c.evidenceClass==='IRRELEVANT'?'Irrelevant':(c.classificationLabel||''))+'</td></tr>').join('')+'</tbody></table>';
   }
   const organicGenerated=Boolean(organicEvidence.generated||organic.generated||(organicEvidence.rows||[]).length);
   const organicHtml='<div class="ci-section"><h4>Organic Search Evidence — DataForSEO</h4>'+
     '<p class="ci-narrative"><strong>Analysis status:</strong> '+esc(organicEvidence.statusLabel||organic.statusLabel||(organicGenerated?'completed':'not generated'))+(organicEvidence.capturedAt||organic.capturedAt?' · '+fmt(organicEvidence.capturedAt||organic.capturedAt):'')+' · '+esc(organicEvidence.provider||organic.provider||'dataforseo-google-organic-live')+(organicEvidence.locationName||organic.locationName?' · '+esc(organicEvidence.locationName||organic.locationName):'')+(organicEvidence.languageCode||organic.languageCode?' · '+esc(organicEvidence.languageCode||organic.languageCode):'')+'</p>'+
-    '<p class="ci-narrative" style="font-size:.72rem;color:#94a3b8">Google Places remains the only source of nearby physical competitors. These rows are stored organic-search evidence, matched by canonical website domain only.</p>'+
+    '<p class="ci-narrative" style="font-size:.72rem;color:#94a3b8">These rows are stored organic-search evidence. Only organic commercial competitors are commercial competitors. Authoritative and directory results are separate. Irrelevant results stay in raw evidence and are not shown here.</p>'+
     ((organicEvidence.error||organic.error)?'<p class="ci-narrative" style="color:#fca5a5">'+esc(organicEvidence.error||organic.error)+'</p>':'')+
+    (qualificationDependency.message?'<div class="guidance-box">'+esc(qualificationDependency.message)+'</div>':'')+
     (organicGenerated?
       '<h5 style="font-size:.78rem;color:#cbd5e1;margin:8px 0 4px">Your Pharmacy</h5>'+(yourPharmacyRows.length?organicEvidenceTable(yourPharmacyRows):'<p class="ci-narrative">No tenant pages appeared in the stored organic-search results.</p>')+
       '<h5 style="font-size:.78rem;color:#cbd5e1;margin:8px 0 4px">Verified Local Competitor Matches</h5>'+(verifiedOrganicRows.length?organicEvidenceTable(verifiedOrganicRows):'<p class="ci-narrative">No stored organic-search rows match a verified Google Places competitor website domain.</p>')+
-      '<h5 style="font-size:.78rem;color:#cbd5e1;margin:8px 0 4px">Wider Organic Landscape</h5>'+(widerOrganicRows.length?organicEvidenceTable(widerOrganicRows):'<p class="ci-narrative">No wider organic-search landscape rows were stored.</p>'):
+      '<h5 style="font-size:.78rem;color:#cbd5e1;margin:8px 0 4px">Organic commercial competitors</h5>'+(organicCommercialRows.length?organicEvidenceTable(organicCommercialRows):'<p class="ci-narrative">No organic commercial competitors were qualified.</p>')+
+      '<h5 style="font-size:.78rem;color:#cbd5e1;margin:8px 0 4px">Authoritative and informational results</h5>'+(authoritativeRows.length?organicEvidenceTable(authoritativeRows):'<p class="ci-narrative">No authoritative or informational results were stored.</p>'):
     '<p class="ci-narrative"><strong>Organic Search Evidence — DataForSEO not yet generated</strong></p><p class="ci-narrative">Organic-search domains are not treated as nearby physical pharmacies unless Google Places separately verifies that relationship.</p>'+(ca.generated||canGenerate?generateBtn:''))+'</div>';
   const compHtml=providerHtml+googleHtml+organicHtml;
   const traffic=dashboard.trafficOpportunity||{};
@@ -3799,7 +3803,7 @@ function renderCommercialIntelligenceDashboard(dashboard){
     '<div style="margin-top:12px"><button class="btn secondary" type="button" onclick="closeCommercialIntelligenceReview()">Close Dashboard</button></div>';
   panelEl.innerHTML=
     '<h4>Commercial Decision</h4>'+
-    '<p style="font-size:.76rem;color:#94a3b8;line-height:1.5;margin-bottom:10px">Review all intelligence above, then approve one commercial decision to continue.</p>'+
+    '<p style="font-size:.76rem;color:#94a3b8;line-height:1.5;margin-bottom:10px">Approval applies to qualified local competitors and classified organic evidence. Raw search results that are irrelevant are not commercial competitors.</p>'+
     (dashboard.approval&&dashboard.approval.approvedAt?'<div class="guidance-box" style="font-size:.72rem">Approved '+fmt(dashboard.approval.approvedAt)+(dashboard.approval.approvedBy?' by '+esc(dashboard.approval.approvedBy):'')+'</div>':'')+
     '<button class="cqr-approve-btn" type="button" id="cirApproveBtn" onclick="approveCommercialIntelligenceReview()" '+(dashboard.canApprove?'':'disabled')+'>Approve Intelligence</button>'+
     (dashboard.approved?'<button class="cqr-publish-btn" type="button" id="cirGenerateBtn" onclick="openCommercialEcosystemGenerationFromCi()">Generate Approved Ecosystem</button>':'')+

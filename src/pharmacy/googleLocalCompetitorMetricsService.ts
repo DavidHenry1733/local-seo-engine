@@ -18,6 +18,7 @@ import {
   evidenceBackedPhotoCount,
   isInferredGoogleCategorySet,
 } from "./googleLocalCompetitorEvidence.ts";
+import { qualifyCommercialEvidenceCandidate } from "./organicSearchEvidenceClassification.ts";
 
 export interface GoogleLocalProfileMetric {
   id: string;
@@ -115,7 +116,19 @@ export function googleLocalMetricRecords(
 ): GoogleLocalMetricRecord[] {
   if (!artifact) return [];
   if (artifact.kind === "intelligence") {
-    return artifact.intel.competitors.map((c) => {
+    return artifact.intel.competitors.filter((c) =>
+      qualifyCommercialEvidenceCandidate({
+        name: c.name,
+        source: c.source || artifact.source,
+        provider: "google-places",
+        placeId: c.placeId,
+        primaryCategory: c.primaryType,
+        categories: c.categories,
+        distanceKm: c.distanceKm,
+        url: c.website,
+        discoveryAccepted: true,
+      }).evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR",
+    ).map((c) => {
       const extra = c as {
         photoCount?: number | null;
         photos?: unknown;
@@ -136,7 +149,19 @@ export function googleLocalMetricRecords(
       };
     });
   }
-  return artifact.snap.competitors.map((c) => {
+  return artifact.snap.competitors.filter((c) =>
+    qualifyCommercialEvidenceCandidate({
+      name: c.businessName,
+      source: c.source || artifact.source,
+      provider: "google-places",
+      placeId: c.placeId,
+      primaryCategory: c.primaryCategory,
+      categories: [c.primaryCategory, ...(c.secondaryCategories || [])],
+      distanceKm: c.distanceKm,
+      url: c.website,
+      discoveryAccepted: true,
+    }).evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR",
+  ).map((c) => {
     const categoryCount =
       c.primaryCategory || (c.secondaryCategories || []).length
         ? 1 + (c.secondaryCategories || []).length

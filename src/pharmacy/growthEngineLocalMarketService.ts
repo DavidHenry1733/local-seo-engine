@@ -1,8 +1,10 @@
 /**
  * Growth Engine — Local Market Intelligence V1 (Google Places real data only).
  */
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { qualifyCommercialEvidenceCandidate } from "./organicSearchEvidenceClassification.ts";
 import {
   discoverCompetitors,
   isDirectCommunityPharmacyCompetitor,
@@ -491,15 +493,30 @@ function mapStoredCompetitorToLocalMarket(competitor: EnrichedCompetitor): Growt
  */
 export function deriveLocalMarketSnapshotFromStoredCompetitorAnalysis(
   slug: string,
+  options?: { rebuild?: boolean },
 ): GrowthEngineCompetitorSnapshot | null {
   const existing = loadCompetitorSnapshot(slug);
-  if (existing?.generatedAt && (existing.competitors.length > 0 || existing.analysis)) return existing;
+  if (!options?.rebuild && existing?.generatedAt && (existing.competitors.length > 0 || existing.analysis)) return existing;
 
   const intel = loadCompetitorIntelligence(slug);
   if (!intel || intel.source !== "google-places-live") return null;
   const competitors = intel.competitors
     .map(mapStoredCompetitorToLocalMarket)
-    .filter((row): row is GrowthEngineCompetitor => Boolean(row));
+    .filter((row): row is GrowthEngineCompetitor => Boolean(row))
+    .filter((row) =>
+      qualifyCommercialEvidenceCandidate({
+        name: row.businessName,
+        source: row.source,
+        provider: "google-places",
+        placeId: row.placeId,
+        primaryCategory: row.primaryCategory,
+        categories: [row.primaryCategory, ...(row.secondaryCategories || [])],
+        distanceKm: row.distanceKm,
+        url: row.website,
+        discoveryAccepted: true,
+        sourceRevision: intel.generatedAt,
+      }).evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR",
+    );
   if (!competitors.length) return null;
 
   const profileData = loadProfileDataForLocalMarket(slug);
@@ -546,6 +563,10 @@ export function deriveLocalMarketSnapshotFromStoredCompetitorAnalysis(
     },
     placesError: null,
     lastDiscoverAttemptAt: intel.generatedAt,
+    qualificationRevision: createHash("sha256")
+      .update(competitors.map((row) => row.placeId).filter(Boolean).sort().join("|"))
+      .digest("hex")
+      .slice(0, 16),
   };
   writeCompetitorSnapshot(snapshot);
   return snapshot;

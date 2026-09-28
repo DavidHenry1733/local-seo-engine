@@ -1,4 +1,6 @@
+import { createHash } from "node:crypto";
 import { isNationalGrowthPlatform } from "./growthPlatformResolverService.ts";
+import { qualifyCommercialEvidenceCandidate } from "./organicSearchEvidenceClassification.ts";
 /**
  * Master Admin — commercial intelligence workflow orchestration (wiring only).
  */
@@ -59,6 +61,50 @@ export function isGrowthIntelligenceGenerated(slug: string): boolean {
 
 export function isGrowthIntelligenceJobOutputComplete(slug: string): boolean {
   return isGrowthIntelligenceGenerated(slug);
+}
+
+export function qualifiedLocalCommercialPlaceIds(slug: string): string[] {
+  const intel = loadCompetitorIntelligence(slug);
+  if (!intel) return [];
+  return intel.competitors
+    .filter((competitor) =>
+      qualifyCommercialEvidenceCandidate({
+        name: competitor.name,
+        source: competitor.source || intel.source,
+        provider: "google-places",
+        placeId: competitor.placeId,
+        primaryCategory: competitor.primaryType,
+        categories: competitor.categories,
+        distanceKm: competitor.distanceKm,
+        url: competitor.website,
+        discoveryAccepted: true,
+        capturedAt: intel.generatedAt,
+        sourceRevision: intel.generatedAt,
+      }).evidenceClass === "LOCAL_COMMERCIAL_COMPETITOR",
+    )
+    .map((competitor) => competitor.placeId)
+    .filter(Boolean)
+    .sort();
+}
+
+export function commercialEvidenceQualificationRevision(slug: string): string {
+  return createHash("sha256").update(qualifiedLocalCommercialPlaceIds(slug).join("|")).digest("hex").slice(0, 16);
+}
+
+export function isLocalMarketQualificationStale(slug: string): boolean {
+  const snap = loadCompetitorSnapshot(slug);
+  const intel = loadCompetitorIntelligence(slug);
+  if (!snap?.generatedAt || !intel?.generatedAt) return false;
+  const qualified = qualifiedLocalCommercialPlaceIds(slug);
+  const stored = snap.competitors.map((competitor) => competitor.placeId).filter(Boolean).sort();
+  if (qualified.join("|") !== stored.join("|")) return true;
+  if (snap.qualificationRevision && snap.qualificationRevision !== commercialEvidenceQualificationRevision(slug)) return true;
+  return false;
+}
+
+export function isGrowthIntelligenceQualificationStale(slug: string): boolean {
+  if (!isGrowthIntelligenceGenerated(slug)) return false;
+  return isLocalMarketQualificationStale(slug);
 }
 
 /**
@@ -291,6 +337,28 @@ export async function runLocalMarketIntelligenceWorkflowAction(
       errors: [],
       idempotent: true,
       activeJobId: active.id,
+    };
+  }
+  if (isLocalMarketQualificationStale(slug)) {
+    const derived = deriveLocalMarketSnapshotFromStoredCompetitorAnalysis(slug, { rebuild: true });
+    if (!derived) {
+      return {
+        ok: false,
+        evidence: "Local Market Intelligence is stale and could not be rebuilt from qualified local competitors",
+        errors: ["Qualified local competitor evidence is missing"],
+      };
+    }
+    recordMasterAdminAudit({
+      user: operator,
+      slug,
+      action: "orchestrate_local_market_intelligence",
+      status: "success",
+      evidence: `Local Market Intelligence regenerated from qualified local competitors — ${derived.competitors.length} competitors`,
+    });
+    return {
+      ok: true,
+      evidence: `Local Market Intelligence regenerated from qualified local competitors — ${derived.competitors.length} competitors`,
+      errors: [],
     };
   }
   if (isLocalMarketIntelligenceGenerated(slug)) {
