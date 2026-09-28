@@ -3141,18 +3141,21 @@ function renderCustomerDetail(c){
   const btn=document.getElementById('continueWorkflowBtn');
   btn.style.display=(atCqr||atMp||atPublishReview||atCirReview||atCge||atIdx||atPerf||atCprJourney||customerAtServicePageReview(c))?'none':'block';
   btn.textContent=orch.continueLabel||'Continue Workflow';
-  if(customerStage(c)==='generate_growth_intelligence'){
+  const intelStage=customerStage(c);
+  if(intelStage==='competitor_analysis'||intelStage==='local_market_intelligence'||intelStage==='generate_growth_intelligence'){
+    const intelAction=orch.stageActionId||'';
+    const intelLabel=(c.nextAction&&c.nextAction!=='—')?c.nextAction:(orch.continueLabel||'Continue Workflow');
     if(cirBanner){
       cirBanner.style.display='block';
-      cirBanner.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap"><div><div style="font-weight:800;font-size:.88rem;margin-bottom:4px">Growth Intelligence</div><div style="font-size:.72rem;color:#c4b5fd">Business Profile is approved. Generate Growth Intelligence when you confirm. Generation does not start until you use that action.</div></div></div>';
+      cirBanner.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap"><div><div style="font-weight:800;font-size:.88rem;margin-bottom:4px">'+esc(intelLabel)+'</div><div style="font-size:.72rem;color:#c4b5fd">Business Profile is approved. '+esc(intelLabel)+' before Growth Intelligence. Generation does not start until you use that action.</div></div></div>';
     }
-    if(cirBtn){
+    if(cirBtn&&(intelAction==='orchestrate_competitor_analysis'||intelAction==='orchestrate_local_market_intelligence'||intelAction==='orchestrate_growth_intelligence')){
       cirBtn.style.display='inline-block';
-      cirBtn.textContent='Generate Growth Intelligence';
-      cirBtn.setAttribute('onclick','continueWorkflow("orchestrate_growth_intelligence")');
+      cirBtn.textContent=intelLabel;
+      cirBtn.setAttribute('onclick','continueWorkflow("'+intelAction+'")');
     }
     btn.style.display='block';
-    btn.textContent=(c.nextAction&&c.nextAction!=='—')?c.nextAction:'Generate Growth Intelligence';
+    btn.textContent=intelLabel;
   }
   btn.disabled=!orch.canContinue;
   const editOnboardingBtn=document.getElementById('editOnboardingSetupBtn');

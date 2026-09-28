@@ -77,6 +77,14 @@ function profile(name: string, branches: ReturnType<typeof branch>[]) {
     pharmacyName: name,
     website: `https://${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.test`,
     phone: "0141 111 1111",
+    email: "owner@example.test",
+    businessEmail: "owner@example.test",
+    townCity: "Paisley",
+    primaryTown: "Paisley",
+    country: "United Kingdom",
+    marketScope: "local",
+    primaryMarket: "Paisley",
+    googlePlaceId: "ChIJExample",
     postcode: branches[0]?.postcode || "",
     addressLine1: branches[0]?.addressLine1 || "",
     displayAddress: branches[0]?.addressLine1 || "",
@@ -122,7 +130,8 @@ async function main() {
   } = await import("../src/pharmacy/masterAdminBusinessProfileReviewService.ts");
   const { loadMasterAdminCustomerContext } = await import("../src/pharmacy/masterAdminCustomerContextService.ts");
   const { resolveWorkflowStage } = await import("../src/pharmacy/masterAdminWorkflowStageExecutor.ts");
-  const { resolveCommercialWorkflowNextAction } = await import("../src/pharmacy/masterAdminCommercialEcosystemGenerationService.ts");
+  const { buildCustomerWorkflowState } = await import("../src/pharmacy/masterAdminWorkflowEngine.ts");
+  const { runWorkflowPreflight } = await import("../src/pharmacy/masterAdminWorkflowOrchestrator.ts");
   const { resolveCanonicalWebsiteImportWorkflowState } = await import("../src/pharmacy/masterAdminWebsiteImportWorkflowStateService.ts");
   const { buildWebsiteSourceSummary } = await import("../src/pharmacy/masterAdminCanonicalWebsiteService.ts");
   const { isBranchSelectionBlocking } = await import("../src/pharmacy/masterAdminWebsiteBranchSelectionService.ts");
@@ -217,8 +226,17 @@ async function main() {
   record("2-approval-binds-hash", stored?.profileContentHash === approvedHash && Boolean(approvedHash), stored?.profileContentHash || "missing");
 
   const approvedStage = stageOf(slugs.approved);
-  const approvedAction = resolveCommercialWorkflowNextAction(slugs.approved, approvedStage);
-  record("3-approved-next-stage", approvedStage === "generate_growth_intelligence" && approvedAction === "Generate Growth Intelligence", `${approvedStage} / ${approvedAction}`);
+  const approvedWorkflow = buildCustomerWorkflowState(slugs.approved);
+  const approvedPreflight = runWorkflowPreflight(slugs.approved);
+  record(
+    "3-approved-next-stage",
+    approvedStage === "competitor_analysis" &&
+      approvedWorkflow?.nextAction?.label === "Generate Competitor Analysis" &&
+      approvedPreflight.ok === true &&
+      approvedPreflight.stageId === "competitor_analysis" &&
+      approvedPreflight.actionId === "orchestrate_competitor_analysis",
+    `${approvedStage} / ${approvedWorkflow?.nextAction?.label} / ${approvedPreflight.actionId}`,
+  );
 
   const openStage = stageOf(slugs.open);
   record("4-unapproved-blocks-intelligence", !isBusinessProfileReviewApproved(slugs.open) && openStage !== "generate_growth_intelligence", openStage);
@@ -268,8 +286,16 @@ async function main() {
   );
 
   const secondStage = stageOf(slugs.second);
-  const secondAction = resolveCommercialWorkflowNextAction(slugs.second, secondStage);
-  record("9-second-pharmacy-same-transition", secondStage === "generate_growth_intelligence" && secondAction === "Generate Growth Intelligence", `${secondStage} / ${secondAction}`);
+  const secondWorkflow = buildCustomerWorkflowState(slugs.second);
+  const secondPreflight = runWorkflowPreflight(slugs.second);
+  record(
+    "9-second-pharmacy-same-transition",
+    secondStage === "competitor_analysis" &&
+      secondWorkflow?.nextAction?.label === "Generate Competitor Analysis" &&
+      secondPreflight.stageId === approvedPreflight.stageId &&
+      secondPreflight.actionId === approvedPreflight.actionId,
+    `${secondStage} / ${secondWorkflow?.nextAction?.label}`,
+  );
 
   const page = fs.readFileSync(path.join(ROOT, "artifacts/api-server/src/routes/masterAdminPlatformPage.ts"), "utf8");
   record(

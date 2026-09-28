@@ -6,7 +6,7 @@ import { readSetupProfile, runSetupGoogleImport, runSetupWebsiteImport, writeSet
 import { runCustomerSetupConfirm } from "./growthEngineCustomerSetupConfirmService.ts";
 import { loadContentPackage, markContentPackageReviewed } from "./pharmacyContentPackageService.ts";
 import { writeWorkflowAcknowledgement } from "./masterAdminWorkflowAckService.ts";
-import { isBusinessProfileReviewApproved } from "./masterAdminBusinessProfileReviewService.ts";
+import { isBusinessProfileReviewApproved, readLatestApprovalSnapshot } from "./masterAdminBusinessProfileReviewService.ts";
 import { websiteImportStageComplete } from "./masterAdminWebsiteBranchSelectionService.ts";
 import {
   isCommercialIntelligenceApproved,
@@ -18,6 +18,7 @@ import {
   runLocalMarketIntelligenceWorkflowAction,
 } from "./masterAdminCommercialIntelligenceWorkflowService.ts";
 import { ensureLegacyAutoAdvance, isLegacyAutoAdvance, legacyIntelligenceStagesComplete } from "./masterAdminWorkflowLegacyService.ts";
+import { loadCompetitorSnapshot } from "./growthEngineLocalMarketService.ts";
 import type { MasterAdminCustomerContext } from "./masterAdminCustomerContextService.ts";
 import type { WorkflowStageId } from "./masterAdminWorkflowModel.ts";
 import { readOnboardingBatch } from "./masterAdminOnboardingBatchService.ts";
@@ -236,6 +237,15 @@ export async function executeWorkflowStageAction(
   }
 }
 
+/** Local Market completion follows the stored snapshot, and a snapshot older than the current Business Profile approval is not current. */
+export function isCurrentLocalMarketIntelligence(slug: string): boolean {
+  if (!isLocalMarketIntelligenceGenerated(slug)) return false;
+  const snap = loadCompetitorSnapshot(slug);
+  const approval = readLatestApprovalSnapshot(slug);
+  if (approval?.approvedAt && snap?.generatedAt && snap.generatedAt < approval.approvedAt) return false;
+  return true;
+}
+
 export function verifyStageCompletion(stageId: WorkflowStageId, ctx: MasterAdminCustomerContext): boolean {
   ensureLegacyAutoAdvance(ctx.slug);
   const data = ctx.data;
@@ -265,7 +275,7 @@ export function verifyStageCompletion(stageId: WorkflowStageId, ctx: MasterAdmin
     case "competitor_analysis":
       return isCompetitorAnalysisGenerated(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
     case "local_market_intelligence":
-      return isLocalMarketIntelligenceGenerated(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
+      return isCurrentLocalMarketIntelligence(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
     case "generate_growth_intelligence":
       return isGrowthIntelligenceGenerated(ctx.slug) || legacyIntelligenceStagesComplete(ctx.slug, ctx.contentGenerated);
     case "commercial_intelligence":
@@ -383,13 +393,6 @@ export function resolveWorkflowStage(ctx: MasterAdminCustomerContext): WorkflowS
       if (!shouldRunGoogleImport(state) && verifyStageCompletion("website_import", ctx)) {
         continue;
       }
-    }
-    if (
-      (stageId === "competitor_analysis" || stageId === "local_market_intelligence") &&
-      isBusinessProfileReviewApproved(ctx.slug) &&
-      !isGrowthIntelligenceGenerated(ctx.slug)
-    ) {
-      continue;
     }
     if (!verifyStageCompletion(stageId, ctx)) return stageId;
   }
