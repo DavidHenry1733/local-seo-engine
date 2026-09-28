@@ -135,6 +135,8 @@ export function buildLocalAreaRecommendations(slug: string): {
   marketScope?: string;
   primaryMarket?: string;
   localityStrategyActive?: boolean;
+  recommendationStatus?: string;
+  evidenceLimitation?: string | null;
 } {
   const safe = safePharmacySlug(slug);
   const profile = readSetupProfile(safe);
@@ -152,7 +154,15 @@ export function buildLocalAreaRecommendations(slug: string): {
   const { town, source: primaryTownSource } = resolvePrimaryTown(profile, safe);
   const coverage = buildLocalCoverageRecommendations(safe);
   if (!town && !coverage.branchLocality && !coverage.areas.length) {
-    return { primaryTown: "", primaryTownSource, areas: [], discoverySource: "none", localityStrategyActive: true };
+    return {
+      primaryTown: "",
+      primaryTownSource,
+      areas: [],
+      discoverySource: "none",
+      localityStrategyActive: true,
+      recommendationStatus: coverage.recommendationStatus,
+      evidenceLimitation: coverage.evidenceLimitation,
+    };
   }
 
   return {
@@ -163,6 +173,8 @@ export function buildLocalAreaRecommendations(slug: string): {
     marketScope: coverage.marketScope,
     primaryMarket: coverage.primaryMarket,
     localityStrategyActive: coverage.localityStrategyActive,
+    recommendationStatus: coverage.recommendationStatus,
+    evidenceLimitation: coverage.evidenceLimitation,
   };
 }
 

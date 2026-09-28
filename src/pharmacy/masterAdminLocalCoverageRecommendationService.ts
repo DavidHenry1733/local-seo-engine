@@ -16,16 +16,23 @@ import {
   getLocalCoverageGoogleClient,
   haversineKm,
   isVerifiedGeoPoint,
+  listRememberedLocalities,
   lookupLocalityCoordinates,
+  readStoredCompetitorSearchOrigin,
   rememberGeocodedLocality,
   resolvePharmacyGoogleLocation,
   roundDistanceKm,
   type GeocodedLocality,
-  type PharmacyGoogleLocation,
+  type LocalCoverageOrigin,
+  type LocalCoverageOriginSource,
 } from "./masterAdminLocalCoverageGeoService.ts";
+import fs from "node:fs";
+import path from "node:path";
 import { AREA_SUGGEST_LIMITS, type AreaSuggestLimit } from "./pharmacyAreaDiscoveryService.ts";
 import type { PharmacyProfileData, ProfileAreaEntry } from "./pharmacyProfileSchema.ts";
-import { safePharmacySlug } from "./pharmacyWorkspacePaths.ts";
+import { slugifyArea } from "./pharmacyAreaNarrativeProfiles.ts";
+import { hasGooglePlacesApiKey } from "./googlePlacesConnection.ts";
+import { safePharmacySlug, WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 
 export const LOCAL_COVERAGE_DEFAULT_LIMIT = 10;
 export const LOCAL_COVERAGE_DEFAULT_RECOMMENDATION_LIMIT = 8;
@@ -37,7 +44,7 @@ export interface LocalCoverageDistanceProvenance {
   pharmacy?: {
     latitude: number;
     longitude: number;
-    source: PharmacyGoogleLocation["source"];
+    source: LocalCoverageOriginSource;
     placeId: string;
   };
   locality?: {
@@ -74,6 +81,7 @@ export interface LocalCoverageRecommendationResult {
   localityStrategyActive?: boolean;
   pharmacyCoordinatesAvailable: boolean;
   evidenceLimitation: string | null;
+  recommendationStatus: "available" | "insufficient" | "failed" | "unavailable";
 }
 
 function text(value: unknown): string {
@@ -100,7 +108,7 @@ function unavailableProvenance(limitation: string): LocalCoverageDistanceProvena
 }
 
 function verifiedProvenance(
-  pharmacy: PharmacyGoogleLocation,
+  pharmacy: LocalCoverageOrigin,
   locality: GeocodedLocality,
 ): LocalCoverageDistanceProvenance {
   return {
@@ -122,7 +130,7 @@ function verifiedProvenance(
 }
 
 function measureDistance(
-  pharmacy: PharmacyGoogleLocation | null,
+  pharmacy: LocalCoverageOrigin | null,
   locality: GeocodedLocality | null,
 ): { km: number | null; label: string; provenance: LocalCoverageDistanceProvenance; limitation: string | null } {
   if (!pharmacy || !isVerifiedGeoPoint(pharmacy)) {
@@ -163,10 +171,11 @@ function catalogAreaNames(town: string): string[] {
 
 function collectCandidateNames(input: {
   slug: string;
-  pharmacy: PharmacyGoogleLocation | null;
+  pharmacy: LocalCoverageOrigin | null;
   profile: PharmacyProfileData;
   primaryTown: string;
   limit: number;
+  skipLiveNearbyDiscovery?: boolean;
 }): Array<{ areaName: string; areaType: string; source: string; branchLocality: boolean }> {
   const out: Array<{ areaName: string; areaType: string; source: string; branchLocality: boolean }> = [];
   const seen = new Set<string>();
@@ -197,7 +206,7 @@ function collectCandidateNames(input: {
   }
 
   const client = getLocalCoverageGoogleClient();
-  if (client && input.pharmacy) {
+  if (client && input.pharmacy && !input.skipLiveNearbyDiscovery) {
     for (const nearby of client.discoverNearbyLocalities({
       origin: input.pharmacy,
       branchLocality: branch,
@@ -219,6 +228,13 @@ function collectCandidateNames(input: {
     add(name, { areaType: "nearby locality", source: "google-places-geocode" });
   }
 
+  for (const remembered of listRememberedLocalities(input.slug)) {
+    add(remembered.areaName, {
+      areaType: "nearby locality",
+      source: remembered.source === "pharmacy-google-location" ? "stored-locality-evidence" : "google-places-nearby",
+    });
+  }
+
   for (const saved of input.profile.selectedAreas || []) {
     add(saved.areaName, {
       areaType: saved.areaType || "service area",
@@ -234,7 +250,7 @@ function toRecommendation(input: {
   areaType: string;
   source: string;
   branchLocality: boolean;
-  pharmacy: PharmacyGoogleLocation | null;
+  pharmacy: LocalCoverageOrigin | null;
   locality: GeocodedLocality | null;
   saved?: ProfileAreaEntry;
 }): LocalCoverageAreaRecommendation {
@@ -256,6 +272,68 @@ function toRecommendation(input: {
   };
 }
 
+const COORDINATES_PAUSED =
+  "Google coordinates were not available for this pharmacy. Automatic area recommendations are paused until location evidence is present. Manual area entry remains available.";
+
+interface PersistedLocalityRecommendation {
+  version: 1;
+  slug: string;
+  primaryTown: string;
+  originKey: string;
+  origin: LocalCoverageOrigin | null;
+  discoveredAt: string;
+  recommendationStatus: "available" | "insufficient" | "failed";
+  evidenceLimitation: string | null;
+  areas: Array<GeocodedLocality & { areaSlug?: string; evidenceSource?: string }>;
+}
+
+function recommendationCachePath(slug: string): string {
+  return path.join(WORKSPACE_ROOT, "data/pharmacy-local-coverage", `${safePharmacySlug(slug)}-recommendations.json`);
+}
+
+function localityOriginKey(origin: LocalCoverageOrigin | null, town: string): string {
+  const place = town.trim().toLowerCase();
+  if (!origin) return `none|${place}`;
+  return `${origin.latitude.toFixed(5)}|${origin.longitude.toFixed(5)}|${place}|${origin.source}`;
+}
+
+function readPersistedLocalityRecommendations(slug: string): PersistedLocalityRecommendation | null {
+  const file = recommendationCachePath(slug);
+  if (!fs.existsSync(file)) return null;
+  try {
+    const doc = JSON.parse(fs.readFileSync(file, "utf8")) as PersistedLocalityRecommendation;
+    if (doc?.version !== 1 || !Array.isArray(doc.areas)) return null;
+    return doc;
+  } catch {
+    return null;
+  }
+}
+
+function writePersistedLocalityRecommendations(doc: PersistedLocalityRecommendation): void {
+  const file = recommendationCachePath(doc.slug);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, JSON.stringify(doc, null, 2));
+}
+
+function restorePersistedLocalities(slug: string, doc: PersistedLocalityRecommendation | null): void {
+  if (!doc) return;
+  for (const area of doc.areas) {
+    if (!area?.areaName || !isVerifiedGeoPoint(area)) continue;
+    rememberGeocodedLocality(slug, {
+      areaName: area.areaName,
+      latitude: area.latitude,
+      longitude: area.longitude,
+      placeId: area.placeId || "",
+      formattedAddress: area.formattedAddress || "",
+      source: area.source || "google-places-geocode",
+    });
+  }
+}
+
+function resolveCoverageOrigin(slug: string, profile: PharmacyProfileData, town: string): LocalCoverageOrigin | null {
+  return resolvePharmacyGoogleLocation(slug, profile) || readStoredCompetitorSearchOrigin(slug, town);
+}
+
 export function buildLocalCoverageRecommendations(
   slug: string,
   options?: { limit?: number; recommendationLimit?: number },
@@ -274,11 +352,17 @@ export function buildLocalCoverageRecommendations(
       localityStrategyActive: false,
       pharmacyCoordinatesAvailable: false,
       evidenceLimitation: null,
+      recommendationStatus: "unavailable",
     };
   }
 
-  const pharmacy = resolvePharmacyGoogleLocation(safe, profile);
-  const primaryTown = text(profile.primaryTown) || text(profile.primaryCity) || text(profile.townCity) || text(pharmacy?.town);
+  const primaryTownHint = text(profile.primaryTown) || text(profile.primaryCity) || text(profile.townCity);
+  const persisted = readPersistedLocalityRecommendations(safe);
+  restorePersistedLocalities(safe, persisted);
+  const googleLocation = resolvePharmacyGoogleLocation(safe, profile);
+  const persistedOrigin = persisted?.origin && isVerifiedGeoPoint(persisted.origin) ? persisted.origin : null;
+  const pharmacy = googleLocation || persistedOrigin;
+  const primaryTown = primaryTownHint || text(pharmacy?.town);
   const primaryTownSource = text(profile.primaryTown) || text(profile.townCity)
     ? "approved profile"
     : pharmacy?.town
@@ -300,6 +384,7 @@ export function buildLocalCoverageRecommendations(
       localityStrategyActive: true,
       pharmacyCoordinatesAvailable: Boolean(pharmacy),
       evidenceLimitation: "Locality evidence unavailable",
+      recommendationStatus: "unavailable",
     };
   }
 
@@ -313,6 +398,7 @@ export function buildLocalCoverageRecommendations(
     profile,
     primaryTown,
     limit,
+    skipLiveNearbyDiscovery: persisted?.recommendationStatus === "available" && persisted.areas.length > 0,
   });
 
   const measured = candidates.map((candidate) => {
@@ -347,20 +433,32 @@ export function buildLocalCoverageRecommendations(
   }
 
   const pharmacyCoordinatesAvailable = Boolean(pharmacy && isVerifiedGeoPoint(pharmacy));
-  const evidenceLimitation = pharmacyCoordinatesAvailable
-    ? null
-    : "Google coordinates were not available for this pharmacy. Automatic area recommendations are paused until location evidence is present. Manual area entry remains available.";
+  const recommendedCount = measured.filter((area) => area.recommended).length;
+  let recommendationStatus: LocalCoverageRecommendationResult["recommendationStatus"] = "insufficient";
+  let evidenceLimitation: string | null = null;
+  if (recommendedCount > 0) {
+    recommendationStatus = "available";
+  } else if (!pharmacyCoordinatesAvailable) {
+    evidenceLimitation = persisted?.evidenceLimitation || COORDINATES_PAUSED;
+    recommendationStatus = persisted?.recommendationStatus === "failed" ? "failed" : "insufficient";
+  } else if (persisted?.evidenceLimitation) {
+    evidenceLimitation = persisted.evidenceLimitation;
+    recommendationStatus = persisted.recommendationStatus === "failed" ? "failed" : "insufficient";
+  } else {
+    evidenceLimitation = "No nearby locality evidence was found for the confirmed primary locality.";
+  }
 
   return {
     primaryTown: primaryTown || pharmacy?.branchLocality || "",
-    primaryTownSource,
+    primaryTownSource: persistedOrigin && !googleLocation ? "stored-competitor-search-origin" : primaryTownSource,
     branchLocality: pharmacy?.branchLocality || "",
     areas: measured,
-    discoverySource: "google-location-evidence",
+    discoverySource: persistedOrigin && !googleLocation ? "stored-locality-evidence" : "google-location-evidence",
     marketScope: "local_regional",
     localityStrategyActive: true,
     pharmacyCoordinatesAvailable,
     evidenceLimitation,
+    recommendationStatus,
   };
 }
 
@@ -371,41 +469,98 @@ export async function hydrateLocalCoverageGoogleLocalities(
   const safe = safePharmacySlug(slug);
   const profile = readSetupProfile(safe);
   if (isNationalMarketScope(safe, profile)) return;
-  const pharmacy = resolvePharmacyGoogleLocation(safe, profile);
-  if (!pharmacy || !isVerifiedGeoPoint(pharmacy)) return;
+  const town = text(profile.primaryTown) || text(profile.primaryCity) || text(profile.townCity);
+  const origin = resolveCoverageOrigin(safe, profile, town);
+  const key = localityOriginKey(origin, town || origin?.town || "");
+  const existing = readPersistedLocalityRecommendations(safe);
+  if (existing && existing.originKey === key) {
+    restorePersistedLocalities(safe, existing);
+    return;
+  }
+  if (!origin || !isVerifiedGeoPoint(origin)) return;
+
+  const canDiscover = Boolean(getLocalCoverageGoogleClient()) || hasGooglePlacesApiKey();
+  if (!canDiscover) return;
 
   const limit = normalizeLimit(options?.limit ?? LOCAL_COVERAGE_DEFAULT_LIMIT);
-  const regionHint = pharmacy.town || text(profile.primaryTown) || text(profile.townCity);
-  const names = new Set<string>();
-  if (pharmacy.branchLocality) names.add(pharmacy.branchLocality);
-
-  const nearby = await discoverNearbyLocalitiesViaGooglePlaces({
-    origin: pharmacy,
-    branchLocality: pharmacy.branchLocality || regionHint,
-    regionHint,
-    limit,
-  });
-  for (const locality of nearby) {
+  const regionHint = origin.town || town;
+  const discovered: GeocodedLocality[] = [];
+  const seen = new Set<string>();
+  const keep = (locality: GeocodedLocality | null) => {
+    if (!locality || !isVerifiedGeoPoint(locality) || !text(locality.areaName)) return;
+    const nameKey = areaKey(locality.areaName);
+    if (seen.has(nameKey)) return;
+    seen.add(nameKey);
     rememberGeocodedLocality(safe, locality);
-    names.add(locality.areaName);
+    discovered.push(locality);
+  };
+
+  try {
+    const nearby = await discoverNearbyLocalitiesViaGooglePlaces({
+      origin,
+      branchLocality: origin.branchLocality || regionHint,
+      regionHint,
+      limit,
+    });
+    for (const locality of nearby) keep(locality);
+
+    if (origin.source !== "stored-competitor-search-origin") {
+      const names = new Set<string>();
+      if (origin.branchLocality) names.add(origin.branchLocality);
+      for (const name of catalogAreaNames(regionHint)) names.add(name);
+      for (const saved of profile.selectedAreas || []) {
+        if (saved.areaName) names.add(saved.areaName);
+      }
+      for (const name of names) {
+        const known = lookupLocalityCoordinates(safe, name, origin);
+        if (known) {
+          keep(known);
+          continue;
+        }
+        keep(await geocodeLocalityViaGooglePlaces(name, origin, regionHint));
+      }
+    }
+  } catch {
+    writePersistedLocalityRecommendations({
+      version: 1,
+      slug: safe,
+      primaryTown: town || regionHint,
+      originKey: key,
+      origin,
+      discoveredAt: new Date().toISOString(),
+      recommendationStatus: "failed",
+      evidenceLimitation: "Nearby locality discovery failed. Manual area entry remains available.",
+      areas: [],
+    });
+    return;
   }
 
-  for (const name of catalogAreaNames(regionHint)) names.add(name);
-  for (const saved of profile.selectedAreas || []) {
-    if (saved.areaName) names.add(saved.areaName);
-  }
-
-  for (const name of names) {
-    if (lookupLocalityCoordinates(safe, name, pharmacy)) continue;
-    const geocoded = await geocodeLocalityViaGooglePlaces(name, pharmacy, regionHint);
-    if (geocoded) rememberGeocodedLocality(safe, geocoded);
-  }
+  writePersistedLocalityRecommendations({
+    version: 1,
+    slug: safe,
+    primaryTown: town || regionHint,
+    originKey: key,
+    origin,
+    discoveredAt: new Date().toISOString(),
+    recommendationStatus: discovered.length ? "available" : "insufficient",
+    evidenceLimitation: discovered.length
+      ? null
+      : "Nearby locality discovery returned no locality evidence. Manual area entry remains available.",
+    areas: discovered.map((area) => ({
+      ...area,
+      areaName: area.areaName,
+      areaSlug: slugifyArea(area.areaName),
+      evidenceSource: area.source === "pharmacy-google-location" ? "stored-locality-evidence" : "google-places-nearby",
+      placeId: area.placeId || "",
+      formattedAddress: area.formattedAddress || "",
+    })),
+  });
 }
 
 export function distanceForLocalCoverageArea(
   slug: string,
   areaName: string,
-  pharmacy?: PharmacyGoogleLocation | null,
+  pharmacy?: LocalCoverageOrigin | null,
 ): { km: number | null; label: string; provenance: LocalCoverageDistanceProvenance } {
   const location = pharmacy === undefined ? resolvePharmacyGoogleLocation(slug) : pharmacy;
   const locality = lookupLocalityCoordinates(slug, areaName, location);

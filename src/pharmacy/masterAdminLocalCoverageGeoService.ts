@@ -2,12 +2,14 @@
  * Shared Local Coverage geography — Google coordinates and haversine distance.
  * Geography is resolved from Google location evidence only.
  */
+import fs from "node:fs";
+import path from "node:path";
 import {
   readGoogleIdentityRecord,
   readGoogleIntelligenceRecord,
 } from "./masterAdminCanonicalGoogleService.ts";
 import { readSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
-import { safePharmacySlug } from "./pharmacyWorkspacePaths.ts";
+import { safePharmacySlug, WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 import type { GoogleImportSnapshot, PharmacyProfileData } from "./pharmacyProfileSchema.ts";
 import { hasGooglePlacesApiKey } from "./googlePlacesConnection.ts";
 
@@ -27,6 +29,8 @@ export type PharmacyCoordinateSource =
   | "google-intelligence"
   | "google-identity";
 
+export type LocalCoverageOriginSource = PharmacyCoordinateSource | "stored-competitor-search-origin";
+
 export interface PharmacyGoogleLocation extends GeoPoint {
   placeId: string;
   address: string;
@@ -34,6 +38,15 @@ export interface PharmacyGoogleLocation extends GeoPoint {
   postcode: string;
   branchLocality: string | null;
   source: PharmacyCoordinateSource;
+}
+
+export interface LocalCoverageOrigin extends GeoPoint {
+  placeId: string;
+  address: string;
+  town: string;
+  postcode: string;
+  branchLocality: string | null;
+  source: LocalCoverageOriginSource;
 }
 
 export interface GeocodedLocality extends GeoPoint {
@@ -136,6 +149,46 @@ export function rememberGeocodedLocality(slug: string, locality: GeocodedLocalit
 
 export function recallGeocodedLocality(slug: string, areaName: string): GeocodedLocality | null {
   return geocodeCache.get(cacheKey(slug, areaName)) || null;
+}
+
+export function listRememberedLocalities(slug: string): GeocodedLocality[] {
+  const prefix = `${safePharmacySlug(slug)}::`;
+  const out: GeocodedLocality[] = [];
+  for (const [key, locality] of geocodeCache) {
+    if (key.startsWith(prefix)) out.push(locality);
+  }
+  return out;
+}
+
+/** Stored competitor-search origin. Read-only. This is not a Google Business Profile. */
+export function readStoredCompetitorSearchOrigin(slug: string, townHint = ""): LocalCoverageOrigin | null {
+  const file = path.join(
+    WORKSPACE_ROOT,
+    "data/pharmacy-competitor-intelligence",
+    `${safePharmacySlug(slug)}-intelligence.json`,
+  );
+  if (!fs.existsSync(file)) return null;
+  try {
+    const doc = JSON.parse(fs.readFileSync(file, "utf8")) as {
+      pharmacy?: { latitude?: unknown; longitude?: unknown; address?: unknown; postcode?: unknown; placeId?: unknown };
+    };
+    const point = asPoint(doc.pharmacy?.latitude, doc.pharmacy?.longitude);
+    if (!point) return null;
+    const address = String(doc.pharmacy?.address || "").trim();
+    const town = String(townHint || "").trim();
+    return {
+      latitude: point.latitude,
+      longitude: point.longitude,
+      placeId: String(doc.pharmacy?.placeId || "").trim(),
+      address,
+      town,
+      postcode: String(doc.pharmacy?.postcode || "").trim(),
+      branchLocality: parseLocalityFromFormattedAddress(address) || town || null,
+      source: "stored-competitor-search-origin",
+    };
+  } catch {
+    return null;
+  }
 }
 
 function asPoint(latitude: unknown, longitude: unknown): GeoPoint | null {
@@ -361,7 +414,7 @@ export async function discoverNearbyLocalitiesViaGooglePlaces(input: {
 export function lookupLocalityCoordinates(
   slug: string,
   areaName: string,
-  pharmacy: PharmacyGoogleLocation | null,
+  pharmacy: LocalCoverageOrigin | null,
 ): GeocodedLocality | null {
   const name = areaName.trim();
   if (!name) return null;
