@@ -19,6 +19,7 @@ import {
   finitePoint as geoFinitePoint,
   addressContainsRequestedLocality,
 } from "./pharmacyLocalEvidenceGeographicAttributionV1.ts";
+import { visibleCopyContainsVerifiedEvidenceName } from "./pharmacyVerifiedLocalEvidenceConsumptionContract.ts";
 
 export const LOCAL_EVIDENCE_PACK_SCHEMA_VERSION = "v3";
 export const LOCAL_EVIDENCE_PACK_PROVIDER = "googlePlaces";
@@ -784,12 +785,7 @@ export function writePharmacyLocalEvidencePack(
 }
 
 export function pageContainsAttributableEvidence(html: string, entityNames: string[]): boolean {
-  const text = String(html || "").replace(/<[^>]+>/g, " ");
-  return entityNames.some((name) => {
-    const needle = String(name || "").trim();
-    if (needle.length < 3) return false;
-    return text.toLowerCase().includes(needle.toLowerCase());
-  });
+  return entityNames.some((name) => visibleCopyContainsVerifiedEvidenceName(html, name));
 }
 
 /** Test-only: load a session plan without requiring a content blueprint. */

@@ -24,6 +24,11 @@ import type {
   LocalClusterContentInput,
   LocalClusterPageContent,
 } from "./pharmacyLocalClusterContentEngine.ts";
+import {
+  selectVerifiedLocalEvidenceForPatientCopy,
+  verifiedLocalEvidencePatientCopySentence,
+  type VerifiedLocalEvidenceFact,
+} from "./contentEngine/pharmacyVerifiedLocalEvidenceConsumptionContract.ts";
 
 export const APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE = "approved-bank-locality-direct";
 
@@ -35,22 +40,15 @@ function namedLocalFacts(
   verified: ReturnType<typeof bindVerifiedLocalityEvidenceV1> | null,
 ): string[] {
   if (!verified) return [];
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const fact of [
-    ...verified.landmarks,
-    ...verified.community,
-    ...verified.transport,
-    ...verified.healthcare,
-  ]) {
-    const name = String(fact.name || "").trim();
-    const key = name.toLowerCase();
-    if (!name || seen.has(key)) continue;
-    seen.add(key);
-    out.push(name);
-    if (out.length >= 3) break;
-  }
-  return out;
+  const facts: VerifiedLocalEvidenceFact[] = [
+    ...verified.healthcare.map((fact) => ({ name: fact.name, category: "healthcare" as const })),
+    ...verified.transport.map((fact) => ({ name: fact.name, category: "transport" as const })),
+    ...verified.landmarks.map((fact) => ({ name: fact.name, category: "landmarks" as const })),
+    ...verified.community.map((fact) => ({ name: fact.name, category: "community" as const })),
+    ...verified.schools.map((fact) => ({ name: fact.name, category: "schools" as const })),
+    ...verified.retail.map((fact) => ({ name: fact.name, category: "retail" as const })),
+  ];
+  return selectVerifiedLocalEvidenceForPatientCopy(facts).selected.map((fact) => fact.name);
 }
 
 function composeLocalAccessBody(
@@ -73,16 +71,8 @@ function composeLocalAccessBody(
   if (direction && areaName) {
     parts.push(`The confirmed pharmacy location is ${direction} of ${areaName}.`);
   }
-  const facts = namedLocalFacts(verified);
-  if (facts.length) {
-    const list =
-      facts.length === 1
-        ? facts[0]
-        : facts.length === 2
-          ? `${facts[0]} and ${facts[1]}`
-          : `${facts.slice(0, -1).join(", ")} and ${facts[facts.length - 1]}`;
-    parts.push(`Useful stored local context for this journey includes ${list}.`);
-  }
+  const evidenceSentence = verifiedLocalEvidencePatientCopySentence(namedLocalFacts(verified));
+  if (evidenceSentence) parts.push(evidenceSentence);
   parts.push("The pharmacy address, telephone number and map are shown below.");
   return parts.filter(Boolean).join(" ");
 }

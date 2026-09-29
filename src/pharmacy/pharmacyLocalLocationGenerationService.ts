@@ -27,9 +27,9 @@ import { usesApprovedBankLocalityDirectPath } from "./pharmacyApprovedBankLocali
 import {
   attributableEntities,
   loadLocalEvidencePackForGeneration,
-  pageContainsAttributableEvidence,
   preflightPharmacyLocalEvidenceForCampaign,
 } from "./contentEngine/pharmacyLocalEvidencePackContractV1.ts";
+import { pageConsumesRequiredVerifiedLocalEvidence } from "./contentEngine/pharmacyVerifiedLocalEvidenceConsumptionContract.ts";
 import { replaceKeywordStuffedPharmacyListingNames, scrubUnconfirmedServiceClaims } from "./pharmacyServicePagePublicationQuality.ts";
 import { usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
 import {
@@ -377,10 +377,14 @@ export function generateLocalLocationHierarchyPages(
     if (!packLoaded.ok) {
       patientCopyFailures.push(`${pageSlug}: evidence-pack:${packLoaded.status}`);
     } else {
-      const names = attributableEntities(packLoaded.pack)
-        .filter((entity) => entity.category === "healthcare" || entity.category === "transport")
-        .map((entity) => entity.name);
-      if (names.length && !pageContainsAttributableEvidence(html, names)) {
+      const consumed = pageConsumesRequiredVerifiedLocalEvidence(
+        html,
+        attributableEntities(packLoaded.pack).map((entity) => ({
+          name: entity.name,
+          category: entity.category,
+        })),
+      );
+      if (!consumed) {
         patientCopyFailures.push(`${pageSlug}: verified local evidence was not consumed in the page body`);
       }
     }
