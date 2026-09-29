@@ -19,7 +19,9 @@ import {
 } from "./pharmacyWebsiteImportBrandEvidenceCompletionService.ts";
 import { loadWebsiteDesignIntelligence } from "./pharmacyWebsiteDesignCaptureService.ts";
 import fs from "node:fs";
+import path from "node:path";
 import type { ServicePageEvidenceField, ServicePageImageSelection } from "./masterAdminCoreProductRecoveryModel.ts";
+import { PHARMACY_WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 import { resolveCustomerFacingPharmacyName } from "./pharmacyServicePageProfileContext.ts";
 import {
   MANUAL_BRAND_SOURCE_PREFIX,
@@ -37,14 +39,17 @@ const OPTIONAL_PRODUCT_OWNER_EVIDENCE_FIELDS = new Set([
   "parkingTransport",
 ]);
 
-const REQUIRED_PRODUCT_OWNER_EVIDENCE_FIELDS = new Set(["nhsPrivateStatus"]);
+export const PRIVATE_SERVICES_OFFERED_FIELD_ID = "privateServicesOffered";
+export const PRIVATE_SERVICES_OFFERED_LABEL = "Private services offered?";
+
+const REQUIRED_PRODUCT_OWNER_EVIDENCE_FIELDS = new Set([PRIVATE_SERVICES_OFFERED_FIELD_ID]);
 
 /** Fields that never require an explicit Product Owner click. */
 const SYSTEM_EVIDENCE_FIELD_IDS = new Set(["expectedDuration", "unknownEvidence"]);
 
 /** Service Page Evidence fields that still require an explicit PO decision after Business Profile approval. */
 export const SERVICE_PAGE_REQUIRES_PO_CONFIRMATION_FIELD_IDS = new Set([
-  "nhsPrivateStatus",
+  PRIVATE_SERVICES_OFFERED_FIELD_ID,
   "pricing",
   "consultationProcess",
   "lockedService",
@@ -313,18 +318,43 @@ function resolveCprBrandEvidence(slug: string): {
   };
 }
 
-function resolveNhsPrivateStatus(
-  profile: ReturnType<typeof readSetupProfile>,
-  approved: Record<string, string>,
-): string | null {
-  const explicit = text(approved.privateServices || (profile as { privateServicesOffered?: string }).privateServicesOffered);
-  if (explicit) return explicit;
-  const nhs = (profile as { nhsServicesAvailable?: boolean }).nhsServicesAvailable;
-  const priv = (profile as { privateServicesAvailable?: boolean }).privateServicesAvailable;
-  if (nhs === true && priv === true) return "NHS and private services available";
-  if (nhs === true && priv === false) return "NHS services available; private services not offered";
-  if (priv === true) return "Private services available";
-  if (nhs === false && priv === false) return "Neither NHS nor private services flagged";
+function readRawProfileData(slug: string): Record<string, unknown> {
+  const file = path.join(PHARMACY_WORKSPACE_ROOT, "data/pharmacy-profiles", `${slug}.json`);
+  if (!fs.existsSync(file)) return {};
+  try {
+    const doc = JSON.parse(fs.readFileSync(file, "utf8")) as { data?: Record<string, unknown> };
+    return doc.data && typeof doc.data === "object" ? doc.data : {};
+  } catch {
+    return {};
+  }
+}
+
+function explicitPrivateServicesToken(value: unknown): "Yes" | "No" | null {
+  const token = String(value ?? "").trim().toLowerCase();
+  if (token === "yes" || token === "true" || token === "offered") return "Yes";
+  if (token === "no" || token === "false" || token === "not offered" || token === "not available") return "No";
+  return null;
+}
+
+/**
+ * Pharmacy-level Yes/No only. Schema default privateServicesAvailable=false is not a No.
+ * A Yes does not name which individual services are private.
+ */
+export function resolvePrivateServicesOfferedAnswer(raw: Record<string, unknown>): "Yes" | "No" | null {
+  const fromText = explicitPrivateServicesToken(raw.privateServicesOffered);
+  if (fromText) return fromText;
+  if (raw.privateServicesAvailable === true) return "Yes";
+  if (raw.privateServicesAvailable !== false) return null;
+  const sources = raw.customerSetupFieldSources;
+  const sourced =
+    Boolean(sources) &&
+    typeof sources === "object" &&
+    "privateServicesAvailable" in (sources as Record<string, unknown>);
+  const importedKeys = [
+    ...(Array.isArray(raw.websiteImportedFieldKeys) ? raw.websiteImportedFieldKeys : []),
+    ...(Array.isArray(raw.googleImportedFieldKeys) ? raw.googleImportedFieldKeys : []),
+  ].map((key) => String(key));
+  if (sourced || importedKeys.includes("privateServicesAvailable")) return "No";
   return null;
 }
 
@@ -394,7 +424,11 @@ export function enrichReviewableEvidenceFields(
       field.status = "not_confirmed";
     }
     field.requiresBusinessProfile =
-      field.status === "not_confirmed" && field.required && !text(field.value) && !field.allowNotApplicable;
+      field.id !== PRIVATE_SERVICES_OFFERED_FIELD_ID &&
+      field.status === "not_confirmed" &&
+      field.required &&
+      !text(field.value) &&
+      !field.allowNotApplicable;
   }
   return fields;
 }
@@ -448,11 +482,17 @@ export function buildCprEvidenceFields(slug: string, serviceId: string): Service
     evidenceField("appointmentPolicy", "Appointment policy", "business", approved.appointmentMethod || profile.appointmentMethod, { source: "business-profile" }),
     evidenceField("lockedService", "Selected locked service", "service", meta?.serviceName || serviceId, { required: true, source: "locked-catalogue" }),
     evidenceField("serviceOfferedConfirmation", "Service offered confirmation", "service", serviceOffered(slug, profile, serviceId), { required: true, source: "campaign" }),
-    evidenceField("nhsPrivateStatus", "NHS/private status", "service", resolveNhsPrivateStatus(profile, approved), {
-      required: true,
-      source: "business-profile",
-      deferConfirmation: true,
-    }),
+    evidenceField(
+      PRIVATE_SERVICES_OFFERED_FIELD_ID,
+      PRIVATE_SERVICES_OFFERED_LABEL,
+      "service",
+      resolvePrivateServicesOfferedAnswer(readRawProfileData(slug)),
+      {
+        required: true,
+        source: "business-profile",
+        deferConfirmation: true,
+      },
+    ),
     evidenceField("accessMethod", "Access method", "service", approved.appointmentMethod || profile.appointmentMethod, { required: true, source: "business-profile" }),
     evidenceField("consultationProcess", "Consultation process", "service", approved.consultationRoom ? "Private consultation room confirmed" : null, { source: "business-profile" }),
     evidenceField("consultationRoom", "Consultation room", "service", approved.consultationRoom || profile.consultationRoom, { source: "business-profile" }),
@@ -554,6 +594,13 @@ export function evaluateRequiredEvidenceGate(input: {
   if (field("postcode")?.status !== "confirmed") blockers.push("Postcode is required before service page generation.");
   if (!isLockedCommercialSupportedService(input.serviceId)) {
     blockers.push("Selected service is not in the locked commercial supported service catalogue.");
+  }
+  const privateServices = field(PRIVATE_SERVICES_OFFERED_FIELD_ID);
+  if (
+    privateServices?.status !== "confirmed" ||
+    (privateServices.value !== "Yes" && privateServices.value !== "No")
+  ) {
+    blockers.push("Private services offered must be confirmed as Yes or No before service page generation.");
   }
   if (field("serviceOfferedConfirmation")?.status !== "confirmed") {
     blockers.push("Service offered confirmation is required — confirm the locked service is offered by this pharmacy.");

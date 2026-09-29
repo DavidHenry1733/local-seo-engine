@@ -1154,6 +1154,11 @@ function workflowNavBarHtml(backLabel){
 }
 function evidenceFieldDecisionButtons(f,reviewLocked,prefix){
   if(reviewLocked)return '';
+  if(f.id==='privateServicesOffered'){
+    const yesBtn='<button class="btn secondary '+prefix+'-field-decision-btn" type="button" data-'+prefix+'-field-id="'+esc(f.id)+'" data-'+prefix+'-decision="edit_value" data-'+prefix+'-value="Yes" style="font-size:.62rem;padding:4px 8px">Yes</button>';
+    const noBtn='<button class="btn secondary '+prefix+'-field-decision-btn" type="button" data-'+prefix+'-field-id="'+esc(f.id)+'" data-'+prefix+'-decision="edit_value" data-'+prefix+'-value="No" style="font-size:.62rem;padding:4px 8px">No</button>';
+    return '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">'+yesBtn+noBtn+'</div>';
+  }
   const btns=[];
   if(f.status==='not_confirmed'){
     if(f.value||f.id==='fonts')btns.push('<button class="btn secondary '+prefix+'-field-decision-btn" type="button" data-'+prefix+'-field-id="'+esc(f.id)+'" data-'+prefix+'-decision="confirmed" style="font-size:.62rem;padding:4px 8px">Confirm</button>');
@@ -6398,6 +6403,10 @@ function evidenceStatusLabel(status){
   if(status==='not_applicable')return 'Not Applicable';
   return 'Not Confirmed';
 }
+function evidenceFieldDisplayValue(f){
+  if(f&&f.id==='privateServicesOffered'&&!f.value)return 'Not Confirmed';
+  return (f&&f.value)||'—';
+}
 function spgEvidenceBlockerPatterns(){
   return [
     /Product Owner evidence review approval required/i,
@@ -6505,12 +6514,12 @@ function spgEvidenceFieldRow(f,dashboard){
   const reviewLocked=Boolean(dashboard&&dashboard.evidenceReviewApproved);
   if(!reviewLocked){
     actions=evidenceFieldDecisionButtons(f,false,'spg');
-    if(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts'))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromSpg()">'+(f.id==='brandSource'?'Confirm brand source in Business Profile':'Return to Business Profile')+'</button></div>';
+    if(f.id!=='privateServicesOffered'&&(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts')))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromSpg()">'+(f.id==='brandSource'?'Confirm brand source in Business Profile':'Return to Business Profile')+'</button></div>';
   }else if(reviewLocked&&f.status==='not_confirmed'){
     actions='<div style="margin-top:4px;color:#fbbf24;font-size:.65rem">Reopen Evidence Review to change this field.</div>';
   }
   if(f.decisionInvalidatedReason)actions=(actions||'')+'<div style="margin-top:4px;color:#fbbf24">'+esc(f.decisionInvalidatedReason)+'</div>';
-  return '<div style="margin:8px 0;padding:8px;border:1px solid #334155;border-radius:8px;font-size:.72rem"><div style="display:flex;gap:8px;flex-wrap:wrap"><strong style="min-width:160px">'+esc(f.label)+'</strong><span style="color:#94a3b8">Source: '+esc(f.source||'—')+'</span>'+(f.confidence!=null?('<span style="color:#94a3b8">Confidence: '+esc(String(f.confidence))+'%</span>'):'')+'<span style="margin-left:auto;color:'+statusColor+'">'+esc(evidenceStatusLabel(f.status))+(f.required?' · Required':'')+'</span></div><div style="margin-top:4px">'+esc(f.value||'—')+'</div>'+actions+'</div>';
+  return '<div style="margin:8px 0;padding:8px;border:1px solid #334155;border-radius:8px;font-size:.72rem"><div style="display:flex;gap:8px;flex-wrap:wrap"><strong style="min-width:160px">'+esc(f.label)+'</strong><span style="color:#94a3b8">Source: '+esc(f.source||'—')+'</span>'+(f.confidence!=null?('<span style="color:#94a3b8">Confidence: '+esc(String(f.confidence))+'%</span>'):'')+'<span style="margin-left:auto;color:'+statusColor+'">'+esc(evidenceStatusLabel(f.status))+(f.required?' · Required':'')+'</span></div><div style="margin-top:4px">'+esc(evidenceFieldDisplayValue(f))+'</div>'+actions+'</div>';
 }
 function bindSpgFieldDecisionControls(){
   const root=document.getElementById('spgModal');
@@ -6521,8 +6530,9 @@ function bindSpgFieldDecisionControls(){
     if(!btn||btn.disabled)return;
     const fieldId=btn.getAttribute('data-spg-field-id');
     const decision=btn.getAttribute('data-spg-decision');
+    const editedValue=btn.getAttribute('data-spg-value');
     if(!fieldId||!decision)return;
-    decideEvidenceReviewField(fieldId,decision,btn,'spg');
+    decideEvidenceReviewField(fieldId,decision,btn,'spg',editedValue);
   });
 }
 function renderSpgFieldDecisionError(err){
@@ -6596,10 +6606,10 @@ function speFieldRow(f){
   let actions='';
   if(!activeSpeReview?.approved){
     actions=evidenceFieldDecisionButtons(f,false,'spe');
-    if(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts'))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromEvidence()">'+(f.id==='brandSource'?'Confirm brand source in Business Profile':'Return to Business Profile')+'</button></div>';
+    if(f.id!=='privateServicesOffered'&&(f.requiresBusinessProfile||(!f.value&&f.required&&!f.allowNotApplicable&&f.id!=='fonts')))actions+=(actions||'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn secondary" type="button" style="font-size:.62rem;padding:4px 8px" onclick="openBusinessProfileReviewFromEvidence()">'+(f.id==='brandSource'?'Confirm brand source in Business Profile':'Return to Business Profile')+'</button></div>';
   }
   if(f.decisionInvalidatedReason)actions=(actions||'')+'<div style="margin-top:4px;color:#fbbf24">'+esc(f.decisionInvalidatedReason)+'</div>';
-  return '<div style="margin:8px 0;padding:8px;border:1px solid #334155;border-radius:8px;font-size:.72rem"><div style="display:flex;gap:8px;flex-wrap:wrap"><strong style="min-width:160px">'+esc(f.label)+'</strong><span style="color:#94a3b8">Source: '+esc(f.source||'—')+'</span>'+(f.confidence!=null?('<span style="color:#94a3b8">Confidence: '+esc(String(f.confidence))+'%</span>'):'')+(f.capturedAt?('<span style="color:#94a3b8">Captured: '+esc(f.capturedAt)+'</span>'):'')+'<span style="margin-left:auto;color:'+statusColor+'">'+esc(evidenceStatusLabel(f.status))+(f.required?' · Required':'')+'</span></div><div style="margin-top:4px">'+esc(f.value||'—')+'</div>'+actions+'</div>';
+  return '<div style="margin:8px 0;padding:8px;border:1px solid #334155;border-radius:8px;font-size:.72rem"><div style="display:flex;gap:8px;flex-wrap:wrap"><strong style="min-width:160px">'+esc(f.label)+'</strong><span style="color:#94a3b8">Source: '+esc(f.source||'—')+'</span>'+(f.confidence!=null?('<span style="color:#94a3b8">Confidence: '+esc(String(f.confidence))+'%</span>'):'')+(f.capturedAt?('<span style="color:#94a3b8">Captured: '+esc(f.capturedAt)+'</span>'):'')+'<span style="margin-left:auto;color:'+statusColor+'">'+esc(evidenceStatusLabel(f.status))+(f.required?' · Required':'')+'</span></div><div style="margin-top:4px">'+esc(evidenceFieldDisplayValue(f))+'</div>'+actions+'</div>';
 }
 function bindSpeFieldDecisionControls(){
   const root=document.getElementById('speSections');
@@ -6610,8 +6620,9 @@ function bindSpeFieldDecisionControls(){
     if(!btn||btn.disabled)return;
     const fieldId=btn.getAttribute('data-spe-field-id');
     const decision=btn.getAttribute('data-spe-decision');
+    const editedValue=btn.getAttribute('data-spe-value');
     if(!fieldId||!decision)return;
-    decideEvidenceReviewField(fieldId,decision,btn);
+    decideEvidenceReviewField(fieldId,decision,btn,null,editedValue);
   });
 }
 let speFieldDecisionInFlight=false;

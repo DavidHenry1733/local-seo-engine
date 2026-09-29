@@ -8,6 +8,10 @@ import type { ContentGenerationContext } from "./contentEngine/contentGeneration
 import { readLatestApprovalSnapshot } from "./masterAdminBusinessProfileReviewService.ts";
 import { readServicePageGenerationRecord, writeServicePageGenerationRecord, readCoreProductRecoveryContract } from "./masterAdminCoreProductRecoveryService.ts";
 import { buildCprEvidenceFields, buildPublicationQualityApprovedEvidence } from "./masterAdminCoreProductRecoveryEvidenceService.ts";
+import {
+  readProductOwnerEvidenceDecisionStore,
+  restoreProductOwnerEvidenceFieldDecisions,
+} from "./masterAdminServicePageEvidenceDecisionService.ts";
 import { readEvidenceReviewApprovedForPublicationQuality } from "./pharmacyServicePagePublicationQualityGate.ts";
 import { isInvalidPharmacyIdentityValue, isKeywordStuffedPharmacyListingName, resolvePublicationPharmacyIdentity } from "./pharmacyServicePagePublicationQuality.ts";
 import { readSetupProfile } from "./growthEngineCustomerSetupImportSplitService.ts";
@@ -81,7 +85,7 @@ const FORBIDDEN_CROSS_TENANT_NAMES = [
   /\bPharmacy Delivered\b/i,
 ];
 
-const DEMO_TENANT_SLUGS = new Set(["pharmaconnect", "brook-pharmacy"]);
+const DEMO_TENANT_SLUGS = new Set(["pharmaconnect", "brook-pharmacy", "brook-pharmacy-demo-derby"]);
 
 const SECTION_EVIDENCE_MAP: Array<{
   sectionId: string;
@@ -89,7 +93,7 @@ const SECTION_EVIDENCE_MAP: Array<{
   evidenceFieldIds: string[];
 }> = [
   { sectionId: "hero", templateBlock: "hero", evidenceFieldIds: ["pharmacyName", "townCity", "accessMethod", "ctaRoute", "phone"] },
-  { sectionId: "service-overview", templateBlock: "service-definition", evidenceFieldIds: ["serviceName", "nhsPrivateStatus", "consultationRoom"] },
+  { sectionId: "service-overview", templateBlock: "service-definition", evidenceFieldIds: ["serviceName", "privateServicesOffered", "consultationRoom"] },
   { sectionId: "conditions", templateBlock: "conditions", evidenceFieldIds: ["serviceName"] },
   { sectionId: "how-it-works", templateBlock: "process", evidenceFieldIds: ["accessMethod", "bookingMethod", "consultationRoom"] },
   { sectionId: "access-preparation", templateBlock: "eligibility", evidenceFieldIds: ["accessMethod", "bookingMethod", "openingHours"] },
@@ -191,12 +195,18 @@ export function resolveBrandResolutionAudit(slug: string): BrandResolutionAudit 
   };
 }
 
+function evidenceFieldsForGenerationContract(slug: string, serviceId: string): ServicePageEvidenceField[] {
+  const fields = buildCprEvidenceFields(slug, serviceId);
+  const store = readProductOwnerEvidenceDecisionStore(slug, serviceId === "pharmacy-first" ? null : serviceId);
+  return restoreProductOwnerEvidenceFieldDecisions(slug, fields, store, { persistInvalidations: false }).fields;
+}
+
 export function buildSectionEvidenceBundles(
   slug: string,
   serviceId: string,
   html?: string,
 ): SectionEvidenceBundle[] {
-  const fields = buildCprEvidenceFields(slug, serviceId);
+  const fields = evidenceFieldsForGenerationContract(slug, serviceId);
   const pharmacyName = fieldValue(fields, "pharmacyName");
   const town = fieldValue(fields, "townCity");
 
@@ -215,6 +225,10 @@ export function buildSectionEvidenceBundles(
       }
       const val = String(f.value || "").trim();
       if (!val) {
+        omitted.push(id);
+        continue;
+      }
+      if (id === "privateServicesOffered" && val !== "Yes" && val !== "No") {
         omitted.push(id);
         continue;
       }
@@ -266,7 +280,7 @@ export function buildTenantContextBinding(
   const resolvedSlug = resolveTenantProfileSlug(slug) || slug;
   const approval = readLatestApprovalSnapshot(resolvedSlug);
   const record = readServicePageGenerationRecord(resolvedSlug, serviceId);
-  const fields = buildCprEvidenceFields(resolvedSlug, serviceId);
+  const fields = evidenceFieldsForGenerationContract(resolvedSlug, serviceId);
   const approvedEvidence = buildPublicationQualityApprovedEvidence(resolvedSlug, serviceId);
   const evidenceReviewApproved = readEvidenceReviewApprovedForPublicationQuality(resolvedSlug, serviceId);
 

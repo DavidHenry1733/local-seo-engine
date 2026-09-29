@@ -280,6 +280,14 @@ export function restoreProductOwnerEvidenceFieldDecisions(
 
   for (const field of fields) {
     const decision = store.decisions[field.id];
+    if (
+      field.id === "privateServicesOffered" &&
+      decision?.decision === "confirmed" &&
+      (decision.evidenceValueAtDecision === "Yes" || decision.evidenceValueAtDecision === "No")
+    ) {
+      field.value = decision.evidenceValueAtDecision;
+      field.source = decision.sourceRevision || "product-owner-edit";
+    }
     const evaluated = evaluateProductOwnerEvidenceDecisionRestore(slug, field, decision || null);
     results.push(evaluated);
     if (!decision) continue;

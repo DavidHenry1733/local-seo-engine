@@ -447,6 +447,22 @@ export function decideServicePageEvidenceReviewField(
   const field = prepareEvidenceReviewFields(slug, serviceId).find((entry) => entry.id === fieldId);
   if (!field) return null;
 
+  if (field.id === "privateServicesOffered") {
+    if (action === "not_applicable") return null;
+    const nextValue = action === "edit_value" ? text(editedValue) : text(field.value);
+    if (nextValue !== "Yes" && nextValue !== "No") return null;
+    field.value = nextValue;
+    field.source = "product-owner-edit";
+    saveProductOwnerEvidenceFieldDecision({
+      slug,
+      serviceId,
+      field: { ...field, value: nextValue, status: "confirmed" },
+      decision: "confirmed",
+      decidedBy: operator,
+    });
+    return buildServicePageEvidenceReview(slug);
+  }
+
   if (action === "edit_value") {
     const nextValue = text(editedValue);
     if (!nextValue) return null;
