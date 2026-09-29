@@ -22,6 +22,16 @@ import { PHARMACY_WORKSPACE_ROOT } from "../pharmacyWorkspacePaths.ts";
 const BANNED_LEGACY_PHRASES =
   /\b(orient yourself|orientating pharmacy care|local orientation|familiar points around|recorded healthcare setting|listed as|recorded as|named on the provider page|evidence pack|editorial fact|fact id)\b/i;
 
+/** Place, source, or evidence catalogue uses of “recorded as”. Clinical measurement wording is not this. */
+const EVIDENCE_PLACE_RECORDED_AS =
+  /\brecorded\s+as\s+(?:a|an|the\s+)?(?:verified\s+)?(?:healthcare|community|local|landmark|transport|school|retail|evidence|location|place|setting|facility)\b/i;
+
+const SOURCE_RECORDS_PLACE =
+  /\bsource\s+records?\s+(?:this\s+)?(?:location|place)\s+as\b/i;
+
+const CLINICAL_MEASUREMENT_RECORDED_AS =
+  /\b(?:systolic|diastolic|mmhg|millimetres?|blood pressure|reading)\b/i;
+
 const SOURCE_LISTING =
   /\b(according to (?:google|wikipedia|the council)|source:|citation|grounding chunk|search result id|places id|dataforseo)\b/i;
 
@@ -29,6 +39,38 @@ const EVIDENCE_ID = /\b(?:ed|fact|ent|loc|editorial)-[a-z0-9-]{4,}\b/i;
 
 const UNSUPPORTED_CLAIMS =
   /\b(guaranteed(?:ly)?|walk-?in(?:s)?|same[- ]day (?:treatment|medicine)|faster care|convenient|immediate(?:ly)? available|prompt treatment|never (?:need|requires?) a gp|easy to reach|easily accessible|travel time|minutes away|open (?:now|late)|always available)\b/i;
+
+function approvedClinicalText(input: BusinessLocalityCopyInputV3): string {
+  const locked = input.offer?.lockedClinicalFacts;
+  return [locked?.conditionSet, locked?.suitability, locked?.process, locked?.safety]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function isClinicalRecordedAs(sentence: string, approved: string): boolean {
+  if (!/\brecorded\s+as\b/i.test(sentence)) return false;
+  if (EVIDENCE_PLACE_RECORDED_AS.test(sentence) || SOURCE_RECORDS_PLACE.test(sentence)) return false;
+  if (CLINICAL_MEASUREMENT_RECORDED_AS.test(sentence)) return true;
+  const compact = sentence.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  return compact.length >= 24 && approved.includes(compact);
+}
+
+/**
+ * Evidence-catalogue “recorded as” stays visible to the listing bans.
+ * Approved or clinical measurement wording does not.
+ */
+export function phraseScanTextForListingRules(text: string, input: BusinessLocalityCopyInputV3): string {
+  const approved = approvedClinicalText(input);
+  return splitSentences(text)
+    .map((sentence) => {
+      if (!isClinicalRecordedAs(sentence, approved)) return sentence;
+      return sentence.replace(/\brecorded\s+as\b/gi, "expressed as");
+    })
+    .join(" ");
+}
 
 function splitSentences(text: string): string[] {
   return String(text || "")
@@ -160,13 +202,20 @@ export function evaluateAcceptedGeminiLocalCopyV1(opts: {
     }
   }
 
-  if (UK_LOCAL_INTRODUCTION_LISTING_LANGUAGE.test(scanned) || SOURCE_LISTING.test(scanned) || EVIDENCE_ID.test(scanned)) {
+  const phraseScanned = phraseScanTextForListingRules(scanned, input);
+  if (
+    UK_LOCAL_INTRODUCTION_LISTING_LANGUAGE.test(phraseScanned) ||
+    SOURCE_LISTING.test(phraseScanned) ||
+    EVIDENCE_ID.test(phraseScanned) ||
+    SOURCE_RECORDS_PLACE.test(scanned) ||
+    EVIDENCE_PLACE_RECORDED_AS.test(phraseScanned)
+  ) {
     failures.push("evidence IDs or source-listing language");
   }
   if (UNSUPPORTED_CLAIMS.test(scanned)) {
     failures.push("unsupported promotional, access, availability or clinical claim");
   }
-  if (BANNED_LEGACY_PHRASES.test(scanned)) {
+  if (BANNED_LEGACY_PHRASES.test(phraseScanned)) {
     failures.push("banned legacy phrase present");
   }
 
