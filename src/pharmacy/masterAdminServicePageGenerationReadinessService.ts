@@ -8,6 +8,8 @@ import { buildServicePageEvidenceFieldPipeline } from "./masterAdminCoreProductR
 import { currentBusinessProfileRevision } from "./masterAdminServicePageEvidenceDecisionService.ts";
 import type { ServicePageEvidenceField } from "./masterAdminCoreProductRecoveryModel.ts";
 import { runPreGenerationValidation, type PreGenerationDependencyCheck } from "./masterAdminPreGenerationValidation.ts";
+import { loadLockedApprovedBankServicePageContract } from "./pharmacyApprovedBankCorePageContract.ts";
+import { isApprovedBankRegisteredService } from "./pharmacyServiceVariantLibrary.ts";
 
 export const SERVICE_PAGE_ONLY_EXCLUDED_PREFLIGHT_BLOCKER_IDS = new Set([
   "growth_intelligence",
@@ -31,6 +33,17 @@ export interface ServicePageGenerationReadinessResult {
 
 function fieldStatus(fields: ServicePageEvidenceField[], id: string): ServicePageEvidenceField["status"] | "missing" {
   return fields.find((f) => f.id === id)?.status || "missing";
+}
+
+/** Same locked-contract rule the worker enforces. Does not repair or invent missing fields. */
+export function lockedApprovedBankServicePageContractBlocker(serviceId: string): string | null {
+  if (!isApprovedBankRegisteredService(serviceId)) return null;
+  try {
+    loadLockedApprovedBankServicePageContract(serviceId);
+    return null;
+  } catch (err) {
+    return err instanceof Error ? err.message : String(err);
+  }
 }
 
 export function evaluateServicePageGenerationReadiness(slug: string, serviceId: string): ServicePageGenerationReadinessResult {
@@ -84,6 +97,9 @@ export function evaluateServicePageGenerationReadiness(slug: string, serviceId: 
   if (!requiredEvidenceGate.passed) {
     blockers.push(...requiredEvidenceGate.blockers);
   }
+
+  const lockedContractBlocker = lockedApprovedBankServicePageContractBlocker(serviceId);
+  if (lockedContractBlocker) blockers.push(lockedContractBlocker);
 
   const uniqueBlockers = [...new Set(blockers)];
   const canGenerateEvidence =

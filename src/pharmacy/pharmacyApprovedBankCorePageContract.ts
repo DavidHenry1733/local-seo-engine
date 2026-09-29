@@ -383,15 +383,19 @@ export function approvedBankContractToParsedSections(
   return map;
 }
 
+function nonEmptyContractArray(value: unknown): value is unknown[] {
+  return Array.isArray(value) && value.length > 0;
+}
+
 export function isCompleteApprovedBankServicePageContract(
   contract: Partial<ApprovedBankServicePageContract> | null | undefined,
 ): contract is ApprovedBankServicePageContract {
   return Boolean(
     contract &&
       contract.contractId === APPROVED_BANK_CORE_PAGE_CONTRACT &&
-      Array.isArray(contract.sections) &&
-      Array.isArray(contract.processSteps) &&
-      Array.isArray(contract.faqs),
+      nonEmptyContractArray(contract.sections) &&
+      nonEmptyContractArray(contract.processSteps) &&
+      nonEmptyContractArray(contract.faqs),
   );
 }
 
