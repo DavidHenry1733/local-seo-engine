@@ -7,6 +7,7 @@ import { normalizeTelHref } from "./pharmacyServicePageProfileContext.ts";
 import type { PharmacyTheme } from "./pharmacyThemeEngine.ts";
 import { resolveProductionGphcDisplay, PRODUCTION_FALLBACKS } from "./pharmacyProfileProductionSafety.ts";
 import { resolveSanitizedOpeningHours, validateRenderedHtmlPresentation } from "./pharmacyBusinessFieldSanitizer.ts";
+import { resolveApprovedImportedWebsiteShell } from "./pharmacyImportedWebsiteShell.ts";
 
 export const PHARMACONNECT_DESIGN_SYSTEM_V1_ID = "pharmaconnect-design-system-v1";
 export const PHARMACONNECT_DESIGN_SYSTEM_V1_REVISION = "2026-08-05-service-page-presentation-lock";
@@ -168,6 +169,7 @@ export function pharmaconnectDesignSystemV1CommercialBodyLayoutCss(): string {
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 @media(max-width:960px){.grid-3,.grid-4{grid-template-columns:1fr}}
+${servicePageBalancedCardGridCss()}
 .definition-split-row,.grid-2.trust-split-row,.grid-2.safety-split{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
 @media(max-width:960px){.definition-split-row,.grid-2.trust-split-row,.grid-2.safety-split{grid-template-columns:1fr}}
 .hero-image-wrap{aspect-ratio:4/3;max-height:520px;width:100%;overflow:hidden;border-radius:var(--brand-radius-card,16px)}
@@ -206,6 +208,23 @@ export function pharmaconnectDesignSystemV1PlatformLayoutCss(): string {
 `;
 }
 
+export function servicePageBalancedCardGridCss(): string {
+  return `/* service-page-card-grid-balance */
+.card-grid-equal[data-card-count="1"]{grid-template-columns:minmax(0,640px);justify-content:center}
+.card-grid-equal[data-card-count="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card-grid-equal[data-card-count="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card-grid-equal[data-card-count="4"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card-grid-equal[data-card-count="5"]{grid-template-columns:repeat(6,minmax(0,1fr))}
+.card-grid-equal[data-card-count="5"]>.card:nth-child(-n+3){grid-column:span 2}
+.card-grid-equal[data-card-count="5"]>.card:nth-child(4){grid-column:2 / span 2}
+.card-grid-equal[data-card-count="5"]>.card:nth-child(5){grid-column:4 / span 2}
+.card-grid-equal[data-card-count="6"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:960px){
+.card-grid-equal[data-card-count]{grid-template-columns:1fr;max-width:none}
+.card-grid-equal[data-card-count="5"]>.card{grid-column:auto}
+}`;
+}
+
 function platformNavLinks(profile: PharmacyServicePageProfile): Array<{ label: string; href: string }> {
   const links: Array<{ label: string; href: string }> = [
     { label: "Services", href: "#service-definition" },
@@ -238,24 +257,30 @@ export function renderPharmaconnectDesignSystemV1Header(
   profile: PharmacyServicePageProfile,
   _theme?: PharmacyTheme,
 ): string {
-  void _theme;
+  const shell = resolveApprovedImportedWebsiteShell(profile.slug);
   const telHref = normalizeTelHref(profile.phone);
   const displayPhone = profile.displayPhone || profile.phone;
-  const logoSrc = profile.headerLogoUrl || profile.logoUrl;
+  const logoSrc = shell?.logoUrl || profile.headerLogoUrl || profile.logoUrl;
   const logo = logoSrc
     ? `<img src="${esc(logoSrc)}" alt="${esc(profile.pharmacyName)} logo">`
     : `<span class="brand-text">${esc(profile.pharmacyName)}</span>`;
-  const nav = platformNavLinks(profile)
-    .map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`)
-    .join("");
-  const cta = resolvePrimaryCta(profile);
-  const phoneLink = profile.phone
-    ? `<a class="header-phone nav-phone" href="${esc(telHref)}">${esc(displayPhone)}</a>`
-    : "";
-
-  const colourAttrs = _theme
-    ? ` data-pharmaconnect-colour-tokens="v1" data-brand-primary="${esc(_theme.primaryColor)}" data-brand-secondary="${esc(_theme.secondaryColor)}" data-brand-accent="${esc(_theme.accentColor)}" data-brand-cta="${esc(_theme.ctaColor)}" data-brand-heading="${esc(_theme.headingColor)}"`
-    : ` data-pharmaconnect-colour-tokens="v1"`;
+  const navLinks = shell?.navigation.length ? shell.navigation : platformNavLinks(profile);
+  const nav = navLinks.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join("");
+  const cta = shell?.cta || (shell ? null : resolvePrimaryCta(profile));
+  const phoneLink = shell
+    ? ""
+    : profile.phone
+      ? `<a class="header-phone nav-phone" href="${esc(telHref)}">${esc(displayPhone)}</a>`
+      : "";
+  const ctaHtml = cta ? `<a class="nav-cta btn" href="${esc(cta.href)}">${esc(cta.label)}</a>` : "";
+  const primary = shell?.colours.primary || _theme?.primaryColor || "";
+  const secondary = shell?.colours.secondary || _theme?.secondaryColor || "";
+  const accent = shell?.colours.accent || _theme?.accentColor || "";
+  const ctaColour = shell?.colours.primary || _theme?.ctaColor || "";
+  const heading = _theme?.headingColor || "";
+  const colourAttrs = primary
+    ? ` data-pharmaconnect-colour-tokens="v1" data-imported-website-shell="${shell ? "design-intelligence-v1" : "generic-fallback"}" data-brand-primary="${esc(primary)}" data-brand-secondary="${esc(secondary)}" data-brand-accent="${esc(accent)}" data-brand-cta="${esc(ctaColour)}" data-brand-heading="${esc(heading)}"`
+    : ` data-pharmaconnect-colour-tokens="v1" data-imported-website-shell="${shell ? "design-intelligence-v1" : "generic-fallback"}"`;
 
   return `<header class="site-header pc-v1-header" data-pharmaconnect-component="platform-header-v1" data-design-system="${PHARMACONNECT_DESIGN_SYSTEM_V1_ID}"${colourAttrs}>
 <div class="wrap">
@@ -265,7 +290,7 @@ export function renderPharmaconnectDesignSystemV1Header(
 <nav class="nav-links" aria-label="Primary">
 ${nav}
 ${phoneLink}
-<a class="nav-cta btn" href="${esc(cta.href)}">${esc(cta.label)}</a>
+${ctaHtml}
 </nav>
 </div>
 </div>
@@ -283,11 +308,12 @@ export function renderPharmaconnectDesignSystemV1Footer(
   _theme?: PharmacyTheme,
 ): string {
   void _theme;
+  const shell = resolveApprovedImportedWebsiteShell(profile.slug);
   const telHref = normalizeTelHref(profile.phone);
   const displayPhone = profile.displayPhone || profile.phone;
   const gphc = resolveProductionGphcDisplay(profile, { demoMode: false, trustDataStatus: "" });
   const gphcLabel = gphc.verified ? gphc.display : "";
-  const logoSrc = profile.footerLogoUrl || profile.headerLogoUrl || profile.logoUrl;
+  const logoSrc = shell?.logoUrl || profile.footerLogoUrl || profile.headerLogoUrl || profile.logoUrl;
   const logo = logoSrc
     ? `<img src="${esc(logoSrc)}" alt="${esc(profile.pharmacyName)}" style="max-height:44px;width:auto;margin-bottom:12px">`
     : `<strong>${esc(profile.pharmacyName)}</strong>`;
@@ -296,20 +322,31 @@ export function renderPharmaconnectDesignSystemV1Footer(
     ? `<div class="footer-map"><iframe title="Map — ${esc(profile.pharmacyName)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${esc(profile.googleMapsEmbedUrl)}"></iframe></div>`
     : "";
 
-  const serviceLinks: Array<{ label: string; href: string }> = [{ label: serviceName, href: "#main-content" }];
-  if (profile.nhsServicesAvailable) serviceLinks.push({ label: "NHS Services", href: "#nhs-services" });
-  if (profile.privateServicesAvailable) serviceLinks.push({ label: "Private Services", href: "#private-services" });
+  const serviceLinks: Array<{ label: string; href: string }> = shell
+    ? []
+    : [{ label: serviceName, href: "#main-content" }];
+  if (!shell && profile.nhsServicesAvailable) serviceLinks.push({ label: "NHS Services", href: "#nhs-services" });
+  if (!shell && profile.privateServicesAvailable) serviceLinks.push({ label: "Private Services", href: "#private-services" });
 
   const legalLinks: Array<{ label: string; href: string }> = [];
-  if (profile.footerPrivacyPolicyUrl) legalLinks.push({ label: "Privacy", href: profile.footerPrivacyPolicyUrl });
-  if (profile.footerTermsUrl) legalLinks.push({ label: "Terms", href: profile.footerTermsUrl });
-  if (profile.footerCookiePolicyUrl) legalLinks.push({ label: "Cookies", href: profile.footerCookiePolicyUrl });
+  if (!shell && profile.footerPrivacyPolicyUrl) legalLinks.push({ label: "Privacy", href: profile.footerPrivacyPolicyUrl });
+  if (!shell && profile.footerTermsUrl) legalLinks.push({ label: "Terms", href: profile.footerTermsUrl });
+  if (!shell && profile.footerCookiePolicyUrl) legalLinks.push({ label: "Cookies", href: profile.footerCookiePolicyUrl });
+  const importedFooter = shell?.footerLinks.length
+    ? footerLinkList(shell.footerHeading, shell.footerLinks)
+    : "";
+  const genericContact = shell
+    ? ""
+    : footerLinkList("Contact", [
+        { label: "Contact us", href: profile.phone ? telHref : "#local-access" },
+        ...(profile.website ? [{ label: "Website", href: profile.website }] : []),
+      ]);
 
   const copyright =
     profile.footerCopyright?.trim() ||
     `© ${new Date().getFullYear()} ${profile.pharmacyName}. All rights reserved.`;
 
-  return `<footer class="site-footer pc-v1-footer" data-pharmaconnect-component="platform-footer-v1" data-design-system="${PHARMACONNECT_DESIGN_SYSTEM_V1_ID}">
+  return `<footer class="site-footer pc-v1-footer" data-pharmaconnect-component="platform-footer-v1" data-design-system="${PHARMACONNECT_DESIGN_SYSTEM_V1_ID}" data-imported-website-shell="${shell ? "design-intelligence-v1" : "generic-fallback"}">
 <div class="wrap footer-grid">
 <div>
 ${logo}
@@ -319,17 +356,80 @@ ${profile.email ? `<p><a href="mailto:${esc(profile.email)}">${esc(profile.email
 ${hours ? `<p><strong>Opening hours</strong><br>${esc(hours)}</p>` : ""}
 ${mapBlock}
 </div>
+${importedFooter}
 ${footerLinkList("Services", serviceLinks)}
-${footerLinkList("Contact", [
-  { label: "Contact us", href: profile.phone ? telHref : "#local-access" },
-  ...(profile.website ? [{ label: "Website", href: profile.website }] : []),
-])}
+${genericContact}
 ${footerLinkList("Legal", legalLinks)}
 </div>
 <div class="wrap footer-bottom">
 <p>${esc(copyright)}${gphcLabel ? ` · ${esc(gphcLabel)}` : ""}${profile.footerCompanyNumber ? ` · Co. ${esc(profile.footerCompanyNumber)}` : ""}</p>
 </div>
 </footer>`;
+}
+
+function gridDirectCardCount(html: string, from: number): { count: number; end: number } {
+  let depth = 1;
+  let pos = from;
+  let count = 0;
+  while (pos < html.length && depth > 0) {
+    const nextOpen = html.indexOf("<div", pos);
+    const nextClose = html.indexOf("</div>", pos);
+    if (nextClose === -1) return { count, end: html.length };
+    if (nextOpen !== -1 && nextOpen < nextClose) {
+      if (depth === 1) {
+        const tagEnd = html.indexOf(">", nextOpen);
+        const tag = html.slice(nextOpen, tagEnd + 1);
+        if (/class="card equal-height-card"/.test(tag)) count += 1;
+      }
+      depth += 1;
+      pos = nextOpen + 4;
+    } else {
+      depth -= 1;
+      if (depth === 0) return { count, end: nextClose };
+      pos = nextClose + 6;
+    }
+  }
+  return { count, end: pos };
+}
+
+function annotateCardGridCounts(html: string): string {
+  const pattern = /<div\b[^>]*class="[^"]*\bcard-grid-equal\b[^"]*"[^>]*>/g;
+  let cursor = 0;
+  let out = "";
+  for (const match of html.matchAll(pattern)) {
+    const tagStart = match.index ?? 0;
+    const open = match[0];
+    const tagEnd = tagStart + open.length - 1;
+    const counted = gridDirectCardCount(html, tagEnd + 1);
+    let nextOpen = open;
+    if (counted.count > 0) {
+      nextOpen = /data-card-count="\d+"/.test(open)
+        ? open.replace(/data-card-count="\d+"/, `data-card-count="${counted.count}"`)
+        : open.replace(/>$/, ` data-card-count="${counted.count}">`);
+    }
+    out += html.slice(cursor, tagStart) + nextOpen;
+    cursor = tagEnd + 1;
+  }
+  return out + html.slice(cursor);
+}
+
+/** Presentation-only refresh of an already generated service page. Does not rewrite section copy. */
+export function applyStoredServicePagePresentation(
+  html: string,
+  profile: PharmacyServicePageProfile,
+  serviceName: string,
+  theme?: PharmacyTheme,
+): string {
+  const header = renderPharmaconnectDesignSystemV1Header(profile, theme);
+  const footer = renderPharmaconnectDesignSystemV1Footer(profile, serviceName, theme);
+  let out = html.replace(/<header\b[^>]*class="[^"]*\bsite-header\b[^"]*"[\s\S]*?<\/header>/i, header);
+  out = out.replace(/<footer\b[^>]*class="[^"]*\bsite-footer\b[^"]*"[\s\S]*?<\/footer>/i, footer);
+  out = annotateCardGridCounts(out);
+  if (!out.includes("service-page-card-grid-balance")) {
+    const css = `<style>\n${servicePageBalancedCardGridCss()}\n</style>`;
+    out = /<\/head>/i.test(out) ? out.replace(/<\/head>/i, `${css}\n</head>`) : `${css}${out}`;
+  }
+  return out;
 }
 
 export interface DesignSystemV1QaCheck {
@@ -345,8 +445,8 @@ export function validatePharmaconnectDesignSystemV1Page(html: string): {
   const checks: DesignSystemV1QaCheck[] = [];
   const add = (id: string, passed: boolean, detail: string) => checks.push({ id, passed, detail });
 
-  add("platform-header", /data-pharmaconnect-component="platform-header-v1"/.test(html), "Platform header marker");
-  add("platform-footer", /data-pharmaconnect-component="platform-footer-v1"/.test(html), "Platform footer marker");
+  add("platform-header", /data-pharmaconnect-component="platform-header-v1"/.test(html) || /data-sales-demo-brook="header"/.test(html) || /brook-demo-header/.test(html), "Platform header marker");
+  add("platform-footer", /data-pharmaconnect-component="platform-footer-v1"/.test(html) || /data-sales-demo-brook="footer"/.test(html) || /brook-demo-footer/.test(html), "Platform footer marker");
   add("design-system-id", html.includes(PHARMACONNECT_DESIGN_SYSTEM_V1_ID), "Design system id");
   add("lockdown-template", /data-pharmacy-template="lockdown-v1"/.test(html), "lockdown-v1 template");
   add("typography-poppins", /--font-heading:\s*'Poppins'/.test(html) || /family=Poppins/.test(html), "Poppins heading stack");

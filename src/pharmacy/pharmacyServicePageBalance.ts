@@ -173,7 +173,7 @@ export function renderBalancedCardGrid(cards: ContentCard[], options: BalancedGr
     })
     .join("\n");
 
-  return `<div class="${gridClass}${options.stepNumbers ? " process-steps" : ""}" ${options.stepNumbers ? 'role="list"' : ""} data-balance-title-lines="${titleLineClass}">${items}</div>`;
+  return `<div class="${gridClass}${options.stepNumbers ? " process-steps" : ""}" ${options.stepNumbers ? 'role="list"' : ""} data-card-count="${balanced.length}" data-balance-title-lines="${titleLineClass}">${items}</div>`;
 }
 
 /** First complete sentence for compact list summaries — no mid-sentence char clipping. */
