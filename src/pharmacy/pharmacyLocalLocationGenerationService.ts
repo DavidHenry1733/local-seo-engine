@@ -364,26 +364,27 @@ export function generateLocalLocationHierarchyPages(
     const pageSlug = resolveClusterPageSlug(cluster.slug);
     if (options?.skipExistingOutputs && !newSlugs.has(pageSlug)) continue;
     const html = htmlBySlug.get(pageSlug) || "";
+    const packLoaded = loadLocalEvidencePackForGeneration(ctx.resolvedSlug, cluster.name, pageSlug);
+    const evidenceFacts = packLoaded.ok
+      ? attributableEntities(packLoaded.pack).map((entity) => ({
+          name: entity.name,
+          category: entity.category,
+        }))
+      : [];
     const gate = evaluateLocalityPatientCopyQualityGate({
       html,
       areaName: cluster.name,
       pharmacyName,
       distanceLabel: cluster.distanceLabel || "",
+      verifiedEvidenceNames: evidenceFacts.map((fact) => fact.name),
     });
     if (!gate.ok) {
       patientCopyFailures.push(`${pageSlug}: ${gate.failures.join("; ")}`);
     }
-    const packLoaded = loadLocalEvidencePackForGeneration(ctx.resolvedSlug, cluster.name, pageSlug);
     if (!packLoaded.ok) {
       patientCopyFailures.push(`${pageSlug}: evidence-pack:${packLoaded.status}`);
     } else {
-      const consumed = pageConsumesRequiredVerifiedLocalEvidence(
-        html,
-        attributableEntities(packLoaded.pack).map((entity) => ({
-          name: entity.name,
-          category: entity.category,
-        })),
-      );
+      const consumed = pageConsumesRequiredVerifiedLocalEvidence(html, evidenceFacts);
       if (!consumed) {
         patientCopyFailures.push(`${pageSlug}: verified local evidence was not consumed in the page body`);
       }

@@ -176,6 +176,19 @@ function localityPrefixedFaqFailures(questions: string[], areaName?: string): st
   return failures;
 }
 
+function maskVerifiedEvidenceNames(text: string, names: readonly string[]): string {
+  const ordered = names
+    .map((name) => String(name || "").trim())
+    .filter((name) => name.length >= 3)
+    .sort((a, b) => b.length - a.length);
+  let out = String(text || "");
+  for (const name of ordered) {
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
+    out = out.replace(new RegExp(escaped, "gi"), " ");
+  }
+  return out;
+}
+
 function scanUnsafePatientCopy(text: string, prefix: string): string[] {
   const failures: string[] = [];
   const hay = String(text || "");
@@ -367,22 +380,27 @@ export function evaluateLocalityPatientCopyQualityGate(input: {
   areaName: string;
   pharmacyName: string;
   distanceLabel?: string;
+  /** Verified place names that must be allowed to appear. They are not operational claims. */
+  verifiedEvidenceNames?: readonly string[];
 }): LocalityPatientCopyGateResult {
   const failures: string[] = [];
   const html = String(input.html || "");
   const area = String(input.areaName || "").trim();
   const pharmacy = String(input.pharmacyName || "").trim();
   const dist = String(input.distanceLabel || "").trim();
+  const verifiedNames = input.verifiedEvidenceNames || [];
 
   const localitySurface = extractLeadParagraphs(html);
   const mainScan = stripHtml((html.match(/<main\b[^>]*>[\s\S]*?<\/main>/i) || [])[0] || html);
+  const claimScan = maskVerifiedEvidenceNames(mainScan, verifiedNames);
+  const surfaceClaimScan = maskVerifiedEvidenceNames(localitySurface, verifiedNames);
 
   for (const re of INTERNAL_PHRASES) {
     if (re.test(mainScan)) {
       failures.push(`internal-phrase:${re.source}`);
     }
   }
-  failures.push(...scanUnsafePatientCopy(mainScan, "unsupported-claim:"));
+  failures.push(...scanUnsafePatientCopy(claimScan, "unsupported-claim:"));
   failures.push(...localityPrefixedFaqFailures(extractFaqQuestions(html), area));
 
   const kmHits = localitySurface.match(/\b\d+(?:\.\d+)?\s*km\b/gi) || [];
@@ -425,7 +443,7 @@ export function evaluateLocalityPatientCopyQualityGate(input: {
     /\bpopulation of\b/i,
   ];
   for (const re of unsupported) {
-    if (re.test(localitySurface)) {
+    if (re.test(surfaceClaimScan)) {
       failures.push(`unsupported-claim:${re.source}`);
     }
   }

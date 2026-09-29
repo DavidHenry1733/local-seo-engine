@@ -154,9 +154,11 @@ export function buildContentGenerationContext(
         }));
   const selectedAreas = options.selectedAreasOverride?.length
     ? options.selectedAreasOverride
-    : localLocationHierarchy.ok
-      ? hierarchyToContentGenerationAreas(localLocationHierarchy)
-      : profileSelectedAreas;
+    : profileSelectedAreas.length
+      ? profileSelectedAreas
+      : localLocationHierarchy.ok
+        ? hierarchyToContentGenerationAreas(localLocationHierarchy)
+        : [];
   const primaryTown = String(raw.primaryTown || raw.townCity || profile.town || "").trim();
   const localArea = options.localArea || primaryTown || selectedAreas[0]?.areaName || "";
 

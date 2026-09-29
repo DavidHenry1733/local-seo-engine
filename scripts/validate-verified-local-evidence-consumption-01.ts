@@ -37,11 +37,11 @@ const generationLatestPath =
 const localityDir = "output/pharmacy-content-ecosystem/gilbert-pharmacy-health-clinic/blood-pressure-checks";
 
 const expectedHashes: Record<string, string> = {
-  [campaignPath]: "b1a0872820599061477fc6dbae642e79b6a995b97b68945e70a35e14a0b849ef",
+  [campaignPath]: "ff036cd0e7cf6b1fb76378d656641d190afea4a8fa1a08cd2790eb63a3ae7bfa",
   [reviewPath]: "c4b044432ed1a2f7e39059187b2be2167a4f97b20f1905a2da1146fa7217d45c",
   [servicePagePath]: "cf733520911cbadffc55573bb03c31ea2798c7e2e60dbbe7ff2c4d4db43cf18c",
-  [jobsPath]: "6944a181376fef8f3c6019fb09fcc6f9366d4206da6060671c1e760e93f76c47",
-  [historyPath]: "f859b72375053fdd26033c93a53faf040713a71fe237deb5c392f9fb936a397f",
+  [jobsPath]: "90bda296fdfb1d467baf9a30dea9859e07a35f0061d0312f100fe73548cb80d7",
+  [historyPath]: "a8f15773820743cdb3f9e2411c56b8f65d3978b63b33c08e89dc7eab3de4c20c",
   [evidencePath]: "e7abe54aaaad3e15b9c3b002fa1de21e70bf95f7a8c805c52ff228ef11169db2",
   [intelligencePath]: "44ebe9b180c1f44253bc240c0273ba6dd19a2f49a557c03ec4cd4ef9d4154e43",
   [generationLatestPath]: "9be152745cba389057f70e64218ec581f21eb18ac6251e9960daa3cf66d80252",
@@ -281,11 +281,14 @@ check(
 
 const jobsAfter = JSON.parse(readFileSync(jobsPath, "utf8"));
 const failedJob = (jobsAfter.jobs || []).find((job: { id?: string }) => job.id === "697f0bf4-5708-48a0-80eb-72f4617d529b");
+const secondFailedJob = (jobsAfter.jobs || []).find((job: { id?: string }) => job.id === "ee221113-ad02-4c1d-a56d-3d80df866024");
 check(
-  "no generation job was created and the failed job stays failed",
+  "no generation job was created and the failed jobs stay failed",
   jobsBefore.jobs.length === jobsAfter.jobs.length &&
     failedJob?.status === "failed" &&
     failedJob?.action === "generate_local_cluster_pages" &&
+    secondFailedJob?.status === "failed" &&
+    secondFailedJob?.error === "Locality patient-copy quality gate failed: glasgow: unsupported-claim:walk-in-assumption" &&
     fileHash(jobsPath) === expectedHashes[jobsPath],
 );
 
