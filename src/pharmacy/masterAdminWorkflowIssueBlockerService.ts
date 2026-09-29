@@ -116,6 +116,37 @@ export function isSupersededPublishFailureIssue(
   });
 }
 
+function isLocalityGenerationFailureIssue(issue: MasterAdminIssueListSummary): boolean {
+  if (!/^Workflow failed:/i.test(issue.title || "")) return false;
+  const full = getMasterAdminIssue(issue.issueId);
+  return /Action:\s*generate_local_cluster_pages\b/.test(full?.reproductionSteps || "");
+}
+
+/**
+ * A failed locality generation stays in the issue record, but it is not a current
+ * blocker once a later generate_local_cluster_pages job has completed.
+ */
+export function isSupersededLocalityGenerationFailureIssue(
+  slug: string,
+  issue: MasterAdminIssueListSummary,
+): boolean {
+  if (issue.tenantSlug !== slug || !isLocalityGenerationFailureIssue(issue)) return false;
+  return listMasterAdminJobs({ slug, limit: 40 }).some(
+    (job) =>
+      job.action === "generate_local_cluster_pages" &&
+      job.status === "completed" &&
+      (job.completedAt || "") > (issue.createdAt || ""),
+  );
+}
+
+export function countActiveCustomerIssues(slug: string): number {
+  return listMasterAdminIssueSummaries().filter((issue) => {
+    if (issue.tenantSlug !== slug) return false;
+    if (["Closed", "Passed"].includes(issue.status)) return false;
+    return !isSupersededLocalityGenerationFailureIssue(slug, issue);
+  }).length;
+}
+
 export function isWorkflowIssueStillBlocking(
   slug: string,
   issue: MasterAdminIssueListSummary,
@@ -126,6 +157,9 @@ export function isWorkflowIssueStillBlocking(
 
   // CPR-INDEXING-ENTRY-HOTFIX-01 — superseded publish failures must not block post-publish stages.
   if (isSupersededPublishFailureIssue(slug, issue)) {
+    return false;
+  }
+  if (isSupersededLocalityGenerationFailureIssue(slug, issue)) {
     return false;
   }
 

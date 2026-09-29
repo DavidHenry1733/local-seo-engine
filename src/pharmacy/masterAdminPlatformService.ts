@@ -106,7 +106,7 @@ import {
 } from "./masterAdminOnboardingBatchService.ts";
 import { mergeCustomerOperationalSummary } from "./masterAdminWebsiteImportWorkflowStateService.ts";
 import { resolveWebsiteIntelligenceReimportState } from "./masterAdminWebsiteIntelligenceReimportState.ts";
-import { resolveWorkflowIssueBlockers } from "./masterAdminWorkflowIssueBlockerService.ts";
+import { countActiveCustomerIssues, resolveWorkflowIssueBlockers } from "./masterAdminWorkflowIssueBlockerService.ts";
 import {
   buildPublishedReleaseVerification,
   readLatestCommercialPublishSnapshot,
@@ -750,7 +750,7 @@ export function buildMasterAdminCustomerRecord(slug: string): MasterAdminCustome
     currentStage: workflow?.currentStage || lifecycle,
     currentStageLabel: workflow?.currentStageLabel || LIFECYCLE_LABELS[lifecycle],
     nextAction: workflow?.nextAction?.label || "—",
-    outstandingIssues: issueSummary.openCount,
+    outstandingIssues: countActiveCustomerIssues(safe),
     latestActivity: profileUpdatedAt || listMasterAdminAudit({ slug: safe, limit: 1 })[0]?.timestamp || "",
     generationStatus: canonicalStatusLabel(canonicalStatuses, "generation"),
     publishingStatus: canonicalStatusLabel(canonicalStatuses, "publishing"),

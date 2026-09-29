@@ -29,7 +29,7 @@ import {
   getClientMeta,
   type MasterAdminCustomerRecord,
 } from "./masterAdminPlatformService.ts";
-import { resolveWorkflowIssueBlockers } from "./masterAdminWorkflowIssueBlockerService.ts";
+import { countActiveCustomerIssues, resolveWorkflowIssueBlockers } from "./masterAdminWorkflowIssueBlockerService.ts";
 import {
   buildPublishedReleaseVerification,
   readLatestCommercialPublishSnapshot,
@@ -219,7 +219,7 @@ function buildMasterAdminCustomerRecordLiteInternal(slug: string): MasterAdminCu
     currentStage: workflow?.currentStage || lifecycle,
     currentStageLabel: workflow?.currentStageLabel || lifecycle,
     nextAction: workflow?.nextAction?.label || "—",
-    outstandingIssues: issueSummary.openCount,
+    outstandingIssues: countActiveCustomerIssues(safe),
     latestActivity: profileUpdatedAt || listMasterAdminAudit({ slug: safe, limit: 1 })[0]?.timestamp || "",
     generationStatus: canonicalStatusLabel(canonicalStatuses, "generation"),
     publishingStatus: canonicalStatusLabel(canonicalStatuses, "publishing"),

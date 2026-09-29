@@ -16,8 +16,8 @@ function check(name: string, passed: boolean, detail?: string) {
 const page = readFileSync(resolve("artifacts/api-server/src/routes/masterAdminPlatformPage.ts"), "utf8");
 const cprSrc = readFileSync(resolve("src/pharmacy/masterAdminCoreProductRecoveryService.ts"), "utf8");
 
-const mapSlice = page.slice(page.indexOf("const CANONICAL_REVIEW_NEXT_ACTIONS={"), page.indexOf("const CANONICAL_REVIEW_NEXT_ACTIONS={") + 400);
-const reviewSlice = page.slice(page.indexOf("const canonicalNext=String(c.nextAction||'');"), page.indexOf("const canonicalNext=String(c.nextAction||'');") + 2600);
+const mapSlice = page.slice(page.indexOf("const CANONICAL_REVIEW_NEXT_ACTIONS={"), page.indexOf("const CANONICAL_REVIEW_NEXT_OPENERS={"));
+const reviewSlice = page.slice(page.indexOf("const canonicalNext=String(c.nextAction||'');"), page.indexOf("const canonicalNext=String(c.nextAction||'');") + 3600);
 const reviewButton = page.match(/id="udOpenServicePageReviewBtn"[^>]*>/)?.[0] || "";
 const evidenceButton = page.match(/id="udOpenEvidenceReviewBtn"[^>]*>/)?.[0] || "";
 const generateButton = page.match(/id="udOpenServicePageGenerationBtn"[^>]*>/)?.[0] || "";
@@ -28,6 +28,7 @@ const supported = [
   ["Generate Service Page", "udOpenServicePageGenerationBtn", "openServicePageGeneration()"],
   ["Open Service Page Review", "udOpenServicePageReviewBtn", "openServicePageReview()"],
   ["Generate Cluster Pages", "udOpenLocalityScopeBtn", "openCampaignLocalitySelection(this.getAttribute('data-campaign-id'),this.getAttribute('data-service-id'))"],
+  ["Review Cluster Pages", "openClusterReviewBtn", "openClusterPageReview(this.getAttribute('data-campaign-id'),this.getAttribute('data-service-id'))"],
 ] as const;
 
 check("header prints the canonical next action", page.includes("c.nextAction?'Next: '+c.nextAction"));
@@ -44,6 +45,8 @@ for (const [label, id, onclick] of supported) {
     ? reviewButton
     : label === "Generate Cluster Pages"
       ? (page.match(/id="udOpenLocalityScopeBtn"[^>]*>/)?.[0] || "")
+      : label === "Review Cluster Pages"
+        ? (page.match(/id="openClusterReviewBtn"[^>]*>/)?.[0] || "")
       : label === "Open Evidence Review"
         ? evidenceButton
         : generateButton;
@@ -61,7 +64,6 @@ const constants = new Map<string, string>();
 for (const match of cprSrc.matchAll(/export const (CPR[A-Z0-9_]+) = "([^"]+)"/g)) constants.set(match[1], match[2]);
 const laterStageLabels = new Set([
   "Cluster Generation in Progress",
-  "Review Cluster Pages",
   "Open Publish Review",
 ]);
 const returned = new Set<string>();
@@ -109,7 +111,7 @@ check("missing campaign shows a visible locality error", localityOpener.includes
 check("approved review binds campaign identity before opening scope", sprRender.includes("bindClusterScopeButton(clusterBtn, review.campaignId, review.serviceId)") && sprRender.includes("data-campaign-id") && sprRender.includes("openCampaignLocalitySelection(clusterBtn.getAttribute('data-campaign-id'),clusterBtn.getAttribute('data-service-id'))"));
 check("Review tab does not show Generate Cluster Pages without a campaign", reviewShell.includes("canonicalNext==='Generate Cluster Pages'") && reviewShell.includes("bindClusterScopeButton(scopeBtn, ident&&ident.campaignId, ident&&ident.serviceId)") && reviewShell.includes("Locality scope unavailable"));
 check("approved review uses the canonical opener", sprRender.includes("CANONICAL_REVIEW_NEXT_OPENERS[nextAction]") && sprApprove.includes("btn.style.display=approved?'none':'block'") && !sprRender.includes("generateCampaignLocalityPages()"));
-check("header next action for Gilbert is Generate Cluster Pages", gilbertNext === "Generate Cluster Pages", String(gilbertNext));
+check("header next action for Gilbert is Review Cluster Pages", gilbertNext === "Review Cluster Pages", String(gilbertNext));
 check("second pharmacy is not assigned Gilbert's action by name", otherNext !== "gilbert-pharmacy-health-clinic", String(otherNext));
 check("resolver read did not change Gilbert files", before === after);
 
