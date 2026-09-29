@@ -538,7 +538,7 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
         <button class="btn" type="button" id="udOpenEvidenceReviewBtn" onclick="openServicePageEvidenceReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Evidence Review</button>
         <button class="btn" type="button" id="udOpenServicePageGenerationBtn" onclick="openServicePageGeneration()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Generate Service Page</button>
         <button class="btn" type="button" id="udOpenServicePageReviewBtn" onclick="openServicePageReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Service Page Review</button>
-        <button class="btn" type="button" id="udOpenLocalityScopeBtn" onclick="openCampaignLocalitySelection()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Generate Cluster Pages</button>
+        <button class="btn" type="button" id="udOpenLocalityScopeBtn" onclick="openCampaignLocalitySelection(this.getAttribute('data-campaign-id'),this.getAttribute('data-service-id'))" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Generate Cluster Pages</button>
         <div id="udReviewStatus" class="ud-link-list"></div>
         <button class="cqr-btn-review" type="button" id="openCqrBtn" onclick="openCommercialQualityReview()" style="margin-top:8px;display:none">Open Quality Review</button>
         <button class="cqr-btn-review" type="button" id="openClusterReviewBtn" onclick="openClusterPageReview()" style="margin-top:8px;display:none">Review Locality Pages</button>
@@ -3146,6 +3146,14 @@ function renderCustomerDetail(c){
     const btn=document.getElementById(CANONICAL_REVIEW_NEXT_ACTIONS[label]);
     if(btn)btn.style.display=label===canonicalNext?'inline-block':'none';
   });
+  if(canonicalNext==='Generate Cluster Pages'){
+    const scopeBtn=document.getElementById('udOpenLocalityScopeBtn');
+    const ident=canonicalClusterIdentity(c);
+    if(!bindClusterScopeButton(scopeBtn, ident&&ident.campaignId, ident&&ident.serviceId)){
+      if(scopeBtn)scopeBtn.style.display='none';
+      if(reviewEl)reviewEl.insertAdjacentHTML('beforeend','<div class="bpr-error-panel" style="margin-top:8px"><h5>Locality scope unavailable</h5><div>The next action needs a service campaign before locality selection can open.</div></div>');
+    }
+  }
   const clusterReviewBtn=document.getElementById('openClusterReviewBtn');
   if(clusterReviewBtn){
     clusterReviewBtn.style.display=customerAtCprClusterReview(c)?'block':'none';
@@ -4184,15 +4192,48 @@ function reviewCampaignRef(){
   if(campaigns.length===1&&campaigns[0].campaignId)return campaigns[0];
   return null;
 }
-async function openCampaignLocalitySelection(){
-  if(!activeCustomer)return;
-  const camp=reviewCampaignRef();
-  if(!camp||!camp.campaignId){toast('Select a service campaign first.',true);return;}
-  document.getElementById('campaignLocalityModal').classList.add('open');
+function canonicalClusterIdentity(c){
+  const selected=c&&c.selectedServiceCampaign;
+  if(selected&&selected.campaignId)return {campaignId:selected.campaignId,serviceId:selected.serviceId||''};
+  const campaigns=(c&&c.serviceCampaigns)||[];
+  if(campaigns.length===1&&campaigns[0]&&campaigns[0].campaignId)return {campaignId:campaigns[0].campaignId,serviceId:campaigns[0].serviceId||''};
+  return null;
+}
+function bindClusterScopeButton(btn,campaignId,serviceId){
+  if(!btn)return false;
+  const id=String(campaignId||'').trim();
+  if(!id){
+    btn.style.display='none';
+    btn.removeAttribute('data-campaign-id');
+    btn.removeAttribute('data-service-id');
+    return false;
+  }
+  btn.setAttribute('data-campaign-id',id);
+  btn.setAttribute('data-service-id',String(serviceId||''));
+  return true;
+}
+async function openCampaignLocalitySelection(campaignId,serviceId){
+  if(!activeCustomer){toast('Open a pharmacy before opening locality selection.',true);return;}
+  ['sprModal','cprClusterReviewModal','idxModal','perfModal','auditModal'].forEach(function(id){
+    const covering=document.getElementById(id);
+    if(covering)covering.classList.remove('open');
+  });
+  const modal=document.getElementById('campaignLocalityModal');
+  if(!modal){toast('Locality selection screen is unavailable.',true);return;}
+  if(modal.parentNode)modal.parentNode.appendChild(modal);
+  modal.classList.add('open');
   document.getElementById('campaignLocalityLoading').style.display='block';
   document.getElementById('campaignLocalityContent').style.display='none';
   document.getElementById('campaignLocalityError').style.display='none';
   setWorkflowPanelUrl('campaign-locality-selection');
+  const explicit=String(campaignId||'').trim();
+  const camp=explicit?{campaignId:explicit,serviceId:String(serviceId||''),serviceName:'this service'}:reviewCampaignRef();
+  if(!camp||!camp.campaignId){
+    document.getElementById('campaignLocalityLoading').style.display='none';
+    document.getElementById('campaignLocalityError').style.display='block';
+    document.getElementById('campaignLocalityErrorDetail').textContent='Select a service campaign before opening locality selection.';
+    return;
+  }
   try{
     const data=await api('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/campaigns/'+encodeURIComponent(camp.campaignId)+'/locality-selection');
     activeCampaignLocalitySelection=data.selection;
@@ -7294,14 +7335,21 @@ function renderServicePageReview(review){
   const nextAction=String(review.nextAction||'');
   const nextOpener=CANONICAL_REVIEW_NEXT_OPENERS[nextAction];
   if(clusterBtn){
-    if(review.reviewStatus==='approved'&&typeof nextOpener==='function'&&nextAction!=='Open Service Page Review'){
+    const clusterIdentityOk=nextAction!=='Generate Cluster Pages'||bindClusterScopeButton(clusterBtn, review.campaignId, review.serviceId);
+    if(review.reviewStatus==='approved'&&typeof nextOpener==='function'&&nextAction!=='Open Service Page Review'&&clusterIdentityOk){
       clusterBtn.style.display='block';
       clusterBtn.disabled=false;
       clusterBtn.textContent=nextAction;
-      clusterBtn.onclick=function(){nextOpener();};
+      clusterBtn.onclick=function(){
+        if(nextAction==='Generate Cluster Pages')openCampaignLocalitySelection(clusterBtn.getAttribute('data-campaign-id'),clusterBtn.getAttribute('data-service-id'));
+        else nextOpener();
+      };
     }else{
       clusterBtn.style.display='none';
       clusterBtn.onclick=null;
+      if(review.reviewStatus==='approved'&&nextAction==='Generate Cluster Pages'&&!clusterIdentityOk){
+        document.getElementById('sprPanelStats').insertAdjacentHTML('beforeend','<div class="bpr-error-panel" style="margin-top:8px"><h5>Locality scope unavailable</h5><div>The next action needs a service campaign before locality selection can open.</div></div>');
+      }
     }
   }
   updateSprApproveState();

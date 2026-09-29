@@ -27,7 +27,7 @@ const supported = [
   ["Open Evidence Review", "udOpenEvidenceReviewBtn", "openServicePageEvidenceReview()"],
   ["Generate Service Page", "udOpenServicePageGenerationBtn", "openServicePageGeneration()"],
   ["Open Service Page Review", "udOpenServicePageReviewBtn", "openServicePageReview()"],
-  ["Generate Cluster Pages", "udOpenLocalityScopeBtn", "openCampaignLocalitySelection()"],
+  ["Generate Cluster Pages", "udOpenLocalityScopeBtn", "openCampaignLocalitySelection(this.getAttribute('data-campaign-id'),this.getAttribute('data-service-id'))"],
 ] as const;
 
 check("header prints the canonical next action", page.includes("c.nextAction?'Next: '+c.nextAction"));
@@ -99,10 +99,15 @@ const { resolveCommercialWorkflowNextAction } = await import("../src/pharmacy/ma
 const gilbertNext = resolveCommercialWorkflowNextAction("gilbert-pharmacy-health-clinic", "generate_ecosystem");
 const otherNext = resolveCommercialWorkflowNextAction("pharmaconnect-e2e-test-pharmacy", "generate_ecosystem");
 const after = execFileSync("sha256sum", protectedFiles, { encoding: "utf8" });
-const localityOpener = page.slice(page.indexOf("async function openCampaignLocalitySelection()"), page.indexOf("function closeCampaignLocalitySelection()"));
+const localityOpener = page.slice(page.indexOf("async function openCampaignLocalitySelection("), page.indexOf("function closeCampaignLocalitySelection()"));
 const sprRender = page.slice(page.indexOf("function renderServicePageReview(review)"), page.indexOf("async function approveServicePageReviewAction()"));
 const sprApprove = page.slice(page.indexOf("function updateSprApproveState()"), page.indexOf("function renderServicePageReview(review)"));
+const reviewShell = page.slice(page.indexOf("const canonicalNext=String(c.nextAction||'');"), page.indexOf("const pubEl=document.getElementById('udPublishingStatus');"));
 check("Generate Cluster Pages opens locality scope", localityOpener.includes("/locality-selection") && !/method:\s*'POST'/.test(localityOpener));
+check("locality opener closes the covering service-page review", localityOpener.includes("sprModal") && localityOpener.includes("classList.remove('open')"));
+check("missing campaign shows a visible locality error", localityOpener.includes("campaignLocalityError") && localityOpener.includes("Select a service campaign before opening locality selection."));
+check("approved review binds campaign identity before opening scope", sprRender.includes("bindClusterScopeButton(clusterBtn, review.campaignId, review.serviceId)") && sprRender.includes("data-campaign-id") && sprRender.includes("openCampaignLocalitySelection(clusterBtn.getAttribute('data-campaign-id'),clusterBtn.getAttribute('data-service-id'))"));
+check("Review tab does not show Generate Cluster Pages without a campaign", reviewShell.includes("canonicalNext==='Generate Cluster Pages'") && reviewShell.includes("bindClusterScopeButton(scopeBtn, ident&&ident.campaignId, ident&&ident.serviceId)") && reviewShell.includes("Locality scope unavailable"));
 check("approved review uses the canonical opener", sprRender.includes("CANONICAL_REVIEW_NEXT_OPENERS[nextAction]") && sprApprove.includes("btn.style.display=approved?'none':'block'") && !sprRender.includes("generateCampaignLocalityPages()"));
 check("header next action for Gilbert is Generate Cluster Pages", gilbertNext === "Generate Cluster Pages", String(gilbertNext));
 check("second pharmacy is not assigned Gilbert's action by name", otherNext !== "gilbert-pharmacy-health-clinic", String(otherNext));
