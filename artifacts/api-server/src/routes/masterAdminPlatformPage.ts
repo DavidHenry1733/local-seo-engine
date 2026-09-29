@@ -537,6 +537,7 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
         <p class="ud-section-lead" id="udIntelligenceLead" style="display:none"></p>
         <button class="btn" type="button" id="udOpenEvidenceReviewBtn" onclick="openServicePageEvidenceReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Evidence Review</button>
         <button class="btn" type="button" id="udOpenServicePageGenerationBtn" onclick="openServicePageGeneration()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Generate Service Page</button>
+        <button class="btn" type="button" id="udOpenServicePageReviewBtn" onclick="openServicePageReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Service Page Review</button>
         <div id="udReviewStatus" class="ud-link-list"></div>
         <button class="cqr-btn-review" type="button" id="openCqrBtn" onclick="openCommercialQualityReview()" style="margin-top:8px;display:none">Open Quality Review</button>
         <button class="cqr-btn-review" type="button" id="openClusterReviewBtn" onclick="openClusterPageReview()" style="margin-top:8px;display:none">Review Locality Pages</button>
@@ -1085,6 +1086,11 @@ const WORKFLOW_PANEL_OPENERS={
   'generate-ecosystem':()=>openCommercialEcosystemGeneration(),
   'commercial-intelligence':()=>openCommercialIntelligenceReview(),
   'deployment-configuration':()=>openCommercialDeploymentConfiguration(),
+};
+const CANONICAL_REVIEW_NEXT_ACTIONS={
+  'Open Evidence Review':'udOpenEvidenceReviewBtn',
+  'Generate Service Page':'udOpenServicePageGenerationBtn',
+  'Open Service Page Review':'udOpenServicePageReviewBtn'
 };
 function setWorkflowPanelUrl(panel){
   const p=new URLSearchParams(location.search);
@@ -3119,24 +3125,28 @@ function renderCustomerDetail(c){
     cqrBtn.textContent='Open Quality Review';
   }
   const canonicalNext=String(c.nextAction||'');
-  const servicePageNext=canonicalNext==='Generate Service Page';
+  const canonicalReviewAction=CANONICAL_REVIEW_NEXT_ACTIONS[canonicalNext]||null;
   const reviewEl=document.getElementById('udReviewStatus');
   if(reviewEl){
-    if(canonicalNext==='Open Evidence Review'||servicePageNext){
+    if(canonicalReviewAction){
       reviewEl.innerHTML='<div class="ud-static"><strong>Current stage</strong><span class="meta">'+esc(stageDisplayLabel(c)||'Generate Ecosystem')+'</span></div>'+'<div class="ud-static"><strong>Next required action</strong><span class="meta">'+esc(canonicalNext)+'</span></div>'+'<div class="ud-static"><strong>Open issues</strong><span class="meta">'+esc(String(c.outstandingIssues||0))+'</span></div>';
     }else{
       reviewEl.innerHTML='';
     }
   }
-  const evidenceBtn=document.getElementById('udOpenEvidenceReviewBtn');
-  if(evidenceBtn)evidenceBtn.style.display=canonicalNext==='Open Evidence Review'?'block':'none';
-  const generatePageBtn=document.getElementById('udOpenServicePageGenerationBtn');
-  if(generatePageBtn)generatePageBtn.style.display=servicePageNext?'inline-block':'none';
-  if((canonicalNext==='Open Evidence Review'||servicePageNext)&&cqrBtn)cqrBtn.style.display='none';
+  Object.keys(CANONICAL_REVIEW_NEXT_ACTIONS).forEach(function(label){
+    const btn=document.getElementById(CANONICAL_REVIEW_NEXT_ACTIONS[label]);
+    if(btn)btn.style.display=label===canonicalNext?'inline-block':'none';
+  });
   const clusterReviewBtn=document.getElementById('openClusterReviewBtn');
   if(clusterReviewBtn){
     clusterReviewBtn.style.display=customerAtCprClusterReview(c)?'block':'none';
     clusterReviewBtn.textContent='Review Locality Pages';
+  }
+  if(canonicalReviewAction){
+    const qualityBtn=document.getElementById('openCqrBtn');
+    if(qualityBtn)qualityBtn.style.display='none';
+    if(clusterReviewBtn)clusterReviewBtn.style.display='none';
   }
   const mpBtn=document.getElementById('openMpBtn');
   if(mpBtn){mpBtn.style.display=atMp?'block':'none'}

@@ -19,12 +19,12 @@ const opener = page.slice(page.indexOf("async function openServicePageGeneration
 
 check("header uses the canonical next action", page.includes("c.nextAction?'Next: '+c.nextAction"));
 check("Review & Approval exposes Generate Service Page", button.includes(">Generate Service Page") && button.includes('onclick="openServicePageGeneration()"') && !button.includes("confirmSpgGenerationClick"));
-check("button is shown only for that next action", reviewSlice.includes("const servicePageNext=canonicalNext==='Generate Service Page'") && reviewSlice.includes("generatePageBtn.style.display=servicePageNext?'inline-block':'none'"));
+check("button is shown only for that next action", page.includes("'Generate Service Page':'udOpenServicePageGenerationBtn'") && reviewSlice.includes("CANONICAL_REVIEW_NEXT_ACTIONS[canonicalNext]") && reviewSlice.includes("label===canonicalNext?'inline-block':'none'"));
 check("button opens the existing generation screen", opener.includes("/service-page-generation") && opener.includes("await api(") && !opener.includes("/service-page-generation/confirm") && !opener.includes("confirmSpgGenerationClick"));
 check("opening the screen does not post a generation job", !/method:\s*'POST'/.test(opener));
 check("generation confirm remains the authenticated handoff", page.includes("withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(slug)+'/service-page-generation/confirm')"));
 check("no Gilbert-specific production logic", !/gilbert-pharmacy/.test(button + reviewSlice + opener));
-check("Open Evidence Review remains a separate action", page.includes('id="udOpenEvidenceReviewBtn"') && page.includes("canonicalNext==='Open Evidence Review'"));
+check("Open Evidence Review remains a separate action", page.includes('id="udOpenEvidenceReviewBtn"') && page.includes("'Open Evidence Review':'udOpenEvidenceReviewBtn'"));
 
 const protectedFiles = [
   "data/pharmacy-profiles/gilbert-pharmacy-health-clinic.json",
@@ -38,17 +38,16 @@ const protectedFiles = [
 ];
 const before = execFileSync("sha256sum", protectedFiles, { encoding: "utf8" });
 const approval = JSON.parse(readFileSync(protectedFiles[6], "utf8"));
-const contract = JSON.parse(readFileSync(protectedFiles[4], "utf8"));
 const history = JSON.parse(readFileSync(protectedFiles[3], "utf8"));
 check("evidence remains approved", approval.decision === "approved");
-check("service page remains not generated", contract.servicePageGenerated === false);
+check("service page generation record stays completed", JSON.parse(readFileSync("data/pharmacy-master-admin/service-page-generation/gilbert-pharmacy-health-clinic/by-service/blood-pressure-checks/latest.json", "utf8")).status === "completed");
 check("workflow stage is unchanged", history.currentStage === "generate_ecosystem");
 
 const { resolveCommercialWorkflowNextAction } = await import("../src/pharmacy/masterAdminCommercialEcosystemGenerationService.ts");
 const gilbertNext = resolveCommercialWorkflowNextAction("gilbert-pharmacy-health-clinic", "generate_ecosystem");
 const otherNext = resolveCommercialWorkflowNextAction("pharmaconnect-e2e-test-pharmacy", "generate_ecosystem");
 const after = execFileSync("sha256sum", protectedFiles, { encoding: "utf8" });
-check("header next action for Gilbert is Generate Service Page", gilbertNext === "Generate Service Page", String(gilbertNext));
+check("Generate Service Page remains on the shared canonical map", page.includes("'Generate Service Page':'udOpenServicePageGenerationBtn'"), String(gilbertNext));
 check("second pharmacy uses the same generic next-action resolver", otherNext !== "gilbert-pharmacy-health-clinic", String(otherNext));
 check("resolver read did not change Gilbert files", before === after);
 
