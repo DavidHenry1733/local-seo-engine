@@ -368,14 +368,13 @@ export async function generateLocalLocationHierarchyPages(
   );
 
   const patientCopyFailures: string[] = [];
+  const entityNamesBySlug = new Map<string, string[]>();
   const approvedBankLocality =
     usesApprovedBankLocalityDirectPath(ctx.serviceId) &&
     !usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId);
   const localContractPages: Array<{ areaName: string; localBody: string; entityNames: string[] }> = [];
   for (const cluster of hierarchy.clusters) {
     const pageSlug = resolveClusterPageSlug(cluster.slug);
-    if (options?.skipExistingOutputs && !newSlugs.has(pageSlug)) continue;
-    const html = htmlBySlug.get(pageSlug) || "";
     const packLoaded = loadLocalEvidencePackForGeneration(ctx.resolvedSlug, cluster.name, pageSlug);
     const evidenceFacts = packLoaded.ok
       ? attributableEntities(packLoaded.pack).map((entity) => ({
@@ -384,6 +383,12 @@ export async function generateLocalLocationHierarchyPages(
           address: entity.address,
         }))
       : [];
+    entityNamesBySlug.set(
+      pageSlug,
+      evidenceFacts.map((fact) => fact.name),
+    );
+    if (options?.skipExistingOutputs && !newSlugs.has(pageSlug)) continue;
+    const html = htmlBySlug.get(pageSlug) || "";
     const gate = evaluateLocalityPatientCopyQualityGate({
       html,
       areaName: cluster.name,
@@ -438,6 +443,12 @@ export async function generateLocalLocationHierarchyPages(
           htmlBySlug.get(bSlug) || "",
           a.name,
           b.name,
+          {
+            pharmacyName,
+            pharmacyAddress: ctx.profile.customerFacingAddress || ctx.profile.fullAddress || "",
+            pharmacyPhone: ctx.profile.phone || ctx.profile.displayPhone || "",
+            entityNames: [...(entityNamesBySlug.get(aSlug) || []), ...(entityNamesBySlug.get(bSlug) || [])],
+          },
         )
       ) {
         patientCopyFailures.push(`${aSlug}/${bSlug}: duplicate locality introduction or access paragraph`);

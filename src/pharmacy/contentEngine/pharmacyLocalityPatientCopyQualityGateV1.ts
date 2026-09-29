@@ -492,11 +492,119 @@ export function evaluateLocalityPatientCopyQualityGate(input: {
   return { ok: failures.length === 0, failures: [...new Set(failures)] };
 }
 
+/**
+ * Canonical business facts may be shared by every locality page.
+ * They must not create a duplicate failure and must not count as differentiation.
+ */
+export type LocalitySharedCanonicalFacts = {
+  pharmacyName?: string;
+  pharmacyAddress?: string;
+  pharmacyPhone?: string;
+  /** Place names that may be swapped without creating a new locality claim. */
+  entityNames?: string[];
+  /** Approved service, safety, or CTA sentences shared by the service. */
+  sharedCopy?: string[];
+};
+
+/** Token edits of the same locality paragraph are not material differentiation. */
+const LOCALITY_TOKEN_EDIT_OVERLAP = 0.92;
+
+const CANONICAL_SHELL_WORDS = new Set([
+  "a", "an", "the", "and", "or", "for", "from", "with", "that", "this", "these", "those",
+  "are", "is", "at", "on", "to", "of", "in", "by", "be", "as", "it", "its", "our", "your",
+  "you", "pharmacy", "address", "patients", "patient", "contact", "phone", "telephone",
+  "call", "ask", "how", "arranged", "service", "their", "can", "will", "may",
+]);
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function structuredFact(html: string, label: string): string {
+  return stripHtml(html.match(new RegExp(`<strong>\\s*${label}:\\s*<\\/strong>\\s*([^<]+)`, "i"))?.[1] || "");
+}
+
+function factsForPair(
+  aHtml: string,
+  bHtml: string,
+  explicit?: LocalitySharedCanonicalFacts,
+): LocalitySharedCanonicalFacts {
+  const pharmacyName =
+    explicit?.pharmacyName ||
+    stripHtml(aHtml.match(/class="pharmacy-local-details[^"]*"[\s\S]*?<h3>([\s\S]*?)<\/h3>/i)?.[1] || "") ||
+    stripHtml(bHtml.match(/class="pharmacy-local-details[^"]*"[\s\S]*?<h3>([\s\S]*?)<\/h3>/i)?.[1] || "");
+  return {
+    pharmacyName,
+    pharmacyAddress: [explicit?.pharmacyAddress, structuredFact(aHtml, "Address"), structuredFact(bHtml, "Address")]
+      .filter(Boolean)
+      .join("\n"),
+    pharmacyPhone: [explicit?.pharmacyPhone, structuredFact(aHtml, "Phone"), structuredFact(bHtml, "Phone")]
+      .filter(Boolean)
+      .join("\n"),
+    entityNames: explicit?.entityNames || [],
+    sharedCopy: explicit?.sharedCopy || [],
+  };
+}
+
+function stripCanonicalSentences(text: string): string {
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .filter((sentence) => !(/\bcontact\b/i.test(sentence) && /\b(ask how|arranged)\b/i.test(sentence)))
+    .join(" ");
+}
+
+/** Locality-specific words left after canonical pharmacy, contact, and service facts are removed. */
+export function localitySpecificComparisonText(
+  text: string,
+  areaName: string,
+  facts: LocalitySharedCanonicalFacts,
+): string {
+  let out = stripCanonicalSentences(text).toLowerCase();
+  const removals = [
+    ...(facts.pharmacyAddress || "").split("\n"),
+    ...(facts.pharmacyPhone || "").split("\n"),
+    facts.pharmacyName || "",
+    areaName,
+    ...(facts.sharedCopy || []),
+    ...(facts.entityNames || []),
+  ]
+    .map((value) => value.trim())
+    .filter((value) => value.length >= 3);
+  removals.sort((a, b) => b.length - a.length);
+  for (const value of removals) {
+    out = out.replace(new RegExp(escapeRegExp(value.toLowerCase()), "g"), " ");
+  }
+  out = out
+    .replace(/\b(?:\+44\s?|0)\d[\d\s()-]{8,}\b/g, " ")
+    .replace(/\b[a-z]{1,2}\d{1,2}[a-z]?\s*\d[a-z]{2}\b/g, " ")
+    .replace(/\b\d+(?:\.\d+)?\s*km\b/g, " ");
+  const words = out
+    .split(/[^a-z0-9]+/)
+    .filter((word) => word.length > 2 && !CANONICAL_SHELL_WORDS.has(word));
+  return words.join(" ");
+}
+
+function tokenOverlap(a: string, b: string): number {
+  const wa = new Set(a.split(" ").filter((word) => word.length > 3));
+  const wb = new Set(b.split(" ").filter((word) => word.length > 3));
+  if (!wa.size || !wb.size) return a === b ? 1 : 0;
+  let shared = 0;
+  for (const word of wa) if (wb.has(word)) shared += 1;
+  return shared / Math.max(wa.size, wb.size);
+}
+
+function materiallyDifferent(a: string, b: string): boolean {
+  if (!a || !b) return false;
+  if (a === b) return false;
+  return tokenOverlap(a, b) < LOCALITY_TOKEN_EDIT_OVERLAP;
+}
+
 export function localityIntroductionsAreDistinct(
   aHtml: string,
   bHtml: string,
   aName: string,
   bName: string,
+  canonical?: LocalitySharedCanonicalFacts,
 ): boolean {
   const introOf = (html: string) => {
     const hero =
@@ -507,29 +615,29 @@ export function localityIntroductionsAreDistinct(
     return stripHtml(p?.[1] || "");
   };
   const accessOf = (html: string) => {
-    const lead =
-      html.match(/<p class="local-intro-lead">([\s\S]*?)<\/p>/i)?.[1] ||
-      html.match(
-        /<section\b[^>]*id="local-access"[^>]*>[\s\S]*?<div class="section-head[^"]*">([\s\S]*?)<\/div>/i,
-      )?.[1] ||
-      "";
-    return stripHtml(lead);
+    const section = html.match(/<section\b[^>]*id="local-access"[^>]*>[\s\S]*?<\/section>/i)?.[0] || "";
+    const localityAccess = section
+      .replace(/<div class="local-safety-note"[\s\S]*?<\/div>/gi, " ")
+      .replace(/<p\b[^>]*data-locality-cta[^>]*>[\s\S]*?<\/p>/gi, " ");
+    const paragraphs = [...localityAccess.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+      .map((match) => stripHtml(match[1] || ""))
+      .filter(Boolean);
+    if (paragraphs.length) return paragraphs.join(" ");
+    return stripHtml(html.match(/<p class="local-intro-lead">([\s\S]*?)<\/p>/i)?.[1] || "");
   };
 
-  const norm = (text: string, name: string) =>
-    text
-      .toLowerCase()
-      .replace(new RegExp(name.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"), "{area}")
-      .replace(/\b\d+(?:\.\d+)?\s*km\b/g, "{dist}")
-      .replace(/\s+/g, " ")
-      .trim();
-
-  const introA = introOf(aHtml);
-  const introB = introOf(bHtml);
-  const accessA = accessOf(aHtml);
-  const accessB = accessOf(bHtml);
-
-  if (introA && introB && norm(introA, aName) === norm(introB, bName)) return false;
-  if (accessA && accessB && norm(accessA, aName) === norm(accessB, bName)) return false;
-  return true;
+  const facts = factsForPair(aHtml, bHtml, canonical);
+  const localA = [
+    localitySpecificComparisonText(introOf(aHtml), aName, facts),
+    localitySpecificComparisonText(accessOf(aHtml), aName, facts),
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const localB = [
+    localitySpecificComparisonText(introOf(bHtml), bName, facts),
+    localitySpecificComparisonText(accessOf(bHtml), bName, facts),
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return materiallyDifferent(localA, localB);
 }
