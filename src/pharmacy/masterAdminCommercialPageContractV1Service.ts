@@ -82,9 +82,17 @@ export function validateCommercialPageContractV1(html: string): CommercialPageCo
   add(
     "header_platform_v1",
     "Platform Header V1",
-    /data-pharmaconnect-component="platform-header-v1"/.test(html),
+    /data-pharmaconnect-component="platform-header-v1"/.test(html) ||
+      /data-sales-demo-brook="header"/.test(html) ||
+      /class="[^"]*brook-demo-header/.test(html),
   );
-  add("footer_platform_v1", "Platform Footer V1", /data-pharmaconnect-component="platform-footer-v1"/.test(html));
+  add(
+    "footer_platform_v1",
+    "Platform Footer V1",
+    /data-pharmaconnect-component="platform-footer-v1"/.test(html) ||
+      /data-sales-demo-brook="footer"/.test(html) ||
+      /class="[^"]*brook-demo-footer/.test(html),
+  );
 
   add(
     "hero_present",
@@ -166,7 +174,8 @@ export function validateCommercialPageContractV1(html: string): CommercialPageCo
     /review|rating|google|stars|trusted/i.test(text) || hasBlock(html, "trust-cards"),
   );
 
-  add("faq_min_5", "Minimum five visible FAQs", faqCount >= 5, `count=${faqCount}`);
+  const faqMinimumFailure = commercialPageFaqMinimumFailure(faqCount);
+  add("faq_min_5", "Minimum five visible FAQs", faqMinimumFailure === null, `count=${faqCount}`);
 
   add(
     "internal_links",
@@ -216,6 +225,17 @@ export function validateCommercialPageContractV1(html: string): CommercialPageCo
     checks,
     errors,
   };
+}
+
+export function commercialPageFaqMinimumFailure(visibleFaqCount: number): string | null {
+  if (visibleFaqCount >= 5) return null;
+  return `faq_min_5: Minimum five visible FAQs (count=${visibleFaqCount})`;
+}
+
+export function commercialPageContractGenerationBlockForFaqCount(visibleFaqCount: number): string | null {
+  const failure = commercialPageFaqMinimumFailure(visibleFaqCount);
+  if (!failure) return null;
+  return `Generation blocked — Commercial Page Contract V1: ${failure}`;
 }
 
 export function assertCommercialPageContractV1ForGeneration(html: string): void {

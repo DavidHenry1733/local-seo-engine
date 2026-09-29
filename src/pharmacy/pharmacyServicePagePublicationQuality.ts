@@ -457,6 +457,8 @@ export function scrubUnconfirmedServiceClaims(
     gphcConfirmed?: boolean;
     /** When set, BP-specific wording is applied only for blood-pressure-checks. */
     serviceId?: string | null;
+    /** Locked approved-bank copy is the content authority and is not rewritten. */
+    approvedBankContractAuthoritative?: boolean;
   },
 ): string {
   let out = html;
@@ -499,7 +501,7 @@ export function scrubUnconfirmedServiceClaims(
     out = out.replace(/Professional registration, clinical governance and local accountability sit behind every consultation[^.]*\./gi, "");
   }
 
-  if (isBloodPressure) {
+  if (isBloodPressure && !options.approvedBankContractAuthoritative) {
     out = scrubBloodPressureUnconfirmedClaims(out, options);
   }
 

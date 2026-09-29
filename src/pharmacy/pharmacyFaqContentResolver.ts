@@ -7,7 +7,7 @@ import * as cheerio from "cheerio";
 import type { ContentGenerationContext } from "./contentEngine/contentGenerationContextTypes.ts";
 import { getContentEcosystemDir, resolvePharmacyWorkspaceRoot } from "./pharmacyWorkspacePaths.ts";
 import { servicePageFaqEntries } from "./pharmacyServicePageIntelligence.ts";
-import { resolveApprovedServiceBank } from "./pharmacyServiceVariantLibrary.ts";
+import { resolveApprovedServiceBank, type ServiceVariantPack } from "./pharmacyServiceVariantLibrary.ts";
 import { withApprovedBankServicePageContract } from "./pharmacyApprovedBankCorePageContract.ts";
 
 export interface ResolvedFaqEntry {
@@ -27,6 +27,27 @@ function dedupeFaqs(entries: ResolvedFaqEntry[], limit = 10): ResolvedFaqEntry[]
     seen.add(key);
     out.push({ question: q, answer: a });
     if (out.length >= limit) break;
+  }
+  return out;
+}
+
+/**
+ * Project locked approved-bank FAQs into the page model.
+ * A blank question or answer is not visible. A repeated question keeps the first.
+ * There is no numeric cap.
+ */
+export function projectLockedApprovedBankServicePageFaqs(pack: ServiceVariantPack): ResolvedFaqEntry[] {
+  const faqs = withApprovedBankServicePageContract(pack).servicePage.faqs;
+  const seen = new Set<string>();
+  const out: ResolvedFaqEntry[] = [];
+  for (const faq of faqs) {
+    const question = String(faq.question || "").trim();
+    const answer = String(faq.answer || "").trim();
+    if (!question || !answer) continue;
+    const key = question.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ question, answer });
   }
   return out;
 }
@@ -83,12 +104,9 @@ export function resolveServicePageFaqContent(
   serviceId: string,
   sourceHtml?: string,
 ): ResolvedFaqEntry[] {
-  // Approved-bank core pages: bank FAQs only — disconnect master/long-form FAQ fallback.
+  // Approved-bank core pages: locked contract FAQs only.
   if (contentContext?.variantPack && resolveApprovedServiceBank(serviceId)) {
-    return dedupeFaqs(
-      withApprovedBankServicePageContract(contentContext.variantPack).servicePage.faqs,
-      10,
-    );
+    return projectLockedApprovedBankServicePageFaqs(contentContext.variantPack);
   }
 
   const merged: ResolvedFaqEntry[] = [];

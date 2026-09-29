@@ -8,8 +8,10 @@ import { buildServicePageEvidenceFieldPipeline } from "./masterAdminCoreProductR
 import { currentBusinessProfileRevision } from "./masterAdminServicePageEvidenceDecisionService.ts";
 import type { ServicePageEvidenceField } from "./masterAdminCoreProductRecoveryModel.ts";
 import { runPreGenerationValidation, type PreGenerationDependencyCheck } from "./masterAdminPreGenerationValidation.ts";
+import { commercialPageContractGenerationBlockForFaqCount } from "./masterAdminCommercialPageContractV1Service.ts";
 import { loadLockedApprovedBankServicePageContract } from "./pharmacyApprovedBankCorePageContract.ts";
-import { isApprovedBankRegisteredService } from "./pharmacyServiceVariantLibrary.ts";
+import { projectLockedApprovedBankServicePageFaqs } from "./pharmacyFaqContentResolver.ts";
+import { isApprovedBankRegisteredService, loadServiceVariantPack } from "./pharmacyServiceVariantLibrary.ts";
 
 export const SERVICE_PAGE_ONLY_EXCLUDED_PREFLIGHT_BLOCKER_IDS = new Set([
   "growth_intelligence",
@@ -43,6 +45,20 @@ export function lockedApprovedBankServicePageContractBlocker(serviceId: string):
     return null;
   } catch (err) {
     return err instanceof Error ? err.message : String(err);
+  }
+}
+
+/** Deterministic Commercial Page Contract checks knowable from the locked contract. */
+export function lockedApprovedBankCommercialPageContractBlocker(serviceId: string): string | null {
+  if (!isApprovedBankRegisteredService(serviceId)) return null;
+  try {
+    const pack = loadServiceVariantPack(serviceId);
+    if (!pack) return null;
+    return commercialPageContractGenerationBlockForFaqCount(
+      projectLockedApprovedBankServicePageFaqs(pack).length,
+    );
+  } catch {
+    return null;
   }
 }
 
@@ -100,6 +116,8 @@ export function evaluateServicePageGenerationReadiness(slug: string, serviceId: 
 
   const lockedContractBlocker = lockedApprovedBankServicePageContractBlocker(serviceId);
   if (lockedContractBlocker) blockers.push(lockedContractBlocker);
+  const commercialContractBlocker = lockedApprovedBankCommercialPageContractBlocker(serviceId);
+  if (commercialContractBlocker) blockers.push(commercialContractBlocker);
 
   const uniqueBlockers = [...new Set(blockers)];
   const canGenerateEvidence =

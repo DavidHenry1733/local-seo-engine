@@ -63,7 +63,7 @@ import {
   type GenerationReport,
 } from "./pharmacyGenerationIntegrityService.ts";
 import { syncSchemaFaqs, type ServicePageFaqLike } from "./pharmacyFaqAlignment.ts";
-import { resolveServicePageFaqContent } from "./pharmacyFaqContentResolver.ts";
+import { projectLockedApprovedBankServicePageFaqs, resolveServicePageFaqContent } from "./pharmacyFaqContentResolver.ts";
 import { enhanceTrustSchemaForSlug } from "./pharmacyTrustLayer.ts";
 import { readServicePageSeoPlan } from "./masterAdminCoreProductRecoverySeoService.ts";
 import {
@@ -282,10 +282,11 @@ export function transformMasterPublishToVisualExperience(
     .join("\n");
   let schemaScripts = schemaScriptsRaw.replace(/Brook Pharmacy/g, profile.pharmacyName);
   const renderedFaqs = extractRenderedServicePageFaqs(mainHtml);
-  const faqsForSchema =
-    renderedFaqs.length >= 5
-      ? renderedFaqs
-      : resolveServicePageFaqContent(contentContext, slug, serviceId, sourceHtml).slice(0, 10);
+  const faqsForSchema = renderedFaqs.length
+    ? renderedFaqs
+    : contentContext?.variantPack && isApprovedBankRegisteredService(serviceId)
+      ? projectLockedApprovedBankServicePageFaqs(contentContext.variantPack)
+      : resolveServicePageFaqContent(contentContext, slug, serviceId, sourceHtml);
   schemaScripts = syncSchemaScriptsWithRenderedFaqs(schemaScripts, faqsForSchema);
   const seoPlan = readServicePageSeoPlan(slug, serviceId);
   const urlPath = meta?.urlPath || `/${serviceId}/`;
@@ -388,6 +389,7 @@ ${footer}
     abpmConfirmed: false,
     gphcConfirmed: Boolean(String(profileData?.gphcNumber || "").trim()),
     serviceId,
+    approvedBankContractAuthoritative: isApprovedBankRegisteredService(serviceId),
   });
   html = polishCommercialServicePublicHtml(html, {
     pharmacyName: profile.pharmacyName,

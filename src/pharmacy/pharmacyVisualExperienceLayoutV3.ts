@@ -54,7 +54,7 @@ import {
 } from "./pharmacyServicePageIntelligence.ts";
 import { resolveCommercialSectionPlanV1 } from "./contentEngine/pharmacyCommercialSectionPlannerV1.ts";
 import { resolveServicePageFaqAnswerFromSections } from "./pharmacyFaqAlignment.ts";
-import { resolveServicePageFaqContent, lockdownPharmacyFirstFaqsFromReference, type ResolvedFaqEntry } from "./pharmacyFaqContentResolver.ts";
+import { resolveServicePageFaqContent, lockdownPharmacyFirstFaqsFromReference, projectLockedApprovedBankServicePageFaqs, type ResolvedFaqEntry } from "./pharmacyFaqContentResolver.ts";
 import { renderMediaTextSection } from "./pharmacyMediaFloatFlowComponent.ts";
 import { filterServiceOverviewParagraphs, stripUnconfirmedConsultationRoomClaims } from "./pharmacyTrustCopyGuards.ts";
 import { resolveBrandDnaForRender } from "./pharmacyBrandDnaEngine.ts";
@@ -66,7 +66,9 @@ import {
   recordRenderFallback,
 } from "./pharmacyTenantDnaRenderActivation.ts";
 import {
+  approvedBankContractToParsedSections,
   withApprovedBankServicePageContract,
+  type ApprovedBankProcessStep,
 } from "./pharmacyApprovedBankCorePageContract.ts";
 import { isApprovedBankRegisteredService } from "./pharmacyServiceVariantLibrary.ts";
 import {
@@ -524,7 +526,22 @@ function renderProcessGrid(
   contentContext: ContentGenerationContext | undefined,
   componentDna: ComponentDna,
   serviceId?: string,
+  lockedSteps?: ApprovedBankProcessStep[],
 ): string {
+  if (lockedSteps?.length) {
+    const cards: ContentCard[] = lockedSteps
+      .filter((step) => step.title.trim() || step.body.trim() || (step.bullets || []).some((bullet) => bullet.trim()))
+      .map((step, index) => ({
+        title: loc(step.title || `Step ${index + 1}`),
+        body: loc([step.body, ...(step.bullets || [])].filter((part) => part.trim()).join(" ")),
+      }));
+    return `<section class="blue-band" data-template-block="process">
+<div class="wrap">
+${renderSectionHead(section?.title || "How the service works", "", true)}
+${renderBalancedCardGrid(cards, { cols: componentDna.process.columns || 4, stepNumbers: true, gridClass: "process-grid" })}
+</div>
+</section>`;
+  }
   if (!section) return "";
   const titledCards = localiseCards(proseToTitledCards(section.proseHtml), loc).slice(0, 4);
   const orderedCards = localiseCards(
@@ -845,6 +862,12 @@ function renderFaqSection(
 ): string {
   const slug = contentContext?.slug || "";
   const serviceId = contentContext?.serviceId || "pharmacy-first";
+  if (contentContext?.variantPack && isApprovedBankRegisteredService(serviceId)) {
+    return renderFaqCards(
+      "Frequently Asked Questions",
+      projectLockedApprovedBankServicePageFaqs(contentContext.variantPack),
+    );
+  }
   const lockdownFaqs =
     serviceId === "pharmacy-first" ? lockdownPharmacyFirstFaqsFromReference() : [];
   const resolvedFaqs = lockdownFaqs.length >= 5
@@ -995,12 +1018,13 @@ export function buildPharmacyServicePageMainHtml(
 
   const $ = cheerio.load(sourceHtml);
   const serviceId = contentContext?.serviceId || ctx.serviceKey;
-  // Keep approved-bank contract loading immutable; master-publish sections remain the
-  // lockdown-v1 / consolidated-v1 content authority for the main service page.
-  if (contentContext?.variantPack && isApprovedBankRegisteredService(serviceId)) {
-    void withApprovedBankServicePageContract(contentContext.variantPack);
-  }
-  const sections = parseMasterSections($);
+  const lockedContract =
+    contentContext?.variantPack && isApprovedBankRegisteredService(serviceId)
+      ? withApprovedBankServicePageContract(contentContext.variantPack).servicePage
+      : null;
+  const sections = lockedContract
+    ? approvedBankContractToParsedSections(lockedContract)
+    : parseMasterSections($);
 
   const loc = makeBodyLocaliser(profile, ctx.serviceName);
   const localAreaLinks = buildLocalAreaLinks(ctx, contentContext);
@@ -1021,6 +1045,7 @@ export function buildPharmacyServicePageMainHtml(
       contentContext,
       componentDna,
       ctx.serviceKey,
+      lockedContract?.processSteps,
     ),
     renderSupportImageBand(sections.get("5"), ctx, loc, contentContext),
     renderSafetyPanel(sections.get("6"), profile, ctx.serviceName, loc),
