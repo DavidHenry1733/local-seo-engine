@@ -538,6 +538,7 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
         <button class="btn" type="button" id="udOpenEvidenceReviewBtn" onclick="openServicePageEvidenceReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Evidence Review</button>
         <button class="btn" type="button" id="udOpenServicePageGenerationBtn" onclick="openServicePageGeneration()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Generate Service Page</button>
         <button class="btn" type="button" id="udOpenServicePageReviewBtn" onclick="openServicePageReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Service Page Review</button>
+        <button class="btn" type="button" id="udOpenLocalityScopeBtn" onclick="openCampaignLocalitySelection()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Generate Cluster Pages</button>
         <div id="udReviewStatus" class="ud-link-list"></div>
         <button class="cqr-btn-review" type="button" id="openCqrBtn" onclick="openCommercialQualityReview()" style="margin-top:8px;display:none">Open Quality Review</button>
         <button class="cqr-btn-review" type="button" id="openClusterReviewBtn" onclick="openClusterPageReview()" style="margin-top:8px;display:none">Review Locality Pages</button>
@@ -1090,7 +1091,14 @@ const WORKFLOW_PANEL_OPENERS={
 const CANONICAL_REVIEW_NEXT_ACTIONS={
   'Open Evidence Review':'udOpenEvidenceReviewBtn',
   'Generate Service Page':'udOpenServicePageGenerationBtn',
-  'Open Service Page Review':'udOpenServicePageReviewBtn'
+  'Open Service Page Review':'udOpenServicePageReviewBtn',
+  'Generate Cluster Pages':'udOpenLocalityScopeBtn'
+};
+const CANONICAL_REVIEW_NEXT_OPENERS={
+  'Open Evidence Review':openServicePageEvidenceReview,
+  'Generate Service Page':openServicePageGeneration,
+  'Open Service Page Review':openServicePageReview,
+  'Generate Cluster Pages':openCampaignLocalitySelection
 };
 function setWorkflowPanelUrl(panel){
   const p=new URLSearchParams(location.search);
@@ -4167,9 +4175,18 @@ let localityJobInFlight=false;
 function selectedCampaignRef(){
   return activeCustomer&&(activeCustomer.selectedServiceCampaign||(activeCustomer.serviceCampaigns||[]).find(function(x){return x.selected||x.campaignId===activeCustomer.selectedCampaignId;}))||null;
 }
+function reviewCampaignRef(){
+  const selected=selectedCampaignRef();
+  if(selected&&selected.campaignId)return selected;
+  if(activeSprReview&&activeSprReview.campaignId)return {campaignId:activeSprReview.campaignId,serviceId:activeSprReview.serviceId||'',serviceName:activeSprReview.serviceName||'this service'};
+  if(activeCampaignLocalitySelection&&activeCampaignLocalitySelection.campaignId)return {campaignId:activeCampaignLocalitySelection.campaignId,serviceId:activeCampaignLocalitySelection.serviceId||'',serviceName:activeCampaignLocalitySelection.serviceName||'this service'};
+  const campaigns=(activeCustomer&&activeCustomer.serviceCampaigns)||[];
+  if(campaigns.length===1&&campaigns[0].campaignId)return campaigns[0];
+  return null;
+}
 async function openCampaignLocalitySelection(){
   if(!activeCustomer)return;
-  const camp=selectedCampaignRef();
+  const camp=reviewCampaignRef();
   if(!camp||!camp.campaignId){toast('Select a service campaign first.',true);return;}
   document.getElementById('campaignLocalityModal').classList.add('open');
   document.getElementById('campaignLocalityLoading').style.display='block';
@@ -4268,8 +4285,8 @@ async function pollLocalityJob(jobId,statusEl){
 }
 async function generateCampaignLocalityPages(){
   if(!activeCustomer||localityJobInFlight)return;
-  const camp=selectedCampaignRef();
-  if(!camp)return;
+  const camp=reviewCampaignRef();
+  if(!camp||!camp.campaignId){toast('Select a service campaign first.',true);return;}
   if(!window.confirm('Generate locality pages for '+camp.serviceName+' using this campaign’s selected locality areas? This creates one job and does not publish.'))return;
   localityJobInFlight=true;
   const statusEl=document.getElementById('campaignLocalityMsg');
@@ -7232,8 +7249,15 @@ function updateSprApproveState(){
   const btn=document.getElementById('sprApproveBtn');
   const box=document.getElementById('sprApproveCheckbox');
   if(!btn||!activeSprReview)return;
-  if(box&&activeSprReview.reviewStatus==='approved')box.checked=true;
-  btn.disabled=!activeSprReview.canApprove||!(box&&box.checked)||activeSprReview.reviewStatus==='approved';
+  const approved=activeSprReview.reviewStatus==='approved';
+  if(box){
+    box.disabled=approved;
+    if(approved)box.checked=true;
+    const row=box.closest('.cpr-confirm-box');
+    if(row)row.style.display=approved?'none':'block';
+  }
+  btn.style.display=approved?'none':'block';
+  btn.disabled=approved||!activeSprReview.canApprove||!(box&&box.checked);
 }
 function renderServicePageReview(review){
   activeSprReview=review;
@@ -7262,16 +7286,23 @@ function renderServicePageReview(review){
   document.getElementById('sprCommercialChecklist').innerHTML=cl?(cl.grouped||[]).map(g=>'<div style="margin-bottom:10px"><strong>'+esc(g.category)+'</strong>'+g.items.map(i=>'<div style="font-size:.72rem;color:'+(i.passed?'#4ade80':'#f87171')+'">'+esc(i.passed?'PASS':'FAIL')+' — '+esc(i.label)+'</div>').join('')+'</div>').join('')+'<div style="font-size:.72rem;margin-top:8px">'+esc(String(cl.passedCount))+' passed · '+esc(String(cl.failedCount))+' failed</div>':'<div class="empty">Commercial checklist unavailable</div>';
   document.getElementById('sprWarnings').innerHTML=[...(review.errors||[]).map(e=>'<div style="color:#f87171">'+esc(e)+'</div>'),...(review.warnings||[]).map(w=>'<div>'+esc(w)+'</div>')].join('')||'<div class="empty">No warnings or errors</div>';
   document.getElementById('sprPanelStats').innerHTML=review.reviewStatus==='approved'
-    ?('<p class="ci-narrative" style="color:#4ade80">Service page approved — cluster generation is available when eligible.</p>')
+    ?('<p class="ci-narrative" style="color:#4ade80">Service page approved.</p><p class="ci-narrative">Next: '+esc(String(review.nextAction||''))+'</p>')
     :review.canApprove
     ?('<p class="ci-narrative">Manual Product Owner review required — do not approve automatically.</p>')
     :('<div class="bpr-error-panel" style="margin:0"><h5>Approval blocked</h5><div>Resolve errors before approving.</div></div>');
   const clusterBtn=document.getElementById('sprClusterGenerateBtn');
+  const nextAction=String(review.nextAction||'');
+  const nextOpener=CANONICAL_REVIEW_NEXT_OPENERS[nextAction];
   if(clusterBtn){
-    clusterBtn.style.display=review.clusterEligible||review.reviewStatus==='approved'?'block':'none';
-    clusterBtn.disabled=false;
-    clusterBtn.textContent='Generate Locality Pages';
-    clusterBtn.onclick=function(){generateCampaignLocalityPages();};
+    if(review.reviewStatus==='approved'&&typeof nextOpener==='function'&&nextAction!=='Open Service Page Review'){
+      clusterBtn.style.display='block';
+      clusterBtn.disabled=false;
+      clusterBtn.textContent=nextAction;
+      clusterBtn.onclick=function(){nextOpener();};
+    }else{
+      clusterBtn.style.display='none';
+      clusterBtn.onclick=null;
+    }
   }
   updateSprApproveState();
 }

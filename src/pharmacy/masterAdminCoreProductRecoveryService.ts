@@ -164,7 +164,17 @@ export function isCampaignServicePageReviewApproved(
 }
 
 export function isServicePageReviewApproved(slug: string): boolean {
-  return readServicePageReviewDecision(slug)?.decision === "approved";
+  if (readServicePageReviewDecision(slug)?.decision === "approved") return true;
+  const serviceId = resolveCprPrimaryServiceId(slug);
+  const identity = resolveServicePageGenerationIdentity(slug, serviceId);
+  if (!identity.campaignId) return false;
+  const record = readServicePageGenerationRecord(slug, identity.serviceId, identity.campaignId);
+  return isCampaignServicePageReviewApproved(
+    slug,
+    identity.campaignId,
+    identity.serviceId,
+    record?.imageAssignmentRevision || null,
+  );
 }
 
 function resolveCprPrimaryServiceId(slug: string): string {
@@ -1337,6 +1347,7 @@ export function buildServicePageReview(
     canApprove: reviewStatus === "pending_product_owner_review" && gateCanApprove,
     reviewStatus,
     approvedAt,
+    nextAction: resolveServicePageGenerationActionLabel(slug),
     clusterEligible: isCprClusterGenerationEligible(slug),
   };
 }

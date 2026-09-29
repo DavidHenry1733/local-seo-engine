@@ -248,4 +248,6 @@ export interface ServicePageReviewPayload {
   generationRevision?: string | null;
   productOwnerNotes?: string | null;
   brandResolution?: BrandResolutionAudit;
+  /** Same label the Master Admin header uses after this review state. */
+  nextAction?: string | null;
 }

@@ -27,6 +27,7 @@ const supported = [
   ["Open Evidence Review", "udOpenEvidenceReviewBtn", "openServicePageEvidenceReview()"],
   ["Generate Service Page", "udOpenServicePageGenerationBtn", "openServicePageGeneration()"],
   ["Open Service Page Review", "udOpenServicePageReviewBtn", "openServicePageReview()"],
+  ["Generate Cluster Pages", "udOpenLocalityScopeBtn", "openCampaignLocalitySelection()"],
 ] as const;
 
 check("header prints the canonical next action", page.includes("c.nextAction?'Next: '+c.nextAction"));
@@ -39,7 +40,13 @@ check("isolated two-action gate is gone", !reviewSlice.includes("servicePageNext
 
 for (const [label, id, onclick] of supported) {
   check(`map routes ${label}`, mapSlice.includes(`'${label}':'${id}'`));
-  const button = label === "Open Service Page Review" ? reviewButton : label === "Open Evidence Review" ? evidenceButton : generateButton;
+  const button = label === "Open Service Page Review"
+    ? reviewButton
+    : label === "Generate Cluster Pages"
+      ? (page.match(/id="udOpenLocalityScopeBtn"[^>]*>/)?.[0] || "")
+      : label === "Open Evidence Review"
+        ? evidenceButton
+        : generateButton;
   check(`${label} uses its existing opener`, button.includes(`id="${id}"`) && button.includes(`onclick="${onclick}"`) && !button.includes("approveServicePageReview"));
 }
 
@@ -54,7 +61,6 @@ const constants = new Map<string, string>();
 for (const match of cprSrc.matchAll(/export const (CPR[A-Z0-9_]+) = "([^"]+)"/g)) constants.set(match[1], match[2]);
 const laterStageLabels = new Set([
   "Cluster Generation in Progress",
-  "Generate Cluster Pages",
   "Review Cluster Pages",
   "Open Publish Review",
 ]);
@@ -93,7 +99,12 @@ const { resolveCommercialWorkflowNextAction } = await import("../src/pharmacy/ma
 const gilbertNext = resolveCommercialWorkflowNextAction("gilbert-pharmacy-health-clinic", "generate_ecosystem");
 const otherNext = resolveCommercialWorkflowNextAction("pharmaconnect-e2e-test-pharmacy", "generate_ecosystem");
 const after = execFileSync("sha256sum", protectedFiles, { encoding: "utf8" });
-check("header next action for Gilbert is Open Service Page Review", gilbertNext === "Open Service Page Review", String(gilbertNext));
+const localityOpener = page.slice(page.indexOf("async function openCampaignLocalitySelection()"), page.indexOf("function closeCampaignLocalitySelection()"));
+const sprRender = page.slice(page.indexOf("function renderServicePageReview(review)"), page.indexOf("async function approveServicePageReviewAction()"));
+const sprApprove = page.slice(page.indexOf("function updateSprApproveState()"), page.indexOf("function renderServicePageReview(review)"));
+check("Generate Cluster Pages opens locality scope", localityOpener.includes("/locality-selection") && !/method:\s*'POST'/.test(localityOpener));
+check("approved review uses the canonical opener", sprRender.includes("CANONICAL_REVIEW_NEXT_OPENERS[nextAction]") && sprApprove.includes("btn.style.display=approved?'none':'block'") && !sprRender.includes("generateCampaignLocalityPages()"));
+check("header next action for Gilbert is Generate Cluster Pages", gilbertNext === "Generate Cluster Pages", String(gilbertNext));
 check("second pharmacy is not assigned Gilbert's action by name", otherNext !== "gilbert-pharmacy-health-clinic", String(otherNext));
 check("resolver read did not change Gilbert files", before === after);
 
