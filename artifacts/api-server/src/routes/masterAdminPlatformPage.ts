@@ -536,6 +536,7 @@ th{background:#0f172a;color:#94a3b8;font-size:.68rem;text-transform:uppercase;le
         <div class="ud-action-row" id="udIntelligenceActionRow"><button class="cir-btn-review" type="button" id="openCirBtn" onclick="openCommercialIntelligenceReview()" style="margin-top:8px;display:none">Open Commercial Intelligence</button></div>
         <p class="ud-section-lead" id="udIntelligenceLead" style="display:none"></p>
         <button class="btn" type="button" id="udOpenEvidenceReviewBtn" onclick="openServicePageEvidenceReview()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Open Evidence Review</button>
+        <button class="btn" type="button" id="udOpenServicePageGenerationBtn" onclick="openServicePageGeneration()" style="margin-top:8px;width:100%;font-size:.78rem;display:none">Generate Service Page</button>
         <div id="udReviewStatus" class="ud-link-list"></div>
         <button class="cqr-btn-review" type="button" id="openCqrBtn" onclick="openCommercialQualityReview()" style="margin-top:8px;display:none">Open Quality Review</button>
         <button class="cqr-btn-review" type="button" id="openClusterReviewBtn" onclick="openClusterPageReview()" style="margin-top:8px;display:none">Review Locality Pages</button>
@@ -3118,9 +3119,10 @@ function renderCustomerDetail(c){
     cqrBtn.textContent='Open Quality Review';
   }
   const canonicalNext=String(c.nextAction||'');
+  const servicePageNext=canonicalNext==='Generate Service Page';
   const reviewEl=document.getElementById('udReviewStatus');
   if(reviewEl){
-    if(canonicalNext==='Open Evidence Review'){
+    if(canonicalNext==='Open Evidence Review'||servicePageNext){
       reviewEl.innerHTML='<div class="ud-static"><strong>Current stage</strong><span class="meta">'+esc(stageDisplayLabel(c)||'Generate Ecosystem')+'</span></div>'+'<div class="ud-static"><strong>Next required action</strong><span class="meta">'+esc(canonicalNext)+'</span></div>'+'<div class="ud-static"><strong>Open issues</strong><span class="meta">'+esc(String(c.outstandingIssues||0))+'</span></div>';
     }else{
       reviewEl.innerHTML='';
@@ -3128,7 +3130,9 @@ function renderCustomerDetail(c){
   }
   const evidenceBtn=document.getElementById('udOpenEvidenceReviewBtn');
   if(evidenceBtn)evidenceBtn.style.display=canonicalNext==='Open Evidence Review'?'block':'none';
-  if(canonicalNext==='Open Evidence Review'&&cqrBtn)cqrBtn.style.display='none';
+  const generatePageBtn=document.getElementById('udOpenServicePageGenerationBtn');
+  if(generatePageBtn)generatePageBtn.style.display=servicePageNext?'inline-block':'none';
+  if((canonicalNext==='Open Evidence Review'||servicePageNext)&&cqrBtn)cqrBtn.style.display='none';
   const clusterReviewBtn=document.getElementById('openClusterReviewBtn');
   if(clusterReviewBtn){
     clusterReviewBtn.style.display=customerAtCprClusterReview(c)?'block':'none';
