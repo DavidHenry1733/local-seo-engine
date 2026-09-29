@@ -213,7 +213,7 @@ export function servicePageBalancedCardGridCss(): string {
 .card-grid-equal[data-card-count="1"]{grid-template-columns:minmax(0,640px);justify-content:center}
 .card-grid-equal[data-card-count="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
 .card-grid-equal[data-card-count="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
-.card-grid-equal[data-card-count="4"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card-grid-equal.grid-2[data-card-count="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
 .card-grid-equal[data-card-count="5"]{grid-template-columns:repeat(6,minmax(0,1fr))}
 .card-grid-equal[data-card-count="5"]>.card:nth-child(-n+3){grid-column:span 2}
 .card-grid-equal[data-card-count="5"]>.card:nth-child(4){grid-column:2 / span 2}
@@ -425,8 +425,10 @@ export function applyStoredServicePagePresentation(
   let out = html.replace(/<header\b[^>]*class="[^"]*\bsite-header\b[^"]*"[\s\S]*?<\/header>/i, header);
   out = out.replace(/<footer\b[^>]*class="[^"]*\bsite-footer\b[^"]*"[\s\S]*?<\/footer>/i, footer);
   out = annotateCardGridCounts(out);
-  if (!out.includes("service-page-card-grid-balance")) {
-    const css = `<style>\n${servicePageBalancedCardGridCss()}\n</style>`;
+  const css = `<style>\n${servicePageBalancedCardGridCss()}\n</style>`;
+  if (out.includes("service-page-card-grid-balance")) {
+    out = out.replace(/<style>\s*\/\* service-page-card-grid-balance \*\/[\s\S]*?<\/style>/, css);
+  } else {
     out = /<\/head>/i.test(out) ? out.replace(/<\/head>/i, `${css}\n</head>`) : `${css}${out}`;
   }
   return out;

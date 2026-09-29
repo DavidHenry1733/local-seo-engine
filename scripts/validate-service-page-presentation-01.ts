@@ -60,6 +60,7 @@ check("generic reconstructed footer service column is not used", !footer.include
 const css = servicePageBalancedCardGridCss();
 check("two-card rule uses the full row", css.includes('.card-grid-equal[data-card-count="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}'));
 check("five-card rule centres the second row", css.includes('.card-grid-equal[data-card-count="5"]>.card:nth-child(4){grid-column:2 / span 2}') && css.includes('.card-grid-equal[data-card-count="5"]>.card:nth-child(5){grid-column:4 / span 2}'));
+check("four-card grid-2 stays a balanced 2x2", css.includes('.card-grid-equal.grid-2[data-card-count="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}') && !css.includes('.card-grid-equal[data-card-count="4"]{grid-template-columns:repeat(4'));
 check("card grids collapse on small screens", css.includes("@media(max-width:960px)") && css.includes("grid-template-columns:1fr"));
 for (const count of [1, 2, 3, 4, 5, 6]) {
   const cards = Array.from({ length: count }, (_, index) => ({ title: `Card ${index + 1}`, body: `Body ${index + 1}.` }));
