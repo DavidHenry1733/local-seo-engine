@@ -30,6 +30,10 @@ import {
   preflightPharmacyLocalEvidenceForCampaign,
 } from "./contentEngine/pharmacyLocalEvidencePackContractV1.ts";
 import { pageConsumesRequiredVerifiedLocalEvidence } from "./contentEngine/pharmacyVerifiedLocalEvidenceConsumptionContract.ts";
+import {
+  evaluateLocalityHtmlContentContract,
+  localityPagesAreTokenOnlyCopies,
+} from "./contentEngine/pharmacyLocalityContentContractGateV1.ts";
 import { replaceKeywordStuffedPharmacyListingNames, scrubUnconfirmedServiceClaims } from "./pharmacyServicePagePublicationQuality.ts";
 import { usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
 import {
@@ -360,6 +364,10 @@ export function generateLocalLocationHierarchyPages(
   );
 
   const patientCopyFailures: string[] = [];
+  const approvedBankLocality =
+    usesApprovedBankLocalityDirectPath(ctx.serviceId) &&
+    !usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId);
+  const localContractPages: Array<{ areaName: string; localBody: string; entityNames: string[] }> = [];
   for (const cluster of hierarchy.clusters) {
     const pageSlug = resolveClusterPageSlug(cluster.slug);
     if (options?.skipExistingOutputs && !newSlugs.has(pageSlug)) continue;
@@ -369,6 +377,7 @@ export function generateLocalLocationHierarchyPages(
       ? attributableEntities(packLoaded.pack).map((entity) => ({
           name: entity.name,
           category: entity.category,
+          address: entity.address,
         }))
       : [];
     const gate = evaluateLocalityPatientCopyQualityGate({
@@ -388,6 +397,34 @@ export function generateLocalLocationHierarchyPages(
       if (!consumed) {
         patientCopyFailures.push(`${pageSlug}: verified local evidence was not consumed in the page body`);
       }
+      if (approvedBankLocality) {
+        const requiredAddresses = evidenceFacts
+          .filter((fact) => fact.category === "healthcare" || fact.category === "transport" || fact.category === "community" || fact.category === "landmarks")
+          .slice(0, 1)
+          .map((fact) => fact.address)
+          .filter(Boolean);
+        const contractGate = evaluateLocalityHtmlContentContract({
+          html,
+          areaName: cluster.name,
+          serviceName: ctx.serviceName,
+          pharmacyName,
+          requiredAddresses,
+          entityNames: evidenceFacts.map((fact) => fact.name),
+        });
+        if (!contractGate.ok) {
+          patientCopyFailures.push(`${pageSlug}: locality-content-contract: ${contractGate.failures.join("; ")}`);
+        }
+        localContractPages.push({
+          areaName: cluster.name,
+          localBody: html,
+          entityNames: evidenceFacts.map((fact) => fact.name),
+        });
+      }
+    }
+  }
+  if (approvedBankLocality) {
+    for (const failure of localityPagesAreTokenOnlyCopies(localContractPages)) {
+      patientCopyFailures.push(failure);
     }
   }
   for (let i = 0; i < hierarchy.clusters.length; i++) {

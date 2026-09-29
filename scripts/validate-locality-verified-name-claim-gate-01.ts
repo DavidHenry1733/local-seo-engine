@@ -267,7 +267,9 @@ check(
     history.currentStage === "generate_ecosystem" &&
     JSON.stringify(selected) === JSON.stringify(expectedAreas) &&
     JSON.stringify(listFiles(localityDir)) === JSON.stringify(localityBefore) &&
-    JSON.stringify(localityBefore) === JSON.stringify(["packs/review-trust.json"]),
+    ["paisley", "barrhead", "elderslie", "renfrew", "linwood", "glasgow"].every((area) =>
+      localityBefore.includes(`local/${area}/index.html`),
+    ),
 );
 const hashesAfter = execFileSync("sha256sum", protectedFiles, { encoding: "utf8" });
 check(

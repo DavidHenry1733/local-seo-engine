@@ -10,12 +10,9 @@ import {
 } from "./pharmacyApprovedBankRunProvenance.ts";
 import { buildApprovedBankLocalityPageContract } from "./pharmacyApprovedBankCorePageContract.ts";
 import { bindVerifiedLocalityEvidenceV1 } from "./contentEngine/pharmacyVerifiedLocalityEvidenceV1.ts";
-import {
-  buildLocalityEvidenceInventory,
-  buildUniqueLocalityNarrative,
-  siblingFactsFromCampaignContext,
-  type LocalitySiblingFact,
-} from "./contentEngine/pharmacyLocalityUniqueNarrativeV1.ts";
+import { loadLocalEvidencePackForGeneration } from "./contentEngine/pharmacyLocalEvidencePackContractV1.ts";
+import { buildLocalityIntelligenceV1 } from "./contentEngine/pharmacyLocalityIntelligenceV1.ts";
+import { synthesiseLocalPatientCopyV1 } from "./contentEngine/pharmacyLocalPatientCopyV1.ts";
 import type { ContentGenerationContext } from "./contentEngine/contentGenerationContextTypes.ts";
 import { isApprovedBankRegisteredService } from "./pharmacyServiceVariantLibrary.ts";
 import { buildPharmacyServicePageProfile } from "./pharmacyServicePageProfileContext.ts";
@@ -24,66 +21,11 @@ import type {
   LocalClusterContentInput,
   LocalClusterPageContent,
 } from "./pharmacyLocalClusterContentEngine.ts";
-import {
-  selectVerifiedLocalEvidenceForPatientCopy,
-  verifiedLocalEvidencePatientCopySentence,
-  type VerifiedLocalEvidenceFact,
-} from "./contentEngine/pharmacyVerifiedLocalEvidenceConsumptionContract.ts";
 
 export const APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE = "approved-bank-locality-direct";
 
 export function usesApprovedBankLocalityDirectPath(serviceId: string): boolean {
   return isApprovedBankRegisteredService(serviceId);
-}
-
-function namedLocalFacts(
-  verified: ReturnType<typeof bindVerifiedLocalityEvidenceV1> | null,
-): string[] {
-  if (!verified) return [];
-  const facts: VerifiedLocalEvidenceFact[] = [
-    ...verified.healthcare.map((fact) => ({ name: fact.name, category: "healthcare" as const })),
-    ...verified.transport.map((fact) => ({ name: fact.name, category: "transport" as const })),
-    ...verified.landmarks.map((fact) => ({ name: fact.name, category: "landmarks" as const })),
-    ...verified.community.map((fact) => ({ name: fact.name, category: "community" as const })),
-    ...verified.schools.map((fact) => ({ name: fact.name, category: "schools" as const })),
-    ...verified.retail.map((fact) => ({ name: fact.name, category: "retail" as const })),
-  ];
-  return selectVerifiedLocalEvidenceForPatientCopy(facts).selected.map((fact) => fact.name);
-}
-
-function composeLocalAccessBody(
-  uniqueAccessBody: string,
-  areaName: string,
-  verified: ReturnType<typeof bindVerifiedLocalityEvidenceV1> | null,
-): string {
-  const parts: string[] = [];
-  const travel = String(uniqueAccessBody || "").trim();
-  if (travel) parts.push(travel);
-  const relationship = String(verified?.relationship || "").trim();
-  if (
-    relationship &&
-    !/local guidance for/i.test(relationship) &&
-    !/\b\d+(?:\.\d+)?\s*km\b/i.test(relationship)
-  ) {
-    parts.push(relationship.replace(/[.]+$/, "") + ".");
-  }
-  const direction = String(verified?.cardinalDirection || "").trim();
-  if (direction && areaName) {
-    parts.push(`The confirmed pharmacy location is ${direction} of ${areaName}.`);
-  }
-  const evidenceSentence = verifiedLocalEvidencePatientCopySentence(namedLocalFacts(verified));
-  if (evidenceSentence) parts.push(evidenceSentence);
-  parts.push("The pharmacy address, telephone number and map are shown below.");
-  return parts.filter(Boolean).join(" ");
-}
-
-function weaveLocalityOnce(text: string, areaName: string): string {
-  const body = String(text || "").trim();
-  const area = String(areaName || "").trim();
-  if (!body || !area) return body;
-  const areaRe = new RegExp(`\\b${area.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
-  if (areaRe.test(body)) return body;
-  return body.replace(/\byour area\b/gi, area);
 }
 
 function wordCount(content: LocalClusterPageContent): number {
@@ -219,51 +161,46 @@ export function composeApprovedBankLocalityDirectDraft(
       })
     : null;
 
-  const selectedSiblings: LocalitySiblingFact[] = siblingFactsFromCampaignContext(ctx);
-  const selfArea = selectedSiblings.find((s) => s.areaSlug === input.areaSlug);
-  const uniqueInventory = buildLocalityEvidenceInventory({
+  const packLoaded = loadLocalEvidencePackForGeneration(key, input.areaName, input.areaSlug);
+  const intelligence = buildLocalityIntelligenceV1({
     areaName: input.areaName,
     areaSlug: input.areaSlug,
+    tenantSlug: key,
+    pack: packLoaded.ok ? packLoaded.pack : null,
+    geographic: {
+      distanceLabel: verified?.distanceLabel || "",
+      distanceProvenance: verified?.distanceProvenance || "",
+      cardinalDirection: verified?.cardinalDirection || "",
+      directionProvenance: verified?.directionProvenance || "",
+      pharmacyAddress: profile.fullAddress || profile.customerFacingAddress || "",
+      pharmacyAddressProvenance: profile.fullAddress || profile.customerFacingAddress ? "profile:pharmacy-address" : "",
+    },
+  });
+  const synthesised = synthesiseLocalPatientCopyV1(intelligence, {
+    serviceName: input.serviceName,
+    serviceExplanation: contract.explanationBody,
     pharmacyName,
     pharmacyAddress: profile.fullAddress || profile.customerFacingAddress || "",
-    serviceName: input.serviceName,
-    displayPhone: profile.displayPhone || profile.phone,
-    verified,
-    selectedSiblings: selectedSiblings.length
-      ? selectedSiblings
-      : [
-          {
-            areaName: input.areaName,
-            areaSlug: input.areaSlug,
-            distanceKm: verified?.distanceKm ?? null,
-            distanceLabel: verified?.distanceLabel || "",
-          },
-          ...(verified?.nearbyLocalities || []).map((n) => ({
-            areaName: n.areaName,
-            areaSlug: n.areaSlug,
-            distanceKm: n.distanceKm,
-            distanceLabel: "",
-          })),
-        ],
-    areaType: selfArea?.areaType,
-    order: selfArea?.order,
+    pharmacyPhone: profile.displayPhone || profile.phone || "",
   });
-  const uniqueNarrative = buildUniqueLocalityNarrative(uniqueInventory);
+  if (!synthesised.ok) {
+    throw new Error(synthesised.blocker);
+  }
+  const localCopy = synthesised.copy;
 
-  const whyChecksBody = weaveLocalityOnce(contract.explanationBody, input.areaName);
-  const considerBody = weaveLocalityOnce(contract.considerBody, input.areaName);
-  const scopeBody = weaveLocalityOnce(contract.scopeBody, input.areaName);
-  const processIntro = weaveLocalityOnce(contract.processBody, input.areaName);
+  const whyChecksBody = contract.explanationBody;
+  const scopeBody = contract.scopeBody;
+  const processIntro = contract.processBody;
   const processSteps = contract.processSteps.map((step) => ({
     title: step.title,
-    body: weaveLocalityOnce(step.body, input.areaName),
+    body: step.body,
     bullets: (step.bullets || []).map((b) => String(b).trim()).filter(Boolean),
   }));
-  const preparationBody = weaveLocalityOnce(contract.preparationBody, input.areaName);
-  const safetyBody = weaveLocalityOnce(contract.safetyBody, input.areaName);
+  const preparationBody = contract.preparationBody;
+  const safetyBody = contract.safetyBody;
   const faqs = contract.faqs.slice(0, 6).map((faq) => ({
     question: String(faq.question || "").trim(),
-    answer: weaveLocalityOnce(faq.answer, input.areaName),
+    answer: faq.answer,
   }));
 
   const supportingItems = processSteps.map((step) => ({
@@ -281,10 +218,10 @@ export function composeApprovedBankLocalityDirectDraft(
     : contract.safetyHeading || `Preparing and staying safe with ${input.serviceName}`;
 
   const content: LocalClusterPageContent = {
-    heroIntro: uniqueNarrative.heroIntro,
-    localRelevanceHeading: contract.considerHeading,
+    heroIntro: localCopy.introduction,
+    localRelevanceHeading: `Using ${input.serviceName} from ${input.areaName}`,
     localRelevanceIntro: "",
-    localRelevanceBody: [considerBody, scopeBody].filter(Boolean).join("\n\n"),
+    localRelevanceBody: [localCopy.serviceContext, localCopy.healthcareCommunityContext, localCopy.whyUseful].filter(Boolean).join("\n\n"),
     localRelevanceBullets: [...contract.considerBullets, ...contract.scopeBullets]
       .map((b) => String(b).trim())
       .filter(Boolean)
@@ -296,8 +233,8 @@ export function composeApprovedBankLocalityDirectDraft(
     processHeading: contract.processHeading,
     processIntro,
     processSteps,
-    accessHeading: uniqueNarrative.accessHeading,
-    accessBody: composeLocalAccessBody(uniqueNarrative.accessBody, input.areaName, verified),
+    accessHeading: `Getting to the pharmacy from ${input.areaName}`,
+    accessBody: localCopy.accessContext,
     clinicalEnvironmentHeading: contract.preparationHeading,
     clinicalEnvironmentBody: preparationBody,
     preparationBullets: contract.preparationBullets.map((b) => String(b).trim()).filter(Boolean),
@@ -310,13 +247,13 @@ export function composeApprovedBankLocalityDirectDraft(
     faqs,
     ctaPrimary: "Contact the pharmacy",
     ctaSecondary: "Get directions",
-    ctaPhonePrompt: uniqueNarrative.confirmBody,
+    ctaPhonePrompt: localCopy.nextStep,
     contentFingerprint: `${input.areaSlug}::${input.serviceId}::${APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE}::${selected.hash}`,
     localIntelligenceUsed: true,
-    narrativeType: `${APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE}:${input.serviceId}`,
+    narrativeType: `${APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE}:${input.serviceId}:local-patient-copy-v1`,
     wordCountEstimate: 0,
-    seoTitle: uniqueNarrative.seoTitle,
-    metaDescription: uniqueNarrative.metaDescription,
+    seoTitle: `${input.serviceName} for patients from ${input.areaName} | ${pharmacyName}`,
+    metaDescription: localCopy.introduction.slice(0, 180),
     supportingHeading: contract.processHeading,
     supportingIntro: processIntro,
     supportingItems,
