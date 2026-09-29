@@ -6692,7 +6692,7 @@ function renderSpeFieldDecisionError(err){
     '<div style="margin-top:6px"><strong>Error:</strong> '+esc(err.error||'Unknown error')+'</div>'+
     '<div class="bpr-error-actions" style="margin-top:10px"><button class="btn" type="button" id="speFieldErrorRetry">Retry</button></div>';
   const retry=document.getElementById('speFieldErrorRetry');
-  if(retry)retry.onclick=function(){decideEvidenceReviewField(err.retryFieldId,err.retryDecision,null);};
+  if(retry)retry.onclick=function(){decideEvidenceReviewField(err.retryFieldId,err.retryDecision,null,null,err.retryEditedValue);};
 }
 function renderEvidenceGroup(elId,fields,dashboard){
   const el=document.getElementById(elId);
@@ -6843,7 +6843,7 @@ async function decideEvidenceReviewField(fieldId,decision,btn,origin,editedValue
   }
   speFieldDecisionInFlight=true;
   try{
-    const path='/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/service-page-evidence-review/field';
+    const path=withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/service-page-evidence-review/field');
     const res=await fetch(path,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({fieldId:fieldId,action:action,value:editedValue})});
     const data=await res.json().catch(()=>({}));
     if(data.review)renderServicePageEvidenceReview(data.review);
@@ -6853,24 +6853,35 @@ async function decideEvidenceReviewField(fieldId,decision,btn,origin,editedValue
       try{await refreshServicePageGenerationDashboard();}catch(_e){}
     }
     if(!res.ok){
+      const errorText=(data&&data.error)||res.statusText||('HTTP '+res.status);
+      if(msgEl){msgEl.style.color='#f87171';msgEl.textContent=errorText;}
       if(origin==='spg'){
-        renderSpgFieldDecisionError({fieldId:fieldId,action:actionLabel,status:res.status,error:(data&&data.error)||res.statusText||('HTTP '+res.status)});
+        renderSpgFieldDecisionError({fieldId:fieldId,action:actionLabel,status:res.status,error:errorText});
       }else{
-        renderSpeFieldDecisionError({fieldId:fieldId,action:actionLabel,status:res.status,error:(data&&data.error)||res.statusText||('HTTP '+res.status),retryFieldId:fieldId,retryDecision:decision});
+        renderSpeFieldDecisionError({fieldId:fieldId,action:actionLabel,status:res.status,error:errorText,retryFieldId:fieldId,retryDecision:decision,retryEditedValue:editedValue});
       }
       return;
     }
     clearSpeFieldDecisionError();
     clearSpgFieldDecisionError();
-    if(msgEl)msgEl.textContent='Saved '+fieldId+' as '+actionLabel+'.';
+    if(msgEl){
+      msgEl.style.color='#4ade80';
+      if(fieldId==='privateServicesOffered'&&(editedValue==='Yes'||editedValue==='No'))msgEl.textContent='Saved / '+editedValue+' selected';
+      else msgEl.textContent='Saved '+fieldId+' as '+actionLabel+'.';
+    }
   }catch(e){
+    if(msgEl){msgEl.style.color='#f87171';msgEl.textContent=e.message||String(e);}
     if(origin==='spg'){
       renderSpgFieldDecisionError({fieldId:fieldId,action:actionLabel,status:0,error:e.message||String(e)});
     }else{
-      renderSpeFieldDecisionError({fieldId:fieldId,action:actionLabel,status:0,error:e.message||String(e),retryFieldId:fieldId,retryDecision:decision});
+      renderSpeFieldDecisionError({fieldId:fieldId,action:actionLabel,status:0,error:e.message||String(e),retryFieldId:fieldId,retryDecision:decision,retryEditedValue:editedValue});
     }
   }finally{
     speFieldDecisionInFlight=false;
+    if(btn&&document.body.contains(btn)){
+      btn.disabled=false;
+      if(btn.dataset.speOriginalText)btn.textContent=btn.dataset.speOriginalText;
+    }
   }
 }
 function openBusinessProfileReviewFromEvidence(){

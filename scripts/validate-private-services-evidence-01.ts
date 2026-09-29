@@ -39,6 +39,10 @@ check("no NHS-services confirmation question", !activeSrc.includes("NHS services
 check("Private services offered field is in the page and contract", page.includes("f.id==='privateServicesOffered'") && page.includes("-value=\"Yes\"") && page.includes("-value=\"No\"") && contractSrc.includes('"privateServicesOffered"') && readinessSrc.includes('"privateServicesOffered"'));
 check("Yes and No use the evidence decision control", page.includes("-decision=\"edit_value\"") && page.includes("decideEvidenceReviewField(fieldId,decision,btn,null,editedValue)") && page.includes("decideEvidenceReviewField(fieldId,decision,btn,'spg',editedValue)") && reviewSrc.includes('nextValue !== "Yes" && nextValue !== "No"'));
 check("missing value displays Not Confirmed", page.includes("f.id==='privateServicesOffered'&&!f.value)return 'Not Confirmed'"));
+const saveFn = page.slice(page.indexOf("async function decideEvidenceReviewField"), page.indexOf("function openBusinessProfileReviewFromEvidence"));
+check("field save uses the authenticated evidence decision endpoint", saveFn.includes("withAuthHandoff('/api/master-admin-platform/customers/'") && saveFn.includes("/service-page-evidence-review/field") && saveFn.includes("method:'POST'"));
+check("successful save leaves Saving and names the Yes or No selection", saveFn.includes("Saved / '+editedValue+' selected") && saveFn.includes("document.body.contains(btn)") && saveFn.includes("btn.disabled=false"));
+check("failed save leaves Saving and shows the error", saveFn.includes("renderSpeFieldDecisionError") && saveFn.includes("retryEditedValue:editedValue") && saveFn.includes("msgEl.style.color='#f87171'"));
 check("no Gilbert-specific production logic", !/gilbert-pharmacy/.test(evidenceSrc + reviewSrc + page.slice(page.indexOf("function evidenceFieldDecisionButtons"), page.indexOf("function editEvidenceFieldValue"))));
 check("pricing evidence stays on its own field", evidenceSrc.includes('evidenceField("pricing", "Pricing", "service", approved.privateServices'));
 check("consultation, duration, room, and trust fields remain", ["consultationProcess", "consultationRoom", "expectedDuration", "teamReviewer"].every((id) => evidenceSrc.includes('"' + id + '"')));
@@ -100,15 +104,41 @@ const otherFields = evidence.buildCprEvidenceFields(other, "flu-vaccinations");
 const otherPrivate = otherFields.find((field) => field.id === "privateServicesOffered");
 check("tenant isolation projects each pharmacy's own answer", otherPrivate?.value === "Yes" && privateField?.value == null);
 
+const beforeReview = review.buildServicePageEvidenceReview(slug);
+const beforeService = beforeReview?.sections.find((section) => section.id === "service");
+const beforeOther = new Map(
+  (beforeReview?.sections.flatMap((section) => section.fields) || [])
+    .filter((field) => field.id !== "privateServicesOffered")
+    .map((field) => [field.id, field.status + "|" + String(field.value)]),
+);
 const rejected = review.decideServicePageEvidenceReviewField(slug, "privateServicesOffered", "edit_value", "regression", "blood-pressure-checks");
 check("individual service is not accepted as the answer", rejected == null);
 const savedYes = review.decideServicePageEvidenceReviewField(slug, "privateServicesOffered", "edit_value", "regression", "Yes");
 const yesField = savedYes?.sections.flatMap((section) => section.fields).find((field) => field.id === "privateServicesOffered");
+const yesService = savedYes?.sections.find((section) => section.id === "service");
 check("Yes persists through Evidence Review", yesField?.value === "Yes" && yesField.status === "confirmed", JSON.stringify(yesField || savedYes));
+check("Yes is the canonical true and is not missing", yesField?.value === "Yes" && yesField.value !== "No" && yesField.status !== "not_confirmed");
 check("Yes satisfies this evidence requirement", Boolean(savedYes) && !savedYes!.blockers.some((blocker) => blocker.includes("Private services offered")));
+check(
+  "evidence completion count updates",
+  Boolean(beforeService && yesService && yesService.confirmedCount === beforeService.confirmedCount + 1),
+  String(beforeService?.confirmedCount) + "->" + String(yesService?.confirmedCount),
+);
+const reloadedYes = review.buildServicePageEvidenceReview(slug);
+const reloadedYesField = reloadedYes?.sections.flatMap((section) => section.fields).find((field) => field.id === "privateServicesOffered");
+check("saved Yes survives reload", reloadedYesField?.value === "Yes" && reloadedYesField.status === "confirmed");
 const savedNo = review.decideServicePageEvidenceReviewField(slug, "privateServicesOffered", "edit_value", "regression", "No");
 const noField = savedNo?.sections.flatMap((section) => section.fields).find((field) => field.id === "privateServicesOffered");
 check("No persists through Evidence Review", noField?.value === "No" && noField.status === "confirmed");
+check("No is the canonical false and is not missing", noField?.value === "No" && noField.status === "confirmed");
+const reloadedNo = review.buildServicePageEvidenceReview(slug);
+const reloadedNoField = reloadedNo?.sections.flatMap((section) => section.fields).find((field) => field.id === "privateServicesOffered");
+check("saved No survives reload", reloadedNoField?.value === "No" && reloadedNoField.status === "confirmed");
+const afterOther = (savedNo?.sections.flatMap((section) => section.fields) || []).filter((field) => field.id !== "privateServicesOffered");
+check(
+  "existing evidence decisions unchanged",
+  afterOther.every((field) => beforeOther.get(field.id) === field.status + "|" + String(field.value)),
+);
 const otherAfter = evidence.buildCprEvidenceFields(other, "flu-vaccinations").find((field) => field.id === "privateServicesOffered");
 check("the other tenant decision is unchanged", otherAfter?.value === "Yes" && otherAfter.status === "not_confirmed");
 
