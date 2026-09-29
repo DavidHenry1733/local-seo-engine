@@ -27,6 +27,7 @@ const protectedFiles = [
   "data/growth-engine/gilbert-pharmacy-health-clinic-workflow.json",
   "data/pharmacy-master-admin/workflow-history/gilbert-pharmacy-health-clinic.json",
   "data/pharmacy-master-admin/core-product-recovery/gilbert-pharmacy-health-clinic/contract.json",
+  "data/pharmacy-master-admin/service-page-evidence-review/gilbert-pharmacy-health-clinic/by-service/blood-pressure-checks/field-decisions.json",
 ].map((file) => path.join(repo, file));
 
 const before = execFileSync("sha256sum", protectedFiles, { encoding: "utf8" });
@@ -43,8 +44,14 @@ const saveFn = page.slice(page.indexOf("async function decideEvidenceReviewField
 check("field save uses the authenticated evidence decision endpoint", saveFn.includes("withAuthHandoff('/api/master-admin-platform/customers/'") && saveFn.includes("/service-page-evidence-review/field") && saveFn.includes("method:'POST'"));
 check("successful save leaves Saving and names the Yes or No selection", saveFn.includes("Saved / '+editedValue+' selected") && saveFn.includes("document.body.contains(btn)") && saveFn.includes("btn.disabled=false"));
 check("failed save leaves Saving and shows the error", saveFn.includes("renderSpeFieldDecisionError") && saveFn.includes("retryEditedValue:editedValue") && saveFn.includes("msgEl.style.color='#f87171'"));
+const approvalFn = page.slice(page.indexOf("async function approveServicePageEvidenceReview"), page.indexOf("function updateSpgGenerateState"));
+const appSrc = readFileSync(path.resolve("artifacts/api-server/src/app.ts"), "utf8");
+const routeSrc = readFileSync(path.resolve("artifacts/api-server/src/routes/api/masterAdminPlatform.ts"), "utf8");
+check("approval endpoint uses the authenticated request mechanism", approvalFn.includes("withAuthHandoff('/api/master-admin-platform/customers/'") && approvalFn.includes("/service-page-evidence-review/approve") && !approvalFn.includes("gilbert"));
+check("failed approval shows the error and returns the control", approvalFn.includes("renderSpeApprovalError") && approvalFn.includes("speApprovalInFlight=false") && approvalFn.includes("updateSpeApproveState()"));
+check("no auth bypass for evidence approval", appSrc.includes('app.use("/api", requireAuth)') && routeSrc.includes('"/master-admin-platform/customers/:slug/service-page-evidence-review/approve"'));
 check("no Gilbert-specific production logic", !/gilbert-pharmacy/.test(evidenceSrc + reviewSrc + page.slice(page.indexOf("function evidenceFieldDecisionButtons"), page.indexOf("function editEvidenceFieldValue"))));
-check("pricing evidence stays on its own field", evidenceSrc.includes('evidenceField("pricing", "Pricing", "service", approved.privateServices'));
+check("Pricing is absent from the active evidence contract", !evidenceSrc.includes('evidenceField("pricing"') && !readinessSrc.includes('"pricing"') && !contractSrc.includes('"pricing"'));
 check("consultation, duration, room, and trust fields remain", ["consultationProcess", "consultationRoom", "expectedDuration", "teamReviewer"].every((id) => evidenceSrc.includes('"' + id + '"')));
 check("Commercial Intelligence remains approved", Boolean(workflow.commercialIntelligenceApproval && workflow.commercialIntelligenceApproval.approvedAt));
 check("workflow remains generate_ecosystem", history.currentStage === "generate_ecosystem");
@@ -79,9 +86,35 @@ writeProfile(slug, {
 });
 writeProfile(other, {
   pharmacyName: "Other Pharmacy",
+  primaryTown: "Paisley",
+  townCity: "Paisley",
+  postcode: "PA2 7EP",
+  website: "https://example-pharmacy.test/",
+  appointmentMethod: "Walk-in and telephone enquiries",
+  pharmacyFirstAvailability: "Yes",
+  primaryCtaDestination: "tel:01417373133",
   privateServicesAvailable: true,
-  selectedServices: ["flu-vaccinations"],
+  selectedServices: ["blood-pressure-checks"],
 });
+mkdirSync(path.join(root, "config/pharmacy"), { recursive: true });
+mkdirSync(path.join(root, "config/projects", other), { recursive: true });
+mkdirSync(path.join(root, "data/pharmacy-image-assignments"), { recursive: true });
+writeFileSync(
+  path.join(root, "config/pharmacy/locked-commercial-service-catalogue.json"),
+  readFileSync(path.resolve("config/pharmacy/locked-commercial-service-catalogue.json")),
+);
+writeFileSync(path.join(root, "config/projects", other, "brand-dna.json"), "{}\n");
+const imageSlots = ["hero", "support", "trust", "conversion"];
+writeFileSync(
+  path.join(root, "data/pharmacy-image-assignments", other + ".json"),
+  JSON.stringify({
+    slug: other,
+    assignments: Object.fromEntries(imageSlots.map((slot, index) => [
+      "blood-pressure-checks:blood-pressure-checks:" + slot,
+      { assetId: "asset-" + String(index + 1), filePath: "images/asset-" + String(index + 1) + ".webp", sourceType: "image-platform" },
+    ])),
+  }),
+);
 
 process.env.WORKSPACE_ROOT = root;
 const evidence = await import("../src/pharmacy/masterAdminCoreProductRecoveryEvidenceService.ts");
@@ -90,10 +123,11 @@ const tenant = await import("../src/pharmacy/pharmacyServicePageTenantContextSer
 
 const missing = evidence.buildCprEvidenceFields(slug, "pharmacy-first");
 const privateField = missing.find((field) => field.id === "privateServicesOffered");
-const preserved = ["consultationProcess", "consultationRoom", "expectedDuration", "pricing", "pharmacyName", "seoPlannedTitle"];
+const preserved = ["consultationProcess", "consultationRoom", "expectedDuration", "pharmacyName", "seoPlannedTitle"];
 check("Private services offered? exists", privateField?.label === "Private services offered?" && privateField.required === true);
 check("missing evidence is Not Confirmed, not No", privateField?.value == null && privateField?.status === "not_confirmed");
 check("old field is not built", !missing.some((field) => field.id === "nhsPrivateStatus" || field.label === "NHS/private status"));
+check("Pricing is absent from Evidence Review", !missing.some((field) => field.id === "pricing" || field.label === "Pricing"));
 check("other evidence fields are unchanged", preserved.every((id) => missing.some((field) => field.id === id)));
 check("Yes does not name individual services", evidence.resolvePrivateServicesOfferedAnswer({ privateServicesAvailable: true, selectedServices: ["blood-pressure-checks"] }) === "Yes");
 check("schema default false is not No", evidence.resolvePrivateServicesOfferedAnswer({ privateServicesAvailable: false }) === null);
@@ -105,6 +139,7 @@ const otherPrivate = otherFields.find((field) => field.id === "privateServicesOf
 check("tenant isolation projects each pharmacy's own answer", otherPrivate?.value === "Yes" && privateField?.value == null);
 
 const beforeReview = review.buildServicePageEvidenceReview(slug);
+check("Pricing is not an approval requirement", !(beforeReview?.blockers || []).some((blocker) => /Pricing/i.test(blocker)));
 const beforeService = beforeReview?.sections.find((section) => section.id === "service");
 const beforeOther = new Map(
   (beforeReview?.sections.flatMap((section) => section.fields) || [])
@@ -149,6 +184,38 @@ check(
   supplied.includes("privateServicesOffered=No") && !supplied.includes("nhsPrivateStatus") && !supplied.includes("blood-pressure-checks"),
   supplied,
 );
+
+let approvalReview = review.buildServicePageEvidenceReview(other);
+for (let pass = 0; pass < 6 && approvalReview && !approvalReview.canApprove; pass += 1) {
+  const pending = approvalReview.sections.flatMap((section) => section.fields).filter((field) => field.status === "not_confirmed");
+  let moved = false;
+  for (const field of pending) {
+    const next = field.id === "privateServicesOffered"
+      ? review.decideServicePageEvidenceReviewField(other, field.id, "edit_value", "regression", "Yes")
+      : field.value || field.id === "fonts"
+        ? review.decideServicePageEvidenceReviewField(other, field.id, "confirm", "regression")
+        : field.allowNotApplicable
+          ? review.decideServicePageEvidenceReviewField(other, field.id, "not_applicable", "regression")
+          : null;
+    if (next) {
+      approvalReview = next;
+      moved = true;
+    }
+  }
+  if (!moved) break;
+}
+const approved = approvalReview?.canApprove ? review.approveServicePageEvidenceReview(other, "regression") : null;
+check("authenticated approval succeeds", approved?.approved === true, (approvalReview?.blockers || []).join(" | "));
+check(
+  "approval binds the current evidence revision",
+  Boolean(approved && approved.evidenceReviewRevision === approvalReview?.evidenceReviewRevision),
+  String(approved?.evidenceReviewRevision) + " vs " + String(approvalReview?.evidenceReviewRevision),
+);
+const reloadedApproval = review.buildServicePageEvidenceReview(other);
+check("successful approval survives reload", reloadedApproval?.approved === true && reloadedApproval.evidenceReviewRevision === approved?.evidenceReviewRevision);
+const firstAfterApproval = review.buildServicePageEvidenceReview(slug);
+const firstPrivate = firstAfterApproval?.sections.flatMap((section) => section.fields).find((field) => field.id === "privateServicesOffered");
+check("second pharmacy approval does not change the first pharmacy decision", firstPrivate?.value === "No" && firstAfterApproval?.approved !== true);
 
 const after = execFileSync("sha256sum", protectedFiles, { encoding: "utf8" });
 check("Gilbert files were not modified", before === after);

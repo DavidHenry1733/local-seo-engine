@@ -120,7 +120,7 @@ export function traceServicePageGenerationReadinessFields(
 }> {
   const readiness = evaluateServicePageGenerationReadiness(slug, serviceId);
   const pipeline = buildServicePageEvidenceFieldPipeline(slug, serviceId);
-  const traceIds = ["privateServicesOffered", "pricing", "fonts"] as const;
+  const traceIds = ["privateServicesOffered", "fonts"] as const;
 
   const traces = traceIds.map((fieldId) => {
     const field = readiness.evidenceFields.find((f) => f.id === fieldId);

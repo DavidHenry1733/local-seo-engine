@@ -21,7 +21,7 @@ const checks = {
   approvedSnapshotLoaded: readiness.approvedSnapshotLoaded,
   privateServicesOffered: resolveServicePageGenerationFieldStatus(readiness.evidenceFields, "privateServicesOffered"),
   nhsPrivateStatusAbsent: !readiness.evidenceFields.some((field) => field.id === "nhsPrivateStatus"),
-  pricing: resolveServicePageGenerationFieldStatus(readiness.evidenceFields, "pricing"),
+  pricingAbsent: !readiness.evidenceFields.some((field) => field.id === "pricing"),
   fonts: resolveServicePageGenerationFieldStatus(readiness.evidenceFields, "fonts"),
   growthIntelligenceExcluded: traces.find((t) => t.fieldId === "growth_intelligence")?.blocking === "NO",
   generationBlockers: readiness.blockers.length,
@@ -42,7 +42,7 @@ const passed =
   checks.approvedSnapshotLoaded &&
   checks.privateServicesOffered === "not_confirmed" &&
   checks.nhsPrivateStatusAbsent &&
-  checks.pricing === "not_applicable" &&
+  checks.pricingAbsent &&
   checks.fonts === "confirmed" &&
   checks.growthIntelligenceExcluded &&
   checks.privateServicesBlocksGeneration &&

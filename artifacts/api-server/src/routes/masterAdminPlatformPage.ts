@@ -6970,7 +6970,7 @@ async function approveServicePageEvidenceReview(){
   }
   const msgEl=document.getElementById('speMsg');
   const slug=activeCustomer.slug;
-  const url='/api/master-admin-platform/customers/'+encodeURIComponent(slug)+'/service-page-evidence-review/approve';
+  const url=withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(slug)+'/service-page-evidence-review/approve');
   const body=JSON.stringify({operatorConfirmed:true});
   speApprovalInFlight=true;
   updateSpeApproveState();

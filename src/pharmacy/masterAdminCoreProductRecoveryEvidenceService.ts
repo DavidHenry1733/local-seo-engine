@@ -30,7 +30,6 @@ import {
 
 const OPTIONAL_PRODUCT_OWNER_EVIDENCE_FIELDS = new Set([
   "fonts",
-  "pricing",
   "teamReviewer",
   "yearsServing",
   "languages",
@@ -50,7 +49,6 @@ const SYSTEM_EVIDENCE_FIELD_IDS = new Set(["expectedDuration", "unknownEvidence"
 /** Service Page Evidence fields that still require an explicit PO decision after Business Profile approval. */
 export const SERVICE_PAGE_REQUIRES_PO_CONFIRMATION_FIELD_IDS = new Set([
   PRIVATE_SERVICES_OFFERED_FIELD_ID,
-  "pricing",
   "consultationProcess",
   "lockedService",
   "serviceOfferedConfirmation",
@@ -497,7 +495,6 @@ export function buildCprEvidenceFields(slug: string, serviceId: string): Service
     evidenceField("consultationProcess", "Consultation process", "service", approved.consultationRoom ? "Private consultation room confirmed" : null, { source: "business-profile" }),
     evidenceField("consultationRoom", "Consultation room", "service", approved.consultationRoom || profile.consultationRoom, { source: "business-profile" }),
     evidenceField("expectedDuration", "Expected duration", "service", null, { notApplicable: true, source: "business-profile" }),
-    evidenceField("pricing", "Pricing", "service", approved.privateServices, { source: "business-profile", notApplicable: false }),
     evidenceField("primaryCta", "CTA", "service", approved.primaryCtaDestination || profile.primaryCtaDestination || profile.headerCtaUrl, { required: true, source: "business-profile" }),
     evidenceField("unknownEvidence", "Unknown evidence", "service", null, { notApplicable: true }),
     evidenceField("teamReviewer", "Team/reviewer", "trust", profile.reviewerName || approved.superintendent, { source: "profile" }),

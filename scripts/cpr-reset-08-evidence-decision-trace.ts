@@ -8,7 +8,6 @@ import { readProductOwnerEvidenceDecisionStore } from "../src/pharmacy/masterAdm
 const SLUG = process.argv[2] || "welfare-pharmacy";
 const FIELD_IDS = [
   "privateServicesOffered",
-  "pricing",
   "teamReviewer",
   "yearsServing",
   "languages",
