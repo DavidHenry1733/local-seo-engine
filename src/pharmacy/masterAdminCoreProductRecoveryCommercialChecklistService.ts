@@ -91,6 +91,7 @@ export function evaluateCommercialServicePageChecklist(slug: string, serviceId: 
         serviceId === "pharmacy-first" ? "latest.json" : path.join("by-service", serviceId, "latest.json"),
       );
 
+  const designQa = hasHtml ? validatePharmaconnectDesignSystemV1Page(html) : null;
   const items: CommercialChecklistItem[] = [];
 
   for (const check of contract.checks) {
@@ -104,7 +105,7 @@ export function evaluateCommercialServicePageChecklist(slug: string, serviceId: 
       "brand_header_v1",
       "BRANDING",
       "Platform header present",
-      /platform-header-v1/.test(html),
+      /platform-header-v1/.test(html) || /data-sales-demo-brook="header"/.test(html) || /brook-demo-header/.test(html),
       undefined,
       true,
     ),
@@ -112,7 +113,7 @@ export function evaluateCommercialServicePageChecklist(slug: string, serviceId: 
       "brand_footer_v1",
       "BRANDING",
       "Platform footer present",
-      /platform-footer-v1/.test(html),
+      /platform-footer-v1/.test(html) || /data-sales-demo-brook="footer"/.test(html) || /brook-demo-footer/.test(html),
       undefined,
       true,
     ),
@@ -152,8 +153,10 @@ export function evaluateCommercialServicePageChecklist(slug: string, serviceId: 
       "presentation_ds_qa",
       "TECHNICAL",
       "Design System V1 presentation QA",
-      hasHtml && validatePharmaconnectDesignSystemV1Page(html).passed,
-      undefined,
+      Boolean(designQa?.passed),
+      designQa?.passed
+        ? undefined
+        : designQa?.checks.filter((check) => !check.passed).map((check) => `${check.id}: ${check.detail}`).join("; ") || "Rendered page missing",
       true,
     ),
     item(

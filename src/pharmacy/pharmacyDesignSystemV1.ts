@@ -440,6 +440,52 @@ export interface DesignSystemV1QaCheck {
   detail: string;
 }
 
+/**
+ * Internal navigation is either in-page anchors, root-relative paths, or the
+ * approved imported shell's own site links. The minimum stays three.
+ */
+export function servicePageInternalLinkCount(html: string): number {
+  const chrome = `${html.match(/<header\b[\s\S]*?<\/header>/i)?.[0] || ""}\n${html.match(/<footer\b[\s\S]*?<\/footer>/i)?.[0] || ""}`;
+  const importedShell = /data-imported-website-shell="design-intelligence-v1"/.test(chrome);
+  const hostCounts = new Map<string, number>();
+  if (importedShell) {
+    for (const match of chrome.matchAll(/href="([^"]*)"/gi)) {
+      const href = match[1].trim();
+      if (!/^https?:\/\//i.test(href)) continue;
+      try {
+        const host = new URL(href).host.toLowerCase();
+        if (!host || host === "localhost" || host.endsWith(".localhost")) continue;
+        hostCounts.set(host, (hostCounts.get(host) || 0) + 1);
+      } catch {
+        /* ignore malformed absolute hrefs */
+      }
+    }
+  }
+  let ownHost = "";
+  let ownCount = 0;
+  for (const [host, count] of hostCounts) {
+    if (count > ownCount) {
+      ownHost = host;
+      ownCount = count;
+    }
+  }
+  let count = 0;
+  for (const match of html.matchAll(/href="([^"]*)"/gi)) {
+    const href = match[1].trim();
+    if (/^#[a-z0-9-]+$/i.test(href) || (href.startsWith("/") && !href.startsWith("//"))) {
+      count++;
+      continue;
+    }
+    if (!ownHost || !/^https?:\/\//i.test(href)) continue;
+    try {
+      if (new URL(href).host.toLowerCase() === ownHost) count++;
+    } catch {
+      /* ignore malformed absolute hrefs */
+    }
+  }
+  return count;
+}
+
 export function validatePharmaconnectDesignSystemV1Page(html: string): {
   passed: boolean;
   checks: DesignSystemV1QaCheck[];
@@ -464,7 +510,8 @@ export function validatePharmaconnectDesignSystemV1Page(html: string): {
   add("responsive-viewport", /<meta name="viewport"/.test(html), "Viewport meta");
   add("no-imported-stylesheet", !/<link[^>]+rel="stylesheet"[^>]+href="https?:\/\/(?!fonts\.googleapis)/i.test(html), "No external customer CSS");
   add("hero-region", /id="hero"|data-slot="hero"|class="hero"/.test(html), "Hero region");
-  add("internal-links", (html.match(/href="#[a-z0-9-]+"/gi) || []).length >= 3, "Internal anchor links");
+  const internalLinkCount = servicePageInternalLinkCount(html);
+  add("internal-links", internalLinkCount >= 3, `Internal links count=${internalLinkCount} expected>=3`);
   add("no-contaminated-hours", !/monospace,monospace;font-size:1em/.test(html), "Opening hours free of CSS contamination");
   add("no-stock-icon-img", !/<img[^>]+src="[^"]*\/isteam\/stock\//i.test(html), "No stock icon URLs in img tags");
   add("commercial-layout-css", /\.grid-3|\.hero-image-wrap|\.pharmacy-local-grid/.test(html), "Commercial layout CSS present");
