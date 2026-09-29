@@ -4495,7 +4495,7 @@ async function updateCommercialDeploymentCredentials(){
   const payload=deploymentConfigurationPayload();
   if(!payload.password){toast('Enter a password or API token to update credentials',true);return}
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/credentials',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({username:payload.username,password:payload.password,authMethod:payload.authMethod})});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/credentials'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({username:payload.username,password:payload.password,authMethod:payload.authMethod})});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||data.error||res.statusText);
     toast('Credentials updated securely');
@@ -4541,7 +4541,7 @@ async function saveCommercialDeploymentConfiguration(){
   const btn=document.getElementById('cdcSaveBtn');
   btn.disabled=true;
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(deploymentConfigurationPayload())});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(deploymentConfigurationPayload())});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||data.error||res.statusText);
     toast('Deployment configuration saved');
@@ -4556,7 +4556,7 @@ async function testCommercialDeploymentConnection(){
   if(!activeCustomer)return;
   toast('Testing connection…');
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/test-connection',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/test-connection'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||data.error||res.statusText);
     toast(data.connectionOk?'Connection test passed':'Connection test completed with issues',!data.connectionOk);
@@ -4569,7 +4569,7 @@ async function validateCommercialDeploymentDestination(){
   if(!activeCustomer)return;
   toast('Validating destination…');
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/validate',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/validate'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||data.error||res.statusText);
     toast(data.validationOk?'Destination validation passed':'Destination validation completed with blockers',!data.validationOk);
@@ -4583,7 +4583,7 @@ async function approveCommercialDeployment(){
   const btn=document.getElementById('cdcApproveBtn');
   btn.disabled=true;
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/approve',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-deployment-configuration/approve'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||data.error||res.statusText);
     toast('Deployment approved — ready to publish');
@@ -4766,7 +4766,7 @@ async function confirmManagedPublishingDomain(){
   const customerRootDomain=document.getElementById('mpCustomerRootDomain')?.value||'';
   if(!customerRootDomain){toast('Enter the customer root domain',true);return}
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/confirm-domain',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({customerRootDomain})});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/confirm-domain'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({customerRootDomain})});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast('Customer domain confirmed');
@@ -4784,7 +4784,7 @@ async function changeManagedPublishingSubdomainLabel(){
   if(!activeCustomer)return;
   const subdomainLabel=document.getElementById('mpSubdomainLabel')?.value||'local';
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/change-subdomain-label',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({subdomainLabel})});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/change-subdomain-label'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({subdomainLabel})});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast('Subdomain label updated');
@@ -4795,7 +4795,7 @@ async function recheckManagedPublishingDns(){
   if(!activeCustomer)return;
   toast('Rechecking DNS…');
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/recheck-dns',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/recheck-dns'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast(data.review?.profile?.dnsStatus==='verified'?'DNS verified':'DNS recheck completed',data.review?.profile?.dnsStatus!=='verified');
@@ -4806,7 +4806,7 @@ async function verifyManagedPublishingSsl(){
   if(!activeCustomer)return;
   toast('Verifying SSL…');
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/verify-ssl',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/verify-ssl'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast(data.review?.profile?.sslStatus==='active'?'SSL active':'SSL verification completed',data.review?.profile?.sslStatus!=='active');
@@ -4841,7 +4841,7 @@ async function saveManagedPublishingSubdomain(){
   const customerSubdomain=document.getElementById('mpCustomerSubdomain')?.value||'';
   if(!customerSubdomain){toast('Enter a customer subdomain',true);return}
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/subdomain',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({customerSubdomain})});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/subdomain'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({customerSubdomain})});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast('Customer subdomain saved');
@@ -4853,7 +4853,7 @@ async function saveManagedPublishingSubdomain(){
 async function removeManagedPublishingSubdomain(){
   if(!activeCustomer)return;
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/subdomain',{method:'DELETE',headers:{'Accept':'application/json'},credentials:'same-origin'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/subdomain'),{method:'DELETE',headers:{'Accept':'application/json'},credentials:'same-origin'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast('Customer subdomain removed');
@@ -4864,7 +4864,7 @@ async function verifyManagedPublishingDns(){
   if(!activeCustomer)return;
   toast('Verifying DNS…');
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/verify-dns',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/verify-dns'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast(data.review?.profile?.dnsStatus==='verified'?'DNS verified':'DNS verification completed with issues',data.review?.profile?.dnsStatus!=='verified');
@@ -4874,7 +4874,7 @@ async function verifyManagedPublishingDns(){
 async function rollbackManagedPublishingRelease(){
   if(!activeCustomer||!activeMpReview||!activeMpReview.profile?.previousRelease)return;
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/rollback',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({releaseId:activeMpReview.profile.previousRelease})});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/managed-publishing/rollback'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({releaseId:activeMpReview.profile.previousRelease})});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||res.statusText);
     toast('Release rolled back');
@@ -5186,7 +5186,7 @@ async function approveCommercialPublish(){
   if(!box||!box.checked){toast('Confirmation checkbox required',true);return}
   btn.disabled=true;
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-publish-review/approve',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({operatorConfirmed:true,initiationSource:'product_owner_dashboard'})});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-publish-review/approve'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({operatorConfirmed:true,initiationSource:'product_owner_dashboard'})});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||data.error||res.statusText);
     toast('Publish job queued');
@@ -5379,7 +5379,7 @@ async function approveCommercialQualityReview(){
   const btn=document.getElementById('cqrApproveBtn');
   btn.disabled=true;
   try{
-    const res=await fetch('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-quality-review/approve',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
+    const res=await fetch(withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/commercial-quality-review/approve'),{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:'{}'});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error(data.message||data.error||res.statusText);
     toast(data.alreadyApproved?'Quality Review already approved':'Quality Review approved — ready to publish');
@@ -6576,7 +6576,7 @@ async function reopenServicePageEvidenceReview(source){
   if(btn){btn.disabled=true;btn.textContent='Reopening…';}
   if(spgBtn){spgBtn.disabled=true;spgBtn.textContent='Reopening…';}
   try{
-    const path='/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/service-page-evidence-review/reject';
+    const path=withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(activeCustomer.slug)+'/service-page-evidence-review/reject');
     const res=await fetch(path,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({notes:notes})});
     const data=await res.json().catch(()=>({}));
     if(!res.ok)throw new Error((data&&data.error)||res.statusText||('HTTP '+res.status));
@@ -7107,7 +7107,7 @@ async function confirmSpgGenerationClick(){
   const msgEl=document.getElementById('spgMsg');
   const slug=activeCustomer.slug;
   const serviceId=activeSpgDashboard.primaryService||activeSpgDashboard.plan?.serviceId||'';
-  const url='/api/master-admin-platform/customers/'+encodeURIComponent(slug)+'/service-page-generation/confirm';
+  const url=withAuthHandoff('/api/master-admin-platform/customers/'+encodeURIComponent(slug)+'/service-page-generation/confirm');
   const body=JSON.stringify({operatorConfirmed:true,initiationSource:'product_owner_dashboard'});
   spgGenerationInFlight=true;
   updateSpgGenerateState();
