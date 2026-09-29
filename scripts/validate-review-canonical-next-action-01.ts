@@ -32,6 +32,7 @@ const supported = [
 ] as const;
 
 check("header prints the canonical next action", page.includes("c.nextAction?'Next: '+c.nextAction"));
+check("campaign header uses the canonical next action", page.includes("CANONICAL_REVIEW_NEXT_ACTIONS[c.nextAction]?c.nextAction:selectedCampaign.nextAction"));
 check("Review & Approval reads that same nextAction", reviewSlice.includes("const canonicalNext=String(c.nextAction||'');") && reviewSlice.includes("CANONICAL_REVIEW_NEXT_ACTIONS[canonicalNext]"));
 check("one map shows the matching existing button", reviewSlice.includes("Object.keys(CANONICAL_REVIEW_NEXT_ACTIONS)") && reviewSlice.includes("label===canonicalNext?'inline-block':'none'"));
 const genericAt = reviewSlice.indexOf("Business Profile Review");

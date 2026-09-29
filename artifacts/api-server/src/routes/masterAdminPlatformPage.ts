@@ -3031,7 +3031,7 @@ function renderCustomerDetail(c){
   document.getElementById('detailMeta').textContent=atBpr
     ? ['Business Profile Review'].filter(Boolean).join(' · ')
     : campaignScoped
-      ? [selectedCampaign.serviceName,selectedCampaign.currentStage,'Next: '+selectedCampaign.nextAction,c.accountManager].filter(Boolean).join(' · ')
+      ? [selectedCampaign.serviceName,selectedCampaign.currentStage,'Next: '+(CANONICAL_REVIEW_NEXT_ACTIONS[c.nextAction]?c.nextAction:selectedCampaign.nextAction),c.accountManager].filter(Boolean).join(' · ')
       : [stageDisplayLabel(c),c.nextAction?'Next: '+c.nextAction:'',(c.outstandingIssues||0)+' open issues',c.accountManager].filter(Boolean).join(' · ');
   renderOnboardingSourcesPanel(c);
   document.getElementById('detailOnboardingSources').style.display=atBpr?'none':'';
