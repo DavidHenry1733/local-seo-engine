@@ -62,11 +62,35 @@ function sectionHtml(html: string, pattern: RegExp): string {
   return html.match(pattern)?.[1] || html.match(pattern)?.[0] || "";
 }
 
+/** Hidden, script, and style regions are removed. Remaining markup stays so section markers can be read. */
+function htmlWithoutHiddenRegions(html: string): string {
+  let source = String(html || "");
+  source = source.replace(/<!--[\s\S]*?-->/g, " ");
+  source = source.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ");
+  source = source.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ");
+  source = source.replace(/<noscript\b[^>]*>[\s\S]*?<\/noscript>/gi, " ");
+  const hidden =
+    /<([a-zA-Z0-9]+)\b[^>]*\b(?:hidden(?=[\s=/>])|aria-hidden\s*=\s*(["'])true\2|style\s*=\s*(["'])[^"']*display\s*:\s*none[^"']*\3|class\s*=\s*(["'])[^"']*\b(?:visually-hidden|sr-only)\b[^"']*\4)[^>]*>[\s\S]*?<\/\1>/gi;
+  let previous = "";
+  while (source !== previous) {
+    previous = source;
+    source = source.replace(hidden, " ");
+  }
+  return source;
+}
+
+export function extractVisibleLocalNextStep(html: string): string {
+  return visiblePatientFacingText(
+    sectionHtml(htmlWithoutHiddenRegions(html), /<p\b[^>]*data-locality-cta[^>]*>([\s\S]*?)<\/p>/i),
+  );
+}
+
 export function extractVisibleLocalPatientSections(html: string): string {
-  const hero = sectionHtml(html, /<section\b[^>]*data-template-block=["']hero["'][^>]*>[\s\S]*?<p>([\s\S]*?)<\/p>/i);
-  const relevance = sectionHtml(html, /<section\b[^>]*data-template-block=["']local-relevance["'][^>]*>([\s\S]*?)<\/section>/i);
-  const access = sectionHtml(html, /<p class=["']local-intro-lead["']>([\s\S]*?)<\/p>/i);
-  const nextStep = sectionHtml(html, /<p\b[^>]*data-locality-cta[^>]*>([\s\S]*?)<\/p>/i);
+  const visible = htmlWithoutHiddenRegions(html);
+  const hero = sectionHtml(visible, /<section\b[^>]*data-template-block=["']hero["'][^>]*>[\s\S]*?<p>([\s\S]*?)<\/p>/i);
+  const relevance = sectionHtml(visible, /<section\b[^>]*data-template-block=["']local-relevance["'][^>]*>([\s\S]*?)<\/section>/i);
+  const access = sectionHtml(visible, /<p class=["']local-intro-lead["']>([\s\S]*?)<\/p>/i);
+  const nextStep = extractVisibleLocalNextStep(visible);
   return visiblePatientFacingText([hero, relevance, access, nextStep].join(" "));
 }
 
@@ -138,7 +162,7 @@ export function evaluateLocalityHtmlContentContract(input: {
   const introRemainder = normaliseLocalityTokenText(intro, [input.areaName, input.pharmacyName, input.serviceName], input.entityNames || []);
   if (introRemainder.split(/\s+/).filter(Boolean).length < 8) failures.push("introduction-is-name-substitution");
   if (!/\bnot at\b/i.test(local)) failures.push("missing-service-locality-synthesis");
-  if (!/\bcontact\b/i.test(local)) failures.push("missing-local-next-step");
+  if (!/\bcontact\b/i.test(extractVisibleLocalNextStep(input.html))) failures.push("missing-local-next-step");
   for (const address of input.requiredAddresses || []) {
     const needle = visiblePatientFacingText(address);
     if (needle && !local.includes(needle)) failures.push(`missing-verified-address:${address}`);

@@ -24,6 +24,7 @@ import { visualServicePageBodyAttributes } from "./pharmacyVisualServicePageRend
 import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
 import { buildImageRenderContext } from "./pharmacyVisualExperience.ts";
 import { renderServicePageImagePanel } from "./pharmacyServicePageImageComponent.ts";
+import { renderLocalityHeroImagePanel } from "./pharmacyLocalityHeroImageResolver.ts";
 import { renderMediaTextSection } from "./pharmacyMediaFloatFlowComponent.ts";
 import type { VisualExperienceServiceId } from "./pharmacyVisualExperienceConfig.ts";
 import { pharmacyLocalPageResponsiveStyleBlock } from "./pharmacyLocalPageResponsiveStyles.ts";
@@ -176,6 +177,20 @@ function renderServiceHubCtaSection(
   conversionImageHtml: string,
 ): string {
   return renderApprovedBankServiceHubCtaHtml(ctx.serviceName, ctx.serviceId, conversionImageHtml);
+}
+
+/**
+ * Visible Local Patient Copy V1 next step.
+ * ctaPhonePrompt is the synthesised nextStep. The shared service-hub CTA is not this copy.
+ */
+function renderVisibleLocalPatientNextStep(nextStep: string): string {
+  const text = String(nextStep || "").trim();
+  if (!text) return "";
+  return `<section data-template-block="local-next-step" id="local-next-step">
+<div class="wrap">
+<p class="locality-cta-context" data-locality-cta>${esc(text)}</p>
+</div>
+</section>`;
 }
 
 function renderClusterLinksSection(
@@ -346,7 +361,14 @@ export function renderLocalClusterLocationPageHtml(
 
   const imageCtx = buildImageRenderContext(key, ctx.serviceId as VisualExperienceServiceId);
   imageCtx.location = cluster.name;
-  const heroImageHtml = renderServicePageImagePanel(imageCtx, "hero", "hero-image-wrap hero-media");
+  imageCtx.pageSlug = resolveClusterPageSlug(cluster.slug) || cluster.slug;
+  const heroImageHtml = renderLocalityHeroImagePanel({
+    tenantSlug: key,
+    serviceId: ctx.serviceId,
+    areaSlug: resolveClusterPageSlug(cluster.slug) || cluster.slug,
+    areaName: cluster.name,
+    imageCtx,
+  }).html;
   const supportingImageHtml = renderServicePageImagePanel(imageCtx, "support", "image-panel support-block-media");
   const trustImageHtml = renderServicePageImagePanel(imageCtx, "trust", "image-panel trust-block-media");
   const conversionImageHtml = renderServicePageImagePanel(
@@ -465,13 +487,10 @@ ${contextInner}
   });
   const links = renderClusterLinksSection(ctx, hierarchy, cluster, content);
   const faq = renderClusterFaqSection(content, ctx, cluster.name);
+  const localNextStep = lockedJourney ? "" : renderVisibleLocalPatientNextStep(content.base.ctaPhonePrompt);
   const conversionAndCta = registered
-    ? renderServiceHubCtaSection(ctx, conversionImageHtml)
-    : `${buildProfileFinalCtaHtml(ctx.serviceName, renderProfile, conversionImageHtml, "", "", ctx)}${
-        !lockedJourney && content.base.ctaPhonePrompt
-          ? `<p class="locality-cta-context wrap" data-locality-cta>${esc(content.base.ctaPhonePrompt)}</p>`
-          : ""
-      }`;
+    ? `${localNextStep}${renderServiceHubCtaSection(ctx, conversionImageHtml)}`
+    : `${buildProfileFinalCtaHtml(ctx.serviceName, renderProfile, conversionImageHtml, "", "", ctx)}${localNextStep}`;
 
   const main = registered
     ? [hero, clusterContext, relevance, childAreas, preparation, trust, faq, access, conversionAndCta, links].join("\n")

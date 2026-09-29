@@ -28,6 +28,16 @@ import { rewriteClusterLinksInHtml, resolveClusterPageSlug } from "../src/pharma
 import { renderLocalLocationClusterFullPage } from "../src/pharmacy/pharmacyLocalHierarchyFullPageRenderer.ts";
 import { resolveLocalLocationHierarchy } from "../src/pharmacy/pharmacyLocalAreaResolver.ts";
 import { evaluateLocalityHtmlDuplicationGate } from "../src/pharmacy/pharmacyLocalityPageDuplicationGateV1.ts";
+import {
+  assessLocalityEvidenceSufficiency,
+  buildLocalityIntelligenceV1,
+} from "../src/pharmacy/contentEngine/pharmacyLocalityIntelligenceV1.ts";
+import {
+  evaluateLocalityHtmlContentContract,
+  extractVisibleLocalNextStep,
+  extractVisibleLocalPatientSections,
+  localityPagesAreTokenOnlyCopies,
+} from "../src/pharmacy/contentEngine/pharmacyLocalityContentContractGateV1.ts";
 import { usesApprovedBankLocalityDirectPath } from "../src/pharmacy/pharmacyApprovedBankLocalityDirectRender.ts";
 import { usesPharmacyFirstPatientJourneyLocalTemplate } from "../src/pharmacy/pharmacyLocalPageTypeContracts.ts";
 
@@ -158,7 +168,7 @@ check("renderer receives the six selected localities", JSON.stringify(renderedNa
 
 const clusterSlugs = hierarchy.clusters.map((cluster) => resolveClusterPageSlug(cluster.slug));
 beginLocalityVariationSessionV1(clusterSlugs);
-const pages: Array<{ areaSlug: string; areaName: string; html: string; failures: string[] }> = [];
+const pages: Array<{ areaSlug: string; areaName: string; html: string; failures: string[]; entityNames: string[] }> = [];
 try {
   check(
     "blood-pressure locality render uses the approved-bank path",
@@ -195,7 +205,42 @@ try {
     else if (!pageConsumesRequiredVerifiedLocalEvidence(html, facts)) {
       failures.push("verified local evidence was not consumed in the page body");
     }
-    pages.push({ areaSlug: pageSlug, areaName: cluster.name, html, failures });
+    const built = buildLocalityIntelligenceV1({
+      areaName: cluster.name,
+      areaSlug: pageSlug,
+      tenantSlug: slug,
+      pack: packLoaded.ok ? packLoaded.pack : null,
+    });
+    const address = built.healthcare[0]?.address || built.community[0]?.address || built.landmarks[0]?.address || "";
+    const contract = evaluateLocalityHtmlContentContract({
+      html,
+      areaName: cluster.name,
+      serviceName: ctx.serviceName,
+      pharmacyName: ctx.profile.pharmacyName,
+      requiredAddresses: address ? [address] : [],
+      entityNames: facts.map((fact) => fact.name),
+    });
+    if (!contract.ok) failures.push(...contract.failures.map((failure) => `locality-content-contract: ${failure}`));
+    const visible = extractVisibleLocalPatientSections(html);
+    const nextStep = extractVisibleLocalNextStep(html);
+    if (!new RegExp(`patients in ${cluster.name} can use`, "i").test(visible)) failures.push("introduction-not-rendered");
+    if (!/\bnot at\b/i.test(visible)) failures.push("service-context-not-rendered");
+    if (!/does not describe roads|verified transport location/i.test(visible)) failures.push("access-context-not-rendered");
+    if (!/verified healthcare location|verified community location|verified local place/i.test(visible)) failures.push("local-context-not-rendered");
+    if (!/does not estimate how many people/i.test(visible)) failures.push("why-useful-not-rendered");
+    if (!/\bcontact\b/i.test(nextStep) || !nextStep.toLowerCase().includes(cluster.name.toLowerCase())) failures.push("next-step-not-rendered");
+    if (cluster.name === "Elderslie") {
+      const sufficiency = assessLocalityEvidenceSufficiency(built);
+      if (sufficiency.classification !== "limited") failures.push(`elderslie-sufficiency:${sufficiency.classification}`);
+      if (/\bGP\b|health centre|medical practice|bus every|train every|parking/i.test(visible)) failures.push("elderslie-invented-fact");
+    }
+    pages.push({
+      areaSlug: pageSlug,
+      areaName: cluster.name,
+      html,
+      failures,
+      entityNames: facts.map((fact) => fact.name),
+    });
   }
 } finally {
   endLocalityVariationSessionV1();
@@ -206,9 +251,21 @@ check(
   pages.length === 6 && pages.every((page) => page.failures.length === 0),
   pages
     .filter((page) => page.failures.length)
-    .map((page) => `${page.areaName}: ${page.failures.slice(0, 4).join("; ")}`)
+    .map((page) => `${page.areaName}: ${page.failures.slice(0, 6).join("; ")}`)
     .join(" | "),
 );
+for (const areaName of expectedAreas) {
+  const page = pages.find((item) => item.areaName === areaName);
+  check(`${areaName} in-memory V1 render passes`, Boolean(page) && page!.failures.length === 0, page?.failures.slice(0, 6).join("; "));
+}
+const tokenOnly = localityPagesAreTokenOnlyCopies(
+  pages.map((page) => ({
+    areaName: page.areaName,
+    localBody: extractVisibleLocalPatientSections(page.html),
+    entityNames: page.entityNames,
+  })),
+);
+check("six rendered locality bodies are not token-only copies", tokenOnly.length === 0, tokenOnly.join(" | "));
 
 const introFailures: string[] = [];
 for (let i = 0; i < pages.length; i++) {

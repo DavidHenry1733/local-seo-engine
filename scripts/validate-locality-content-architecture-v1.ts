@@ -21,6 +21,8 @@ import {
 import {
   evaluateLocalityHtmlContentContract,
   evaluateLocalPatientCopyContract,
+  extractVisibleLocalNextStep,
+  extractVisibleLocalPatientSections,
   isTokenOnlyDifferentiation,
   localityPagesAreTokenOnlyCopies,
 } from "../src/pharmacy/contentEngine/pharmacyLocalityContentContractGateV1.ts";
@@ -307,6 +309,92 @@ for (const [areaName, areaSlug] of areas) {
   preflight.push(`${areaName}=${verdict.classification}`);
 }
 check("six locality inputs were evaluated", preflight.length === 6, preflight.join(", "));
+
+function contractPage(parts: {
+  intro: string;
+  service: string;
+  access: string;
+  next?: string;
+  nextAttrs?: string;
+  outsideCta?: string;
+}): string {
+  const next = parts.next
+    ? `<section data-template-block="local-next-step"><div class="wrap"><p ${parts.nextAttrs || ""}data-locality-cta>${parts.next}</p></div></section>`
+    : "";
+  return `<section data-template-block="hero"><p>${parts.intro}</p></section><section data-template-block="local-relevance"><p>${parts.service}</p></section><p class="local-intro-lead">${parts.access}</p>${next}${parts.outsideCta || ""}`;
+}
+
+if (north.ok) {
+  const rendered = contractPage({
+    intro: north.copy.introduction,
+    service: `${north.copy.serviceContext} ${north.copy.healthcareCommunityContext} ${north.copy.whyUseful}`,
+    access: north.copy.accessContext,
+    next: north.copy.nextStep,
+  });
+  const visible = extractVisibleLocalPatientSections(rendered);
+  const detected = evaluateLocalityHtmlContentContract({
+    html: rendered,
+    areaName: "Northville",
+    serviceName: service.serviceName,
+    pharmacyName: service.pharmacyName,
+    requiredAddresses: ["12 Station Road, Northville NO1 1AA"],
+    entityNames: ["Northville Surgery"],
+  });
+  check("introduction renders and is detected", /patients in northville can use/i.test(visible));
+  check("service context renders and is detected", /not at northville surgery/i.test(visible));
+  check("access context renders and is detected", visible.includes("does not describe roads"));
+  check("healthcare context renders and is detected", visible.includes("verified healthcare location"));
+  check("why-service-useful renders and is detected", visible.includes("does not estimate how many people"));
+  check("local nextStep renders visibly and is detected", /\bcontact\b/i.test(extractVisibleLocalNextStep(rendered)) && detected.ok, detected.failures.join("; "));
+  const missingNext = evaluateLocalityHtmlContentContract({
+    html: contractPage({
+      intro: north.copy.introduction,
+      service: `${north.copy.serviceContext} ${north.copy.whyUseful}`,
+      access: north.copy.accessContext,
+    }),
+    areaName: "Northville",
+    serviceName: service.serviceName,
+    pharmacyName: service.pharmacyName,
+    requiredAddresses: ["12 Station Road, Northville NO1 1AA"],
+    entityNames: ["Northville Surgery"],
+  });
+  check("missing nextStep genuinely fails", !missingNext.ok && missingNext.failures.includes("missing-local-next-step"));
+  const hiddenNext = evaluateLocalityHtmlContentContract({
+    html: contractPage({
+      intro: north.copy.introduction,
+      service: `${north.copy.serviceContext} ${north.copy.whyUseful}`,
+      access: north.copy.accessContext,
+      next: north.copy.nextStep,
+      nextAttrs: "hidden ",
+    }),
+    areaName: "Northville",
+    serviceName: service.serviceName,
+    pharmacyName: service.pharmacyName,
+    requiredAddresses: ["12 Station Road, Northville NO1 1AA"],
+    entityNames: ["Northville Surgery"],
+  });
+  check("hidden nextStep fails", !hiddenNext.ok && hiddenNext.failures.includes("missing-local-next-step") && !extractVisibleLocalNextStep(hiddenNext.ok ? "" : contractPage({
+    intro: north.copy.introduction,
+    service: north.copy.serviceContext,
+    access: north.copy.accessContext,
+    next: north.copy.nextStep,
+    nextAttrs: "hidden ",
+  })));
+  const outside = evaluateLocalityHtmlContentContract({
+    html: contractPage({
+      intro: north.copy.introduction,
+      service: `${north.copy.serviceContext} ${north.copy.whyUseful}`,
+      access: north.copy.accessContext,
+      outsideCta: `<section data-template-block="final-cta"><a class="btn">Contact the pharmacy</a><p>Contact the pharmacy for this service.</p></section>`,
+    }),
+    areaName: "Northville",
+    serviceName: service.serviceName,
+    pharmacyName: service.pharmacyName,
+    requiredAddresses: ["12 Station Road, Northville NO1 1AA"],
+    entityNames: ["Northville Surgery"],
+  });
+  check("unrelated CTA outside locality copy does not satisfy the next step", !outside.ok && outside.failures.includes("missing-local-next-step"));
+}
 
 for (const [areaName, areaSlug] of areas) {
   const html = readFileSync(resolve(`output/pharmacy-content-ecosystem/${slug}/${serviceId}/local/${areaSlug}/index.html`), "utf8");
