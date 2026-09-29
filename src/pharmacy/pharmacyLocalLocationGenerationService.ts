@@ -23,6 +23,8 @@ import {
 } from "./pharmacyLocalHierarchyFullPageRenderer.ts";
 import { scrubPublicLocalEngineHtml } from "./pharmacyLocalClusterCompositionDedupe.ts";
 import { polishCommercialClusterPublicHtml, attachLocalityPageJsonLd } from "./contentEngine/pharmacyCommercialNarrativePolishV1.ts";
+import { composeCommercialClusterNarrativeV1 } from "./pharmacyLocalClusterContentEngine.ts";
+import { canonicalClusterNarrativeRequest } from "./pharmacyLocalHubClusterContentEngine.ts";
 import { usesApprovedBankLocalityDirectPath } from "./pharmacyApprovedBankLocalityDirectRender.ts";
 import {
   attributableEntities,
@@ -89,7 +91,7 @@ function stampLocalHtmlOutput(html: string, stamp: CampaignRunStamp): string {
   return applyCampaignRunStampToHtml(html, stamp);
 }
 
-export function generateLocalLocationHierarchyPages(
+export async function generateLocalLocationHierarchyPages(
   ctxInput: ContentGenerationContext,
   options?: {
     generationStamp?: GenerationStamp;
@@ -354,7 +356,9 @@ export function generateLocalLocationHierarchyPages(
       skippedExistingPaths.push(outPath);
       htmlBySlug.set(pageSlug, existingHtml);
     } else {
-      htmlBySlug.set(pageSlug, renderClusterHtml(cluster));
+      const request = canonicalClusterNarrativeRequest(ctx, hierarchy, { ...cluster, slug: pageSlug });
+      await composeCommercialClusterNarrativeV1(request.input, request.ctx);
+      htmlBySlug.set(pageSlug, renderClusterHtml({ ...cluster, slug: pageSlug }));
     }
   }
   const newSlugs = new Set(
@@ -398,17 +402,11 @@ export function generateLocalLocationHierarchyPages(
         patientCopyFailures.push(`${pageSlug}: verified local evidence was not consumed in the page body`);
       }
       if (approvedBankLocality) {
-        const requiredAddresses = evidenceFacts
-          .filter((fact) => fact.category === "healthcare" || fact.category === "transport" || fact.category === "community" || fact.category === "landmarks")
-          .slice(0, 1)
-          .map((fact) => fact.address)
-          .filter(Boolean);
         const contractGate = evaluateLocalityHtmlContentContract({
           html,
           areaName: cluster.name,
           serviceName: ctx.serviceName,
           pharmacyName,
-          requiredAddresses,
           entityNames: evidenceFacts.map((fact) => fact.name),
         });
         if (!contractGate.ok) {

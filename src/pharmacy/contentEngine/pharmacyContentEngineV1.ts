@@ -21,7 +21,7 @@ export const CONTENT_ENGINE_V1 = {
   clusterBuilder: {
     module: "pharmacyLocalLocationGenerationService.ts",
     entry: "generateLocalLocationHierarchyPages",
-    content: "buildLocalClusterHubPageContent → composeCommercialClusterNarrativeV1 → verified evidence + allocator → service variant pack or Pharmacy First locality narrative",
+    content: "generateLocalLocationHierarchyPages → composeCommercialClusterNarrativeV1 → requestUkLocalIntroductionProseV1",
     renderer: "renderLocalClusterLocationPageHtml (local-cluster-v1)",
   },
   narrativePlanner: {

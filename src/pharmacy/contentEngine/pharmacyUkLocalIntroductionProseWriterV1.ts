@@ -24,47 +24,104 @@ export const UK_LOCAL_INTRODUCTION_GEMINI_MODEL = "gemini-3.6-flash";
 export const UK_LOCAL_INTRODUCTION_GEMINI_ENDPOINT =
   `https://generativelanguage.googleapis.com/v1beta/models/${UK_LOCAL_INTRODUCTION_GEMINI_MODEL}:generateContent`;
 
+const PHARMACY_FIRST_SERVICE_MEANING = [
+  "provides SERVICE consultations for eligible people from the selected area.",
+  "covers certain common health conditions.",
+  "The pharmacist assesses symptoms, relevant medicines and medical history.",
+  "The outcome may include advice, suitable treatment or referral to another healthcare professional.",
+  "Eligibility and treatment depend on the individual clinical assessment.",
+];
+
+function pharmacyFirstMeaningLines(pharmacy: string, service: string): string[] {
+  return [
+    `- ${pharmacy} provides ${service} consultations for eligible people from the selected area.`,
+    `- ${service} covers certain common health conditions.`,
+    `- ${PHARMACY_FIRST_SERVICE_MEANING[2]}`,
+    `- ${PHARMACY_FIRST_SERVICE_MEANING[3]}`,
+    `- ${PHARMACY_FIRST_SERVICE_MEANING[4]}`,
+  ];
+}
+
+export function approvedServiceMeaningLines(input: {
+  business: { name: string };
+  offer: {
+    serviceId: string;
+    serviceName: string;
+    lockedClinicalFacts: {
+      conditionSet: string;
+      suitability: string;
+      process: string;
+      safety: string;
+    };
+  };
+}): string[] {
+  const pharmacy = String(input.business.name || "the confirmed pharmacy").trim() || "the confirmed pharmacy";
+  const service = String(input.offer.serviceName || "the service").trim() || "the service";
+  if (input.offer.serviceId === "pharmacy-first") {
+    return pharmacyFirstMeaningLines(pharmacy, service);
+  }
+  const locked = input.offer.lockedClinicalFacts;
+  const lines = [locked.conditionSet, locked.suitability, locked.process, locked.safety]
+    .map((line) => String(line || "").replace(/\s+/g, " ").trim())
+    .filter((line) => line.length > 20)
+    .slice(0, 6)
+    .map((line) => `- ${line}`);
+  return lines.length
+    ? lines
+    : [`- ${pharmacy} provides ${service} for eligible people from the selected area.`];
+}
+
 export function acceptedUkLocalIntroductionWritingContract(opts: {
   pharmacyName: string;
   serviceName: string;
+  allowedServiceMeaning?: string[];
 }): string {
   const pharmacy = String(opts.pharmacyName || "the confirmed pharmacy").trim() || "the confirmed pharmacy";
   const service = String(opts.serviceName || "Pharmacy First").trim() || "Pharmacy First";
+  const meaning = opts.allowedServiceMeaning?.length
+    ? opts.allowedServiceMeaning.join("\n")
+    : pharmacyFirstMeaningLines(pharmacy, service).join("\n");
+  const paragraph3 = opts.allowedServiceMeaning?.length
+    ? `Continue with the approved ${service} explanation supplied below. Keep the selected area present without keyword-stuffing. Do not add conditions, treatments, eligibility or outcomes that are not in that approved service meaning.`
+    : `Continue the service explanation for eligible common conditions: pharmacist consultation, advice, suitable treatment or referral where appropriate. Keep the selected area present without keyword-stuffing. The transition must feel like healthcare/service copy — not a disclaimer pasted onto a place article.`;
   return `Write as an experienced British healthcare copywriter.
 
 Using only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.
 
+CONTENT HIERARCHY (mandatory):
+1) ${service} service intent
+2) ${pharmacy} service information and useful patient explanation
+3) Selected-area relevance
+4) Verified locality evidence woven naturally where it helps a patient
+This must read as a ${service} service landing page for ${pharmacy}, personalised for the selected area — not an article about the area with ${service} added afterwards.
+
 HERO INTRODUCTION:
-Write 35–55 words introducing ${service} for people in the selected area and naming ${pharmacy} as the provider.
+Write 35–55 words introducing ${service} for people in the selected area and naming ${pharmacy} as the provider. Establish immediately what the service is useful for.
 
 LOCAL INTRODUCTION:
 Write 170–230 words in three fluent British-English paragraphs.
 
 Paragraph 1:
-Introduce the area, its location and its character using verified facts.
+Open with ${service} and ${pharmacy} for people in the selected area, and what the service is useful for. Do not open with neighbourhood-ward identity, civic boards, carnivals, war memorials, library catalogues, or landmark lists.
 
 Paragraph 2:
-Describe meaningful verified landmarks, green spaces, shopping, community facilities and healthcare references. Select the most useful facts and connect them naturally. Do not list every evidence record.
+Weave verified local healthcare context first (named GP or healthcare settings where supplied). Add only those civic, park or community facts that genuinely help a patient understand local relevance. Prefer healthcare facts over civic or heritage catalogues. Do not manufacture a landmarks section. Do not list every evidence record.
 
 Paragraph 3:
-Move naturally from the area and its local healthcare needs into ${pharmacy}’s ${service} service. Name ${pharmacy} and ${service}, and explain that eligible patients can receive a pharmacist consultation for certain common conditions. Do not reproduce a fixed clinical closing sentence. The transition must feel like part of the article—not a disclaimer pasted onto the end.
+${paragraph3}
 
 You may express only this ${service} meaning:
-- ${pharmacy} provides ${service} consultations for eligible people from the selected area.
-- ${service} covers certain common health conditions.
-- The pharmacist assesses symptoms, relevant medicines and medical history.
-- The outcome may include advice, suitable treatment or referral to another healthcare professional.
-- Eligibility and treatment depend on the individual clinical assessment.
+${meaning}
 
 Do not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.
 
 Do not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.
 
-Use neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.
+Use neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient, established neighbourhood, or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.
 
-Do not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.
+Do not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “patients near local landmarks”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.
 
-Do not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “the community” where appropriate.
+Do not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “patients here” where appropriate.
 
 Return exactly this layout:
 HERO INTRODUCTION:
@@ -142,24 +199,25 @@ export function buildUkLocalIntroductionProseChatRequest(
   const history = factsForCategory(input, ["heritage"]);
   const community = factsForCategory(input, ["community"]);
   const healthcare = factsForCategory(input, ["healthcare"]);
+  const meaningLines = approvedServiceMeaningLines(input);
   const prompt = [
-    acceptedUkLocalIntroductionWritingContract({ pharmacyName, serviceName }),
+    acceptedUkLocalIntroductionWritingContract({
+      pharmacyName,
+      serviceName,
+      allowedServiceMeaning: input.offer.serviceId === "pharmacy-first" ? undefined : meaningLines,
+    }),
     "",
     `Selected area: ${area}`,
     `Confirmed pharmacy name: ${pharmacyName}`,
     premisesLocality ? `Confirmed pharmacy premises locality: ${premisesLocality}` : "",
     distanceLabel ? `Saved straight-line distance: ${distanceLabel}` : "",
     "",
-    ...bulletBlock("Verified area identity and geographical context:", identity),
-    ...bulletBlock("Verified history where available:", history),
-    ...bulletBlock("Verified landmarks, parks, shopping, civic and community facilities:", community),
     ...bulletBlock("Verified GP practices or healthcare facilities:", healthcare),
+    ...bulletBlock("Verified area identity and geographical context:", identity),
+    ...bulletBlock("Verified community facilities (use only where they help patient relevance):", community),
+    ...bulletBlock("Verified heritage or landmark facts (use sparingly; never as the page subject):", history),
     `Approved ${serviceName} service meaning:`,
-    `- ${pharmacyName} provides ${serviceName} consultations for eligible people from the selected area.`,
-    `- ${serviceName} covers certain common health conditions.`,
-    "- The pharmacist assesses symptoms, relevant medicines and medical history.",
-    "- The outcome may include advice, suitable treatment or referral to another healthcare professional.",
-    "- Eligibility and treatment depend on the individual clinical assessment.",
+    ...meaningLines,
   ]
     .filter((line) => line !== "")
     .join("\n");

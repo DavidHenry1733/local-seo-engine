@@ -1,22 +1,10 @@
 /**
- * Direct approved-bank locality rendering for registered services.
- * Final visible copy may come only from the current approved bank, confirmed
- * tenant profile, stored verified locality intelligence, the current campaign
- * locality, and the shared layout renderer.
+ * Direct approved-bank service sections for registered services.
+ * This module does not write locality prose. Locality synthesis belongs to
+ * composeCommercialClusterNarrativeV1.
  */
-import {
-  bindCurrentRegisteredApprovedBank,
-  selectRegisteredApprovedBank,
-} from "./pharmacyApprovedBankRunProvenance.ts";
-import { buildApprovedBankLocalityPageContract } from "./pharmacyApprovedBankCorePageContract.ts";
-import { bindVerifiedLocalityEvidenceV1 } from "./contentEngine/pharmacyVerifiedLocalityEvidenceV1.ts";
-import { loadLocalEvidencePackForGeneration } from "./contentEngine/pharmacyLocalEvidencePackContractV1.ts";
-import { buildLocalityIntelligenceV1 } from "./contentEngine/pharmacyLocalityIntelligenceV1.ts";
-import { synthesiseLocalPatientCopyV1 } from "./contentEngine/pharmacyLocalPatientCopyV1.ts";
 import type { ContentGenerationContext } from "./contentEngine/contentGenerationContextTypes.ts";
 import { isApprovedBankRegisteredService } from "./pharmacyServiceVariantLibrary.ts";
-import { buildPharmacyServicePageProfile } from "./pharmacyServicePageProfileContext.ts";
-import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
 import type {
   LocalClusterContentInput,
   LocalClusterPageContent,
@@ -26,24 +14,6 @@ export const APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE = "approved-bank-locality-d
 
 export function usesApprovedBankLocalityDirectPath(serviceId: string): boolean {
   return isApprovedBankRegisteredService(serviceId);
-}
-
-function wordCount(content: LocalClusterPageContent): number {
-  return [
-    content.heroIntro,
-    content.whyChecksBody,
-    content.localRelevanceIntro,
-    content.localRelevanceBody,
-    content.processIntro,
-    ...content.processSteps.map((s) => `${s.title} ${s.body} ${(s.bullets || []).join(" ")}`),
-    content.clinicalEnvironmentBody,
-    content.trustBody,
-    ...content.faqs.map((f) => `${f.question} ${f.answer}`),
-    content.accessBody,
-  ]
-    .join(" ")
-    .split(/\s+/)
-    .filter(Boolean).length;
 }
 
 export function serviceHubPublicPath(serviceId: string): string {
@@ -124,143 +94,9 @@ ${list}
 
 export function composeApprovedBankLocalityDirectDraft(
   input: LocalClusterContentInput,
-  ctxInput?: ContentGenerationContext,
+  _ctxInput?: ContentGenerationContext,
 ): LocalClusterPageContent {
-  if (!isApprovedBankRegisteredService(input.serviceId)) {
-    throw new Error(`Direct approved-bank locality compose requires a registered service: ${input.serviceId}`);
-  }
-  const ctx = ctxInput ? bindCurrentRegisteredApprovedBank(ctxInput) : undefined;
-  const selected = selectRegisteredApprovedBank(input.serviceId);
-  const pack = selected.pack;
-  if (!pack || pack.serviceId !== input.serviceId || !selected.hash) {
-    throw new Error(`Current registered approved bank missing for locality compose: ${input.serviceId}`);
-  }
-
-  const key = resolveTenantProfileSlug(input.slug) || input.slug;
-  const profile = ctx?.profile ?? buildPharmacyServicePageProfile(key);
-  const pharmacyName = profile.pharmacyName;
-  const contract = buildApprovedBankLocalityPageContract(pack, input.areaSlug, input.areaSlugsInCluster);
-
-  const verified = ctx
-    ? bindVerifiedLocalityEvidenceV1({
-        ctx,
-        areaName: input.areaName,
-        areaSlug: input.areaSlug,
-        siblingLocalities: (input.siblingLocalities?.length
-          ? input.siblingLocalities
-          : input.nearbyAreaNames.map((name, i) => ({
-              areaName: name,
-              areaSlug: input.areaSlugsInCluster[i] || name.toLowerCase(),
-            }))
-        ).concat(
-          input.siblingLocalities?.some((s) => s.areaSlug === input.areaSlug)
-            ? []
-            : [{ areaName: input.areaName, areaSlug: input.areaSlug, ...input.localityRecord }],
-        ),
-        localityRecord: input.localityRecord,
-      })
-    : null;
-
-  const packLoaded = loadLocalEvidencePackForGeneration(key, input.areaName, input.areaSlug);
-  const intelligence = buildLocalityIntelligenceV1({
-    areaName: input.areaName,
-    areaSlug: input.areaSlug,
-    tenantSlug: key,
-    pack: packLoaded.ok ? packLoaded.pack : null,
-    geographic: {
-      distanceLabel: verified?.distanceLabel || "",
-      distanceProvenance: verified?.distanceProvenance || "",
-      cardinalDirection: verified?.cardinalDirection || "",
-      directionProvenance: verified?.directionProvenance || "",
-      pharmacyAddress: profile.fullAddress || profile.customerFacingAddress || "",
-      pharmacyAddressProvenance: profile.fullAddress || profile.customerFacingAddress ? "profile:pharmacy-address" : "",
-    },
-  });
-  const synthesised = synthesiseLocalPatientCopyV1(intelligence, {
-    serviceName: input.serviceName,
-    serviceExplanation: contract.explanationBody,
-    pharmacyName,
-    pharmacyAddress: profile.fullAddress || profile.customerFacingAddress || "",
-    pharmacyPhone: profile.displayPhone || profile.phone || "",
-  });
-  if (!synthesised.ok) {
-    throw new Error(synthesised.blocker);
-  }
-  const localCopy = synthesised.copy;
-
-  const whyChecksBody = contract.explanationBody;
-  const scopeBody = contract.scopeBody;
-  const processIntro = contract.processBody;
-  const processSteps = contract.processSteps.map((step) => ({
-    title: step.title,
-    body: step.body,
-    bullets: (step.bullets || []).map((b) => String(b).trim()).filter(Boolean),
-  }));
-  const preparationBody = contract.preparationBody;
-  const safetyBody = contract.safetyBody;
-  const faqs = contract.faqs.slice(0, 6).map((faq) => ({
-    question: String(faq.question || "").trim(),
-    answer: faq.answer,
-  }));
-
-  const supportingItems = processSteps.map((step) => ({
-    title: step.title,
-    body: step.body,
-    evidence: "approved-bank-process",
-    bullets: step.bullets,
-  }));
-
-  const splitPrepAndSafety = Boolean(preparationBody && safetyBody);
-  const trustHeading = splitPrepAndSafety
-    ? input.serviceId === "blood-pressure-checks"
-      ? contract.safetyHeading || "Results and safety"
-      : `Preparing and staying safe with ${input.serviceName}`
-    : contract.safetyHeading || `Preparing and staying safe with ${input.serviceName}`;
-
-  const content: LocalClusterPageContent = {
-    heroIntro: localCopy.introduction,
-    localRelevanceHeading: `Using ${input.serviceName} from ${input.areaName}`,
-    localRelevanceIntro: "",
-    localRelevanceBody: [localCopy.serviceContext, localCopy.healthcareCommunityContext, localCopy.whyUseful].filter(Boolean).join("\n\n"),
-    localRelevanceBullets: [...contract.considerBullets, ...contract.scopeBullets]
-      .map((b) => String(b).trim())
-      .filter(Boolean)
-      .filter((b, i, arr) => arr.indexOf(b) === i)
-      .slice(0, 8),
-    whyChecksHeading: contract.explanationHeading,
-    whyChecksBody,
-    whyChecksBullets: (contract.explanationBullets || []).map((b) => String(b).trim()).filter(Boolean),
-    processHeading: contract.processHeading,
-    processIntro,
-    processSteps,
-    accessHeading: `Getting to the pharmacy from ${input.areaName}`,
-    accessBody: localCopy.accessContext,
-    clinicalEnvironmentHeading: contract.preparationHeading,
-    clinicalEnvironmentBody: preparationBody,
-    preparationBullets: contract.preparationBullets.map((b) => String(b).trim()).filter(Boolean),
-    eligibilityHeading: contract.scopeHeading,
-    eligibilityBody: scopeBody,
-    eligibilityBullets: contract.scopeBullets.map((b) => String(b).trim()).filter(Boolean),
-    trustHeading,
-    trustBullets: contract.safetyBullets.map((b) => String(b).trim()).filter(Boolean),
-    trustBody: safetyBody,
-    faqs,
-    ctaPrimary: "Contact the pharmacy",
-    ctaSecondary: "Get directions",
-    ctaPhonePrompt: localCopy.nextStep,
-    contentFingerprint: `${input.areaSlug}::${input.serviceId}::${APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE}::${selected.hash}`,
-    localIntelligenceUsed: true,
-    narrativeType: `${APPROVED_BANK_LOCALITY_DIRECT_NARRATIVE}:${input.serviceId}:local-patient-copy-v1`,
-    wordCountEstimate: 0,
-    seoTitle: `${input.serviceName} for patients from ${input.areaName} | ${pharmacyName}`,
-    metaDescription: localCopy.introduction.slice(0, 180),
-    supportingHeading: contract.processHeading,
-    supportingIntro: processIntro,
-    supportingItems,
-    nearbyLocalityLinks: verified?.nearbyLocalities || [],
-    sectionEvidence: verified?.sectionEvidence,
-    evidenceLimited: verified?.evidenceLimited,
-  };
-  content.wordCountEstimate = wordCount(content);
-  return content;
+  throw new Error(
+    `Approved-bank locality draft cannot write locality prose for ${input.serviceId}/${input.areaSlug}. composeCommercialClusterNarrativeV1 owns locality synthesis.`,
+  );
 }

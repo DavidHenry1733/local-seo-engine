@@ -25,14 +25,14 @@ export interface RebindPharmacyFirstLocalOptions {
   preserveExistingNarrative?: boolean;
 }
 
-export function rebindPharmacyFirstLocalClusterPages(
+export async function rebindPharmacyFirstLocalClusterPages(
   slug: string,
   serviceId = "pharmacy-first",
   _options: RebindPharmacyFirstLocalOptions = {},
 ): RebindPharmacyFirstLocalResult {
   const resolvedSlug = resolveTenantProfileSlug(slug) || slug;
   const baseCtx = buildContentGenerationContext(resolvedSlug, serviceId);
-  const result = generateLocalLocationHierarchyPages(baseCtx);
+  const result = await generateLocalLocationHierarchyPages(baseCtx);
   if (!result.ok) {
     return {
       slug: resolvedSlug,

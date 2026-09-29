@@ -859,7 +859,7 @@ function runQualityChecks(
   ];
 }
 
-export function buildBenchmarkServiceEcosystem(
+export async function buildBenchmarkServiceEcosystem(
   ctx: ContentGenerationContext,
   options: { corePagesOnly?: boolean; generationStamp?: GenerationStamp } = {},
 ): EcosystemBuildResult {
@@ -923,7 +923,7 @@ export function buildBenchmarkServiceEcosystem(
     void writeLocalClusterPage;
     void writePage;
     void vars;
-    const localGeneration = generateLocalLocationHierarchyPages(ctx, { generationStamp });
+    const localGeneration = await generateLocalLocationHierarchyPages(ctx, { generationStamp });
     if (!localGeneration.ok) {
       throw new Error(localGeneration.blockedReason || "Local area page generation failed");
     }
@@ -1030,7 +1030,7 @@ export function buildBenchmarkServiceEcosystem(
     wordCount: countWords(overviewBody.replace(/<[^>]+>/g, " ")),
   });
 
-  const localGeneration = generateLocalLocationHierarchyPages(ctx, { generationStamp });
+  const localGeneration = await generateLocalLocationHierarchyPages(ctx, { generationStamp });
   if (!localGeneration.ok) {
     throw new Error(localGeneration.blockedReason || "Local area page generation failed");
   }
@@ -1328,12 +1328,16 @@ ${renderPreviewSiteHeader({ ...chrome, serviceName, homeUrl: chrome.website })}
   };
 }
 
-export function buildBenchmarkServiceEcosystemFromSlug(serviceId: string, slug: string): EcosystemBuildResult {
+export async function buildBenchmarkServiceEcosystemFromSlug(serviceId: string, slug: string): Promise<EcosystemBuildResult> {
   return buildBenchmarkServiceEcosystem(buildContentGenerationContext(slug, serviceId));
 }
 
-export function buildAllBenchmarkServiceEcosystems(slug = SLUG): EcosystemBuildResult[] {
-  return ROLLOUT_SERVICE_IDS.map((serviceId) => buildBenchmarkServiceEcosystemFromSlug(serviceId, slug));
+export async function buildAllBenchmarkServiceEcosystems(slug = SLUG): Promise<EcosystemBuildResult[]> {
+  const results: EcosystemBuildResult[] = [];
+  for (const serviceId of ROLLOUT_SERVICE_IDS) {
+    results.push(await buildBenchmarkServiceEcosystemFromSlug(serviceId, slug));
+  }
+  return results;
 }
 
 export function countBenchmarkEcosystems(slug = SLUG): number {

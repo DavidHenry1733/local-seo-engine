@@ -1,8 +1,7 @@
 /**
- * Local Patient Copy V1.
- * Synthesises approved service intelligence with Locality Intelligence V1.
- * The renderer must print this copy. It must not invent locality relevance
- * by swapping a locality name into the service page.
+ * Local Patient Copy V1 — SUPERSEDED as a patient-facing writer.
+ * Structural section names remain for older fixtures.
+ * Live locality prose is owned by composeCommercialClusterNarrativeV1.
  */
 import {
   assessLocalityEvidenceSufficiency,

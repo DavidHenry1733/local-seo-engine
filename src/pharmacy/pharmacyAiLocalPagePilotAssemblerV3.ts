@@ -10,6 +10,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { buildContentGenerationContext } from "./contentEngine/buildContentGenerationContext.ts";
+import { installSavedLocalIntroductionForRender } from "./pharmacyLocalClusterContentEngine.ts";
+import { canonicalClusterNarrativeRequest } from "./pharmacyLocalHubClusterContentEngine.ts";
 import {
   AI_PILOT_V3_PREVIEW_BANNER,
   AI_LOCAL_PILOT_V3_AREAS,
@@ -230,11 +232,19 @@ export function renderAiLocalPagePilotHtmlInMemoryV3(opts: {
       throw new Error("Preview must render the saved candidate overlay; deterministic assembly is generate-path only");
     }
     setSessionAiLocalCopy(pageSlug, opts.overlay);
-    if (hasCurrentGeminiLocalCopyFields(opts.overlay) || opts.restoreStrategyVariants === false) {
+    if (opts.restoreStrategyVariants === false) {
+      setSessionRestoreStrategyVariants(false);
+    } else if (opts.restoreStrategyVariants === true) {
+      setSessionRestoreStrategyVariants(true);
+    } else if (hasCurrentGeminiLocalCopyFields(opts.overlay)) {
+      // Default generate/preview path keeps Gemini copy ownership unless restore is requested.
       setSessionRestoreStrategyVariants(false);
     }
+    const clusterForRender = { ...cluster, slug: pageSlug };
+    const request = canonicalClusterNarrativeRequest(ctx, hierarchy, clusterForRender);
+    installSavedLocalIntroductionForRender(request.input, request.ctx, opts.overlay);
     const rendered = rewriteClusterLinksInHtml(
-      renderLocalLocationClusterFullPage(ctx, hierarchy, { ...cluster, slug: pageSlug }),
+      renderLocalLocationClusterFullPage(ctx, hierarchy, clusterForRender),
       [pageSlug],
     );
     const delivery = (
@@ -337,8 +347,11 @@ export function assemblePharmacyAiLocalPagePilotsV3(
       }
       const evidenceNames: string[] = [];
       const siblingNames = hierarchy.clusters.filter((row) => row.slug !== cluster.slug).map((row) => row.name);
+      const clusterForRender = { ...cluster, slug: pageSlug };
+      const request = canonicalClusterNarrativeRequest(ctx, hierarchy, clusterForRender);
+      installSavedLocalIntroductionForRender(request.input, request.ctx, overlay);
       const rendered = rewriteClusterLinksInHtml(
-        renderLocalLocationClusterFullPage(ctx, hierarchy, { ...cluster, slug: pageSlug }),
+        renderLocalLocationClusterFullPage(ctx, hierarchy, clusterForRender),
         clusterSlugs,
       );
       const delivery = (

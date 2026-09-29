@@ -130,6 +130,12 @@ export function evaluateAcceptedGeminiLocalCopyV1(opts: {
   }
 
   const sentences = splitSentences(hay);
+  let scanned = hay;
+  for (const entity of input.locality.acceptedEntities || []) {
+    const name = String(entity.name || "").trim();
+    if (name.length < 3) continue;
+    scanned = scanned.replace(new RegExp(escapeRe(name), "gi"), " ");
+  }
   const seen = new Set<string>();
   for (const sentence of sentences) {
     const key = sentence.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -154,13 +160,13 @@ export function evaluateAcceptedGeminiLocalCopyV1(opts: {
     }
   }
 
-  if (UK_LOCAL_INTRODUCTION_LISTING_LANGUAGE.test(hay) || SOURCE_LISTING.test(hay) || EVIDENCE_ID.test(hay)) {
+  if (UK_LOCAL_INTRODUCTION_LISTING_LANGUAGE.test(scanned) || SOURCE_LISTING.test(scanned) || EVIDENCE_ID.test(scanned)) {
     failures.push("evidence IDs or source-listing language");
   }
-  if (UNSUPPORTED_CLAIMS.test(hay)) {
+  if (UNSUPPORTED_CLAIMS.test(scanned)) {
     failures.push("unsupported promotional, access, availability or clinical claim");
   }
-  if (BANNED_LEGACY_PHRASES.test(hay)) {
+  if (BANNED_LEGACY_PHRASES.test(scanned)) {
     failures.push("banned legacy phrase present");
   }
 

@@ -7,7 +7,8 @@ import type { LocalAreaEvidenceRecord } from "./pharmacyLocalAreaResolver.ts";
 import { scopeContentGenerationContextForArea } from "./contentEngine/contentEngineContextScope.ts";
 import { ownerVariablesForArea } from "./contentEngine/contentEngineTokens.ts";
 import {
-  composeCommercialClusterNarrativeV1,
+  readPreparedCanonicalClusterNarrative,
+  type LocalClusterContentInput,
   type LocalClusterPageContent,
 } from "./pharmacyLocalClusterContentEngine.ts";
 import { scrubPublicLocalEngineTerms } from "./pharmacyLocalClusterCompositionDedupe.ts";
@@ -54,19 +55,7 @@ export function buildLocalHubPageContent(
 ): LocalHubPageContent {
   const hubName = hierarchy.primaryLocality;
   const scopedCtx = scopeContentGenerationContextForArea(ctx, hubName);
-  const areaNames = hierarchy.areas.map((a) => a.name);
-  const base = composeCommercialClusterNarrativeV1(
-    {
-      slug: ctx.resolvedSlug,
-      serviceId: ctx.serviceId,
-      serviceName: ctx.serviceName,
-      areaName: hubName,
-      areaSlug: hierarchy.hub?.slug ?? "hub",
-      nearbyAreaNames: areaNames,
-      areaSlugsInCluster: hierarchy.areas.map((a) => a.slug),
-    },
-    scopedCtx,
-  );
+  const base = readPreparedCanonicalClusterNarrative(ctx.serviceId, hierarchy.hub?.slug ?? "hub");
   ownerVariablesForArea(scopedCtx, hubName);
   return {
     contractId: "local-hub-v1",
@@ -83,33 +72,31 @@ export function buildLocalHubPageContent(
   };
 }
 
-export function buildLocalClusterHubPageContent(
+export function canonicalClusterNarrativeRequest(
   ctx: ContentGenerationContext,
   hierarchy: LocalLocationHierarchy,
   cluster: LocalAreaEvidenceRecord,
-): LocalClusterHubPageContent {
-  void resolveCommercialSectionPlanV1("cluster");
-  const childAreas = hierarchy.areas.filter((a) => a.parentAreaId === cluster.areaId);
-  const siblingLocalities = hierarchy.clusters.map((c) => ({
-    areaName: c.name,
-    areaSlug: c.slug,
-    distanceLabel: c.distanceLabel,
-    relationship: c.relationship,
-    evidence: c.evidence,
-    source: c.source,
+): { input: LocalClusterContentInput; ctx: ContentGenerationContext } {
+  const childAreas = hierarchy.areas.filter((area) => area.parentAreaId === cluster.areaId);
+  const siblingLocalities = hierarchy.clusters.map((row) => ({
+    areaName: row.name,
+    areaSlug: row.slug,
+    distanceLabel: row.distanceLabel,
+    relationship: row.relationship,
+    evidence: row.evidence,
+    source: row.source,
   }));
-  const focusArea = cluster.name;
-  const scopedCtx = scopeContentGenerationContextForArea(ctx, focusArea);
-  const nearbyNames = siblingLocalities.filter((s) => s.areaSlug !== cluster.slug).map((s) => s.areaName);
-  const base = composeCommercialClusterNarrativeV1(
-    {
+  const nearbyNames = siblingLocalities.filter((row) => row.areaSlug !== cluster.slug).map((row) => row.areaName);
+  return {
+    ctx: scopeContentGenerationContextForArea(ctx, cluster.name),
+    input: {
       slug: ctx.resolvedSlug,
       serviceId: ctx.serviceId,
       serviceName: ctx.serviceName,
       areaName: cluster.name,
       areaSlug: cluster.slug,
-      nearbyAreaNames: nearbyNames.length ? nearbyNames : childAreas.map((a) => a.name),
-      areaSlugsInCluster: siblingLocalities.map((s) => s.areaSlug),
+      nearbyAreaNames: nearbyNames.length ? nearbyNames : childAreas.map((area) => area.name),
+      areaSlugsInCluster: siblingLocalities.map((row) => row.areaSlug),
       siblingLocalities,
       localityRecord: {
         distanceLabel: cluster.distanceLabel,
@@ -118,8 +105,16 @@ export function buildLocalClusterHubPageContent(
         source: cluster.source,
       },
     },
-    scopedCtx,
-  );
+  };
+}
+
+export function buildLocalClusterHubPageContent(
+  ctx: ContentGenerationContext,
+  hierarchy: LocalLocationHierarchy,
+  cluster: LocalAreaEvidenceRecord,
+): LocalClusterHubPageContent {
+  void resolveCommercialSectionPlanV1("cluster");
+  const base = readPreparedCanonicalClusterNarrative(ctx.serviceId, cluster.slug);
   const pharmacyName = ctx.profile.pharmacyName;
   if (usesPharmacyFirstPatientJourneyLocalTemplate(ctx.serviceId)) {
     const authoredParagraphs = /\n\s*\n/.test(String(base.whyChecksBody || ""));
@@ -251,22 +246,7 @@ export function buildLocalAreaPageContent(
   area: LocalAreaEvidenceRecord,
 ): LocalAreaHubPageContent {
   const parentCluster = hierarchy.clusters.find((c) => c.areaId === area.parentAreaId);
-  const siblings = hierarchy.areas.filter(
-    (a) => a.parentAreaId === area.parentAreaId && a.areaId !== area.areaId,
-  );
-  const scopedCtx = scopeContentGenerationContextForArea(ctx, area.name);
-  const base = composeCommercialClusterNarrativeV1(
-    {
-      slug: ctx.resolvedSlug,
-      serviceId: ctx.serviceId,
-      serviceName: ctx.serviceName,
-      areaName: area.name,
-      areaSlug: area.slug,
-      nearbyAreaNames: siblings.map((a) => a.name),
-      areaSlugsInCluster: siblings.map((a) => a.slug),
-    },
-    scopedCtx,
-  );
+  const base = readPreparedCanonicalClusterNarrative(ctx.serviceId, area.slug);
   const clusterLabel = parentCluster?.name || hierarchy.primaryLocality;
   if (usesApprovedBankLocalityDirectPath(ctx.serviceId)) {
     return {

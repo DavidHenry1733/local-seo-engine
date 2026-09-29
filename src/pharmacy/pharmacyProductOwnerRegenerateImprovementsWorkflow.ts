@@ -805,7 +805,7 @@ export async function runProductOwnerRegenerateImprovementsWorkflow(
       localitySlugs: plan.localitySlugs,
       explicitImprovement: true,
     });
-    const locals = generateLocalLocationHierarchyPages(boundCtx, {
+    const locals = await generateLocalLocationHierarchyPages(boundCtx, {
       generationStamp: stamp,
     });
     if (!locals.ok) {

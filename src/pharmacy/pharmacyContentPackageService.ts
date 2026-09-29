@@ -1201,7 +1201,7 @@ export async function generateContentPackage(
         const contentCtx =
           customerContext?.generationContext ||
           buildContentGenerationContext(key, selectedServiceId, { localArea });
-        const ecoResult = buildBenchmarkServiceEcosystem(contentCtx, { generationStamp: runStamp });
+        const ecoResult = await buildBenchmarkServiceEcosystem(contentCtx, { generationStamp: runStamp });
         const ecoIndexPath = path.join(ecoResult.ecosystemRoot, "_ecosystem-index.json");
         if (!fs.existsSync(ecoIndexPath)) {
           throw new Error(
@@ -1236,7 +1236,7 @@ export async function generateContentPackage(
         const contentCtx =
           customerContext?.generationContext ||
           buildContentGenerationContext(key, selectedServiceId, { localArea });
-        const locals = generateLocalLocationHierarchyPages(contentCtx, { generationStamp: runStamp });
+        const locals = await generateLocalLocationHierarchyPages(contentCtx, { generationStamp: runStamp });
         if (!locals.ok) {
           throw new Error(locals.blockedReason || "locality generation failed");
         }
@@ -1926,7 +1926,7 @@ export interface MissingLocalPageReconciliationResult {
  * Detects existing local/{slug}/index.html first, refuses overwrite, and patches
  * locality inventory counts without regenerating the rest of the package.
  */
-export function reconcileMissingLocalLocationPages(
+export async function reconcileMissingLocalLocationPages(
   slug: string,
   serviceId: string,
 ): MissingLocalPageReconciliationResult {
@@ -1968,7 +1968,7 @@ export function reconcileMissingLocalLocationPages(
     return { ok: false, error: "Current package generation stamp is missing.", skippedExistingPaths: [], createdPaths: [] };
   }
 
-  const result = generateLocalLocationHierarchyPages(frozen.generationContext, {
+  const result = await generateLocalLocationHierarchyPages(frozen.generationContext, {
     generationStamp: stamp,
     skipExistingOutputs: true,
   });

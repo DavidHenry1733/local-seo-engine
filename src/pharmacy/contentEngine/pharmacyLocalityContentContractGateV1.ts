@@ -19,6 +19,24 @@ const FABRICATION_RULES: Array<{ id: string; re: RegExp }> = [
   { id: "invented-timetable", re: /\b(?:bus|train) every\b/i },
 ];
 
+const EVIDENCE_SYSTEM_LANGUAGE =
+  /\b(verified healthcare location|verified community location|verified local place|verified transport location|verified evidence|evidence sufficiency|this page does not estimate|provided at the pharmacy, not at)\b/i;
+
+function evidenceSystemFailures(text: string): string[] {
+  return EVIDENCE_SYSTEM_LANGUAGE.test(text) ? ["evidence-system-language"] : [];
+}
+
+function entityPaddingFailures(text: string, names: readonly string[]): string[] {
+  const failures: string[] = [];
+  for (const name of names) {
+    const cleanName = clean(name);
+    if (cleanName.length < 3) continue;
+    const count = text.match(new RegExp(escapeRe(cleanName), "gi"))?.length || 0;
+    if (count > 2) failures.push(`entity-padding:${cleanName}`);
+  }
+  return failures;
+}
+
 function clean(value: string): string {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
@@ -107,6 +125,7 @@ export function evaluateLocalPatientCopyContract(input: {
   if (EVIDENCE_NAME_LIST_PATTERN.test(visible)) {
     failures.push("evidence-name-list");
   }
+  failures.push(...evidenceSystemFailures(visible));
   if (!new RegExp(escapeRe(input.areaName), "i").test(input.copy.introduction)) {
     failures.push("introduction-missing-locality");
   }
@@ -117,14 +136,8 @@ export function evaluateLocalPatientCopyContract(input: {
   if (introWithoutNames.split(/\s+/).filter(Boolean).length < 12) {
     failures.push("introduction-is-name-substitution");
   }
-  if (!/\bnot at\b/i.test(input.copy.serviceContext) && !/\bnot at\b/i.test(input.copy.healthcareCommunityContext)) {
-    failures.push("missing-service-locality-synthesis");
-  }
   if (!new RegExp(escapeRe(input.serviceName), "i").test(`${input.copy.serviceContext} ${input.copy.whyUseful}`)) {
     failures.push("missing-service-context");
-  }
-  if (/\bhow many people\b/i.test(input.copy.whyUseful) === false) {
-    failures.push("missing-no-demand-limit");
   }
   if (!/\bcontact\b/i.test(input.copy.nextStep)) {
     failures.push("missing-local-next-step");
@@ -156,12 +169,15 @@ export function evaluateLocalityHtmlContentContract(input: {
   const local = extractVisibleLocalPatientSections(input.html);
   if (!local) failures.push("missing-visible-local-sections");
   if (EVIDENCE_NAME_LIST_PATTERN.test(local)) failures.push("evidence-name-list");
+  failures.push(...evidenceSystemFailures(local));
+  failures.push(...entityPaddingFailures(local, input.entityNames || []));
   const intro = visiblePatientFacingText(
     sectionHtml(input.html, /<section\b[^>]*data-template-block=["']hero["'][^>]*>[\s\S]*?<p>([\s\S]*?)<\/p>/i),
   );
   const introRemainder = normaliseLocalityTokenText(intro, [input.areaName, input.pharmacyName, input.serviceName], input.entityNames || []);
   if (introRemainder.split(/\s+/).filter(Boolean).length < 8) failures.push("introduction-is-name-substitution");
-  if (!/\bnot at\b/i.test(local)) failures.push("missing-service-locality-synthesis");
+  if (!new RegExp(escapeRe(input.serviceName), "i").test(local)) failures.push("missing-service-context");
+  if (!new RegExp(escapeRe(input.areaName), "i").test(local)) failures.push("introduction-missing-locality");
   if (!/\bcontact\b/i.test(extractVisibleLocalNextStep(input.html))) failures.push("missing-local-next-step");
   for (const address of input.requiredAddresses || []) {
     const needle = visiblePatientFacingText(address);

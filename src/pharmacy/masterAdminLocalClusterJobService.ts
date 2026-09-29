@@ -16,6 +16,8 @@ import { renderLocalLocationClusterFullPage } from "./pharmacyLocalHierarchyFull
 import { scrubPublicLocalEngineHtml } from "./pharmacyLocalClusterCompositionDedupe.ts";
 import { polishCommercialClusterPublicHtml } from "./contentEngine/pharmacyCommercialNarrativePolishV1.ts";
 import { resolveClusterPageSlug } from "./pharmacyClusterPageUrlResolver.ts";
+import { composeCommercialClusterNarrativeV1 } from "./pharmacyLocalClusterContentEngine.ts";
+import { canonicalClusterNarrativeRequest } from "./pharmacyLocalHubClusterContentEngine.ts";
 
 import { CPR_DASHBOARD_INITIATION_SOURCE, isCprClusterGenerationEligible } from "./masterAdminCoreProductRecoveryService.ts";
 import {
@@ -188,8 +190,11 @@ export async function executeLocalClusterPagesJob(
       if (!cluster) throw new Error(`Locality not in campaign selection: ${onlyAreaSlug}`);
       const pageSlug = resolveClusterPageSlug(cluster.slug);
       const siblingNames = hierarchy.clusters.filter((c) => c.slug !== cluster.slug).map((c) => c.name);
+      const clusterForRender = { ...cluster, slug: pageSlug };
+      const request = canonicalClusterNarrativeRequest(ctx, hierarchy, clusterForRender);
+      await composeCommercialClusterNarrativeV1(request.input, request.ctx);
       const html = polishCommercialClusterPublicHtml(
-        scrubPublicLocalEngineHtml(renderLocalLocationClusterFullPage(ctx, hierarchy, { ...cluster, slug: pageSlug })),
+        scrubPublicLocalEngineHtml(renderLocalLocationClusterFullPage(ctx, hierarchy, clusterForRender)),
         {
           areaName: cluster.name,
           pharmacyName: ctx.profile.pharmacyName,
@@ -207,7 +212,7 @@ export async function executeLocalClusterPagesJob(
     } else {
       opts.onProgress?.(55, "Generating local cluster pages");
       updateMasterAdminJob(jobId, { progress: 55, progressLabel: "Generating local cluster pages", stage: "render-page" });
-      const result = generateLocalLocationHierarchyPages(ctx);
+      const result = await generateLocalLocationHierarchyPages(ctx);
       if (!result.ok) {
         throw new Error(result.blockedReason || "Local cluster generation failed");
       }

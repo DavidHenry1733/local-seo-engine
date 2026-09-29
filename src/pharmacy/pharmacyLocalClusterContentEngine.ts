@@ -1,8 +1,8 @@
 /**
  * Local cluster page content — Content Engine V1 canonical cluster narrative planner.
- * Single production pipeline for all services:
- * - Pharmacy First → dedicated locality intelligence narrative
- * - All other services → service variant pack via selectAreaVariants (no BP-family fallback)
+ * composeCommercialClusterNarrativeV1 is the only locality-copy owner.
+ * It calls the existing Gemini introduction writer. It does not use slot prose,
+ * Pharmacy First narrative, or Local Patient Copy V1.
  */
 import { loadPharmacyProfile } from "./pharmacyContentBlueprintService.ts";
 import { buildAreaNarrativeProfile } from "./pharmacyAreaNarrativeProfiles.ts";
@@ -27,13 +27,7 @@ import {
   providersForArea,
 } from "./pharmacyLocalMarketSnapshot.ts";
 import { phraseAreaTravelContext } from "./contentEngine/pharmacyLocalMarketIntelligencePhrases.ts";
-import { composeApprovedBankLocalityDirectDraft } from "./pharmacyApprovedBankLocalityDirectRender.ts";
-import { buildPharmacyFirstLocalNarrative } from "./pharmacyFirstLocalNarrative.ts";
-import { usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
-import {
-  getLocalityVariationSessionV1,
-  sessionRestoresStrategyVariants,
-} from "./contentEngine/pharmacyLocalityVariationSessionV1.ts";
+import { synthesiseCanonicalGroundedLocalCopyV1 } from "./contentEngine/pharmacyCanonicalLocalSynthesisV1.ts";
 import { finalizeLocalClusterPageContent } from "./pharmacyLocalClusterCompositionDedupe.ts";
 import { commercialNarrativeSequenceV1 } from "./contentEngine/pharmacyCommercialSectionPlannerV1.ts";
 import { allocateLocalityEvidenceV1 } from "./contentEngine/pharmacyLocalityEvidenceAllocatorV1.ts";
@@ -388,255 +382,11 @@ function assertServiceIsolatedLocalClusterContent(
  */
 function composeServiceVariantPackClusterDraft(
   input: LocalClusterContentInput,
-  ctx?: ContentGenerationContext,
+  _ctx?: ContentGenerationContext,
 ): LocalClusterPageContent {
-  const key = resolveTenantProfileSlug(input.slug) || input.slug;
-  const profile = ctx?.profile ?? buildPharmacyServicePageProfile(key);
-  const pharmacyName = profile.pharmacyName;
-  const town = profile.town || "";
-
-  const selected = isApprovedBankRegisteredService(input.serviceId)
-    ? selectRegisteredApprovedBank(input.serviceId)
-    : null;
-  const boundPackMatchesRegistry =
-    Boolean(selected?.registered) &&
-    Boolean(selected?.hash) &&
-    ctx?.approvedBankHash === selected?.hash &&
-    ctx?.variantPack?.serviceId === input.serviceId;
-  const pack = selected?.registered
-    ? boundPackMatchesRegistry
-      ? ctx!.variantPack
-      : selected.pack
-    : ctx?.variantPack ?? loadServiceVariantPack(input.serviceId);
-  if (!pack || pack.serviceId !== input.serviceId) {
-    throw new Error(
-      `No service-specific locality content bank for service "${input.serviceId}". Refusing silent cross-service fallback.`,
-    );
-  }
-  if (!pack.faqs?.length || !pack.intro?.length || !pack.cta?.length) {
-    throw new Error(
-      `Incomplete service variant pack for "${input.serviceId}" (intro/FAQ/CTA banks required).`,
-    );
-  }
-
-  const ctxInject = (text: string) =>
-    stripAreaPrefixCopy(
-      injectServiceContext(text, pharmacyName, input.areaName, town, input.serviceName),
-      input.areaName,
-    );
-
-  // Shared locality evidence allocation — service banks stay intact; place facts are injected.
-  const verified = ctx
-    ? bindVerifiedLocalityEvidenceV1({
-        ctx,
-        areaName: input.areaName,
-        areaSlug: input.areaSlug,
-        siblingLocalities: (input.siblingLocalities?.length
-          ? input.siblingLocalities
-          : input.nearbyAreaNames.map((name, i) => ({
-              areaName: name,
-              areaSlug: input.areaSlugsInCluster[i] || name.toLowerCase(),
-            }))
-        ).concat(
-          input.siblingLocalities?.some((s) => s.areaSlug === input.areaSlug)
-            ? []
-            : [{ areaName: input.areaName, areaSlug: input.areaSlug, ...input.localityRecord }],
-        ),
-        localityRecord: input.localityRecord,
-      })
-    : null;
-  const localityEvidence = allocateLocalityEvidenceV1({
-    areaName: input.areaName,
-    areaSlug: input.areaSlug,
-    pharmacyName,
-    serviceName: input.serviceName,
-    displayPhone: profile.displayPhone || profile.phone,
-    pharmacyAddress: profile.fullAddress || profile.customerFacingAddress || "",
-    nearbyAreaNames: verified?.nearbyLocalities.map((n) => n.areaName) || input.nearbyAreaNames,
-    areaSlugsInCluster: input.areaSlugsInCluster,
-    areaDiscovery: ctx?.areaDiscovery,
-    verified,
-  });
-
-  const selectedSiblings: LocalitySiblingFact[] = siblingFactsFromCampaignContext(ctx);
-  const selfArea = selectedSiblings.find((s) => s.areaSlug === input.areaSlug);
-  const uniqueInventory = buildLocalityEvidenceInventory({
-    areaName: input.areaName,
-    areaSlug: input.areaSlug,
-    pharmacyName,
-    pharmacyAddress: profile.fullAddress || profile.customerFacingAddress || "",
-    serviceName: input.serviceName,
-    displayPhone: profile.displayPhone || profile.phone,
-    verified,
-    selectedSiblings: selectedSiblings.length
-      ? selectedSiblings
-      : [
-          {
-            areaName: input.areaName,
-            areaSlug: input.areaSlug,
-            distanceKm: verified?.distanceKm ?? null,
-            distanceLabel: verified?.distanceLabel || "",
-          },
-          ...(verified?.nearbyLocalities || []).map((n) => ({
-            areaName: n.areaName,
-            areaSlug: n.areaSlug,
-            distanceKm: n.distanceKm,
-            distanceLabel: "",
-          })),
-        ],
-    areaType: selfArea?.areaType,
-    order: selfArea?.order,
-  });
-  const uniqueNarrative = buildUniqueLocalityNarrative(uniqueInventory);
-
-  const localityContract = buildApprovedBankLocalityPageContract(
-    pack,
-    input.areaSlug,
-    input.areaSlugsInCluster,
+  throw new Error(
+    `Slot locality narrative is not a live writer for ${input.serviceId}/${input.areaSlug}. composeCommercialClusterNarrativeV1 owns locality synthesis.`,
   );
-  void localityEvidence;
-
-  // Unique evidence-backed locality intro (patient-facing; do not expand "the pharmacy" to the full trading name).
-  const heroIntro = uniqueNarrative.heroIntro;
-
-  const whyChecksHeading = ctxInject(localityContract.explanationHeading);
-  const whyChecksBody = weaveLocalityOnce(ctxInject(localityContract.explanationBody), input.areaName);
-  const whyChecksBullets: string[] = [];
-
-  const verifiedEntity =
-    verified?.healthcare.find((e) => e.name?.trim()) ||
-    verified?.landmarks.find((e) => e.name?.trim()) ||
-    verified?.community.find((e) => e.name?.trim()) ||
-    verified?.schools.find((e) => e.name?.trim()) ||
-    null;
-  const localWeave = verifiedEntity?.name
-    ? `${verifiedEntity.name} is a recognised place in ${input.areaName}; it does not change how ${input.serviceName} is arranged.`
-    : "";
-
-  const considerFull = weaveLocalityOnce(ctxInject(localityContract.considerBody), input.areaName);
-  const considerSentences = considerFull.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
-  const localRelevanceHeading = ctxInject(localityContract.considerHeading);
-  const localRelevanceIntro = considerSentences[0] || "";
-  const localRelevanceBody = [
-    considerSentences.slice(1).join(" "),
-    ctxInject(localityContract.scopeBody),
-    localWeave,
-  ]
-    .filter(Boolean)
-    .join("\n\n");
-  const localRelevanceBullets = [...localityContract.considerBullets, ...localityContract.scopeBullets]
-    .map(ctxInject)
-    .filter(Boolean)
-    .filter((b, i, arr) => arr.indexOf(b) === i)
-    .slice(0, 8);
-
-  const processSteps = (localityContract.processSteps.length
-    ? localityContract.processSteps.map((step) => ({
-        title: ctxInject(step.title),
-        body: ctxInject(step.body),
-      }))
-    : buildPackProcessStepsFromBank(
-        pack.howItWorks?.[0],
-        pack.treatmentProcess?.[0],
-      )
-  ).filter((step) => step.title && step.body);
-  const howHeading = ctxInject(localityContract.processHeading);
-  const howBody = ctxInject(localityContract.processBody);
-
-  const clinicalEnvironmentHeading = ctxInject(localityContract.preparationHeading);
-  const clinicalEnvironmentBody = ctxInject(localityContract.preparationBody);
-  const preparationBullets = localityContract.preparationBullets.map(ctxInject).filter(Boolean);
-
-  const trustHeading = ctxInject(localityContract.safetyHeading);
-  const trustBody = ctxInject(localityContract.safetyBody)
-    .replace(/\bsignposts?\b/gi, "advise you to contact")
-    .replace(/\breferral if needed\b/gi, "further advice if needed");
-  const trustBullets = localityContract.safetyBullets.map(ctxInject).filter(Boolean);
-
-  const faqsRaw = localityContract.faqs.length
-    ? localityContract.faqs
-    : pickServiceVariantFaqs(pack.faqs, input.serviceId, input.areaSlug, 8, input.areaSlugsInCluster);
-  if (!faqsRaw.length) {
-    throw new Error(`Service FAQ bank empty after selection for "${input.serviceId}" / ${input.areaSlug}.`);
-  }
-  const faqs = faqsRaw.map((f, i) => ({
-    question: localizeFaqQuestion(
-      stripAreaPrefixCopy(f.question, input.areaName),
-      input.areaName,
-      input.areaSlug,
-      i,
-      input.serviceId,
-    ),
-    answer: ctxInject(f.answer)
-      .replace(/\bsignposts?\b/gi, "advise you to contact")
-      .replace(/\breferral if needed\b/gi, "further advice if needed"),
-  }));
-
-  // CTA wording — keep contact process simple; do not inject full pharmacy name repeatedly.
-  const ctaPrimary = "Contact the pharmacy";
-  const ctaSecondary = "Get directions";
-  const ctaPhonePrompt = uniqueNarrative.confirmBody;
-  const accessHeading = uniqueNarrative.accessHeading;
-  const accessBody = uniqueNarrative.accessBody;
-
-  // Visible process copy only — commercial polish markers must not collapse bank sections.
-  const processIntro = howBody;
-
-  return {
-    heroIntro,
-    localRelevanceHeading,
-    localRelevanceIntro,
-    localRelevanceBody,
-    localRelevanceBullets,
-    whyChecksHeading,
-    whyChecksBody,
-    whyChecksBullets,
-    processHeading: howHeading,
-    processIntro,
-    processSteps,
-    accessHeading,
-    accessBody,
-    clinicalEnvironmentHeading,
-    clinicalEnvironmentBody,
-    preparationBullets,
-    eligibilityHeading: ctxInject(localityContract.scopeHeading),
-    eligibilityBody: ctxInject(localityContract.scopeBody),
-    eligibilityBullets: localityContract.scopeBullets.map(ctxInject).filter(Boolean),
-    trustHeading,
-    trustBullets,
-    trustBody,
-    faqs,
-    ctaPrimary,
-    ctaSecondary,
-    ctaPhonePrompt,
-    contentFingerprint: "",
-    localIntelligenceUsed: true,
-    narrativeType: `service-variant-pack:${input.serviceId}`,
-    wordCountEstimate: 0,
-    seoTitle: uniqueNarrative.seoTitle,
-    metaDescription: uniqueNarrative.metaDescription,
-    supportingHeading: howHeading,
-    supportingIntro: (howBody.split(/(?<=[.!?])\s+/)[0] || howBody).trim(),
-    supportingItems: [
-      ...processSteps.map((step) => ({
-        title: step.title,
-        body: step.body,
-        evidence: "approved-bank-process",
-      })),
-      ...(clinicalEnvironmentBody
-        ? [
-            {
-              title: clinicalEnvironmentHeading || "How to prepare",
-              body: [clinicalEnvironmentBody, ...preparationBullets].filter(Boolean).join(" "),
-              evidence: "approved-bank-preparation",
-            },
-          ]
-        : []),
-    ],
-    nearbyLocalityLinks: verified?.nearbyLocalities || [],
-    sectionEvidence: verified?.sectionEvidence,
-    evidenceLimited: verified?.evidenceLimited,
-  };
 }
 
 function finalizeCommercialClusterPipeline(
@@ -673,37 +423,175 @@ function finalizeCommercialClusterPipeline(
   return content;
 }
 
-/** Canonical Narrative Planner V1 — cluster page purpose. */
-export function composeCommercialClusterNarrativeV1(
+const preparedCanonicalNarratives = new Map<string, LocalClusterPageContent>();
+
+export function canonicalNarrativeKey(serviceId: string, areaSlug: string): string {
+  return `${serviceId}::${areaSlug}`;
+}
+
+export function readPreparedCanonicalClusterNarrative(
+  serviceId: string,
+  areaSlug: string,
+): LocalClusterPageContent {
+  const content = preparedCanonicalNarratives.get(canonicalNarrativeKey(serviceId, areaSlug));
+  if (!content) {
+    throw new Error(
+      `Canonical local content is missing for ${serviceId}/${areaSlug}. composeCommercialClusterNarrativeV1 must run before render.`,
+    );
+  }
+  return content;
+}
+
+function serviceSectionsForCanonicalNarrative(
+  input: LocalClusterContentInput,
+  ctx: ContentGenerationContext,
+) {
+  const selected = isApprovedBankRegisteredService(input.serviceId)
+    ? selectRegisteredApprovedBank(input.serviceId)
+    : null;
+  const pack = selected?.pack || ctx.variantPack || loadServiceVariantPack(input.serviceId);
+  if (!pack || pack.serviceId !== input.serviceId) {
+    throw new Error(
+      `No service-specific locality content bank for service "${input.serviceId}". Refusing silent cross-service fallback.`,
+    );
+  }
+  return buildApprovedBankLocalityPageContract(pack, input.areaSlug, input.areaSlugsInCluster);
+}
+
+export function installValidatedCanonicalClusterNarrative(
+  input: LocalClusterContentInput,
+  ctx: ContentGenerationContext,
+  synthesised: {
+    heroIntroduction: string;
+    localIntroduction: string;
+    nextStep: string;
+    provenance: Array<{ name: string; category: string; provenance: string }>;
+    sufficiency: "sufficient" | "limited";
+    fingerprint: string;
+    synthesis: string;
+  },
+): LocalClusterPageContent {
+  const contract = serviceSectionsForCanonicalNarrative(input, ctx);
+  const pharmacyName = ctx.profile.pharmacyName;
+  const address = ctx.profile.fullAddress || ctx.profile.customerFacingAddress || "";
+  const processSteps = contract.processSteps.map((step) => ({
+    title: step.title,
+    body: step.body,
+    bullets: (step.bullets || []).map((bullet) => String(bullet).trim()).filter(Boolean),
+  }));
+  const draft: LocalClusterPageContent = {
+    heroIntro: synthesised.heroIntroduction,
+    localRelevanceHeading: `Using ${input.serviceName} from ${input.areaName}`,
+    localRelevanceIntro: "",
+    localRelevanceBody: synthesised.localIntroduction,
+    localRelevanceBullets: [...contract.considerBullets, ...contract.scopeBullets]
+      .map((bullet) => String(bullet).trim())
+      .filter(Boolean)
+      .filter((bullet, index, all) => all.indexOf(bullet) === index)
+      .slice(0, 8),
+    whyChecksHeading: contract.explanationHeading,
+    whyChecksBody: contract.explanationBody,
+    whyChecksBullets: (contract.explanationBullets || []).map((bullet) => String(bullet).trim()).filter(Boolean),
+    processHeading: contract.processHeading,
+    processIntro: contract.processBody,
+    processSteps,
+    accessHeading: `The pharmacy address for patients from ${input.areaName}`,
+    accessBody: address ? `${pharmacyName} is at ${address}.` : "",
+    clinicalEnvironmentHeading: contract.preparationHeading,
+    clinicalEnvironmentBody: contract.preparationBody,
+    preparationBullets: contract.preparationBullets.map((bullet) => String(bullet).trim()).filter(Boolean),
+    eligibilityHeading: contract.scopeHeading,
+    eligibilityBody: contract.scopeBody,
+    eligibilityBullets: contract.scopeBullets.map((bullet) => String(bullet).trim()).filter(Boolean),
+    trustHeading: contract.safetyHeading || `Preparing and staying safe with ${input.serviceName}`,
+    trustBullets: contract.safetyBullets.map((bullet) => String(bullet).trim()).filter(Boolean),
+    trustBody: contract.safetyBody,
+    faqs: contract.faqs.slice(0, 6).map((faq) => ({
+      question: String(faq.question || "").trim(),
+      answer: faq.answer,
+    })),
+    ctaPrimary: "Contact the pharmacy",
+    ctaSecondary: "Get directions",
+    ctaPhonePrompt: synthesised.nextStep,
+    contentFingerprint: synthesised.fingerprint,
+    localIntelligenceUsed: true,
+    narrativeType: `canonical-local-content-engine:${synthesised.synthesis}`,
+    wordCountEstimate: 0,
+    seoTitle: `${input.serviceName} for patients from ${input.areaName} | ${pharmacyName}`,
+    metaDescription: synthesised.heroIntroduction.slice(0, 180),
+    supportingHeading: contract.processHeading,
+    supportingIntro: contract.processBody,
+    supportingItems: processSteps.map((step) => ({
+      title: step.title,
+      body: step.body,
+      evidence: "approved-service-intelligence",
+      bullets: step.bullets,
+    })),
+    sectionEvidence: {
+      "local-introduction": synthesised.provenance.map(
+        (fact) => `${fact.name}|${fact.category}|${fact.provenance}`,
+      ),
+    },
+    evidenceLimited: synthesised.sufficiency === "limited",
+  };
+  let content = finalizeLocalClusterPageContent(draft);
+  content = cleanLocalContentForService(content, input);
+  assertServiceIsolatedLocalClusterContent(content, input);
+  content.wordCountEstimate = estimateWords(content);
+  preparedCanonicalNarratives.set(canonicalNarrativeKey(input.serviceId, input.areaSlug), content);
+  return content;
+}
+
+/** Canonical Narrative Planner V1. Grounded Gemini synthesis plus approved service facts. */
+export async function composeCommercialClusterNarrativeV1(
   input: LocalClusterContentInput,
   ctx?: ContentGenerationContext,
+): Promise<LocalClusterPageContent> {
+  if (!ctx) {
+    throw new Error("Canonical local content requires the campaign generation context.");
+  }
+  const contract = serviceSectionsForCanonicalNarrative(input, ctx);
+  const synthesised = await synthesiseCanonicalGroundedLocalCopyV1({
+    input,
+    ctx,
+    serviceMeaning: {
+      conditionSet: contract.explanationBody,
+      suitability: contract.scopeBody || contract.explanationBody,
+      process: contract.processBody,
+      safety: contract.safetyBody,
+    },
+  });
+  return installValidatedCanonicalClusterNarrative(input, ctx, synthesised);
+}
+
+export function installSavedLocalIntroductionForRender(
+  input: LocalClusterContentInput,
+  ctx: ContentGenerationContext,
+  copy: { heroIntroduction: string; localIntroduction: string; localCtaBridge?: string },
 ): LocalClusterPageContent {
-  if (usesPharmacyFirstPatientJourneyLocalTemplate(input.serviceId) && ctx) {
-    const sessionStrategy = getLocalityVariationSessionV1()?.forceStrategyBySlug.get(input.areaSlug);
-    const restoreVariants = sessionRestoresStrategyVariants();
-    return buildPharmacyFirstLocalNarrative(input, ctx, {
-      forceStrategy: restoreVariants ? sessionStrategy : sessionStrategy || "patient-journey-led",
-    });
-  }
-  if (isApprovedBankRegisteredService(input.serviceId)) {
-    return composeApprovedBankLocalityDirectDraft(input, ctx);
-  }
-
-  const pharmacyName =
-    ctx?.profile.pharmacyName ||
-    buildPharmacyServicePageProfile(resolveTenantProfileSlug(input.slug) || input.slug).pharmacyName;
-
-  // Service-to-locality router: unregistered services still use the shared composer.
-  const draft = composeServiceVariantPackClusterDraft(input, ctx);
-
-  return finalizeCommercialClusterPipeline(draft, input, ctx, pharmacyName);
+  const phone = String(ctx.profile.displayPhone || ctx.profile.phone || "").trim();
+  const bridge = String(copy.localCtaBridge || "").trim();
+  const nextStep = /\bcontact\b/i.test(bridge)
+    ? bridge
+    : phone
+      ? `Contact ${ctx.profile.pharmacyName} on ${phone} to ask how ${input.serviceName} is arranged.`
+      : `Contact ${ctx.profile.pharmacyName} to ask how ${input.serviceName} is arranged.`;
+  return installValidatedCanonicalClusterNarrative(input, ctx, {
+    heroIntroduction: copy.heroIntroduction,
+    localIntroduction: copy.localIntroduction,
+    nextStep,
+    provenance: [],
+    sufficiency: "sufficient",
+    fingerprint: copy.localIntroduction,
+    synthesis: "requestUkLocalIntroductionProseV1",
+  });
 }
 
 /** @deprecated Prefer composeCommercialClusterNarrativeV1 — kept as stable cluster builder alias. */
-export function buildLocalClusterPageContent(
+export async function buildLocalClusterPageContent(
   input: LocalClusterContentInput,
   ctx?: ContentGenerationContext,
-): LocalClusterPageContent {
+): Promise<LocalClusterPageContent> {
   return composeCommercialClusterNarrativeV1(input, ctx);
 }
 
