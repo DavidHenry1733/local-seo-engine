@@ -201,7 +201,7 @@ function buildCopyInput(
     ukLocalIntroductionStyle: {
       id: "gemini-local-introduction",
       label: "Gemini local introduction",
-      instruction: "Write British English local copy from the supplied service facts and verified local places only.",
+      instruction: "Write a natural local introduction to the service. Local places are optional. Zero place mentions is valid. Mention a place only when it materially helps the patient.",
     },
     previousLocalContextFingerprints: previousFingerprints(input),
   };

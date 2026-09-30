@@ -1,6 +1,6 @@
 /**
  * Accepted Brook Gemini local-copy validation.
- * Word counts, three-paragraph local introduction, pharmacy/service naming,
+ * Word counts, two-or-three-paragraph local introduction, pharmacy/service naming,
  * leakage and banned-phrase checks. Does not require Gemini grounding metadata.
  */
 import fs from "node:fs";
@@ -13,8 +13,6 @@ import {
   countUkLocalIntroductionWords,
   UK_LOCAL_HERO_INTRODUCTION_MAX_WORDS,
   UK_LOCAL_HERO_INTRODUCTION_MIN_WORDS,
-  UK_LOCAL_INTRODUCTION_GEMINI_MAX_WORDS,
-  UK_LOCAL_INTRODUCTION_GEMINI_MIN_WORDS,
   UK_LOCAL_INTRODUCTION_LISTING_LANGUAGE,
 } from "./pharmacyUkLocalIntroductionStyleContractV1.ts";
 import { PHARMACY_WORKSPACE_ROOT } from "../pharmacyWorkspacePaths.ts";
@@ -162,13 +160,11 @@ export function evaluateAcceptedGeminiLocalCopyV1(opts: {
   }
   const localParas = paragraphs(copy.localIntroduction);
   const introWords = countUkLocalIntroductionWords(copy.localIntroduction);
-  if (localParas.length !== 3) {
-    failures.push(`local introduction must be exactly three paragraphs (found ${localParas.length})`);
+  if (localParas.length < 2 || localParas.length > 3) {
+    failures.push(`local introduction must be two or three paragraphs (found ${localParas.length})`);
   }
-  if (introWords < UK_LOCAL_INTRODUCTION_GEMINI_MIN_WORDS || introWords > UK_LOCAL_INTRODUCTION_GEMINI_MAX_WORDS) {
-    failures.push(
-      `introduction length ${introWords} words; required ${UK_LOCAL_INTRODUCTION_GEMINI_MIN_WORDS}–${UK_LOCAL_INTRODUCTION_GEMINI_MAX_WORDS}`,
-    );
+  if (introWords < 100 || introWords > 180) {
+    failures.push(`introduction length ${introWords} words; required 100–180`);
   }
 
   const sentences = splitSentences(hay);
@@ -223,7 +219,7 @@ export function evaluateAcceptedGeminiLocalCopyV1(opts: {
 }
 
 const CORRECTABLE_ACCEPTED_GEMINI_COPY_DEFECT =
-  /^(?:another-area leakage:|hero length |local introduction must be exactly three paragraphs|introduction length |repeated sentence:|banned legacy phrase present$|evidence IDs or source-listing language$|unsupported promotional, access, availability or clinical claim$|local-narrative similarity |copy must name |local introduction prose could not be parsed$)/i;
+  /^(?:another-area leakage:|hero length |local introduction must be exactly three paragraphs|local introduction must be two or three paragraphs|introduction length |repeated sentence:|banned legacy phrase present$|evidence IDs or source-listing language$|unsupported promotional, access, availability or clinical claim$|local-narrative similarity |copy must name |local introduction prose could not be parsed$)/i;
 
 export function isCorrectableAcceptedGeminiCopyDefect(failure: string): boolean {
   return CORRECTABLE_ACCEPTED_GEMINI_COPY_DEFECT.test(String(failure || "").trim());

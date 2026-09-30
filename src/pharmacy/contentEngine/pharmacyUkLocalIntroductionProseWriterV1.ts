@@ -82,46 +82,55 @@ export function acceptedUkLocalIntroductionWritingContract(opts: {
     ? opts.allowedServiceMeaning.join("\n")
     : pharmacyFirstMeaningLines(pharmacy, service).join("\n");
   const paragraph3 = opts.allowedServiceMeaning?.length
-    ? `Continue with the approved ${service} explanation supplied below. Keep the selected area present without keyword-stuffing. Do not add conditions, treatments, eligibility or outcomes that are not in that approved service meaning.`
+    ? `If a third paragraph is useful, add one next-step point from the approved ${service} meaning. Do not repeat paragraph 2, and do not add conditions, treatments, eligibility or outcomes that are not in that approved service meaning.`
     : `Continue the service explanation for eligible common conditions: pharmacist consultation, advice, suitable treatment or referral where appropriate. Keep the selected area present without keyword-stuffing. The transition must feel like healthcare/service copy — not a disclaimer pasted onto a place article.`;
-  return `Write as an experienced British healthcare copywriter.
+  return `Write as an experienced British healthcare copywriter for a paying pharmacy client.
 
-Using only the verified information supplied for this selected area, return two clearly separated plain-text fields and nothing else.
+Using only the verified information supplied, return two clearly separated plain-text fields and nothing else.
 
-CONTENT HIERARCHY (mandatory):
-1) ${service} service intent
-2) ${pharmacy} service information and useful patient explanation
-3) Selected-area relevance
-4) Verified locality evidence woven naturally where it helps a patient
-This must read as a ${service} service landing page for ${pharmacy}, personalised for the selected area — not an article about the area with ${service} added afterwards.
+This is a local introduction to the service. It must tell a patient what ${service} is, who it is for, why they might consider it, that ${pharmacy} provides it, and that it is for people in the selected area. Then explain the service in useful plain English.
+
+Local places are optional supporting context. You are never required to mention a GP surgery, clinic, hospital, library, park, school, landmark, community centre, transport stop, or any other place. Zero place mentions is valid and is often the better page. Not mentioning a supplied place is not a failure.
+
+Mention a supplied place only when it materially helps the patient understand one of these:
+- how they reach this pharmacy or this service
+- a healthcare context that is genuinely about this service, without inventing a referral, partnership, or shared care
+- a geographic relationship that is directly useful
+Otherwise omit it. Do not mention a place because it was supplied. Do not use different places to make locality pages look different. Locality comes from the area name and from the service being for people there.
 
 HERO INTRODUCTION:
-Write 35–55 words introducing ${service} for people in the selected area and naming ${pharmacy} as the provider. Establish immediately what the service is useful for.
+Write 35–55 words introducing ${service} for people in the selected area and naming ${pharmacy} as the provider. Establish immediately what the service is useful for. Do not open with a place, landmark, library, park, or GP practice.
 
 LOCAL INTRODUCTION:
-Write 170–230 words in three fluent British-English paragraphs.
+Write 100–180 words in two or three fluent British-English paragraphs. Stop when the service is clear. Do not pad the word count.
 
 Paragraph 1:
-Open with ${service} and ${pharmacy} for people in the selected area, and what the service is useful for. Do not open with neighbourhood-ward identity, civic boards, carnivals, war memorials, library catalogues, or landmark lists.
+Open with ${service} and ${pharmacy} for people in the selected area, and what the service is useful for. Do not open with a place list, a landmark, a library, a park, or a GP practice.
 
 Paragraph 2:
-Weave verified local healthcare context first (named GP or healthcare settings where supplied). Add only those civic, park or community facts that genuinely help a patient understand local relevance. Prefer healthcare facts over civic or heritage catalogues. Do not manufacture a landmarks section. Do not list every evidence record.
+Explain the service in plain English: what happens, what the patient learns, and the limit of the service, using only the approved service meaning. One sentence that a pharmacy check does not diagnose, and one sentence that emergency symptoms need urgent care, is enough. Do not paste every safety sentence.
 
-Paragraph 3:
-${paragraph3}
+Paragraph 3, only if it adds something useful:
+${paragraph3} Do not add a paragraph that only repeats the warning.
 
 You may express only this ${service} meaning:
 ${meaning}
+
+Do not invent patient behaviour, demand, or demographics. Do not write “many local residents”, “people often come in”, “whether you are visiting”, “whether you are running errands”, “spending time around”, “taking time out near”, “fits around everyday commitments”, “it is important to note”, “please note”, “a straightforward way”, or “an accessible screening”.
+
+Do not invent a relationship with a GP practice, clinic, library, park, or landmark. Do not write that the pharmacy works alongside another provider, or that patients manage their health alongside a named place.
+
+Do not claim this service reduces the risk of stroke, heart disease, kidney disease, or any other condition unless that exact claim is in the approved service meaning above. A statement that a condition can increase risk is not a statement that this service reduces that risk.
 
 Do not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.
 
 Do not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.
 
-Use neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient, established neighbourhood, or ‘known for’ something unless that exact character claim is supported by the supplied evidence. Describe verified places, facilities and organisations naturally without inventing an opinion about the area.
+Use neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient, established neighbourhood, or ‘known for’ something unless that exact character claim is supported by the supplied evidence.
 
-Do not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “patients near local landmarks”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; raw provider labels; or evidence-source language.
+Do not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “patients near local landmarks”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; “evidence pack”; “source record”; raw provider labels; or evidence-source language.
 
-Do not repeatedly use the area name. Use natural alternatives such as “the area”, “the neighbourhood”, “local residents” and “patients here” where appropriate.
+Use the selected area name and the pharmacy name naturally. Do not repeat either in every sentence. Do not substitute “local residents” for the area name in order to invent what those residents do.
 
 Return exactly this layout:
 HERO INTRODUCTION:
@@ -212,10 +221,10 @@ export function buildUkLocalIntroductionProseChatRequest(
     premisesLocality ? `Confirmed pharmacy premises locality: ${premisesLocality}` : "",
     distanceLabel ? `Saved straight-line distance: ${distanceLabel}` : "",
     "",
-    ...bulletBlock("Verified GP practices or healthcare facilities:", healthcare),
-    ...bulletBlock("Verified area identity and geographical context:", identity),
-    ...bulletBlock("Verified community facilities (use only where they help patient relevance):", community),
-    ...bulletBlock("Verified heritage or landmark facts (use sparingly; never as the page subject):", history),
+    ...bulletBlock(
+      "Optional local context. Omit every item unless it materially helps access, a genuine service-related healthcare context, or a directly useful geographic relationship. Naming none of these is correct. Do not recite them to prove the page is local:",
+      [...healthcare, ...identity, ...community, ...history],
+    ),
     `Approved ${serviceName} service meaning:`,
     ...meaningLines,
   ]
@@ -255,7 +264,7 @@ export function buildUkLocalIntroductionCorrectionChatRequest(
     "Rejected copy:",
     rejected,
     "",
-    "Return the same HERO INTRODUCTION / LOCAL INTRODUCTION layout. Keep verified facts. Discuss the selected area only.",
+    "Return the same HERO INTRODUCTION / LOCAL INTRODUCTION layout. Keep the approved service meaning. Do not add a place, landmark, or organisation to repair the copy. Discuss the selected area only.",
   ].join("\n");
   return {
     ...base,
