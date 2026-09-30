@@ -81,42 +81,35 @@ export function acceptedUkLocalIntroductionWritingContract(opts: {
   const meaning = opts.allowedServiceMeaning?.length
     ? opts.allowedServiceMeaning.join("\n")
     : pharmacyFirstMeaningLines(pharmacy, service).join("\n");
-  const paragraph3 = opts.allowedServiceMeaning?.length
-    ? `If a third paragraph is useful, add one next-step point from the approved ${service} meaning. Do not repeat paragraph 2, and do not add conditions, treatments, eligibility or outcomes that are not in that approved service meaning.`
-    : `Continue the service explanation for eligible common conditions: pharmacist consultation, advice, suitable treatment or referral where appropriate. Keep the selected area present without keyword-stuffing. The transition must feel like healthcare/service copy — not a disclaimer pasted onto a place article.`;
   return `Write as an experienced British healthcare copywriter for a paying pharmacy client.
 
 Using only the verified information supplied, return two clearly separated plain-text fields and nothing else.
 
-This is a local introduction to the service. It must tell a patient what ${service} is, who it is for, why they might consider it, that ${pharmacy} provides it, and that it is for people in the selected area. Then explain the service in useful plain English.
+Write ONE local introduction to ${service}. Together the two fields are about 80–130 words in two short paragraphs. If the introduction is complete at about 85 words, stop. Do not add words or a further paragraph to reach a number.
 
-Local places are optional supporting context. You are never required to mention a GP surgery, clinic, hospital, library, park, school, landmark, community centre, transport stop, or any other place. Zero place mentions is valid and is often the better page. Not mentioning a supplied place is not a failure.
+The introduction establishes, once:
+1) the service
+2) the selected area
+3) ${pharmacy} as the provider
+4) why a patient may consider it
+5) what the patient can broadly expect
+6) a next step, where that helps
+Then stop. The rest of the page already contains eligibility, preparation, the measurement, safety, diagnosis limits, emergencies and FAQs. Do not copy those sections into this introduction.
 
-Mention a supplied place only when it materially helps the patient understand one of these:
-- how they reach this pharmacy or this service
-- a healthcare context that is genuinely about this service, without inventing a referral, partnership, or shared care
-- a geographic relationship that is directly useful
-Otherwise omit it. Do not mention a place because it was supplied. Do not use different places to make locality pages look different. Locality comes from the area name and from the service being for people there.
+The approved service meaning below is an evidence pool, not a checklist. Use one concise approved fact where it helps explain why the service matters. Do not transcribe the pool.
+
+Supplied local places are also a pool, not a checklist. You are never required to mention a GP surgery, clinic, hospital, library, park, school, landmark, community centre or transport stop. Zero place mentions is valid. Use a place only when it genuinely helps the patient understand access, useful geography, service availability, or a healthcare context the evidence actually supports. Do not mention a place to prove the page is local. Do not invent a referral, partnership, shared care, demand, or what local people do.
 
 HERO INTRODUCTION:
-Write 35–55 words introducing ${service} for people in the selected area and naming ${pharmacy} as the provider. Establish immediately what the service is useful for. Do not open with a place, landmark, library, park, or GP practice.
+The first paragraph only. Name ${service}, the selected area and ${pharmacy}, and why the service may be useful. Do not open with a landmark, library, park or GP practice.
 
 LOCAL INTRODUCTION:
-Write 100–180 words in two or three fluent British-English paragraphs. Stop when the service is clear. Do not pad the word count.
+The second paragraph only. One paragraph. Say what the patient can expect, and a sensible next step if that adds something. Do not start this paragraph by naming ${service}, ${pharmacy} and the selected area again. Do not repeat the same benefit. Do not list emergency symptoms, diagnosis limits, preparation steps, measurement units, eligibility criteria or FAQ answers.
 
-Paragraph 1:
-Open with ${service} and ${pharmacy} for people in the selected area, and what the service is useful for. Do not open with a place list, a landmark, a library, a park, or a GP practice.
-
-Paragraph 2:
-Explain the service in plain English: what happens, what the patient learns, and the limit of the service, using only the approved service meaning. One sentence that a pharmacy check does not diagnose, and one sentence that emergency symptoms need urgent care, is enough. Do not paste every safety sentence.
-
-Paragraph 3, only if it adds something useful:
-${paragraph3} Do not add a paragraph that only repeats the warning.
-
-You may express only this ${service} meaning:
+You may select from this ${service} meaning, and you must not go beyond it:
 ${meaning}
 
-Do not invent patient behaviour, demand, or demographics. Do not write “many local residents”, “people often come in”, “whether you are visiting”, “whether you are running errands”, “spending time around”, “taking time out near”, “fits around everyday commitments”, “it is important to note”, “please note”, “a straightforward way”, or “an accessible screening”.
+Do not invent patient behaviour, demand, or demographics. Do not write “many local residents”, “people often come in”, “whether you are visiting”, “whether you are running errands”, “spending time around”, “taking time out near”, “fits around everyday commitments”, “it is important to note”, “please note”, “a straightforward way”, “an accessible screening”, or “making a routine check useful”. Do not lean on the word “routine” to pad a sentence. Vary the opening from one area to another rather than swapping only the place name.
 
 Do not invent a relationship with a GP practice, clinic, library, park, or landmark. Do not write that the pharmacy works alongside another provider, or that patients manage their health alongside a named place.
 
@@ -130,18 +123,14 @@ Use neutral factual British English. Do not describe an area as pleasant, welcom
 
 Do not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “patients near local landmarks”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; “evidence pack”; “source record”; raw provider labels; or evidence-source language.
 
-Use the selected area name and the pharmacy name naturally. Do not repeat either in every sentence. Do not substitute “local residents” for the area name in order to invent what those residents do.
+Use the selected area name and the pharmacy name in the first paragraph. The second paragraph should continue, not introduce the service again. Use natural professional British English, including contractions where they sound like a pharmacy website rather than a leaflet.
 
 Return exactly this layout:
 HERO INTRODUCTION:
-<one paragraph>
+<first paragraph>
 
 LOCAL INTRODUCTION:
-<paragraph 1>
-
-<paragraph 2>
-
-<paragraph 3>`;
+<second paragraph>`
 }
 
 export const UK_LOCAL_INTRODUCTION_APPROVED_PROMPT = acceptedUkLocalIntroductionWritingContract({
@@ -456,6 +445,6 @@ export async function requestUkLocalIntroductionProseV1(
     model: UK_LOCAL_INTRODUCTION_GEMINI_MODEL,
     promptTokens: usage.promptTokens,
     completionTokens: usage.completionTokens,
-    uncertain: !heroIntroduction || !introduction || heroWords < 20 || localWords < 80,
+    uncertain: !heroIntroduction || !introduction || heroWords < 20 || localWords < 12,
   };
 }

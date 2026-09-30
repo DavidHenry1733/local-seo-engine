@@ -11,8 +11,6 @@ import type { BusinessLocalityCopyInputV3 } from "./pharmacyAiLocalNarrativeProm
 import type { GeminiLocalGroundingMetadataV1 } from "./pharmacyUkLocalIntroductionProseWriterV1.ts";
 import {
   countUkLocalIntroductionWords,
-  UK_LOCAL_HERO_INTRODUCTION_MAX_WORDS,
-  UK_LOCAL_HERO_INTRODUCTION_MIN_WORDS,
   UK_LOCAL_INTRODUCTION_LISTING_LANGUAGE,
 } from "./pharmacyUkLocalIntroductionStyleContractV1.ts";
 import { PHARMACY_WORKSPACE_ROOT } from "../pharmacyWorkspacePaths.ts";
@@ -153,18 +151,41 @@ export function evaluateAcceptedGeminiLocalCopyV1(opts: {
   if (!serviceRe.test(hay)) failures.push(`copy must name ${service || "the selected service"}`);
 
   const heroWords = countUkLocalIntroductionWords(copy.heroIntroduction);
-  if (heroWords < UK_LOCAL_HERO_INTRODUCTION_MIN_WORDS || heroWords > UK_LOCAL_HERO_INTRODUCTION_MAX_WORDS) {
-    failures.push(
-      `hero length ${heroWords} words; required ${UK_LOCAL_HERO_INTRODUCTION_MIN_WORDS}–${UK_LOCAL_HERO_INTRODUCTION_MAX_WORDS}`,
-    );
-  }
   const localParas = paragraphs(copy.localIntroduction);
-  const introWords = countUkLocalIntroductionWords(copy.localIntroduction);
-  if (localParas.length < 2 || localParas.length > 3) {
-    failures.push(`local introduction must be two or three paragraphs (found ${localParas.length})`);
+  const introWords = countUkLocalIntroductionWords(`${copy.heroIntroduction} ${copy.localIntroduction}`);
+  if (heroWords < 25 || heroWords > 85) {
+    failures.push(`hero length ${heroWords} words; required 25–85`);
   }
-  if (introWords < 100 || introWords > 180) {
-    failures.push(`introduction length ${introWords} words; required 100–180`);
+  if (localParas.length !== 1) {
+    failures.push(`local introduction must be one continuation paragraph (found ${localParas.length})`);
+  }
+  if (introWords < 65 || introWords > 140) {
+    failures.push(`introduction length ${introWords} words; required about 80–130`);
+  }
+  const localHay = String(copy.localIntroduction || "").toLowerCase();
+  if (
+    pharmacy &&
+    service &&
+    area &&
+    localHay.includes(pharmacy.toLowerCase()) &&
+    localHay.includes(service.toLowerCase()) &&
+    localHay.includes(area.toLowerCase())
+  ) {
+    failures.push("local introduction restarts the pharmacy, service and locality proposition");
+  }
+  if (
+    /\b(chest pain|severe headache|sudden vision|neurological symptoms|do not diagnose|does not diagnose|on the spot|long-term management|one reading does not|systolic over diastolic)\b/i.test(
+      hay,
+    )
+  ) {
+    failures.push("downstream safety padding");
+  }
+  if (
+    /\b(it is important to note|please note|fits around everyday commitments|many local residents|making a (?:routine|regular) \w+ useful)\b/i.test(
+      hay,
+    )
+  ) {
+    failures.push("obvious generic filler");
   }
 
   const sentences = splitSentences(hay);
@@ -219,7 +240,7 @@ export function evaluateAcceptedGeminiLocalCopyV1(opts: {
 }
 
 const CORRECTABLE_ACCEPTED_GEMINI_COPY_DEFECT =
-  /^(?:another-area leakage:|hero length |local introduction must be exactly three paragraphs|local introduction must be two or three paragraphs|introduction length |repeated sentence:|banned legacy phrase present$|evidence IDs or source-listing language$|unsupported promotional, access, availability or clinical claim$|local-narrative similarity |copy must name |local introduction prose could not be parsed$)/i;
+  /^(?:another-area leakage:|hero length |local introduction must be exactly three paragraphs|local introduction must be two or three paragraphs|local introduction must be one continuation paragraph|local introduction restarts |introduction length |downstream safety padding$|obvious generic filler$|repeated sentence:|banned legacy phrase present$|evidence IDs or source-listing language$|unsupported promotional, access, availability or clinical claim$|local-narrative similarity |copy must name |local introduction prose could not be parsed$)/i;
 
 export function isCorrectableAcceptedGeminiCopyDefect(failure: string): boolean {
   return CORRECTABLE_ACCEPTED_GEMINI_COPY_DEFECT.test(String(failure || "").trim());

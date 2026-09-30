@@ -201,7 +201,7 @@ function buildCopyInput(
     ukLocalIntroductionStyle: {
       id: "gemini-local-introduction",
       label: "Gemini local introduction",
-      instruction: "Write a natural local introduction to the service. Local places are optional. Zero place mentions is valid. Mention a place only when it materially helps the patient.",
+      instruction: "Write one local introduction of about 80–130 words in two short paragraphs. Stop when it is complete. Local places are optional. Use one only when it genuinely helps the patient.",
     },
     previousLocalContextFingerprints: previousFingerprints(input),
   };

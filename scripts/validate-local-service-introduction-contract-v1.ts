@@ -32,16 +32,17 @@ check("contract does not require entity consumption", /never required to mention
 check("supplied places are labelled optional", writer.includes("Naming none of these is correct"));
 check("prompt does not tell the model to weave healthcare places", !/Weave verified local healthcare/.test(writer));
 
+check("introduction is two short paragraphs", /about 80–130 words in two short paragraphs/.test(writer));
+check("second paragraph must not restart the opening", /Do not start this paragraph by naming/.test(writer));
+
 function words(count: number, label: string): string {
   return Array.from({ length: count }, (_, index) => `${label}${index}`).join(" ");
 }
 
 function fixture(localSentence: string, entityName = "Riverside Monument") {
-  const hero = `Northbridge Pharmacy provides Blood Pressure Checks for people in Alderton who want a reading explained in plain language before deciding what to do next. ${words(16, "hero")}`;
-  const local = [
-    `${localSentence} ${words(32, "a")}`,
-    `People in Alderton can ask Northbridge Pharmacy what a Blood Pressure Checks reading means. ${words(28, "b")}`,
-  ].join("\n\n");
+  const hero =
+    "If you live in Alderton and want to keep an eye on your blood pressure, Northbridge Pharmacy provides Blood Pressure Checks with a clear explanation of your reading and what it may mean. High blood pressure often has no obvious symptoms, so a check can show whether further action may be appropriate.";
+  const local = `${localSentence} ${words(4, "next")}`.trim();
   return {
     copy: { heroIntroduction: hero, localIntroduction: local, area: "Alderton", editorialFactIdsUsed: [] },
     input: {
@@ -98,8 +99,22 @@ function grounding(localSentence: string): string[] {
   }).failures;
 }
 
-const zeroEntity = grounding("If you live in Alderton and want to understand a blood pressure reading, Northbridge Pharmacy provides Blood Pressure Checks and explains the result in plain language.");
+const zeroEntity = grounding(
+  "The pharmacy team will take your reading, explain the result in straightforward language and advise you about sensible next steps where necessary.",
+);
 check("zero entity mentions still passes grounding", zeroEntity.length === 0, zeroEntity.join("; "));
+check(
+  "a restarted second paragraph fails",
+  grounding("Northbridge Pharmacy offers Blood Pressure Checks for people in Alderton with the same opening repeated.").some((row) =>
+    row.startsWith("local introduction restarts"),
+  ),
+);
+check(
+  "downstream safety padding fails",
+  grounding("Chest pain or a severe headache needs urgent care, and a check does not diagnose hypertension on the spot.").some((row) =>
+    row === "downstream safety padding",
+  ),
+);
 
 const approvedClinical = grounding("Blood pressure is recorded as systolic over diastolic (mmHg).");
 check("approved clinical wording still passes", !approvedClinical.some((row) => /recorded as|banned legacy|source-listing/i.test(row)), approvedClinical.join("; "));
@@ -242,18 +257,22 @@ try {
     const pageSlug = resolveClusterPageSlug(cluster.slug);
     if (!wanted.has(pageSlug)) continue;
     const request = canonicalClusterNarrativeRequest(ctx, hierarchy, { ...cluster, slug: pageSlug });
+    try {
     const content = await composeCommercialClusterNarrativeV1(request.input, request.ctx);
     const introduction = `${content.heroIntro}\n\n${content.localRelevanceBody}`.trim();
-    const entities = (content.sectionEvidence?.["local-introduction"] || [])
+    const supplied = (content.sectionEvidence?.["local-introduction"] || [])
       .map((row: string) => String(row).split("|")[0] || "")
       .filter(Boolean);
-    const defects = editorialDefects(introduction, entities);
+    const used = supplied.filter((name: string) => introduction.toLowerCase().includes(name.toLowerCase()));
+    const defects = editorialDefects(introduction, []);
+    const words = introduction.split(/\s+/).filter(Boolean).length;
     drafts.push({
       area: cluster.name,
       slug: pageSlug,
       narrativeType: content.narrativeType,
       limited: String(Boolean(content.evidenceLimited)),
-      entities: entities.join("; "),
+      entities: used.join("; ") || "none",
+      words: String(words),
       defects: defects.join(" | "),
       introduction,
     });
@@ -262,6 +281,11 @@ try {
     if (pageSlug === "elderslie") {
       check("Elderslie evidence remains limited", content.evidenceLimited === true);
       check("Elderslie omits William Wallace Monument", !/william wallace/i.test(introduction));
+    }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      drafts.push({ area: cluster.name, slug: pageSlug, narrativeType: "", limited: "", entities: "", words: "0", defects: message, introduction: "" });
+      check(`${cluster.name} production synthesis path`, false, message);
     }
   }
 } finally {
@@ -275,7 +299,7 @@ check("six introductions", drafts.length === 6, String(drafts.length));
 for (const draft of drafts) {
   console.log(`\n===== ${draft.area} =====`);
   console.log(draft.introduction);
-  console.log(`--- limited=${draft.limited} entities=${draft.entities || "none"} defects=${draft.defects || "none"}`);
+  console.log(`--- words=${draft.words} limited=${draft.limited} used=${draft.entities} defects=${draft.defects || "none"}`);
 }
 
 const failed = steps.filter((step) => !step.passed);
