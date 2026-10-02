@@ -20,6 +20,7 @@ import {
   buildCampaignRegenerationPreview,
   type CampaignRegenerationPreview,
 } from "./growthEngineCampaignBuilderRegenerationService.ts";
+import { applyGenerateCampaignAreas } from "./growthEngineCampaignBuilderService.ts";
 import { loadContentPackage } from "./pharmacyContentPackageService.ts";
 import {
   buildVisualExperiencePage,
@@ -30,6 +31,23 @@ import { PHARMACY_WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
 
 export const CAMPAIGN_REGENERATION_RUN_KIND = "campaign-builder-versioned-regeneration-v1";
 export const CAMPAIGN_NEW_CAMPAIGN_GENERATOR = "accepted-brook-gemini-local-pages-v1";
+export const YORKSHIRE_PHARMACY_SLUG = "yorkshire-pharmacy-and-health-clinic";
+export const YORKSHIRE_PHARMACY_FIRST_GENERATE_AREAS = [
+  "Darfield",
+  "Wombwell",
+  "Thurnscoe",
+  "Grimethorpe",
+  "Goldthorpe",
+  "Worsbrough",
+  "Hoyland",
+  "Cudworth",
+  "Mexborough",
+  "Royston",
+] as const;
+
+export function defaultGenerateAreasForSlug(slug: string): string[] {
+  return slug === YORKSHIRE_PHARMACY_SLUG ? [...YORKSHIRE_PHARMACY_FIRST_GENERATE_AREAS] : [];
+}
 export const CAMPAIGN_REGENERATION_RUN_DIRNAME = "data/pharmacy-local-page-campaign-runs";
 export const CAMPAIGN_HISTORICAL_RUN_FILENAME = "versioned-regeneration.json";
 export const CAMPAIGN_HISTORICAL_RUNS_INACTIVE =
@@ -282,6 +300,7 @@ async function processRun(run: CampaignRegenerationRun): Promise<CampaignRegener
       candidateVersion: run.candidateVersion,
       allowAuthorisedCampaignAreas: true,
       maxAttempts: 1,
+      cleanProfileCampaign: true,
     });
     if (!generated.ok) {
       job.status = "failed";
@@ -359,12 +378,16 @@ export async function executeCampaignBuilderVersionedRegeneration(opts: {
   confirmed: boolean;
   authorisedBy?: string;
   processInline?: boolean;
+  areas?: string[];
 }): Promise<
   | { ok: true; duplicate: boolean; generated: boolean; published: false; indexed: false; preview: CampaignRegenerationPreview; run: CampaignRegenerationRun }
   | { ok: false; generated: false; published: false; indexed: false; error: string; status: number; preview?: CampaignRegenerationPreview | null; run?: CampaignRegenerationRun | null }
 > {
+  const requestedAreas = (opts.areas || []).map((row) => String(row || "").trim()).filter(Boolean);
+  const areas = requestedAreas.length ? requestedAreas : defaultGenerateAreasForSlug(opts.slug);
   const preview = buildCampaignRegenerationPreview(opts.slug, opts.serviceId, null, {
     requireExistingCampaign: false,
+    areas,
   });
   void CAMPAIGN_HISTORICAL_RUNS_INACTIVE;
   if (!preview) {
@@ -413,6 +436,8 @@ export async function executeCampaignBuilderVersionedRegeneration(opts: {
       run: await active,
     };
   }
+
+  if (areas.length) applyGenerateCampaignAreas(opts.slug, opts.serviceId, areas);
 
   const run = newRun(preview, String(opts.authorisedBy || "authenticated-session"));
   saveRun(run);

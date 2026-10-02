@@ -8518,9 +8518,7 @@ async function lcFixDeploy(){
                     <option value="core-pharmacy">Core Pharmacy</option>
                     <option value="clinical-nhs-services" selected>Clinical NHS Services</option>
                     <option value="vaccination-services">Vaccination Services</option>
-                    <option value="private-healthcare-services">Private Healthcare Services</option>
                     <option value="travel-health-services">Travel Health Services</option>
-                    <option value="weight-management-services">Weight Management Services</option>
                   </select>
                 </label>
                 <label style="font-size:.82rem;color:var(--muted)">Image
@@ -8566,10 +8564,9 @@ async function lcFixDeploy(){
               <label style="font-size:.82rem;color:var(--muted)">Template Family<select id="ipd-family-prompts" onchange="ipdOnFamilyChange()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:200px"><option value="clinical-nhs-services" selected>Clinical NHS Services</option></select></label>
               <label style="font-size:.82rem;color:var(--muted)">Service<select id="ipd-service-prompts" onchange="ipdOnServiceChange()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:220px">
                 <option value="pharmacy-first" selected>Pharmacy First</option>
-                <option value="nhs-flu-vaccination">NHS Flu Vaccination</option>
-                <option value="private-ear-wax-removal">Ear Wax Removal</option>
+                <option value="blood-pressure-checks">Blood Pressure Checks</option>
                 <option value="travel-vaccinations">Travel Vaccinations</option>
-                <option value="pharmacy-weight-loss-programme">Weight Loss Programme</option>
+                <option value="flu-vaccinations">Flu Vaccination</option>
               </select></label>
               <label style="font-size:.82rem;color:var(--muted)">Pack<select id="ipd-pack-prompts" onchange="ipdLoadPrompts()" style="margin-left:6px;padding:6px 10px;border-radius:6px;border:1px solid #d1d5db;min-width:180px"><option value="clinical-nhs-services" selected>Clinical NHS Services</option></select></label>
               <button class="btn btn-sm btn-primary" onclick="ipdDownloadPromptPack()">Download Prompt Pack</button>
@@ -11529,17 +11526,14 @@ var IPD_PROMPT_DEFAULTS = {
 };
 var IPD_FALLBACK_SERVICES = [
   { serviceKey: 'pharmacy-first', serviceName: 'Pharmacy First', templateFamily: 'clinical-nhs-services' },
-  { serviceKey: 'nhs-flu-vaccination', serviceName: 'NHS Flu Vaccination', templateFamily: 'vaccination-services' },
-  { serviceKey: 'private-ear-wax-removal', serviceName: 'Ear Wax Removal', templateFamily: 'private-healthcare-services' },
+  { serviceKey: 'blood-pressure-checks', serviceName: 'Blood Pressure Checks', templateFamily: 'clinical-nhs-services' },
   { serviceKey: 'travel-vaccinations', serviceName: 'Travel Vaccinations', templateFamily: 'travel-health-services' },
-  { serviceKey: 'pharmacy-weight-loss-programme', serviceName: 'Weight Loss Programme', templateFamily: 'weight-management-services' }
+  { serviceKey: 'flu-vaccinations', serviceName: 'Flu Vaccination', templateFamily: 'vaccination-services' }
 ];
 var IPD_FALLBACK_FAMILIES = [
   { familyKey: 'clinical-nhs-services', familyName: 'Clinical NHS Services' },
   { familyKey: 'vaccination-services', familyName: 'Vaccination Services' },
-  { familyKey: 'private-healthcare-services', familyName: 'Private Healthcare Services' },
-  { familyKey: 'travel-health-services', familyName: 'Travel Health Services' },
-  { familyKey: 'weight-management-services', familyName: 'Weight Management Services' }
+  { familyKey: 'travel-health-services', familyName: 'Travel Health Services' }
 ];
 var IPD_FALLBACK_PACKS = [
   { packKey: 'clinical-nhs-services', packName: 'Clinical NHS Services', templateFamily: 'clinical-nhs-services' }
@@ -11566,23 +11560,11 @@ var IPD_UPLOAD_IMAGE_FALLBACK = {
     { imageKey: 'vaccination-record-review', imageLabel: 'Vaccination Record Review', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/vaccination-services/vaccination-record-review.webp' },
     { imageKey: 'vaccine-availability', imageLabel: 'Vaccine Availability', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/vaccination-services/vaccine-availability.webp' }
   ],
-  'private-healthcare-services': [
-    { imageKey: 'ear-wax-removal', imageLabel: 'Ear Wax Removal', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/ear-wax-removal.webp' },
-    { imageKey: 'private-consultation', imageLabel: 'Private Consultation', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/private-consultation.webp' },
-    { imageKey: 'health-screening', imageLabel: 'Health Screening', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/health-screening.webp' },
-    { imageKey: 'aftercare-guidance', imageLabel: 'Aftercare Guidance', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/private-healthcare-services/aftercare-guidance.webp' }
-  ],
   'travel-health-services': [
     { imageKey: 'travel-consultation', imageLabel: 'Travel Consultation', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/travel-consultation.webp' },
     { imageKey: 'destination-advice', imageLabel: 'Destination Advice', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/destination-advice.webp' },
     { imageKey: 'travel-vaccination', imageLabel: 'Travel Vaccination', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/travel-vaccination.webp' },
     { imageKey: 'travel-medicine-planning', imageLabel: 'Travel Medicine Planning', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/travel-health-services/travel-medicine-planning.webp' }
-  ],
-  'weight-management-services': [
-    { imageKey: 'weight-consultation', imageLabel: 'Weight Consultation', defaultSlot: 'hero', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/weight-consultation.webp' },
-    { imageKey: 'bmi-review', imageLabel: 'BMI Review', defaultSlot: 'support', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/bmi-review.webp' },
-    { imageKey: 'progress-monitoring', imageLabel: 'Progress Monitoring', defaultSlot: 'trust', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/progress-monitoring.webp' },
-    { imageKey: 'private-weight-support', imageLabel: 'Private Weight Support', defaultSlot: 'conversion', uploadTargetPath: 'assets/pharmacy-image-library/weight-management-services/private-weight-support.webp' }
   ]
 };
 
@@ -11590,9 +11572,7 @@ var IPD_UPLOAD_PACK_FALLBACK = [
   { packKey: 'core-pharmacy', packName: 'Core Pharmacy' },
   { packKey: 'clinical-nhs-services', packName: 'Clinical NHS Services' },
   { packKey: 'vaccination-services', packName: 'Vaccination Services' },
-  { packKey: 'private-healthcare-services', packName: 'Private Healthcare Services' },
-  { packKey: 'travel-health-services', packName: 'Travel Health Services' },
-  { packKey: 'weight-management-services', packName: 'Weight Management Services' }
+  { packKey: 'travel-health-services', packName: 'Travel Health Services' }
 ];
 
 function ipdUploadImagesForPack(packKey) {

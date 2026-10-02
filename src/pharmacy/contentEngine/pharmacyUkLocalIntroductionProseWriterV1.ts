@@ -1,7 +1,7 @@
 /**
  * Dedicated Gemini prose writer for the local hero and introduction.
  * Restored accepted Brook Gemini local-copy call. Returns plain text.
- * Does not request page JSON, clinical copy, Google Search tools, or grounding metadata.
+ * One Google Search-grounded Gemini call rewrites heroIntroduction and localIntroduction.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -10,11 +10,8 @@ import { execSync } from "node:child_process";
 import { parseAiLocalCopyV3, type AiLocalCopyV3 } from "./pharmacyAiLocalCopySchemaV1.ts";
 import {
   keepGeminiLocalIntroductionParagraphs,
-  premisesLocalityFromCanonicalAddress,
-  writerFacingEditorialStatement,
   type BusinessLocalityCopyInputV3,
 } from "./pharmacyAiLocalNarrativePromptContractV1.ts";
-import { formatStraightLineKm } from "./pharmacyContentGenerationFieldPolicyV1.ts";
 import { countUkLocalIntroductionWords } from "./pharmacyUkLocalIntroductionStyleContractV1.ts";
 
 export const UK_LOCAL_INTRODUCTION_PROSE_WRITER_ID = "pharmacy-uk-local-introduction-prose-writer-v1";
@@ -23,6 +20,7 @@ export const UK_LOCAL_INTRODUCTION_OPENAI_WRITER_ACTIVE = false;
 export const UK_LOCAL_INTRODUCTION_GEMINI_MODEL = "gemini-3.6-flash";
 export const UK_LOCAL_INTRODUCTION_GEMINI_ENDPOINT =
   `https://generativelanguage.googleapis.com/v1beta/models/${UK_LOCAL_INTRODUCTION_GEMINI_MODEL}:generateContent`;
+export const UK_LOCAL_INTRODUCTION_GEMINI_GOOGLE_SEARCH_TOOL = { google_search: {} } as const;
 
 const PHARMACY_FIRST_SERVICE_MEANING = [
   "provides SERVICE consultations for eligible people from the selected area.",
@@ -40,6 +38,19 @@ function pharmacyFirstMeaningLines(pharmacy: string, service: string): string[] 
     `- ${PHARMACY_FIRST_SERVICE_MEANING[3]}`,
     `- ${PHARMACY_FIRST_SERVICE_MEANING[4]}`,
   ];
+}
+
+const DOWNSTREAM_SAFETY_NOT_FOR_INTRODUCTION =
+  /\b(chest pain|severe headache|sudden vision|neurological symptoms|do not diagnose|does not diagnose|on the spot|long-term management|one reading does not|systolic over diastolic)\b/i;
+
+function introductionSelectableMeaning(text: string): string {
+  return String(text || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter((sentence) => sentence.length > 20 && !DOWNSTREAM_SAFETY_NOT_FOR_INTRODUCTION.test(sentence))
+    .join(" ");
 }
 
 export function approvedServiceMeaningLines(input: {
@@ -62,7 +73,7 @@ export function approvedServiceMeaningLines(input: {
   }
   const locked = input.offer.lockedClinicalFacts;
   const lines = [locked.conditionSet, locked.suitability, locked.process, locked.safety]
-    .map((line) => String(line || "").replace(/\s+/g, " ").trim())
+    .map((line) => introductionSelectableMeaning(line))
     .filter((line) => line.length > 20)
     .slice(0, 6)
     .map((line) => `- ${line}`);
@@ -74,63 +85,53 @@ export function approvedServiceMeaningLines(input: {
 export function acceptedUkLocalIntroductionWritingContract(opts: {
   pharmacyName: string;
   serviceName: string;
-  allowedServiceMeaning?: string[];
+  areaName?: string;
+  country?: string;
+  evidenceBlock?: string;
 }): string {
-  const pharmacy = String(opts.pharmacyName || "the confirmed pharmacy").trim() || "the confirmed pharmacy";
-  const service = String(opts.serviceName || "Pharmacy First").trim() || "Pharmacy First";
-  const meaning = opts.allowedServiceMeaning?.length
-    ? opts.allowedServiceMeaning.join("\n")
-    : pharmacyFirstMeaningLines(pharmacy, service).join("\n");
-  return `Write as an experienced British healthcare copywriter for a paying pharmacy client.
+  const area = String(opts.areaName || "the selected area").trim() || "the selected area";
+  const country = String(opts.country || "UK").trim() || "UK";
+  const service = String(opts.serviceName || "the pharmacy service").trim() || "the pharmacy service";
+  const evidence = String(opts.evidenceBlock || "").trim() || "Verified places:\n- None supplied.";
+  return `You are an expert UK healthcare copywriter and local researcher writing content for an independent community pharmacy website.
+Create an engaging local introduction for:
+LOCATION:
+${area}, ${country}
+PAGE PURPOSE:
+This introduction will appear on a local ${service} service page for an independent community pharmacy.
+IMPORTANT:
+The ${service} service content has already been written separately.
+Do NOT write the ${service} service content.
+Do not explain or rewrite the service.
+Your job is to write the LOCAL component of the page.
+Write approximately 200–250 words introducing ${area} and its local healthcare environment. If the verified evidence is limited, write less. Do not invent facts to reach a word count.
+Use only the supplied verified local facts. You have not been given web search. Do not add a place, statistic, council, population or relationship that is not in those facts.
+You do not need to mention every supplied fact.
 
-Using only the verified information supplied, return two clearly separated plain-text fields and nothing else.
+${evidence}
 
-Write ONE local introduction to ${service}. Together the two fields are about 80–130 words in two short paragraphs. If the introduction is complete at about 85 words, stop. Do not add words or a further paragraph to reach a number.
-
-The introduction establishes, once:
-1) the service
-2) the selected area
-3) ${pharmacy} as the provider
-4) why a patient may consider it
-5) what the patient can broadly expect
-6) a next step, where that helps
-Then stop. The rest of the page already contains eligibility, preparation, the measurement, safety, diagnosis limits, emergencies and FAQs. Do not copy those sections into this introduction.
-
-The approved service meaning below is an evidence pool, not a checklist. Use one concise approved fact where it helps explain why the service matters. Do not transcribe the pool.
-
-Supplied local places are also a pool, not a checklist. You are never required to mention a GP surgery, clinic, hospital, library, park, school, landmark, community centre or transport stop. Zero place mentions is valid. Use a place only when it genuinely helps the patient understand access, useful geography, service availability, or a healthcare context the evidence actually supports. Do not mention a place to prove the page is local. Do not invent a referral, partnership, shared care, demand, or what local people do.
-
+Where the facts support it, consider ${area}'s location, local health centres, GP practices, NHS services, hospitals and useful geographic or community context.
+Use specific local names where they improve the content.
+Write naturally for people in ${area}.
+The copy should sound like professionally researched website editorial, not an SEO template, not a database of places, and not a directory of names and categories.
+Select the information that produces the strongest introduction.
+Street addresses and postcodes are supporting information. Do not put them in the introduction.
+Do not invent a working relationship, partnership, referral arrangement or formal connection between the pharmacy and any GP practice, hospital, NHS organisation or healthcare provider.
+Do not claim that the pharmacy works alongside or with another healthcare provider unless that relationship is explicitly present in the verified evidence.
+Do not invent patient behaviour, demand, travel or service usage.
+Do not say the pharmacy is in ${area} unless the verified premises fact says so.
+Do not invent statistics or facts.
+Use each verified place once in the whole introduction. Never repeat a fact to fill both the hero and the local introduction.
+Use professional, natural UK English. Keep every sentence under 40 words.
+Again:
+DO NOT explain ${service}.
+The approved ${service} content will follow this local introduction.
+Return exactly:
 HERO INTRODUCTION:
-The first paragraph only. Name ${service}, the selected area and ${pharmacy}, and why the service may be useful. Do not open with a landmark, library, park or GP practice.
+<opening paragraph about ${area}>
 
 LOCAL INTRODUCTION:
-The second paragraph only. One paragraph. Say what the patient can expect, and a sensible next step if that adds something. Do not start this paragraph by naming ${service}, ${pharmacy} and the selected area again. Do not repeat the same benefit. Do not list emergency symptoms, diagnosis limits, preparation steps, measurement units, eligibility criteria or FAQ answers.
-
-You may select from this ${service} meaning, and you must not go beyond it:
-${meaning}
-
-Do not invent patient behaviour, demand, or demographics. Do not write “many local residents”, “people often come in”, “whether you are visiting”, “whether you are running errands”, “spending time around”, “taking time out near”, “fits around everyday commitments”, “it is important to note”, “please note”, “a straightforward way”, “an accessible screening”, or “making a routine check useful”. Do not lean on the word “routine” to pad a sentence. Vary the opening from one area to another rather than swapping only the place name.
-
-Do not invent a relationship with a GP practice, clinic, library, park, or landmark. Do not write that the pharmacy works alongside another provider, or that patients manage their health alongside a named place.
-
-Do not claim this service reduces the risk of stroke, heart disease, kidney disease, or any other condition unless that exact claim is in the approved service meaning above. A statement that a condition can increase risk is not a statement that this service reduces that risk.
-
-Do not claim guaranteed treatment, guaranteed medicine supply, walk-in availability, faster care, convenience, immediate or prompt treatment, that a GP appointment is never required, travel time, route distance or easy access, or any unverified pharmacy service or outcome.
-
-Do not write travel time, route distance, kilometres, or that the pharmacy is easy to reach. Do not locate the pharmacy in the premises locality in these fields; that belongs later on the page. Do not invent facts or reuse wording or facts from another area.
-
-Use neutral factual British English. Do not describe an area as pleasant, welcoming, vibrant, thriving, attractive, popular, desirable, close-knit, well-connected, convenient, established neighbourhood, or ‘known for’ something unless that exact character claim is supported by the supplied evidence.
-
-Do not use: “orient yourself”; “orientating pharmacy care”; “local orientation”; “familiar points around”; “patients near local landmarks”; “listed as”; “recorded as”; “named on the provider page”; “recorded healthcare setting”; “evidence pack”; “source record”; raw provider labels; or evidence-source language.
-
-Use the selected area name and the pharmacy name in the first paragraph. The second paragraph should continue, not introduce the service again. Use natural professional British English, including contractions where they sound like a pharmacy website rather than a leaflet.
-
-Return exactly this layout:
-HERO INTRODUCTION:
-<first paragraph>
-
-LOCAL INTRODUCTION:
-<second paragraph>`
+<the rest of the local introduction>`;
 }
 
 export const UK_LOCAL_INTRODUCTION_APPROVED_PROMPT = acceptedUkLocalIntroductionWritingContract({
@@ -165,20 +166,33 @@ export type GeminiLocalGroundingMetadataV1 = {
   groundingSupportCount: number;
 };
 
-function factsForCategory(
-  input: BusinessLocalityCopyInputV3,
-  categories: string[],
-): string[] {
-  const allowed = new Set(categories);
-  return (input.editorialFacts || [])
-    .filter((fact) => allowed.has(fact.category))
-    .map((fact) => writerFacingEditorialStatement(fact.normalizedStatement))
-    .filter((statement) => statement.length >= 12);
-}
-
-function bulletBlock(title: string, lines: string[]): string[] {
-  if (!lines.length) return [];
-  return [title, ...lines.map((line) => `- ${line}`), ""];
+function verifiedEvidenceBlock(input: BusinessLocalityCopyInputV3, area: string): string {
+  const lines: string[] = [];
+  if (input.locality.pharmacyIsInArea) {
+    lines.push(
+      "Verified premises:",
+      `- Pharmacy: ${String(input.business.name || "").trim()}`,
+      `- Address: ${String(input.business.address || "").trim()}`,
+      "- Source: pharmacy profile",
+      "The address section already names this pharmacy and address. Do not write the pharmacy name in the introduction.",
+      "",
+    );
+  } else {
+    lines.push(`Verified premises: none. Do not say the pharmacy is in ${area}.`, "");
+  }
+  const facts = (input.editorialFacts || []).filter((fact) => fact.category !== "excluded" && fact.normalizedStatement);
+  lines.push(`Verified place count: ${facts.length}. Write less when this count is small.`);
+  lines.push("Verified places:");
+  if (!facts.length) lines.push("- None supplied.");
+  for (const fact of facts) {
+    lines.push(`- Category: ${fact.category}`);
+    lines.push(`  Supported statement: ${fact.normalizedStatement}`);
+    if (fact.sourceUrl) lines.push(`  Source URL: ${fact.sourceUrl}`);
+  }
+  const excluded = (input.excludedLocalEvidence || []).map((row) => String(row || "").trim()).filter(Boolean);
+  lines.push("", "Uncertainties — excluded, do not use:");
+  lines.push(excluded.length ? excluded.map((row) => `- ${row}`).join("\n") : "- None supplied.");
+  return lines.join("\n");
 }
 
 export function buildUkLocalIntroductionProseChatRequest(
@@ -187,38 +201,14 @@ export function buildUkLocalIntroductionProseChatRequest(
   const area = String(input.locality.areaName || "").trim();
   const pharmacyName = String(input.business.name || "").trim();
   const serviceName = String(input.offer.serviceName || "Pharmacy First").trim() || "Pharmacy First";
-  const premisesLocality = premisesLocalityFromCanonicalAddress(input.business.address);
-  const distanceKm = input.locality.distanceKm;
-  const distanceLabel =
-    distanceKm != null && Number.isFinite(distanceKm)
-      ? `approximately ${formatStraightLineKm(distanceKm)} km in a straight line`
-      : "";
-  const identity = factsForCategory(input, ["area-identity"]);
-  const history = factsForCategory(input, ["heritage"]);
-  const community = factsForCategory(input, ["community"]);
-  const healthcare = factsForCategory(input, ["healthcare"]);
-  const meaningLines = approvedServiceMeaningLines(input);
-  const prompt = [
-    acceptedUkLocalIntroductionWritingContract({
-      pharmacyName,
-      serviceName,
-      allowedServiceMeaning: input.offer.serviceId === "pharmacy-first" ? undefined : meaningLines,
-    }),
-    "",
-    `Selected area: ${area}`,
-    `Confirmed pharmacy name: ${pharmacyName}`,
-    premisesLocality ? `Confirmed pharmacy premises locality: ${premisesLocality}` : "",
-    distanceLabel ? `Saved straight-line distance: ${distanceLabel}` : "",
-    "",
-    ...bulletBlock(
-      "Optional local context. Omit every item unless it materially helps access, a genuine service-related healthcare context, or a directly useful geographic relationship. Naming none of these is correct. Do not recite them to prove the page is local:",
-      [...healthcare, ...identity, ...community, ...history],
-    ),
-    `Approved ${serviceName} service meaning:`,
-    ...meaningLines,
-  ]
-    .filter((line) => line !== "")
-    .join("\n");
+  const country = String(input.pageCountry || "").trim() || "UK";
+  const prompt = acceptedUkLocalIntroductionWritingContract({
+    pharmacyName,
+    serviceName,
+    areaName: area,
+    country,
+    evidenceBlock: verifiedEvidenceBlock(input, area),
+  });
   return {
     provider: "gemini",
     model: UK_LOCAL_INTRODUCTION_GEMINI_MODEL,
@@ -253,7 +243,9 @@ export function buildUkLocalIntroductionCorrectionChatRequest(
     "Rejected copy:",
     rejected,
     "",
-    "Return the same HERO INTRODUCTION / LOCAL INTRODUCTION layout. Keep the approved service meaning. Do not add a place, landmark, or organisation to repair the copy. Discuss the selected area only.",
+    "Return the same HERO INTRODUCTION / LOCAL INTRODUCTION layout.",
+    "Write natural local editorial. Do not turn the introduction into a list of place names and categories.",
+    "Do not repeat a fact, do not write street addresses or postcodes, and do not invent behaviour or a healthcare partnership.",
   ].join("\n");
   return {
     ...base,
@@ -299,6 +291,7 @@ function labeledSection(raw: string, label: string, nextLabel?: string): string 
     const next = end.exec(rest);
     if (next && next.index != null) rest = rest.slice(0, next.index);
   }
+  rest = rest.split(/\n(?:#{1,3} |Research Sources|Facts Excluded|\*\*\*)/)[0] || rest;
   return normalizeParagraphs(rest);
 }
 
@@ -416,6 +409,7 @@ export async function requestUkLocalIntroductionProseV1(
     },
     body: JSON.stringify({
       contents: [{ role: "user", parts: [{ text: request.prompt }] }],
+      tools: [UK_LOCAL_INTRODUCTION_GEMINI_GOOGLE_SEARCH_TOOL],
       generationConfig: {
         temperature: request.temperature,
         maxOutputTokens: request.maxOutputTokens,

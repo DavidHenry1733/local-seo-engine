@@ -14,7 +14,7 @@ import {
   type ResolvedGrowthPlatform,
 } from "./growthPlatformResolverService.ts";
 import { listLockedCommercialSupportedServices } from "./masterAdminLockedCommercialServiceCatalog.ts";
-import { BENCHMARK_MASTER_SERVICE_IDS, getServicePublishMeta } from "./pharmacyMasterPublishConfig.ts";
+import { activeServiceRegistry, isActiveServiceId, isActiveServiceStatus } from "./pharmacyServiceRegistry.ts";
 import { getPharmacyProjectConfigPath, safePharmacySlug } from "./pharmacyWorkspacePaths.ts";
 
 export interface TenantServiceCatalogueEntry {
@@ -86,12 +86,14 @@ function resolveProjectCommercialServices(project: Record<string, unknown>): Ten
 }
 
 function resolveLocalPharmacyServices(): TenantServiceCatalogueEntry[] {
-  const locked = listLockedCommercialSupportedServices();
+  const locked = listLockedCommercialSupportedServices().filter((entry) => isActiveServiceId(entry.serviceId));
   if (locked.length) return locked;
-  return BENCHMARK_MASTER_SERVICE_IDS.map((serviceId) => ({
-    serviceId,
-    serviceName: getServicePublishMeta(serviceId)?.serviceName || serviceId,
-  }));
+  return activeServiceRegistry()
+    .filter((entry) => isActiveServiceStatus(entry.status))
+    .map((entry) => ({
+      serviceId: entry.id,
+      serviceName: entry.name,
+    }));
 }
 
 export function resolveTenantServiceCatalogue(slug: string): TenantServiceCatalogue {

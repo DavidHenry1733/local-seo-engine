@@ -42,7 +42,7 @@ export interface LockedCommercialServiceVerification {
   schemaSupport: boolean;
 }
 
-export const LOCKED_COMMERCIAL_SUPPORTED_SERVICE_COUNT = 7 as const;
+export const LOCKED_COMMERCIAL_SUPPORTED_SERVICE_COUNT = 4 as const;
 
 function readCatalogueFile(): LockedCommercialServiceCatalogue | null {
   if (!fs.existsSync(LOCKED_COMMERCIAL_CATALOGUE_PATH)) return null;

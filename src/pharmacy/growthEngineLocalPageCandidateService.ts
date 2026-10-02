@@ -379,6 +379,7 @@ export async function generateOneLocalPageCandidate(opts: {
   maxAttempts?: number;
   candidateVersion?: string;
   allowAuthorisedCampaignAreas?: boolean;
+  cleanProfileCampaign?: boolean;
 }): Promise<
   | {
       ok: true;
@@ -392,6 +393,7 @@ export async function generateOneLocalPageCandidate(opts: {
   const areaRef = String(opts.areaSlug || opts.areaName || "").trim();
   const version = opts.candidateVersion || AI_LOCAL_PILOT_CONTRACT_VERSION_V3;
   const allowAuthorised = opts.allowAuthorisedCampaignAreas === true;
+  const cleanProfileCampaign = opts.cleanProfileCampaign === true;
   const preflightOpts = { allowAuthorisedCampaignAreas: allowAuthorised, candidateVersion: version };
   if (!areaRef) {
     const empty = preflightOneLocalPageCandidate(opts.slug, opts.serviceId, "", preflightOpts);
@@ -401,9 +403,11 @@ export async function generateOneLocalPageCandidate(opts: {
       preflight: empty,
     };
   }
-  const resolvedArea = allowAuthorised
-    ? resolveAuthorisedCampaignArea(opts.slug, areaRef)
-    : resolveOneLocalPageCandidateArea(opts.slug, areaRef);
+  const resolvedArea = cleanProfileCampaign
+    ? { areaName: String(opts.areaName || areaRef).trim(), areaSlug: slugifyArea(opts.areaSlug || opts.areaName || areaRef) }
+    : allowAuthorised
+      ? resolveAuthorisedCampaignArea(opts.slug, areaRef)
+      : resolveOneLocalPageCandidateArea(opts.slug, areaRef);
   if (!resolvedArea) {
     const empty = preflightOneLocalPageCandidate(opts.slug, opts.serviceId, areaRef, preflightOpts);
     return {
@@ -415,11 +419,13 @@ export async function generateOneLocalPageCandidate(opts: {
   const preflight = preflightOneLocalPageCandidate(opts.slug, opts.serviceId, resolvedArea.areaSlug, preflightOpts);
   const replacing = opts.replaceExistingCandidate === true;
   const improving = opts.requireImprovedLocalQuality === true;
-  const generationError = improving || replacing
-    ? improvedLocalPageGenerationBlocker(preflight)
-    : preflight.canGenerate
-      ? null
-      : preflight.blocker || "This local page cannot be created yet.";
+  const generationError = cleanProfileCampaign
+    ? null
+    : improving || replacing
+      ? improvedLocalPageGenerationBlocker(preflight)
+      : preflight.canGenerate
+        ? null
+        : preflight.blocker || "This local page cannot be created yet.";
   if (generationError) {
     return {
       ok: false,
@@ -428,16 +434,16 @@ export async function generateOneLocalPageCandidate(opts: {
     };
   }
   const taskId =
-    allowAuthorised || version !== AI_LOCAL_PILOT_CONTRACT_VERSION_V3
-      ? `${opts.slug}:${opts.serviceId}:${version}:one-local-page:${preflight.areaSlug}`
+    cleanProfileCampaign || allowAuthorised || version !== AI_LOCAL_PILOT_CONTRACT_VERSION_V3
+      ? `${opts.slug}:${opts.serviceId}:${version}:one-local-page:${preflight.areaSlug || resolvedArea.areaSlug}`
       : oneLocalPageAuthorizedTaskIdV3(opts.slug, opts.serviceId, preflight.areaSlug);
   const budgetFile = authorizedTaskBudgetPathV3({
     slug: opts.slug,
     serviceId: opts.serviceId,
     taskId,
   });
-  let maxProviderCalls = 2;
-  if (fs.existsSync(budgetFile) && !allowAuthorised && version === AI_LOCAL_PILOT_CONTRACT_VERSION_V3) {
+  let maxProviderCalls = cleanProfileCampaign ? 1 : 2;
+  if (fs.existsSync(budgetFile) && !cleanProfileCampaign && !allowAuthorised && version === AI_LOCAL_PILOT_CONTRACT_VERSION_V3) {
     const granted = grantOneLocalPageGenerateCallIfNeededV3({
       slug: opts.slug,
       serviceId: opts.serviceId,
@@ -468,13 +474,13 @@ export async function generateOneLocalPageCandidate(opts: {
   const generated = await generateAiLocalCopyPilotV3({
     slug: opts.slug,
     serviceId: opts.serviceId,
-    areaName: preflight.areaName,
-    areaSlug: preflight.areaSlug,
+    areaName: preflight.areaName || resolvedArea.areaName,
+    areaSlug: preflight.areaSlug || resolvedArea.areaSlug,
     writeRecord: true,
     authorizedTaskId: taskId,
-    maxAttempts: opts.maxAttempts ?? ONE_LOCAL_PAGE_GENERATE_MAX_ATTEMPTS,
-    maxProviderCalls,
-    previousFingerprints: opts.previousFingerprints,
+    maxAttempts: cleanProfileCampaign ? 1 : opts.maxAttempts ?? ONE_LOCAL_PAGE_GENERATE_MAX_ATTEMPTS,
+    maxProviderCalls: cleanProfileCampaign ? 1 : maxProviderCalls,
+    previousFingerprints: cleanProfileCampaign ? [] : opts.previousFingerprints,
     requireImprovedLocalQuality: opts.requireImprovedLocalQuality === true,
     candidateVersion: version,
     ukLocalIntroductionStyle: {

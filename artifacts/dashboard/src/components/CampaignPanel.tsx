@@ -51,6 +51,20 @@ const AMBER  = "hsl(38 85% 48%)";
 const RED    = "hsl(0 72% 50%)";
 const DIVIDER = "hsl(220 16% 92%)";
 
+const YORKSHIRE_PHARMACY_SLUG = "yorkshire-pharmacy-and-health-clinic";
+const YORKSHIRE_PHARMACY_FIRST_GENERATE_AREAS = [
+  "Darfield",
+  "Wombwell",
+  "Thurnscoe",
+  "Grimethorpe",
+  "Goldthorpe",
+  "Worsbrough",
+  "Hoyland",
+  "Cudworth",
+  "Mexborough",
+  "Royston",
+];
+
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
@@ -198,6 +212,8 @@ export default function CampaignPanel({ campaignId, slug, onClose }: Props) {
   const [regenResult, setRegenResult]           = useState<{ liveUrl?: string; sitemapNote?: string; ftpError?: string | null } | null>(null);
   const [rolloutJobId, setRolloutJobId]         = useState<string | null>(null);
   const [rolling, setRolling]                   = useState(false);
+  const [creatingVersion, setCreatingVersion]   = useState(false);
+  const [createVersionMessage, setCreateVersionMessage] = useState<string | null>(null);
 
   const currentMoneyUrl = moneyPageUrl ?? detail?.moneyPageUrl ?? "";
   const currentKeyword  = focusKeyword  ?? detail?.focusKeyword  ?? "";
@@ -225,6 +241,42 @@ export default function CampaignPanel({ campaignId, slug, onClose }: Props) {
     },
     onError: (e: Error) => showToast(e.message, "err"),
   });
+
+  async function handleCreateCampaignVersion() {
+    if (creatingVersion) return;
+    setCreatingVersion(true);
+    setCreateVersionMessage(null);
+    const campaign = detail?.serviceKey || "pharmacy-first";
+    const areas =
+      slug === YORKSHIRE_PHARMACY_SLUG
+        ? YORKSHIRE_PHARMACY_FIRST_GENERATE_AREAS
+        : (detail?.areas || []).map((row) => row.area).filter(Boolean);
+    try {
+      const result = await apiFetch<{
+        ok?: boolean;
+        duplicate?: boolean;
+        error?: string;
+        run?: { candidateVersion?: string; status?: string };
+      }>("/api/growth-engine/campaign-builder/generate", {
+        method: "POST",
+        body: JSON.stringify({ slug, campaign, areas }),
+      });
+      if (result.duplicate) {
+        setCreateVersionMessage("This campaign is already running. No extra calls were started.");
+        return;
+      }
+      setCreateVersionMessage(
+        result.run?.candidateVersion
+          ? `Campaign version ${result.run.candidateVersion} is generating. Nothing was published or indexed.`
+          : "Campaign version generation started. Nothing was published or indexed.",
+      );
+      qc.invalidateQueries({ queryKey: ["campaigns", slug] });
+    } catch (e: unknown) {
+      setCreatingVersion(false);
+      showToast(e instanceof Error ? e.message : "Could not create the campaign version.", "err");
+      return;
+    }
+  }
 
   async function handleRollout() {
     setRolling(true);
@@ -412,11 +464,24 @@ export default function CampaignPanel({ campaignId, slug, onClose }: Props) {
                 <div>
                   <h2 className="text-xs font-semibold" style={{ color: FG }}>Actions</h2>
                   <p className="text-[10px] mt-0.5" style={{ color: MUTED }}>
-                    Regenerate rebuilds every page with the latest template and deploys in one step.
+                    Create a new campaign version with one grounded Gemini rewrite per area. Previous runs stay as history.
                   </p>
                 </div>
 
-                <Btn onClick={handleRollout} loading={rolling} disabled={rolling} icon={Zap} label="Regenerate & Deploy All Pages" accent={GREEN} solid />
+                <Btn
+                  onClick={handleCreateCampaignVersion}
+                  loading={creatingVersion}
+                  disabled={creatingVersion}
+                  icon={Zap}
+                  label="Create new campaign version"
+                  accent={GREEN}
+                  solid
+                />
+                {createVersionMessage && (
+                  <p className="text-[10px]" style={{ color: creatingVersion ? BLUE : GREEN }}>{createVersionMessage}</p>
+                )}
+
+                <Btn onClick={handleRollout} loading={rolling} disabled={rolling || creatingVersion} icon={Zap} label="Regenerate & Deploy All Pages" accent={BLUE} solid />
 
                 {rolloutJobId && (
                   <RolloutProgress jobId={rolloutJobId} onDone={handleRolloutDone} />

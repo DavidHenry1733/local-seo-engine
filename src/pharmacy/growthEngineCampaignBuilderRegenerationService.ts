@@ -118,9 +118,21 @@ export function findActivePharmacyCampaignForService(
   );
 }
 
-function uniqueAreaNames(slug: string, campaign: PharmacyCampaign | null): { areaName: string; areaSlug: string }[] {
-  const session = loadCampaignBuilderSession(slug);
+function uniqueAreaNames(
+  slug: string,
+  campaign: PharmacyCampaign | null,
+  requested?: string[],
+): { areaName: string; areaSlug: string }[] {
   const names = new Map<string, string>();
+  for (const raw of requested || []) {
+    const areaName = String(raw || "").trim();
+    const areaSlug = slugifyArea(areaName);
+    if (areaName && areaSlug) names.set(areaSlug, areaName);
+  }
+  if (names.size) {
+    return [...names.entries()].map(([areaSlug, areaName]) => ({ areaSlug, areaName }));
+  }
+  const session = loadCampaignBuilderSession(slug);
   for (const raw of session.targetAreaNames || []) {
     const areaName = String(raw || "").trim();
     const areaSlug = slugifyArea(areaName);
@@ -142,7 +154,7 @@ export function buildCampaignRegenerationPreview(
   slug: string,
   serviceId: string,
   listItem?: CampaignBuilderListItem | null,
-  options?: { requireExistingCampaign?: boolean },
+  options?: { requireExistingCampaign?: boolean; areas?: string[] },
 ): CampaignRegenerationPreview | null {
   const campaign = findActivePharmacyCampaignForService(slug, serviceId);
   const requireExisting = options?.requireExistingCampaign !== false;
@@ -156,7 +168,7 @@ export function buildCampaignRegenerationPreview(
   const existingVersions = listExistingCandidateVersions(slug, serviceId);
   const existingCandidateVersion = existingVersions[existingVersions.length - 1] || "none";
   const newCandidateVersion = nextCandidateVersion(existingVersions);
-  const areas = uniqueAreaNames(slug, campaign);
+  const areas = uniqueAreaNames(slug, campaign, options?.areas);
   const assetsToRegenerate = (item?.packageItems || []).filter((row) => row.count > 0);
 
   return {

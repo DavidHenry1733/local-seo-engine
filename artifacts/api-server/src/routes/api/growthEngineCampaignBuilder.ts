@@ -1,7 +1,7 @@
 /**
  * Campaign Builder V1 — JSON + form API routes.
  */
-import { Router } from "express";
+import { Router, type Request, type Response } from "express";
 import {
   advanceCampaignBuilderStep,
   approveCampaignBuilderAsset,
@@ -55,6 +55,7 @@ import {
   executeCampaignBuilderVersionedRegeneration,
   getCampaignRegenerationRun,
 } from "../../../../../src/pharmacy/growthEngineCampaignBuilderRegenerationRunService.ts";
+import { resolveActiveServiceId } from "../../../../../src/pharmacy/pharmacyServiceRegistry.ts";
 import {
   confirmRemainingLocalPagesCampaign,
   getRemainingLocalPagesCampaign,
@@ -693,6 +694,59 @@ router.get("/growth-engine/:slug/campaign-builder/local-page-evidence-run", (req
   return res.json({ ok: true, run, plan });
 });
 
+function parseGenerateAreas(body: unknown): string[] {
+  const raw = body && typeof body === "object" ? (body as Record<string, unknown>).areas : null;
+  if (!Array.isArray(raw)) return [];
+  return raw.map((row) => String(row || "").trim()).filter(Boolean);
+}
+
+async function handleCampaignBuilderGenerate(
+  req: Request,
+  res: Response,
+  slugRaw: string,
+  options?: { defaultConfirmed?: boolean },
+) {
+  const slug = resolveSlug(slugRaw);
+  if (!slug) return res.status(400).json({ ok: false, generated: false, published: false, indexed: false, error: "Invalid slug" });
+  let session = loadCampaignBuilderSession(slug);
+  const requestedCampaign = String(req.body?.campaign || req.body?.campaignId || req.body?.serviceId || session.selectedServiceId || "");
+  const campaignId = resolveActiveServiceId(requestedCampaign) || requestedCampaign;
+  if (!campaignId) {
+    return res.status(400).json({
+      ok: false,
+      generated: false,
+      published: false,
+      indexed: false,
+      error: "Select a campaign first",
+    });
+  }
+  if (session.selectedServiceId !== campaignId) {
+    session = selectCampaignBuilderService(slug, campaignId);
+  }
+  const confirmed =
+    options?.defaultConfirmed === true ||
+    req.body?.confirmed === true ||
+    req.body?.confirmed === "true" ||
+    req.body?.confirmed === "on";
+  const areas = parseGenerateAreas(req.body);
+  const result = await executeCampaignBuilderVersionedRegeneration({
+    slug,
+    serviceId: campaignId,
+    confirmed,
+    areas,
+    authorisedBy: String(req.session?.userId || "authenticated-session"),
+    processInline: false,
+  });
+  return res.status(result.ok ? 200 : result.status || 400).json({
+    ...result,
+    reviewUrl: reviewCentreUrl(slug, campaignId),
+  });
+}
+
+router.post("/growth-engine/campaign-builder/generate", async (req, res) => {
+  return handleCampaignBuilderGenerate(req, res, String(req.body?.slug || ""), { defaultConfirmed: true });
+});
+
 router.post("/growth-engine/:slug/campaign-builder/generate-local-page-candidate", async (req, res) => {
   const slug = resolveSlug(req.params.slug);
   if (!slug) return res.status(400).json({ ok: false, error: "Invalid slug" });
@@ -718,34 +772,7 @@ router.post("/growth-engine/:slug/campaign-builder/generate-local-page-candidate
 });
 
 router.post("/growth-engine/:slug/campaign-builder/generate", async (req, res) => {
-  const slug = resolveSlug(req.params.slug);
-  if (!slug) return res.status(400).json({ ok: false, generated: false, published: false, indexed: false, error: "Invalid slug" });
-  let session = loadCampaignBuilderSession(slug);
-  const campaignId = String(req.body?.campaign || req.body?.campaignId || req.body?.serviceId || session.selectedServiceId || "");
-  if (!campaignId) {
-    return res.status(400).json({
-      ok: false,
-      generated: false,
-      published: false,
-      indexed: false,
-      error: "Select a campaign first",
-    });
-  }
-  if (session.selectedServiceId !== campaignId) {
-    session = selectCampaignBuilderService(slug, campaignId);
-  }
-  const confirmed = req.body?.confirmed === true || req.body?.confirmed === "true" || req.body?.confirmed === "on";
-  const result = await executeCampaignBuilderVersionedRegeneration({
-    slug,
-    serviceId: campaignId,
-    confirmed,
-    authorisedBy: String(req.session?.userId || "authenticated-session"),
-    processInline: false,
-  });
-  return res.status(result.ok ? 200 : result.status || 400).json({
-    ...result,
-    reviewUrl: reviewCentreUrl(slug, campaignId),
-  });
+  return handleCampaignBuilderGenerate(req, res, String(req.params.slug || ""));
 });
 
 router.post("/growth-engine/:slug/campaign-builder/approve-asset", (req, res) => {
@@ -770,31 +797,7 @@ router.get("/growth-engine/:slug/campaign-builder/regeneration-run", (req, res) 
 });
 
 router.post("/growth-engine/:slug/campaign-builder/regenerate-campaign", async (req, res) => {
-  const slug = resolveSlug(req.params.slug);
-  if (!slug) return res.status(400).json({ ok: false, generated: false, published: false, indexed: false, error: "Invalid slug" });
-  const session = loadCampaignBuilderSession(slug);
-  const serviceId = String(req.body?.serviceId || req.body?.campaign || session.selectedServiceId || "");
-  if (!serviceId) {
-    return res.status(400).json({
-      ok: false,
-      generated: false,
-      published: false,
-      indexed: false,
-      error: "No campaign selected",
-    });
-  }
-  const confirmed = req.body?.confirmed === true || req.body?.confirmed === "true" || req.body?.confirmed === "on";
-  const result = await executeCampaignBuilderVersionedRegeneration({
-    slug,
-    serviceId,
-    confirmed,
-    authorisedBy: String(req.session?.userId || "authenticated-session"),
-    processInline: false,
-  });
-  return res.status(result.ok ? 200 : result.status || 400).json({
-    ...result,
-    reviewUrl: reviewCentreUrl(slug, serviceId),
-  });
+  return handleCampaignBuilderGenerate(req, res, String(req.params.slug || ""));
 });
 
 router.post("/growth-engine/:slug/campaign-builder/regenerate", async (req, res) => {

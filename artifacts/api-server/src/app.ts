@@ -21,6 +21,7 @@ import { requireAuth, requireAdmin, hasValidInternalToken } from "./middlewares/
 import { FileSessionStore } from "./lib/fileSessionStore";
 import healthRouter from "./routes/health";
 import growthEnginePublicAcceptedPreviewRouter from "./routes/growthEnginePublicAcceptedPreview";
+import { dashboardApiRouter } from './pharmacy/dashboardRouter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -330,6 +331,7 @@ app.use("/api", pharmacyVisualExperienceAdminRouter);
 app.use("/api", pharmacyImagePlatformReviewRouter);
 
 app.use("/api", router);
+app.use(dashboardApiRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.get("/*splat", (req, res, next) => {

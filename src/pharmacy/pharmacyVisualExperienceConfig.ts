@@ -9,7 +9,6 @@ export const VISUAL_EXPERIENCE_BENCHMARK_SERVICES = [
   "blood-pressure-checks",
   "travel-vaccinations",
   "flu-vaccinations",
-  "emergency-contraception",
 ] as const;
 
 export type VisualExperienceServiceId = (typeof VISUAL_EXPERIENCE_BENCHMARK_SERVICES)[number];
@@ -49,12 +48,6 @@ export const VISUAL_EXPERIENCE_SERVICE_CONFIG: Record<
     serviceName: "Flu Vaccinations",
     templateFamilyKey: "clinical-nhs-services",
     imageServiceKey: "flu-vaccinations",
-  },
-  "emergency-contraception": {
-    serviceId: "emergency-contraception",
-    serviceName: "Emergency Contraception",
-    templateFamilyKey: "clinical-nhs-services",
-    imageServiceKey: "emergency-contraception",
   },
 };
 

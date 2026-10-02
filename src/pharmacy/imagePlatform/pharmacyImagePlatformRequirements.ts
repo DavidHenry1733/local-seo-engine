@@ -2,7 +2,8 @@
  * Required assets per service — platform catalog (not render).
  */
 import fs from "node:fs";
-import { BENCHMARK_MASTER_SERVICE_IDS, getServicePublishMeta } from "../pharmacyMasterPublishConfig.ts";
+import { CORE_SERVICE_IDS } from "../dashboardCustomerStore.ts";
+import { getServicePublishMeta } from "../pharmacyMasterPublishConfig.ts";
 import { ensureImagePlatformDirectories, serviceCatalogAbs, type ImagePlatformRole } from "./pharmacyImagePlatformPaths.ts";
 import type { ImagePlatformServiceCatalog } from "./pharmacyImagePlatformTypes.ts";
 
@@ -64,7 +65,7 @@ export function buildServiceCatalog(serviceId: string): ImagePlatformServiceCata
 }
 
 export function listPlatformServiceIds(): string[] {
-  return [...BENCHMARK_MASTER_SERVICE_IDS];
+  return [...CORE_SERVICE_IDS];
 }
 
 export function writeAllServiceCatalogs(): string[] {

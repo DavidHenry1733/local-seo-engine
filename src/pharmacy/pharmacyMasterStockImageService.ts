@@ -12,8 +12,7 @@ import {
   type ImageMatrixSlot,
   type PharmacyImageAssignmentsDoc,
 } from "./pharmacyImageOperatingSystem.ts";
-import { BENCHMARK_MASTER_SERVICE_IDS } from "./pharmacyMasterPublishConfig.ts";
-import { VISUAL_EXPERIENCE_BENCHMARK_SERVICES } from "./pharmacyVisualExperienceConfig.ts";
+import { CORE_SERVICE_IDS } from "./dashboardCustomerStore.ts";
 
 export type MasterStockImageType =
   | "hero"
@@ -196,11 +195,7 @@ export function autoFillServiceImagesFromMasterStock(
   }
 
   const serviceIds = options?.allServices
-    ? [
-        ...VISUAL_EXPERIENCE_BENCHMARK_SERVICES.filter((id) =>
-          BENCHMARK_MASTER_SERVICE_IDS.includes(id as (typeof BENCHMARK_MASTER_SERVICE_IDS)[number]),
-        ),
-      ]
+    ? [...CORE_SERVICE_IDS]
     : [options?.serviceId || "pharmacy-first"];
 
   let assigned = 0;

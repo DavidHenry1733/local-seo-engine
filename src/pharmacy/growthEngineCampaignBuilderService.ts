@@ -216,6 +216,26 @@ export function saveCampaignBuilderSession(session: CampaignBuilderSession): Cam
   return next;
 }
 
+export function applyGenerateCampaignAreas(slug: string, serviceId: string, areas: string[]): string[] {
+  const unique: string[] = [];
+  const seen = new Set<string>();
+  for (const raw of areas) {
+    const name = String(raw || "").trim();
+    const key = name.toLowerCase();
+    if (!name || seen.has(key)) continue;
+    seen.add(key);
+    unique.push(name);
+  }
+  const session = loadCampaignBuilderSession(slug);
+  saveCampaignBuilderSession({
+    ...session,
+    selectedServiceId: session.selectedServiceId || serviceId,
+    targetAreaMode: unique.length ? "selected" : session.targetAreaMode,
+    targetAreaNames: unique.length ? unique : session.targetAreaNames,
+  });
+  return unique.length ? unique : [...(session.targetAreaNames || [])];
+}
+
 export function campaignBuilderStepUrl(slug: string, step: CampaignBuilderStep): string {
   return `/api/growth-engine/campaign-builder?slug=${encodeURIComponent(slug)}&step=${step}`;
 }

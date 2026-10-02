@@ -15,9 +15,10 @@ import {
   type ResolvedPharmacyImage,
   sanitizePharmacyImageAltText,
 } from "./templates/pharmacyImageLibrary.ts";
-import { VISUAL_EXPERIENCE_BENCHMARK_SERVICES, VISUAL_EXPERIENCE_SERVICE_CONFIG } from "./pharmacyVisualExperienceConfig.ts";
-import { BENCHMARK_MASTER_SERVICE_IDS } from "./pharmacyMasterPublishConfig.ts";
+import { VISUAL_EXPERIENCE_SERVICE_CONFIG } from "./pharmacyVisualExperienceConfig.ts";
 import { getServicePublishMeta } from "./pharmacyMasterPublishConfig.ts";
+import { CORE_SERVICE_IDS } from "./dashboardCustomerStore.ts";
+import { activeServiceRegistry, isActiveServiceStatus, resolveActiveServiceId } from "./pharmacyServiceRegistry.ts";
 import { buildPharmacyServicePageProfile } from "./pharmacyServicePageProfileContext.ts";
 import { normalizeServiceId } from "./pharmacyServiceLibraryService.ts";
 import { PHARMACY_WORKSPACE_ROOT } from "./pharmacyWorkspacePaths.ts";
@@ -197,6 +198,7 @@ export interface ImageSourceBreakdown {
 export interface ServiceCatalogEntry {
   serviceId: string;
   serviceName: string;
+  status?: "active" | "pipeline";
 }
 
 export interface ImageOperatingSystemDashboard {
@@ -455,7 +457,24 @@ export function saveImageAssignments(slug: string, doc: PharmacyImageAssignments
   return file;
 }
 
-export function listLibraryImages(): LibraryImageOption[] {
+/** Authoritative reusable library = Image Platform approved production assets when READY. */
+export function listProductionPlatformLibraryImages(serviceId = "pharmacy-first"): LibraryImageOption[] {
+  if (!isPharmacyFirstProductionLibraryReady() || serviceId !== "pharmacy-first") return [];
+  return listApprovedProductionAssets(serviceId).map((asset) => {
+    const assetPath = String(asset.filePath || "").replace(/^\/+/, "");
+    return {
+      libraryRef: `image-platform/${asset.assetId}`,
+      imagePack: "pharmacy-image-platform",
+      imageKey: asset.assetId,
+      category: asset.role || "support",
+      assetPath,
+      assetExists: Boolean(assetPath && assetExists(assetPath)),
+      altPattern: asset.defaultAltText || asset.assetId,
+    };
+  });
+}
+
+function listLegacyBlueprintLibraryImages(): LibraryImageOption[] {
   const library = loadPharmacyImageLibrary();
   const options: LibraryImageOption[] = [];
   for (const [packKey, pack] of Object.entries(library.imagePacks)) {
@@ -476,6 +495,13 @@ export function listLibraryImages(): LibraryImageOption[] {
   return options;
 }
 
+export function listLibraryImages(): LibraryImageOption[] {
+  // Prefer Image Platform production photographs over legacy blueprint SVG packs.
+  const platform = listProductionPlatformLibraryImages("pharmacy-first");
+  if (platform.length > 0) return platform;
+  return listLegacyBlueprintLibraryImages();
+}
+
 export function listLibraryImagesFiltered(filters?: {
   serviceId?: string;
   slot?: string;
@@ -490,6 +516,12 @@ export function listLibraryImagesFiltered(filters?: {
   const serviceId = filters.serviceId;
 
   return all.filter((img) => {
+    if (img.imagePack === "pharmacy-image-platform") {
+      if (slot && img.category.toLowerCase() !== slot) return false;
+      if (category && img.category.toLowerCase() !== category) return false;
+      if (serviceId && serviceId !== "pharmacy-first") return false;
+      return true;
+    }
     if (slot && img.category.toLowerCase() !== slot && !img.imageKey.toLowerCase().includes(slot)) {
       const pack = library.imagePacks[img.imagePack];
       const meta = pack?.images.find((i) => i.imageKey === img.imageKey);
@@ -516,10 +548,9 @@ export function listLibraryImagesFiltered(filters?: {
   });
 }
 
-const VALID_IMAGE_LIBRARY_SERVICE_IDS = new Set<string>([
-  ...BENCHMARK_MASTER_SERVICE_IDS,
-  ...VISUAL_EXPERIENCE_BENCHMARK_SERVICES,
-]);
+const VALID_IMAGE_LIBRARY_SERVICE_IDS = new Set<string>(
+  activeServiceRegistry().filter((entry) => isActiveServiceStatus(entry.status)).map((entry) => entry.id),
+);
 
 const PAGE_SLOT_IDS = new Set<string>(PAGE_IMAGE_SLOTS);
 
@@ -541,7 +572,7 @@ function templateFamilyForService(serviceId: string): string {
 
 /** Normalise and validate a service id for image library routing. Returns null if invalid. */
 export function normalizeImageLibraryServiceId(raw: string): string | null {
-  const normalized = normalizeServiceId(raw);
+  const normalized = resolveActiveServiceId(raw) || resolveActiveServiceId(normalizeServiceId(raw));
   if (!normalized || !VALID_IMAGE_LIBRARY_SERVICE_IDS.has(normalized)) return null;
   if (imageLibraryPackKeys().has(normalized)) return null;
   if (PAGE_SLOT_IDS.has(normalized)) return null;
@@ -557,10 +588,13 @@ export function resolveImageLibraryServiceId(raw?: string): string {
 }
 
 export function buildServiceCatalog(): ServiceCatalogEntry[] {
-  return BENCHMARK_MASTER_SERVICE_IDS.map((serviceId) => {
-    const meta = getServicePublishMeta(serviceId);
-    return { serviceId, serviceName: meta?.serviceName || serviceId };
-  });
+  return activeServiceRegistry()
+    .filter((entry) => isActiveServiceStatus(entry.status))
+    .map((entry) => ({
+      serviceId: entry.id,
+      serviceName: entry.name,
+      status: entry.status,
+    }));
 }
 
 function defaultLibraryRefForSlot(serviceId: string, slot: ImageMatrixSlot): string | null {
@@ -584,8 +618,31 @@ function resolveFromLibraryRef(
   ctx: PharmacyImageRenderContext,
   slot: PharmacyImageSlot,
 ): ResolvedPharmacyImage | null {
+  const [packKey, imageKey] = String(libraryRef || "").split("/");
+  if (
+    (packKey === "image-platform" || packKey === "pharmacy-image-platform") &&
+    imageKey &&
+    isPharmacyFirstProductionLibraryReady()
+  ) {
+    const platformAsset = listApprovedProductionAssets("pharmacy-first").find((a) => a.assetId === imageKey);
+    if (platformAsset?.filePath && assetExists(platformAsset.filePath)) {
+      return {
+        imageKey: platformAsset.assetId,
+        imagePack: "pharmacy-image-platform",
+        slot,
+        alt: sanitizePharmacyImageAltText(platformAsset.defaultAltText || imageKey, ctx, slot),
+        caption: ctx.serviceName || platformAsset.assetId,
+        assetPath: platformAsset.filePath.replace(/^\/+/, ""),
+        assetExists: true,
+        schemaUsage: "image-platform-service",
+        libraryRef: `image-platform/${platformAsset.assetId}`,
+        displayMode: "approved",
+        approvalStatus: "approved",
+        source: "library",
+      };
+    }
+  }
   const library = loadPharmacyImageLibrary();
-  const [packKey, imageKey] = libraryRef.split("/");
   const pack = library.imagePacks[packKey];
   const meta = pack?.images.find((i) => i.imageKey === imageKey);
   if (!meta) return null;
@@ -1236,7 +1293,7 @@ export function getImageSourceBreakdown(slug: string, serviceId: string, campaig
     } else if (!card.assigned || card.sourceType === "missing") {
       breakdown.missing++;
       breakdown.missingSlots.push(card.slot);
-    } else if (card.sourceType === "library") breakdown.library++;
+    } else if (card.sourceType === "library" || card.sourceType === "image-platform") breakdown.library++;
     else if (card.sourceType === "upload") breakdown.upload++;
     else if (card.sourceType === "ai") breakdown.ai++;
   }
@@ -1295,13 +1352,13 @@ export function updateAiRequestStatus(
 
 export function buildMatrixStatus(slug: string): MatrixCellStatus[] {
   const cells: MatrixCellStatus[] = [];
-  for (const serviceId of BENCHMARK_MASTER_SERVICE_IDS) {
-    const meta = getServicePublishMeta(serviceId);
+  const channels = activeServiceRegistry().filter((entry) => isActiveServiceStatus(entry.status));
+  for (const channel of channels) {
     for (const slot of IMAGE_MATRIX_SLOTS) {
-      const resolved = resolvePharmacyImageForSlot(slug, serviceId, slot);
+      const resolved = resolvePharmacyImageForSlot(slug, channel.id, slot);
       cells.push({
-        serviceId,
-        serviceName: meta?.serviceName || serviceId,
+        serviceId: channel.id,
+        serviceName: channel.name,
         slot,
         assigned: resolved.assetExists,
         source: resolved.source,
@@ -1319,6 +1376,7 @@ export function buildImageOperatingSystemDashboard(
   options?: { serviceId?: string; campaignId?: string },
 ): ImageOperatingSystemDashboard {
   const s = safeSlug(slug);
+  seedVisualPageImageAssignments(s, false);
   const profile = buildPharmacyServicePageProfile(s);
   const doc = loadImageAssignments(s);
   const matrix = buildMatrixStatus(s);
@@ -1350,7 +1408,7 @@ export function buildImageOperatingSystemDashboard(
     libraryImages,
     uploads: doc.uploads,
     aiRequests: doc.aiRequests,
-    benchmarkServices: [...BENCHMARK_MASTER_SERVICE_IDS],
+    benchmarkServices: [...CORE_SERVICE_IDS],
     serviceCatalog,
     matrixSlots: [...IMAGE_MATRIX_SLOTS],
     selectedServiceId,
@@ -1381,11 +1439,11 @@ export const VISUAL_PAGE_LIBRARY_ASSIGNMENTS: Record<
     trust: "travel-health-services/destination-advice",
     conversion: "travel-health-services/malaria-advice",
   },
-  "emergency-contraception": {
-    hero: "clinical-nhs-services/contraception-service",
-    support: "core-pharmacy/pharmacist-consultation",
-    trust: "core-pharmacy/community-pharmacy",
-    conversion: "core-pharmacy/prescription-collection",
+  "flu-vaccinations": {
+    hero: "vaccination-services/flu-vaccination",
+    support: "vaccination-services/vaccination-consultation",
+    trust: "vaccination-services/vaccination-record-review",
+    conversion: "vaccination-services/vaccine-availability",
   },
 };
 
@@ -1401,7 +1459,7 @@ export interface VisualPageImageAuditRow {
 
 export function auditVisualPageImageSlots(slug: string): VisualPageImageAuditRow[] {
   const rows: VisualPageImageAuditRow[] = [];
-  for (const serviceId of VISUAL_EXPERIENCE_BENCHMARK_SERVICES) {
+  for (const serviceId of CORE_SERVICE_IDS) {
     const meta = getServicePublishMeta(serviceId);
     const profile = buildPharmacyServicePageProfile(slug);
     const ctx: PharmacyImageRenderContext = {
@@ -1431,13 +1489,13 @@ export function auditVisualPageImageSlots(slug: string): VisualPageImageAuditRow
   return rows;
 }
 
-/** Seed library assignments for all visual benchmark page slots (16 total). */
+/** Seed library assignments for the four production campaign slots. */
 export function seedVisualPageImageAssignments(slug: string, force = false): number {
   const doc = loadImageAssignments(slug);
   let seeded = 0;
   const now = new Date().toISOString();
 
-  for (const serviceId of VISUAL_EXPERIENCE_BENCHMARK_SERVICES) {
+  for (const serviceId of CORE_SERVICE_IDS) {
     const slots = VISUAL_PAGE_LIBRARY_ASSIGNMENTS[serviceId];
     if (!slots) continue;
     for (const slot of ["hero", "support", "trust", "conversion"] as const) {
@@ -1464,4 +1522,20 @@ export function seedVisualPageImageAssignments(slug: string, force = false): num
 
   if (seeded > 0) saveImageAssignments(slug, doc);
   return seeded;
+}
+
+export function layoutSlotAssetsForService(
+  slug: string,
+  serviceId: string,
+): Array<{ slot: PageImageSlot; url: string; altText: string; libraryRef: string }> {
+  const resolvedService = resolveActiveServiceId(serviceId) || "pharmacy-first";
+  return PAGE_IMAGE_SLOTS.map((slot) => {
+    const resolved = resolvePharmacyImageForSlot(slug, resolvedService, slot);
+    return {
+      slot,
+      url: resolved.assetExists ? publicUrl(resolved.assetPath) : "",
+      altText: resolved.alt || `${resolvedService} ${slot}`,
+      libraryRef: resolved.libraryRef || "",
+    };
+  }).filter((row) => Boolean(row.url));
 }

@@ -26,7 +26,7 @@ export const CB_UX_RECOMMENDED_BANNER = "★★★★★ Recommended First Campa
 
 export const CB_UX_BUILD_CAMPAIGN = "🚀 Build Campaign";
 
-export const CB_UX_REGENERATE_CAMPAIGN = "Create new campaign";
+export const CB_UX_REGENERATE_CAMPAIGN = "Create new campaign version";
 export const CB_UX_CONTINUE_V6_REGENERATION = "Continue v6 regeneration";
 
 export const CB_UX_REGENERATE_VERSION_EXPLAIN =

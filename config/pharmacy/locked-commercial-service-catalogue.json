@@ -3,7 +3,7 @@
   "purpose": "CPR commercial release — explicitly locked supported services for Master Admin onboarding and service-page-only generation.",
   "approvalDocumentation": "docs/pharmacy-master-library/MASTER-LIBRARY-PUBLISH-VALIDATION-V1.md",
   "publishConfigSource": "src/pharmacy/pharmacyMasterPublishConfig.ts",
-  "lockedCommercialSupportedServiceCount": 7,
+  "lockedCommercialSupportedServiceCount": 4,
   "services": [
     {
       "serviceId": "pharmacy-first",
@@ -43,7 +43,7 @@
     },
     {
       "serviceId": "flu-vaccinations",
-      "serviceName": "Flu Vaccinations",
+      "serviceName": "Flu Vaccination",
       "locked": true,
       "approvalStatus": "locked",
       "knowledgePackSources": [
@@ -52,41 +52,6 @@
       ],
       "imagePlatformCatalog": "assets/pharmacy-image-platform/services/flu-vaccinations/service-catalog.json",
       "masterFile": "flu-vaccinations-master-v1.md"
-    },
-    {
-      "serviceId": "prescription-dispensing",
-      "serviceName": "Prescription Dispensing",
-      "locked": true,
-      "approvalStatus": "locked",
-      "knowledgePackSources": [
-        "config/pharmacy/service-expertise-library.json",
-        "data/pharmacy-service-expertise/prescription-dispensing.json"
-      ],
-      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/prescription-dispensing/service-catalog.json",
-      "masterFile": "prescription-dispensing-master-v1.md"
-    },
-    {
-      "serviceId": "emergency-contraception",
-      "serviceName": "Emergency Contraception",
-      "locked": true,
-      "approvalStatus": "locked",
-      "knowledgePackSources": [
-        "docs/pharmacy-master-library/research/emergency-contraception-research-v1.md"
-      ],
-      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/emergency-contraception/service-catalog.json",
-      "masterFile": "emergency-contraception-master-v1.md"
-    },
-    {
-      "serviceId": "repeat-prescriptions",
-      "serviceName": "Repeat Prescriptions",
-      "locked": true,
-      "approvalStatus": "locked",
-      "knowledgePackSources": [
-        "config/pharmacy/service-expertise-library.json",
-        "data/pharmacy-service-expertise/repeat-prescriptions.json"
-      ],
-      "imagePlatformCatalog": "assets/pharmacy-image-platform/services/repeat-prescriptions/service-catalog.json",
-      "masterFile": "repeat-prescriptions-master-v2.md"
     }
   ]
 }

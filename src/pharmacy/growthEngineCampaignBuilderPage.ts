@@ -94,6 +94,7 @@ import {
 import { buildCampaignExplorerCatalog } from "./growthEngineCampaignExplorerService.ts";
 import { campaignBuilderWizardUrl } from "./growthEngineCampaignBuilderRoutingService.ts";
 import { buildCampaignRegenerationPreview } from "./growthEngineCampaignBuilderRegenerationService.ts";
+import { defaultGenerateAreasForSlug } from "./growthEngineCampaignBuilderRegenerationRunService.ts";
 import { resolveAuthoritativeCampaignPriority } from "./growthEngineGrowthPlanResolver.ts";
 import { isNationalGrowthPlatform } from "./growthPlatformResolverService.ts";
 import { growthEnginePlatformCopy } from "./growthEnginePlatformCopy.ts";
@@ -316,7 +317,10 @@ function renderRegenerateConfirmation(slug: string, preview: NonNullable<ReturnT
     ? preview.assetsToRegenerate.map((item) => `${item.count} ${item.label}`).join("; ")
     : "Campaign package assets";
   const existingVersion = `${preview.existingCampaignName} · campaign version ${preview.existingCampaignVersion}`;
-  const localCount = preview.candidateJobs.length;
+  const generateAreas = defaultGenerateAreasForSlug(slug).length
+    ? defaultGenerateAreasForSlug(slug)
+    : preview.candidateJobs.map((job) => job.areaName);
+  const localCount = generateAreas.length;
   return `<div class="cb-regen-confirm" id="cbRegenConfirm" hidden data-cb-generate-campaign="true">
 <h4>Confirm new campaign</h4>
 <p class="cb-copy">${esc(CB_UX_REGENERATE_VERSION_EXPLAIN)}</p>
@@ -364,14 +368,19 @@ function renderRegenerateConfirmation(slug: string, preview: NonNullable<ReturnT
     }
     var slug = btn.getAttribute('data-slug');
     var serviceId = btn.getAttribute('data-service-id');
+    var areas = ${JSON.stringify(generateAreas)};
     var handoff = new URLSearchParams(location.search).get('_t');
-    var auth = handoff ? '&_t=' + encodeURIComponent(handoff) : '';
-    var res = await fetch('/api/growth-engine/' + slug + '/campaign-builder/regenerate-campaign?confirmed=1' + auth, {
+    var token = handoff ? encodeURIComponent(handoff) : '';
+    var generateAuth = token ? '?_t=' + token : '';
+    var pollAuth = token ? '&_t=' + token : '';
+    var res = await fetch('/api/growth-engine/campaign-builder/generate' + generateAuth, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {'Content-Type':'application/json','Accept':'application/json'},
       body: JSON.stringify({
-        serviceId: serviceId,
+        slug: slug,
+        campaign: serviceId,
+        areas: areas,
         confirmed: !!(box && box.checked)
       })
     });
@@ -390,7 +399,7 @@ function renderRegenerateConfirmation(slug: string, preview: NonNullable<ReturnT
       if (status) status.textContent = 'This campaign is already running. No extra calls were started.';
     }
     async function poll() {
-      var check = await fetch('/api/growth-engine/' + slug + '/campaign-builder/regeneration-run?serviceId=' + encodeURIComponent(serviceId) + auth, {
+      var check = await fetch('/api/growth-engine/' + slug + '/campaign-builder/regeneration-run?serviceId=' + encodeURIComponent(serviceId) + pollAuth, {
         credentials: 'same-origin',
         headers: {'Accept':'application/json'}
       });
@@ -1852,13 +1861,16 @@ document.getElementById('btnGenerate') && (document.getElementById('btnGenerate'
   status.textContent = 'Creating a fresh campaign from the saved profile. Previous runs stay as inactive history.';
   status.style.color = '#005eb8';
   var handoff = new URLSearchParams(location.search).get('_t');
-  var auth = handoff ? '&_t=' + encodeURIComponent(handoff) : '';
+  var token = handoff ? encodeURIComponent(handoff) : '';
+  var generateAuth = token ? '?_t=' + token : '';
+  var pollAuth = token ? '&_t=' + token : '';
   var campaign = ${JSON.stringify(campaign)};
-  var res = await fetch('/api/growth-engine/${esc(slug)}/campaign-builder/generate?confirmed=1' + auth, {
+  var areas = ${JSON.stringify(defaultGenerateAreasForSlug(slug).length ? defaultGenerateAreasForSlug(slug) : targetAreaList)};
+  var res = await fetch('/api/growth-engine/campaign-builder/generate' + generateAuth, {
     method: 'POST',
     credentials: 'same-origin',
     headers: {'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({ campaign: campaign, serviceId: campaign, confirmed: true })
+    body: JSON.stringify({ slug: ${JSON.stringify(slug)}, campaign: campaign, areas: areas, confirmed: true })
   });
   var json = await res.json().catch(function(){ return {}; });
   if (!json.ok) {
@@ -1871,7 +1883,7 @@ document.getElementById('btnGenerate') && (document.getElementById('btnGenerate'
     status.textContent = 'This campaign is already running. No extra calls were started.';
   }
   async function poll() {
-    var check = await fetch('/api/growth-engine/${esc(slug)}/campaign-builder/regeneration-run?serviceId=' + encodeURIComponent(campaign) + auth, {
+    var check = await fetch('/api/growth-engine/${esc(slug)}/campaign-builder/regeneration-run?serviceId=' + encodeURIComponent(campaign) + pollAuth, {
       credentials: 'same-origin',
       headers: {'Accept':'application/json'}
     });

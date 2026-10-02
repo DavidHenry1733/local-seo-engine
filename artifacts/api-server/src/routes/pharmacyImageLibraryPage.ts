@@ -110,9 +110,13 @@ function renderAiList(d: ImageOperatingSystemDashboard): string {
 
 function renderMatrix(d: ImageOperatingSystemDashboard): string {
   const pageSlots = new Set(PAGE_IMAGE_SLOTS);
+  const activeIds = new Set(
+    (d.serviceCatalog || []).filter((channel) => channel.status === "active").map((channel) => channel.serviceId),
+  );
   const byService = new Map<string, MatrixCellStatus[]>();
   for (const cell of d.matrix) {
     if (!pageSlots.has(cell.slot as (typeof PAGE_IMAGE_SLOTS)[number])) continue;
+    if (!activeIds.has(cell.serviceId)) continue;
     if (!byService.has(cell.serviceId)) byService.set(cell.serviceId, []);
     byService.get(cell.serviceId)!.push(cell);
   }
@@ -276,6 +280,7 @@ ${renderPlatformWorkflowBar({ slug: d.slug, nextStepUrl: os.nextStep?.url })}
   <div class="field">
     <label for="imageLibraryServiceSelect">Service</label>
     <select id="imageLibraryServiceSelect">${d.serviceCatalog
+      .filter((s) => s.status === "active")
       .map(
         (s) =>
           `<option value="${esc(s.serviceId)}" ${s.serviceId === d.selectedServiceId ? "selected" : ""}>${esc(s.serviceName)}</option>`,
