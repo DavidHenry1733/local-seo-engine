@@ -13,10 +13,17 @@ import { buildPharmacyServicePageProfile } from "./pharmacyServicePageProfileCon
 import { applyBrandDnaToServicePageProfile, buildPharmacyThemeWithBrandDna, buildGoogleFontsLink } from "./pharmacyBrandDnaResolver.ts";
 import {
   ensureBusinessNameInHeading,
-  renderBrandHeroComponent,
   resolvePageComponents,
   resolvePageComponentDna,
 } from "./pharmacyBrandDnaComponentRenderers.ts";
+import {
+  CLINICAL_PATIENT_TEMPLATE_ATTR,
+  clinicalPatientTemplateHeadAssets,
+  renderClinicalHero,
+  renderClinicalLocalIntroduction,
+  renderClinicalProcessTimeline,
+  renderClinicalServiceDefinitionSection,
+} from "./pharmacyClinicalPatientTemplate.ts";
 import { componentDnaBodyAttributes } from "./pharmacyComponentDnaResolver.ts";
 import { resolveBrandDnaForRender } from "./pharmacyBrandDnaEngine.ts";
 import { BRAND_DNA_VERSION } from "./pharmacyBrandDnaTypes.ts";
@@ -25,6 +32,7 @@ import { visualServicePageBodyAttributes } from "./pharmacyVisualServicePageRend
 import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
 import { buildImageRenderContext } from "./pharmacyVisualExperience.ts";
 import { renderServicePageImagePanel } from "./pharmacyServicePageImageComponent.ts";
+import { renderLocalityHeroImagePanel } from "./pharmacyLocalityHeroImageResolver.ts";
 import { renderMediaTextSection } from "./pharmacyMediaFloatFlowComponent.ts";
 import { splitSentences } from "./pharmacyServicePageBalance.ts";
 import type { VisualExperienceServiceId } from "./pharmacyVisualExperienceConfig.ts";
@@ -78,6 +86,10 @@ function bodyToParagraphs(body: string): string[] {
     chunks.push(sentences.slice(i, i + 2).join(" "));
   }
   return chunks;
+}
+
+function renderLocalIntroductionWrapper(body: string): string {
+  return renderClinicalLocalIntroduction(bodyToParagraphs(body));
 }
 
 function areaBreadcrumb(
@@ -170,7 +182,14 @@ export function renderLocalAreaPageHtml(
 
   const imageCtx = buildImageRenderContext(key, ctx.serviceId as VisualExperienceServiceId);
   imageCtx.location = area.name;
-  const heroImageHtml = renderServicePageImagePanel(imageCtx, "hero", "hero-image-wrap hero-media");
+  imageCtx.pageSlug = area.slug;
+  const heroImageHtml = renderLocalityHeroImagePanel({
+    tenantSlug: key,
+    serviceId: ctx.serviceId,
+    areaSlug: area.slug,
+    areaName: area.name,
+    imageCtx,
+  }).html;
   const supportingImageHtml = renderServicePageImagePanel(imageCtx, "support", "image-panel support-block-media");
   const trustImageHtml = renderServicePageImagePanel(imageCtx, "trust", "image-panel trust-block-media");
   const conversionImageHtml = renderServicePageImagePanel(
@@ -195,10 +214,7 @@ export function renderLocalAreaPageHtml(
     ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(directionsDestination)}`
     : "";
 
-  const hero = renderBrandHeroComponent(components, {
-    serviceName: ctx.serviceName,
-    profile,
-    heroImageHtml,
+  const hero = renderClinicalHero({
     eyebrow: servicePageHeroEyebrow(ctx, profile, ctx.serviceName),
     headline: registered
       ? `${ctx.serviceName} for patients from ${area.name}`
@@ -216,52 +232,45 @@ export function renderLocalAreaPageHtml(
     secondaryCtaHref: registered
       ? directionsUrl || undefined
       : publicHref(ctx, resolveLocalClusterTarget(parentCluster.slug, parentCluster.name)),
-    componentDna,
+    heroImageHtml,
+    componentVariant: components.heroVariant,
   });
 
-  const areaOverviewBullets = registered && content.base.whyChecksBullets.length
-    ? `<ul class="clean">${content.base.whyChecksBullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
-    : "";
-  const areaContext = `<section id="cluster-context" data-template-block="service-definition">
-<div class="wrap">
-${renderSectionHead(content.clusterContextHeading, "")}
-${bodyToParagraphs(content.clusterContextBody)
-  .map((p) => `<p>${esc(p)}</p>`)
-  .join("\n")}
-${areaOverviewBullets}
-</div>
-</section>`;
+  const areaOverviewBullets = registered ? content.base.whyChecksBullets || [] : [];
+  const localIntroduction = renderLocalIntroductionWrapper(content.base.localRelevanceBody);
+  const areaContext = renderClinicalServiceDefinitionSection({
+    heading: content.clusterContextHeading,
+    paragraphs: bodyToParagraphs(content.clusterContextBody),
+    bullets: areaOverviewBullets,
+  });
 
+  const hospitalsHeading =
+    String(content.relevanceHeading || "").trim() || `Hospitals and GP practices in ${area.name}`;
   const relevance = renderMediaTextSection({
     sectionId: "cluster-relevance",
     sectionClass: "blue-band",
     templateBlock: "local-relevance",
-    headHtml: renderSectionHead(content.relevanceHeading, content.base.localRelevanceIntro),
-    paragraphs: bodyToParagraphs(content.base.localRelevanceBody),
+    headHtml: renderSectionHead(hospitalsHeading, content.base.localRelevanceIntro),
+    paragraphs: [],
     lists: content.base.localRelevanceBullets.length ? [content.base.localRelevanceBullets] : undefined,
     mediaHtml: supportingImageHtml,
     hasImage: true,
     thresholds: componentDna.splitSection.layoutThresholds,
   });
-  const processCards = (content.base.supportingItems || [])
-    .map((item) => {
-      const list = item.bullets?.length
-        ? `<ul class="clean">${item.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
-        : "";
-      return `<article class="area-card"><h3>${esc(item.title)}</h3>${item.body ? `<p>${esc(item.body)}</p>` : ""}${list}</article>`;
-    })
-    .join("\n");
-  const processIntroHtml = bodyToParagraphs(content.base.processIntro || content.childAreasIntro)
-    .map((p) => `<p>${esc(p)}</p>`)
-    .join("\n");
+  const processSteps = (content.base.processSteps || []).filter((step) =>
+    Boolean(String(step.title || "").trim() || String(step.body || "").trim()),
+  );
   const process = registered
-    ? `<section class="soft" id="child-areas">
-<div class="wrap">
-${renderSectionHead(content.base.processHeading || "What happens next", "")}
-${processIntroHtml}
-<div class="areas-grid">${processCards}</div>
-</div>
-</section>`
+    ? renderClinicalProcessTimeline({
+        heading: content.base.processHeading || "What happens next",
+        steps: processSteps.length
+          ? processSteps
+          : (content.base.supportingItems || []).map((item) => ({
+              title: item.title,
+              body: item.body,
+              bullets: item.bullets,
+            })),
+      })
     : "";
   const preparation = registered
     ? renderApprovedBankLocalityPreparationHtml({
@@ -286,8 +295,8 @@ ${processIntroHtml}
     : buildProfileFinalCtaHtml(ctx.serviceName, profile, conversionImageHtml, "", "", ctx);
 
   const main = registered
-    ? [hero, areaContext, relevance, process, preparation, trust, faq, access, conversionAndCta].join("\n")
-    : [hero, areaContext, relevance, trust, access, faq, conversionAndCta].join("\n");
+    ? [hero, localIntroduction, areaContext, process, preparation, trust, access, faq, conversionAndCta, relevance].join("\n")
+    : [hero, localIntroduction, areaContext, process, trust, access, faq, conversionAndCta, relevance].join("\n");
 
   const title = `${ctx.serviceName} in ${area.name} | ${profile.pharmacyName}`;
   const metaDesc = `${profile.pharmacyName} — ${ctx.serviceName} for patients in ${area.name}.`;
@@ -309,8 +318,9 @@ ${buildGoogleFontsLink(theme)}
 ${buildPharmacyServicePageStyleBlock(theme)}
 ${localPageTypeTypographyStyleBlock()}
 ${pharmacyLocalPageResponsiveStyleBlock()}
+${clinicalPatientTemplateHeadAssets()}
 </head>
-<body ${visualServicePageBodyAttributes(ctx.serviceId)} ${componentDnaBodyAttributes(componentDna)} data-pharmacy-template="${PHARMACY_SERVICE_PAGE_TEMPLATE_ID}" data-local-page-kind="location-area" data-local-page-contract="${LOCAL_AREA_CONTRACT_ID}" data-publish-source="local-area-v1" data-local-area="${esc(area.slug)}" data-location-component="${HOMEPAGE_LOCATION_COMPONENT_ID}"${usesApprovedBankLocalityDirectPath(ctx.serviceId) ? ` data-approved-bank-locality-contract="approved-bank-locality-page-v1"` : ""}>
+<body ${visualServicePageBodyAttributes(ctx.serviceId)} ${componentDnaBodyAttributes(componentDna)} class="bg-white" ${CLINICAL_PATIENT_TEMPLATE_ATTR} data-pharmacy-template="${PHARMACY_SERVICE_PAGE_TEMPLATE_ID}" data-local-page-kind="location-area" data-local-page-contract="${LOCAL_AREA_CONTRACT_ID}" data-publish-source="local-area-v1" data-local-area="${esc(area.slug)}" data-location-component="${HOMEPAGE_LOCATION_COMPONENT_ID}"${usesApprovedBankLocalityDirectPath(ctx.serviceId) ? ` data-approved-bank-locality-contract="approved-bank-locality-page-v1"` : ""}>
 ${renderPharmacyServicePageHeader(profile, theme)}
 <main id="main-content">
 ${areaBreadcrumb(ctx, hierarchy, area, parentCluster)}

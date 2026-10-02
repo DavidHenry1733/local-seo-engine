@@ -12,10 +12,13 @@ import {
 import { buildPharmacyServicePageProfile } from "./pharmacyServicePageProfileContext.ts";
 import { applyBrandDnaToServicePageProfile, buildPharmacyThemeWithBrandDna, buildGoogleFontsLink } from "./pharmacyBrandDnaResolver.ts";
 import {
-  renderBrandHeroComponent,
   resolvePageComponents,
   resolvePageComponentDna,
 } from "./pharmacyBrandDnaComponentRenderers.ts";
+import {
+  CLINICAL_PATIENT_TEMPLATE_ATTR,
+  clinicalPatientTemplateHeadAssets,
+} from "./pharmacyClinicalPatientTemplate.ts";
 import { componentDnaBodyAttributes } from "./pharmacyComponentDnaResolver.ts";
 import { resolveBrandDnaForRender } from "./pharmacyBrandDnaEngine.ts";
 import { BRAND_DNA_VERSION } from "./pharmacyBrandDnaTypes.ts";
@@ -25,7 +28,6 @@ import { resolveTenantProfileSlug } from "./pharmacyTenantSlug.ts";
 import { buildImageRenderContext } from "./pharmacyVisualExperience.ts";
 import { renderServicePageImagePanel } from "./pharmacyServicePageImageComponent.ts";
 import { renderLocalityHeroImagePanel } from "./pharmacyLocalityHeroImageResolver.ts";
-import { renderMediaTextSection } from "./pharmacyMediaFloatFlowComponent.ts";
 import type { VisualExperienceServiceId } from "./pharmacyVisualExperienceConfig.ts";
 import { pharmacyLocalPageResponsiveStyleBlock } from "./pharmacyLocalPageResponsiveStyles.ts";
 import { LOCAL_CLUSTER_CONTRACT_ID, LOCAL_CLUSTER_V1_CONTRACT, usesPharmacyFirstPatientJourneyLocalTemplate } from "./pharmacyLocalPageTypeContracts.ts";
@@ -74,7 +76,7 @@ function renderSectionHead(title: string, intro = ""): string {
   const heading = String(title || "").trim();
   const lead = String(intro || "").trim();
   if (!heading && !lead) return "";
-  return `<div class="section-head center">${heading ? `<h2>${esc(heading)}</h2>` : ""}${lead ? `<p>${esc(lead)}</p>` : ""}</div>`;
+  return `<div class="clinical-section-head mb-8">${heading ? `<h2 class="text-[#1E293B] font-semibold">${esc(heading)}</h2>` : ""}${lead ? `<p class="text-slate-600 leading-relaxed mt-2">${esc(lead)}</p>` : ""}</div>`;
 }
 
 function bodyToParagraphs(body: string): string[] {
@@ -95,6 +97,20 @@ function bodyToParagraphs(body: string): string[] {
   return chunks;
 }
 
+/** Visual wrapper for Gemini `localIntroduction` — sits under the hero, not inside the hospitals directory. */
+function renderLocalIntroductionWrapper(body: string, evidence: string[] = []): string {
+  const paragraphs = bodyToParagraphs(body);
+  if (!paragraphs.length) return "";
+  const evidenceAttr = evidence.length ? ` data-locality-evidence="${esc(evidence.join("|"))}"` : "";
+  return `<section id="cluster-local-introduction" class="local-introduction py-10 bg-white" data-template-block="local-introduction" data-content-field="localIntroduction"${evidenceAttr}>
+<div class="wrap px-6">
+<div class="local-introduction-wrapper clinical-callout bg-slate-50 rounded-2xl border-l-4 border-[#10B981] p-8 shadow-sm">
+${paragraphs.map((p) => `<p class="text-slate-600 leading-relaxed">${esc(p)}</p>`).join("\n")}
+</div>
+</div>
+</section>`;
+}
+
 function clusterBreadcrumb(
   ctx: ContentGenerationContext,
   hierarchy: LocalLocationHierarchy,
@@ -102,7 +118,7 @@ function clusterBreadcrumb(
 ): string {
   const serviceHref = publicHref(ctx, { pageType: "service", localSegment: ctx.serviceId });
   void hierarchy;
-  return `<nav class="local-breadcrumb wrap" aria-label="Breadcrumb" data-template-block="breadcrumbs"><a href="${esc(serviceHref)}">${esc(ctx.serviceName)}</a> <span aria-hidden="true">›</span> <span>${esc(cluster.name)}</span></nav>`;
+  return `<nav class="local-breadcrumb wrap px-6 py-4 text-sm text-slate-500" aria-label="Breadcrumb" data-template-block="breadcrumbs"><a class="text-[#10B981] font-semibold" href="${esc(serviceHref)}">${esc(ctx.serviceName)}</a> <span aria-hidden="true">›</span> <span class="text-[#1E293B]">${esc(cluster.name)}</span></nav>`;
 }
 
 function renderChildAreasSection(
@@ -122,7 +138,7 @@ function renderChildAreasSection(
     ? childAreas
         .map(
           (a) =>
-            `<a class="area-card" href="${esc(publicHref(ctx, resolveLocalAreaTarget(a.slug, a.name)))}"><h3>${esc(ctx.serviceName)} in ${esc(a.name)}</h3><p>Guidance for patients living in or travelling from ${esc(a.name)}.</p></a>`,
+            `<a class="area-card bg-white rounded-2xl border border-slate-200 shadow-sm p-6" href="${esc(publicHref(ctx, resolveLocalAreaTarget(a.slug, a.name)))}"><h3 class="text-[#1E293B] font-semibold">${esc(ctx.serviceName)} in ${esc(a.name)}</h3><p class="text-slate-600">${esc(`Guidance for patients living in or travelling from ${a.name}.`)}</p></a>`,
         )
         .join("\n")
     : supporting
@@ -130,7 +146,7 @@ function renderChildAreasSection(
           const list = item.bullets?.length
             ? `<ul class="clean">${item.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
             : "";
-          return `<article class="area-card" data-locality-evidence="${esc(item.evidence)}"><h3>${esc(item.title)}</h3>${item.body ? `<p>${esc(item.body)}</p>` : ""}${list}</article>`;
+          return `<article class="area-card bg-white rounded-2xl border border-slate-200 shadow-sm p-6" data-locality-evidence="${esc(item.evidence)}"><h3 class="text-[#1E293B] font-semibold">${esc(item.title)}</h3>${item.body ? `<p class="text-slate-600">${esc(item.body)}</p>` : ""}${list}</article>`;
         })
         .join("\n");
   const heading = lockedJourney
@@ -156,18 +172,74 @@ function renderChildAreasSection(
     : direct
       ? content.base.processIntro || intro
       : intro || content.base.supportingIntro || "";
-  const introHtml = lockedJourney
-    ? `<p>${esc(introText)}</p>`
-    : bodyToParagraphs(introText)
-        .map((p) => `<p>${esc(p)}</p>`)
-        .join("\n");
-  return `<section class="soft" id="child-areas" data-template-block="child-areas" data-locality-evidence="${esc(
+  const hasMarkers = /%%[A-Z_]+%%/.test(introText);
+  const steps = (content.base.processSteps || []).filter((step) =>
+    Boolean(String(step.title || "").trim() || String(step.body || "").trim() || (step.bullets || []).length),
+  );
+  const fallbackSteps =
+    steps.length > 0
+      ? steps
+      : supporting
+          .filter((item) => item.title || item.body)
+          .map((item) => ({ title: item.title, body: item.body, bullets: item.bullets }))
+          .concat(
+            steps.length || supporting.length || hasMarkers
+              ? []
+              : bodyToParagraphs(introText).map((paragraph, index) => ({
+                  title: `Step ${index + 1}`,
+                  body: paragraph,
+                })),
+          );
+  const introHtml =
+    hasMarkers && fallbackSteps.length
+      ? ""
+      : hasMarkers || (!fallbackSteps.length && introText.trim())
+        ? lockedJourney
+          ? `<p class="text-slate-600 leading-relaxed">${esc(introText)}</p>`
+          : bodyToParagraphs(introText)
+              .map((p) => `<p class="text-slate-600 leading-relaxed">${esc(p)}</p>`)
+              .join("\n")
+        : "";
+  const extraHtml =
+    lockedJourney || !(childAreas.length && !direct)
+      ? ""
+      : `<div class="areas-grid grid grid-cols-1 md:grid-cols-2 gap-6">${cards}</div>`;
+  const timelineItems = fallbackSteps
+    .map((step) => ({
+      title: String(step.title || "").trim(),
+      body: String(step.body || "").trim(),
+      bullets: (step.bullets || []).map((b) => String(b || "").trim()).filter(Boolean),
+    }))
+    .filter((step) => step.title || step.body || step.bullets.length);
+  const timeline = timelineItems.length
+    ? `<ol class="clinical-timeline mt-6" data-clinical-timeline="true">
+${timelineItems
+  .map((step, index) => {
+    const body = step.body ? `<p class="text-slate-600 leading-relaxed">${esc(step.body)}</p>` : "";
+    const list = step.bullets.length
+      ? `<ul class="clean mt-2">${step.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
+      : "";
+    return `<li class="clinical-timeline-item flex items-start gap-4 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+<span class="clinical-step-badge inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#10B981] text-white font-semibold" aria-hidden="true">${index + 1}</span>
+<div class="clinical-timeline-body">
+${step.title ? `<h3 class="text-[#1E293B] font-semibold">${esc(step.title)}</h3>` : ""}
+${body}
+${list}
+</div>
+</li>`;
+  })
+  .join("\n")}
+</ol>`
+    : "";
+  return `<section class="soft py-10 bg-white" id="child-areas" data-template-block="child-areas" data-locality-evidence="${esc(
     (content.base.sectionEvidence?.supporting || []).join("|"),
   )}">
-<div class="wrap">
+<div class="wrap px-6">
 ${renderSectionHead(heading, "")}
 ${introHtml}
-${lockedJourney ? "" : `<div class="areas-grid">${cards || `<article class="area-card"><h3>${esc(cluster.name)}</h3><p>Guidance for patients travelling from ${esc(cluster.name)}.</p></article>`}</div>`}
+${hasMarkers && fallbackSteps.length ? `<div hidden data-strategy-markers="true">${esc(introText)}</div>` : ""}
+${timeline}
+${extraHtml}
 </div>
 </section>`;
 }
@@ -186,9 +258,9 @@ function renderServiceHubCtaSection(
 function renderVisibleLocalPatientNextStep(nextStep: string): string {
   const text = String(nextStep || "").trim();
   if (!text) return "";
-  return `<section data-template-block="local-next-step" id="local-next-step">
-<div class="wrap">
-<p class="locality-cta-context" data-locality-cta>${esc(text)}</p>
+  return `<section data-template-block="local-next-step" id="local-next-step" class="py-8 bg-white">
+<div class="wrap px-6">
+<p class="locality-cta-context bg-slate-50 border-l-4 border-[#10B981] rounded-2xl p-6 text-slate-600" data-locality-cta>${esc(text)}</p>
 </div>
 </section>`;
 }
@@ -247,12 +319,12 @@ function renderClusterLinksSection(
         serviceName: ctx.serviceName,
         localityLabel: cluster.name,
       });
-  return `<section class="cluster-link-band soft" data-template-block="parent-child-links" data-locality-evidence="${esc(
+  return `<section class="cluster-link-band soft py-10 bg-white" data-template-block="parent-child-links" data-locality-evidence="${esc(
     (content.base.sectionEvidence?.internalLinks || []).join("|"),
   )}">
-<div class="wrap">
+<div class="wrap px-6">
 ${renderSectionHead(relatedHeading, "")}
-<ul class="clean">${links}</ul>
+<ul class="clean grid grid-cols-1 md:grid-cols-2 gap-3">${links}</ul>
 </div>
 </section>`;
 }
@@ -295,23 +367,23 @@ function renderClusterTrustSection(
     ? content.base.trustBody
     : intro || prose || content.base.trustBody.split(/\n\n+/)[0] || "";
   const listHtml = bullets.length
-    ? `<ul class="trust-safety-list">${bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
+    ? `<ul class="trust-safety-list mt-4">${bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
     : "";
-  const tag = registered ? "" : `<span class="tag">Service experience</span>\n`;
+  const tag = registered ? "" : `<span class="tag text-[#10B981] font-semibold uppercase tracking-wide text-sm">Service experience</span>\n`;
   const proseHtml = registered
-    ? bodyToParagraphs(proseText).map((p) => `<p>${esc(p)}</p>`).join("\n")
+    ? bodyToParagraphs(proseText).map((p) => `<p class="text-slate-600 leading-relaxed">${esc(p)}</p>`).join("\n")
     : proseText
-      ? `<p>${esc(proseText)}</p>`
+      ? `<p class="text-slate-600 leading-relaxed">${esc(proseText)}</p>`
       : "";
-  return `<section class="about" id="cluster-trust" data-template-block="trust-split">
-<div class="wrap">
-<div class="grid-2 trust-split-row">
+  return `<section class="about py-10 bg-white" id="cluster-trust" data-template-block="trust-split">
+<div class="wrap px-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center trust-split-row">
 <div class="trust-prose">
-${tag}<h2>${esc(title)}</h2>
+${tag}<h2 class="text-[#1E293B] font-semibold">${esc(title)}</h2>
 ${proseHtml}
 ${listHtml}
 </div>
-<div class="trust-media">${trustImageHtml}</div>
+<div class="trust-media rounded-2xl overflow-hidden shadow-sm">${trustImageHtml}</div>
 </div>
 </div>
 </section>`;
@@ -334,12 +406,12 @@ function renderClusterFaqSection(
     .filter((f) => String(f.question || "").trim() && String(f.answer || "").trim())
     .map(
       (f) =>
-        `<div class="cluster-faq-item faq-card"><h3 class="faq-q">${esc(f.question)}</h3><p class="faq-a">${esc(f.answer)}</p></div>`,
+        `<div class="cluster-faq-item faq-card bg-white rounded-2xl border border-slate-200 shadow-sm p-6"><h3 class="faq-q text-[#1E293B] font-semibold">${esc(f.question)}</h3><p class="faq-a text-slate-600 leading-relaxed">${esc(f.answer)}</p></div>`,
     )
     .join("\n");
   if (!items) return "";
-  return `<section class="faq" id="faq-section" data-template-block="faq">
-<div class="wrap">${renderSectionHead(faqHeading, "")}${items}</div>
+  return `<section class="faq py-10 bg-white" id="faq-section" data-template-block="faq">
+<div class="wrap px-6">${renderSectionHead(faqHeading, "")}<div class="grid grid-cols-1 md:grid-cols-2 gap-6">${items}</div></div>
 </section>`;
 }
 
@@ -406,69 +478,92 @@ export function renderLocalClusterLocationPageHtml(
     overlayCopy && String(overlayCopy.heroIntroduction || "").trim()
       ? `${ctx.serviceName} in ${cluster.name}`
       : "";
-  const hero = renderBrandHeroComponent(components, {
-    serviceName: ctx.serviceName,
-    profile: renderProfile,
-    heroImageHtml,
-    eyebrow: servicePageHeroEyebrow(ctx, renderProfile, ctx.serviceName),
-    headline: geminiHeroHeading
+  const hero = `<section class="hero bg-white py-12 md:py-16" id="hero-section" data-template-block="hero" data-component-variant="${esc(components.heroVariant || "clinical-split")}">
+<div class="wrap grid grid-cols-1 md:grid-cols-2 gap-10 items-center hero-grid hero-grid--split-left px-6">
+<div class="hero-copy">
+<div class="eyebrow text-[#10B981] font-semibold tracking-wide uppercase text-sm">${esc(servicePageHeroEyebrow(ctx, renderProfile, ctx.serviceName))}</div>
+<h1 class="text-[#1E293B]">${esc(
+    geminiHeroHeading
       ? geminiHeroHeading
       : lockedJourney
         ? `${ctx.serviceName} — ${cluster.name}`
         : `${ctx.serviceName} for patients from ${cluster.name}`,
-    intro: content.base.heroIntro.split(/\n\n+/)[0] || content.base.heroIntro,
-    primaryCtaLabel: ctaLabel,
-    primaryCtaHref,
-    secondaryCtaLabel: directionsUrl
-      ? usesApprovedBankLocalLayout(ctx.serviceId)
-        ? content.base.ctaSecondary || "Get directions"
-        : "Get directions"
-      : undefined,
-    secondaryCtaHref: directionsUrl || undefined,
-    componentDna,
-  });
-
-  const hasLocalRelevanceCopy =
-    Boolean(String(content.relevanceHeading || "").trim()) ||
-    Boolean(String(content.base.localRelevanceIntro || "").trim()) ||
-    Boolean(String(content.base.localRelevanceBody || "").trim()) ||
-    content.base.localRelevanceBullets.length > 0;
+  )}</h1>
+<p class="text-slate-600 text-lg leading-relaxed">${esc(content.base.heroIntro.split(/\n\n+/)[0] || content.base.heroIntro)}</p>
+<div class="btns flex flex-wrap gap-3">
+<a class="btn bg-[#10B981] text-white rounded-full shadow-xl" href="${esc(primaryCtaHref)}">${esc(ctaLabel)}</a>
+${
+  directionsUrl
+    ? `<a class="btn secondary bg-white text-[#1E293B] rounded-full px-6" href="${esc(directionsUrl)}">${esc(
+        usesApprovedBankLocalLayout(ctx.serviceId) ? content.base.ctaSecondary || "Get directions" : "Get directions",
+      )}</a>`
+    : ""
+}
+</div>
+</div>
+<div class="hero-media">
+<div class="clinical-hero-frame rounded-2xl overflow-hidden shadow-xl ring-1">${heroImageHtml}</div>
+</div>
+</div>
+</section>`;
 
   const registered = usesApprovedBankLocalLayout(ctx.serviceId);
-  const overviewBullets = registered && content.base.whyChecksBullets.length
-    ? `<ul class="clean">${content.base.whyChecksBullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`
-    : "";
-  const contextHead = renderSectionHead(content.clusterContextHeading, content.clusterContextIntro);
-  const contextParas = bodyToParagraphs(content.clusterContextBody)
-    .map((p) => `<p>${esc(p)}</p>`)
-    .join("\n");
-  const contextInner = [contextHead, contextParas, overviewBullets].filter(Boolean).join("\n");
-  const clusterContext = contextInner
-    ? `<section id="cluster-context" data-template-block="service-definition">
-<div class="wrap">
-${contextInner}
+  const localIntroduction = renderLocalIntroductionWrapper(
+    content.base.localRelevanceBody,
+    content.base.sectionEvidence?.["local-introduction"] || [],
+  );
+  const hasDirectoryCopy =
+    Boolean(String(content.relevanceHeading || "").trim()) ||
+    Boolean(String(content.base.localRelevanceIntro || "").trim()) ||
+    content.base.localRelevanceBullets.length > 0;
+  const overviewBullets = registered ? content.base.whyChecksBullets || [] : [];
+  const serviceCards: Array<{ title: string; body: string }> = [];
+  if (String(content.clusterContextIntro || "").trim()) {
+    serviceCards.push({ title: "", body: String(content.clusterContextIntro).trim() });
+  }
+  for (const paragraph of bodyToParagraphs(content.clusterContextBody)) {
+    if (paragraph.trim()) serviceCards.push({ title: "", body: paragraph.trim() });
+  }
+  for (const bullet of overviewBullets) {
+    if (String(bullet || "").trim()) serviceCards.push({ title: "", body: String(bullet).trim() });
+  }
+  const clusterContext =
+    !String(content.clusterContextHeading || "").trim() && !serviceCards.length
+      ? ""
+      : `<section id="cluster-context" class="py-10 bg-white" data-template-block="service-definition">
+<div class="wrap px-6">
+${renderSectionHead(String(content.clusterContextHeading || "").trim(), "")}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+${serviceCards
+  .map(
+    (card, index) => `<article class="clinical-service-card bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+<h3 class="text-[#10B981] text-sm font-semibold uppercase tracking-wide">Point ${index + 1}</h3>
+<p class="text-slate-600 leading-relaxed">${esc(card.body)}</p>
+</article>`,
+  )
+  .join("\n")}
+</div>
+</div>
+</section>`;
+  const childAreas = renderChildAreasSection(ctx, hierarchy, cluster, content.childAreasIntro, content);
+  const hospitalsHeading =
+    String(content.relevanceHeading || "").trim() || `Hospitals and GP practices in ${cluster.name}`;
+  const relevance = hasDirectoryCopy
+    ? `<section class="blue-band py-10 bg-slate-50" id="cluster-relevance" data-template-block="local-relevance">
+<div class="wrap px-6">
+${renderSectionHead(hospitalsHeading, content.base.localRelevanceIntro)}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="rounded-2xl overflow-hidden shadow-sm">${supportingImageHtml}</div>
+${
+  lockedJourney || !content.base.localRelevanceBullets.length
+    ? ""
+    : `<ul class="clean bg-white rounded-2xl border border-slate-200 shadow-sm p-6">${content.base.localRelevanceBullets.map((b) => `<li class="text-slate-600">${esc(b)}</li>`).join("")}</ul>`
+}
+</div>
 </div>
 </section>`
-    : "";
-  const childAreas = renderChildAreasSection(ctx, hierarchy, cluster, content.childAreasIntro, content);
-  const relevance = hasLocalRelevanceCopy
-    ? renderMediaTextSection({
-        sectionId: "cluster-relevance",
-        sectionClass: "blue-band",
-        templateBlock: "local-relevance",
-        headHtml: renderSectionHead(content.relevanceHeading, content.base.localRelevanceIntro),
-        paragraphs: bodyToParagraphs(content.base.localRelevanceBody),
-        lists: lockedJourney
-          ? undefined
-          : content.base.localRelevanceBullets.length
-            ? [content.base.localRelevanceBullets]
-            : undefined,
-        mediaHtml: supportingImageHtml,
-        hasImage: true,
-        thresholds: componentDna.splitSection.layoutThresholds,
-      })
-    : `<section class="blue-band" id="cluster-relevance" data-template-block="local-relevance">
-<div class="wrap">${supportingImageHtml}</div>
+    : `<section class="blue-band py-10 bg-slate-50" id="cluster-relevance" data-template-block="local-relevance">
+<div class="wrap px-6">${renderSectionHead(hospitalsHeading, "")}<div class="rounded-2xl overflow-hidden shadow-sm">${supportingImageHtml}</div></div>
 </section>`;
   const preparation = registered
     ? renderApprovedBankLocalityPreparationHtml({
@@ -488,13 +583,25 @@ ${contextInner}
   const links = renderClusterLinksSection(ctx, hierarchy, cluster, content);
   const faq = renderClusterFaqSection(content, ctx, cluster.name);
   const localNextStep = lockedJourney ? "" : renderVisibleLocalPatientNextStep(content.base.ctaPhonePrompt);
-  const conversionAndCta = registered
-    ? `${localNextStep}${renderServiceHubCtaSection(ctx, conversionImageHtml)}`
-    : `${buildProfileFinalCtaHtml(ctx.serviceName, renderProfile, conversionImageHtml, "", "", ctx)}${localNextStep}`;
-
-  const main = registered
-    ? [hero, clusterContext, relevance, childAreas, preparation, trust, faq, access, conversionAndCta, links].join("\n")
-    : [hero, clusterContext, childAreas, relevance, trust, access, links, faq, conversionAndCta].join("\n");
+  const closing = registered
+    ? renderServiceHubCtaSection(ctx, conversionImageHtml)
+    : `${buildProfileFinalCtaHtml(ctx.serviceName, renderProfile, conversionImageHtml, "", "", ctx)}`;
+  // Approved visual stack: hero + localIntroduction, What [Service] is, What happens next,
+  // then remaining blocks, with Hospitals and GP practices last. Arrangement copy is unchanged.
+  const main = [
+    hero,
+    localIntroduction,
+    clusterContext,
+    childAreas,
+    localNextStep,
+    preparation,
+    trust,
+    access,
+    links,
+    faq,
+    closing,
+    relevance,
+  ].join("\n");
 
   const title =
     content.base.seoTitle || `${ctx.serviceName} in ${cluster.name} | ${profile.pharmacyName}`;
@@ -519,10 +626,11 @@ ${buildGoogleFontsLink(theme)}
 ${buildPharmacyServicePageStyleBlock(theme)}
 ${localPageTypeTypographyStyleBlock()}
 ${pharmacyLocalPageResponsiveStyleBlock()}
+${clinicalPatientTemplateHeadAssets()}
 </head>
-<body ${visualServicePageBodyAttributes(ctx.serviceId)} ${componentDnaBodyAttributes(componentDna)} data-pharmacy-template="${PHARMACY_SERVICE_PAGE_TEMPLATE_ID}" data-local-page-kind="location-cluster" data-local-page-contract="${LOCAL_CLUSTER_CONTRACT_ID}" data-publish-source="local-cluster-v1" data-local-cluster="${esc(cluster.slug)}" data-location-component="${HOMEPAGE_LOCATION_COMPONENT_ID}"${registered ? ` data-approved-bank-locality-contract="approved-bank-locality-page-v1"` : ""}>
+<body ${visualServicePageBodyAttributes(ctx.serviceId)} ${componentDnaBodyAttributes(componentDna)} class="bg-white" ${CLINICAL_PATIENT_TEMPLATE_ATTR} data-pharmacy-template="${PHARMACY_SERVICE_PAGE_TEMPLATE_ID}" data-local-page-kind="location-cluster" data-local-page-contract="${LOCAL_CLUSTER_CONTRACT_ID}" data-publish-source="local-cluster-v1" data-local-cluster="${esc(cluster.slug)}" data-local-section-arrangement="" data-location-component="${HOMEPAGE_LOCATION_COMPONENT_ID}"${registered ? ` data-approved-bank-locality-contract="approved-bank-locality-page-v1"` : ""}>
 ${renderPharmacyServicePageHeader(renderProfile, theme)}
-<main id="main-content">
+<main id="main-content" class="bg-white">
 ${clusterBreadcrumb(ctx, hierarchy, cluster)}
 ${main}
 </main>

@@ -71,7 +71,7 @@ function ensureSectionHeadCenter(html: string): string {
 function centerNarrativeBodyCopy(html: string): string {
   // Use existing .section-head.center alignment contract for narrative paragraphs.
   return html.replace(
-    /(<section\b[^>]*(?:data-template-block="(?:service-definition|child-areas|local-relevance|consultation|trust-split)"|id="(?:cluster-context|child-areas|cluster-relevance|cluster-trust|cluster-consultation)")[^>]*>[\s\S]*?<div class="wrap">)([\s\S]*?)(<\/div>\s*<\/section>)/gi,
+    /(<section\b[^>]*(?:data-template-block="(?:service-definition|child-areas|local-introduction|local-relevance|consultation|trust-split)"|id="(?:cluster-context|cluster-local-introduction|child-areas|cluster-relevance|cluster-trust|cluster-consultation)")[^>]*>[\s\S]*?<div class="wrap">)([\s\S]*?)(<\/div>\s*<\/section>)/gi,
     (_full, open: string, inner: string, close: string) => {
       let body = inner;
       // Do not centre maps, lists, grids, or media panels.
@@ -183,6 +183,7 @@ function splitHowAndConsultation(html: string): { html: string; meta: StrategyPo
 
   const howIntro = stripMarkers(before)
     .replace(/<div class="areas-grid">[\s\S]*?<\/div>/gi, "")
+    .replace(/<ol\b[^>]*data-clinical-timeline[\s\S]*?<\/ol>/gi, "")
     .replace(/<h2>[^<]+<\/h2>/i, "")
     .replace(/<div class="section-head[^"]*">/gi, "")
     .replace(/<\/div>/gi, " ")
@@ -220,10 +221,12 @@ function splitHowAndConsultation(html: string): { html: string; meta: StrategyPo
     .trim();
 
   const howHeading = meta.headings.how || "How Pharmacy First can help";
+  const timeline = extractSection(child, /<ol\b[^>]*data-clinical-timeline[\s\S]*?<\/ol>/i);
   // Headings stay in <h2> only — never concatenate into the <p>.
-  const howSection = `<section class="soft" id="child-areas" data-template-block="child-areas">
-<div class="wrap">
-<div class="section-head center"><h2>${esc(howHeading)}</h2>${howIntro ? `<p class="narrative-center">${esc(howIntro)}</p>` : ""}</div>
+  const howSection = `<section class="soft py-10" id="child-areas" data-template-block="child-areas">
+<div class="wrap px-6">
+<div class="clinical-section-head"><h2 class="text-[#1E293B]">${esc(howHeading)}</h2>${howIntro ? `<p class="text-slate-600 leading-relaxed">${esc(howIntro)}</p>` : ""}</div>
+${timeline}
 </div>
 </section>`;
 
@@ -239,6 +242,27 @@ function splitHowAndConsultation(html: string): { html: string; meta: StrategyPo
   };
 }
 
+const APPROVED_CLUSTER_LEADING_SLOTS = ["localIntro", "why", "how", "nextStep"] as const;
+const APPROVED_CLUSTER_TRAILING_SLOT = "conditions";
+
+/** Pin visual stack: hero (caller) → localIntroduction → service definition → what happens next → … → hospitals/GP last. */
+function pinApprovedClusterVisualSectionOrder(order: string[]): string[] {
+  const fallback = ["why", "how", "conditions", "consultation", "travel", "gp", "faq", "cta", "nearby"];
+  const source = (order.length ? order : fallback).filter(Boolean);
+  const leading = [...APPROVED_CLUSTER_LEADING_SLOTS];
+  const middle = source.filter(
+    (slot) => slot !== APPROVED_CLUSTER_TRAILING_SLOT && !leading.includes(slot as (typeof leading)[number]),
+  );
+  const seen = new Set<string>();
+  const pinned: string[] = [];
+  for (const slot of [...leading, ...middle, APPROVED_CLUSTER_TRAILING_SLOT]) {
+    if (seen.has(slot)) continue;
+    seen.add(slot);
+    pinned.push(slot);
+  }
+  return pinned;
+}
+
 function reorderClusterSections(html: string, order: string[]): string {
   const mainMatch = html.match(/<main id="main-content">([\s\S]*?)<\/main>/i);
   if (!mainMatch) return html;
@@ -248,8 +272,12 @@ function reorderClusterSections(html: string, order: string[]): string {
   const hero = extractSection(mainInner, /<section\b[^>]*data-template-block="hero"[\s\S]*?<\/section>/i)
     || extractSection(mainInner, /<section\b[^>]*class="[^"]*hero[\s\S]*?<\/section>/i);
   const map: Record<string, string> = {
+    localIntro:
+      extractSection(mainInner, /<section[^>]*id="cluster-local-introduction"[\s\S]*?<\/section>/i) ||
+      extractSection(mainInner, /<section[^>]*data-template-block="local-introduction"[\s\S]*?<\/section>/i),
     why: extractSection(mainInner, /<section[^>]*id="cluster-context"[\s\S]*?<\/section>/i),
     how: extractSection(mainInner, /<section[^>]*id="child-areas"[\s\S]*?<\/section>/i),
+    nextStep: extractSection(mainInner, /<section[^>]*id="local-next-step"[\s\S]*?<\/section>/i),
     conditions: extractSection(mainInner, /<section[^>]*id="cluster-relevance"[\s\S]*?<\/section>/i),
     consultation: extractSection(mainInner, /<section[^>]*id="cluster-consultation"[\s\S]*?<\/section>/i),
     travel:
@@ -263,7 +291,7 @@ function reorderClusterSections(html: string, order: string[]): string {
     nearby: extractSection(mainInner, /<section[^>]*data-template-block="parent-child-links"[\s\S]*?<\/section>/i),
   };
 
-  const sequence = (order.length ? order : ["why", "how", "conditions", "consultation", "travel", "gp", "faq", "cta", "nearby"])
+  const sequence = pinApprovedClusterVisualSectionOrder(order)
     .map((slot) => map[slot] || "")
     .filter(Boolean);
   const ordered = [breadcrumb, hero, ...sequence].filter(Boolean).join("\n");
@@ -282,7 +310,6 @@ function applyStrategyHeadings(html: string, headings: Record<string, string>): 
   };
   bind(/<section[^>]*id="cluster-context"[\s\S]*?<\/section>/i, headings.why);
   bind(/<section[^>]*id="child-areas"[\s\S]*?<\/section>/i, headings.how);
-  bind(/<section[^>]*id="cluster-relevance"[\s\S]*?<\/section>/i, headings.conditions);
   bind(/<section[^>]*id="cluster-consultation"[\s\S]*?<\/section>/i, headings.consultation);
   bind(/<section[^>]*id="local-access"[\s\S]*?<\/section>/i, headings.travel);
   bind(/<section[^>]*id="cluster-trust"[\s\S]*?<\/section>/i, headings.gp);

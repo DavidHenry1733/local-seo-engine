@@ -6,6 +6,14 @@ export function pharmacyLocalPageResponsiveStyleBlock(): string {
     ':is([data-publish-source="local-location-engine"], [data-publish-source="local-hub-v1"], [data-publish-source="local-cluster-v1"], [data-publish-source="local-area-v1"])';
   return `<style data-local-page-responsive="v1">
 body${localBody} { overflow-x: clip; }
+body${localBody} .local-introduction-wrapper {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+body${localBody} .local-introduction-wrapper p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
 @media (max-width: 980px) {
   body${localBody} .site-header .wrap,
   body${localBody} .site-header .header-row {
