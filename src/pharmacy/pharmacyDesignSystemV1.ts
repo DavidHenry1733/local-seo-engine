@@ -172,6 +172,15 @@ export function pharmaconnectDesignSystemV1CommercialBodyLayoutCss(): string {
 ${servicePageBalancedCardGridCss()}
 .definition-split-row,.grid-2.trust-split-row,.grid-2.safety-split{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
 @media(max-width:960px){.definition-split-row,.grid-2.trust-split-row,.grid-2.safety-split{grid-template-columns:1fr}}
+.safety-media{margin:0;border-radius:16px;overflow:hidden}
+.safety-media img,.safety-media .image-panel{width:100%;height:100%;min-height:22rem;object-fit:cover;display:block;border-radius:16px}
+.conditions-authority-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px}
+.conditions-authority-grid .condition-track-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;text-align:center;padding:22px 12px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 1px 2px rgba(15,23,42,.06)}
+.conditions-authority-grid .condition-track-icon{width:2.5rem;height:2.5rem;color:#005EB8;display:flex;align-items:center;justify-content:center}
+.conditions-authority-grid .condition-track-icon svg{width:1.75rem;height:1.75rem}
+.conditions-authority-grid .condition-track-card h3{margin:0;font-size:15px;line-height:1.35;color:#005EB8;font-weight:650}
+@media(max-width:1100px){.conditions-authority-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:720px){.conditions-authority-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .hero-image-wrap{aspect-ratio:4/3;max-height:520px;width:100%;overflow:hidden;border-radius:var(--brand-radius-card,16px)}
 .image-panel{aspect-ratio:4/3;max-height:480px;width:100%;overflow:hidden;border-radius:var(--brand-radius-card,16px)}
 .image-panel img,.hero-image-wrap img{object-fit:cover;width:100%;height:100%;max-width:100%;display:block}

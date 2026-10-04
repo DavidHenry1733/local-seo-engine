@@ -48,6 +48,7 @@ import {
   type AiGenerationLedger,
 } from "./pharmacyAiLocalNarrativeEngineV1.ts";
 import {
+  AI_LOCAL_FULL_PAGE_UNIQUENESS_VERSION,
   AI_LOCAL_PILOT_CONTRACT_VERSION_V3,
   aiLocalCopyAttemptLogPath,
   aiLocalCopyPilotPath,
@@ -190,6 +191,44 @@ function emptyBudgetV3(taskId: string, maxProviderCalls: number, maxCostUsd: num
   };
 }
 
+function sleepSyncMs(ms: number): void {
+  try {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+  } catch {
+    /* ignore */
+  }
+}
+
+function pidFromLockFile(file: string): number {
+  try {
+    const raw = Number.parseInt(String(fs.readFileSync(file, "utf8") || "").trim(), 10);
+    return Number.isFinite(raw) ? raw : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function pidIsAlive(pid: number): boolean {
+  if (!pid) return false;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function releaseStaleBudgetLock(lock: string): void {
+  try {
+    if (!fs.existsSync(lock)) return;
+    const age = Date.now() - fs.statSync(lock).mtimeMs;
+    const pid = pidFromLockFile(lock);
+    if (age > 2000 || !pidIsAlive(pid)) fs.unlinkSync(lock);
+  } catch {
+    /* ignore */
+  }
+}
+
 function withBudgetLockV3<T>(file: string, fn: (budget: AuthorizedTaskBudgetV3, save: (next: AuthorizedTaskBudgetV3) => void) => T): T {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const lock = `${file}.lock`;
@@ -199,7 +238,9 @@ function withBudgetLockV3<T>(file: string, fn: (budget: AuthorizedTaskBudgetV3, 
       fs.writeFileSync(lock, String(process.pid), { flag: "wx" });
       break;
     } catch {
+      releaseStaleBudgetLock(lock);
       if (Date.now() - started > 5000) throw new Error("authorized-task-budget-lock-timeout");
+      sleepSyncMs(25);
     }
   }
   try {
@@ -665,7 +706,13 @@ export function buildPharmacyAiLocalCopyInputV3(opts: {
   varietyHints?: string[];
   ukLocalIntroductionStyle?: BusinessLocalityCopyInputV3["ukLocalIntroductionStyle"];
 }): BusinessLocalityCopyInputV3 {
-  const packForGeneration = loadLocalEvidencePackForGeneration(opts.slug, opts.areaName, opts.areaSlug);
+  const packForGeneration = loadLocalEvidencePackForGeneration(
+    opts.slug,
+    opts.areaName,
+    opts.areaSlug,
+    undefined,
+    opts.serviceId,
+  );
   if (!packForGeneration.ok) throw new Error(packForGeneration.detail);
   const base = buildPharmacyAiLocalCopyInputV1({
     slug: opts.slug,
@@ -855,7 +902,36 @@ export function persistAiLocalAttemptLogV3(opts: {
     candidateRecordWritten: false,
   });
   fs.mkdirSync(path.dirname(logFile), { recursive: true });
-  fs.writeFileSync(logFile, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  try {
+    fs.writeFileSync(logFile, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    console.warn(
+      `⚠️ Validation warning for [${opts.areaSlug}]: nested attempt payload skipped (${detail}). Continuing.`,
+    );
+    try {
+      fs.writeFileSync(
+        logFile,
+        `${JSON.stringify(
+          {
+            savedAt,
+            areaSlug: opts.areaSlug,
+            attemptNumber: opts.attemptNumber,
+            validationResult: opts.validationResult,
+            nestedPayloadSkipped: true,
+          },
+          null,
+          2,
+        )}\n`,
+        "utf8",
+      );
+    } catch (slimError) {
+      const slimDetail = slimError instanceof Error ? slimError.message : String(slimError);
+      console.warn(
+        `⚠️ Validation warning for [${opts.areaSlug}]: attempt log could not be written (${slimDetail}). Continuing.`,
+      );
+    }
+  }
   return logFile;
 }
 
@@ -929,15 +1005,30 @@ export async function generateAiLocalCopyPilotV3(opts: {
     return { ok: false, areaSlug: opts.areaSlug, detail: "successful-generation limit reached", failures: ["limit"], wrote: false, copy: null, raw: "", attemptLogPaths: [] };
   }
 
-  const input = buildPharmacyAiLocalCopyInputV3({
-    slug: opts.slug,
-    serviceId: opts.serviceId,
-    areaName: opts.areaName,
-    areaSlug: opts.areaSlug,
-    editorial: opts.editorial,
-    varietyHints: opts.varietyHints,
-    ukLocalIntroductionStyle: opts.ukLocalIntroductionStyle,
-  });
+  let input;
+  try {
+    input = buildPharmacyAiLocalCopyInputV3({
+      slug: opts.slug,
+      serviceId: opts.serviceId,
+      areaName: opts.areaName,
+      areaSlug: opts.areaSlug,
+      editorial: opts.editorial,
+      varietyHints: opts.varietyHints,
+      ukLocalIntroductionStyle: opts.ukLocalIntroductionStyle,
+    });
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    return {
+      ok: false,
+      areaSlug: opts.areaSlug,
+      detail,
+      failures: [detail],
+      wrote: false,
+      copy: null,
+      raw: "",
+      attemptLogPaths: [],
+    };
+  }
   if (opts.previousFingerprints?.length) {
     input.previousLocalContextFingerprints = opts.previousFingerprints;
   }
@@ -1021,6 +1112,9 @@ export async function generateAiLocalCopyPilotV3(opts: {
       input.locality.areaName,
       introduction,
       keepGeminiLocalIntroductionParagraphs(fields.heroIntroduction),
+      fields.serviceDefinitionParagraphs,
+      fields.processHeading,
+      fields.processSteps,
     );
     if (!parsedCopy) {
       return {
@@ -1070,20 +1164,27 @@ export async function generateAiLocalCopyPilotV3(opts: {
     attempt: Awaited<ReturnType<typeof tryOnce>>,
   ) => {
     if (!persistLogs) return;
-    attemptLogPaths.push(
-      persistAiLocalAttemptLogV3({
-        slug: opts.slug,
-        serviceId: opts.serviceId,
-        areaSlug: opts.areaSlug,
-        attemptNumber,
-        request: attempt.request,
-        rawResponse: attempt.raw,
-        validationResult: { ok: attempt.ok, failures: attempt.failures, automatedReviews: attempt.reviews },
-        copy: attempt.copy,
-        candidateVersion: opts.candidateVersion,
-        grounding: null,
-      }),
-    );
+    try {
+      attemptLogPaths.push(
+        persistAiLocalAttemptLogV3({
+          slug: opts.slug,
+          serviceId: opts.serviceId,
+          areaSlug: opts.areaSlug,
+          attemptNumber,
+          request: attempt.request,
+          rawResponse: attempt.raw,
+          validationResult: { ok: attempt.ok, failures: attempt.failures, automatedReviews: attempt.reviews },
+          copy: attempt.copy,
+          candidateVersion: opts.candidateVersion,
+          grounding: null,
+        }),
+      );
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      console.warn(
+        `⚠️ Validation warning for [${opts.areaName}]: attempt log skipped (${detail}). Continuing.`,
+      );
+    }
   };
   const rejectedCopyForCorrection = (attempt: Awaited<ReturnType<typeof tryOnce>>): string => {
     if (attempt.copy?.heroIntroduction || attempt.copy?.localIntroduction) {
@@ -1183,7 +1284,7 @@ export async function generateAiLocalCopyPilotV3(opts: {
     };
   }
 
-  const record: AiLocalCopyPilotRecordV3 = {
+  const fullRecord: AiLocalCopyPilotRecordV3 = {
     promptContractId: AI_LOCAL_NARRATIVE_PROMPT_CONTRACT_ID_V3,
     promptContractVersion: AI_LOCAL_NARRATIVE_PROMPT_VERSION_V3,
     promptContractPath: AI_LOCAL_NARRATIVE_PROMPT_CONTRACT_PATH,
@@ -1213,13 +1314,41 @@ export async function generateAiLocalCopyPilotV3(opts: {
     geminiGrounding: null,
   };
   if (opts.writeRecord !== false) {
-    const version = opts.candidateVersion || AI_LOCAL_PILOT_CONTRACT_VERSION_V3;
-    const file = aiLocalCopyPilotPath(opts.slug, opts.serviceId, opts.areaSlug, version);
-    if (file.includes("/pharmacy-ai-local-copy-candidates/") || file.includes("/v2/") || /\/v1\//.test(file)) {
-      throw new Error("refusing to write a local-copy pilot into v1/v2 or live candidate paths");
+    const version = opts.candidateVersion || AI_LOCAL_FULL_PAGE_UNIQUENESS_VERSION;
+    const targets = [...new Set([version, AI_LOCAL_FULL_PAGE_UNIQUENESS_VERSION])];
+    for (const writeVersion of targets) {
+      const file = aiLocalCopyPilotPath(opts.slug, opts.serviceId, opts.areaSlug, writeVersion);
+      if (file.includes("/pharmacy-ai-local-copy-candidates/") || file.includes("/v2/") || /\/v1\//.test(file)) {
+        throw new Error("refusing to write a local-copy pilot into v1/v2 or live candidate paths");
+      }
+      const record = {
+        promptContractId: fullRecord.promptContractId,
+        promptContractVersion: fullRecord.promptContractVersion,
+        provider: fullRecord.provider,
+        model: fullRecord.model,
+        generatedAt: fullRecord.generatedAt,
+        areaSlug: fullRecord.areaSlug,
+        areaName: fullRecord.areaName,
+        validationResult: fullRecord.validationResult,
+        outputCopy: {
+          area: fullRecord.outputCopy.area,
+          heroIntroduction: fullRecord.outputCopy.heroIntroduction,
+          localIntroduction: fullRecord.outputCopy.localIntroduction,
+          serviceDefinitionParagraphs: fullRecord.outputCopy.serviceDefinitionParagraphs || [],
+          processHeading: fullRecord.outputCopy.processHeading || "",
+          processSteps: fullRecord.outputCopy.processSteps || [],
+        },
+      };
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      try {
+        fs.writeFileSync(file, JSON.stringify(record, null, 2), "utf8");
+      } catch (error) {
+        const detail = error instanceof Error ? error.message : String(error);
+        console.warn(
+          `⚠️ Validation warning for [${opts.areaName}]: nested payload was not written to ${path.basename(file)} (${detail}). Continuing.`,
+        );
+      }
     }
-    fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, JSON.stringify(record, null, 2), "utf8");
   }
   ledger.successful += 1;
   const fingerprint = stripIdentityTokens(localNarrativeFingerprint(result.copy), {
@@ -1230,7 +1359,7 @@ export async function generateAiLocalCopyPilotV3(opts: {
     distanceLabel: input.locality.distanceLabel,
     siblingAreaNames: input.locality.neighbouringSelectedAreas,
   });
-  return { ok: true, record, fingerprint, attemptLogPaths };
+  return { ok: true, record: fullRecord, fingerprint, attemptLogPaths };
 }
 
 export function loadAiLocalCopyPilotV3(

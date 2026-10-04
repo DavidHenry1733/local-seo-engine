@@ -111,6 +111,17 @@ body[data-local-page-contract="local-area-v1"] .trust-block-media {
   height: auto;
   max-height: none;
 }
+body[data-local-page-contract="local-cluster-v1"] .locality-hero-figure,
+body[data-local-page-contract="local-area-v1"] .locality-hero-figure {
+  margin: 0;
+}
+body[data-local-page-contract="local-cluster-v1"] .locality-hero-caption,
+body[data-local-page-contract="local-area-v1"] .locality-hero-caption {
+  margin: 8px 0 0;
+  font: 600 12px/1.4 var(--brand-body-font, 'Open Sans', Arial, sans-serif);
+  color: var(--brand-muted, #5F6C7B);
+  letter-spacing: 0.01em;
+}
 body[data-local-page-contract="local-cluster-v1"] .grid-2.trust-split-row,
 body[data-local-page-contract="local-area-v1"] .grid-2.trust-split-row {
   align-items: start;

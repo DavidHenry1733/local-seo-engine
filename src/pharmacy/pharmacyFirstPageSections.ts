@@ -216,29 +216,24 @@ ${renderBalancedCardGrid(cards, { cols: 4, stepNumbers: true, gridClass: "proces
 export function renderPharmacyFirstSafety(
   section: ParsedMasterSection | undefined,
   profile: PharmacyServicePageProfile,
+  consultImageHtml = "",
 ): string {
   if (!section) return "";
   const loc = makeBodyLocaliser(profile, "Pharmacy First");
-  const cards = localiseCards(proseToCards(section.proseHtml), loc);
-  const titled = cards.filter((c) => c.title);
   const $p = cheerio.load(`<div>${section.proseHtml}</div>`);
   const intro = $p("p")
     .slice(0, 2)
     .map((_, el) => `<p>${esc(loc($p(el).text().trim()))}</p>`)
     .get()
     .join("");
-  const cardGrid =
-    titled.length > 0
-      ? renderBalancedCardGrid(titled.slice(0, 4), { cols: 2, gridClass: "safety-grid" })
-      : "";
   return `<section class="impact" data-template-block="safety">
-<div class="wrap grid-2">
-<div>
+<div class="wrap grid-2 safety-split">
+<div class="safety-prose-col">
 <span class="tag">When to seek GP or urgent care</span>
 <h2>${esc(section.title)}</h2>
-${intro}
+<div class="safety-prose">${intro}</div>
 </div>
-${cardGrid ? `<div>${cardGrid}</div>` : ""}
+<div class="safety-media">${consultImageHtml}</div>
 </div>
 </section>`;
 }

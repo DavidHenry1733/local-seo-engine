@@ -223,16 +223,16 @@ function splitHowAndConsultation(html: string): { html: string; meta: StrategyPo
   const howHeading = meta.headings.how || "How Pharmacy First can help";
   const timeline = extractSection(child, /<ol\b[^>]*data-clinical-timeline[\s\S]*?<\/ol>/i);
   // Headings stay in <h2> only — never concatenate into the <p>.
-  const howSection = `<section class="soft py-10" id="child-areas" data-template-block="child-areas">
-<div class="wrap px-6">
-<div class="clinical-section-head"><h2 class="text-[#1E293B]">${esc(howHeading)}</h2>${howIntro ? `<p class="text-slate-600 leading-relaxed">${esc(howIntro)}</p>` : ""}</div>
+  const howSection = `<section class="py-14 bg-white" id="child-areas" data-template-block="child-areas">
+<div class="max-w-4xl mx-auto px-6">
+<div class="clinical-section-head"><h2 class="cluster-heading">${esc(howHeading)}</h2>${howIntro ? `<p class="text-slate-600 leading-relaxed">${esc(howIntro)}</p>` : ""}</div>
 ${timeline}
 </div>
 </section>`;
 
-  const consultSection = `<section class="soft" id="cluster-consultation" data-template-block="consultation">
-<div class="wrap">
-<div class="section-head center"><h2>${esc(consultHeading)}</h2>${consultBody ? `<p class="narrative-center">${esc(consultBody)}</p>` : ""}</div>
+  const consultSection = `<section class="py-14 bg-white" id="cluster-consultation" data-template-block="consultation">
+<div class="max-w-6xl mx-auto px-6">
+<div class="clinical-section-head"><h2 class="cluster-heading">${esc(consultHeading)}</h2>${consultBody ? `<p class="text-slate-600 leading-relaxed">${esc(consultBody)}</p>` : ""}</div>
 </div>
 </section>`;
 
@@ -242,12 +242,12 @@ ${timeline}
   };
 }
 
-const APPROVED_CLUSTER_LEADING_SLOTS = ["localIntro", "why", "how", "nextStep"] as const;
+const APPROVED_CLUSTER_LEADING_SLOTS = ["localIntro", "why", "how", "gp", "consultation", "nextStep"] as const;
 const APPROVED_CLUSTER_TRAILING_SLOT = "conditions";
 
-/** Pin visual stack: hero (caller) → localIntroduction → service definition → what happens next → … → hospitals/GP last. */
+/** Pin visual stack: hero hook → service definition + local context → what happens next → safety → service sections. */
 function pinApprovedClusterVisualSectionOrder(order: string[]): string[] {
-  const fallback = ["why", "how", "conditions", "consultation", "travel", "gp", "faq", "cta", "nearby"];
+  const fallback = ["why", "how", "consultation", "travel", "gp", "faq", "cta", "nearby"];
   const source = (order.length ? order : fallback).filter(Boolean);
   const leading = [...APPROVED_CLUSTER_LEADING_SLOTS];
   const middle = source.filter(
@@ -264,7 +264,7 @@ function pinApprovedClusterVisualSectionOrder(order: string[]): string[] {
 }
 
 function reorderClusterSections(html: string, order: string[]): string {
-  const mainMatch = html.match(/<main id="main-content">([\s\S]*?)<\/main>/i);
+  const mainMatch = html.match(/<main id="main-content"[^>]*>([\s\S]*?)<\/main>/i);
   if (!mainMatch) return html;
   const mainInner = mainMatch[1] || "";
 
@@ -296,20 +296,26 @@ function reorderClusterSections(html: string, order: string[]): string {
     .filter(Boolean);
   const ordered = [breadcrumb, hero, ...sequence].filter(Boolean).join("\n");
 
-  if (!hero || !map.why || !map.how || !map.conditions) return html;
-  return html.replace(mainMatch[0], `<main id="main-content">\n${ordered}\n</main>`);
+  if (!hero || !map.why || !map.how) return html;
+  if (!map.conditions) return html;
+  const mainOpen = html.match(/<main id="main-content"[^>]*>/i)?.[0] || `<main id="main-content">`;
+  return html.replace(mainMatch[0], `${mainOpen}\n${ordered}\n</main>`);
 }
 
-function applyStrategyHeadings(html: string, headings: Record<string, string>): string {
+function applyStrategyHeadings(html: string, headings: Record<string, string>, skip: string[] = []): string {
   let out = html;
   const bind = (sectionRe: RegExp, heading?: string) => {
     if (!heading) return;
     out = out.replace(sectionRe, (block) =>
-      block.replace(/<h2>[^<]+<\/h2>/i, `<h2>${esc(heading)}</h2>`),
+      block.replace(/<h2[^>]*>[^<]+<\/h2>/i, (current) =>
+        /class="cluster-heading/.test(current)
+          ? current.replace(/>([^<]+)</, `>${esc(heading)}<`)
+          : `<h2>${esc(heading)}</h2>`,
+      ),
     );
   };
   bind(/<section[^>]*id="cluster-context"[\s\S]*?<\/section>/i, headings.why);
-  bind(/<section[^>]*id="child-areas"[\s\S]*?<\/section>/i, headings.how);
+  if (!skip.includes("how")) bind(/<section[^>]*id="child-areas"[\s\S]*?<\/section>/i, headings.how);
   bind(/<section[^>]*id="cluster-consultation"[\s\S]*?<\/section>/i, headings.consultation);
   bind(/<section[^>]*id="local-access"[\s\S]*?<\/section>/i, headings.travel);
   bind(/<section[^>]*id="cluster-trust"[\s\S]*?<\/section>/i, headings.gp);
@@ -331,7 +337,9 @@ function stripDuplicateAreaInventory(html: string): string {
     /<div><strong>Areas served[^<]*<\/strong>\s*<div class="coverage-tags"[^>]*>[\s\S]*?<\/div><\/div>/gi,
     "",
   );
-  out = out.replace(/<div class="coverage-tags"[^>]*>[\s\S]*?<\/div>/gi, "");
+  out = out.replace(/<div class="coverage-tags"[^>]*>[\s\S]*?<\/div>/gi, (block) =>
+    /nearby-help-tags/.test(block) ? block : "",
+  );
   // Unverified GP catchment lists.
   out = out.replace(/<div class="local-healthcare-context[\s\S]*?<\/div>/gi, "");
   out = out.replace(/<div class="local-healthcare-card[\s\S]*?<\/div>/gi, "");
@@ -353,7 +361,7 @@ export function polishCommercialClusterPublicHtml(
     if (travelLead) {
       out = out.replace(/(<p class="local-intro-lead">)[\s\S]*?(<\/p>)/i, `$1${esc(travelLead)}$2`);
     }
-    out = applyStrategyHeadings(out, meta.headings);
+    out = applyStrategyHeadings(out, meta.headings, ["how"]);
     out = reorderClusterSections(out, meta.sectionOrder);
     out = ensureSectionHeadCenter(out);
     out = out

@@ -221,7 +221,10 @@ export function finalizeLocalClusterPageContent(content: LocalClusterPageContent
   ]);
   for (const key of accessOwnKeys) usedKeys.add(key);
   const clinicalEnvironmentBody = dedupeFieldWithIntents(content.clinicalEnvironmentBody, usedKeys, usedIntents);
-  const trustBody = dedupeFieldWithIntents(content.trustBody, usedKeys, usedIntents, ["referral"]);
+  const preserveApprovedSafety = String(content.narrativeType || "").startsWith("canonical-local-content-engine");
+  const trustBody = preserveApprovedSafety
+    ? scrubPublicLocalEngineTerms(content.trustBody)
+    : dedupeFieldWithIntents(content.trustBody, usedKeys, usedIntents, ["referral"]);
   const trustIntro = content.trustIntro
     ? dedupeFieldWithIntents(content.trustIntro, usedKeys, usedIntents, ["referral"])
     : undefined;

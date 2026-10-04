@@ -15,6 +15,13 @@ import {
   ACTIVE_SERVICE_IDS,
   resolveActiveServiceId,
 } from "./pharmacyServiceRegistry.ts";
+import { sitemapLocalitySlug } from "./pharmacyClusterPageUrlResolver.ts";
+import { NHS_PHARMACY_FIRST_CONDITION_TRACKS } from "./pharmacyFirstConditionTracks.ts";
+import {
+  localityOperationalStatus,
+  loadOperationalPageStatus,
+} from "./pharmacyDashboardOperationalPageStatus.ts";
+import { selectDistinctCatchmentAreas } from "./pharmacyCatchmentAreaGuardrails.ts";
 
 export const CORE_SERVICE_CHANNELS = ACTIVE_SERVICE_CHANNELS;
 export const CORE_SERVICE_IDS = ACTIVE_SERVICE_IDS;
@@ -87,7 +94,7 @@ export interface CompetitorMatrixRow {
 export interface LocalClusterPage {
   suburbName: string;
   slug: string;
-  status: "DRAFT" | "PUBLISHED";
+  status: "DRAFT" | "APPROVED" | "APPROVED FOR REVISION" | "PUBLISHED";
   clinicalPathway: string;
   previewBodyHtml: string;
   serviceId: string;
@@ -219,10 +226,25 @@ function overlayLiveProfile(customer: PharmacyCustomerRecord): PharmacyCustomerR
       longitude: num(data.longitude) ?? num(snap.longitude) ?? customer.googleCatchment.longitude,
       googleBusinessProfileUrl: str(data.googleBusinessProfileUrl) || customer.googleCatchment.googleBusinessProfileUrl,
       googleMapsEmbedUrl: str(data.googleMapsEmbedUrl) || customer.googleCatchment.googleMapsEmbedUrl,
-      coverageRadius: str(data.coverageRadius) || customer.googleCatchment.coverageRadius,
-      rankingAreas: uniq(data.rankingAreas).length ? uniq(data.rankingAreas) : customer.googleCatchment.rankingAreas,
-      nearbyAreas: uniq(data.nearbyAreas).length ? uniq(data.nearbyAreas) : customer.googleCatchment.nearbyAreas,
-      coverageAreas: uniq(data.coverageAreas).length ? uniq(data.coverageAreas) : customer.googleCatchment.coverageAreas,
+      coverageRadius: str(data.coverageRadius) || customer.googleCatchment.coverageRadius || "5-10 km",
+      rankingAreas: selectDistinctCatchmentAreas({
+        names: uniq(data.rankingAreas).length ? uniq(data.rankingAreas) : customer.googleCatchment.rankingAreas,
+        slug: customer.slug,
+        town: str(data.primaryTown) || str(data.townCity) || customer.townCity,
+        limit: 10,
+      }),
+      nearbyAreas: selectDistinctCatchmentAreas({
+        names: uniq(data.nearbyAreas).length ? uniq(data.nearbyAreas) : customer.googleCatchment.nearbyAreas,
+        slug: customer.slug,
+        town: str(data.primaryTown) || str(data.townCity) || customer.townCity,
+        limit: 12,
+      }),
+      coverageAreas: selectDistinctCatchmentAreas({
+        names: uniq(data.coverageAreas).length ? uniq(data.coverageAreas) : customer.googleCatchment.coverageAreas,
+        slug: customer.slug,
+        town: str(data.primaryTown) || str(data.townCity) || customer.townCity,
+        limit: 12,
+      }),
     };
     return {
       ...customer,
@@ -339,10 +361,16 @@ export function buildCatchmentPages(
 ): LocalClusterPage[] {
   const resolved = resolveCoreServiceId(serviceId) || "pharmacy-first";
   const label = coreServiceLabel(resolved);
-  return customer.googleCatchment.rankingAreas.map((area) => ({
+  const rankingAreas = selectDistinctCatchmentAreas({
+    names: customer.googleCatchment.rankingAreas,
+    slug: customer.slug,
+    town: customer.townCity,
+    limit: 10,
+  });
+  return rankingAreas.map((area) => ({
     suburbName: area,
-    slug: `services/${resolved}-${customer.slug}/${areaSlug(area)}`,
-    status: "DRAFT",
+    slug: sitemapLocalitySlug(area),
+    status: localityOperationalStatus(customer.slug, resolved, area),
     clinicalPathway: label,
     previewBodyHtml: "",
     serviceId: resolved,
@@ -440,6 +468,7 @@ export function buildPharmacyDashboardPayload(slug: string, serviceId?: string) 
   const resolvedService = resolveCoreServiceId(serviceId) || "pharmacy-first";
   const competitorsMatrix = loadCompetitorMatrix(customer.slug);
   const localClusterPages = buildCatchmentPages(customer, resolvedService);
+  const operational = loadOperationalPageStatus(customer.slug, resolvedService);
   return {
     success: true,
     slug: customer.slug,
@@ -476,6 +505,12 @@ export function buildPharmacyDashboardPayload(slug: string, serviceId?: string) 
     totalCompetitorsIdentified: competitorsMatrix.length,
     competitorsMatrix,
     localClusterPages,
+    servicePageStatus: operational.servicePage.status,
+    serviceHub: {
+      title: "Conditions Covered Under NHS Pharmacy First",
+      conditionTracks: [...NHS_PHARMACY_FIRST_CONDITION_TRACKS],
+      layout: "authority-7",
+    },
   };
 }
 
@@ -489,10 +524,15 @@ export function buildGenerationHierarchy(customer: PharmacyCustomerRecord, servi
     hub: null,
     clusters: [],
     areas: [],
-    generationAreas: customer.googleCatchment.rankingAreas.map((area) => ({
-      areaId: `${customer.slug}-${areaSlug(area)}`,
+    generationAreas: selectDistinctCatchmentAreas({
+      names: customer.googleCatchment.rankingAreas,
+      slug: customer.slug,
+      town: customer.townCity,
+      limit: 10,
+    }).map((area) => ({
+      areaId: `${customer.slug}-${sitemapLocalitySlug(area)}`,
       name: area,
-      slug: `services/${resolved}-${customer.slug}/${areaSlug(area)}`,
+      slug: sitemapLocalitySlug(area),
       type: "neighbourhood-area",
       parentAreaId: null,
       source: "google-catchment",

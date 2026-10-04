@@ -554,12 +554,15 @@ export type EditorialFactForPromptV3 = {
   prohibitedInference: string;
   sourceClass: string;
   publisher: string;
+  sourceUrl?: string;
 };
 
 export type BusinessLocalityCopyInputV3 = BusinessLocalityCopyInputV1 & {
   tenantSlug?: string;
   editorialFacts: EditorialFactForPromptV3[];
   editorialSufficiency: "READY" | "EVIDENCE LIMITED";
+  excludedLocalEvidence?: string[];
+  pageCountry?: string;
   previousLocalContextFingerprints?: string[];
   ukLocalIntroductionStyle?: {
     id: string;
@@ -639,7 +642,7 @@ export function buildAiLocalNarrativeUserPromptV3(input: BusinessLocalityCopyInp
     ),
     fieldNotes: {
       localIntroduction:
-        `Required when verified local facts remain. Write 150 to 250 words of fluent British English in proper paragraphs separated by \\n\\n. Follow this assigned structure: ${input.ukLocalIntroductionStyle?.instruction || "use a distinct opening, weave this area’s verified facts, and close with the selected service"}. ${PHARMACY_FIRST_LOCAL_NARRATIVE_WRITER_RULE_V3} Populate the structure from this area’s verified facts only. Keep named organisations, parks and civic places. Source statements may use internal listing wording; rewrite them as natural British English. Never write “orient yourself”, “listed as”, “recorded as”, “named on the provider page”, “named on the neighbourhood page”, or “recorded healthcare setting”. Do not add which-clauses, giving-clauses, home-to colour, or heritage/community-sense claims. Connect ${input.locality.areaName} to the selected service without eligibility, conditions, process, safety, credentials or disclaimer wording. Do not write kilometres. Uniqueness must not come from swapping the area name. Cite each factual sentence’s supplied factId in evidenceClaims. Never print fact IDs in this field.`,
+        `Required when verified local facts remain. Write 150 to 250 words of fluent British English in proper paragraphs separated by \\n\\n. SERVICE-FIRST HIERARCHY (mandatory): Paragraph 1 must establish ${input.offer.serviceName}, ${input.business.name}, people in ${input.locality.areaName}, and what the service is useful for. Do not open with neighbourhood-ward identity, civic boards, carnivals, war memorials, libraries-as-catalogue, or landmark lists. Later paragraphs may weave verified local healthcare context and only those civic or park facts that genuinely help a patient understand local relevance to ${input.business.name}. Prefer healthcare facts over civic or heritage catalogues. Never manufacture a landmarks section. Never write “orient yourself”, “patients near local landmarks”, “orientating pharmacy care”, “local orientation”, or “familiar points around”. Follow this assigned structure only where it does not conflict with the service-first hierarchy: ${input.ukLocalIntroductionStyle?.instruction || "use a distinct opening, weave this area’s verified facts, and close with the selected service"}. ${PHARMACY_FIRST_LOCAL_NARRATIVE_WRITER_RULE_V3} Populate the structure from this area’s verified facts only. Keep named organisations where they help the reader. Source statements may use internal listing wording; rewrite them as natural British English. Never write “listed as”, “recorded as”, “named on the provider page”, “named on the neighbourhood page”, or “recorded healthcare setting”. Do not add which-clauses, giving-clauses, home-to colour, or heritage/community-sense claims. Connect ${input.locality.areaName} to the selected service without eligibility, conditions, process, safety, credentials or disclaimer wording. Do not write kilometres. Uniqueness must not come from swapping the area name. Cite each factual sentence’s supplied factId in evidenceClaims. Never print fact IDs in this field.`,
       localContextHeading:
         "Omit this field. Return an empty string. The template heading is enough. Do not invent a section title about healthcare options, community setting, local character or similar colour.",
       localContextParagraphs:
@@ -758,6 +761,21 @@ export function premisesLocalityFromCanonicalAddress(address: string): string {
   return parts.length >= 2 ? parts[1] : "";
 }
 
+/** Prefer the address form that still names the premises town. */
+export function premisesAddressForArea(profile: {
+  displayAddress?: string;
+  fullAddress?: string;
+  customerFacingAddress?: string;
+}): string {
+  const candidates = [profile.displayAddress, profile.fullAddress, profile.customerFacingAddress]
+    .map((value) => String(value || "").trim())
+    .filter(Boolean);
+  for (const candidate of candidates) {
+    if (premisesLocalityFromCanonicalAddress(candidate)) return candidate;
+  }
+  return candidates[0] || "";
+}
+
 export function formatRendererOwnedStraightLineKmV3(distanceKm: number): string {
   return formatStraightLineKm(distanceKm);
 }
@@ -845,7 +863,13 @@ export function applyRendererOwnedLocalCopyFieldsV3(
   };
 }
 
-export function overlayFromCopy(copy: AiLocalCopyV1) {
+export function overlayFromCopy(
+  copy: AiLocalCopyV1 & {
+    serviceDefinitionParagraphs?: string[];
+    processHeading?: string;
+    processSteps?: Array<{ title: string; body: string; bullets?: string[] }>;
+  },
+) {
   return {
     heroIntroduction: copy.heroIntroduction,
     localContextHeading: copy.localContextHeading,
@@ -855,5 +879,10 @@ export function overlayFromCopy(copy: AiLocalCopyV1) {
     localAccessIntroduction: copy.localAccessIntroduction,
     localFaqs: copy.localFaqs,
     localCtaBridge: copy.localCtaBridge,
+    serviceDefinitionParagraphs: Array.isArray(copy.serviceDefinitionParagraphs)
+      ? copy.serviceDefinitionParagraphs.map((row) => String(row || "").trim()).filter(Boolean).slice(0, 5)
+      : [],
+    processHeading: String(copy.processHeading || "").trim(),
+    processSteps: Array.isArray(copy.processSteps) ? copy.processSteps : [],
   };
 }

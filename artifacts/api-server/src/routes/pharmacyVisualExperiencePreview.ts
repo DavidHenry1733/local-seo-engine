@@ -21,6 +21,8 @@ import {
   resolveVisualExperiencePreviewTenant,
   type ResolvedVisualExperiencePreview,
 } from "../../../../src/pharmacy/pharmacyVisualExperiencePreviewScopeService.ts";
+import { isPublicBrookSalesDemoHubVisualExperienceGet } from "../../../../src/pharmacy/pharmacyAcceptedPageRouteResolverV1.ts";
+import { renderCorporateServiceHubForTenant } from "../../../../src/pharmacy/pharmacyLocalClusterLocationPageRenderer.ts";
 
 function esc(v: unknown): string {
   return String(v ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m] || m));
@@ -52,9 +54,15 @@ function sendScopedPreviewPage(res: import("express").Response, preview: Resolve
     sendCanonicalPreviewPage(res, preview.slug, preview.pageSlug, preview.serviceId);
     return;
   }
-  // Service-page-only review preview must stream the persisted generation artifact.
-  // Do not sanitise, overlay, or rebuild JSON-LD on the stored HTML — that rewrite
-  // path scans the entire page in memory and times out on large generated files.
+  if (/pharmacy-first/i.test(String(preview.serviceId || ""))) {
+    try {
+      const html = renderCorporateServiceHubForTenant(preview.slug, preview.serviceId);
+      res.status(200).type("html").send(html);
+      return;
+    } catch {
+      /* Fall through to stored bytes only if live cluster hub render fails. */
+    }
+  }
   sendCanonicalPreviewBytes(res, preview.htmlPath);
 }
 
@@ -118,6 +126,37 @@ function mountBeforeRoute(pathSuffix: string): void {
 
 mountBeforeRoute("");
 mountBeforeRoute("/");
+
+/** Token-free Brook Pharmacy First hub visual-experience preview for sales screenshots only. */
+function handleBrookSalesDemoHubVisualExperience(
+  req: import("express").Request,
+  res: import("express").Response,
+  next: import("express").NextFunction,
+): void {
+  if (
+    !isPublicBrookSalesDemoHubVisualExperienceGet({
+      method: req.method,
+      path: req.path,
+      originalUrl: req.originalUrl,
+      url: req.url,
+      query: req.query as Record<string, unknown>,
+    })
+  ) {
+    return next();
+  }
+  const preview = resolveScopedPreview(req, res, "pharmacy-first");
+  if (!preview) return;
+  sendScopedPreviewPage(res, preview);
+}
+
+pharmacyVisualExperiencePublicRouter.get(
+  "/pharmacy-visual-experience/pharmacy-first",
+  handleBrookSalesDemoHubVisualExperience,
+);
+pharmacyVisualExperiencePublicRouter.get(
+  "/pharmacy-visual-experience/pharmacy-first/",
+  handleBrookSalesDemoHubVisualExperience,
+);
 
 /** Authenticated Master Admin canonical final render preview — raw file bytes only. */
 export const pharmacyVisualExperienceAdminRouter = Router();

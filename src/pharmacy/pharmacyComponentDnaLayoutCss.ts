@@ -37,6 +37,13 @@ export function componentDnaLayoutCss(dna: ComponentDna): string {
 .definition-split-row,.grid-2.trust-split-row,.grid-2.safety-split{display:grid;grid-template-columns:var(--component-split-text-ratio,1fr) var(--component-split-image-ratio,1fr);gap:var(--component-split-gap,32px);align-items:start}
 .trust-split-row{align-items:center;gap:var(--component-trust-gap,20px)}
 .safety-split{gap:var(--component-trust-gap,20px)}
+.safety-media{margin:0;border-radius:var(--component-image-radius,16px);overflow:hidden}
+.safety-media img,.safety-media .image-panel{width:100%;height:100%;min-height:22rem;object-fit:cover;display:block}
+.conditions-authority-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px}
+.conditions-authority-grid .condition-track-card{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:22px 12px}
+.conditions-authority-grid .condition-track-icon{width:2.5rem;height:2.5rem;color:var(--brand-heading,#005EB8);display:flex;align-items:center;justify-content:center}
+.conditions-authority-grid .condition-track-icon svg{width:1.75rem;height:1.75rem}
+.conditions-authority-grid .condition-track-card h3{margin:0;font-size:15px;line-height:1.35}
 .definition-split-continuation{max-width:var(--component-split-max-width,920px);margin-left:auto;margin-right:auto}
 section[data-layout="media-float-flow"]::after{content:"";display:table;clear:both}
 section[data-layout="media-float-flow"] .section-media,
@@ -55,6 +62,12 @@ body[data-split-composition="media-float-flow"] .definition-split-media{float:ri
 body[data-split-composition="media-float-flow"] .definition-split-copy{display:block}
 body[data-split-composition="media-float-flow"] .definition-split-row::after{content:"";display:block;clear:both}
 body[data-split-composition="media-float-flow"] .definition-split-continuation{max-width:none;margin-left:0;margin-right:0;width:100%;clear:both}
+/* Section layout wins over body composition defaults — balanced-split must stay side-by-side. */
+body[data-split-composition="media-float-flow"] section[data-layout="balanced-split"] .balanced-split-row,
+body[data-split-composition="media-float-flow"] section[data-layout="balanced-split"] .definition-split-row{display:grid;grid-template-columns:var(--component-split-text-ratio,1fr) var(--component-split-image-ratio,1fr);gap:var(--component-split-gap,32px);align-items:start}
+body[data-split-composition="media-float-flow"] section[data-layout="balanced-split"] .definition-split-media,
+body[data-split-composition="media-float-flow"] section[data-layout="balanced-split"] .section-media{float:none;width:auto;max-width:none;margin:0}
+body[data-split-composition="media-float-flow"] section[data-layout="balanced-split"] .definition-split-row::after{content:none;display:none}
 section[data-media-layout="media-float-flow"] .definition-split-row{display:block}
 section[data-media-layout="media-float-flow"] .definition-split-media{float:right;width:min(48%,520px);margin:0 0 24px 32px}
 section[data-media-layout="media-float-flow"] .definition-split-copy{display:block}
@@ -140,6 +153,7 @@ body[data-process-variant="compact-list"] .process-grid.grid-4{grid-template-col
   header[data-mobile-header="stacked-nav"] .nav{flex-direction:column;align-items:flex-start}
   header[data-mobile-header="stacked-nav"] .nav-links{width:100%;flex-wrap:wrap;white-space:normal}
   .hero-grid,.grid-2,.grid-3,.grid-4,.definition-split-row,.grid-2.trust-split-row,.grid-2.safety-split,.pharmacy-local-grid{grid-template-columns:1fr;gap:var(--component-split-gap,28px)}
+  .conditions-authority-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   section[data-layout="media-float-flow"] .section-media,
   section[data-layout="media-float-flow"] .definition-split-media{float:none;width:100%;max-width:none;margin:0 0 var(--component-split-gap,24px) 0}
   body[data-split-composition="media-float-flow"] .definition-split-media{float:none;width:100%;margin:0 0 24px 0}

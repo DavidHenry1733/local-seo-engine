@@ -28,6 +28,8 @@ import {
 } from "./pharmacyLocalMarketSnapshot.ts";
 import { phraseAreaTravelContext } from "./contentEngine/pharmacyLocalMarketIntelligencePhrases.ts";
 import { synthesiseCanonicalGroundedLocalCopyV1 } from "./contentEngine/pharmacyCanonicalLocalSynthesisV1.ts";
+import { localityArrangementCopy } from "./contentEngine/pharmacyLocalitySectionArrangementV1.ts";
+import { premisesAddressForArea, premisesLocalityFromCanonicalAddress } from "./contentEngine/pharmacyAiLocalNarrativePromptContractV1.ts";
 import { finalizeLocalClusterPageContent } from "./pharmacyLocalClusterCompositionDedupe.ts";
 import { commercialNarrativeSequenceV1 } from "./contentEngine/pharmacyCommercialSectionPlannerV1.ts";
 import { allocateLocalityEvidenceV1 } from "./contentEngine/pharmacyLocalityEvidenceAllocatorV1.ts";
@@ -458,6 +460,36 @@ function serviceSectionsForCanonicalNarrative(
   return buildApprovedBankLocalityPageContract(pack, input.areaSlug, input.areaSlugsInCluster);
 }
 
+function facilityNamedBeforeIs(sentence: string): string {
+  const named = sentence.replace(/^The\s+/i, "").match(/^([^.]{3,90}?)\s+is\b/i);
+  if (!named) return "";
+  const facility = named[1].replace(/\s+/g, " ").trim();
+  if (facility.split(/\s+/).length < 2) return "";
+  if (/^(it|they|this|that)$/i.test(facility)) return "";
+  if (/\b(serves|includes|operates|provides|manages|holds|include)\b/i.test(facility)) return "";
+  return facility;
+}
+
+function properFacilityName(text: string): string {
+  const named = text.match(
+    /\b(NHS\s+[A-Z][A-Za-z]+(?:\s+(?:and|[A-Z][A-Za-z]+)){1,6}|[A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+){1,5}\s(?:Hospital|Infirmary))\b/,
+  );
+  return named?.[1]?.replace(/\s+/g, " ").trim() || "";
+}
+
+/** Keep the arrangement slot, but do not leave a heading that names a place or service the introduction does not support. */
+function editorialHeadingAlignedToCopy(heading: string, area: string, hero: string, local: string): string {
+  const body = `${hero}\n${local}`;
+  const claimsGp = /\bgp practices\b/i.test(heading) && !/\bgp practice/i.test(body);
+  const claimsPrimaryCarePlaces = /\bprimary care places\b/i.test(heading) && !/\bprimary care\b/i.test(body);
+  const withoutArea = heading.replace(new RegExp(`\\b${area.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "ig"), " ");
+  const properNames = withoutArea.match(/\b[A-Z][A-Za-z0-9'&-]+(?:\s+[A-Z][A-Za-z0-9'&-]+){1,6}/g) || [];
+  const namesMissingPlace = properNames.some((phrase) => !body.toLowerCase().includes(phrase.toLowerCase()));
+  if (!claimsGp && !claimsPrimaryCarePlaces && !namesMissingPlace) return heading;
+  const facility = facilityNamedBeforeIs(local) || facilityNamedBeforeIs(hero) || properFacilityName(`${hero}\n${local}`);
+  return facility ? `${facility} in ${area}` : heading;
+}
+
 export function installValidatedCanonicalClusterNarrative(
   input: LocalClusterContentInput,
   ctx: ContentGenerationContext,
@@ -473,7 +505,30 @@ export function installValidatedCanonicalClusterNarrative(
 ): LocalClusterPageContent {
   const contract = serviceSectionsForCanonicalNarrative(input, ctx);
   const pharmacyName = ctx.profile.pharmacyName;
-  const address = ctx.profile.fullAddress || ctx.profile.customerFacingAddress || "";
+  const address = premisesAddressForArea(ctx.profile);
+  const premises = premisesLocalityFromCanonicalAddress(address);
+  const leadHealthcare = synthesised.provenance.find((fact) => fact.category === "healthcare")?.name || "";
+  const leadPlace = synthesised.provenance.find((fact) => fact.category === "landmarks" || fact.category === "community")?.name || "";
+  const draftedHeading = localityArrangementCopy({
+    areaSlug: input.areaSlug,
+    areaName: input.areaName,
+    pharmacyName,
+    phone: String(ctx.profile.displayPhone || ctx.profile.phone || ""),
+    serviceName: input.serviceName,
+    address,
+    premisesInArea: Boolean(premises) && premises.toLowerCase() === input.areaName.trim().toLowerCase(),
+    leadHealthcare,
+    leadPlace,
+  });
+  const arrangement = {
+    ...draftedHeading,
+    editorialHeading: editorialHeadingAlignedToCopy(
+      draftedHeading.editorialHeading,
+      input.areaName,
+      synthesised.heroIntroduction,
+      synthesised.localIntroduction,
+    ),
+  };
   const processSteps = contract.processSteps.map((step) => ({
     title: step.title,
     body: step.body,
@@ -481,7 +536,7 @@ export function installValidatedCanonicalClusterNarrative(
   }));
   const draft: LocalClusterPageContent = {
     heroIntro: synthesised.heroIntroduction,
-    localRelevanceHeading: `Using ${input.serviceName} from ${input.areaName}`,
+    localRelevanceHeading: arrangement.editorialHeading,
     localRelevanceIntro: "",
     localRelevanceBody: synthesised.localIntroduction,
     localRelevanceBullets: [...contract.considerBullets, ...contract.scopeBullets]
@@ -495,7 +550,7 @@ export function installValidatedCanonicalClusterNarrative(
     processHeading: contract.processHeading,
     processIntro: contract.processBody,
     processSteps,
-    accessHeading: `The pharmacy address for patients from ${input.areaName}`,
+    accessHeading: arrangement.addressHeading,
     accessBody: address ? `${pharmacyName} is at ${address}.` : "",
     clinicalEnvironmentHeading: contract.preparationHeading,
     clinicalEnvironmentBody: contract.preparationBody,
@@ -512,7 +567,7 @@ export function installValidatedCanonicalClusterNarrative(
     })),
     ctaPrimary: "Contact the pharmacy",
     ctaSecondary: "Get directions",
-    ctaPhonePrompt: synthesised.nextStep,
+    ctaPhonePrompt: arrangement.nextStep,
     contentFingerprint: synthesised.fingerprint,
     localIntelligenceUsed: true,
     narrativeType: `canonical-local-content-engine:${synthesised.synthesis}`,

@@ -76,6 +76,7 @@ import {
   shouldUseDesignIntelligenceImages,
 } from "./pharmacyDesignIntelligenceImageService.ts";
 import { renderResolvedImageSlotHtml } from "./pharmacyImageSlotRenderHelpers.ts";
+import { renderNhsPharmacyFirstConditionGridHtml } from "./pharmacyFirstConditionTracks.ts";
 
 type BodyLocaliser = (text: string) => string;
 
@@ -475,6 +476,10 @@ function renderServiceDefinitionSplit(
   });
 }
 
+function isPharmacyFirstService(serviceId?: string, serviceName?: string): boolean {
+  return /pharmacy[- ]first/i.test(String(serviceId || "")) || /pharmacy first/i.test(String(serviceName || ""));
+}
+
 /** Slot 5 — Conditions / key points: titled cards only, max 9, DNA-driven column grid. */
 function renderConditionsGrid(
   section: ParsedMasterSection | undefined,
@@ -483,6 +488,9 @@ function renderConditionsGrid(
   serviceId?: string,
   serviceName?: string,
 ): string {
+  if (isPharmacyFirstService(serviceId, serviceName)) {
+    return renderNhsPharmacyFirstConditionGridHtml();
+  }
   if (!section) return "";
   const titled = proseToTitledCards(section.proseHtml);
   const fromList = titled.length
@@ -677,38 +685,47 @@ ${intro ? `<p>${esc(intro)}</p>` : ""}
 </section>`;
 }
 
-/** Slot 8 — Safety panel: prose left, titled safety cards right (max 4). */
+/** Slot 8 — Safety panel: prose left, one consultation image right. */
 function renderSafetyPanel(
   section: ParsedMasterSection | undefined,
   profile: PharmacyServicePageProfile,
   serviceName: string,
   loc: BodyLocaliser,
+  ctx?: PharmacyImageRenderContext,
 ): string {
-  if (!section) return "";
-  const isMisconceptions = /misconception/i.test(section.title);
-  const cards = localiseCards(proseToTitledCards(section.proseHtml), loc);
-  const titled = cards.slice(0, 4);
-  const $p = cheerio.load(`<div>${section.proseHtml}</div>`);
-  const intro = $p("p")
+  const pharmacyFirst = isPharmacyFirstService(ctx?.serviceKey, serviceName);
+  if (!section && !pharmacyFirst) return "";
+  void profile;
+  const $p = cheerio.load(`<div>${section?.proseHtml || ""}</div>`);
+  const fromMaster = $p("p")
     .slice(0, 2)
     .map((_, el) => `<p>${esc(loc($p(el).text().trim()))}</p>`)
     .get()
+    .filter(Boolean)
     .join("");
-  const cardGrid =
-    titled.length > 0
-      ? renderBalancedCardGrid(titled, { cols: 2, gridClass: "safety-grid" })
-      : "";
-  const introHtml =
-    isMisconceptions && cardGrid ? "" : `<div class="safety-prose">${intro}</div>`;
+  const intro =
+    fromMaster ||
+    `<p>${esc(
+      loc(
+        "Contact your GP, NHS 111 or emergency services if symptoms are severe, rapidly worsening, or the pharmacist advises that pharmacy care is not the right next step.",
+      ),
+    )}</p>`;
+  const introHtml = `<div class="safety-prose">${intro}</div>`;
+  const consultImage = ctx
+    ? resolveTenantSlotImage(ctx, "support", "image-panel support-block-media")
+    : "";
+  const title = pharmacyFirst
+    ? "When to contact a GP, NHS 111 or emergency services"
+    : section?.title || "When to seek GP or urgent care";
 
   return `<section class="impact" data-template-block="safety">
 <div class="wrap grid-2 safety-split">
-<div>
+<div class="safety-prose-col">
 <span class="tag">When to seek GP or urgent care</span>
-<h2>${esc(section.title)}</h2>
+<h2>${esc(title)}</h2>
 ${introHtml}
 </div>
-${cardGrid ? `<div class="safety-cards">${cardGrid}</div>` : ""}
+<div class="safety-media">${consultImage}</div>
 </div>
 </section>`;
 }
@@ -1048,7 +1065,7 @@ export function buildPharmacyServicePageMainHtml(
       lockedContract?.processSteps,
     ),
     renderSupportImageBand(sections.get("5"), ctx, loc, contentContext),
-    renderSafetyPanel(sections.get("6"), profile, ctx.serviceName, loc),
+    renderSafetyPanel(sections.get("6"), profile, ctx.serviceName, loc, ctx),
     renderTrustSection(sections.get("9"), $, ctx, profile, loc, contentContext),
     renderProfessionalReviewPanelHtml(profile),
     renderFaqSection($, loc, sections, contentContext, sourceHtml, profile),

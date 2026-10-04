@@ -125,6 +125,14 @@ ul.clean li{padding:12px 0;border-bottom:1px solid rgba(148,163,184,.22);font-we
 .final h2{color:var(--brand-heading)}.final p{color:var(--brand-muted)}
 .site-footer{background:var(--brand-footer-bg,var(--footer-bg,var(--brand-heading)));color:var(--brand-footer-text,var(--footer-text,#fff))}.site-footer h3{color:var(--brand-footer-text,var(--footer-text,#fff))}.site-footer p,.site-footer a{color:var(--brand-footer-link,var(--footer-link,var(--footer-text,#fff)))}.site-footer a:hover{color:var(--brand-footer-accent,var(--footer-accent,var(--footer-link)))}
 .conditions-grid .card h3{color:var(--brand-heading-primary,var(--brand-heading));min-height:0}
+.conditions-authority-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px}
+.conditions-authority-grid .condition-track-card{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:22px 12px}
+.conditions-authority-grid .condition-track-icon{width:2.5rem;height:2.5rem;color:var(--brand-heading,#005EB8);display:flex;align-items:center;justify-content:center}
+.conditions-authority-grid .condition-track-icon svg{width:1.75rem;height:1.75rem}
+.conditions-authority-grid .condition-track-card h3{margin:0;font-size:15px;line-height:1.35}
+@media(max-width:1100px){.conditions-authority-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:720px){.conditions-authority-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.safety-media img,.safety-media .image-panel{width:100%;height:100%;min-height:22rem;object-fit:cover;display:block;border-radius:16px}
 ${layoutCss}`;
 }
 
