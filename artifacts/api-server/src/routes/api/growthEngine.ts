@@ -68,6 +68,28 @@ import {
   rejectCustomerSetupGoogleListing,
   searchAgainCustomerSetupGoogleListings,
 } from "../../../../../src/pharmacy/growthEngineCustomerSetupGoogleMatchService.ts";
+import { buildTenantOpportunityForecast } from "../../../../../src/pharmacy/opportunityForecastService.ts";
+import {
+  parseExecutiveReportScenario,
+  renderExecutiveOpportunityReportHtml,
+} from "../../../../../src/pharmacy/opportunityExecutiveReport.ts";
+import {
+  buildTenantPortfolioOpportunity,
+  type TenantPortfolioOpportunity,
+} from "../../../../../src/pharmacy/portfolioOpportunityService.ts";
+import { buildTenantCompetitorRadar } from "../../../../../src/pharmacy/localCompetitorSerpRadarService.ts";
+import { postcodeOutcode } from "../../../../../src/pharmacy/companiesHouseService.ts";
+import {
+  buildEligibleContractorPool,
+  claimTerritoryLicense,
+  decorateCluster,
+  findTopTerritories,
+  getOutcodesWithinRadius,
+} from "../../../../../src/services/territoryClusterService.ts";
+import { generatePharmacyPitch } from "../../../../../src/pharmacy/generatePharmacyPitchService.ts";
+import { findPharmacyCustomer } from "../../../../../src/pharmacy/dashboardCustomerStore.ts";
+import { getPharmacyProfilePath } from "../../../../../src/pharmacy/pharmacyWorkspacePaths.ts";
+import fs from "node:fs";
 
 const router = Router();
 
@@ -82,6 +104,118 @@ function safeSlug(v: string): string {
 function resolveSlug(raw: string): string | null {
   return resolveTenantProfileSlug(raw) || safeSlug(raw) || null;
 }
+
+function readProfileGphcNumber(slug: string): string {
+  return readProfileField(slug, "gphcNumber");
+}
+
+function readProfileField(slug: string, key: string): string {
+  try {
+    const file = getPharmacyProfilePath(slug);
+    if (!fs.existsSync(file)) return "";
+    const doc = JSON.parse(fs.readFileSync(file, "utf8")) as { data?: Record<string, unknown> };
+    return String(doc.data?.[key] || "").trim();
+  } catch {
+    return "";
+  }
+}
+
+router.get("/growth-engine/top-territories", async (req, res) => {
+  req.setTimeout(180000);
+  res.setTimeout(180000);
+  const city = String(req.query.city || "").trim();
+  const metro = String(req.query.metro || "").trim();
+  const outcode = String(req.query.outcode || req.query.anchor || "").trim();
+  const limit = Number(req.query.limit);
+  const minPopulation = Number(req.query.minPopulation || req.query.minPop);
+  const radiusMiles = Number(req.query.radius || req.query.radiusMiles);
+  try {
+    const result = await findTopTerritories({
+      city,
+      metro,
+      outcode,
+      limit: Number.isFinite(limit) ? limit : undefined,
+      minPopulation: Number.isFinite(minPopulation) ? minPopulation : undefined,
+      radiusMiles: Number.isFinite(radiusMiles) ? radiusMiles : undefined,
+    });
+    res.json(result);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
+});
+
+router.get("/growth-engine/territory-cluster", async (req, res) => {
+  const outcode = String(req.query.outcode || req.query.anchor || "").trim();
+  const radiusMiles = Number(req.query.radius || req.query.radiusMiles) || 15;
+  if (!outcode) {
+    return res.status(400).json({ ok: false, error: "outcode is required" });
+  }
+  try {
+    const cluster = await getOutcodesWithinRadius(outcode, radiusMiles);
+    if (!cluster) {
+      return res.status(404).json({ ok: false, error: `No centroid found for ${outcode}` });
+    }
+    const view = decorateCluster(cluster);
+    res.json({
+      ...view,
+      outcodes: view.outcodes.map((row) => ({
+        outcode: row.outcode,
+        population: row.population,
+        distanceMiles: Number(row.distanceMiles.toFixed(2)),
+        postTown: row.postTown,
+      })),
+    });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
+});
+
+router.get("/growth-engine/:slug/claim-territory", async (req, res) => {
+  const slug = resolveSlug(req.params.slug);
+  if (!slug) return res.status(400).json({ ok: false, error: "Invalid slug" });
+  const customer = findPharmacyCustomer(slug);
+  const pharmacyName = String(req.query.pharmacyName || customer?.pharmacyName || slug).trim();
+  const postcode = String(req.query.postcode || customer?.postcode || "").trim();
+  const outcode = postcodeOutcode(postcode) || postcodeOutcode(readProfileField(slug, "postcode"));
+  if (!outcode) return res.status(400).json({ ok: false, error: "Postcode is required to claim a territory" });
+  try {
+    const cluster = await getOutcodesWithinRadius(outcode, 15);
+    claimTerritoryLicense({
+      outcode,
+      polygonOutcodes: cluster?.polygonOutcodes,
+      slug,
+      pharmacyName,
+    });
+    const next = new URLSearchParams({
+      claim: "1",
+      pharmacyName,
+      postcode: postcode || outcode,
+    });
+    res.redirect(302, `/new-pitch?${next.toString()}`);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
+});
+
+router.post("/growth-engine/generate-pitch", async (req, res) => {
+  req.setTimeout(180000);
+  res.setTimeout(180000);
+  const pharmacyName = String(req.body?.pharmacyName || "").trim();
+  const postcode = String(req.body?.postcode || "").trim();
+  const gphcNumber = String(req.body?.gphcNumber || "").trim();
+  if (!pharmacyName) return res.status(400).json({ ok: false, error: "Pharmacy name is required" });
+  if (!postcode) return res.status(400).json({ ok: false, error: "Postcode is required" });
+  try {
+    const result = await generatePharmacyPitch({ pharmacyName, postcode, gphcNumber });
+    res.json(result);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
+});
 
 router.post("/growth-engine/:slug/growth-plan/decision", (req, res) => {
   const slug = resolveSlug(req.params.slug);
@@ -125,6 +259,137 @@ router.get("/growth-engine/:slug/opportunities", (req, res) => {
   const report = buildGrowthOpportunityReport(slug);
   if (req.query.persist === "1") saveGrowthOpportunityReport(report);
   res.json({ ok: true, report });
+});
+
+async function sendExecutiveOpportunityReport(
+  req: import("express").Request,
+  res: import("express").Response,
+): Promise<void> {
+  const slug = resolveSlug(req.params.slug);
+  if (!slug) {
+    res.status(400).json({ ok: false, error: "Invalid slug" });
+    return;
+  }
+  const force = req.query.force === "1" || req.query.refresh === "1";
+  const locationName = String(req.query.location || req.query.locationName || "").trim();
+  try {
+    const forecast = await buildTenantOpportunityForecast(slug, {
+      force,
+      locationName: locationName || undefined,
+    });
+    const scenario = parseExecutiveReportScenario(req.query as Record<string, unknown>);
+    let radar = null;
+    try {
+      radar = await buildTenantCompetitorRadar(slug, {
+        force,
+        locationName: locationName || undefined,
+      });
+    } catch {
+      radar = null;
+    }
+    let portfolio: TenantPortfolioOpportunity | null = null;
+    try {
+      portfolio = await buildTenantPortfolioOpportunity(slug, {
+        force,
+        locationName: locationName || undefined,
+      });
+    } catch {
+      portfolio = null;
+    }
+    const customer = findPharmacyCustomer(slug);
+    const outcode = postcodeOutcode(customer?.postcode || readProfileField(slug, "postcode"));
+    let territory = null;
+    try {
+      territory = outcode ? await getOutcodesWithinRadius(outcode, 15) : null;
+    } catch {
+      territory = null;
+    }
+    let contractorPool = null;
+    try {
+      contractorPool = territory
+        ? await buildEligibleContractorPool(territory, {
+            limit: 6,
+            highlight: {
+              slug,
+              pharmacyName: forecast.pharmacyName || customer?.pharmacyName,
+              postcode: customer?.postcode,
+              tradingAddress: customer?.displayAddress,
+            },
+          })
+        : null;
+    } catch {
+      contractorPool = null;
+    }
+    const html = renderExecutiveOpportunityReportHtml(forecast, scenario, radar, portfolio, {
+      website: customer?.website,
+      gphcNumber: readProfileGphcNumber(slug),
+      registeredCompanyName:
+        readProfileField(slug, "registeredCompanyName") || readProfileField(slug, "companyName"),
+      companyNumber: readProfileField(slug, "companyRegistrationNumber"),
+      primaryDirectorName:
+        readProfileField(slug, "primaryDirectorName") || readProfileField(slug, "pharmacyOwnerName"),
+    }, territory, contractorPool);
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.setHeader("Cache-Control", "no-store");
+    res.send(html);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
+}
+
+router.get("/growth-engine/:slug/opportunity-forecast/report", sendExecutiveOpportunityReport);
+router.get("/growth-engine/:slug/executive-report", sendExecutiveOpportunityReport);
+
+router.get("/growth-engine/:slug/competitor-radar", async (req, res) => {
+  const slug = resolveSlug(req.params.slug);
+  if (!slug) return res.status(400).json({ ok: false, error: "Invalid slug" });
+  const force = req.query.force === "1" || req.query.refresh === "1";
+  const locationName = String(req.query.location || req.query.locationName || "").trim();
+  try {
+    const radar = await buildTenantCompetitorRadar(slug, {
+      force,
+      locationName: locationName || undefined,
+    });
+    res.json(radar);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
+});
+
+router.get("/growth-engine/:slug/portfolio-opportunity", async (req, res) => {
+  const slug = resolveSlug(req.params.slug);
+  if (!slug) return res.status(400).json({ ok: false, error: "Invalid slug" });
+  const force = req.query.force === "1" || req.query.refresh === "1";
+  const locationName = String(req.query.location || req.query.locationName || "").trim();
+  try {
+    const portfolio = await buildTenantPortfolioOpportunity(slug, {
+      force,
+      locationName: locationName || undefined,
+    });
+    res.json(portfolio);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
+});
+
+router.get("/growth-engine/:slug/opportunity-forecast", async (req, res) => {
+  const slug = resolveSlug(req.params.slug);
+  if (!slug) return res.status(400).json({ ok: false, error: "Invalid slug" });
+  const force = req.query.force === "1" || req.query.refresh === "1";
+  const locationName = String(req.query.location || req.query.locationName || "").trim();
+  try {
+    const forecast = await buildTenantOpportunityForecast(slug, {
+      force,
+      locationName: locationName || undefined,
+    });
+    res.json(forecast);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(502).json({ ok: false, error: message });
+  }
 });
 
 router.get("/growth-engine/:slug/growth-plan", (req, res) => {

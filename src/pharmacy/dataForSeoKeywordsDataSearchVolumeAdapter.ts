@@ -5,6 +5,7 @@
  */
 import { fetchDataForSeo, isDataForSeoTransportTimeout } from "./dataForSeoHttp.ts";
 import { isDataForSeoConfigured } from "./dataForSeoNationalSearchAdapter.ts";
+import { hydrateDataForSeoEnvIfNeeded } from "./contentEngine/pharmacyLocalEditorialEvidenceCollectorV3.ts";
 import {
   SERVICE_SEARCH_DEMAND_ENDPOINT,
   SERVICE_SEARCH_DEMAND_LANGUAGE_CODE,
@@ -17,10 +18,17 @@ import {
 
 export { isDataForSeoConfigured };
 
+export type SearchVolumeLiveOptions = {
+  locationName?: string;
+  locationCode?: number;
+  languageCode?: string;
+};
+
 export type SearchVolumeLiveRequest = {
   keywords: string[];
-  location_code: typeof SERVICE_SEARCH_DEMAND_LOCATION_CODE;
-  language_code: typeof SERVICE_SEARCH_DEMAND_LANGUAGE_CODE;
+  location_code?: number;
+  location_name?: string;
+  language_code: string;
 };
 
 export type SearchVolumeLivePostResult = {
@@ -30,6 +38,7 @@ export type SearchVolumeLivePostResult = {
 };
 
 function credentials(): { login: string; password: string } {
+  hydrateDataForSeoEnvIfNeeded();
   const login = String(process.env.DATAFORSEO_LOGIN || process.env.DATAFORSEO_API_LOGIN || "").trim();
   const password = String(
     process.env.DATAFORSEO_PASSWORD || process.env.DATAFORSEO_API_PASSWORD || "",
@@ -69,14 +78,60 @@ function parseMonthlySearches(value: unknown): MonthlySearchVolume[] {
   return out;
 }
 
-export function buildSearchVolumeLiveRequest(keywords: string[]): SearchVolumeLiveRequest[] {
-  return [
-    {
-      keywords: keywords.map((k) => String(k || "").trim()).filter(Boolean),
-      location_code: SERVICE_SEARCH_DEMAND_LOCATION_CODE,
-      language_code: SERVICE_SEARCH_DEMAND_LANGUAGE_CODE,
-    },
-  ];
+export function buildSearchVolumeLiveRequest(
+  keywords: string[],
+  options: SearchVolumeLiveOptions = {},
+): SearchVolumeLiveRequest[] {
+  const languageCode = options.languageCode || SERVICE_SEARCH_DEMAND_LANGUAGE_CODE;
+  const locationName = String(options.locationName || "").trim();
+  const locationCode =
+    options.locationCode != null && Number.isFinite(options.locationCode)
+      ? Number(options.locationCode)
+      : null;
+  const body: SearchVolumeLiveRequest = {
+    keywords: keywords.map((k) => String(k || "").trim()).filter(Boolean),
+    language_code: languageCode,
+  };
+  // Google Ads accepts location_code XOR location_name. Prefer explicit city/metro codes
+  // (e.g. Liverpool 1006886) over a postcode-sector string.
+  if (locationCode != null) body.location_code = locationCode;
+  else if (locationName) body.location_name = locationName;
+  else body.location_code = SERVICE_SEARCH_DEMAND_LOCATION_CODE;
+  return [body];
+}
+
+function summarizeSearchVolumePayload(payload: unknown): Record<string, unknown> {
+  const json = payload as {
+    status_code?: number;
+    status_message?: string;
+    cost?: number;
+    tasks?: Array<{
+      id?: string;
+      status_code?: number;
+      status_message?: string;
+      cost?: number;
+      result?: Array<Record<string, unknown>>;
+    }>;
+  };
+  return {
+    status_code: json?.status_code,
+    status_message: json?.status_message,
+    cost: json?.cost,
+    tasks: (json?.tasks || []).map((task) => ({
+      id: task.id,
+      status_code: task.status_code,
+      status_message: task.status_message,
+      cost: task.cost,
+      result_count: Array.isArray(task.result) ? task.result.length : 0,
+      items: (Array.isArray(task.result) ? task.result : []).map((row) => ({
+        keyword: row.keyword,
+        search_volume: row.search_volume,
+        location_code: row.location_code,
+        competition: row.competition,
+        cpc: row.cpc,
+      })),
+    })),
+  };
 }
 
 /**
@@ -200,12 +255,14 @@ export function parseSearchVolumeLiveResponse(input: {
  */
 export async function postGoogleAdsSearchVolumeLive(
   keywords: string[],
+  options: SearchVolumeLiveOptions = {},
 ): Promise<SearchVolumeLivePostResult> {
   if (!keywords.length) {
     return { payload: { tasks: [] }, taskId: null, cost: 0 };
   }
   const { login, password } = credentials();
-  const body = buildSearchVolumeLiveRequest(keywords);
+  const body = buildSearchVolumeLiveRequest(keywords, options);
+  console.log("[DataForSEO search_volume] request", JSON.stringify(body));
   try {
     const response = await fetchDataForSeo(SERVICE_SEARCH_DEMAND_ENDPOINT, {
       method: "POST",
@@ -216,6 +273,7 @@ export async function postGoogleAdsSearchVolumeLive(
       body: JSON.stringify(body),
     });
     const payload: any = await response.json();
+    console.log("[DataForSEO search_volume] response", JSON.stringify(summarizeSearchVolumePayload(payload)));
     if (!response.ok || payload?.status_code !== 20000) {
       throw new Error(
         `DataForSEO search_volume failed: HTTP ${response.status} status ${payload?.status_code || "unknown"}`,

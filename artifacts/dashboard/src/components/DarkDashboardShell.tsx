@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetch } from "@/lib/api";
 import {
@@ -7,18 +8,22 @@ import {
   type PharmacyCustomerCard,
 } from "@/components/CustomerSelectionGrid";
 import { PharmacyWorkspacePanel, type WorkspaceDashboardData, type WorkspacePanelId } from "@/components/PharmacyWorkspacePanel";
+import { CatchmentRegeneratePreview } from "@/components/CatchmentRegeneratePreview";
 import { ImageLibraryView } from "@/components/ImageLibraryView";
+import { AddClientImportButton, GoogleMapsImportModal } from "@/components/GoogleMapsImportModal";
+import { GeneratePharmacyPitchWizard } from "@/components/GeneratePharmacyPitchWizard";
+import { TerritoryExplorer } from "@/pages/TerritoryExplorer";
 import {
   activatePharmacyWorkspace,
   campaignBuilderChooseUrl,
   closePharmacyWorkspace,
   isWorkspaceLandscapeOpen,
-  readWorkspaceSlug,
+  readUrlWorkspaceSlug,
   workspacePanelFromHash,
 } from "@/lib/pharmacyWorkspaceClient";
 import {
-  LayoutDashboard, Wand2, FileSearch, TrendingUp, Image,
-  Palette, Activity, Globe, ShieldCheck, Users, KeyRound,
+  LayoutDashboard, Wand2, FileSearch, TrendingUp, Image, Sparkles,
+  Palette, Activity, Globe, ShieldCheck, Users, KeyRound, MapPin,
   Bell, Search, FolderOpen, ChevronDown, Settings,
   Zap, CheckCircle2, ChevronRight, BookOpen,
   Check, BarChart2, BarChart3,
@@ -34,8 +39,13 @@ const NAV_GROUPS = [
     id: "campaigns", label: "CAMPAIGNS",
     items: [
       { icon: LayoutDashboard, label: "Dashboard",       sub: "Overview & stats",       href: "/dashboard",      color: "#818cf8", badge: null },
+      { icon: Sparkles,        label: "New Pitch",       sub: "Generate pharmacy pitch", href: "/new-pitch",     color: "#fbbf24", badge: null },
+      { icon: MapPin,          label: "Territory Explorer", sub: "Catchment & exclusivity", href: "/territories", color: "#38bdf8", badge: null },
       { icon: Wand2,           label: "SEO Wizard",      sub: "Campaign builder",       href: "/wizard",         color: "#a78bfa", badge: "8 stages" },
-      { icon: FileSearch,      label: "Page Preview",    sub: "Browse generated pages", href: "/pages",          color: "#60a5fa", badge: "169" },
+      { icon: TrendingUp,      label: "Growth Engine",   sub: "Plan & intelligence",    href: "/growth-engine",  color: "#34d399", badge: null },
+      { icon: FileText,        label: "Content Review",  sub: "Authority audit",        href: "/content-review", color: "#60a5fa", badge: null },
+      { icon: ShieldCheck,     label: "Review Centre",   sub: "Approve campaign pages", href: "/review-centre",  color: "#fb7185", badge: null },
+      { icon: FileSearch,      label: "Page Preview",    sub: "Browse generated pages", href: "/pages",          color: "#38bdf8", badge: null },
       { icon: Image,           label: "Image Packs",     sub: "Manage visual assets",   href: "/images",         color: "#fbbf24", badge: null },
       { icon: Palette,         label: "Designs",         sub: "UI design variants",     href: "/designs",        color: "#f472b6", badge: null },
     ],
@@ -158,27 +168,35 @@ function Sidebar({
 }
 
 // ─── Top bar ─────────────────────────────────────────────────────────────────
-function TopBar({ project, title, sub, setActive }: { project: string; title: string; sub?: string; setActive: (h: string) => void }) {
+function TopBar({ project, title, sub, setActive, onImportClient }: { project: string; title: string; sub?: string; setActive: (h: string) => void; onImportClient: () => void }) {
   return (
-    <header style={{ height: 52, background: "#10121c", borderBottom: "1px solid #1c1f30", display: "flex", alignItems: "center", padding: "0 20px", gap: 12, flexShrink: 0 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#3a3f5c" }}>
+    <header style={{ minHeight: 52, background: "#10121c", borderBottom: "1px solid #1c1f30", display: "flex", alignItems: "center", padding: "0 16px", gap: 12, flexShrink: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#3a3f5c", minWidth: 0, overflow: "hidden" }}>
         <BookOpen size={13} color="#2e3250" />
         <span>{project}</span>
         <ChevronRight size={12} color="#2e3250" />
         <span style={{ color: "#c8d0e0", fontWeight: 600 }}>{title}</span>
         {sub && <><ChevronRight size={12} color="#2e3250" /><span style={{ color: "#a78bfa", fontWeight: 500, fontSize: 12 }}>{sub}</span></>}
       </div>
-      <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 8, background: "#181b2a", border: "1px solid #1c1f30", borderRadius: 8, padding: "7px 14px", maxWidth: 360, marginLeft: "auto", cursor: "text" }}>
-        <Search size={13} color="#2e3250" />
-        <span style={{ fontSize: 12.5, color: "#2e3250" }}>Jump to page, campaign…</span>
-        <kbd style={{ marginLeft: "auto", fontSize: 10, color: "#2e3250", background: "#10121c", padding: "2px 6px", borderRadius: 4, border: "1px solid #1c1f30" }}>⌘K</kbd>
-      </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <button style={{ position: "relative", background: "none", border: "none", cursor: "pointer", padding: 4 }}>
+      <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#181b2a", border: "1px solid #1c1f30", borderRadius: 8, padding: "7px 14px", width: 220, cursor: "text" }}>
+          <Search size={13} color="#2e3250" />
+          <span style={{ fontSize: 12.5, color: "#2e3250" }}>Jump to page…</span>
+        </div>
+        <button type="button" style={{ position: "relative", background: "none", border: "none", cursor: "pointer", padding: 4 }}>
           <Bell size={17} color="#3a3f5c" />
           <span style={{ position: "absolute", top: 2, right: 2, width: 7, height: 7, borderRadius: "50%", background: "#818cf8", border: "2px solid #10121c" }} />
         </button>
-        <button onClick={() => setActive("/wizard")} style={{ display: "flex", alignItems: "center", gap: 6, background: "linear-gradient(135deg,#4f46e5,#7c3aed)", border: "none", borderRadius: 7, padding: "7px 14px", cursor: "pointer", boxShadow: "0 0 14px rgba(99,102,241,0.3)" }}>
+        <AddClientImportButton compact onClick={onImportClient} />
+        <button type="button" onClick={() => setActive("/territories")} style={{ display: "flex", alignItems: "center", gap: 6, background: "#0f172a", border: "1px solid #334155", borderRadius: 7, padding: "7px 14px", cursor: "pointer", flexShrink: 0 }}>
+          <MapPin size={13} color="#38bdf8" />
+          <span style={{ fontSize: 12, fontWeight: 600, color: "#e4e8f5" }}>Territory Explorer</span>
+        </button>
+        <button type="button" onClick={() => setActive("/new-pitch")} style={{ display: "flex", alignItems: "center", gap: 6, background: "#0f172a", border: "1px solid #334155", borderRadius: 7, padding: "7px 14px", cursor: "pointer", flexShrink: 0 }}>
+          <Sparkles size={13} color="#fbbf24" />
+          <span style={{ fontSize: 12, fontWeight: 600, color: "#e4e8f5" }}>Generate Pitch</span>
+        </button>
+        <button type="button" onClick={() => setActive("/wizard")} style={{ display: "flex", alignItems: "center", gap: 6, background: "linear-gradient(135deg,#4f46e5,#7c3aed)", border: "none", borderRadius: 7, padding: "7px 14px", cursor: "pointer", boxShadow: "0 0 14px rgba(99,102,241,0.3)", flexShrink: 0 }}>
           <Wand2 size={13} color="#fff" />
           <span style={{ fontSize: 12, fontWeight: 600, color: "#fff" }}>New Campaign</span>
         </button>
@@ -223,6 +241,9 @@ interface TenantDashboardResponse {
   serviceChannels?: Array<{ id: string; label: string; active?: boolean }>;
   importRecords?: WorkspaceDashboardData["importRecords"];
   campaigns?: WorkspaceDashboardData["campaigns"];
+  localCampaigns?: WorkspaceDashboardData["localCampaigns"];
+  campaignCreateEnabled?: boolean;
+  livePreviewUrl?: string;
   workspace?: WorkspaceDashboardData["workspace"];
 }
 
@@ -238,24 +259,8 @@ function mapIframeSrc(html: string | undefined, suburb: string, mapsUrl?: string
   return `https://maps.google.com/maps?q=${encodeURIComponent(suburb)}&hl=en&z=15&output=embed`;
 }
 
-function markdownDraft(html: string): string {
-  return html
-    .replace(/<figure[\s\S]*?<\/figure>/gi, "")
-    .replace(/<h3[^>]*>/gi, "\n### ")
-    .replace(/<\/h3>/gi, "\n")
-    .replace(/<strong[^>]*>/gi, "**")
-    .replace(/<\/strong>/gi, "**\n")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/p>/gi, "\n\n")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/g, " ")
-    .replace(/[ \t]+\n/g, "\n")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
-}
-
 function useProductionLocalities() {
-  const [selectedSlug, setSelectedSlug] = useState<string>(() => readWorkspaceSlug());
+  const [selectedSlug, setSelectedSlug] = useState<string>(() => readUrlWorkspaceSlug());
   const customersQuery = useQuery<CustomersResponse>({
     queryKey: ["dashboard-customers"],
     queryFn: () => apiFetch<CustomersResponse>("/api/dashboard/customers"),
@@ -280,7 +285,7 @@ function useProductionLocalities() {
     );
     return {
       suburb: area,
-      slug: draft?.slug || `services/pharmacy-first-${selectedSlug}/${area.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+      slug: draft?.slug || area.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       status: draft?.status || "DRAFT",
       previewBodyHtml: draft?.previewBodyHtml,
       mapSrc: mapIframeSrc(draft?.previewBodyHtml, area, query.data?.googleCatchment?.googleMapsEmbedUrl),
@@ -303,8 +308,9 @@ function useProductionLocalities() {
 
 function statusTone(status: string) {
   const live = /live|published|deployed/i.test(status) && !/not deployed/i.test(status);
+  const approved = /approved/i.test(status);
   const draft = /draft|review|pending/i.test(status);
-  if (live) return { color: "#4ade80", bg: "#052e16", border: "#166534" };
+  if (live || approved) return { color: "#4ade80", bg: "#052e16", border: "#166534" };
   if (draft) return { color: "#fbbf24", bg: "#1c1200", border: "#713f12" };
   return { color: "#6b7296", bg: "#181b2a", border: "#252840" };
 }
@@ -314,10 +320,12 @@ function PageDashboard({
   setActive,
   setProject,
   onOpenCampaign,
+  onImportClient,
 }: {
   setActive: (h: string) => void;
   setProject: (p: string) => void;
   onOpenCampaign: (slug: string, serviceKey: string) => void;
+  onImportClient: () => void;
 }) {
   const {
     pharmacies,
@@ -330,31 +338,84 @@ function PageDashboard({
     customersError,
   } = useProductionLocalities();
   const [workspaceOpen, setWorkspaceOpen] = useState(() => isWorkspaceLandscapeOpen());
-  const [panel, setPanel] = useState<WorkspacePanelId>(() => workspacePanelFromHash());
+  const [panel, setPanel] = useState<WorkspacePanelId>(() => {
+    if (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("catchment")) {
+      return "catchment";
+    }
+    return workspacePanelFromHash();
+  });
 
   useEffect(() => {
     if (data?.pharmacyName) setProject(data.pharmacyName);
   }, [data?.pharmacyName, setProject]);
 
+  useEffect(() => {
+    const syncFromUrl = () => {
+      const slug = readUrlWorkspaceSlug();
+      if (!slug) {
+        setWorkspaceOpen(false);
+        setProject("PharmaConnect");
+        return;
+      }
+      setSelectedSlug(slug);
+      setWorkspaceOpen(true);
+      setPanel(workspacePanelFromHash());
+    };
+    window.addEventListener("popstate", syncFromUrl);
+    window.addEventListener("hashchange", syncFromUrl);
+    window.addEventListener("pharmacy-workspace-activate", syncFromUrl);
+    window.addEventListener("pharmacy-workspace-close", syncFromUrl);
+    return () => {
+      window.removeEventListener("popstate", syncFromUrl);
+      window.removeEventListener("hashchange", syncFromUrl);
+      window.removeEventListener("pharmacy-workspace-activate", syncFromUrl);
+      window.removeEventListener("pharmacy-workspace-close", syncFromUrl);
+    };
+  }, [setSelectedSlug, setProject]);
+
   const openWorkspace = (slug: string) => {
     const card = pharmacies.find((row) => row.slug === slug);
-    localStorage.setItem("selectedSlug", slug);
-    localStorage.setItem("pharmacyWorkspaceView", "landscape");
     setSelectedSlug(slug);
     setProject(card?.pharmacyName || slug);
-    setPanel("profile");
+    setPanel("campaigns");
     setWorkspaceOpen(true);
-    setActive("/dashboard");
+    activatePharmacyWorkspace(slug, "campaigns", "");
   };
 
   return (
     <main style={{ flex: 1, overflowY: "auto", padding: "24px 28px", background: "#0b0d14" }}>
       {!workspaceOpen ? (
         <>
-          <div style={{ marginBottom: 24 }}>
-            <p style={{ color: "#818cf8", fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", margin: "0 0 8px" }}>PHARMACONNECT</p>
-            <h1 style={{ color: "#e4e8f5", fontSize: 22, fontWeight: 700, margin: "0 0 4px", letterSpacing: "-0.02em" }}>Production pharmacies</h1>
-            <p style={{ color: "#6b7296", fontSize: 12.5, margin: 0 }}>Select a live customer such as Gilbert or Yorkshire to open their workspace: profile, import, catchment, and campaigns.</p>
+          <div style={{ marginBottom: 24, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+            <div style={{ minWidth: 0, flex: "1 1 280px" }}>
+              <p style={{ color: "#818cf8", fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", margin: "0 0 8px" }}>PHARMACONNECT</p>
+              <h1 style={{ color: "#e4e8f5", fontSize: 22, fontWeight: 700, margin: "0 0 4px", letterSpacing: "-0.02em" }}>Production pharmacies</h1>
+              <p style={{ color: "#6b7296", fontSize: 12.5, margin: 0 }}>Select a live customer such as Gilbert or Yorkshire to open their workspace: profile, import, catchment, and campaigns.</p>
+            </div>
+            <div style={{ flexShrink: 0, display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <button
+                type="button"
+                onClick={() => setActive("/new-pitch")}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "linear-gradient(135deg,#4f46e5,#7c3aed)",
+                  border: "none",
+                  borderRadius: 8,
+                  padding: "10px 16px",
+                  cursor: "pointer",
+                  color: "#fff",
+                  fontSize: 14,
+                  fontWeight: 800,
+                  boxShadow: "0 0 16px rgba(99,102,241,0.35)",
+                }}
+              >
+                <Sparkles size={15} />
+                Generate New Pharmacy Pitch
+              </button>
+              <AddClientImportButton onClick={onImportClient} />
+            </div>
           </div>
           <CustomerSelectionGrid
             pharmacies={pharmacies}
@@ -479,61 +540,38 @@ function PageWizard({ src }: { src?: string }) {
 
 // ─── Page: Page Preview ───────────────────────────────────────────────────────
 function PagePreview() {
-  const { localities } = useProductionLocalities();
-  const [suburb, setSuburb] = useState<string>("");
-  const [auditorTab, setAuditorTab] = useState<"draft" | "map">("draft");
-  useEffect(() => {
-    if (localities[0] && !localities.some((row) => row.suburb === suburb)) {
-      setSuburb(localities[0].suburb);
-    }
-  }, [localities, suburb]);
-  const selected = localities.find((row) => row.suburb === suburb) ?? localities[0];
-  const draftText = selected?.previewBodyHtml ? markdownDraft(selected.previewBodyHtml) : "";
+  const { selectedSlug, localities } = useProductionLocalities();
+  const areas = localities.map((row) => row.suburb);
+  const previewHref = selectedSlug ? `/preview/${selectedSlug}/pharmacy-first` : "";
   return (
     <main style={{ flex: 1, overflowY: "auto", padding: "24px 28px", background: "#0b0d14" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
+      <div style={{ marginBottom: 16, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
         <div>
           <h1 style={{ color: "#e4e8f5", fontSize: 22, fontWeight: 700, margin: "0 0 4px", letterSpacing: "-0.02em" }}>Page Preview</h1>
-          <p style={{ color: "#3a3f5c", fontSize: 12.5, margin: 0 }}>Selected pharmacy catchment pages</p>
+          <p style={{ color: "#3a3f5c", fontSize: 12.5, margin: 0 }}>Live generated Pharmacy First page for the selected workspace</p>
         </div>
+        {previewHref ? (
+          <a
+            href={previewHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#4f46e5", color: "#fff", textDecoration: "none", borderRadius: 10, padding: "10px 16px", fontSize: 13, fontWeight: 700, boxShadow: "0 8px 24px rgba(79,70,229,0.35)" }}
+          >
+            👁 View Live Page Preview
+          </a>
+        ) : null}
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12, marginBottom: 16 }}>
-        {localities.map((page) => {
-          const tone = statusTone(page.status);
-          const active = page.suburb === selected?.suburb;
-          return (
-            <button key={page.slug} type="button" onClick={() => setSuburb(page.suburb)} style={{ textAlign: "left", background: "#10121c", border: `1px solid ${active ? "#818cf8" : "#1c1f30"}`, borderRadius: 12, padding: "16px 18px", cursor: "pointer" }}>
-              <div style={{ fontSize: 12.5, fontWeight: 600, color: "#d4d8f0", marginBottom: 4 }}>{page.suburb}</div>
-              <div style={{ fontSize: 10.5, color: "#3a3f5c", fontFamily: "monospace", marginBottom: 10 }}>/{page.slug}</div>
-              <span style={{ fontSize: 10, fontWeight: 600, color: tone.color, background: tone.bg, border: `1px solid ${tone.border}`, padding: "2px 8px", borderRadius: 10 }}>{page.status}</span>
-            </button>
-          );
-        })}
-      </div>
-      {selected && (
-        <div style={{ background: "#10121c", border: "1px solid #1c1f30", borderRadius: 14, overflow: "hidden" }}>
-          <div style={{ display: "flex", gap: 6, padding: "12px 14px", borderBottom: "1px solid #1c1f30" }}>
-            {(["draft", "map"] as const).map((tab) => {
-              const active = auditorTab === tab;
-              return (
-                <button key={tab} type="button" onClick={() => setAuditorTab(tab)} style={{ background: active ? "#1a1d30" : "transparent", color: active ? "#a78bfa" : "#6b7296", border: `1px solid ${active ? "#a78bfa55" : "#1c1f30"}`, borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>
-                  {tab === "draft" ? "Clinical draft" : "Map"}
-                </button>
-              );
-            })}
-          </div>
-          <div style={{ padding: 16, background: "#0b0d14" }}>
-            {auditorTab === "draft" ? (
-              draftText ? (
-                <pre style={{ margin: 0, whiteSpace: "pre-wrap", fontFamily: "inherit", fontSize: 12.5, lineHeight: 1.55, color: "#c8d0e0" }}>{draftText}</pre>
-              ) : (
-                <p style={{ margin: 0, fontSize: 12.5, color: "#6b7296" }}>No stored clinical draft for {selected.suburb}.</p>
-              )
-            ) : (
-              <iframe src={selected.mapSrc} title={`${selected.suburb} local area map`} loading="lazy" style={{ width: "100%", height: 280, border: "1px solid #1c1f30", borderRadius: 10, background: "#10121c" }} />
-            )}
-          </div>
-        </div>
+      {selectedSlug ? (
+        <>
+          <iframe
+            title="Live page preview"
+            src={previewHref}
+            style={{ width: "100%", height: 720, border: "1px solid #1c1f30", borderRadius: 14, background: "#fff", marginBottom: 20 }}
+          />
+          <CatchmentRegeneratePreview slug={selectedSlug} serviceId="pharmacy-first" areas={areas} />
+        </>
+      ) : (
+        <p style={{ margin: 0, fontSize: 13, color: "#6b7296" }}>Select a pharmacy workspace to preview catchment pages.</p>
       )}
     </main>
   );
@@ -888,7 +926,14 @@ function PagePassword() {
 // ─── Page router ─────────────────────────────────────────────────────────────
 const PAGE_META: Record<string, { title: string; sub?: string }> = {
   "/dashboard": { title: "Dashboard" },
-  "/wizard":    { title: "SEO Wizard", sub: "Stage 8" },
+  "/":          { title: "Dashboard" },
+  "/new-pitch": { title: "Generate Pitch", sub: "New pharmacy onboarding" },
+  "/territories": { title: "Territory Explorer", sub: "Catchment checker" },
+  "/catchment-checker": { title: "Territory Explorer", sub: "Catchment checker" },
+  "/wizard":    { title: "SEO Wizard", sub: "Campaign builder" },
+  "/growth-engine": { title: "Growth Engine", sub: "Plan & intelligence" },
+  "/content-review": { title: "Content Review", sub: "Authority audit" },
+  "/review-centre": { title: "Review Centre", sub: "Approve campaign pages" },
   "/pages":     { title: "Page Preview" },
   "/images":    { title: "Image Packs" },
   "/designs":   { title: "Designs" },
@@ -900,22 +945,59 @@ const PAGE_META: Record<string, { title: string; sub?: string }> = {
   "/password":  { title: "Change Password" },
 };
 
+function pathToNav(path: string): string {
+  const clean = (path.split("?")[0] || "/").replace(/\/$/, "") || "/";
+  if (clean === "/" || clean === "/dashboard") return "/dashboard";
+  if (clean === "/catchment-checker") return "/territories";
+  if (clean.startsWith("/services") || clean.startsWith("/pages")) return "/pages";
+  if (PAGE_META[clean]) return clean;
+  return "/dashboard";
+}
+
+function EmbeddedToolFrame({ src, title }: { src: string; title: string }) {
+  if (!src) {
+    return (
+      <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", background: "#0b0d14" }}>
+        <p style={{ color: "#6b7296", fontSize: 13 }}>Select a pharmacy to open {title}.</p>
+      </main>
+    );
+  }
+  return (
+    <main style={{ flex: 1, minHeight: 0, overflow: "hidden", background: "#0b0d14" }}>
+      <iframe title={title} src={src} style={{ width: "100%", height: "100%", border: 0, display: "block", background: "#0b0d14" }} />
+    </main>
+  );
+}
+
 function PageContent({
   active,
   setActive,
   setProject,
   wizardSrc,
+  growthSrc,
+  reviewSrc,
+  contentReviewSrc,
   onOpenCampaign,
+  onImportClient,
 }: {
   active: string;
   setActive: (h: string) => void;
   setProject: (p: string) => void;
   wizardSrc: string;
+  growthSrc: string;
+  reviewSrc: string;
+  contentReviewSrc: string;
   onOpenCampaign: (slug: string, serviceKey: string) => void;
+  onImportClient: () => void;
 }) {
   switch (active) {
-    case "/dashboard": return <PageDashboard setActive={setActive} setProject={setProject} onOpenCampaign={onOpenCampaign} />;
+    case "/dashboard": return <PageDashboard setActive={setActive} setProject={setProject} onOpenCampaign={onOpenCampaign} onImportClient={onImportClient} />;
+    case "/new-pitch": return <GeneratePharmacyPitchWizard />;
+    case "/territories": return <TerritoryExplorer />;
     case "/wizard":    return <PageWizard src={wizardSrc} />;
+    case "/growth-engine": return <EmbeddedToolFrame src={growthSrc} title="Growth Engine" />;
+    case "/content-review": return <EmbeddedToolFrame src={contentReviewSrc} title="Content Review" />;
+    case "/review-centre": return <EmbeddedToolFrame src={reviewSrc} title="Review Centre" />;
     case "/pages":     return <PagePreview />;
     case "/images":    return <PageImages />;
     case "/designs":   return <PageDesigns />;
@@ -925,21 +1007,90 @@ function PageContent({
     case "/security":  return <PageSecurity />;
     case "/team":      return <PageTeam />;
     case "/password":  return <PagePassword />;
-    default:           return <PageDashboard setActive={setActive} setProject={setProject} onOpenCampaign={onOpenCampaign} />;
+    default:           return <PageDashboard setActive={setActive} setProject={setProject} onOpenCampaign={onOpenCampaign} onImportClient={onImportClient} />;
   }
 }
 
 // ─── Root ─────────────────────────────────────────────────────────────────────
 export function DarkDashboardShell() {
-  const [active,      setActive]      = useState("/dashboard");
+  const [location, setLocation] = useLocation();
+  const [active, setActiveState] = useState(() => pathToNav(location));
   const [project,     setProject]     = useState("PharmaConnect");
   const [projectOpen, setProjectOpen] = useState(false);
   const [wizardSrc,   setWizardSrc]   = useState("");
-  const meta = PAGE_META[active] ?? { title: "Dashboard" };
-  const openCampaignBuilder = (slug: string, serviceKey: string) => {
-    setWizardSrc(campaignBuilderChooseUrl(slug, serviceKey));
-    setActive("/wizard");
+  const [importOpen,  setImportOpen]  = useState(false);
+  const [toolSlug, setToolSlug] = useState(() =>
+    typeof window === "undefined"
+      ? ""
+      : new URLSearchParams(window.location.search).get("slug") || localStorage.getItem("selectedSlug") || "",
+  );
+  useEffect(() => {
+    const syncSlug = () => {
+      setToolSlug(new URLSearchParams(window.location.search).get("slug") || localStorage.getItem("selectedSlug") || "");
+    };
+    window.addEventListener("popstate", syncSlug);
+    window.addEventListener("pharmacy-workspace-activate", syncSlug);
+    window.addEventListener("pharmacy-workspace-close", syncSlug);
+    return () => {
+      window.removeEventListener("popstate", syncSlug);
+      window.removeEventListener("pharmacy-workspace-activate", syncSlug);
+      window.removeEventListener("pharmacy-workspace-close", syncSlug);
+    };
+  }, []);
+  const setActive = (href: string) => {
+    const [pathPart, queryPart] = href.split("?");
+    const next = pathToNav(pathPart);
+    if (next === "/wizard") {
+      const workspaceSlug =
+        (typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("slug")) ||
+        toolSlug ||
+        "";
+      if (workspaceSlug) {
+        activatePharmacyWorkspace(workspaceSlug, "campaigns");
+        setActiveState("/dashboard");
+        return;
+      }
+      setActiveState("/dashboard");
+      setLocation("/");
+      return;
+    }
+    setActiveState(next);
+    let search = queryPart ? `?${queryPart}` : "";
+    if (!search && typeof window !== "undefined") {
+      const slug = new URLSearchParams(window.location.search).get("slug");
+      if (slug && next !== "/territories" && next !== "/new-pitch") {
+        search = `?slug=${encodeURIComponent(slug)}`;
+      }
+    }
+    const hash = typeof window === "undefined" ? "" : window.location.hash;
+    setLocation((next === "/dashboard" ? "/" : next) + search + hash);
   };
+  useEffect(() => {
+    if (pathToNav(location) === "/wizard") {
+      const workspaceSlug =
+        (typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("slug")) ||
+        toolSlug ||
+        "";
+      if (workspaceSlug) {
+        activatePharmacyWorkspace(workspaceSlug, "campaigns");
+        return;
+      }
+      setLocation("/");
+      return;
+    }
+    setActiveState(pathToNav(location));
+  }, [location, setLocation, toolSlug]);
+  const meta = PAGE_META[active] ?? { title: "Dashboard" };
+  const slug = toolSlug;
+  const growthSrc = slug ? `/api/growth-engine?slug=${encodeURIComponent(slug)}&embedded=1` : "";
+  const reviewSrc = slug ? `/api/growth-engine/review-centre?slug=${encodeURIComponent(slug)}&embedded=1` : "";
+  const contentReviewSrc = slug ? `/api/pharmacy-authority-readiness?slug=${encodeURIComponent(slug)}&embedded=1` : "";
+  const setupSrc = slug ? `/api/setup?slug=${encodeURIComponent(slug)}&embedded=1` : "";
+  const openCampaignBuilder = (nextSlug: string, serviceKey: string) => {
+    setWizardSrc(campaignBuilderChooseUrl(nextSlug, serviceKey));
+    activatePharmacyWorkspace(nextSlug, "campaigns", serviceKey);
+  };
+  const openImportClient = () => setImportOpen(true);
 
   return (
     <div
@@ -948,15 +1099,20 @@ export function DarkDashboardShell() {
     >
       <Sidebar active={active} setActive={setActive} project={project} setProject={setProject} projectOpen={projectOpen} setProjectOpen={setProjectOpen} />
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-        <TopBar project={project} title={meta.title} sub={wizardSrc && active === "/wizard" ? "Campaign builder" : meta.sub} setActive={setActive} />
+        <TopBar project={project} title={meta.title} sub={wizardSrc && active === "/wizard" ? "Campaign builder" : meta.sub} setActive={setActive} onImportClient={openImportClient} />
         <PageContent
           active={active}
           setActive={setActive}
           setProject={setProject}
-          wizardSrc={wizardSrc}
+          wizardSrc={wizardSrc || setupSrc}
+          growthSrc={growthSrc}
+          reviewSrc={reviewSrc}
+          contentReviewSrc={contentReviewSrc}
           onOpenCampaign={openCampaignBuilder}
+          onImportClient={openImportClient}
         />
       </div>
+      <GoogleMapsImportModal open={importOpen} onClose={() => setImportOpen(false)} />
     </div>
   );
 }

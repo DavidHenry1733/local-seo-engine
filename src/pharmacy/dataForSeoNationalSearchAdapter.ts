@@ -155,7 +155,7 @@ async function executeOnce(
           : err instanceof Error ? err.message : String(err),
         cost: null,
         successful: false,
-        retryable: false,
+        retryable: timedOut,
         timedOut,
       },
       results: [],
@@ -275,7 +275,7 @@ export class DataForSeoNationalSearchProvider
     attempts.push(first.attempt);
 
     let current = first;
-    if (!first.attempt.successful && first.attempt.retryable && !first.fatal && !first.attempt.timedOut) {
+    if (!first.attempt.successful && first.attempt.retryable && !first.fatal) {
       hooks.onRetry?.(first.attempt);
       const retry = await executeOnce(request, 1 + MAX_DATAFORSEO_INTERNAL_SE_RETRIES, this.id);
       attempts.push(retry.attempt);

@@ -154,17 +154,14 @@ export function dataForSeoLocationCodeFromIsoNumeric(isoNumeric: number): number
 }
 
 export function resolveDataForSeoSearchLocation(country: unknown): DataForSeoSearchLocation {
-  const token = normaliseCountryToken(country);
-  if (!token) {
-    throw new Error("DataForSEO search location requires a country.");
-  }
-  const iso2 = NAME_TO_ISO2[token];
+  const token = normaliseCountryToken(country) || "gb";
+  const iso2 = NAME_TO_ISO2[token] || "gb";
   const isoNumeric = iso2 ? ISO2_NUMERIC[iso2] : undefined;
   if (!iso2 || !isoNumeric) {
     throw new Error(`No canonical DataForSEO location_code for country "${String(country || "").trim()}".`);
   }
   return {
-    country: String(country || "").trim() || token,
+    country: String(country || "").trim() || "United Kingdom",
     iso2,
     isoNumeric,
     locationCode: dataForSeoLocationCodeFromIsoNumeric(isoNumeric),
